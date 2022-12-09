@@ -4,7 +4,7 @@
             <h5 class="fw-bold">ANTECEDENTES</h5>
             
             <div class="col row">                 
-                <h5 class="col-md-12">Personales patológicos</h5>
+                <h5 class="col-md-12 fw-bold">Personales patológicos</h5>
 
                 <div class="col-md-4">
                     <label for="inputState" class="form-label">Alergias</label>
@@ -125,7 +125,7 @@
             </div>
 
             <div class="col row"> 
-                <h5 class="col-12">No patológicos</h5>
+                <h5 class="col-12 fw-bold">No patológicos</h5>
 
                 <div class="col-md-4">
                     <label for="inputState" class="form-label">Tabaquismo</label>
@@ -192,7 +192,7 @@
     <div class="col-10 divform">
         <form class="row g-3">
             <h5 class="fw-bold">EXPLORACIÓN FÍSICA</h5>
-            <h5 class="">Signos Vitales</h5>
+            <h5 class="fw-bold">Signos Vitales</h5>
 
             <div class="col-md-2">
                 <label for="" class="form-label">Edad</label>
@@ -237,7 +237,7 @@
 
     <div class="col-10 divform">
         <form class="row g-3">
-            <h5 class="">Valoración de Vía Aérea y Otras Escalas</h5>
+            <h5 class="fw-bold">Valoración de Vía Aérea y Otras Escalas</h5>
 
             <div class="col-md-3">
                 <label for="inputState" class="form-label">Mallampati</label>
@@ -387,7 +387,7 @@
     <div class="col-10 divform">
         <form class="row g-3">
             <h5 class="fw-bold">EXÁMENES</h5>
-            <h5 class="">Perfil Bioquímico</h5>
+            <h5 class="fw-bold">Perfil Bioquímico</h5>
 
             <div class="col-md-6">
                 <label for="" class="form-label">Fecha de realización</label>
@@ -508,7 +508,7 @@
 
     <div class="col-10 divform">
         <form class="row g-3">
-            <h5 class="fw-bold">ESTUDIOS</h5>           
+            <h5 class="fw-bold fw-bold">ESTUDIOS</h5>           
 
             <div class="col-md-8">
                 <label for="inputState" class="form-label">Estudio</label>

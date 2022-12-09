@@ -13,7 +13,7 @@
           <RouterLink active-class="text-dark fw-bold bgactive" class="nav-link" to="/pre">ID PACIENTE</RouterLink>
         </div>
         <div class="col-md-3">
-          <RouterLink active-class="text-dark fw-bold bgactive" class="nav-link" to="/pre">VALORACIÓN</RouterLink>
+          <RouterLink active-class="text-dark fw-bold bgactive" class="nav-link" to="/valoracion">VALORACIÓN</RouterLink>
         </div>
         <div class="col-md-3">
           <RouterLink active-class="text-dark fw-bold bgactive" class="nav-link" to="/plan">PLAN</RouterLink>
