@@ -1,6 +1,6 @@
 <template>
     
-    <div class="col-9 divform">  
+    <div class="col-12 divform">  
         <form class="row g-3">                
             <div class="col-md-4">
                 <label for="" class="form-label">Número de Expediente</label>
