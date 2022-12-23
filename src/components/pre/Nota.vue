@@ -3,7 +3,7 @@
         <form class="row g-3">                
             <div class="col-md-12">
                 <label for="" class="form-label">Observaciones</label>
-                <textarea class="form-control" id="" rows="3"></textarea>
+                <textarea class="form-control" id="" rows="20"></textarea>
             </div>
         </form>
     </div>    

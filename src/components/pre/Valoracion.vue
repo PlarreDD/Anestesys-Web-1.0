@@ -2,19 +2,19 @@
     
     <ul class="nav nav-pills mb-3 text-center" id="">
         <li class="nav-item col-md-2" >
-            <button class="nav-link active" id="valoracion" data-bs-toggle="pill" data-bs-target="#antecedentes" type="button" aria-selected="true">ANTECEDENTES</button>
+            <button class="btn btn-outline-success active" id="valoracion" data-bs-toggle="pill" data-bs-target="#antecedentes" type="button" aria-selected="true">ANTECEDENTES</button>
         </li>
         <li class="nav-item col-md-3" >
-            <button class="nav-link" id="valoracion" data-bs-toggle="pill" data-bs-target="#exploracion" type="button" aria-selected="false">EXPLORACIÓN FÍSICA</button>
+            <button class="btn btn-outline-success" id="valoracion" data-bs-toggle="pill" data-bs-target="#exploracion" type="button" aria-selected="false">EXPLORACIÓN FÍSICA</button>
         </li>
         <li class="nav-item col-md-2" >
-            <button class="nav-link" id="valoracion" data-bs-toggle="pill" data-bs-target="#via" type="button" aria-selected="false">VÍA AÉREA</button>
+            <button class="btn btn-outline-success" id="valoracion" data-bs-toggle="pill" data-bs-target="#via" type="button" aria-selected="false">VÍA AÉREA</button>
         </li>
         <li class="nav-item col-md-2" >
-            <button class="nav-link" id="valoracion" data-bs-toggle="pill" data-bs-target="#estudios" type="button" aria-selected="false">ESTUDIOS</button>
+            <button class="btn btn-outline-success" id="valoracion" data-bs-toggle="pill" data-bs-target="#estudios" type="button" aria-selected="false">ESTUDIOS</button>
         </li>
         <li class="nav-item col-md-2" >
-            <button class="nav-link" id="valoracion" data-bs-toggle="pill" data-bs-target="#examenes" type="button" aria-selected="false">EXÁMENES</button>
+            <button class="btn btn-outline-success" id="valoracion" data-bs-toggle="pill" data-bs-target="#examenes" type="button" aria-selected="false">EXÁMENES</button>
         </li>
     </ul>
 

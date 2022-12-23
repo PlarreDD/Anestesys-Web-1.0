@@ -17,7 +17,7 @@
                 <form class="row g-3">
                     <div class="col-md-12">
                         <label for="" class="form-label">Observaciones</label>
-                        <textarea class="form-control" id="" rows="3"></textarea>
+                        <textarea class="form-control" id="" rows="20"></textarea>
                     </div>
                 </form>
             </div>
@@ -27,57 +27,57 @@
                 <form class="row g-3">
                     <table>
                         <tr>
-                            <th>Criterio</th>
-                            <th>Ingreso</th>
-                            <th>15 min</th>
-                            <th>30 min</th>
-                            <th>45 min</th>
-                            <th>60 min</th>
-                            <th>90 min</th>
-                            <th>120 min</th>
+                            <td>Criterio</td>
+                            <td>Ingreso</td>
+                            <td>15 min</td>
+                            <td>30 min</td>
+                            <td>45 min</td>
+                            <td>60 min</td>
+                            <td>90 min</td>
+                            <td>120 min</td>
                         </tr>
                         <tr>
-                            <th class="col-2">Frecuencia Cardiaca</th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
+                            <td class="col-2">Frecuencia Cardiaca</td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
                         </tr>
                         <tr>
-                            <th class="col-2">Frecuencia Respiratoria</th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
+                            <td class="col-2">Frecuencia Respiratoria</td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
                         </tr>
                         <tr>
-                            <th class="col-2">Tensión Arterial</th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
+                            <td class="col-2">Tensión Arterial</td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
                         </tr>
                         <tr>
-                            <th class="col-2">Saturación de O2</th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
-                            <th><input type="text" class="form-control" id=""></th>
+                            <td class="col-2">Saturación de O2</td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
+                            <td><input type="text" class="form-control" id=""></td>
                         </tr>
                         <tr>
-                            <th class="col-2">Aldrete</th>
+                            <td class="col-2">Aldrete</td>
                             <th>                               
                                 <select id="inputState" class="form-select">
                                     <option selected>Seleccione...</option>
@@ -185,7 +185,7 @@
                             </th>
                         </tr>
                         <tr>
-                            <th class="col-2">Bromage</th>
+                            <td class="col-2">Bromage</td>
                             <th>                               
                                 <select id="inputState" class="form-select">
                                     <option selected>Seleccione...</option>
@@ -251,7 +251,7 @@
                             </th>
                         </tr>
                         <tr>
-                            <th class="col-2">Nauseas/Vomito</th>
+                            <td class="col-2">Nauseas/Vomito</td>
                             <th>                               
                                 <select id="inputState" class="form-select">
                                     <option selected>Seleccione...</option>
@@ -303,7 +303,7 @@
                             </th>
                         </tr>
                         <tr>
-                            <th class="col-2">Escala de EVA Dolor</th>
+                            <td class="col-2">Escala de EVA Dolor</td>
                             <th>                               
                                 <select id="inputState" class="form-select">
                                     <option selected>Seleccione...</option>
@@ -415,6 +415,7 @@
             </div>
         </div>
         <div class="tab-pane fade" id="alta">
+            
             <div class="col-12 divBorder">
                 <form class="row g-3">
                     <div class="col-md-3">

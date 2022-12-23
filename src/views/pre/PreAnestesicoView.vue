@@ -9,7 +9,7 @@
   <div class="input-group mb-3">
     <div class="col-10 divform navbar-nav">              
 
-        <ul class="nav nav-pills mb-3 text-center" id="">
+        <ul class="nav nav-pills nav-fill text-center" id="">
           <li class="nav-item col-md-3" >
               <button class="nav-link active" id="pre-menu" data-bs-toggle="pill" data-bs-target="#pre-id" type="button" aria-selected="true">ID PACIENTE</button>
           </li>

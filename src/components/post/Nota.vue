@@ -30,7 +30,7 @@
 
                     <div class="col-md-12">
                         <label for="" class="form-label">Nota Post-Anestésica</label>
-                        <textarea class="form-control" id="" rows="3"></textarea>
+                        <textarea class="form-control" id="" rows="8"></textarea>
                     </div>
 
                     <h5 class="">SIGNOS VITALES AL EGRESO DEL QUIROFANO</h5>
