@@ -26,24 +26,24 @@
     </div>
   </div>
 
-  <div class="input-group mb-3"> 
+  <div class="input-group mb-3 divPrincipal"> 
     
-    <div class="tab-content col-md-9 divJustify" id="" >
+    <div class="tab-content col-md-9" id="" >
         <div class="tab-pane fade show active" id="pre-id"><Id/></div>
         <div class="tab-pane fade" id="pre-valoracion"><Valoracion/></div>
         <div class="tab-pane fade" id="pre-plan"><Plan/></div>
         <div class="tab-pane fade" id="pre-nota"><Nota/></div>
     </div>
 
-    <div class="col-2">
-      <div class="col-md-2 divLateral">
-        <img src="images/pre.png" width="180" height="180"/>
+    <div class="col-2 divMenuLateralPrincipal">
+      <div class="col-md-2 divMenuLateral">
+        <img src="images/pre.png" class="imgAjuste"/>
       </div>
-      <div class="col-md-2 divLateral">
-        <RouterLink to="trans"><img src="images/trans.png" width="180" height="180"/></RouterLink>
+      <div class="col-md-2 divMenuLateral">
+        <RouterLink to="trans"><img src="images/trans.png" class="imgAjuste"/></RouterLink>
       </div>
-      <div class="col-md-2 divLateral">
-        <RouterLink to="post"><img src="images/post.png" width="180" height="180"/></RouterLink>
+      <div class="col-md-2 divMenuLateral">
+        <RouterLink to="post"><img src="images/post.png" class="imgAjuste"/></RouterLink>
       </div>    
     </div>
   </div>
@@ -63,12 +63,19 @@ export default ({
 </script>
 
 <style scoped>
-.divLateral {
+.divMenuLateral {
   margin-bottom: 6px; 
   margin-top: 6px;
   margin-left: 20px;
 }
-.divJustify {
-  width: 80%;
+.divMenuLateralPrincipal {
+  margin-top: 16px;
+}
+.divPrincipal {
+  width: 110%
+}
+.imgAjuste{
+  width: 455%;
+  height: auto;
 }
 </style>

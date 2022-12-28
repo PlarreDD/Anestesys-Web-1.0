@@ -13,21 +13,21 @@
     </div>
   </div>
 
-  <div class="input-group mb-3"> 
+  <div class="input-group mb-3 divPrincipal"> 
     
-    <div class="tab-content col-md-9 divJustify" id="">
+    <div class="tab-content col-md-9" id="">
         <div class="tab-pane fade show active" id="nota"><Nota /></div>
         <div class="tab-pane fade" id="recuperacion"><Recuperacion /></div>
     </div>
 
-    <div class="col-2 divLateralPrincipal">
-      <div class="col-md-2 divLateral">
+    <div class="col-2 divMenuLateralPrincipal">
+      <div class="col-md-2 divMenuLateral">
         <RouterLink to="pre"><img src="images/pre.png" width="180" height="180"/></RouterLink>
       </div>
-      <div class="col-md-2 divLateral">
+      <div class="col-md-2 divMenuLateral">
         <RouterLink to="trans"><img src="images/trans.png" width="180" height="180"/></RouterLink>
       </div>
-      <div class="col-md-2 divLateral">
+      <div class="col-md-2 divMenuLateral">
        <img src="images/post.png" width="180" height="180"/>
       </div>    
     </div>
@@ -44,15 +44,15 @@ export default ({
 })
 </script>
 
-<style scoped>.divLateral {
+<style scoped>.divMenuLateral {
   margin-bottom: 6px; 
   margin-top: 6px;
   margin-left: 20px;
 }
-.divLateralPrincipal {
+.divMenuLateralPrincipal {
   margin-top: 54px;
 }
-.divJustify {
-  width: 80%;
+.divPrincipal {
+  width: 110%;
 }
 </style>
