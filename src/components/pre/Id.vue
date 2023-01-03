@@ -1,14 +1,14 @@
 <template>
-    
-    <div class="col-12 divBorder">  
-        <form class="row g-3">                
+
+    <div :class="numExpediente.length != 0 || nombrePaciente.length !=0 ? 'divColor col-12 divBorder' : 'col-12 divBorder'">  
+        <form @submit.prevent="getData" class="row g-3">                
             <div class="col-md-4">
                 <label for="" class="form-label">Número de Expediente</label>
-                <input type="text" class="form-control" id="numExpediente"> 
+                <input type="text" class="form-control" v-model.trim="numExpediente">                
             </div>
             <div class="col-md-6">
                 <label for="" class="form-label">Nombre del Paciente</label>
-                <input type="text" class="form-control" id="nombrePaciente"> 
+                <input type="text" class="form-control" id="nombrePaciente" v-model="nombrePaciente"> 
             </div>
             <div class="col-md-2">
                 <label for="" class="form-label">Edad</label>
@@ -79,7 +79,10 @@
             <div class="col-md-6">
                 <label for="" class="form-label">Anestesiólogo VPA</label>
                 <input type="text" class="form-control" id="anestesiologoVPA">
-            </div>            
+            </div>    
+            <div class="col-auto">
+        <button class="btn btn-warning fw-bold" type="submit">Buscar</button>
+    </div>                
         </form>
     </div>
 
@@ -96,4 +99,25 @@
 .radioMargin{
     margin-right: 10px;
 }
+.divColor {
+    background: rgb(224, 224, 224);
+}
 </style>
+
+<script lang="ts">
+
+import { defineComponent } from "vue"
+
+export default defineComponent({
+    data: () => ({
+        numExpediente: "",
+        nombrePaciente: ""
+    }),
+    methods: {
+        getData() {
+            this.$emit("validar", this.numExpediente)
+            this.numExpediente = ""
+        }
+    }
+})
+</script>

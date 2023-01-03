@@ -5,15 +5,15 @@
        
     </div>
 
-    <div class="col-2 divMenuLateralPrincipal">
+    <div class="col-2 divMenuLateralPrincipal"> <!--Menú lateral-->
       <div class="col-md-2 divMenuLateral">
-        <RouterLink to="pre"><img src="images/pre.png" width="180" height="180"/></RouterLink>
+        <RouterLink to="pre"><img src="images/pre.png" class="imgAjuste"/></RouterLink>
       </div>
       <div class="col-md-2 divMenuLateral">
-        <img src="images/trans.png" width="180" height="180" />
+        <img src="images/trans.png" class="imgAjuste"/>
       </div>
       <div class="col-md-2 divMenuLateral">
-        <RouterLink to="post"><img src="images/post.png" width="180" height="180"/></RouterLink>
+        <RouterLink to="post"><img src="images/post.png" class="imgAjuste"/></RouterLink>
       </div>    
     </div>
   </div>
@@ -30,5 +30,9 @@
 }
 .divPrincipal {
     width: 110%;
+}
+.imgAjuste{
+  width: 455%;
+  height: auto;
 }
 </style>

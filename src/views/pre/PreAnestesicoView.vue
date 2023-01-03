@@ -2,40 +2,44 @@
 
   <div class="input-group mb-3">
     <div class="col-md-7">
-      <input class="form-control me-2" type="search" placeholder="Buscar expediente del paciente..." aria-label="Buscar">
+      <input class="form-control me-2" type="search" placeholder="Buscar expediente del paciente..." aria-label="Buscar"> <!--Buscador-->
     </div>    
   </div>
 
   <div class="input-group mb-3">
     <div class="col-10 divform navbar-nav">              
 
-        <ul class="nav nav-pills nav-fill text-center" id="">
+        <ul class="nav nav-pills nav-fill text-center" id=""> <!--Lista para el menú principal-->
           <li class="nav-item col-md-3" >
-              <button class="nav-link active" id="pre-menu" data-bs-toggle="pill" data-bs-target="#pre-id" type="button" aria-selected="true">ID PACIENTE</button>
+              <button class="nav-link active" id="pre-menu" data-bs-toggle="pill" data-bs-target="#pre-id" type="submit" aria-selected="true">ID PACIENTE</button> <!--Se asigna el contenedor al que apuntara el elemento por medio de data-bs-target-->
           </li>
           <li class="nav-item col-md-3" >
-              <button class="nav-link" id="pre-menu" data-bs-toggle="pill" data-bs-target="#pre-valoracion" type="button" aria-selected="false">VALORACIÓN</button>
+              <button class="nav-link" id="pre-menu" data-bs-toggle="pill" data-bs-target="#pre-valoracion" type="submit" aria-selected="false">VALORACIÓN</button>
           </li>
           <li class="nav-item col-md-3" >
-              <button class="nav-link" id="pre-menu" data-bs-toggle="pill" data-bs-target="#pre-plan" type="button" aria-selected="false">PLAN</button>
+              <button class="nav-link" id="pre-menu" data-bs-toggle="pill" data-bs-target="#pre-plan" type="submit" aria-selected="false">PLAN</button>
           </li>
           <li class="nav-item col-md-3" >
-              <button class="nav-link" id="pre-menu" data-bs-toggle="pill" data-bs-target="#pre-nota" type="button" aria-selected="false">NOTA</button>
+              <button class="nav-link" id="pre-menu" data-bs-toggle="pill" data-bs-target="#pre-nota" type="submit" aria-selected="false">NOTA</button>
           </li>
         </ul>
+    </div>
+
+    <div class="col-md-10">
+      <BarraProgreso />
     </div>
   </div>
 
   <div class="input-group mb-3 divPrincipal"> 
     
-    <div class="tab-content col-md-9" id="" >
-        <div class="tab-pane fade show active" id="pre-id"><Id/></div>
+    <div class="tab-content col-md-9" id="" > <!--Redirecciona al contenedor seleccionado, cargando la información del componente-->
+        <div class="tab-pane fade show active" id="pre-id"><Id @validar="validaExpediente"/></div>
         <div class="tab-pane fade" id="pre-valoracion"><Valoracion/></div>
         <div class="tab-pane fade" id="pre-plan"><Plan/></div>
         <div class="tab-pane fade" id="pre-nota"><Nota/></div>
     </div>
 
-    <div class="col-2 divMenuLateralPrincipal">
+    <div class="col-2 divMenuLateralPrincipal"> <!--Menú lateral-->
       <div class="col-md-2 divMenuLateral">
         <img src="images/pre.png" class="imgAjuste"/>
       </div>
@@ -51,13 +55,39 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue"
 import Id from "../../components/pre/Id.vue";
 import Valoracion from "../../components/pre/Valoracion.vue";
 import Plan from "../../components/pre/Plan.vue";
 import Nota from '../../components/pre/Nota.vue';
-export default ({
+import BarraProgreso from '../../components/BarraProgreso.vue';
+import swal from 'sweetalert2'
+
+declare var numExpediente: any
+
+export default defineComponent({
   components:{
-    Id, Nota, Plan, Valoracion
+    Id,
+    Nota,
+    Plan,
+    Valoracion,
+    BarraProgreso
+  },
+  created(){
+    this.validaExpediente()
+  },
+  methods: {
+      async validaExpediente(numExpediente = ".") {            
+          if(numExpediente.trim() === "") {
+              swal.fire({
+              title: "El campo número de expediente no puede ir vacío",
+              icon: "error",
+              showConfirmButton: true,
+              showCloseButton: true,
+              })     
+              return;           
+          }
+      }
   }
 })
 </script>
