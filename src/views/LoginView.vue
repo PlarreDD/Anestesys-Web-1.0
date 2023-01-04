@@ -3,7 +3,7 @@
 
         <h4>Iniciar sesión</h4>
 
-        <form class="row g-3" action="home" method="post">
+        <form class="row g-3" action="pre" method="post">
             <div class="col-md-12">
                 <input type="text" class="form-control" id="user" placeholder="Usuario" required>  
             </div>
@@ -12,7 +12,7 @@
             </div>
 
             <div class="col-md-12">
-                <button class="btn btn-primary btn-signin" type="submit">Entrar</button>
+                <button onclick="location.href='home'" class="btn btn-primary btn-signin" type="submit">Entrar</button>
             </div>
             <div class="col-md-6">                    
                 <div class="opcioncontra">¿No tienes cuenta? <a href="404">Registrate</a></div> 
