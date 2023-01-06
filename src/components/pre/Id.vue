@@ -113,6 +113,7 @@ export default defineComponent({
         numExpediente: "",
         nombrePaciente: ""
     }),
+    
     methods: {
         getData() {
             this.$emit("validar", this.numExpediente)

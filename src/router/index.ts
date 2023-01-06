@@ -35,6 +35,6 @@ const router = createRouter({
       component: () => import('../views/post/PostAnestesicoView.vue')
     }
   ]
-})
+});
 
 export default router
