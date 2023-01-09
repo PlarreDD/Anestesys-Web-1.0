@@ -20,33 +20,45 @@
             <div class="col-md-6">                    
                 <div class="opcioncontra">¿No tienes cuenta? <a href="404">Registrate</a></div> 
             </div>
-            
         </form>        
     </div>
 </template>
 
 <script lang="ts">
-import axios from "axios";
-import { defineComponent } from "vue"
+import { apiAxios } from "@/boot/axios";
+import { defineComponent, ref } from "vue"
+
+const tkn = ref('');
+const xprsIn = ref('');
 
 export default defineComponent({
     methods:{
-        access:async () => {
+        access: async () => {
             try {
-                const res = await axios.post(
-                    "http://localhost:5000/login",
+                const res = await apiAxios.post(
+                    "/login",
                     {
                         "email": "cnisuwe@test.com",
                         "password": "123123"
                     }
                 );
 
-                console.log(res.data);
-
+                tkn.value = res.data.token;
+                xprsIn.value = res.data.expiresIn;
+                console.log(tkn.value + " - " + xprsIn.value);
             } catch (error) {
                 console.log(error);                
             }
-        }
+        },
+
+        refreshToken: async () => {
+            try {
+                const res = await apiAxios.get("/refresh");
+                console.log();                
+            } catch (error) {
+                console.log(error);
+            }            
+        },
     }
 });
 </script>
