@@ -41,6 +41,10 @@ npm run build
 
 ## Cambios
 
--Se da estructura a las carpetas y componentes del proyecto
+- Se da estructura a las carpetas y componentes del proyecto
 
--Se esta trabajando en las vistas del modulo pre anestesico
+- Se esta trabajando en las vistas del modulo pre anestesico
+
+- Se dividen las carpetas con los proyectos para Front End y Back End.
+
+- Cambios al Back End para funcionar con TypeScript

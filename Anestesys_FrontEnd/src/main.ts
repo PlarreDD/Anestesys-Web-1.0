@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import mongoose from "mongoose";
 
 const app = createApp(App)
 

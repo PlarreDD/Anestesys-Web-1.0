@@ -45,22 +45,36 @@ export default defineComponent({
 
                 tkn.value = res.data.token;
                 xprsIn.value = res.data.expiresIn;
-                console.log(tkn.value + " - " + xprsIn.value);
+                console.log(tkn.value + " - " + xprsIn.value);                
             } catch (error) {
                 console.log(error);                
             }
-        },
-
-        refreshToken: async () => {
-            try {
-                const res = await apiAxios.get("/refresh");
-                console.log();                
-            } catch (error) {
-                console.log(error);
-            }            
-        },
+        }
     }
 });
+
+function setTime(): void {
+    setTimeout(() => {
+        refreshToken();
+        console.log("TimeOut");        
+    }, Number(xprsIn) * 1000 - 6000);
+};
+
+// Funciona pero hace falta createLink para tener un link valido en la BD
+const refreshToken = async(): Promise <void> => {
+    try {
+        const res = await apiAxios.get("/refresh");
+        tkn.value = res.data.token;
+        xprsIn.value = res.data.expiresIn;
+        console.log(tkn.value + " - " + xprsIn.value);
+        
+        setTime();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+refreshToken();
 </script>
 
 <style>
