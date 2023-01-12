@@ -18,7 +18,7 @@
             </div>
 
             <div class="col-md-6">                    
-                <div class="opcioncontra">¿No tienes cuenta? <a href="404">Registrate</a></div> 
+                <div class="opcioncontra">¿No tienes cuenta? <a href="register">Registrate</a></div> 
             </div>
         </form>        
     </div>
