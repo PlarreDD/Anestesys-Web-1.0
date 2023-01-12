@@ -4,7 +4,7 @@
       <nav class="navbar">        
         
         <div class="container-fluid">
-          <RouterLink to="/">Anestesys</RouterLink>
+          <RouterLink to="/"><img src="images/logoAnestesys.png" class="imgAjuste"/></RouterLink>
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#barraConfiguracion" aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -44,3 +44,10 @@
   </div>
   
 </template>
+
+<style scoped>
+.imgAjuste{
+  width: 15%;
+  height: auto;    
+}
+</style>

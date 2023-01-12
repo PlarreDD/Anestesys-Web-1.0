@@ -33,6 +33,11 @@ const router = createRouter({
       path: '/post',
       name: 'post',     
       component: () => import('../views/post/PostAnestesicoView.vue')
+    },
+    {
+      path: '/registro',
+      name: 'registro',
+      component: () => import('../views/RegistroView.vue')
     }
   ]
 })

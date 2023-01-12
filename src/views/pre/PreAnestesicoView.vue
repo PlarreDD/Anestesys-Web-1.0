@@ -7,20 +7,19 @@
   </div>
 
   <div class="input-group mb-3">
-    <div class="col-10 divform navbar-nav">              
-
+    <div class="col-10 divform navbar-nav">          
         <ul class="nav nav-pills nav-fill text-center" id=""> <!--Lista para el menú principal-->
           <li class="nav-item col-md-3" >
-              <button class="nav-link active" id="pre-menu" data-bs-toggle="pill" data-bs-target="#pre-id" type="submit" aria-selected="true">ID PACIENTE</button> <!--Se asigna el contenedor al que apuntara el elemento por medio de data-bs-target-->
+              <button class="nav-link active" id="id-tab" href="#pre-id" data-bs-toggle="tab" type="submit" aria-selected="true">ID PACIENTE</button> <!--Se asigna el contenedor al que apuntara el elemento por medio de data-bs-target-->
           </li>
           <li class="nav-item col-md-3" >
-              <button class="nav-link" id="pre-menu" data-bs-toggle="pill" data-bs-target="#pre-valoracion" type="submit" aria-selected="false">VALORACIÓN</button>
+              <button class="nav-link" id="valoracion-tab" href="#pre-valoracion" data-bs-toggle="tab" type="submit" aria-selected="false">VALORACIÓN</button>
           </li>
           <li class="nav-item col-md-3" >
-              <button class="nav-link" id="pre-menu" data-bs-toggle="pill" data-bs-target="#pre-plan" type="submit" aria-selected="false">PLAN</button>
+              <button class="nav-link" id="plan-tab" href="#pre-plan" data-bs-toggle="tab" type="submit" aria-selected="false">PLAN</button>
           </li>
           <li class="nav-item col-md-3" >
-              <button class="nav-link" id="pre-menu" data-bs-toggle="pill" data-bs-target="#pre-nota" type="submit" aria-selected="false">NOTA</button>
+              <button class="nav-link" id="nota-tab" href="#pre-nota" data-bs-toggle="tab" type="submit" aria-selected="false">NOTA</button>
           </li>
         </ul>
     </div>
@@ -33,10 +32,10 @@
   <div class="input-group mb-3 divPrincipal"> 
     
     <div class="tab-content col-md-9" id="" > <!--Redirecciona al contenedor seleccionado, cargando la información del componente-->
-        <div class="tab-pane fade show active" id="pre-id"><Id @validar="validaExpediente"/></div>
-        <div class="tab-pane fade" id="pre-valoracion"><Valoracion/></div>
-        <div class="tab-pane fade" id="pre-plan"><Plan/></div>
-        <div class="tab-pane fade" id="pre-nota"><Nota/></div>
+        <div class="tab-pane fade show active" id="pre-id"><id @validar="validaExpediente"/></div>
+        <div class="tab-pane fade" id="pre-valoracion"><valoracion/></div>
+        <div class="tab-pane fade" id="pre-plan"><plan/></div>
+        <div class="tab-pane fade" id="pre-nota"><nota/></div>
     </div>
 
     <div class="col-2 divMenuLateralPrincipal"> <!--Menú lateral-->
@@ -55,7 +54,9 @@
 </template>
 
 <script lang="ts">
+
 import { defineComponent } from "vue"
+
 import Id from "../../components/pre/Id.vue";
 import Valoracion from "../../components/pre/Valoracion.vue";
 import Plan from "../../components/pre/Plan.vue";
@@ -64,6 +65,7 @@ import BarraProgreso from '../../components/BarraProgreso.vue';
 import swal from 'sweetalert2'
 
 declare var numExpediente: any
+declare var nombrePaciente: any
 
 export default defineComponent({
   components:{
@@ -77,10 +79,10 @@ export default defineComponent({
     this.validaExpediente()
   },
   methods: {
-      async validaExpediente(numExpediente = ".") {            
-          if(numExpediente.trim() === "") {
+      async validaExpediente(numExpediente = ".", nombrePaciente = ".") {            
+          if(numExpediente.trim() == "" || nombrePaciente.trim() == "") {
               swal.fire({
-              title: "El campo número de expediente no puede ir vacío",
+              title: "El número de expediente y nombre del paciente no pueden ir vacíos",
               icon: "error",
               showConfirmButton: true,
               showCloseButton: true,

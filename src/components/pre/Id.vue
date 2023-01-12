@@ -1,27 +1,28 @@
 <template>
 
-    <div :class="numExpediente.length != 0 || nombrePaciente.length !=0 ? 'divColor col-12 divBorder' : 'col-12 divBorder'">  
-        <form @submit.prevent="getData" class="row g-3">                
+    <div :class="id.numExpediente.length != 0 || id.nombrePaciente.length != 0 ? 'divColor col-12 divBorder' : 'col-12 divBorder'">  
+        <form @submit.prevent="getData" class="row g-3">  
+
             <div class="col-md-4">
                 <label for="" class="form-label">Número de Expediente</label>
-                <input type="text" class="form-control" v-model.trim="numExpediente">                
+                <input type="text" class="form-control" v-model="id.numExpediente">                
             </div>
             <div class="col-md-6">
                 <label for="" class="form-label">Nombre del Paciente</label>
-                <input type="text" class="form-control" id="nombrePaciente" v-model="nombrePaciente"> 
+                <input type="text" class="form-control" v-model="id.nombrePaciente"> 
             </div>
             <div class="col-md-2">
                 <label for="" class="form-label">Edad</label>
-                <input type="number" class="form-control" id="edadPaciente">  
+                <input type="number" class="form-control" v-model="id.edadPaciente">  
             </div>
 
             <div class="col-md-3">
                 <label for="" class="form-label">Fecha de Nacimiento</label>
-                <input type="date" class="form-control" id="fechaNacimiento">
+                <input type="date" class="form-control" v-model="id.fechaNacimiento">
             </div>
             <div class="col-md-3">
                 <label for="" class="form-label">Habitación</label>
-                <input type="text" class="form-control" id="habitacion"> 
+                <input type="text" class="form-control" v-model="id.habitacion"> 
             </div>            
             <div class="col-md-3">
                 <label for="" class="form-label col-12">Género</label>
@@ -35,12 +36,12 @@
 
             <div class="col-md-3">
                 <label for="" class="form-label">Fecha de Ingreso</label>
-                <input type="date" class="form-control" id="fechaIngreso">
+                <input type="date" class="form-control" v-model="id.fechaIngreso">
             </div>
           
             <div class="col-md-8">
                 <label for="" class="form-label">Diagnóstico</label>
-                <textarea class="form-control" id="" rows="3"></textarea>
+                <textarea class="form-control" v-model="id.diagnostico" rows="3"></textarea>
             </div>
             <div class="col-md-4">
                 <label for="" class="form-label col-12">Tipo de Cirugía</label>
@@ -57,32 +58,32 @@
 
             <div class="col-md-6">
                 <label for="" class="form-label">Cirugía</label>
-                <input type="text" class="form-control" id="diagnostico">
+                <input type="text" class="form-control" v-model="id.cirugia">
             </div>
             <div class="col-md-3">
                 <label for="" class="form-label">Fecha de Cirugía</label>
-                <input type="date" class="form-control" id="fechaCirugia">
+                <input type="date" class="form-control" v-model="id.fechaCirugia">
             </div>    
             <div class="col-md-3">
                 <label for="" class="form-label">Hora de Cirugía</label>
-                <input type="time" class="form-control" id="horaCirugia">
+                <input type="time" class="form-control" v-model="id.horaCirugia">
             </div>
 
             <div class="col-md-6">
                 <label for="" class="form-label">Cirujano</label>
-                <input type="text" class="form-control" id="cirujano">
+                <input type="text" class="form-control" v-model="id.cirujano">
             </div>
             <div class="col-md-6">
                 <label for="" class="form-label">Anestesiólogo</label>
-                <input type="text" class="form-control" id="anestesiologo">
+                <input type="text" class="form-control" v-model="id.anestesiologo">
             </div>
             <div class="col-md-6">
                 <label for="" class="form-label">Anestesiólogo VPA</label>
-                <input type="text" class="form-control" id="anestesiologoVPA">
+                <input type="text" class="form-control" v-model="id.anestesiologoVPA">
             </div>    
             <div class="col-auto">
-        <button class="btn btn-warning fw-bold" type="submit">Buscar</button>
-    </div>                
+                <button class="btn btn-warning fw-bold" type="submit">Buscar</button>
+            </div>                
         </form>
     </div>
 
@@ -105,18 +106,31 @@
 </style>
 
 <script lang="ts">
-
 import { defineComponent } from "vue"
 
 export default defineComponent({
     data: () => ({
-        numExpediente: "",
-        nombrePaciente: ""
+        id: {
+            numExpediente: "", 
+            nombrePaciente: "", 
+            edadPaciente: "", 
+            fechaNacimiento: "", 
+            habitacion: "", 
+            genero: "",
+            fechaIngreso: "", 
+            diagnostico: "", 
+            tipoCirugia: "", 
+            cirugia: "", 
+            fechaCirugia: "", 
+            horaCirugia: "",
+            cirujano: "", 
+            anestesiologo: "", 
+            anestesiologoVPA:""
+        }        
     }),
     methods: {
         getData() {
-            this.$emit("validar", this.numExpediente)
-            this.numExpediente = ""
+            this.$emit("validar", this.id.numExpediente, this.id.nombrePaciente)
         }
     }
 })

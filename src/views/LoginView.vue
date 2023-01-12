@@ -8,14 +8,14 @@
                 <input type="text" class="form-control" id="user" placeholder="Usuario" required>  
             </div>
             <div class="col-md-12">
-                <input type="password" class="form-control" id="user" placeholder="******" required>  
+                <input type="password" class="form-control" id="contrasena" placeholder="******" required>  
             </div>
 
             <div class="col-md-12">
                 <button onclick="location.href='home'" class="btn btn-primary btn-signin" type="submit">Entrar</button>
             </div>
             <div class="col-md-6">                    
-                <div class="opcioncontra">¿No tienes cuenta? <a href="404">Registrate</a></div> 
+                <div class="opcioncontra">¿No tienes cuenta? <a href="registro">Registrate</a></div> 
             </div>
             
         </form>        
