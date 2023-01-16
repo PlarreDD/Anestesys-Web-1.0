@@ -15,6 +15,11 @@ const router = createRouter({
       component: LoginView
     },
     {
+      path: '/registro',
+      name: 'registro',
+      component: () => import('../views/RegistroView.vue')
+    },
+    {
       path: '/home',
       name: 'home',
       component: () => import('../views/HomeView.vue')
@@ -35,9 +40,14 @@ const router = createRouter({
       component: () => import('../views/post/PostAnestesicoView.vue')
     },
     {
-      path: '/registro',
-      name: 'registro',
-      component: () => import('../views/RegistroView.vue')
+      path: '/medicamentos',
+      name: 'medicamentos',     
+      component: () => import('../views/menu/Medicamentos.vue')
+    },
+    {
+      path: '/medicos',
+      name: 'medicos',     
+      component: () => import('../views/menu/Medicos.vue')
     }
   ]
 })

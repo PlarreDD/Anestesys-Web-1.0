@@ -5,11 +5,11 @@
 
             <div class="col-md-4">
                 <label for="" class="form-label">Número de Expediente</label>
-                <input type="text" class="form-control" v-model="id.numExpediente">                
+                <input type="text" class="form-control" v-model="id.numExpediente" id="numExpediente">                
             </div>
             <div class="col-md-6">
                 <label for="" class="form-label">Nombre del Paciente</label>
-                <input type="text" class="form-control" v-model="id.nombrePaciente"> 
+                <input type="text" class="form-control" v-model="id.nombrePaciente" id="nombrePaciente"> 
             </div>
             <div class="col-md-2">
                 <label for="" class="form-label">Edad</label>
@@ -113,16 +113,16 @@ export default defineComponent({
         id: {
             numExpediente: "", 
             nombrePaciente: "", 
-            edadPaciente: "", 
-            fechaNacimiento: "", 
-            habitacion: "", 
-            genero: "",
-            fechaIngreso: "", 
+            edadPaciente: 0, 
+            fechaNacimiento: Date, 
+            habitacion: 0, 
+            genero: CharacterData,
+            fechaIngreso: Date, 
             diagnostico: "", 
             tipoCirugia: "", 
             cirugia: "", 
-            fechaCirugia: "", 
-            horaCirugia: "",
+            fechaCirugia: Date, 
+            horaCirugia: TimeRanges,
             cirujano: "", 
             anestesiologo: "", 
             anestesiologoVPA:""

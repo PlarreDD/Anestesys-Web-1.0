@@ -7,7 +7,7 @@
   </div>
 
   <div class="input-group mb-3">
-    <div class="col-10 divform navbar-nav">          
+    <div class="col-10 divform navbar-nav">                
         <ul class="nav nav-pills nav-fill text-center" id=""> <!--Lista para el menú principal-->
           <li class="nav-item col-md-3" >
               <button class="nav-link active" id="id-tab" href="#pre-id" data-bs-toggle="tab" type="submit" aria-selected="true">ID PACIENTE</button> <!--Se asigna el contenedor al que apuntara el elemento por medio de data-bs-target-->
@@ -66,6 +66,13 @@ import swal from 'sweetalert2'
 
 declare var numExpediente: any
 declare var nombrePaciente: any
+
+function isValid() {
+  if (numExpediente.trim() == "" || nombrePaciente.trim() == "") {
+    return false;
+  }
+  return true;
+}
 
 export default defineComponent({
   components:{
