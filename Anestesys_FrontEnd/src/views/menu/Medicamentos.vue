@@ -4,19 +4,14 @@
       <div class="col-12 col-md-5">
         <form>
 
-          <h3>Gestión de cirujanos y anestesiólogos</h3>
+          <h3>Gestión de medicamentos</h3>
           <div class="mb-3">
-            <label class="form-label">Nombre(s)</label>
+            <label class="form-label">Medicamento</label>
             <input type="text" class="form-control" required />
           </div>
 
           <div class="mb-3">
-            <label class="form-label">Apellido(s)</label>
-            <input type="text" class="form-control" required />
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Matricula</label>
+            <label class="form-label">Código de barras</label>
             <input type="text" class="form-control" required />
           </div>
 
@@ -31,8 +26,8 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Nombre completo</th>
-                        <th>Matricula</th>
+                        <th>Medicamento</th>
+                        <th>Código de barras</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
@@ -41,8 +36,8 @@
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>Nombre del médico</td>
-                        <td>18151111</td>
+                        <td>Paracetamol</td>
+                        <td>7875468798</td>
                         <td><button class="btn btn-outline-info">Editar</button></td>
                         <td><button class="btn btn-outline-danger">Eliminar</button></td>
                     </tr>

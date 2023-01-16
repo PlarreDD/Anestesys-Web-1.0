@@ -20,10 +20,10 @@
                   <a class="nav-link active" aria-current="page" href="#">Monitores</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Médicos</a>
+                  <a class="nav-link" href="medicos">Médicos</a>
                 </li>  
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Medicamentos</a>
+                  <a class="nav-link" href="medicamentos">Medicamentos</a>
                 </li>    
                 <li class="nav-item">
                   <a class="nav-link" href="#">Tendencias</a>

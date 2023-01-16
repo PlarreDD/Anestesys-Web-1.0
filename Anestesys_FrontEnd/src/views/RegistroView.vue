@@ -83,7 +83,6 @@ export default {
 
     methods: {
         handleSubmit: async () => {
-            data
             try {
                 console.log("Nombre: " + name);                
             } catch (error) {
