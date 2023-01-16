@@ -10,11 +10,7 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@types/mongoose": "^5.11.97",
-    "axios": "^1.2.2",
-    "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mongoose": "^6.8.2",
     "sweetalert2": "^11.4.8",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"

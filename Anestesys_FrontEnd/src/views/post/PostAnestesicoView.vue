@@ -16,8 +16,8 @@
   <div class="input-group mb-3 divPrincipal"> 
     
     <div class="tab-content col-md-9" id=""> <!--Redirecciona al contenedor seleccionado, cargando la información del componente-->
-        <div class="tab-pane fade show active" id="nota"><Nota /></div>
-        <div class="tab-pane fade" id="recuperacion"><Recuperacion /></div>
+        <div class="tab-pane fade show active" id="nota"><nota /></div>
+        <div class="tab-pane fade" id="recuperacion"><recuperacion /></div>
     </div>
 
     <div class="col-2 divMenuLateralPrincipal"> <!--Menú lateral-->

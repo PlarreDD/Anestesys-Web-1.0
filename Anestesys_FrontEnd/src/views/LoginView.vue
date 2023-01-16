@@ -8,74 +8,19 @@
                 <input type="text" class="form-control" id="user" placeholder="Usuario" required>  
             </div>
             <div class="col-md-12">
-                <input type="password" class="form-control" id="password" placeholder="******" required>  
+                <input type="password" class="form-control" id="contrasena" placeholder="******" required>  
             </div>
 
             <div class="col-md-12">
-                <button @click="access" class="btn btn-primary btn-signin" type="submit">Entrar</button>
-
-                <button onclick="location.href='trans'" class="btn btn-primary btn-signin" type="submit">Acceso Rápido</button>
+                <button onclick="location.href='home'" class="btn btn-primary btn-signin" type="submit">Entrar</button>
             </div>
-
             <div class="col-md-6">                    
-                <div class="opcioncontra">¿No tienes cuenta? <a href="register">Registrate</a></div> 
+                <div class="opcioncontra">¿No tienes cuenta? <a href="registro">Registrate</a></div> 
             </div>
+            
         </form>        
     </div>
 </template>
-
-<script lang="ts">
-import { apiAxios } from "@/boot/axios";
-import { defineComponent, ref } from "vue"
-
-const tkn = ref('');
-const xprsIn = ref('');
-
-export default defineComponent({
-    methods:{
-        access: async () => {
-            try {
-                const res = await apiAxios.post(
-                    "/login",
-                    {
-                        "email": "cnisuwe@test.com",
-                        "password": "123123"
-                    }
-                );
-
-                tkn.value = res.data.token;
-                xprsIn.value = res.data.expiresIn;
-                console.log(tkn.value + " - " + xprsIn.value);                
-            } catch (error) {
-                console.log(error);                
-            }
-        }
-    }
-});
-
-function setTime(): void {
-    setTimeout(() => {
-        refreshToken();
-        console.log("TimeOut");        
-    }, Number(xprsIn) * 1000 - 6000);
-};
-
-// Funciona pero hace falta createLink para tener un link valido en la BD
-const refreshToken = async(): Promise <void> => {
-    try {
-        const res = await apiAxios.get("/refresh");
-        tkn.value = res.data.token;
-        xprsIn.value = res.data.expiresIn;
-        console.log(tkn.value + " - " + xprsIn.value);
-        
-        setTime();
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-refreshToken();
-</script>
 
 <style>
 .divBorder {
