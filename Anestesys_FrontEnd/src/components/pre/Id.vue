@@ -82,9 +82,9 @@
                 <input type="text" class="form-control" v-model="id.anestesiologoVPA">
             </div>    
             <div class="col-auto">
-                <button class="btn btn-warning fw-bold" type="submit">Buscar</button>
-            </div>                
-        </form>
+                <button class="btn btn-warning fw-bold" href="#pre-valoracion" data-bs-toggle="tab" type="submit">Siguiente</button>
+            </div>                            
+        </form>        
     </div>
 
 </template>
@@ -106,9 +106,15 @@
 </style>
 
 <script lang="ts">
+
 import { defineComponent } from "vue"
 
+import Pre from "../../views/pre/PreAnestesicoView.vue";
+
 export default defineComponent({
+    components:{
+        Pre
+    },
     data: () => ({
         id: {
             numExpediente: "", 

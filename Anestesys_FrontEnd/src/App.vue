@@ -37,11 +37,17 @@
         </div>
       </nav>
     </div>
-  </header>
 
-  <div class="container mt-3">
-    <RouterView />
-  </div>
+    <div class="container mt-3">
+      <RouterView v-slot="{Component}">
+        <transition>
+          <keep-alive>
+            <component :is="Component" />
+          </keep-alive>
+        </transition>
+      </RouterView>
+    </div>
+  </header>  
   
 </template>
 
