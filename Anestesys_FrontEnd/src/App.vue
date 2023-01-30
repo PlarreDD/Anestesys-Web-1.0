@@ -3,13 +3,13 @@
     <div class="container mt-3">
       <nav class="navbar">        
         
-        <div class="container-fluid">
+        <div class="nav-content">
           <RouterLink to="/"><img src="images/logoAnestesys.png" class="imgAjuste"/></RouterLink>
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#barraConfiguracion" aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
 
-          <div class="offcanvas offcanvas-end" tabindex="-1" id="barraConfiguracion" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas nav-config" tabindex="-1" id="barraConfiguracion" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
               <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Configuración</h5>
               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -55,5 +55,18 @@
 .imgAjuste{
   width: 15%;
   height: auto;    
+}
+.nav-content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-config{
+    top: 0;
+    right: 0;
+    width: 300px;
+    background-color: rgb(192, 192, 192);
+    border-left: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
+    transform: translateX(100%);    
 }
 </style>

@@ -75,10 +75,73 @@
             <RouterLink to="post"><img src="images/post.png" class="imgAjuste"/></RouterLink>
           </div>    
         </div>
+
+        <div>
+          <pre @recibe-datos="actualizaDatos" />
+        </div>
+
+        <div class="container text-center col-md-9 posicion-sticky borde-contenedor">
+            <div class="row">
+              <div class="col borde-columna">
+                Paciente: {{nomPaciente}}
+              </div>
+              <div class="col borde-columna">
+                Cirujano: {{}}
+              </div>
+              <div class="col borde-columna">
+                Cirugía: {{}}
+              </div>
+            </div>
+        </div>
     </div>    
 
   </div>
 </template>
+
+<script lang="ts">
+
+import Pre from "../pre/PreAnestesicoView.vue";
+
+export default({
+
+  data() {
+    return {
+      numExpediente:'',
+      nomPaciente:'',
+      nomCirujano:'',
+      nomCirugia:''
+    }
+  },
+  components:{
+    Pre
+  },
+  mounted: function() { // Llama el método despues de cargar la página
+      this.mueveReloj();
+  },
+  methods: {
+      async mueveReloj() {            
+        const clock: HTMLSpanElement = document.getElementById('clock');
+
+        setInterval(()=> {
+          const date: Date = new Date();
+          clock.innerText = date.toLocaleTimeString('es-MX', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+          });
+
+        }, 1000);
+      },
+      actualizaDatos(nombrePaciente, nombreCirujano, cirugia) {
+        this.nomPaciente = nombrePaciente,
+        this.nomCirujano = nombreCirujano,
+        this.nomCirugia = cirugia
+
+        console.log(this.nomPaciente) 
+      },
+  }
+})
+</script>
 
 <style scoped>
 .divMenuLateral {
@@ -99,29 +162,22 @@
 .centrar-label{
   text-align: center;
 }
+.posicion-sticky {
+    position: sticky;
+    bottom: 0;
+    z-index: 1020;
+    background-color: rgb(142, 143, 142);
+}
+.borde-contenedor{
+  box-shadow: 3px 3px 7px #ccc;
+  padding: 1.2rem;
+
+  border: rgb(0, 0, 0) 1px solid;
+}
+.borde-columna{
+  margin-left: auto;
+  margin-right: auto;
+  border-right: 1px solid rgb(0, 0, 0);
+  border-left: 1px solid rgb(0, 0, 0);
+}
 </style>
-
-<script lang="ts">
-
-export default({
-
-  mounted: function() { // Llama el método despues de cargar la página
-      this.mueveReloj();
-  },
-  methods: {
-      async mueveReloj() {            
-        const clock: HTMLSpanElement = document.getElementById('clock');
-
-        setInterval(()=> {
-          const date: Date = new Date();
-          clock.innerText = date.toLocaleTimeString('es-MX', {
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-          });
-
-        }, 1000);
-      }
-  }
-})
-</script>

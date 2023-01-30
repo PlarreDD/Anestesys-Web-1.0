@@ -27,8 +27,8 @@
                   <li class="nav-item col-md-3" >
                       <button class="nav-link active" id="id-tab" href="#pre-id" data-bs-toggle="tab" type="submit" aria-selected="true">ID PACIENTE</button> <!--Se asigna el contenedor al que apuntara el elemento por medio de data-bs-target-->
                   </li>
-                  <li class="nav-item col-md-3" > <!--@click="mandarMensaje()"-->
-                      <button class="nav-link" id="valoracion-tab" href="#pre-valoracion" data-bs-toggle="tab" type="submit" aria-selected="false">VALORACIÓN</button>
+                  <li class="nav-item col-md-3" >
+                      <button class="nav-link" id="valoracion-tab" href="#pre-valoracion" data-bs-toggle="tab" type="submit" aria-selected="false" @click="validaExpediente(numExpediente, nomPaciente)">VALORACIÓN</button>
                   </li>
                   <li class="nav-item col-md-3" >
                       <button class="nav-link" id="plan-tab" href="#pre-plan" data-bs-toggle="tab" type="submit" aria-selected="false">PLAN</button>
@@ -38,17 +38,13 @@
                   </li>
               </ul>
           </div>
-
-          <!--<div class="col-md-10">
-            <BarraProgreso />
-          </div>-->
       </div>
 
       <div class="input-group mb-3 divPrincipal"> 
         
           <div class="tab-content col-md-9" id=""> <!--Redirecciona al contenedor seleccionado, cargando la información del componente-->
               <div class="tab-pane fade show active" id="pre-id">
-                <id @validar="validaExpediente"/>
+                <id @recibe-datos="actualizaDatos" @validar="validaExpediente"/>
               </div>
               <div class="tab-pane fade" id="pre-valoracion">
                 <valoracion/>
@@ -70,22 +66,23 @@
               </div>
               <div class="col-md-2 divMenuLateral">
                   <RouterLink to="post"><img src="images/post.png" class="imgAjuste"/></RouterLink>
-              </div>    
+              </div>                                                                                         
           </div>
-
-          <div class="uno col-md-9">
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                          <th>Nombre paciente: {{}}</th>
-                          <th>Nombre cirujano</th>
-                          <th>Nombre cirugía</th>
-                        </tr>
-                    </thead>                  
-                </table>        
+          
+          <div class="container text-center col-md-9 posicion-sticky borde-contenedor">
+            <div class="row">
+              <div class="col borde-columna">
+                <label class="form-label">Paciente: {{nomPaciente}}</label>                                  
+              </div>
+              <div class="col borde-columna">
+                Cirujano: {{nomCirujano}}
+              </div>
+              <div class="col borde-columna">
+                Cirugía: {{nomCirugia}}
+              </div>
             </div>
           </div>
+
       </div>
   </div>  
 
@@ -106,11 +103,15 @@ import Nota from '../../components/pre/Nota.vue';
 import BarraProgreso from '../../components/BarraProgreso.vue';
 import swal from 'sweetalert2'
 
-declare var numExpediente: any
-declare var nombrePaciente: any
-
 export default defineComponent({
-  
+  data() {
+    return {
+      numExpediente:'',
+      nomPaciente:'',
+      nomCirujano:'',
+      nomCirugia:''
+    }
+  },
   components:{
     Id,
     Nota,
@@ -119,13 +120,13 @@ export default defineComponent({
     BarraProgreso
   },
   created(){
-    this.validaExpediente()
+    this.validaExpediente(this.numExpediente, this.nomPaciente)
   },
   mounted: function() { // Llama el método despues de cargar la página
       this.mandarMensaje();
   },
   methods: {
-      async validaExpediente(numExpediente = ".", nombrePaciente = ".") {            
+      async validaExpediente(numExpediente, nombrePaciente) {                                  
           if(numExpediente.trim() == "" || nombrePaciente.trim() == "") {
               swal.fire({
               title: 'Escribir el número de expediente o nombre del paciente',
@@ -135,8 +136,11 @@ export default defineComponent({
               backdrop: true,
               toast: true,
               position: 'top'
-              })     
-              return;           
+              })                         
+              return;                       
+          }
+          else{
+            alert('OK')
           }
       },
       async mandarMensaje(){
@@ -151,7 +155,14 @@ export default defineComponent({
           toast: true,
           position: 'top-end'            
         })  
-      }
+      },
+      actualizaDatos(nombrePaciente, nombreCirujano, cirugia) {
+        this.nomPaciente = nombrePaciente,
+        this.nomCirujano = nombreCirujano,
+        this.nomCirugia = cirugia
+
+        this.$emit('recibe-datos', this.nomPaciente, this.nomCirujano, this.nomCirugia);         
+      },
   }
 })
 </script>
@@ -175,16 +186,22 @@ export default defineComponent({
 .centrar-boton{
   text-align: center;
 }
-div.sticky {
-    position: -webkit-sticky;
+.posicion-sticky {
     position: sticky;
-    top: 0;
-    padding: 5px;
+    bottom: 0;
+    z-index: 1020;
+    background-color: rgb(142, 143, 142);
 }
-.uno {
-  left: 37.5%;
-  position: absolute;
-  top: 105%;
-  transform: translate(-50%, -50%);
+.borde-contenedor{
+  box-shadow: 3px 3px 7px #ccc;
+  padding: 1.2rem;
+
+  border: rgb(0, 0, 0) 1px solid;
+}
+.borde-columna{
+  margin-left: auto;
+  margin-right: auto;
+  border-right: 1px solid rgb(0, 0, 0);
+  border-left: 1px solid rgb(0, 0, 0);
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
 
     <div :class="id.numExpediente.length != 0 || id.nombrePaciente.length != 0 ? 'divColor col-12 divBorder' : 'col-12 divBorder'">  
-        <form @submit.prevent="getData" class="row g-3">  
+        <form @submit.prevent="obtenerDatos" class="row g-3">  
 
             <div class="col-md-4">
                 <label for="" class="form-label">Número de Expediente</label>
@@ -9,7 +9,7 @@
             </div>
             <div class="col-md-6">
                 <label for="" class="form-label">Nombre del Paciente</label>
-                <input type="text" class="form-control" v-model="id.nombrePaciente" id="nombrePaciente"> 
+                <input type="text" class="form-control" @keyup.capture="enviarDatos" v-model="id.nombrePaciente" id="nombrePaciente"> 
             </div>
             <div class="col-md-2">
                 <label for="" class="form-label">Edad</label>
@@ -58,7 +58,7 @@
 
             <div class="col-md-6">
                 <label for="" class="form-label">Cirugía</label>
-                <input type="text" class="form-control" v-model="id.cirugia">
+                <input type="text" class="form-control" @keyup.capture="enviarDatos" v-model="id.cirugia">
             </div>
             <div class="col-md-3">
                 <label for="" class="form-label">Fecha de Cirugía</label>
@@ -71,7 +71,7 @@
 
             <div class="col-md-6">
                 <label for="" class="form-label">Cirujano</label>
-                <input type="text" class="form-control" v-model="id.cirujano">
+                <input type="text" class="form-control" @keyup.capture="enviarDatos" v-model="id.cirujano">
             </div>
             <div class="col-md-6">
                 <label for="" class="form-label">Anestesiólogo</label>
@@ -109,35 +109,35 @@
 
 import { defineComponent } from "vue"
 
-import Pre from "../../views/pre/PreAnestesicoView.vue";
-
 export default defineComponent({
-    components:{
-        Pre
+    data () {
+        return{
+            id: {
+                numExpediente: "", 
+                nombrePaciente: '', 
+                edadPaciente: 0, 
+                fechaNacimiento: "", 
+                habitacion: 0, 
+                genero: "",
+                fechaIngreso: "", 
+                diagnostico: "", 
+                tipoCirugia: "", 
+                cirugia: "", 
+                fechaCirugia: "", 
+                horaCirugia: "",
+                cirujano: "", 
+                anestesiologo: "", 
+                anestesiologoVPA:""
+            }      
+        }  
     },
-    data: () => ({
-        id: {
-            numExpediente: "", 
-            nombrePaciente: "", 
-            edadPaciente: 0, 
-            fechaNacimiento: Date, 
-            habitacion: 0, 
-            genero: CharacterData,
-            fechaIngreso: Date, 
-            diagnostico: "", 
-            tipoCirugia: "", 
-            cirugia: "", 
-            fechaCirugia: Date, 
-            horaCirugia: TimeRanges,
-            cirujano: "", 
-            anestesiologo: "", 
-            anestesiologoVPA:""
-        }        
-    }),
     methods: {
-        getData() {
+        obtenerDatos() {
             this.$emit("validar", this.id.numExpediente, this.id.nombrePaciente)
-        }
+        },
+        enviarDatos() {
+            this.$emit('recibe-datos', this.id.nombrePaciente, this.id.cirujano, this.id.cirugia)            
+        }        
     }
 })
 </script>
