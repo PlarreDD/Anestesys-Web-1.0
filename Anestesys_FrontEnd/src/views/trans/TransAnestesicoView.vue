@@ -9,18 +9,255 @@
 
     <div class="input-group mb-3">
         <div class="col-9 divform navbar-nav">                     
-            <ul class="nav nav-pills nav-fill text-center" id=""> <!--Lista para el menú principal-->
-                <li class="nav-item col-md-3">
-                    <button class="nav-link active" id="id-tab" data-bs-toggle="tab" type="submit" aria-selected="true">GRID ANESTÉSICO</button> <!--Se asigna el contenedor al que apuntara el elemento por medio de data-bs-target-->
+            <ul class="nav text-center" id=""> <!--Lista para el menú principal-->
+                <li class="col-md-3">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">GRID ANESTÉSICO</button> <!--Botón para abrir el dropdown-->
+                    <form class="dropdown-menu p-5">
+                      <div class="mb-3 estiloDropDown input-group mb-3">
+                        
+                      </div>
+                    </form>
                 </li>
-                <li class="nav-item col-md-3">
-                    <button class="nav-link" id="valoracion-tab" data-bs-toggle="tab" type="submit" aria-selected="false">TÉCNICA ANESTÉSICA</button>
+                <li class="col-md-3">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">TÉCNICA ANESTÉSICA</button>
+                    <form class="dropdown-menu p-5">
+                      <div class="mb-3 estiloDropDownTecnica row g-3">
+                        <div class="form-check col-md-4">
+                          <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
+                          <label class="form-check-label" for="checkTecnica">Local</label>
+                        </div>
+                        <div class="form-check col-md-4">
+                          <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
+                          <label class="form-check-label" for="checkTecnica">Sedación</label>
+                        </div>
+                        <div class="form-check col-md-4">
+                          <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
+                          <label class="form-check-label" for="checkTecnica">General balanceada</label>
+                        </div>
+                        <div class="form-check col-md-4">
+                          <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
+                          <label class="form-check-label" for="checkTecnica">TIVA (Anestesia total intravenosa)</label>
+                        </div>
+                        <div class="form-check col-md-4">
+                          <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
+                          <label class="form-check-label" for="checkTecnica">Multimodal</label>
+                        </div>
+                        <div class="form-check col-md-4">
+                          <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
+                          <label class="form-check-label" for="checkTecnica">Bloqueo mixto</label>
+                        </div>
+                        <div class="form-check col-md-4">
+                          <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
+                          <label class="form-check-label" for="checkTecnica">Bloqueo peridural lumbar</label>
+                        </div>
+                        <div class="form-check col-md-4">
+                          <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
+                          <label class="form-check-label" for="checkTecnica">Bloqueo peridural caudal</label>
+                        </div>
+                        <div class="form-check col-md-4">
+                          <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
+                          <label class="form-check-label" for="checkTecnica">Bloqueo espinal</label>
+                        </div>
+                        <div class="form-check col-md-4">
+                          <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
+                          <label class="form-check-label" for="checkTecnica">Bloqueo de plexo</label>
+                        </div>
+                        <div class="form-check col-md-4">
+                          <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
+                          <label class="form-check-label" for="checkTecnica">Bloqueo troncular</label>
+                        </div>
+                        <div class="form-check col-md-4">
+                          <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
+                          <label class="form-check-label" for="checkTecnica">Bloqueo peridural torácico</label>
+                        </div>
+                        <div class="form-check col-md-4">
+                          <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
+                          <label class="form-check-label" for="checkTecnica">Bloqueo peridural cervical</label>
+                        </div>
+                        <div class="form-check col-md-4">
+                          <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
+                          <label class="form-check-label" for="checkTecnica">Libre de opioides</label>
+                        </div>
+                      </div>
+                    </form>
                 </li>
-                <li class="nav-item col-md-3">
-                    <button class="nav-link" id="plan-tab" data-bs-toggle="tab" type="submit" aria-selected="false">BALANCE HIDRICO</button>
+                <li class="col-md-3">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">BALANCE HIDRICO</button>
+                    <form class="dropdown-menu p-5">
+                      <div class="mb-3 estiloDropDownBalance input-group mb-3">
+                        <h6 class="bold col-md-12">INGRESOS</h6>
+
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Solución Hartman(ml):</label>
+                        </div>
+                        <div class="col-md-1 ">
+                          <input class="form-control" type="text" id="">
+                        </div>                        
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Solución fisiológica(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Glucosados(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+                        
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Gelatinas(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Almidones(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>                      
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Albúminas(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Paquete globular(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>                     
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Plasmas(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Plaquetas(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Crioprecipitados(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Factor VII(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Factor VIII(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Otros:</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+
+                        <h6 class="bold col-md-12">EGRESOS</h6>
+
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Liquídos de ascitis(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Sangrado aproximado(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Uresis(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Exposición quirúrgica(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Requerimientos basales(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Ayuno(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label">Otros:</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+                      </div>
+                    </form>
                 </li>
-                <li class="nav-item col-md-3">
-                    <button class="nav-link" id="nota-tab" data-bs-toggle="tab" type="submit" aria-selected="false">DATOS DEL VENTILADOR</button>
+                <li class="col-md-3">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">DATOS DEL VENTILADOR</button>
+                    <form class="dropdown-menu p-5">
+                      <div class="mb-3 estiloDropDownVentilador row g-3">
+                        <div class="col-md-9">
+                            <label for="inputState" class="form-label">Modos de ventilación</label>
+                            <select id="inputState" class="form-select">
+                                <option selected>Seleccione...</option>
+                                <option>Control volumen</option>
+                                <option>Control presión</option>
+                                <option>Presión soporte</option>
+                                <option>SIMV-VC+PSV</option>
+                                <option>SIMV-PC+PSV</option>
+                                <option>Ventilación control presión con volumen garantizado</option>                   
+                            </select>
+                        </div>   
+                        <div class="col-md-3">
+                            <label class="form-label">PEEP</label>
+                            <input type="text" class="form-control" id=""> 
+                        </div>    
+                        
+                        <div class="col-md-3">
+                            <label class="form-label">VT</label>
+                            <input type="text" class="form-control" id=""> 
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Frec. Resp</label>
+                            <input type="text" class="form-control" id=""> 
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">I:E</label>
+                            <input type="text" class="form-control" id=""> 
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">P. Límite</label>
+                            <input type="text" class="form-control" id=""> 
+                        </div>
+                      </div>                      
+                    </form>
                 </li>
             </ul>
         </div>       
@@ -35,13 +272,13 @@
         </div>   
 
         <div class="col-2">
-          <div class="centrar-label">
+          <div class="centrarLabel">
             <h4><span id="clock"></span></h4>
           </div>          
         </div>   
     </div>
 
-    <div class="input-group mb-3 divPrincipal"> 
+    <div class="input-group mb-3 bordePrincipal"> 
       
         <div class="tab-content col-md-9" id="">
           <div class="row g-3">
@@ -64,15 +301,15 @@
           </div>
         </div>
 
-        <div class="col-2 divMenuLateralPrincipal"> <!--Menú lateral-->
-          <div class="col-md-2 divMenuLateral">
-            <RouterLink to="pre"><img src="images/pre.png" class="imgAjuste"/></RouterLink>
+        <div class="col-2 menuLateralPrincipal"> <!--Menú lateral-->
+          <div class="col-md-2 menuLateral">
+            <RouterLink to="pre"><img src="images/pre.png" class="ajusteImg"/></RouterLink>
           </div>
-          <div class="col-md-2 divMenuLateral">
-            <img src="images/trans.png" class="imgAjuste"/>
+          <div class="col-md-2 menuLateral">
+            <img src="images/trans.png" class="ajusteImg"/>
           </div>
-          <div class="col-md-2 divMenuLateral">
-            <RouterLink to="post"><img src="images/post.png" class="imgAjuste"/></RouterLink>
+          <div class="col-md-2 menuLateral">
+            <RouterLink to="post"><img src="images/post.png" class="ajusteImg"/></RouterLink>
           </div>    
         </div>
 
@@ -80,15 +317,15 @@
           <pre @recibe-datos="actualizaDatos" />
         </div>
 
-        <div class="container text-center col-md-9 posicion-sticky borde-contenedor">
+        <div class="container text-center col-md-9 posicionEstatica bordeContenedor">
             <div class="row">
-              <div class="col borde-columna">
+              <div class="col bordeColumna">
                 Paciente: {{nomPaciente}}
               </div>
-              <div class="col borde-columna">
+              <div class="col bordeColumna">
                 Cirujano: {{}}
               </div>
-              <div class="col borde-columna">
+              <div class="col bordeColumna">
                 Cirugía: {{}}
               </div>
             </div>
@@ -144,40 +381,52 @@ export default({
 </script>
 
 <style scoped>
-.divMenuLateral {
+.menuLateral {
     margin-bottom: 6px; 
     margin-top: 6px;
     margin-left: 20px;
 }
-.divMenuLateralPrincipal {
+.menuLateralPrincipal {
     margin-top: 16px;
 }
-.divPrincipal {
+.bordePrincipal {
     width: 110%;
 }
-.imgAjuste{
+.ajusteImg{
   width: 455%;
   height: auto;
 }
-.centrar-label{
+.centrarLabel{
   text-align: center;
 }
-.posicion-sticky {
+.posicionEstatica {
     position: sticky;
     bottom: 0;
     z-index: 1020;
     background-color: rgb(142, 143, 142);
 }
-.borde-contenedor{
+.bordeContenedor{
   box-shadow: 3px 3px 7px #ccc;
   padding: 1.2rem;
 
   border: rgb(0, 0, 0) 1px solid;
 }
-.borde-columna{
+.bordeColumna{
   margin-left: auto;
   margin-right: auto;
   border-right: 1px solid rgb(0, 0, 0);
   border-left: 1px solid rgb(0, 0, 0);
+}
+.estiloDropDown{
+  width: 450px; height: 250px;
+}
+.estiloDropDownTecnica{
+  width: 450px; height: auto;
+}
+.estiloDropDownBalance{
+  width: 600px; height: 400px;
+}
+.estiloDropDownVentilador{
+  width: 450px; height: auto;
 }
 </style>

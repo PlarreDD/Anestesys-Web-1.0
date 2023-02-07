@@ -14,7 +14,7 @@
 
         <div class="tab-content col-md-12" id="">
             <div class="tab-pane fade show active" id="notaEvaluacion">
-                <div class="col-12 divBorder">
+                <div class="col-12 bordePrincipal">
                     <form class="row g-3">
                         <div class="col-md-12">
                             <label for="" class="form-label">Observaciones</label>
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="aldrete">
-                <div class="col-12 divBorder">
+                <div class="col-12 bordePrincipal largoContenedor">
                     <form class="row g-3">
                         <table class="table">
                             <tr>
@@ -417,7 +417,7 @@
             </div>
             <div class="tab-pane fade" id="alta">
                 
-                <div class="col-12 divBorder">
+                <div class="col-12 bordePrincipal largoContenedor">
                     <form class="row g-3">
                         <div class="col-md-3">
                             <label for="" class="form-label">Criterio de Aldrete</label>
@@ -493,11 +493,14 @@
 </template>
 
 <style scoped>
-.divBorder {
+.bordePrincipal {
   border-radius: 13px;
   box-shadow: 3px 3px 7px #ccc;
   padding: 1rem;
   margin-top :10px;
   margin-bottom: 10px;
+}
+.largoContenedor{
+    height: 558px
 }
 </style>

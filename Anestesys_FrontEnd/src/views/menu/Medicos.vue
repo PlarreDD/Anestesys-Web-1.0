@@ -1,5 +1,5 @@
 <template>    
-    <div class="row divBorder">
+    <div class="row bordePrincipal">
 
       <div class="col-12 col-md-5">
         <form>
@@ -55,7 +55,7 @@
 </template>
 
 <style scoped>
-.divBorder {
+.bordePrincipal {
   border-radius: 13px;
   box-shadow: 3px 3px 7px #ccc;
   padding: 1rem;

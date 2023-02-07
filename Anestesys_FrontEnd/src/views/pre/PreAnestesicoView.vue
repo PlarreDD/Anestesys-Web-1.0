@@ -5,17 +5,17 @@
             <input class="form-control me-2" type="search" placeholder="Buscar número de expediente..." aria-label="Buscar"> <!--Buscador-->
           </div>   
           <div class="col-md-2">
-            <div class="centrar-boton">
+            <div class="centrarBoton">
               <button class="btn btn-secondary">Nuevo Paciente</button>
             </div>
           </div> 
           <div class="col-md-2">
-            <div class="centrar-boton">
+            <div class="centrarBoton">
               <button class="btn btn-secondary">Nuevo Registro</button>
             </div>
           </div> 
           <div class="col-md-2">
-            <div class="centrar-boton">
+            <div class="centrarBoton">
               <button class="btn btn-secondary">Historial Paciente</button>
             </div>
           </div>            
@@ -40,7 +40,7 @@
           </div>
       </div>
 
-      <div class="input-group mb-3 divPrincipal"> 
+      <div class="input-group mb-3 bordePrincipal"> 
         
           <div class="tab-content col-md-9" id=""> <!--Redirecciona al contenedor seleccionado, cargando la información del componente-->
               <div class="tab-pane fade show active" id="pre-id">
@@ -57,27 +57,27 @@
               </div>
           </div>
 
-          <div class="col-2 divMenuLateralPrincipal"> <!--Menú lateral-->
-              <div class="col-md-2 divMenuLateral">
-                  <img src="images/pre.png" class="imgAjuste"/>
+          <div class="col-2 menuLateralPrincipal"> <!--Menú lateral-->
+              <div class="col-md-2 menuLateral">
+                  <img src="images/pre.png" class="ajusteImg"/>
               </div>
-              <div class="col-md-2 divMenuLateral">
-                  <RouterLink to="trans"><img src="images/trans.png" class="imgAjuste"/></RouterLink>
+              <div class="col-md-2 menuLateral">
+                  <RouterLink to="trans"><img src="images/trans.png" class="ajusteImg"/></RouterLink>
               </div>
-              <div class="col-md-2 divMenuLateral">
-                  <RouterLink to="post"><img src="images/post.png" class="imgAjuste"/></RouterLink>
+              <div class="col-md-2 menuLateral">
+                  <RouterLink to="post"><img src="images/post.png" class="ajusteImg"/></RouterLink>
               </div>                                                                                         
           </div>
           
-          <div class="container text-center col-md-9 posicion-sticky borde-contenedor">
+          <div class="container text-center col-md-9 posicionEstatica bordeContenedor">
             <div class="row">
-              <div class="col borde-columna">
+              <div class="col bordeColumna">
                 <label class="form-label">Paciente: {{nomPaciente}}</label>                                  
               </div>
-              <div class="col borde-columna">
+              <div class="col bordeColumna">
                 Cirujano: {{nomCirujano}}
               </div>
-              <div class="col borde-columna">
+              <div class="col bordeColumna">
                 Cirugía: {{nomCirugia}}
               </div>
             </div>
@@ -128,6 +128,21 @@ export default defineComponent({
   methods: {
       async validaExpediente(numExpediente, nombrePaciente) {                                  
           if(numExpediente.trim() == "" || nombrePaciente.trim() == "") {
+
+              if(numExpediente.trim() ==""){
+                document.getElementById("validaNumExp").className = "visible validaCampo";
+                document.getElementById("numExpediente").className = "form-control border border-danger";
+              }else{
+                document.getElementById("validaNumExp").className = "invisible";
+              }
+              
+              if(nombrePaciente.trim() ==""){
+                document.getElementById("validaNomPac").className = "visible validaCampo";              
+                document.getElementById("nombrePaciente").className = "form-control border border-danger";
+              }else{
+                document.getElementById("validaNomPac").className = "invisible"; 
+              }         
+
               swal.fire({
               title: 'Escribir el número de expediente o nombre del paciente',
               icon: 'error',
@@ -135,11 +150,15 @@ export default defineComponent({
               showCloseButton: true,
               backdrop: true,
               toast: true,
-              position: 'top'
+              position: 'top',
+              timer: 3000,
+              timerProgressBar: true
               })                         
               return;                       
           }
           else{
+            document.getElementById("validaNumExp").className = "invisible";
+            document.getElementById("validaNomPac").className = "invisible";  
             alert('OK')
           }
       },
@@ -168,37 +187,37 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.divMenuLateral {
+.menuLateral {
   margin-bottom: 6px; 
   margin-top: 6px;
   margin-left: 20px;
 }
-.divMenuLateralPrincipal {
+.menuLateralPrincipal {
   margin-top: 16px;
 }
-.divPrincipal {
+.bordePrincipal {
   width: 110%
 }
-.imgAjuste{
+.ajusteImg{
   width: 455%;
   height: auto;
 }
-.centrar-boton{
+.centrarBoton{
   text-align: center;
 }
-.posicion-sticky {
+.posicionEstatica {
     position: sticky;
     bottom: 0;
     z-index: 1020;
     background-color: rgb(142, 143, 142);
 }
-.borde-contenedor{
+.bordeContenedor{
   box-shadow: 3px 3px 7px #ccc;
   padding: 1.2rem;
 
   border: rgb(0, 0, 0) 1px solid;
 }
-.borde-columna{
+.bordeColumna{
   margin-left: auto;
   margin-right: auto;
   border-right: 1px solid rgb(0, 0, 0);

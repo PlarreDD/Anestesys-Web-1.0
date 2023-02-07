@@ -12,7 +12,7 @@
 
         <div class="tab-content col-md-12" id="">
             <div class="tab-pane fade show active" id="notaPost">
-                <div class="col-12 divBorder">
+                <div class="col-12 bordePrincipal">
                     <form class="row g-3">    
                         <div class="col-md-9">
                             <label for="" class="form-label">Técnica de anestesia final</label>
@@ -22,7 +22,7 @@
                             <label for="" class="form-label col-12">Intubación</label>
 
                             <input type="radio" class="btn-check" name="intubacion" id="intubacionSi" autocomplete="off">
-                            <label class="btn btn-outline-success radioMargin" for="intubacionSi">Sí</label>
+                            <label class="btn btn-outline-success margenRadio" for="intubacionSi">Sí</label>
 
                             <input type="radio" class="btn-check" name="intubacion" id="intubacionNo" autocomplete="off">
                             <label class="btn btn-outline-danger" for="intubacionNo">No</label>
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="caso">
-                <div class="col-12 divBorder">                
+                <div class="col-12 bordePrincipal largoContenedor">
                     <form class="row g-3">    
                         <div class="col-md-4">
                             <label for="" class="form-label">Número de productos</label>
@@ -86,14 +86,14 @@
                         </div>
 
                         <div class="col-md-12">
-                            <fieldset class="scheduler-border">
-                                <legend class="scheduler-border">Datos bebé #</legend>
+                            <fieldset class="bordeScheduler">
+                                <legend class="bordeScheduler">Datos bebé #</legend>
                                 <div class="row g-3">
                                     <div class="col-md-4">
                                         <label for="" class="form-label col-12">Género</label>
 
                                         <input type="radio" class="btn-check" name="genero" id="masculino" autocomplete="off">
-                                        <label class="btn btn-outline-info radioMargin" for="masculino">Masculino</label>
+                                        <label class="btn btn-outline-info margenRadio" for="masculino">Masculino</label>
 
                                         <input type="radio" class="btn-check" name="genero" id="femenino" autocomplete="off">
                                         <label class="btn btn-outline-info" for="femenino">Femenino</label>                            
@@ -143,29 +143,32 @@
 </template>
 
 <style scoped>
-.divBorder {
+.bordePrincipal {
   border-radius: 13px;
   box-shadow: 3px 3px 7px #ccc;
   padding: 1rem;
   margin-top :10px;
   margin-bottom: 10px;
 }
-.radioMargin {
+.margenRadio {
     margin-right: 10px;
 }
-fieldset.scheduler-border {
+fieldset.bordeScheduler {
     border: 1px groove #ddd !important;
     padding: 0 1.4em 1.4em 1.4em !important;
     margin: 0 0 1.5em 0 !important;
     -webkit-box-shadow:  0px 0px 0px 0px #000;
             box-shadow:  0px 0px 0px 0px #000;
 }
-legend.scheduler-border {
+legend.bordeScheduler {
     font-size: 1.2em !important;
     font-weight: bold !important;
     text-align: left !important;
     width:auto;
     padding:0 10px;
     border-bottom:none;
+}
+.largoContenedor{
+    height: 576px
 }
 </style>

@@ -14,22 +14,22 @@
       </div>
     </div>
 
-    <div class="input-group mb-3 divPrincipal"> 
+    <div class="input-group mb-3 bordePrincipal"> 
       
       <div class="tab-content col-md-9" id=""> <!--Redirecciona al contenedor seleccionado, cargando la información del componente-->
           <div class="tab-pane fade show active" id="nota"><nota /></div>
           <div class="tab-pane fade" id="recuperacion"><recuperacion /></div>
       </div>
 
-      <div class="col-2 divMenuLateralPrincipal"> <!--Menú lateral-->
-        <div class="col-md-2 divMenuLateral">
-          <RouterLink to="pre"><img src="images/pre.png" class="imgAjuste"/></RouterLink>
+      <div class="col-2 menuLateralPrincipal"> <!--Menú lateral-->
+        <div class="col-md-2 menuLateral">
+          <RouterLink to="pre"><img src="images/pre.png" class="ajusteImg"/></RouterLink>
         </div>
-        <div class="col-md-2 divMenuLateral">
-          <RouterLink to="trans"><img src="images/trans.png" class="imgAjuste"/></RouterLink>
+        <div class="col-md-2 menuLateral">
+          <RouterLink to="trans"><img src="images/trans.png" class="ajusteImg"/></RouterLink>
         </div>
-        <div class="col-md-2 divMenuLateral">
-          <img src="images/post.png" width="180" class="imgAjuste"/>
+        <div class="col-md-2 menuLateral">
+          <img src="images/post.png" width="180" class="ajusteImg"/>
         </div>    
       </div>
     </div>
@@ -46,18 +46,18 @@ export default ({
 })
 </script>
 
-<style scoped>.divMenuLateral {
+<style scoped>.menuLateral {
   margin-bottom: 6px; 
   margin-top: 6px;
   margin-left: 20px;
 }
-.divMenuLateralPrincipal {
+.menuLateralPrincipal {
   margin-top: 54px;
 }
-.divPrincipal {
+.bordePrincipal {
   width: 110%;
 }
-.imgAjuste{
+.ajusteImg{
   width: 455%;
   height: auto;
 }
