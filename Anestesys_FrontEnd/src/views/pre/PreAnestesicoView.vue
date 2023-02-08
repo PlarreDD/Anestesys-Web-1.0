@@ -6,17 +6,17 @@
           </div>   
           <div class="col-md-2">
             <div class="centrarBoton">
-              <button class="btn btn btn-outline-secundario"><b>Nuevo Paciente</b></button>
+              <button class="btn btn btn-outline-secundario">Nuevo Paciente</button>
             </div>
           </div> 
           <div class="col-md-2">
             <div class="centrarBoton">
-              <button class="btn btn btn-outline-secundario"><b>Nuevo Registro</b></button>
+              <button class="btn btn btn-outline-secundario">Nuevo Registro</button>
             </div>
           </div> 
           <div class="col-md-2">
             <div class="centrarBoton">
-              <button class="btn btn btn-outline-secundario"><b>Historial Paciente</b></button>
+              <button class="btn btn btn-outline-secundario">Historial Paciente</button>
             </div>
           </div>            
       </div>
