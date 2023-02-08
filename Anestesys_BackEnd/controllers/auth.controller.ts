@@ -37,8 +37,8 @@ export const register = async (req:any, res:any) => {
     }
 };
 
-export const login = async (req:any, res:any) => {    
-    try{
+export const login = async (req:any, res:any) => {   
+    try{        
         const {email, password} = req.body;
 
         let user = await User.findOne({email});
@@ -47,14 +47,14 @@ export const login = async (req:any, res:any) => {
 
         //const respuestaPasword = await user.comparePassword(password);//Primera version
         const respuestaPasword = await bcryptjs.compare(password, user.password);//Probando si funciona
-
+        
         if(!respuestaPasword) return res.status(403).json({error: "Contraseña Incorrecta"});
-
+        
         //Generar el JWT
         const {token, expiresIn} = generateToken(user.id) as JWTGen;
-
+            
         generateRefreshToken(user.id, res);
-
+        
         return res.json({token, expiresIn});
     }catch(error){
         console.log(error);

@@ -7,46 +7,46 @@
             <div class="col-md-12">
                 <input type="text"
                     class="form-control"
-                    v-model="nomUsr"
+                    v-model="usr.nomUsr"
                     id="nombre"
                     placeholder="Nombre(s)"
-                required>  
+                    required>  
             </div>
             
             <div class="col-md-12">
                 <input type="text"
                     class="form-control"
-                    v-model="apUsr"
+                    v-model="usr.apUsr"
                     id="apellidos"
                     placeholder="Apellido(s)"
-                required>  
+                    required>  
             </div>
             
             <div class="col-md-12">
                 <input type="email"
                     class="form-control"
-                    v-model="email"
+                    v-model="usr.email"
                     id="correo"
                     placeholder="correo@mail.com"
-                required>
+                    required>
             </div>
 
             <div class="col-md-12">
                 <input type="password"
                     class="form-control"
-                    v-model="pswd"
+                    v-model="usr.pswd"
                     id="pass"
                     placeholder="******"
-                required>  
+                    required>  
             </div>
             
             <div class="col-md-12">
                 <input type="password"
                     class="form-control"
-                    v-model="rpswd"
+                    v-model="usr.rpswd"
                     id="confPass"
                     placeholder="******"
-                required>  
+                    required>
             </div>
 
             <div class="col-md-12">
@@ -67,32 +67,31 @@
 </template>
 
 <script lang="ts">
-//import { defineComponent } from "vue"
-//import { ref } from "vue";
+import { apiAxios } from '@/boot/axios';
+import type { regUsr } from '@/interfaces/regUsr';
 
 export default {
     data() {
         return{
-            nomUsr: "",
-            apUsr: "",
-            email: "",
-            pswd: "",
-            rpswd: "",
+            usr: { } as regUsr
         };
     },
 
     methods: {
-        handleSubmit: async () => {
-            data
-            try {
-                console.log("Nombre: " + name);                
-            } catch (error) {
-                console.log(error);
-            }
+        handleSubmit() {
+            apiAxios.post("http://localhost:5000/register", {
+                email: this.usr.email,
+                password: this.usr.pswd,
+                repassword: this.usr.rpswd,
+                nomMed: this.usr.nomUsr,
+                apMed: this.usr.apUsr,
+            }).then((res:any) => {
+                console.log(res.data);
+            }).catch((e:any) =>
+                console.log(e));
         }
     }
 }
-
 </script>
 
 <style>
