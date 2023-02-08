@@ -1,10 +1,10 @@
 <template>
   <header>
-    <div class="container mt-3">
-      <nav class="navbar">        
+    <div class="mt">
+      <nav class="navbar navbar-color">        
         
         <div class="nav-content">
-          <RouterLink to="/"><img src="images/logoAnestesys.png" class="imgAjuste"/></RouterLink>
+          <RouterLink to="/" class="navbar-brand"><img src="images/logoAnestesys.png" class="imgAjuste"/></RouterLink>
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#barraConfiguracion" aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -65,8 +65,14 @@
     top: 0;
     right: 0;
     width: 300px;
-    background-color: rgb(192, 192, 192);
+    background-color: #fff ;
     border-left: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
     transform: translateX(100%);    
+}
+.navbar-color{
+  background-color: #002D60;
+}
+.mt {
+    margin-bottom: 1rem!important;
 }
 </style>

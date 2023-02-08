@@ -403,19 +403,19 @@ export default({
     position: sticky;
     bottom: 0;
     z-index: 1020;
-    background-color: rgb(142, 143, 142);
+    background-color: #fff;
 }
 .bordeContenedor{
   box-shadow: 3px 3px 7px #ccc;
   padding: 1.2rem;
 
-  border: rgb(0, 0, 0) 1px solid;
+  border: #000000 1px solid;
 }
 .bordeColumna{
   margin-left: auto;
   margin-right: auto;
-  border-right: 1px solid rgb(0, 0, 0);
-  border-left: 1px solid rgb(0, 0, 0);
+  border-right: 1px solid #000000;
+  border-left: 1px solid #000000;
 }
 .estiloDropDown{
   width: 450px; height: 250px;

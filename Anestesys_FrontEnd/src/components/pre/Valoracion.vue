@@ -757,11 +757,12 @@ export default defineComponent({
 
 <style scoped>
 .bordePrincipal {
-  border-radius: 13px;
-  box-shadow: 3px 3px 7px #ccc;
+  border-radius: 5px;
+  box-shadow: 3px 3px 7px;
   padding: 1rem;
   margin-top :10px;
   margin-bottom: 10px;
+  background-color: rgba(225, 225, 225, 0.6);
 }
 .margenTexto{
     margin-bottom: 30px;
@@ -778,7 +779,7 @@ export default defineComponent({
 .formSombra:focus{
     border-color:green;
     outline:0;
-    -webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(0,128,0);
-    box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(0,128,0)
+    -webkit-box-shadow:inset 0 1px 1px #000,0 0 8px green;
+    box-shadow:inset 0 1px 1px #000,0 0 8px green
 }
 </style>
