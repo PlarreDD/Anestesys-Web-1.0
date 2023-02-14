@@ -51,6 +51,11 @@ const router = createRouter({
       path: '/medicos',
       name: 'medicos',     
       component: () => import('../views/menu/Medicos.vue')
+    },
+    {
+      path: '/logout',
+      name: 'logout',     
+      component: () => import('../views/menu/Salir.vue')
     }
   ]
 })

@@ -14,23 +14,32 @@
               <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Configuración</h5>
               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
+
             <div class="offcanvas-body">
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="#">Monitores</a>
                 </li>
+                
                 <li class="nav-item">
                   <a class="nav-link" href="medicos">Médicos</a>
                 </li>  
+                
                 <li class="nav-item">
                   <a class="nav-link" href="medicamentos">Medicamentos</a>
                 </li>    
+                
                 <li class="nav-item">
                   <a class="nav-link" href="#">Tendencias</a>
-                </li>                  
+                </li>
+
                 <li class="nav-item">
                   <a class="nav-link" href="#">Teclado</a>
-                </li>              
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="logout">Logout</a>
+                </li>
               </ul>              
             </div>
           </div>

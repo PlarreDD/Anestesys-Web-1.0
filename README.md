@@ -38,6 +38,8 @@ npm run dev
 ```sh
 npm run build
 ```
+## Ubicaciones de Archivos
+- Archivo dotenv se ubica en la carpeta Anestesys_BackEnd junto a los json e index.ts se descarga de la carpeta de OneDrive D+D/Anestesys/AnestesysWeb
 
 ## Cambios
 
