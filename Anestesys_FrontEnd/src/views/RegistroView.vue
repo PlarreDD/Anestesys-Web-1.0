@@ -51,6 +51,7 @@
 
             <div class="col-md-12">
                 <button 
+                    onclick="location.href='/'"
                     class="btn btn-primary btn-signin"
                     type="submit">
                         Registrar

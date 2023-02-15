@@ -2,9 +2,9 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
 export const requireRefreshToken = (req:any, res:any, next:any) => {
-    interface JWTPayload{
-        uid: String
-    };
+    // interface JWTPayload{
+    //     uid: String
+    // };
 
     try {
         const refreshTokenCookie = req.cookies.refreshToken;

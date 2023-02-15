@@ -1,10 +1,10 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { tokenVerificationErrors } from '../utils/tokenManager';
+//import { tokenVerificationErrors } from '../utils/tokenManager';
 
 export const requireToken = (req: any, res: any, next: any) => {
-    interface JWTPayload{
-        uid: String
-    };
+    // interface JWTPayload{
+    //     uid: String
+    // };
 
     try {
         let token = req.headers?.authorization;
