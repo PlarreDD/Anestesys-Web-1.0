@@ -11,7 +11,7 @@
         <div class="col-9 divform navbar-nav">                     
             <ul class="nav text-center" id=""> <!--Lista para el menú principal-->
                 <li class="col-md-3">
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">GRID ANESTÉSICO</button> <!--Botón para abrir el dropdown-->
+                    <button type="button" class="btn btn-outline-secondary fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">GRID ANESTÉSICO</button> <!--Botón para abrir el dropdown-->
                     <form class="dropdown-menu p-5">
                       <div class="mb-3 estiloDropDown input-group mb-3">
                         
@@ -19,199 +19,199 @@
                     </form>
                 </li>
                 <li class="col-md-3">
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">TÉCNICA ANESTÉSICA</button>
+                    <button type="button" class="btn btn-outline-secondary fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">TÉCNICA ANESTÉSICA</button>
                     <form class="dropdown-menu p-5">
                       <div class="mb-3 estiloDropDownTecnica row g-3">
                         <div class="form-check col-md-4">
                           <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                          <label class="form-check-label" for="checkTecnica">Local</label>
+                          <label class="form-check-label fw-bold" for="checkTecnica">Local</label>
                         </div>
                         <div class="form-check col-md-4">
                           <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                          <label class="form-check-label" for="checkTecnica">Sedación</label>
+                          <label class="form-check-label fw-bold" for="checkTecnica">Sedación</label>
                         </div>
                         <div class="form-check col-md-4">
                           <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                          <label class="form-check-label" for="checkTecnica">General balanceada</label>
+                          <label class="form-check-label fw-bold" for="checkTecnica">General balanceada</label>
                         </div>
                         <div class="form-check col-md-4">
                           <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                          <label class="form-check-label" for="checkTecnica">TIVA (Anestesia total intravenosa)</label>
+                          <label class="form-check-label fw-bold" for="checkTecnica">TIVA (Anestesia total intravenosa)</label>
                         </div>
                         <div class="form-check col-md-4">
                           <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                          <label class="form-check-label" for="checkTecnica">Multimodal</label>
+                          <label class="form-check-label fw-bold" for="checkTecnica">Multimodal</label>
                         </div>
                         <div class="form-check col-md-4">
                           <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                          <label class="form-check-label" for="checkTecnica">Bloqueo mixto</label>
+                          <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo mixto</label>
                         </div>
                         <div class="form-check col-md-4">
                           <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                          <label class="form-check-label" for="checkTecnica">Bloqueo peridural lumbar</label>
+                          <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural lumbar</label>
                         </div>
                         <div class="form-check col-md-4">
                           <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                          <label class="form-check-label" for="checkTecnica">Bloqueo peridural caudal</label>
+                          <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural caudal</label>
                         </div>
                         <div class="form-check col-md-4">
                           <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                          <label class="form-check-label" for="checkTecnica">Bloqueo espinal</label>
+                          <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo espinal</label>
                         </div>
                         <div class="form-check col-md-4">
                           <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                          <label class="form-check-label" for="checkTecnica">Bloqueo de plexo</label>
+                          <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo de plexo</label>
                         </div>
                         <div class="form-check col-md-4">
                           <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                          <label class="form-check-label" for="checkTecnica">Bloqueo troncular</label>
+                          <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo troncular</label>
                         </div>
                         <div class="form-check col-md-4">
                           <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                          <label class="form-check-label" for="checkTecnica">Bloqueo peridural torácico</label>
+                          <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural torácico</label>
                         </div>
                         <div class="form-check col-md-4">
                           <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                          <label class="form-check-label" for="checkTecnica">Bloqueo peridural cervical</label>
+                          <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural cervical</label>
                         </div>
                         <div class="form-check col-md-4">
                           <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                          <label class="form-check-label" for="checkTecnica">Libre de opioides</label>
+                          <label class="form-check-label fw-bold" for="checkTecnica">Libre de opioides</label>
                         </div>
                       </div>
                     </form>
                 </li>
                 <li class="col-md-3">
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">BALANCE HIDRICO</button>
+                    <button type="button" class="btn btn-outline-secondary fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">BALANCE HIDRICO</button>
                     <form class="dropdown-menu p-5">
                       <div class="mb-3 estiloDropDownBalance input-group mb-3">
-                        <h6 class="bold col-md-12">INGRESOS</h6>
+                        <h6 class="col-md-12 fw-bold">INGRESOS</h6>
 
                         <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Solución Hartman(ml):</label>
+                          <label for="" class="form-label fw-bold">Solución Hartman(ml):</label>
                         </div>
                         <div class="col-md-1 ">
                           <input class="form-control" type="text" id="">
                         </div>                        
                         <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Solución fisiológica(ml):</label>
+                          <label for="" class="form-label fw-bold">Solución fisiológica(ml):</label>
                         </div>
                         <div class="col-md-1">
                           <input class="form-control" type="text" id="">
                         </div>
                         <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Glucosados(ml):</label>
+                          <label for="" class="form-label fw-bold">Glucosados(ml):</label>
                         </div>
                         <div class="col-md-1">
                           <input class="form-control" type="text" id="">
                         </div>
                         
                         <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Gelatinas(ml):</label>
+                          <label for="" class="form-label fw-bold">Gelatinas(ml):</label>
                         </div>
                         <div class="col-md-1">
                           <input class="form-control" type="text" id="">
                         </div>
                         <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Almidones(ml):</label>
+                          <label for="" class="form-label fw-bold">Almidones(ml):</label>
                         </div>
                         <div class="col-md-1">
                           <input class="form-control" type="text" id="">
                         </div>                      
                         <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Albúminas(ml):</label>
+                          <label for="" class="form-label fw-bold">Albúminas(ml):</label>
                         </div>
                         <div class="col-md-1">
                           <input class="form-control" type="text" id="">
                         </div>
 
                         <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Paquete globular(ml):</label>
+                          <label for="" class="form-label fw-bold">Paquete globular(ml):</label>
                         </div>
                         <div class="col-md-1">
                           <input class="form-control" type="text" id="">
                         </div>                     
                         <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Plasmas(ml):</label>
+                          <label for="" class="form-label fw-bold">Plasmas(ml):</label>
                         </div>
                         <div class="col-md-1">
                           <input class="form-control" type="text" id="">
                         </div>
                         <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Plaquetas(ml):</label>
-                        </div>
-                        <div class="col-md-1">
-                          <input class="form-control" type="text" id="">
-                        </div>
-
-                        <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Crioprecipitados(ml):</label>
-                        </div>
-                        <div class="col-md-1">
-                          <input class="form-control" type="text" id="">
-                        </div>
-                        <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Factor VII(ml):</label>
-                        </div>
-                        <div class="col-md-1">
-                          <input class="form-control" type="text" id="">
-                        </div>
-                        <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Factor VIII(ml):</label>
+                          <label for="" class="form-label fw-bold">Plaquetas(ml):</label>
                         </div>
                         <div class="col-md-1">
                           <input class="form-control" type="text" id="">
                         </div>
 
                         <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Otros:</label>
-                        </div>
-                        <div class="col-md-1">
-                          <input class="form-control" type="text" id="">
-                        </div>
-
-                        <h6 class="bold col-md-12">EGRESOS</h6>
-
-                        <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Liquídos de ascitis(ml):</label>
+                          <label for="" class="form-label fw-bold">Crioprecipitados(ml):</label>
                         </div>
                         <div class="col-md-1">
                           <input class="form-control" type="text" id="">
                         </div>
                         <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Sangrado aproximado(ml):</label>
+                          <label for="" class="form-label fw-bold">Factor VII(ml):</label>
                         </div>
                         <div class="col-md-1">
                           <input class="form-control" type="text" id="">
                         </div>
                         <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Uresis(ml):</label>
+                          <label for="" class="form-label fw-bold">Factor VIII(ml):</label>
                         </div>
                         <div class="col-md-1">
                           <input class="form-control" type="text" id="">
                         </div>
 
                         <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Exposición quirúrgica(ml):</label>
+                          <label for="" class="form-label fw-bold">Otros:</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+
+                        <h6 class="col-md-12 fw-bold">EGRESOS</h6>
+
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label fw-bold">Liquídos de ascitis(ml):</label>
                         </div>
                         <div class="col-md-1">
                           <input class="form-control" type="text" id="">
                         </div>
                         <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Requerimientos basales(ml):</label>
+                          <label for="" class="form-label fw-bold">Sangrado aproximado(ml):</label>
                         </div>
                         <div class="col-md-1">
                           <input class="form-control" type="text" id="">
                         </div>
                         <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Ayuno(ml):</label>
+                          <label for="" class="form-label fw-bold">Uresis(ml):</label>
                         </div>
                         <div class="col-md-1">
                           <input class="form-control" type="text" id="">
                         </div>
 
                         <div class="col-md-3 centrarLabel">
-                          <label for="" class="form-label">Otros:</label>
+                          <label for="" class="form-label fw-bold">Exposición quirúrgica(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label fw-bold">Requerimientos basales(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label fw-bold">Ayuno(ml):</label>
+                        </div>
+                        <div class="col-md-1">
+                          <input class="form-control" type="text" id="">
+                        </div>
+
+                        <div class="col-md-3 centrarLabel">
+                          <label for="" class="form-label fw-bold">Otros:</label>
                         </div>
                         <div class="col-md-1">
                           <input class="form-control" type="text" id="">
@@ -220,11 +220,11 @@
                     </form>
                 </li>
                 <li class="col-md-3">
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">DATOS DEL VENTILADOR</button>
+                    <button type="button" class="btn btn-outline-secondary fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">DATOS DEL VENTILADOR</button>
                     <form class="dropdown-menu p-5">
                       <div class="mb-3 estiloDropDownVentilador row g-3">
                         <div class="col-md-9">
-                            <label for="inputState" class="form-label">Modos de ventilación</label>
+                            <label for="inputState" class="form-label fw-bold">Modos de ventilación</label>
                             <select id="inputState" class="form-select">
                                 <option selected>Seleccione...</option>
                                 <option>Control volumen</option>
@@ -236,25 +236,55 @@
                             </select>
                         </div>   
                         <div class="col-md-3">
-                            <label class="form-label">PEEP</label>
+                            <label class="form-label fw-bold">PEEP</label>
                             <input type="text" class="form-control" id=""> 
                         </div>    
                         
                         <div class="col-md-3">
-                            <label class="form-label">VT</label>
+                            <label class="form-label fw-bold">VT</label>
                             <input type="text" class="form-control" id=""> 
                         </div>
                         <div class="col-md-3">
-                            <label class="form-label">Frec. Resp</label>
+                            <label class="form-label fw-bold">Frec. Resp</label>
                             <input type="text" class="form-control" id=""> 
                         </div>
                         <div class="col-md-3">
-                            <label class="form-label">I:E</label>
+                            <label class="form-label fw-bold">I:E</label>
                             <input type="text" class="form-control" id=""> 
                         </div>
                         <div class="col-md-3">
-                            <label class="form-label">P. Límite</label>
+                            <label class="form-label fw-bold">P. Límite</label>
                             <input type="text" class="form-control" id=""> 
+                        </div>
+
+                        <div class="col-md-9"></div>
+
+                        <div class="col-md-2">
+                          <button type="submit" class="btn btn-outline-secondary fw-bold">Guardar</button>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Hora</th>
+                                        <th>Modo de ventilación</th>
+                                        <th>Editar</th>
+                                        <th>Eliminar</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>12:00</td>
+                                        <td>Ventilación control presión con volumen garantizado</td>
+                                        <td><button class="btn btn-outline-secondary fw-bold">Editar</button></td>
+                                        <td><button class="btn btn-outline-secondary fw-bold">Eliminar</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>        
                         </div>
                       </div>                      
                     </form>
@@ -262,7 +292,7 @@
             </ul>
         </div>       
         <div class="col-1">
-          <select id="inputState" class="form-select">
+          <select id="inputState" class="form-select fw-bold">
             <option>1</option>
             <option>2</option>
             <option>5</option>
@@ -317,7 +347,7 @@
           <pre @recibe-datos="actualizaDatos" />
         </div>
 
-        <div class="container text-center col-md-9 posicionEstatica bordeContenedor">
+        <div class="container text-center col-md-9 posicionEstatica bordeContenedor fw-bold">
             <div class="row">
               <div class="col bordeColumna">
                 Paciente: {{nomPaciente}}
@@ -384,7 +414,7 @@ export default({
 .menuLateral {
     margin-bottom: 6px; 
     margin-top: 6px;
-    margin-left: 20px;
+    margin-left: 45px;
 }
 .menuLateralPrincipal {
     margin-top: 16px;
@@ -406,10 +436,9 @@ export default({
     background-color: #fff;
 }
 .bordeContenedor{
-  box-shadow: 3px 3px 7px #ccc;
   padding: 1.2rem;
-
-  border: #000000 1px solid;
+  border-radius: 5px;
+  border: #ccc 1px solid;
 }
 .bordeColumna{
   margin-left: auto;
@@ -427,6 +456,6 @@ export default({
   width: 600px; height: 400px;
 }
 .estiloDropDownVentilador{
-  width: 450px; height: auto;
+  width: 500px; height: auto;
 }
 </style>

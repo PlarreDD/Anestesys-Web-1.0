@@ -4,104 +4,104 @@
         <form @submit.prevent="obtenerDatos" class="row g-3">  
 
             <div class="col-md-4">
-                <label for="" class="form-label">Número de Expediente</label>
-                <input type="text" v-model="id.numExpediente" id="numExpediente"
-                :class="id.numExpediente.length != 0 ? 'form-control border border-success formSombra' : 'form-control'">
+                <label for="" class="form-label fw-bold">Número de Expediente</label>
+                <input type="text" v-model="id.numExpediente" id="numExpediente" pattern="[0-9]{8}" title="Sólo números, ocho dígitos"
+                :class="id.numExpediente != '' ? 'form-control border border-success formSombra' : 'form-control'">
                 <div class="invisible" id="validaNumExp">
                     Escriba el número de expediente
                 </div>                
             </div>
             <div class="col-md-6">
-                <label for="" class="form-label">Nombre del Paciente</label>
+                <label for="" class="form-label fw-bold">Nombre del Paciente</label>
                 <input type="text" @keyup.capture="enviarDatos" v-model="id.nombrePaciente" id="nombrePaciente" 
-                :class="id.nombrePaciente.length != 0 ? 'form-control border border-success formSombra' : 'form-control'">
+                :class="id.nombrePaciente != '' ? 'form-control border border-success formSombra' : 'form-control'">
                 <div class="invisible" id="validaNomPac">
                     Escriba el nombre del paciente
                 </div>        
             </div>
             <div class="col-md-2">
-                <label for="" class="form-label">Edad</label>
+                <label for="" class="form-label fw-bold">Edad</label>
                 <input type="text" class="form-control" v-model="id.edadPaciente" 
                 :class="id.edadPaciente != 0 ? 'form-control border border-success formSombra' : 'form-control'">  
             </div>
 
             <div class="col-md-3">
-                <label for="" class="form-label">Fecha de Nacimiento</label>
+                <label for="" class="form-label fw-bold">Fecha de Nacimiento</label>
                 <input type="date" class="form-control" v-model="id.fechaNacimiento"
                 :class="id.fechaNacimiento != Date ? 'form-control border border-success formSombra' : 'form-control'">
             </div>
             <div class="col-md-3">
-                <label for="" class="form-label">Habitación</label>
+                <label for="" class="form-label fw-bold">Habitación</label>
                 <input type="text" class="form-control" v-model="id.habitacion"
-                :class="id.habitacion.length != 0 ? 'form-control border border-success formSombra' : 'form-control'"> 
+                :class="id.habitacion != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
             </div>            
             <div class="col-md-3">
-                <label for="" class="form-label col-12">Género</label>
+                <label for="" class="form-label col-12 fw-bold">Género</label>
 
                 <input type="radio" class="btn-check" name="genero" id="masculino" autocomplete="off" value="Masculino" v-model="id.genero">
-                <label class="btn btn-outline-info margenRadio" for="masculino">Masculino</label>
+                <label class="btn btn-radio margenRadio" for="masculino">Masculino</label>
 
                 <input type="radio" class="btn-check" name="genero" id="femenino" autocomplete="off" value="Femenino" v-model="id.genero">
-                <label class="btn btn-outline-info" for="femenino">Femenino</label>
+                <label class="btn btn-radio" for="femenino">Femenino</label>
             </div>             
 
             <div class="col-md-3">
-                <label for="" class="form-label">Fecha de Ingreso</label>
+                <label for="" class="form-label fw-bold">Fecha de Ingreso</label>
                 <input type="date" class="form-control" v-model="id.fechaIngreso"
                 :class="id.fechaIngreso != Date ? 'form-control border border-success formSombra' : 'form-control'">
             </div>
           
             <div class="col-md-8">
-                <label for="" class="form-label">Diagnóstico</label>
+                <label for="" class="form-label fw-bold">Diagnóstico</label>
                 <textarea class="form-control" v-model="id.diagnostico" rows="3" 
-                :class="id.diagnostico.length != 0 ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
+                :class="id.diagnostico != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
             </div>
             <div class="col-md-4">
-                <label for="" class="form-label col-12">Tipo de Cirugía</label>
+                <label for="" class="form-label col-12 fw-bold">Tipo de Cirugía</label>
 
                 <input type="radio" class="btn-check" name="tipoCirugia" id="mayor" autocomplete="off" value="Mayor" v-model="id.tipoCirugia">
-                <label class="btn btn-outline-info margenRadio" for="mayor">Mayor</label>
+                <label class="btn btn-radio margenRadio" for="mayor">Mayor</label>
 
                 <input type="radio" class="btn-check" name="tipoCirugia" id="menor" autocomplete="off" value="Menor" v-model="id.tipoCirugia">
-                <label class="btn btn-outline-info margenRadio" for="menor">Menor</label>
+                <label class="btn btn-radio margenRadio" for="menor">Menor</label>
 
                 <input type="radio" class="btn-check" name="tipoCirugia" id="ambulatoria" autocomplete="off" value="Ambulatoria" v-model="id.tipoCirugia">
-                <label class="btn btn-outline-info" for="ambulatoria">Ambulatoria</label>
+                <label class="btn btn-radio" for="ambulatoria">Ambulatoria</label>
             </div>           
 
             <div class="col-md-6">
-                <label for="" class="form-label">Cirugía</label>
+                <label for="" class="form-label fw-bold">Cirugía</label>
                 <input type="text" class="form-control" @keyup.capture="enviarDatos" v-model="id.cirugia"
-                :class="id.cirugia.length != 0 ? 'form-control border border-success formSombra' : 'form-control'">
+                :class="id.cirugia != '' ? 'form-control border border-success formSombra' : 'form-control'">
             </div>
             <div class="col-md-3">
-                <label for="" class="form-label">Fecha de Cirugía</label>
+                <label for="" class="form-label fw-bold">Fecha de Cirugía</label>
                 <input type="date" class="form-control" v-model="id.fechaCirugia"
                 :class="id.fechaCirugia != Date ? 'form-control border border-success formSombra' : 'form-control'">
             </div>    
             <div class="col-md-3">
-                <label for="" class="form-label">Hora de Cirugía</label>
+                <label for="" class="form-label fw-bold">Hora de Cirugía</label>
                 <input type="time" class="form-control" v-model="id.horaCirugia"
                 :class="id.horaCirugia.length != 0 ? 'form-control border border-success formSombra' : 'form-control'">
             </div>
 
             <div class="col-md-6">
-                <label for="" class="form-label">Cirujano</label>
+                <label for="" class="form-label fw-bold">Cirujano</label>
                 <input type="text" class="form-control" @keyup.capture="enviarDatos" v-model="id.cirujano"
-                :class="id.cirujano.length != 0 ? 'form-control border border-success formSombra' : 'form-control'">
+                :class="id.cirujano != '' ? 'form-control border border-success formSombra' : 'form-control'">
             </div>
             <div class="col-md-6">
-                <label for="" class="form-label">Anestesiólogo</label>
+                <label for="" class="form-label fw-bold">Anestesiólogo</label>
                 <input type="text" class="form-control" v-model="id.anestesiologo"
-                :class="id.anestesiologo.length != 0 ? 'form-control border border-success formSombra' : 'form-control'">
+                :class="id.anestesiologo != '' ? 'form-control border border-success formSombra' : 'form-control'">
             </div>
             <div class="col-md-6">
-                <label for="" class="form-label">Anestesiólogo VPA</label>
+                <label for="" class="form-label fw-bold">Anestesiólogo VPA</label>
                 <input type="text" class="form-control" v-model="id.anestesiologoVPA"
-                :class="id.anestesiologoVPA.length != 0 ? 'form-control border border-success formSombra' : 'form-control'">
-            </div>    
-            <div class="col-auto">
-                <button class="btn btn-warning fw-bold" href="#pre-valoracion" data-bs-toggle="tab" type="submit">Siguiente</button>
+                :class="id.anestesiologoVPA != '' ? 'form-control border border-success formSombra' : 'form-control'">
+            </div>              
+            <div class="col-md-6 margenBoton">
+                <button class="btn btn-outline-secondary fw-bold" href="#pre-valoracion" data-bs-toggle="tab" type="submit">Siguiente</button>
             </div>                            
         </form>        
     </div>
@@ -149,22 +149,34 @@ export default defineComponent({
 <style scoped>
 .borderPrincipal {
   border-radius: 5px;
-  box-shadow: 3px 3px 7px;
   padding: 1rem;
   margin-top :10px;
   margin-bottom: 10px;
-  background-color: rgba(225, 225, 225, 0.6);
+  background-color: rgba(232, 234, 236, 0.6);
 }
-.margenRadio{
+.margenRadio {
     margin-right: 10px;
 }
-.formSombra:focus{
+.margenBoton{
+    margin-top: 48px;
+}
+.formSombra:focus {
     border-color:green;
     outline:0;
-    -webkit-box-shadow:inset 0 1px 1px #000,0 0 8px green;
-    box-shadow:inset 0 1px 1px #000,0 0 8px green
+    -webkit-box-shadow:0 0 8px green;
+    box-shadow:0 0 8px green
 }
-.validaCampo{
+.validaCampo {
     color: red;
+}
+.btn-radio {
+    --bs-btn-color: #000;
+    --bs-btn-border-color: #ced4da;
+    --bs-btn-hover-color: #000;
+    --bs-btn-focus-shadow-rgb: 13,202,240;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #002d60;
+    --bs-btn-active-border-color: #ced4da;
+    --bs-btn-bg: #ffffff;
 }
 </style>

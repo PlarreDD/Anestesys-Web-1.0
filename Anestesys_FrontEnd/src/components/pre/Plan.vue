@@ -2,19 +2,19 @@
     <div>
         <ul class="nav nav-pills mb-3 text-center" id="">
             <li class="nav-item col-md-3" >
-                <button class="nav-link active" id="plan" data-bs-toggle="pill" data-bs-target="#posicion" type="button" aria-selected="true">POSICIÓN Y CUIDADOS</button>
+                <button class="btn btn-outline-secondary fw-bold active" id="plan" data-bs-toggle="pill" data-bs-target="#posicion" type="button" aria-selected="true">POSICIÓN Y CUIDADOS</button>
             </li>
             <li class="nav-item col-md-2" >
-                <button class="nav-link" id="plan" data-bs-toggle="pill" data-bs-target="#sedacion" type="button" aria-selected="false">SEDACIÓN</button>
+                <button class="btn btn-outline-secondary fw-bold" id="plan" data-bs-toggle="pill" data-bs-target="#sedacion" type="button" aria-selected="false">SEDACIÓN</button>
             </li>
             <li class="nav-item col-md-2" >
-                <button class="nav-link" id="plan" data-bs-toggle="pill" data-bs-target="#regional" type="button" aria-selected="false">REGIONAL</button>
+                <button class="btn btn-outline-secondary fw-bold" id="plan" data-bs-toggle="pill" data-bs-target="#regional" type="button" aria-selected="false">REGIONAL</button>
             </li>
             <li class="nav-item col-md-2" >
-                <button class="nav-link" id="plan" data-bs-toggle="pill" data-bs-target="#local" type="button" aria-selected="false">LOCAL</button>
+                <button class="btn btn-outline-secondary fw-bold" id="plan" data-bs-toggle="pill" data-bs-target="#local" type="button" aria-selected="false">LOCAL</button>
             </li>
             <li class="nav-item col-md-2" >
-                <button class="nav-link" id="plan" data-bs-toggle="pill" data-bs-target="#general" type="button" aria-selected="false">GENERAL</button>
+                <button class="btn btn-outline-secondary fw-bold" id="plan" data-bs-toggle="pill" data-bs-target="#general" type="button" aria-selected="false">GENERAL</button>
             </li>
         </ul>
 
@@ -25,12 +25,12 @@
                         <h5 class="fw-bold">POSICIÓN Y CUIDADOS</h5>    
 
                         <div class="col-md-2">
-                            <label for="" class="form-label">Horas de ayuno</label>
+                            <label for="" class="form-label fw-bold">Horas de ayuno</label>
                             <input type="text" class="form-control" id="" v-model="posicion.horasAyuno"
                             :class="posicion.horasAyuno != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
                         <div class="col-md-4">
-                            <label for="inputState" class="form-label">Acceso Venoso</label>
+                            <label for="inputState" class="form-label fw-bold">Acceso Venoso</label>
                             <select id="inputState" class="form-select" v-model="posicion.accesoVenoso"
                             :class="posicion.accesoVenoso != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
@@ -45,7 +45,7 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label">Posición del paciente</label>
+                            <label for="inputState" class="form-label fw-bold">Posición del paciente</label>
                             <select id="inputState" class="form-select" v-model="posicion.posicionPaciente"
                             :class="posicion.posicionPaciente != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
@@ -63,7 +63,7 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label">Posición de los brazos</label>
+                            <label for="inputState" class="form-label fw-bold">Posición de los brazos</label>
                             <select id="inputState" class="form-select" v-model="posicion.posicionBrazos"
                             :class="posicion.posicionBrazos != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
@@ -73,77 +73,68 @@
                         </div>
 
                         <div class="col-md-2">
-                            <label for="" class="form-label col-12">Aplicación de torniquete</label>
+                            <label for="" class="form-label col-12 fw-bold">Aplicación de torniquete</label>
 
                             <input type="radio" class="btn-check" name="torniquete" id="torniSi" autocomplete="off" value="Sí" v-model="posicion.torniquete">
-                            <label class="btn btn-outline-success margenRadio" for="torniSi">Sí</label>
+                            <label class="btn btn-radio margenRadio" for="torniSi">Sí</label>
 
                             <input type="radio" class="btn-check" name="torniquete" id="torniNo" autocomplete="off" value="No" v-model="posicion.torniquete">
-                            <label class="btn btn-outline-danger" for="torniNo">No</label>
+                            <label class="btn btn-radio" for="torniNo">No</label>
                         </div>
                         <div class="col-md-5">
-                            <label for="" class="form-label">Sitio</label>
+                            <label for="" class="form-label fw-bold">Sitio</label>
                             <input type="text" class="form-control" id="" v-model="posicion.sitio"
                             :class="posicion.sitio != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
                         <div class="col-md-3">
-                            <label for="" class="form-label">Probable tiempo de isquemia</label>
+                            <label for="" class="form-label fw-bold">Probable tiempo de isquemia</label>
                             <input type="text" class="form-control" id="" v-model="posicion.tiempoIsquemia"
                             :class="posicion.tiempoIsquemia != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
                         <div class="col-md-2">
-                            <label for="" class="form-label col-12">Protección de ojos</label>
+                            <label for="" class="form-label col-12 fw-bold">Protección de ojos</label>
 
                             <input type="radio" class="btn-check" name="ojos" id="ojosSi" autocomplete="off" value="Sí"  v-model="posicion.proteccionOjos">
-                            <label class="btn btn-outline-success margenRadio" for="ojosSi">Sí</label>
+                            <label class="btn btn-radio margenRadio" for="ojosSi">Sí</label>
 
                             <input type="radio" class="btn-check" name="ojos" id="ojosNo" autocomplete="off" value="No" v-model="posicion.proteccionOjos">
-                            <label class="btn btn-outline-danger" for="ojosNo">No</label>
+                            <label class="btn btn-radio" for="ojosNo">No</label>
                         </div>
 
                         <div class="col-md-2">
-                            <label for="" class="form-label col-12">Protección de prominencias oseas</label>
+                            <label for="" class="form-label col-12 fw-bold">Protección de prominencias oseas</label>
 
                             <input type="radio" class="btn-check" name="oseas" id="oseasSi" autocomplete="off" value="Sí" v-model="posicion.protecProminencias">
-                            <label class="btn btn-outline-success margenRadio" for="oseasSi">Sí</label>
+                            <label class="btn btn-radio margenRadio" for="oseasSi">Sí</label>
 
                             <input type="radio" class="btn-check" name="oseas" id="oseasNo" autocomplete="off" value="No" v-model="posicion.protecProminencias">
-                            <label class="btn btn-outline-danger" for="oseasNo">No</label>                            
+                            <label class="btn btn-radio" for="oseasNo">No</label>                            
                         </div>
                         <div class="col-md-10">
-                            <label for="" class="form-label">Técnica anéstesica</label>
+                            <label for="" class="form-label fw-bold">Técnica anéstesica</label>
                             <input type="text" class="form-control" id="" v-model="posicion.tecnicaAnestesica"
                             :class="posicion.tecnicaAnestesica != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
                         <div class="col-md-2">
-                            <label for="" class="form-label col-12">Premedicación</label>
+                            <label for="" class="form-label col-12 fw-bold">Premedicación</label>
 
                             <input type="radio" class="btn-check" name="premedicacion" id="premediSi" autocomplete="off" value="Sí" v-model="posicion.premedicacion">
-                            <label class="btn btn-outline-success margenRadio" for="premediSi">Sí</label>
+                            <label class="btn btn-radio margenRadio" for="premediSi">Sí</label>
 
                             <input type="radio" class="btn-check" name="premedicacion" id="premediNo" autocomplete="off" value="No" v-model="posicion.premedicacion">
-                            <label class="btn btn-outline-danger" for="premediNo">No</label>
+                            <label class="btn btn-radio" for="premediNo">No</label>
                         </div>
                         <div class="col-md-10">
-                            <label for="" class="form-label">Específicar</label>
+                            <label for="" class="form-label fw-bold">Específicar</label>
                             <input type="text" class="form-control" id="" v-model="posicion.espPremedicacion"
                             :class="posicion.espPremedicacion != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
                         <div class="col-md-12">
-                            <label for="" class="form-label">Monitoreo</label>
+                            <label for="" class="form-label fw-bold">Monitoreo</label>
                             <input type="text" class="form-control" id="" v-model="posicion.monitoreo"
                             :class="posicion.monitoreo != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
-                        </div>
-
-                        <div class="col-md-3">
-                            <label v-for="opcion in posicion.aplicacionTorniquete" :key="opcion.opc">
-                                <input type="radio" :value="opcion.opc" v-model="posicion.torniquete" />
-                                <span>{{ opcion.opc }}</span>                               
-                            </label>
-
-                            <span>Seleccionado: {{ posicion.torniquete }}</span>
                         </div>
                     </form>
                 </div>
@@ -152,10 +143,10 @@
                 <div class="col-12 bordePrincipal largoContenedor">  
                     <form class="row g-3">    
                         <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5>    
-                        <h5 class="fw-bold col-md-12">Sedación</h5>   
+                        <h5 class="fw-bold col-md-12 fw-bold">Sedación</h5>   
 
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label">Vía</label>
+                            <label for="inputState" class="form-label fw-bold">Vía</label>
                             <select id="inputState" class="form-select" v-model="sedacion.via"
                             :class="sedacion.via != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
@@ -168,7 +159,7 @@
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <label for="inputState" class="form-label">Opción</label>
+                            <label for="inputState" class="form-label fw-bold">Opción</label>
                             <select id="inputState" class="form-select" v-model="sedacion.opcion"
                             :class="sedacion.opcion != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
@@ -177,13 +168,13 @@
                             </select>
                         </div>
                         <div class="col-md-7">
-                            <label for="" class="form-label">Observaciones</label>
+                            <label for="" class="form-label fw-bold">Observaciones</label>
                             <textarea class="form-control" id="" rows="3" v-model="sedacion.observaciones"
                             :class="sedacion.observaciones != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
                         </div>
 
                         <div class="col-md-12">
-                            <label for="" class="form-label">Medicamentos utilizados</label>
+                            <label for="" class="form-label fw-bold">Medicamentos utilizados</label>
                             <input type="text" class="form-control" id="" v-model="sedacion.medicamentos"
                             :class="sedacion.medicamentos != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
@@ -195,10 +186,10 @@
                     <form class="row g-3">    
                         <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5>    
                         <h5 class="fw-bold col-md-12">Regional</h5>  
-                        <h5 class="">BLOQUEO NEURO-AXIAL</h5>  
+                        <h5 class="fw-bold">BLOQUEO NEURO-AXIAL</h5>  
 
                         <div class="col-md-2">
-                            <label for="inputState" class="form-label">Tipo</label>
+                            <label for="inputState" class="form-label fw-bold">Tipo</label>
                             <select id="inputState" class="form-select" v-model="regional.tipo"
                             :class="regional.tipo != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
@@ -208,22 +199,22 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <label for="" class="form-label">Tipo de aguja</label>
+                            <label for="" class="form-label fw-bold">Tipo de aguja</label>
                             <input type="text" class="form-control" id="" v-model="regional.tipoAguja"
                             :class="regional.tipoAguja != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
                         <div class="col-md-2">
-                            <label for="" class="form-label">Nivel</label>
+                            <label for="" class="form-label fw-bold">Nivel</label>
                             <input type="text" class="form-control" id="" v-model="regional.nivel"
                             :class="regional.nivel != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
                         <div class="col-md-3">
-                            <label for="" class="form-label">Calibre de aguja</label>
+                            <label for="" class="form-label fw-bold">Calibre de aguja</label>
                             <input type="text" class="form-control" id="" v-model="regional.calibreAguja"
                             :class="regional.calibreAguja != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
                         <div class="col-md-2">
-                            <label for="inputState" class="form-label">Catéter</label>
+                            <label for="inputState" class="form-label fw-bold">Catéter</label>
                             <select id="inputState" class="form-select" v-model="regional.cateter"
                             :class="regional.cateter != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
@@ -233,7 +224,7 @@
                         </div>
 
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label">Orientación de catéter</label>
+                            <label for="inputState" class="form-label fw-bold">Orientación de catéter</label>
                             <select id="inputState" class="form-select" v-model="regional.orientacionCateter"
                             :class="regional.orientacionCateter != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
@@ -243,26 +234,26 @@
                         </div>
 
                         <div class="col-md-3">
-                            <label for="" class="form-label col-12">Probables dificultades técnicas</label>
+                            <label for="" class="form-label col-12 fw-bold">Probables dificultades técnicas</label>
 
                             <input type="radio" class="btn-check" name="difTec" id="difTecSi" autocomplete="off" value="Sí" v-model="regional.probDificulNeuro">
-                            <label class="btn btn-outline-success margenRadio" for="difTecSi">Sí</label>
+                            <label class="btn btn-radio margenRadio" for="difTecSi">Sí</label>
 
                             <input type="radio" class="btn-check" name="difTec" id="difTecNo" autocomplete="off" value="No" v-model="regional.probDificulNeuro">
-                            <label class="btn btn-outline-danger" for="difTecNo">No</label>
+                            <label class="btn btn-radio" for="difTecNo">No</label>
                         </div>
 
                         <div class="col-md-6">
-                            <label for="" class="form-label">Específicar</label>
+                            <label for="" class="form-label fw-bold">Específicar</label>
                             <textarea class="form-control" id="" rows="3" v-model="regional.espDificultadesNeuro"
                             :class="regional.espDificultadesNeuro != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
                         </div>
                         <hr />
 
-                        <h5 class="">BLOQUEO PLEXO</h5>
+                        <h5 class="fw-bold">BLOQUEO PLEXO</h5>
                         
                         <div class="col-md-2">
-                            <label for="inputState" class="form-label">Sitio</label>
+                            <label for="inputState" class="form-label fw-bold">Sitio</label>
                             <select id="inputState" class="form-select" v-model="regional.sitio"
                             :class="regional.sitio != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
@@ -274,20 +265,20 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label">Opción</label>
+                            <label for="inputState" class="form-label fw-bold">Opción</label>
                             <select id="inputState" class="form-select" v-model="regional.opcion"
                             :class="regional.opcion != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>                  
                             </select>
                         </div>
                         <div class="col-md-7">
-                            <label for="" class="form-label">Específicar</label>
+                            <label for="" class="form-label fw-bold">Específicar</label>
                             <textarea class="form-control" id="" rows="3" v-model="regional.espSitio"
                             :class="regional.espSitio != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
                         </div>
 
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label">Anestésico utilizado</label>
+                            <label for="inputState" class="form-label fw-bold">Anestésico utilizado</label>
                             <select id="inputState" class="form-select" v-model="regional.anestesicoUtilizado"
                             :class="regional.anestesicoUtilizado != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
@@ -301,70 +292,70 @@
                             </select>
                         </div>
                         <div class="col-md-9">
-                            <label for="" class="form-label">Específicar</label>
+                            <label for="" class="form-label fw-bold">Específicar</label>
                             <textarea class="form-control" id="" rows="3" v-model="regional.espAnestesico"
                             :class="regional.espAnestesico != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
                         </div>
 
                         <div class="col-md-3">
-                            <label for="" class="form-label col-12">Probables dificultades técnicas</label>
+                            <label for="" class="form-label col-12 fw-bold">Probables dificultades técnicas</label>
 
                             <input type="radio" class="btn-check" name="dif" id="difSi" autocomplete="off" value="Sí" v-model="regional.probDificulPlexo">
-                            <label class="btn btn-outline-success margenRadio" for="difSi">Sí</label>
+                            <label class="btn btn-radio margenRadio" for="difSi">Sí</label>
 
                             <input type="radio" class="btn-check" name="dif" id="difNo" autocomplete="off" value="No" v-model="regional.probDificulPlexo">
-                            <label class="btn btn-outline-danger" for="difNo">No</label>
+                            <label class="btn btn-radio" for="difNo">No</label>
                         </div>
                         <div class="col-md-9">
-                            <label for="" class="form-label">Específicar</label>
+                            <label for="" class="form-label fw-bold">Específicar</label>
                             <textarea class="form-control" id="" rows="3" v-model="regional.espDificulPlexo"
                             :class="regional.espDificulPlexo != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
                         </div>
                         <hr />
 
-                        <h5 class="">EQUIPO DE APOYO</h5>
+                        <h5 class="fw-bold">EQUIPO DE APOYO</h5>
 
                         <div class="col-md-2">
-                            <label for="" class="form-label col-12">Ultrasonido</label>
+                            <label for="" class="form-label col-12 fw-bold">Ultrasonido</label>
 
                             <input type="radio" class="btn-check" name="ultrasonido" id="ultraSi" autocomplete="off" value="Sí" v-model="regional.ultrasonido">
-                            <label class="btn btn-outline-success margenRadio" for="ultraSi">Sí</label>
+                            <label class="btn btn-radio margenRadio" for="ultraSi">Sí</label>
 
                             <input type="radio" class="btn-check" name="ultrasonido" id="ultraNo" autocomplete="off" value="No" v-model="regional.ultrasonido">
-                            <label class="btn btn-outline-danger" for="ultraNo">No</label>
+                            <label class="btn btn-radio" for="ultraNo">No</label>
                         </div>
                         <div class="col-md-4">
-                            <label for="" class="form-label">Específicar</label>
+                            <label for="" class="form-label fw-bold">Específicar</label>
                             <textarea class="form-control" id="" rows="3" v-model="regional.espUltrasonido"
                             :class="regional.espUltrasonido != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
                         </div>
                         
                         <div class="col-md-2">
-                            <label for="" class="form-label col-12">Neuroestimulador</label>
+                            <label for="" class="form-label col-12 fw-bold">Neuroestimulador</label>
 
                             <input type="radio" class="btn-check" name="neuro" id="neuroSi" autocomplete="off" value="Sí" v-model="regional.neuroestimulador">
-                            <label class="btn btn-outline-success margenRadio" for="neuroSi">Sí</label>
+                            <label class="btn btn-radio margenRadio" for="neuroSi">Sí</label>
 
                             <input type="radio" class="btn-check" name="neuro" id="neuroNo" autocomplete="off" value="No" v-model="regional.neuroestimulador">
-                            <label class="btn btn-outline-danger" for="neuroNo">No</label>
+                            <label class="btn btn-radio" for="neuroNo">No</label>
                         </div>
                         <div class="col-md-4">
-                            <label for="" class="form-label">Específicar</label>
+                            <label for="" class="form-label fw-bold">Específicar</label>
                             <textarea class="form-control" id="" rows="3" v-model="regional.espNeuroestimulador"
                             :class="regional.espNeuroestimulador != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
                         </div>
 
                         <div class="col-md-2">
-                            <label for="" class="form-label col-12">Probables complicaciones</label>
+                            <label for="" class="form-label col-12 fw-bold">Probables complicaciones</label>
 
                             <input type="radio" class="btn-check" name="complicaciones" id="compliSi" autocomplete="off" value="Sí" v-model="regional.probComplicaciones">
-                            <label class="btn btn-outline-success margenRadio" for="compliSi">Sí</label>
+                            <label class="btn btn-radio margenRadio" for="compliSi">Sí</label>
 
                             <input type="radio" class="btn-check" name="complicaciones" id="compliNo" autocomplete="off" value="No" v-model="regional.probComplicaciones">
-                            <label class="btn btn-outline-danger" for="compliNo">No</label>
+                            <label class="btn btn-radio" for="compliNo">No</label>
                         </div>
                         <div class="col-md-4">
-                            <label for="" class="form-label">Específicar</label>
+                            <label for="" class="form-label fw-bold">Específicar</label>
                             <textarea class="form-control" id="" rows="3" v-model="regional.espDificEquipo"
                             :class="regional.espDificEquipo != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
                         </div>
@@ -378,12 +369,12 @@
                         <h5 class="fw-bold col-md-12">Local</h5>  
 
                         <div class="col-md-8">
-                            <label for="" class="form-label">Sitio de la anéstesia</label>
+                            <label for="" class="form-label fw-bold">Sitio de la anéstesia</label>
                             <input type="text" class="form-control" id="" v-model="local.sitioAnestesiaL"
                             :class="local.sitioAnestesiaL != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
                         <div class="col-md-4">
-                            <label for="inputState" class="form-label">Anéstesico utilizado</label>
+                            <label for="inputState" class="form-label fw-bold">Anéstesico utilizado</label>
                             <select id="inputState" class="form-select" v-model="local.anestesicoUtilizado"
                             :class="local.anestesicoUtilizado != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
@@ -398,7 +389,7 @@
                         </div>
 
                         <div class="col-md-12">
-                            <label for="" class="form-label">Específicar</label>
+                            <label for="" class="form-label fw-bold">Específicar</label>
                             <textarea class="form-control" id="" rows="3" v-model="local.especificar"
                             :class="local.especificar != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
                         </div>
@@ -410,10 +401,10 @@
                     <form class="row g-3">    
                         <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5>    
                         <h5 class="fw-bold col-md-12">General</h5>
-                        <h5 class="col-md-12">INTUBACIÓN</h5>
+                        <h5 class="col-md-12 fw-bold">INTUBACIÓN</h5>
 
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label">Inducción</label>
+                            <label for="inputState" class="form-label fw-bold">Inducción</label>
                             <select id="inputState" class="form-select" v-model="general.induccion"
                             :class="general.induccion != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
@@ -424,7 +415,7 @@
                         </div>
 
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label">Tubo</label>
+                            <label for="inputState" class="form-label fw-bold">Tubo</label>
                             <select id="inputState" class="form-select" v-model="general.tubo"
                             :class="general.tubo != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
@@ -434,13 +425,13 @@
                         </div>
 
                         <div class="col-md-3">
-                            <label for="" class="form-label">Número de tubo</label>
+                            <label for="" class="form-label fw-bold">Número de tubo</label>
                             <input type="text" class="form-control" id="" v-model="general.numeroTubo"
                             :class="general.numeroTubo != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label">Tipo de canula</label>
+                            <label for="inputState" class="form-label fw-bold">Tipo de canula</label>
                             <select id="inputState" class="form-select" v-model="general.tipoCanula"
                             :class="general.tipoCanula != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
@@ -450,16 +441,16 @@
                         </div>
 
                         <div class="col-md-2">
-                            <label for="" class="form-label col-12">Globo</label>
+                            <label for="" class="form-label col-12 fw-bold">Globo</label>
 
                             <input type="radio" class="btn-check" name="globo" id="globoSi" autocomplete="off" value="Sí" v-model="general.globo">
-                            <label class="btn btn-outline-success margenRadio" for="globoSi">Sí</label>
+                            <label class="btn btn-radio margenRadio" for="globoSi">Sí</label>
 
                             <input type="radio" class="btn-check" name="globo" id="globoNo" autocomplete="off" value="No" v-model="general.globo">
-                            <label class="btn btn-outline-danger" for="globoNo">No</label>
+                            <label class="btn btn-radio" for="globoNo">No</label>
                         </div>
                         <div class="col-md-2">
-                            <label for="inputState" class="form-label">Presión</label>
+                            <label for="inputState" class="form-label fw-bold">Presión</label>
                             <select id="inputState" class="form-select" v-model="general.presion"
                             :class="general.presion != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
@@ -468,69 +459,69 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <label for="" class="form-label col-12">Probables dificultades técnicas</label>
+                            <label for="" class="form-label col-12 fw-bold">Probables dificultades técnicas</label>
 
                             <input type="radio" class="btn-check" name="difTecIntu" id="difTecIntuSi" autocomplete="off" value="Sí" v-model="general.difTecnicasIntubacion">
-                            <label class="btn btn-outline-success margenRadio" for="difTecIntuSi">Sí</label>
+                            <label class="btn btn-radio margenRadio" for="difTecIntuSi">Sí</label>
 
                             <input type="radio" class="btn-check" name="difTecIntu" id="difTecIntuNo" autocomplete="off" value="No" v-model="general.difTecnicasIntubacion">
-                            <label class="btn btn-outline-danger" for="difTecIntuNo">No</label>
+                            <label class="btn btn-radio" for="difTecIntuNo">No</label>
                         </div>
                         <div class="col-md-5">
-                            <label for="" class="form-label">Específicar</label>
+                            <label for="" class="form-label fw-bold">Específicar</label>
                             <textarea class="form-control" id="" rows="3" v-model="general.espDifTecIntubacion"
                             :class="general.espDifTecIntubacion != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
                         </div>
 
                         <hr />
-                        <h5 class="col-md-12">DISPOSITIVOS SUPRAGLÓTICOS</h5>
+                        <h5 class="col-md-12 Raumanmeri">DISPOSITIVOS SUPRAGLÓTICOS</h5>
 
                         <div class="col-md-3">
-                            <label for="" class="form-label col-12">Dispositivos suproglóticos</label>
+                            <label for="" class="form-label col-12 fw-bold">Dispositivos suproglóticos</label>
 
                             <input type="radio" class="btn-check" name="supragloticos" id="supragloticosSi" autocomplete="off" value="Sí" v-model="general.dispositivosSupro">
-                            <label class="btn btn-outline-success margenRadio" for="supragloticosSi">Sí</label>
+                            <label class="btn btn-radio margenRadio" for="supragloticosSi">Sí</label>
 
                             <input type="radio" class="btn-check" name="supragloticos" id="supragloticosNo" autocomplete="off" value="No" v-model="general.dispositivosSupro">
-                            <label class="btn btn-outline-danger" for="supragloticosNo">No</label>
+                            <label class="btn btn-radio" for="supragloticosNo">No</label>
                         </div>
 
                         <div class="col-md-3">
-                            <label for="" class="form-label">Calibre</label>
+                            <label for="" class="form-label fw-bold">Calibre</label>
                             <input type="text" class="form-control" id="" v-model="general.calibre"
                             :class="general.calibre != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
                         <div class="col-md-6"></div>
 
                         <div class="col-md-3">
-                            <label for="" class="form-label col-12">Complicaciones</label>
+                            <label for="" class="form-label col-12 fw-bold">Complicaciones</label>
 
                             <input type="radio" class="btn-check" name="complicaciones" id="complicacionesSi" autocomplete="off" value="Sí" v-model="general.complicaciones">
-                            <label class="btn btn-outline-success margenRadio" for="complicacionesSi">Sí</label>
+                            <label class="btn btn-radio margenRadio" for="complicacionesSi">Sí</label>
 
                             <input type="radio" class="btn-check" name="complicaciones" id="complicacionesNo" autocomplete="off" value="No" v-model="general.complicaciones">
-                            <label class="btn btn-outline-danger" for="complicacionesNo">No</label>
+                            <label class="btn btn-radio" for="complicacionesNo">No</label>
                         </div>
                         <div class="col-md-8">
-                            <label for="" class="form-label">Específicar</label>
+                            <label for="" class="form-label fw-bold">Específicar</label>
                             <textarea class="form-control" id="" rows="3" v-model="general.espComplicaciones"
                             :class="general.espComplicaciones != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
                         </div>        
                         
                         <hr />
-                        <h5 class="col-md-12">OTROS</h5>
+                        <h5 class="col-md-12 fw-bold">OTROS</h5>
 
                         <div class="col-md-3">
-                            <label for="" class="form-label col-12">Uso de otros dispositivos</label>
+                            <label for="" class="form-label col-12 fw-bold">Uso de otros dispositivos</label>
 
                             <input type="radio" class="btn-check" name="otros" id="otrosSi" autocomplete="off" value="Sí" v-model="general.otrosDispositivos">
-                            <label class="btn btn-outline-success margenRadio" for="otrosSi">Sí</label>
+                            <label class="btn btn-radio margenRadio" for="otrosSi">Sí</label>
 
                             <input type="radio" class="btn-check" name="otros" id="otrosNo" autocomplete="off" value="No" v-model="general.otrosDispositivos">
-                            <label class="btn btn-outline-danger" for="otrosNo">No</label>
+                            <label class="btn btn-radio" for="otrosNo">No</label>
                         </div>
                         <div class="col-md-8">
-                            <label for="" class="form-label">Específicar</label>
+                            <label for="" class="form-label fw-bold">Específicar</label>
                             <textarea class="form-control" id="" rows="3" v-model="general.espOtrosDispositivos"
                             :class="general.espOtrosDispositivos != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
                         </div>             
@@ -622,11 +613,10 @@ export default defineComponent({
 <style scoped>
 .bordePrincipal {
   border-radius: 5px;
-  box-shadow: 3px 3px 7px;
   padding: 1rem;
   margin-top :10px;
   margin-bottom: 10px;
-  background-color: rgba(225, 225, 225, 0.6);
+  background-color: rgba(232, 234, 236, 0.6);
 }
 .margenRadio{
     margin-right: 10px;
@@ -637,7 +627,17 @@ export default defineComponent({
 .formSombra:focus{
     border-color:green;
     outline:0;
-    -webkit-box-shadow:inset 0 1px 1px #000,0 0 8px green;
-    box-shadow:inset 0 1px 1px #000,0 0 8px green
+    -webkit-box-shadow:0 0 8px green;
+    box-shadow:0 0 8px green
+}
+.btn-radio {
+    --bs-btn-color: #000;
+    --bs-btn-border-color: #ced4da;
+    --bs-btn-hover-color: #000;
+    --bs-btn-focus-shadow-rgb: 13,202,240;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #002d60;
+    --bs-btn-active-border-color: #ced4da;
+    --bs-btn-bg: #ffffff;
 }
 </style>

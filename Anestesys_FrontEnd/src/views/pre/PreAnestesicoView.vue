@@ -6,17 +6,17 @@
           </div>   
           <div class="col-md-2">
             <div class="centrarBoton">
-              <button class="btn btn btn-outline-secundario">Nuevo Paciente</button>
+              <button class="btn btn btn-outline-secundario fw-bold">Nuevo Paciente</button>
             </div>
           </div> 
           <div class="col-md-2">
             <div class="centrarBoton">
-              <button class="btn btn btn-outline-secundario">Nuevo Registro</button>
+              <button class="btn btn btn-outline-secundario fw-bold">Nuevo Registro</button>
             </div>
           </div> 
           <div class="col-md-2">
             <div class="centrarBoton">
-              <button class="btn btn btn-outline-secundario">Historial Paciente</button>
+              <button class="btn btn btn-outline-secundario fw-bold">Historial Paciente</button>
             </div>
           </div>            
       </div>
@@ -25,16 +25,16 @@
           <div class="col-10 divform navbar-nav">                     
               <ul class="nav nav-pills nav-fill text-center" id=""> <!--Lista para el menú principal-->
                   <li class="nav-item col-md-3" >
-                      <button class="nav-link active" id="id-tab" href="#pre-id" data-bs-toggle="tab" type="submit" aria-selected="true"><u><b>ID PACIENTE</b></u></button> <!--Se asigna el contenedor al que apuntara el elemento por medio de data-bs-target-->
+                      <button class="nav-link active fw-bold under" id="id-tab" href="#pre-id" data-bs-toggle="tab" type="submit" aria-selected="true">ID PACIENTE</button> <!--Se asigna el contenedor al que apuntara el elemento por medio de data-bs-target-->
                   </li>
                   <li class="nav-item col-md-3" >
-                      <button class="nav-link" id="valoracion-tab" href="#pre-valoracion" data-bs-toggle="tab" type="submit" aria-selected="false" @click="validaExpediente(numExpediente, nomPaciente)"><u><b>VALORACIÓN</b></u></button>
+                      <button class="nav-link fw-bold under" id="valoracion-tab" href="#pre-valoracion" data-bs-toggle="tab" type="submit" aria-selected="false" @click="validaExpediente(numExpediente, nomPaciente)">VALORACIÓN</button>
                   </li>
                   <li class="nav-item col-md-3" >
-                      <button class="nav-link" id="plan-tab" href="#pre-plan" data-bs-toggle="tab" type="submit" aria-selected="false"><u><b>PLAN</b></u></button>
+                      <button class="nav-link fw-bold under" id="plan-tab" href="#pre-plan" data-bs-toggle="tab" type="submit" aria-selected="false">PLAN</button>
                   </li>
                   <li class="nav-item col-md-3" >
-                      <button class="nav-link" id="nota-tab" href="#pre-nota" data-bs-toggle="tab" type="submit" aria-selected="false"><u><b>NOTA</b></u></button>
+                      <button class="nav-link fw-bold under" id="nota-tab" href="#pre-nota" data-bs-toggle="tab" type="submit" aria-selected="false">NOTA</button>
                   </li>
               </ul>
           </div>
@@ -69,18 +69,23 @@
               </div>                                                                                         
           </div>
           
-          <div class="container text-center col-md-9 posicionEstatica bordeContenedor">
+          <div class="container text-center col-md-9 posicionEstatica bordeContenedor fw-bold">
             <div class="row">
               <div class="col bordeColumna">
-                <label class="form-label">Paciente: {{nomPaciente}}</label>                                  
+                <label class="form-label">{{nomPaciente}}</label>                                  
               </div>
               <div class="col bordeColumna">
-                Cirujano: {{nomCirujano}}
+                {{nomCirujano}}
               </div>
               <div class="col bordeColumna">
-                Cirugía: {{nomCirugia}}
+                {{nomCirugia}}
               </div>
             </div>
+          </div>
+
+          <div class="container col-md-1">
+            <button @click="topFunction()" class="btn btn-arriba fw-bold" id="btnArriba" title="Go to top"><i class="fa-solid fa-3x fa-angle-up"></i></button>  
+                    
           </div>
 
       </div>
@@ -100,8 +105,7 @@ import Id from "../../components/pre/Id.vue";
 import Valoracion from "../../components/pre/Valoracion.vue";
 import Plan from "../../components/pre/Plan.vue";
 import Nota from '../../components/pre/Nota.vue';
-import BarraProgreso from '../../components/BarraProgreso.vue';
-import swal from 'sweetalert2'
+import swal from 'sweetalert2';
 
 export default defineComponent({
   data() {
@@ -116,14 +120,17 @@ export default defineComponent({
     Id,
     Nota,
     Plan,
-    Valoracion,
-    BarraProgreso
+    Valoracion
   },
   created(){
-    this.validaExpediente(this.numExpediente, this.nomPaciente)
+    this.validaExpediente(this.numExpediente, this.nomPaciente);
   },
   mounted: function() { // Llama el método despues de cargar la página
-      this.mandarMensaje();
+      this.mensajeBienvenida();    
+      document.addEventListener('scroll', this.scrollFunction)  
+  },
+  destroyed: function(){
+    document.addEventListener('scroll', this.scrollFunction)
   },
   methods: {
       async validaExpediente(numExpediente, nombrePaciente) {                                  
@@ -158,11 +165,12 @@ export default defineComponent({
           }
           else{
             document.getElementById("validaNumExp").className = "invisible";
-            document.getElementById("validaNomPac").className = "invisible";  
+            document.getElementById("validaNomPac").className = "invisible";              
+
             alert('OK')
           }
       },
-      async mandarMensaje(){
+      async mensajeBienvenida(){
         swal.fire({
           title: 'Bienvenido',
           html: '<b>Daniel</b>',
@@ -175,22 +183,38 @@ export default defineComponent({
           position: 'top-end'            
         })  
       },
-      actualizaDatos(nombrePaciente, nombreCirujano, cirugia) {
+      async actualizaDatos(nombrePaciente, nombreCirujano, cirugia) {
         this.nomPaciente = nombrePaciente,
         this.nomCirujano = nombreCirujano,
         this.nomCirugia = cirugia
 
-        this.$emit('recibe-datos', this.nomPaciente, this.nomCirujano, this.nomCirugia);         
+        this.$emit('recibe-datos', this.nomPaciente, this.nomCirujano, this.nomCirugia);  
+        
+        console.log('Pac: '+this.nomPaciente, ', Dr.: '+this.nomCirujano, ', Cx: '+this.nomCirugia)
       },
-  }
+      async scrollFunction() {
+        if (document.body.scrollTop > 25 || document.documentElement.scrollTop > 25) {
+          document.getElementById("btnArriba").style.display = "block";
+        } else {
+          document.getElementById("btnArriba").style.display = "none";
+        }
+      },
+      async topFunction() {
+        document.body.scrollTop = 0; // Para safari
+        document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
+      }
+  }  
 })
 </script>
 
 <style scoped>
-.menuLateral {
+.menuLateral {  
   margin-bottom: 6px; 
-  margin-top: 6px;
-  margin-left: 20px;
+  margin-top: 4px;
+  margin-left: 45px;
+}
+.alinearElementoD{
+    text-align: right;
 }
 .menuLateralPrincipal {
   margin-top: 16px;
@@ -212,7 +236,6 @@ export default defineComponent({
   background-color: #fff;
 }
 .bordeContenedor{
-  box-shadow: 3px 3px 7px #ccc;
   padding: 1.2rem;
   border-radius: 5px;
   border: #ccc 1px solid;
@@ -238,11 +261,33 @@ export default defineComponent({
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
 }
 .btn-outline-secundario {
-    --bs-btn-color: #002D60;
-    --bs-btn-border-color: #CED4DA;
-    --bs-btn-hover-border-color: #CED4DA;
-    --bs-btn-hover-color: #002D60;  
     --bs-btn-bg: #ffffff;
-    --bs-btn-hover-bg: #ffffff;
+    --bs-btn-color: #002d60;    
+    --bs-btn-border-color: #ced4da;
+    --bs-btn-hover-bg: #ced4da;
+    --bs-btn-hover-color: #002d60;
+    --bs-btn-hover-border-color: #ced4da;          
+    --bs-btn-active-bg: #ced4da;
+    --bs-btn-active-color: #002d60;
+    --bs-btn-active-border-color: #ced4da;    
+}
+.under {
+    text-decoration: underline;
+}
+.btn-arriba {
+    display: none;  /*Oculto por defecto */
+    position: fixed; /* Posición fija */
+    bottom: 60px; /* Coloque el botón en la parte inferior de la página. */
+    z-index: 99; /* Asegúrese de que no se superponga */  
+    border-radius: 6px; /* Esquinas redondeadas */ 
+    --bs-btn-bg: #ffffff;
+    --bs-btn-color: #002d60;    
+    --bs-btn-border-color: #ced4da;
+    --bs-btn-hover-bg: #002d60;
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-border-color: #002d60;          
+    --bs-btn-active-bg: #002d60;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-border-color: #002d60;     
 }
 </style>

@@ -2,13 +2,13 @@
     <div>
         <ul class="nav nav-pills mb-3 text-center" id="">
             <li class="nav-item col-md-4" >
-                <button class="nav-link active" id="recuperacion" data-bs-toggle="pill" data-bs-target="#notaEvaluacion" type="button" aria-selected="true">NOTA DE EVALUACIÓN DE UCPA</button>
+                <button class="btn btn-outline-secondary fw-bold active" id="recuperacion" data-bs-toggle="pill" data-bs-target="#notaEvaluacion" type="button" aria-selected="true">NOTA DE EVALUACIÓN DE UCPA</button>
             </li>
             <li class="nav-item col-md-4" >
-                <button class="nav-link" id="recuperacion" data-bs-toggle="pill" data-bs-target="#aldrete" type="button" aria-selected="false">ALDRETE DE RECUPERACIÓN</button>
+                <button class="btn btn-outline-secondary fw-bold" id="recuperacion" data-bs-toggle="pill" data-bs-target="#aldrete" type="button" aria-selected="false">ALDRETE DE RECUPERACIÓN</button>
             </li>
             <li class="nav-item col-md-4" >
-                <button class="nav-link" id="recuperacion" data-bs-toggle="pill" data-bs-target="#alta" type="button" aria-selected="false">ALTA DE RECUPERACIÓN</button>
+                <button class="btn btn-outline-secondary fw-bold" id="recuperacion" data-bs-toggle="pill" data-bs-target="#alta" type="button" aria-selected="false">ALTA DE RECUPERACIÓN</button>
             </li>
         </ul>
 
@@ -494,11 +494,11 @@
 
 <style scoped>
 .bordePrincipal {
-  border-radius: 13px;
-  box-shadow: 3px 3px 7px #ccc;
+  border-radius: 5px;
   padding: 1rem;
   margin-top :10px;
   margin-bottom: 10px;
+  background-color: rgba(232, 234, 236, 0.6);
 }
 .largoContenedor{
     height: 558px

@@ -2,10 +2,10 @@
     <div>
         <ul class="nav nav-pills mb-3 text-center" id="">
             <li class="nav-item col-md-6" >
-                <button class="nav-link active" id="nota" data-bs-toggle="pill" data-bs-target="#notaPost" type="button" aria-selected="true">NOTA POST-ANESTÉSICA</button>
+                <button class="btn btn-outline-secondary fw-bold active" id="nota" data-bs-toggle="pill" data-bs-target="#notaPost" type="button" aria-selected="true">NOTA POST-ANESTÉSICA</button>
             </li>
             <li class="nav-item col-md-6" >
-                <button class="nav-link" id="nota" data-bs-toggle="pill" data-bs-target="#caso" type="button" aria-selected="false">CASO OBSTÉTRICO RECIÉN NACIDO</button>
+                <button class="btn btn-outline-secondary fw-bold" id="nota" data-bs-toggle="pill" data-bs-target="#caso" type="button" aria-selected="false">CASO OBSTÉTRICO RECIÉN NACIDO</button>
             </li>
         </ul>
 
@@ -22,10 +22,10 @@
                             <label for="" class="form-label col-12">Intubación</label>
 
                             <input type="radio" class="btn-check" name="intubacion" id="intubacionSi" autocomplete="off">
-                            <label class="btn btn-outline-success margenRadio" for="intubacionSi">Sí</label>
+                            <label class="btn btn-radio margenRadio" for="intubacionSi">Sí</label>
 
                             <input type="radio" class="btn-check" name="intubacion" id="intubacionNo" autocomplete="off">
-                            <label class="btn btn-outline-danger" for="intubacionNo">No</label>
+                            <label class="btn btn-radio" for="intubacionNo">No</label>
                         </div>
 
                         <div class="col-md-12">
@@ -33,7 +33,7 @@
                             <textarea class="form-control" id="" rows="8"></textarea>
                         </div>
 
-                        <h5 class="">SIGNOS VITALES AL EGRESO DEL QUIROFANO</h5>
+                        <h5 class="">SIGNOS VITALES AL EGRESO DEL QUIRÓFANO</h5>
 
                         <div class="col-md-2">
                             <label for="" class="form-label">TA</label>
@@ -93,10 +93,10 @@
                                         <label for="" class="form-label col-12">Género</label>
 
                                         <input type="radio" class="btn-check" name="genero" id="masculino" autocomplete="off">
-                                        <label class="btn btn-outline-info margenRadio" for="masculino">Masculino</label>
+                                        <label class="btn btn-radio margenRadio" for="masculino">Masculino</label>
 
                                         <input type="radio" class="btn-check" name="genero" id="femenino" autocomplete="off">
-                                        <label class="btn btn-outline-info" for="femenino">Femenino</label>                            
+                                        <label class="btn btn-radio" for="femenino">Femenino</label>                            
                                     </div>                                 
                                     <div class="col-md-4">
                                         <label for="" class="form-label">Hora de Nacimiento</label>
@@ -144,11 +144,11 @@
 
 <style scoped>
 .bordePrincipal {
-  border-radius: 13px;
-  box-shadow: 3px 3px 7px #ccc;
+  border-radius: 5px;
   padding: 1rem;
   margin-top :10px;
   margin-bottom: 10px;
+  background-color: rgba(232, 234, 236, 0.6);
 }
 .margenRadio {
     margin-right: 10px;
@@ -170,5 +170,15 @@ legend.bordeScheduler {
 }
 .largoContenedor{
     height: 576px
+}
+.btn-radio {
+    --bs-btn-color: #000;
+    --bs-btn-border-color: #ced4da;
+    --bs-btn-hover-color: #000;
+    --bs-btn-focus-shadow-rgb: 13,202,240;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #002d60;
+    --bs-btn-active-border-color: #ced4da;
+    --bs-btn-bg: #ffffff;
 }
 </style>
