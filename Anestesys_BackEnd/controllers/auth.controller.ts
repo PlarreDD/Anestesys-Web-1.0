@@ -1,7 +1,9 @@
 import { User } from "../models/User";
-import { generateToken, generateRefreshToken } from "../utils/tokenManager";
+import { generateToken,
+         generateRefreshToken } from "../utils/tokenManager";
 import bcryptjs from "bcryptjs";
-import { Request, Response } from "express";    // Obtiene los Response y Request que se envían 
+import { Request,
+         Response } from "express";    // Obtiene los Response y Request que se envían 
 
 export const register = async (req:Request, res:Response) => {
     const {email, password, nomMed, apMed} = req.body;
@@ -53,18 +55,18 @@ export const login = async (req:Request, res:Response) => {
     }
 };
 
-export const infoUser = async(_req:Request, _res:Response) => {
-    // try{
-    //     const user = await User.findById(req.uid).lean();
+export const infoUser = async(req:any, res:Response) => {
+    try{
+        const user = await User.findById(req.uid).lean();
 
-    //     if(user) return res.json({email: user.email, uid: user._id});
+        if(user) return res.json({email: user.email, uid: user._id});
                 
-    // }catch(error){
-    //     return res.status(500).json({error: "Error de Servidor"});
-    // }
+    }catch(error){
+        return res.status(500).json({error: "Error de Servidor"});
+    }
 };
 
-export const refreshToken = (req:Request, res:Response) => {
+export const refreshToken = (req:any, res:Response) => {
     try {
         const token = generateToken(req.uid);
 
