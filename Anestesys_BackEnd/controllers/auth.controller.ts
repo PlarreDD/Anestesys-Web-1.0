@@ -47,8 +47,10 @@ export const login = async (req:Request, res:Response) => {
         const token = generateToken(user.id);
                     
         generateRefreshToken(user.id, res);
-        
-        return res.json({token});
+        const tkn = token?.token;
+        const xprIn = token?.expiresIn;
+
+        return res.json( {tkn, xprIn} );
     }catch(error){
         console.log(error);
         return res.status(500).json({error: "Error con el servidor"});
@@ -70,7 +72,10 @@ export const refreshToken = (req:any, res:Response) => {
     try {
         const token = generateToken(req.uid);
 
-        return res.json({token});
+        const tkn = token?.token;
+        const xprIn = token?.expiresIn;
+
+        return res.json({tkn, xprIn});
     } catch (error) {
         console.log(error);
 

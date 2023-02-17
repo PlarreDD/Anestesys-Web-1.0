@@ -2,6 +2,7 @@
     <div class="col-6 divBorder">              
 
         <h4>Iniciar sesión</h4>
+        {{ token }} - {{ expiresIn }}
 
         <form class="row g-3" action="pre" method="post" @submit.prevent="handleSubmit">
             <div class="col-md-12">
@@ -23,7 +24,7 @@
             </div>
 
             <div class="col-md-12">
-                <button onclick="location.href='home'"
+                <button 
                         class="btn btn-primary btn-signin"
                         type="submit">
                     Entrar
@@ -46,11 +47,17 @@
 <script lang="ts">
 import { apiAxios } from '@/boot/axios';
 import type { regUsr } from '@/interfaces/regUsr';
+import { ref } from "vue";
+
+const token = ref('');
+const expiresIn = ref('');
 
 export default {
     data() {
         return{
-            usr: { } as regUsr
+            usr: { } as regUsr,
+            token,
+            expiresIn,
         };
     },
 
@@ -60,12 +67,31 @@ export default {
                 email: this.usr.email,
                 password: this.usr.pswd,
             }).then((res:any) => {
-                console.log(res.data);
+                token.value = res.data.tkn;
+                expiresIn.value = res.data.xprIn;
             }).catch((e:any) =>
                 console.log(e));
         }
     }
 }
+
+const refreshToken = async () => {
+    try {
+        console.log("refresh");
+        
+        const res = await apiAxios.post("http://localhost:5000/refresh");
+        
+        token.value = res.data.tkn;
+        expiresIn.value = res.data.xprIn;
+
+        console.log("tkn: " + token);
+        console.log("xpr: " + expiresIn);
+    } catch (error) {
+        console.log(error);        
+    }   
+}
+
+refreshToken();
 </script>
 
 <style>
