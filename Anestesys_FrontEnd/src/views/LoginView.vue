@@ -73,25 +73,28 @@ export default {
                 console.log(e));
         }
     }
-}
+};
 
 const refreshToken = async () => {
     try {
-        console.log("refresh");
-        
-        const res = await apiAxios.post("http://localhost:5000/refresh");
+        const res = await apiAxios.get("http://localhost:5000/refresh");
         
         token.value = res.data.tkn;
         expiresIn.value = res.data.xprIn;
-
-        console.log("tkn: " + token);
-        console.log("xpr: " + expiresIn);
+        setTime();
     } catch (error) {
         console.log(error);        
     }   
-}
+};
+
+const setTime = async () => {
+    setTimeout(() => {
+        refreshToken();
+    }, Number(expiresIn.value) * 1000 - 6000)
+};
 
 refreshToken();
+
 </script>
 
 <style>

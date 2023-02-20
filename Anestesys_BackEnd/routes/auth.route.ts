@@ -15,7 +15,7 @@ router.post("/login", bodyLoginValidator, login);
 router.post("/register", bodyRegisterValidator, register);
 router.post('/logout', logout);
 
-router.get('/protected', requireToken, infoUser);
 router.get('/refresh', requireRefreshToken, refreshToken);
+router.get('/protected', requireToken, infoUser);
 
 export default router;

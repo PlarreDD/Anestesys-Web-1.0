@@ -12,7 +12,7 @@ export const generateToken = (uid: any) =>{
 };
 
 export const generateRefreshToken = (uid: any, res: any) => {
-    const expiresIn = 60 * 60 * 24 * 30;
+    const expiresIn = 60 * 60 * 24;
 
     try {
         const refreshToken = jwt.sign({uid}, String(process.env.JWT_REFRESH), {expiresIn});
