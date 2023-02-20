@@ -101,7 +101,9 @@
                 :class="id.anestesiologoVPA != '' ? 'form-control border border-success formSombra' : 'form-control'">
             </div>              
             <div class="col-md-6 margenBoton">
-                <button class="btn btn-outline-secondary fw-bold" href="#pre-valoracion" data-bs-toggle="tab" type="submit">Siguiente</button>
+                <button href="#pre-valoracion" data-bs-toggle="tab" type="submit"
+                :class="id.numExpediente != '' && id.nombrePaciente != '' ? 'btn btn-outline-success fw-bold' : 'btn btn-outline-secondary fw-bold'"
+                :disabled="id.numExpediente != '' && id.nombrePaciente != '' ? false : true">Siguiente</button>
             </div>                            
         </form>        
     </div>
@@ -139,7 +141,7 @@ export default defineComponent({
             this.$emit("validar", this.id.numExpediente, this.id.nombrePaciente)
         },
         enviarDatos() {
-            this.$emit('recibe-datos', this.id.nombrePaciente, this.id.cirujano, this.id.cirugia)            
+            this.$emit('recibe-datos',this.id.numExpediente, this.id.nombrePaciente, this.id.cirujano, this.id.cirugia)            
         },
                 
     }

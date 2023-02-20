@@ -2,19 +2,24 @@
     <div>
         <ul class="nav nav-pills mb-3 text-center" id="">
             <li class="nav-item col-md-2" >
-                <button class="btn btn-outline-secondary fw-bold active" id="valoracion" data-bs-toggle="pill" data-bs-target="#antecedentes" type="button" aria-selected="true">ANTECEDENTES</button>
+                <button class="btn btn-outline-secondary fw-bold active" id="valoracion" data-bs-toggle="pill" data-bs-target="#antecedentes" 
+                type="button" aria-selected="true" data-title="Antecedentes patológicos y no patológicos">ANTECEDENTES</button>
             </li>
             <li class="nav-item col-md-3" >
-                <button class="btn btn-outline-secondary fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#exploracion" type="button" aria-selected="false">EXPLORACIÓN FÍSICA</button>
+                <button class="btn btn-outline-secondary fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#exploracion" 
+                type="button" aria-selected="false" title="Registro de signos vitales">EXPLORACIÓN FÍSICA</button>
             </li>
             <li class="nav-item col-md-2" >
-                <button class="btn btn-outline-secondary fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#via" type="button" aria-selected="false">VÍA AÉREA</button>
+                <button class="btn btn-outline-secondary fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#via" 
+                type="button" aria-selected="false" title="Valoración de vía aérea y otras escalas">VÍA AÉREA</button>
             </li>
             <li class="nav-item col-md-2" >
-                <button class="btn btn-outline-secondary fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#estudios" type="button" aria-selected="false">ESTUDIOS</button>
+                <button class="btn btn-outline-secondary fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#estudios" 
+                type="button" aria-selected="false" title="Estudios realizados previamente">ESTUDIOS</button>
             </li>
             <li class="nav-item col-md-2" >
-                <button class="btn btn-outline-secondary fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#examenes" type="button" aria-selected="false">EXÁMENES</button>
+                <button class="btn btn-outline-secondary fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#examenes" 
+                type="button" aria-selected="false" title="Perfil bioquímico">EXÁMENES</button>
             </li>
         </ul>
 
@@ -650,5 +655,31 @@ export default defineComponent({
     outline:0;
     -webkit-box-shadow:0 0 8px green;
     box-shadow:0 0 8px green
+}
+[data-title]:hover:after {
+    opacity: 1;
+    transition: all 0.1s ease 0.5s;
+    visibility: visible;
+}
+[data-title]:after {
+    content: attr(data-title);
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 13px;
+    font-family: SF UI Display;
+    position: absolute;
+    padding: 2px 5px;
+    bottom: -1.8em;
+    left: 80%;
+    white-space: nowrap;
+    opacity: 0;
+    border: 1px solid #fff;
+    z-index: 99999;
+    visibility: hidden;
+    border-radius: 5px;
+    
+}
+[data-title] {
+    position: relative;
 }
 </style>

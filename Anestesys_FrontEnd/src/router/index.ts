@@ -38,11 +38,6 @@ const router = createRouter({
       path: '/medicamentos',
       name: 'medicamentos',     
       component: () => import('../views/menu/Medicamentos.vue')
-    },
-    {
-      path: '/medicos',
-      name: 'medicos',     
-      component: () => import('../views/menu/Medicos.vue')
     }
   ]
 })

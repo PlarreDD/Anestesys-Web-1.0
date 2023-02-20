@@ -291,8 +291,8 @@
                 </li>
             </ul>
         </div>       
-        <div class="col-1">
-          <select id="inputState" class="form-select fw-bold">
+        <div class="col-1 fw-bold">
+          <select id="inputState" class="form-select ">
             <option>1</option>
             <option>2</option>
             <option>5</option>
@@ -301,7 +301,7 @@
           </select>
         </div>   
 
-        <div class="col-2">
+        <div class="col-2 fw-bold">
           <div class="centrarLabel">
             <h4><span id="clock"></span></h4>
           </div>          

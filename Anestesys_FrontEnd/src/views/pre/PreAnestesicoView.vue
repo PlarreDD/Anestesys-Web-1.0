@@ -6,17 +6,17 @@
           </div>   
           <div class="col-md-2">
             <div class="centrarBoton">
-              <button class="btn btn btn-outline-secundario fw-bold">Nuevo Paciente</button>
+              <button class="btn btn-outline-secundario fw-bold">Nuevo Paciente</button>
             </div>
           </div> 
           <div class="col-md-2">
             <div class="centrarBoton">
-              <button class="btn btn btn-outline-secundario fw-bold">Nuevo Registro</button>
+              <button class="btn btn-outline-secundario fw-bold">Nuevo Registro</button>
             </div>
           </div> 
           <div class="col-md-2">
             <div class="centrarBoton">
-              <button class="btn btn btn-outline-secundario fw-bold">Historial Paciente</button>
+              <button class="btn btn-outline-secundario fw-bold">Historial Paciente</button>
             </div>
           </div>            
       </div>
@@ -25,16 +25,18 @@
           <div class="col-10 divform navbar-nav">                     
               <ul class="nav nav-pills nav-fill text-center" id=""> <!--Lista para el menú principal-->
                   <li class="nav-item col-md-3" >
-                      <button class="nav-link active fw-bold under" id="id-tab" href="#pre-id" data-bs-toggle="tab" type="submit" aria-selected="true">ID PACIENTE</button> <!--Se asigna el contenedor al que apuntara el elemento por medio de data-bs-target-->
+                      <button class="nav-link active fw-bold underBold" id="id-tab" href="#pre-id" data-bs-toggle="tab" type="submit" aria-selected="true">ID PACIENTE</button> <!--Se asigna el contenedor al que apuntara el elemento por medio de data-bs-target-->
+                  </li>
+                  <li class="nav-item col-md-3">
+                      <button class="nav-link fw-bold under" id="valoracion-tab" href="#pre-valoracion" data-bs-toggle="tab" type="submit" aria-selected="false"
+                      :disabled="numExpediente != '' && nomPaciente != '' ? false : true">VALORACIÓN</button>
                   </li>
                   <li class="nav-item col-md-3" >
-                      <button class="nav-link fw-bold under" id="valoracion-tab" href="#pre-valoracion" data-bs-toggle="tab" type="submit" aria-selected="false" @click="validaExpediente(numExpediente, nomPaciente)">VALORACIÓN</button>
+                      <button class="nav-link fw-bold under" id="plan-tab" href="#pre-plan" type="submit" aria-selected="false">PLAN</button>
                   </li>
                   <li class="nav-item col-md-3" >
-                      <button class="nav-link fw-bold under" id="plan-tab" href="#pre-plan" data-bs-toggle="tab" type="submit" aria-selected="false">PLAN</button>
-                  </li>
-                  <li class="nav-item col-md-3" >
-                      <button class="nav-link fw-bold under" id="nota-tab" href="#pre-nota" data-bs-toggle="tab" type="submit" aria-selected="false">NOTA</button>
+                      <button class="nav-link fw-bold under" id="nota-tab" href="#pre-nota" data-bs-toggle="tab" type="submit" aria-selected="false"
+                      :disabled="numExpediente != '' && nomPaciente != '' ? false : true">NOTA</button>
                   </li>
               </ul>
           </div>
@@ -84,8 +86,7 @@
           </div>
 
           <div class="container col-md-1">
-            <button @click="topFunction()" class="btn btn-arriba fw-bold" id="btnArriba" title="Go to top"><i class="fa-solid fa-3x fa-angle-up"></i></button>  
-                    
+            <button @click="topFunction()" class="btn btn-arriba fw-bold" id="btnArriba" title="Go to top"><i class="fa-solid fa-3x fa-angle-up"></i></button>                      
           </div>
 
       </div>
@@ -106,6 +107,8 @@ import Valoracion from "../../components/pre/Valoracion.vue";
 import Plan from "../../components/pre/Plan.vue";
 import Nota from '../../components/pre/Nota.vue';
 import swal from 'sweetalert2';
+//import mitt from 'mitt';
+//import emitter from "@/services/emitter";
 
 export default defineComponent({
   data() {
@@ -126,8 +129,8 @@ export default defineComponent({
     this.validaExpediente(this.numExpediente, this.nomPaciente);
   },
   mounted: function() { // Llama el método despues de cargar la página
-      this.mensajeBienvenida();    
-      document.addEventListener('scroll', this.scrollFunction)  
+      //this.mensajeBienvenida();    
+      document.addEventListener('scroll', this.scrollFunction);              
   },
   destroyed: function(){
     document.addEventListener('scroll', this.scrollFunction)
@@ -170,25 +173,13 @@ export default defineComponent({
             alert('OK')
           }
       },
-      async mensajeBienvenida(){
-        swal.fire({
-          title: 'Bienvenido',
-          html: '<b>Daniel</b>',
-          icon: 'info',
-          showConfirmButton: false,
-          showCloseButton: true,  
-          timer: 5000,
-          timerProgressBar: true,
-          toast: true,
-          position: 'top-end'            
-        })  
-      },
-      async actualizaDatos(nombrePaciente, nombreCirujano, cirugia) {
+      async actualizaDatos(numeroExpediente,nombrePaciente, nombreCirujano, cirugia) {
+        this.numExpediente=numeroExpediente,
         this.nomPaciente = nombrePaciente,
         this.nomCirujano = nombreCirujano,
         this.nomCirugia = cirugia
 
-        this.$emit('recibe-datos', this.nomPaciente, this.nomCirujano, this.nomCirugia);  
+        this.$emit('recibe-datos', this.nomPaciente, this.nomCirujano, this.nomCirugia);
         
         console.log('Pac: '+this.nomPaciente, ', Dr.: '+this.nomCirujano, ', Cx: '+this.nomCirugia)
       },
@@ -202,6 +193,19 @@ export default defineComponent({
       async topFunction() {
         document.body.scrollTop = 0; // Para safari
         document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
+      },
+      async ocultarBorde() {
+        if (document.getElementById("id-tab").ariaSelected=="false"){
+          document.getElementById("id-tab").className="nav-link active fw-bold"
+          alert('Entro')
+        }
+      },
+      async validarCambio() {
+        if (this.numExpediente.trim() != '' && this.nomPaciente.trim() != '') {
+          //document.getElementById("plan-tab").tabIndex('') 
+          alert('Entro, no debe cambiar')       
+        }
+        alert('Error!')
       }
   }  
 })
@@ -273,6 +277,12 @@ export default defineComponent({
 }
 .under {
     text-decoration: underline;
+}
+.underBold {
+    border-bottom: thick solid;
+    border-bottom-width: 5px;
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
 }
 .btn-arriba {
     display: none;  /*Oculto por defecto */
