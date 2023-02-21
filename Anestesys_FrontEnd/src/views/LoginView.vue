@@ -1,30 +1,36 @@
 <template>
-    <div class="col-5 divBorder posicionEstatica">        
-      
+    <div class="col-5 divBorder posicionEstaticaL">        
+      <div class="margenL">
         <div class="div-img">
-              <img src="images/logoA.png" class="imgLogo"/>
+            <img src="images/logoA.png" class="imgLogo"/>
         </div>
 
         <h3 class="fw-bold">Inicia Sesión</h3>
 
         <form class="row g-3" method="post">
-            <div class="col-md-12">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
                 <label for="" class="form-label fw-bold">Correo electrónico</label>
                 <input type="text" class="form-control" id="user" placeholder="email@mail.com" required>  
             </div>
-            <div class="col-md-12">
-                <label for="" class="form-label fw-bold">Contraseña</label>
-                <input type="password" class="form-control" id="contrasena" placeholder="******" required>  
-            </div>
+            <div class="col-md-2"></div>
 
-            <div class="col-md-12">                    
-                <RouterLink class="nav-link aColor fw-bold" to="registro">Crear una cuenta</RouterLink>
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <label for="" class="form-label fw-bold">Contraseña</label>
+                <input type="password" class="form-control" id="contrasena" placeholder="********" required>  
             </div>
-            <div class="col-md-12">
+            <div class="col-md-2"></div>
+
+            <div class="col-md-12 div-img">
                 <RouterLink to="pre"><button @click="mandarMensaje()" class="btn btn-login fw-bold" type="submit">Entrar</button></RouterLink>
-            </div>            
+            </div>   
+            <div class="col-md-12">                    
+                <RouterLink class="nav-link colorLinkL fw-bold" to="registro">Crear una cuenta</RouterLink>
+            </div>                   
             
-        </form>        
+        </form>   
+      </div>     
     </div>
 </template>
 
@@ -34,6 +40,9 @@ import { defineComponent } from "vue"
 import swal from 'sweetalert2'
 
 export default defineComponent({
+  mounted: function() { // Llama el método despues de cargar la página
+      this.cargarFondo();                 
+    },
   methods: {      
       async mandarMensaje(){
         swal.fire({
@@ -47,6 +56,9 @@ export default defineComponent({
           toast: true,
           position: 'top-end'            
         })  
+      },
+      async cargarFondo(){
+            document.body.style.backgroundImage = "url('../../public/images/login.webp')";
       }
   }
 })
@@ -57,13 +69,14 @@ export default defineComponent({
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
   padding: 1rem;
-  margin-top :10px;
-  margin-bottom: 10px;
-  background-color: rgba(232, 234, 236, 0.6);
+  backdrop-filter: blur(40px) brightness(90%);
 }
-.aColor{
+.colorLinkL{
   color: #6AC2BC;
   text-align: center;
+}
+.colorLinkL:hover{
+  color: #6AC2BC
 }
 .btn-login {
     --bs-btn-bg: #6AC2BC;
@@ -83,10 +96,12 @@ h3{
 label{
   color: #002D60;
 }
-.posicionEstatica {
-  position: fixed;
+.posicionEstaticaL {
+  position: absolute;
   right: 0;
+  top: 0;
   z-index: 1020;
+  height: 909px;
 }
 .div-img {
   text-align: center;
@@ -94,5 +109,8 @@ label{
 .imgLogo{
   width: 400px;
   height: auto; 
+}
+.margenL{
+  margin-top: 80px;
 }
 </style>

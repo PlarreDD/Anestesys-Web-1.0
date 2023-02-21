@@ -129,7 +129,7 @@ export default defineComponent({
     this.validaExpediente(this.numExpediente, this.nomPaciente);
   },
   mounted: function() { // Llama el método despues de cargar la página
-      //this.mensajeBienvenida();    
+      this.cargarFondo();    
       document.addEventListener('scroll', this.scrollFunction);              
   },
   destroyed: function(){
@@ -206,6 +206,9 @@ export default defineComponent({
           alert('Entro, no debe cambiar')       
         }
         alert('Error!')
+      },
+      async cargarFondo(){
+            document.body.style.backgroundImage = "url('')";
       }
   }  
 })
