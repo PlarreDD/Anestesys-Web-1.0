@@ -2,7 +2,7 @@
     <div class="col-6 divBorder">              
 
         <h4>Registro</h4>
-
+        
         <form class="row g-3" action="pre" method="post" @submit.prevent="handleSubmit">
             <div class="col-md-12">
                 <input type="text"
@@ -51,7 +51,6 @@
 
             <div class="col-md-12">
                 <button 
-                    onclick="location.href='/'"
                     class="btn btn-primary btn-signin"
                     type="submit">
                         Registrar
@@ -70,29 +69,49 @@
 <script lang="ts">
 import { apiAxios } from '@/boot/axios';
 import type { regUsr } from '@/interfaces/regUsr';
+import { ref } from "vue";
+
+const NombreDr = ref('');
+const ApPatDr = ref('');
+const FechaNac = ref('');
+var arr = [];
+const genPswd = ref('');
 
 export default {
     data() {
         return{
-            usr: { } as regUsr
+            usr: { } as regUsr,
+            //NombreDr,
         };
     },
 
     methods: {
         handleSubmit() {
+            NombreDr.value = this.usr.nomUsr;
+            arr = Array.from(NombreDr.value);
+            genPswd.value = arr[0] + arr[1] + arr[2];
+
+            ApPatDr.value = this.usr.apUsr;
+            arr = Array.from(ApPatDr.value);
+            genPswd.value = genPswd.value + arr[0] + arr[1] + '#';
+            
+            console.log("Nombre: " + genPswd.value);
+            
             apiAxios.post("http://localhost:5000/register", {
                 email: this.usr.email,
                 password: this.usr.pswd,
                 repassword: this.usr.rpswd,
                 nomMed: this.usr.nomUsr,
-                apMed: this.usr.apUsr,
+                apMed: this.usr.apUsr,                
             }).then((res:any) => {
                 console.log(res.data);
             }).catch((e:any) =>
-                console.log(e));
+            console.log(e));
+            
         }
     }
-}
+};
+
 </script>
 
 <style>

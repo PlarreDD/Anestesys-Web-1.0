@@ -94,7 +94,6 @@ const setTime = async () => {
 };
 
 refreshToken();
-
 </script>
 
 <style>
