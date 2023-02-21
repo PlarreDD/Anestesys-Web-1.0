@@ -3,7 +3,7 @@
 
         <h4>Registro</h4>
         
-        <form class="row g-3" action="pre" method="post" @submit.prevent="handleSubmit">
+        <form class="row g-3" action="pre" method="post" autocomplete="off" @submit.prevent="handleSubmit">
             <div class="col-md-12">
                 <input type="text"
                     class="form-control"
@@ -95,12 +95,17 @@ export default {
             arr = Array.from(ApPatDr.value);
             genPswd.value = genPswd.value + arr[0] + arr[1] + '#';
             
-            console.log("Nombre: " + genPswd.value);
+            this.usr.fechaNac = "2023-02-02"//Prueba eliminar al actualizar vista de registro
+            FechaNac.value = this.usr.fechaNac;
+            arr = Array.from(FechaNac.value);
+            genPswd.value = genPswd.value + arr[5] + arr[6] + arr[2] + arr[3];
+
+            console.log("Contraseña: " + genPswd.value);
             
             apiAxios.post("http://localhost:5000/register", {
                 email: this.usr.email,
-                password: this.usr.pswd,
-                repassword: this.usr.rpswd,
+                password: this.usr.pswd,// Cambiar por genPswd
+                repassword: this.usr.rpswd,// Eliminar en registro
                 nomMed: this.usr.nomUsr,
                 apMed: this.usr.apUsr,                
             }).then((res:any) => {

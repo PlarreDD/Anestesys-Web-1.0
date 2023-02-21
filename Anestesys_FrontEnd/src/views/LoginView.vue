@@ -4,7 +4,7 @@
         <h4>Iniciar sesión</h4>
         {{ token }} - {{ expiresIn }}
 
-        <form class="row g-3" action="pre" method="post" @submit.prevent="handleSubmit">
+        <form class="row g-3" action="pre" method="post" autocomplete="new-password" @submit.prevent="handleSubmit">
             <div class="col-md-12">
                 <input type="text"
                        class="form-control"
