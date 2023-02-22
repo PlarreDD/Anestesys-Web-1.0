@@ -111,9 +111,7 @@
 </template>
 
 <script lang="ts">
-
 import { defineComponent } from "vue"
-
 export default defineComponent({
     data () {
         return{
@@ -144,6 +142,7 @@ export default defineComponent({
             this.$emit('recibe-datos',this.id.numExpediente, this.id.nombrePaciente, this.id.cirujano, this.id.cirugia)            
         },
                 
+    }
 })
 </script>
 

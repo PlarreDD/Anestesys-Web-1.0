@@ -56,7 +56,13 @@
                 <div class="col-md-2"></div>                            
 
                 <div class="col-md-12 div-img">
-                    <RouterLink to="/"><button class="btn btn-reg fw-bold" type="submit" @click="mandarMensaje()">Crear Cuenta</button></RouterLink>
+                    <!-- <RouterLink to="/"> -->
+                        <button class="btn btn-reg fw-bold"
+                                type="submit"
+                                @click="mandarMensaje()">
+                                    Crear Cuenta
+                        </button>
+                    <!-- </RouterLink> -->
                 </div>
                 
                 <div class="col-md-12">                    
@@ -107,7 +113,6 @@ export default defineComponent({
             arr = Array.from(ApPatDr.value);
             genPswd.value = genPswd.value + arr[0] + arr[1] + '#';
             
-            this.usr.fechaNac = "2023-02-02"//Prueba eliminar al actualizar vista de registro
             FechaNac.value = this.usr.fechaNac;
             arr = Array.from(FechaNac.value);
             genPswd.value = genPswd.value + arr[5] + arr[6] + arr[2] + arr[3];
@@ -116,14 +121,14 @@ export default defineComponent({
             
             apiAxios.post("http://localhost:5000/register", {
                 email: this.usr.email,
-                password: this.usr.pswd,// Cambiar por genPswd
-                repassword: this.usr.rpswd,// Eliminar en registro
+                password: genPswd,
+                repassword: genPswd,
                 nomMed: this.usr.nomUsr,
                 apMed: this.usr.apUsr,                
             }).then((res:any) => {
                 console.log(res.data);
             }).catch((e:any) =>
-            console.log(e));
+                console.log(e));
             
         },
 
