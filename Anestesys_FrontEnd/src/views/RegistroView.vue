@@ -56,13 +56,13 @@
                 <div class="col-md-2"></div>                            
 
                 <div class="col-md-12 div-img">
-                    <!-- <RouterLink to="/"> -->
+                    <RouterLink to="/">
                         <button class="btn btn-reg fw-bold"
                                 type="submit"
                                 @click="mandarMensaje()">
                                     Crear Cuenta
                         </button>
-                    <!-- </RouterLink> -->
+                    </RouterLink>
                 </div>
                 
                 <div class="col-md-12">                    
