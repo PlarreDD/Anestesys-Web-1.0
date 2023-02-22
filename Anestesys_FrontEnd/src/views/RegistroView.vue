@@ -1,5 +1,5 @@
 <template>
-    <div class="col-5 divBorder posicionEstaticaR">  
+    <div class="col-5 divBorderR posicionEstaticaR">  
         <div class="margenR">
             <div class="div-img">
                 <img src="images/logoA.png" class="imgLogo"/>
@@ -53,27 +53,14 @@
                         id="fechaN"
                     required>  
                 </div>
-                <div class="col-md-2"></div>
-                
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                    <label for="" class="form-label fw-bold">Contraseña</label>
-                    <input type="password"
-                        class="form-control"
-                        v-model="pswd"
-                        id="pass"
-                        placeholder="******"
-                    required readonly>
-                    <span class="fa fa-fw fa-eye password-icon show-password" id="mostrar" @click=" mostrarPass()"></span>  
-                </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-2"></div>                            
 
                 <div class="col-md-12 div-img">
-                    <button class="btn btn-reg fw-bold" type="submit">Crear Cuenta</button>
+                    <RouterLink to="/"><button class="btn btn-reg fw-bold" type="submit" @click="mandarMensaje()">Crear Cuenta</button></RouterLink>
                 </div>
                 
                 <div class="col-md-12">                    
-                    <RouterLink class="nav-link colorLinkR fw-bold" to="/">Iniciar Sesión</RouterLink>
+                    <RouterLink class="nav-link colorLinkR" @click="cargarFondoLogin()" to="/">Iniciar Sesión</RouterLink>
                 </div>
             </form> 
         </div>
@@ -82,7 +69,10 @@
 
 <script lang="ts">
 
-export default {
+import { defineComponent } from "vue"
+import swal from 'sweetalert2'
+
+export default defineComponent({
     data() {
         return{
             nomUsr: "",
@@ -95,6 +85,9 @@ export default {
     mounted: function() { // Llama el método despues de cargar la página
       this.cargarFondo();                 
     },
+    created(){
+        this.cargarFondo()
+    },
     methods: {
         handleSubmit: async () => {
             try {
@@ -103,24 +96,35 @@ export default {
                 console.log(error);
             }
         },
+        async mandarMensaje(){
+            swal.fire({
+                html: 'Usuario <b>Nombre</b> registrado correctamente, consulte su correo electrónico',
+                icon: 'info',
+                showConfirmButton: true,
+                showCloseButton: true,  
+                toast: true,
+                position: 'top-start'            
+            });
+            document.body.style.backgroundImage = "url('../../public/images/login.webp')";
+        },
         async cargarFondo(){
             document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
         },
-        async mostrarPass(){
-            if ( (document.getElementById("pass") as HTMLInputElement).type == "text" ) {
-                (document.getElementById("pass") as HTMLInputElement).type = "password";
-                document.getElementById("mostrar").className='fa fa-fw fa-eye-slash password-icon show-password'
-            } else {
-                (document.getElementById("pass") as HTMLInputElement).type = "text";
-                document.getElementById("mostrar").className='fa fa-fw fa-eye password-icon show-password'
-            }
-        }
+        async cargarFondoLogin(){
+            document.body.style.backgroundImage = "url('../../public/images/login.webp')";
+        },
     }
-}
+})
 
 </script>
 
 <style>
+.divBorderR {
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
+  padding: 1rem;
+  backdrop-filter: blur(40px) brightness(90%);
+}
 .btn-reg {
     --bs-btn-bg: #E88300;
     --bs-btn-color: #ffffff;    
@@ -130,29 +134,25 @@ export default {
     --bs-btn-hover-border-color: #E88300;          
     --bs-btn-active-bg: #ffffff;
     --bs-btn-active-color: #E88300;
-    --bs-btn-active-border-color: #E88300;   
+    --bs-btn-active-border-color: #E88300;  
+    margin-top: 15px; 
 }
 .posicionEstaticaR {
   position: fixed;
   left: 0;
   top:0;
+  bottom:0;
   z-index: 1020;
-  height: 909px;
 }
 .colorLinkR{
   color: #E88300;
   text-align: center;
 }
 .colorLinkR:hover{
-  color: #E88300
+  color: #E88300;
+  text-decoration: underline;
 }
 .margenR{
-  margin-top: 50px;
-}
-.password-icon {
-  float: right;
-  position: relative;
-  margin: -25px 10px 0 0;
-  cursor: pointer;
+  margin-top: 80px;
 }
 </style>

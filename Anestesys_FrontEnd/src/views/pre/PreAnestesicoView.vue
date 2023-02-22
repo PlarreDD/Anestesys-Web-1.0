@@ -129,7 +129,8 @@ export default defineComponent({
     this.validaExpediente(this.numExpediente, this.nomPaciente);
   },
   mounted: function() { // Llama el método despues de cargar la página
-      this.cargarFondo();    
+      this.ocultarFondo();
+      this.mostrarHeader();    
       document.addEventListener('scroll', this.scrollFunction);              
   },
   destroyed: function(){
@@ -202,13 +203,16 @@ export default defineComponent({
       },
       async validarCambio() {
         if (this.numExpediente.trim() != '' && this.nomPaciente.trim() != '') {
-          //document.getElementById("plan-tab").tabIndex('') 
+          //document.getElementById("plan-tab").tab('show') 
           alert('Entro, no debe cambiar')       
         }
         alert('Error!')
       },
-      async cargarFondo(){
+      async ocultarFondo(){
             document.body.style.backgroundImage = "url('')";
+      },
+      async mostrarHeader(){
+        document.getElementById("headerP").className='mt visible'
       }
   }  
 })

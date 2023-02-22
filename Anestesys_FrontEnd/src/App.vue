@@ -30,7 +30,7 @@ import BarraNavegacion from "./components/barraNavegacion.vue";
 
 export default defineComponent({
   components:{
-    //BarraNavegacion
+    BarraNavegacion
   }
 
 })

@@ -18,7 +18,8 @@
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <label for="" class="form-label fw-bold">Contraseña</label>
-                <input type="password" class="form-control" id="contrasena" placeholder="********" required>  
+                <input type="password" class="form-control" id="contrasena" placeholder="********" required>
+                <span class="fa fa-fw fa-eye password-icon show-password" id="mostrar" @click=" mostrarPass()"></span>  
             </div>
             <div class="col-md-2"></div>
 
@@ -26,7 +27,7 @@
                 <RouterLink to="pre"><button @click="mandarMensaje()" class="btn btn-login fw-bold" type="submit">Entrar</button></RouterLink>
             </div>   
             <div class="col-md-12">                    
-                <RouterLink class="nav-link colorLinkL fw-bold" to="registro">Crear una cuenta</RouterLink>
+                <RouterLink class="nav-link colorLinkL" to="registro" @click="cargarFondoRegistro()">Crear una cuenta</RouterLink>
             </div>                   
             
         </form>   
@@ -41,13 +42,16 @@ import swal from 'sweetalert2'
 
 export default defineComponent({
   mounted: function() { // Llama el método despues de cargar la página
-      this.cargarFondo();                 
-    },
+      this.cargarFondo();  
+      this.ocultarHeader();               
+  },
+  created(){
+    this.cargarFondo()
+  },
   methods: {      
       async mandarMensaje(){
         swal.fire({
-          title: 'Bienvenido',
-          html: '<b>Daniel</b>',
+          html: 'Bienvenido <b>Nombre</b>',
           icon: 'info',
           showConfirmButton: false,
           showCloseButton: true,  
@@ -59,6 +63,21 @@ export default defineComponent({
       },
       async cargarFondo(){
             document.body.style.backgroundImage = "url('../../public/images/login.webp')";
+      },
+      async cargarFondoRegistro(){
+            document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
+      },
+      async ocultarHeader(){
+        document.getElementById("headerP").className='mt invisible'
+      },
+      async mostrarPass(){
+            if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
+                (document.getElementById("contrasena") as HTMLInputElement).type = "password";
+                document.getElementById("mostrar").className='fa fa-fw fa-eye password-icon show-password'
+            } else {
+                (document.getElementById("contrasena") as HTMLInputElement).type = "text";
+                document.getElementById("mostrar").className='fa fa-fw fa-eye-slash password-icon show-password'
+            }
       }
   }
 })
@@ -66,8 +85,8 @@ export default defineComponent({
 
 <style>
 .divBorder {
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
   padding: 1rem;
   backdrop-filter: blur(40px) brightness(90%);
 }
@@ -76,7 +95,8 @@ export default defineComponent({
   text-align: center;
 }
 .colorLinkL:hover{
-  color: #6AC2BC
+  color: #6AC2BC;
+  text-decoration: underline;
 }
 .btn-login {
     --bs-btn-bg: #6AC2BC;
@@ -87,11 +107,14 @@ export default defineComponent({
     --bs-btn-hover-border-color: #6AC2BC;          
     --bs-btn-active-bg: #ffffff;
     --bs-btn-active-color: #6AC2BC;
-    --bs-btn-active-border-color: #6AC2BC;   
+    --bs-btn-active-border-color: #6AC2BC;
+    margin-top: 15px;   
 }
 h3{
   text-align: center;
   color: #002D60;
+  margin-top: 15px;
+  margin-bottom: 20px;
 }
 label{
   color: #002D60;
@@ -100,8 +123,8 @@ label{
   position: absolute;
   right: 0;
   top: 0;
+  bottom: 0;
   z-index: 1020;
-  height: 909px;
 }
 .div-img {
   text-align: center;
@@ -112,5 +135,11 @@ label{
 }
 .margenL{
   margin-top: 80px;
+}
+.password-icon {
+  float: right;
+  position: relative;
+  margin: -25px 10px 0 0;
+  cursor: pointer;
 }
 </style>

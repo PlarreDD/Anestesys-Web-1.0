@@ -1,12 +1,12 @@
 <template>
-  <div class="mt">
+  <div class="mt" id="headerP">
       <nav class="navbar navbar-color fw-bold">                
         <div class="input-group">
 
           <div class="col-md-1"></div>
 
           <div class="col-md-2 alinearElementoI">
-            <RouterLink class="" to="pre"><img src="images/logoA.png" class="imgLogo"/></RouterLink>
+            <RouterLink class="" to="pre"><img src="images/logoA.png" class="imgLogoBarra"/></RouterLink>
           </div>
 
           <div class="col-md-5 alinearElementoD">
@@ -61,11 +61,11 @@
 </template>
 
 <style>
-    .imgLogo{
+.imgLogoBarra {
   width: 280px;
   height: auto;    
 }
-.imgPerfil{
+.imgPerfil {
   width: 75px;
   height: auto;   
   border-radius: 50px;   
@@ -76,7 +76,7 @@
 .navbar-color{
   background-color: #002D60;
 }
-.nav-config{
+.nav-config {
     top: 0;
     right: 0;
     width: 250px;
