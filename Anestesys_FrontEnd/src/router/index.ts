@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+//import { requireToken } from '../../../Anestesys_BackEnd/middlewares/requireToken'/*'../middlewares/requireToken';*/
 import LoginView from '../views/LoginView.vue'
 
 const router = createRouter({
@@ -41,5 +42,9 @@ const router = createRouter({
     }
   ]
 })
+
+/*router.beforeEach((to, from, next) => {
+  return '/'
+})*/
 
 export default router

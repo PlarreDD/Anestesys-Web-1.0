@@ -144,7 +144,6 @@ export default defineComponent({
             this.$emit('recibe-datos',this.id.numExpediente, this.id.nombrePaciente, this.id.cirujano, this.id.cirugia)            
         },
                 
-    }
 })
 </script>
 

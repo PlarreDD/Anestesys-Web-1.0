@@ -1,6 +1,6 @@
 import {Router} from "express";
 //import { createLinks, getLinks, getLink, removeLink, updateLink } from "../controllers/link.controller.js";
-import { requireToken } from "../middlewares/requireToken.js";
+//import { requireToken } from "../middlewares/requireToken.js";
 //import { bodyLinkValidator, paramsLinkValidator } from "../middlewares/validatorManager.js";
 const router = Router();
 

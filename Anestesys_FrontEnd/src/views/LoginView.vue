@@ -6,48 +6,77 @@
         </div>
 
         <h3 class="fw-bold">Inicia Sesión</h3>
+        {{ token }} - {{ expiresIn }}
 
-        <form class="row g-3" method="post">
+        <form class="row g-3" action="pre" method="post" autocomplete="new-password" @submit.prevent="handleSubmit">
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <label for="" class="form-label fw-bold">Correo electrónico</label>
-                <input type="text" class="form-control" id="user" placeholder="email@mail.com" required>  
+                <input type="text"
+                       class="form-control"
+                       v-model="usr.email"
+                       id="user"
+                       placeholder="email@mail.com"
+                       required>
             </div>
-            <div class="col-md-2"></div>
 
+            
+
+            <div class="col-md-2"></div>
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <label for="" class="form-label fw-bold">Contraseña</label>
-                <input type="password" class="form-control" id="contrasena" placeholder="********" required>
-                <span class="fa fa-fw fa-eye password-icon show-password" id="mostrar" @click=" mostrarPass()"></span>  
-            </div>
-            <div class="col-md-2"></div>
-
-            <div class="col-md-12 div-img">
-                <RouterLink to="pre"><button @click="mandarMensaje()" class="btn btn-login fw-bold" type="submit">Entrar</button></RouterLink>
-            </div>   
-            <div class="col-md-12">                    
-                <RouterLink class="nav-link colorLinkL" to="registro" @click="cargarFondoRegistro()">Crear una cuenta</RouterLink>
-            </div>                   
-            
-        </form>   
-      </div>     
-    </div>
-</template>
+                <input type="password"
+                       class="form-control"
+                       v-model="usr.pswd"
+                       id="contrasena"
+                       placeholder="********"
+                       required>
+                       <span class="fa fa-fw fa-eye password-icon show-password" id="mostrar" @click=" mostrarPass()"></span>  
+                      </div>
+                      <div class="col-md-2"></div>
+                      
+                      <div class="col-md-12 div-img">
+                        <RouterLink to="pre"><button @click="mandarMensaje()" class="btn btn-login fw-bold" type="submit">Entrar</button></RouterLink>
+                      </div>   
+                      <div class="col-md-12">                    
+                        <RouterLink class="nav-link colorLinkL" to="registro" @click="cargarFondoRegistro()">Crear una cuenta</RouterLink>
+                      </div>                   
+                      
+                    </form>   
+                  </div>     
+                </div>
+              </template>
 
 <script lang="ts">
+import { apiAxios } from '@/boot/axios';
+import type { regUsr } from '@/interfaces/regUsr';
+import { ref } from "vue";
 
 import { defineComponent } from "vue"
 import swal from 'sweetalert2'
 
+const token = ref('');
+const expiresIn = ref('');
+
 export default defineComponent({
   mounted: function() { // Llama el método despues de cargar la página
-      this.cargarFondo();  
-      this.ocultarHeader();               
+    this.cargarFondo();  
+    this.ocultarHeader();               
   },
+  
   created(){
     this.cargarFondo()
   },
+
+  data() {
+      return{
+          usr: { } as regUsr,
+          token,
+          expiresIn,
+      };
+  },
+  
   methods: {      
       async mandarMensaje(){
         swal.fire({
@@ -61,15 +90,19 @@ export default defineComponent({
           position: 'top-end'            
         })  
       },
+
       async cargarFondo(){
             document.body.style.backgroundImage = "url('../../public/images/login.webp')";
       },
+
       async cargarFondoRegistro(){
             document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
       },
+
       async ocultarHeader(){
         document.getElementById("headerP").className='mt invisible'
       },
+
       async mostrarPass(){
             if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
                 (document.getElementById("contrasena") as HTMLInputElement).type = "password";
@@ -78,9 +111,40 @@ export default defineComponent({
                 (document.getElementById("contrasena") as HTMLInputElement).type = "text";
                 document.getElementById("mostrar").className='fa fa-fw fa-eye-slash password-icon show-password'
             }
-      }
+      },
+      
+      handleSubmit() {
+          apiAxios.post("http://localhost:5000/login", {
+              email: this.usr.email,
+              password: this.usr.pswd,
+          }).then((res:any) => {
+              token.value = res.data.tkn;
+              expiresIn.value = res.data.xprIn;
+          }).catch((e:any) =>
+              console.log(e));
+      },
   }
-})
+});
+
+const refreshToken = async () => {
+    try {
+        const res = await apiAxios.get("http://localhost:5000/refresh");
+        
+        token.value = res.data.tkn;
+        expiresIn.value = res.data.xprIn;
+        setTime();
+    } catch (error) {
+        console.log(error);        
+    }   
+};
+
+const setTime = async () => {
+    setTimeout(() => {
+        refreshToken();
+    }, Number(expiresIn.value) * 1000 - 6000)
+};
+
+refreshToken();
 </script>
 
 <style>

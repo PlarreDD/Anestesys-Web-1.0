@@ -6,17 +6,17 @@
             </div>
 
             <h3 class="fw-bold">Nuevo Usuario</h3>
-
-            <form class="row g-3" action="pre" method="post" @submit.prevent="handleSubmit">
+        
+            <form class="row g-3" action="pre" method="post" autocomplete="off" @submit.prevent="handleSubmit">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
                     <label for="" class="form-label fw-bold">Nombre(s)</label>
                     <input type="text"
                         class="form-control"
-                        v-model="nomUsr"
+                        v-model="usr.nomUsr"
                         id="nombre"
                         placeholder="Nombre(s)"
-                    required>  
+                        required>  
                 </div>
                 <div class="col-md-2"></div>
                 
@@ -25,10 +25,10 @@
                     <label for="" class="form-label fw-bold">Apellidos</label>
                     <input type="text"
                         class="form-control"
-                        v-model="apUsr"
+                        v-model="usr.apUsr"
                         id="apellidos"
                         placeholder="Apellido(s)"
-                    required>  
+                        required>  
                 </div>
                 <div class="col-md-2"></div>
                 
@@ -37,10 +37,10 @@
                     <label for="" class="form-label fw-bold">Correo electrónico</label>
                     <input type="email"
                         class="form-control"
-                        v-model="email"
+                        v-model="usr.email"
                         id="correo"
                         placeholder="correo@mail.com"
-                    required>
+                        required>
                 </div>
                 <div class="col-md-2"></div>
 
@@ -49,7 +49,7 @@
                     <label for="" class="form-label fw-bold">Fecha de nacimiento</label>
                     <input type="date"
                         class="form-control"
-                        v-model="fechaN"
+                        v-model="usr.fechaNac"
                         id="fechaN"
                     required>  
                 </div>
@@ -68,6 +68,15 @@
 </template>
 
 <script lang="ts">
+import { apiAxios } from '@/boot/axios';
+import type { regUsr } from '@/interfaces/regUsr';
+import { ref } from "vue";
+
+const NombreDr = ref('');
+const ApPatDr = ref('');
+const FechaNac = ref('');
+var arr = [];
+const genPswd = ref('');
 
 import { defineComponent } from "vue"
 import swal from 'sweetalert2'
@@ -75,27 +84,49 @@ import swal from 'sweetalert2'
 export default defineComponent({
     data() {
         return{
-            nomUsr: "",
-            apUsr: "",
-            email: "",
-            fechaN: "",
-            pswd: "",
+            usr: { } as regUsr,
+            //NombreDr,
         };
     },
+    
     mounted: function() { // Llama el método despues de cargar la página
       this.cargarFondo();                 
     },
+
     created(){
         this.cargarFondo()
     },
+
     methods: {
-        handleSubmit: async () => {
-            try {
-                console.log("Nombre: " + name);                
-            } catch (error) {
-                console.log(error);
-            }
+        handleSubmit() {
+            NombreDr.value = this.usr.nomUsr;
+            arr = Array.from(NombreDr.value);
+            genPswd.value = arr[0] + arr[1] + arr[2];
+
+            ApPatDr.value = this.usr.apUsr;
+            arr = Array.from(ApPatDr.value);
+            genPswd.value = genPswd.value + arr[0] + arr[1] + '#';
+            
+            this.usr.fechaNac = "2023-02-02"//Prueba eliminar al actualizar vista de registro
+            FechaNac.value = this.usr.fechaNac;
+            arr = Array.from(FechaNac.value);
+            genPswd.value = genPswd.value + arr[5] + arr[6] + arr[2] + arr[3];
+
+            console.log("Contraseña: " + genPswd.value);
+            
+            apiAxios.post("http://localhost:5000/register", {
+                email: this.usr.email,
+                password: this.usr.pswd,// Cambiar por genPswd
+                repassword: this.usr.rpswd,// Eliminar en registro
+                nomMed: this.usr.nomUsr,
+                apMed: this.usr.apUsr,                
+            }).then((res:any) => {
+                console.log(res.data);
+            }).catch((e:any) =>
+            console.log(e));
+            
         },
+
         async mandarMensaje(){
             swal.fire({
                 html: 'Usuario <b>Nombre</b> registrado correctamente, consulte su correo electrónico',
@@ -107,14 +138,16 @@ export default defineComponent({
             });
             document.body.style.backgroundImage = "url('../../public/images/login.webp')";
         },
+
         async cargarFondo(){
             document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
         },
+
         async cargarFondoLogin(){
             document.body.style.backgroundImage = "url('../../public/images/login.webp')";
         },
     }
-})
+});
 
 </script>
 

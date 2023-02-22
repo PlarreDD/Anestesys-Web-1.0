@@ -2,6 +2,16 @@ import { Schema, model } from "mongoose";
 import bcryptjs from "bcryptjs";
 
 const userSchema = new Schema({
+    nomMed:{
+        type: String,
+        required: true,
+    },
+
+    apMed:{
+        type: String,
+        required: true,
+    },
+
     email:{
         type: String,
         required: true,
@@ -12,16 +22,6 @@ const userSchema = new Schema({
     },
 
     password:{
-        type: String,
-        required: true,
-    },
-
-    nomMed:{
-        type: String,
-        required: true,
-    },
-
-    apMed:{
         type: String,
         required: true,
     },

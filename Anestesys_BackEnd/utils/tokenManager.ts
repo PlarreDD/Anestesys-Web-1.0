@@ -5,14 +5,14 @@ export const generateToken = (uid: any) =>{
 
     try{
         const token = jwt.sign({uid}, String(process.env.JWT_SECRET), {expiresIn});
-        return {token: String, expiresIn: Number};
+        return {token, expiresIn};
     }catch(error){
         console.log(error);
     }
 };
 
 export const generateRefreshToken = (uid: any, res: any) => {
-    const expiresIn = 60 * 60 * 24 * 30;
+    const expiresIn = 60 * 60 * 24;
 
     try {
         const refreshToken = jwt.sign({uid}, String(process.env.JWT_REFRESH), {expiresIn});

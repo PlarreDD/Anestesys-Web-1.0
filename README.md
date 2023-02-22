@@ -38,13 +38,17 @@ npm run dev
 ```sh
 npm run build
 ```
+## Ubicaciones de Archivos
+- Archivo dotenv se ubica en la carpeta Anestesys_BackEnd junto a los json e index.ts se descarga de la carpeta de OneDrive D+D/Anestesys/AnestesysWeb
 
 ## Cambios
 
-- Se da estructura a las carpetas y componentes del proyecto
+- Se da estructura a las carpetas y componentes del proyecto.
 
-- Se esta trabajando en las vistas del modulo pre anestesico
+- Se esta trabajando en las vistas del modulo pre anestesico.
 
 - Se dividen las carpetas con los proyectos para Front End y Back End.
 
-- Cambios al Back End para funcionar con TypeScript
+- Cambios al Back End para funcionar con TypeScript.
+
+- Agregada función para registrar usuarios en base de datos desde el front end.
