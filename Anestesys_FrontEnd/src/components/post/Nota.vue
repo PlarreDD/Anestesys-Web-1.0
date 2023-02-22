@@ -1,140 +1,141 @@
 <template>
+    <div>
+        <ul class="nav nav-pills mb-3 text-center" id="">
+            <li class="nav-item col-md-6" >
+                <button class="btn btn-outline-secondary fw-bold active" id="nota" data-bs-toggle="pill" data-bs-target="#notaPost" type="button" aria-selected="true">NOTA POST-ANESTÉSICA</button>
+            </li>
+            <li class="nav-item col-md-6" >
+                <button class="btn btn-outline-secondary fw-bold" id="nota" data-bs-toggle="pill" data-bs-target="#caso" type="button" aria-selected="false">CASO OBSTÉTRICO RECIÉN NACIDO</button>
+            </li>
+        </ul>
 
-    <ul class="nav nav-pills mb-3 text-center" id="">
-        <li class="nav-item col-md-6" >
-            <button class="nav-link active" id="nota" data-bs-toggle="pill" data-bs-target="#notaPost" type="button" aria-selected="true">NOTA POST-ANESTÉSICA</button>
-        </li>
-        <li class="nav-item col-md-6" >
-            <button class="nav-link" id="nota" data-bs-toggle="pill" data-bs-target="#caso" type="button" aria-selected="false">CASO OBSTÉTRICO RECIÉN NACIDO</button>
-        </li>
-    </ul>
 
+        <div class="tab-content col-md-12" id="">
+            <div class="tab-pane fade show active" id="notaPost">
+                <div class="col-12 bordePrincipal">
+                    <form class="row g-3">    
+                        <div class="col-md-9">
+                            <label for="" class="form-label">Técnica de anestesia final</label>
+                            <input type="text" class="form-control" id=""> 
+                        </div>
+                        <div class="col-md-3">
+                            <label for="" class="form-label col-12">Intubación</label>
 
-    <div class="tab-content col-md-12" id="">
-        <div class="tab-pane fade show active" id="notaPost">
-            <div class="col-12 divBorder">
-                <form class="row g-3">    
-                    <div class="col-md-9">
-                        <label for="" class="form-label">Técnica de anestesia final</label>
-                        <input type="text" class="form-control" id=""> 
-                    </div>
-                    <div class="col-md-3">
-                        <label for="" class="form-label col-12">Intubación</label>
+                            <input type="radio" class="btn-check" name="intubacion" id="intubacionSi" autocomplete="off">
+                            <label class="btn btn-radio margenRadio" for="intubacionSi">Sí</label>
 
-                        <input type="radio" class="btn-check" name="intubacion" id="intubacionSi" autocomplete="off">
-                        <label class="btn btn-outline-success radioMargin" for="intubacionSi">Sí</label>
+                            <input type="radio" class="btn-check" name="intubacion" id="intubacionNo" autocomplete="off">
+                            <label class="btn btn-radio" for="intubacionNo">No</label>
+                        </div>
 
-                        <input type="radio" class="btn-check" name="intubacion" id="intubacionNo" autocomplete="off">
-                        <label class="btn btn-outline-danger" for="intubacionNo">No</label>
-                    </div>
+                        <div class="col-md-12">
+                            <label for="" class="form-label">Nota Post-Anestésica</label>
+                            <textarea class="form-control" id="" rows="8"></textarea>
+                        </div>
 
-                    <div class="col-md-12">
-                        <label for="" class="form-label">Nota Post-Anestésica</label>
-                        <textarea class="form-control" id="" rows="8"></textarea>
-                    </div>
+                        <h5 class="">SIGNOS VITALES AL EGRESO DEL QUIRÓFANO</h5>
 
-                    <h5 class="">SIGNOS VITALES AL EGRESO DEL QUIROFANO</h5>
+                        <div class="col-md-2">
+                            <label for="" class="form-label">TA</label>
+                            <input type="text" class="form-control" id=""> 
+                        </div>
+                        <div class="col-md-2">
+                            <label for="" class="form-label">FC</label>
+                            <input type="text" class="form-control" id=""> 
+                        </div>
+                        <div class="col-md-2">
+                            <label for="" class="form-label">FR</label>
+                            <input type="text" class="form-control" id=""> 
+                        </div>
+                        <div class="col-md-2">
+                            <label for="" class="form-label">Temperatura</label>
+                            <input type="text" class="form-control" id=""> 
+                        </div>
+                        <div class="col-md-2">
+                            <label for="" class="form-label">Pulso</label>
+                            <input type="text" class="form-control" id=""> 
+                        </div>
+                        <div class="col-md-2">
+                            <label for="" class="form-label">SpO2</label>
+                            <input type="text" class="form-control" id=""> 
+                        </div>
 
-                    <div class="col-md-2">
-                        <label for="" class="form-label">TA</label>
-                        <input type="text" class="form-control" id=""> 
-                    </div>
-                    <div class="col-md-2">
-                        <label for="" class="form-label">FC</label>
-                        <input type="text" class="form-control" id=""> 
-                    </div>
-                    <div class="col-md-2">
-                        <label for="" class="form-label">FR</label>
-                        <input type="text" class="form-control" id=""> 
-                    </div>
-                    <div class="col-md-2">
-                        <label for="" class="form-label">Temperatura</label>
-                        <input type="text" class="form-control" id=""> 
-                    </div>
-                    <div class="col-md-2">
-                        <label for="" class="form-label">Pulso</label>
-                        <input type="text" class="form-control" id=""> 
-                    </div>
-                    <div class="col-md-2">
-                        <label for="" class="form-label">SpO2</label>
-                        <input type="text" class="form-control" id=""> 
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="inputState" class="form-label">El paciente pasa a</label>
-                        <select id="inputState" class="form-select">
-                            <option selected>Seleccione...</option>
-                            <option>Recuperación - Quirofano</option>
-                            <option>Recuperación - Casa</option>
-                            <option>Recuperación - Piso</option>
-                            <option>Unidad de cuidados intermedia</option>
-                            <option>Unidad de cuidados intensivos</option>
-                            <option>Unidad de cuidados intensivos pediátricos</option>
-                            <option>Unidad de cuidados intensivos neonatales</option>
-                            <option>Traslado a otra unidad hospitalaria</option>                    
-                        </select>
-                    </div>   
-                </form>
+                        <div class="col-md-6">
+                            <label for="inputState" class="form-label">El paciente pasa a</label>
+                            <select id="inputState" class="form-select">
+                                <option selected>Seleccione...</option>
+                                <option>Recuperación - Quirofano</option>
+                                <option>Recuperación - Casa</option>
+                                <option>Recuperación - Piso</option>
+                                <option>Unidad de cuidados intermedia</option>
+                                <option>Unidad de cuidados intensivos</option>
+                                <option>Unidad de cuidados intensivos pediátricos</option>
+                                <option>Unidad de cuidados intensivos neonatales</option>
+                                <option>Traslado a otra unidad hospitalaria</option>                    
+                            </select>
+                        </div>   
+                    </form>
+                </div>
             </div>
-        </div>
-        <div class="tab-pane fade" id="caso">
-            <div class="col-12 divBorder">                
-                <form class="row g-3">    
-                    <div class="col-md-4">
-                        <label for="" class="form-label">Número de productos</label>
-                        <input type="text" class="form-control" id=""> 
-                    </div>
+            <div class="tab-pane fade" id="caso">
+                <div class="col-12 bordePrincipal largoContenedor">
+                    <form class="row g-3">    
+                        <div class="col-md-4">
+                            <label for="" class="form-label">Número de productos</label>
+                            <input type="text" class="form-control" id=""> 
+                        </div>
 
-                    <div class="col-md-12">
-                        <fieldset class="scheduler-border">
-                            <legend class="scheduler-border">Datos bebé #</legend>
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label for="" class="form-label col-12">Género</label>
+                        <div class="col-md-12">
+                            <fieldset class="bordeScheduler">
+                                <legend class="bordeScheduler">Datos bebé #</legend>
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label for="" class="form-label col-12">Género</label>
 
-                                    <input type="radio" class="btn-check" name="genero" id="masculino" autocomplete="off">
-                                    <label class="btn btn-outline-info radioMargin" for="masculino">Masculino</label>
+                                        <input type="radio" class="btn-check" name="genero" id="masculino" autocomplete="off">
+                                        <label class="btn btn-radio margenRadio" for="masculino">Masculino</label>
 
-                                    <input type="radio" class="btn-check" name="genero" id="femenino" autocomplete="off">
-                                    <label class="btn btn-outline-info" for="femenino">Femenino</label>                            
-                                </div>                                 
-                                <div class="col-md-4">
-                                    <label for="" class="form-label">Hora de Nacimiento</label>
-                                    <input type="time" class="form-control" id="horaNacimiento">
+                                        <input type="radio" class="btn-check" name="genero" id="femenino" autocomplete="off">
+                                        <label class="btn btn-radio" for="femenino">Femenino</label>                            
+                                    </div>                                 
+                                    <div class="col-md-4">
+                                        <label for="" class="form-label">Hora de Nacimiento</label>
+                                        <input type="time" class="form-control" id="horaNacimiento">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="" class="form-label">Alumbramiento</label>
+                                        <input type="text" class="form-control" id="">
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label for="" class="form-label">Apgar 1 min</label>
+                                        <input type="text" class="form-control" id="">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="" class="form-label">Apgar 5 min</label>
+                                        <input type="text" class="form-control" id="">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="" class="form-label">Capurro</label>
+                                        <input type="text" class="form-control" id="">
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label for="" class="form-label">Peso (gm)</label>
+                                        <input type="text" class="form-control" id="">
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label for="" class="form-label">Talla (cm)</label>
+                                        <input type="text" class="form-control" id="">
+                                    </div>
+
                                 </div>
-                                <div class="col-md-4">
-                                    <label for="" class="form-label">Alumbramiento</label>
-                                    <input type="text" class="form-control" id="">
-                                </div>
+                            </fieldset>
+                        </div>
 
-                                <div class="col-md-4">
-                                    <label for="" class="form-label">Apgar 1 min</label>
-                                    <input type="text" class="form-control" id="">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="" class="form-label">Apgar 5 min</label>
-                                    <input type="text" class="form-control" id="">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="" class="form-label">Capurro</label>
-                                    <input type="text" class="form-control" id="">
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="" class="form-label">Peso (gm)</label>
-                                    <input type="text" class="form-control" id="">
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="" class="form-label">Talla (cm)</label>
-                                    <input type="text" class="form-control" id="">
-                                </div>
-
-                            </div>
-                        </fieldset>
-                    </div>
-
-                </form>            
+                    </form>            
+                </div>
             </div>
         </div>
     </div>
@@ -142,29 +143,42 @@
 </template>
 
 <style scoped>
-.divBorder {
-  border-radius: 13px;
-  box-shadow: 3px 3px 7px #ccc;
+.bordePrincipal {
+  border-radius: 5px;
   padding: 1rem;
   margin-top :10px;
   margin-bottom: 10px;
+  background-color: rgba(232, 234, 236, 0.6);
 }
-.radioMargin {
+.margenRadio {
     margin-right: 10px;
 }
-fieldset.scheduler-border {
+fieldset.bordeScheduler {
     border: 1px groove #ddd !important;
     padding: 0 1.4em 1.4em 1.4em !important;
     margin: 0 0 1.5em 0 !important;
     -webkit-box-shadow:  0px 0px 0px 0px #000;
             box-shadow:  0px 0px 0px 0px #000;
 }
-legend.scheduler-border {
+legend.bordeScheduler {
     font-size: 1.2em !important;
     font-weight: bold !important;
     text-align: left !important;
     width:auto;
     padding:0 10px;
     border-bottom:none;
+}
+.largoContenedor{
+    height: 576px
+}
+.btn-radio {
+    --bs-btn-color: #000;
+    --bs-btn-border-color: #ced4da;
+    --bs-btn-hover-color: #000;
+    --bs-btn-focus-shadow-rgb: 13,202,240;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #002d60;
+    --bs-btn-active-border-color: #ced4da;
+    --bs-btn-bg: #ffffff;
 }
 </style>
