@@ -5,38 +5,38 @@
                 <img src="images/logoA.png" class="imgLogo"/>
             </div>
 
-            <h3 class="fw-bold">Nuevo Usuario</h3>
+            <h2 class="fw-bold h2Margen">Nuevo Usuario</h2>
         
             <form class="row g-3" action="pre" method="post" autocomplete="off" @submit.prevent="handleSubmit">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
-                    <label for="" class="form-label fw-bold">Nombre(s)</label>
+                    <label for="" class="form-label fw-bold margenLabelR">Nombre(s)</label>
                     <input type="text"
-                        class="form-control"
+                        class="form-control margenInputR"
                         v-model="usr.nomUsr"
                         id="nombre"
-                        placeholder="Nombre(s)"
+                        placeholder="Nombre completo"
                         required>  
                 </div>
                 <div class="col-md-2"></div>
                 
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
-                    <label for="" class="form-label fw-bold">Apellidos</label>
+                    <label for="" class="form-label fw-bold margenLabelR">Apellidos</label>
                     <input type="text"
-                        class="form-control"
+                        class="form-control margenInputR"
                         v-model="usr.apUsr"
                         id="apellidos"
-                        placeholder="Apellido(s)"
+                        placeholder="Apellidos (paterno y materno)"
                         required>  
                 </div>
                 <div class="col-md-2"></div>
                 
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
-                    <label for="" class="form-label fw-bold">Correo electrónico</label>
+                    <label for="" class="form-label fw-bold margenLabelR">Correo electrónico</label>
                     <input type="email"
-                        class="form-control"
+                        class="form-control margenInputR"
                         v-model="usr.email"
                         id="correo"
                         placeholder="correo@mail.com"
@@ -46,7 +46,7 @@
 
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
-                    <label for="" class="form-label fw-bold">Fecha de nacimiento</label>
+                    <label for="" class="form-label fw-bold margenLabelR">Fecha de nacimiento</label>
                     <input type="date"
                         class="form-control"
                         v-model="usr.fechaNac"
@@ -96,7 +96,8 @@ export default defineComponent({
     },
     
     mounted: function() { // Llama el método despues de cargar la página
-      this.cargarFondo();                 
+      this.cargarFondo();
+      this.ocultarHeader();                 
     },
 
     created(){
@@ -151,6 +152,10 @@ export default defineComponent({
         async cargarFondoLogin(){
             document.body.style.backgroundImage = "url('../../public/images/login.webp')";
         },
+
+        async ocultarHeader(){
+            document.getElementById("headerP").className='mt invisible'
+        },
     }
 });
 
@@ -158,8 +163,8 @@ export default defineComponent({
 
 <style>
 .divBorderR {
-  border-top-right-radius: 40px;
-  border-bottom-right-radius: 40px;
+  border-top-right-radius: 55px;
+  border-bottom-right-radius: 55px;
   padding: 1rem;
   backdrop-filter: blur(40px) brightness(90%);
 }
@@ -181,6 +186,15 @@ export default defineComponent({
   top:0;
   bottom:0;
   z-index: 1020;
+}
+.margenInputR{
+  margin-bottom: 15px
+}
+.margenLabelR{
+  margin-bottom: 5px
+}
+.h2Margen{
+    margin-bottom: 40px
 }
 .colorLinkR{
   color: #E88300;

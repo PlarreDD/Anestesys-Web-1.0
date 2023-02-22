@@ -5,7 +5,7 @@
             <img src="images/logoA.png" class="imgLogo"/>
         </div>
 
-        <h3 class="fw-bold">Inicia Sesión</h3>
+        <h2 class="fw-bold">Inicia Sesión</h2>
         {{ token }} - {{ expiresIn }}
 
         <form class="row g-3" action="pre" method="post" autocomplete="new-password" @submit.prevent="handleSubmit">
@@ -13,7 +13,7 @@
             <div class="col-md-8">
                 <label for="" class="form-label fw-bold">Correo electrónico</label>
                 <input type="text"
-                       class="form-control"
+                       class="form-control margenInput"
                        v-model="usr.email"
                        id="user"
                        placeholder="email@mail.com"
@@ -40,7 +40,7 @@
                         <RouterLink to="pre"><button @click="mandarMensaje()" class="btn btn-login fw-bold" type="submit">Entrar</button></RouterLink>
                       </div>   
                       <div class="col-md-12">                    
-                        <RouterLink class="nav-link colorLinkL" to="registro" @click="cargarFondoRegistro()">Crear una cuenta</RouterLink>
+                        <RouterLink class="nav-link colorLink" to="registro" @click="cargarFondoRegistro()">Crear una cuenta</RouterLink>
                       </div>                   
                       
                     </form>   
@@ -149,14 +149,14 @@ refreshToken();
 
 <style>
 .divBorder {
-  border-top-left-radius: 40px;
-  border-bottom-left-radius: 40px;
+  border-top-left-radius: 55px;
+  border-bottom-left-radius: 55px;
   padding: 1rem;
   backdrop-filter: blur(40px) brightness(90%);
 }
 .colorLinkL{
-  color: #6AC2BC;
-  text-align: center;
+  color: #E88300;
+  text-align: center;;
 }
 .colorLinkL:hover{
   color: #6AC2BC;
@@ -174,14 +174,17 @@ refreshToken();
     --bs-btn-active-border-color: #6AC2BC;
     margin-top: 15px;   
 }
-h3{
+h2{
   text-align: center;
   color: #002D60;
   margin-top: 15px;
   margin-bottom: 20px;
 }
 label{
-  color: #002D60;
+  color: #002D60;  
+}
+.margenInput{
+  margin-bottom: 15px
 }
 .posicionEstaticaL {
   position: absolute;
@@ -205,5 +208,6 @@ label{
   position: relative;
   margin: -25px 10px 0 0;
   cursor: pointer;
+  color: gray;
 }
 </style>
