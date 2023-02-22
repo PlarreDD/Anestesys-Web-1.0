@@ -121,10 +121,10 @@ export default defineComponent({
             
             apiAxios.post("http://localhost:5000/register", {
                 email: this.usr.email,
-                password: genPswd,
-                repassword: genPswd,
+                password: String(genPswd),
+                repassword: String(genPswd),
                 nomMed: this.usr.nomUsr,
-                apMed: this.usr.apUsr,                
+                apMed: this.usr.apUsr,
             }).then((res:any) => {
                 console.log(res.data);
             }).catch((e:any) =>
