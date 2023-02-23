@@ -15,8 +15,10 @@
                         class="form-control margenInputR"
                         v-model="usr.nomUsr"
                         id="nombre"
-                        placeholder="Nombre completo"
-                        required>  
+                        placeholder="Nombre completo">
+                    <div class="invisible" id="userNombre">
+                        Escriba sus nombres
+                    </div>  
                 </div>
                 <div class="col-md-2"></div>
                 
@@ -27,8 +29,10 @@
                         class="form-control margenInputR"
                         v-model="usr.apUsr"
                         id="apellidos"
-                        placeholder="Apellidos (paterno y materno)"
-                        required>  
+                        placeholder="Apellidos (paterno y materno)">
+                    <div class="invisible" id="userApellidos">
+                        Escriba sus apellidos
+                    </div> 
                 </div>
                 <div class="col-md-2"></div>
                 
@@ -39,8 +43,10 @@
                         class="form-control margenInputR"
                         v-model="usr.email"
                         id="correo"
-                        placeholder="correo@mail.com"
-                        required>
+                        placeholder="correo@mail.com">
+                    <div class="invisible" id="userEmail">
+                        Escriba su correo electrónico
+                    </div> 
                 </div>
                 <div class="col-md-2"></div>
 
@@ -50,23 +56,23 @@
                     <input type="date"
                         class="form-control"
                         v-model="usr.fechaNac"
-                        id="fechaN"
-                    required>  
+                        id="fechaN"> 
+                    <div class="invisible" id="userFechaN">
+                        Escriba su fecha de nacimiento
+                    </div> 
                 </div>
                 <div class="col-md-2"></div>                            
 
                 <div class="col-md-12 div-img">
                     <!-- <RouterLink to="/"> -->
-                        <button class="btn btn-reg fw-bold"
-                                type="submit"
-                                @click="mandarMensaje()">
-                                    Crear Cuenta
-                        </button>
+                    <a href="/">
+                        <button @click="validaCamposRegistro()" class="btn btn-reg fw-bold" type="submit">Crear Cuenta</button>
+                    </a>
                     <!-- </RouterLink> -->
                 </div>
                 
                 <div class="col-md-12">                    
-                    <RouterLink class="nav-link colorLinkR" @click="cargarFondoLogin()" to="/">Iniciar Sesión</RouterLink>
+                    <RouterLink class="nav-link colorLinkA" @click="cargarFondoLogin()" to="/">Iniciar Sesión</RouterLink>
                 </div>
             </form> 
         </div>
@@ -101,7 +107,7 @@ export default defineComponent({
     },
 
     created(){
-        this.cargarFondo()
+        this.cargarFondo()        
     },
 
     methods: {
@@ -129,21 +135,63 @@ export default defineComponent({
             }).then((res:any) => {
                 console.log(res.data);
             }).catch((e:any) =>
-                console.log(e));
-            
+                console.log(e));            
         },
 
-        async mandarMensaje(){
-            swal.fire({
-                html: 'Usuario <b>Nombre</b> registrado correctamente, consulte su correo electrónico',
-                icon: 'info',
-                showConfirmButton: true,
-                showCloseButton: true,  
-                toast: true,
-                position: 'top-start'            
-            });
-            document.body.style.backgroundImage = "url('../../public/images/login.webp')";
-        },
+        async validaCamposRegistro() {                                
+            if(this.usr.nomUsr == undefined || this.usr.nomUsr == "" || this.usr.apUsr == undefined || this.usr.apUsr =="" ||
+                this.usr.email == undefined || this.usr.email == "" || this.usr.fechaNac == undefined) {
+
+                if(this.usr.nomUsr ==undefined || this.usr.nomUsr == ""){
+                    document.getElementById("userNombre").className = "visible validaCampo";
+                    document.getElementById("nombre").className = "form-control border border-danger margenInputR";
+                }else{
+                    document.getElementById("userNombre").className = "invisible";
+                    document.getElementById("nombre").className = "form-control margenInputR";
+                }                              
+                if(this.usr.apUsr ==undefined || this.usr.apUsr ==""){
+                    document.getElementById("userApellidos").className = "visible validaCampo";              
+                    document.getElementById("apellidos").className = "form-control border border-danger margenInputR";
+                }else{
+                    document.getElementById("userApellidos").className = "invisible";
+                    document.getElementById("apellidos").className = "form-control margenInputR"; 
+                }                           
+                if(this.usr.email ==undefined || this.usr.email ==""){
+                    document.getElementById("userEmail").className = "visible validaCampo";              
+                    document.getElementById("email").className = "form-control border border-danger margenInputR";
+                }else{
+                    document.getElementById("userEmail").className = "invisible";
+                    document.getElementById("email").className = "form-control margenInputR"; 
+                }          
+                if(this.usr.fechaNac ==undefined){
+                    document.getElementById("userFechaN").className = "visible validaCampo";              
+                    document.getElementById("fechaN").className = "form-control border border-danger";
+                }else{
+                    document.getElementById("userFechaN").className = "invisible";
+                    document.getElementById("fechaN").className = "form-control"; 
+                }          
+            }
+            else{          
+                swal.fire({
+                    html: 'Usuario <b>Nombre</b> registrado correctamente, consulte su correo electrónico',
+                    icon: 'info', showConfirmButton: true, showCloseButton: true,  
+                    toast: true, position: 'top-start'            
+                });
+                document.body.style.backgroundImage = "url('../../public/images/login.webp')";  
+                
+                document.getElementById("userNombre").className = "invisible";                
+                document.getElementById("userApellidos").className = "invisible"; 
+                document.getElementById("userEmail").className = "invisible";
+                document.getElementById("userFechaN").className = "invisible"; 
+                document.getElementById("nombre").className = "form-control margenInputR";  
+                document.getElementById("apellidos").className = "form-control margenInputR";
+                //alert('else');
+                document.getElementById("email").className = "form-control margenInputR";  
+                document.getElementById("fechaN").className = "form-control";           
+                
+                           
+            }
+      },
 
         async cargarFondo(){
             document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
@@ -178,7 +226,10 @@ export default defineComponent({
     --bs-btn-active-bg: #ffffff;
     --bs-btn-active-color: #E88300;
     --bs-btn-active-border-color: #E88300;  
-    margin-top: 15px; 
+    margin-top: 15px;
+}
+.validaCampo {
+    color: red;
 }
 .posicionEstaticaR {
   position: fixed;
@@ -188,7 +239,7 @@ export default defineComponent({
   z-index: 1020;
 }
 .margenInputR{
-  margin-bottom: 15px
+  margin-bottom: 2px
 }
 .margenLabelR{
   margin-bottom: 5px
@@ -196,11 +247,11 @@ export default defineComponent({
 .h2Margen{
     margin-bottom: 40px
 }
-.colorLinkR{
+.colorLinkA{
   color: #E88300;
   text-align: center;
 }
-.colorLinkR:hover{
+.colorLinkA:hover{
   color: #E88300;
   text-decoration: underline;
 }

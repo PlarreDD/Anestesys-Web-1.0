@@ -103,7 +103,8 @@
             <div class="col-md-6 margenBoton">
                 <button href="#pre-valoracion" data-bs-toggle="tab" type="submit"
                 :class="id.numExpediente != '' && id.nombrePaciente != '' ? 'btn btn-outline-success fw-bold' : 'btn btn-outline-secondary fw-bold'"
-                :disabled="id.numExpediente != '' && id.nombrePaciente != '' ? false : true">Siguiente</button>
+                >Siguiente</button>
+                <!-- :disabled="id.numExpediente != '' && id.nombrePaciente != '' ? false : true" -->
             </div>                            
         </form>        
     </div>

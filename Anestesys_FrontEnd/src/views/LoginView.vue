@@ -16,13 +16,16 @@
                        class="form-control margenInput"
                        v-model="usr.email"
                        id="user"
-                       placeholder="email@mail.com"
-                       required>
-            </div>
-
-            
-
+                       placeholder="correo@mail.com"
+                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                       <span id="emailOK"></span>                       
+                       
+                <div class="invisible" id="userLogin">
+                    Escriba el correo electrónico
+                </div>
+            </div>          
             <div class="col-md-2"></div>
+
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <label for="" class="form-label fw-bold">Contraseña</label>
@@ -30,17 +33,23 @@
                        class="form-control"
                        v-model="usr.pswd"
                        id="contrasena"
-                       placeholder="********"
-                       required>
+                       placeholder="********">
                        <span class="fa fa-fw fa-eye password-icon show-password" id="mostrar" @click=" mostrarPass()"></span>  
+                       <div class="invisible" id="contraLogin">
+                          Escriba la contraseña
+                      </div>
                       </div>
                       <div class="col-md-2"></div>
                       
                       <div class="col-md-12 div-img">
-                        <RouterLink to="pre"><button @click="mandarMensaje()" class="btn btn-login fw-bold" type="submit">Entrar</button></RouterLink>
+                        <!-- <RouterLink to="pre"> -->
+                        <a href="pre">
+                          <button @click="validaCamposLogin()" class="btn btn-login fw-bold" type="submit">Entrar</button>
+                        </a>
+                        <!-- </RouterLink> -->
                       </div>   
                       <div class="col-md-12">                    
-                        <RouterLink class="nav-link colorLink" to="registro" @click="cargarFondoRegistro()">Crear una cuenta</RouterLink>
+                        <RouterLink class="nav-link colorLinkL" to="registro" @click="cargarFondoRegistro()" type="submit">Crear una cuenta</RouterLink>
                       </div>                   
                       
                     </form>   
@@ -49,6 +58,7 @@
               </template>
 
 <script lang="ts">
+
 import { apiAxios } from '@/boot/axios';
 import type { regUsr } from '@/interfaces/regUsr';
 import { ref } from "vue";
@@ -78,17 +88,46 @@ export default defineComponent({
   },
   
   methods: {      
-      async mandarMensaje(){
-        swal.fire({
-          html: 'Bienvenido <b>Nombre</b>',
-          icon: 'info',
-          showConfirmButton: false,
-          showCloseButton: true,  
-          timer: 5000,
-          timerProgressBar: true,
-          toast: true,
-          position: 'top-end'            
-        })  
+
+      async validaCamposLogin() {                                
+          if(this.usr.email == undefined || this.usr.email == "" || this.usr.pswd == undefined || this.usr.pswd =="") {
+
+              if(this.usr.email ==undefined || this.usr.email == ""){
+                
+                document.getElementById("userLogin").className = "visible validaCampo";
+                document.getElementById("user").className = "form-control border border-danger";
+              }else{
+                document.getElementById("userLogin").className = "invisible";
+                document.getElementById("user").className = "form-control";
+              }              
+              
+              if(this.usr.pswd ==undefined || this.usr.pswd ==""){
+                document.getElementById("contraLogin").className = "visible validaCampo";              
+                document.getElementById("contrasena").className = "form-control border border-danger";
+              }else{
+                document.getElementById("contraLogin").className = "invisible";
+                document.getElementById("contrasena").className = "form-control"; 
+              }                                    
+          }
+          else{
+            document.getElementById("userLogin").className = "invisible";
+            document.getElementById("contraLogin").className = "invisible"; 
+            document.getElementById("user").className = "form-control";  
+            document.getElementById("contrasena").className = "form-control";           
+
+            swal.fire({
+              html: 'Bienvenido <b>Nombre</b>',
+              icon: 'info',
+              showConfirmButton: false,
+              showCloseButton: true,  
+              timer: 5000,
+              timerProgressBar: true,
+              toast: true,
+              position: 'top-end'            
+            })
+            
+            window.location.href = "pre";
+          }
       },
 
       async cargarFondo(){
@@ -154,25 +193,29 @@ refreshToken();
   padding: 1rem;
   backdrop-filter: blur(40px) brightness(90%);
 }
+.validaCampo {
+    color: red;
+}
 .colorLinkL{
   color: #E88300;
   text-align: center;;
 }
 .colorLinkL:hover{
-  color: #6AC2BC;
+  color: #E88300;
   text-decoration: underline;
 }
 .btn-login {
-    --bs-btn-bg: #6AC2BC;
+    --bs-btn-bg: #E88300;
     --bs-btn-color: #ffffff;    
-    --bs-btn-border-color: #6AC2BC;
-    --bs-btn-hover-bg: #6AC2BC;
+    --bs-btn-border-color: #E88300;
+    --bs-btn-hover-bg: #E88300;
     --bs-btn-hover-color: #ffffff;
-    --bs-btn-hover-border-color: #6AC2BC;          
+    --bs-btn-hover-border-color: #E88300;          
     --bs-btn-active-bg: #ffffff;
-    --bs-btn-active-color: #6AC2BC;
-    --bs-btn-active-border-color: #6AC2BC;
-    margin-top: 15px;   
+    --bs-btn-active-color: #E88300;
+    --bs-btn-active-border-color: #E88300; 
+    margin-top: 15px;  
+    width: 130px; 
 }
 h2{
   text-align: center;
