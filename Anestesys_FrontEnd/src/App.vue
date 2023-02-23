@@ -20,7 +20,6 @@
 </style>
 
 <script lang="ts">
-
 window.onbeforeunload = function(e) {
   return 'Texto de aviso';
 };  

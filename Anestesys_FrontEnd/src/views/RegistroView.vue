@@ -56,13 +56,13 @@
                 <div class="col-md-2"></div>                            
 
                 <div class="col-md-12 div-img">
-                    <RouterLink to="/">
+                    <!-- <RouterLink to="/"> -->
                         <button class="btn btn-reg fw-bold"
                                 type="submit"
                                 @click="mandarMensaje()">
                                     Crear Cuenta
                         </button>
-                    </RouterLink>
+                    <!-- </RouterLink> -->
                 </div>
                 
                 <div class="col-md-12">                    
@@ -105,11 +105,11 @@ export default defineComponent({
 
     methods: {
         handleSubmit() {
-            NombreDr.value = this.usr.nomUsr;
+            NombreDr.value = this.usr.nomUsr.trim();
             arr = Array.from(NombreDr.value);
             genPswd.value = arr[0] + arr[1] + arr[2];
 
-            ApPatDr.value = this.usr.apUsr;
+            ApPatDr.value = this.usr.apUsr.trim();
             arr = Array.from(ApPatDr.value);
             genPswd.value = genPswd.value + arr[0] + arr[1] + '#';
             
@@ -121,8 +121,8 @@ export default defineComponent({
             
             apiAxios.post("http://localhost:5000/register", {
                 email: this.usr.email,
-                password: String(genPswd),
-                repassword: String(genPswd),
+                password: String(genPswd.value),
+                repassword: String(genPswd.value),
                 nomMed: this.usr.nomUsr,
                 apMed: this.usr.apUsr,
             }).then((res:any) => {
