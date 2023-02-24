@@ -6,8 +6,6 @@
         </div>
 
         <h3 class="fw-bold">Inicia Sesión</h3>
-        {{ token }} - {{ expiresIn }}
-
         {{ userStore.token }} - {{ userStore.expiresIn }}
 
         <form class="row g-3" action="pre" method="post" autocomplete="new-password" @submit.prevent="handleSubmit">
@@ -56,7 +54,6 @@
 
 <script lang="ts">
 import { useUserStore } from "../stores/user-store";
-import { apiAxios } from '@/boot/axios';
 import type { regUsr } from '@/interfaces/regUsr';
 import { ref, 
          defineComponent } from "vue";
@@ -123,39 +120,11 @@ export default defineComponent({
       
       handleSubmit() {
         userStore.loginAccess(this.usr.email, this.usr.pswd);
-      //     apiAxios.post("http://localhost:5000/login", {
-      //         email: this.usr.email,
-      //         password: this.usr.pswd,
-      //     }).then((res:any) => {
-      //         token.value = res.data.tkn;
-      //         expiresIn.value = res.data.xprIn;
-      //     }).catch((e:any) =>
-      //         console.log(e));
       },
   }
 });
 
-// const refreshToken = async () => {
-//     try {
-//         const res = await apiAxios.get("http://localhost:5000/refresh");
-        
-//         token.value = res.data.tkn;
-//         expiresIn.value = res.data.xprIn;
-//         setTime();
-//     } catch (error) {
-//         console.log(error);        
-//     }   
-// };
-
 userStore.refreshToken();
-
-const setTime = async () => {
-    setTimeout(() => {
-      userStore.refreshToken();
-    }, Number(expiresIn.value) * 1000 - 6000)
-};
-
-// refreshToken();
 </script>
 
 <style>

@@ -61,7 +61,7 @@
                                 type="submit"
                                 @click="mandarMensaje()">
                                     Crear Cuenta
-                        </button>
+                        </button>                   
                     <!-- </RouterLink> -->
                 </div>
                 
@@ -153,7 +153,6 @@ export default defineComponent({
         },
     }
 });
-
 </script>
 
 <style>
