@@ -64,10 +64,8 @@
                 <div class="col-md-2"></div>                            
 
                 <div class="col-md-12 div-img">
-                    <!-- <RouterLink to="/"> -->
-                    <a href="/">
-                        <button @click="validaCamposRegistro()" class="btn btn-reg fw-bold" type="submit">Crear Cuenta</button>
-                    </a>
+                    <!-- <RouterLink to="/"> -->                
+                        <button @click="validaCamposRegistro()" class="btn btn-reg fw-bold" type="submit">Crear Cuenta</button>                    
                     <!-- </RouterLink> -->
                 </div>
                 
@@ -142,6 +140,14 @@ export default defineComponent({
             if(this.usr.nomUsr == undefined || this.usr.nomUsr == "" || this.usr.apUsr == undefined || this.usr.apUsr =="" ||
                 this.usr.email == undefined || this.usr.email == "" || this.usr.fechaNac == undefined) {
 
+                if(this.usr.fechaNac ==undefined){
+                    document.getElementById("userFechaN").className = "visible validaCampo";              
+                    document.getElementById("fechaN").className = "form-control border border-danger";
+                }else{
+                    document.getElementById("userFechaN").className = "invisible";
+                    document.getElementById("fechaN").className = "form-control"; 
+                }          
+
                 if(this.usr.nomUsr ==undefined || this.usr.nomUsr == ""){
                     document.getElementById("userNombre").className = "visible validaCampo";
                     document.getElementById("nombre").className = "form-control border border-danger margenInputR";
@@ -158,26 +164,14 @@ export default defineComponent({
                 }                           
                 if(this.usr.email ==undefined || this.usr.email ==""){
                     document.getElementById("userEmail").className = "visible validaCampo";              
-                    document.getElementById("email").className = "form-control border border-danger margenInputR";
+                    document.getElementById("correo").className = "form-control border border-danger margenInputR";
                 }else{
                     document.getElementById("userEmail").className = "invisible";
-                    document.getElementById("email").className = "form-control margenInputR"; 
-                }          
-                if(this.usr.fechaNac ==undefined){
-                    document.getElementById("userFechaN").className = "visible validaCampo";              
-                    document.getElementById("fechaN").className = "form-control border border-danger";
-                }else{
-                    document.getElementById("userFechaN").className = "invisible";
-                    document.getElementById("fechaN").className = "form-control"; 
-                }          
+                    document.getElementById("correo").className = "form-control margenInputR"; 
+                }                          
             }
             else{          
-                swal.fire({
-                    html: 'Usuario <b>Nombre</b> registrado correctamente, consulte su correo electrónico',
-                    icon: 'info', showConfirmButton: true, showCloseButton: true,  
-                    toast: true, position: 'top-start'            
-                });
-                document.body.style.backgroundImage = "url('../../public/images/login.webp')";  
+                this.mostrarMensaje();
                 
                 document.getElementById("userNombre").className = "invisible";                
                 document.getElementById("userApellidos").className = "invisible"; 
@@ -185,13 +179,27 @@ export default defineComponent({
                 document.getElementById("userFechaN").className = "invisible"; 
                 document.getElementById("nombre").className = "form-control margenInputR";  
                 document.getElementById("apellidos").className = "form-control margenInputR";
-                //alert('else');
-                document.getElementById("email").className = "form-control margenInputR";  
-                document.getElementById("fechaN").className = "form-control";           
+                document.getElementById("fechaN").className = "form-control";                
+                document.getElementById("correo").className = "form-control margenInputR";
                 
-                           
+                this.sendEmail();
+                //window.location.href = "/";
             }
-      },
+        },
+
+        async mostrarMensaje(){
+            swal.fire({
+                    html: 'Usuario <b>Nombre</b> registrado correctamente, consulte su correo electrónico',
+                    icon: 'info', showConfirmButton: true, showCloseButton: true,  
+                    toast: true, position: 'top-start'            
+            });
+            document.body.style.backgroundImage = "url('../../public/images/login.webp')";
+        },
+    
+        async sendEmail() {
+            
+
+        },
 
         async cargarFondo(){
             document.body.style.backgroundImage = "url('../../public/images/registro.webp')";

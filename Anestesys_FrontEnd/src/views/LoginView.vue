@@ -124,9 +124,7 @@ export default defineComponent({
               timerProgressBar: true,
               toast: true,
               position: 'top-end'            
-            })
-            
-            window.location.href = "pre";
+            })            
           }
       },
 
