@@ -1,55 +1,55 @@
 <template>
-    <div class="col-5 divBorder posicionEstaticaL">        
-      <div class="margenL">
-        <div class="div-img">
-            <img src="images/logoA.png" class="imgLogo"/>
+  <div class="col-5 divBorder posicionEstaticaL">
+    <div class="margenL">
+      <div class="div-img">
+          <img src="images/logoA.png" class="imgLogo"/>
+      </div>
+
+      <h3 class="fw-bold">Inicia Sesión</h3>
+      {{ userStore.token }} - {{ userStore.expiresIn }}
+
+      <form class="row g-3" action="pre" method="post" autocomplete="new-password" @submit.prevent="handleSubmit">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <label for="" class="form-label fw-bold">Correo electrónico</label>
+          <input type="text"
+                  class="form-control"
+                  v-model="usr.email"
+                  id="user"
+                  placeholder="email@mail.com"
+                  required>
         </div>
 
-        <h3 class="fw-bold">Inicia Sesión</h3>
-        {{ userStore.token }} - {{ userStore.expiresIn }}
-
-        <form class="row g-3" action="pre" method="post" autocomplete="new-password" @submit.prevent="handleSubmit">
-          <div class="col-md-2"></div>
-          <div class="col-md-8">
-            <label for="" class="form-label fw-bold">Correo electrónico</label>
-            <input type="text"
-                   class="form-control"
-                   v-model="usr.email"
-                   id="user"
-                   placeholder="email@mail.com"
-                   required>
-          </div>
-
-          <div class="col-md-2"></div>
-          <div class="col-md-2"></div>
-          <div class="col-md-8">
-            <label for="" class="form-label fw-bold">Contraseña</label>
-            <input type="password"
-                   class="form-control"
-                   v-model="usr.pswd"
-                   id="contrasena"
-                   placeholder="********"
-                   required>
-            <span class="fa fa-fw fa-eye password-icon show-password" id="mostrar" @click=" mostrarPass()"></span>  
-          </div>
-          
-          <div class="col-md-2"></div>
-          <div class="col-md-12 div-img">
-            <!-- <RouterLink to="pre"> -->
-              <button @click="mandarMensaje()"
-                      class="btn btn-login fw-bold"
-                      type="submit"> Entrar </button>
-            <!-- </RouterLink> -->
-          </div>   
-          
-          <div class="col-md-12">
-            <RouterLink class="nav-link colorLinkL"
-                        to="registro"
-                        @click="cargarFondoRegistro()"> Crear una cuenta </RouterLink>
-          </div>
-        </form>   
-      </div>     
+        <div class="col-md-2"></div>
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <label for="" class="form-label fw-bold">Contraseña</label>
+          <input type="password"
+                  class="form-control"
+                  v-model="usr.pswd"
+                  id="contrasena"
+                  placeholder="********"
+                  required>
+          <span class="fa fa-fw fa-eye password-icon show-password" id="mostrar" @click=" mostrarPass()"></span>  
+        </div>
+        
+        <div class="col-md-2"></div>
+        <div class="col-md-12 div-img">
+          <RouterLink to="pre">
+            <button @click="mandarMensaje()"
+                    class="btn btn-login fw-bold"
+                    type="submit"> Entrar </button>
+          </RouterLink>
+        </div>
+        
+        <div class="col-md-12">
+          <RouterLink class="nav-link colorLinkL"
+                      to="registro"
+                      @click="cargarFondoRegistro()"> Crear una cuenta </RouterLink>
+        </div>
+      </form>
     </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -60,8 +60,6 @@ import { ref,
 import swal from 'sweetalert2'
 
 const userStore = useUserStore();
-const token = ref('');
-const expiresIn = ref('');
 
 export default defineComponent({
   mounted: function() { // Llama el método despues de cargar la página
@@ -76,8 +74,6 @@ export default defineComponent({
   data() {
       return{
           usr: { } as regUsr,
-          token,
-          expiresIn,
           userStore
       };
   },
