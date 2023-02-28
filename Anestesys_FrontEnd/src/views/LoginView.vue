@@ -8,7 +8,7 @@
       <h3 class="fw-bold">Inicia Sesión</h3>
       {{ userStore.token }} - {{ userStore.expiresIn }}
 
-      <form class="row g-3" action="pre" method="post" autocomplete="new-password" @submit.prevent="handleSubmit">
+      <form class="row g-3" method="post" autocomplete="new-password" @submit.prevent="handleSubmit">
         <div class="col-md-2"></div>
         <div class="col-md-8">
           <label for="" class="form-label fw-bold">Correo electrónico</label>
@@ -35,11 +35,8 @@
         
         <div class="col-md-2"></div>
         <div class="col-md-12 div-img">
-          <RouterLink to="pre">
-            <button @click="mandarMensaje()"
-                    class="btn btn-login fw-bold"
-                    type="submit"> Entrar </button>
-          </RouterLink>
+            <button @click="validaCamposLogin()"
+                    class="btn btn-login fw-bold"> Entrar </button>
         </div>
         
         <div class="col-md-12">
@@ -78,45 +75,75 @@ export default defineComponent({
       };
   },
   
-  methods: {      
-      async mandarMensaje(){
-        swal.fire({
-          html: 'Bienvenido <b>Nombre</b>',
-          icon: 'info',
-          showConfirmButton: false,
-          showCloseButton: true,  
-          timer: 5000,
-          timerProgressBar: true,
-          toast: true,
-          position: 'top-end'            
-        })  
-      },
+  methods: {
+    async validaCamposLogin() {
+      if(this.usr.email == undefined || this.usr.email == "" ||
+         this.usr.pswd == undefined || this.usr.pswd =="") {   
+          if(this.usr.email ==undefined || this.usr.email == ""){
+      //       document.getElementById("userLogin").className = "visible validaCampo";
+      //       document.getElementById("user").className = "form-control border border-danger";
+          }
+          else{
+      //       document.getElementById("userLogin").className = "invisible";
+      //       document.getElementById("user").className = "form-control";
+          }
 
-      async cargarFondo(){
-            document.body.style.backgroundImage = "url('../../public/images/login.webp')";
-      },
-
-      async cargarFondoRegistro(){
-            document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
-      },
-
-      async ocultarHeader(){
-        document.getElementById("headerP").className='mt invisible'
-      },
-
-      async mostrarPass(){
-            if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
-                (document.getElementById("contrasena") as HTMLInputElement).type = "password";
-                document.getElementById("mostrar").className='fa fa-fw fa-eye password-icon show-password'
-            } else {
-                (document.getElementById("contrasena") as HTMLInputElement).type = "text";
-                document.getElementById("mostrar").className='fa fa-fw fa-eye-slash password-icon show-password'
-            }
-      },
-      
-      handleSubmit() {
+          if(this.usr.pswd ==undefined || this.usr.pswd ==""){
+      //       document.getElementById("contraLogin").className = "visible validaCampo";
+      //       document.getElementById("contrasena").className = "form-control border border-danger";
+          }
+          else{
+      //       document.getElementById("contraLogin").className = "invisible";
+      //       document.getElementById("contrasena").className = "form-control"; 
+          }
+      }
+      else{
+      //   document.getElementById("userLogin").className = "invisible";
+      //   document.getElementById("contraLogin").className = "invisible"; 
+      //   document.getElementById("user").className = "form-control";  
+      //   document.getElementById("contrasena").className = "form-control";
+        
+      /*Codigo funcional*/
         userStore.loginAccess(this.usr.email, this.usr.pswd);
-      },
+        this.mostrarMensaje();
+        this.$router.push('pre')
+      }
+    },
+
+    async mostrarMensaje(){
+      swal.fire({
+        html: 'Bienvenido <b>Dr. García</b>',
+        icon: 'info',
+        showConfirmButton: false,
+        showCloseButton: true,  
+        timer: 5000,
+        timerProgressBar: true,
+        toast: true,
+        position: 'top-end'
+      })  
+    },
+
+    async cargarFondo(){
+          document.body.style.backgroundImage = "url('../../public/images/login.webp')";
+    },
+
+    async cargarFondoRegistro(){
+          document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
+    },
+
+    async ocultarHeader(){
+      document.getElementById("headerP").className='mt invisible'
+    },
+
+    async mostrarPass(){
+          if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
+              (document.getElementById("contrasena") as HTMLInputElement).type = "password";
+              document.getElementById("mostrar").className='fa fa-fw fa-eye password-icon show-password'
+          } else {
+              (document.getElementById("contrasena") as HTMLInputElement).type = "text";
+              document.getElementById("mostrar").className='fa fa-fw fa-eye-slash password-icon show-password'
+          }
+    },
   }
 });
 
