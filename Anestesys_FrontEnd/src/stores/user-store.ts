@@ -14,12 +14,10 @@ export const useUserStore = defineStore('user', {
             //     email: email,
             //     password: pswd,
             // }).then((res:any) => {
-            //     this.token = res.data.tkn;
-            //     this.expiresIn = res.data.xprIn;
+                return this.token = "NuevoToken",
+                       this.expiresIn = "TimeOut";
             // }).catch((e:any) =>
             //     console.log(e));
-            return this.token = "NuevoToken",
-                   this.expiresIn = "TimeOut";
         },
 
         refreshToken(){
