@@ -7,16 +7,16 @@
 
             <h2 class="fw-bold h2Margen">Nuevo Usuario</h2>
         
-            <form class="row g-3" action="pre" method="post" autocomplete="off" @submit.prevent="handleSubmit">
+            <form class="row g-3" action="/" method="post" autocomplete="off" @submit.prevent="handleSubmit">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
                     <label for="" class="form-label fw-bold margenLabelR">Nombre(s)</label>
                     <input type="text"
-                        class="form-control margenInputR"
+                        :class="userNombre == true ? 'form-control border border-danger margenInputR' : 'form-control margenInputR'"
                         v-model="usr.nomUsr"
                         id="nombre"
                         placeholder="Nombre completo">
-                    <div class="invisible" id="userNombre">
+                    <div :class="userNombre == true ? 'visible validaCampo' : 'invisible'" id="userNombre">
                         Escriba sus nombres
                     </div>  
                 </div>
@@ -26,11 +26,11 @@
                 <div class="col-md-8">
                     <label for="" class="form-label fw-bold margenLabelR">Apellidos</label>
                     <input type="text"
-                        class="form-control margenInputR"
+                        :class="userApellido == true ? 'form-control border border-danger margenInputR' : 'form-control margenInputR'"
                         v-model="usr.apUsr"
                         id="apellidos"
                         placeholder="Apellidos (paterno y materno)">
-                    <div class="invisible" id="userApellidos">
+                    <div :class="userApellido == true ? 'visible validaCampo' : 'invisible'" id="userApellidos">
                         Escriba sus apellidos
                     </div> 
                 </div>
@@ -40,11 +40,11 @@
                 <div class="col-md-8">
                     <label for="" class="form-label fw-bold margenLabelR">Correo electrónico</label>
                     <input type="email"
-                        class="form-control margenInputR"
+                        :class="userCorreo == true ? 'form-control border border-danger margenInputR' : 'form-control margenInputR'"
                         v-model="usr.email"
                         id="correo"
                         placeholder="correo@mail.com">
-                    <div class="invisible" id="userEmail">
+                    <div :class="userCorreo == true ? 'visible validaCampo' : 'invisible'" id="userEmail">
                         Escriba su correo electrónico
                     </div> 
                 </div>
@@ -54,17 +54,17 @@
                 <div class="col-md-8">
                     <label for="" class="form-label fw-bold margenLabelR">Fecha de nacimiento</label>
                     <input type="date"
-                        class="form-control"
+                        :class="userFecha == true ? 'form-control border border-danger' : 'form-control'"
                         v-model="usr.fechaNac"
                         id="fechaN"> 
-                    <div class="invisible" id="userFechaN">
+                    <div :class="userFecha == true ? 'visible validaCampo' : 'invisible'" id="userFechaN">
                         Escriba su fecha de nacimiento
                     </div> 
                 </div>
                 <div class="col-md-2"></div>                            
 
                 <div class="col-md-12 div-img">
-                    <!-- <RouterLink to="/"> -->                
+                    <!-- <RouterLink to="/">                 -->
                         <button @click="validaCamposRegistro()" class="btn btn-reg fw-bold" type="submit">Crear Cuenta</button>                    
                     <!-- </RouterLink> -->
                 </div>
@@ -91,11 +91,18 @@ const genPswd = ref('');
 import { defineComponent } from "vue"
 import swal from 'sweetalert2'
 
+// import nodemailer from 'nodemailer';
+//import Mail from 'nodemailer/lib/mailer';
+
 export default defineComponent({
     data() {
         return{
             usr: { } as regUsr,
             //NombreDr,
+            userNombre:false,
+            userApellido:false,
+            userCorreo:false,
+            userFecha:false
         };
     },
     
@@ -135,55 +142,46 @@ export default defineComponent({
             }).catch((e:any) =>
                 console.log(e));            
         },
-
+        
         async validaCamposRegistro() {                                
             if(this.usr.nomUsr == undefined || this.usr.nomUsr == "" || this.usr.apUsr == undefined || this.usr.apUsr =="" ||
-                this.usr.email == undefined || this.usr.email == "" || this.usr.fechaNac == undefined) {
-
-                if(this.usr.fechaNac ==undefined){
-                    document.getElementById("userFechaN").className = "visible validaCampo";              
-                    document.getElementById("fechaN").className = "form-control border border-danger";
-                }else{
-                    document.getElementById("userFechaN").className = "invisible";
-                    document.getElementById("fechaN").className = "form-control"; 
-                }          
+                this.usr.email == undefined || this.usr.email == "" || this.usr.fechaNac == undefined) {                      
 
                 if(this.usr.nomUsr ==undefined || this.usr.nomUsr == ""){
-                    document.getElementById("userNombre").className = "visible validaCampo";
-                    document.getElementById("nombre").className = "form-control border border-danger margenInputR";
+                    this.userNombre=true                    
                 }else{
-                    document.getElementById("userNombre").className = "invisible";
-                    document.getElementById("nombre").className = "form-control margenInputR";
-                }                              
+                    this.userNombre=false                   
+                }    
+
                 if(this.usr.apUsr ==undefined || this.usr.apUsr ==""){
-                    document.getElementById("userApellidos").className = "visible validaCampo";              
-                    document.getElementById("apellidos").className = "form-control border border-danger margenInputR";
+                    this.userApellido=true                    
                 }else{
-                    document.getElementById("userApellidos").className = "invisible";
-                    document.getElementById("apellidos").className = "form-control margenInputR"; 
-                }                           
+                    this.userApellido=false                  
+                }  
+
                 if(this.usr.email ==undefined || this.usr.email ==""){
-                    document.getElementById("userEmail").className = "visible validaCampo";              
-                    document.getElementById("correo").className = "form-control border border-danger margenInputR";
+                    this.userCorreo=true                    
                 }else{
-                    document.getElementById("userEmail").className = "invisible";
-                    document.getElementById("correo").className = "form-control margenInputR"; 
-                }                          
+                    this.userCorreo=false                   
+                }      
+                
+                if(this.usr.fechaNac ==undefined){
+                    this.userFecha=true                   
+                }else{
+                    this.userFecha=false                  
+                }   
             }
             else{          
                 this.mostrarMensaje();
                 
-                document.getElementById("userNombre").className = "invisible";                
-                document.getElementById("userApellidos").className = "invisible"; 
-                document.getElementById("userEmail").className = "invisible";
-                document.getElementById("userFechaN").className = "invisible"; 
-                document.getElementById("nombre").className = "form-control margenInputR";  
-                document.getElementById("apellidos").className = "form-control margenInputR";
-                document.getElementById("fechaN").className = "form-control";                
-                document.getElementById("correo").className = "form-control margenInputR";
+                this.userNombre=false
+                this.userApellido=false
+                this.userCorreo=false
+                this.userFecha=false
                 
-                this.sendEmail();
-                //window.location.href = "/";
+                //this.sendEmail();
+                
+                //this.$router.push('/')
             }
         },
 
@@ -196,10 +194,34 @@ export default defineComponent({
             document.body.style.backgroundImage = "url('../../public/images/login.webp')";
         },
     
-        async sendEmail() {
-            
+        // async sendEmail() {
+        //     const hostname= "hostname from account page";
+        //     const username= "username from account page";
+        //     const password= "password from account page";
 
-        },
+        //     const transporter = nodemailer.createTransport({
+        //         host: hostname,
+        //         port: 587,
+        //         secure: false,
+        //         requireTLS: true,
+        //         auth: {
+        //         user: username,
+        //         pass: password,
+        //         },
+        //         logger: true
+        //     });
+        //      // send mail with defined transport object
+        //     const info = await transporter.sendMail({
+        //         from: '"Sender Name" <from@example.net>',
+        //         to: "to@example.com",
+        //         subject: "Hello from node",
+        //         text: "Hello world?",
+        //         html: "<strong>Hello world?</strong>",
+        //         headers: { 'x-myheader': 'test header' }
+        //     });
+
+        //     console.log("Message sent: %s", info.response);
+        // },
 
         async cargarFondo(){
             document.body.style.backgroundImage = "url('../../public/images/registro.webp')";

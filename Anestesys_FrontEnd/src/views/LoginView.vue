@@ -13,14 +13,13 @@
             <div class="col-md-8">
                 <label for="" class="form-label fw-bold">Correo electrónico</label>
                 <input type="text"
-                       class="form-control margenInput"
-                       v-model="usr.email"
-                       id="user"
-                       placeholder="correo@mail.com"
-                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-                       <span id="emailOK"></span>                       
+                      :class="userCorreo == true ? 'form-control border border-danger margenInput' : 'form-control margenInput'"
+                      v-model="usr.email"
+                      id="user"
+                      placeholder="correo@mail.com"
+                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">                     
                        
-                <div class="invisible" id="userLogin">
+                <div :class="userCorreo == true ? 'visible validaCampo' : 'invisible'" id="userLogin">
                     Escriba el correo electrónico
                 </div>
             </div>          
@@ -30,23 +29,20 @@
             <div class="col-md-8">
                 <label for="" class="form-label fw-bold">Contraseña</label>
                 <input type="password"
-                       class="form-control"
-                       v-model="usr.pswd"
-                       id="contrasena"
-                       placeholder="********">
-                       <span class="fa fa-fw fa-eye password-icon show-password" id="mostrar" @click=" mostrarPass()"></span>  
-                       <div class="invisible" id="contraLogin">
+                      :class="userContrasena == true ? 'form-control border border-danger' : 'form-control'"
+                      v-model="usr.pswd"
+                      id="contrasena"
+                      placeholder="********">
+                      <span class="fa fa-fw fa-eye password-icon show-password" id="mostrar" @click=" mostrarPass()"></span>  
+                      
+                      <div id="contraLogin" :class="userContrasena == true ? 'visible validaCampo' : 'invisible'">
                           Escriba la contraseña
                       </div>
                       </div>
                       <div class="col-md-2"></div>
                       
-                      <div class="col-md-12 div-img">
-                        <!-- <RouterLink to="pre"> -->
-                        <a href="pre">
-                          <button @click="validaCamposLogin()" class="btn btn-login fw-bold" type="submit">Entrar</button>
-                        </a>
-                        <!-- </RouterLink> -->
+                      <div class="col-md-12 div-img">             
+                          <button @click="validaCamposLogin()" class="btn btn-login fw-bold" type="submit">Entrar</button>                   
                       </div>   
                       <div class="col-md-12">                    
                         <RouterLink class="nav-link colorLinkL" to="registro" @click="cargarFondoRegistro()" type="submit">Crear una cuenta</RouterLink>
@@ -84,6 +80,8 @@ export default defineComponent({
           usr: { } as regUsr,
           token,
           expiresIn,
+          userCorreo:false,
+          userContrasena:false
       };
   },
   
@@ -93,39 +91,40 @@ export default defineComponent({
           if(this.usr.email == undefined || this.usr.email == "" || this.usr.pswd == undefined || this.usr.pswd =="") {
 
               if(this.usr.email ==undefined || this.usr.email == ""){
-                
-                document.getElementById("userLogin").className = "visible validaCampo";
-                document.getElementById("user").className = "form-control border border-danger";
+                this.userCorreo=true;                               
               }else{
-                document.getElementById("userLogin").className = "invisible";
-                document.getElementById("user").className = "form-control";
+                this.userCorreo=false                              
               }              
               
               if(this.usr.pswd ==undefined || this.usr.pswd ==""){
-                document.getElementById("contraLogin").className = "visible validaCampo";              
-                document.getElementById("contrasena").className = "form-control border border-danger";
+                this.userContrasena=true;                               
               }else{
-                document.getElementById("contraLogin").className = "invisible";
-                document.getElementById("contrasena").className = "form-control"; 
+                this.userContrasena=false;                               
               }                                    
           }
           else{
-            document.getElementById("userLogin").className = "invisible";
-            document.getElementById("contraLogin").className = "invisible"; 
-            document.getElementById("user").className = "form-control";  
-            document.getElementById("contrasena").className = "form-control";           
+            this.userCorreo=false; 
+            this.userContrasena=false;           
+              
+            this.mostrarMensaje();
 
-            swal.fire({
-              html: 'Bienvenido <b>Nombre</b>',
-              icon: 'info',
-              showConfirmButton: false,
-              showCloseButton: true,  
-              timer: 5000,
-              timerProgressBar: true,
-              toast: true,
-              position: 'top-end'            
-            })            
+            this.handleSubmit();
+
+            //this.$router.push('pre')
           }
+      },
+
+      async mostrarMensaje(){
+        swal.fire({
+            html: 'Bienvenido <b>Nombre</b>',
+            icon: 'info',
+            showConfirmButton: false,
+            showCloseButton: true,  
+            timer: 5000,
+            timerProgressBar: true,
+            toast: true,
+            position: 'top-end'            
+        })          
       },
 
       async cargarFondo(){
@@ -225,7 +224,7 @@ label{
   color: #002D60;  
 }
 .margenInput{
-  margin-bottom: 15px
+  margin-bottom: 2px
 }
 .posicionEstaticaL {
   position: absolute;
