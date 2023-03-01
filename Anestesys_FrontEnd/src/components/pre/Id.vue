@@ -103,7 +103,8 @@
             <div class="col-md-6 margenBoton">
                 <button href="#pre-valoracion" data-bs-toggle="tab" type="submit"
                 :class="id.numExpediente != '' && id.nombrePaciente != '' ? 'btn btn-outline-success fw-bold' : 'btn btn-outline-secondary fw-bold'"
-                :disabled="id.numExpediente != '' && id.nombrePaciente != '' ? false : true">Siguiente</button>
+                >Siguiente</button>
+                <!-- :disabled="id.numExpediente != '' && id.nombrePaciente != '' ? false : true" -->
             </div>                            
         </form>        
     </div>
@@ -152,7 +153,7 @@ export default defineComponent({
   padding: 1rem;
   margin-top :10px;
   margin-bottom: 10px;
-  background-color: rgba(232, 234, 236, 0.6);
+  backdrop-filter: blur(40px) brightness(97%);  
 }
 .margenRadio {
     margin-right: 10px;

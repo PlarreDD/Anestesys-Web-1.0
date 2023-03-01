@@ -5,7 +5,7 @@
             <img src="images/logoA.png" class="imgLogo"/>
         </div>
 
-        <h3 class="fw-bold">Inicia Sesión</h3>
+        <h2 class="fw-bold">Inicia Sesión</h2>
         {{ token }} - {{ expiresIn }}
 
         <form class="row g-3" action="pre" method="post" autocomplete="new-password" @submit.prevent="handleSubmit">
@@ -13,34 +13,39 @@
             <div class="col-md-8">
                 <label for="" class="form-label fw-bold">Correo electrónico</label>
                 <input type="text"
-                       class="form-control"
-                       v-model="usr.email"
-                       id="user"
-                       placeholder="email@mail.com"
-                       required>
-            </div>
-
-            
-
+                      :class="userCorreo == true ? 'form-control border border-danger margenInput' : 'form-control margenInput'"
+                      v-model="usr.email"
+                      id="user"
+                      placeholder="correo@mail.com"
+                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">                     
+                       
+                <div :class="userCorreo == true ? 'visible validaCampo' : 'invisible'" id="userLogin">
+                    Escriba el correo electrónico
+                </div>
+            </div>          
             <div class="col-md-2"></div>
+
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <label for="" class="form-label fw-bold">Contraseña</label>
                 <input type="password"
-                       class="form-control"
-                       v-model="usr.pswd"
-                       id="contrasena"
-                       placeholder="********"
-                       required>
-                       <span class="fa fa-fw fa-eye password-icon show-password" id="mostrar" @click=" mostrarPass()"></span>  
+                      :class="userContrasena == true ? 'form-control border border-danger' : 'form-control'"
+                      v-model="usr.pswd"
+                      id="contrasena"
+                      placeholder="********">
+                      <span class="fa fa-fw fa-eye password-icon show-password" id="mostrar" @click=" mostrarPass()"></span>  
+                      
+                      <div id="contraLogin" :class="userContrasena == true ? 'visible validaCampo' : 'invisible'">
+                          Escriba la contraseña
+                      </div>
                       </div>
                       <div class="col-md-2"></div>
                       
-                      <div class="col-md-12 div-img">
-                        <RouterLink to="pre"><button @click="mandarMensaje()" class="btn btn-login fw-bold" type="submit">Entrar</button></RouterLink>
+                      <div class="col-md-12 div-img">             
+                          <button @click="validaCamposLogin()" class="btn btn-login fw-bold" type="submit">Entrar</button>                   
                       </div>   
                       <div class="col-md-12">                    
-                        <RouterLink class="nav-link colorLinkL" to="registro" @click="cargarFondoRegistro()">Crear una cuenta</RouterLink>
+                        <RouterLink class="nav-link colorLinkL" to="registro" @click="cargarFondoRegistro()" type="submit">Crear una cuenta</RouterLink>
                       </div>                   
                       
                     </form>   
@@ -49,6 +54,7 @@
               </template>
 
 <script lang="ts">
+
 import { apiAxios } from '@/boot/axios';
 import type { regUsr } from '@/interfaces/regUsr';
 import { ref } from "vue";
@@ -74,21 +80,51 @@ export default defineComponent({
           usr: { } as regUsr,
           token,
           expiresIn,
+          userCorreo:false,
+          userContrasena:false
       };
   },
   
   methods: {      
-      async mandarMensaje(){
+
+      async validaCamposLogin() {                                
+          if(this.usr.email == undefined || this.usr.email == "" || this.usr.pswd == undefined || this.usr.pswd =="") {
+
+              if(this.usr.email ==undefined || this.usr.email == ""){
+                this.userCorreo=true;                               
+              }else{
+                this.userCorreo=false                              
+              }              
+              
+              if(this.usr.pswd ==undefined || this.usr.pswd ==""){
+                this.userContrasena=true;                               
+              }else{
+                this.userContrasena=false;                               
+              }                                    
+          }
+          else{
+            this.userCorreo=false; 
+            this.userContrasena=false;           
+              
+            this.mostrarMensaje();
+
+            this.handleSubmit();
+
+            //this.$router.push('pre')
+          }
+      },
+
+      async mostrarMensaje(){
         swal.fire({
-          html: 'Bienvenido <b>Nombre</b>',
-          icon: 'info',
-          showConfirmButton: false,
-          showCloseButton: true,  
-          timer: 5000,
-          timerProgressBar: true,
-          toast: true,
-          position: 'top-end'            
-        })  
+            html: 'Bienvenido <b>Nombre</b>',
+            icon: 'info',
+            showConfirmButton: false,
+            showCloseButton: true,  
+            timer: 5000,
+            timerProgressBar: true,
+            toast: true,
+            position: 'top-end'            
+        })          
       },
 
       async cargarFondo(){
@@ -149,39 +185,46 @@ refreshToken();
 
 <style>
 .divBorder {
-  border-top-left-radius: 40px;
-  border-bottom-left-radius: 40px;
+  border-top-left-radius: 55px;
+  border-bottom-left-radius: 55px;
   padding: 1rem;
   backdrop-filter: blur(40px) brightness(90%);
 }
+.validaCampo {
+    color: red;
+}
 .colorLinkL{
-  color: #6AC2BC;
-  text-align: center;
+  color: #E88300;
+  text-align: center;;
 }
 .colorLinkL:hover{
-  color: #6AC2BC;
+  color: #E88300;
   text-decoration: underline;
 }
 .btn-login {
-    --bs-btn-bg: #6AC2BC;
+    --bs-btn-bg: #E88300;
     --bs-btn-color: #ffffff;    
-    --bs-btn-border-color: #6AC2BC;
-    --bs-btn-hover-bg: #6AC2BC;
+    --bs-btn-border-color: #E88300;
+    --bs-btn-hover-bg: #E88300;
     --bs-btn-hover-color: #ffffff;
-    --bs-btn-hover-border-color: #6AC2BC;          
+    --bs-btn-hover-border-color: #E88300;          
     --bs-btn-active-bg: #ffffff;
-    --bs-btn-active-color: #6AC2BC;
-    --bs-btn-active-border-color: #6AC2BC;
-    margin-top: 15px;   
+    --bs-btn-active-color: #E88300;
+    --bs-btn-active-border-color: #E88300; 
+    margin-top: 15px;  
+    width: 130px; 
 }
-h3{
+h2{
   text-align: center;
   color: #002D60;
   margin-top: 15px;
   margin-bottom: 20px;
 }
 label{
-  color: #002D60;
+  color: #002D60;  
+}
+.margenInput{
+  margin-bottom: 2px
 }
 .posicionEstaticaL {
   position: absolute;
@@ -205,5 +248,6 @@ label{
   position: relative;
   margin: -25px 10px 0 0;
   cursor: pointer;
+  color: gray;
 }
 </style>
