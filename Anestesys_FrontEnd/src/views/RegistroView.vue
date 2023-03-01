@@ -91,7 +91,7 @@ const genPswd = ref('');
 import { defineComponent } from "vue"
 import swal from 'sweetalert2'
 
-// import nodemailer from 'nodemailer';
+//import nodemailer from 'nodemailer';
 //import Mail from 'nodemailer/lib/mailer';
 
 export default defineComponent({
