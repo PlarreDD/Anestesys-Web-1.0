@@ -2,24 +2,24 @@
   <div class="mt" id="headerP">
       <nav class="navbar navbar-color fw-bold">                
         <div class="input-group">
-
           <div class="col-md-1"></div>
 
           <div class="col-md-2 alinearElementoI">
-            <RouterLink class="" to="pre"><img src="images/logoA.png" class="imgLogoBarra"/></RouterLink>
+            <RouterLink class="" to="pre">
+              <img src="images/logoA.png" class="imgLogoBarra"/>
+            </RouterLink>
           </div>
 
           <div class="col-md-5 alinearElementoD">
             <button class="btn btn-menu" type="button" data-bs-toggle="dropdown" aria-controls="offcanvasNavbar"><i class="fa-solid fa-2x fa-bars"></i></button>
+            
             <form class="dropdown-menu p-5">
-              <div class="mb-3 estiloDropDown input-group mb-3">
-
-              </div>
+              <div class="mb-3 estiloDropDown input-group mb-3"></div>
             </form>            
           </div>
          
           <div class="col-md-2 text-white alinearElementoD">
-            <img src="images/perfil.jpg" class="imgPerfil"/>{{}}Dr. Usuario
+            <img src="images/perfil.jpg" class="imgPerfil"/>{{}}Dr. García
           </div>
 
           <div class="col-md-1 alinearElementoD">
@@ -33,32 +33,62 @@
               <h5 class="offcanvas-title fw-bold text-dark" id="offcanvasNavbarLabel">Configuración</h5>
               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
+
             <div class="offcanvas-body">
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li class="nav-item">
-                  <a href="#"><button class="btn btn-configuracion fw-bold">Ver Perfil</button></a>
-                </li>                 
-                <li class="nav-item">                  
-                  <RouterLink to="medicamentos"><button class="btn btn-configuracion fw-bold">Medicamentos</button></RouterLink>
-                </li>                    
+                  <a href="#">
+                    <button class="btn btn-configuracion fw-bold">Ver Perfil</button>
+                  </a>
+                </li> 
+                
                 <li class="nav-item">
-                  <a to="#"><button class="btn btn-configuracion fw-bold">Tendencias</button></a>
-                </li>                  
+                  <RouterLink to="medicamentos">
+                    <button class="btn btn-configuracion fw-bold">Medicamentos</button>
+                  </RouterLink>
+                </li>
+                
                 <li class="nav-item">
-                  <a to="#"><button class="btn btn-configuracion fw-bold">Teclado</button></a>
-                </li>   
+                  <a to="#">
+                    <button class="btn btn-configuracion fw-bold">Tendencias</button>
+                  </a>
+                </li>
+                
                 <li class="nav-item">
-                  <a href="/"><button class="btn btn-configuracion fw-bold">Salir</button></a>
-                </li>  
-                          
+                  <a to="#">
+                    <button class="btn btn-configuracion fw-bold">Teclado</button>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <!-- <a href="/"> -->
+                    <button class="btn btn-configuracion fw-bold" @click=" userLogout()">Salir</button>
+                  <!-- </a> -->
+                </li>
               </ul>              
             </div>
           </div>
-
         </div>
       </nav>
     </div>
 </template>
+
+<script lang="ts">
+// import { useUserStore } from "@/stores/user-store";
+import { defineComponent } from "vue";
+
+//const userStore = useUserStore();
+
+export default defineComponent({
+  methods:{
+    userLogout(){
+      console.log("salir");
+      // userStore.logout();
+    },
+  }
+})
+
+</script>
 
 <style>
 .imgLogoBarra {

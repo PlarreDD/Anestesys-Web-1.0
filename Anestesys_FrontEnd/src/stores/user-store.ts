@@ -1,12 +1,48 @@
 import { defineStore } from "pinia";
+import { apiAxios } from '@/boot/axios';
 import { ref } from "vue";
 
-export const useUserStore = defineStore('user', () => {
-    const token = ref("tknGlobal");
-    const expiresIn = ref("");
+export const useUserStore = defineStore('user', {
+    state: () => ({
+        token: ref(null),
+        expiresIn: ref(null),
+    }),
 
-    return {
-        token,
-        expiresIn,
-    };
+    actions: {
+        loginAccess(email: string, pswd:string){
+            // apiAxios.post("http://localhost:5000/login", {
+            //     email: email,
+            //     password: pswd,
+            // }).then((res:any) => {
+                return this.token = "NuevoToken",
+                       this.expiresIn = "TimeOut";
+            // }).catch((e:any) =>
+            //     console.log(e));
+        },
+
+        refreshToken(){
+            apiAxios.get("http://localhost:5000/refresh")
+            .then((res:any) => {
+                this.token = res.data.tkn;
+                this.expiresIn = res.data.xprIn;
+                this.setTime();
+            }).catch((e:any) =>
+                console.log(e));
+        },
+
+        setTime(){
+            setTimeout(() => {
+                console.log("TimeOut");                
+                this.refreshToken();
+            }, Number(this.expiresIn) * 1000 - 5000)
+        },
+
+        logout(){
+            apiAxios.post("http://localhost:5000/logout")
+            .then(
+                this.token = null,
+                this.expiresIn = null,
+            );
+        },
+    }    
 });

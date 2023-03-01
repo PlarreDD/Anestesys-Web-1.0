@@ -1,74 +1,75 @@
 <template>
-    <div class="col-5 divBorder posicionEstaticaL">        
-      <div class="margenL">
-        <div class="div-img">
-            <img src="images/logoA.png" class="imgLogo"/>
+  <div class="col-5 divBorder posicionEstaticaL">
+    <div class="margenL">
+      <div class="div-img">
+          <img src="images/logoA.png" class="imgLogo"/>
+      </div>
+
+      <h3 class="fw-bold">Inicia Sesión</h3>
+      {{ userStore.token }} - {{ userStore.expiresIn }}
+
+      <form class="row g-3" method="post" autocomplete="new-password" @submit.prevent="handleSubmit">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <label for="" class="form-label fw-bold">Correo electrónico</label>
+          <input type="text"
+                 :class="userCorreo == true ? 'form-control border border-danger margenInput' : 'form-control margenInput'"
+                 v-model="usr.email"
+                 id="user"
+                 placeholder="correo@mail.com"
+                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+
+          <div :class="userCorreo == true ? 'visible validaCampo' : 'invisible'" id="userLogin">
+              Escriba el correo electrónico
+          </div>
         </div>
 
-        <h2 class="fw-bold">Inicia Sesión</h2>
-        {{ token }} - {{ expiresIn }}
-
-        <form class="row g-3" action="pre" method="post" autocomplete="new-password" @submit.prevent="handleSubmit">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <label for="" class="form-label fw-bold">Correo electrónico</label>
-                <input type="text"
-                      :class="userCorreo == true ? 'form-control border border-danger margenInput' : 'form-control margenInput'"
-                      v-model="usr.email"
-                      id="user"
-                      placeholder="correo@mail.com"
-                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">                     
-                       
-                <div :class="userCorreo == true ? 'visible validaCampo' : 'invisible'" id="userLogin">
-                    Escriba el correo electrónico
-                </div>
-            </div>          
-            <div class="col-md-2"></div>
-
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <label for="" class="form-label fw-bold">Contraseña</label>
-                <input type="password"
-                      :class="userContrasena == true ? 'form-control border border-danger' : 'form-control'"
-                      v-model="usr.pswd"
-                      id="contrasena"
-                      placeholder="********">
-                      <span class="fa fa-fw fa-eye password-icon show-password" id="mostrar" @click=" mostrarPass()"></span>  
-                      
-                      <div id="contraLogin" :class="userContrasena == true ? 'visible validaCampo' : 'invisible'">
-                          Escriba la contraseña
-                      </div>
-                      </div>
-                      <div class="col-md-2"></div>
-                      
-                      <div class="col-md-12 div-img">             
-                          <button @click="validaCamposLogin()" class="btn btn-login fw-bold" type="submit">Entrar</button>                   
-                      </div>   
-                      <div class="col-md-12">                    
-                        <RouterLink class="nav-link colorLinkL" to="registro" @click="cargarFondoRegistro()" type="submit">Crear una cuenta</RouterLink>
-                      </div>                   
-                      
-                    </form>   
-                  </div>     
-                </div>
-              </template>
+        <div class="col-md-2"></div>
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <label for="" class="form-label fw-bold">Contraseña</label>
+          <input type="password"
+                 :class="userContrasena == true ? 'form-control border border-danger' : 'form-control'"
+                 v-model="usr.pswd"
+                 id="contrasena"
+                 placeholder="********">
+          <span class="fa fa-fw fa-eye password-icon show-password"
+                id="mostrar"
+                @click=" mostrarPass()"></span>
+                    
+          <div id="contraLogin"
+               :class="userContrasena == true ? 'visible validaCampo' : 'invisible'"> Escriba la contraseña </div>
+        </div>
+        
+        <div class="col-md-2"></div>
+        <div class="col-md-12 div-img">
+            <button @click="validaCamposLogin()"
+                    class="btn btn-login fw-bold"> Entrar </button>
+        </div>
+        
+        <div class="col-md-12">
+          <RouterLink class="nav-link colorLinkL"
+                      to="registro"
+                      @click="cargarFondoRegistro()"> Crear una cuenta </RouterLink>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
 
 <script lang="ts">
-
-import { apiAxios } from '@/boot/axios';
+import { useUserStore } from "../stores/user-store";
 import type { regUsr } from '@/interfaces/regUsr';
-import { ref } from "vue";
-
-import { defineComponent } from "vue"
+import { ref, 
+         defineComponent } from "vue";
 import swal from 'sweetalert2'
 
-const token = ref('');
-const expiresIn = ref('');
+const userStore = useUserStore();
 
 export default defineComponent({
   mounted: function() { // Llama el método despues de cargar la página
-    this.cargarFondo();  
-    this.ocultarHeader();               
+    this.cargarFondo();
+    this.ocultarHeader();           
   },
   
   created(){
@@ -78,109 +79,79 @@ export default defineComponent({
   data() {
       return{
           usr: { } as regUsr,
-          token,
-          expiresIn,
+          userStore,
           userCorreo:false,
           userContrasena:false
       };
   },
   
-  methods: {      
-
-      async validaCamposLogin() {                                
-          if(this.usr.email == undefined || this.usr.email == "" || this.usr.pswd == undefined || this.usr.pswd =="") {
-
-              if(this.usr.email ==undefined || this.usr.email == ""){
-                this.userCorreo=true;                               
-              }else{
-                this.userCorreo=false                              
-              }              
-              
-              if(this.usr.pswd ==undefined || this.usr.pswd ==""){
-                this.userContrasena=true;                               
-              }else{
-                this.userContrasena=false;                               
-              }                                    
+  methods: {
+    async validaCamposLogin() {
+      if(this.usr.email == undefined || this.usr.email == "" ||
+         this.usr.pswd == undefined || this.usr.pswd =="") {   
+          if(this.usr.email == undefined || this.usr.email == ""){
+            this.userCorreo = true;
           }
           else{
-            this.userCorreo=false; 
-            this.userContrasena=false;           
-              
-            this.mostrarMensaje();
-
-            this.handleSubmit();
-
-            //this.$router.push('pre')
+            this.userCorreo = false;
           }
-      },
 
-      async mostrarMensaje(){
-        swal.fire({
-            html: 'Bienvenido <b>Nombre</b>',
-            icon: 'info',
-            showConfirmButton: false,
-            showCloseButton: true,  
-            timer: 5000,
-            timerProgressBar: true,
-            toast: true,
-            position: 'top-end'            
-        })          
-      },
+          if(this.usr.pswd == undefined || this.usr.pswd == ""){
+            this.userContrasena = true;
+          }
+          else{
+            this.userContrasena = false;
+          }
+      }
+      else{
+        this.userCorreo = false;
+        this.userContrasena = false;
 
-      async cargarFondo(){
-            document.body.style.backgroundImage = "url('../../public/images/login.webp')";
-      },
+        /*Codigo funcional*/
+        userStore.loginAccess(this.usr.email, this.usr.pswd);
+        this.mostrarMensaje();
+        this.$router.push('pre')
+      }
+    },
 
-      async cargarFondoRegistro(){
-            document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
-      },
+    async mostrarMensaje(){
+      swal.fire({
+        html: 'Bienvenido <b>Dr. García</b>',
+        icon: 'info',
+        showConfirmButton: false,
+        showCloseButton: true,  
+        timer: 5000,
+        timerProgressBar: true,
+        toast: true,
+        position: 'top-end'
+      })  
+    },
 
-      async ocultarHeader(){
-        document.getElementById("headerP").className='mt invisible'
-      },
+    async cargarFondo(){
+          document.body.style.backgroundImage = "url('../../public/images/login.webp')";
+    },
 
-      async mostrarPass(){
-            if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
-                (document.getElementById("contrasena") as HTMLInputElement).type = "password";
-                document.getElementById("mostrar").className='fa fa-fw fa-eye password-icon show-password'
-            } else {
-                (document.getElementById("contrasena") as HTMLInputElement).type = "text";
-                document.getElementById("mostrar").className='fa fa-fw fa-eye-slash password-icon show-password'
-            }
-      },
-      
-      handleSubmit() {
-          apiAxios.post("http://localhost:5000/login", {
-              email: this.usr.email,
-              password: this.usr.pswd,
-          }).then((res:any) => {
-              token.value = res.data.tkn;
-              expiresIn.value = res.data.xprIn;
-          }).catch((e:any) =>
-              console.log(e));
-      },
+    async cargarFondoRegistro(){
+          document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
+    },
+
+    async ocultarHeader(){
+      document.getElementById("headerP").className='mt invisible'
+    },
+
+    async mostrarPass(){
+          if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
+              (document.getElementById("contrasena") as HTMLInputElement).type = "password";
+              document.getElementById("mostrar").className='fa fa-fw fa-eye password-icon show-password'
+          } else {
+              (document.getElementById("contrasena") as HTMLInputElement).type = "text";
+              document.getElementById("mostrar").className='fa fa-fw fa-eye-slash password-icon show-password'
+          }
+    },
   }
 });
 
-const refreshToken = async () => {
-    try {
-        const res = await apiAxios.get("http://localhost:5000/refresh");
-        
-        token.value = res.data.tkn;
-        expiresIn.value = res.data.xprIn;
-        setTime();
-    } catch (error) {
-        console.log(error);        
-    }   
-};
-
-const setTime = async () => {
-    setTimeout(() => {
-        refreshToken();
-    }, Number(expiresIn.value) * 1000 - 6000)
-};
-
-refreshToken();
+userStore.refreshToken();
 </script>
 
 <style>

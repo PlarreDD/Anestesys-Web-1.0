@@ -37,6 +37,12 @@ export const bodyLinkValidator = [
 ];
 
 export const bodyRegisterValidator = [ 
+    body("nomMed", "Formato incorrecto")
+        .trim(),
+
+    body("apMed", "Formato incorrecto")
+        .trim(),
+
     body("email", "Formato incorrecto")
         .trim()
         .isEmail()
