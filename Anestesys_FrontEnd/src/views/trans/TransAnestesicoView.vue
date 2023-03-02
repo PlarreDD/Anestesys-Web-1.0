@@ -1,45 +1,79 @@
 <template>
   <div>
-
-    <div class="input-group mb-3">      
-        <div class="col-md-6">
-          <input class="form-control me-2" type="search" placeholder="Buscar número de expediente..." aria-label="Buscar"> <!--Buscador-->
-        </div>              
+    <div class="input-group mb-3">
+      <div class="col-md-6">
+        <input class="form-control me-2"
+               type="search"
+               placeholder="Buscar número de expediente..."
+               aria-label="Buscar"> <!--Buscador-->
+      </div>
     </div>
 
     <div class="input-group mb-3">
         <div class="col-9 divform navbar-nav">                     
             <ul class="nav text-center" id=""> <!--Lista para el menú principal-->
+              <li class="col-md-3">
+                <button type="button"
+                        class="btn btn-outline-secondary fw-bold"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        data-bs-auto-close="outside"> GRID ANESTÉSICO </button>
+                <!--Botón para abrir el dropdown-->
+                <form class="dropdown-menu p-5">
+                  <div class="mb-3 estiloDropDown input-group mb-3"></div>
+                </form>
+              </li>
+
                 <li class="col-md-3">
-                    <button type="button" class="btn btn-outline-secondary fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">GRID ANESTÉSICO</button> <!--Botón para abrir el dropdown-->
-                    <form class="dropdown-menu p-5">
-                      <div class="mb-3 estiloDropDown input-group mb-3">
-                        
-                      </div>
-                    </form>
-                </li>
-                <li class="col-md-3">
-                    <button type="button" class="btn btn-outline-secondary fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">TÉCNICA ANESTÉSICA</button>
+                    <button type="button"
+                            class="btn btn-outline-secondary fw-bold"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                            data-bs-auto-close = "outside"> TÉCNICA ANESTÉSICA </button>
+
                     <form class="dropdown-menu p-5">
                       <div class="mb-3 estiloDropDownTecnica row g-3">
                         <div class="form-check col-md-4">
-                          <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                          <label class="form-check-label fw-bold" for="checkTecnica">Local</label>
+                          <input class="form-check-input"
+                                 type="checkbox"
+                                 value=""
+                                 id="checkTecnica">
+                          <label class="form-check-label fw-bold"
+                                 for="checkTecnica"> Local </label>
                         </div>
+
                         <div class="form-check col-md-4">
-                          <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                          <label class="form-check-label fw-bold" for="checkTecnica">Sedación</label>
+                          <input class="form-check-input"
+                                 type="checkbox"
+                                 value=""
+                                 id="checkTecnica">
+                          <label class="form-check-label fw-bold"
+                                 for="checkTecnica"> Sedación </label>
                         </div>
+
                         <div class="form-check col-md-4">
-                          <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                          <label class="form-check-label fw-bold" for="checkTecnica">General balanceada</label>
+                          <input class="form-check-input"
+                                 type="checkbox"
+                                 value=""
+                                 id="checkTecnica">
+                          <label class="form-check-label fw-bold"
+                                 for="checkTecnica"> General balanceada </label>
                         </div>
+                        
                         <div class="form-check col-md-4">
-                          <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                          <label class="form-check-label fw-bold" for="checkTecnica">TIVA (Anestesia total intravenosa)</label>
+                          <input class="form-check-input"
+                                 type="checkbox"
+                                 value=""
+                                 id="checkTecnica">
+                          <label class="form-check-label fw-bold"
+                                 for="checkTecnica"> TIVA (Anestesia total intravenosa) </label>
                         </div>
+
                         <div class="form-check col-md-4">
-                          <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
+                          <input class="form-check-input"
+                                 type="checkbox"
+                                 value=""
+                                 id="checkTecnica">
                           <label class="form-check-label fw-bold" for="checkTecnica">Multimodal</label>
                         </div>
                         <div class="form-check col-md-4">

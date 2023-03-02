@@ -52,3 +52,6 @@ npm run build
 - Cambios al Back End para funcionar con TypeScript.
 
 - Agregada función para registrar usuarios en base de datos desde el front end.
+
+- Corregido la funcion del boton de "Ingresar" en el login para acceder con un solo click.
+

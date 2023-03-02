@@ -50,8 +50,7 @@
                 <img src="images/logoA.png" class="imgLogo"/>
             </div>
 
-            <h2 class="fw-bold">Inicia Sesión</h2>
-            {{ userStore.token }} - {{ userStore.expiresIn }}
+      <h3 class="fw-bold">Inicia Sesión</h3>
 
             <form class="row g-3" method="post" autocomplete="new-password" @submit.prevent="">
               <div class="col-md-2"></div>
@@ -131,7 +130,7 @@ export default defineComponent({
           usr: { } as regUsr,
           userStore,
           userCorreo:false,
-          userContrasena:false
+          userContrasena:false,
       };
   },
   
@@ -160,10 +159,7 @@ export default defineComponent({
         this.usr.email = ""
         this.usr.pswd = ""
 
-        /*Codigo funcional*/
         userStore.loginAccess(this.usr.email, this.usr.pswd);
-        this.mostrarMensaje();
-        this.$router.push('pre')
       }
     },
 
@@ -210,7 +206,18 @@ export default defineComponent({
   }
 });
 
-userStore.refreshToken();
+export const mostrarMensaje = async () => {
+      swal.fire({
+        html: 'Bienvenido <b>Dr. García</b>',
+        icon: 'info',
+        showConfirmButton: false,
+        showCloseButton: true,  
+        timer: 5000,
+        timerProgressBar: true,
+        toast: true,
+        position: 'top-end'
+      })  
+}
 </script>
 
 <style>

@@ -74,9 +74,9 @@ router.beforeEach((to, from, next) => {
       
     return next("/");
   }
-  else{    
-    if (userStore.token)      
-      return next("/pre");  
+  else{
+    if (userStore.token)
+      return next("/pre");
   }
   
   next();
