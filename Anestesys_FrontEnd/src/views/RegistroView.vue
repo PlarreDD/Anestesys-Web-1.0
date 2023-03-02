@@ -136,6 +136,7 @@ export default defineComponent({
                 apMed: this.usr.apUsr,
             }).then((res:any) => {
                 console.log(res.data);
+                this.$router.push('/');
             }).catch((e:any) =>
                 console.log(e));            
         },
@@ -175,6 +176,7 @@ export default defineComponent({
                 this.userApellido=false
                 this.userCorreo=false
                 this.userFecha=false
+
             }
         },
 
