@@ -2,32 +2,43 @@
   <div>
     <div class="input-group mb-3">
       <div class="col-10 divform navbar-nav">              
-
-          <ul class="nav nav-pills mb-3 text-center" id=""> <!--Lista para el menú principal-->
-            <li class="nav-item col-md-6" >
-                <button class="nav-link bold under active" id="post" data-bs-toggle="pill" data-bs-target="#nota" type="button" aria-selected="true">NOTA POST</button> <!--Se asigna el contenedor al que apuntara el elemento por medio de data-bs-target-->
-            </li>
-            <li class="nav-item col-md-6" >
-                <button class="nav-link bold under" id="post" data-bs-toggle="pill" data-bs-target="#recuperacion" type="button" aria-selected="false">RECUPERACIÓN</button>
-            </li>          
-          </ul>
+        <ul class="nav nav-pills mb-3 text-center" id=""> <!--Lista para el menú principal-->
+          <li class="nav-item col-md-6" >
+            <button class="nav-link bold under active"
+                    id="post"
+                    data-bs-toggle="pill"
+                    data-bs-target="#nota"
+                    type="button"
+                    aria-selected="true"> NOTA POST </button>
+            <!--Se asigna el contenedor al que apuntara el elemento por medio de data-bs-target-->
+          </li>
+          
+          <li class="nav-item col-md-6" >
+              <button class="nav-link bold under" id="post" data-bs-toggle="pill" data-bs-target="#recuperacion" type="button" aria-selected="false">RECUPERACIÓN</button>
+          </li>          
+        </ul>
       </div>
     </div>
 
     <div class="input-group mb-3 bordePrincipal"> 
-      
       <div class="tab-content col-md-9" id=""> <!--Redirecciona al contenedor seleccionado, cargando la información del componente-->
-          <div class="tab-pane fade show active" id="nota"><nota /></div>
-          <div class="tab-pane fade" id="recuperacion"><recuperacion /></div>
+        <div class="tab-pane fade show active" id="nota"><nota /></div>
+        <div class="tab-pane fade" id="recuperacion"><recuperacion /></div>
       </div>
 
       <div class="col-2 menuLateralPrincipal"> <!--Menú lateral-->
         <div class="col-md-2 menuLateral">
-          <RouterLink to="pre"><img src="images/pre.png" class="ajusteImg"/></RouterLink>
+          <RouterLink to="pre">
+            <img src="images/pre.png" class="ajusteImg"/>
+          </RouterLink>
         </div>
+
         <div class="col-md-2 menuLateral">
-          <RouterLink to="trans"><img src="images/trans.png" class="ajusteImg"/></RouterLink>
+          <RouterLink to="trans">
+            <img src="images/trans.png" class="ajusteImg"/>
+          </RouterLink>
         </div>
+
         <div class="col-md-2 menuLateral">
           <img src="images/post.png" width="180" class="ajusteImg"/>
         </div>    
@@ -39,6 +50,7 @@
 <script lang="ts">
 import Nota from '../../components/post/Nota.vue';
 import Recuperacion from "../../components/post/Recuperacion.vue";
+
 export default ({
   components:{
     Recuperacion, Nota
