@@ -210,6 +210,7 @@ export default defineComponent({
       },
       async ocultarFondo(){
             document.body.style.backgroundImage = "url('')";
+            document.body.style.backgroundColor = '#F5F8FC';
       },
       async mostrarHeader(){
         document.getElementById("headerP").className='mt visible'

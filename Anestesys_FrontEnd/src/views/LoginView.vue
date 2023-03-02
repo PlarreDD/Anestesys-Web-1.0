@@ -1,60 +1,111 @@
 <template>
-  <div class="col-5 divBorder posicionEstaticaL">
-    <div class="margenL">
-      <div class="div-img">
-          <img src="images/logoA.png" class="imgLogo"/>
+  <div>
+          <!-- Modal -->   
+      <div class="">
+          <div class="modal modal-dialog" id="emergenciaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content colorModal">
+                
+                <div class="modal-header">
+                  <div class="col-12">
+                    <div class="row g-3">
+                      <div class="col-md-11 div-img">
+                        <img src="../../public/images/advertencia.svg" class="imgModal"/>                        
+                      </div> 
+                      <div class="col-md-1 div-img">                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>                     
+                    </div>
+                  </div>      
+                                                  
+                </div>
+
+                <div class="modal-body">
+                  <h3 class="fw-bold textoModal">MODO EMERGENCIA</h3>
+                  <h4 class="fw-bold textoModal">al finalizar el caso deberá ingresar sus datos para guardar la información del paciente.</h4>
+                </div>
+
+                <div class="modal-footer">
+                  <div class="col-12">
+                    <div class="row g-3">
+                      <div class="col-md-4 div-img">
+                        <button type="button" class="btn btn-modal fw-bold" data-bs-dismiss="modal">CANCELAR</button>
+                      </div>
+                      <div class="col-md-4"></div>
+                      <div class="col-md-4 div-img">
+                        <button type="button" class="btn btn-modal fw-bold" data-bs-dismiss="modal" @click="iniciarEmergencia()">ACEPTAR</button>
+                      </div>
+                    </div>
+                  </div>                  
+                </div>
+
+              </div>
+            </div>
+          </div>
       </div>
 
-      <h3 class="fw-bold">Inicia Sesión</h3>
-      {{ userStore.token }} - {{ userStore.expiresIn }}
+      <div class="col-5 divBorder posicionEstaticaL">
+          <div class="margenL">
+            <div class="div-img">
+                <img src="images/logoA.png" class="imgLogo"/>
+            </div>
 
-      <form class="row g-3" method="post" autocomplete="new-password" @submit.prevent="handleSubmit">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-          <label for="" class="form-label fw-bold">Correo electrónico</label>
-          <input type="text"
-                 :class="userCorreo == true ? 'form-control border border-danger margenInput' : 'form-control margenInput'"
-                 v-model="usr.email"
-                 id="user"
-                 placeholder="correo@mail.com"
-                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+            <h2 class="fw-bold">Inicia Sesión</h2>
+            {{ userStore.token }} - {{ userStore.expiresIn }}
 
-          <div :class="userCorreo == true ? 'visible validaCampo' : 'invisible'" id="userLogin">
-              Escriba el correo electrónico
-          </div>
-        </div>
+            <form class="row g-3" method="post" autocomplete="new-password" @submit.prevent="">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">
+                <label for="" class="form-label fw-bold">Correo electrónico</label>
+                <input type="text"
+                      :class="userCorreo == true ? 'form-control border border-danger margenInput' : 'form-control margenInput'"
+                      v-model="usr.email"
+                      id="user"
+                      placeholder="correo@mail.com"
+                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
 
-        <div class="col-md-2"></div>
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-          <label for="" class="form-label fw-bold">Contraseña</label>
-          <input type="password"
-                 :class="userContrasena == true ? 'form-control border border-danger' : 'form-control'"
-                 v-model="usr.pswd"
-                 id="contrasena"
-                 placeholder="********">
-          <span class="fa fa-fw fa-eye password-icon show-password"
-                id="mostrar"
-                @click=" mostrarPass()"></span>
-                    
-          <div id="contraLogin"
-               :class="userContrasena == true ? 'visible validaCampo' : 'invisible'"> Escriba la contraseña </div>
-        </div>
-        
-        <div class="col-md-2"></div>
-        <div class="col-md-12 div-img">
-            <button @click="validaCamposLogin()"
-                    class="btn btn-login fw-bold"> Entrar </button>
-        </div>
-        
-        <div class="col-md-12">
-          <RouterLink class="nav-link colorLinkL"
-                      to="registro"
-                      @click="cargarFondoRegistro()"> Crear una cuenta </RouterLink>
-        </div>
-      </form>
-    </div>
+                <div :class="userCorreo == true ? 'visible validaCampo' : 'invisible'" id="userLogin">
+                    Escriba el correo electrónico
+                </div>
+              </div>
+
+              <div class="col-md-2"></div>
+              <div class="col-md-2"></div>
+              <div class="col-md-8">
+                <label for="" class="form-label fw-bold">Contraseña</label>
+                <input type="password"
+                      :class="userContrasena == true ? 'form-control border border-danger' : 'form-control'"
+                      v-model="usr.pswd"
+                      id="contrasena"
+                      placeholder="********">
+                <span class="fa fa-fw fa-eye password-icon show-password"
+                      id="mostrar"
+                      @click=" mostrarPass()"></span>
+                          
+                <div id="contraLogin"
+                    :class="userContrasena == true ? 'visible validaCampo' : 'invisible'"> Escriba la contraseña </div>
+              </div>
+              
+              <div class="col-md-2"></div>
+              <div class="col-md-12 div-img">
+                  <button @click="validaCamposLogin()"
+                          class="btn btn-login fw-bold"> Entrar </button>
+              </div>
+              
+              <div class="col-md-12">
+                <RouterLink class="nav-link colorLinkL"
+                            to="registro"
+                            @click="cargarFondoRegistro()"> Crear una cuenta </RouterLink>
+              </div>
+            </form>          
+          </div>   
+      
+          <div class="div-img col-md-10">
+            <button type="button" class="btn btn-emergencia fw-bold" data-bs-toggle="modal" data-bs-target="#emergenciaModal"> !EMERGENCIA¡ </button>
+          </div>                 
+      </div>
   </div>
+  
 </template>
 
 <script lang="ts">
@@ -65,7 +116,6 @@ import { ref,
 import swal from 'sweetalert2'
 
 const userStore = useUserStore();
-
 export default defineComponent({
   mounted: function() { // Llama el método despues de cargar la página
     this.cargarFondo();
@@ -107,11 +157,20 @@ export default defineComponent({
         this.userCorreo = false;
         this.userContrasena = false;
 
+        this.usr.email = ""
+        this.usr.pswd = ""
+
         /*Codigo funcional*/
         userStore.loginAccess(this.usr.email, this.usr.pswd);
         this.mostrarMensaje();
         this.$router.push('pre')
       }
+    },
+
+    async iniciarEmergencia(){
+      userStore.token = "tokenEmergencia"
+      userStore.expiresIn = 900
+      this.$router.push('pre')
     },
 
     async mostrarMensaje(){
@@ -155,6 +214,12 @@ userStore.refreshToken();
 </script>
 
 <style>
+
+.modal-dialog {
+ 
+          width: 360px;
+ 
+        }
 .divBorder {
   border-top-left-radius: 55px;
   border-bottom-left-radius: 55px;
@@ -183,7 +248,35 @@ userStore.refreshToken();
     --bs-btn-active-color: #E88300;
     --bs-btn-active-border-color: #E88300; 
     margin-top: 15px;  
+    width: 130px;     
+}
+.btn-emergencia {
+    --bs-btn-bg: #D11515;
+    --bs-btn-color: #ffffff;    
+    --bs-btn-border-color: #D11515;
+    --bs-btn-hover-bg: #D11515;
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-border-color: #D11515;          
+    --bs-btn-active-bg: #ffffff;
+    --bs-btn-active-color: #D11515;
+    --bs-btn-active-border-color: #D11515; 
     width: 130px; 
+    font-size: small;
+    position: absolute;
+    bottom: 35px;
+}
+.btn-modal {
+    --bs-btn-bg: #ffffff; 
+    --bs-btn-color: #002D60;    
+    --bs-btn-border-color: #ffffff;
+    --bs-btn-hover-bg: #ffffff;
+    --bs-btn-hover-color: #002D60;
+    --bs-btn-hover-border-color: #ffffff;          
+    --bs-btn-active-bg: #002D60;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-border-color: #ffffff; 
+    margin-top: 15px;  
+    width: 130px;     
 }
 h2{
   text-align: center;
@@ -220,5 +313,20 @@ label{
   margin: -25px 10px 0 0;
   cursor: pointer;
   color: gray;
+}
+.colorModal{
+  background-color: #D11515;
+}
+.tamanoModal{
+  width: 800px;
+  height: auto;
+}
+.imgModal {
+  width: 80px;
+  height: auto;   
+}
+.textoModal {
+  text-align: center;
+  color: #ffffff;
 }
 </style>
