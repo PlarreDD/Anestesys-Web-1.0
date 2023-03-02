@@ -6,9 +6,8 @@
       </div>
 
       <h3 class="fw-bold">Inicia Sesión</h3>
-      {{ userStore.token }} - {{ userStore.expiresIn }}
 
-      <form class="row g-3" method="post" autocomplete="new-password" @submit.prevent="handleSubmit">
+      <form class="row g-3" method="post" autocomplete="new-password" @submit.prevent="">
         <div class="col-md-2"></div>
         <div class="col-md-8">
           <label for="" class="form-label fw-bold">Correo electrónico</label>
@@ -44,7 +43,7 @@
         <div class="col-md-2"></div>
         <div class="col-md-12 div-img">
             <button @click="validaCamposLogin()"
-                    class="btn btn-login fw-bold"> Entrar </button>
+                    class="btn btn-login fw-bold" > Entrar </button>
         </div>
         
         <div class="col-md-12">
@@ -81,7 +80,7 @@ export default defineComponent({
           usr: { } as regUsr,
           userStore,
           userCorreo:false,
-          userContrasena:false
+          userContrasena:false,
       };
   },
   
@@ -107,24 +106,8 @@ export default defineComponent({
         this.userCorreo = false;
         this.userContrasena = false;
 
-        /*Codigo funcional*/
         userStore.loginAccess(this.usr.email, this.usr.pswd);
-        this.mostrarMensaje();
-        this.$router.push('pre')
       }
-    },
-
-    async mostrarMensaje(){
-      swal.fire({
-        html: 'Bienvenido <b>Dr. García</b>',
-        icon: 'info',
-        showConfirmButton: false,
-        showCloseButton: true,  
-        timer: 5000,
-        timerProgressBar: true,
-        toast: true,
-        position: 'top-end'
-      })  
     },
 
     async cargarFondo(){
@@ -151,7 +134,18 @@ export default defineComponent({
   }
 });
 
-userStore.refreshToken();
+export const mostrarMensaje = async () => {
+      swal.fire({
+        html: 'Bienvenido <b>Dr. García</b>',
+        icon: 'info',
+        showConfirmButton: false,
+        showCloseButton: true,  
+        timer: 5000,
+        timerProgressBar: true,
+        toast: true,
+        position: 'top-end'
+      })  
+}
 </script>
 
 <style>

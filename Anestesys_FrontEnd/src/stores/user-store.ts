@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { apiAxios } from '@/boot/axios';
 import { ref } from "vue";
+import router from "@/router";
 
 export const useUserStore = defineStore('user', {
     state: () => ({
@@ -10,14 +11,15 @@ export const useUserStore = defineStore('user', {
 
     actions: {
         loginAccess(email: string, pswd:string){
-            // apiAxios.post("http://localhost:5000/login", {
-            //     email: email,
-            //     password: pswd,
-            // }).then((res:any) => {
-                return this.token = "NuevoToken",
-                       this.expiresIn = "TimeOut";
-            // }).catch((e:any) =>
-            //     console.log(e));
+            apiAxios.post("http://localhost:5000/login", {
+                email: email,
+                password: pswd,
+            }).then((res:any) => {
+                this.token = res.data.tkn;
+                this.expiresIn = res.data.xprIn;
+                router.push("/pre");
+            }).catch((e:any) =>
+                console.log(e));
         },
 
         refreshToken(){

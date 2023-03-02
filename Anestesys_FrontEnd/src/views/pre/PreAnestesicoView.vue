@@ -110,6 +110,8 @@ import swal from 'sweetalert2';
 //import mitt from 'mitt';
 //import emitter from "@/services/emitter";
 
+import { mostrarMensaje } from "../LoginView.vue";
+
 export default defineComponent({
   data() {
     return {
@@ -129,6 +131,7 @@ export default defineComponent({
     this.validaExpediente(this.numExpediente, this.nomPaciente);
   },
   mounted: function() { // Llama el método despues de cargar la página
+      mostrarMensaje();
       this.ocultarFondo();
       this.mostrarHeader();    
       document.addEventListener('scroll', this.scrollFunction);              

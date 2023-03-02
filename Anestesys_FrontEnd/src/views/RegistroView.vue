@@ -80,7 +80,9 @@
 <script lang="ts">
 import { apiAxios } from '@/boot/axios';
 import type { regUsr } from '@/interfaces/regUsr';
-import { ref } from "vue";
+import { ref,
+         defineComponent } from "vue"
+import swal from 'sweetalert2'
 
 const NombreDr = ref('');
 const ApPatDr = ref('');
@@ -88,11 +90,6 @@ const FechaNac = ref('');
 var arr = [];
 const genPswd = ref('');
 
-import { defineComponent } from "vue"
-import swal from 'sweetalert2'
-
-//import nodemailer from 'nodemailer';
-//import Mail from 'nodemailer/lib/mailer';
 
 export default defineComponent({
     data() {
@@ -178,10 +175,6 @@ export default defineComponent({
                 this.userApellido=false
                 this.userCorreo=false
                 this.userFecha=false
-                
-                //this.sendEmail();
-                
-                //this.$router.push('/')
             }
         },
 
