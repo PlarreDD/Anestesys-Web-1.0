@@ -184,13 +184,14 @@ export default defineComponent({
                 this.userApellido = false
                 this.userCorreo = false
                 this.userFecha = false
-
+                
+                userStore.registerUsr(this.usr.email, this.usr.nomUsr, this.usr.apUsr, this.usr.fechaNac);
+                
                 this.usr.nomUsr = ""
                 this.usr.apUsr = ""
                 this.usr.email = ""
                 this.usr.fechaNac = ""
                 
-                userStore.registerUsr(this.usr.email, this.usr.nomUsr, this.usr.apUsr, this.usr.fechaNac);
                 this.$router.push('/')
             }
         },

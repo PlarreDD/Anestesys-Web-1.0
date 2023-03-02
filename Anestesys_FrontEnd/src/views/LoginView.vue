@@ -155,11 +155,11 @@ export default defineComponent({
       else{
         this.userCorreo = false;
         this.userContrasena = false;
+        
+        userStore.loginAccess(this.usr.email, this.usr.pswd);
 
         this.usr.email = ""
         this.usr.pswd = ""
-
-        userStore.loginAccess(this.usr.email, this.usr.pswd);
       }
     },
 
