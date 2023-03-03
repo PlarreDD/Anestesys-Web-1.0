@@ -1,110 +1,120 @@
 <template>
   <div>
-          <!-- Modal -->   
-      <div class="">
-          <div class="modal" id="emergenciaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered" style="width:1250px;">
-              <div class="modal-content colorModal">
-                
-                <div class="modal-header">
-                  <div class="col-12">
-                    <div class="row g-3">
-                      <div class="col-md-11 div-img">
-                        <img src="../../public/images/advertencia.svg" class="imgModal"/>                        
-                      </div> 
-                      <div class="col-md-1 div-img">                        
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>                     
-                    </div>
-                  </div>      
-                                                  
+    <div class="">
+      <div class="modal"
+           id="emergenciaModal"
+           tabindex="-1"
+           aria-labelledby="exampleModalLabel"
+           aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" style="width:1250px;">
+          <div class="modal-content colorModal">
+            <div class="modal-header">
+              <div class="col-12">
+                <div class="row g-3">
+                  <div class="col-md-11 div-img">
+                    <img src="../../public/images/advertencia.svg" class="imgModal"/>
+                  </div>
+                  
+                  <div class="col-md-1 div-img">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
                 </div>
-
-                <div class="modal-body">
-                  <h2 class="fw-bold textoModal">MODO EMERGENCIA</h2>
-                  <h3 class="textoModal">al finalizar el caso deberá ingresar sus datos para guardar la información del paciente.</h3>
-                </div>
-
-                <div class="modal-footer">
-                  <div class="col-12">
-                    <div class="row g-3">
-                      <div class="col-md-4 div-img">
-                        <button type="button" class="btn btn-modal fw-bold" data-bs-dismiss="modal">CANCELAR</button>
-                      </div>
-                      <div class="col-md-4"></div>
-                      <div class="col-md-4 div-img">
-                        <button type="button" class="btn btn-modal fw-bold" data-bs-dismiss="modal" @click="iniciarEmergencia()">ACEPTAR</button>
-                      </div>
-                    </div>
-                  </div>                  
-                </div>
-
               </div>
+            </div>
+
+            <div class="modal-body">
+              <h2 class="fw-bold textoModal">MODO EMERGENCIA</h2>
+              <h3 class="textoModal">al finalizar el caso deberá ingresar sus datos para guardar la información del paciente.</h3>
+            </div>
+
+            <div class="modal-footer">
+              <div class="col-12">
+                <div class="row g-3">
+                  <div class="col-md-4 div-img">
+                    <button type="button"
+                            class="btn btn-modal fw-bold"
+                            data-bs-dismiss="modal"> CANCELAR </button>
+                  </div>
+                  
+                  <div class="col-md-4"></div>
+                  
+                  <div class="col-md-4 div-img">
+                    <button type="button"
+                            class="btn btn-modal fw-bold"
+                            data-bs-dismiss="modal"
+                            @click="iniciarEmergencia()"> ACEPTAR </button>
+                  </div>
+                </div>
+              </div>                  
             </div>
           </div>
+        </div>
       </div>
+    </div>
 
-      <div class="col-5 divBorder posicionEstaticaL">
-          <div class="margenL">
-            <div class="div-img">
-                <img src="images/logoA.png" class="imgLogo"/>
+    <div class="col-5 divBorder posicionEstaticaL">
+      <div class="margenL">
+        <div class="div-img">
+            <img src="images/logoA.png" class="imgLogo"/>
+        </div>
+
+        <h2 class="fw-bold h2Estilo"> Inicia Sesión </h2>
+
+        <form class="row g-3" method="post" autocomplete="new-password" @submit.prevent="">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <label for="" class="form-label fw-bold">Correo electrónico</label>
+            <input type="text"
+                  :class="userCorreo == true ? 'form-control border border-danger margenInput' : 'form-control margenInput'"
+                  v-model="usr.email"
+                  id="user"
+                  placeholder="correo@mail.com"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+
+            <div :class="userCorreo == true ? 'visible validaCampo' : 'invisible'" id="userLogin">
+                Escriba el correo electrónico
             </div>
+          </div>
 
-            <h2 class="fw-bold h2Estilo">Inicia Sesión</h2>
-
-            <form class="row g-3" method="post" autocomplete="new-password" @submit.prevent="">
-              <div class="col-md-2"></div>
-              <div class="col-md-8">
-                <label for="" class="form-label fw-bold">Correo electrónico</label>
-                <input type="text"
-                      :class="userCorreo == true ? 'form-control border border-danger margenInput' : 'form-control margenInput'"
-                      v-model="usr.email"
-                      id="user"
-                      placeholder="correo@mail.com"
-                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-
-                <div :class="userCorreo == true ? 'visible validaCampo' : 'invisible'" id="userLogin">
-                    Escriba el correo electrónico
-                </div>
-              </div>
-
-              <div class="col-md-2"></div>
-              <div class="col-md-2"></div>
-              <div class="col-md-8">
-                <label for="" class="form-label fw-bold">Contraseña</label>
-                <input type="password"
-                      :class="userContrasena == true ? 'form-control border border-danger' : 'form-control'"
-                      v-model="usr.pswd"
-                      id="contrasena"
-                      placeholder="********">
-                <span class="fa fa-fw fa-eye password-icon show-password"
-                      id="mostrar"
-                      @click=" mostrarPass()"></span>
-                          
-                <div id="contraLogin"
-                    :class="userContrasena == true ? 'visible validaCampo' : 'invisible'"> Escriba la contraseña </div>
-              </div>
-              
-              <div class="col-md-2"></div>
-              <div class="col-md-12 div-img">
-                  <button @click="validaCamposLogin()"
-                          class="btn btn-login fw-bold"> Entrar </button>
-              </div>
-              
-              <div class="col-md-12">
-                <RouterLink class="nav-link colorLinkL"
-                            to="registro"
-                            @click="cargarFondoRegistro()"> Crear una cuenta </RouterLink>
-              </div>
-            </form>          
-          </div>   
-      
-          <div class="div-img col-md-10">
-            <button type="button" class="btn btn-emergencia fw-bold" data-bs-toggle="modal" data-bs-target="#emergenciaModal"> !EMERGENCIA¡ </button>
-          </div>                 
+          <div class="col-md-2"></div>
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <label for="" class="form-label fw-bold">Contraseña</label>
+            <input type="password"
+                  :class="userContrasena == true ? 'form-control border border-danger' : 'form-control'"
+                  v-model="usr.pswd"
+                  id="contrasena"
+                  placeholder="********">
+            <span class="fa fa-fw fa-eye password-icon show-password"
+                  id="mostrar"
+                  @click=" mostrarPass()"></span>
+                      
+            <div id="contraLogin"
+                :class="userContrasena == true ? 'visible validaCampo' : 'invisible'"> Escriba la contraseña </div>
+          </div>
+          
+          <div class="col-md-2"></div>
+          <div class="col-md-12 div-img">
+              <button @click="validaCamposLogin()"
+                      class="btn btn-login fw-bold"> Entrar </button>
+          </div>
+          
+          <div class="col-md-12">
+            <RouterLink class="nav-link colorLinkL"
+                        to="registro"
+                        @click="cargarFondoRegistro()"> Crear una cuenta </RouterLink>
+          </div>
+        </form>
       </div>
-  </div>
-  
+
+      <div class="div-img col-md-10">
+        <button type="button"
+                class="btn btn-emergencia fw-bold"
+                data-bs-toggle="modal"
+                data-bs-target="#emergenciaModal"> !EMERGENCIA¡ </button>
+      </div>                 
+    </div>
+  </div>  
 </template>
 
 <script lang="ts">
@@ -126,31 +136,31 @@ export default defineComponent({
   },
 
   data() {
-      return{
-          usr: { } as regUsr,
-          userStore,
-          userCorreo:false,
-          userContrasena:false,
-      };
+    return{
+        usr: { } as regUsr,
+        userStore,
+        userCorreo:false,
+        userContrasena:false,
+    };
   },
   
   methods: {
     async validaCamposLogin() {
       if(this.usr.email == undefined || this.usr.email == "" ||
-         this.usr.pswd == undefined || this.usr.pswd =="") {   
-          if(this.usr.email == undefined || this.usr.email == ""){
-            this.userCorreo = true;
-          }
-          else{
-            this.userCorreo = false;
-          }
+         this.usr.pswd == undefined || this.usr.pswd =="") {
+        if(this.usr.email == undefined || this.usr.email == ""){
+          this.userCorreo = true;
+        }
+        else{
+          this.userCorreo = false;
+        }
 
-          if(this.usr.pswd == undefined || this.usr.pswd == ""){
-            this.userContrasena = true;
-          }
-          else{
-            this.userContrasena = false;
-          }
+        if(this.usr.pswd == undefined || this.usr.pswd == ""){
+          this.userContrasena = true;
+        }
+        else{
+          this.userContrasena = false;
+        }
       }
       else{
         this.userCorreo = false;
@@ -169,25 +179,12 @@ export default defineComponent({
       this.$router.push('pre')
     },
 
-    async mostrarMensaje(){
-      swal.fire({
-        html: 'Bienvenido <b>Dr. García</b>',
-        icon: 'info',
-        showConfirmButton: false,
-        showCloseButton: true,  
-        timer: 5000,
-        timerProgressBar: true,
-        toast: true,
-        position: 'top-end'
-      })  
-    },
-
     async cargarFondo(){
-          document.body.style.backgroundImage = "url('../../public/images/login.webp')";
+      document.body.style.backgroundImage = "url('../../public/images/login.webp')";
     },
 
     async cargarFondoRegistro(){
-          document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
+      document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
     },
 
     async ocultarHeader(){
@@ -195,28 +192,28 @@ export default defineComponent({
     },
 
     async mostrarPass(){
-          if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
-              (document.getElementById("contrasena") as HTMLInputElement).type = "password";
-              document.getElementById("mostrar").className='fa fa-fw fa-eye password-icon show-password'
-          } else {
-              (document.getElementById("contrasena") as HTMLInputElement).type = "text";
-              document.getElementById("mostrar").className='fa fa-fw fa-eye-slash password-icon show-password'
-          }
+      if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
+        (document.getElementById("contrasena") as HTMLInputElement).type = "password";
+        document.getElementById("mostrar").className='fa fa-fw fa-eye password-icon show-password'
+      } else {
+        (document.getElementById("contrasena") as HTMLInputElement).type = "text";
+        document.getElementById("mostrar").className='fa fa-fw fa-eye-slash password-icon show-password'
+      }
     },
   }
 });
 
 export const mostrarMensaje = async () => {
-      swal.fire({
-        html: 'Bienvenido <b>Dr. García</b>',
-        icon: 'info',
-        showConfirmButton: false,
-        showCloseButton: true,  
-        timer: 5000,
-        timerProgressBar: true,
-        toast: true,
-        position: 'top-end'
-      })  
+  swal.fire({
+    html: 'Bienvenido <b>Dr. García</b>',
+    icon: 'info',
+    showConfirmButton: false,
+    showCloseButton: true,  
+    timer: 5000,
+    timerProgressBar: true,
+    toast: true,
+    position: 'top-end'
+  })  
 }
 </script>
 
