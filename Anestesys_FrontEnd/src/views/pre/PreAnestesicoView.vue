@@ -149,6 +149,9 @@ import Plan from "../../components/pre/Plan.vue";
 import Nota from '../../components/pre/Nota.vue';
 import swal from 'sweetalert2';
 import { mostrarMensaje } from "../LoginView.vue";
+import { useUserStore } from "@/stores/user-store";
+
+const userStore = useUserStore();
 
 export default defineComponent({
   data() {
@@ -156,7 +159,8 @@ export default defineComponent({
       numExpediente:'',
       nomPaciente:'',
       nomCirujano:'',
-      nomCirugia:''
+      nomCirugia:'',
+      userStore,
     }
   },
 
@@ -172,7 +176,7 @@ export default defineComponent({
   },
   
   mounted: function() { // Llama el método despues de cargar la página
-    mostrarMensaje("Luis", "García");
+    mostrarMensaje(userStore.Nombre, userStore.Apellido);
     this.ocultarFondo();
     this.mostrarHeader();    
     document.addEventListener('scroll', this.scrollFunction);              
