@@ -34,10 +34,17 @@ export const register = async (req:Request, res:Response) => {
 export const login = async (req:Request, res:Response) => {
     try{        
         const {email, password} = req.body;
+        var Nombre = "";
+        var Apellido = "";
 
         let user = await User.findOne({email});
 
-        if(!user) return res.status(403).json({error: "No existe el usuario"});
+        if(!user)
+            return res.status(403).json({error: "No existe el usuario"});
+        else{
+            Nombre = user.nomMed;
+            Apellido = user.apMed;
+        }
 
         const respuestaPasword = await bcryptjs.compare(password, user.password);
         
@@ -50,21 +57,10 @@ export const login = async (req:Request, res:Response) => {
         const tkn = token?.token;
         const xprIn = token?.expiresIn;
 
-        return res.json( {tkn, xprIn} );
+        return res.json( {tkn, xprIn, Nombre, Apellido} );
     }catch(error){
         console.log(error);
         return res.status(500).json({error: "Error con el servidor"});
-    }
-};
-
-export const infoUser = async(req:any, res:Response) => {
-    try{
-        const user = await User.findById(req.uid).lean();
-
-        if(user) return res.json({email: user.email, uid: user._id});
-                
-    }catch(error){
-        return res.status(500).json({error: "Error de Servidor"});
     }
 };
 

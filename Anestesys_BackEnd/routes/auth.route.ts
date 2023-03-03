@@ -1,10 +1,8 @@
 import { Router } from 'express';
-import { infoUser,
-         login,
+import { login,
          logout,
          register,
          refreshToken } from '../controllers/auth.controller';
-import { requireToken } from '../middlewares/requireToken';
 import { requireRefreshToken } from '../middlewares/requireRefreshToken';
 import { bodyLoginValidator,
          bodyRegisterValidator } from '../middlewares/validationManager';
@@ -16,6 +14,5 @@ router.post("/register", bodyRegisterValidator, register);
 router.post('/logout', logout);
 
 router.get('/refresh', requireRefreshToken, refreshToken);
-router.get('/protected', requireToken, infoUser);
 
 export default router;

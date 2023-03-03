@@ -135,7 +135,6 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script lang="ts">
@@ -173,7 +172,7 @@ export default defineComponent({
   },
   
   mounted: function() { // Llama el método despues de cargar la página
-    mostrarMensaje();
+    mostrarMensaje("Luis", "García");
     this.ocultarFondo();
     this.mostrarHeader();    
     document.addEventListener('scroll', this.scrollFunction);              
@@ -257,7 +256,6 @@ export default defineComponent({
     
     async validarCambio() {
       if (this.numExpediente.trim() != '' && this.nomPaciente.trim() != '') {
-        //document.getElementById("plan-tab").tab('show') 
         alert('Entro, no debe cambiar')       
       }
       alert('Error!')

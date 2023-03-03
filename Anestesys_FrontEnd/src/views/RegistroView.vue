@@ -16,6 +16,7 @@
                         v-model="usr.nomUsr"
                         id="nombre"
                         placeholder="Nombre completo">
+                    
                     <div :class="userNombre == true ? 'visible validaCampo' : 'invisible'" id="userNombre">
                         Escriba sus nombres
                     </div>
@@ -160,9 +161,10 @@ export default defineComponent({
 
         async mostrarMensaje(){
             swal.fire({
-                    html: 'Usuario <b>'+this.usr.nomUsr+' '+this.usr.apUsr+'</b> registrado correctamente, consulte su correo electrónico',
-                    icon: 'info', showConfirmButton: true, showCloseButton: true,
-                    toast: true, position: 'top-start'
+                html: 'Usuario <b>' + this.usr.nomUsr + ' ' + this.usr.apUsr +
+                        '</b> registrado correctamente, consulte su correo electrónico',
+                icon: 'info', showConfirmButton: true, showCloseButton: true,
+                toast: true, position: 'top-start'
             });
 
             document.body.style.backgroundImage = "url('../../public/images/login.webp')";

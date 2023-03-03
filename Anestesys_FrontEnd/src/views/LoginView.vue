@@ -203,9 +203,9 @@ export default defineComponent({
   }
 });
 
-export const mostrarMensaje = async () => {
+export const mostrarMensaje = async (Nombre: string, Apellido: string) => {
   swal.fire({
-    html: 'Bienvenido <b>Dr. García</b>',
+    html: 'Bienvenido <b>Dr. ' + Nombre + ' ' + Apellido + '</b>',
     icon: 'info',
     showConfirmButton: false,
     showCloseButton: true,  

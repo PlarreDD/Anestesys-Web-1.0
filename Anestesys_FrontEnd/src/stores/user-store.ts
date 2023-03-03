@@ -7,6 +7,8 @@ export const useUserStore = defineStore('user', {
     state: () => ({
         token: ref(null),
         expiresIn: ref(null),
+        Nombre: ref(null),
+        Apellido: ref(null),
     }),
 
     actions: {
@@ -17,6 +19,8 @@ export const useUserStore = defineStore('user', {
             }).then((res:any) => {
                 this.token = res.data.tkn;
                 this.expiresIn = res.data.xprIn;
+                this.Nombre = res.data.Nombre;
+                this.Apellido = res.data.Apellido;
                 router.push("/pre");
             }).catch((e:any) =>
                 console.log(e));
