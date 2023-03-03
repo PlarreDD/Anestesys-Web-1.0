@@ -82,25 +82,13 @@
 </template>
 
 <script lang="ts">
-// import { apiAxios } from '@/boot/axios';
 import type { regUsr } from '@/interfaces/regUsr';
 import { useUserStore } from '@/stores/user-store';
 import swal from 'sweetalert2'
 import { ref,
          defineComponent } from "vue";
 
-// const NombreDr = ref('');
-// const ApPatDr = ref('');
-// const FechaNac = ref('');
-// var arr = [];
-// const genPswd = ref('');
 const userStore = useUserStore();
-
-//import {nodemailer} from 'nodemailer';
-//import Mail from 'nodemailer/lib/mailer';
-// const {nodemailer} = require('nodemailer')
-// const {Mail} = require('nodemailer/lib/mailer')
-//import { MessageClient } from "cloudmailin"
 
 export default defineComponent({
     data() {
@@ -124,33 +112,7 @@ export default defineComponent({
         this.cargarFondo()
     },
 
-    methods: {
-        // handleSubmit() {
-            // NombreDr.value = this.usr.nomUsr.trim();
-            // arr = Array.from(NombreDr.value);
-            // genPswd.value = arr[0] + arr[1] + arr[2];
-
-            // ApPatDr.value = this.usr.apUsr.trim();
-            // arr = Array.from(ApPatDr.value);
-            // genPswd.value = genPswd.value + arr[0] + arr[1] + '#';
-            
-            // FechaNac.value = this.usr.fechaNac;
-            // arr = Array.from(FechaNac.value);
-            // genPswd.value = genPswd.value + arr[5] + arr[6] + arr[2] + arr[3];
-
-            // console.log("Contraseña: " + genPswd.value);
-            
-            // apiAxios.post("http://localhost:5000/register", {
-            //     email: this.usr.email,
-            //     password: String(genPswd.value),
-            //     repassword: String(genPswd.value),
-            //     nomMed: this.usr.nomUsr,
-            //     apMed: this.usr.apUsr,
-            // }).then((res:any) => {
-            //     console.log(res.data);
-            // }).catch((e:any) =>
-            //     console.log(e));
-        // },
+    methods: {        
         
         async validaCamposRegistro() {
             if(this.usr.nomUsr == undefined || this.usr.nomUsr == "" ||
@@ -198,7 +160,7 @@ export default defineComponent({
 
         async mostrarMensaje(){
             swal.fire({
-                    html: 'Usuario <b>Nombre</b> registrado correctamente, consulte su correo electrónico',
+                    html: 'Usuario <b>'+this.usr.nomUsr+' '+this.usr.apUsr+'</b> registrado correctamente, consulte su correo electrónico',
                     icon: 'info', showConfirmButton: true, showCloseButton: true,
                     toast: true, position: 'top-start'
             });

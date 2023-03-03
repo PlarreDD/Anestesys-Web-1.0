@@ -61,9 +61,7 @@
                 </li>
 
                 <li class="nav-item">
-                  <!-- <a href="/"> -->
                     <button class="btn btn-configuracion fw-bold" @click=" userLogout()">Salir</button>
-                  <!-- </a> -->
                 </li>
               </ul>              
             </div>
@@ -74,16 +72,12 @@
 </template>
 
 <script lang="ts">
-// import { useUserStore } from "@/stores/user-store";
 import { defineComponent } from "vue";
-
-//const userStore = useUserStore();
 
 export default defineComponent({
   methods:{
     userLogout(){
       console.log("salir");
-      // userStore.logout();
     },
   }
 })
@@ -134,7 +128,7 @@ export default defineComponent({
 .estiloDropDown{
   width: 450px; height: 250px;
 }
-.btn-menu {
+.btn-menu {    
     --bs-btn-bg: #002d60;
     --bs-btn-color: #ffffff;    
     --bs-btn-border-color: #002d60;
@@ -143,7 +137,7 @@ export default defineComponent({
     --bs-btn-hover-border-color: #002d60;          
     --bs-btn-active-bg: #002d60;
     --bs-btn-active-color: #ffffff;
-    --bs-btn-active-border-color: #002d60;    
+    --bs-btn-active-border-color: #002d60;  
 }
 .btn-configuracion {
     --bs-btn-bg: #ffffff;
