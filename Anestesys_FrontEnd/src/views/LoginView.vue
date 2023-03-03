@@ -2,8 +2,8 @@
   <div>
           <!-- Modal -->   
       <div class="">
-          <div class="modal modal-dialog" id="emergenciaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+          <div class="modal" id="emergenciaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" style="width:1250px;">
               <div class="modal-content colorModal">
                 
                 <div class="modal-header">
@@ -21,8 +21,8 @@
                 </div>
 
                 <div class="modal-body">
-                  <h3 class="fw-bold textoModal">MODO EMERGENCIA</h3>
-                  <h4 class="fw-bold textoModal">al finalizar el caso deberá ingresar sus datos para guardar la información del paciente.</h4>
+                  <h2 class="fw-bold textoModal">MODO EMERGENCIA</h2>
+                  <h3 class="textoModal">al finalizar el caso deberá ingresar sus datos para guardar la información del paciente.</h3>
                 </div>
 
                 <div class="modal-footer">
@@ -50,7 +50,7 @@
                 <img src="images/logoA.png" class="imgLogo"/>
             </div>
 
-      <h3 class="fw-bold">Inicia Sesión</h3>
+            <h2 class="fw-bold h2Estilo">Inicia Sesión</h2>
 
             <form class="row g-3" method="post" autocomplete="new-password" @submit.prevent="">
               <div class="col-md-2"></div>
@@ -221,12 +221,19 @@ export const mostrarMensaje = async () => {
 </script>
 
 <style>
+.modal-dialog,
+.modal-content {
+    height: 50%;
+}
 
-.modal-dialog {
- 
-          width: 360px;
- 
-        }
+.modal-header{
+  border-bottom: #D11515;
+}
+
+.modal-footer{
+  border-top: #D11515;
+}
+
 .divBorder {
   border-top-left-radius: 55px;
   border-bottom-left-radius: 55px;
@@ -285,7 +292,7 @@ export const mostrarMensaje = async () => {
     margin-top: 15px;  
     width: 130px;     
 }
-h2{
+.h2Estilo{
   text-align: center;
   color: #002D60;
   margin-top: 15px;
@@ -329,7 +336,7 @@ label{
   height: auto;
 }
 .imgModal {
-  width: 80px;
+  width: 180px;
   height: auto;   
 }
 .textoModal {

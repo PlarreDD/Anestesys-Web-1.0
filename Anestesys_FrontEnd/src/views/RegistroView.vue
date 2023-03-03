@@ -5,7 +5,7 @@
                 <img src="images/logoA.png" class="imgLogo"/>
             </div>
 
-            <h2 class="fw-bold h2Margen">Nuevo Usuario</h2>
+            <h2 class="fw-bold h2Estilo">Nuevo Usuario</h2>
         
             <form class="row g-3" method="post" autocomplete="off" @submit.prevent="">
                 <div class="col-md-2"></div>
@@ -256,8 +256,11 @@ export default defineComponent({
 .margenLabelR{
   margin-bottom: 5px
 }
-.h2Margen{
-    margin-bottom: 40px
+.h2Estilo{
+  margin-bottom: 40px;
+  text-align: center;
+  color: #002D60;
+  margin-top: 15px;
 }
 .colorLinkA{
   color: #E88300;
@@ -272,12 +275,6 @@ export default defineComponent({
 }
 .margenR{
   margin-top: 80px;
-}
-h2{
-  text-align: center;
-  color: #002D60;
-  margin-top: 15px;
-  margin-bottom: 20px;
 }
 label{
   color: #002D60;  
