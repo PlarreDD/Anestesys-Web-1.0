@@ -25,7 +25,8 @@ export const register = async (req:Request, res:Response) => {
     }catch(error){
         console.log(error);
 
-        if(error.code === 11000) return res.status(400).json({error: "Usuario ya registrado"});
+        if(error.code === 11000)
+            return res.status(400).json({error: "Usuario ya registrado"});
         
         return res.status(500).json({error: "Error con el servidor"});
     }
@@ -39,16 +40,16 @@ export const login = async (req:Request, res:Response) => {
 
         let user = await User.findOne({email});
 
-        if(!user)
-            return res.status(403).json({error: "No existe el usuario"});
-        else{
+        if(!user) throw {code: 12000};
+        else
+        {
             Nombre = user.nomMed;
             Apellido = user.apMed;
         }
 
         const respuestaPasword = await bcryptjs.compare(password, user.password);
         
-        if(!respuestaPasword) return res.status(403).json({error: "Contraseña Incorrecta"});
+        if(!respuestaPasword) throw {code: 13000};
         
         //Generar el JWT
         const token = generateToken(user.id);
@@ -60,6 +61,12 @@ export const login = async (req:Request, res:Response) => {
         return res.json( {tkn, xprIn, Nombre, Apellido} );
     }catch(error){
         console.log(error);
+
+        if (error.code == 12000)
+            return res.status(403).json({error: "Usuario Inválido"});
+        else if (error.code == 13000)
+            return res.status(403).json({error: "Contraseña Incorrecta"});
+
         return res.status(500).json({error: "Error con el servidor"});
     }
 };

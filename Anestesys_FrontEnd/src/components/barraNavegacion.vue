@@ -11,59 +11,77 @@
           </div>
 
           <div class="col-md-5 alinearElementoD">
-            <button class="btn btn-menu" type="button" data-bs-toggle="dropdown" aria-controls="offcanvasNavbar"><i class="fa-solid fa-2x fa-bars"></i></button>
-            
+            <button class="btn btn-menu"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-controls="offcanvasNavbar">
+              <i class="fa-solid fa-2x fa-bars"></i>
+            </button>
+
             <form class="dropdown-menu p-5">
               <div class="mb-3 estiloDropDown input-group mb-3"></div>
             </form>            
           </div>
          
           <div class="col-md-2 text-white alinearElementoD">
-            <img src="images/perfil.jpg" class="imgPerfil"/>{{}}Dr. García
+            <img src="images/perfil.jpg" class="imgPerfil"/> {{ "Dr. García" }}
           </div>
 
           <div class="col-md-1 alinearElementoD">
-            <button class="btn btn-menu" type="button" data-bs-toggle="offcanvas" data-bs-target="#barraConfiguracion" aria-controls="offcanvasNavbar">
+            <button class="btn btn-menu"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#barraConfiguracion"
+                    aria-controls="offcanvasNavbar">
               <i class="fa-solid fa-2x fa-ellipsis"></i>
             </button>
           </div>                      
 
-          <div class="offcanvas nav-config" tabindex="-1" id="barraConfiguracion" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas nav-config"
+               tabindex="-1"
+               id="barraConfiguracion"
+               aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
-              <h5 class="offcanvas-title fw-bold text-dark" id="offcanvasNavbarLabel">Configuración</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              <h5 class="offcanvas-title fw-bold text-dark"
+                  id="offcanvasNavbarLabel"> Configuración </h5>
+              <button type="button"
+                      class="btn-close"
+                      data-bs-dismiss="offcanvas"
+                      aria-label="Close">
+              </button>
             </div>
 
             <div class="offcanvas-body">
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li class="nav-item">
                   <a href="#">
-                    <button class="btn btn-configuracion fw-bold">Ver Perfil</button>
+                    <button class="btn btn-configuracion fw-bold"> Ver Perfil </button>
                   </a>
                 </li> 
                 
                 <li class="nav-item">
                   <RouterLink to="medicamentos">
-                    <button class="btn btn-configuracion fw-bold">Medicamentos</button>
+                    <button class="btn btn-configuracion fw-bold"> Medicamentos </button>
                   </RouterLink>
                 </li>
                 
                 <li class="nav-item">
                   <a to="#">
-                    <button class="btn btn-configuracion fw-bold">Tendencias</button>
+                    <button class="btn btn-configuracion fw-bold"> Tendencias </button>
                   </a>
                 </li>
                 
                 <li class="nav-item">
                   <a to="#">
-                    <button class="btn btn-configuracion fw-bold">Teclado</button>
+                    <button class="btn btn-configuracion fw-bold"> Teclado </button>
                   </a>
                 </li>
 
                 <li class="nav-item">
-                    <button class="btn btn-configuracion fw-bold" @click=" userLogout()">Salir</button>
+                    <button class="btn btn-configuracion fw-bold"
+                            @click=" userLogout()"> Salir </button>
                 </li>
-              </ul>              
+              </ul>
             </div>
           </div>
         </div>

@@ -23,7 +23,7 @@
             </div>
 
             <div class="modal-body">
-              <h2 class="fw-bold textoModal">MODO EMERGENCIA</h2>
+              <h2 class="fw-bold textoModal"> MODO EMERGENCIA </h2>
               <h3 class="textoModal">al finalizar el caso deberá ingresar sus datos para guardar la información del paciente.</h3>
             </div>
 
@@ -81,10 +81,10 @@
           <div class="col-md-8">
             <label for="" class="form-label fw-bold">Contraseña</label>
             <input type="password"
-                  :class="userContrasena == true ? 'form-control border border-danger' : 'form-control'"
-                  v-model="usr.pswd"
-                  id="contrasena"
-                  placeholder="********">
+                   :class="userContrasena == true ? 'form-control border border-danger' : 'form-control'"
+                   v-model="usr.pswd"
+                   id="contrasena"
+                   placeholder="********">
             <span class="fa fa-fw fa-eye password-icon show-password"
                   id="mostrar"
                   @click=" mostrarPass()"></span>
@@ -107,11 +107,11 @@
         </form>
       </div>
 
-      <div class="div-img col-md-10">
+      <div class="div-img col-md-9">
         <button type="button"
                 class="btn btn-emergencia fw-bold"
                 data-bs-toggle="modal"
-                data-bs-target="#emergenciaModal"> !EMERGENCIA¡ </button>
+                data-bs-target="#emergenciaModal"> ¡EMERGENCIA! </button>
       </div>                 
     </div>
   </div>  

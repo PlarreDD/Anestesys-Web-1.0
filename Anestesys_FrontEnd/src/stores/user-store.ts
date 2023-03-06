@@ -20,10 +20,11 @@ export const useUserStore = defineStore('user', {
                 this.token = res.data.tkn;
                 this.expiresIn = res.data.xprIn;
                 this.Nombre = res.data.Nombre;
-                this.Apellido = res.data.Apellido;
+                this.Apellido = res.data.Apellido;                
                 router.push("/pre");
-            }).catch((e:any) =>
-                console.log(e));
+            }).catch((res:any) => {
+                console.log("Usuario o contraseña inválidos");                    
+            });
         },
 
         refreshToken(){
@@ -73,7 +74,7 @@ export const useUserStore = defineStore('user', {
             }).then((res:any) => {
                 console.log(res.data);
             }).catch((e:any) =>
-                console.log(e));
+                console.log("Usuario ya registrado"));
         },
 
         logout(){
