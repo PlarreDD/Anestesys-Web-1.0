@@ -155,12 +155,6 @@ export default defineComponent({
   margin-bottom: 10px;
   backdrop-filter: blur(40px) brightness(97%);  
 }
-.margenRadio {
-    margin-right: 10px;
-}
-.margenBoton{
-    margin-top: 48px;
-}
 .formSombra:focus {
     border-color:green;
     outline:0;
@@ -179,5 +173,11 @@ export default defineComponent({
     --bs-btn-active-bg: #002d60;
     --bs-btn-active-border-color: #ced4da;
     --bs-btn-bg: #ffffff;
+}
+.margenRadio {
+    margin-right: 10px;
+}
+.margenBoton{
+    margin-top: 48px;
 }
 </style>

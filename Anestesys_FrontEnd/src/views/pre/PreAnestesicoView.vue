@@ -9,20 +9,20 @@
       </div>
 
       <div class="col-md-2">
-        <div class="centrarBoton">
-          <button class="btn btn-outline-secundario fw-bold"> Nuevo Paciente </button>
+        <div class="alinearBotonDerecha">
+          <button class="btn btn-icono fw-bold"><img class="btn-paciente" src="images/imgIcon/nuevo-pac.svg"/> Nuevo Paciente </button>
         </div>
       </div>
 
       <div class="col-md-2">
         <div class="centrarBoton">
-          <button class="btn btn-outline-secundario fw-bold"> Nuevo Registro </button>
+          <button class="btn btn-icono fw-bold"><img class="btn-registro" src="images/imgIcon/nuevo.svg"/> Nuevo Registro </button>
         </div>
       </div>
       
       <div class="col-md-2">
-        <div class="centrarBoton">
-          <button class="btn btn-outline-secundario fw-bold"> Historial Paciente </button>
+        <div class="alinearBotonDerecha">
+          <button class="btn btn-icono fw-bold"><img class="btn-historial" src="images/imgIcon/historial-pac.svg"/> Historial Paciente </button>
         </div>
       </div>
     </div>
@@ -31,17 +31,18 @@
       <div class="col-10 divform navbar-nav">
         <ul class="nav nav-pills nav-fill text-center" id=""> <!--Lista para el menú principal-->
           <li class="nav-item col-md-3" >
-            <button class="nav-link active fw-bold underBold"
+            <button 
+                    :class="esPaciente == true ? 'btn-barra-act fw-bold active' : 'btn-barra-des fw-bold active'"
                     id="id-tab"
                     href="#pre-id"
                     data-bs-toggle="tab"
                     type="submit"
-                    aria-selected="true"> ID PACIENTE </button>
+                    aria-selected="true" @click="validaSeleccionId()"> ID PACIENTE </button>
             <!--Se asigna el contenedor al que apuntara el elemento por medio de data-bs-target-->
           </li>
 
           <li class="nav-item col-md-3">
-            <button class="nav-link fw-bold under"
+            <button class="nav-link fw-bold"
                     id = "valoracion-tab"
                     href="#pre-valoracion"
                     data-bs-toggle="tab"
@@ -51,15 +52,17 @@
           </li>
 
           <li class="nav-item col-md-3">
-            <button class="nav-link fw-bold under"
+            <button 
+                    :class="esPlan == true ? 'btn-barra-act fw-bold' : 'btn-barra-des fw-bold'"
                     id="plan-tab"
                     href="#pre-plan"
+                    data-bs-toggle="tab"
                     type="submit"
-                    aria-selected="false"> PLAN </button>
+                    aria-selected="false" @click="validaSeleccionPlan()"> PLAN </button>
           </li>
 
           <li class="nav-item col-md-3" >
-            <button class="nav-link fw-bold under"
+            <button class="nav-link fw-bold"
                     id="nota-tab"
                     href="#pre-nota"
                     data-bs-toggle="tab"
@@ -93,26 +96,26 @@
 
       <div class="col-2 menuLateralPrincipal"> <!--Menú lateral-->
         <div class="col-md-2 menuLateral">
-          <img src="images/pre.png" class="ajusteImg"/>
+          <img src="images/pre.svg" class="img-menu-lateral"/>
         </div>
         
         <div class="col-md-2 menuLateral">
           <RouterLink to="trans">
-            <img src="images/trans.png" class="ajusteImg"/>
+            <img src="images/trans_off.svg" class="img-menu-lateral"/>
           </RouterLink>
         </div>
         
         <div class="col-md-2 menuLateral">
           <RouterLink to="post">
-            <img src="images/post.png" class="ajusteImg"/>
+            <img src="images/post_off.svg" class="img-menu-lateral"/>
           </RouterLink>
         </div>                                                                                         
       </div>
       
-      <div class="container text-center col-md-9 posicionEstatica bordeContenedor fw-bold">
+      <div class="container text-center col-md-9 posicionEstatica fw-bold">
         <div class="row">
           <div class="col bordeColumna">
-            <label class="form-label">
+            <label class="form-label text-white">
               {{nomPaciente}}
             </label>                                  
           </div>
@@ -161,6 +164,10 @@ export default defineComponent({
       nomCirujano:'',
       nomCirugia:'',
       userStore,
+      esPaciente: false,
+      esValoracion: false,
+      esPlan: false,
+      esNota: false
     }
   },
 
@@ -177,7 +184,8 @@ export default defineComponent({
   
   mounted: function() { // Llama el método despues de cargar la página
     mostrarMensaje(userStore.Nombre, userStore.Apellido);
-    this.ocultarFondo();
+    this.validaSeleccionId()
+    this.ocultarFondo();    
     this.mostrarHeader();    
     document.addEventListener('scroll', this.scrollFunction);              
   },
@@ -227,6 +235,35 @@ export default defineComponent({
       }
     },
 
+    async validaSeleccionId(){
+      if(document.getElementById("id-tab").ariaSelected=="true"){
+        this.esPaciente=true;
+        this.esValoracion=false;
+        this.esPlan=false;
+        this.esNota=false;
+      }
+      else
+        this.esPaciente=false
+    },
+
+    async validaSeleccionPlan(){
+      if(document.getElementById("plan-tab").ariaSelected=="true"){
+        this.esPlan=true;
+        this.esPaciente=false;
+        this.esValoracion=false;        
+        this.esNota=false;
+      }
+      else
+        this.esPlan=false
+    },
+
+    async ocultarBorde() {
+      if (document.getElementById("id-tab").ariaSelected=="false"){
+        document.getElementById("id-tab").className="nav-link active fw-bold"
+        alert('Entro')
+      }
+    },
+
     async actualizaDatos(numeroExpediente,nombrePaciente, nombreCirujano, cirugia) {
       this.numExpediente=numeroExpediente,
       this.nomPaciente = nombrePaciente,
@@ -236,6 +273,13 @@ export default defineComponent({
       this.$emit('recibe-datos', this.nomPaciente, this.nomCirujano, this.nomCirugia);
       
       console.log('Pac: '+this.nomPaciente, ', Dr.: '+this.nomCirujano, ', Cx: '+this.nomCirugia)
+    },
+
+    async validarCambio() {
+      if (this.numExpediente.trim() != '' && this.nomPaciente.trim() != '') {
+        alert('Entro, no debe cambiar')       
+      }
+      alert('Error!')
     },
       
     async scrollFunction() {
@@ -249,88 +293,30 @@ export default defineComponent({
     async topFunction() {
       document.body.scrollTop = 0; // Para safari
       document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
-    },
-    
-    async ocultarBorde() {
-      if (document.getElementById("id-tab").ariaSelected=="false"){
-        document.getElementById("id-tab").className="nav-link active fw-bold"
-        alert('Entro')
-      }
-    },
-    
-    async validarCambio() {
-      if (this.numExpediente.trim() != '' && this.nomPaciente.trim() != '') {
-        alert('Entro, no debe cambiar')       
-      }
-      alert('Error!')
-    },
-    
+    },  
+
     async ocultarFondo(){
       document.body.style.backgroundImage = "url('')";
       document.body.style.backgroundColor = '#F5F8FC'
+      alert(document.getElementById("id-tab").ariaSelected)
     },
-      
+
     async mostrarHeader(){
       document.getElementById("headerP").className='mt visible'
-    }
+    },     
   }  
 })
 </script>
 
 <style scoped>
-.menuLateral {  
-  margin-bottom: 6px; 
-  margin-top: 4px;
-  margin-left: 45px;
-}
-.alinearElementoD{
+/* Botones */
+.alinearBotonDerecha{
     text-align: right;
-}
-.menuLateralPrincipal {
-  margin-top: 16px;
-}
-.bordePrincipal {
-  width: 110%
-}
-.ajusteImg{
-  width: 455%;
-  height: auto;
 }
 .centrarBoton{
   text-align: center;
 }
-.posicionEstatica {
-  position: sticky;
-  bottom: 0;
-  z-index: 1020;
-  background-color: #fff;
-}
-.bordeContenedor{
-  padding: 1.2rem;
-  border-radius: 5px;
-  border: #ccc 1px solid;
-}
-.bordeColumna{
-  margin-left: auto;
-  margin-right: auto;
-  border-right: 1px solid #000000;
-  border-left: 1px solid #000000;
-}
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    color: var(--bs-nav-pills-link-active-color);
-    background-color: #F5F8FC;
-    color: #E88300;
-}
-.nav-link {
-    display: block;
-    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
-    font-size: var(--bs-nav-link-font-size);
-    font-weight: var(--bs-nav-link-font-weight);
-    color: #002D60;
-    text-decoration: none;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
-}
-.btn-outline-secundario {
+.btn-icono {
     --bs-btn-bg: #ffffff;
     --bs-btn-color: #002d60;    
     --bs-btn-border-color: #ced4da;
@@ -341,15 +327,72 @@ export default defineComponent({
     --bs-btn-active-color: #002d60;
     --bs-btn-active-border-color: #ced4da;    
 }
-.under {
-    text-decoration: underline;
+.btn-paciente{
+  width: 25px;
+  height: auto;
 }
-.underBold {
+.btn-registro{
+  width: 24px;
+  height: auto;
+}
+.btn-historial{
+  width: 42px;
+  height: auto;
+}
+
+/* Barra navegación */
+.btn-barra-act{
+  background-color: #F5F8FC;
+    color: #E88300;
     border-bottom: thick solid;
     border-bottom-width: 5px;
     border-bottom-left-radius: 0%;
     border-bottom-right-radius: 0%;
+    border-left: none;
+    border-right: none;
+    border-top: none;
 }
+.btn-barra-des{
+  background-color: #F5F8FC;
+    color: #002d60;
+    border: none;
+}
+/* Contenido principal */
+.bordePrincipal {
+  width: 108%
+}
+
+/* Menú lateral */
+.menuLateralPrincipal {
+  margin-top: 10px;
+}
+.menuLateral {  
+  margin-bottom: 20px; 
+  margin-left: 45px;
+}
+.img-menu-lateral{
+  width: 510%;
+  height: auto;
+}
+
+/* Menú estatico */
+.posicionEstatica {
+  position: sticky;
+  bottom: 0;
+  z-index: 1020;
+  background-color: #002D60;
+  padding: 1.2rem;
+  border-radius: 5px;
+  color: #ffffff;
+}
+.bordeColumna{
+  margin-left: auto;
+  margin-right: auto;
+  border-right: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+}
+
+/* Botón arriba */
 .btn-arriba {
     display: none;  /*Oculto por defecto */
     position: fixed; /* Posición fija */
