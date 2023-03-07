@@ -367,13 +367,13 @@
 
         <div class="col-2 menuLateralPrincipal"> <!--Menú lateral-->
           <div class="col-md-2 menuLateral">
-            <RouterLink to="pre"><img src="images/pre.png" class="ajusteImg"/></RouterLink>
+            <RouterLink to="pre"><img src="images/pre_off.svg" class="ajusteImg"/></RouterLink>
           </div>
           <div class="col-md-2 menuLateral">
-            <img src="images/trans.png" class="ajusteImg"/>
+            <img src="images/trans.svg" class="ajusteImg"/>
           </div>
           <div class="col-md-2 menuLateral">
-            <RouterLink to="post"><img src="images/post.png" class="ajusteImg"/></RouterLink>
+            <RouterLink to="post"><img src="images/post_off.svg" class="ajusteImg"/></RouterLink>
           </div>    
         </div>
 
@@ -446,18 +446,17 @@ export default({
 
 <style scoped>
 .menuLateral {
-    margin-bottom: 6px; 
-    margin-top: 6px;
+    margin-bottom: 20px; 
     margin-left: 45px;
 }
 .menuLateralPrincipal {
-    margin-top: 16px;
+    margin-top: 10px;
 }
 .bordePrincipal {
-    width: 110%;
+    width: 108%;
 }
 .ajusteImg{
-  width: 455%;
+  width: 510%;
   height: auto;
 }
 .centrarLabel{

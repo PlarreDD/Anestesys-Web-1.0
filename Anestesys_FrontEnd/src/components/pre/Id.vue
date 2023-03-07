@@ -5,17 +5,19 @@
 
             <div class="col-md-4">
                 <label for="" class="form-label fw-bold">Número de Expediente</label>
-                <input type="text" v-model="id.numExpediente" id="numExpediente" pattern="[0-9]{8}" title="Sólo números, ocho dígitos"
+                <input type="text" v-model="id.numExpediente" id="numExpediente" 
                 :class="id.numExpediente != '' ? 'form-control border border-success formSombra' : 'form-control'">
-                <div class="invisible" id="validaNumExp">
+                <!-- pattern="[0-9]{8}" title="Sólo números, ocho dígitos" -->
+                <div :class="idNumExp == true ? 'visible validaCampo' : 'invisible'" id="validaNumExp">                     
                     Escriba el número de expediente
+                    <label for="">{{ idNumExp }}}</label>
                 </div>                
             </div>
             <div class="col-md-6">
                 <label for="" class="form-label fw-bold">Nombre del Paciente</label>
                 <input type="text" @keyup.capture="enviarDatos" v-model="id.nombrePaciente" id="nombrePaciente" 
                 :class="id.nombrePaciente != '' ? 'form-control border border-success formSombra' : 'form-control'">
-                <div class="invisible" id="validaNomPac">
+                <div :class="idnomPac == true ? 'visible validaCampo' : 'invisible'" id="validaNomPac">
                     Escriba el nombre del paciente
                 </div>        
             </div>
@@ -132,17 +134,20 @@ export default defineComponent({
                 cirujano: "", 
                 anestesiologo: "", 
                 anestesiologoVPA:""
-            }      
+            },
+            idNumExp:false,
+            idnomPac:false      
         }  
     },
     methods: {
         obtenerDatos() {
-            this.$emit("validar", this.id.numExpediente, this.id.nombrePaciente)
+            this.$emit("validar", this.id.numExpediente, this.id.nombrePaciente, this.idNumExp, this.idnomPac)
+            console.log(this.id.numExpediente)
+            console.log(this.idNumExp)
         },
         enviarDatos() {
-            this.$emit('recibe-datos',this.id.numExpediente, this.id.nombrePaciente, this.id.cirujano, this.id.cirugia)            
-        },
-                
+            this.$emit('recibe-datos',this.id.numExpediente, this.id.nombrePaciente, this.id.cirujano, this.id.cirugia)                        
+        }   
     }
 })
 </script>

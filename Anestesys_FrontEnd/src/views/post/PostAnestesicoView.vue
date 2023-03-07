@@ -29,18 +29,18 @@
       <div class="col-2 menuLateralPrincipal"> <!--Menú lateral-->
         <div class="col-md-2 menuLateral">
           <RouterLink to="pre">
-            <img src="images/pre.png" class="ajusteImg"/>
+            <img src="images/pre_off.svg" class="ajusteImg"/>
           </RouterLink>
         </div>
 
         <div class="col-md-2 menuLateral">
           <RouterLink to="trans">
-            <img src="images/trans.png" class="ajusteImg"/>
+            <img src="images/trans_off.svg" class="ajusteImg"/>
           </RouterLink>
         </div>
 
         <div class="col-md-2 menuLateral">
-          <img src="images/post.png" width="180" class="ajusteImg"/>
+          <img src="images/post.svg" width="180" class="ajusteImg"/>
         </div>    
       </div>
     </div>
@@ -60,18 +60,17 @@ export default ({
 
 <style scoped>
 .menuLateral {
-  margin-bottom: 6px; 
-  margin-top: 4px;
+  margin-bottom: 20px; 
   margin-left: 45px;
 }
 .menuLateralPrincipal {
   margin-top: 54px;
 }
 .bordePrincipal {
-  width: 110%;
+  width: 108%;
 }
 .ajusteImg{
-  width: 455%;
+  width: 510%;
   height: auto;
 }
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {

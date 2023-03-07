@@ -31,8 +31,7 @@
       <div class="col-10 divform navbar-nav">
         <ul class="nav nav-pills nav-fill text-center" id=""> <!--Lista para el menú principal-->
           <li class="nav-item col-md-3" >
-            <button 
-                    :class="esPaciente == true ? 'btn-barra-act fw-bold active' : 'btn-barra-des fw-bold active'"
+            <button :class="esPaciente == true ? 'btn-barra-act fw-bold active' : 'btn-barra-des fw-bold'"
                     id="id-tab"
                     href="#pre-id"
                     data-bs-toggle="tab"
@@ -42,33 +41,28 @@
           </li>
 
           <li class="nav-item col-md-3">
-            <button class="nav-link fw-bold"
+            <button :class="esValoracion == true ? 'btn-barra-act fw-bold active' : 'btn-barra-des fw-bold'"
                     id = "valoracion-tab"
                     href="#pre-valoracion"
                     data-bs-toggle="tab"
-                    type="submit"
-                    aria-selected="false"
+                    aria-selected="false" @click="validaSeleccionValoracion()"
                     :disabled="numExpediente != '' && nomPaciente != '' ? false : true"> VALORACIÓN </button>
           </li>
 
           <li class="nav-item col-md-3">
-            <button 
-                    :class="esPlan == true ? 'btn-barra-act fw-bold' : 'btn-barra-des fw-bold'"
+            <button :class="esPlan == true ? 'btn-barra-act fw-bold active' : 'btn-barra-des fw-bold'"
                     id="plan-tab"
                     href="#pre-plan"
                     data-bs-toggle="tab"
-                    type="submit"
                     aria-selected="false" @click="validaSeleccionPlan()"> PLAN </button>
           </li>
 
           <li class="nav-item col-md-3" >
-            <button class="nav-link fw-bold"
+            <button :class="esNota == true ? 'btn-barra-act fw-bold active' : 'btn-barra-des fw-bold'"
                     id="nota-tab"
                     href="#pre-nota"
                     data-bs-toggle="tab"
-                    type="submit"
-                    aria-selected="false"
-                    :disabled="numExpediente != '' && nomPaciente != '' ? false : true"> NOTA </button>
+                    aria-selected="false" @click="validaSeleccionNota()"> NOTA </button>
           </li>
         </ul>
       </div>
@@ -78,7 +72,7 @@
       <div class="tab-content col-md-9" id=""> <!--Redirecciona al contenedor seleccionado, cargando la información del componente-->
         <div class="tab-pane fade show active" id="pre-id">
           <id @recibe-datos="actualizaDatos"
-              @validar="validaExpediente"/>
+              @validar="validaExpediente" />
         </div>
 
         <div class="tab-pane fade" id="pre-valoracion">
@@ -109,7 +103,9 @@
           <RouterLink to="post">
             <img src="images/post_off.svg" class="img-menu-lateral"/>
           </RouterLink>
-        </div>                                                                                         
+        </div>         
+        
+        <div class="trans"></div>
       </div>
       
       <div class="container text-center col-md-9 posicionEstatica fw-bold">
@@ -179,7 +175,7 @@ export default defineComponent({
   },
   
   created(){
-    this.validaExpediente(this.numExpediente, this.nomPaciente);
+    // this.validaExpediente(this.numExpediente, this.nomPaciente, this.numExpB, this.nomPacB);
   },
   
   mounted: function() { // Llama el método despues de cargar la página
@@ -195,14 +191,18 @@ export default defineComponent({
   },
   
   methods: {
-    async validaExpediente(numExpediente, nombrePaciente) {                                  
+    async validaExpediente(numExpediente, nombrePaciente, idNumExp, idnomPac) {                                  
       if(numExpediente.trim() == "" || nombrePaciente.trim() == "") {
-        if(numExpediente.trim() ==""){
-          document.getElementById("validaNumExp").className = "visible validaCampo";
+        
+        if(numExpediente.trim() ==""){  
+                 
+          idNumExp=true
+
+          // document.getElementById("validaNumExp").className = "visible validaCampo";        
           document.getElementById("numExpediente").className = "form-control border border-danger";
         }
         else{
-          document.getElementById("validaNumExp").className = "invisible";
+          idNumExp=false
         }
           
         if(nombrePaciente.trim() ==""){
@@ -236,32 +236,48 @@ export default defineComponent({
     },
 
     async validaSeleccionId(){
-      if(document.getElementById("id-tab").ariaSelected=="true"){
+      if(document.getElementById("id-tab").ariaSelected=="false"){
+        this.esPaciente=false   
+      }
+      else
         this.esPaciente=true;
         this.esValoracion=false;
         this.esPlan=false;
-        this.esNota=false;
+        this.esNota=false;             
+    },
+
+    async validaSeleccionValoracion(){
+      if(document.getElementById("valoracion-tab").ariaSelected=="false"){
+        this.esValoracion=false  
       }
       else
-        this.esPaciente=false
+        this.esPaciente=false;
+        this.esValoracion=true;
+        this.esPlan=false;
+        this.esNota=false;  
+        console.log('Id true')              
     },
 
     async validaSeleccionPlan(){
-      if(document.getElementById("plan-tab").ariaSelected=="true"){
+      if(document.getElementById("plan-tab").ariaSelected=="false"){
+        this.esPlan=false
+      }
+      else
         this.esPlan=true;
         this.esPaciente=false;
         this.esValoracion=false;        
         this.esNota=false;
-      }
-      else
-        this.esPlan=false
     },
 
-    async ocultarBorde() {
-      if (document.getElementById("id-tab").ariaSelected=="false"){
-        document.getElementById("id-tab").className="nav-link active fw-bold"
-        alert('Entro')
+    async validaSeleccionNota(){
+      if(document.getElementById("nota-tab").ariaSelected=="false"){
+        this.esNota=false
       }
+      else
+        this.esPlan=false;
+        this.esPaciente=false;
+        this.esValoracion=false;        
+        this.esNota=true;
     },
 
     async actualizaDatos(numeroExpediente,nombrePaciente, nombreCirujano, cirugia) {
@@ -298,7 +314,6 @@ export default defineComponent({
     async ocultarFondo(){
       document.body.style.backgroundImage = "url('')";
       document.body.style.backgroundColor = '#F5F8FC'
-      alert(document.getElementById("id-tab").ariaSelected)
     },
 
     async mostrarHeader(){
@@ -353,7 +368,7 @@ export default defineComponent({
     border-top: none;
 }
 .btn-barra-des{
-  background-color: #F5F8FC;
+    background-color: #F5F8FC;
     color: #002d60;
     border: none;
 }
@@ -373,6 +388,14 @@ export default defineComponent({
 .img-menu-lateral{
   width: 510%;
   height: auto;
+}
+.trans{
+  background-image: url('images/trans_off.svg');
+  width: 256px;
+  height:202px;
+}
+.trans:hover{
+  background-image: url('images/trans.svg');
 }
 
 /* Menú estatico */
