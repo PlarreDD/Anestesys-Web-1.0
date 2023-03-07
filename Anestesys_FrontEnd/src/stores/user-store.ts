@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { apiAxios } from '@/boot/axios';
 import { ref } from "vue";
 import router from "@/router";
+import swal from 'sweetalert2';
 
 export const useUserStore = defineStore('user', {
     state: () => ({
@@ -20,7 +21,19 @@ export const useUserStore = defineStore('user', {
                 this.token = res.data.tkn;
                 this.expiresIn = res.data.xprIn;
                 this.Nombre = res.data.Nombre;
-                this.Apellido = res.data.Apellido;                
+                this.Apellido = res.data.Apellido;
+                
+                swal.fire({
+                    html: 'Bienvenido <b>Dr. ' + this.Nombre + ' ' + this.Apellido + '</b>',
+                    icon: 'info',
+                    showConfirmButton: false,
+                    showCloseButton: true,  
+                    timer: 5000,
+                    timerProgressBar: true,
+                    toast: true,
+                    position: 'top-end'
+                  })
+
                 router.push("/pre");
             }).catch((res:any) => {
                 console.log("Usuario o contraseña inválidos");                    
@@ -72,9 +85,42 @@ export const useUserStore = defineStore('user', {
                 nomMed: nomUsr,
                 apMed: apUsr,
             }).then((res:any) => {
-                console.log(res.data);
-            }).catch((e:any) =>
-                console.log("Usuario ya registrado"));
+                swal.fire({
+                    html: 'Usuario <b>' + nomUsr + ' ' + apUsr +
+                          '</b> registrado con éxito.'+
+                          '</b></br>Usuario: <b>' + email +
+                          '</b></br>Contraseña: <b>' + genPswd.value +
+                          '</b></br>Consulte su correo electrónico',
+                    icon: 'info',
+                    showConfirmButton: true,
+                    showCloseButton: true,
+                    toast: true, position: 'top-start'
+                });
+    
+                document.body.style.backgroundImage = "url('../../public/images/login.webp')";
+                router.push('/');
+
+                console.log("Response " + res.data);
+            }).catch((e:any) =>{
+                if(e.response){
+                    swal.fire({
+                        html: 'El correo <b>' + email + '</b> ya está registrado',
+                        icon: 'info',
+                        showConfirmButton: false,
+                        showCloseButton: true,  
+                        timer: 5000,
+                        timerProgressBar: true,
+                        toast: true,
+                        position: 'top-end'
+                    })   
+                }
+                else if(e.request){
+                    console.log(e.request);                    
+                }
+                else{
+                    console.log("ErrorAx: ", e);
+                }
+            });
         },
 
         logout(){
@@ -82,6 +128,7 @@ export const useUserStore = defineStore('user', {
             .then(
                 this.token = null,
                 this.expiresIn = null,
+                // console.log("salir"),
             );
         },
     }

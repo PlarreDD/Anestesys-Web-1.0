@@ -93,13 +93,17 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
+  data(){
+    return{
+      // userStore,
+    };
+  },
+
   methods:{
     userLogout(){
-      console.log("salir");
     },
   }
 })
-
 </script>
 
 <style>
