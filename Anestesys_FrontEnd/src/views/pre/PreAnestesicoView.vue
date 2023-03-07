@@ -147,7 +147,7 @@ import Valoracion from "../../components/pre/Valoracion.vue";
 import Plan from "../../components/pre/Plan.vue";
 import Nota from '../../components/pre/Nota.vue';
 import swal from 'sweetalert2';
-import { mostrarMensaje } from "../LoginView.vue";
+// import { mostrarMensaje } from "../LoginView.vue";
 import { useUserStore } from "@/stores/user-store";
 
 const userStore = useUserStore();
@@ -179,7 +179,7 @@ export default defineComponent({
   },
   
   mounted: function() { // Llama el método despues de cargar la página
-    mostrarMensaje(userStore.Nombre, userStore.Apellido);
+    // mostrarMensaje(userStore.Nombre, userStore.Apellido);
     this.validaSeleccionId()
     this.ocultarFondo();    
     this.mostrarHeader();    

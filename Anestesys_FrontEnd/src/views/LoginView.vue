@@ -120,15 +120,14 @@
 <script lang="ts">
 import { useUserStore } from "../stores/user-store";
 import type { regUsr } from '@/interfaces/regUsr';
-import { ref, 
-         defineComponent } from "vue";
-import swal from 'sweetalert2'
+import { defineComponent } from "vue";
 
 const userStore = useUserStore();
+
 export default defineComponent({
   mounted: function() { // Llama el método despues de cargar la página
     this.cargarFondo();
-    this.ocultarHeader();           
+    this.ocultarHeader();
   },
   
   created(){
@@ -202,19 +201,6 @@ export default defineComponent({
     },
   }
 });
-
-export const mostrarMensaje = async (Nombre: string, Apellido: string) => {
-  swal.fire({
-    html: 'Bienvenido <b>Dr. ' + Nombre + ' ' + Apellido + '</b>',
-    icon: 'info',
-    showConfirmButton: false,
-    showCloseButton: true,  
-    timer: 5000,
-    timerProgressBar: true,
-    toast: true,
-    position: 'top-end'
-  })  
-}
 </script>
 
 <style>
