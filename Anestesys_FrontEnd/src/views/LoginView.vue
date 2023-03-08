@@ -202,8 +202,8 @@ export default defineComponent({
   }
 });
 
-export const mostrarMensaje = async () => {
-    userStore.logout();
+export const salir = async () => {
+  console.log("Salir");
 }
 </script>
 

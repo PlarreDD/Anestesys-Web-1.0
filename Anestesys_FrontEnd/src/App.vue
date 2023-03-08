@@ -23,7 +23,7 @@
 window.onbeforeunload = function(e) {
   return 'Texto de aviso';
 };  
-
+import { defineStore } from "pinia";
 import { defineComponent } from "vue"
 import BarraNavegacion from "./components/barraNavegacion.vue";
 
