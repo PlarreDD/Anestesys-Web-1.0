@@ -27,19 +27,19 @@
       </div>
 
       <div class="col-2 menuLateralPrincipal"> <!--Menú lateral-->
-        <div class="col-md-2 menuLateral">
+        <div class="col-md-2 menu-pre-trans">
           <RouterLink to="pre">
-            <img src="images/pre_off.svg" class="ajusteImg"/>
+            <img src="images/pre.svg" class="ajusteImg"/>
           </RouterLink>
         </div>
 
-        <div class="col-md-2 menuLateral">
+        <div class="col-md-2 menu-pre-trans">
           <RouterLink to="trans">
-            <img src="images/trans_off.svg" class="ajusteImg"/>
+            <img src="images/trans.svg" class="ajusteImg"/>
           </RouterLink>
         </div>
 
-        <div class="col-md-2 menuLateral">
+        <div class="col-md-2 menu-post">
           <img src="images/post.svg" width="180" class="ajusteImg"/>
         </div>    
       </div>
@@ -59,19 +59,38 @@ export default ({
 </script>
 
 <style scoped>
-.menuLateral {
-  margin-bottom: 20px; 
-  margin-left: 45px;
-}
 .menuLateralPrincipal {
-  margin-top: 54px;
+  margin-top: 47px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+.menu-post {  
+  width: 185px;
+  height: 185px;
+  background-color: #E88300;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-left: 47px;
+}
+.menu-pre-trans {  
+  width: 185px;
+  height: 185px;
+  background-color: #d6d6d6;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-left: 47px;
+}
+.menu-pre-trans:hover{
+  background-color: #E88300;
+  transition: background-color 0.2s ease-in-out;
+}
+.ajusteImg{
+  width: 100%;
+  height: 100%;
 }
 .bordePrincipal {
   width: 108%;
-}
-.ajusteImg{
-  width: 510%;
-  height: auto;
 }
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     color: var(--bs-nav-pills-link-active-color);

@@ -88,16 +88,29 @@ export const useUserStore = defineStore('user', {
                 swal.fire({
                     html: 'Usuario <b>' + nomUsr + ' ' + apUsr +
                           '</b> registrado con éxito.'+
-                          '</b></br>Usuario: <b>' + email +
-                          '</b></br>Contraseña: <b>' + genPswd.value +
                           '</b></br>Consulte su correo electrónico',
                     icon: 'info',
-                    showConfirmButton: true,
-                    showCloseButton: true,
-                    toast: true, position: 'top-start'
+                    showConfirmButton: false,
+                    showCloseButton: false,
+                    timer: 5000,
+                    timerProgressBar: true,
+                    toast: true,
+                    position: 'top-start'
                 });
     
                 document.body.style.backgroundImage = "url('../../public/images/login.webp')";
+
+                swal.fire({
+                    html: '</b></br>Usuario: <b>' + email +
+                          '</b></br>Contraseña: <b>' + genPswd.value +
+                          '</b></br>Consulte su correo electrónico',
+                    icon: 'info',
+                    showConfirmButton: false,
+                    showCloseButton: false,
+                    toast: true,
+                    position: 'top-start'
+                });
+
                 router.push('/');
 
                 console.log("Response " + res.data);
@@ -125,11 +138,11 @@ export const useUserStore = defineStore('user', {
 
         logout(){
             apiAxios.post("http://localhost:5000/logout")
-            .then(
-                this.token = null,
-                this.expiresIn = null,
-                // console.log("salir"),
-            );
+            .then(() =>{
+                this.token = null;
+                this.expiresIn = null;
+                console.log("salirA");                
+            });
         },
     }
 });

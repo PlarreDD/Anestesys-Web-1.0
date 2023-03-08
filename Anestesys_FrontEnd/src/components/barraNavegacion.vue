@@ -86,11 +86,14 @@
           </div>
         </div>
       </nav>
-    </div>
+  </div>
 </template>
 
 <script lang="ts">
+// import { useUserStore } from '../stores/user-store';
 import { defineComponent } from "vue";
+
+// const userStore = useUserStore();
 
 export default defineComponent({
   data(){
@@ -101,6 +104,7 @@ export default defineComponent({
 
   methods:{
     userLogout(){
+  //     userStore.logout();
     },
   }
 })
@@ -117,7 +121,7 @@ export default defineComponent({
   border-radius: 50px;   
 }
 .mt {
-    margin-bottom: 3rem!important;
+    margin-bottom: 2rem!important;
 }
 .navbar-color{
   background-color: #002D60;

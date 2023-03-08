@@ -111,7 +111,7 @@
         <button type="button"
                 class="btn btn-emergencia fw-bold"
                 data-bs-toggle="modal"
-                data-bs-target="#emergenciaModal"> !EMERGENCIA¡ </button>
+                data-bs-target="#emergenciaModal"> ¡EMERGENCIA! </button>
       </div>                 
     </div>
   </div>  
@@ -201,6 +201,10 @@ export default defineComponent({
     },
   }
 });
+
+export const mostrarMensaje = async () => {
+    userStore.logout();
+}
 </script>
 
 <style>
