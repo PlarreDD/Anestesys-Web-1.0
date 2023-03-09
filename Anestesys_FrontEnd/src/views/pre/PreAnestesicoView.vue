@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <header>
+      <barra-navegacion/>
+  </header>
+  <div style="margin-top: 120px;">
     <div class="input-group mb-3">
       <div class="col-md-6">
         <input class="form-control me-2"
@@ -115,7 +118,7 @@
         
       </div>
       
-      <div class="container text-center col-md-9 posicionEstatica fw-bold">
+      <div class="container text-center col-md-9 posicionEstatica fw-bold" style="border-radius: 5px;">
         <div class="row">
           <div class="col bordeColumna">
             <label class="form-label text-white">
@@ -156,6 +159,7 @@ import Nota from '../../components/pre/Nota.vue';
 import swal from 'sweetalert2';
 // import { mostrarMensaje } from "../LoginView.vue";
 import { useUserStore } from "@/stores/user-store";
+import BarraNavegacion from "../../components/barraNavegacion.vue";
 
 const userStore = useUserStore();
 
@@ -184,7 +188,8 @@ export default defineComponent({
     Id,
     Nota,
     Plan,
-    Valoracion
+    Valoracion,
+    BarraNavegacion
   },
   
   created(){
@@ -250,6 +255,7 @@ export default defineComponent({
         this.bordeRojoNom=false
         this.bordeVerdeNom=true        
 
+        window.location.href = '#pre-valoracion'
         alert('OK')
       }
     },
@@ -359,7 +365,7 @@ export default defineComponent({
     --bs-btn-hover-border-color: #ced4da;          
     --bs-btn-active-bg: #ced4da;
     --bs-btn-active-color: #002d60;
-    --bs-btn-active-border-color: #ced4da;    
+    --bs-btn-active-border-color: #ced4da; 
 }
 .btn-paciente{
   width: 25px;
@@ -376,7 +382,7 @@ export default defineComponent({
 
 /* Barra navegación */
 .btn-barra-act{
-  background-color: #F5F8FC;
+    background-color: #F5F8FC;
     color: #E88300;
     border-bottom: thick solid;
     border-bottom-width: 5px;
@@ -385,6 +391,7 @@ export default defineComponent({
     border-left: none;
     border-right: none;
     border-top: none;
+    width: 110px;
 }
 .btn-barra-des{
     background-color: #F5F8FC;
@@ -410,6 +417,7 @@ export default defineComponent({
   padding: 1rem;
   border-radius: 10px;
   margin-left: 28px;
+  text-align: center;
 }
 .menuTransPost {  
   width: 200px;
@@ -418,6 +426,7 @@ export default defineComponent({
   padding: 1rem;
   border-radius: 10px;
   margin-left: 28px;
+  text-align: center;
 }
 .menuTransPost:hover{
   background-color: #E88300;
