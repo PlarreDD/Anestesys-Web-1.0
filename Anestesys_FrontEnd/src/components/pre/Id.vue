@@ -87,8 +87,12 @@
             
             <div class="col-md-8">
                 <label for="" class="form-label fw-bold">CIE-10</label>
-                <input type="text" class="form-control" @keyup.capture="enviarDatos" v-model="id.cie10"
-                :class="id.cie10 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                <select id="inputState" class="form-select" v-model="id.cie10"
+                    :class="id.cie10 != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option selected>Seleccione...</option>
+                    <option></option>
+                    <option></option>
+                </select>              
             </div>
 
             <div class="col-md-6">
@@ -96,6 +100,17 @@
                 <input type="text" class="form-control" @keyup.capture="enviarDatos" v-model="id.cirugia"
                 :class="id.cirugia != '' ? 'form-control border border-success formSombra' : 'form-control'">
             </div>
+            <div class="col-md-6">
+                <label for="" class="form-label fw-bold">CIE-9</label>
+                <select id="inputState" class="form-select" v-model="id.cie9"
+                    :class="id.cie9 != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option selected>Seleccione...</option>
+                    <option></option>
+                    <option></option>
+                </select>       
+            </div>
+
+            <div class="col-md-6"></div>
             <div class="col-md-3">
                 <label for="" class="form-label fw-bold">Fecha de Cirugía</label>
                 <input type="date" class="form-control" v-model="id.fechaCirugia"
@@ -106,6 +121,8 @@
                 <input type="time" class="form-control" v-model="id.horaCirugia"
                 :class="id.horaCirugia.length != 0 ? 'form-control border border-success formSombra' : 'form-control'">
             </div>
+            
+            <hr />
 
             <div class="col-md-6">
                 <label for="" class="form-label fw-bold">Cirujano</label>
@@ -117,6 +134,7 @@
                 <input type="text" class="form-control" v-model="id.anestesiologo"
                 :class="id.anestesiologo != '' ? 'form-control border border-success formSombra' : 'form-control'">
             </div>
+
             <div class="col-md-6">
                 <label for="" class="form-label fw-bold">Anestesiólogo VPA</label>
                 <input type="text" class="form-control" v-model="id.anestesiologoVPA"
@@ -168,10 +186,13 @@ export default defineComponent({
                 fechaNacimiento: Date, 
                 habitacion: "", 
                 genero: "",
-                fechaIngreso: Date, 
+                fechaIngreso: Date,
+                numEpisodio: "", 
                 diagnostico: "", 
                 tipoCirugia: "", 
-                cirugia: "", 
+                cirugia: "",
+                cie9: "Seleccione...",
+                cie10: "Seleccione...",
                 fechaCirugia: Date, 
                 horaCirugia: "",
                 cirujano: "", 
