@@ -86,7 +86,7 @@
           </div>
         </div>
       </nav>
-    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -115,7 +115,7 @@ export default defineComponent({
   border-radius: 50px;   
 }
 .mt {
-    margin-bottom: 3rem!important;
+    margin-bottom: 2rem!important;
 }
 .navbar-color{
   background-color: #002D60;

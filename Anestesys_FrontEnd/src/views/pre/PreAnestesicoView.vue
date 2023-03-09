@@ -72,7 +72,13 @@
       <div class="tab-content col-md-9" id=""> <!--Redirecciona al contenedor seleccionado, cargando la información del componente-->
         <div class="tab-pane fade show active" id="pre-id">
           <id @recibe-datos="actualizaDatos"
-              @validar="validaExpediente" />
+              @validar="validaExpediente" 
+              :propNumExp="numExpB"
+              :propNomPac="nomPacB"
+              :propRojoNum="bordeRojoNum"
+              :propVerdeNum="bordeVerdeNum"
+              :propRojoNom="bordeRojoNom"
+              :propVerdeNom="bordeVerdeNom"/>
         </div>
 
         <div class="tab-pane fade" id="pre-valoracion">
@@ -89,23 +95,24 @@
       </div>
 
       <div class="col-2 menuLateralPrincipal"> <!--Menú lateral-->
-        <div class="col-md-2 menuLateral">
+        
+        <div class="col-md-2 menuPre">
           <img src="images/pre.svg" class="img-menu-lateral"/>
         </div>
         
-        <div class="col-md-2 menuLateral">
+        <div class="col-md-2 menuTransPost">
           <RouterLink to="trans">
-            <img src="images/trans_off.svg" class="img-menu-lateral"/>
+            <img src="images/trans.svg" class="img-menu-lateral"/>
           </RouterLink>
-        </div>
+        </div>      
         
-        <div class="col-md-2 menuLateral">
+        <div class="col-md-2 menuTransPost">
           <RouterLink to="post">
-            <img src="images/post_off.svg" class="img-menu-lateral"/>
+            <img src="images/post.svg" class="img-menu-lateral"/>
           </RouterLink>
         </div>         
         
-        <div class="trans"></div>
+        
       </div>
       
       <div class="container text-center col-md-9 posicionEstatica fw-bold">
@@ -159,6 +166,12 @@ export default defineComponent({
       nomPaciente:'',
       nomCirujano:'',
       nomCirugia:'',
+      numExpB:false,
+      nomPacB:false,
+      bordeRojoNum:false,
+      bordeVerdeNum:false,
+      bordeRojoNom:false,
+      bordeVerdeNom:false,
       userStore,
       esPaciente: false,
       esValoracion: false,
@@ -175,7 +188,7 @@ export default defineComponent({
   },
   
   created(){
-    // this.validaExpediente(this.numExpediente, this.nomPaciente, this.numExpB, this.nomPacB);
+    // this.validaExpediente(this.numExpediente, this.nomPaciente);
   },
   
   mounted: function() { // Llama el método despues de cargar la página
@@ -191,26 +204,29 @@ export default defineComponent({
   },
   
   methods: {
-    async validaExpediente(numExpediente, nombrePaciente, idNumExp, idnomPac) {                                  
+    async validaExpediente(numExpediente, nombrePaciente,) {                                  
       if(numExpediente.trim() == "" || nombrePaciente.trim() == "") {
         
-        if(numExpediente.trim() ==""){  
-                 
-          idNumExp=true
-
-          // document.getElementById("validaNumExp").className = "visible validaCampo";        
-          document.getElementById("numExpediente").className = "form-control border border-danger";
+        if(numExpediente.trim() ==""){                   
+          this.numExpB=true          
+          this.bordeRojoNum=true  
+          this.bordeVerdeNum=false
         }
         else{
-          idNumExp=false
+          this.numExpB=false
+          this.bordeVerdeNum=true
+          this.bordeRojoNum=false
         }
           
         if(nombrePaciente.trim() ==""){
-          document.getElementById("validaNomPac").className = "visible validaCampo";              
-          document.getElementById("nombrePaciente").className = "form-control border border-danger";
+          this.nomPacB=true 
+          this.bordeRojoNom=true  
+          this.bordeVerdeNom=false          
         }
         else{
-          document.getElementById("validaNomPac").className = "invisible"; 
+          this.nomPacB=false
+          this.bordeVerdeNom=true
+          this.bordeRojoNom=false
         }
 
         swal.fire({
@@ -218,7 +234,6 @@ export default defineComponent({
           icon: 'error',
           showConfirmButton: true,
           showCloseButton: true,
-          backdrop: true,
           toast: true,
           position: 'top',
           timer: 3000,
@@ -228,8 +243,12 @@ export default defineComponent({
         return;                       
       }
       else{
-        document.getElementById("validaNumExp").className = "invisible";
-        document.getElementById("validaNomPac").className = "invisible";              
+        this.numExpB=false
+        this.nomPacB=false  
+        this.bordeRojoNum=false
+        this.bordeVerdeNum=true
+        this.bordeRojoNom=false
+        this.bordeVerdeNom=true        
 
         alert('OK')
       }
@@ -374,28 +393,39 @@ export default defineComponent({
 }
 /* Contenido principal */
 .bordePrincipal {
-  width: 108%
+  width: 110%
 }
 
 /* Menú lateral */
 .menuLateralPrincipal {
   margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
 }
-.menuLateral {  
-  margin-bottom: 20px; 
-  margin-left: 45px;
+.menuPre {  
+  width: 200px;
+  height: 185px;
+  background-color: #E88300;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-left: 28px;
+}
+.menuTransPost {  
+  width: 200px;
+  height: 185px;
+  background-color: #d6d6d6;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-left: 28px;
+}
+.menuTransPost:hover{
+  background-color: #E88300;
+  transition: background-color 0.2s ease-in-out;
 }
 .img-menu-lateral{
-  width: 510%;
-  height: auto;
-}
-.trans{
-  background-image: url('images/trans_off.svg');
-  width: 256px;
-  height:202px;
-}
-.trans:hover{
-  background-image: url('images/trans.svg');
+  width: 90%;
+  height: 90%;
 }
 
 /* Menú estatico */

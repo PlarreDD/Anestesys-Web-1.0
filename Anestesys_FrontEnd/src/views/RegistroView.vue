@@ -85,8 +85,7 @@
 <script lang="ts">
 import type { regUsr } from '@/interfaces/regUsr';
 import { useUserStore } from '@/stores/user-store';
-import { ref,
-         defineComponent } from "vue";
+import { defineComponent } from "vue";
 
 const userStore = useUserStore();
 

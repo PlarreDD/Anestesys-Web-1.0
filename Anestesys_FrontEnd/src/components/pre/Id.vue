@@ -4,20 +4,28 @@
         <form @submit.prevent="obtenerDatos" class="row g-3">  
 
             <div class="col-md-4">
-                <label for="" class="form-label fw-bold">Número de Expediente</label>
-                <input type="text" v-model="id.numExpediente" id="numExpediente" 
-                :class="id.numExpediente != '' ? 'form-control border border-success formSombra' : 'form-control'">
-                <!-- pattern="[0-9]{8}" title="Sólo números, ocho dígitos" -->
-                <div :class="idNumExp == true ? 'visible validaCampo' : 'invisible'" id="validaNumExp">                     
-                    Escriba el número de expediente
-                    <label for="">{{ idNumExp }}}</label>
+                <label for="" class="form-label fw-bold">Número de Expediente</label>                
+                <input type="text" 
+                    v-model="id.numExpediente" 
+                    pattern="[0-9]{8}" title="Sólo números, ocho dígitos"
+                    id="numExpediente" 
+                    class="form-control"
+                    :class="{ 'form-control border border-danger': propRojoNum, 'form-control border border-success formSombra': propVerdeNum }">                
+
+                <div :class="propNumExp == true ? 'visible validaCampo' : 'invisible'" id="validaNumExp">                     
+                    Escriba el número de expediente                    
                 </div>                
             </div>
             <div class="col-md-6">
                 <label for="" class="form-label fw-bold">Nombre del Paciente</label>
-                <input type="text" @keyup.capture="enviarDatos" v-model="id.nombrePaciente" id="nombrePaciente" 
-                :class="id.nombrePaciente != '' ? 'form-control border border-success formSombra' : 'form-control'">
-                <div :class="idnomPac == true ? 'visible validaCampo' : 'invisible'" id="validaNomPac">
+                <input class="form-control" 
+                    type="text" 
+                    @keyup.capture="enviarDatos" 
+                    v-model="id.nombrePaciente" 
+                    id="nombrePaciente" 
+                    :class="{ 'form-control border border-danger': propRojoNom, 'form-control border border-success formSombra': propVerdeNom }">
+
+                <div :class="propNomPac == true ? 'visible validaCampo' : 'invisible'" id="validaNomPac">
                     Escriba el nombre del paciente
                 </div>        
             </div>
@@ -116,6 +124,26 @@
 <script lang="ts">
 import { defineComponent } from "vue"
 export default defineComponent({
+    props: {
+        propNumExp: {
+            type: Boolean
+        },
+        propNomPac:{
+            type: Boolean
+        },
+        propRojoNum:{
+            type: Boolean
+        },
+        propVerdeNum:{
+            type: Boolean
+        },
+        propRojoNom:{
+            type: Boolean
+        },
+        propVerdeNom:{
+            type: Boolean
+        },
+    },
     data () {
         return{
             id: {
@@ -134,16 +162,12 @@ export default defineComponent({
                 cirujano: "", 
                 anestesiologo: "", 
                 anestesiologoVPA:""
-            },
-            idNumExp:false,
-            idnomPac:false      
+            }, 
         }  
     },
     methods: {
         obtenerDatos() {
-            this.$emit("validar", this.id.numExpediente, this.id.nombrePaciente, this.idNumExp, this.idnomPac)
-            console.log(this.id.numExpediente)
-            console.log(this.idNumExp)
+            this.$emit("validar", this.id.numExpediente, this.id.nombrePaciente)
         },
         enviarDatos() {
             this.$emit('recibe-datos',this.id.numExpediente, this.id.nombrePaciente, this.id.cirujano, this.id.cirugia)                        

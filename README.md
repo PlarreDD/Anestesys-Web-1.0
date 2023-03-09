@@ -55,3 +55,7 @@ npm run build
 
 - Corregido la funcion del boton de "Ingresar" en el login para acceder con un solo click.
 
+### 08/03/2023 (LESB)
+- Reubicación de las ventanas emergentes del login y del registro a user-store para que al finalizar el registro o inicio de sesión se activen.
+
+- Redireccionamiento del las vistas desde user-store para realizarse al finalizar la acción del registro o inicio de sesión.
