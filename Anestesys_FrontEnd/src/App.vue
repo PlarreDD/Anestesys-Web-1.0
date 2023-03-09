@@ -1,6 +1,6 @@
 <template>
   <header>
-    <barra-navegacion/>
+    <!-- <barra-navegacion/> -->
     
     <div class="container mt-3">
       <RouterView v-slot="{Component}"> <!--Mantener los datos en las páginas al cambiar de vista-->
@@ -23,11 +23,11 @@ window.onbeforeunload = function(e) {
   return 'Texto de aviso';
 };
 import { defineComponent } from "vue"
-import BarraNavegacion from "./components/barraNavegacion.vue";
+// import BarraNavegacion from "./components/barraNavegacion.vue";
 
 export default defineComponent({
   components:{
-    BarraNavegacion
+    // BarraNavegacion
   }
 
 })

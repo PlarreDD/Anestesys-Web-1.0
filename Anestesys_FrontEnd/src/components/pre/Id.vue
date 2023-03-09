@@ -30,9 +30,9 @@
                 </div>        
             </div>
             <div class="col-md-2">
-                <label for="" class="form-label fw-bold">Edad</label>
-                <input type="text" class="form-control" v-model="id.edadPaciente" 
-                :class="id.edadPaciente != 0 ? 'form-control border border-success formSombra' : 'form-control'">  
+                <label for="" class="form-label fw-bold">Habitación</label>
+                <input type="text" class="form-control" v-model="id.habitacion"
+                :class="id.habitacion != '' ? 'form-control border border-success formSombra' : 'form-control'">
             </div>
 
             <div class="col-md-3">
@@ -40,10 +40,10 @@
                 <input type="date" class="form-control" v-model="id.fechaNacimiento"
                 :class="id.fechaNacimiento != Date ? 'form-control border border-success formSombra' : 'form-control'">
             </div>
-            <div class="col-md-3">
-                <label for="" class="form-label fw-bold">Habitación</label>
-                <input type="text" class="form-control" v-model="id.habitacion"
-                :class="id.habitacion != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+            <div class="col-md-2">
+                <label for="" class="form-label fw-bold">Edad</label>
+                <input type="text" class="form-control" v-model="id.edadPaciente" 
+                :class="id.edadPaciente != 0 ? 'form-control border border-success formSombra' : 'form-control'">                 
             </div>            
             <div class="col-md-3">
                 <label for="" class="form-label col-12 fw-bold">Género</label>
@@ -54,13 +54,19 @@
                 <input type="radio" class="btn-check" name="genero" id="femenino" autocomplete="off" value="Femenino" v-model="id.genero">
                 <label class="btn btn-radio" for="femenino">Femenino</label>
             </div>             
-
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label for="" class="form-label fw-bold">Fecha de Ingreso</label>
                 <input type="date" class="form-control" v-model="id.fechaIngreso"
                 :class="id.fechaIngreso != Date ? 'form-control border border-success formSombra' : 'form-control'">
             </div>
+            <div class="col-md-2">
+                <label for="" class="form-label fw-bold">Núm de episodio</label>
+                <input type="text" class="form-control" v-model="id.numEpisodio"
+                :class="id.numEpisodio != '' ? 'form-control border border-success formSombra' : 'form-control'">
+            </div>
           
+            <hr />
+
             <div class="col-md-8">
                 <label for="" class="form-label fw-bold">Diagnóstico</label>
                 <textarea class="form-control" v-model="id.diagnostico" rows="3" 
@@ -77,7 +83,13 @@
 
                 <input type="radio" class="btn-check" name="tipoCirugia" id="ambulatoria" autocomplete="off" value="Ambulatoria" v-model="id.tipoCirugia">
                 <label class="btn btn-radio" for="ambulatoria">Ambulatoria</label>
-            </div>           
+            </div>  
+            
+            <div class="col-md-8">
+                <label for="" class="form-label fw-bold">CIE-10</label>
+                <input type="text" class="form-control" @keyup.capture="enviarDatos" v-model="id.cie10"
+                :class="id.cie10 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+            </div>
 
             <div class="col-md-6">
                 <label for="" class="form-label fw-bold">Cirugía</label>
@@ -109,12 +121,15 @@
                 <label for="" class="form-label fw-bold">Anestesiólogo VPA</label>
                 <input type="text" class="form-control" v-model="id.anestesiologoVPA"
                 :class="id.anestesiologoVPA != '' ? 'form-control border border-success formSombra' : 'form-control'">
-            </div>              
-            <div class="col-md-6 margenBoton">
-                <button href="#pre-valoracion" data-bs-toggle="tab" type="submit"
-                :class="id.numExpediente != '' && id.nombrePaciente != '' ? 'btn btn-outline-success fw-bold' : 'btn btn-outline-secondary fw-bold'"
-                >Siguiente</button>
-                <!-- :disabled="id.numExpediente != '' && id.nombrePaciente != '' ? false : true" -->
+            </div>    
+            <div class="col-md-4"></div>          
+            <div class="col-md-1 margenBoton">
+                <button href="#pre-valoracion" 
+                        data-bs-toggle="tab" 
+                        type="submit"
+                        class="btn btn-guardar fw-bold">
+                        GUARDAR</button>
+                        <!-- :disabled="id.numExpediente != '' && id.nombrePaciente != '' ? false : true" -->
             </div>                            
         </form>        
     </div>
@@ -190,6 +205,19 @@ export default defineComponent({
     -webkit-box-shadow:0 0 8px green;
     box-shadow:0 0 8px green
 }
+.btn-guardar{
+    --bs-btn-bg: #ffffff;
+    --bs-btn-color: #002d60;    
+    --bs-btn-border-color: #ced4da;
+    --bs-btn-hover-bg: #ffffff;
+    --bs-btn-hover-color: #002d60;
+    --bs-btn-hover-border-color: #ced4da;          
+    --bs-btn-active-bg: #002d60;
+    --bs-btn-active-color: #ced4da;
+    --bs-btn-active-border-color: #002d60;
+    width: 150px;
+    height: 50px;
+}
 .validaCampo {
     color: red;
 }
@@ -208,5 +236,6 @@ export default defineComponent({
 }
 .margenBoton{
     margin-top: 48px;
+    margin-left: 5px;
 }
 </style>

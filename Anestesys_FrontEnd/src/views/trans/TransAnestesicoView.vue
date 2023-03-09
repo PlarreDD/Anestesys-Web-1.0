@@ -458,20 +458,22 @@ export default({
     row-gap: 10px;
 }
 .menu-trans {  
-  width: 185px;
+  width: 200px;
   height: 185px;
   background-color: #E88300;
   padding: 1rem;
   border-radius: 10px;
   margin-left: 47px;
+  text-align: center;
 }
 .menu-pre-post {  
-  width: 185px;
+  width: 200px;
   height: 185px;
   background-color: #d6d6d6;
   padding: 1rem;
   border-radius: 10px;
   margin-left: 47px;
+  text-align: center;
 }
 .menu-pre-post:hover{
   background-color: #E88300;

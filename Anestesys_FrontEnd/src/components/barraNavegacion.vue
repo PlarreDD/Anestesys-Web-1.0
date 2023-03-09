@@ -124,6 +124,10 @@ export default defineComponent({
 }
 .mt {
     margin-bottom: 2rem!important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 .navbar-color{
   background-color: #002D60;
