@@ -78,8 +78,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <button class="btn btn-configuracion fw-bold"
-                            @click=" userLogout()"> Salir </button>
+                    <a href="/"><button class="btn btn-configuracion fw-bold"
+                            >Salir </button></a>
                 </li>
               </ul>
             </div>
@@ -90,7 +90,10 @@
 </template>
 
 <script lang="ts">
+// import { useUserStore } from "@/stores/user-store";
 import { defineComponent } from "vue";
+
+// const userStore = useUserStore();
 
 export default defineComponent({
   data(){
@@ -98,11 +101,6 @@ export default defineComponent({
       // userStore,
     };
   },
-
-  methods:{
-    userLogout(){
-    },
-  }
 })
 </script>
 

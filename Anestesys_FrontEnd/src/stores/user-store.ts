@@ -89,8 +89,6 @@ export const useUserStore = defineStore('user', {
             arr = Array.from(FechaNac.value);
             genPswd.value = genPswd.value + arr[5] + arr[6] + arr[2] + arr[3];
 
-            // console.log("Contraseña: " + genPswd.value);
-            
             let timerInterval;
             
             /* Comunicación a con la base de datos */
@@ -137,9 +135,6 @@ export const useUserStore = defineStore('user', {
                         });
                     }
                 });
-    
-                // document.body.style.backgroundImage = "url('../../public/images/login.webp')";
-                // console.log("Response " + res.data);
             }).catch((e:any) =>{
                 if(e.response){
                     /* Mensaje de registro fallido */
@@ -155,7 +150,7 @@ export const useUserStore = defineStore('user', {
                     })   
                 }
                 else if(e.request){
-                    console.log(e.request);                    
+                    console.log(e.request);
                 }
                 else{
                     console.log("ErrorAx: ", e);
@@ -165,14 +160,10 @@ export const useUserStore = defineStore('user', {
 
         logout(){
             apiAxios.post("http://localhost:5000/logout")
-            // .then(
-            //     this.token = null,
-            //     this.expiresIn = null,
-            // );
             .then(() => {
                 this.token = null;
                 this.expiresIn = null;
-                console.log("salir");
+                router.push('/');
             })
         },
     }
