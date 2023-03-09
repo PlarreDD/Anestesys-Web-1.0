@@ -5,42 +5,50 @@
   <div style="margin-top: 120px;">
     <div class="input-group mb-3">
       <div class="col-md-6">
+        <!--Buscador-->
         <input class="form-control me-2"
                type="search"
-               placeholder="Buscar número de expediente..." aria-label="Buscar">
-        <!--Buscador-->
+               placeholder="Buscar número de expediente..."
+               aria-label="Buscar">
       </div>
 
       <div class="col-md-2">
         <div class="alinearBotonDerecha">
-          <button class="btn btn-icono fw-bold"><img class="btn-paciente" src="images/imgIcon/nuevo-pac.svg"/> Nuevo Paciente </button>
+          <button class="btn btn-icono fw-bold">
+            <img class="btn-paciente" src="images/imgIcon/nuevo-pac.svg"/> Nuevo Paciente </button>
         </div>
       </div>
 
       <div class="col-md-2">
         <div class="centrarBoton">
-          <button class="btn btn-icono fw-bold"><img class="btn-registro" src="images/imgIcon/nuevo.svg"/> Nuevo Registro </button>
+          <button class="btn btn-icono fw-bold">
+            <img class="btn-registro"
+                 src="images/imgIcon/nuevo.svg"/> Nuevo Registro </button>
         </div>
       </div>
       
       <div class="col-md-2">
         <div class="alinearBotonDerecha">
-          <button class="btn btn-icono fw-bold"><img class="btn-historial" src="images/imgIcon/historial-pac.svg"/> Historial Paciente </button>
+          <button class="btn btn-icono fw-bold">
+            <img class="btn-historial"
+                 src="images/imgIcon/historial-pac.svg"/> Historial Paciente </button>
         </div>
       </div>
     </div>
 
     <div class="input-group mb-3">
       <div class="col-10 divform navbar-nav">
-        <ul class="nav nav-pills nav-fill text-center" id=""> <!--Lista para el menú principal-->
-          <li class="nav-item col-md-3" >
+        <!--Lista para el menú principal-->
+        <ul class="nav nav-pills nav-fill text-center" id="">
+          <li class="nav-item col-md-3">
+            <!--Se asigna el contenedor al que apuntara el elemento por medio de data-bs-target-->
             <button :class="esPaciente == true ? 'btn-barra-act fw-bold active' : 'btn-barra-des fw-bold'"
                     id="id-tab"
                     href="#pre-id"
                     data-bs-toggle="tab"
                     type="submit"
-                    aria-selected="true" @click="validaSeleccionId()"> ID PACIENTE </button>
-            <!--Se asigna el contenedor al que apuntara el elemento por medio de data-bs-target-->
+                    aria-selected="true"
+                    @click="validaSeleccionId()"> ID PACIENTE </button>
           </li>
 
           <li class="nav-item col-md-3">
@@ -48,7 +56,8 @@
                     id = "valoracion-tab"
                     href="#pre-valoracion"
                     data-bs-toggle="tab"
-                    aria-selected="false" @click="validaSeleccionValoracion()"
+                    aria-selected="false"
+                    @click="validaSeleccionValoracion()"
                     :disabled="numExpediente != '' && nomPaciente != '' ? false : true"> VALORACIÓN </button>
           </li>
 
@@ -57,7 +66,8 @@
                     id="plan-tab"
                     href="#pre-plan"
                     data-bs-toggle="tab"
-                    aria-selected="false" @click="validaSeleccionPlan()"> PLAN </button>
+                    aria-selected="false"
+                    @click="validaSeleccionPlan()"> PLAN </button>
           </li>
 
           <li class="nav-item col-md-3" >
@@ -65,14 +75,16 @@
                     id="nota-tab"
                     href="#pre-nota"
                     data-bs-toggle="tab"
-                    aria-selected="false" @click="validaSeleccionNota()"> NOTA </button>
+                    aria-selected="false"
+                    @click="validaSeleccionNota()"> NOTA </button>
           </li>
         </ul>
       </div>
     </div>
 
     <div class="input-group mb-3 bordePrincipal"> 
-      <div class="tab-content col-md-9" id=""> <!--Redirecciona al contenedor seleccionado, cargando la información del componente-->
+      <!--Redirecciona al contenedor seleccionado, cargando la información del componente-->
+      <div class="tab-content col-md-9" id="">
         <div class="tab-pane fade show active" id="pre-id">
           <id @recibe-datos="actualizaDatos"
               @validar="validaExpediente" 
@@ -97,8 +109,8 @@
         </div>
       </div>
 
-      <div class="col-2 menuLateralPrincipal"> <!--Menú lateral-->
-        
+      <!--Menú lateral-->
+      <div class="col-2 menuLateralPrincipal">        
         <div class="col-md-2 menuPre">
           <img src="images/pre.svg" class="img-menu-lateral"/>
         </div>
@@ -113,9 +125,7 @@
           <RouterLink to="post">
             <img src="images/post.svg" class="img-menu-lateral"/>
           </RouterLink>
-        </div>         
-        
-        
+        </div>
       </div>
       
       <div class="container text-center col-md-9 posicionEstatica fw-bold" style="border-radius: 5px;">
@@ -140,7 +150,9 @@
         <button @click="topFunction()"
                 class="btn btn-arriba fw-bold"
                 id="btnArriba"
-                title="Go to top"> <i class="fa-solid fa-3x fa-angle-up"></i> </button>                      
+                title="Go to top">
+          <i class="fa-solid fa-3x fa-angle-up"></i>
+        </button>                      
       </div>
     </div>
   </div>
@@ -176,7 +188,6 @@ export default defineComponent({
       bordeVerdeNum:false,
       bordeRojoNom:false,
       bordeVerdeNom:false,
-      userStore,
       esPaciente: false,
       esValoracion: false,
       esPlan: false,
@@ -197,7 +208,6 @@ export default defineComponent({
   },
   
   mounted: function() { // Llama el método despues de cargar la página
-    // mostrarMensaje(userStore.Nombre, userStore.Apellido);
     this.validaSeleccionId()
     this.ocultarFondo();    
     this.mostrarHeader();    

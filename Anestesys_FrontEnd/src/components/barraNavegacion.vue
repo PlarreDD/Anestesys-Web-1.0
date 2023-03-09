@@ -92,15 +92,23 @@
 <script lang="ts">
 // import { useUserStore } from "@/stores/user-store";
 import { defineComponent } from "vue";
+import swal from 'sweetalert2';
 
 // const userStore = useUserStore();
 
 export default defineComponent({
-  data(){
-    return{
-      // userStore,
-    };
-  },
+  methods: {
+    async mostrarMensaje(){
+      swal.fire({
+        html: 'Usuario registrado correctamente, consulte su correo electrónico',
+        icon: 'info',
+        showConfirmButton: true,
+        showCloseButton: true,
+        toast: true,
+        position: 'top-start'
+      });
+    },
+  }
 })
 </script>
 
