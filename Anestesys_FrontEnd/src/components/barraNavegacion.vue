@@ -78,8 +78,9 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="/"><button class="btn btn-configuracion fw-bold"
-                            >Salir </button></a>
+                    <button class="btn btn-configuracion fw-bold"
+                    @click="userStore.logout()"
+                            >Salir </button>
                 </li>
               </ul>
             </div>
@@ -90,13 +91,18 @@
 </template>
 
 <script lang="ts">
-// import { useUserStore } from "@/stores/user-store";
+import { useUserStore } from "@/stores/user-store";
 import { defineComponent } from "vue";
 import swal from 'sweetalert2';
 
-// const userStore = useUserStore();
+const userStore = useUserStore();
 
 export default defineComponent({
+  data() {
+    return{
+        userStore,
+    };
+  },
   methods: {
     async mostrarMensaje(){
       swal.fire({
