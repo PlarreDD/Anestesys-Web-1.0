@@ -10,6 +10,7 @@ export interface regIdPaciente{
     diagnostico: string,
     tipoCx: string,
     cie10: string,
+    cie9: string,
     cirugia: string,
     fechaCx: string,
     hrCx: string,
