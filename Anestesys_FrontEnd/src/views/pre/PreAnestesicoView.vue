@@ -2,6 +2,7 @@
   <header>
       <barra-navegacion/>
   </header>
+
   <div style="margin-top: 120px;">
     <div class="input-group mb-3">
       <div class="col-md-6">
@@ -169,7 +170,6 @@ import Valoracion from "../../components/pre/Valoracion.vue";
 import Plan from "../../components/pre/Plan.vue";
 import Nota from '../../components/pre/Nota.vue';
 import swal from 'sweetalert2';
-// import { mostrarMensaje } from "../LoginView.vue";
 import { useUserStore } from "@/stores/user-store";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
 
@@ -182,6 +182,7 @@ export default defineComponent({
       nomPaciente:'',
       nomCirujano:'',
       nomCirugia:'',
+      
       numExpB:false,
       nomPacB:false,
       bordeRojoNum:false,
@@ -315,7 +316,7 @@ export default defineComponent({
         this.esNota=true;
     },
 
-    async actualizaDatos(numeroExpediente,nombrePaciente, nombreCirujano, cirugia) {
+    async actualizaDatos(numeroExpediente, nombrePaciente, nombreCirujano, cirugia) {
       this.numExpediente=numeroExpediente,
       this.nomPaciente = nombrePaciente,
       this.nomCirujano = nombreCirujano,
@@ -323,7 +324,7 @@ export default defineComponent({
 
       this.$emit('recibe-datos', this.nomPaciente, this.nomCirujano, this.nomCirugia);
       
-      console.log('Pac: '+this.nomPaciente, ', Dr.: '+this.nomCirujano, ', Cx: '+this.nomCirugia)
+      console.log('Pac: '+ this.nomPaciente, ', Dr.: '+this.nomCirujano, ', Cx: '+this.nomCirugia)
     },
 
     async validarCambio() {
