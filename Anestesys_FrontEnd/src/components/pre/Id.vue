@@ -30,9 +30,9 @@
                 </div>        
             </div>
             <div class="col-md-2">
-                <label for="" class="form-label fw-bold">Habitación</label>
-                <input type="text" class="form-control" v-model="id.habitacion"
-                :class="id.habitacion != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                <label for="" class="form-label fw-bold">Núm de episodio</label>
+                <input type="text" class="form-control" v-model="id.numEpisodio"
+                :class="id.numEpisodio != '' ? 'form-control border border-success formSombra' : 'form-control'">
             </div>
 
             <div class="col-md-3">
@@ -60,9 +60,9 @@
                 :class="id.fechaIngreso != Date ? 'form-control border border-success formSombra' : 'form-control'">
             </div>
             <div class="col-md-2">
-                <label for="" class="form-label fw-bold">Núm de episodio</label>
-                <input type="text" class="form-control" v-model="id.numEpisodio"
-                :class="id.numEpisodio != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                <label for="" class="form-label fw-bold">Habitación</label>
+                <input type="text" class="form-control" v-model="id.habitacion"
+                :class="id.habitacion != '' ? 'form-control border border-success formSombra' : 'form-control'">                
             </div>
           
             <hr />
@@ -87,27 +87,31 @@
             
             <div class="col-md-8">
                 <label for="" class="form-label fw-bold">CIE-10</label>
-                <select id="inputState" class="form-select" v-model="id.cie10"
-                    :class="id.cie10 != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
-                    <option selected>Seleccione...</option>
-                    <option></option>
-                    <option></option>
-                </select>              
+                <el-select v-model="id.cie10" filterable :class="id.cie10 != 'Seleccione...' ? 'form-control-select border border-success formSombra' : 'form-control-select'">
+                    <el-option
+                        v-for="option in id.options"
+                        :key="option.value"
+                        :label="option.label"
+                        :value="option.value">
+                    </el-option>
+                </el-select>                   
             </div>
 
             <div class="col-md-6">
                 <label for="" class="form-label fw-bold">Cirugía</label>
-                <input type="text" class="form-control" @keyup.capture="enviarDatos" v-model="id.cirugia"
-                :class="id.cirugia != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                <textarea type="text" class="form-control" rows="3" @keyup.capture="enviarDatos" v-model="id.cirugia"
+                :class="id.cirugia != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
             </div>
             <div class="col-md-6">
                 <label for="" class="form-label fw-bold">CIE-9</label>
-                <select id="inputState" class="form-select" v-model="id.cie9"
-                    :class="id.cie9 != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
-                    <option selected>Seleccione...</option>
-                    <option></option>
-                    <option></option>
-                </select>       
+                <el-select v-model="id.cie9" filterable :class="id.cie9 != 'Seleccione...' ? 'form-control-select border border-success formSombra' : 'form-control-select'">
+                    <el-option
+                        v-for="option in id.options"
+                        :key="option.value"
+                        :label="option.label"
+                        :value="option.value">
+                    </el-option>
+                </el-select>
             </div>
 
             <div class="col-md-6"></div>
@@ -119,7 +123,7 @@
             <div class="col-md-3">
                 <label for="" class="form-label fw-bold">Hora de Cirugía</label>
                 <input type="time" class="form-control" v-model="id.horaCirugia"
-                :class="id.horaCirugia.length != 0 ? 'form-control border border-success formSombra' : 'form-control'">
+                :class="id.horaCirugia != '' ? 'form-control border border-success formSombra' : 'form-control'">
             </div>
             
             <hr />
@@ -156,7 +160,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue"
+import { ElSelect, ElOption } from 'element-plus';
 export default defineComponent({
+    components: { ElSelect, ElOption },
     props: {
         propNumExp: {
             type: Boolean
@@ -197,7 +203,15 @@ export default defineComponent({
                 horaCirugia: "",
                 cirujano: "", 
                 anestesiologo: "", 
-                anestesiologoVPA:""
+                anestesiologoVPA:"",
+                selectedOption: '',
+                options: [
+                    { label: 'Opción 1', value: 'opcion1' },
+                    { label: 'Opción 2', value: 'opcion2' },
+                    { label: 'Opción 3', value: 'opcion3' },
+                    { label: 'Opción 4', value: 'opcion4' },
+                    { label: 'Opción 5', value: 'opcion5' },
+                ],
             }, 
         }  
     },
@@ -258,5 +272,46 @@ export default defineComponent({
 .margenBoton{
     margin-top: 48px;
     margin-left: 5px;
+}
+.form-control-select {
+    display: block;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.3rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.el-select {
+    --el-select-border-color-hover: var(--el-border-color-hover);
+    --el-select-disabled-border: var(--el-disabled-border-color);
+    --el-select-font-size: var(--el-font-size-base);
+    --el-select-close-hover-color: var(--el-text-color-secondary);
+    --el-select-input-color: var(--el-text-color-placeholder);
+    --el-select-multiple-input-color: var(--el-text-color-regular);
+    --el-select-input-focus-border-color: var(--el-disabled-border-color); 
+    --el-select-input-font-size: 14px;
+}
+.el-select-dropdown__item.selected {
+    color: #000;
+    font-weight: 700;
+}
+.el-input__inner {
+    --el-input-inner-height: calc(var(--el-input-height, 32px) - 2px);
+    width: 100%;
+    flex-grow: 1;
+    -webkit-appearance: none;
+    color: #000;
+    font-size: inherit;
+    height: var(--el-input-inner-height);
+    line-height: var(--el-input-inner-height);
+    padding: 0;
+    outline: 0;
+    border: none;
+    background: 0 0;
+    box-sizing: border-box;
 }
 </style>

@@ -104,7 +104,6 @@ export default defineComponent({
     
     mounted: function() { // Llama el método despues de cargar la página
       this.cargarFondo();
-      this.ocultarHeader();
     },
 
     created(){
@@ -162,10 +161,6 @@ export default defineComponent({
 
         async cargarFondoLogin(){
             document.body.style.backgroundImage = "url('../../public/images/login.webp')";
-        },
-
-        async ocultarHeader(){
-            document.getElementById("headerP").className='mt invisible'
         },
     }
 });

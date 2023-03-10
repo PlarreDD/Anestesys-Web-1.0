@@ -2,7 +2,7 @@
   <header>
       <barra-navegacion/>
   </header>
-  <div style="margin-top: 120px;">
+  <div class="margen-div-barra">
     <div class="input-group mb-3">
       <div class="col-md-6">
         <!--Buscador-->
@@ -204,7 +204,6 @@ export default defineComponent({
   },
   
   created(){
-    // this.validaExpediente(this.numExpediente, this.nomPaciente);
   },
   
   mounted: function() { // Llama el método despues de cargar la página
@@ -411,6 +410,9 @@ export default defineComponent({
 /* Contenido principal */
 .bordePrincipal {
   width: 110%
+}
+.margen-div-barra{
+  margin-top: 120px;
 }
 
 /* Menú lateral */

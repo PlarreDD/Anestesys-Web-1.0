@@ -127,7 +127,6 @@ const userStore = useUserStore();
 export default defineComponent({
   mounted: function() { // Llama el método despues de cargar la página
     this.cargarFondo();
-    this.ocultarHeader();
   },
   
   created(){
@@ -184,10 +183,6 @@ export default defineComponent({
 
     async cargarFondoRegistro(){
       document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
-    },
-
-    async ocultarHeader(){
-      document.getElementById("headerP").className='mt invisible'
     },
 
     async mostrarPass(){
