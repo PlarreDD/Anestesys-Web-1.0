@@ -1,21 +1,19 @@
 <template>
-
     <div class="col-12 borderPrincipal">  
         <form @submit.prevent="obtenerDatos" class="row g-3">
             <div class="col-md-4">
-                <label for="" class="form-label fw-bold"> Número de Expediente </label>                
+                <label for="" class="form-label fw-bold"> Número de Expediente </label>
                 <input type="text" 
                     v-model="id.numExped" 
                     pattern="[0-9]{8}"
                     title="Sólo números, ocho dígitos"
                     id="numExpediente" 
                     class="form-control"
-                    :class="{ 'form-control border border-danger': propRojoNum, 'form-control border border-success formSombra': propVerdeNum }">                
+                    :class="{ 'form-control border border-danger': propRojoNum,
+                              'form-control border border-success formSombra': propVerdeNum }">
 
                 <div :class="propNumExp == true ? 'visible validaCampo' : 'invisible'"
-                     id="validaNumExp">                     
-                    Escriba el número de expediente                    
-                </div>                
+                     id="validaNumExp"> Escriba el número de expediente </div>
             </div>
 
             <div class="col-md-6">
@@ -26,18 +24,18 @@
                        @keyup.capture="enviarDatos"
                        v-model="id.nomPaciente"
                        id="nombrePaciente" 
-                       :class="{ 'form-control border border-danger': propRojoNom, 'form-control border border-success formSombra': propVerdeNom }">
+                       :class="{ 'form-control border border-danger': propRojoNom,
+                                 'form-control border border-success formSombra': propVerdeNom }">
 
                 <div :class="propNomPac == true ? 'visible validaCampo' : 'invisible'"
-                     id="validaNomPac">
-                    Escriba el nombre del paciente
-                </div>        
+                     id="validaNomPac"> Escriba el nombre del paciente </div>
             </div>
 
             <div class="col-md-2">
                 <label for="" class="form-label fw-bold">Núm de episodio</label>
                 <input type="text" class="form-control" v-model="id.numEpisodio"
-                :class="id.numEpisodio != undefined || id.numEpisodio != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                :class="id.numEpisodio != undefined || id.numEpisodio != '' ?
+                       'form-control border border-success formSombra' : 'form-control'">
             </div>
 
             <div class="col-md-3">
@@ -45,7 +43,8 @@
                 <input type="date"
                        class="form-control"
                        v-model="id.fechaNac"
-                       :class="id.fechaNac != String(Date) ? 'form-control border border-success formSombra' : 'form-control'">
+                       :class="id.fechaNac != String(Date) ?
+                              'form-control border border-success formSombra' : 'form-control'">
             </div>
 
             <div class="col-md-2">
@@ -53,7 +52,8 @@
                 <input type="text"
                        class="form-control"
                        v-model="id.edadPaciente"
-                       :class="id.edadPaciente != '0' ? 'form-control border border-success formSombra' : 'form-control'">
+                       :class="id.edadPaciente != '0' ?
+                              'form-control border border-success formSombra' : 'form-control'">
             </div>
 
             <div class="col-md-3">
@@ -74,7 +74,8 @@
                        autocomplete="off"
                        value="Femenino"
                        v-model="id.genero">
-                <label class="btn btn-radio" for="femenino"> Femenino </label>
+                <label class="btn btn-radio"
+                       for="femenino"> Femenino </label>
             </div>
             
             <div class="col-md-2">
@@ -82,28 +83,33 @@
                 <input type="date"
                        class="form-control"
                        v-model="id.fechaIn"
-                       :class="id.fechaIn != String(Date) ? 'form-control border border-success formSombra' : 'form-control'">
+                       :class="id.fechaIn != String(Date) ?
+                              'form-control border border-success formSombra' : 'form-control'">
             </div>
 
             <div class="col-md-2">
                 <label for="" class="form-label fw-bold">Habitación</label>
                 <input type="text" class="form-control" v-model="id.habitacion"
-                :class="id.habitacion != '' || id.habitacion != undefined ? 'form-control border border-success formSombra' : 'form-control'">                
+                :class="id.habitacion != '' || id.habitacion != undefined ?
+                       'form-control border border-success formSombra' : 'form-control'">
             </div>
           
             <hr />
 
             <div class="col-md-8">
-                <label for="" class="form-label fw-bold"> Diagnóstico </label>
+                <label for=""
+                       class="form-label fw-bold"> Diagnóstico </label>
                 <textarea class="form-control"
                           rows="3"
                           v-model="id.diagnostico"
-                          :class="id.diagnostico != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
+                          :class="id.diagnostico != '' ?
+                                 'form-control border border-success formSombra' : 'form-control'">
+                </textarea>
             </div>
 
             <div class="col-md-4">
-                <label for="" class="form-label col-12 fw-bold"> Tipo de Cirugía </label>
-
+                <label for=""
+                       class="form-label col-12 fw-bold"> Tipo de Cirugía </label>
                 <input type="radio"
                        class="btn-check"
                        name="tipoCirugia"
@@ -111,8 +117,9 @@
                        autocomplete="off"
                        value="Mayor"
                        v-model="id.tipoCx">
-                <label class="btn btn-radio margenRadio" for="mayor"> Mayor </label>
-                
+                <label class="btn btn-radio margenRadio"
+                       for="mayor"> Mayor </label>
+
                 <input type="radio"
                        class="btn-check"
                        name="tipoCirugia"
@@ -120,7 +127,8 @@
                        autocomplete="off"
                        value="Menor"
                        v-model="id.tipoCx">
-                <label class="btn btn-radio margenRadio" for="menor"> Menor </label>
+                <label class="btn btn-radio margenRadio"
+                       for="menor"> Menor </label>
 
                 <input type="radio"
                        class="btn-check"
@@ -129,29 +137,45 @@
                        autocomplete="off"
                        value="Ambulatoria"
                        v-model="id.tipoCx">
-                <label class="btn btn-radio" for="ambulatoria"> Ambulatoria </label>
-            </div>  
+                <label class="btn btn-radio"
+                       for="ambulatoria"> Ambulatoria </label>
+            </div>
             
             <div class="col-md-8">
                 <label for="" class="form-label fw-bold">CIE-10</label>
-                <el-select v-model="id.cie10" filterable :class="id.cie10 != 'Seleccione...' ? 'form-control-select border border-success formSombra' : 'form-control-select'">
+                <el-select
+                    v-model="id.cie10" filterable
+                    :class="id.cie10 != 'Seleccione...' ?
+                           'form-control-select border border-success formSombra' : 'form-control-select'">
                     <el-option
                         v-for="option in id.options"
                         :key="option.value"
                         :label="option.label"
                         :value="option.value">
                     </el-option>
-                </el-select>                   
+                </el-select>
             </div>
 
             <div class="col-md-6">
-                <label for="" class="form-label fw-bold">Cirugía</label>
-                <textarea type="text" class="form-control" rows="3" @keyup.capture="enviarDatos" v-model="id.cirugia"
-                :class="id.cirugia != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
+                <label for=""
+                       class="form-label fw-bold"> Cirugía </label>
+                <textarea type="text"
+                          class="form-control"
+                          rows="3"
+                          @keyup.capture="enviarDatos"
+                          v-model="id.cirugia"
+                          :class="id.cirugia != '' ?
+                                 'form-control border border-success formSombra' : 'form-control'">
+                </textarea>
             </div>
+
             <div class="col-md-6">
-                <label for="" class="form-label fw-bold">CIE-9</label>
-                <el-select v-model="id.cie9" filterable :class="id.cie9 != 'Seleccione...' ? 'form-control-select border border-success formSombra' : 'form-control-select'">
+                <label for=""
+                       class="form-label fw-bold"> CIE-9 </label>
+                <el-select
+                    v-model="id.cie9" filterable
+                    :class="id.cie9 != 'Seleccione...' ?
+                           'form-control-select border border-success formSombra' : 'form-control-select'">
                     <el-option
                         v-for="option in id.options"
                         :key="option.value"
@@ -163,47 +187,56 @@
 
             <div class="col-md-6"></div>
             <div class="col-md-3">
-                <label for="" class="form-label fw-bold"> Fecha de Cirugía </label>
+                <label for=""
+                       class="form-label fw-bold"> Fecha de Cirugía </label>
                 <input type="date"
                        class="form-control"
                        v-model="id.fechaCx"
-                       :class="id.fechaCx != String(Date) ? 'form-control border border-success formSombra' : 'form-control'">
+                       :class="id.fechaCx != String(Date) ?
+                              'form-control border border-success formSombra' : 'form-control'">
             </div>
 
             <div class="col-md-3">
-                <label for="" class="form-label fw-bold"> Hora de Cirugía </label>
-                
+                <label for=""
+                       class="form-label fw-bold"> Hora de Cirugía </label>
                 <input type="time"
                        class="form-control"
                        v-model="id.hrCx"
-                       :class="id.hrCx != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                       :class="id.hrCx != '' ?
+                              'form-control border border-success formSombra' : 'form-control'">
             </div>
             
             <hr />
 
             <div class="col-md-6">
-                <label for="" class="form-label fw-bold"> Cirujano </label>
+                <label for=""
+                       class="form-label fw-bold"> Cirujano </label>
                 <input type="text"
                        class="form-control"
                        @keyup.capture="enviarDatos"
                        v-model="id.cirujano"
-                       :class="id.cirujano != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                       :class="id.cirujano != '' ?
+                              'form-control border border-success formSombra' : 'form-control'">
             </div>
             
             <div class="col-md-6">
-                <label for="" class="form-label fw-bold"> Anestesiólogo </label>
+                <label for=""
+                       class="form-label fw-bold"> Anestesiólogo </label>
                 <input type="text" 
                        class="form-control"
                        v-model="id.anestesiologo"
-                       :class="id.anestesiologo != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                       :class="id.anestesiologo != '' ?
+                              'form-control border border-success formSombra' : 'form-control'">
             </div>
 
             <div class="col-md-6">
-                <label for="" class="form-label fw-bold"> Anestesiólogo VPA </label>
+                <label for=""
+                       class="form-label fw-bold"> Anestesiólogo VPA </label>
                 <input type="text"
                        class="form-control"
                        v-model="id.anestesiologoVPA"
-                       :class="id.anestesiologoVPA != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                       :class="id.anestesiologoVPA != '' ?
+                              'form-control border border-success formSombra' : 'form-control'">
             </div>
             
             <div class="col-md-4"></div>
@@ -211,7 +244,25 @@
                 <button href="#pre-valoracion" 
                         data-bs-toggle="tab" 
                         type="submit"
-                        class="btn btn-guardar fw-bold"> GUARDAR </button>
+                        class="btn btn-guardar fw-bold"
+                        @click="preIdStore.savePreId(id.numExped,
+                                                               id.nomPaciente,
+                                                               id.numEpisodio,
+                                                               id.fechaNac,
+                                                               id.edadPaciente,
+                                                               id.genero,
+                                                               id.fechaIn,
+                                                               id.habitacion,
+                                                               id.diagnostico,
+                                                               id.tipoCx,
+                                                               id.cie10,
+                                                               id.cie9,
+                                                               id.cirugia,
+                                                               id.fechaCx,
+                                                               id.hrCx,
+                                                               id.cirujano,
+                                                               id.anestesiologo,
+                                                               id.anestesiologoVPA)"> GUARDAR </button>
                         <!-- :disabled="id.numExpediente != '' && id.nombrePaciente != '' ? false : true" -->
             </div>
         </form>
@@ -222,6 +273,10 @@
 import type { regIdPaciente } from "@/interfaces/regPreAnest"
 import { defineComponent } from "vue"
 import { ElSelect, ElOption } from 'element-plus';
+import { usePreIdStore } from "../../stores/preId-store";
+
+const preIdStore = usePreIdStore();
+
 export default defineComponent({
     components: { ElSelect, ElOption },
     props: {
@@ -248,17 +303,24 @@ export default defineComponent({
     data () {
         return{
             id: {} as regIdPaciente,
+            preIdStore,
         }
     },
 
     methods: {
         obtenerDatos() {
             this.$emit("validar", this.id.numExped, this.id.nomPaciente)
-            console.log(this.id.numEpisodio)
+            // console.log(this.id.numEpisodio)
         },
         enviarDatos() {
             this.$emit('recibe-datos', this.id.numExped, this.id.nomPaciente, this.id.cirujano, this.id.cirugia)
-        }   
+        },
+
+        // save(){
+        //     // preIdStore.savePreId();
+        // },
+
+        
     }
 })
 </script>

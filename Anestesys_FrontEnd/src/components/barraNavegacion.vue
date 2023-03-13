@@ -1,6 +1,6 @@
 <template>
   <div class="mt" id="headerP">
-      <nav class="navbar navbar-color fw-bold">                
+      <nav class="navbar navbar-color fw-bold">
         <div class="input-group">
           <div class="col-md-1"></div>
 
@@ -20,7 +20,7 @@
 
             <form class="dropdown-menu p-5">
               <div class="mb-3 estiloDropDown input-group mb-3"></div>
-            </form>            
+            </form>
           </div>
          
           <div class="col-md-2 text-white alinearElementoD">
@@ -35,7 +35,7 @@
                     aria-controls="offcanvasNavbar">
               <i class="fa-solid fa-2x fa-ellipsis"></i>
             </button>
-          </div>                      
+          </div>
 
           <div class="offcanvas nav-config"
                tabindex="-1"
@@ -80,7 +80,7 @@
                 <li class="nav-item">
                     <button class="btn btn-configuracion fw-bold"
                     @click="userStore.logout()"
-                            >Salir </button>
+                            > Salir </button>
                 </li>
               </ul>
             </div>

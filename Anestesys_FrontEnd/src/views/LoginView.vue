@@ -45,7 +45,7 @@
                             @click="iniciarEmergencia()"> ACEPTAR </button>
                   </div>
                 </div>
-              </div>                  
+              </div>
             </div>
           </div>
         </div>
@@ -88,17 +88,17 @@
             <span class="fa fa-fw fa-eye password-icon show-password"
                   id="mostrar"
                   @click=" mostrarPass()"></span>
-                      
+
             <div id="contraLogin"
                 :class="userContrasena == true ? 'visible validaCampo' : 'invisible'"> Escriba la contraseña </div>
           </div>
-          
+
           <div class="col-md-2"></div>
           <div class="col-md-12 div-img">
               <button @click="validaCamposLogin()"
                       class="btn btn-login fw-bold"> Entrar </button>
           </div>
-          
+
           <div class="col-md-12">
             <RouterLink class="nav-link colorLinkL"
                         to="registro"
@@ -112,7 +112,7 @@
                 class="btn btn-emergencia fw-bold"
                 data-bs-toggle="modal"
                 data-bs-target="#emergenciaModal"> ¡EMERGENCIA! </button>
-      </div>                 
+      </div>
     </div>
   </div>  
 </template>

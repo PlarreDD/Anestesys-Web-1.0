@@ -97,74 +97,84 @@ export const useUserStore = defineStore('user', {
                 password: String(genPswd.value),
                 repassword: String(genPswd.value),
                 nomMed: nomUsr,
-                apMed: apUsr,
-            }).then((res:any) => {
-                /* Mensaje de registro exitoso */
-                swal.fire({
-                    html: 'Usuario <b>' + nomUsr + ' ' + apUsr +
-                          '</b> registrado con éxito.',
-                    icon: 'info',
-                    showConfirmButton: false,
-                    showCloseButton: false,
-                    timer: 5000,
-                    timerProgressBar: true,
-                    toast: true,
-                    position: 'top-start',
-                    didOpen: () => {
-                        const b = swal.getHtmlContainer().querySelector('b')
-                        timerInterval = setInterval(() => {}, 100)
-                    },
-                    willClose: () => {
-                        clearInterval(timerInterval)
-                    },
-                }).then((result) => {
-                    if (result.dismiss === swal.DismissReason.timer) {
-                        /* Redirección al Login */
-                        router.push('/');
-
-                        /* Mensaje con las credenciales del usuario registrado */
+                apMed: apUsr,})
+                    .then((res:any) => {
+                        /* Mensaje de registro exitoso */
                         swal.fire({
-                            html: '</b></br>Usuario: <b>' + email +
-                                  '</b></br>Contraseña: <b>' + genPswd.value +
-                                  '</b></br>Guarde esta contraseña en un lugar seguro o consulte su correo',
+                            html: 'Usuario <b>' + nomUsr + ' ' + apUsr +
+                                '</b> registrado con éxito.',
+                            icon: 'info',
+                            showConfirmButton: false,
+                            showCloseButton: false,
+                            timer: 5000,
+                            timerProgressBar: true,
+                            toast: true,
+                            position: 'top-start',
+                            didOpen: () => {
+                                const b = swal.getHtmlContainer().querySelector('b')
+                                timerInterval = setInterval(() => {}, 100)
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval)
+                            },
+                        }).then((result) => {
+                            if (result.dismiss === swal.DismissReason.timer) {
+                                /* Redirección al Login */
+                                router.push('/');
+
+                                /* Mensaje con las credenciales del usuario registrado */
+                                swal.fire({
+                                    html: '</br>Usuario: <b>' + email +
+                                          '</b></br>Contraseña: <b>' + genPswd.value +
+                                          '</b></br>Guarde esta contraseña en un lugar seguro o consulte su correo',
+                                    icon: 'info',
+                                    showConfirmButton: true,
+                                    showCloseButton: true,
+                                    toast: true,
+                                    position: 'top',
+                                });
+                            }
+                        });})
+                    .catch((e:any) => {
+                        if(e.response){
+                            /* Mensaje de registro fallido */
+                            swal.fire({
+                                html: 'El correo <b>' + email + '</b> ya está registrado',
+                                icon: 'info',
+                                showConfirmButton: false,
+                                showCloseButton: true,  
+                                timer: 5000,
+                                timerProgressBar: true,
+                                toast: true,
+                                position: 'top-end'
+                            });
+                        }
+                        else if(e.request){
+                            console.log(e.request);
+                        }
+                        else{
+                            console.log("ErrorAx: ", e);
+                        }});
+        },
+
+        logout(){
+            apiAxios.post("http://localhost:5000/logout")
+                    .then(() => {
+                        this.token = null;
+                        this.expiresIn = null;
+                        /* Mensaje de cierre de sesión */
+                        // Falta uso de botones de cancelar y finaluizar
+                        swal.fire({
+                            html: 'Esta a punto de cerrar sesión',
                             icon: 'info',
                             showConfirmButton: true,
                             showCloseButton: true,
                             toast: true,
                             position: 'top',
-                        });
-                    }
-                });
-            }).catch((e:any) =>{
-                if(e.response){
-                    /* Mensaje de registro fallido */
-                    swal.fire({
-                        html: 'El correo <b>' + email + '</b> ya está registrado',
-                        icon: 'info',
-                        showConfirmButton: false,
-                        showCloseButton: true,  
-                        timer: 5000,
-                        timerProgressBar: true,
-                        toast: true,
-                        position: 'top-end'
-                    })   
-                }
-                else if(e.request){
-                    console.log(e.request);
-                }
-                else{
-                    console.log("ErrorAx: ", e);
-                }
-            });
-        },
+                        })
 
-        logout(){
-            apiAxios.post("http://localhost:5000/logout")
-            .then(() => {
-                this.token = null;
-                this.expiresIn = null;
-                router.push('/');
-            })
+                        router.push('/');
+                    })
         },
     }
 });
