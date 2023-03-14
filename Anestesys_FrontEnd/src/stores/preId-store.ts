@@ -19,8 +19,8 @@ export const usePreIdStore = defineStore('preid', {
                 fechaInPaciente: fechaIn,
                 diagnostico: diagnostico,
                 tipoCx: tipoCx,
-                cie10,
-                cie9,
+                cie10: cie10,
+                cie9: cie9,
                 cirugia: cirugia,
                 fechaCx: fechaCx,
                 hrCx: hrCx,
@@ -28,7 +28,7 @@ export const usePreIdStore = defineStore('preid', {
                 anestesiologo: anestesiologo,
                 anestesiologoVPA: anestesiologoVPA})
                     .catch((e:any) => {
-                        console.log(e);
+                        console.log("error: " + e);
                     })
                 ;
         },

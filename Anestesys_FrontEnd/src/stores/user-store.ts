@@ -26,7 +26,7 @@ export const useUserStore = defineStore('user', {
                 /* Mensaje de Bienvenida */
                 swal.fire({
                     html: 'Bienvenido <b>Dr. ' + this.Nombre + ' ' + this.Apellido + '</b>',
-                    icon: 'info',
+                    icon: 'success',
                     showConfirmButton: false,
                     showCloseButton: true,  
                     timer: 5000,
@@ -40,14 +40,12 @@ export const useUserStore = defineStore('user', {
             }).catch((res:any) => {
                 /* Fallo de inicio de sesión */
                 swal.fire({
-                    html: 'Usuario o contraseña inválidos',
-                    icon: 'info',
+                    html: '<b>Usuario o contraseña inválidos</b>',
+                    icon: 'error',
                     showConfirmButton: false,
-                    showCloseButton: true,  
-                    timer: 5000,
+                    showCloseButton: false,
+                    timer: 4000,
                     timerProgressBar: true,
-                    toast: true,
-                    position: 'top-end'
                 });
             });
         },
@@ -103,13 +101,12 @@ export const useUserStore = defineStore('user', {
                         swal.fire({
                             html: 'Usuario <b>' + nomUsr + ' ' + apUsr +
                                 '</b> registrado con éxito.',
-                            icon: 'info',
+                            icon: 'success',
                             showConfirmButton: false,
                             showCloseButton: false,
-                            timer: 5000,
+                            timer: 3000,
                             timerProgressBar: true,
-                            toast: true,
-                            position: 'top-start',
+                            // toast: true,
                             didOpen: () => {
                                 const b = swal.getHtmlContainer().querySelector('b')
                                 timerInterval = setInterval(() => {}, 100)
@@ -124,14 +121,13 @@ export const useUserStore = defineStore('user', {
 
                                 /* Mensaje con las credenciales del usuario registrado */
                                 swal.fire({
-                                    html: '</br>Usuario: <b>' + email +
+                                    html: '<center></br>Usuario: <b>' + email +
                                           '</b></br>Contraseña: <b>' + genPswd.value +
-                                          '</b></br>Guarde esta contraseña en un lugar seguro o consulte su correo',
+                                          '</b></center></br></br>Guarde esta contraseña en</br>un lugar seguro o consulte su correo',                                    
                                     icon: 'info',
                                     showConfirmButton: true,
-                                    showCloseButton: true,
-                                    toast: true,
-                                    position: 'top',
+                                    showCloseButton: false,                                    
+                                    width:680,
                                 });
                             }
                         });})
@@ -140,13 +136,12 @@ export const useUserStore = defineStore('user', {
                             /* Mensaje de registro fallido */
                             swal.fire({
                                 html: 'El correo <b>' + email + '</b> ya está registrado',
-                                icon: 'info',
+                                icon: 'error',
                                 showConfirmButton: false,
-                                showCloseButton: true,  
+                                showCloseButton: false,  
                                 timer: 5000,
                                 timerProgressBar: true,
-                                toast: true,
-                                position: 'top-end'
+                                // position: 'top-end'
                             });
                         }
                         else if(e.request){
@@ -169,8 +164,8 @@ export const useUserStore = defineStore('user', {
                             icon: 'info',
                             showConfirmButton: true,
                             showCloseButton: true,
-                            toast: true,
-                            position: 'top',
+                            showDenyButton: true,
+                            denyButtonText: `Cancelar`,
                         })
 
                         router.push('/');

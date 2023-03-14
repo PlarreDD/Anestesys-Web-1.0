@@ -2,7 +2,7 @@
     <div class="col-12 borderPrincipal">  
         <form @submit.prevent="obtenerDatos" class="row g-3">
             <div class="col-md-4">
-                <label for="" class="form-label fw-bold"> Número de Expediente </label>
+                <label for="" class="form-label fw-bold"> Número de Expediente <span class="text-danger">*</span> </label>
                 <input type="text" 
                     v-model="id.numExped" 
                     pattern="[0-9]{8}"
@@ -10,14 +10,15 @@
                     id="numExpediente" 
                     class="form-control"
                     :class="{ 'form-control border border-danger': propRojoNum,
-                              'form-control border border-success formSombra': propVerdeNum }">
+                              'form-control border border-success formSombra': propVerdeNum }"
+                    placeholder="Campo obligatorio">
 
                 <div :class="propNumExp == true ? 'visible validaCampo' : 'invisible'"
                      id="validaNumExp"> Escriba el número de expediente </div>
             </div>
 
             <div class="col-md-6">
-                <label for="" class="form-label fw-bold"> Nombre del Paciente </label>
+                <label for="" class="form-label fw-bold"> Nombre del Paciente <span class="text-danger">*</span> </label>
                 
                 <input class="form-control" 
                        type="text" 
@@ -25,7 +26,8 @@
                        v-model="id.nomPaciente"
                        id="nombrePaciente" 
                        :class="{ 'form-control border border-danger': propRojoNom,
-                                 'form-control border border-success formSombra': propVerdeNom }">
+                                 'form-control border border-success formSombra': propVerdeNom }"
+                        placeholder="Campo obligatorio">
 
                 <div :class="propNomPac == true ? 'visible validaCampo' : 'invisible'"
                      id="validaNomPac"> Escriba el nombre del paciente </div>
@@ -279,6 +281,7 @@ const preIdStore = usePreIdStore();
 
 export default defineComponent({
     components: { ElSelect, ElOption },
+
     props: {
         propNumExp: {
             type: Boolean
