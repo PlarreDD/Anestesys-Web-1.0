@@ -13,17 +13,18 @@ export const getInfo = (_req:Request, res:Response) => {
 
 export const createPaciente = async (req:Request, res:Response) => {
     try {
-        const { numExpediente, nomPaciente, fechaNPaciente,
-                edadPaciente, habitacionPaciente, generoPaciente,
-                fechaInPaciente, diagnostico, tipoCx,
-                cirugia, fechaCx, hrCx,
+        const { numExpediente, nomPaciente, numEpisodio, 
+                fechaNPaciente, edadPaciente, habitacionPaciente,
+                generoPaciente, fechaInPaciente, diagnostico,
+                tipoCx, cirugia, cie10, cie9, fechaCx, hrCx,
                 cirujano, anestesiologo, anestesiologoVPA } = req.body;
 
-        const paciente = new IdPacientes({ numExpediente, nomPaciente, fechaNPaciente,
-                                          edadPaciente, habitacionPaciente, generoPaciente,
-                                          fechaInPaciente, diagnostico, tipoCx,
-                                          cirugia, fechaCx, hrCx,
-                                          cirujano, anestesiologo, anestesiologoVPA });
+        const paciente = new IdPacientes({ numExpediente, nomPaciente, numEpisodio,
+                                           fechaNPaciente, edadPaciente,
+                                           habitacionPaciente, generoPaciente,
+                                           fechaInPaciente, diagnostico, tipoCx,
+                                           cie10, cie9, cirugia, fechaCx, hrCx,
+                                           cirujano, anestesiologo, anestesiologoVPA });
         await paciente.save();
 
         return res.json({paciente});

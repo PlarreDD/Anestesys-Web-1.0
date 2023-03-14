@@ -59,3 +59,10 @@ npm run build
 - Reubicación de las ventanas emergentes del login y del registro a user-store para que al finalizar el registro o inicio de sesión se activen.
 
 - Redireccionamiento del las vistas desde user-store para realizarse al finalizar la acción del registro o inicio de sesión.
+
+### 10/03/2023 (LESB)
+- Cambios en la vista ID agregando modelado para la base de datos.
+
+- Agregada la funcion en el link de salir en la barra de navegación.
+
+- Creadas funciones para subir los datos capturados a la Base de Datos.

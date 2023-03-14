@@ -24,7 +24,9 @@
 
             <div class="modal-body">
               <h2 class="fw-bold textoModal">MODO EMERGENCIA</h2>
-              <h3 class="textoModal">al finalizar el caso deberá ingresar sus datos para guardar la información del paciente.</h3>
+              <h3 class="textoModal">Al finalizar el caso deberá ingresar sus datos</h3>
+              <h3 class="textoModal">para guardar la información del paciente.</h3>
+
             </div>
 
             <div class="modal-footer">
@@ -32,7 +34,7 @@
                 <div class="row g-3">
                   <div class="col-md-4 div-img">
                     <button type="button"
-                            class="btn btn-modal fw-bold"
+                            class="btn btn-modal fw-bold btn-modal"
                             data-bs-dismiss="modal"> CANCELAR </button>
                   </div>
                   
@@ -40,12 +42,12 @@
                   
                   <div class="col-md-4 div-img">
                     <button type="button"
-                            class="btn btn-modal fw-bold"
+                            class="btn btn-modal fw-bold btn-modal"
                             data-bs-dismiss="modal"
                             @click="iniciarEmergencia()"> ACEPTAR </button>
                   </div>
                 </div>
-              </div>                  
+              </div>
             </div>
           </div>
         </div>
@@ -88,17 +90,17 @@
             <span class="fa fa-fw fa-eye password-icon show-password"
                   id="mostrar"
                   @click=" mostrarPass()"></span>
-                      
+
             <div id="contraLogin"
                 :class="userContrasena == true ? 'visible validaCampo' : 'invisible'"> Escriba la contraseña </div>
           </div>
-          
+
           <div class="col-md-2"></div>
           <div class="col-md-12 div-img">
               <button @click="validaCamposLogin()"
                       class="btn btn-login fw-bold"> Entrar </button>
           </div>
-          
+
           <div class="col-md-12">
             <RouterLink class="nav-link colorLinkL"
                         to="registro"
@@ -112,7 +114,7 @@
                 class="btn btn-emergencia fw-bold"
                 data-bs-toggle="modal"
                 data-bs-target="#emergenciaModal"> ¡EMERGENCIA! </button>
-      </div>                 
+      </div>
     </div>
   </div>  
 </template>
@@ -121,6 +123,7 @@
 import { useUserStore } from "../stores/user-store";
 import type { regUsr } from '@/interfaces/regUsr';
 import { defineComponent } from "vue";
+import swal from 'sweetalert2';
 
 const userStore = useUserStore();
 
@@ -179,6 +182,11 @@ export default defineComponent({
 
     async cargarFondo(){
       document.body.style.backgroundImage = "url('../../public/images/login.webp')";
+      // swal.fire({
+                                    
+                                    
+
+      //           });
     },
 
     async cargarFondoRegistro(){
@@ -215,6 +223,9 @@ export const salir = async () => {
 .modal-footer{
   border-top: #D11515;
 }
+.btn-modal{
+  margin-bottom: 20px;
+}
 
 .divBorder {
   border-top-left-radius: 55px;
@@ -232,6 +243,15 @@ export const salir = async () => {
 .colorLinkL:hover{
   color: #E88300;
   text-decoration: underline;
+}
+.nav-link {
+  display: block;
+  padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+  font-size: var(--bs-nav-link-font-size);
+  font-weight: var(--bs-nav-link-font-weight);
+  color: #E88300;
+  text-decoration: none;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
 }
 .btn-login {
     --bs-btn-bg: #E88300;

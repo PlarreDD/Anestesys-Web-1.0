@@ -119,7 +119,7 @@
           <RouterLink to="trans">
             <img src="images/trans.svg" class="img-menu-lateral"/>
           </RouterLink>
-        </div>      
+        </div>
         
         <div class="col-md-2 menu-trans-post">
           <RouterLink to="post">
@@ -133,7 +133,7 @@
           <div class="col bordeColumna">
             <label class="form-label text-white">
               {{nomPaciente}}
-            </label>                                  
+            </label>
           </div>
           
           <div class="col bordeColumna">
@@ -152,7 +152,7 @@
                 id="btnArriba"
                 title="Go to top">
           <i class="fa-solid fa-3x fa-angle-up"></i>
-        </button>                      
+        </button>
       </div>
     </div>
   </div>
@@ -210,7 +210,7 @@ export default defineComponent({
     this.validaSeleccionId()
     this.ocultarFondo();    
     this.mostrarHeader();    
-    document.addEventListener('scroll', this.scrollFunction);              
+    document.addEventListener('scroll', this.scrollFunction);
   },
   
   destroyed: function(){
@@ -218,12 +218,12 @@ export default defineComponent({
   },
   
   methods: {
-    async validaExpediente(numExpediente, nombrePaciente,) {                                  
+    async validaExpediente(numExpediente, nombrePaciente,) {
       if(numExpediente.trim() == "" || nombrePaciente.trim() == "") {
         
-        if(numExpediente.trim() ==""){                   
-          this.numExpB=true          
-          this.bordeRojoNum=true  
+        if(numExpediente.trim() ==""){
+          this.numExpB=true
+          this.bordeRojoNum=true
           this.bordeVerdeNum=false
         }
         else{
@@ -233,9 +233,9 @@ export default defineComponent({
         }
           
         if(nombrePaciente.trim() ==""){
-          this.nomPacB=true 
-          this.bordeRojoNom=true  
-          this.bordeVerdeNom=false          
+          this.nomPacB=true
+          this.bordeRojoNom=true
+          this.bordeVerdeNom=false
         }
         else{
           this.nomPacB=false
@@ -252,9 +252,9 @@ export default defineComponent({
           position: 'top',
           timer: 3000,
           timerProgressBar: true
-        })              
+        })
         
-        return;                       
+        return;
       }
       else{
         this.numExpB=false
@@ -262,7 +262,7 @@ export default defineComponent({
         this.bordeRojoNum=false
         this.bordeVerdeNum=true
         this.bordeRojoNom=false
-        this.bordeVerdeNom=true        
+        this.bordeVerdeNom=true
 
         window.location.href = '#pre-valoracion'
         alert('OK')
@@ -277,7 +277,7 @@ export default defineComponent({
         this.esPaciente=true;
         this.esValoracion=false;
         this.esPlan=false;
-        this.esNota=false;             
+        this.esNota=false;
     },
 
     async validaSeleccionValoracion(){
@@ -289,7 +289,7 @@ export default defineComponent({
         this.esValoracion=true;
         this.esPlan=false;
         this.esNota=false;  
-        console.log('Id true')              
+        console.log('Id true')
     },
 
     async validaSeleccionPlan(){
@@ -299,7 +299,7 @@ export default defineComponent({
       else
         this.esPlan=true;
         this.esPaciente=false;
-        this.esValoracion=false;        
+        this.esValoracion=false;
         this.esNota=false;
     },
 
@@ -310,7 +310,7 @@ export default defineComponent({
       else
         this.esPlan=false;
         this.esPaciente=false;
-        this.esValoracion=false;        
+        this.esValoracion=false;
         this.esNota=true;
     },
 
@@ -327,7 +327,7 @@ export default defineComponent({
 
     async validarCambio() {
       if (this.numExpediente.trim() != '' && this.nomPaciente.trim() != '') {
-        alert('Entro, no debe cambiar')       
+        alert('Entro, no debe cambiar')
       }
       alert('Error!')
     },
@@ -339,11 +339,11 @@ export default defineComponent({
         document.getElementById("btnArriba").style.display = "none";
       }
     },
-      
+
     async topFunction() {
       document.body.scrollTop = 0; // Para safari
       document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
-    },  
+    },
 
     async ocultarFondo(){
       document.body.style.backgroundImage = "url('')";
@@ -352,7 +352,7 @@ export default defineComponent({
 
     async mostrarHeader(){
       document.getElementById("headerP").className='mt visible'
-    },     
+    },
   }  
 })
 </script>
@@ -367,14 +367,14 @@ export default defineComponent({
 }
 .btn-icono {
     --bs-btn-bg: #ffffff;
-    --bs-btn-color: #002d60;    
+    --bs-btn-color: #002d60;
     --bs-btn-border-color: #ced4da;
     --bs-btn-hover-bg: #ced4da;
     --bs-btn-hover-color: #002d60;
-    --bs-btn-hover-border-color: #ced4da;          
+    --bs-btn-hover-border-color: #ced4da;
     --bs-btn-active-bg: #ced4da;
     --bs-btn-active-color: #002d60;
-    --bs-btn-active-border-color: #ced4da; 
+    --bs-btn-active-border-color: #ced4da;
 }
 .btn-paciente{
   width: 25px;

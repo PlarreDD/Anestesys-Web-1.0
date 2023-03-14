@@ -222,7 +222,25 @@
                             <button href="#pre-valoracion" 
                                     data-bs-toggle="tab" 
                                     type="submit"
-                                    class="btn btn-guardar fw-bold"> GUARDAR </button>
+                                    class="btn btn-guardar fw-bold"
+                                    @click="preIdStore.savePreId(id.numExped,
+                                                                        id.nomPaciente,
+                                                                        id.numEpisodio,
+                                                                        id.fechaNac,
+                                                                        id.edadPaciente,
+                                                                        id.genero,
+                                                                        id.fechaIn,
+                                                                        id.habitacion,
+                                                                        id.diagnostico,
+                                                                        id.tipoCx,
+                                                                        id.cie10,
+                                                                        id.cie9,
+                                                                        id.cirugia,
+                                                                        id.fechaCx,
+                                                                        id.hrCx,
+                                                                        id.cirujano,
+                                                                        id.anestesiologo,
+                                                                        id.anestesiologoVPA)"> GUARDAR </button>
                                     <!-- :disabled="id.numExpediente != '' && id.nombrePaciente != '' ? false : true" -->
                         </div>
                     </form>
@@ -322,9 +340,13 @@
 import type { regIdPaciente } from "@/interfaces/regPreAnest"
 import { defineComponent } from "vue"
 import { ElSelect, ElOption } from 'element-plus';
-import { isUndefined } from "lodash";
+import { usePreIdStore } from "../../stores/preId-store";
+
+const preIdStore = usePreIdStore();
+
 export default defineComponent({
     components: { ElSelect, ElOption },
+
     props: {
         propNumExp: {
             type: Boolean
@@ -349,17 +371,24 @@ export default defineComponent({
     data () {
         return{
             id: {} as regIdPaciente,
+            preIdStore,
         }
     },
 
     methods: {
         obtenerDatos() {
             this.$emit("validar", this.id.numExped, this.id.nomPaciente)
-            console.log(this.id.numEpisodio)
+            // console.log(this.id.numEpisodio)
         },
         enviarDatos() {
             this.$emit('recibe-datos', this.id.numExped, this.id.nomPaciente, this.id.cirujano, this.id.cirugia)
-        }   
+        },
+
+        // save(){
+        //     // preIdStore.savePreId();
+        // },
+
+        
     }
 })
 </script>
