@@ -166,10 +166,12 @@ export const useUserStore = defineStore('user', {
                             if (result.isConfirmed) {
                                 this.token = null;
                                 this.expiresIn = null;
-                                router.push('/');
+                                window.location.href="/"
+                                // router.push('/');
+                                // document.body.style.backgroundImage = "url('../../public/images/login.webp')";
                             }
                         })
-                    })
+                    })                    
         },
     }
 });

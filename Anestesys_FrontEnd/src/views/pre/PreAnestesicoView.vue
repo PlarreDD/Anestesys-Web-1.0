@@ -423,7 +423,7 @@ export default defineComponent({
   row-gap: 10px;
 }
 .menu-pre {  
-  width: 200px;
+  width: auto;
   height: auto;
   background-color: #E88300;
   padding: 1rem;
@@ -432,7 +432,7 @@ export default defineComponent({
   text-align: center;
 }
 .menu-trans-post {  
-  width: 200px;
+  width: auto;
   height: auto;
   background-color: #d6d6d6;
   padding: 1rem;
@@ -446,7 +446,7 @@ export default defineComponent({
 }
 .img-menu-lateral{
   width: 90%;
-  height: 90%;
+  height: 95%;
 }
 
 /* Menú estatico */

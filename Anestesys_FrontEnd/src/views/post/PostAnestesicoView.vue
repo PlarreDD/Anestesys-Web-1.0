@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <header>
+    <barra-navegacion/>
+  </header>
+  <div class="margen-div-barra">
     <div class="input-group mb-3">
       <div class="col-10 divform navbar-nav">              
         <ul class="nav nav-pills mb-3 text-center" id=""> <!--Lista para el menú principal-->
@@ -50,15 +53,21 @@
 <script lang="ts">
 import Nota from '../../components/post/Nota.vue';
 import Recuperacion from "../../components/post/Recuperacion.vue";
+import BarraNavegacion from "../../components/barraNavegacion.vue";
 
 export default ({
   components:{
-    Recuperacion, Nota
+    Recuperacion, 
+    Nota,
+    BarraNavegacion
   }
 })
 </script>
 
 <style scoped>
+.margen-div-barra{
+  margin-top: 120px;
+}
 .menuLateralPrincipal {
   margin-top: 47px;
   display: flex;

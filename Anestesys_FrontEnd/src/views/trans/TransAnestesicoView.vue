@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <header>
+    <barra-navegacion/>
+  </header>
+  <div class="margen-div-barra">
     <div class="input-group mb-3">
       <div class="col-md-6">
         <input class="form-control me-2"
@@ -404,6 +407,7 @@
 <script lang="ts">
 
 import Pre from "../pre/PreAnestesicoView.vue";
+import BarraNavegacion from "../../components/barraNavegacion.vue";
 
 export default({
 
@@ -416,7 +420,8 @@ export default({
     }
   },
   components:{
-    Pre
+    Pre,
+    BarraNavegacion
   },
   mounted: function() { // Llama el método despues de cargar la página
       this.mueveReloj();
@@ -447,6 +452,9 @@ export default({
 </script>
 
 <style scoped>
+.margen-div-barra{
+  margin-top: 120px;
+}
 .menuLateralPrincipal {
     margin-top: 11px;
     display: flex;

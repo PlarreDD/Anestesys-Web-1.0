@@ -11,16 +11,7 @@
           </div>
 
           <div class="col-md-5 alinearElementoD">
-            <button class="btn btn-menu"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-controls="offcanvasNavbar">
-              <i class="fa-solid fa-2x fa-bars"></i>
-            </button>
 
-            <form class="dropdown-menu p-5">
-              <div class="mb-3 estiloDropDown input-group mb-3"></div>
-            </form>
           </div>
          
           <div class="col-md-2 text-white alinearElementoD">

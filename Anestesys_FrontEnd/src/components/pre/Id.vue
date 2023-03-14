@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ul class="nav nav-pills mb-3 text-center" id="">        
+        <ul class="nav nav-pills mb-3 text-center centrar-li" id="">        
             <li class="nav-item col-md-3">
                 <button class="btn btn-nav-bar fw-bold active" id="plan" data-bs-toggle="pill" data-bs-target="#informacion" type="button" aria-selected="true">INFORMACIÓN</button>
             </li>
@@ -12,16 +12,15 @@
         <div class="tab-content col-md-12" id="">
             <div class="tab-pane fade show active" id="informacion">
                 <div class="col-12 borderPrincipal">  
-                    <form @submit.prevent="obtenerDatos" class="row g-3">
+                    <form @submit.prevent="obtenerDatos" class="row g-3 margen-input">
                         <div class="col-md-4">
-                            <label for="" class="form-label fw-bold"> Número de Expediente </label>                
+                            <label for="" class="form-label fw-bold"> Número de Expediente <span class="text-danger">*</span> <i class="fa-solid fa fa-circle-question"></i></label>                
                             <input type="text" 
                                 v-model="id.numExped" 
-                                pattern="[0-9]{8}"
-                                title="Sólo números, ocho dígitos"
                                 id="numExpediente" 
                                 class="form-control"
-                                :class="{ 'form-control border border-danger': propRojoNum, 'form-control border border-success formSombra': propVerdeNum }">                
+                                :class="{ 'form-control border border-danger': propRojoNum, 'form-control border border-success formSombra': propVerdeNum }"
+                                placeholder="Campo obligatorio">                
 
                             <div :class="propNumExp == true ? 'visible validaCampo' : 'invisible'"
                                 id="validaNumExp">                     
@@ -30,14 +29,15 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold"> Nombre del Paciente </label>
+                            <label for="" class="form-label fw-bold"> Nombre del Paciente <span class="text-danger">*</span></label>
                             
                             <input class="form-control" 
                                 type="text" 
                                 @keyup.capture="enviarDatos"
                                 v-model="id.nomPaciente"
                                 id="nombrePaciente" 
-                                :class="{ 'form-control border border-danger': propRojoNom, 'form-control border border-success formSombra': propVerdeNom }">
+                                :class="{ 'form-control border border-danger': propRojoNom, 'form-control border border-success formSombra': propVerdeNom }"
+                                placeholder="Campo obligatorio">
 
                             <div :class="propNomPac == true ? 'visible validaCampo' : 'invisible'"
                                 id="validaNomPac">
@@ -45,11 +45,31 @@
                             </div>        
                         </div>
 
-                        <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">Núm de episodio</label>
-                            <input type="text" class="form-control" v-model="id.numEpisodio"
-                            :class="id.numEpisodio != undefined ? 'form-control border border-success formSombra' : 'form-control'">
-                        </div>
+                        <div class="col-md-1 margenBoton">
+                            <button href="#pre-valoracion" 
+                                    data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar fw-bold"
+                                    @click="preIdStore.savePreId(id.numExped,
+                                                                        id.nomPaciente,
+                                                                        id.numEpisodio,
+                                                                        id.fechaNac,
+                                                                        id.edadPaciente,
+                                                                        id.genero,
+                                                                        id.fechaIn,
+                                                                        id.habitacion,
+                                                                        id.diagnostico,
+                                                                        id.tipoCx,
+                                                                        id.cie10,
+                                                                        id.cie9,
+                                                                        id.cirugia,
+                                                                        id.fechaCx,
+                                                                        id.hrCx,
+                                                                        id.cirujano,
+                                                                        id.anestesiologo,
+                                                                        id.anestesiologoVPA)"> GUARDAR </button>
+                                    <!-- :disabled="id.numExpediente != '' && id.nombrePaciente != '' ? false : true" -->
+                        </div>                                               
 
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold"> Fecha de Nacimiento </label>
@@ -58,6 +78,7 @@
                                 v-model="id.fechaNac"
                                 :class="id.fechaNac != undefined ? 'form-control border border-success formSombra' : 'form-control'">
                         </div>
+                        <div class="col-md-1"></div>
 
                         <div class="col-md-2">
                             <label for="" class="form-label fw-bold"> Edad </label>
@@ -66,6 +87,7 @@
                                 v-model="id.edadPaciente"
                                 :class="id.edadPaciente != undefined ? 'form-control border border-success formSombra' : 'form-control'">
                         </div>
+                        <div class="col-md-1"></div>
 
                         <div class="col-md-3">
                             <label for="" class="form-label col-12 fw-bold"> Género </label>
@@ -87,21 +109,33 @@
                                 v-model="id.genero">
                             <label class="btn btn-radio" for="femenino"> Femenino </label>
                         </div>
+                        <div class="col-md-1"></div>
                         
-                        <div class="col-md-2">
-                            <label for="" class="form-label fw-bold"> Fecha de Ingreso </label>
-                            <input type="date"
-                                class="form-control"
-                                v-model="id.fechaIn"
-                                :class="id.fechaIn != undefined ? 'form-control border border-success formSombra' : 'form-control'">
-                        </div>
+                        <div class="row g-3 margen-quince">
 
-                        <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">Habitación</label>
-                            <input type="text" class="form-control" v-model="id.habitacion"
-                            :class="id.habitacion != undefined ? 'form-control border border-success formSombra' : 'form-control'">                
+                            <div class="col-md-3">
+                                <label for="" class="form-label fw-bold">Núm de episodio</label>
+                                <input type="text" class="form-control" v-model="id.numEpisodio"
+                                :class="id.numEpisodio != undefined ? 'form-control border border-success formSombra' : 'form-control'">
+                            </div>
+                            <div class="col-md-1"></div>
+    
+                            <div class="col-md-2">
+                                <label for="" class="form-label fw-bold">Habitación</label>
+                                <input type="text" class="form-control" v-model="id.habitacion"
+                                :class="id.habitacion != undefined ? 'form-control border border-success formSombra' : 'form-control'">                
+                            </div>
+                            <div class="col-md-1"></div>
+    
+                            <div class="col-md-3">
+                                <label for="" class="form-label fw-bold"> Fecha de Ingreso </label>
+                                <input type="date"
+                                    class="form-control"
+                                    v-model="id.fechaIn"
+                                    :class="id.fechaIn != undefined ? 'form-control border border-success formSombra' : 'form-control'">
+                            </div>                        
+                        
                         </div>
-                    
                         <hr />
 
                         <div class="col-md-8">
@@ -144,7 +178,7 @@
                         </div>  
                         
                         <div class="col-md-8">
-                            <label for="" class="form-label fw-bold">CIE-10</label>
+                            <label for="" class="form-label fw-bold margen-diez">CIE-10</label>
                             <el-select v-model="id.cie10" filterable :class="id.cie10 != undefined ? 'form-control-select border border-success formSombra' : 'form-control-select'">
                                 <el-option
                                     v-for="option in id.options"
@@ -155,21 +189,23 @@
                             </el-select>                   
                         </div>
 
-                        <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Cirugía</label>
-                            <textarea type="text" class="form-control" rows="3" @keyup.capture="enviarDatos" v-model="id.cirugia"
-                            :class="id.cirugia != undefined ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">CIE-9</label>
-                            <el-select v-model="id.cie9" filterable :class="id.cie9 != undefined ? 'form-control-select border border-success formSombra' : 'form-control-select'">
-                                <el-option
-                                    v-for="option in id.options"
-                                    :key="option.value"
-                                    :label="option.label"
-                                    :value="option.value">
-                                </el-option>
-                            </el-select>
+                        <div class="row g-3 margen-quince">
+                            <div class="col-md-6">
+                                <label for="" class="form-label fw-bold">Cirugía</label>
+                                <textarea type="text" class="form-control" rows="3" @keyup.capture="enviarDatos" v-model="id.cirugia"
+                                :class="id.cirugia != undefined ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="" class="form-label fw-bold">CIE-9</label>
+                                <el-select v-model="id.cie9" filterable :class="id.cie9 != undefined ? 'form-control-select border border-success formSombra' : 'form-control-select'">
+                                    <el-option
+                                        v-for="option in id.options"
+                                        :key="option.value"
+                                        :label="option.label"
+                                        :value="option.value">
+                                    </el-option>
+                                </el-select>
+                            </div>
                         </div>
 
                         <div class="col-md-6"></div>
@@ -209,47 +245,21 @@
                                 :class="id.anestesiologo != undefined ? 'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 margen-25">
                             <label for="" class="form-label fw-bold"> Anestesiólogo VPA </label>
                             <input type="text"
                                 class="form-control"
                                 v-model="id.anestesiologoVPA"
                                 :class="id.anestesiologoVPA != undefined ? 'form-control border border-success formSombra' : 'form-control'">
-                        </div>
+                        </div>                        
                         
-                        <div class="col-md-4"></div>
-                        <div class="col-md-1 margenBoton">
-                            <button href="#pre-valoracion" 
-                                    data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar fw-bold"
-                                    @click="preIdStore.savePreId(id.numExped,
-                                                                        id.nomPaciente,
-                                                                        id.numEpisodio,
-                                                                        id.fechaNac,
-                                                                        id.edadPaciente,
-                                                                        id.genero,
-                                                                        id.fechaIn,
-                                                                        id.habitacion,
-                                                                        id.diagnostico,
-                                                                        id.tipoCx,
-                                                                        id.cie10,
-                                                                        id.cie9,
-                                                                        id.cirugia,
-                                                                        id.fechaCx,
-                                                                        id.hrCx,
-                                                                        id.cirujano,
-                                                                        id.anestesiologo,
-                                                                        id.anestesiologoVPA)"> GUARDAR </button>
-                                    <!-- :disabled="id.numExpediente != '' && id.nombrePaciente != '' ? false : true" -->
-                        </div>
                     </form>
                 </div>
             </div>
 
             <div class="tab-pane fade" id="demograficos">
                 <div class="col-12 borderPrincipal">  
-                    <form @submit.prevent="obtenerDatos" class="row g-3">                                
+                    <form @submit.prevent="obtenerDatos" class="row g-3 margen-input">                                
 
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Nacionalidad</label>
@@ -326,7 +336,7 @@
                             <button href="#pre-valoracion" 
                                     data-bs-toggle="tab" 
                                     type="submit"
-                                    class="btn btn-guardar fw-bold"> GUARDAR </button>
+                                    class="btn btn-guardar margen-btn-guardar fw-bold"> GUARDAR </button>
                         </div>
                     </form>
                 </div>
@@ -401,6 +411,18 @@ export default defineComponent({
   margin-bottom: 10px;
   backdrop-filter: blur(40px) brightness(97%);  
 }
+.margen-input{
+    margin-top: -1px;
+}
+.margen-diez{
+    margin-top: 10px;
+}
+.margen-quince{
+    margin-top: 15px;
+}
+.margen-25{
+    margin-top: 25px;
+}
 .formSombra:focus {
     border-color:green;
     outline:0;
@@ -417,8 +439,9 @@ export default defineComponent({
     --bs-btn-active-bg: #002d60;
     --bs-btn-active-color: #ffffff;
     --bs-btn-active-border-color: #002d60;
-    width: 150px;
-    height: 50px;
+    width: 150px;        
+}
+.margen-btn-guardar{
     margin-top: 145px;
 }
 .btn-nav-bar{
@@ -451,6 +474,9 @@ h5{
     color: #002D60;
     margin-top: 60px;
     margin-bottom: 0px;
+}
+.centrar-li{
+  justify-content: center; 
 }
 .margenRadio {
     margin-right: 10px;
