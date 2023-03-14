@@ -11,18 +11,34 @@ export interface regIdPaciente{
     tipoCx: string,
     cie10: string,
     cie9: string,
-    selectedOption: '',
-                options: [
-                    { label: 'Opción 1', value: 'opcion1' },
-                    { label: 'Opción 2', value: 'opcion2' },
-                    { label: 'Opción 3', value: 'opcion3' },
-                    { label: 'Opción 4', value: 'opcion4' },
-                    { label: 'Opción 5', value: 'opcion5' },
-                ],
+    options: [
+        { label: 'Opción 1', value: 'opcion1' },
+        { label: 'Opción 2', value: 'opcion2' },
+        { label: 'Opción 3', value: 'opcion3' },
+        { label: 'Opción 4', value: 'opcion4' },
+        { label: 'Opción 5', value: 'opcion5' },
+    ],
     cirugia: string,
     fechaCx: string,
     hrCx: string,
     cirujano: string,
     anestesiologo: string,
     anestesiologoVPA: string,
+
+    nacionalidad: string,
+    opcionNacionalidad: [
+    { value: 'mexicana', label: 'Mexicana' },
+    { value: 'moMexicana', label: 'No Mexicana' }],
+    CURP: string,
+    folioID: string,
+    estNacimiento: string,
+    opcionEstadoNacimiento: [
+        { value: 'aguascalientes', label: 'Aguascalientes' },
+        { value: 'bajaCalifornia', label: 'Baja California' },
+        { value: 'bajaCaliforniaSur', label: 'Baja California Sur' },
+        { value: 'campeche', label: 'Campeche' },
+        { value: 'coahuila', label: 'Coahuila' }],
+    estResidencia: string,
+    alcaldia: string,
+    colonia: string
 }

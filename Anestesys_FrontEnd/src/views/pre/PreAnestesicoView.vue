@@ -111,17 +111,17 @@
 
       <!--Menú lateral-->
       <div class="col-2 menuLateralPrincipal">        
-        <div class="col-md-2 menuPre">
+        <div class="col-md-2 menu-pre">
           <img src="images/pre.svg" class="img-menu-lateral"/>
         </div>
         
-        <div class="col-md-2 menuTransPost">
+        <div class="col-md-2 menu-trans-post">
           <RouterLink to="trans">
             <img src="images/trans.svg" class="img-menu-lateral"/>
           </RouterLink>
         </div>      
         
-        <div class="col-md-2 menuTransPost">
+        <div class="col-md-2 menu-trans-post">
           <RouterLink to="post">
             <img src="images/post.svg" class="img-menu-lateral"/>
           </RouterLink>
@@ -422,25 +422,25 @@ export default defineComponent({
   flex-direction: column;
   row-gap: 10px;
 }
-.menuPre {  
+.menu-pre {  
   width: 200px;
-  height: 185px;
+  height: auto;
   background-color: #E88300;
   padding: 1rem;
   border-radius: 10px;
   margin-left: 28px;
   text-align: center;
 }
-.menuTransPost {  
+.menu-trans-post {  
   width: 200px;
-  height: 185px;
+  height: auto;
   background-color: #d6d6d6;
   padding: 1rem;
   border-radius: 10px;
   margin-left: 28px;
   text-align: center;
 }
-.menuTransPost:hover{
+.menu-trans-post:hover{
   background-color: #E88300;
   transition: background-color 0.2s ease-in-out;
 }

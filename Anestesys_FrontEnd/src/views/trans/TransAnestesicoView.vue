@@ -383,10 +383,6 @@
           </div>    
         </div>
 
-        <div>
-          <pre @recibe-datos="actualizaDatos" />
-        </div>
-
         <div class="container text-center col-md-9 posicionEstatica bordeContenedor fw-bold">
             <div class="row">
               <div class="col bordeColumna">
@@ -459,7 +455,7 @@ export default({
 }
 .menu-trans {  
   width: 200px;
-  height: 185px;
+  height: auto;
   background-color: #E88300;
   padding: 1rem;
   border-radius: 10px;
@@ -468,7 +464,7 @@ export default({
 }
 .menu-pre-post {  
   width: 200px;
-  height: 185px;
+  height: auto;
   background-color: #d6d6d6;
   padding: 1rem;
   border-radius: 10px;
