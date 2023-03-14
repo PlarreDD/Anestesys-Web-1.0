@@ -155,20 +155,20 @@ export const useUserStore = defineStore('user', {
         logout(){
             apiAxios.post("http://localhost:5000/logout")
                     .then(() => {
-                        this.token = null;
-                        this.expiresIn = null;
                         /* Mensaje de cierre de sesión */
                         // Falta uso de botones de cancelar y finaluizar
                         swal.fire({
                             html: 'Esta a punto de cerrar sesión',
-                            icon: 'info',
+                            icon: 'warning',
                             showConfirmButton: true,
-                            showCloseButton: true,
-                            showDenyButton: true,
-                            denyButtonText: `Cancelar`,
+                            showCancelButton: true,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                this.token = null;
+                                this.expiresIn = null;
+                                router.push('/');
+                            }
                         })
-
-                        router.push('/');
                     })
         },
     }
