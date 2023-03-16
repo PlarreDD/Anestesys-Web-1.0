@@ -117,14 +117,14 @@
           <img src="images/pre.svg" class="img-menu-lateral"/>
         </div>
         
-        <div class="col-md-2 menu-trans-post">
-          <RouterLink to="trans" class="">
+        <div :class="numExpediente != '' && nomPaciente != '' ? 'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
+          <RouterLink to="trans" :class="numExpediente != '' && nomPaciente != '' ? 'visible' : 'invisible'">
             <img src="images/trans.svg" class="img-menu-lateral"/>
           </RouterLink>
         </div>
         
-        <div class="col-md-2 menu-trans-post">
-          <RouterLink to="post">
+        <div :class="numExpediente != '' && nomPaciente != '' ? 'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
+          <RouterLink to="post" :class="numExpediente != '' && nomPaciente != '' ? 'visible' : 'invisible'">
             <img src="images/post.svg" class="img-menu-lateral"/>
           </RouterLink>
         </div>
@@ -445,6 +445,15 @@ export default defineComponent({
 .menu-trans-post:hover{
   background-color: #E88300;
   transition: background-color 0.2s ease-in-out;
+}
+.menu-desactivado {  
+  width: 200px;
+  height: auto;
+  background-color: #d6d6d6;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-left: 28px;
+  text-align: center;
 }
 .img-menu-lateral{
   width: 90%;
