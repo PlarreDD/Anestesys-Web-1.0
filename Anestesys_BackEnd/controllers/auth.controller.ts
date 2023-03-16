@@ -21,7 +21,7 @@ export const register = async (req:Request, res:Response) => {
 
         generateRefreshToken(user.id, res);
        
-        return res.status(201).json({token});
+        return res.status(201).json({token, user});
     }catch(error){
         console.log(error);
 

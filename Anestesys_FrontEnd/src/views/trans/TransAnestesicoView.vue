@@ -484,8 +484,8 @@ export default({
   transition: background-color 0.2s ease-in-out;
 }
 .ajusteImg{
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 95%;
 }
 .bordePrincipal {
     width: 108%;

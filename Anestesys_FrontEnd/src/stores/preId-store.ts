@@ -27,6 +27,9 @@ export const usePreIdStore = defineStore('preid', {
                 cirujano: cirujano,
                 anestesiologo: anestesiologo,
                 anestesiologoVPA: anestesiologoVPA})
+                .then((res:any)=>{
+                    console.log(res.data)
+                })
                     .catch((e:any) => {
                         console.log("error: " + e);
                     })

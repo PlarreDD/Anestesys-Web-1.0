@@ -130,7 +130,9 @@ export const useUserStore = defineStore('user', {
                                     width:680,
                                 });
                             }
-                        });})
+                        });
+                    console.log(res.data);
+                    })
                     .catch((e:any) => {
                         if(e.response){
                             /* Mensaje de registro fallido */

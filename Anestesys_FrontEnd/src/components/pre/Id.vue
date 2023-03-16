@@ -14,7 +14,12 @@
                 <div class="col-12 borderPrincipal">  
                     <form @submit.prevent="obtenerDatos" class="row g-3 margen-input">
                         <div class="col-md-4">
-                            <label for="" class="form-label fw-bold"> Número de Expediente <span class="text-danger">*</span> <i class="fa-solid fa fa-circle-question"></i></label>                
+                            <label for="" class="form-label fw-bold"> Número de Expediente 
+                                <span class="text-danger">* </span> 
+                                <i class="fa-solid fa fa-circle-question" 
+                                    data-title="Llene el campo para navegar por la aplicación">
+                                </i>
+                            </label>                
                             <input type="text" 
                                 v-model="id.numExped" 
                                 id="numExpediente" 
@@ -29,7 +34,12 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold"> Nombre del Paciente <span class="text-danger">*</span></label>
+                            <label for="" class="form-label fw-bold"> Nombre del Paciente 
+                                <span class="text-danger">* </span> 
+                                <i class="fa-solid fa fa-circle-question" 
+                                    data-title="Llene el campo para navegar por la aplicación">
+                                </i>
+                            </label>
                             
                             <input class="form-control" 
                                 type="text" 
@@ -181,10 +191,8 @@
                             <label for="" class="form-label fw-bold margen-diez">CIE-10</label>
                             <el-select v-model="id.cie10" filterable :class="id.cie10 != undefined ? 'form-control-select border border-success formSombra' : 'form-control-select'">
                                 <el-option
-                                    v-for="option in id.options"
-                                    :key="option.value"
-                                    :label="option.label"
-                                    :value="option.value">
+                                    v-for="estadoNacimiento in opcionCIE10"
+                                    :value="estadoNacimiento.lblCie10">
                                 </el-option>
                             </el-select>                   
                         </div>
@@ -199,10 +207,8 @@
                                 <label for="" class="form-label fw-bold">CIE-9</label>
                                 <el-select v-model="id.cie9" filterable :class="id.cie9 != undefined ? 'form-control-select border border-success formSombra' : 'form-control-select'">
                                     <el-option
-                                        v-for="option in id.options"
-                                        :key="option.value"
-                                        :label="option.label"
-                                        :value="option.value">
+                                    v-for="estadoNacimiento in opcionCIE9"
+                                    :value="estadoNacimiento.lblCie9">
                                     </el-option>
                                 </el-select>
                             </div>
@@ -251,7 +257,14 @@
                                 class="form-control"
                                 v-model="id.anestesiologoVPA"
                                 :class="id.anestesiologoVPA != undefined ? 'form-control border border-success formSombra' : 'form-control'">
-                        </div>                        
+                        </div>        
+                        <div class="col-md-6 margen-25">
+                            <label for="" class="form-label fw-bold"> Residente de Anestesia </label>
+                            <input type="text"
+                                class="form-control"
+                                v-model="id.residenteAnestsia"
+                                :class="id.residenteAnestsia != undefined ? 'form-control border border-success formSombra' : 'form-control'">
+                        </div>                   
                         
                     </form>
                 </div>
@@ -266,8 +279,8 @@
                             <el-select v-model="id.nacionalidad" filterable 
                                 :class="id.nacionalidad != undefined ? 'form-control-select border border-success formSombra' : 'form-control-select'">
                                 <el-option
-                                    v-for="nacionalidad in id.opcionNacionalidad"
-                                    :value="nacionalidad.value">
+                                    v-for="nacionalidad in opcionNacionalidad"
+                                    :value="nacionalidad.lblNac">
                                 </el-option>
                             </el-select>                   
                         </div>                        
@@ -286,8 +299,8 @@
                             <el-select v-model="id.estNacimiento" filterable 
                                 :class="id.estNacimiento != undefined ? 'form-control-select border border-success formSombra' : 'form-control-select'">
                                 <el-option
-                                    v-for="estadoNacimiento in id.opcionEstadoNacimiento"
-                                    :value="estadoNacimiento.value">
+                                    v-for="estadoNacimiento in opcionEstadoNacimiento"
+                                    :value="estadoNacimiento.lblEst">
                                 </el-option>
                             </el-select>                   
                         </div>                               
@@ -299,36 +312,27 @@
                             <el-select v-model="id.estResidencia" filterable 
                                 :class="id.estResidencia != undefined ? 'form-control-select border border-success formSombra' : 'form-control-select'">
                                 <el-option
-                                    v-for="option in id.options"
-                                    :key="option.value"
-                                    :label="option.label"
-                                    :value="option.value">
+                                v-for="estadoNacimiento in opcionEstadoResidencia"
+                                    :value="estadoNacimiento.lblEstRes">
                                 </el-option>
                             </el-select>                   
                         </div>      
 
                         <div class="col-md-4">
                             <label for="" class="form-label fw-bold">Alcaldía/Municipio</label>
-                            <el-select v-model="id.alcaldia" filterable :class="id.alcaldia != undefined ? 'form-control-select border border-success formSombra' : 'form-control-select'">
-                                <el-option
-                                    v-for="option in id.options"
-                                    :key="option.value"
-                                    :label="option.label"
-                                    :value="option.value">
-                                </el-option>
-                            </el-select>                   
+                            <input type="text" class="form-control" v-model="id.alcaldia"
+                            :class="id.alcaldia != undefined ? 'form-control border border-success formSombra' : 'form-control'">
                         </div>   
 
                         <div class="col-md-4">
                             <label for="" class="form-label fw-bold">Colonia/Localidad</label>
-                            <el-select v-model="id.colonia" filterable :class="id.colonia != undefined ? 'form-control-select border border-success formSombra' : 'form-control-select'">
-                                <el-option
-                                    v-for="option in id.options"
-                                    :key="option.value"
-                                    :label="option.label"
-                                    :value="option.value">
-                                </el-option>
-                            </el-select>                   
+                            <input type="text" class="form-control" v-model="id.colonia"
+                            :class="id.colonia != undefined ? 'form-control border border-success formSombra' : 'form-control'">                
+                        </div>   
+                        <div class="col-md-4">
+                            <label for="" class="form-label fw-bold">Código Postal</label>
+                            <input type="text" class="form-control" v-model="id.codigoPostal"
+                            :class="id.codigoPostal != undefined ? 'form-control border border-success formSombra' : 'form-control'">                
                         </div>   
                         
                         <div class="col-md-10"></div>
@@ -351,6 +355,7 @@ import type { regIdPaciente } from "@/interfaces/regPreAnest"
 import { defineComponent } from "vue"
 import { ElSelect, ElOption } from 'element-plus';
 import { usePreIdStore } from "../../stores/preId-store";
+// import { regIdPaciente } from '../../interfaces/regPreAnest';
 
 const preIdStore = usePreIdStore();
 
@@ -382,13 +387,96 @@ export default defineComponent({
         return{
             id: {} as regIdPaciente,
             preIdStore,
+            opcionCIE10: [
+                { valorCie10: 'opcion1', lblCie10: 'Opción 1' },
+                { valorCie10: 'opcion2', lblCie10: 'Opción 2' }
+            ] as regIdPaciente[],
+            opcionCIE9: [
+                { valorCie9: 'opcion1', lblCie9: 'Opción 1' },
+                { valorCie9: 'opcion2', lblCie9: 'Opción 2' }
+            ] as regIdPaciente[],
+            opcionNacionalidad: [
+                { valorNac: 'mexicana', lblNac: 'Mexicana' },
+                { valorNac: 'noMexicana', lblNac: 'Extranjera' }
+            ] as regIdPaciente[],
+            opcionEstadoNacimiento: [
+                { valorEst: 'aguascalientes', lblEst: 'Aguascalientes' },
+                { valorEst: 'bajaCalifornia', lblEst: 'Baja California' },
+                { valorEst: 'bajaCaliforniaSur', lblEst: 'Baja California Sur' },
+                { valorEst: 'campeche', lblEst: 'Campeche' },
+                { valorEst: 'coahuila', lblEst: 'Coahuila de Zaragoza' },
+                { valorEst: 'colima', lblEst: 'Colima' },
+                { valorEst: 'chiapas', lblEst: 'Chiapas' },
+                { valorEst: 'chihuahua', lblEst: 'Chihuahua' },
+                { valorEst: 'cdmx', lblEst: 'Ciudad de México' },
+                { valorEst: 'durango', lblEst: 'Durango' },
+                { valorEst: 'guanajuato', lblEst: 'Guanajuato' },
+                { valorEst: 'guerrero', lblEst: 'Guerrero' },
+                { valorEst: 'hidalgo', lblEst: 'Hidalgo' },
+                { valorEst: 'jalisco', lblEst: 'Jalisco' },
+                { valorEst: 'mexico', lblEst: 'México' },
+                { valorEst: 'michoacan', lblEst: 'Michoacán de Ocampo' },
+                { valorEst: 'morelos', lblEst: 'Morelos' },
+                { valorEst: 'nayarit', lblEst: 'Nayarit' },
+                { valorEst: 'nuevoLeon', lblEst: 'Nuevo León' },
+                { valorEst: 'oaxaca', lblEst: 'Oaxaca' },
+                { valorEst: 'puebla', lblEst: 'Puebla' },
+                { valorEst: 'queretaro', lblEst: 'Querétaro' },
+                { valorEst: 'quintanaRoo', lblEst: 'Quintana Roo' },
+                { valorEst: 'sanLuis', lblEst: 'San Luis Potosí' },
+                { valorEst: 'sinaloa', lblEst: 'Sinaloa' },
+                { valorEst: 'sonora', lblEst: 'Sonora' },
+                { valorEst: 'tabasco', lblEst: 'Tabasco' },
+                { valorEst: 'tamaulipas', lblEst: 'Tamaulipas' },
+                { valorEst: 'tlaxcala', lblEst: 'Tlaxcala' },
+                { valorEst: 'veracruz', lblEst: 'Veracruz de Ignacio de la LLave' },
+                { valorEst: 'yucatan', lblEst: 'Yucatán' },
+                { valorEst: 'zacatecas', lblEst: 'Zacatecas' },
+                { valorEst: 'noAplica', lblEst: 'No Aplica' },
+                { valorEst: 'seIgnora', lblEst: 'Se Ignora' }
+            ] as regIdPaciente[],
+            opcionEstadoResidencia: [
+                { valorEstRes: 'aguascalientes', lblEstRes: 'Aguascalientes' },
+                { valorEstRes: 'bajaCalifornia', lblEstRes: 'Baja California' },
+                { valorEstRes: 'bajaCaliforniaSur', lblEstRes: 'Baja California Sur' },
+                { valorEstRes: 'campeche', lblEstRes: 'Campeche' },
+                { valorEstRes: 'coahuila', lblEstRes: 'Coahuila de Zaragoza' },
+                { valorEstRes: 'colima', lblEstRes: 'Colima' },
+                { valorEstRes: 'chiapas', lblEstRes: 'Chiapas' },
+                { valorEstRes: 'chihuahua', lblEstRes: 'Chihuahua' },
+                { valorEstRes: 'cdmx', lblEstRes: 'Ciudad de México' },
+                { valorEstRes: 'durango', lblEstRes: 'Durango' },
+                { valorEstRes: 'guanajuato', lblEstRes: 'Guanajuato' },
+                { valorEstRes: 'guerrero', lblEstRes: 'Guerrero' },
+                { valorEstRes: 'hidalgo', lblEstRes: 'Hidalgo' },
+                { valorEstRes: 'jalisco', lblEstRes: 'Jalisco' },
+                { valorEstRes: 'mexico', lblEstRes: 'México' },
+                { valorEstRes: 'michoacan', lblEstRes: 'Michoacán de Ocampo' },
+                { valorEstRes: 'morelos', lblEstRes: 'Morelos' },
+                { valorEstRes: 'nayarit', lblEstRes: 'Nayarit' },
+                { valorEstRes: 'nuevoLeon', lblEstRes: 'Nuevo León' },
+                { valorEstRes: 'oaxaca', lblEstRes: 'Oaxaca' },
+                { valorEstRes: 'puebla', lblEstRes: 'Puebla' },
+                { valorEstRes: 'queretaro', lblEstRes: 'Querétaro' },
+                { valorEstRes: 'quintanaRoo', lblEstRes: 'Quintana Roo' },
+                { valorEstRes: 'sanLuis', lblEstRes: 'San Luis Potosí' },
+                { valorEstRes: 'sinaloa', lblEstRes: 'Sinaloa' },
+                { valorEstRes: 'sonora', lblEstRes: 'Sonora' },
+                { valorEstRes: 'tabasco', lblEstRes: 'Tabasco' },
+                { valorEstRes: 'tamaulipas', lblEstRes: 'Tamaulipas' },
+                { valorEstRes: 'tlaxcala', lblEstRes: 'Tlaxcala' },
+                { valorEstRes: 'veracruz', lblEstRes: 'Veracruz de Ignacio de la LLave' },
+                { valorEstRes: 'yucatan', lblEstRes: 'Yucatán' },
+                { valorEstRes: 'zacatecas', lblEstRes: 'Zacatecas' },
+                { valorEstRes: 'noAplica', lblEstRes: 'No Aplica' },
+                { valorEstRes: 'seIgnora', lblEstRes: 'Se Ignora' }
+            ] as regIdPaciente[]
         }
     },
 
     methods: {
         obtenerDatos() {
-            this.$emit("validar", this.id.numExped, this.id.nomPaciente)
-            // console.log(this.id.numEpisodio)
+            this.$emit("validar", this.id.numExped, this.id.nomPaciente)           
         },
         enviarDatos() {
             this.$emit('recibe-datos', this.id.numExped, this.id.nomPaciente, this.id.cirujano, this.id.cirugia)
@@ -424,25 +512,29 @@ export default defineComponent({
     margin-top: 25px;
 }
 .formSombra:focus {
-    border-color:green;
+    border-color:#6BD99B;
     outline:0;
-    -webkit-box-shadow:0 0 8px green;
-    box-shadow:0 0 8px green
+    -webkit-box-shadow:0 0 8px #6BD99B;
+    box-shadow:0 0 8px #6BD99B
+}
+.border-success {
+    --bs-border-opacity: 1;
+    border-color: #6BD99B !important;
 }
 .btn-guardar{
-    --bs-btn-bg: #ffffff;
-    --bs-btn-color: #002d60;    
-    --bs-btn-border-color: #ced4da;
-    --bs-btn-hover-bg: #ffffff;
-    --bs-btn-hover-color: #002d60;
-    --bs-btn-hover-border-color: #ced4da;          
-    --bs-btn-active-bg: #002d60;
+    --bs-btn-bg: none;
+    --bs-btn-color: #E88300;    
+    --bs-btn-border-color: #E88300;
+    --bs-btn-hover-bg: #E88300;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #E88300;          
+    --bs-btn-active-bg: #E88300;
     --bs-btn-active-color: #ffffff;
-    --bs-btn-active-border-color: #002d60;
+    --bs-btn-active-border-color: #E88300;
     width: 150px;        
 }
 .margen-btn-guardar{
-    margin-top: 145px;
+    margin-top: 120px;
 }
 .btn-nav-bar{
     --bs-btn-bg: #fff;
@@ -527,5 +619,31 @@ hr{
     border: none;
     background: 0 0;
     box-sizing: border-box;
+}
+[data-title]:hover:after {
+    opacity: 1;
+    transition: all 0.1s ease 0.5s;
+    visibility: visible;
+}
+[data-title]:after {
+    content: attr(data-title);
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 13px;
+    font-family: SF UI Display;
+    position: absolute;
+    padding: 2px 5px;
+    bottom: -1.8em;
+    left: 80%;
+    white-space: nowrap;
+    opacity: 0;
+    border: 1px solid #fff;
+    z-index: 99999;
+    visibility: hidden;
+    border-radius: 5px;
+}
+[data-title] {
+    position: relative;
+    cursor: pointer
 }
 </style>

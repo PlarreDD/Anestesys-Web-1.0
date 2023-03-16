@@ -67,7 +67,8 @@
                     href="#pre-plan"
                     data-bs-toggle="tab"
                     aria-selected="false"
-                    @click="validaSeleccionPlan()"> PLAN </button>
+                    @click="validaSeleccionPlan()"
+                    :disabled="numExpediente != '' && nomPaciente != '' ? false : true"> PLAN </button>
           </li>
 
           <li class="nav-item col-md-3" >
@@ -76,7 +77,8 @@
                     href="#pre-nota"
                     data-bs-toggle="tab"
                     aria-selected="false"
-                    @click="validaSeleccionNota()"> NOTA </button>
+                    @click="validaSeleccionNota()"
+                    :disabled="numExpediente != '' && nomPaciente != '' ? false : true"> NOTA </button>
           </li>
         </ul>
       </div>
@@ -116,7 +118,7 @@
         </div>
         
         <div class="col-md-2 menu-trans-post">
-          <RouterLink to="trans">
+          <RouterLink to="trans" class="">
             <img src="images/trans.svg" class="img-menu-lateral"/>
           </RouterLink>
         </div>
@@ -219,25 +221,29 @@ export default defineComponent({
   
   methods: {
     async validaExpediente(numExpediente, nombrePaciente,) {
-      if(numExpediente.trim() == "" || nombrePaciente.trim() == "") {
-        
-        if(numExpediente.trim() ==""){
+      if(numExpediente.trim() == undefined || nombrePaciente.trim() == undefined) {  
+    
+        if(numExpediente.trim() == undefined){
+          alert("Entro if")
           this.numExpB=true
           this.bordeRojoNum=true
           this.bordeVerdeNum=false
         }
         else{
+          alert("Entro else")
           this.numExpB=false
           this.bordeVerdeNum=true
           this.bordeRojoNum=false
         }
           
-        if(nombrePaciente.trim() ==""){
+        if(nombrePaciente.trim() ==''){
+          alert("entro if nom")
           this.nomPacB=true
           this.bordeRojoNom=true
           this.bordeVerdeNom=false
         }
         else{
+          alert("entro else nom")
           this.nomPacB=false
           this.bordeVerdeNom=true
           this.bordeRojoNom=false
@@ -423,7 +429,7 @@ export default defineComponent({
   row-gap: 10px;
 }
 .menu-pre {  
-  width: auto;
+  width: 200px;
   height: auto;
   background-color: #E88300;
   padding: 1rem;
@@ -432,7 +438,7 @@ export default defineComponent({
   text-align: center;
 }
 .menu-trans-post {  
-  width: auto;
+  width: 200px;
   height: auto;
   background-color: #d6d6d6;
   padding: 1rem;
