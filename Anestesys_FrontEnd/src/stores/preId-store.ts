@@ -1,10 +1,15 @@
 import { defineStore } from "pinia";
 import { apiAxios } from '@/boot/axios';
 import { useUserStore } from "./user-store";
+import { ref } from "vue";
 
 const userStore = useUserStore();
 
 export const usePreIdStore = defineStore('preid', {
+    state: () => ({
+        pacienteID: ref(null),
+    }),
+
     actions: {
         savePreId(numExped: String, nomPaciente: String, numEpisodio: String,
                   fechaNac: String, edadPaciente: String, genero: String,
@@ -55,15 +60,14 @@ export const usePreIdStore = defineStore('preid', {
                     colonia: colonia,
                     codigoPostal: codigoPostal
                 }
+            })                
+            .then((res:any) => {
+                this.pacienteID = res.data._id
+                console.log(res.data);
             })
-                
-                .then((res:any)=>{
-                    console.log(res.data)
-                })
-                    .catch((e:any) => {
-                        console.log("error: " + e);
-                    })
-                ;
+            .catch((e:any) => {
+                console.log("error: " + e);
+            });
         },
     }
 });
