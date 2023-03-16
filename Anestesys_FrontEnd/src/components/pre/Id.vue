@@ -60,76 +60,100 @@
                                     data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar fw-bold"
-                                    @click="preIdStore.savePreId(id.numExped,
-                                                                        id.nomPaciente,
-                                                                        id.numEpisodio,
-                                                                        id.fechaNac,
-                                                                        id.edadPaciente,
-                                                                        id.genero,
-                                                                        id.fechaIn,
-                                                                        id.habitacion,
-                                                                        id.diagnostico,
-                                                                        id.tipoCx,
-                                                                        id.cie10,
-                                                                        id.cie9,
-                                                                        id.cirugia,
-                                                                        id.fechaCx,
-                                                                        id.hrCx,
-                                                                        id.cirujano,
-                                                                        id.anestesiologo,
-                                                                        id.anestesiologoVPA)"> GUARDAR </button>
+                                    @click="preIdStore.savePreId(/* Informacion Paciente */
+                                                                           id.numExped,
+                                                                           id.nomPaciente,
+                                                                           id.numEpisodio,
+                                                                           id.fechaNac,
+                                                                           id.edadPaciente,
+                                                                           id.habitacion,
+                                                                           id.genero,
+                                                                           id.fechaIn,
+                                                                           /* Datos de cirugía */
+                                                                           id.diagnostico,
+                                                                           id.tipoCx,
+                                                                           id.cirugia,
+                                                                           id.fechaCx,
+                                                                           id.hrCx,
+                                                                           /* Datos CIE */
+                                                                           id.cie10,
+                                                                           id.cie9,
+                                                                           /* Informacion Médicos */
+                                                                           id.cirujano,
+                                                                           id.anestesiologo,
+                                                                           id.anestesiologoVPA,
+                                                                           id.residenteAnestesia,
+                                                                           /* Datos Demográficos */
+                                                                           id.nacionalidad, 
+                                                                           id.CURP,
+                                                                           id.folioID,
+                                                                           id.estNacimiento,
+                                                                           id.estResidencia,
+                                                                           id.alcaldia,
+                                                                           id.colonia,
+                                                                           id.codigoPostal)"> GUARDAR </button>
                                     <!-- :disabled="id.numExpediente != '' && id.nombrePaciente != '' ? false : true" -->
                         </div>                                               
 
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold"> Fecha de Nacimiento </label>
+                            <label for=""
+                                   class="form-label fw-bold"> Fecha de Nacimiento </label>
                             <input type="date"
-                                class="form-control"
-                                v-model="id.fechaNac"
-                                :class="id.fechaNac != undefined ? 'form-control border border-success formSombra' : 'form-control'">
+                                   class="form-control"
+                                   v-model="id.fechaNac"
+                                   :class="id.fechaNac != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'">
                         </div>
-                        <div class="col-md-1"></div>
 
+                        <div class="col-md-1"></div>
                         <div class="col-md-2">
-                            <label for="" class="form-label fw-bold"> Edad </label>
+                            <label for=""
+                                   class="form-label fw-bold"> Edad </label>
                             <input type="text"
-                                class="form-control"
-                                v-model="id.edadPaciente"
-                                :class="id.edadPaciente != undefined ? 'form-control border border-success formSombra' : 'form-control'">
+                                   class="form-control"
+                                   v-model="id.edadPaciente"
+                                   :class="id.edadPaciente != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'">
                         </div>
-                        <div class="col-md-1"></div>
 
+                        <div class="col-md-1"></div>
                         <div class="col-md-3">
-                            <label for="" class="form-label col-12 fw-bold"> Género </label>
+                            <label for=""
+                                   class="form-label col-12 fw-bold"> Género </label>
                             <input type="radio"
-                                class="btn-check"
-                                name="genero"
-                                id="masculino"
-                                autocomplete="off"
-                                value="Masculino"
-                                v-model="id.genero">
-                            <label class="btn btn-radio margenRadio" for="masculino"> Masculino </label>
+                                   class="btn-check"
+                                   name="genero"
+                                   id="masculino"
+                                   autocomplete="off"
+                                   value="Masculino"
+                                   v-model="id.genero">
+                            <label class="btn btn-radio margenRadio"
+                                   for="masculino"> Masculino </label>
                                             
                             <input type="radio"
-                                class="btn-check"
-                                name="genero"
-                                id="femenino"
-                                autocomplete="off"
-                                value="Femenino"
-                                v-model="id.genero">
-                            <label class="btn btn-radio" for="femenino"> Femenino </label>
+                                   class="btn-check"
+                                   name="genero"
+                                   id="femenino"
+                                   autocomplete="off"
+                                   value="Femenino"
+                                   v-model="id.genero">
+                            <label class="btn btn-radio"
+                                   for="femenino"> Femenino </label>
                         </div>
-                        <div class="col-md-1"></div>
-                        
-                        <div class="row g-3 margen-quince">
 
+                        <div class="col-md-1"></div>                        
+                        <div class="row g-3 margen-quince">
                             <div class="col-md-3">
-                                <label for="" class="form-label fw-bold">Núm de episodio</label>
-                                <input type="text" class="form-control" v-model="id.numEpisodio"
-                                :class="id.numEpisodio != undefined ? 'form-control border border-success formSombra' : 'form-control'">
+                                <label for=""
+                                       class="form-label fw-bold"> Núm de episodio </label>
+                                <input type="text"
+                                       class="form-control"
+                                       v-model="id.numEpisodio"
+                                       :class="id.numEpisodio != undefined ?
+                                              'form-control border border-success formSombra' : 'form-control'">
                             </div>
-                            <div class="col-md-1"></div>
-    
+
+                            <div class="col-md-1"></div>    
                             <div class="col-md-2">
                                 <label for="" class="form-label fw-bold">Habitación</label>
                                 <input type="text" class="form-control" v-model="id.habitacion"
@@ -262,10 +286,9 @@
                             <label for="" class="form-label fw-bold"> Residente de Anestesia </label>
                             <input type="text"
                                 class="form-control"
-                                v-model="id.residenteAnestsia"
-                                :class="id.residenteAnestsia != undefined ? 'form-control border border-success formSombra' : 'form-control'">
-                        </div>                   
-                        
+                                v-model="id.residenteAnestesia"
+                                :class="id.residenteAnestesia != undefined ? 'form-control border border-success formSombra' : 'form-control'">
+                        </div>
                     </form>
                 </div>
             </div>
@@ -340,7 +363,39 @@
                             <button href="#pre-valoracion" 
                                     data-bs-toggle="tab" 
                                     type="submit"
-                                    class="btn btn-guardar margen-btn-guardar fw-bold"> GUARDAR </button>
+                                    class="btn btn-guardar margen-btn-guardar fw-bold"
+                                    @click="preIdStore.savePreId(/* Informacion Paciente */
+                                                                           id.numExped,
+                                                                           id.nomPaciente,
+                                                                           id.numEpisodio,
+                                                                           id.fechaNac,
+                                                                           id.edadPaciente,
+                                                                           id.habitacion,
+                                                                           id.genero,
+                                                                           id.fechaIn,
+                                                                           /* Datos de cirugía */
+                                                                           id.diagnostico,
+                                                                           id.tipoCx,
+                                                                           id.cirugia,
+                                                                           id.fechaCx,
+                                                                           id.hrCx,
+                                                                           /* Datos CIE */
+                                                                           id.cie10,
+                                                                           id.cie9,
+                                                                           /* Informacion Médicos */
+                                                                           id.cirujano,
+                                                                           id.anestesiologo,
+                                                                           id.anestesiologoVPA,
+                                                                           id.residenteAnestesia,
+                                                                           /* Datos Demográficos */
+                                                                           id.nacionalidad, 
+                                                                           id.CURP,
+                                                                           id.folioID,
+                                                                           id.estNacimiento,
+                                                                           id.estResidencia,
+                                                                           id.alcaldia,
+                                                                           id.colonia,
+                                                                           id.codigoPostal)"> GUARDAR </button>
                         </div>
                     </form>
                 </div>
@@ -387,18 +442,33 @@ export default defineComponent({
         return{
             id: {} as regIdPaciente,
             preIdStore,
+
+            valorNac: String,
+            lblNac: String,  
+            valorCie10: String,
+            lblCie10: String,
+            valorCie9: String,
+            lblCie9: String,
+            valorEst: String,
+            lblEst: String,
+            valorEstRes: String,
+            lblEstRes: String,
+
             opcionCIE10: [
                 { valorCie10: 'opcion1', lblCie10: 'Opción 1' },
                 { valorCie10: 'opcion2', lblCie10: 'Opción 2' }
-            ] as regIdPaciente[],
+            ],
+            
             opcionCIE9: [
                 { valorCie9: 'opcion1', lblCie9: 'Opción 1' },
                 { valorCie9: 'opcion2', lblCie9: 'Opción 2' }
-            ] as regIdPaciente[],
+            ],
+            
             opcionNacionalidad: [
                 { valorNac: 'mexicana', lblNac: 'Mexicana' },
                 { valorNac: 'noMexicana', lblNac: 'Extranjera' }
-            ] as regIdPaciente[],
+            ],
+            
             opcionEstadoNacimiento: [
                 { valorEst: 'aguascalientes', lblEst: 'Aguascalientes' },
                 { valorEst: 'bajaCalifornia', lblEst: 'Baja California' },
@@ -434,7 +504,8 @@ export default defineComponent({
                 { valorEst: 'zacatecas', lblEst: 'Zacatecas' },
                 { valorEst: 'noAplica', lblEst: 'No Aplica' },
                 { valorEst: 'seIgnora', lblEst: 'Se Ignora' }
-            ] as regIdPaciente[],
+            ],
+
             opcionEstadoResidencia: [
                 { valorEstRes: 'aguascalientes', lblEstRes: 'Aguascalientes' },
                 { valorEstRes: 'bajaCalifornia', lblEstRes: 'Baja California' },
@@ -470,7 +541,7 @@ export default defineComponent({
                 { valorEstRes: 'zacatecas', lblEstRes: 'Zacatecas' },
                 { valorEstRes: 'noAplica', lblEstRes: 'No Aplica' },
                 { valorEstRes: 'seIgnora', lblEstRes: 'Se Ignora' }
-            ] as regIdPaciente[]
+            ],
         }
     },
 
@@ -481,12 +552,6 @@ export default defineComponent({
         enviarDatos() {
             this.$emit('recibe-datos', this.id.numExped, this.id.nomPaciente, this.id.cirujano, this.id.cirugia)
         },
-
-        // save(){
-        //     // preIdStore.savePreId();
-        // },
-
-        
     }
 })
 </script>

@@ -17,20 +17,18 @@ const IdPacienteSchema = new Schema({
         required: true,
         trim: true,
     },
-
-    numEpisodio: {
-        type: String,
-        required: true,
-        trim: true,
-    },
-
+    
     // uid: {
     //     type: Schema.Types.ObjectId,
     //     ref: "user",
     //     required: true,
     // },
     
-    /* Información adicional */
+    /* Información adicional  del paciente */
+    numEpisodio: {
+        type: String,
+    },
+
     fechaNPaciente: {
         type: String,
 
@@ -66,34 +64,76 @@ const IdPacienteSchema = new Schema({
 
     },
 
+    /* Datos CIE */
+    cie10: {
+        type: String
+    },
+
+    cie9: {
+        type: String
+    },
+
+    /* Informacion Médicos */
     cirugia: {
         type: String,
-
-    },
+    },        
 
     fechaCx: {
         type: String,
-
     },
 
     hrCx: {
         type: String,
-
     },
 
+    /* Informacion Médicos */
     cirujano: {
         type: String,
-
     },
 
     anestesiologo: {
         type: String,
-
     },
 
     anestesiologoVPA: {
         type: String,
+    },
 
+    residenteAnestesia: {
+        type: String,
+    },
+
+    /* Datos Demográficos */
+    nacionalidad: {
+        type: String,
+    },
+
+    CURP: {
+        type: String,
+    },
+
+    folioID: {
+        type: String,
+    },
+
+    estNacimiento: {
+        type: String,
+    },
+
+    estResidencia: {
+        type: String,
+    },
+
+    alcaldia: {
+        type: String,
+    },
+
+    colonia: {
+        type: String,
+    },
+
+    codigoPostal: {
+        type: String,
     },
 });
 

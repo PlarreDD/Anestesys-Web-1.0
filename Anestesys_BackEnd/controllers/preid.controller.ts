@@ -13,21 +13,40 @@ export const getInfo = (_req:Request, res:Response) => {
 
 export const createPaciente = async (req:Request, res:Response) => {
     try {
-        const { numExpediente, nomPaciente, numEpisodio, 
-                fechaNPaciente, edadPaciente, habitacionPaciente,
-                generoPaciente, fechaInPaciente, diagnostico,
-                tipoCx, cirugia, cie10, cie9, fechaCx, hrCx,
-                cirujano, anestesiologo, anestesiologoVPA } = req.body;
+        const { numExpediente, nomPaciente,
+                /* Información adicional  del paciente */
+                numEpisodio, fechaNPaciente, edadPaciente,
+                habitacionPaciente, generoPaciente,
+                fechaInPaciente, diagnostico, tipoCx,
+                /* Datos CIE */
+                cie10, cie9, 
+                /* Informacion Médicos */
+                cirugia, fechaCx, hrCx,
+                /* Informacion Médicos */
+                cirujano, anestesiologo, anestesiologoVPA,
+                residenteAnestesia,
+                /* Datos Demográficos */
+                nacionalidad, CURP, folioID, estNacimiento,
+                estResidencia, alcaldia, colonia, codigoPostal } = req.body;
 
-        const paciente = new IdPacientes({ numExpediente, nomPaciente, numEpisodio,
-                                           fechaNPaciente, edadPaciente,
+        const paciente = new IdPacientes({ numExpediente, nomPaciente,
+                                           /* Información adicional  del paciente */
+                                           numEpisodio, fechaNPaciente, edadPaciente,
                                            habitacionPaciente, generoPaciente,
                                            fechaInPaciente, diagnostico, tipoCx,
-                                           cie10, cie9, cirugia, fechaCx, hrCx,
-                                           cirujano, anestesiologo, anestesiologoVPA });
+                                           /* Datos CIE */
+                                           cie10, cie9, 
+                                           /* Informacion Médicos */
+                                           cirugia, fechaCx, hrCx,
+                                           /* Informacion Médicos */
+                                           cirujano, anestesiologo, anestesiologoVPA,
+                                           residenteAnestesia,
+                                           /* Datos Demográficos */
+                                           nacionalidad, CURP, folioID, estNacimiento,
+                                           estResidencia, alcaldia, colonia, codigoPostal });
         await paciente.save();
 
-        return res.json({paciente});
+        return res.json({ paciente });
     } catch (error) {
         console.log(error);
         return res.status(500).json({Error: 'Error de servidor'});

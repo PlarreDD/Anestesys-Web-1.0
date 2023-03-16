@@ -221,29 +221,25 @@ export default defineComponent({
   
   methods: {
     async validaExpediente(numExpediente, nombrePaciente,) {
-      if(numExpediente.trim() == undefined || nombrePaciente.trim() == undefined) {  
-    
-        if(numExpediente.trim() == undefined){
-          alert("Entro if")
+      if(numExpediente === undefined || nombrePaciente === undefined ||
+         numExpediente === '' || nombrePaciente === '') {
+        if(numExpediente === undefined || numExpediente === ''){
           this.numExpB=true
           this.bordeRojoNum=true
           this.bordeVerdeNum=false
         }
         else{
-          alert("Entro else")
           this.numExpB=false
           this.bordeVerdeNum=true
           this.bordeRojoNum=false
         }
           
-        if(nombrePaciente.trim() ==''){
-          alert("entro if nom")
+        if(nombrePaciente === undefined || nombrePaciente === ''){
           this.nomPacB=true
           this.bordeRojoNom=true
           this.bordeVerdeNom=false
         }
         else{
-          alert("entro else nom")
           this.nomPacB=false
           this.bordeVerdeNom=true
           this.bordeRojoNom=false
