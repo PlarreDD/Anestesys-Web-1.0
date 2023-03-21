@@ -18,11 +18,11 @@ const IdPacienteSchema = new Schema({
         trim: true,
     },
     
-    // uid: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "user",
-    //     required: true,
-    // },
+    uid: {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+        required: true,
+    },
     
     /* Información adicional  del paciente */
     numEpisodio: {

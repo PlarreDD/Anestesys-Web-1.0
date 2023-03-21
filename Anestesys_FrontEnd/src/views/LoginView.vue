@@ -182,11 +182,6 @@ export default defineComponent({
 
     async cargarFondo(){
       document.body.style.backgroundImage = "url('../../public/images/login.webp')";
-      // swal.fire({
-                                    
-                                    
-
-      //           });
     },
 
     async cargarFondoRegistro(){

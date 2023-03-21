@@ -11,7 +11,7 @@ export const requireToken = (req:any, res:any, next:any) => {
         const { uid } = jwt.verify(token, String(process.env.JWT_SECRET)) as JwtPayload;
         
         req.uid = uid;
-
+        
         next();
     } catch (error) {
         return res.status(401).send(error);

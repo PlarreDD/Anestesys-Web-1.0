@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { requireToken } from "../middlewares/requireToken";
 import { getInfo, 
-         createPaciente } from "../controllers/preid.controller";
+         createPaciente,
+         updatePaciente } from "../controllers/preid.controller";
 
 const router = Router();
 
@@ -13,5 +14,5 @@ const router = Router();
 
 router.get('/', requireToken, getInfo);
 router.post('/', requireToken, createPaciente);
-
+router.put('/:id',  requireToken, updatePaciente)
 export default router;

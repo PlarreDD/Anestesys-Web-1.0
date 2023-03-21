@@ -2,10 +2,21 @@
     <div>
         <ul class="nav nav-pills mb-3 text-center centrar-li" id="">        
             <li class="nav-item col-md-3">
-                <button class="btn btn-nav-bar fw-bold active" id="plan" data-bs-toggle="pill" data-bs-target="#informacion" type="button" aria-selected="true">INFORMACIÓN</button>
+                <button class="btn btn-nav-bar fw-bold active"
+                        id="plan"
+                        data-bs-toggle="pill"
+                        data-bs-target="#informacion"
+                        type="button"
+                        aria-selected="true"> INFORMACIÓN </button>
             </li>
+
             <li class="nav-item col-md-2" >
-                <button class="btn btn-nav-bar fw-bold" id="plan" data-bs-toggle="pill" data-bs-target="#demograficos" type="button" aria-selected="false">DATOS DEMOGRÁFICOS</button>
+                <button class="btn btn-nav-bar fw-bold"
+                        id="plan"
+                        data-bs-toggle="pill"
+                        data-bs-target="#demograficos"
+                        type="button"
+                        aria-selected="false"> DATOS DEMOGRÁFICOS </button>
             </li>
         </ul>
 
@@ -19,40 +30,38 @@
                                 <i class="fa-solid fa fa-circle-question" 
                                     data-title="Llene el campo para navegar por la aplicación">
                                 </i>
-                            </label>                
-                            <input type="text" 
-                                v-model="id.numExped" 
-                                id="numExpediente" 
-                                class="form-control"
-                                :class="{ 'form-control border border-danger': propRojoNum, 'form-control border border-success formSombra': propVerdeNum }"
-                                placeholder="Campo obligatorio">                
+                            </label>
 
+                            <input type="text"
+                                   v-model="id.numExped"
+                                   id="numExpediente"
+                                   class="form-control"
+                                   :class="{ 'form-control border border-danger': propRojoNum,
+                                             'form-control border border-success formSombra': propVerdeNum }"
+                                   placeholder="Campo obligatorio">
                             <div :class="propNumExp == true ? 'visible validaCampo' : 'invisible'"
-                                id="validaNumExp">                     
-                                Escriba el número de expediente                    
-                            </div>                
+                                 id="validaNumExp"> Escriba el número de expediente </div>                
                         </div>
 
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold"> Nombre del Paciente 
+                            <label for=""
+                                   class="form-label fw-bold"> Nombre del Paciente 
                                 <span class="text-danger">* </span> 
                                 <i class="fa-solid fa fa-circle-question" 
-                                    data-title="Llene el campo para navegar por la aplicación">
+                                   data-title="Llene el campo para navegar por la aplicación">
                                 </i>
                             </label>
                             
                             <input class="form-control" 
-                                type="text" 
-                                @keyup.capture="enviarDatos"
-                                v-model="id.nomPaciente"
-                                id="nombrePaciente" 
-                                :class="{ 'form-control border border-danger': propRojoNom, 'form-control border border-success formSombra': propVerdeNom }"
-                                placeholder="Campo obligatorio">
-
+                                   type="text" 
+                                   @keyup.capture="enviarDatos"
+                                   v-model="id.nomPaciente"
+                                   id="nombrePaciente" 
+                                   :class="{ 'form-control border border-danger': propRojoNom,
+                                             'form-control border border-success formSombra': propVerdeNom }"
+                                   placeholder="Campo obligatorio">
                             <div :class="propNomPac == true ? 'visible validaCampo' : 'invisible'"
-                                id="validaNomPac">
-                                Escriba el nombre del paciente
-                            </div>        
+                                 id="validaNomPac"> Escriba el nombre del paciente </div>        
                         </div>
 
                         <div class="col-md-1 margenBoton">
@@ -60,38 +69,7 @@
                                     data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar fw-bold"
-                                    @click="preIdStore.savePreId(/* Informacion Paciente */
-                                                                           id.numExped,
-                                                                           id.nomPaciente,
-                                                                           id.numEpisodio,
-                                                                           id.fechaNac,
-                                                                           id.edadPaciente,
-                                                                           id.habitacion,
-                                                                           id.genero,
-                                                                           id.fechaIn,
-                                                                           /* Datos de cirugía */
-                                                                           id.diagnostico,
-                                                                           id.tipoCx,
-                                                                           id.cirugia,
-                                                                           id.fechaCx,
-                                                                           id.hrCx,
-                                                                           /* Datos CIE */
-                                                                           id.cie10,
-                                                                           id.cie9,
-                                                                           /* Informacion Médicos */
-                                                                           id.cirujano,
-                                                                           id.anestesiologo,
-                                                                           id.anestesiologoVPA,
-                                                                           id.residenteAnestesia,
-                                                                           /* Datos Demográficos */
-                                                                           id.nacionalidad, 
-                                                                           id.CURP,
-                                                                           id.folioID,
-                                                                           id.estNacimiento,
-                                                                           id.estResidencia,
-                                                                           id.alcaldia,
-                                                                           id.colonia,
-                                                                           id.codigoPostal)"> GUARDAR </button>
+                                    @click="preIdStore.savePreId( id )"> GUARDAR </button>
                                     <!-- :disabled="id.numExpediente != '' && id.nombrePaciente != '' ? false : true" -->
                         </div>                                               
 
@@ -153,68 +131,78 @@
                                               'form-control border border-success formSombra' : 'form-control'">
                             </div>
 
-                            <div class="col-md-1"></div>    
+                            <div class="col-md-1"></div>
                             <div class="col-md-2">
-                                <label for="" class="form-label fw-bold">Habitación</label>
-                                <input type="text" class="form-control" v-model="id.habitacion"
-                                :class="id.habitacion != undefined ? 'form-control border border-success formSombra' : 'form-control'">                
+                                <label for=""
+                                       class="form-label fw-bold"> Habitación </label>
+                                <input type="text"
+                                       class="form-control"
+                                       v-model="id.habitacion"
+                                       :class="id.habitacion != undefined ?
+                                              'form-control border border-success formSombra' : 'form-control'">
                             </div>
                             <div class="col-md-1"></div>
     
                             <div class="col-md-3">
                                 <label for="" class="form-label fw-bold"> Fecha de Ingreso </label>
                                 <input type="date"
-                                    class="form-control"
-                                    v-model="id.fechaIn"
-                                    :class="id.fechaIn != undefined ? 'form-control border border-success formSombra' : 'form-control'">
-                            </div>                        
-                        
+                                       class="form-control"
+                                       v-model="id.fechaIn"
+                                       :class="id.fechaIn != undefined ?
+                                              'form-control border border-success formSombra' : 'form-control'">
+                            </div>
                         </div>
+
                         <hr />
 
                         <div class="col-md-8">
                             <label for="" class="form-label fw-bold"> Diagnóstico </label>
                             <textarea class="form-control"
-                                    rows="3"
-                                    v-model="id.diagnostico"
-                                    :class="id.diagnostico != undefined ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
+                                      rows="3"
+                                      v-model="id.diagnostico"
+                                      :class="id.diagnostico != undefined ?
+                                             'form-control border border-success formSombra' : 'form-control'">
+                            </textarea>
                         </div>
 
                         <div class="col-md-4">
                             <label for="" class="form-label col-12 fw-bold"> Tipo de Cirugía </label>
 
                             <input type="radio"
-                                class="btn-check"
-                                name="tipoCirugia"
-                                id="mayor"
-                                autocomplete="off"
-                                value="Mayor"
-                                v-model="id.tipoCx">
+                                   class="btn-check"
+                                   name="tipoCirugia"
+                                   id="mayor"
+                                   autocomplete="off"
+                                   value="Mayor"
+                                   v-model="id.tipoCx">
                             <label class="btn btn-radio margenRadio" for="mayor"> Mayor </label>
-                            
-                            <input type="radio"
-                                class="btn-check"
-                                name="tipoCirugia"
-                                id="menor"
-                                autocomplete="off"
-                                value="Menor"
-                                v-model="id.tipoCx">
-                            <label class="btn btn-radio margenRadio" for="menor"> Menor </label>
 
                             <input type="radio"
-                                class="btn-check"
-                                name="tipoCirugia"
-                                id="ambulatoria"
-                                autocomplete="off"
-                                value="Ambulatoria"
-                                v-model="id.tipoCx">
+                                   class="btn-check"
+                                   name="tipoCirugia"
+                                   id="menor"
+                                   autocomplete="off"
+                                   value="Menor"
+                                   v-model="id.tipoCx">
+                            <label class="btn btn-radio margenRadio" for="menor"> Menor </label>
+                            
+                            <input type="radio"
+                                   class="btn-check"
+                                   name="tipoCirugia"
+                                   id="ambulatoria"
+                                   autocomplete="off"
+                                   value="Ambulatoria"
+                                   v-model="id.tipoCx">
                             <label class="btn btn-radio" for="ambulatoria"> Ambulatoria </label>
                         </div>  
                         
                         <div class="col-md-8">
-                            <label for="" class="form-label fw-bold margen-diez">CIE-10</label>
-                            <el-select v-model="id.cie10" filterable :class="id.cie10 != undefined ? 'form-control-select border border-success formSombra' : 'form-control-select'">
-                                <el-option
+                            <label for="" class="form-label fw-bold margen-diez"> CIE-10 </label>
+                            <el-select v-model="id.cie10"
+                                       filterable
+                                       :class="id.cie10 != undefined ?
+                                              'form-control-select border border-success formSombra' : 'form-control-select'">
+                                <el-option 
                                     v-for="estadoNacimiento in opcionCIE10"
                                     :value="estadoNacimiento.lblCie10">
                                 </el-option>
@@ -224,15 +212,26 @@
                         <div class="row g-3 margen-quince">
                             <div class="col-md-6">
                                 <label for="" class="form-label fw-bold">Cirugía</label>
-                                <textarea type="text" class="form-control" rows="3" @keyup.capture="enviarDatos" v-model="id.cirugia"
-                                :class="id.cirugia != undefined ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
+                                <textarea type="text"
+                                          class="form-control"
+                                          rows="3"
+                                          @keyup.capture="enviarDatos"
+                                          v-model="id.cirugia"
+                                          :class="id.cirugia != undefined ?
+                                                 'form-control border border-success formSombra' : 'form-control'">
+                                </textarea>
                             </div>
+
                             <div class="col-md-6">
-                                <label for="" class="form-label fw-bold">CIE-9</label>
-                                <el-select v-model="id.cie9" filterable :class="id.cie9 != undefined ? 'form-control-select border border-success formSombra' : 'form-control-select'">
+                                <label for=""
+                                       class="form-label fw-bold"> CIE-9 </label>
+                                <el-select v-model="id.cie9"
+                                           filterable
+                                           :class="id.cie9 != undefined ?
+                                                  'form-control-select border border-success formSombra' : 'form-control-select'">
                                     <el-option
-                                    v-for="estadoNacimiento in opcionCIE9"
-                                    :value="estadoNacimiento.lblCie9">
+                                        v-for="estadoNacimiento in opcionCIE9"
+                                        :value="estadoNacimiento.lblCie9">
                                     </el-option>
                                 </el-select>
                             </div>
@@ -242,18 +241,19 @@
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold"> Fecha de Cirugía </label>
                             <input type="date"
-                                class="form-control"
-                                v-model="id.fechaCx"
-                                :class="id.fechaCx != undefined ? 'form-control border border-success formSombra' : 'form-control'">
+                                   class="form-control"
+                                   v-model="id.fechaCx"
+                                   :class="id.fechaCx != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold"> Hora de Cirugía </label>
-                            
+                            <label for="" class="form-label fw-bold"> Hora de Cirugía </label>                            
                             <input type="time"
-                                class="form-control"
-                                v-model="id.hrCx"
-                                :class="id.hrCx != undefined ? 'form-control border border-success formSombra' : 'form-control'">
+                                   class="form-control"
+                                   v-model="id.hrCx"
+                                   :class="id.hrCx != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'">
                         </div>
                         
                         <hr />
@@ -261,102 +261,130 @@
                         <div class="col-md-6">
                             <label for="" class="form-label fw-bold"> Cirujano </label>
                             <input type="text"
-                                class="form-control"
-                                @keyup.capture="enviarDatos"
-                                v-model="id.cirujano"
-                                :class="id.cirujano != undefined ? 'form-control border border-success formSombra' : 'form-control'">
+                                   class="form-control"
+                                   @keyup.capture="enviarDatos"
+                                   v-model="id.cirujano"
+                                   :class="id.cirujano != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'">
                         </div>
                         
                         <div class="col-md-6">
                             <label for="" class="form-label fw-bold"> Anestesiólogo </label>
                             <input type="text" 
-                                class="form-control"
-                                v-model="id.anestesiologo"
-                                :class="id.anestesiologo != undefined ? 'form-control border border-success formSombra' : 'form-control'">
+                                   class="form-control"
+                                   v-model="id.anestesiologo"
+                                   :class="id.anestesiologo != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
                         <div class="col-md-6 margen-25">
                             <label for="" class="form-label fw-bold"> Anestesiólogo VPA </label>
                             <input type="text"
-                                class="form-control"
-                                v-model="id.anestesiologoVPA"
-                                :class="id.anestesiologoVPA != undefined ? 'form-control border border-success formSombra' : 'form-control'">
-                        </div>        
+                                   class="form-control"
+                                   v-model="id.anestesiologoVPA"
+                                   :class="id.anestesiologoVPA != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'">
+                        </div>
+
                         <div class="col-md-6 margen-25">
                             <label for="" class="form-label fw-bold"> Residente de Anestesia </label>
                             <input type="text"
-                                class="form-control"
-                                v-model="id.residenteAnestesia"
-                                :class="id.residenteAnestesia != undefined ? 'form-control border border-success formSombra' : 'form-control'">
+                                   class="form-control"
+                                   v-model="id.residenteAnestesia"
+                                   :class="id.residenteAnestesia != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'">
                         </div>
                     </form>
                 </div>
             </div>
 
             <div class="tab-pane fade" id="demograficos">
-                <div class="col-12 borderPrincipal">  
-                    <form @submit.prevent="obtenerDatos" class="row g-3 margen-input">                                
-
+                <div class="col-12 borderPrincipal">
+                    <form @submit.prevent="obtenerDatos" class="row g-3 margen-input">
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Nacionalidad</label>
-                            <el-select v-model="id.nacionalidad" filterable 
-                                :class="id.nacionalidad != undefined ? 'form-control-select border border-success formSombra' : 'form-control-select'">
+                            <label for="" class="form-label fw-bold"> Nacionalidad </label>
+                            <el-select v-model="id.nacionalidad"
+                                       filterable
+                                       :class="id.nacionalidad != undefined ?
+                                              'form-control-select border border-success formSombra' : 'form-control-select'">
                                 <el-option
                                     v-for="nacionalidad in opcionNacionalidad"
                                     :value="nacionalidad.lblNac">
                                 </el-option>
-                            </el-select>                   
-                        </div>                        
+                            </el-select>
+                        </div>
+
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">CURP</label>
-                            <input type="text" class="form-control" v-model="id.CURP"
-                            :class="id.CURP != undefined ? 'form-control border border-success formSombra' : 'form-control'">
-                        </div>                        
+                            <label for="" class="form-label fw-bold"> CURP </label>
+                            <input type="text"
+                                   class="form-control"
+                                   v-model="id.CURP"
+                                   :class="id.CURP != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'">
+                        </div>
+
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">FOLIO ID</label>
-                            <input type="text" class="form-control" v-model="id.folioID"
-                            :class="id.folioID != undefined ? 'form-control border border-success formSombra' : 'form-control'">                
-                        </div>  
+                            <label for="" class="form-label fw-bold"> FOLIO ID </label>
+                            <input type="text"
+                                   class="form-control"
+                                   v-model="id.folioID"
+                                   :class="id.folioID != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'">                
+                        </div>
+                        
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Estado de Nacimiento</label>
-                            <el-select v-model="id.estNacimiento" filterable 
-                                :class="id.estNacimiento != undefined ? 'form-control-select border border-success formSombra' : 'form-control-select'">
+                            <label for="" class="form-label fw-bold"> Estado de Nacimiento </label>
+                            <el-select v-model="id.estNacimiento"
+                                       filterable
+                                       :class="id.estNacimiento != undefined ?
+                                              'form-control-select border border-success formSombra' : 'form-control-select'">
                                 <el-option
                                     v-for="estadoNacimiento in opcionEstadoNacimiento"
                                     :value="estadoNacimiento.lblEst">
                                 </el-option>
-                            </el-select>                   
-                        </div>                               
+                            </el-select>
+                        </div>
 
-                        <h5 class="fw-bold">DATOS DEL DOMICILIO</h5>
+                        <h5 class="fw-bold"> DATOS DEL DOMICILIO </h5>
 
                         <div class="col-md-4">
                             <label for="" class="form-label fw-bold">Estado de residencia</label>
-                            <el-select v-model="id.estResidencia" filterable 
-                                :class="id.estResidencia != undefined ? 'form-control-select border border-success formSombra' : 'form-control-select'">
-                                <el-option
-                                v-for="estadoNacimiento in opcionEstadoResidencia"
-                                    :value="estadoNacimiento.lblEstRes">
+                            <el-select v-model="id.estResidencia"
+                                       filterable 
+                                       :class="id.estResidencia != undefined ?
+                                       'form-control-select border border-success formSombra' : 'form-control-select'">
+                                <el-option v-for="estadoNacimiento in opcionEstadoResidencia"
+                                           :value="estadoNacimiento.lblEstRes">
                                 </el-option>
-                            </el-select>                   
-                        </div>      
+                            </el-select>
+                        </div>
 
                         <div class="col-md-4">
-                            <label for="" class="form-label fw-bold">Alcaldía/Municipio</label>
-                            <input type="text" class="form-control" v-model="id.alcaldia"
-                            :class="id.alcaldia != undefined ? 'form-control border border-success formSombra' : 'form-control'">
-                        </div>   
+                            <label for="" class="form-label fw-bold"> Alcaldía/Municipio </label>
+                            <input type="text"
+                                   class="form-control"
+                                   v-model="id.alcaldia"
+                                   :class="id.alcaldia != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'">
+                        </div>
 
                         <div class="col-md-4">
-                            <label for="" class="form-label fw-bold">Colonia/Localidad</label>
-                            <input type="text" class="form-control" v-model="id.colonia"
-                            :class="id.colonia != undefined ? 'form-control border border-success formSombra' : 'form-control'">                
-                        </div>   
+                            <label for="" class="form-label fw-bold"> Colonia/Localidad </label>
+                            <input type="text"
+                                   class="form-control"
+                                   v-model="id.colonia"
+                                   :class="id.colonia != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'">
+                        </div>
+
                         <div class="col-md-4">
-                            <label for="" class="form-label fw-bold">Código Postal</label>
-                            <input type="text" class="form-control" v-model="id.codigoPostal"
-                            :class="id.codigoPostal != undefined ? 'form-control border border-success formSombra' : 'form-control'">                
-                        </div>   
+                            <label for="" class="form-label fw-bold"> Código Postal </label>
+                            <input type="text"
+                                   class="form-control"
+                                   v-model="id.codigoPostal"
+                                   :class="id.codigoPostal != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'">
+                        </div>
                         
                         <div class="col-md-10"></div>
                         <div class="col-md-1 margenBoton">
@@ -364,45 +392,13 @@
                                     data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar margen-btn-guardar fw-bold"
-                                    @click="preIdStore.savePreId(/* Informacion Paciente */
-                                                                           id.numExped,
-                                                                           id.nomPaciente,
-                                                                           id.numEpisodio,
-                                                                           id.fechaNac,
-                                                                           id.edadPaciente,
-                                                                           id.habitacion,
-                                                                           id.genero,
-                                                                           id.fechaIn,
-                                                                           /* Datos de cirugía */
-                                                                           id.diagnostico,
-                                                                           id.tipoCx,
-                                                                           id.cirugia,
-                                                                           id.fechaCx,
-                                                                           id.hrCx,
-                                                                           /* Datos CIE */
-                                                                           id.cie10,
-                                                                           id.cie9,
-                                                                           /* Informacion Médicos */
-                                                                           id.cirujano,
-                                                                           id.anestesiologo,
-                                                                           id.anestesiologoVPA,
-                                                                           id.residenteAnestesia,
-                                                                           /* Datos Demográficos */
-                                                                           id.nacionalidad, 
-                                                                           id.CURP,
-                                                                           id.folioID,
-                                                                           id.estNacimiento,
-                                                                           id.estResidencia,
-                                                                           id.alcaldia,
-                                                                           id.colonia,
-                                                                           id.codigoPostal)"> GUARDAR </button>
+                                    @click="preIdStore.savePreId( id )"> GUARDAR </button>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
-        
-    </div>    
+        </div>        
+    </div>
 </template>
 
 <script lang="ts">
@@ -410,7 +406,6 @@ import type { regIdPaciente } from "@/interfaces/regPreAnest"
 import { defineComponent } from "vue"
 import { ElSelect, ElOption } from 'element-plus';
 import { usePreIdStore } from "../../stores/preId-store";
-// import { regIdPaciente } from '../../interfaces/regPreAnest';
 
 const preIdStore = usePreIdStore();
 

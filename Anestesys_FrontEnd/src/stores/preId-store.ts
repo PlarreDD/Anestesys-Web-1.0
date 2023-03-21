@@ -11,15 +11,7 @@ export const usePreIdStore = defineStore('preid', {
     }),
 
     actions: {
-        savePreId(numExped: String, nomPaciente: String, numEpisodio: String,
-                  fechaNac: String, edadPaciente: String, genero: String,
-                  fechaIn: String, habitacion: String, diagnostico: String,
-                  tipoCx: String, cie10: String, cie9: String, cirugia: String,
-                  fechaCx: String, hrCx: String, cirujano: String,
-                  anestesiologo: String, anestesiologoVPA: String,
-                  residenteAnestesia: String, nacionalidad: String, CURP: String,
-                  folioID: String, estNacimiento: String, estResidencia: String,
-                  alcaldia: String, colonia: String,codigoPostal: String){
+        savePreId(id: any){
             apiAxios({
                 url: "http://localhost:5000/preId",
                 method: "POST",
@@ -28,42 +20,43 @@ export const usePreIdStore = defineStore('preid', {
                 },
                 data: {
                     /* Información obligatoria a llenar en el cuestionario */
-                    numExpediente: numExped,
-                    nomPaciente: nomPaciente,
+                    numExpediente: id.numExped,
+                    nomPaciente: id.nomPaciente,
                     /* Información adicional  del paciente */
-                    numEpisodio: numEpisodio,
-                    fechaNPaciente: fechaNac,
-                    edadPaciente: edadPaciente,
-                    habitacionPaciente: habitacion,
-                    generoPaciente: genero,
-                    fechaInPaciente: fechaIn,
+                    numEpisodio: id.numEpisodio,
+                    fechaNPaciente: id.fechaNac,
+                    edadPaciente: id.edadPaciente,
+                    habitacionPaciente: id.habitacion,
+                    generoPaciente: id.genero,
+                    fechaInPaciente: id.fechaIn,
                     /* Datos de cirugía */
-                    diagnostico: diagnostico,
-                    tipoCx: tipoCx,
-                    cirugia: cirugia,
-                    fechaCx: fechaCx,
-                    hrCx: hrCx,
+                    diagnostico: id.diagnostico,
+                    tipoCx: id.tipoCx,
+                    cirugia: id.cirugia,
+                    fechaCx: id.fechaCx,
+                    hrCx: id.hrCx,
                     /* Datos CIE */
-                    cie9: cie9,
-                    cie10: cie10,
+                    cie9: id.cie9,
+                    cie10: id.cie10,
                     /* Informacion Médicos */
-                    cirujano: cirujano,
-                    anestesiologo: anestesiologo,
-                    anestesiologoVPA: anestesiologoVPA,
-                    residenteAnestesia: residenteAnestesia,
-                    nacionalidad: nacionalidad, 
-                    CURP: CURP,
-                    folioID: folioID,
-                    estNacimiento: estNacimiento,
-                    estResidencia: estResidencia,
-                    alcaldia: alcaldia,
-                    colonia: colonia,
-                    codigoPostal: codigoPostal
+                    cirujano: id.cirujano,
+                    anestesiologo: id.anestesiologo,
+                    anestesiologoVPA: id.anestesiologoVPA,
+                    residenteAnestesia: id.residenteAnestesia,
+                    nacionalidad: id.nacionalidad, 
+                    CURP: id.CURP,
+                    folioID: id.folioID,
+                    estNacimiento: id.estNacimiento,
+                    estResidencia: id.estResidencia,
+                    alcaldia: id.alcaldia,
+                    colonia: id.colonia,
+                    codigoPostal: id.codigoPostal
                 }
             })                
             .then((res:any) => {
-                this.pacienteID = res.data._id
                 console.log(res.data);
+                this.pacienteID = String(res.data.id);
+                console.log(this.pacienteID);                
             })
             .catch((e:any) => {
                 console.log("error: " + e);

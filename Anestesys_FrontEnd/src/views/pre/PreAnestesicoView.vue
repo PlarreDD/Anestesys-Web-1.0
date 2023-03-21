@@ -15,7 +15,8 @@
       <div class="col-md-2">
         <div class="alinearBotonDerecha">
           <button class="btn btn-icono fw-bold">
-            <img class="btn-paciente" src="images/imgIcon/nuevo-pac.svg"/> Nuevo Paciente </button>
+            <img class="btn-paciente"
+                 src="images/imgIcon/nuevo-pac.svg"/> Nuevo Paciente </button>
         </div>
       </div>
 
@@ -117,33 +118,38 @@
           <img src="images/pre.svg" class="img-menu-lateral"/>
         </div>
         
-        <div :class="numExpediente != '' && nomPaciente != '' ? 'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
-          <RouterLink to="trans" :class="numExpediente != '' && nomPaciente != '' ? 'visible' : 'invisible'">
+        <div :class="numExpediente != '' && nomPaciente != '' ?
+                    'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
+          <RouterLink to="trans"
+                      :class="numExpediente != '' && nomPaciente != '' ? 'visible' : 'invisible'">
             <img src="images/trans.svg" class="img-menu-lateral"/>
           </RouterLink>
         </div>
         
-        <div :class="numExpediente != '' && nomPaciente != '' ? 'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
-          <RouterLink to="post" :class="numExpediente != '' && nomPaciente != '' ? 'visible' : 'invisible'">
+        <div :class="numExpediente != '' && nomPaciente != '' ?
+                    'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
+          <RouterLink to="post"
+                      :class="numExpediente != '' && nomPaciente != '' ? 'visible' : 'invisible'">
             <img src="images/post.svg" class="img-menu-lateral"/>
           </RouterLink>
         </div>
       </div>
       
-      <div class="container text-center col-md-9 posicionEstatica fw-bold" style="border-radius: 5px;">
+      <div class="container text-center col-md-9 posicionEstatica fw-bold"
+           style="border-radius: 5px;">
         <div class="row">
           <div class="col bordeColumna">
             <label class="form-label text-white">
-              {{nomPaciente}}
+              {{ nomPaciente }}
             </label>
           </div>
           
           <div class="col bordeColumna">
-            {{nomCirujano}}
+            {{ nomCirujano }}
           </div>
           
           <div class="col bordeColumna">
-            {{nomCirugia}}
+            {{ nomCirugia }}
           </div>
         </div>
       </div>
@@ -290,8 +296,7 @@ export default defineComponent({
         this.esPaciente=false;
         this.esValoracion=true;
         this.esPlan=false;
-        this.esNota=false;  
-        console.log('Id true')
+        this.esNota=false;
     },
 
     async validaSeleccionPlan(){
@@ -323,8 +328,6 @@ export default defineComponent({
       this.nomCirugia = cirugia
 
       this.$emit('recibe-datos', this.nomPaciente, this.nomCirujano, this.nomCirugia);
-      
-      console.log('Pac: '+ this.nomPaciente, ', Dr.: '+this.nomCirujano, ', Cx: '+this.nomCirugia)
     },
 
     async validarCambio() {
