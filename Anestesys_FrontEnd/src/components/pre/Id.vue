@@ -68,12 +68,13 @@
                             <button data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar fw-bold"
-                                    :class="propBtnGuardar == preIdStore.pacienteID ? 'visible' : 'invisible'"
+                                    :class="propBtnGuardar == true ? 'visible' : 'invisible'"
                                     @click="preIdStore.savePreId( id )"> GUARDAR </button>
                             <button data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar fw-bold"
-                                    :class="propBtnActualizar == preIdStore.pacienteID ? 'visible' : 'invisible'" @click="actualizar()"> ACTUALIZAR </button>
+                                    :class="propBtnActualizar == true ? 'visible' : 'invisible'"
+                                    @click="actualizar()"> ACTUALIZAR </button>
                         </div>                                               
 
                         <div class="col-md-3">
@@ -395,14 +396,14 @@
                                     data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar fw-bold"
-                                    :class="propBtnGuardar == preIdStore.pacienteID ? 'visible' : 'invisible'"                                    
-
+                                    :class="propBtnGuardar == true ? 'visible' : 'invisible'"
                                     @click="preIdStore.savePreId( id )"> GUARDAR </button> 
                                                                            
                                     <button data-bs-toggle="tab" 
                                             type="submit"
                                             class="btn btn-guardar fw-bold"
-                                            :class="propBtnActualizar == preIdStore.pacienteID ? 'visible' : 'invisible'" @click="actualizar()"> ACTUALIZAR </button>
+                                            :class="propBtnActualizar == true ? 'visible' : 'invisible'"
+                                            @click="actualizar()"> ACTUALIZAR </button>
                         </div>
                     </form>
                 </div>

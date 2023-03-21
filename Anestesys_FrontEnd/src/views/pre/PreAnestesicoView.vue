@@ -207,8 +207,10 @@ export default defineComponent({
       esValoracion: false,
       esPlan: false,
       esNota: false,
-      btnGuardar:idStore.pacienteID,
-      btnActualizar:!(idStore.pacienteID)
+      // btnGuardar:idStore.pacienteID,
+      btnGuardar: true,
+      btnActualizar: false
+      // btnActualizar:!(idStore.pacienteID)
     }
   },
 
@@ -281,11 +283,11 @@ export default defineComponent({
         this.bordeRojoNom=false
         this.bordeVerdeNom=true
 
-        // this.btnGuardar=false
-        // this.btnActualizar=true
+        this.btnGuardar=false
+        this.btnActualizar=true
 
-        this.btnGuardar= !(idStore.pacienteID)
-        this.btnActualizar= idStore.pacienteID     
+        // this.btnGuardar= !(idStore.pacienteID)
+        // this.btnActualizar= idStore.pacienteID     
         
       }
     },
