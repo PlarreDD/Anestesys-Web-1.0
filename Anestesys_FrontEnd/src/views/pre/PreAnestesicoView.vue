@@ -95,7 +95,9 @@
               :propRojoNum="bordeRojoNum"
               :propVerdeNum="bordeVerdeNum"
               :propRojoNom="bordeRojoNom"
-              :propVerdeNom="bordeVerdeNom"/>
+              :propVerdeNom="bordeVerdeNom"
+              :propBtnGuardar="btnGuardar"
+              :propBtnActualizar="btnActualizar"/>
         </div>
 
         <div class="tab-pane fade" id="pre-valoracion">
@@ -118,7 +120,7 @@
         </div>
         
         <div :class="numExpediente != '' && nomPaciente != '' ? 'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
-          <RouterLink to="trans" :class="numExpediente != '' && nomPaciente != '' ? 'visible' : 'invisible'">
+          <RouterLink to="trans" :class="numExpediente != '' && nomPaciente != '' ? claseVisible : claseInvisible">
             <img src="images/trans.svg" class="img-menu-lateral"/>
           </RouterLink>
         </div>
@@ -173,12 +175,17 @@ import Nota from '../../components/pre/Nota.vue';
 import swal from 'sweetalert2';
 import { useUserStore } from "@/stores/user-store";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
+import { usePreIdStore } from '../../stores/preId-store';
 
 const userStore = useUserStore();
+const idStore = usePreIdStore();
 
 export default defineComponent({
   data() {
     return {
+      claseVisible:'visible',
+      claseInvisible:'invisible',
+
       numExpediente:'',
       nomPaciente:'',
       nomCirujano:'',
@@ -193,7 +200,9 @@ export default defineComponent({
       esPaciente: false,
       esValoracion: false,
       esPlan: false,
-      esNota: false
+      esNota: false,
+      btnGuardar:idStore.pacienteID,
+      btnActualizar:!(idStore.pacienteID)
     }
   },
 
@@ -266,8 +275,12 @@ export default defineComponent({
         this.bordeRojoNom=false
         this.bordeVerdeNom=true
 
-        window.location.href = '#pre-valoracion'
-        alert('OK')
+        // this.btnGuardar=false
+        // this.btnActualizar=true
+
+        this.btnGuardar= !(idStore.pacienteID)
+        this.btnActualizar= idStore.pacienteID     
+        
       }
     },
 

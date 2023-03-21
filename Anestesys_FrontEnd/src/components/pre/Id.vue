@@ -56,10 +56,10 @@
                         </div>
 
                         <div class="col-md-1 margenBoton">
-                            <button href="#pre-valoracion" 
-                                    data-bs-toggle="tab" 
+                            <button data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar fw-bold"
+                                    :class="propBtnGuardar == preIdStore.pacienteID ? 'visible' : 'invisible'"
                                     @click="preIdStore.savePreId(/* Informacion Paciente */
                                                                            id.numExped,
                                                                            id.nomPaciente,
@@ -92,7 +92,10 @@
                                                                            id.alcaldia,
                                                                            id.colonia,
                                                                            id.codigoPostal)"> GUARDAR </button>
-                                    <!-- :disabled="id.numExpediente != '' && id.nombrePaciente != '' ? false : true" -->
+                            <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar fw-bold"
+                                    :class="propBtnActualizar == preIdStore.pacienteID ? 'visible' : 'invisible'" @click="actualizar()"> ACTUALIZAR </button>
                         </div>                                               
 
                         <div class="col-md-3">
@@ -363,7 +366,9 @@
                             <button href="#pre-valoracion" 
                                     data-bs-toggle="tab" 
                                     type="submit"
-                                    class="btn btn-guardar margen-btn-guardar fw-bold"
+                                    class="btn btn-guardar fw-bold"
+                                    :class="propBtnGuardar == preIdStore.pacienteID ? 'visible' : 'invisible'"                                    
+
                                     @click="preIdStore.savePreId(/* Informacion Paciente */
                                                                            id.numExped,
                                                                            id.nomPaciente,
@@ -395,7 +400,12 @@
                                                                            id.estResidencia,
                                                                            id.alcaldia,
                                                                            id.colonia,
-                                                                           id.codigoPostal)"> GUARDAR </button>
+                                                                           id.codigoPostal)"> GUARDAR </button> 
+                                                                           
+                                    <button data-bs-toggle="tab" 
+                                            type="submit"
+                                            class="btn btn-guardar fw-bold"
+                                            :class="propBtnActualizar == preIdStore.pacienteID ? 'visible' : 'invisible'" @click="actualizar()"> ACTUALIZAR </button>
                         </div>
                     </form>
                 </div>
@@ -436,6 +446,12 @@ export default defineComponent({
         propVerdeNom:{
             type: Boolean
         },
+        propBtnGuardar:{
+            type: Boolean
+        },
+        propBtnActualizar:{
+            type: Boolean
+        }
     },
 
     data () {
@@ -552,6 +568,9 @@ export default defineComponent({
         enviarDatos() {
             this.$emit('recibe-datos', this.id.numExped, this.id.nomPaciente, this.id.cirujano, this.id.cirugia)
         },
+        actualizar(){
+            alert('Actualizar')
+        }
     }
 })
 </script>
@@ -596,10 +615,8 @@ export default defineComponent({
     --bs-btn-active-bg: #E88300;
     --bs-btn-active-color: #ffffff;
     --bs-btn-active-border-color: #E88300;
-    width: 150px;        
-}
-.margen-btn-guardar{
-    margin-top: 120px;
+    width: 150px; 
+    position: absolute;       
 }
 .btn-nav-bar{
     --bs-btn-bg: #fff;
