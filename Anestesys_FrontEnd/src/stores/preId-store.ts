@@ -56,7 +56,16 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {
                 this.pacienteID = res.data.paciente;
-                alert("Paciente registrado correctamente");
+                
+                swal.fire({
+                    title: 'Paciente registrado correctamente',
+                    icon: 'info',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top',
+                    timer: 3000,
+                    timerProgressBar: true
+                })
             })
             .catch((e: any) => {
                 console.log("error: " + e);
@@ -105,7 +114,16 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {
                 this.pacienteID = res.data.paciente;
-                alert("Datos actualizados correctamente");
+                
+                swal.fire({
+                    title: 'Datos actualizados correctamente',
+                    icon: 'info',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top',
+                    timer: 3000,
+                    timerProgressBar: true
+                })
             })
             .catch((e: any) => {
                 console.log("error: " + e);

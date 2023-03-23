@@ -265,8 +265,7 @@ export default defineComponent({
         swal.fire({
           title: 'Escribir el número de expediente o nombre del paciente',
           icon: 'error',
-          showConfirmButton: true,
-          showCloseButton: true,
+          showConfirmButton: false,
           toast: true,
           position: 'top',
           timer: 3000,
