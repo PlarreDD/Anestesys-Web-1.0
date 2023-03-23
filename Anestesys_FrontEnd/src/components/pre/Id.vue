@@ -33,7 +33,7 @@
                             </label>
 
                             <input type="text"
-                                   v-model="id.numExped"
+                                   v-model="infoPreIdPaciente.numExped"
                                    id="numExpediente"
                                    class="form-control"
                                    :class="{ 'form-control border border-danger': propRojoNum,
@@ -55,7 +55,7 @@
                             <input class="form-control" 
                                    type="text" 
                                    @keyup.capture="enviarDatos"
-                                   v-model="id.nomPaciente"
+                                   v-model="infoPreIdPaciente.nomPaciente"
                                    id="nombrePaciente" 
                                    :class="{ 'form-control border border-danger': propRojoNom,
                                              'form-control border border-success formSombra': propVerdeNom }"
@@ -69,12 +69,12 @@
                                     type="submit"
                                     class="btn btn-guardar fw-bold"
                                     :class="propBtnGuardar == true ? 'visible' : 'invisible'"
-                                    @click="preIdStore.savePreId( id )"> GUARDAR </button>
+                                    @click="preIdStore.savePreId( infoPreIdPaciente )"> GUARDAR </button>
                             <button data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar fw-bold"
                                     :class="propBtnActualizar == true ? 'visible' : 'invisible'"
-                                    @click="actualizar()"> ACTUALIZAR </button>
+                                    @click="preIdStore.updatePreId( infoPreIdPaciente )"> ACTUALIZAR </button>
                         </div>                                               
 
                         <div class="col-md-3">
@@ -82,8 +82,8 @@
                                    class="form-label fw-bold"> Fecha de Nacimiento </label>
                             <input type="date"
                                    class="form-control"
-                                   v-model="id.fechaNac"
-                                   :class="id.fechaNac != undefined ?
+                                   v-model="infoPreIdPaciente.fechaNac"
+                                   :class="infoPreIdPaciente.fechaNac != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -93,8 +93,8 @@
                                    class="form-label fw-bold"> Edad </label>
                             <input type="text"
                                    class="form-control"
-                                   v-model="id.edadPaciente"
-                                   :class="id.edadPaciente != undefined ?
+                                   v-model="infoPreIdPaciente.edadPaciente"
+                                   :class="infoPreIdPaciente.edadPaciente != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -108,7 +108,7 @@
                                    id="masculino"
                                    autocomplete="off"
                                    value="Masculino"
-                                   v-model="id.genero">
+                                   v-model="infoPreIdPaciente.genero">
                             <label class="btn btn-radio margenRadio"
                                    for="masculino"> Masculino </label>
                                             
@@ -118,7 +118,7 @@
                                    id="femenino"
                                    autocomplete="off"
                                    value="Femenino"
-                                   v-model="id.genero">
+                                   v-model="infoPreIdPaciente.genero">
                             <label class="btn btn-radio"
                                    for="femenino"> Femenino </label>
                         </div>
@@ -130,8 +130,8 @@
                                        class="form-label fw-bold"> Núm de episodio </label>
                                 <input type="text"
                                        class="form-control"
-                                       v-model="id.numEpisodio"
-                                       :class="id.numEpisodio != undefined ?
+                                       v-model="infoPreIdPaciente.numEpisodio"
+                                       :class="infoPreIdPaciente.numEpisodio != undefined ?
                                               'form-control border border-success formSombra' : 'form-control'">
                             </div>
 
@@ -141,8 +141,8 @@
                                        class="form-label fw-bold"> Habitación </label>
                                 <input type="text"
                                        class="form-control"
-                                       v-model="id.habitacion"
-                                       :class="id.habitacion != undefined ?
+                                       v-model="infoPreIdPaciente.habitacion"
+                                       :class="infoPreIdPaciente.habitacion != undefined ?
                                               'form-control border border-success formSombra' : 'form-control'">
                             </div>
                             <div class="col-md-1"></div>
@@ -151,8 +151,8 @@
                                 <label for="" class="form-label fw-bold"> Fecha de Ingreso </label>
                                 <input type="date"
                                        class="form-control"
-                                       v-model="id.fechaIn"
-                                       :class="id.fechaIn != undefined ?
+                                       v-model="infoPreIdPaciente.fechaIn"
+                                       :class="infoPreIdPaciente.fechaIn != undefined ?
                                               'form-control border border-success formSombra' : 'form-control'">
                             </div>
                         </div>
@@ -163,8 +163,8 @@
                             <label for="" class="form-label fw-bold"> Diagnóstico </label>
                             <textarea class="form-control"
                                       rows="3"
-                                      v-model="id.diagnostico"
-                                      :class="id.diagnostico != undefined ?
+                                      v-model="infoPreIdPaciente.diagnostico"
+                                      :class="infoPreIdPaciente.diagnostico != undefined ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -178,7 +178,7 @@
                                    id="mayor"
                                    autocomplete="off"
                                    value="Mayor"
-                                   v-model="id.tipoCx">
+                                   v-model="infoPreIdPaciente.tipoCx">
                             <label class="btn btn-radio margenRadio" for="mayor"> Mayor </label>
 
                             <input type="radio"
@@ -187,7 +187,7 @@
                                    id="menor"
                                    autocomplete="off"
                                    value="Menor"
-                                   v-model="id.tipoCx">
+                                   v-model="infoPreIdPaciente.tipoCx">
                             <label class="btn btn-radio margenRadio" for="menor"> Menor </label>
                             
                             <input type="radio"
@@ -196,15 +196,15 @@
                                    id="ambulatoria"
                                    autocomplete="off"
                                    value="Ambulatoria"
-                                   v-model="id.tipoCx">
+                                   v-model="infoPreIdPaciente.tipoCx">
                             <label class="btn btn-radio" for="ambulatoria"> Ambulatoria </label>
                         </div>  
                         
                         <div class="col-md-8">
                             <label for="" class="form-label fw-bold margen-diez"> CIE-10 </label>
-                            <el-select v-model="id.cie10"
+                            <el-select v-model="infoPreIdPaciente.cie10"
                                        filterable
-                                       :class="id.cie10 != undefined ?
+                                       :class="infoPreIdPaciente.cie10 != undefined ?
                                               'form-control-select border border-success formSombra' : 'form-control-select'">
                                 <el-option 
                                     v-for="estadoNacimiento in opcionCIE10"
@@ -220,8 +220,8 @@
                                           class="form-control"
                                           rows="3"
                                           @keyup.capture="enviarDatos"
-                                          v-model="id.cirugia"
-                                          :class="id.cirugia != undefined ?
+                                          v-model="infoPreIdPaciente.cirugia"
+                                          :class="infoPreIdPaciente.cirugia != undefined ?
                                                  'form-control border border-success formSombra' : 'form-control'">
                                 </textarea>
                             </div>
@@ -229,9 +229,9 @@
                             <div class="col-md-6">
                                 <label for=""
                                        class="form-label fw-bold"> CIE-9 </label>
-                                <el-select v-model="id.cie9"
+                                <el-select v-model="infoPreIdPaciente.cie9"
                                            filterable
-                                           :class="id.cie9 != undefined ?
+                                           :class="infoPreIdPaciente.cie9 != undefined ?
                                                   'form-control-select border border-success formSombra' : 'form-control-select'">
                                     <el-option
                                         v-for="estadoNacimiento in opcionCIE9"
@@ -246,8 +246,8 @@
                             <label for="" class="form-label fw-bold"> Fecha de Cirugía </label>
                             <input type="date"
                                    class="form-control"
-                                   v-model="id.fechaCx"
-                                   :class="id.fechaCx != undefined ?
+                                   v-model="infoPreIdPaciente.fechaCx"
+                                   :class="infoPreIdPaciente.fechaCx != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -255,8 +255,8 @@
                             <label for="" class="form-label fw-bold"> Hora de Cirugía </label>                            
                             <input type="time"
                                    class="form-control"
-                                   v-model="id.hrCx"
-                                   :class="id.hrCx != undefined ?
+                                   v-model="infoPreIdPaciente.hrCx"
+                                   :class="infoPreIdPaciente.hrCx != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
                         
@@ -267,8 +267,8 @@
                             <input type="text"
                                    class="form-control"
                                    @keyup.capture="enviarDatos"
-                                   v-model="id.cirujano"
-                                   :class="id.cirujano != undefined ?
+                                   v-model="infoPreIdPaciente.cirujano"
+                                   :class="infoPreIdPaciente.cirujano != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
                         
@@ -276,8 +276,8 @@
                             <label for="" class="form-label fw-bold"> Anestesiólogo </label>
                             <input type="text" 
                                    class="form-control"
-                                   v-model="id.anestesiologo"
-                                   :class="id.anestesiologo != undefined ?
+                                   v-model="infoPreIdPaciente.anestesiologo"
+                                   :class="infoPreIdPaciente.anestesiologo != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -285,8 +285,8 @@
                             <label for="" class="form-label fw-bold"> Anestesiólogo VPA </label>
                             <input type="text"
                                    class="form-control"
-                                   v-model="id.anestesiologoVPA"
-                                   :class="id.anestesiologoVPA != undefined ?
+                                   v-model="infoPreIdPaciente.anestesiologoVPA"
+                                   :class="infoPreIdPaciente.anestesiologoVPA != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -294,8 +294,8 @@
                             <label for="" class="form-label fw-bold"> Residente de Anestesia </label>
                             <input type="text"
                                    class="form-control"
-                                   v-model="id.residenteAnestesia"
-                                   :class="id.residenteAnestesia != undefined ?
+                                   v-model="infoPreIdPaciente.residenteAnestesia"
+                                   :class="infoPreIdPaciente.residenteAnestesia != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
                     </form>
@@ -307,9 +307,9 @@
                     <form @submit.prevent="obtenerDatos" class="row g-3 margen-input">
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold"> Nacionalidad </label>
-                            <el-select v-model="id.nacionalidad"
+                            <el-select v-model="infoPreIdPaciente.nacionalidad"
                                        filterable
-                                       :class="id.nacionalidad != undefined ?
+                                       :class="infoPreIdPaciente.nacionalidad != undefined ?
                                               'form-control-select border border-success formSombra' : 'form-control-select'">
                                 <el-option
                                     v-for="nacionalidad in opcionNacionalidad"
@@ -322,8 +322,8 @@
                             <label for="" class="form-label fw-bold"> CURP </label>
                             <input type="text"
                                    class="form-control"
-                                   v-model="id.CURP"
-                                   :class="id.CURP != undefined ?
+                                   v-model="infoPreIdPaciente.CURP"
+                                   :class="infoPreIdPaciente.CURP != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -331,16 +331,16 @@
                             <label for="" class="form-label fw-bold"> FOLIO ID </label>
                             <input type="text"
                                    class="form-control"
-                                   v-model="id.folioID"
-                                   :class="id.folioID != undefined ?
+                                   v-model="infoPreIdPaciente.folioID"
+                                   :class="infoPreIdPaciente.folioID != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'">                
                         </div>
                         
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold"> Estado de Nacimiento </label>
-                            <el-select v-model="id.estNacimiento"
+                            <el-select v-model="infoPreIdPaciente.estNacimiento"
                                        filterable
-                                       :class="id.estNacimiento != undefined ?
+                                       :class="infoPreIdPaciente.estNacimiento != undefined ?
                                               'form-control-select border border-success formSombra' : 'form-control-select'">
                                 <el-option
                                     v-for="estadoNacimiento in opcionEstadoNacimiento"
@@ -353,9 +353,9 @@
 
                         <div class="col-md-4">
                             <label for="" class="form-label fw-bold">Estado de residencia</label>
-                            <el-select v-model="id.estResidencia"
+                            <el-select v-model="infoPreIdPaciente.estResidencia"
                                        filterable 
-                                       :class="id.estResidencia != undefined ?
+                                       :class="infoPreIdPaciente.estResidencia != undefined ?
                                        'form-control-select border border-success formSombra' : 'form-control-select'">
                                 <el-option v-for="estadoNacimiento in opcionEstadoResidencia"
                                            :value="estadoNacimiento.lblEstRes">
@@ -367,8 +367,8 @@
                             <label for="" class="form-label fw-bold"> Alcaldía/Municipio </label>
                             <input type="text"
                                    class="form-control"
-                                   v-model="id.alcaldia"
-                                   :class="id.alcaldia != undefined ?
+                                   v-model="infoPreIdPaciente.alcaldia"
+                                   :class="infoPreIdPaciente.alcaldia != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -376,8 +376,8 @@
                             <label for="" class="form-label fw-bold"> Colonia/Localidad </label>
                             <input type="text"
                                    class="form-control"
-                                   v-model="id.colonia"
-                                   :class="id.colonia != undefined ?
+                                   v-model="infoPreIdPaciente.colonia"
+                                   :class="infoPreIdPaciente.colonia != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -385,8 +385,8 @@
                             <label for="" class="form-label fw-bold"> Código Postal </label>
                             <input type="text"
                                    class="form-control"
-                                   v-model="id.codigoPostal"
-                                   :class="id.codigoPostal != undefined ?
+                                   v-model="infoPreIdPaciente.codigoPostal"
+                                   :class="infoPreIdPaciente.codigoPostal != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
                         
@@ -397,13 +397,13 @@
                                     type="submit"
                                     class="btn btn-guardar fw-bold"
                                     :class="propBtnGuardar == true ? 'visible' : 'invisible'"
-                                    @click="preIdStore.savePreId( id )"> GUARDAR </button> 
+                                    @click="preIdStore.savePreId( infoPreIdPaciente )"> GUARDAR </button> 
                                                                            
                                     <button data-bs-toggle="tab" 
                                             type="submit"
                                             class="btn btn-guardar fw-bold"
                                             :class="propBtnActualizar == true ? 'visible' : 'invisible'"
-                                            @click="actualizar()"> ACTUALIZAR </button>
+                                            @click="preIdStore.updatePreId( infoPreIdPaciente )"> ACTUALIZAR </button>
                         </div>
                     </form>
                 </div>
@@ -452,7 +452,7 @@ export default defineComponent({
 
     data () {
         return{
-            id: {} as regIdPaciente,
+            infoPreIdPaciente: {} as regIdPaciente,
             preIdStore,
 
             valorNac: String,
@@ -559,14 +559,12 @@ export default defineComponent({
 
     methods: {
         obtenerDatos() {
-            this.$emit("validar", this.id.numExped, this.id.nomPaciente)           
+            this.$emit("validar", this.infoPreIdPaciente.numExped, this.infoPreIdPaciente.nomPaciente);
         },
+
         enviarDatos() {
-            this.$emit('recibe-datos', this.id.numExped, this.id.nomPaciente, this.id.cirujano, this.id.cirugia)
+            this.$emit('recibe-datos', this.infoPreIdPaciente.numExped, this.infoPreIdPaciente.nomPaciente, this.infoPreIdPaciente.cirujano, this.infoPreIdPaciente.cirugia);
         },
-        actualizar(){
-            alert('Actualizar')
-        }
     }
 })
 </script>

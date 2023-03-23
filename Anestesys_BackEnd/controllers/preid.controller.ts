@@ -2,7 +2,7 @@ import { //Request,
          Response } from "express";
 import { IdPacientes } from "../models/Paciente";
 
-export const getInfo = async (req:any, res:Response) => {
+export const getAllPacientes = async (req: any, res: Response) => {
     try {
         const pacientes = await IdPacientes.find({uid: req.uid})
         
@@ -13,7 +13,7 @@ export const getInfo = async (req:any, res:Response) => {
     }
 };
 
-export const createPaciente = async (req:any, res:Response) => {
+export const createPaciente = async (req: any, res: Response) => {
     try {
         const { numExpediente, nomPaciente,
                 /* Información adicional  del paciente */
@@ -51,11 +51,11 @@ export const createPaciente = async (req:any, res:Response) => {
         return res.json({ paciente });
     } catch (error) {
         console.log(error);
-        return res.status(500).json({Error: 'Error de servidor'});
+        return res.status(500).json({ Error: 'Error de servidor' });
     }
 };
 
-export const updatePaciente = async (req:any, res:Response) => {
+export const updatePaciente = async (req: any, res: Response) => {
     try {
         const { id } = req.params;
         const updVar = req.body;
@@ -63,12 +63,12 @@ export const updatePaciente = async (req:any, res:Response) => {
         const paciente = await IdPacientes.findByIdAndUpdate(id, updVar);
 
         if (!paciente) 
-            return res.status(404).json({ Error: "No existe el link." })
+            return res.status(404).json({ Error: "No existe el paciente." });
 
         if(!paciente.uid.equals(req.uid))
-            return res.status(401).json({ Error: "Este paciente no corresponde a este usuario." })
+            return res.status(401).json({ Error: "Este paciente no corresponde a este usuario." });
         
-        return res.json({ paciente })
+        return res.json({ paciente });
     } catch (error) {
         console.log(error);
 
