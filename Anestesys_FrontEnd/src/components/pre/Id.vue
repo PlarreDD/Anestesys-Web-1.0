@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div>        
+
         <ul class="nav nav-pills mb-3 text-center centrar-li" id="">        
             <li class="nav-item col-md-3">
                 <button class="btn btn-nav-bar fw-bold active"
@@ -612,6 +613,7 @@ export default defineComponent({
     width: 150px; 
     position: absolute;       
 }
+
 .btn-nav-bar{
     --bs-btn-bg: #fff;
     --bs-btn-color: #002D60;    
@@ -650,7 +652,7 @@ h5{
     margin-right: 10px;
 }
 .margenBoton{
-    margin-top: 48px;
+    margin-bottom: 48px;
     margin-left: 5px;
 }
 hr{

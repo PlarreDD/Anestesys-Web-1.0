@@ -33,8 +33,7 @@
                id="barraConfiguracion"
                aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
-              <h5 class="offcanvas-title fw-bold text-dark"
-                  id="offcanvasNavbarLabel"> Configuración </h5>
+              
               <button type="button"
                       class="btn-close"
                       data-bs-dismiss="offcanvas"
@@ -54,6 +53,14 @@
                   <RouterLink to="medicamentos">
                     <button class="btn btn-configuracion fw-bold"> Medicamentos </button>
                   </RouterLink>
+                </li>
+
+                <li>
+                  <button type="button"
+                    class="btn btn-configuracion fw-bold"
+                    data-bs-toggle="modal"
+                    data-bs-target="#medicamentosModal"> Medicamentos! 
+                  </button>
                 </li>
                 
                 <li class="nav-item">
@@ -78,6 +85,93 @@
           </div>
         </div>
       </nav>
+
+      <!-- Modal medicamentos -->
+      <div class="modal"
+           id="medicamentosModal"
+           tabindex="-1"
+           aria-labelledby="exampleModalLabel"
+           aria-hidden="true">
+
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content colorModalMedicamentos">
+                  
+                <div class="modal-header">
+                      <div class="col-12">
+                          <div class="row g-3">
+                            <div class="col-md-11">
+                                <h5 class="text-white">MEDICAMENTOS</h5>
+                                <h6 class="text-white">Gestión de medicamentos</h6>
+                            </div>
+                            
+                            <div class="col-md-1 div-img">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <div class="modal-body">
+                      <div class="col-12">
+                        <div class="row g-3">
+                          <div class="col-md-4">
+                                  <input type="text"
+                                        class="form-control"
+                                        v-model="nombreMedicamento"                                  
+                                        placeholder="Nombre del medicamento">
+                          </div>
+                          <div class="col-md-8"></div>
+
+                          <div class="col-md-4">
+                                  <input type="text"
+                                        class="form-control"
+                                        v-model="codigoMedicamento"                                
+                                        placeholder="Código de barras">
+                          </div>
+                          <div class="col-md-1">
+                              <button type="button"
+                                      class="btn btn-modal fw-bold"
+                                      data-bs-dismiss="modal"> Agregar </button>
+                          </div> 
+                          <div class="col-md-7"></div>
+
+                          <div class="col-md-12"> 
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-white">Paracetamol</td>
+                                            <td class="text-white">7875468798</td>
+                                            <td><i class="fa-solid fa fa-pen-to-square text-white"></i></td>
+                                            <td><i class="fa-solid fa fa-xmark text-white"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>        
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>   
+                    </div>
+                  </div>                  
+
+                  <div class="modal-footer">
+                    <div class="col-12">
+                      <div class="row g-3">
+                        <div class="col-md-4 div-img">
+                          <button type="button"
+                                  class="btn btn-modal fw-bold btn-modal"
+                                  data-bs-dismiss="modal"> CANCELAR </button>
+                        </div>                                  
+                      </div>
+                    </div>
+                  </div>
+
+              </div>
+          </div>
+      </div>
   </div>
 </template>
 
@@ -92,6 +186,8 @@ export default defineComponent({
   data() {
     return{
         userStore,
+        nombreMedicamento:'',
+        codigoMedicamento:''
     };
   },
   methods: {
@@ -129,11 +225,24 @@ export default defineComponent({
 .navbar-color{
   background-color: #002D60;
 }
+.btn-close {
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    padding: 0.25em 0.25em;
+    color: #fff;
+    border: 0;
+    border-radius: 0.375rem;
+    opacity: .5;
+}
+.div-img {
+  text-align: center;
+}
 .nav-config {
     top: 0;
     right: 0;
     width: 250px;
-    background-color: #edeff3;
+    background-color: #002D60;
     border-left: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
     transform: translateX(100%);    
 }
@@ -157,6 +266,9 @@ export default defineComponent({
 .estiloDropDown{
   width: 450px; height: 250px;
 }
+.colorModalMedicamentos{
+  background-color: #002D60;
+}
 .btn-menu {    
     --bs-btn-bg: #002d60;
     --bs-btn-color: #ffffff;    
@@ -169,15 +281,15 @@ export default defineComponent({
     --bs-btn-active-border-color: #002d60;  
 }
 .btn-configuracion {
-    --bs-btn-bg: #ffffff;
-    --bs-btn-color: #002d60;    
-    --bs-btn-border-color: #ced4da;
-    --bs-btn-hover-bg: #ced4da;
-    --bs-btn-hover-color: #002d60;
-    --bs-btn-hover-border-color: #ced4da;          
-    --bs-btn-active-bg: #ced4da;
-    --bs-btn-active-color: #002d60;
-    --bs-btn-active-border-color: #ced4da;   
+    --bs-btn-bg: #002d60;
+    --bs-btn-color: #fff;    
+    --bs-btn-border-color: #002d60;
+    --bs-btn-hover-bg: #002d60;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #002d60;          
+    --bs-btn-active-bg: #002d60;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-border-color: #002d60;   
     width: 150px; 
     margin-bottom: 8px;
 }
