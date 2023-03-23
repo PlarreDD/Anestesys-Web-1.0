@@ -10,9 +10,7 @@
             </RouterLink>
           </div>
 
-          <div class="col-md-5 alinearElementoD">
-
-          </div>
+          <div class="col-md-5"></div>
          
           <div class="col-md-2 text-white alinearElementoD">
             <img src="images/perfil.jpg" class="imgPerfil"/> {{ "Dr. García" }}
@@ -35,50 +33,50 @@
             <div class="offcanvas-header">
               
               <button type="button"
-                      class="btn-close"
-                      data-bs-dismiss="offcanvas"
-                      aria-label="Close">
-              </button>
+              class="btn-close" 
+              data-bs-dismiss="offcanvas" 
+              aria-label="Close"><i class="fa-solid fa-xl fa-xmark text-white"></i></button>
             </div>
 
             <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
-                  <a href="#">
-                    <button class="btn btn-configuracion fw-bold"> Ver Perfil </button>
-                  </a>
-                </li> 
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">                
+
+                <li>
+                  <button type="button"
+                    class="btn btn-configuracion fw-bold"
+                    data-bs-toggle="modal"
+                    data-bs-target="#medicamentosModal" ><i class="fa-solid fa fa-pills"></i> Medicamentos
+                  </button>
+                </li>
                 
-                <li class="nav-item">
-                  <RouterLink to="medicamentos">
-                    <button class="btn btn-configuracion fw-bold"> Medicamentos </button>
-                  </RouterLink>
+                <li>
+                  <button type="button"
+                    class="btn btn-configuracion fw-bold"
+                    data-bs-toggle="modal"
+                    data-bs-target="#monitorModal"><i class="fa-solid fa fa-tv"></i> Monitor de signos vitales
+                  </button>
+                </li>
+                
+                <li>
+                  <button type="button"
+                    class="btn btn-configuracion fw-bold"
+                    data-bs-toggle="modal"
+                    data-bs-target="#tendenciasModal"><i class="fa-solid fa fa-file-waveform"></i> Tendencias
+                  </button>
                 </li>
 
                 <li>
                   <button type="button"
                     class="btn btn-configuracion fw-bold"
                     data-bs-toggle="modal"
-                    data-bs-target="#medicamentosModal"> Medicamentos! 
+                    data-bs-target="#tecladoModal"><i class="fa-solid fa fa-keyboard"></i> Teclado virtual
                   </button>
-                </li>
-                
-                <li class="nav-item">
-                  <a to="#">
-                    <button class="btn btn-configuracion fw-bold"> Tendencias </button>
-                  </a>
-                </li>
-                
-                <li class="nav-item">
-                  <a to="#">
-                    <button class="btn btn-configuracion fw-bold"> Teclado </button>
-                  </a>
                 </li>
 
                 <li class="nav-item">
                     <button class="btn btn-configuracion fw-bold"
                     @click="userStore.logout()"
-                            > Salir </button>
+                            ><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i> Salir </button>
                 </li>
               </ul>
             </div>
@@ -93,19 +91,22 @@
            aria-labelledby="exampleModalLabel"
            aria-hidden="true">
 
-          <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
               <div class="modal-content colorModalMedicamentos">
                   
                 <div class="modal-header">
                       <div class="col-12">
                           <div class="row g-3">
                             <div class="col-md-11">
-                                <h5 class="text-white">MEDICAMENTOS</h5>
-                                <h6 class="text-white">Gestión de medicamentos</h6>
+                                <h5 class="text-white fw-bold">MEDICAMENTOS</h5>
+                                <h6 class="text-white fw-bold">Gestión de medicamentos</h6>
                             </div>
                             
                             <div class="col-md-1 div-img">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" 
+                                        class="btn fw-bold" 
+                                        data-bs-dismiss="modal" 
+                                        aria-label="Close"><i class="fa-solid fa-xl fa-xmark text-white"></i></button>
                             </div>
                           </div>
                       </div>
@@ -113,7 +114,7 @@
 
                   <div class="input-group mb-3">
                     <div class="modal-body">
-                      <div class="col-12">
+                      <div class="col-md-12">
                         <div class="row g-3">
                           <div class="col-md-4">
                                   <input type="text"
@@ -131,21 +132,55 @@
                           </div>
                           <div class="col-md-1">
                               <button type="button"
-                                      class="btn btn-modal fw-bold"
-                                      data-bs-dismiss="modal"> Agregar </button>
+                                      class="btn btn-modal-medicamentos fw-bold"> Agregar </button>
                           </div> 
-                          <div class="col-md-7"></div>
 
                           <div class="col-md-12"> 
-                            <div class="table-responsive">
+                            <div class="table-responsive deslizar">
                                 <table class="table table-hover">
                                     
                                     <tbody>
                                         <tr>
+                                            <td class="text-white">1</td>
                                             <td class="text-white">Paracetamol</td>
                                             <td class="text-white">7875468798</td>
-                                            <td><i class="fa-solid fa fa-pen-to-square text-white"></i></td>
-                                            <td><i class="fa-solid fa fa-xmark text-white"></i></td>
+                                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
+                                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-white">2</td>
+                                            <td class="text-white">Paracetamol</td>
+                                            <td class="text-white">7875468798</td>
+                                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
+                                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-white">3</td>
+                                            <td class="text-white">Paracetamol</td>
+                                            <td class="text-white">7875468798</td>
+                                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
+                                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-white">4</td>
+                                            <td class="text-white">Paracetamol</td>
+                                            <td class="text-white">7875468798</td>
+                                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
+                                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-white">5</td>
+                                            <td class="text-white">Paracetamol</td>
+                                            <td class="text-white">7875468798</td>
+                                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
+                                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-white">6</td>
+                                            <td class="text-white">Paracetamol</td>
+                                            <td class="text-white">7875468798</td>
+                                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
+                                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
                                         </tr>
                                     </tbody>
                                 </table>        
@@ -156,18 +191,6 @@
                       </div>   
                     </div>
                   </div>                  
-
-                  <div class="modal-footer">
-                    <div class="col-12">
-                      <div class="row g-3">
-                        <div class="col-md-4 div-img">
-                          <button type="button"
-                                  class="btn btn-modal fw-bold btn-modal"
-                                  data-bs-dismiss="modal"> CANCELAR </button>
-                        </div>                                  
-                      </div>
-                    </div>
-                  </div>
 
               </div>
           </div>
@@ -206,42 +229,11 @@ export default defineComponent({
 </script>
 
 <style>
-.imgLogoBarra {
-  width: 280px;
-  height: auto;    
-}
-.imgPerfil {
-  width: 75px;
-  height: auto;   
-  border-radius: 50px;   
-}
-.mt {
-    margin-bottom: 2rem!important;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-}
-.navbar-color{
-  background-color: #002D60;
-}
-.btn-close {
-    box-sizing: content-box;
-    width: 1em;
-    height: 1em;
-    padding: 0.25em 0.25em;
-    color: #fff;
-    border: 0;
-    border-radius: 0.375rem;
-    opacity: .5;
-}
-.div-img {
-  text-align: center;
-}
+/* Barra navegación */
 .nav-config {
     top: 0;
     right: 0;
-    width: 250px;
+    width: 300px;
     background-color: #002D60;
     border-left: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
     transform: translateX(100%);    
@@ -255,42 +247,78 @@ export default defineComponent({
     text-decoration: none;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
 }
-.alinearElementoD{
-    align-self: center;
-    text-align: right;
+.mt {
+    margin-bottom: 2rem!important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.div-img {
+  text-align: center;
+}
+.imgLogoBarra {
+  width: 280px;
+  height: auto;    
+}
+.imgPerfil {
+  width: 75px;
+  height: auto;   
+  border-radius: 50px;   
+}
+.navbar-color{
+  background-color: #002D60;
 }
 .alinearElementoI{
     align-self: center;
     text-align: left;
 }
-.estiloDropDown{
-  width: 450px; height: 250px;
-}
-.colorModalMedicamentos{
-  background-color: #002D60;
-}
+/* Botones */
 .btn-menu {    
-    --bs-btn-bg: #002d60;
-    --bs-btn-color: #ffffff;    
-    --bs-btn-border-color: #002d60;
-    --bs-btn-hover-bg: #002d60;
-    --bs-btn-hover-color: #ffffff;
-    --bs-btn-hover-border-color: #002d60;          
-    --bs-btn-active-bg: #002d60;
-    --bs-btn-active-color: #ffffff;
-    --bs-btn-active-border-color: #002d60;  
+  --bs-btn-bg: #002d60;
+  --bs-btn-color: #ffffff;    
+  --bs-btn-border-color: #002d60;
+  --bs-btn-hover-bg: #002d60;
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-hover-border-color: #002d60;          
+  --bs-btn-active-bg: #002d60;
+  --bs-btn-active-color: #ffffff;
+  --bs-btn-active-border-color: #002d60;  
 }
 .btn-configuracion {
-    --bs-btn-bg: #002d60;
-    --bs-btn-color: #fff;    
-    --bs-btn-border-color: #002d60;
-    --bs-btn-hover-bg: #002d60;
+  --bs-btn-bg: #002d60;
+  --bs-btn-color: #fff;    
+  --bs-btn-border-color: #002d60;
+  --bs-btn-hover-bg: #002d60;
     --bs-btn-hover-color: #fff;
     --bs-btn-hover-border-color: #002d60;          
     --bs-btn-active-bg: #002d60;
     --bs-btn-active-color: #fff;
     --bs-btn-active-border-color: #002d60;   
-    width: 150px; 
+    width: 280px; 
     margin-bottom: 8px;
+    text-align: left;
+    padding: 20px;
+  }
+  .btn-modal-medicamentos {
+    --bs-btn-bg: #ffffff; 
+    --bs-btn-color: #002D60;    
+    --bs-btn-border-color: #ffffff;
+    --bs-btn-hover-bg: #ffffff;
+    --bs-btn-hover-color: #002D60;
+    --bs-btn-hover-border-color: #ffffff;          
+    --bs-btn-active-bg: #002D60;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-border-color: #ffffff;  
+    width: 130px;     
+}
+/* Modal medicamentos */
+.colorModalMedicamentos{
+  background-color: #002D60;
+}
+.deslizar {
+  overflow:scroll;
+  overflow-x: hidden;
+  height:200px;
 }
 </style>

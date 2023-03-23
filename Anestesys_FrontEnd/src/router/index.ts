@@ -51,15 +51,6 @@ const router = createRouter({
         auth: true
       }
     },
-    
-    {
-      path: '/medicamentos',
-      name: 'medicamentos',     
-      component: () => import('../views/menu/Medicamentos.vue'),
-      meta:{
-        auth: true
-      }
-    }
   ]
 })
 
