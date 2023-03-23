@@ -6,7 +6,7 @@
            tabindex="-1"
            aria-labelledby="exampleModalLabel"
            aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" style="width:1250px;">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content colorModal">
             <div class="modal-header">
               <div class="col-12">
@@ -34,7 +34,7 @@
                 <div class="row g-3">
                   <div class="col-md-4 div-img">
                     <button type="button"
-                            class="btn btn-modal fw-bold btn-modal"
+                            class="btn btn-modal fw-bold"
                             data-bs-dismiss="modal"> CANCELAR </button>
                   </div>
                   
@@ -42,7 +42,7 @@
                   
                   <div class="col-md-4 div-img">
                     <button type="button"
-                            class="btn btn-modal fw-bold btn-modal"
+                            class="btn btn-modal fw-bold"
                             data-bs-dismiss="modal"
                             @click="iniciarEmergencia()"> ACEPTAR </button>
                   </div>

@@ -64,15 +64,15 @@
                                  id="validaNomPac"> Escriba el nombre del paciente </div>        
                         </div>
 
-                        <div class="col-md-1 margenBoton">
+                        <div class="col-md-1 margen-btn-info">
                             <button data-bs-toggle="tab" 
                                     type="submit"
-                                    class="btn btn-guardar fw-bold"
+                                    class="btn btn-guardar-info fw-bold"
                                     :class="propBtnGuardar == true ? 'visible' : 'invisible'"
                                     @click="preIdStore.savePreId( infoPreIdPaciente )"> GUARDAR </button>
                             <button data-bs-toggle="tab" 
                                     type="submit"
-                                    class="btn btn-guardar fw-bold"
+                                    class="btn btn-guardar-info fw-bold"
                                     :class="propBtnActualizar == true ? 'visible' : 'invisible'"
                                     @click="preIdStore.updatePreId( infoPreIdPaciente )"> ACTUALIZAR </button>
                         </div>                                               
@@ -382,7 +382,7 @@
                         </div>
 
                         <div class="col-md-4">
-                            <label for="" class="form-label fw-bold"> Código Postal </label>
+                            <label for="" class="form-label fw-bold margen-cp"> Código Postal </label>
                             <input type="text"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.codigoPostal"
@@ -395,13 +395,13 @@
                             <button href="#pre-valoracion" 
                                     data-bs-toggle="tab" 
                                     type="submit"
-                                    class="btn btn-guardar fw-bold"
+                                    class="btn btn-guardar-datos fw-bold"
                                     :class="propBtnGuardar == true ? 'visible' : 'invisible'"
                                     @click="preIdStore.savePreId( infoPreIdPaciente )"> GUARDAR </button> 
                                                                            
                                     <button data-bs-toggle="tab" 
                                             type="submit"
-                                            class="btn btn-guardar fw-bold"
+                                            class="btn btn-guardar-datos fw-bold"
                                             :class="propBtnActualizar == true ? 'visible' : 'invisible'"
                                             @click="preIdStore.updatePreId( infoPreIdPaciente )"> ACTUALIZAR </button>
                         </div>
@@ -577,18 +577,6 @@ export default defineComponent({
   margin-bottom: 10px;
   backdrop-filter: blur(40px) brightness(97%);  
 }
-.margen-input{
-    margin-top: -1px;
-}
-.margen-diez{
-    margin-top: 10px;
-}
-.margen-quince{
-    margin-top: 15px;
-}
-.margen-25{
-    margin-top: 25px;
-}
 .formSombra:focus {
     border-color:#6BD99B;
     outline:0;
@@ -599,7 +587,14 @@ export default defineComponent({
     --bs-border-opacity: 1;
     border-color: #6BD99B !important;
 }
-.btn-guardar{
+.validaCampo {
+    color: red;
+}
+.centrar-li{
+  justify-content: center; 
+}
+/* Botones */
+.btn-guardar-info{
     --bs-btn-bg: none;
     --bs-btn-color: #E88300;    
     --bs-btn-border-color: #E88300;
@@ -612,7 +607,19 @@ export default defineComponent({
     width: 150px; 
     position: absolute;       
 }
-
+.btn-guardar-datos{
+    --bs-btn-bg: none;
+    --bs-btn-color: #E88300;    
+    --bs-btn-border-color: #E88300;
+    --bs-btn-hover-bg: #E88300;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #E88300;          
+    --bs-btn-active-bg: #E88300;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-border-color: #E88300;
+    width: 150px; 
+    position: absolute;       
+}
 .btn-nav-bar{
     --bs-btn-bg: #fff;
     --bs-btn-color: #002D60;    
@@ -626,9 +633,6 @@ export default defineComponent({
     width: 214px;
     height: auto;
 }
-.validaCampo {
-    color: red;
-}
 .btn-radio {
     --bs-btn-color: #000;
     --bs-btn-border-color: #ced4da;
@@ -639,14 +643,7 @@ export default defineComponent({
     --bs-btn-active-border-color: #ced4da;
     --bs-btn-bg: #ffffff;
 }
-h5{
-    color: #002D60;
-    margin-top: 60px;
-    margin-bottom: 0px;
-}
-.centrar-li{
-  justify-content: center; 
-}
+/* Margenes */
 .margenRadio {
     margin-right: 10px;
 }
@@ -654,9 +651,32 @@ h5{
     margin-bottom: 48px;
     margin-left: 5px;
 }
+.margen-btn-info{
+    margin-top: 48px;
+    margin-bottom: 48px;
+    margin-left: 5px;
+}
+.margen-input{
+    margin-top: -1px;
+}
+.margen-diez{
+    margin-top: 10px;
+}
+.margen-quince{
+    margin-top: 15px;
+}
+.margen-25{
+    margin-top: 25px;
+}
+h5{
+    color: #002D60;
+    margin-top: 60px;
+    margin-bottom: 0px;
+}
 hr{
     margin-top: 38px;
 }
+/* Buscador en input tipo select */
 .form-control-select {
     display: block;
     font-size: 1rem;
@@ -697,6 +717,7 @@ hr{
     background: 0 0;
     box-sizing: border-box;
 }
+/* propiedad title */
 [data-title]:hover:after {
     opacity: 1;
     transition: all 0.1s ease 0.5s;
