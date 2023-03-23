@@ -2,6 +2,7 @@ import { //Request,
          Response } from "express";
 import { IdPacientes } from "../models/Paciente";
 
+/* Función para obtener todos los pacientes asociados a un usuario */
 export const getAllPacientes = async (req: any, res: Response) => {
     try {
         const pacientes = await IdPacientes.find({uid: req.uid})
@@ -13,6 +14,19 @@ export const getAllPacientes = async (req: any, res: Response) => {
     }
 };
 
+/* Funcion para la busqueda de un paciente. Debe estar asociado al usuario */
+export const getPaciente = async (req: any, res: Response) => {
+    try {
+        const pacientes = await IdPacientes.find({numExpediente: req.numExpediente})
+        
+        return res.json({pacientes});
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Funcion para registrar la ficha ID de un paciente */
 export const createPaciente = async (req: any, res: Response) => {
     try {
         const { numExpediente, nomPaciente,
@@ -55,6 +69,7 @@ export const createPaciente = async (req: any, res: Response) => {
     }
 };
 
+/* Funcion de actualización de la ficha ID de un paciente */
 export const updatePaciente = async (req: any, res: Response) => {
     try {
         const { id } = req.params;

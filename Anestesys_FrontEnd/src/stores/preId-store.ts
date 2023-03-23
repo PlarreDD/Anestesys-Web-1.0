@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { apiAxios } from '@/boot/axios';
 import { useUserStore } from "./user-store";
 import { ref } from "vue";
-import _ from "lodash";
+import swal from 'sweetalert2';
 
 const userStore = useUserStore();
 
@@ -56,6 +56,7 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {
                 this.pacienteID = res.data.paciente;
+                alert("Paciente registrado correctamente");
             })
             .catch((e: any) => {
                 console.log("error: " + e);
@@ -104,6 +105,7 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {
                 this.pacienteID = res.data.paciente;
+                alert("Datos actualizados correctamente");
             })
             .catch((e: any) => {
                 console.log("error: " + e);

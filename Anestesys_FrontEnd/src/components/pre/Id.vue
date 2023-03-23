@@ -1,6 +1,5 @@
 <template>
-    <div>        
-
+    <div>
         <ul class="nav nav-pills mb-3 text-center centrar-li" id="">        
             <li class="nav-item col-md-3">
                 <button class="btn btn-nav-bar fw-bold active"
