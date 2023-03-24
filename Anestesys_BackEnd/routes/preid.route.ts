@@ -7,10 +7,10 @@ import { getAllPacientes,
 
 const router = Router();
 
-// GET          /preId          all links
-// GET          /preId/:id      1 link
-// POST         /preId          create links
-// PATCH/PUT    /preId/:id      update links
+// GET          /preId          Consultar pacientes
+// GET          /preId/:id      Consultar 1 paciente
+// POST         /preId          Crear paciente
+// PATCH/PUT    /preId/:id      Actualizar paciente
 
 router.get('/', requireToken, getAllPacientes);
 router.get('/:id', requireToken, getPaciente);

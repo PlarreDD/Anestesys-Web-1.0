@@ -1,6 +1,6 @@
-import { //Request,
-         Response } from "express";
+import { Response } from "express";
 import { IdPacientes } from "../models/Paciente";
+import { IdPacientesCx } from "../models/PacienteCirugía";
 
 /* Función para obtener todos los pacientes asociados a un usuario */
 export const getAllPacientes = async (req: any, res: Response) => {
@@ -46,9 +46,13 @@ export const createPaciente = async (req: any, res: Response) => {
                 estResidencia, alcaldia, colonia, codigoPostal } = req.body;
 
         const paciente = new IdPacientes({ numExpediente, nomPaciente, uid: req.uid,
-                                           /* Información adicional  del paciente */
-                                           numEpisodio, fechaNPaciente, edadPaciente,
-                                           habitacionPaciente, generoPaciente,
+                                           fechaNPaciente, edadPaciente, generoPaciente,
+                                           /* Datos Demográficos */
+                                           nacionalidad, CURP, folioID, estNacimiento,
+                                           estResidencia, alcaldia, colonia, codigoPostal });
+
+        const infoCx = new IdPacientesCx({ /* Información adicional  del paciente */
+                                           numEpisodio, pid: paciente._id,  habitacionPaciente,
                                            fechaInPaciente, diagnostico, tipoCx,
                                            /* Datos CIE */
                                            cie10, cie9, 
@@ -56,13 +60,12 @@ export const createPaciente = async (req: any, res: Response) => {
                                            cirugia, fechaCx, hrCx,
                                            /* Informacion Médicos */
                                            cirujano, anestesiologo, anestesiologoVPA,
-                                           residenteAnestesia,
-                                           /* Datos Demográficos */
-                                           nacionalidad, CURP, folioID, estNacimiento,
-                                           estResidencia, alcaldia, colonia, codigoPostal });
-        await paciente.save();
+                                           residenteAnestesia });
 
-        return res.json({ paciente });
+        await paciente.save();
+        await infoCx.save();
+
+        return res.json({ paciente, infoCx });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ Error: 'Error de servidor' });
@@ -75,14 +78,48 @@ export const updatePaciente = async (req: any, res: Response) => {
         const { id } = req.params;
         const updVar = req.body;
 
-        const paciente = await IdPacientes.findByIdAndUpdate(id, updVar);
+        const paciente = await IdPacientes.findByIdAndUpdate( id, { nomPaciente: updVar.nomPaciente,
+                                                                    fechaNPaciente: updVar.fechaNac,
+                                                                    edadPaciente: updVar.edadPaciente,
+                                                                    generoPaciente: updVar.genero,
+                                                                    nacionalidad: updVar.nacionalidad,
+                                                                    CURP: updVar.CURP,
+                                                                    folioID: updVar.folioID,
+                                                                    estNacimiento: updVar.estNacimiento,
+                                                                    estResidencia: updVar.estResidencia,
+                                                                    alcaldia: updVar.alcaldia,
+                                                                    colonia: updVar.colonia,
+                                                                    codigoPostal: updVar.codigoPostal} );
 
-        if (!paciente) 
+        const infoCx = await IdPacientesCx.findOne({ numEpisodio: updVar.numEpisodio });
+
+        if (!paciente)
             return res.status(404).json({ Error: "No existe el paciente." });
-
-        if(!paciente.uid.equals(req.uid))
-            return res.status(401).json({ Error: "Este paciente no corresponde a este usuario." });
         
+        if (!infoCx?.pid.equals(String(paciente._id.toString())))
+            return res.status(401).json({ Error: "Esta información no corresponde a este paciente." });
+        else{
+            IdPacientesCx.updateMany({ numEpisodio: updVar.numEpisodio,
+                                       habitacionPaciente: updVar.habitacionPaciente,
+                                       fechaInPaciente: updVar.fechaIn,
+                                       /* Datos de cirugía */
+                                       diagnostico: updVar.diagnostico,
+                                       tipoCx: updVar.tipoCx,
+                                       /* Datos CIE */
+                                       cie9: updVar.cie9,
+                                       cie10: updVar.cie10,
+                                       /* Informacion procedimiento */
+                                       cirugia: updVar.cirugia,
+                                       fechaCx: updVar.fechaCx,
+                                       hrCx: updVar.hrCx,
+                                       /* Informacion Médicos */
+                                       cirujano: updVar.cirujano,
+                                       anestesiologo: updVar.anestesiologo,
+                                       anestesiologoVPA: updVar.anestesiologoVPA,
+                                       residenteAnestesia: updVar.residenteAnestesia,
+            });
+        }
+
         return res.json({ paciente });
     } catch (error) {
         console.log(error);

@@ -26,7 +26,7 @@
                     <form @submit.prevent="obtenerDatos" class="row g-3 margen-input">
                         <div class="col-md-4">
                             <label for="" class="form-label fw-bold"> Número de Expediente 
-                                <span class="text-danger">* </span> 
+                                <span class="text-danger">* </span>
                                 <i class="fa-solid fa fa-circle-question" 
                                     data-title="Llene el campo para navegar por la aplicación">
                                 </i>
@@ -123,11 +123,19 @@
                                    for="femenino"> Femenino </label>
                         </div>
 
+                        <hr />
+
                         <div class="col-md-1"></div>                        
                         <div class="row g-3 margen-quince">
                             <div class="col-md-3">
                                 <label for=""
-                                       class="form-label fw-bold"> Núm de episodio </label>
+                                       class="form-label fw-bold"> Núm de episodio
+                                    <span class="text-danger">* </span>
+                                    <i class="fa-solid fa fa-circle-question" 
+                                       data-title="Llene el campo para navegar por la aplicación">
+                                    </i>
+                                </label>
+
                                 <input type="text"
                                        class="form-control"
                                        v-model="infoPreIdPaciente.numEpisodio"
@@ -156,8 +164,6 @@
                                               'form-control border border-success formSombra' : 'form-control'">
                             </div>
                         </div>
-
-                        <hr />
 
                         <div class="col-md-8">
                             <label for="" class="form-label fw-bold"> Diagnóstico </label>
