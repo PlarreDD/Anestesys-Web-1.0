@@ -59,11 +59,11 @@ export const usePreIdStore = defineStore('preid', {
                 
                 swal.fire({
                     title: 'Paciente registrado correctamente',
-                    icon: 'info',
+                    icon: 'success',
                     showConfirmButton: false,
                     toast: true,
-                    position: 'top',
-                    timer: 3000,
+                    position: 'top-end',
+                    timer: 2000,
                     timerProgressBar: true
                 })
             })
@@ -117,11 +117,11 @@ export const usePreIdStore = defineStore('preid', {
                 
                 swal.fire({
                     title: 'Datos actualizados correctamente',
-                    icon: 'info',
+                    icon: 'success',
                     showConfirmButton: false,
                     toast: true,
-                    position: 'top',
-                    timer: 3000,
+                    position: 'top-end',
+                    timer: 2000,
                     timerProgressBar: true
                 })
             })

@@ -16,6 +16,7 @@
             <img src="images/perfil.jpg" class="imgPerfil"/> {{ "Dr. García" }}
           </div>
 
+          <!-- Menú de configuración -->
           <div class="col-md-1 alinearElementoD">
             <button class="btn btn-menu"
                     type="button"
@@ -30,17 +31,11 @@
                tabindex="-1"
                id="barraConfiguracion"
                aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header">
-              
-              <button type="button"
-              class="btn-close" 
-              data-bs-dismiss="offcanvas" 
-              aria-label="Close"><i class="fa-solid fa-xl fa-xmark text-white"></i></button>
-            </div>
+
+            <div class="offcanvas-header"></div>
 
             <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">                
-
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li>
                   <button type="button"
                     class="btn btn-configuracion fw-bold"
@@ -53,7 +48,7 @@
                   <button type="button"
                     class="btn btn-configuracion fw-bold"
                     data-bs-toggle="modal"
-                    data-bs-target="#monitorModal"><i class="fa-solid fa fa-tv"></i> Monitor de signos vitales
+                    data-bs-target="#monitorModal"><i class="fa-solid fa fa-tv"></i> Configuración de monitor
                   </button>
                 </li>
                 
@@ -106,7 +101,7 @@
                                 <button type="button" 
                                         class="btn fw-bold" 
                                         data-bs-dismiss="modal" 
-                                        aria-label="Close"><i class="fa-solid fa-xl fa-xmark text-white"></i></button>
+                                        aria-label="Close"><i class="fa-solid fa-2x fa-xmark text-white"></i></button>
                             </div>
                           </div>
                       </div>
@@ -130,6 +125,7 @@
                                         v-model="codigoMedicamento"                                
                                         placeholder="Código de barras">
                           </div>
+                          <div class="col-md-1"></div>
                           <div class="col-md-1">
                               <button type="button"
                                       class="btn btn-modal-medicamentos fw-bold"> Agregar </button>
@@ -235,8 +231,8 @@ export default defineComponent({
     right: 0;
     width: 300px;
     background-color: #002D60;
-    border-left: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
-    transform: translateX(100%);    
+    border-bottom-left-radius: 50px!important;
+    transform: translateX(100%);
 }
 .nav-link {
     display: block;
@@ -272,6 +268,10 @@ export default defineComponent({
 .alinearElementoI{
     align-self: center;
     text-align: left;
+}
+.alinearElementoD{
+    align-self: center;
+    text-align: right;
 }
 /* Botones */
 .btn-menu {    

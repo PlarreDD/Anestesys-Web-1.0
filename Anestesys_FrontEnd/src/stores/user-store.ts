@@ -104,7 +104,7 @@ export const useUserStore = defineStore('user', {
                             icon: 'success',
                             showConfirmButton: false,
                             showCloseButton: false,
-                            timer: 3000,
+                            timer: 1500,
                             timerProgressBar: true,
                             // toast: true,
                             didOpen: () => {
