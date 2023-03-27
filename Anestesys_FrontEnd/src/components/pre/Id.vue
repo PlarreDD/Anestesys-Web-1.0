@@ -130,23 +130,11 @@
                             <div class="col-md-3">
                                 <label for=""
                                        class="form-label fw-bold"> Núm de episodio
-                                    <span class="text-danger">* </span>
-                                    <i class="fa-solid fa fa-circle-question" 
-                                       data-title="Llene el campo para navegar por la aplicación">
-                                    </i>
                                 </label>
 
                                 <input type="text"
                                        class="form-control"
-                                       v-model="infoPreIdPaciente.numEpisodio"
-                                       @keyup.capture="enviarDatos"
-                                       placeholder="Escriba el número de episodio"
-                                       :class="{ 'form-control border border-danger': propRojoNumEp,
-                                             'form-control border border-success formSombra': propVerdeNumEp }">
-
-                                <div :class="propNumEp == true ? 'visible validaCampo' : 'invisible'"
-                                     id="validaNumExp"> Escriba el número de episodio </div>
-
+                                       v-model="infoPreIdPaciente.numEpisodio">
                             </div>
 
                             <div class="col-md-1"></div>
@@ -442,9 +430,6 @@ export default defineComponent({
         propNomPac:{
             type: Boolean
         },
-        propNumEp: {
-            type: Boolean
-        },
         propRojoNum:{
             type: Boolean
         },
@@ -461,12 +446,6 @@ export default defineComponent({
             type: Boolean
         },
         propBtnActualizar:{
-            type: Boolean
-        },
-        propRojoNumEp:{
-            type: Boolean
-        },
-        propVerdeNumEp:{
             type: Boolean
         },
     },
@@ -580,11 +559,15 @@ export default defineComponent({
 
     methods: {
         obtenerDatos() {
-            this.$emit("validar", this.infoPreIdPaciente.numExped, this.infoPreIdPaciente.nomPaciente, this.infoPreIdPaciente.numEpisodio);
+            this.$emit("validar", this.infoPreIdPaciente.numExped,
+                                  this.infoPreIdPaciente.nomPaciente);
         },
 
         enviarDatos() {
-            this.$emit('recibe-datos', this.infoPreIdPaciente.numExped, this.infoPreIdPaciente.nomPaciente, this.infoPreIdPaciente.cirujano, this.infoPreIdPaciente.cirugia, this.infoPreIdPaciente.numEpisodio);
+            this.$emit('recibe-datos', this.infoPreIdPaciente.numExped,
+                                       this.infoPreIdPaciente.nomPaciente,
+                                       this.infoPreIdPaciente.cirujano,
+                                       this.infoPreIdPaciente.cirugia);
         },
     }
 })

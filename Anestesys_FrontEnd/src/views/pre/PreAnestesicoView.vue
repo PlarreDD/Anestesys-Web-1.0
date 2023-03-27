@@ -59,7 +59,7 @@
                     data-bs-toggle="tab"
                     aria-selected="false"
                     @click="validaSeleccionValoracion()"
-                    :disabled="numExpediente != '' && nomPaciente != '' && numEpisodio != '' 
+                    :disabled="numExpediente != '' && nomPaciente != '' 
                     ? false : true"> VALORACIÓN </button>
           </li>
 
@@ -70,7 +70,7 @@
                     data-bs-toggle="tab"
                     aria-selected="false"
                     @click="validaSeleccionPlan()"
-                    :disabled="numExpediente != '' && nomPaciente != '' && numEpisodio != ''
+                    :disabled="numExpediente != '' && nomPaciente != ''
                     ? false : true"> PLAN </button>
           </li>
 
@@ -81,7 +81,7 @@
                     data-bs-toggle="tab"
                     aria-selected="false"
                     @click="validaSeleccionNota()"
-                    :disabled="numExpediente != '' && nomPaciente != '' && numEpisodio != '' 
+                    :disabled="numExpediente != '' && nomPaciente != ''
                     ? false : true"> NOTA </button>
           </li>
         </ul>
@@ -96,13 +96,10 @@
               @validar="validaExpediente" 
               :propNumExp="numExpB"
               :propNomPac="nomPacB"
-              :propNumEp="numEpB"
               :propRojoNum="bordeRojoNum"
               :propVerdeNum="bordeVerdeNum"
               :propRojoNom="bordeRojoNom"
               :propVerdeNom="bordeVerdeNom"
-              :propRojoNumEp="bordeRojoNumEp"
-              :propVerdeNumEp="bordeVerdeNumEp"
               :propBtnGuardar="btnGuardar"
               :propBtnActualizar="btnActualizar"/>
         </div>
@@ -126,18 +123,18 @@
           <img src="images/pre.svg" class="img-menu-lateral"/>
         </div>
         
-        <div :class="numExpediente != '' && nomPaciente != '' && numEpisodio != '' ?
+        <div :class="numExpediente != '' && nomPaciente != '' ?
                     'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
           <RouterLink to="trans"
-                      :class="numExpediente != '' && nomPaciente != '' && numEpisodio != '' ? 'visible' : 'invisible'">
+                      :class="numExpediente != '' && nomPaciente != '' ? 'visible' : 'invisible'">
             <img src="images/trans.svg" class="img-menu-lateral"/>
           </RouterLink>
         </div>
         
-        <div :class="numExpediente != '' && nomPaciente != '' && numEpisodio != '' ?
+        <div :class="numExpediente != '' && nomPaciente != '' ?
                     'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
           <RouterLink to="post"
-                      :class="numExpediente != '' && nomPaciente != '' && numEpisodio != '' ? 'visible' : 'invisible'">
+                      :class="numExpediente != '' && nomPaciente != '' ? 'visible' : 'invisible'">
             <img src="images/post.svg" class="img-menu-lateral"/>
           </RouterLink>
         </div>
@@ -200,23 +197,23 @@ export default defineComponent({
 
       numExpediente:'',
       nomPaciente:'',
-      numEpisodio:'',
       nomCirujano:'',
       nomCirugia:'',
       
       numExpB:false,
       nomPacB:false,
-      numEpB: false,
+
       bordeRojoNum:false,
       bordeVerdeNum:false,
+      
       bordeRojoNom:false,
       bordeVerdeNom:false,
-      bordeRojoNumEp:false,
-      bordeVerdeNumEp:false,
+      
       esPaciente: false,
       esValoracion: false,
       esPlan: false,
       esNota: false,
+      
       btnGuardar: true,
       btnActualizar: false      
     }
@@ -245,10 +242,9 @@ export default defineComponent({
   },
   
   methods: {
-    async validaExpediente(numExpediente, nombrePaciente, numEpisodio) {
+    async validaExpediente(numExpediente, nombrePaciente) {
       if(numExpediente === undefined || nombrePaciente === undefined ||
-         numExpediente === '' || nombrePaciente === '' || numEpisodio === '' ||
-         numEpisodio === undefined) {
+         numExpediente === '' || nombrePaciente === '') {
         if(numExpediente === undefined || numExpediente === ''){
           this.numExpB=true
           this.bordeRojoNum=true
@@ -271,17 +267,6 @@ export default defineComponent({
           this.bordeRojoNom=false
         }
 
-        if(numEpisodio === undefined || numEpisodio === ''){
-          this.numEpB=true
-          this.bordeRojoNumEp=true
-          this.bordeVerdeNumEp=false
-        }
-        else{
-          this.numEpB=false
-          this.bordeVerdeNumEp=true
-          this.bordeRojoNumEp=false
-        }
-
         swal.fire({
           title: 'Escribir el número de expediente, nombre del paciente y número de episodio',
           icon: 'error',
@@ -296,15 +281,14 @@ export default defineComponent({
       }
       else{
         this.numExpB=false
-        this.nomPacB=false  
-        this.numEpB=false
+        this.nomPacB=false
+        
         this.bordeRojoNum=false
         this.bordeVerdeNum=true
+        
         this.bordeRojoNom=false
         this.bordeVerdeNom=true
-        this.bordeRojoNumEp=false
-        this.bordeVerdeNumEp=true
-
+        
         this.btnGuardar=false
         this.btnActualizar=true
     
@@ -360,10 +344,8 @@ export default defineComponent({
       this.nomPaciente = nombrePaciente,
       this.nomCirujano = nombreCirujano,
       this.nomCirugia = cirugia,
-      this.numEpisodio = numEpisodio
 
-      this.$emit('recibe-datos', this.nomPaciente, this.nomCirujano, this.nomCirugia, this.numEpisodio);
-      console.log("NumEpisodio " + numEpisodio + ", NumExpediente: " + numeroExpediente + ", NomPaciente: " + nombrePaciente);      
+      this.$emit('recibe-datos', this.nomPaciente, this.nomCirujano, this.nomCirugia);
     },
       
     async scrollFunction() {

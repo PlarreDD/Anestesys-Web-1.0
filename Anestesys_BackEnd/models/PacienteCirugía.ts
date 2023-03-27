@@ -14,7 +14,6 @@ const IdPacienteCxSchema = new Schema({
     /* Información de la cirugía del paciente */
     numEpisodio: {
         type: String,
-        required: true,
     },    
 
     habitacionPaciente: {
