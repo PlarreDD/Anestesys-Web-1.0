@@ -336,7 +336,7 @@ export default defineComponent({
     },
 
     async actualizaDatos(numeroExpediente, nombrePaciente, nombreCirujano, cirugia) {
-      this.numExpediente=numeroExpediente,
+      this.numExpediente = numeroExpediente,
       this.nomPaciente = nombrePaciente,
       this.nomCirujano = nombreCirujano,
       this.nomCirugia = cirugia

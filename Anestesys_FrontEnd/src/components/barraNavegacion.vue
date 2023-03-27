@@ -1,165 +1,165 @@
 <template>
   <div class="mt" id="headerP">
-      <nav class="navbar navbar-color fw-bold">
-        <div class="input-group">
-          <div class="col-md-1"></div>
+    <nav class="navbar navbar-color fw-bold">
+      <div class="input-group">
+        <div class="col-md-1"></div>
 
-          <div class="col-md-2 alinearElementoI">
-            <RouterLink class="" to="pre">
-              <img src="images/logoA.png" class="imgLogoBarra"/>
-            </RouterLink>
+        <div class="col-md-2 alinearElementoI">
+          <RouterLink class="" to="pre">
+            <img src="images/logoA.png" class="imgLogoBarra"/>
+          </RouterLink>
+        </div>
+
+        <div class="col-md-5"></div>
+        
+        <div class="col-md-2 text-white alinearElementoD">
+          <img src="images/perfil.jpg" class="imgPerfil"/> {{ "Dr. García" }}
+        </div>
+
+        <!-- Menú de configuración -->
+        <div class="col-md-1 alinearElementoD">
+          <button class="btn btn-menu"
+                  type="button"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#barraConfiguracion"
+                  aria-controls="offcanvasNavbar">
+            <i class="fa-solid fa-2x fa-ellipsis"></i>
+          </button>
+        </div>
+
+        <div class="offcanvas nav-config"
+              tabindex="-1"
+              id="barraConfiguracion"
+              aria-labelledby="offcanvasNavbarLabel">
+
+          <div class="offcanvas-header"></div>
+
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li>
+                <button type="button"
+                        class="btn btn-configuracion fw-bold"
+                        data-bs-toggle="modal"
+                        data-bs-target="#medicamentosModal" >
+                  <i class="fa-solid fa fa-pills"></i> Medicamentos
+                </button>
+              </li>
+              
+              <li>
+                <button type="button"
+                        class="btn btn-configuracion fw-bold"
+                        data-bs-toggle="modal"
+                        data-bs-target="#monitorModal">
+                  <i class="fa-solid fa fa-tv"></i> Configuración de monitor
+                </button>
+              </li>
+              
+              <li>
+                <button type="button"
+                        class="btn btn-configuracion fw-bold"
+                        data-bs-toggle="modal"
+                        data-bs-target="#tendenciasModal">
+                  <i class="fa-solid fa fa-file-waveform"></i> Tendencias
+                </button>
+              </li>
+
+              <li>
+                <button type="button"
+                        class="btn btn-configuracion fw-bold"
+                        data-bs-toggle="modal"
+                        data-bs-target="#tecladoModal">
+                  <i class="fa-solid fa fa-keyboard"></i> Teclado virtual
+                </button>
+              </li>
+
+              <li class="nav-item">
+                <button class="btn btn-configuracion fw-bold"
+                        @click="userStore.logout()">
+                  <i class="fa-solid fa-right-from-bracket fa-rotate-180"></i> Salir 
+                </button>
+              </li>
+            </ul>
           </div>
+        </div>
+      </div>
+    </nav>
 
-          <div class="col-md-5"></div>
-         
-          <div class="col-md-2 text-white alinearElementoD">
-            <img src="images/perfil.jpg" class="imgPerfil"/> {{ "Dr. García" }}
-          </div>
+    <!-- Modal medicamentos -->
+    <div class="modal"
+          id="medicamentosModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
 
-          <!-- Menú de configuración -->
-          <div class="col-md-1 alinearElementoD">
-            <button class="btn btn-menu"
-                    type="button"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#barraConfiguracion"
-                    aria-controls="offcanvasNavbar">
-              <i class="fa-solid fa-2x fa-ellipsis"></i>
-            </button>
-          </div>
-
-          <div class="offcanvas nav-config"
-               tabindex="-1"
-               id="barraConfiguracion"
-               aria-labelledby="offcanvasNavbarLabel">
-
-            <div class="offcanvas-header"></div>
-
-            <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li>
-                  <button type="button"
-                    class="btn btn-configuracion fw-bold"
-                    data-bs-toggle="modal"
-                    data-bs-target="#medicamentosModal" ><i class="fa-solid fa fa-pills"></i> Medicamentos
-                  </button>
-                </li>
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content colorModalMedicamentos">
+          <div class="modal-header">
+            <div class="col-12">
+              <div class="row g-3">
+                <div class="col-md-11">
+                    <h5 class="text-white fw-bold">MEDICAMENTOS</h5>
+                    <h6 class="text-white fw-bold">Gestión de medicamentos</h6>
+                </div>
                 
-                <li>
-                  <button type="button"
-                    class="btn btn-configuracion fw-bold"
-                    data-bs-toggle="modal"
-                    data-bs-target="#monitorModal"><i class="fa-solid fa fa-tv"></i> Configuración de monitor
-                  </button>
-                </li>
-                
-                <li>
-                  <button type="button"
-                    class="btn btn-configuracion fw-bold"
-                    data-bs-toggle="modal"
-                    data-bs-target="#tendenciasModal"><i class="fa-solid fa fa-file-waveform"></i> Tendencias
-                  </button>
-                </li>
+                <div class="col-md-1 div-img">
+                    <button type="button" 
+                            class="btn fw-bold" 
+                            data-bs-dismiss="modal" 
+                            aria-label="Close">
+                      <i class="fa-solid fa-2x fa-xmark text-white"></i>
+                    </button>
+                </div>
+              </div>
+            </div>
+          </div>
 
-                <li>
-                  <button type="button"
-                    class="btn btn-configuracion fw-bold"
-                    data-bs-toggle="modal"
-                    data-bs-target="#tecladoModal"><i class="fa-solid fa fa-keyboard"></i> Teclado virtual
-                  </button>
-                </li>
+          <div class="input-group mb-3">
+            <div class="modal-body">
+              <div class="col-md-12">
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <input type="text"
+                           class="form-control"
+                           v-model="nombreMedicamento"                                  
+                           placeholder="Nombre del medicamento">
+                  </div>
+                  <div class="col-md-8"></div>
 
-                <li class="nav-item">
-                    <button class="btn btn-configuracion fw-bold"
-                    @click="userStore.logout()"
-                            ><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i> Salir </button>
-                </li>
-              </ul>
+                  <div class="col-md-4">
+                    <input type="text"
+                           class="form-control"
+                           v-model="codigoMedicamento"                                
+                           placeholder="Código de barras">
+                  </div>
+
+                  <div class="col-md-1"></div>
+                  <div class="col-md-1">
+                    <button type="button"
+                            class="btn btn-modal-medicamentos fw-bold"> Agregar </button>
+                  </div>
+
+                  <div class="col-md-12"> 
+                    <div class="table-responsive deslizar">
+                      <table class="table table-hover">
+                        <tbody>
+                          <tr v-for="medicamento in medStore.medicamentos">
+                            <!-- <td class="text-white">{{ medicamento._id }}</td> -->
+                            <td class="text-white">{{ medicamento.codigoMedicamento }}</td>
+                            <td class="text-white">{{ medicamento.nombreMedicamento }}</td>
+                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
+                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </nav>
-
-      <!-- Modal medicamentos -->
-      <div class="modal"
-           id="medicamentosModal"
-           tabindex="-1"
-           aria-labelledby="exampleModalLabel"
-           aria-hidden="true">
-
-          <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-              <div class="modal-content colorModalMedicamentos">
-                  
-                <div class="modal-header">
-                      <div class="col-12">
-                          <div class="row g-3">
-                            <div class="col-md-11">
-                                <h5 class="text-white fw-bold">MEDICAMENTOS</h5>
-                                <h6 class="text-white fw-bold">Gestión de medicamentos</h6>
-                            </div>
-                            
-                            <div class="col-md-1 div-img">
-                                <button type="button" 
-                                        class="btn fw-bold" 
-                                        data-bs-dismiss="modal" 
-                                        aria-label="Close"><i class="fa-solid fa-2x fa-xmark text-white"></i></button>
-                            </div>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="input-group mb-3">
-                    <div class="modal-body">
-                      <div class="col-md-12">
-                        <div class="row g-3">
-                          <div class="col-md-4">
-                                  <input type="text"
-                                        class="form-control"
-                                        v-model="nombreMedicamento"                                  
-                                        placeholder="Nombre del medicamento">
-                          </div>
-                          <div class="col-md-8"></div>
-
-                          <div class="col-md-4">
-                                  <input type="text"
-                                        class="form-control"
-                                        v-model="codigoMedicamento"                                
-                                        placeholder="Código de barras">
-                          </div>
-                          <div class="col-md-1"></div>
-                          <div class="col-md-1">
-                              <button type="button"
-                                      class="btn btn-modal-medicamentos fw-bold"> Agregar </button>
-                          </div> 
-                          <div class="col-md-6">
-                              <button type="button"
-                                      class="btn btn-modal-medicamentos fw-bold" @click="medStore.getMedicamentosList()"> Carga </button>
-                          </div>
-
-                          <div class="col-md-12"> 
-                            <div class="table-responsive deslizar">
-                                <table class="table table-hover">
-                                    
-                                    <tbody>
-                                        <tr>                                          
-                                            <td class="text-white">{{medStore.med}}</td>
-                                            <td class="text-white">Paracetamol</td>
-                                            <td class="text-white">7875468798</td>
-                                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
-                                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
-                                        </tr>                                        
-                                    </tbody>
-                                </table>        
-                            </div>
-                          </div>
-
-                        </div>
-                      </div>   
-                    </div>
-                  </div>                  
-
-              </div>
-          </div>
       </div>
+    </div>
   </div>
 </template>
 
@@ -182,6 +182,11 @@ export default defineComponent({
         codigoMedicamento:''
     };
   },
+
+  mounted() {
+    medStore.getMedicamentosList();
+  },
+
   methods: {
     async mostrarMensaje(){
       swal.fire({

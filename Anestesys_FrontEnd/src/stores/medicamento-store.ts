@@ -8,7 +8,7 @@ const userStore = useUserStore();
 
 export const useMedicamentoStore = defineStore('medicamento', {
     state: () => ({
-        med: ref(null),
+        medicamentos: ref(null),
     }),
 
     actions:{
@@ -21,8 +21,7 @@ export const useMedicamentoStore = defineStore('medicamento', {
                 }
             })
             .then((res: any) => {
-                this.med = res.data;
-                console.log(JSON.stringify  (this.med));
+                this.medicamentos = res.data.medicamentos;
             });
 
         }
