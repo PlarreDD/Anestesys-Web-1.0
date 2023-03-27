@@ -130,54 +130,23 @@
                               <button type="button"
                                       class="btn btn-modal-medicamentos fw-bold"> Agregar </button>
                           </div> 
+                          <div class="col-md-6">
+                              <button type="button"
+                                      class="btn btn-modal-medicamentos fw-bold" @click="medStore.getMedicamentosList()"> Carga </button>
+                          </div>
 
                           <div class="col-md-12"> 
                             <div class="table-responsive deslizar">
                                 <table class="table table-hover">
                                     
                                     <tbody>
-                                        <tr>
-                                            <td class="text-white">1</td>
+                                        <tr>                                          
+                                            <td class="text-white">{{medStore.med}}</td>
                                             <td class="text-white">Paracetamol</td>
                                             <td class="text-white">7875468798</td>
                                             <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
                                             <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-white">2</td>
-                                            <td class="text-white">Paracetamol</td>
-                                            <td class="text-white">7875468798</td>
-                                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
-                                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-white">3</td>
-                                            <td class="text-white">Paracetamol</td>
-                                            <td class="text-white">7875468798</td>
-                                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
-                                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-white">4</td>
-                                            <td class="text-white">Paracetamol</td>
-                                            <td class="text-white">7875468798</td>
-                                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
-                                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-white">5</td>
-                                            <td class="text-white">Paracetamol</td>
-                                            <td class="text-white">7875468798</td>
-                                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
-                                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-white">6</td>
-                                            <td class="text-white">Paracetamol</td>
-                                            <td class="text-white">7875468798</td>
-                                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
-                                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
-                                        </tr>
+                                        </tr>                                        
                                     </tbody>
                                 </table>        
                             </div>
@@ -198,13 +167,17 @@
 import { useUserStore } from "@/stores/user-store";
 import { defineComponent } from "vue";
 import swal from 'sweetalert2';
+import { useMedicamentoStore } from '../stores/medicamento-store';
+import { Medicamento } from '../../../Anestesys_BackEnd/models/Medicamento';
 
 const userStore = useUserStore();
+const medStore= useMedicamentoStore();
 
 export default defineComponent({
   data() {
     return{
         userStore,
+        medStore,
         nombreMedicamento:'',
         codigoMedicamento:''
     };
