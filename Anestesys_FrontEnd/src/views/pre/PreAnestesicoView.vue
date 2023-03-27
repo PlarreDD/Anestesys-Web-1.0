@@ -59,7 +59,8 @@
                     data-bs-toggle="tab"
                     aria-selected="false"
                     @click="validaSeleccionValoracion()"
-                    :disabled="numExpediente != '' && nomPaciente != '' ? false : true"> VALORACIÓN </button>
+                    :disabled="numExpediente != '' && nomPaciente != '' && numEpisodio != '' 
+                    ? false : true"> VALORACIÓN </button>
           </li>
 
           <li class="nav-item col-md-3">
@@ -69,7 +70,8 @@
                     data-bs-toggle="tab"
                     aria-selected="false"
                     @click="validaSeleccionPlan()"
-                    :disabled="numExpediente != '' && nomPaciente != '' ? false : true"> PLAN </button>
+                    :disabled="numExpediente != '' && nomPaciente != '' && numEpisodio != ''
+                    ? false : true"> PLAN </button>
           </li>
 
           <li class="nav-item col-md-3" >
@@ -79,7 +81,8 @@
                     data-bs-toggle="tab"
                     aria-selected="false"
                     @click="validaSeleccionNota()"
-                    :disabled="numExpediente != '' && nomPaciente != '' ? false : true"> NOTA </button>
+                    :disabled="numExpediente != '' && nomPaciente != '' && numEpisodio != '' 
+                    ? false : true"> NOTA </button>
           </li>
         </ul>
       </div>
@@ -93,10 +96,13 @@
               @validar="validaExpediente" 
               :propNumExp="numExpB"
               :propNomPac="nomPacB"
+              :propNumEp="numEpB"
               :propRojoNum="bordeRojoNum"
               :propVerdeNum="bordeVerdeNum"
               :propRojoNom="bordeRojoNom"
               :propVerdeNom="bordeVerdeNom"
+              :propRojoNumEp="bordeRojoNumEp"
+              :propVerdeNumEp="bordeVerdeNumEp"
               :propBtnGuardar="btnGuardar"
               :propBtnActualizar="btnActualizar"/>
         </div>
@@ -120,18 +126,18 @@
           <img src="images/pre.svg" class="img-menu-lateral"/>
         </div>
         
-        <div :class="numExpediente != '' && nomPaciente != '' ?
+        <div :class="numExpediente != '' && nomPaciente != '' && numEpisodio != '' ?
                     'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
           <RouterLink to="trans"
-                      :class="numExpediente != '' && nomPaciente != '' ? 'visible' : 'invisible'">
+                      :class="numExpediente != '' && nomPaciente != '' && numEpisodio != '' ? 'visible' : 'invisible'">
             <img src="images/trans.svg" class="img-menu-lateral"/>
           </RouterLink>
         </div>
         
-        <div :class="numExpediente != '' && nomPaciente != '' ?
+        <div :class="numExpediente != '' && nomPaciente != '' && numEpisodio != '' ?
                     'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
           <RouterLink to="post"
-                      :class="numExpediente != '' && nomPaciente != '' ? 'visible' : 'invisible'">
+                      :class="numExpediente != '' && nomPaciente != '' && numEpisodio != '' ? 'visible' : 'invisible'">
             <img src="images/post.svg" class="img-menu-lateral"/>
           </RouterLink>
         </div>
@@ -194,23 +200,25 @@ export default defineComponent({
 
       numExpediente:'',
       nomPaciente:'',
+      numEpisodio:'',
       nomCirujano:'',
       nomCirugia:'',
       
       numExpB:false,
       nomPacB:false,
+      numEpB: false,
       bordeRojoNum:false,
       bordeVerdeNum:false,
       bordeRojoNom:false,
       bordeVerdeNom:false,
+      bordeRojoNumEp:false,
+      bordeVerdeNumEp:false,
       esPaciente: false,
       esValoracion: false,
       esPlan: false,
       esNota: false,
-      // btnGuardar:idStore.pacienteID,
       btnGuardar: true,
-      btnActualizar: false
-      // btnActualizar:!(idStore.pacienteID)
+      btnActualizar: false      
     }
   },
 
@@ -237,9 +245,10 @@ export default defineComponent({
   },
   
   methods: {
-    async validaExpediente(numExpediente, nombrePaciente,) {
+    async validaExpediente(numExpediente, nombrePaciente, numEpisodio) {
       if(numExpediente === undefined || nombrePaciente === undefined ||
-         numExpediente === '' || nombrePaciente === '') {
+         numExpediente === '' || nombrePaciente === '' || numEpisodio === '' ||
+         numEpisodio === undefined) {
         if(numExpediente === undefined || numExpediente === ''){
           this.numExpB=true
           this.bordeRojoNum=true
@@ -262,8 +271,19 @@ export default defineComponent({
           this.bordeRojoNom=false
         }
 
+        if(numEpisodio === undefined || numEpisodio === ''){
+          this.numEpB=true
+          this.bordeRojoNumEp=true
+          this.bordeVerdeNumEp=false
+        }
+        else{
+          this.numEpB=false
+          this.bordeVerdeNumEp=true
+          this.bordeRojoNumEp=false
+        }
+
         swal.fire({
-          title: 'Escribir el número de expediente o nombre del paciente',
+          title: 'Escribir el número de expediente, nombre del paciente y número de episodio',
           icon: 'error',
           showConfirmButton: false,
           toast: true,
@@ -277,17 +297,17 @@ export default defineComponent({
       else{
         this.numExpB=false
         this.nomPacB=false  
+        this.numEpB=false
         this.bordeRojoNum=false
         this.bordeVerdeNum=true
         this.bordeRojoNom=false
         this.bordeVerdeNom=true
+        this.bordeRojoNumEp=false
+        this.bordeVerdeNumEp=true
 
         this.btnGuardar=false
         this.btnActualizar=true
-
-        // this.btnGuardar= !(idStore.pacienteID)
-        // this.btnActualizar= idStore.pacienteID     
-        
+    
       }
     },
 
@@ -335,20 +355,15 @@ export default defineComponent({
         this.esNota=true;
     },
 
-    async actualizaDatos(numeroExpediente, nombrePaciente, nombreCirujano, cirugia) {
-      this.numExpediente=numeroExpediente,
+    async actualizaDatos(numeroExpediente, nombrePaciente, nombreCirujano, cirugia, numEpisodio) {
+      this.numExpediente = numeroExpediente,
       this.nomPaciente = nombrePaciente,
       this.nomCirujano = nombreCirujano,
-      this.nomCirugia = cirugia
+      this.nomCirugia = cirugia,
+      this.numEpisodio = numEpisodio
 
-      this.$emit('recibe-datos', this.nomPaciente, this.nomCirujano, this.nomCirugia);
-    },
-
-    async validarCambio() {
-      if (this.numExpediente.trim() != '' && this.nomPaciente.trim() != '') {
-        alert('Entro, no debe cambiar')
-      }
-      alert('Error!')
+      this.$emit('recibe-datos', this.nomPaciente, this.nomCirujano, this.nomCirugia, this.numEpisodio);
+      console.log("NumEpisodio " + numEpisodio + ", NumExpediente: " + numeroExpediente + ", NomPaciente: " + nombrePaciente);      
     },
       
     async scrollFunction() {

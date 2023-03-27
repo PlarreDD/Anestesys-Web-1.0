@@ -40,7 +40,7 @@
                                              'form-control border border-success formSombra': propVerdeNum }"
                                    placeholder="Campo obligatorio">
                             <div :class="propNumExp == true ? 'visible validaCampo' : 'invisible'"
-                                 id="validaNumExp"> Escriba el número de expediente </div>                
+                                 id="validaNumExp"> Escriba el número de expediente </div>
                         </div>
 
                         <div class="col-md-6">
@@ -139,8 +139,14 @@
                                 <input type="text"
                                        class="form-control"
                                        v-model="infoPreIdPaciente.numEpisodio"
-                                       :class="infoPreIdPaciente.numEpisodio != undefined ?
-                                              'form-control border border-success formSombra' : 'form-control'">
+                                       @keyup.capture="enviarDatos"
+                                       placeholder="Escriba el número de episodio"
+                                       :class="{ 'form-control border border-danger': propRojoNumEp,
+                                             'form-control border border-success formSombra': propVerdeNumEp }">
+
+                                <div :class="propNumEp == true ? 'visible validaCampo' : 'invisible'"
+                                     id="validaNumExp"> Escriba el número de episodio </div>
+
                             </div>
 
                             <div class="col-md-1"></div>
@@ -436,6 +442,9 @@ export default defineComponent({
         propNomPac:{
             type: Boolean
         },
+        propNumEp: {
+            type: Boolean
+        },
         propRojoNum:{
             type: Boolean
         },
@@ -453,7 +462,13 @@ export default defineComponent({
         },
         propBtnActualizar:{
             type: Boolean
-        }
+        },
+        propRojoNumEp:{
+            type: Boolean
+        },
+        propVerdeNumEp:{
+            type: Boolean
+        },
     },
 
     data () {
@@ -565,11 +580,11 @@ export default defineComponent({
 
     methods: {
         obtenerDatos() {
-            this.$emit("validar", this.infoPreIdPaciente.numExped, this.infoPreIdPaciente.nomPaciente);
+            this.$emit("validar", this.infoPreIdPaciente.numExped, this.infoPreIdPaciente.nomPaciente, this.infoPreIdPaciente.numEpisodio);
         },
 
         enviarDatos() {
-            this.$emit('recibe-datos', this.infoPreIdPaciente.numExped, this.infoPreIdPaciente.nomPaciente, this.infoPreIdPaciente.cirujano, this.infoPreIdPaciente.cirugia);
+            this.$emit('recibe-datos', this.infoPreIdPaciente.numExped, this.infoPreIdPaciente.nomPaciente, this.infoPreIdPaciente.cirujano, this.infoPreIdPaciente.cirugia, this.infoPreIdPaciente.numEpisodio);
         },
     }
 })

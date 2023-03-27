@@ -90,37 +90,32 @@ export const updatePaciente = async (req: any, res: Response) => {
                                                                     alcaldia: updVar.alcaldia,
                                                                     colonia: updVar.colonia,
                                                                     codigoPostal: updVar.codigoPostal} );
-
-        const infoCx = await IdPacientesCx.findOne({ numEpisodio: updVar.numEpisodio });
-
-        if (!paciente)
-            return res.status(404).json({ Error: "No existe el paciente." });
+        console.log(JSON.stringify(paciente));
         
-        if (!infoCx?.pid.equals(String(paciente._id.toString())))
-            return res.status(401).json({ Error: "Esta información no corresponde a este paciente." });
-        else{
-            IdPacientesCx.updateMany({ numEpisodio: updVar.numEpisodio,
-                                       habitacionPaciente: updVar.habitacionPaciente,
-                                       fechaInPaciente: updVar.fechaIn,
-                                       /* Datos de cirugía */
-                                       diagnostico: updVar.diagnostico,
-                                       tipoCx: updVar.tipoCx,
-                                       /* Datos CIE */
-                                       cie9: updVar.cie9,
-                                       cie10: updVar.cie10,
-                                       /* Informacion procedimiento */
-                                       cirugia: updVar.cirugia,
-                                       fechaCx: updVar.fechaCx,
-                                       hrCx: updVar.hrCx,
-                                       /* Informacion Médicos */
-                                       cirujano: updVar.cirujano,
-                                       anestesiologo: updVar.anestesiologo,
-                                       anestesiologoVPA: updVar.anestesiologoVPA,
-                                       residenteAnestesia: updVar.residenteAnestesia,
-            });
-        }
+        console.log("IDPaciente: " + paciente?._id + "\nNúmero de episodio: " + updVar.numEpisodio);
 
-        return res.json({ paciente });
+        const infoCx = await IdPacientesCx.findOneAndUpdate({ pid: paciente?._id }, { numEpisodio: updVar.numEpisodio,
+                                                                                      habitacionPaciente: updVar.habitacionPaciente,
+                                                                                      fechaInPaciente: updVar.fechaIn,
+                                                                                      /* Datos de cirugía */
+                                                                                      diagnostico: updVar.diagnostico,
+                                                                                      tipoCx: updVar.tipoCx,
+                                                                                      /* Datos CIE */
+                                                                                      cie9: updVar.cie9,
+                                                                                      cie10: updVar.cie10,
+                                                                                      /* Informacion procedimiento */
+                                                                                      cirugia: updVar.cirugia,
+                                                                                      fechaCx: updVar.fechaCx,
+                                                                                      hrCx: updVar.hrCx,
+                                                                                      /* Informacion Médicos */
+                                                                                      cirujano: updVar.cirujano,
+                                                                                      anestesiologo: updVar.anestesiologo,
+                                                                                      anestesiologoVPA: updVar.anestesiologoVPA,
+                                                                                      residenteAnestesia: updVar.residenteAnestesia });
+
+        console.log(infoCx);        
+
+        return res.json({ paciente, infoCx });
     } catch (error) {
         console.log(error);
 
