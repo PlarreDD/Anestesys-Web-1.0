@@ -135,9 +135,8 @@
                         </div>
 
                         <hr /> <!-- Separación datos de Cirugía -->
-
-                        <div class="col-md-1"></div>
-                        <div class="row g-3 margen-quince">
+        
+                        <div class="row g-3 margen-cinco">
                             <!-- Número de Episodio -->
                             <div class="col-md-3">
                                 <label for=""
@@ -697,6 +696,9 @@ export default defineComponent({
 }
 .margen-input{
     margin-top: -1px;
+}
+.margen-cinco{
+    margin-top: 5px;
 }
 .margen-diez{
     margin-top: 10px;
