@@ -117,37 +117,48 @@
             <div class="modal-body">
               <div class="col-md-12">
                 <div class="row g-3">
-                  <div class="col-md-4">
-                    <input type="text"
-                           class="form-control"
-                           v-model="nombreMedicamento"                                  
-                           placeholder="Nombre del medicamento">
-                  </div>
-                  <div class="col-md-8"></div>
+                  <form class="row g-3" @submit.prevent="">
+                    <div class="col-md-4">
+                      <input type="text"
+                            class="form-control"                           
+                            v-model="infoMedicamento.nombreMedicamento"                                  
+                            placeholder="Nombre del medicamento">
+                            <!-- :class="medicamentoNuevo == true ? 'border border-danger' : 'border border-success'" -->
+                    </div>
+                    <div class="col-md-8"></div>
 
-                  <div class="col-md-4">
-                    <input type="text"
-                           class="form-control"
-                           v-model="codigoMedicamento"                                
-                           placeholder="Código de barras">
-                  </div>
+                    <div class="col-md-4">
+                      <input type="text"
+                            class="form-control"
+                            v-model="infoMedicamento.codigoMedicamento"                                
+                            placeholder="Código de barras">
+                    </div>
 
-                  <div class="col-md-1"></div>
-                  <div class="col-md-1">
-                    <button type="button"
-                            class="btn btn-modal-medicamentos fw-bold"> Agregar </button>
-                  </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1">
+                      <template v-if="editar === false">
+                        <button  type="button"
+                              class="btn btn-modal-medicamentos fw-bold"
+                              @click="agregaMedicamento()"> Agregar </button>
+                      </template>
+                      <template v-else>
+                        <button type="button"
+                              class="btn btn-modal-medicamentos fw-bold"
+                              @click=""> Actualizar </button>
+                      </template>
+                    </div>
+                  </form>
 
                   <div class="col-md-12"> 
-                    <div class="table-responsive deslizar">
-                      <table class="table table-hover">
+                    <div class="deslizar">
+                      <table class="table table-responsive">
                         <tbody>
                           <tr v-for="medicamento in medStore.medicamentos">
-                            <!-- <td class="text-white">{{ medicamento._id }}</td> -->
-                            <td class="text-white">{{ medicamento.codigoMedicamento }}</td>
+                            <td class="text-white">{{ medicamento._id }}</td>
                             <td class="text-white">{{ medicamento.nombreMedicamento }}</td>
-                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
-                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
+                            <td class="text-white">{{ medicamento.codigoMedicamento }}</td>                            
+                            <td><button class="btn" @click="cambiarBtnActualizar()"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
+                            <td><button class="btn" @click="eliminarMedicamento()"><i class="fa-solid fa-trash text-white"></i></button></td>
                           </tr>
                         </tbody>
                       </table>
@@ -168,7 +179,7 @@ import { useUserStore } from "@/stores/user-store";
 import { defineComponent } from "vue";
 import swal from 'sweetalert2';
 import { useMedicamentoStore } from '../stores/medicamento-store';
-import { Medicamento } from '../../../Anestesys_BackEnd/models/Medicamento';
+import type { regMedicamento } from '@/interfaces/regMedicamento';
 
 const userStore = useUserStore();
 const medStore= useMedicamentoStore();
@@ -178,8 +189,9 @@ export default defineComponent({
     return{
         userStore,
         medStore,
-        nombreMedicamento:'',
-        codigoMedicamento:''
+        infoMedicamento: {} as regMedicamento,
+        medicamentoNuevo: false,
+        editar: false
     };
   },
 
@@ -190,7 +202,7 @@ export default defineComponent({
   methods: {
     async mostrarMensaje(){
       swal.fire({
-        html: 'Usuario registrado correctamente, consulte su correo electrónico',
+        title: 'Usuario registrado correctamente, consulte su correo electrónico',
         icon: 'info',
         showConfirmButton: true,
         showCloseButton: true,
@@ -198,6 +210,33 @@ export default defineComponent({
         position: 'top-start'
       });
     },
+    async agregaMedicamento(){
+      if(this.infoMedicamento.nombreMedicamento == undefined || this.infoMedicamento.nombreMedicamento == ''){
+        
+        this.medicamentoNuevo=true
+
+        swal.fire({
+            title: 'Ingrese el nombre del medicamento',
+            icon: 'warning',
+            showConfirmButton: false,
+            showCloseButton: true,
+            toast: true,
+            timer: 2500,
+            timerProgressBar: true,
+            position: 'top-end'
+        });       
+      }
+      else{
+        this.medicamentoNuevo=false
+        medStore.createMedicamento(this.infoMedicamento)
+      }
+    },
+    async cambiarBtnActualizar(){
+      this.editar=true
+    },
+    async eliminarMedicamento(){   
+      medStore.deleteMedicamento(this.infoMedicamento)   
+    }
   }
 })
 </script>

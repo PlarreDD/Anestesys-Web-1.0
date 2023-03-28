@@ -8,10 +8,7 @@ const MedicamentoSchema = new Schema({
         unique: true,
     },
     codigoMedicamento:{
-        type: String,
-        required: false,
-        trim: true,
-        unique: true,
+        type: String
     }
 })
 

@@ -283,11 +283,7 @@ export default defineComponent({
         this.bordeVerdeNom=true
 
         this.btnGuardar=false
-        this.btnActualizar=true
-
-        // this.btnGuardar= !(idStore.pacienteID)
-        // this.btnActualizar= idStore.pacienteID     
-        
+        this.btnActualizar=true          
       }
     },
 
