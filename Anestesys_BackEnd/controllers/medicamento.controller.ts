@@ -16,7 +16,9 @@ export const getMedicamentos = async (req: any, res: Response) => {
 /* Funcion para la busqueda de un medicamento */
 export const getMedicamento = async (req: any, res: Response) => {
     try {
-        const medicamento = await Medicamento.findOne(req.params)        
+        const {id} = req.params;
+        
+        const medicamento = await Medicamento.findById(id)        
         return res.json({medicamento});
     } catch (error) {
         console.log(error);

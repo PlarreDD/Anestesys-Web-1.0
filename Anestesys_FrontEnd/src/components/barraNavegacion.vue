@@ -13,7 +13,7 @@
         <div class="col-md-5"></div>
         
         <div class="col-md-2 text-white alinearElementoD">
-          <img src="images/perfil.jpg" class="imgPerfil"/> {{ "Dr. García" }}
+          <img src="images/perfil.jpg" class="imgPerfil"/> {{ 'Dr. '+userStore.Nombre+' '+userStore.Apellido }}
         </div>
 
         <!-- Menú de configuración -->
@@ -129,6 +129,7 @@
                             class="form-control"
                             v-model="infoMedicamento.codigoMedicamento"                                
                             placeholder="Código de barras">
+                      <input type="hidden" v-model="infoMedicamento.idMedicamento">
                     </div>
 
                     <div class="col-md-1"></div>
@@ -141,7 +142,7 @@
                       <template v-else>
                         <button type="button"
                               class="btn btn-modal-medicamentos fw-bold"
-                              @click="actualizarMedicamento(medStore.medicamentos._id, medStore.medicamentos)"> Actualizar </button>
+                              @click="actualizarMedicamento(infoMedicamento)"> Actualizar </button>
                       </template>
 
                     </div>
@@ -150,13 +151,22 @@
                   <div class="col-md-12"> 
                     <div class="deslizar">
                       <table class="table table-responsive">
+                        <thead>
+                          <tr>
+                            <th class="text-white">#</th>
+                            <th class="text-white">Nombre</th>
+                            <th class="text-white">Código</th>
+                            <th class="text-white"></th>
+                            <th class="text-white"></th>
+                          </tr>
+                        </thead>
                         <tbody>
-                          <tr v-for="medicamento in medStore.medicamentos">
-                            <td class="text-white">{{ medicamento._id }}</td>
+                          <tr v-for="medicamento, index in medStore.medicamentos">
+                            <td class="text-white">{{ index+1 }}</td>
                             <td class="text-white">{{ medicamento.nombreMedicamento }}</td>
                             <td class="text-white">{{ medicamento.codigoMedicamento }}</td>                            
                             <td><button class="btn" @click="cambiarBtnActualizar(medicamento._id)"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
-                            <td><button class="btn" @click="eliminarMedicamento(medicamento._id)"><i class="fa-solid fa-trash text-white"></i></button></td>
+                            <td><button class="btn" @click="validaEliminarMedicamento(medicamento._id)"><i class="fa-solid fa-trash text-white"></i></button></td>
                           </tr>
                         </tbody>
                       </table>
@@ -188,7 +198,8 @@ export default defineComponent({
         userStore,
         medStore,
         infoMedicamento: {} as regMedicamento,
-        editar: false
+        editar: false,
+
     };
   },
 
@@ -238,13 +249,18 @@ export default defineComponent({
 
     async cambiarBtnActualizar(idMedicamento){
       this.editar=true
-      medStore.getMedicamento(idMedicamento)
+      
+      await medStore.getMedicamento(idMedicamento)      
+      
+      this.infoMedicamento.idMedicamento=medStore.medicamentos._id;
       this.infoMedicamento.nombreMedicamento=medStore.medicamentos.nombreMedicamento;
-      this.infoMedicamento.codigoMedicamento=medStore.medicamentos.codigoMedicamento;      
+      this.infoMedicamento.codigoMedicamento=medStore.medicamentos.codigoMedicamento;       
+
+      await this.listarMedicamentos()
     },
 
-    async actualizarMedicamento(idMedicamento, medicamento){
-
+    async actualizarMedicamento(infoMedicamento){
+      
       if(this.infoMedicamento.nombreMedicamento == ''){
         swal.fire({
             title: 'Ingrese el nombre del medicamento',
@@ -257,17 +273,38 @@ export default defineComponent({
             position: 'top-end'
         }); 
       }else{
-        medStore.updateMedicamento(idMedicamento, medicamento);
+        await medStore.updateMedicamento(infoMedicamento);
         this.editar=false
 
         this.infoMedicamento.nombreMedicamento=""
         this.infoMedicamento.codigoMedicamento=""
-      }
+        this.infoMedicamento.idMedicamento=""        
+
+        await this.listarMedicamentos()
+      }      
     },
 
-    async eliminarMedicamento(idMedicamento){   
-      await medStore.deleteMedicamento(idMedicamento)  
+    async validaEliminarMedicamento(idMedicamento){   
+
+      swal.fire({
+          html: '¿Esta seguro de eliminar el medicamento?',
+          icon: 'warning',
+          showConfirmButton: true,
+          showCancelButton: true,
+          toast: true
+      }).then((result) => {
+          if (result.isConfirmed) {
+            this.eliminarMedicamento(idMedicamento);                                        
+          }
+      })
       
+      //await medStore.deleteMedicamento(idMedicamento)  
+      
+      
+    },
+
+    async eliminarMedicamento(idMedicamento){
+      await medStore.deleteMedicamento(idMedicamento)
       await this.listarMedicamentos()
     }
   }

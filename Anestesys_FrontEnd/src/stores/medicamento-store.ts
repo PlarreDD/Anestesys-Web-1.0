@@ -53,7 +53,7 @@ export const useMedicamentoStore = defineStore('medicamento', {
                 headers: {
                     Authorization: "Bearer " + userStore.token,
                 },
-                data: {                    
+                data: {                                        
                     nombreMedicamento: infoMedicamento.nombreMedicamento,
                     codigoMedicamento: infoMedicamento.codigoMedicamento,                    
                 }
@@ -92,8 +92,9 @@ export const useMedicamentoStore = defineStore('medicamento', {
                 }});
         },
 
-        async updateMedicamento(idMedicamento, infoMedicamento: any){
-            
+        async updateMedicamento(infoMedicamento: any){
+            const {idMedicamento, nombreMedicamento, codigoMedicamento}=infoMedicamento;
+
             await apiAxios({
                 url: `http://localhost:5000/medicamentos/${String(idMedicamento)}`,
                 method: "PUT",
@@ -101,8 +102,8 @@ export const useMedicamentoStore = defineStore('medicamento', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    nombreMedicamento: infoMedicamento.nombreMedicamento,
-                    codigoMedicamento: infoMedicamento.codigoMedicamento,
+                    nombreMedicamento: nombreMedicamento,
+                    codigoMedicamento: codigoMedicamento,
                 }
             })
             .then((res: any) => {
