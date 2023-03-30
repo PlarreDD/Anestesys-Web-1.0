@@ -289,9 +289,8 @@ export default defineComponent({
         this.bordeRojoNom=false
         this.bordeVerdeNom=true
         
-        this.btnGuardar=false
+        this.btnGuardar=false       
         this.btnActualizar=true
-    
       }
     },
 

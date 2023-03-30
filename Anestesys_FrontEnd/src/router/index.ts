@@ -51,6 +51,7 @@ const router = createRouter({
         auth: true
       }
     },
+
   ]
 })
 
