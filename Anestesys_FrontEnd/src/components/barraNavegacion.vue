@@ -34,14 +34,15 @@
 
           <div class="offcanvas-header"></div>
 
-          <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <div class="">
+            <ul class="navbar-nav justify-content-left ">
               <li>
                 <button type="button"
                         class="btn btn-configuracion fw-bold"
                         data-bs-toggle="modal"
                         data-bs-target="#medicamentosModal" >
-                  <i class="fa-solid fa fa-pills"></i> Medicamentos
+                          <img src="images/imgIcon/medicamento.svg"/> 
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Medicamentos
                 </button>
               </li>
               
@@ -50,7 +51,8 @@
                         class="btn btn-configuracion fw-bold"
                         data-bs-toggle="modal"
                         data-bs-target="#monitorModal">
-                  <i class="fa-solid fa fa-tv"></i> Configuración de monitor
+                          <img src="images/imgIcon/monitor.svg"/> 
+                            &nbsp;&nbsp;&nbsp;Configuración de monitor
                 </button>
               </li>
               
@@ -59,7 +61,8 @@
                         class="btn btn-configuracion fw-bold"
                         data-bs-toggle="modal"
                         data-bs-target="#tendenciasModal">
-                  <i class="fa-solid fa fa-file-waveform"></i> Tendencias
+                          <img src="images/imgIcon/tendencia.svg"/> 
+                            &nbsp;&nbsp;&nbsp;Tendencias
                 </button>
               </li>
 
@@ -68,14 +71,16 @@
                         class="btn btn-configuracion fw-bold"
                         data-bs-toggle="modal"
                         data-bs-target="#tecladoModal">
-                  <i class="fa-solid fa fa-keyboard"></i> Teclado virtual
+                          <img src="images/imgIcon/teclado.svg"/> 
+                            &nbsp;&nbsp;&nbsp;Teclado virtual
                 </button>
               </li>
 
               <li class="nav-item">
                 <button class="btn btn-configuracion fw-bold"
                         @click="userStore.logout()">
-                  <i class="fa-solid fa-right-from-bracket fa-rotate-180"></i> Salir 
+                          <img src="images/imgIcon/salir.svg"/> 
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Salir 
                 </button>
               </li>
             </ul>
@@ -92,11 +97,13 @@
           aria-hidden="true">
 
       <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content colorModalMedicamentos">
-          <div class="modal-header">
-            <div class="col-12">
-              <div class="row g-3">
-                <div class="col-md-11">
+        <div class="modal-content colorModalMedicamentos modal-med-largo">          
+
+          <div class="input-group mb-3">
+            <div class="modal-body">
+              <div class="col-md-12">
+                <div class="row g-3">
+                  <div class="col-md-11">
                     <h5 class="text-white fw-bold">MEDICAMENTOS</h5>
                     <h6 class="text-white fw-bold">Gestión de medicamentos</h6>
                 </div>
@@ -105,25 +112,17 @@
                     <button type="button" 
                             class="btn fw-bold" 
                             data-bs-dismiss="modal" 
-                            aria-label="Close">
+                            aria-label="Close">                      
                       <i class="fa-solid fa-2x fa-xmark text-white"></i>
                     </button>
                 </div>
-              </div>
-            </div>
-          </div>
 
-          <div class="input-group mb-3">
-            <div class="modal-body">
-              <div class="col-md-12">
-                <div class="row g-3">
                   <form class="row g-3" @submit.prevent="">
                     <div class="col-md-4">
                       <input type="text"
-                            class="form-control"                           
+                            class="form-control"                                                     
                             v-model="infoMedicamento.nombreMedicamento"                                  
                             placeholder="Nombre del medicamento">
-                            <!-- :class="medicamentoNuevo == true ? 'border border-danger' : 'border border-success'" -->
                     </div>
                     <div class="col-md-8"></div>
 
@@ -146,6 +145,10 @@
                               class="btn btn-modal-medicamentos fw-bold"
                               @click=""> Actualizar </button>
                       </template>
+
+                      <button type="button"
+                              class="btn btn-modal-medicamentos fw-bold"
+                              @click="listarMedicamentos()"> Cargar </button>
                     </div>
                   </form>
 
@@ -157,8 +160,8 @@
                             <td class="text-white">{{ medicamento._id }}</td>
                             <td class="text-white">{{ medicamento.nombreMedicamento }}</td>
                             <td class="text-white">{{ medicamento.codigoMedicamento }}</td>                            
-                            <td><button class="btn" @click="cambiarBtnActualizar()"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
-                            <td><button class="btn" @click="eliminarMedicamento()"><i class="fa-solid fa-trash text-white"></i></button></td>
+                            <td><button class="btn" @click="cambiarBtnActualizar(medicamento._id, medicamento)"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
+                            <td><button class="btn" @click="eliminarMedicamento(medicamento._id)"><i class="fa-solid fa-trash text-white"></i></button></td>
                           </tr>
                         </tbody>
                       </table>
@@ -190,14 +193,13 @@ export default defineComponent({
         userStore,
         medStore,
         infoMedicamento: {} as regMedicamento,
-        medicamentoNuevo: false,
         editar: false
     };
   },
 
-  mounted() {
-    medStore.getMedicamentosList();
-  },
+  // mounted() {
+  //   //medStore.getMedicamentosList();
+  // },
 
   methods: {
     async mostrarMensaje(){
@@ -210,11 +212,14 @@ export default defineComponent({
         position: 'top-start'
       });
     },
+
+    async listarMedicamentos(){
+      medStore.getMedicamentosList()
+    },
+
     async agregaMedicamento(){
       if(this.infoMedicamento.nombreMedicamento == undefined || this.infoMedicamento.nombreMedicamento == ''){
         
-        this.medicamentoNuevo=true
-
         swal.fire({
             title: 'Ingrese el nombre del medicamento',
             icon: 'warning',
@@ -227,15 +232,22 @@ export default defineComponent({
         });       
       }
       else{
-        this.medicamentoNuevo=false
         medStore.createMedicamento(this.infoMedicamento)
       }
     },
-    async cambiarBtnActualizar(){
+
+    async cambiarBtnActualizar(idMedicamento, medicamento){
       this.editar=true
+      medStore.getMedicamento(idMedicamento)
+      // this.infoMedicamento.nombreMedicamento=medStore.medicamentos.nombreMedicamento;
+      // this.infoMedicamento.codigoMedicamento=medStore.medicamentos.codigoMedicamento;
+
+      // console.log(medStore.medicamentos.nombreMedicamento, medStore.medicamentos.codigoMedicamento)
+      // medStore.updateMedicamento(idMedicamento, medicamento);
     },
-    async eliminarMedicamento(){   
-      medStore.deleteMedicamento(this.infoMedicamento)   
+
+    async eliminarMedicamento(idMedicamento){   
+      medStore.deleteMedicamento(idMedicamento)   
     }
   }
 })
@@ -306,17 +318,17 @@ export default defineComponent({
   --bs-btn-bg: #002d60;
   --bs-btn-color: #fff;    
   --bs-btn-border-color: #002d60;
-  --bs-btn-hover-bg: #002d60;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-border-color: #002d60;          
-    --bs-btn-active-bg: #002d60;
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-border-color: #002d60;   
-    width: 280px; 
-    margin-bottom: 8px;
-    text-align: left;
-    padding: 20px;
-  }
+  --bs-btn-hover-bg: #4B688B;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-border-color: #4B688B;          
+  --bs-btn-active-bg: #4B688B;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-border-color: #4B688B;   
+  width: 300px; 
+  margin-bottom: 8px;
+  text-align: left;
+  padding: 20px;
+}
   .btn-modal-medicamentos {
     --bs-btn-bg: #ffffff; 
     --bs-btn-color: #002D60;    
@@ -336,6 +348,10 @@ export default defineComponent({
 .deslizar {
   overflow:scroll;
   overflow-x: hidden;
-  height:200px;
+  height:270px;
+  margin-top: 15px;
+}
+.modal-med-largo{
+  height: 515px
 }
 </style>

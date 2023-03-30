@@ -6,6 +6,7 @@ const MedicamentoSchema = new Schema({
         required: true,
         trim: true,
         unique: true,
+        uppercase: true
     },
     codigoMedicamento:{
         type: String

@@ -4,7 +4,7 @@ import { Medicamento } from "../models/Medicamento";
 /* Función para obtener todos los medicamentos */
 export const getMedicamentos = async (req: any, res: Response) => {
     try {
-        const medicamentos = await Medicamento.find({uid: req.uid}) 
+        const medicamentos = await Medicamento.find({id: req.id}) 
         console.log();       
         return res.json({medicamentos});            
     } catch (error) {

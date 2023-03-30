@@ -3,7 +3,7 @@ import { apiAxios } from '@/boot/axios';
 import { useUserStore } from "./user-store";
 import { ref } from "vue";
 import swal from 'sweetalert2';
-import { deleteMedicamento, updateMedicamento } from '../../../Anestesys_BackEnd/controllers/medicamento.controller';
+import { deleteMedicamento, updateMedicamento, getMedicamento } from '../../../Anestesys_BackEnd/controllers/medicamento.controller';
 
 const userStore = useUserStore();
 
@@ -23,8 +23,27 @@ export const useMedicamentoStore = defineStore('medicamento', {
             })
             .then((res: any) => {
                 this.medicamentos = res.data.medicamentos;
+            })
+            .catch((e:any) => {
+                console.log(e);                
             });
 
+        },
+
+        getMedicamento(idMedicamento){
+            apiAxios({
+                url: `http://localhost:5000/medicamentos/${String(idMedicamento)}`,
+                method: "GET",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                }
+            })
+            .then((res: any) => {
+                this.medicamentos = res.data.medicamento;                
+            })
+            .catch((e:any) => {
+                console.log(e);                
+            });
         },
 
         createMedicamento(infoMedicamento: any){
@@ -73,9 +92,10 @@ export const useMedicamentoStore = defineStore('medicamento', {
                 }});
         },
 
-        updateMedicamento(infoMedicamento: any){
+        updateMedicamento(idMedicamento, infoMedicamento: any){
+            
             apiAxios({
-                url: `http://localhost:5000/medicamentos/${String(this.medicamentos._id)}`,
+                url: `http://localhost:5000/medicamentos/${String(idMedicamento)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -99,13 +119,14 @@ export const useMedicamentoStore = defineStore('medicamento', {
                 })
             })
             .catch((e: any) => {
-                console.log("error: " + e);
+                console.log(e);
             });       
         },
 
         deleteMedicamento(infoMedicamento: any){
+            
             apiAxios({
-                url: `http://localhost:5000/medicamentos/${String(this.medicamentos._id)}`,
+                url: `http://localhost:5000/medicamentos/${String(infoMedicamento)}`,
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -123,6 +144,9 @@ export const useMedicamentoStore = defineStore('medicamento', {
                     timer: 2500,
                     timerProgressBar: true
                 })
+            })
+            .catch((e:any) => {
+                console.log(e);                
             });
         }
     }
