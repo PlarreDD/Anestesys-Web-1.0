@@ -85,9 +85,7 @@
 <script lang="ts">
 import type { regUsr } from '@/interfaces/regUsr';
 import { useUserStore } from '@/stores/user-store';
-import swal from 'sweetalert2'
-import { ref,
-         defineComponent } from "vue";
+import { defineComponent } from "vue";
 
 const userStore = useUserStore();
 
@@ -106,68 +104,55 @@ export default defineComponent({
     
     mounted: function() { // Llama el método despues de cargar la página
       this.cargarFondo();
-      this.ocultarHeader();
     },
 
     created(){
         this.cargarFondo()
     },
 
-    methods: {        
-        
+    methods: {
         async validaCamposRegistro() {
-            if(this.usr.nomUsr == undefined || this.usr.nomUsr == "" ||
-               this.usr.apUsr == undefined || this.usr.apUsr =="" ||
-               this.usr.email == undefined || this.usr.email == "" ||
-               this.usr.fechaNac == undefined) {
-                if(this.usr.nomUsr == undefined || this.usr.nomUsr == "")
-                    this.userNombre = true;
-                else
+            try {
+                if(this.usr.nomUsr == undefined || this.usr.nomUsr == "" ||
+                   this.usr.apUsr == undefined || this.usr.apUsr =="" ||
+                   this.usr.email == undefined || this.usr.email == "" ||
+                   this.usr.fechaNac == undefined) {
+                    if(this.usr.nomUsr == undefined || this.usr.nomUsr == "")
+                        this.userNombre = true;
+                    else
+                        this.userNombre = false
+    
+                    if(this.usr.apUsr == undefined || this.usr.apUsr == "")
+                        this.userApellido = true;
+                    else
+                        this.userApellido = false;
+    
+                    if(this.usr.email == undefined || this.usr.email == "")
+                        this.userCorreo = true;
+                    else
+                        this.userCorreo = false;
+    
+                    if(this.usr.fechaNac == undefined)
+                        this.userFecha = true;
+                    else
+                        this.userFecha = false;
+                }
+                else{
                     this.userNombre = false
+                    this.userApellido = false
+                    this.userCorreo = false
+                    this.userFecha = false
+                    
+                    userStore.registerUsr(this.usr.email, this.usr.nomUsr, this.usr.apUsr, this.usr.fechaNac);
 
-                if(this.usr.apUsr == undefined || this.usr.apUsr == "")
-                    this.userApellido = true;
-                else
-                    this.userApellido = false;
-
-                if(this.usr.email == undefined || this.usr.email == "")
-                    this.userCorreo = true;
-                else
-                    this.userCorreo = false;
-
-                if(this.usr.fechaNac == undefined)
-                    this.userFecha = true;
-                else
-                    this.userFecha = false;
+                    this.usr.nomUsr = ""
+                    this.usr.apUsr = ""
+                    this.usr.email = ""
+                    this.usr.fechaNac = ""
+                }                
+            } catch (error) {
+                console.log("Error registro: " + error.error.response.data);
             }
-            else{
-                this.mostrarMensaje();
-                
-                this.userNombre = false
-                this.userApellido = false
-                this.userCorreo = false
-                this.userFecha = false
-                
-                userStore.registerUsr(this.usr.email, this.usr.nomUsr, this.usr.apUsr, this.usr.fechaNac);
-                
-                this.usr.nomUsr = ""
-                this.usr.apUsr = ""
-                this.usr.email = ""
-                this.usr.fechaNac = ""
-                
-                this.$router.push('/')
-            }
-        },
-
-        async mostrarMensaje(){
-            swal.fire({
-                html: 'Usuario <b>' + this.usr.nomUsr + ' ' + this.usr.apUsr +
-                        '</b> registrado correctamente, consulte su correo electrónico',
-                icon: 'info', showConfirmButton: true, showCloseButton: true,
-                toast: true, position: 'top-start'
-            });
-
-            document.body.style.backgroundImage = "url('../../public/images/login.webp')";
         },
 
         async cargarFondo(){
@@ -176,10 +161,6 @@ export default defineComponent({
 
         async cargarFondoLogin(){
             document.body.style.backgroundImage = "url('../../public/images/login.webp')";
-        },
-
-        async ocultarHeader(){
-            document.getElementById("headerP").className='mt invisible'
         },
     }
 });

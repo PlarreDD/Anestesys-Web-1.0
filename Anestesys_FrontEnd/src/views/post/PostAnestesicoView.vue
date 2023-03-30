@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <header>
+    <barra-navegacion/>
+  </header>
+  <div class="margen-div-barra">
     <div class="input-group mb-3">
       <div class="col-10 divform navbar-nav">              
         <ul class="nav nav-pills mb-3 text-center" id=""> <!--Lista para el menú principal-->
@@ -27,20 +30,20 @@
       </div>
 
       <div class="col-2 menuLateralPrincipal"> <!--Menú lateral-->
-        <div class="col-md-2 menuLateral">
+        <div class="col-md-2 menu-pre-trans">
           <RouterLink to="pre">
-            <img src="images/pre.png" class="ajusteImg"/>
+            <img src="images/pre.svg" class="ajusteImg"/>
           </RouterLink>
         </div>
 
-        <div class="col-md-2 menuLateral">
+        <div class="col-md-2 menu-pre-trans">
           <RouterLink to="trans">
-            <img src="images/trans.png" class="ajusteImg"/>
+            <img src="images/trans.svg" class="ajusteImg"/>
           </RouterLink>
         </div>
 
-        <div class="col-md-2 menuLateral">
-          <img src="images/post.png" width="180" class="ajusteImg"/>
+        <div class="col-md-2 menu-post">
+          <img src="images/post.svg" width="180" class="ajusteImg"/>
         </div>    
       </div>
     </div>
@@ -50,29 +53,55 @@
 <script lang="ts">
 import Nota from '../../components/post/Nota.vue';
 import Recuperacion from "../../components/post/Recuperacion.vue";
+import BarraNavegacion from "../../components/barraNavegacion.vue";
 
 export default ({
   components:{
-    Recuperacion, Nota
+    Recuperacion, 
+    Nota,
+    BarraNavegacion
   }
 })
 </script>
 
 <style scoped>
-.menuLateral {
-  margin-bottom: 6px; 
-  margin-top: 4px;
-  margin-left: 45px;
+.margen-div-barra{
+  margin-top: 120px;
 }
 .menuLateralPrincipal {
-  margin-top: 54px;
+  margin-top: 47px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
 }
-.bordePrincipal {
-  width: 110%;
+.menu-post {  
+  width: 200px;
+  height: auto;
+  background-color: #E88300;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-left: 47px;
+  text-align: center;
+}
+.menu-pre-trans {  
+  width: 200px;
+  height: auto;
+  background-color: #d6d6d6;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-left: 47px;
+  text-align: center;
+}
+.menu-pre-trans:hover{
+  background-color: #E88300;
+  transition: background-color 0.2s ease-in-out;
 }
 .ajusteImg{
-  width: 455%;
-  height: auto;
+  width: 90%;
+  height: 95%;
+}
+.bordePrincipal {
+  width: 108%;
 }
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     color: var(--bs-nav-pills-link-active-color);

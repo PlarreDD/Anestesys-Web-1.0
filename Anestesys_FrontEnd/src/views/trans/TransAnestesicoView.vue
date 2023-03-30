@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <header>
+    <barra-navegacion/>
+  </header>
+  <div class="margen-div-barra">
     <div class="input-group mb-3">
       <div class="col-md-6">
         <input class="form-control me-2"
@@ -366,19 +369,21 @@
         </div>
 
         <div class="col-2 menuLateralPrincipal"> <!--Menú lateral-->
-          <div class="col-md-2 menuLateral">
-            <RouterLink to="pre"><img src="images/pre.png" class="ajusteImg"/></RouterLink>
+          
+          <div class="col-md-2 menu-pre-post">
+            <RouterLink to="pre"><img src="images/pre.svg" class="ajusteImg"/></RouterLink>
+          
           </div>
-          <div class="col-md-2 menuLateral">
-            <img src="images/trans.png" class="ajusteImg"/>
+          
+          <div class="col-md-2 menu-trans">
+            <img src="images/trans.svg" class="ajusteImg"/>
+          
           </div>
-          <div class="col-md-2 menuLateral">
-            <RouterLink to="post"><img src="images/post.png" class="ajusteImg"/></RouterLink>
+          
+          <div class="col-md-2 menu-pre-post">
+            <RouterLink to="post"><img src="images/post.svg" class="ajusteImg"/></RouterLink>
+          
           </div>    
-        </div>
-
-        <div>
-          <pre @recibe-datos="actualizaDatos" />
         </div>
 
         <div class="container text-center col-md-9 posicionEstatica bordeContenedor fw-bold">
@@ -402,6 +407,7 @@
 <script lang="ts">
 
 import Pre from "../pre/PreAnestesicoView.vue";
+import BarraNavegacion from "../../components/barraNavegacion.vue";
 
 export default({
 
@@ -414,7 +420,8 @@ export default({
     }
   },
   components:{
-    Pre
+    Pre,
+    BarraNavegacion
   },
   mounted: function() { // Llama el método despues de cargar la página
       this.mueveReloj();
@@ -445,20 +452,43 @@ export default({
 </script>
 
 <style scoped>
-.menuLateral {
-    margin-bottom: 6px; 
-    margin-top: 6px;
-    margin-left: 45px;
+.margen-div-barra{
+  margin-top: 120px;
 }
 .menuLateralPrincipal {
-    margin-top: 16px;
+    margin-top: 11px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
 }
-.bordePrincipal {
-    width: 110%;
+.menu-trans {  
+  width: 200px;
+  height: auto;
+  background-color: #E88300;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-left: 47px;
+  text-align: center;
+}
+.menu-pre-post {  
+  width: 200px;
+  height: auto;
+  background-color: #d6d6d6;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-left: 47px;
+  text-align: center;
+}
+.menu-pre-post:hover{
+  background-color: #E88300;
+  transition: background-color 0.2s ease-in-out;
 }
 .ajusteImg{
-  width: 455%;
-  height: auto;
+  width: 90%;
+  height: 95%;
+}
+.bordePrincipal {
+    width: 108%;
 }
 .centrarLabel{
   text-align: center;

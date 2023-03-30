@@ -1,6 +1,6 @@
 <template>
   <div class="mt" id="headerP">
-      <nav class="navbar navbar-color fw-bold">                
+      <nav class="navbar navbar-color fw-bold">
         <div class="input-group">
           <div class="col-md-1"></div>
 
@@ -10,23 +10,13 @@
             </RouterLink>
           </div>
 
-          <div class="col-md-5 alinearElementoD">
-            <button class="btn btn-menu"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-controls="offcanvasNavbar">
-              <i class="fa-solid fa-2x fa-bars"></i>
-            </button>
-
-            <form class="dropdown-menu p-5">
-              <div class="mb-3 estiloDropDown input-group mb-3"></div>
-            </form>            
-          </div>
+          <div class="col-md-5"></div>
          
           <div class="col-md-2 text-white alinearElementoD">
             <img src="images/perfil.jpg" class="imgPerfil"/> {{ "Dr. García" }}
           </div>
 
+          <!-- Menú de configuración -->
           <div class="col-md-1 alinearElementoD">
             <button class="btn btn-menu"
                     type="button"
@@ -35,96 +25,214 @@
                     aria-controls="offcanvasNavbar">
               <i class="fa-solid fa-2x fa-ellipsis"></i>
             </button>
-          </div>                      
+          </div>
 
           <div class="offcanvas nav-config"
                tabindex="-1"
                id="barraConfiguracion"
                aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title fw-bold text-dark"
-                  id="offcanvasNavbarLabel"> Configuración </h5>
-              <button type="button"
-                      class="btn-close"
-                      data-bs-dismiss="offcanvas"
-                      aria-label="Close">
-              </button>
-            </div>
+
+            <div class="offcanvas-header"></div>
 
             <div class="offcanvas-body">
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
-                  <a href="#">
-                    <button class="btn btn-configuracion fw-bold"> Ver Perfil </button>
-                  </a>
-                </li> 
-                
-                <li class="nav-item">
-                  <RouterLink to="medicamentos">
-                    <button class="btn btn-configuracion fw-bold"> Medicamentos </button>
-                  </RouterLink>
+                <li>
+                  <button type="button"
+                    class="btn btn-configuracion fw-bold"
+                    data-bs-toggle="modal"
+                    data-bs-target="#medicamentosModal" ><i class="fa-solid fa fa-pills"></i> Medicamentos
+                  </button>
                 </li>
                 
-                <li class="nav-item">
-                  <a to="#">
-                    <button class="btn btn-configuracion fw-bold"> Tendencias </button>
-                  </a>
+                <li>
+                  <button type="button"
+                    class="btn btn-configuracion fw-bold"
+                    data-bs-toggle="modal"
+                    data-bs-target="#monitorModal"><i class="fa-solid fa fa-tv"></i> Configuración de monitor
+                  </button>
                 </li>
                 
-                <li class="nav-item">
-                  <a to="#">
-                    <button class="btn btn-configuracion fw-bold"> Teclado </button>
-                  </a>
+                <li>
+                  <button type="button"
+                    class="btn btn-configuracion fw-bold"
+                    data-bs-toggle="modal"
+                    data-bs-target="#tendenciasModal"><i class="fa-solid fa fa-file-waveform"></i> Tendencias
+                  </button>
+                </li>
+
+                <li>
+                  <button type="button"
+                    class="btn btn-configuracion fw-bold"
+                    data-bs-toggle="modal"
+                    data-bs-target="#tecladoModal"><i class="fa-solid fa fa-keyboard"></i> Teclado virtual
+                  </button>
                 </li>
 
                 <li class="nav-item">
                     <button class="btn btn-configuracion fw-bold"
-                            @click=" userLogout()"> Salir </button>
+                    @click="userStore.logout()"
+                            ><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i> Salir </button>
                 </li>
               </ul>
             </div>
           </div>
         </div>
       </nav>
-    </div>
+
+      <!-- Modal medicamentos -->
+      <div class="modal"
+           id="medicamentosModal"
+           tabindex="-1"
+           aria-labelledby="exampleModalLabel"
+           aria-hidden="true">
+
+          <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content colorModalMedicamentos">
+                  
+                <div class="modal-header">
+                      <div class="col-12">
+                          <div class="row g-3">
+                            <div class="col-md-11">
+                                <h5 class="text-white fw-bold">MEDICAMENTOS</h5>
+                                <h6 class="text-white fw-bold">Gestión de medicamentos</h6>
+                            </div>
+                            
+                            <div class="col-md-1 div-img">
+                                <button type="button" 
+                                        class="btn fw-bold" 
+                                        data-bs-dismiss="modal" 
+                                        aria-label="Close"><i class="fa-solid fa-2x fa-xmark text-white"></i></button>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <div class="modal-body">
+                      <div class="col-md-12">
+                        <div class="row g-3">
+                          <div class="col-md-4">
+                                  <input type="text"
+                                        class="form-control"
+                                        v-model="nombreMedicamento"                                  
+                                        placeholder="Nombre del medicamento">
+                          </div>
+                          <div class="col-md-8"></div>
+
+                          <div class="col-md-4">
+                                  <input type="text"
+                                        class="form-control"
+                                        v-model="codigoMedicamento"                                
+                                        placeholder="Código de barras">
+                          </div>
+                          <div class="col-md-1"></div>
+                          <div class="col-md-1">
+                              <button type="button"
+                                      class="btn btn-modal-medicamentos fw-bold"> Agregar </button>
+                          </div> 
+
+                          <div class="col-md-12"> 
+                            <div class="table-responsive deslizar">
+                                <table class="table table-hover">
+                                    
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-white">1</td>
+                                            <td class="text-white">Paracetamol</td>
+                                            <td class="text-white">7875468798</td>
+                                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
+                                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-white">2</td>
+                                            <td class="text-white">Paracetamol</td>
+                                            <td class="text-white">7875468798</td>
+                                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
+                                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-white">3</td>
+                                            <td class="text-white">Paracetamol</td>
+                                            <td class="text-white">7875468798</td>
+                                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
+                                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-white">4</td>
+                                            <td class="text-white">Paracetamol</td>
+                                            <td class="text-white">7875468798</td>
+                                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
+                                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-white">5</td>
+                                            <td class="text-white">Paracetamol</td>
+                                            <td class="text-white">7875468798</td>
+                                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
+                                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-white">6</td>
+                                            <td class="text-white">Paracetamol</td>
+                                            <td class="text-white">7875468798</td>
+                                            <td><button class="btn"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
+                                            <td><button class="btn"><i class="fa-solid fa-trash text-white"></i></button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>        
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>   
+                    </div>
+                  </div>                  
+
+              </div>
+          </div>
+      </div>
+  </div>
 </template>
 
 <script lang="ts">
+import { useUserStore } from "@/stores/user-store";
 import { defineComponent } from "vue";
+import swal from 'sweetalert2';
+
+const userStore = useUserStore();
 
 export default defineComponent({
-  methods:{
-    userLogout(){
-      console.log("salir");
+  data() {
+    return{
+        userStore,
+        nombreMedicamento:'',
+        codigoMedicamento:''
+    };
+  },
+  methods: {
+    async mostrarMensaje(){
+      swal.fire({
+        html: 'Usuario registrado correctamente, consulte su correo electrónico',
+        icon: 'info',
+        showConfirmButton: true,
+        showCloseButton: true,
+        toast: true,
+        position: 'top-start'
+      });
     },
   }
 })
-
 </script>
 
 <style>
-.imgLogoBarra {
-  width: 280px;
-  height: auto;    
-}
-.imgPerfil {
-  width: 75px;
-  height: auto;   
-  border-radius: 50px;   
-}
-.mt {
-    margin-bottom: 3rem!important;
-}
-.navbar-color{
-  background-color: #002D60;
-}
+/* Barra navegación */
 .nav-config {
     top: 0;
     right: 0;
-    width: 250px;
-    background-color: #edeff3;
-    border-left: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
-    transform: translateX(100%);    
+    width: 300px;
+    background-color: #002D60;
+    border-bottom-left-radius: 50px!important;
+    transform: translateX(100%);
 }
 .nav-link {
     display: block;
@@ -135,39 +243,82 @@ export default defineComponent({
     text-decoration: none;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
 }
-.alinearElementoD{
-    align-self: center;
-    text-align: right;
+.mt {
+    margin-bottom: 2rem!important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.div-img {
+  text-align: center;
+}
+.imgLogoBarra {
+  width: 280px;
+  height: auto;    
+}
+.imgPerfil {
+  width: 75px;
+  height: auto;   
+  border-radius: 50px;   
+}
+.navbar-color{
+  background-color: #002D60;
 }
 .alinearElementoI{
     align-self: center;
     text-align: left;
 }
-.estiloDropDown{
-  width: 450px; height: 250px;
+.alinearElementoD{
+    align-self: center;
+    text-align: right;
 }
+/* Botones */
 .btn-menu {    
-    --bs-btn-bg: #002d60;
-    --bs-btn-color: #ffffff;    
-    --bs-btn-border-color: #002d60;
-    --bs-btn-hover-bg: #002d60;
-    --bs-btn-hover-color: #ffffff;
-    --bs-btn-hover-border-color: #002d60;          
-    --bs-btn-active-bg: #002d60;
-    --bs-btn-active-color: #ffffff;
-    --bs-btn-active-border-color: #002d60;  
+  --bs-btn-bg: #002d60;
+  --bs-btn-color: #ffffff;    
+  --bs-btn-border-color: #002d60;
+  --bs-btn-hover-bg: #002d60;
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-hover-border-color: #002d60;          
+  --bs-btn-active-bg: #002d60;
+  --bs-btn-active-color: #ffffff;
+  --bs-btn-active-border-color: #002d60;  
 }
 .btn-configuracion {
-    --bs-btn-bg: #ffffff;
-    --bs-btn-color: #002d60;    
-    --bs-btn-border-color: #ced4da;
-    --bs-btn-hover-bg: #ced4da;
-    --bs-btn-hover-color: #002d60;
-    --bs-btn-hover-border-color: #ced4da;          
-    --bs-btn-active-bg: #ced4da;
-    --bs-btn-active-color: #002d60;
-    --bs-btn-active-border-color: #ced4da;   
-    width: 150px; 
+  --bs-btn-bg: #002d60;
+  --bs-btn-color: #fff;    
+  --bs-btn-border-color: #002d60;
+  --bs-btn-hover-bg: #002d60;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #002d60;          
+    --bs-btn-active-bg: #002d60;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-border-color: #002d60;   
+    width: 280px; 
     margin-bottom: 8px;
+    text-align: left;
+    padding: 20px;
+  }
+  .btn-modal-medicamentos {
+    --bs-btn-bg: #ffffff; 
+    --bs-btn-color: #002D60;    
+    --bs-btn-border-color: #ffffff;
+    --bs-btn-hover-bg: #ffffff;
+    --bs-btn-hover-color: #002D60;
+    --bs-btn-hover-border-color: #ffffff;          
+    --bs-btn-active-bg: #002D60;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-border-color: #ffffff;  
+    width: 130px;     
+}
+/* Modal medicamentos */
+.colorModalMedicamentos{
+  background-color: #002D60;
+}
+.deslizar {
+  overflow:scroll;
+  overflow-x: hidden;
+  height:200px;
 }
 </style>

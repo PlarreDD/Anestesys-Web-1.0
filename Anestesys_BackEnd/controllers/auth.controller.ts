@@ -3,7 +3,7 @@ import { generateToken,
          generateRefreshToken } from "../utils/tokenManager";
 import bcryptjs from "bcryptjs";
 import { Request,
-         Response } from "express";    // Obtiene los Response y Request que se envían 
+         Response } from "express";    // Obtiene los Response y Request que se envían
 
 export const register = async (req:Request, res:Response) => {
     const {email, password, nomMed, apMed} = req.body;
@@ -21,7 +21,7 @@ export const register = async (req:Request, res:Response) => {
 
         generateRefreshToken(user.id, res);
        
-        return res.status(201).json({token});
+        return res.status(201).json({token, user});
     }catch(error){
         console.log(error);
 

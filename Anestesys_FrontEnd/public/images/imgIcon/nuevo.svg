@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28.741" height="38.072" viewBox="0 0 28.741 38.072">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3 {
+        fill: none;
+        stroke: #002d60;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-1, .cls-3 {
+        stroke-linecap: round;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-width: 3px;
+      }
+
+      .cls-3 {
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="Grupo_84" data-name="Grupo 84" transform="translate(-1230.252 -209.5)">
+    <line id="Línea_18933" data-name="Línea 18933" class="cls-1" y2="7.414" transform="translate(1235.024 238.658)"/>
+    <line id="Línea_18934" data-name="Línea 18934" class="cls-1" x2="6.543" transform="translate(1231.752 242.365)"/>
+    <path id="Trazado_32" data-name="Trazado 32" class="cls-2" d="M1241.558,243.252h14.12a1.9,1.9,0,0,0,1.9-1.9v-24.8L1252.006,211h-18.1a1.9,1.9,0,0,0-1.9,1.9v24.048" transform="translate(-0.086 0)"/>
+    <line id="Línea_18935" data-name="Línea 18935" class="cls-3" x2="11.463" transform="translate(1236.363 219.526)"/>
+    <line id="Línea_18936" data-name="Línea 18936" class="cls-3" x2="8.156" transform="translate(1236.363 223.233)"/>
+    <line id="Línea_18937" data-name="Línea 18937" class="cls-3" x2="15.57" transform="translate(1236.363 226.94)"/>
+    <line id="Línea_18938" data-name="Línea 18938" class="cls-3" x2="3.707" transform="translate(1236.363 230.647)"/>
+    <path id="Trazado_33" data-name="Trazado 33" class="cls-2" d="M1266.882,218.064h-5.035a.791.791,0,0,1-.785-.89l.63-5.041" transform="translate(-10.13 -0.392)"/>
+  </g>
+</svg>

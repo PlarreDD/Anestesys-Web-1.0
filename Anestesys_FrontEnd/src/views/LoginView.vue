@@ -6,7 +6,7 @@
            tabindex="-1"
            aria-labelledby="exampleModalLabel"
            aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" style="width:1250px;">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content colorModal">
             <div class="modal-header">
               <div class="col-12">
@@ -24,7 +24,9 @@
 
             <div class="modal-body">
               <h2 class="fw-bold textoModal">MODO EMERGENCIA</h2>
-              <h3 class="textoModal">al finalizar el caso deberá ingresar sus datos para guardar la información del paciente.</h3>
+              <h3 class="textoModal">Al finalizar el caso deberá ingresar sus datos</h3>
+              <h3 class="textoModal">para guardar la información del paciente.</h3>
+
             </div>
 
             <div class="modal-footer">
@@ -45,7 +47,7 @@
                             @click="iniciarEmergencia()"> ACEPTAR </button>
                   </div>
                 </div>
-              </div>                  
+              </div>
             </div>
           </div>
         </div>
@@ -88,17 +90,17 @@
             <span class="fa fa-fw fa-eye password-icon show-password"
                   id="mostrar"
                   @click=" mostrarPass()"></span>
-                      
+
             <div id="contraLogin"
                 :class="userContrasena == true ? 'visible validaCampo' : 'invisible'"> Escriba la contraseña </div>
           </div>
-          
+
           <div class="col-md-2"></div>
           <div class="col-md-12 div-img">
               <button @click="validaCamposLogin()"
                       class="btn btn-login fw-bold"> Entrar </button>
           </div>
-          
+
           <div class="col-md-12">
             <RouterLink class="nav-link colorLinkL"
                         to="registro"
@@ -111,8 +113,8 @@
         <button type="button"
                 class="btn btn-emergencia fw-bold"
                 data-bs-toggle="modal"
-                data-bs-target="#emergenciaModal"> !EMERGENCIA¡ </button>
-      </div>                 
+                data-bs-target="#emergenciaModal"> ¡EMERGENCIA! </button>
+      </div>
     </div>
   </div>  
 </template>
@@ -120,15 +122,14 @@
 <script lang="ts">
 import { useUserStore } from "../stores/user-store";
 import type { regUsr } from '@/interfaces/regUsr';
-import { ref, 
-         defineComponent } from "vue";
-import swal from 'sweetalert2'
+import { defineComponent } from "vue";
+import swal from 'sweetalert2';
 
 const userStore = useUserStore();
+
 export default defineComponent({
   mounted: function() { // Llama el método despues de cargar la página
     this.cargarFondo();
-    this.ocultarHeader();           
   },
   
   created(){
@@ -187,10 +188,6 @@ export default defineComponent({
       document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
     },
 
-    async ocultarHeader(){
-      document.getElementById("headerP").className='mt invisible'
-    },
-
     async mostrarPass(){
       if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
         (document.getElementById("contrasena") as HTMLInputElement).type = "password";
@@ -203,17 +200,8 @@ export default defineComponent({
   }
 });
 
-export const mostrarMensaje = async (Nombre: string, Apellido: string) => {
-  swal.fire({
-    html: 'Bienvenido <b>Dr. ' + Nombre + ' ' + Apellido + '</b>',
-    icon: 'info',
-    showConfirmButton: false,
-    showCloseButton: true,  
-    timer: 5000,
-    timerProgressBar: true,
-    toast: true,
-    position: 'top-end'
-  })  
+export const salir = async () => {
+  console.log("Salir");
 }
 </script>
 
@@ -229,6 +217,9 @@ export const mostrarMensaje = async (Nombre: string, Apellido: string) => {
 
 .modal-footer{
   border-top: #D11515;
+}
+.btn-modal{
+  margin-bottom: 20px;
 }
 
 .divBorder {
@@ -247,6 +238,15 @@ export const mostrarMensaje = async (Nombre: string, Apellido: string) => {
 .colorLinkL:hover{
   color: #E88300;
   text-decoration: underline;
+}
+.nav-link {
+  display: block;
+  padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+  font-size: var(--bs-nav-link-font-size);
+  font-weight: var(--bs-nav-link-font-weight);
+  color: #E88300;
+  text-decoration: none;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
 }
 .btn-login {
     --bs-btn-bg: #E88300;
