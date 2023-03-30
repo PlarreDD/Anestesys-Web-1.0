@@ -23,8 +23,6 @@ export const register = async (req:Request, res:Response) => {
        
         return res.status(201).json({token, user});
     }catch(error){
-        console.log(error);
-
         if(error.code === 11000)
             return res.status(400).json({error: "Usuario ya registrado"});
         
@@ -60,8 +58,6 @@ export const login = async (req:Request, res:Response) => {
 
         return res.json( {tkn, xprIn, Nombre, Apellido} );
     }catch(error){
-        console.log(error);
-
         if (error.code == 12000)
             return res.status(403).json({error: "Usuario Inválido"});
         else if (error.code == 13000)
@@ -80,8 +76,6 @@ export const refreshToken = (req:any, res:Response) => {
 
         return res.json({tkn, xprIn});
     } catch (error) {
-        console.log(error);
-
         return res.status(500).json({error: "Error de servidor"});
     }
 };

@@ -5,10 +5,8 @@ import { Medicamento } from "../models/Medicamento";
 export const getMedicamentos = async (req: any, res: Response) => {
     try {
         const medicamentos = await Medicamento.find({id: req.id}) 
-        console.log();       
-        return res.json({medicamentos});            
+        return res.json({medicamentos});
     } catch (error) {
-        console.log(error);
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -21,7 +19,6 @@ export const getMedicamento = async (req: any, res: Response) => {
         const medicamento = await Medicamento.findById(id)        
         return res.json({medicamento});
     } catch (error) {
-        console.log(error);
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -36,7 +33,6 @@ export const createMedicamento = async (req: any, res: Response) => {
 
         return res.json({ medicamento });
     } catch (error) {
-        console.log(error);
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 };
@@ -54,8 +50,6 @@ export const updateMedicamento = async (req: any, res: Response) => {
         
         return res.json({ medicamento });
     } catch (error) {
-        console.log(error);
-
         if (error.kind === "ObjectId") {
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }
@@ -73,8 +67,6 @@ export const deleteMedicamento = async (req: any, res: Response) => {
 
         return res.json({ medicamento });
     } catch (error) {
-        console.log(error);
-
         if (error.kind === "ObjectId") {
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }

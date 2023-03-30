@@ -56,13 +56,14 @@ export const useUserStore = defineStore('user', {
                 this.token = res.data.tkn;
                 this.expiresIn = res.data.xprIn;
                 this.setTime();
-            }).catch((e:any) =>
-                console.log(e));
+            }).catch((e:any) => {
+                // console.log(e)
+            });
         },
 
         setTime(){
             setTimeout(() => {
-                console.log("TimeOut");
+                // console.log("TimeOut");
                 this.refreshToken();
             }, Number(this.expiresIn) * 1000 - 5000)
         },
@@ -131,7 +132,7 @@ export const useUserStore = defineStore('user', {
                                 });
                             }
                         });
-                    console.log(res.data);
+                    // console.log(res.data);
                     })
                     .catch((e:any) => {
                         if(e.response){
@@ -147,10 +148,10 @@ export const useUserStore = defineStore('user', {
                             });
                         }
                         else if(e.request){
-                            console.log(e.request);
+                            // console.log(e.request);
                         }
                         else{
-                            console.log("ErrorAx: ", e);
+                            // console.log("ErrorAx: ", e);
                         }});
         },
 

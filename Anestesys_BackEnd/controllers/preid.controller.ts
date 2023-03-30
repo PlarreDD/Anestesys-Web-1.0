@@ -9,7 +9,6 @@ export const getAllPacientes = async (req: any, res: Response) => {
         
         return res.json({pacientes});
     } catch (error) {
-        console.log(error);
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -21,7 +20,6 @@ export const getPaciente = async (req: any, res: Response) => {
         
         return res.json({pacientes});
     } catch (error) {
-        console.log(error);
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -67,7 +65,6 @@ export const createPaciente = async (req: any, res: Response) => {
 
         return res.json({ paciente, infoCx });
     } catch (error) {
-        console.log(error);
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 };
@@ -90,10 +87,7 @@ export const updatePaciente = async (req: any, res: Response) => {
                                                                     alcaldia: updVar.alcaldia,
                                                                     colonia: updVar.colonia,
                                                                     codigoPostal: updVar.codigoPostal} );
-        console.log(JSON.stringify(paciente));
         
-        console.log("IDPaciente: " + paciente?._id + "\nNúmero de episodio: " + updVar.numEpisodio);
-
         const infoCx = await IdPacientesCx.findOneAndUpdate({ pid: paciente?._id }, { numEpisodio: updVar.numEpisodio,
                                                                                       habitacionPaciente: updVar.habitacionPaciente,
                                                                                       fechaInPaciente: updVar.fechaIn,
@@ -112,17 +106,12 @@ export const updatePaciente = async (req: any, res: Response) => {
                                                                                       anestesiologo: updVar.anestesiologo,
                                                                                       anestesiologoVPA: updVar.anestesiologoVPA,
                                                                                       residenteAnestesia: updVar.residenteAnestesia });
-
-        console.log(infoCx);        
-
+        
         return res.json({ paciente, infoCx });
     } catch (error) {
-        console.log(error);
-
-        if (error.kind === "ObjectId") {
+        if (error.kind === "ObjectId") 
             return res.status(403).json({ error: "Formato de ID incorrecto" });
-        }
-        
+                
         return res.status(500).json({ error: "Error de servidor" });
     }
 };

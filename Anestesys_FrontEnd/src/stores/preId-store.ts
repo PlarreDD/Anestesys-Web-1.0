@@ -70,7 +70,7 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
-                console.log("error: " + e);
+                // console.log("error: " + e);
             });
         },
 
@@ -130,7 +130,7 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
-                console.log("error: " + e);
+                // console.log("error: " + e);
             });            
         }
     }

@@ -11,7 +11,6 @@ export const requireRefreshToken = (req:any, res:any, next:any) => {
         req.uid = uid;
         next();
     } catch (error) {
-        console.log(error);
         res.status(401).json(error/*{error: tokenVerificationErrors[error.message]}*/);
     }
 };
