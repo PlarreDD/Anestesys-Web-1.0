@@ -143,7 +143,7 @@
                       <template v-else>
                         <button type="button"
                               class="btn btn-modal-medicamentos fw-bold"
-                              @click=""> Actualizar </button>
+                              @click="actualizarMedicamento(medStore.medicamentos._id, medStore.medicamentos)"> Actualizar </button>
                       </template>
 
                       <button type="button"
@@ -160,7 +160,7 @@
                             <td class="text-white">{{ medicamento._id }}</td>
                             <td class="text-white">{{ medicamento.nombreMedicamento }}</td>
                             <td class="text-white">{{ medicamento.codigoMedicamento }}</td>                            
-                            <td><button class="btn" @click="cambiarBtnActualizar(medicamento._id, medicamento)"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
+                            <td><button class="btn" @click="cambiarBtnActualizar(medicamento._id)"><i class="fa-solid fa-pen-to-square text-white"></i></button></td>
                             <td><button class="btn" @click="eliminarMedicamento(medicamento._id)"><i class="fa-solid fa-trash text-white"></i></button></td>
                           </tr>
                         </tbody>
@@ -233,17 +233,39 @@ export default defineComponent({
       }
       else{
         medStore.createMedicamento(this.infoMedicamento)
+
+        this.infoMedicamento.nombreMedicamento=""
+        this.infoMedicamento.codigoMedicamento=""
       }
     },
 
-    async cambiarBtnActualizar(idMedicamento, medicamento){
+    async cambiarBtnActualizar(idMedicamento){
       this.editar=true
       medStore.getMedicamento(idMedicamento)
-      // this.infoMedicamento.nombreMedicamento=medStore.medicamentos.nombreMedicamento;
-      // this.infoMedicamento.codigoMedicamento=medStore.medicamentos.codigoMedicamento;
+      this.infoMedicamento.nombreMedicamento=medStore.medicamentos.nombreMedicamento;
+      this.infoMedicamento.codigoMedicamento=medStore.medicamentos.codigoMedicamento;      
+    },
 
-      // console.log(medStore.medicamentos.nombreMedicamento, medStore.medicamentos.codigoMedicamento)
-      // medStore.updateMedicamento(idMedicamento, medicamento);
+    async actualizarMedicamento(idMedicamento, medicamento){
+
+      if(this.infoMedicamento.nombreMedicamento == ''){
+        swal.fire({
+            title: 'Ingrese el nombre del medicamento',
+            icon: 'warning',
+            showConfirmButton: false,
+            showCloseButton: true,
+            toast: true,
+            timer: 2500,
+            timerProgressBar: true,
+            position: 'top-end'
+        }); 
+      }else{
+        medStore.updateMedicamento(idMedicamento, medicamento);
+        this.editar=false
+
+        this.infoMedicamento.nombreMedicamento=""
+        this.infoMedicamento.codigoMedicamento=""
+      }
     },
 
     async eliminarMedicamento(idMedicamento){   
