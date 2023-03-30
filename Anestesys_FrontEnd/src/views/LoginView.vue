@@ -199,10 +199,6 @@ export default defineComponent({
     },
   }
 });
-
-export const salir = async () => {
-  console.log("Salir");
-}
 </script>
 
 <style>

@@ -444,8 +444,6 @@ export default({
         this.nomPaciente = nombrePaciente,
         this.nomCirujano = nombreCirujano,
         this.nomCirugia = cirugia
-
-        console.log(this.nomPaciente) 
       },
   }
 })

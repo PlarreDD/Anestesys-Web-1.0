@@ -151,7 +151,7 @@ export default defineComponent({
                     this.usr.fechaNac = ""
                 }                
             } catch (error) {
-                console.log("Error registro: " + error.error.response.data);
+                // console.log("Error registro: " + error.error.response.data);
             }
         },
 
