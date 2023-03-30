@@ -13,8 +13,8 @@ export const useMedicamentoStore = defineStore('medicamento', {
     }),
 
     actions:{
-        getMedicamentosList(){
-            apiAxios({
+        async getMedicamentosList(){
+            await apiAxios({
                 url: "http://localhost:5000/medicamentos",
                 method: "GET",
                 headers: {
@@ -30,8 +30,8 @@ export const useMedicamentoStore = defineStore('medicamento', {
 
         },
 
-        getMedicamento(idMedicamento){
-            apiAxios({
+        async getMedicamento(idMedicamento){
+            await apiAxios({
                 url: `http://localhost:5000/medicamentos/${String(idMedicamento)}`,
                 method: "GET",
                 headers: {
@@ -46,8 +46,8 @@ export const useMedicamentoStore = defineStore('medicamento', {
             });
         },
 
-        createMedicamento(infoMedicamento: any){
-            apiAxios({
+        async createMedicamento(infoMedicamento: any){
+            await apiAxios({
                 url: "http://localhost:5000/medicamentos",
                 method: "POST",
                 headers: {
@@ -92,9 +92,9 @@ export const useMedicamentoStore = defineStore('medicamento', {
                 }});
         },
 
-        updateMedicamento(idMedicamento, infoMedicamento: any){
+        async updateMedicamento(idMedicamento, infoMedicamento: any){
             
-            apiAxios({
+            await apiAxios({
                 url: `http://localhost:5000/medicamentos/${String(idMedicamento)}`,
                 method: "PUT",
                 headers: {
@@ -123,9 +123,8 @@ export const useMedicamentoStore = defineStore('medicamento', {
             });       
         },
 
-        deleteMedicamento(infoMedicamento: any){
-            
-            apiAxios({
+        async deleteMedicamento(infoMedicamento: any){            
+            await apiAxios({
                 url: `http://localhost:5000/medicamentos/${String(infoMedicamento)}`,
                 method: "DELETE",
                 headers: {

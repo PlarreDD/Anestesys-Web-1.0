@@ -68,9 +68,7 @@
 
               <li>
                 <button type="button"
-                        class="btn btn-configuracion fw-bold"
-                        data-bs-toggle="modal"
-                        data-bs-target="#tecladoModal">
+                        class="btn btn-configuracion fw-bold">
                           <img src="images/imgIcon/teclado.svg"/> 
                             &nbsp;&nbsp;&nbsp;Teclado virtual
                 </button>
@@ -146,9 +144,6 @@
                               @click="actualizarMedicamento(medStore.medicamentos._id, medStore.medicamentos)"> Actualizar </button>
                       </template>
 
-                      <button type="button"
-                              class="btn btn-modal-medicamentos fw-bold"
-                              @click="listarMedicamentos()"> Cargar </button>
                     </div>
                   </form>
 
@@ -197,9 +192,9 @@ export default defineComponent({
     };
   },
 
-  // mounted() {
-  //   //medStore.getMedicamentosList();
-  // },
+  mounted() {
+    medStore.getMedicamentosList();
+  },
 
   methods: {
     async mostrarMensaje(){
@@ -214,7 +209,7 @@ export default defineComponent({
     },
 
     async listarMedicamentos(){
-      medStore.getMedicamentosList()
+      await medStore.getMedicamentosList()
     },
 
     async agregaMedicamento(){
@@ -232,10 +227,12 @@ export default defineComponent({
         });       
       }
       else{
-        medStore.createMedicamento(this.infoMedicamento)
+        await medStore.createMedicamento(this.infoMedicamento)
 
         this.infoMedicamento.nombreMedicamento=""
         this.infoMedicamento.codigoMedicamento=""
+
+        await this.listarMedicamentos()
       }
     },
 
@@ -269,7 +266,9 @@ export default defineComponent({
     },
 
     async eliminarMedicamento(idMedicamento){   
-      medStore.deleteMedicamento(idMedicamento)   
+      await medStore.deleteMedicamento(idMedicamento)  
+      
+      await this.listarMedicamentos()
     }
   }
 })
