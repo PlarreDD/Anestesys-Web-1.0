@@ -1,6 +1,7 @@
 <template>
     <div>
-        <ul class="nav nav-pills mb-3 text-center centrar-li" id="">        
+        <ul class="nav nav-pills mb-3 text-center centrar-li" id="">
+            <!-- Información -->
             <li class="nav-item col-md-3">
                 <button class="btn btn-nav-bar fw-bold active"
                         id="plan"
@@ -10,6 +11,7 @@
                         aria-selected="true"> INFORMACIÓN </button>
             </li>
 
+            <!-- Datos Demográficos -->
             <li class="nav-item col-md-2" >
                 <button class="btn btn-nav-bar fw-bold"
                         id="plan"
@@ -21,14 +23,16 @@
         </ul>
 
         <div class="tab-content col-md-12" id="">
+            <!-- Información del paciente -->
             <div class="tab-pane fade show active" id="informacion">
                 <div class="col-12 borderPrincipal">  
                     <form @submit.prevent="obtenerDatos" class="row g-3 margen-input">
+                        <!-- Número de Expediente -->
                         <div class="col-md-4">
                             <label for="" class="form-label fw-bold"> Número de Expediente 
-                                <span class="text-danger">* </span> 
+                                <span class="text-danger">* </span>
                                 <i class="fa-solid fa fa-circle-question" 
-                                    data-title="Llene el campo para navegar por la aplicación">
+                                   data-title="Llene el campo para navegar por la aplicación">
                                 </i>
                             </label>
 
@@ -38,11 +42,13 @@
                                    class="form-control"
                                    :class="{ 'form-control border border-danger': propRojoNum,
                                              'form-control border border-success formSombra': propVerdeNum }"
-                                   placeholder="Campo obligatorio">
+                                   placeholder="Campo obligatorio"
+                                   :disabled="propBtnGuardar != true">
                             <div :class="propNumExp == true ? 'visible validaCampo' : 'invisible'"
-                                 id="validaNumExp"> Escriba el número de expediente </div>                
+                                 id="validaNumExp"> Escriba el número de expediente </div>
                         </div>
 
+                        <!-- Nombre del Paciente -->
                         <div class="col-md-6">
                             <label for=""
                                    class="form-label fw-bold"> Nombre del Paciente 
@@ -61,22 +67,25 @@
                                              'form-control border border-success formSombra': propVerdeNom }"
                                    placeholder="Campo obligatorio">
                             <div :class="propNomPac == true ? 'visible validaCampo' : 'invisible'"
-                                 id="validaNomPac"> Escriba el nombre del paciente </div>        
+                                 id="validaNomPac"> Escriba el nombre del paciente </div>
                         </div>
 
+                        <!-- Botón Guardar/Actualizar -->
                         <div class="col-md-1 margen-btn-info">
                             <button data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar-info fw-bold"
                                     :class="propBtnGuardar == true ? 'visible' : 'invisible'"
                                     @click="preIdStore.savePreId( infoPreIdPaciente )"> GUARDAR </button>
+                            
                             <button data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar-info fw-bold"
                                     :class="propBtnActualizar == true ? 'visible' : 'invisible'"
                                     @click="preIdStore.updatePreId( infoPreIdPaciente )"> ACTUALIZAR </button>
-                        </div>                                               
+                        </div>
 
+                        <!-- Fecha de Nacimiento -->
                         <div class="col-md-3">
                             <label for=""
                                    class="form-label fw-bold"> Fecha de Nacimiento </label>
@@ -87,6 +96,7 @@
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
+                        <!-- Edad -->
                         <div class="col-md-1"></div>
                         <div class="col-md-2">
                             <label for=""
@@ -98,6 +108,7 @@
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
+                        <!-- Género -->
                         <div class="col-md-1"></div>
                         <div class="col-md-3">
                             <label for=""
@@ -111,7 +122,7 @@
                                    v-model="infoPreIdPaciente.genero">
                             <label class="btn btn-radio margenRadio"
                                    for="masculino"> Masculino </label>
-                                            
+
                             <input type="radio"
                                    class="btn-check"
                                    name="genero"
@@ -123,19 +134,22 @@
                                    for="femenino"> Femenino </label>
                         </div>
 
-                        <div class="col-md-1"></div>                        
-                        <div class="row g-3 margen-quince">
+                        <hr /> <!-- Separación datos de Cirugía -->
+        
+                        <div class="row g-3 margen-cinco">
+                            <!-- Número de Episodio -->
                             <div class="col-md-3">
                                 <label for=""
-                                       class="form-label fw-bold"> Núm de episodio </label>
+                                       class="form-label fw-bold"> Núm de episodio
+                                </label>
+
                                 <input type="text"
                                        class="form-control"
-                                       v-model="infoPreIdPaciente.numEpisodio"
-                                       :class="infoPreIdPaciente.numEpisodio != undefined ?
-                                              'form-control border border-success formSombra' : 'form-control'">
+                                       v-model="infoPreIdPaciente.numEpisodio">
                             </div>
 
                             <div class="col-md-1"></div>
+                            <!-- Habitación -->
                             <div class="col-md-2">
                                 <label for=""
                                        class="form-label fw-bold"> Habitación </label>
@@ -146,7 +160,8 @@
                                               'form-control border border-success formSombra' : 'form-control'">
                             </div>
                             <div class="col-md-1"></div>
-    
+
+                            <!-- Fecha de Ingreso -->
                             <div class="col-md-3">
                                 <label for="" class="form-label fw-bold"> Fecha de Ingreso </label>
                                 <input type="date"
@@ -157,8 +172,7 @@
                             </div>
                         </div>
 
-                        <hr />
-
+                        <!-- Diagnóstico -->
                         <div class="col-md-8">
                             <label for="" class="form-label fw-bold"> Diagnóstico </label>
                             <textarea class="form-control"
@@ -169,6 +183,7 @@
                             </textarea>
                         </div>
 
+                        <!-- Tipo de Cirugía -->
                         <div class="col-md-4">
                             <label for="" class="form-label col-12 fw-bold"> Tipo de Cirugía </label>
 
@@ -189,7 +204,7 @@
                                    value="Menor"
                                    v-model="infoPreIdPaciente.tipoCx">
                             <label class="btn btn-radio margenRadio" for="menor"> Menor </label>
-                            
+
                             <input type="radio"
                                    class="btn-check"
                                    name="tipoCirugia"
@@ -198,8 +213,9 @@
                                    value="Ambulatoria"
                                    v-model="infoPreIdPaciente.tipoCx">
                             <label class="btn btn-radio" for="ambulatoria"> Ambulatoria </label>
-                        </div>  
-                        
+                        </div>
+
+                        <!-- CIE-10 -->
                         <div class="col-md-8">
                             <label for="" class="form-label fw-bold margen-diez"> CIE-10 </label>
                             <el-select v-model="infoPreIdPaciente.cie10"
@@ -210,10 +226,11 @@
                                     v-for="estadoNacimiento in opcionCIE10"
                                     :value="estadoNacimiento.lblCie10">
                                 </el-option>
-                            </el-select>                   
+                            </el-select>
                         </div>
 
                         <div class="row g-3 margen-quince">
+                            <!-- Cirugía -->
                             <div class="col-md-6">
                                 <label for="" class="form-label fw-bold">Cirugía</label>
                                 <textarea type="text"
@@ -226,6 +243,7 @@
                                 </textarea>
                             </div>
 
+                            <!-- CIE-9 -->
                             <div class="col-md-6">
                                 <label for=""
                                        class="form-label fw-bold"> CIE-9 </label>
@@ -242,6 +260,7 @@
                         </div>
 
                         <div class="col-md-6"></div>
+                        <!-- Fecha de Cirugía -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold"> Fecha de Cirugía </label>
                             <input type="date"
@@ -251,17 +270,19 @@
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
+                        <!-- Hora de Cirugía -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold"> Hora de Cirugía </label>                            
+                            <label for="" class="form-label fw-bold"> Hora de Cirugía </label>
                             <input type="time"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.hrCx"
                                    :class="infoPreIdPaciente.hrCx != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
-                        
-                        <hr />
 
+                        <hr /> <!-- Datos de los Médicos -->
+
+                        <!-- Cirujano -->
                         <div class="col-md-6">
                             <label for="" class="form-label fw-bold"> Cirujano </label>
                             <input type="text"
@@ -271,7 +292,8 @@
                                    :class="infoPreIdPaciente.cirujano != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
-                        
+
+                        <!-- Anestesiólogo -->
                         <div class="col-md-6">
                             <label for="" class="form-label fw-bold"> Anestesiólogo </label>
                             <input type="text" 
@@ -281,6 +303,7 @@
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
+                        <!-- Anestesiólogo VPA -->
                         <div class="col-md-6 margen-25">
                             <label for="" class="form-label fw-bold"> Anestesiólogo VPA </label>
                             <input type="text"
@@ -290,6 +313,7 @@
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
+                        <!-- Residente de Anestesia -->
                         <div class="col-md-6 margen-25">
                             <label for="" class="form-label fw-bold"> Residente de Anestesia </label>
                             <input type="text"
@@ -302,9 +326,11 @@
                 </div>
             </div>
 
+            <!-- Datos Demográficos -->
             <div class="tab-pane fade" id="demograficos">
                 <div class="col-12 borderPrincipal">
                     <form @submit.prevent="obtenerDatos" class="row g-3 margen-input">
+                        <!-- Nacionalidad -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold"> Nacionalidad </label>
                             <el-select v-model="infoPreIdPaciente.nacionalidad"
@@ -318,6 +344,7 @@
                             </el-select>
                         </div>
 
+                        <!-- CURP -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold"> CURP </label>
                             <input type="text"
@@ -327,6 +354,7 @@
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
+                        <!-- Folio ID -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold"> FOLIO ID </label>
                             <input type="text"
@@ -335,7 +363,8 @@
                                    :class="infoPreIdPaciente.folioID != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'">                
                         </div>
-                        
+
+                        <!-- Estado de Nacimiento -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold"> Estado de Nacimiento </label>
                             <el-select v-model="infoPreIdPaciente.estNacimiento"
@@ -351,6 +380,7 @@
 
                         <h5 class="fw-bold"> DATOS DEL DOMICILIO </h5>
 
+                        <!-- Estado de Residencia -->
                         <div class="col-md-4">
                             <label for="" class="form-label fw-bold">Estado de residencia</label>
                             <el-select v-model="infoPreIdPaciente.estResidencia"
@@ -363,6 +393,7 @@
                             </el-select>
                         </div>
 
+                        <!-- Alcaldía/Municipio -->
                         <div class="col-md-4">
                             <label for="" class="form-label fw-bold"> Alcaldía/Municipio </label>
                             <input type="text"
@@ -372,6 +403,7 @@
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
+                        <!-- Colonia/Localidad -->
                         <div class="col-md-4">
                             <label for="" class="form-label fw-bold"> Colonia/Localidad </label>
                             <input type="text"
@@ -381,6 +413,7 @@
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
+                        <!-- Código Postal -->
                         <div class="col-md-4">
                             <label for="" class="form-label fw-bold margen-cp"> Código Postal </label>
                             <input type="text"
@@ -389,8 +422,9 @@
                                    :class="infoPreIdPaciente.codigoPostal != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
-                        
+
                         <div class="col-md-10"></div>
+                        <!-- Botón Guardar/Actuazlizar -->
                         <div class="col-md-1 margenBoton">
                             <button href="#pre-valoracion" 
                                     data-bs-toggle="tab" 
@@ -398,7 +432,7 @@
                                     class="btn btn-guardar-datos fw-bold"
                                     :class="propBtnGuardar == true ? 'visible' : 'invisible'"
                                     @click="preIdStore.savePreId( infoPreIdPaciente )"> GUARDAR </button> 
-                                                                           
+
                                     <button data-bs-toggle="tab" 
                                             type="submit"
                                             class="btn btn-guardar-datos fw-bold"
@@ -408,7 +442,7 @@
                     </form>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
 </template>
 
@@ -447,7 +481,7 @@ export default defineComponent({
         },
         propBtnActualizar:{
             type: Boolean
-        }
+        },
     },
 
     data () {
@@ -559,11 +593,15 @@ export default defineComponent({
 
     methods: {
         obtenerDatos() {
-            this.$emit("validar", this.infoPreIdPaciente.numExped, this.infoPreIdPaciente.nomPaciente);
+            this.$emit("validar", this.infoPreIdPaciente.numExped,
+                                  this.infoPreIdPaciente.nomPaciente);
         },
 
         enviarDatos() {
-            this.$emit('recibe-datos', this.infoPreIdPaciente.numExped, this.infoPreIdPaciente.nomPaciente, this.infoPreIdPaciente.cirujano, this.infoPreIdPaciente.cirugia);
+            this.$emit('recibe-datos', this.infoPreIdPaciente.numExped,
+                                       this.infoPreIdPaciente.nomPaciente,
+                                       this.infoPreIdPaciente.cirujano,
+                                       this.infoPreIdPaciente.cirugia);
         },
     }
 })
@@ -658,6 +696,9 @@ export default defineComponent({
 }
 .margen-input{
     margin-top: -1px;
+}
+.margen-cinco{
+    margin-top: 5px;
 }
 .margen-diez{
     margin-top: 10px;

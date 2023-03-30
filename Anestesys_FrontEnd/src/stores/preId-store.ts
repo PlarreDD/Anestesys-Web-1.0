@@ -23,27 +23,10 @@ export const usePreIdStore = defineStore('preid', {
                     /* Información obligatoria a llenar en el cuestionario */
                     numExpediente: infoPreIdPaciente.numExped,
                     nomPaciente: infoPreIdPaciente.nomPaciente,
-                    /* Información adicional  del paciente */
-                    numEpisodio: infoPreIdPaciente.numEpisodio,
                     fechaNPaciente: infoPreIdPaciente.fechaNac,
                     edadPaciente: infoPreIdPaciente.edadPaciente,
-                    habitacionPaciente: infoPreIdPaciente.habitacion,
                     generoPaciente: infoPreIdPaciente.genero,
-                    fechaInPaciente: infoPreIdPaciente.fechaIn,
-                    /* Datos de cirugía */
-                    diagnostico: infoPreIdPaciente.diagnostico,
-                    tipoCx: infoPreIdPaciente.tipoCx,
-                    cirugia: infoPreIdPaciente.cirugia,
-                    fechaCx: infoPreIdPaciente.fechaCx,
-                    hrCx: infoPreIdPaciente.hrCx,
-                    /* Datos CIE */
-                    cie9: infoPreIdPaciente.cie9,
-                    cie10: infoPreIdPaciente.cie10,
-                    /* Informacion Médicos */
-                    cirujano: infoPreIdPaciente.cirujano,
-                    anestesiologo: infoPreIdPaciente.anestesiologo,
-                    anestesiologoVPA: infoPreIdPaciente.anestesiologoVPA,
-                    residenteAnestesia: infoPreIdPaciente.residenteAnestesia,
+                    /* Datos demográficos */
                     nacionalidad: infoPreIdPaciente.nacionalidad, 
                     CURP: infoPreIdPaciente.CURP,
                     folioID: infoPreIdPaciente.folioID,
@@ -51,7 +34,26 @@ export const usePreIdStore = defineStore('preid', {
                     estResidencia: infoPreIdPaciente.estResidencia,
                     alcaldia: infoPreIdPaciente.alcaldia,
                     colonia: infoPreIdPaciente.colonia,
-                    codigoPostal: infoPreIdPaciente.codigoPostal
+                    codigoPostal: infoPreIdPaciente.codigoPostal,
+                    /* Información de la cirugía del paciente */
+                    numEpisodio: infoPreIdPaciente.numEpisodio,
+                    habitacionPaciente: infoPreIdPaciente.habitacion,
+                    fechaInPaciente: infoPreIdPaciente.fechaIn,
+                    /* Datos de cirugía */
+                    diagnostico: infoPreIdPaciente.diagnostico,
+                    tipoCx: infoPreIdPaciente.tipoCx,
+                    /* Datos CIE */
+                    cie9: infoPreIdPaciente.cie9,
+                    cie10: infoPreIdPaciente.cie10,
+                    /* Informacion procedimiento */
+                    cirugia: infoPreIdPaciente.cirugia,
+                    fechaCx: infoPreIdPaciente.fechaCx,
+                    hrCx: infoPreIdPaciente.hrCx,
+                    /* Informacion Médicos */
+                    cirujano: infoPreIdPaciente.cirujano,
+                    anestesiologo: infoPreIdPaciente.anestesiologo,
+                    anestesiologoVPA: infoPreIdPaciente.anestesiologoVPA,
+                    residenteAnestesia: infoPreIdPaciente.residenteAnestesia,
                 }
             })
             .then((res: any) => {
@@ -81,27 +83,10 @@ export const usePreIdStore = defineStore('preid', {
                 },
                 data: {
                     nomPaciente: infoPreIdPaciente.nomPaciente,
-                    /* Información adicional  del paciente */
-                    numEpisodio: infoPreIdPaciente.numEpisodio,
                     fechaNPaciente: infoPreIdPaciente.fechaNac,
                     edadPaciente: infoPreIdPaciente.edadPaciente,
-                    habitacionPaciente: infoPreIdPaciente.habitacion,
                     generoPaciente: infoPreIdPaciente.genero,
-                    fechaInPaciente: infoPreIdPaciente.fechaIn,
-                    /* Datos de cirugía */
-                    diagnostico: infoPreIdPaciente.diagnostico,
-                    tipoCx: infoPreIdPaciente.tipoCx,
-                    cirugia: infoPreIdPaciente.cirugia,
-                    fechaCx: infoPreIdPaciente.fechaCx,
-                    hrCx: infoPreIdPaciente.hrCx,
-                    /* Datos CIE */
-                    cie9: infoPreIdPaciente.cie9,
-                    cie10: infoPreIdPaciente.cie10,
-                    /* Informacion Médicos */
-                    cirujano: infoPreIdPaciente.cirujano,
-                    anestesiologo: infoPreIdPaciente.anestesiologo,
-                    anestesiologoVPA: infoPreIdPaciente.anestesiologoVPA,
-                    residenteAnestesia: infoPreIdPaciente.residenteAnestesia,
+                    /* Datos Demográficos */
                     nacionalidad: infoPreIdPaciente.nacionalidad, 
                     CURP: infoPreIdPaciente.CURP,
                     folioID: infoPreIdPaciente.folioID,
@@ -109,7 +94,26 @@ export const usePreIdStore = defineStore('preid', {
                     estResidencia: infoPreIdPaciente.estResidencia,
                     alcaldia: infoPreIdPaciente.alcaldia,
                     colonia: infoPreIdPaciente.colonia,
-                    codigoPostal: infoPreIdPaciente.codigoPostal
+                    codigoPostal: infoPreIdPaciente.codigoPostal,
+                    /* Información de la cirugía del paciente */
+                    numEpisodio: infoPreIdPaciente.numEpisodio,
+                    habitacionPaciente: infoPreIdPaciente.habitacion,
+                    fechaInPaciente: infoPreIdPaciente.fechaIn,
+                    /* Datos de cirugía */
+                    diagnostico: infoPreIdPaciente.diagnostico,
+                    tipoCx: infoPreIdPaciente.tipoCx,
+                    /* Datos CIE */
+                    cie9: infoPreIdPaciente.cie9,
+                    cie10: infoPreIdPaciente.cie10,
+                    /* Informacion procedimiento */
+                    cirugia: infoPreIdPaciente.cirugia,
+                    fechaCx: infoPreIdPaciente.fechaCx,
+                    hrCx: infoPreIdPaciente.hrCx,
+                    /* Informacion Médicos */
+                    cirujano: infoPreIdPaciente.cirujano,
+                    anestesiologo: infoPreIdPaciente.anestesiologo,
+                    anestesiologoVPA: infoPreIdPaciente.anestesiologoVPA,
+                    residenteAnestesia: infoPreIdPaciente.residenteAnestesia,
                 }
             })
             .then((res: any) => {

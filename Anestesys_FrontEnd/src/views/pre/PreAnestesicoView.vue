@@ -59,7 +59,8 @@
                     data-bs-toggle="tab"
                     aria-selected="false"
                     @click="validaSeleccionValoracion()"
-                    :disabled="numExpediente != '' && nomPaciente != '' ? false : true"> VALORACIÓN </button>
+                    :disabled="numExpediente != '' && nomPaciente != '' 
+                    ? false : true"> VALORACIÓN </button>
           </li>
 
           <li class="nav-item col-md-3">
@@ -69,7 +70,8 @@
                     data-bs-toggle="tab"
                     aria-selected="false"
                     @click="validaSeleccionPlan()"
-                    :disabled="numExpediente != '' && nomPaciente != '' ? false : true"> PLAN </button>
+                    :disabled="numExpediente != '' && nomPaciente != ''
+                    ? false : true"> PLAN </button>
           </li>
 
           <li class="nav-item col-md-3" >
@@ -79,7 +81,8 @@
                     data-bs-toggle="tab"
                     aria-selected="false"
                     @click="validaSeleccionNota()"
-                    :disabled="numExpediente != '' && nomPaciente != '' ? false : true"> NOTA </button>
+                    :disabled="numExpediente != '' && nomPaciente != ''
+                    ? false : true"> NOTA </button>
           </li>
         </ul>
       </div>
@@ -199,18 +202,20 @@ export default defineComponent({
       
       numExpB:false,
       nomPacB:false,
+
       bordeRojoNum:false,
       bordeVerdeNum:false,
+      
       bordeRojoNom:false,
       bordeVerdeNom:false,
+      
       esPaciente: false,
       esValoracion: false,
       esPlan: false,
       esNota: false,
-      // btnGuardar:idStore.pacienteID,
+      
       btnGuardar: true,
-      btnActualizar: false
-      // btnActualizar:!(idStore.pacienteID)
+      btnActualizar: false      
     }
   },
 
@@ -237,7 +242,7 @@ export default defineComponent({
   },
   
   methods: {
-    async validaExpediente(numExpediente, nombrePaciente,) {
+    async validaExpediente(numExpediente, nombrePaciente) {
       if(numExpediente === undefined || nombrePaciente === undefined ||
          numExpediente === '' || nombrePaciente === '') {
         if(numExpediente === undefined || numExpediente === ''){
@@ -263,7 +268,7 @@ export default defineComponent({
         }
 
         swal.fire({
-          title: 'Escribir el número de expediente o nombre del paciente',
+          title: 'Escribir el número de expediente, nombre del paciente y número de episodio',
           icon: 'error',
           showConfirmButton: false,
           toast: true,
@@ -276,14 +281,16 @@ export default defineComponent({
       }
       else{
         this.numExpB=false
-        this.nomPacB=false  
+        this.nomPacB=false
+        
         this.bordeRojoNum=false
         this.bordeVerdeNum=true
+        
         this.bordeRojoNom=false
         this.bordeVerdeNom=true
-
-        this.btnGuardar=false
-        this.btnActualizar=true          
+        
+        this.btnGuardar=false       
+        this.btnActualizar=true
       }
     },
 
@@ -331,20 +338,13 @@ export default defineComponent({
         this.esNota=true;
     },
 
-    async actualizaDatos(numeroExpediente, nombrePaciente, nombreCirujano, cirugia) {
+    async actualizaDatos(numeroExpediente, nombrePaciente, nombreCirujano, cirugia, numEpisodio) {
       this.numExpediente = numeroExpediente,
       this.nomPaciente = nombrePaciente,
       this.nomCirujano = nombreCirujano,
-      this.nomCirugia = cirugia
+      this.nomCirugia = cirugia,
 
       this.$emit('recibe-datos', this.nomPaciente, this.nomCirujano, this.nomCirugia);
-    },
-
-    async validarCambio() {
-      if (this.numExpediente.trim() != '' && this.nomPaciente.trim() != '') {
-        alert('Entro, no debe cambiar')
-      }
-      alert('Error!')
     },
       
     async scrollFunction() {
