@@ -70,4 +70,18 @@ const IdPacienteSchema = new Schema({
     }
 });
 
+const IdNotaSchema = new Schema({
+    /* Id del paciente para enlazar la tabla */
+    pid: {
+        type: Schema.Types.ObjectId,
+        ref: 'IdPacientes',
+        required: true,
+    },
+
+    obsNota: {
+        type: String,
+    },
+});
+
 export const IdPacientes = model ('IdPacientes', IdPacienteSchema);
+export const IdNota = model('IdNota', IdNotaSchema);

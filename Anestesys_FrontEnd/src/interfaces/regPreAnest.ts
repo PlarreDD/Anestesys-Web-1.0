@@ -34,3 +34,8 @@ export interface regIdPaciente{
     anestesiologoVPA: string,
     residenteAnestesia: string,
 }
+
+export interface notaPre{
+    /* Nota PreAnestesica */
+    nota: string,
+}

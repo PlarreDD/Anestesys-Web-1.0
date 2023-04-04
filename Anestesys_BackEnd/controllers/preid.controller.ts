@@ -1,7 +1,11 @@
 import { Response } from "express";
-import { IdPacientes } from "../models/Paciente";
+import { IdPacientes,
+         IdNota } from "../models/Paciente";
 import { IdPacientesCx } from "../models/PacienteCirugía";
 
+/********************************************************************/
+/***************************  ID PACIENTE ***************************/
+/********************************************************************/
 /* Función para obtener todos los pacientes asociados a un usuario */
 export const getAllPacientes = async (req: any, res: Response) => {
     try {
@@ -115,3 +119,21 @@ export const updatePaciente = async (req: any, res: Response) => {
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
+
+/********************************************************************/
+/******************************* NOTA *******************************/
+/********************************************************************/
+/* Función de registro de nota pre anetésica */
+export const saveNota = async (req: any, res: Response) => {
+    try {
+        const { obsNotaPre, pid } = req.body;
+        
+        const idnota = new IdNota({ pid: pid, obsNota: obsNotaPre });
+        
+        await idnota.save();
+
+        return res.json({ idnota });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+}

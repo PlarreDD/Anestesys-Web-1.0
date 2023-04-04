@@ -132,6 +132,36 @@ export const usePreIdStore = defineStore('preid', {
             .catch((e: any) => {
                 // console.log("error: " + e);
             });            
-        }
+        },
+
+        savePreNota(obsNotaPre: string, pid: string){
+            console.log(obsNotaPre + " - " + pid);
+            
+            apiAxios({
+                url: "http://localhost:5000/nota",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    pid: pid,
+                    obsNotaPre: obsNotaPre,
+                },
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Nota guardada correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
     }
 });
