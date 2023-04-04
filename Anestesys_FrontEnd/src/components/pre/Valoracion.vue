@@ -1,130 +1,152 @@
 <template>
     <div>
-        <ul class="nav nav-pills mb-3 text-center" id="">
+        <ul class="nav nav-pills mb-3 text-center centrar-li" id="">
             <li class="nav-item col-md-2" >
-                <button class="btn btn-outline-secondary fw-bold active" id="valoracion" data-bs-toggle="pill" data-bs-target="#antecedentes" 
+                <button class="btn btn-nav-bar fw-bold active" id="valoracion" data-bs-toggle="pill" data-bs-target="#antecedentes" 
                 type="button" aria-selected="true" data-title="Antecedentes patológicos y no patológicos">ANTECEDENTES</button>
             </li>
             <li class="nav-item col-md-3" >
-                <button class="btn btn-outline-secondary fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#exploracion" 
+                <button class="btn btn-nav-bar fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#exploracion" 
                 type="button" aria-selected="false" title="Registro de signos vitales">EXPLORACIÓN FÍSICA</button>
             </li>
             <li class="nav-item col-md-2" >
-                <button class="btn btn-outline-secondary fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#via" 
+                <button class="btn btn-nav-bar fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#via" 
                 type="button" aria-selected="false" title="Valoración de vía aérea y otras escalas">VÍA AÉREA</button>
             </li>
             <li class="nav-item col-md-2" >
-                <button class="btn btn-outline-secondary fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#estudios" 
+                <button class="btn btn-nav-bar fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#estudios" 
                 type="button" aria-selected="false" title="Estudios realizados previamente">ESTUDIOS</button>
             </li>
             <li class="nav-item col-md-2" >
-                <button class="btn btn-outline-secondary fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#examenes" 
+                <button class="btn btn-nav-bar fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#examenes" 
                 type="button" aria-selected="false" title="Perfil bioquímico">EXÁMENES</button>
             </li>
         </ul>
 
         <div class="tab-content col-md-12" id="">
+            <!-- Div Formulario Antecedentes -->
             <div class="tab-pane fade show active" id="antecedentes">
                 <div class="col-12 bordePrincipal">
                     <form class="row g-3">    
-                        <h5 class="fw-bold">ANTECEDENTES</h5>
+                        <h5 class="col-md-12 fw-bold">ANTECEDENTES</h5>
                         
-                        <div class="col row">                 
-                            <h5 class="col-md-12 fw-bold">Personales patológicos</h5>
+                        <div class="col row">   
+                            <div class="g-3">
+                                <h5 class="col-md-12 fw-bold">Personales patológicos</h5>
 
-                            <div class="col-md-10">
-                                <label for="" class="form-label fw-bold">Alergias</label>
-                                <textarea type="text" class="form-control margenTexto" v-model="antecedentes.alergias" id=""
-                                :class="antecedentes.alergias != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
-                            </div>
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold">Alergias</label>
+                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.alergias" id=""
+                                    :class="antecedentes.alergias != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
+                                </div>
 
-                            <div class="col-md-10">
-                                <label for="" class="form-label fw-bold">Quirúrgicos</label>
-                                <textarea type="text" class="form-control margenTexto" id="" v-model="antecedentes.quirurgicos"
-                                :class="antecedentes.quirurgicos != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
-                            </div>
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold">Quirúrgicos</label>
+                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.quirurgicos"
+                                    :class="antecedentes.quirurgicos != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
+                                </div>
 
-                            <div class="col-md-10">
-                                <label for="" class="form-label fw-bold">Endocrinológicos</label>
-                                <textarea type="text" class="form-control margenTexto" id="" v-model="antecedentes.endocrinologicos"
-                                :class="antecedentes.endocrinologicos != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
-                            </div>
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold">Endocrinológicos</label>
+                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.endocrinologicos"
+                                    :class="antecedentes.endocrinologicos != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
+                                </div>
 
-                            <div class="col-md-10">
-                                <label for="" class="form-label fw-bold">Urológicos</label>
-                                <textarea type="text" class="form-control margenTexto" id="" v-model="antecedentes.urologicos"
-                                :class="antecedentes.urologicos != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
-                            </div>
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold">Urológicos</label>
+                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.urologicos"
+                                    :class="antecedentes.urologicos != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
+                                </div>
 
-                            <div class="col-md-10">
-                                <label for="" class="form-label fw-bold">Traumáticos</label>
-                                <textarea type="text" class="form-control margenTexto" id="" v-model="antecedentes.traumaticos"
-                                :class="antecedentes.traumaticos != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
-                            </div>
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold">Traumáticos</label>
+                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.traumaticos"
+                                    :class="antecedentes.traumaticos != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
+                                </div>
 
-                            <div class="col-md-10">
-                                <label for="" class="form-label fw-bold">Ortopédicos</label>
-                                <textarea type="text" class="form-control margenTexto" id="" v-model="antecedentes.ortopedicos"
-                                :class="antecedentes.ortopedicos != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
-                            </div>
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold">Ortopédicos</label>
+                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.ortopedicos"
+                                    :class="antecedentes.ortopedicos != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
+                                </div>
 
-                            <div class="col-md-10">
-                                <label for="" class="form-label fw-bold">Transfusiones previas</label>
-                                <textarea type="text" class="form-control margenTexto" id="" v-model="antecedentes.transfusiones"
-                                :class="antecedentes.transfusiones != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
-                            </div>
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold">Transfusiones previas</label>
+                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.transfusiones"
+                                    :class="antecedentes.transfusiones != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
+                                </div>
 
-                            <div class="col-md-10">
-                                <label for="" class="form-label fw-bold">Complicaciones anestésicas previas</label>
-                                <textarea type="text" class="form-control margenTexto" id="" v-model="antecedentes.complAnestesicas"
-                                :class="antecedentes.complAnestesicas != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
-                            </div>
-                            
-                            <div class="col-md-10">
-                                <label for="" class="form-label fw-bold">Medicación actual</label>
-                                <textarea type="text" class="form-control" id="" v-model="antecedentes.medicacion"
-                                :class="antecedentes.medicacion != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
-                            </div>
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold">Complicaciones anestésicas previas</label>
+                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.complAnestesicas"
+                                    :class="antecedentes.complAnestesicas != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
+                                </div>
+                                
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold">Estado psiquico</label>
+                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.psiquico"
+                                    :class="antecedentes.psiquico != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold">Medicación actual</label>
+                                    <textarea type="text" class="form-control" rows="1" v-model="antecedentes.medicacion"
+                                    :class="antecedentes.medicacion != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
+                                </div>                                
+                            </div> 
                         </div>
-
+                        <hr />
                         <div class="col row"> 
-                            <h5 class="col-12 fw-bold">No patológicos</h5>
+                            <div class="g-3">
+                                <h5 class="col-12 fw-bold">No patológicos</h5>
 
-                            <div class="col-md-6">
-                                <label for="" class="form-label fw-bold">Horas de ayuno</label>
-                                <input type="text" class="form-control" id="" v-model="antecedentes.horasAyuno"
-                                :class="antecedentes.horasAyuno != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
-                            </div>
-                            <div class="col-md-6"></div>
+                                <div class="col-md-6">
+                                    <label for="" class="form-label fw-bold">Horas de ayuno (hrs)</label>
+                                    <input type="text" class="form-control margen-input" id="" v-model="antecedentes.horasAyuno"
+                                    :class="antecedentes.horasAyuno != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+                                </div>
+                                <div class="col-md-6"></div>
 
-                            <div class="col-md-10">
-                                <label for="" class="form-label fw-bold">Tabaquismo</label>
-                                <textarea type="text" class="form-control" id="" v-model="antecedentes.tabaquismo"
-                                :class="antecedentes.tabaquismo != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
-                            </div>
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold">Tabaquismo</label>
+                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.tabaquismo"
+                                    :class="antecedentes.tabaquismo != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
+                                </div>
 
-                            <div class="col-md-10">
-                                <label for="" class="form-label fw-bold">Etilismo</label>
-                                <textarea type="text" class="form-control" id="" v-model="antecedentes.etilismo"
-                                :class="antecedentes.etilismo != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
-                            </div>
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold">Etilismo</label>
+                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.etilismo"
+                                    :class="antecedentes.etilismo != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
+                                </div>
 
-                            <div class="col-md-10">
-                                <label for="" class="form-label fw-bold">Adicciones</label>
-                                <textarea type="text" class="form-control" id="" v-model="antecedentes.adicciones"
-                                :class="antecedentes.adicciones != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
-                            </div>
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold">Adicciones</label>
+                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.adicciones"
+                                    :class="antecedentes.adicciones != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
+                                </div>
 
-                            <div class="col-md-10">
-                                <label for="" class="form-label fw-bold">Inmunizaciones</label>
-                                <textarea type="text" class="form-control" id="" v-model="antecedentes.inmunizaciones"
-                                :class="antecedentes.inmunizaciones != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
-                            </div>
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold">Inmunizaciones</label>
+                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.inmunizaciones"
+                                    :class="antecedentes.inmunizaciones != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
+                                </div>
 
-                            <div class="col-md-12">
-                                <label for="" class="form-label fw-bold">Antecedentes de importancia para el procedimiento quirúrgico</label>
-                                <textarea class="form-control" id="" rows="3" v-model="antecedentes.antecedentes"
-                                :class="antecedentes.antecedentes != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold">Antecedentes de importancia para el procedimiento quirúrgico</label>
+                                    <textarea class="form-control" id="" rows="10" v-model="antecedentes.antecedentes"
+                                    :class="antecedentes.antecedentes != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
+                                </div>
+
+                                <!-- Botón Guardar/Actuazlizar -->
+                                <div class="col-md-1 margenBoton">
+                                    <button data-bs-toggle="tab" 
+                                            type="submit"
+                                            class="btn btn-guardar-datos fw-bold"> GUARDAR </button> 
+
+                                    <button data-bs-toggle="tab" 
+                                            type="submit"
+                                            class="btn btn-guardar-datos fw-bold"> ACTUALIZAR </button>
+                                </div>
                             </div>
                             
                         </div>
@@ -132,6 +154,7 @@
                     </form>
                 </div>
             </div>
+            <!-- Div Formulario Exploración Física -->
             <div class="tab-pane fade" id="exploracion">
                 <div class="col-12 bordePrincipal largoContenedor">
                     <form class="row g-3">
@@ -188,6 +211,7 @@
                     </form>
                 </div> 
             </div>
+            <!-- Div Formulario Vía Aérea -->
             <div class="tab-pane fade" id="via">
                 <div class="col-12 bordePrincipal largoContenedor">
                     <form class="row g-3">
@@ -351,6 +375,7 @@
                     </form>
                 </div>
             </div>
+            <!-- Div Formulario Estudios -->
             <div class="tab-pane fade" id="estudios">
                 <div class="col-12 bordePrincipal largoContenedor">
                     <form class="row g-3">
@@ -388,6 +413,7 @@
                     </form>
                 </div>            
             </div>
+            <!-- Div Formulario Exámenes -->
             <div class="tab-pane fade" id="examenes">
                 <div class="col-12 bordePrincipal">
                     <form class="row g-3">
@@ -555,6 +581,7 @@ export default defineComponent({
                 ortopedicos: "",
                 transfusiones: "",
                 complAnestesicas: "",
+                psiquico: "",
                 medicacion: "",
                 horasAyuno: "",
                 tabaquismo: "",
@@ -631,21 +658,22 @@ export default defineComponent({
 </script>
 
 <style scoped>
+hr{
+    border:         none;
+    border-left:    2px solid #A2A2A2;
+    height:         auto;
+    width:          1px;       
+}
+h5{
+    color: #002D60;
+    margin-bottom: 25px;
+}
 .bordePrincipal {
   border-radius: 5px;
   padding: 1rem;
   margin-top :10px;
   margin-bottom: 10px;
   background-color: rgba(232, 234, 236, 0.6);
-}
-.margenTexto{
-    margin-bottom: 30px;
-}
-.margenRadio{
-    margin-right: 10px;
-}
-.margenBoton{
-    margin-top: 32px;
 }
 .largoContenedor{
     height: 535px
@@ -656,6 +684,46 @@ export default defineComponent({
     -webkit-box-shadow:0 0 8px green;
     box-shadow:0 0 8px green
 }
+.centrar-li{
+  justify-content: center; 
+}
+/* Botones */
+.btn-nav-bar{
+    --bs-btn-bg: #fff;
+    --bs-btn-color: #002D60;    
+    --bs-btn-border-color: #fff;
+    --bs-btn-hover-bg: #A0A6B2;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #A0A6B2;          
+    --bs-btn-active-bg: #A0A6B2;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-border-color: #A0A6B2;
+    height: auto;
+}
+.btn-guardar-datos{
+    --bs-btn-bg: none;
+    --bs-btn-color: #E88300;    
+    --bs-btn-border-color: #E88300;
+    --bs-btn-hover-bg: #E88300;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #E88300;          
+    --bs-btn-active-bg: #E88300;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-border-color: #E88300;
+    width: 150px; 
+    position: absolute;       
+}
+/* Margenes */
+.margen-input{
+    margin-bottom: 25px;
+}
+.margenRadio{
+    margin-right: 10px;
+}
+.margenBoton{
+    margin-top: 32px;
+}
+/* Title */
 [data-title]:hover:after {
     opacity: 1;
     transition: all 0.1s ease 0.5s;
@@ -676,8 +744,7 @@ export default defineComponent({
     border: 1px solid #fff;
     z-index: 99999;
     visibility: hidden;
-    border-radius: 5px;
-    
+    border-radius: 5px;    
 }
 [data-title] {
     position: relative;
