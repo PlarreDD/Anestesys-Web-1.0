@@ -1,7 +1,8 @@
 import { Response } from "express";
 import { IdPacientes,
-         IdNota } from "../models/Paciente";
-import { IdPacientesCx } from "../models/PacienteCirugía";
+         IdPacientesCx,
+         IdNota } from "../models/PreAnestesico";
+// import { IdPacientesCx } from "../models/PacienteCirugía";
 
 /********************************************************************/
 /***************************  ID PACIENTE ***************************/
