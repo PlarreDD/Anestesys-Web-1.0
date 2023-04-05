@@ -4,6 +4,15 @@
             <div class="col-md-12">
                 <label for=""
                        class="form-label fw-bold"> Observaciones </label>
+
+                <div>
+                    <button data-bs-toggle="tab" 
+                            type="submit"
+                            class="btn btn-guardar-info fw-bold"
+                            @click="preIdStore.updatePreNota(textoNota.nota, preIdStore.pacienteID._id)"
+                            > ACTUALIZAR </button>
+                </div>
+                
                 <textarea class="form-control"
                           id=""
                           rows="20"
@@ -13,20 +22,17 @@
                 </textarea>
 
                 <!-- Botón Guardar/Actualizar -->
-                <div class="col-md-1 margen-btn-info">
+                <div>
                     <button data-bs-toggle="tab" 
                             type="submit"
                             class="btn btn-guardar-info fw-bold"
                             @click="preIdStore.savePreNota(textoNota.nota, preIdStore.pacienteID._id)"
                             > GUARDAR </button>
                     
-                    <!-- <button data-bs-toggle="tab" 
-                            type="submit"
-                            class="btn btn-guardar-info fw-bold"
-                            :class="propBtnActualizar == true ? 'visible' : 'invisible'"> ACTUALIZAR </button> -->
                 </div>
+                        
+                
             </div>
-
         </form>
     </div>    
 </template>

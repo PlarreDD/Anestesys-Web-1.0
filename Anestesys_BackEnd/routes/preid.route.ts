@@ -3,7 +3,7 @@ import { requireToken } from "../middlewares/requireToken";
 import { getAllPacientes,
          getPaciente,
          createPaciente,
-         updatePaciente } from "../controllers/preid.controller";
+         updatePaciente } from "../controllers/preanest.controller";
 
 const router = Router();
 

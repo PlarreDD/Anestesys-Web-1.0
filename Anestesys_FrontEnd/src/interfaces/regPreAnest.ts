@@ -1,3 +1,5 @@
+/* Modelado para obtener los datos desde las vistas */
+/* Registro Id del Paciente */
 export interface regIdPaciente{
     /* Informacion Paciente */
     numExped: string,
@@ -35,6 +37,31 @@ export interface regIdPaciente{
     residenteAnestesia: string,
 }
 
+/* Registro PreAnestésico Valoración Antecedentes */
+export interface regValoracion{
+    /* Antecedentes */
+    // Personales Patológicos
+    antPersPat_Alergias: string,
+    antPersPat_Quirurgicos: string,
+    antPersPat_Endocrinologicos: string,
+    antPersPat_Urologicos: string,
+    antPersPat_Traumaticos: string,
+    antPersPat_Ortopedicos: string,
+    antPersPat_Transfusiones: string,
+    antPersPat_CompAnestPrev: string,
+    antPersPat_EstadoPsiq: string,
+    antPersPat_MedActual: string,
+
+    // Personales No Patológicos
+    antPersNoPat_HrsAyuno: string,
+    antPersNoPat_Tabaquismo: string,
+    antPersNoPat_Etilismo: string,
+    antPersNoPat_Adicciones: string,
+    antPersNoPat_Inmunizaciones: string,
+    antPersNoPat_AntImportQx: string,
+}
+
+/* Registro Nota Preanestesica */
 export interface notaPre{
     /* Nota PreAnestesica */
     nota: string,

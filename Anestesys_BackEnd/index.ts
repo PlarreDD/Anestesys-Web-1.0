@@ -6,6 +6,7 @@ import cors from 'cors';
 import authRouter from './routes/auth.route';
 import preidRouter from './routes/preid.route';
 import medicamentoRouter from './routes/medicamento.route';
+import valRouter from './routes/valoracion.route'
 import notaRouter from './routes/nota.route'
 
 const app = express();
@@ -32,6 +33,7 @@ app.use(cookieParser());
 app.use('/', authRouter);
 /*------------ Pre Anestésico -------------*/
 app.use('/preId', preidRouter);
+app.use('/valora', valRouter);
 app.use('/nota', notaRouter);
 /*----------------- Menú ------------------*/
 app.use('/medicamentos', medicamentoRouter);

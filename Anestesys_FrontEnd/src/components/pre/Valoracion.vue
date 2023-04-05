@@ -1,159 +1,277 @@
 <template>
     <div>
+        <!-- Barra Navegación Valoración -->
         <ul class="nav nav-pills mb-3 text-center centrar-li" id="">
+            <!-- Botón Antecedentes -->
             <li class="nav-item col-md-2" >
-                <button class="btn btn-nav-bar fw-bold active" id="valoracion" data-bs-toggle="pill" data-bs-target="#antecedentes" 
-                type="button" aria-selected="true" data-title="Antecedentes patológicos y no patológicos">ANTECEDENTES</button>
+                <button class="btn btn-nav-bar fw-bold active"
+                        id="valoracion"
+                        data-bs-toggle="pill"
+                        data-bs-target="#antecedentes"
+                        type="button"
+                        aria-selected="true"
+                        data-title="Antecedentes patológicos y no patológicos"> ANTECEDENTES </button>
             </li>
+
+            <!-- Botón Exploración Física -->
             <li class="nav-item col-md-3" >
-                <button class="btn btn-nav-bar fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#exploracion" 
-                type="button" aria-selected="false" title="Registro de signos vitales">EXPLORACIÓN FÍSICA</button>
+                <button class="btn btn-nav-bar fw-bold"
+                        id="valoracion"
+                        data-bs-toggle="pill"
+                        data-bs-target="#exploracion"
+                        type="button"
+                        aria-selected="false"
+                        title="Registro de signos vitales"> EXPLORACIÓN FÍSICA </button>
             </li>
+
+            <!-- Botón Vía Aérea -->
             <li class="nav-item col-md-2" >
-                <button class="btn btn-nav-bar fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#via" 
-                type="button" aria-selected="false" title="Valoración de vía aérea y otras escalas">VÍA AÉREA</button>
+                <button class="btn btn-nav-bar fw-bold"
+                        id="valoracion"
+                        data-bs-toggle="pill"
+                        data-bs-target="#via"
+                        type="button"
+                        aria-selected="false"
+                        title="Valoración de vía aérea y otras escalas"> VÍA AÉREA </button>
             </li>
+
+            <!-- Botón Estudios -->
             <li class="nav-item col-md-2" >
-                <button class="btn btn-nav-bar fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#estudios" 
-                type="button" aria-selected="false" title="Estudios realizados previamente">ESTUDIOS</button>
+                <button class="btn btn-nav-bar fw-bold"
+                        id="valoracion"
+                        data-bs-toggle="pill"
+                        data-bs-target="#estudios"
+                        type="button"
+                        aria-selected="false"
+                        title="Estudios realizados previamente"> ESTUDIOS </button>
             </li>
+            
+            <!-- Botón Exámenes -->
             <li class="nav-item col-md-2" >
-                <button class="btn btn-nav-bar fw-bold" id="valoracion" data-bs-toggle="pill" data-bs-target="#examenes" 
-                type="button" aria-selected="false" title="Perfil bioquímico">EXÁMENES</button>
+                <button class="btn btn-nav-bar fw-bold"
+                id="valoracion"
+                data-bs-toggle="pill"
+                data-bs-target="#examenes"
+                type="button"
+                aria-selected="false"
+                title="Perfil bioquímico"> EXÁMENES </button>
             </li>
         </ul>
-
+        
+        <button data-bs-toggle="tab" 
+                type="submit"
+                class="btn btn-guardar-datos fw-bold"
+                @click="preIdStore.updatePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
         <div class="tab-content col-md-12" id="">
             <!-- Div Formulario Antecedentes -->
             <div class="tab-pane fade show active" id="antecedentes">
                 <div class="col-12 bordePrincipal">
-                    <form class="row g-3">    
-                        <h5 class="col-md-12 fw-bold">ANTECEDENTES</h5>
-                        
-                        <div class="col row">   
+                    <form @submit.prevent="" class="row g-3">    
+                        <h5 class="col-md-12 fw-bold">ANTECEDENTES</h5>                        
+                        <!-- Personales patológicos -->
+                        <div class="col row">
                             <div class="g-3">
-                                <h5 class="col-md-12 fw-bold">Personales patológicos</h5>
-
+                                <h5 class="col-md-12 fw-bold"> Personales patológicos </h5>
+                                <!-- Alergias -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold">Alergias</label>
-                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.alergias" id=""
-                                    :class="antecedentes.alergias != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
+                                    <label for="" class="form-label fw-bold"> Alergias </label>
+                                    <textarea type="text"
+                                              class="form-control margen-input"
+                                              rows="1"
+                                              v-model="infoValoracion.antPersPat_Alergias"
+                                              id=""
+                                              :class="infoValoracion.antPersPat_Alergias != '' ?
+                                                     'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
 
+                                <!-- Quirúrgicos -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold">Quirúrgicos</label>
-                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.quirurgicos"
-                                    :class="antecedentes.quirurgicos != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
-                                </div>
-
-                                <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold">Endocrinológicos</label>
-                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.endocrinologicos"
-                                    :class="antecedentes.endocrinologicos != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
-                                </div>
-
-                                <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold">Urológicos</label>
-                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.urologicos"
-                                    :class="antecedentes.urologicos != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
-                                </div>
-
-                                <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold">Traumáticos</label>
-                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.traumaticos"
-                                    :class="antecedentes.traumaticos != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold">Ortopédicos</label>
-                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.ortopedicos"
-                                    :class="antecedentes.ortopedicos != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
-                                </div>
-
-                                <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold">Transfusiones previas</label>
-                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.transfusiones"
-                                    :class="antecedentes.transfusiones != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
-                                </div>
-
-                                <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold">Complicaciones anestésicas previas</label>
-                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.complAnestesicas"
-                                    :class="antecedentes.complAnestesicas != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
+                                    <label for="" class="form-label fw-bold"> Quirúrgicos </label>
+                                    <textarea type="text"
+                                              class="form-control margen-input"
+                                              rows="1"
+                                              v-model="infoValoracion.antPersPat_Quirurgicos"
+                                              :class="infoValoracion.antPersPat_Quirurgicos != '' ?
+                                                     'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
                                 
+                                <!-- Endocrinológicos -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold">Estado psiquico</label>
-                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.psiquico"
-                                    :class="antecedentes.psiquico != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
+                                    <label for="" class="form-label fw-bold"> Endocrinológicos </label>
+                                    <textarea type="text"
+                                              class="form-control margen-input"
+                                              rows="1"
+                                              v-model="infoValoracion.antPersPat_Endocrinologicos"
+                                              :class="infoValoracion.antPersPat_Endocrinologicos != '' ?
+                                                     'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
 
+                                <!-- Urológicos -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold">Medicación actual</label>
-                                    <textarea type="text" class="form-control" rows="1" v-model="antecedentes.medicacion"
-                                    :class="antecedentes.medicacion != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
-                                </div>                                
+                                    <label for="" class="form-label fw-bold"> Urológicos </label>
+                                    <textarea type="text"
+                                              class="form-control margen-input"
+                                              rows="1"
+                                              v-model="infoValoracion.antPersPat_Urologicos"
+                                              :class="infoValoracion.antPersPat_Urologicos != '' ?
+                                                     'form-control border border-success formSombra' : 'form-control'"></textarea>
+                                </div>
+
+                                <!-- Traumáticos -->
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold"> Traumáticos </label>
+                                    <textarea type="text"
+                                              class="form-control margen-input"
+                                              rows="1"
+                                              v-model="infoValoracion.antPersPat_Traumaticos"
+                                              :class="infoValoracion.antPersPat_Traumaticos != '' ?
+                                                     'form-control border border-success formSombra' : 'form-control'"></textarea>
+                                </div>
+
+                                <!-- Ortopédicos -->
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold"> Ortopédicos </label>
+                                    <textarea type="text"
+                                              class="form-control margen-input"
+                                              rows="1"
+                                              v-model="infoValoracion.antPersPat_Ortopedicos"
+                                              :class="infoValoracion.antPersPat_Ortopedicos != '' ?
+                                                     'form-control border border-success formSombra' : 'form-control'"></textarea>
+                                </div>
+
+                                <!-- Transfusiones previas -->
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold"> Transfusiones previas </label>
+                                    <textarea type="text"
+                                              class="form-control margen-input"
+                                              rows="1"
+                                              v-model="infoValoracion.antPersPat_Transfusiones"
+                                              :class="infoValoracion.antPersPat_Transfusiones != '' ?
+                                                     'form-control border border-success formSombra' : 'form-control'"></textarea>
+                                </div>
+
+                                <!-- Complicaciones anestésicas previas -->
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold"> Complicaciones anestésicas previas </label>
+                                    <textarea type="text"
+                                              class="form-control margen-input"
+                                              rows="1"
+                                              v-model="infoValoracion.antPersPat_CompAnestPrev"
+                                              :class="infoValoracion.antPersPat_CompAnestPrev != '' ?
+                                                     'form-control border border-success formSombra' : 'form-control'"></textarea>
+                                </div>
+                                
+                                <!-- Estado psiquico -->
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold"> Estado psiquico </label>
+                                    <textarea type="text"
+                                              class="form-control margen-input"
+                                              rows="1"
+                                              v-model="infoValoracion.antPersPat_EstadoPsiq"
+                                              :class="infoValoracion.antPersPat_EstadoPsiq != '' ?
+                                                     'form-control border border-success formSombra' : 'form-control'"></textarea>
+                                </div>
+                                
+                                <!-- Medicación actual -->
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold"> Medicación actual </label>
+                                    <textarea type="text"
+                                              class="form-control"
+                                              rows="1"
+                                              v-model="infoValoracion.antPersPat_MedActual"
+                                              :class="infoValoracion.antPersPat_MedActual != '' ?
+                                                     'form-control border border-success formSombra' : 'form-control'"></textarea>
+                                </div>
                             </div> 
                         </div>
+
                         <hr />
-                        <div class="col row"> 
+                        
+                        <!-- No patológicos -->
+                        <div class="col row">
                             <div class="g-3">
-                                <h5 class="col-12 fw-bold">No patológicos</h5>
-
+                                <h5 class="col-12 fw-bold"> No patológicos </h5>
+                                <!-- Horas de ayuno (hrs) -->
                                 <div class="col-md-6">
-                                    <label for="" class="form-label fw-bold">Horas de ayuno (hrs)</label>
-                                    <input type="text" class="form-control margen-input" id="" v-model="antecedentes.horasAyuno"
-                                    :class="antecedentes.horasAyuno != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+                                    <label for="" class="form-label fw-bold"> Horas de ayuno (hrs) </label>
+                                    <input type="text"
+                                           class="form-control margen-input"
+                                           id=""
+                                           v-model="infoValoracion.antPersNoPat_HrsAyuno"
+                                           :class="infoValoracion.antPersNoPat_HrsAyuno != '' ?
+                                                  'form-control border border-success formSombra' : 'form-control'">
                                 </div>
+
+                                <!-- Tabaquismo -->
                                 <div class="col-md-6"></div>
-
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold">Tabaquismo</label>
-                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.tabaquismo"
-                                    :class="antecedentes.tabaquismo != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
+                                    <label for="" class="form-label fw-bold"> Tabaquismo </label>
+                                    <textarea type="text"
+                                              class="form-control margen-input"
+                                              rows="1"
+                                              v-model="infoValoracion.antPersNoPat_Tabaquismo"
+                                              :class="infoValoracion.antPersNoPat_Tabaquismo != '' ?
+                                                     'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
 
+                                <!-- Etilismo -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold">Etilismo</label>
-                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.etilismo"
-                                    :class="antecedentes.etilismo != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
+                                    <label for="" class="form-label fw-bold"> Etilismo </label>
+                                    <textarea type="text"
+                                              class="form-control margen-input"
+                                              rows="1"
+                                              v-model="infoValoracion.antPersNoPat_Etilismo"
+                                              :class="infoValoracion.antPersNoPat_Etilismo != '' ?
+                                                     'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
 
+                                <!-- Adicciones -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold">Adicciones</label>
-                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.adicciones"
-                                    :class="antecedentes.adicciones != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
+                                    <label for="" class="form-label fw-bold"> Adicciones </label>
+                                    <textarea type="text"
+                                              class="form-control margen-input"
+                                              rows="1"
+                                              v-model="infoValoracion.antPersNoPat_Adicciones"
+                                              :class="infoValoracion.antPersNoPat_Adicciones != '' ?
+                                                     'form-control border border-success formSombra' : 'form-control'"></textarea>
+                                </div>
+                                
+                                <!-- Inmunizaciones -->
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold"> Inmunizaciones </label>
+                                    <textarea type="text"
+                                              class="form-control margen-input"
+                                              rows="1"
+                                              v-model="infoValoracion.antPersNoPat_Inmunizaciones"
+                                              :class="infoValoracion.antPersNoPat_Inmunizaciones != '' ?
+                                                     'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
 
+                                <!-- Antecedentes de importancia para el procedimiento quirúrgico -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold">Inmunizaciones</label>
-                                    <textarea type="text" class="form-control margen-input" rows="1" v-model="antecedentes.inmunizaciones"
-                                    :class="antecedentes.inmunizaciones != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea> 
-                                </div>
-
-                                <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold">Antecedentes de importancia para el procedimiento quirúrgico</label>
-                                    <textarea class="form-control" id="" rows="10" v-model="antecedentes.antecedentes"
-                                    :class="antecedentes.antecedentes != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
+                                    <label for="" class="form-label fw-bold"> Antecedentes de importancia para el procedimiento quirúrgico </label>
+                                    <textarea class="form-control"
+                                              id=""
+                                              rows="10"
+                                              v-model="infoValoracion.antPersNoPat_AntImportQx"
+                                              :class="infoValoracion.antPersNoPat_AntImportQx != '' ?
+                                                     'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
 
                                 <!-- Botón Guardar/Actuazlizar -->
                                 <div class="col-md-1 margenBoton">
                                     <button data-bs-toggle="tab" 
                                             type="submit"
-                                            class="btn btn-guardar-datos fw-bold"> GUARDAR </button> 
+                                            class="btn btn-guardar-datos fw-bold"
+                                            @click="preIdStore.savePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> GUARDAR </button> 
 
-                                    <button data-bs-toggle="tab" 
-                                            type="submit"
-                                            class="btn btn-guardar-datos fw-bold"> ACTUALIZAR </button>
                                 </div>
-                            </div>
-                            
+                            </div>                            
                         </div>
-
                     </form>
                 </div>
             </div>
+
             <!-- Div Formulario Exploración Física -->
             <div class="tab-pane fade" id="exploracion">
                 <div class="col-12 bordePrincipal largoContenedor">
@@ -211,6 +329,7 @@
                     </form>
                 </div> 
             </div>
+
             <!-- Div Formulario Vía Aérea -->
             <div class="tab-pane fade" id="via">
                 <div class="col-12 bordePrincipal largoContenedor">
@@ -375,6 +494,7 @@
                     </form>
                 </div>
             </div>
+
             <!-- Div Formulario Estudios -->
             <div class="tab-pane fade" id="estudios">
                 <div class="col-12 bordePrincipal largoContenedor">
@@ -413,6 +533,7 @@
                     </form>
                 </div>            
             </div>
+
             <!-- Div Formulario Exámenes -->
             <div class="tab-pane fade" id="examenes">
                 <div class="col-12 bordePrincipal">
@@ -563,33 +684,21 @@
             </div>
         </div>   
     </div>
-    
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue"
+import { defineComponent } from "vue";
+import { usePreIdStore } from "@/stores/preId-store";
+import type { regValoracion } from "@/interfaces/regPreAnest";
+
+const preIdStore = usePreIdStore();
 
 export default defineComponent({
     data () {
         return{
-            antecedentes: {
-                alergias: "",
-                quirurgicos: "",
-                endocrinologicos: "",
-                urologicos: "",
-                traumaticos: "",
-                ortopedicos: "",
-                transfusiones: "",
-                complAnestesicas: "",
-                psiquico: "",
-                medicacion: "",
-                horasAyuno: "",
-                tabaquismo: "",
-                etilismo: "",
-                adicciones: "",
-                inmunizaciones: "",
-                antecedentes: ""
-            },
+            infoValoracion: {} as regValoracion,
+            preIdStore,
+
             exploracion: {
                 edad: 0,
                 temperatura: "",
@@ -648,11 +757,12 @@ export default defineComponent({
             }
         }  
     },
+
     methods: {
         calcularIMC() {
             this.exploracion.imc = (this.exploracion.peso / (this.exploracion.talla * this.exploracion.talla))
             this.exploracion.imc = Number(this.exploracion.imc.toFixed(2));
-        }                
+        },
     }
 })
 </script>

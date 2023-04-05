@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { requireToken } from "../middlewares/requireToken";
-import { saveNota,
-         updateNota } from "../controllers/preanest.controller";
+import { savePreAntecedentes,
+         updatePreAntecedentes } from "../controllers/preanest.controller";
 
 
 const router = Router();
@@ -12,7 +12,7 @@ const router = Router();
 // PATCH/PUT    /nota/:id      Actualizar paciente
 
 /*------------------- PreId --------------------*/
-router.post('/', requireToken, saveNota);
-router.put('/:id',  requireToken, updateNota);
+router.post('/', requireToken, savePreAntecedentes);
+router.put('/:id',  requireToken, updatePreAntecedentes);
 
 export default router;

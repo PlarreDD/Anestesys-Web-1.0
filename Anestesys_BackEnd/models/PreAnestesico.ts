@@ -1,10 +1,10 @@
 /* Modelado para la base de datos de la vista de
- * información personal del paciente en preanestésico
+ * información del paciente en preanestésico
  */
 import { Schema, model } from "mongoose";
 
-/* Pre Anestésico Id Paciente */
-const IdPacienteSchema = new Schema({
+/* Id Paciente */
+const PreIdPacienteSchema = new Schema({
     /* Información obligatoria a llenar en el cuestionario */
     numExpediente: {
         type: String,
@@ -71,8 +71,8 @@ const IdPacienteSchema = new Schema({
     }
 });
 
-/* Pre Anestésico Id Paciente Información Cirugía */
-const IdPacienteCxSchema = new Schema({
+/* Id Paciente Información Cirugía */
+const PreIdPacienteCxSchema = new Schema({
     /* Id del paciente para enlazar la tabla */
     pid: {
         type: Schema.Types.ObjectId,
@@ -142,8 +142,84 @@ const IdPacienteCxSchema = new Schema({
     }
 });
 
-/* Pre Anestésico Nota */
-const IdNotaSchema = new Schema({
+/* Valoración */
+const PreValoracionSchema = new Schema({
+    /* Id del paciente para enlazar la tabla */
+    pid: {
+        type: Schema.Types.ObjectId,
+        ref: 'IdPacientes',
+        required: true,
+    },
+    /* Antecedentes */
+    // Personales Patológicos
+    antPersPat_Alergias: {
+        type: String,
+    },
+
+    antPersPat_Quirurgicos: {
+        type: String,
+    },
+
+    antPersPat_Endocrinologicos: {
+        type: String,
+    },
+
+    antPersPat_Urologicos: {
+        type: String,
+    },
+
+    antPersPat_Traumaticos: {
+        type: String,
+    },
+
+    antPersPat_Ortopedicos: {
+        type: String,
+    },
+
+    antPersPat_Transfusiones: {
+        type: String,
+    },
+
+    antPersPat_CompAnestPrev: {
+        type: String,
+    },
+
+    antPersPat_EstadoPsiq: {
+        type: String,
+    },
+
+    antPersPat_MedActual: {
+        type: String,
+    },
+
+    // Personales No Patológicos
+    antPersNoPat_HrsAyuno: {
+        type: String,
+    },
+
+    antPersNoPat_Tabaquismo: {
+        type: String,
+    },
+
+    antPersNoPat_Etilismo: {
+        type: String,
+    },
+
+    antPersNoPat_Adicciones: {
+        type: String,
+    },
+
+    antPersNoPat_Inmunizaciones: {
+        type: String,
+    },
+
+    antPersNoPat_AntImportQx: {
+        type: String,
+    },
+});
+
+/* Nota */
+const PreNotaSchema = new Schema({
     /* Id del paciente para enlazar la tabla */
     pid: {
         type: Schema.Types.ObjectId,
@@ -151,11 +227,13 @@ const IdNotaSchema = new Schema({
         required: true,
     },
 
+    /* Información de la nota pre anestésica */
     obsNota: {
         type: String,
     },
 });
 
-export const IdPacientes = model ('IdPacientes', IdPacienteSchema);
-export const IdPacientesCx = model ('IdPacientesCx', IdPacienteCxSchema);
-export const IdNota = model('IdNota', IdNotaSchema);
+export const PreIdPacientes = model('PreIdPacientes', PreIdPacienteSchema);
+export const PreIdPacientesCx = model('PreIdPacientesCx', PreIdPacienteCxSchema);
+export const PreVal = model('PreVal', PreValoracionSchema);
+export const PreNota = model('PreNota', PreNotaSchema);

@@ -1,8 +1,8 @@
 import { Response } from "express";
-import { IdPacientes,
-         IdPacientesCx,
-         IdNota } from "../models/PreAnestesico";
-// import { IdPacientesCx } from "../models/PacienteCirugía";
+import { PreIdPacientes,
+         PreIdPacientesCx,
+         PreVal,
+         PreNota } from "../models/PreAnestesico";
 
 /********************************************************************/
 /***************************  ID PACIENTE ***************************/
@@ -10,7 +10,7 @@ import { IdPacientes,
 /* Función para obtener todos los pacientes asociados a un usuario */
 export const getAllPacientes = async (req: any, res: Response) => {
     try {
-        const pacientes = await IdPacientes.find({uid: req.uid})
+        const pacientes = await PreIdPacientes.find({uid: req.uid})
         
         return res.json({pacientes});
     } catch (error) {
@@ -21,7 +21,7 @@ export const getAllPacientes = async (req: any, res: Response) => {
 /* Funcion para la busqueda de un paciente. Debe estar asociado al usuario */
 export const getPaciente = async (req: any, res: Response) => {
     try {
-        const pacientes = await IdPacientes.find({numExpediente: req.numExpediente})
+        const pacientes = await PreIdPacientes.find({numExpediente: req.numExpediente})
         
         return res.json({pacientes});
     } catch (error) {
@@ -32,8 +32,9 @@ export const getPaciente = async (req: any, res: Response) => {
 /* Funcion para registrar la ficha ID de un paciente */
 export const createPaciente = async (req: any, res: Response) => {
     try {
-        const { numExpediente, nomPaciente,
-                /* Información adicional  del paciente */
+        const { /* Información principal del paciente */
+                numExpediente, nomPaciente,
+                /* Información adicional del paciente */
                 numEpisodio, fechaNPaciente, edadPaciente,
                 habitacionPaciente, generoPaciente,
                 fechaInPaciente, diagnostico, tipoCx,
@@ -48,13 +49,13 @@ export const createPaciente = async (req: any, res: Response) => {
                 nacionalidad, CURP, folioID, estNacimiento,
                 estResidencia, alcaldia, colonia, codigoPostal } = req.body;
 
-        const paciente = new IdPacientes({ numExpediente, nomPaciente, uid: req.uid,
+        const paciente = new PreIdPacientes({ numExpediente, nomPaciente, uid: req.uid,
                                            fechaNPaciente, edadPaciente, generoPaciente,
                                            /* Datos Demográficos */
                                            nacionalidad, CURP, folioID, estNacimiento,
                                            estResidencia, alcaldia, colonia, codigoPostal });
 
-        const infoCx = new IdPacientesCx({ /* Información adicional  del paciente */
+        const infoCx = new PreIdPacientesCx({ /* Información adicional  del paciente */
                                            numEpisodio, pid: paciente._id,  habitacionPaciente,
                                            fechaInPaciente, diagnostico, tipoCx,
                                            /* Datos CIE */
@@ -80,7 +81,7 @@ export const updatePaciente = async (req: any, res: Response) => {
         const { id } = req.params;
         const updVar = req.body;
 
-        const paciente = await IdPacientes.findByIdAndUpdate( id, { nomPaciente: updVar.nomPaciente,
+        const paciente = await PreIdPacientes.findByIdAndUpdate( id, { nomPaciente: updVar.nomPaciente,
                                                                     fechaNPaciente: updVar.fechaNac,
                                                                     edadPaciente: updVar.edadPaciente,
                                                                     generoPaciente: updVar.genero,
@@ -93,7 +94,7 @@ export const updatePaciente = async (req: any, res: Response) => {
                                                                     colonia: updVar.colonia,
                                                                     codigoPostal: updVar.codigoPostal} );
         
-        const infoCx = await IdPacientesCx.findOneAndUpdate({ pid: paciente?._id }, { numEpisodio: updVar.numEpisodio,
+        const infoCx = await PreIdPacientesCx.findOneAndUpdate({ pid: paciente?._id }, { numEpisodio: updVar.numEpisodio,
                                                                                       habitacionPaciente: updVar.habitacionPaciente,
                                                                                       fechaInPaciente: updVar.fechaIn,
                                                                                       /* Datos de cirugía */
@@ -120,7 +121,91 @@ export const updatePaciente = async (req: any, res: Response) => {
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
+/********************************************************************/
+/**************************** Valoración ****************************/
+/********************************************************************/
+/* Función de registro de valoración pre anetésica */
+export const savePreAntecedentes = async (req: any, res: Response) => {
+    try {
+        const { pid, antPersPat_Alergias, antPersPat_Quirurgicos,
+                antPersPat_Endocrinologicos, antPersPat_Urologicos,
+                antPersPat_Traumaticos, antPersPat_Ortopedicos,
+                antPersPat_Transfusiones, antPersPat_CompAnestPrev,
+                antPersPat_EstadoPsiq, antPersPat_MedActual,
+                antPersNoPat_HrsAyuno, antPersNoPat_Tabaquismo,
+                antPersNoPat_Etilismo, antPersNoPat_Adicciones,
+                antPersNoPat_Inmunizaciones, antPersNoPat_AntImportQx
+            } = req.body;
 
+        const preval = new PreVal({
+            pid: pid,
+            /* Antecedentes */
+            // Personales Patológicos
+            antPersPat_Alergias: antPersPat_Alergias,
+            antPersPat_Quirurgicos: antPersPat_Quirurgicos,
+            antPersPat_Endocrinologicos: antPersPat_Endocrinologicos,
+            antPersPat_Urologicos: antPersPat_Urologicos,
+            antPersPat_Traumaticos: antPersPat_Traumaticos,
+            antPersPat_Ortopedicos: antPersPat_Ortopedicos,
+            antPersPat_Transfusiones: antPersPat_Transfusiones,
+            antPersPat_CompAnestPrev: antPersPat_CompAnestPrev,
+            antPersPat_EstadoPsiq: antPersPat_EstadoPsiq,
+            antPersPat_MedActual:antPersPat_MedActual ,
+            //Personales No Patológicos
+            antPersNoPat_HrsAyuno:antPersNoPat_HrsAyuno ,
+            antPersNoPat_Tabaquismo:antPersNoPat_Tabaquismo ,
+            antPersNoPat_Etilismo:antPersNoPat_Etilismo ,
+            antPersNoPat_Adicciones:antPersNoPat_Adicciones ,
+            antPersNoPat_Inmunizaciones:antPersNoPat_Inmunizaciones ,
+            antPersNoPat_AntImportQx:antPersNoPat_AntImportQx ,
+        });
+
+        await preval.save();
+
+        return res.json({ preval });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }    
+};
+
+export const updatePreAntecedentes = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { antPersPat_Alergias, antPersPat_Quirurgicos,
+            antPersPat_Endocrinologicos, antPersPat_Urologicos,
+            antPersPat_Traumaticos, antPersPat_Ortopedicos,
+            antPersPat_Transfusiones, antPersPat_CompAnestPrev,
+            antPersPat_EstadoPsiq, antPersPat_MedActual,
+            antPersNoPat_HrsAyuno, antPersNoPat_Tabaquismo,
+            antPersNoPat_Etilismo, antPersNoPat_Adicciones,
+            antPersNoPat_Inmunizaciones, antPersNoPat_AntImportQx
+        } = req.body;
+
+        const preval = await PreVal.findOneAndUpdate({pid: id}, { /* Antecedentes */
+        // Personales Patológicos
+        antPersPat_Alergias: antPersPat_Alergias,
+        antPersPat_Quirurgicos: antPersPat_Quirurgicos,
+        antPersPat_Endocrinologicos: antPersPat_Endocrinologicos,
+        antPersPat_Urologicos: antPersPat_Urologicos,
+        antPersPat_Traumaticos: antPersPat_Traumaticos,
+        antPersPat_Ortopedicos: antPersPat_Ortopedicos,
+        antPersPat_Transfusiones: antPersPat_Transfusiones,
+        antPersPat_CompAnestPrev: antPersPat_CompAnestPrev,
+        antPersPat_EstadoPsiq: antPersPat_EstadoPsiq,
+        antPersPat_MedActual:antPersPat_MedActual ,
+        //Personales No Patológicos
+        antPersNoPat_HrsAyuno:antPersNoPat_HrsAyuno ,
+        antPersNoPat_Tabaquismo:antPersNoPat_Tabaquismo ,
+        antPersNoPat_Etilismo:antPersNoPat_Etilismo ,
+        antPersNoPat_Adicciones:antPersNoPat_Adicciones ,
+        antPersNoPat_Inmunizaciones:antPersNoPat_Inmunizaciones ,
+        antPersNoPat_AntImportQx:antPersNoPat_AntImportQx , });
+
+        return res.json({ preval })
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
 /********************************************************************/
 /******************************* NOTA *******************************/
 /********************************************************************/
@@ -129,12 +214,27 @@ export const saveNota = async (req: any, res: Response) => {
     try {
         const { obsNotaPre, pid } = req.body;
         
-        const idnota = new IdNota({ pid: pid, obsNota: obsNotaPre });
+        const prenota = new PreNota({ pid: pid,
+                                      obsNota: obsNotaPre });
         
-        await idnota.save();
+        await prenota.save();
 
-        return res.json({ idnota });
+        return res.json({ prenota });
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
     }
-}
+};
+
+/* Función de actualización de nota pre anetésica */
+export const updateNota = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { obsNotaPre } = req.body;
+
+        const prenota = await PreNota.findOneAndUpdate({pid: id}, { obsNota: obsNotaPre });
+
+        return res.json({ prenota })
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
