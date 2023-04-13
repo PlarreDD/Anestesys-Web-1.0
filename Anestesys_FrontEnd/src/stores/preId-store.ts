@@ -132,7 +132,7 @@ export const usePreIdStore = defineStore('preid', {
             })
             .catch((e: any) => {
                 // console.log("error: " + e);
-            });            
+            });
         },
         /*************************** Valoración **************************/
         savePreAntecedentes(infoValoracion: any, pid: string){
@@ -143,7 +143,9 @@ export const usePreIdStore = defineStore('preid', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
+                    // Antecedentes
                     pid: pid,
+                    // Personales Patológicos
                     antPersPat_Alergias: infoValoracion.antPersPat_Alergias,
                     antPersPat_Quirurgicos: infoValoracion.antPersPat_Quirurgicos,
                     antPersPat_Endocrinologicos: infoValoracion.antPersPat_Endocrinologicos,
@@ -162,6 +164,9 @@ export const usePreIdStore = defineStore('preid', {
                     antPersNoPat_Inmunizaciones: infoValoracion.antPersNoPat_Inmunizaciones,
                     antPersNoPat_AntImportQx: infoValoracion.antPersNoPat_AntImportQx
                 },
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
             });
         },
 
@@ -173,7 +178,9 @@ export const usePreIdStore = defineStore('preid', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
+                    // Antecedentes
                     pid: pid,
+                    // Personales Patológicos
                     antPersPat_Alergias: infoValoracion.antPersPat_Alergias,
                     antPersPat_Quirurgicos: infoValoracion.antPersPat_Quirurgicos,
                     antPersPat_Endocrinologicos: infoValoracion.antPersPat_Endocrinologicos,

@@ -61,7 +61,7 @@
         <button data-bs-toggle="tab" 
                 type="submit"
                 class="btn btn-guardar-datos fw-bold"
-                @click="preIdStore.updatePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
+                @click="prueba(infoValoracion)"> ACTUALIZAR </button>
         <div class="tab-content col-md-12" id="">
             <!-- Div Formulario Antecedentes -->
             <div class="tab-pane fade show active" id="antecedentes">
@@ -263,8 +263,7 @@
                                     <button data-bs-toggle="tab" 
                                             type="submit"
                                             class="btn btn-guardar-datos fw-bold"
-                                            @click="preIdStore.savePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> GUARDAR </button> 
-
+                                            @click="preIdStore.savePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> GUARDAR </button>
                                 </div>
                             </div>                            
                         </div>
@@ -334,12 +333,16 @@
             <div class="tab-pane fade" id="via">
                 <div class="col-12 bordePrincipal largoContenedor">
                     <form class="row g-3">
-                        <h5 class="fw-bold">Valoración de Vía Aérea y Otras Escalas</h5>
-
+                        <h5 class="fw-bold"> Valoración de Vía Aérea y Otras Escalas </h5>
+                        
+                        <!-- Mallampati -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold">Mallampati</label>
-                            <select id="inputState" class="form-select" v-model="via.mallampati"
-                            :class="via.mallampati != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
+                            <label for="inputState" class="form-label fw-bold"> Mallampati </label>
+                            <select id="inputState"
+                                    class="form-select"
+                                    v-model="infoValoracion.viaAerea_Mallampati"
+                                    :class="infoValoracion.viaAerea_Mallampati != 'Seleccione...' ?
+                                           'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Clase I</option>
                                 <option>Clase II</option>
@@ -347,20 +350,30 @@
                                 <option>Clase IV</option>
                             </select>
                         </div>
+
+                        <!-- Patil-Aldreti -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold">Patil-Aldreti</label>
-                            <select id="inputState" class="form-select" v-model="via.patilAldreti"
-                            :class="via.patilAldreti != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
+                            <label for="inputState" class="form-label fw-bold"> Patil-Aldreti </label>
+                            <select id="inputState"
+                                    class="form-select"
+                                    v-model="infoValoracion.viaAerea_PatilAldreti"
+                                    :class="infoValoracion.viaAerea_PatilAldreti != 'Seleccione...' ?
+                                           'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Más de 6.5 cm</option>
                                 <option>De 6 a 6.5 cm</option>
                                 <option>Menos de 6 cm</option>
                             </select>
                         </div>
+
+                        <!-- Apertura bucal -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold">Apertura bucal</label>
-                            <select id="inputState" class="form-select" v-model="via.aperturaBucal"
-                            :class="via.aperturaBucal != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
+                            <label for="inputState" class="form-label fw-bold"> Apertura bucal </label>
+                            <select id="inputState"
+                                    class="form-select"
+                                    v-model="infoValoracion.viaAerea_AperturaBucal"
+                                    :class="infoValoracion.viaAerea_AperturaBucal != 'Seleccione...' ?
+                                           'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>3 cm</option>
                                 <option>2.6 a 3 cm</option>
@@ -368,10 +381,15 @@
                                 <option>&lt; 2.5 cm</option>
                             </select>
                         </div>
+
+                        <!-- Distancia esternomentoniana -->
                         <div class="col-md-3">
                             <label for="inputState" class="form-label fw-bold">Distancia esternomentoniana</label>
-                            <select id="inputState" class="form-select" v-model="via.distancia"
-                            :class="via.distancia != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
+                            <select id="inputState"
+                                    class="form-select"
+                                    v-model="infoValoracion.viaAerea_Distancia"
+                                    :class="infoValoracion.viaAerea_Distancia != 'Seleccione...' ?
+                                           'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Más de 13 cm</option>
                                 <option>De 12 a 13 cm</option>
@@ -380,22 +398,31 @@
                             </select>
                         </div>
                         
+                        <!-- Protusión Mandibular -->
                         <div class="col-md-6">
-                            <label for="inputState" class="form-label fw-bold">Protusión Mandibular</label>
-                            <select id="inputState" class="form-select" v-model="via.protusion"
-                            :class="via.protusion != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
+                            <label for="inputState" class="form-label fw-bold"> Protusión Mandibular </label>
+                            <select id="inputState"
+                                    class="form-select"
+                                    v-model="infoValoracion.viaAerea_Protusion"
+                                    :class="infoValoracion.viaAerea_Protusion != 'Seleccione...' ?
+                                           'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Los incisivos inferiores pueden ser llevados más adelante de la arcada dental superior</option>
                                 <option>Los incisivos inferiores se desplazan hasta el nivel de la dentadura superior</option>
                                 <option>Los incisivos inferiores no se proyectan hacia adelante y no pueden tocar la arcada dentaria</option>
                             </select>
                         </div>
+
+                        <!-- IPID -->
                         <div class="col-md-6">
-                            <label for="inputState" class="form-label fw-bold">IPID</label>
-                            <select id="inputState" class="form-select" v-model="via.ipid"
-                            :class="via.ipid != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
+                            <label for="inputState" class="form-label fw-bold"> IPID </label>
+                            <select id="inputState"
+                                    class="form-select"
+                                    v-model="infoValoracion.viaAerea_Ipid"
+                                    :class="infoValoracion.viaAerea_Ipid != 'Seleccione...' ?
+                                           'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
-                            <option>Intubación fácil</option>
+                                <option>Intubación fácil</option>
                                 <option>Discreta dificultad, no requiere maniobras adicionales</option>
                                 <option>Franca dificultad, requiere hasta dos intentos con ayuda de una o dos maniobras adicionales </option>
                                 <option>Gran dificultad, requiere más de dos intentos y ayuda de tres o más maniobras adicionales</option>
@@ -403,10 +430,14 @@
                             </select>
                         </div>
 
+                        <!-- Escala Glasgow -->
                         <div class="col-md-3">
                             <label for="inputState" class="form-label fw-bold">Escala Glasgow</label>
-                            <select id="inputState" class="form-select" v-model="via.glasgow"
-                            :class="via.glasgow != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
+                            <select id="inputState"
+                                    class="form-select"
+                                    v-model="infoValoracion.viaAerea_Glasgow"
+                                    :class="infoValoracion.viaAerea_Glasgow != 'Seleccione...' ?
+                                           'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>1</option>
                                 <option>2</option>
@@ -425,10 +456,15 @@
                                 <option>15</option>                    
                             </select>
                         </div>
+
+                        <!-- Escala NYHA -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold">Escala NYHA</label>
-                            <select id="inputState" class="form-select" v-model="via.nyha"
-                            :class="via.nyha != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
+                            <label for="inputState" class="form-label fw-bold"> Escala NYHA </label>
+                            <select id="inputState"
+                                    class="form-select"
+                                    v-model="infoValoracion.viaAerea_NYHA"
+                                    :class="infoValoracion.viaAerea_NYHA != 'Seleccione...' ?
+                                           'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Clase I</option>
                                 <option>Clase II</option>
@@ -436,10 +472,15 @@
                                 <option>Clase IV</option>
                             </select>
                         </div>
+
+                        <!-- Escala de Goldman -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold">Escala de Goldman</label>
-                            <select id="inputState" class="form-select" v-model="via.goldman"
-                            :class="via.goldman != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
+                            <label for="inputState" class="form-label fw-bold"> Escala de Goldman </label>
+                            <select id="inputState"
+                                    class="form-select"
+                                    v-model="infoValoracion.viaAerea_Goldman"
+                                    :class="infoValoracion.viaAerea_Goldman != 'Seleccione...' ?
+                                           'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Clase I</option>
                                 <option>Clase II</option>
@@ -447,10 +488,15 @@
                                 <option>Clase IV</option>
                             </select>
                         </div>
+
+                        <!-- Riesgo de Trombosis -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold">Riesgo de Trombosis</label>
-                            <select id="inputState" class="form-select" v-model="via.riesgoTrombosis"
-                            :class="via.riesgoTrombosis != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
+                            <label for="inputState" class="form-label fw-bold"> Riesgo de Trombosis </label>
+                            <select id="inputState"
+                                    class="form-select"
+                                    v-model="infoValoracion.viaAerea_RiesgoTrombosis"
+                                    :class="infoValoracion.viaAerea_RiesgoTrombosis != 'Seleccione...' ?
+                                           'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Riesgo Trombótico Bajo</option>
                                 <option>Riesgo Trombótico Medio</option>
@@ -459,10 +505,14 @@
                             </select>
                         </div>
 
+                        <!-- Clasificación ASA -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold">Clasificación ASA</label>
-                            <select id="inputState" class="form-select" v-model="via.clasificacionASA"
-                            :class="via.clasificacionASA != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
+                            <label for="inputState" class="form-label fw-bold"> Clasificación ASA </label>
+                            <select id="inputState"
+                                    class="form-select"
+                                    v-model="infoValoracion.viaAerea_ClasificacionASA"
+                                    :class="infoValoracion.viaAerea_ClasificacionASA != 'Seleccione...' ?
+                                           'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Clase I</option>
                                 <option>Clase II</option>
@@ -472,19 +522,29 @@
                                 <option>Clase VI</option>
                             </select>
                         </div>
+
+                        <!-- Tipo de Cirugía -->
                         <div class="col-md-3">
                             <label for="inputState" class="form-label fw-bold">Tipo de Cirugía</label>
-                            <select id="inputState" class="form-select" v-model="via.tipoCirugia"
-                            :class="via.tipoCirugia != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
+                            <select id="inputState"
+                                    class="form-select"
+                                    v-model="infoValoracion.viaAerea_TipoCirugia"
+                                    :class="infoValoracion.viaAerea_TipoCirugia != 'Seleccione...' ?
+                                           'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Electiva</option>
                                 <option>Urgencia</option>
                             </select>
                         </div>
+
+                        <!-- Riesgo Anéstesico Quirúrgico -->
                         <div class="col-md-4">
                             <label for="inputState" class="form-label fw-bold">Riesgo Anéstesico Quirúrgico</label>
-                            <select id="inputState" class="form-select" v-model="via.riesgoAnestesico"
-                            :class="via.riesgoAnestesico != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
+                            <select id="inputState"
+                                    class="form-select"
+                                    v-model="infoValoracion.viaAerea_RiesgoAnestesico"
+                                    :class="infoValoracion.viaAerea_RiesgoAnestesico != 'Seleccione...' ?
+                                           'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Riesgo Alto</option>
                                 <option>Riesgo Medio</option>
@@ -500,11 +560,15 @@
                 <div class="col-12 bordePrincipal largoContenedor">
                     <form class="row g-3">
                         <h5 class="fw-bold fw-bold">ESTUDIOS</h5>           
-
+                        
+                        <!-- Estudio -->
                         <div class="col-md-8">
                             <label for="inputState" class="form-label fw-bold">Estudio</label>
-                            <select id="inputState" class="form-select" v-model="estudios.estudio"
-                            :class="estudios.estudio != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
+                            <select id="inputState"
+                                    class="form-select"
+                                    v-model="infoValoracion.estudios_Estudio"
+                                    :class="infoValoracion.estudios_Estudio != 'Seleccione...' ?
+                                           'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Electrocardiograma</option>
                                 <option>Electroencefalograma</option>
@@ -521,14 +585,21 @@
                             </select>
                         </div>       
                         
+                        <!-- Botón Guardar/Actualizar -->
                         <div class="col-md-2">
                             <button class="btn btn-outline-secondary fw-bold margenBoton">Guardar</button>
                         </div>
                         
+                        <!-- Especificaciones -->
                         <div class="col-md-12">
                             <label for="" class="form-label fw-bold">Específicar</label>
-                            <textarea class="form-control" id="" rows="3" v-model="estudios.espEstudio"
-                            :class="estudios.espEstudio != '' ? 'form-control border border-success formSombra' : 'form-control'"></textarea>
+                            <textarea class="form-control"
+                                      id=""
+                                      rows="3"
+                                      v-model="infoValoracion.estudio_Especificaciones"
+                                      :class="infoValoracion.estudio_Especificaciones != '' ?
+                                             'form-control border border-success formSombra' : 'form-control'">
+                            </textarea>
                         </div>
                     </form>
                 </div>            
@@ -538,19 +609,29 @@
             <div class="tab-pane fade" id="examenes">
                 <div class="col-12 bordePrincipal">
                     <form class="row g-3">
+                        <!-- Exámenes / Perfil Bioquímico -->
                         <h5 class="fw-bold">EXÁMENES</h5>
                         <h5 class="fw-bold">Perfil Bioquímico</h5>
 
+                        <!-- Fecha de realización -->
                         <div class="col-md-6">
                             <label for="" class="form-label fw-bold">Fecha de realización</label>
-                            <input type="date" class="form-control" id="" v-model="examenes.fechaRealizacion"
-                            :class="examenes.fechaRealizacion != Date ? 'form-control border border-success formSombra' : 'form-control'">
+                            <input type="date"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.fechaRealizacion"
+                                   :class="examenes.fechaRealizacion != Date ?
+                                          'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
+                        <!-- Grupo sanguíneo -->
                         <div class="col-md-6">
                             <label for="inputState" class="form-label fw-bold">Grupo sanguíneo</label>
-                            <select id="inputState" class="form-select" v-model="examenes.grupoSanguineo"
-                            :class="examenes.grupoSanguineo != 'Seleccione...' ? 'form-control border border-success formSombra' : 'form-control'">
+                            <select id="inputState"
+                                    class="form-select"
+                                    v-model="examenes.grupoSanguineo"
+                                    :class="examenes.grupoSanguineo != 'Seleccione...' ?
+                                           'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>A+</option>
                                 <option>A-</option>
@@ -563,122 +644,246 @@
                             </select>
                         </div>
 
+                        <!-- Hemoglobina -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Hemoglobina</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.hemoglobina"
-                            :class="examenes.hemoglobina != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.hemoglobina"
+                                   :class="examenes.hemoglobina != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+
+                        <!-- Hematocrito -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Hematocrito</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.hematocrito"
-                            :class="examenes.hemoglobina != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.hematocrito"
+                                   :class="examenes.hemoglobina != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+
+                        <!-- Plaquetas -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Plaquetas</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.plaquetas"
-                            :class="examenes.plaquetas != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.plaquetas"
+                                   :class="examenes.plaquetas != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+
+                        <!-- Leutocitos -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Leutocitos</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.leutocitos"
-                            :class="examenes.leutocitos != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.leutocitos"
+                                   :class="examenes.leutocitos != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
+                        <!-- TP -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">TP</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.TP"
-                            :class="examenes.TP != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.TP"
+                                   :class="examenes.TP != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+
+                        <!-- TT -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">TT</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.TT"
-                            :class="examenes.TT != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.TT"
+                                   :class="examenes.TT != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+
+                        <!-- TPT -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">TPT</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.TPT"
-                            :class="examenes.TPT != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.TPT"
+                                   :class="examenes.TPT != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+
+                        <!-- INR -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">INR</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.INR"
-                            :class="examenes.INR != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.INR"
+                                   :class="examenes.INR != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
+                        <!-- Glucosa -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Glucosa</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.glucosa"
-                            :class="examenes.glucosa != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.glucosa"
+                                   :class="examenes.glucosa != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+
+                        <!-- Creatinina -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Creatinina</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.creatinina"
-                            :class="examenes.creatinina != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id="" v-model="examenes.creatinina"
+                                   :class="examenes.creatinina != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+
+                        <!-- Urea -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Urea</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.urea"
-                            :class="examenes.urea != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.urea"
+                                   :class="examenes.urea != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+
+                        <!-- Sodio -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Sodio</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.sodio"
-                            :class="examenes.sodio != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.sodio"
+                                   :class="examenes.sodio != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
+                        <!-- Potasio -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Potasio</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.potasio"
-                            :class="examenes.potasio != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
-                        </div>
-                        <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Cloro</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.cloro"
-                            :class="examenes.cloro != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
-                        </div>
-                        <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Calcio</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.calcio"
-                            :class="examenes.calcio != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
-                        </div>
-                        <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Magnesio</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.magnesio"
-                            :class="examenes.magnesio != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.potasio"
+                                   :class="examenes.potasio != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
+                        <!-- Cloro -->
+                        <div class="col-md-3">
+                            <label for="" class="form-label fw-bold">Cloro</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.cloro"
+                                   :class="examenes.cloro != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
+                        </div>
+
+                        <!-- Calcio -->
+                        <div class="col-md-3">
+                            <label for="" class="form-label fw-bold">Calcio</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.calcio"
+                                   :class="examenes.calcio != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
+                        </div>
+
+                        <!-- Magnesio -->
+                        <div class="col-md-3">
+                            <label for="" class="form-label fw-bold">Magnesio</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.magnesio"
+                                   :class="examenes.magnesio != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
+                        </div>
+
+                        <!-- Bilirrubina directa -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Bilirrubina directa</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.bilirrubinaDirecta"
-                            :class="examenes.bilirrubinaDirecta != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.bilirrubinaDirecta"
+                                   :class="examenes.bilirrubinaDirecta != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+
+                        <!-- Bilirrubina indirecta -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Bilirrubina indirecta</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.bilirrubinaIndirecta"
-                            :class="examenes.bilirrubinaIndirecta != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.bilirrubinaIndirecta"
+                                   :class="examenes.bilirrubinaIndirecta != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+
+                        <!-- Bilirrubina Total -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Bilirrubina Total</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.bilirrubinaTotal"
-                            :class="examenes.bilirrubinaTotal != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.bilirrubinaTotal"
+                                   :class="examenes.bilirrubinaTotal != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+
+                        <!-- Lipasa -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Lipasa</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.lipasa"
-                            :class="examenes.lipasa != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.lipasa"
+                                   :class="examenes.lipasa != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>    
                         
+                        <!-- Amilasa -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Amilasa</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.amilasa"
-                            :class="examenes.amilasa != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
-                        </div> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.amilasa"
+                                   :class="examenes.amilasa != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
+                        </div>
+
+                        <!-- Otros -->
                         <div class="col-md-9">
                             <label for="" class="form-label fw-bold">Otros</label>
-                            <input type="text" class="form-control" id="" v-model="examenes.otros"
-                            :class="examenes.otros != '' ? 'form-control border border-success formSombra' : 'form-control'"> 
-                        </div> 
-                        
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="examenes.otros"
+                                   :class="examenes.otros != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
+                        </div>
                     </form>
                 </div>
             </div>
@@ -710,25 +915,12 @@ export default defineComponent({
                 tensionArterial: "",
                 saturacionOxigeno: ""
             },
-            via: {
-                mallampati: "Seleccione...",
-                patilAldreti: "Seleccione...",
-                aperturaBucal: "Seleccione...",
-                distancia: "Seleccione...",
-                protusion: "Seleccione...",
-                ipid: "Seleccione...",
-                glasgow: "Seleccione...",
-                nyha: "Seleccione...",
-                goldman: "Seleccione...",
-                riesgoTrombosis: "Seleccione...",
-                clasificacionASA: "Seleccione...",
-                tipoCirugia: "Seleccione...",
-                riesgoAnestesico: "Seleccione..."
-            },
-            estudios: {
-                estudio: "Seleccione...",
-                espEstudio: ""
-            },
+            
+            // estudios: {
+            //     estudio: "Seleccione...",
+            //     espEstudio: ""
+            // },
+
             examenes: {
                 fechaRealizacion: Date,
                 grupoSanguineo: "Seleccione...",
@@ -763,6 +955,9 @@ export default defineComponent({
             this.exploracion.imc = (this.exploracion.peso / (this.exploracion.talla * this.exploracion.talla))
             this.exploracion.imc = Number(this.exploracion.imc.toFixed(2));
         },
+        prueba(infoValoracion: any){
+            console.log(infoValoracion);            
+        }
     }
 })
 </script>

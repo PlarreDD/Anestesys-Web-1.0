@@ -59,6 +59,25 @@ export interface regValoracion{
     antPersNoPat_Adicciones: string,
     antPersNoPat_Inmunizaciones: string,
     antPersNoPat_AntImportQx: string,
+
+    // Vía Aérea
+    viaAerea_Mallampati: string,
+    viaAerea_PatilAldreti: string,
+    viaAerea_AperturaBucal: string,
+    viaAerea_Distancia: string,
+    viaAerea_Protusion: string,
+    viaAerea_Ipid: string,
+    viaAerea_Glasgow: string,
+    viaAerea_NYHA: string,
+    viaAerea_Goldman: string,
+    viaAerea_RiesgoTrombosis: string,
+    viaAerea_ClasificacionASA: string,
+    viaAerea_TipoCirugia: string,
+    viaAerea_RiesgoAnestesico: string,
+
+    // Estudios
+    estudios_Estudio: string,
+    estudio_Especificaciones: string,
 }
 
 /* Registro Nota Preanestesica */
