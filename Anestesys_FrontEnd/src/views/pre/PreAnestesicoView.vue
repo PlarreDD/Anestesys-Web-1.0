@@ -59,8 +59,7 @@
                     data-bs-toggle="tab"
                     aria-selected="false"
                     @click="validaSeleccionValoracion()"
-                    :disabled="numExpediente != '' && nomPaciente != '' 
-                    ? false : true"> VALORACIÓN </button>
+                    v-bind:disabled="deshabilitado"> VALORACIÓN </button>
           </li>
 
           <li class="nav-item col-md-3">
@@ -70,8 +69,7 @@
                     data-bs-toggle="tab"
                     aria-selected="false"
                     @click="validaSeleccionPlan()"
-                    :disabled="numExpediente != '' && nomPaciente != ''
-                    ? false : true"> PLAN </button>
+                    v-bind:disabled="deshabilitado"> PLAN </button>
           </li>
 
           <li class="nav-item col-md-3" >
@@ -81,8 +79,7 @@
                     data-bs-toggle="tab"
                     aria-selected="false"
                     @click="validaSeleccionNota()"
-                    :disabled="numExpediente != '' && nomPaciente != ''
-                    ? false : true"> NOTA </button>
+                    v-bind:disabled="deshabilitado"> NOTA </button>
           </li>
         </ul>
       </div>
@@ -126,7 +123,7 @@
         <div :class="numExpediente != '' && nomPaciente != '' ?
                     'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
           <RouterLink to="trans"
-                      :class="numExpediente != '' && nomPaciente != '' ? 'visible' : 'invisible'">
+                      class="invisible" id="menu-trans">
             <img src="images/trans.svg" class="img-menu-lateral"/>
           </RouterLink>
         </div>
@@ -134,7 +131,7 @@
         <div :class="numExpediente != '' && nomPaciente != '' ?
                     'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
           <RouterLink to="post"
-                      :class="numExpediente != '' && nomPaciente != '' ? 'visible' : 'invisible'">
+          class="invisible" id="menu-post">
             <img src="images/post.svg" class="img-menu-lateral"/>
           </RouterLink>
         </div>
@@ -192,6 +189,8 @@ const idStore = usePreIdStore();
 export default defineComponent({
   data() {
     return {
+      deshabilitado: true,
+
       claseVisible:'visible',
       claseInvisible:'invisible',
 
@@ -267,6 +266,10 @@ export default defineComponent({
           this.bordeRojoNom=false
         }
 
+        this.deshabilitado=true
+        document.getElementById("menu-trans").className='invisible'
+        document.getElementById("menu-post").className='invisible'       
+
         swal.fire({
           title: 'Escribir el número de expediente, nombre del paciente y número de episodio',
           icon: 'error',
@@ -291,6 +294,10 @@ export default defineComponent({
         
         this.btnGuardarId=false       
         this.btnActualizarId=true
+
+        this.deshabilitado=false
+        document.getElementById("menu-trans").className='visible'
+        document.getElementById("menu-post").className='visible'
       }
     },
 
