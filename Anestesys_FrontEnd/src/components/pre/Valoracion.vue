@@ -932,23 +932,6 @@ export default defineComponent({
             infoValoracion: {} as regValoracion,
             preIdStore,
 
-            exploracion: {
-                edad: 0,
-                temperatura: "",
-                frecuenciaCardiaca: "",
-                frecueciaRespiratoria: "",
-                peso: 0,
-                talla: 0,
-                imc: 0,
-                tensionArterial: "",
-                saturacionOxigeno: ""
-            },
-            
-            // estudios: {
-            //     estudio: "Seleccione...",
-            //     espEstudio: ""
-            // },
-
             examenes: {
                 fechaRealizacion: Date,
                 grupoSanguineo: "Seleccione...",
