@@ -3,35 +3,34 @@
         <form @submit.prevent="" class="row g-3">                
             <div class="col-md-12">
                 <label for=""
-                       class="form-label fw-bold"> Observaciones </label>
-
-                <div>
-                    <button data-bs-toggle="tab" 
-                            type="submit"
-                            class="btn btn-guardar-info fw-bold"
-                            @click="preIdStore.updatePreNota(textoNota.nota, preIdStore.pacienteID._id)"
-                            > ACTUALIZAR </button>
-                </div>
+                       class="form-label fw-bold"> Nota  Preanestésica</label>
                 
                 <textarea class="form-control"
                           id=""
                           rows="20"
                           v-model="textoNota.nota"
-                          :class="textoNota.nota != '' ?
+                          :class="textoNota.nota != undefined ?
                                  'form-control border border-success formSombra' : 'form-control'">
                 </textarea>
+                                                   
+            </div>
 
-                <!-- Botón Guardar/Actualizar -->
-                <div>
+            <!-- Botón Guardar/Actualizar --> 
+            <div class="col-md-12 alinear-btn">
+                <template v-if="btnActualizarNota === false">
                     <button data-bs-toggle="tab" 
                             type="submit"
                             class="btn btn-guardar-info fw-bold"
-                            @click="preIdStore.savePreNota(textoNota.nota, preIdStore.pacienteID._id)"
+                            @click="cambiarUpdateNota"
                             > GUARDAR </button>
-                    
-                </div>
-                        
-                
+                </template>
+                <template v-else>
+                    <button data-bs-toggle="tab" 
+                            type="submit"
+                            class="btn btn-guardar-info fw-bold"
+                            @click="preIdStore.updatePreNota(textoNota.nota, preIdStore.pacienteID._id)"
+                            > ACTUALIZAR </button> 
+                </template>                                                         
             </div>
         </form>
     </div>    
@@ -45,24 +44,22 @@ import { defineComponent } from "vue";
 const preIdStore = usePreIdStore();
 
 export default defineComponent({
-    // props:{
-    //     propBtnGuardar:{
-    //         type: Boolean
-    //     },
-
-    //     propBtnActualizar:{
-    //         type: Boolean
-    //     },
-    // },
     
     data () {
         return{
             textoNota: {} as notaPre,
             preIdStore,
+
+            btnActualizarNota:false
         }
     },
 
     methods: {
+        cambiarUpdateNota() {
+            this.btnActualizarNota=true
+
+            preIdStore.savePreNota(this.textoNota.nota, preIdStore.pacienteID._id)
+        }
     }
 })
 </script>
@@ -92,20 +89,9 @@ export default defineComponent({
     --bs-btn-active-bg: #E88300;
     --bs-btn-active-color: #ffffff;
     --bs-btn-active-border-color: #E88300;
-    width: 150px; 
-    position: absolute;       
+    width: 150px;        
 }
-.btn-guardar-datos{
-    --bs-btn-bg: none;
-    --bs-btn-color: #E88300;    
-    --bs-btn-border-color: #E88300;
-    --bs-btn-hover-bg: #E88300;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-border-color: #E88300;          
-    --bs-btn-active-bg: #E88300;
-    --bs-btn-active-color: #ffffff;
-    --bs-btn-active-border-color: #E88300;
-    width: 150px; 
-    position: absolute;       
+.alinear-btn{
+    text-align: end;
 }
 </style>
