@@ -73,9 +73,8 @@
                                     <label for="" class="form-label fw-bold"> Alergias </label>
                                     <textarea type="text"
                                               class="form-control margen-input"
-                                              rows="1"
-                                              v-model="infoValoracion.antPersPat_Alergias"
-                                              id=""
+                                              rows="2"
+                                              v-model="infoValoracion.antPersPat_Alergias"                                              
                                               :class="infoValoracion.antPersPat_Alergias != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
@@ -85,7 +84,7 @@
                                     <label for="" class="form-label fw-bold"> Quirúrgicos </label>
                                     <textarea type="text"
                                               class="form-control margen-input"
-                                              rows="1"
+                                              rows="2"
                                               v-model="infoValoracion.antPersPat_Quirurgicos"
                                               :class="infoValoracion.antPersPat_Quirurgicos != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
@@ -96,7 +95,7 @@
                                     <label for="" class="form-label fw-bold"> Endocrinológicos </label>
                                     <textarea type="text"
                                               class="form-control margen-input"
-                                              rows="1"
+                                              rows="2"
                                               v-model="infoValoracion.antPersPat_Endocrinologicos"
                                               :class="infoValoracion.antPersPat_Endocrinologicos != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
@@ -107,7 +106,7 @@
                                     <label for="" class="form-label fw-bold"> Urológicos </label>
                                     <textarea type="text"
                                               class="form-control margen-input"
-                                              rows="1"
+                                              rows="2"
                                               v-model="infoValoracion.antPersPat_Urologicos"
                                               :class="infoValoracion.antPersPat_Urologicos != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
@@ -118,7 +117,7 @@
                                     <label for="" class="form-label fw-bold"> Traumáticos </label>
                                     <textarea type="text"
                                               class="form-control margen-input"
-                                              rows="1"
+                                              rows="2"
                                               v-model="infoValoracion.antPersPat_Traumaticos"
                                               :class="infoValoracion.antPersPat_Traumaticos != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
@@ -129,7 +128,7 @@
                                     <label for="" class="form-label fw-bold"> Ortopédicos </label>
                                     <textarea type="text"
                                               class="form-control margen-input"
-                                              rows="1"
+                                              rows="2"
                                               v-model="infoValoracion.antPersPat_Ortopedicos"
                                               :class="infoValoracion.antPersPat_Ortopedicos != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
@@ -140,7 +139,7 @@
                                     <label for="" class="form-label fw-bold"> Transfusiones previas </label>
                                     <textarea type="text"
                                               class="form-control margen-input"
-                                              rows="1"
+                                              rows="2"
                                               v-model="infoValoracion.antPersPat_Transfusiones"
                                               :class="infoValoracion.antPersPat_Transfusiones != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
@@ -151,7 +150,7 @@
                                     <label for="" class="form-label fw-bold"> Complicaciones anestésicas previas </label>
                                     <textarea type="text"
                                               class="form-control margen-input"
-                                              rows="1"
+                                              rows="2"
                                               v-model="infoValoracion.antPersPat_CompAnestPrev"
                                               :class="infoValoracion.antPersPat_CompAnestPrev != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
@@ -162,7 +161,7 @@
                                     <label for="" class="form-label fw-bold"> Estado psiquico </label>
                                     <textarea type="text"
                                               class="form-control margen-input"
-                                              rows="1"
+                                              rows="2"
                                               v-model="infoValoracion.antPersPat_EstadoPsiq"
                                               :class="infoValoracion.antPersPat_EstadoPsiq != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
@@ -173,7 +172,7 @@
                                     <label for="" class="form-label fw-bold"> Medicación actual </label>
                                     <textarea type="text"
                                               class="form-control"
-                                              rows="1"
+                                              rows="2"
                                               v-model="infoValoracion.antPersPat_MedActual"
                                               :class="infoValoracion.antPersPat_MedActual != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
@@ -201,10 +200,10 @@
                                 <!-- Tabaquismo -->
                                 <div class="col-md-6"></div>
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Tabaquismo </label>
+                                    <label for="" class="form-label fw-bold margen-tabaquismo"> Tabaquismo </label>
                                     <textarea type="text"
                                               class="form-control margen-input"
-                                              rows="1"
+                                              rows="2"
                                               v-model="infoValoracion.antPersNoPat_Tabaquismo"
                                               :class="infoValoracion.antPersNoPat_Tabaquismo != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
@@ -215,7 +214,7 @@
                                     <label for="" class="form-label fw-bold"> Etilismo </label>
                                     <textarea type="text"
                                               class="form-control margen-input"
-                                              rows="1"
+                                              rows="2"
                                               v-model="infoValoracion.antPersNoPat_Etilismo"
                                               :class="infoValoracion.antPersNoPat_Etilismo != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
@@ -226,7 +225,7 @@
                                     <label for="" class="form-label fw-bold"> Adicciones </label>
                                     <textarea type="text"
                                               class="form-control margen-input"
-                                              rows="1"
+                                              rows="2"
                                               v-model="infoValoracion.antPersNoPat_Adicciones"
                                               :class="infoValoracion.antPersNoPat_Adicciones != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
@@ -237,18 +236,18 @@
                                     <label for="" class="form-label fw-bold"> Inmunizaciones </label>
                                     <textarea type="text"
                                               class="form-control margen-input"
-                                              rows="1"
+                                              rows="2"
                                               v-model="infoValoracion.antPersNoPat_Inmunizaciones"
                                               :class="infoValoracion.antPersNoPat_Inmunizaciones != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
 
                                 <!-- Antecedentes de importancia para el procedimiento quirúrgico -->
-                                <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Antecedentes de importancia para el procedimiento quirúrgico </label>
-                                    <textarea class="form-control"
+                                <div class="col-md-12">                                    
+                                    <h5 class="col-12 fw-bold margen-ante-impor"> Antecedentes de importancia </h5>
+                                    <textarea class="form-control deslizar"
                                               id=""
-                                              rows="10"
+                                              rows="12"
                                               v-model="infoValoracion.antPersNoPat_AntImportQx"
                                               :class="infoValoracion.antPersNoPat_AntImportQx != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
@@ -311,7 +310,7 @@
                             :class="infoValoracion.sigVit_Peso != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
                         <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">Talla (mt)</label>
+                            <label for="" class="form-label fw-bold">Talla (m)</label>
                             <input type="text" class="form-control" id="" v-model="infoValoracion.sigVit_Talla" @keyup.capture="calcularIMC"
                             :class="infoValoracion.sigVit_Talla != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
@@ -991,7 +990,10 @@ hr{
 }
 h5{
     color: #002D60;
-    margin-bottom: 25px;
+    margin-bottom: 20px;    
+}
+.margen-ante-impor{
+    margin-top: 60px
 }
 .bordePrincipal {
   border-radius: 5px;
@@ -1004,10 +1006,14 @@ h5{
     height: 535px
 }
 .formSombra:focus{
-    border-color:green;
+    border-color:#6BD99B;
     outline:0;
-    -webkit-box-shadow:0 0 8px green;
-    box-shadow:0 0 8px green
+    -webkit-box-shadow:0 0 8px #6BD99B;
+    box-shadow:0 0 8px #6BD99B
+}
+.border-success {
+    --bs-border-opacity: 1;
+    border-color: #6BD99B !important;
 }
 .centrar-li{
   justify-content: center; 
@@ -1047,6 +1053,15 @@ h5{
 .margenBoton{
     margin-top: 32px;
     text-align: end;
+}
+.margen-tabaquismo{
+    margin-top: 25px;
+}
+.deslizar {
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 270px;
+  margin-top: 15px;
 }
 /* Title */
 [data-title]:hover:after {
