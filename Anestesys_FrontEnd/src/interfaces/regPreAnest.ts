@@ -59,6 +59,17 @@ export interface regValoracion{
     antPersNoPat_Adicciones: string,
     antPersNoPat_Inmunizaciones: string,
     antPersNoPat_AntImportQx: string,
+
+    // Signos Vitales
+    sigVit_Edad: string,
+    sigVit_Temperatura: string,
+    sigVit_FrecuCardiaca: string,
+    sigVit_FrecuRespiratoria: string,
+    sigVit_Peso: number,
+    sigVit_Talla: number,
+    sigVit_IMC: number,
+    sigVit_TensionArterial: string,
+    sigVit_SaturacionOxigeno: string
 }
 
 /* Registro Nota Preanestesica */

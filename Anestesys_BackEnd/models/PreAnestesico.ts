@@ -216,6 +216,43 @@ const PreValoracionSchema = new Schema({
     antPersNoPat_AntImportQx: {
         type: String,
     },
+
+    // Signos Vitales
+    sigVit_Edad: {
+        type: String,
+    },
+
+    sigVit_Temperatura: {
+        type: String,
+    },
+
+    sigVit_FrecuCardiaca: {
+        type: String,
+    },
+
+    sigVit_FrecuRespiratoria: {
+        type: String,
+    },
+
+    sigVit_Peso: {
+        type: String,
+    },
+
+    sigVit_Talla: {
+        type: String,
+    },
+
+    sigVit_IMC: {
+        type: String,
+    },
+
+    sigVit_TensionArterial: {
+        type: String,
+    },
+
+    sigVit_SaturacionOxigeno: {
+        type: String,
+    },
 });
 
 /* Nota */

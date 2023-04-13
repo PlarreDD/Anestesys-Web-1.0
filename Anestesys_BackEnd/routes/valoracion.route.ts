@@ -6,12 +6,10 @@ import { savePreAntecedentes,
 
 const router = Router();
 
-// GET          /nota          Consultar pacientes
-// GET          /nota/:id      Consultar 1 paciente
-// POST         /nota          Crear paciente
-// PATCH/PUT    /nota/:id      Actualizar paciente
+// POST         /nota          Crear
+// PATCH/PUT    /nota/:id      Actualizar
 
-/*------------------- PreId --------------------*/
+/*------------------- PreValoración --------------------*/
 router.post('/', requireToken, savePreAntecedentes);
 router.put('/:id',  requireToken, updatePreAntecedentes);
 

@@ -21,7 +21,7 @@
                         data-bs-target="#exploracion"
                         type="button"
                         aria-selected="false"
-                        title="Registro de signos vitales"> EXPLORACIÓN FÍSICA </button>
+                        data-title="Registro de signos vitales"> EXPLORACIÓN FÍSICA </button>
             </li>
 
             <!-- Botón Vía Aérea -->
@@ -32,7 +32,7 @@
                         data-bs-target="#via"
                         type="button"
                         aria-selected="false"
-                        title="Valoración de vía aérea y otras escalas"> VÍA AÉREA </button>
+                        data-title="Valoración de vía aérea y otras escalas"> VÍA AÉREA </button>
             </li>
 
             <!-- Botón Estudios -->
@@ -43,7 +43,7 @@
                         data-bs-target="#estudios"
                         type="button"
                         aria-selected="false"
-                        title="Estudios realizados previamente"> ESTUDIOS </button>
+                        data-title="Estudios realizados previamente"> ESTUDIOS </button>
             </li>
             
             <!-- Botón Exámenes -->
@@ -54,14 +54,10 @@
                 data-bs-target="#examenes"
                 type="button"
                 aria-selected="false"
-                title="Perfil bioquímico"> EXÁMENES </button>
+                data-title="Perfil bioquímico"> EXÁMENES </button>
             </li>
         </ul>
-        
-        <button data-bs-toggle="tab" 
-                type="submit"
-                class="btn btn-guardar-datos fw-bold"
-                @click="preIdStore.updatePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
+                
         <div class="tab-content col-md-12" id="">
             <!-- Div Formulario Antecedentes -->
             <div class="tab-pane fade show active" id="antecedentes">
@@ -80,7 +76,7 @@
                                               rows="1"
                                               v-model="infoValoracion.antPersPat_Alergias"
                                               id=""
-                                              :class="infoValoracion.antPersPat_Alergias != '' ?
+                                              :class="infoValoracion.antPersPat_Alergias != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
 
@@ -91,7 +87,7 @@
                                               class="form-control margen-input"
                                               rows="1"
                                               v-model="infoValoracion.antPersPat_Quirurgicos"
-                                              :class="infoValoracion.antPersPat_Quirurgicos != '' ?
+                                              :class="infoValoracion.antPersPat_Quirurgicos != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
                                 
@@ -102,7 +98,7 @@
                                               class="form-control margen-input"
                                               rows="1"
                                               v-model="infoValoracion.antPersPat_Endocrinologicos"
-                                              :class="infoValoracion.antPersPat_Endocrinologicos != '' ?
+                                              :class="infoValoracion.antPersPat_Endocrinologicos != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
 
@@ -113,7 +109,7 @@
                                               class="form-control margen-input"
                                               rows="1"
                                               v-model="infoValoracion.antPersPat_Urologicos"
-                                              :class="infoValoracion.antPersPat_Urologicos != '' ?
+                                              :class="infoValoracion.antPersPat_Urologicos != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
 
@@ -124,7 +120,7 @@
                                               class="form-control margen-input"
                                               rows="1"
                                               v-model="infoValoracion.antPersPat_Traumaticos"
-                                              :class="infoValoracion.antPersPat_Traumaticos != '' ?
+                                              :class="infoValoracion.antPersPat_Traumaticos != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
 
@@ -135,7 +131,7 @@
                                               class="form-control margen-input"
                                               rows="1"
                                               v-model="infoValoracion.antPersPat_Ortopedicos"
-                                              :class="infoValoracion.antPersPat_Ortopedicos != '' ?
+                                              :class="infoValoracion.antPersPat_Ortopedicos != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
 
@@ -146,7 +142,7 @@
                                               class="form-control margen-input"
                                               rows="1"
                                               v-model="infoValoracion.antPersPat_Transfusiones"
-                                              :class="infoValoracion.antPersPat_Transfusiones != '' ?
+                                              :class="infoValoracion.antPersPat_Transfusiones != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
 
@@ -157,7 +153,7 @@
                                               class="form-control margen-input"
                                               rows="1"
                                               v-model="infoValoracion.antPersPat_CompAnestPrev"
-                                              :class="infoValoracion.antPersPat_CompAnestPrev != '' ?
+                                              :class="infoValoracion.antPersPat_CompAnestPrev != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
                                 
@@ -168,7 +164,7 @@
                                               class="form-control margen-input"
                                               rows="1"
                                               v-model="infoValoracion.antPersPat_EstadoPsiq"
-                                              :class="infoValoracion.antPersPat_EstadoPsiq != '' ?
+                                              :class="infoValoracion.antPersPat_EstadoPsiq != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
                                 
@@ -179,7 +175,7 @@
                                               class="form-control"
                                               rows="1"
                                               v-model="infoValoracion.antPersPat_MedActual"
-                                              :class="infoValoracion.antPersPat_MedActual != '' ?
+                                              :class="infoValoracion.antPersPat_MedActual != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
                             </div> 
@@ -198,7 +194,7 @@
                                            class="form-control margen-input"
                                            id=""
                                            v-model="infoValoracion.antPersNoPat_HrsAyuno"
-                                           :class="infoValoracion.antPersNoPat_HrsAyuno != '' ?
+                                           :class="infoValoracion.antPersNoPat_HrsAyuno != undefined ?
                                                   'form-control border border-success formSombra' : 'form-control'">
                                 </div>
 
@@ -210,7 +206,7 @@
                                               class="form-control margen-input"
                                               rows="1"
                                               v-model="infoValoracion.antPersNoPat_Tabaquismo"
-                                              :class="infoValoracion.antPersNoPat_Tabaquismo != '' ?
+                                              :class="infoValoracion.antPersNoPat_Tabaquismo != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
 
@@ -221,7 +217,7 @@
                                               class="form-control margen-input"
                                               rows="1"
                                               v-model="infoValoracion.antPersNoPat_Etilismo"
-                                              :class="infoValoracion.antPersNoPat_Etilismo != '' ?
+                                              :class="infoValoracion.antPersNoPat_Etilismo != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
 
@@ -232,7 +228,7 @@
                                               class="form-control margen-input"
                                               rows="1"
                                               v-model="infoValoracion.antPersNoPat_Adicciones"
-                                              :class="infoValoracion.antPersNoPat_Adicciones != '' ?
+                                              :class="infoValoracion.antPersNoPat_Adicciones != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
                                 
@@ -243,7 +239,7 @@
                                               class="form-control margen-input"
                                               rows="1"
                                               v-model="infoValoracion.antPersNoPat_Inmunizaciones"
-                                              :class="infoValoracion.antPersNoPat_Inmunizaciones != '' ?
+                                              :class="infoValoracion.antPersNoPat_Inmunizaciones != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
 
@@ -254,18 +250,26 @@
                                               id=""
                                               rows="10"
                                               v-model="infoValoracion.antPersNoPat_AntImportQx"
-                                              :class="infoValoracion.antPersNoPat_AntImportQx != '' ?
+                                              :class="infoValoracion.antPersNoPat_AntImportQx != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
                                 </div>
 
                                 <!-- Botón Guardar/Actuazlizar -->
-                                <div class="col-md-1 margenBoton">
-                                    <button data-bs-toggle="tab" 
+                                <div class="col-md-12 margenBoton">
+                                    <template v-if="btnActualizarValoracion === false">
+                                        <button data-bs-toggle="tab" 
+                                            type="submit"
+                                            class="btn btn-guardar-datos fw-bold"                                            
+                                            @click="cambiarUpdateValoracion"> GUARDAR </button> 
+                                    </template>
+                                    <template v-else>
+                                        <button data-bs-toggle="tab" 
                                             type="submit"
                                             class="btn btn-guardar-datos fw-bold"
-                                            @click="preIdStore.savePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> GUARDAR </button> 
-
+                                            @click="preIdStore.updatePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
+                                    </template>                                                         
                                 </div>
+                                        
                             </div>                            
                         </div>
                     </form>
@@ -275,56 +279,75 @@
             <!-- Div Formulario Exploración Física -->
             <div class="tab-pane fade" id="exploracion">
                 <div class="col-12 bordePrincipal largoContenedor">
-                    <form class="row g-3">
+                    <form @submit.prevent="" class="row g-3">
                         <h5 class="fw-bold">EXPLORACIÓN FÍSICA</h5>
                         <h5 class="fw-bold">Signos Vitales</h5>
 
                         <div class="col-md-2">
                             <label for="" class="form-label fw-bold">Edad</label>
-                            <input type="text" class="form-control" id="" v-model="exploracion.edad"
-                            :class="exploracion.edad != 0 ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text" class="form-control" id="" v-model="infoValoracion.sigVit_Edad"
+                            :class="infoValoracion.sigVit_Edad != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
                         <div class="col-md-2">
                             <label for="" class="form-label fw-bold">Temperatura</label>
-                            <input type="text" class="form-control" id="" v-model="exploracion.temperatura"
-                            :class="exploracion.temperatura.length != 0 ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text" class="form-control" id="" v-model="infoValoracion.sigVit_Temperatura"
+                            :class="infoValoracion.sigVit_Temperatura != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Frecuencia Cardíaca</label>
-                            <input type="text" class="form-control" id="" placeholder="x min" v-model="exploracion.frecuenciaCardiaca"
-                            :class="exploracion.frecuenciaCardiaca.length != 0 ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <label for="" class="form-label fw-bold">Frecuencia Cardíaca (x min)</label>
+                            <input type="text" class="form-control" id="" placeholder="x min" v-model="infoValoracion.sigVit_FrecuCardiaca"
+                            :class="infoValoracion.sigVit_FrecuCardiaca != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Frecuencia Respiratoria</label>
-                            <input type="text" class="form-control" id="" placeholder="x min" v-model="exploracion.frecueciaRespiratoria"
-                            :class="exploracion.frecueciaRespiratoria.length != 0 ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <label for="" class="form-label fw-bold">Frecuencia Respiratoria (x min)</label>
+                            <input type="text" class="form-control" id="" placeholder="x min" v-model="infoValoracion.sigVit_FrecuRespiratoria"
+                            :class="infoValoracion.sigVit_FrecuRespiratoria != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
                         <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">Peso (k)</label>
-                            <input type="text" class="form-control" id="" v-model="exploracion.peso" @keyup.capture="calcularIMC"
-                            :class="exploracion.peso != 0 ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <label for="" class="form-label fw-bold">Peso (kg)</label>
+                            <input type="text" class="form-control" id="" v-model="infoValoracion.sigVit_Peso" @keyup.capture="calcularIMC"
+                            :class="infoValoracion.sigVit_Peso != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
                         <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">Talla (m)</label>
-                            <input type="text" class="form-control" id="" v-model="exploracion.talla" @keyup.capture="calcularIMC"
-                            :class="exploracion.talla != 0 ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <label for="" class="form-label fw-bold">Talla (mt)</label>
+                            <input type="text" class="form-control" id="" v-model="infoValoracion.sigVit_Talla" @keyup.capture="calcularIMC"
+                            :class="infoValoracion.sigVit_Talla != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
                         <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">IMC</label>
-                            <input type="text" class="form-control" id="" v-model="exploracion.imc" readonly
-                            :class="exploracion.imc != 0 ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <label for="" class="form-label fw-bold">IMC                                 
+                                <span data-title="IMC=Peso(Kg)/Estatura&sup2(mts)">
+                                    <font-awesome-icon icon="fa-solid fa-circle-info" />
+                                </span>
+                            </label>
+                            <input type="text" class="form-control" id="" v-model="infoValoracion.sigVit_IMC" readonly
+                            :class="infoValoracion.sigVit_IMC != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Tensión Arterial</label>
-                            <input type="text" class="form-control" id="" placeholder="mmHg" v-model="exploracion.tensionArterial"
-                            :class="exploracion.tensionArterial.length != 0 ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <label for="" class="form-label fw-bold">Tensión Arterial (mmHg)</label>
+                            <input type="text" class="form-control" id="" placeholder="mmHg" v-model="infoValoracion.sigVit_TensionArterial"
+                            :class="infoValoracion.sigVit_TensionArterial != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Saturación de Oxígeno</label>
-                            <input type="text" class="form-control" id="" placeholder="%" v-model="exploracion.saturacionOxigeno"
-                            :class="exploracion.saturacionOxigeno.length != 0 ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <label for="" class="form-label fw-bold">Saturación de Oxígeno (%)</label>
+                            <input type="text" class="form-control" id="" placeholder="%" v-model="infoValoracion.sigVit_SaturacionOxigeno"
+                            :class="infoValoracion.sigVit_SaturacionOxigeno != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
+                        </div>
+                        <!-- Botón Guardar/Actuazlizar -->
+                        <div class="col-md-12 margenBoton">
+                            <template v-if="btnActualizarValoracion === false">
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"                                            
+                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
+                            </template>
+                            <template v-else>
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"
+                                    @click="preIdStore.updatePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
+                            </template>                                                                                    
                         </div>
                     </form>
                 </div> 
@@ -694,22 +717,15 @@ import type { regValoracion } from "@/interfaces/regPreAnest";
 const preIdStore = usePreIdStore();
 
 export default defineComponent({
+
     data () {
         return{
+
+            IMC:"",
+
             infoValoracion: {} as regValoracion,
             preIdStore,
-
-            exploracion: {
-                edad: 0,
-                temperatura: "",
-                frecuenciaCardiaca: "",
-                frecueciaRespiratoria: "",
-                peso: 0,
-                talla: 0,
-                imc: 0,
-                tensionArterial: "",
-                saturacionOxigeno: ""
-            },
+            
             via: {
                 mallampati: "Seleccione...",
                 patilAldreti: "Seleccione...",
@@ -754,25 +770,33 @@ export default defineComponent({
                 lipasa: "",
                 amilasa: "",
                 otros: ""
-            }
+            },
+
+            btnActualizarValoracion:false,
         }  
     },
 
     methods: {
         calcularIMC() {
-            this.exploracion.imc = (this.exploracion.peso / (this.exploracion.talla * this.exploracion.talla))
-            this.exploracion.imc = Number(this.exploracion.imc.toFixed(2));
+            this.infoValoracion.sigVit_IMC = (this.infoValoracion.sigVit_Peso / (this.infoValoracion.sigVit_Talla * this.infoValoracion.sigVit_Talla))
+            this.infoValoracion.sigVit_IMC = Number(this.infoValoracion.sigVit_IMC.toFixed(2));
         },
+
+        cambiarUpdateValoracion() {
+            this.btnActualizarValoracion=true
+
+            preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
+        }       
     }
 })
 </script>
 
 <style scoped>
 hr{
-    border:         none;
-    border-left:    2px solid #A2A2A2;
-    height:         auto;
-    width:          1px;       
+    border: none;
+    border-left: 2px solid #A2A2A2;
+    height: auto;
+    width: 1px;       
 }
 h5{
     color: #002D60;
@@ -820,8 +844,7 @@ h5{
     --bs-btn-active-bg: #E88300;
     --bs-btn-active-color: #ffffff;
     --bs-btn-active-border-color: #E88300;
-    width: 150px; 
-    position: absolute;       
+    width: 150px;        
 }
 /* Margenes */
 .margen-input{
@@ -832,6 +855,7 @@ h5{
 }
 .margenBoton{
     margin-top: 32px;
+    text-align: end;
 }
 /* Title */
 [data-title]:hover:after {
@@ -847,7 +871,7 @@ h5{
     font-family: SF UI Display;
     position: absolute;
     padding: 2px 5px;
-    bottom: -1.8em;
+    bottom: -2.0em;
     left: 80%;
     white-space: nowrap;
     opacity: 0;
@@ -858,5 +882,6 @@ h5{
 }
 [data-title] {
     position: relative;
+    cursor: pointer
 }
 </style>

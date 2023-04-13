@@ -93,15 +93,15 @@
       <div class="tab-content col-md-9" id="">
         <div class="tab-pane fade show active" id="pre-id">
           <id @recibe-datos="actualizaDatos"
-              @validar="validaExpediente" 
+              @validar="validaExpedienteId" 
               :propNumExp="numExpB"
               :propNomPac="nomPacB"
               :propRojoNum="bordeRojoNum"
               :propVerdeNum="bordeVerdeNum"
               :propRojoNom="bordeRojoNom"
               :propVerdeNom="bordeVerdeNom"
-              :propBtnGuardar="btnGuardar"
-              :propBtnActualizar="btnActualizar"/>
+              :propBtnGuardarId="btnGuardarId"
+              :propBtnActualizarId="btnActualizarId"/>
         </div>
 
         <div class="tab-pane fade" id="pre-valoracion">
@@ -164,7 +164,7 @@
                 class="btn btn-arriba fw-bold"
                 id="btnArriba"
                 title="Go to top">
-          <i class="fa-solid fa-3x fa-angle-up"></i>
+          <font-awesome-icon icon="fa-solid fa-angle-up" size="2xl" />
         </button>
       </div>
     </div>
@@ -214,8 +214,8 @@ export default defineComponent({
       esPlan: false,
       esNota: false,
       
-      btnGuardar: true,
-      btnActualizar: false      
+      btnGuardarId: true,
+      btnActualizarId: false          
     }
   },
 
@@ -240,9 +240,9 @@ export default defineComponent({
   destroyed: function(){
     document.addEventListener('scroll', this.scrollFunction)
   },
-  
+
   methods: {
-    async validaExpediente(numExpediente, nombrePaciente) {
+    async validaExpedienteId(numExpediente, nombrePaciente) {
       if(numExpediente === undefined || nombrePaciente === undefined ||
          numExpediente === '' || nombrePaciente === '') {
         if(numExpediente === undefined || numExpediente === ''){
@@ -289,8 +289,8 @@ export default defineComponent({
         this.bordeRojoNom=false
         this.bordeVerdeNom=true
         
-        this.btnGuardar=false       
-        this.btnActualizar=true
+        this.btnGuardarId=false       
+        this.btnActualizarId=true
       }
     },
 

@@ -160,8 +160,32 @@ export const usePreIdStore = defineStore('preid', {
                     antPersNoPat_Etilismo: infoValoracion.antPersNoPat_Etilismo,
                     antPersNoPat_Adicciones: infoValoracion.antPersNoPat_Adicciones,
                     antPersNoPat_Inmunizaciones: infoValoracion.antPersNoPat_Inmunizaciones,
-                    antPersNoPat_AntImportQx: infoValoracion.antPersNoPat_AntImportQx
+                    antPersNoPat_AntImportQx: infoValoracion.antPersNoPat_AntImportQx,
+                    // Signos Vitales
+                    sigVit_Edad: infoValoracion.sigVit_Edad,
+                    sigVit_Temperatura: infoValoracion.sigVit_Temperatura,
+                    sigVit_FrecuCardiaca: infoValoracion.sigVit_FrecuCardiaca,
+                    sigVit_FrecuRespiratoria: infoValoracion.sigVit_FrecuRespiratoria,
+                    sigVit_Peso: infoValoracion.sigVit_Peso,
+                    sigVit_Talla: infoValoracion.sigVit_Talla,
+                    sigVit_IMC: infoValoracion.sigVit_IMC,
+                    sigVit_TensionArterial: infoValoracion.sigVit_TensionArterial,
+                    sigVit_SaturacionOxigeno: infoValoracion.sigVit_SaturacionOxigeno
                 },
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos guardados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
             });
         },
 
@@ -190,7 +214,17 @@ export const usePreIdStore = defineStore('preid', {
                     antPersNoPat_Etilismo: infoValoracion.antPersNoPat_Etilismo,
                     antPersNoPat_Adicciones: infoValoracion.antPersNoPat_Adicciones,
                     antPersNoPat_Inmunizaciones: infoValoracion.antPersNoPat_Inmunizaciones,
-                    antPersNoPat_AntImportQx: infoValoracion.antPersNoPat_AntImportQx
+                    antPersNoPat_AntImportQx: infoValoracion.antPersNoPat_AntImportQx,
+                    // Signos Vitales
+                    sigVit_Edad: infoValoracion.sigVit_Edad,
+                    sigVit_Temperatura: infoValoracion.sigVit_Temperatura,
+                    sigVit_FrecuCardiaca: infoValoracion.sigVit_FrecuCardiaca,
+                    sigVit_FrecuRespiratoria: infoValoracion.sigVit_FrecuRespiratoria,
+                    sigVit_Peso: infoValoracion.sigVit_Peso,
+                    sigVit_Talla: infoValoracion.sigVit_Talla,
+                    sigVit_IMC: infoValoracion.sigVit_IMC,
+                    sigVit_TensionArterial: infoValoracion.sigVit_TensionArterial,
+                    sigVit_SaturacionOxigeno: infoValoracion.sigVit_SaturacionOxigeno
                 }
             })
             .then((res: any) => {
@@ -225,7 +259,7 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {
                 swal.fire({
-                    title: 'Nota guardada correctamente',
+                    title: 'Datos guardados correctamente',
                     icon: 'success',
                     showConfirmButton: false,
                     toast: true,

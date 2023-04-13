@@ -134,7 +134,11 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
                 antPersPat_EstadoPsiq, antPersPat_MedActual,
                 antPersNoPat_HrsAyuno, antPersNoPat_Tabaquismo,
                 antPersNoPat_Etilismo, antPersNoPat_Adicciones,
-                antPersNoPat_Inmunizaciones, antPersNoPat_AntImportQx
+                antPersNoPat_Inmunizaciones, antPersNoPat_AntImportQx,
+
+                sigVit_Edad, sigVit_Temperatura, sigVit_FrecuCardiaca,
+                sigVit_FrecuRespiratoria, sigVit_Peso, sigVit_Talla,
+                sigVit_IMC, sigVit_TensionArterial, sigVit_SaturacionOxigeno
             } = req.body;
 
         const preval = new PreVal({
@@ -158,6 +162,16 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
             antPersNoPat_Adicciones:antPersNoPat_Adicciones ,
             antPersNoPat_Inmunizaciones:antPersNoPat_Inmunizaciones ,
             antPersNoPat_AntImportQx:antPersNoPat_AntImportQx ,
+            //Signos Vitales
+            sigVit_Edad:sigVit_Edad,
+            sigVit_Temperatura:sigVit_Temperatura,
+            sigVit_FrecuCardiaca:sigVit_FrecuCardiaca,
+            sigVit_FrecuRespiratoria:sigVit_FrecuRespiratoria,
+            sigVit_Peso:sigVit_Peso,
+            sigVit_Talla:sigVit_Talla,
+            sigVit_IMC:sigVit_IMC,
+            sigVit_TensionArterial:sigVit_TensionArterial,
+            sigVit_SaturacionOxigeno:sigVit_SaturacionOxigeno
         });
 
         await preval.save();
@@ -178,7 +192,11 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
             antPersPat_EstadoPsiq, antPersPat_MedActual,
             antPersNoPat_HrsAyuno, antPersNoPat_Tabaquismo,
             antPersNoPat_Etilismo, antPersNoPat_Adicciones,
-            antPersNoPat_Inmunizaciones, antPersNoPat_AntImportQx
+            antPersNoPat_Inmunizaciones, antPersNoPat_AntImportQx,
+
+            sigVit_Edad, sigVit_Temperatura, sigVit_FrecuCardiaca,
+            sigVit_FrecuRespiratoria, sigVit_Peso, sigVit_Talla,
+            sigVit_IMC, sigVit_TensionArterial, sigVit_SaturacionOxigeno
         } = req.body;
 
         const preval = await PreVal.findOneAndUpdate({pid: id}, { /* Antecedentes */
@@ -192,14 +210,25 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
         antPersPat_Transfusiones: antPersPat_Transfusiones,
         antPersPat_CompAnestPrev: antPersPat_CompAnestPrev,
         antPersPat_EstadoPsiq: antPersPat_EstadoPsiq,
-        antPersPat_MedActual:antPersPat_MedActual ,
+        antPersPat_MedActual:antPersPat_MedActual,
         //Personales No Patológicos
-        antPersNoPat_HrsAyuno:antPersNoPat_HrsAyuno ,
-        antPersNoPat_Tabaquismo:antPersNoPat_Tabaquismo ,
-        antPersNoPat_Etilismo:antPersNoPat_Etilismo ,
-        antPersNoPat_Adicciones:antPersNoPat_Adicciones ,
-        antPersNoPat_Inmunizaciones:antPersNoPat_Inmunizaciones ,
-        antPersNoPat_AntImportQx:antPersNoPat_AntImportQx , });
+        antPersNoPat_HrsAyuno:antPersNoPat_HrsAyuno,
+        antPersNoPat_Tabaquismo:antPersNoPat_Tabaquismo,
+        antPersNoPat_Etilismo:antPersNoPat_Etilismo,
+        antPersNoPat_Adicciones:antPersNoPat_Adicciones,
+        antPersNoPat_Inmunizaciones:antPersNoPat_Inmunizaciones,
+        antPersNoPat_AntImportQx:antPersNoPat_AntImportQx, 
+        //Signos Vitales
+        sigVit_Edad:sigVit_Edad,
+        sigVit_Temperatura:sigVit_Temperatura,
+        sigVit_FrecuCardiaca:sigVit_FrecuCardiaca,
+        sigVit_FrecuRespiratoria:sigVit_FrecuRespiratoria,
+        sigVit_Peso:sigVit_Peso,
+        sigVit_Talla:sigVit_Talla,
+        sigVit_IMC:sigVit_IMC,
+        sigVit_TensionArterial:sigVit_TensionArterial,
+        sigVit_SaturacionOxigeno:sigVit_SaturacionOxigeno
+    });
 
         return res.json({ preval })
     } catch (error) {

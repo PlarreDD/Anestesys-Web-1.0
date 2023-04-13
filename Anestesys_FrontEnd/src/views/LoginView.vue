@@ -87,9 +87,18 @@
                   v-model="usr.pswd"
                   id="contrasena"
                   placeholder="********">
-            <span class="fa fa-fw fa-eye password-icon show-password"
+            <span class="password-icon show-password"                  
                   id="mostrar"
-                  @click=" mostrarPass()"></span>
+                  @click=" mostrarPass()">
+
+                  <template v-if="contrasena === false">
+                    <font-awesome-icon icon="fa-solid fa-eye" />
+                  </template>
+                  <template v-else>
+                    <font-awesome-icon icon="fa-solid fa-eye-slash" />
+                  </template>      
+                  
+            </span>
 
             <div id="contraLogin"
                 :class="userContrasena == true ? 'visible validaCampo' : 'invisible'"> Escriba la contraseña </div>
@@ -123,7 +132,6 @@
 import { useUserStore } from "../stores/user-store";
 import type { regUsr } from '@/interfaces/regUsr';
 import { defineComponent } from "vue";
-import swal from 'sweetalert2';
 
 const userStore = useUserStore();
 
@@ -142,6 +150,7 @@ export default defineComponent({
         userStore,
         userCorreo:false,
         userContrasena:false,
+        contrasena:false
     };
   },
   
@@ -191,10 +200,10 @@ export default defineComponent({
     async mostrarPass(){
       if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
         (document.getElementById("contrasena") as HTMLInputElement).type = "password";
-        document.getElementById("mostrar").className='fa fa-fw fa-eye password-icon show-password'
+        this.contrasena=false
       } else {
         (document.getElementById("contrasena") as HTMLInputElement).type = "text";
-        document.getElementById("mostrar").className='fa fa-fw fa-eye-slash password-icon show-password'
+        this.contrasena=true
       }
     },
   }

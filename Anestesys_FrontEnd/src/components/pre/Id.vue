@@ -8,7 +8,8 @@
                         data-bs-toggle="pill"
                         data-bs-target="#informacion"
                         type="button"
-                        aria-selected="true"> INFORMACIÓN </button>
+                        aria-selected="true"
+                        data-title="Información del paciente, cirugía y médicos"> INFORMACIÓN </button>
             </li>
 
             <!-- Datos Demográficos -->
@@ -18,7 +19,8 @@
                         data-bs-toggle="pill"
                         data-bs-target="#demograficos"
                         type="button"
-                        aria-selected="false"> DATOS DEMOGRÁFICOS </button>
+                        aria-selected="false"
+                        data-title="Datos demográficos del paciente"> DATOS DEMOGRÁFICOS </button>
             </li>
         </ul>
 
@@ -31,9 +33,9 @@
                         <div class="col-md-4">
                             <label for="" class="form-label fw-bold"> Número de Expediente 
                                 <span class="text-danger">* </span>
-                                <i class="fa-solid fa fa-circle-question" 
-                                   data-title="Llene el campo para navegar por la aplicación">
-                                </i>
+                                <span data-title="Llene el campo para navegar por la aplicación">
+                                    <font-awesome-icon icon="fa-solid fa-circle-question"/>
+                                </span>
                             </label>
 
                             <input type="text"
@@ -43,7 +45,7 @@
                                    :class="{ 'form-control border border-danger': propRojoNum,
                                              'form-control border border-success formSombra': propVerdeNum }"
                                    placeholder="Campo obligatorio"
-                                   :disabled="propBtnGuardar != true">
+                                   :disabled="propBtnGuardarId != true">
                             <div :class="propNumExp == true ? 'visible validaCampo' : 'invisible'"
                                  id="validaNumExp"> Escriba el número de expediente </div>
                         </div>
@@ -53,9 +55,10 @@
                             <label for=""
                                    class="form-label fw-bold"> Nombre del Paciente 
                                 <span class="text-danger">* </span> 
-                                <i class="fa-solid fa fa-circle-question" 
-                                   data-title="Llene el campo para navegar por la aplicación">
-                                </i>
+                                <span data-title="Llene el campo para navegar por la aplicación">
+                                    <font-awesome-icon icon="fa-solid fa-circle-question"/>
+                                </span>
+
                             </label>
                             
                             <input class="form-control" 
@@ -75,13 +78,13 @@
                             <button data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar-info fw-bold"
-                                    :class="propBtnGuardar == true ? 'visible' : 'invisible'"
+                                    :class="propBtnGuardarId == true ? 'visible' : 'invisible'"
                                     @click="preIdStore.savePreId( infoPreIdPaciente )"> GUARDAR </button>
                             
                             <button data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar-info fw-bold"
-                                    :class="propBtnActualizar == true ? 'visible' : 'invisible'"
+                                    :class="propBtnActualizarId == true ? 'visible' : 'invisible'"
                                     @click="preIdStore.updatePreId( infoPreIdPaciente )"> ACTUALIZAR </button>
                         </div>
 
@@ -430,14 +433,14 @@
                                     data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar-datos fw-bold"
-                                    :class="propBtnGuardar == true ? 'visible' : 'invisible'"
+                                    :class="propBtnGuardarId == true ? 'visible' : 'invisible'"
                                     @click="preIdStore.savePreId( infoPreIdPaciente )"> GUARDAR </button> 
 
-                                    <button data-bs-toggle="tab" 
-                                            type="submit"
-                                            class="btn btn-guardar-datos fw-bold"
-                                            :class="propBtnActualizar == true ? 'visible' : 'invisible'"
-                                            @click="preIdStore.updatePreId( infoPreIdPaciente )"> ACTUALIZAR </button>
+                            <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"
+                                    :class="propBtnActualizarId == true ? 'visible' : 'invisible'"
+                                    @click="preIdStore.updatePreId( infoPreIdPaciente )"> ACTUALIZAR </button>
                         </div>
                     </form>
                 </div>
@@ -476,10 +479,10 @@ export default defineComponent({
         propVerdeNom:{
             type: Boolean
         },
-        propBtnGuardar:{
+        propBtnGuardarId:{
             type: Boolean
         },
-        propBtnActualizar:{
+        propBtnActualizarId:{
             type: Boolean
         },
     },
@@ -772,7 +775,7 @@ hr{
     font-family: SF UI Display;
     position: absolute;
     padding: 2px 5px;
-    bottom: -1.8em;
+    bottom: -2.0em;
     left: 80%;
     white-space: nowrap;
     opacity: 0;

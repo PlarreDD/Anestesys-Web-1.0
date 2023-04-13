@@ -28,6 +28,7 @@
             aria-controls="offcanvasNavbar"
           >
             <i class="fa-solid fa-2x fa-ellipsis"></i>
+            <font-awesome-icon icon="fa-solid fa-ellipsis" size="2xl" />
           </button>
         </div>
 
@@ -209,9 +210,10 @@
                                 class="btn"
                                 @click="cambiarBtnActualizar(medicamento._id)"
                               >
-                                <i
-                                  class="fa-solid fa-pen-to-square text-white"
-                                ></i>
+                                <font-awesome-icon 
+                                  icon="fa-solid fa-pen-to-square" 
+                                  size="lg" 
+                                  class="text-white"/>
                               </button>
                             </td>
                             <td>
@@ -221,7 +223,9 @@
                                   validaEliminarMedicamento(medicamento._id)
                                 "
                               >
-                                <i class="fa-solid fa-trash text-white"></i>
+                                <font-awesome-icon 
+                                    icon="fa-solid fa-trash" 
+                                    size="lg" class="text-white"/>
                               </button>
                             </td>
                           </tr>
