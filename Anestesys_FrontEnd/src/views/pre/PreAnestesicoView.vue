@@ -13,7 +13,7 @@
       </div>
 
       <div class="col-md-2">
-        <div class="alinearBotonDerecha">
+        <div class="centrarBoton">
           <button class="btn btn-icono fw-bold">
             <img class="btn-paciente"
                  src="images/imgIcon/nuevo-pac.svg"/> Nuevo Paciente </button>
@@ -123,15 +123,15 @@
         <div :class="numExpediente != '' && nomPaciente != '' ?
                     'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
           <RouterLink to="trans"
-                      class="invisible" id="menu-trans">
-            <img src="images/trans.svg" class="img-menu-lateral"/>
+                      class="" id="menu-trans">
+            <img src="images/trans.svg" class="img-menu-lateral" v-bind:aria-disabled="true"/>
           </RouterLink>
         </div>
         
         <div :class="numExpediente != '' && nomPaciente != '' ?
                     'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
           <RouterLink to="post"
-          class="invisible" id="menu-post">
+          class="" id="menu-post">
             <img src="images/post.svg" class="img-menu-lateral"/>
           </RouterLink>
         </div>
@@ -232,7 +232,8 @@ export default defineComponent({
   mounted: function() { // Llama el método despues de cargar la página
     this.validaSeleccionId()
     this.ocultarFondo();    
-    this.mostrarHeader();    
+    this.mostrarHeader();  
+    this.ocultarMenuLateral();  
     document.addEventListener('scroll', this.scrollFunction);
   },
   
@@ -370,6 +371,11 @@ export default defineComponent({
     async ocultarFondo(){
       document.body.style.backgroundImage = "url('')";
       document.body.style.backgroundColor = '#F5F8FC'
+    },
+
+    async ocultarMenuLateral(){
+      document.getElementById("menu-trans").className='invisible'
+      document.getElementById("menu-post").className='invisible'    
     },
 
     async mostrarHeader(){
