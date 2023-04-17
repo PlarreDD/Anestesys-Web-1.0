@@ -15,6 +15,10 @@
 </template>
 
 <style scoped>
+  @font-face {
+      font-family: SF UI Display;
+      src: url("@/fonts/SF-UI-Display-Regular.otf") format("opentype");
+  }
 </style>
 
 <script lang="ts">
