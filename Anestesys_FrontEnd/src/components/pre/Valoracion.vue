@@ -426,7 +426,7 @@
             <div class="tab-pane fade" id="via">
                 <div class="col-12 bordePrincipal largoContenedor">
                     <form @submit.prevent="" class="row g-3">
-                        <h5 class="fw-bold"> Valoración de Vía Aérea y Otras Escalas </h5>
+                        <h5 class="fw-bold"> VALORACIÓN DE VÍA AÉREA Y OTRAS ESCALAS </h5>
                         
                         <!-- Mallampati -->
                         <div class="col-md-3">
@@ -434,7 +434,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Mallampati"
-                                    :class="infoValoracion.viaAerea_Mallampati != 'Seleccione...' ?
+                                    :class="infoValoracion.viaAerea_Mallampati != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Clase I</option>
@@ -450,7 +450,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_PatilAldreti"
-                                    :class="infoValoracion.viaAerea_PatilAldreti != 'Seleccione...' ?
+                                    :class="infoValoracion.viaAerea_PatilAldreti != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Más de 6.5 cm</option>
@@ -465,7 +465,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_AperturaBucal"
-                                    :class="infoValoracion.viaAerea_AperturaBucal != 'Seleccione...' ?
+                                    :class="infoValoracion.viaAerea_AperturaBucal != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>3 cm</option>
@@ -481,7 +481,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Distancia"
-                                    :class="infoValoracion.viaAerea_Distancia != 'Seleccione...' ?
+                                    :class="infoValoracion.viaAerea_Distancia != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Más de 13 cm</option>
@@ -497,7 +497,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Protusion"
-                                    :class="infoValoracion.viaAerea_Protusion != 'Seleccione...' ?
+                                    :class="infoValoracion.viaAerea_Protusion != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Los incisivos inferiores pueden ser llevados más adelante de la arcada dental superior</option>
@@ -512,7 +512,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Ipid"
-                                    :class="infoValoracion.viaAerea_Ipid != 'Seleccione...' ?
+                                    :class="infoValoracion.viaAerea_Ipid != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Intubación fácil</option>
@@ -529,7 +529,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Glasgow"
-                                    :class="infoValoracion.viaAerea_Glasgow != 'Seleccione...' ?
+                                    :class="infoValoracion.viaAerea_Glasgow != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>1</option>
@@ -556,7 +556,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_NYHA"
-                                    :class="infoValoracion.viaAerea_NYHA != 'Seleccione...' ?
+                                    :class="infoValoracion.viaAerea_NYHA != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Clase I</option>
@@ -572,7 +572,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Goldman"
-                                    :class="infoValoracion.viaAerea_Goldman != 'Seleccione...' ?
+                                    :class="infoValoracion.viaAerea_Goldman != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Clase I</option>
@@ -588,7 +588,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_RiesgoTrombosis"
-                                    :class="infoValoracion.viaAerea_RiesgoTrombosis != 'Seleccione...' ?
+                                    :class="infoValoracion.viaAerea_RiesgoTrombosis != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Riesgo Trombótico Bajo</option>
@@ -604,7 +604,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_ClasificacionASA"
-                                    :class="infoValoracion.viaAerea_ClasificacionASA != 'Seleccione...' ?
+                                    :class="infoValoracion.viaAerea_ClasificacionASA != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Clase I</option>
@@ -622,7 +622,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_TipoCirugia"
-                                    :class="infoValoracion.viaAerea_TipoCirugia != 'Seleccione...' ?
+                                    :class="infoValoracion.viaAerea_TipoCirugia != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Electiva</option>
@@ -636,7 +636,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_RiesgoAnestesico"
-                                    :class="infoValoracion.viaAerea_RiesgoAnestesico != 'Seleccione...' ?
+                                    :class="infoValoracion.viaAerea_RiesgoAnestesico != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Riesgo Alto</option>
@@ -719,12 +719,13 @@
             <div class="tab-pane fade" id="examenes">
                 <div class="col-12 bordePrincipal">
                     <form @submit.prevent="" class="row g-3">
-                        <!-- Exámenes / Perfil Bioquímico -->
-                        <h5 class="fw-bold">LABORATORIO</h5>
-                        <h5 class="fw-bold">Perfil Bioquímico</h5>
+                        <!-- Exámenes / Perfil Bioquímico -->                        
+                        <div class="col-md-10">
+                            <h5 class="fw-bold">PERFIL BIOQUÍMICO</h5>
+                        </div>
 
                         <!-- Botón Guardar/Actuazlizar -->
-                        <div class="col-md-12 margenBoton">
+                        <div class="col-md-2">
                             <template v-if="btnActualizarValoracion === false">
                                 <button data-bs-toggle="tab" 
                                     type="submit"
@@ -737,8 +738,9 @@
                                     type="submit"
                                     class="btn btn-guardar-datos fw-bold"
                                     @click="preIdStore.updatePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
-                            </template>                                                                                    
+                            </template>                                                         
                         </div>
+
 
                         <!-- Fecha de realización -->
                         <!-- Revisar que funcione el class -->
@@ -748,7 +750,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_FechaRealizacion"
-                                   :class="infoValoracion.perfilBioQ_FechaRealizacion != '' ?
+                                   :class="infoValoracion.perfilBioQ_FechaRealizacion != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"
                                           >
                         </div>
@@ -759,7 +761,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoValoracion.perfilBioQ_GrupoSanguineo"
-                                    :class="infoValoracion.perfilBioQ_GrupoSanguineo != 'Seleccione...' ?
+                                    :class="infoValoracion.perfilBioQ_GrupoSanguineo != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>A+</option>
@@ -780,7 +782,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_Hemoglobina"
-                                   :class="infoValoracion.perfilBioQ_Hemoglobina != '' ?
+                                   :class="infoValoracion.perfilBioQ_Hemoglobina != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -791,7 +793,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_Hematocrito"
-                                   :class="infoValoracion.perfilBioQ_Hematocrito != '' ?
+                                   :class="infoValoracion.perfilBioQ_Hematocrito != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -802,7 +804,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_Plaquetas"
-                                   :class="infoValoracion.perfilBioQ_Plaquetas != '' ?
+                                   :class="infoValoracion.perfilBioQ_Plaquetas != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -813,7 +815,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_Leutocitos"
-                                   :class="infoValoracion.perfilBioQ_Leutocitos != '' ?
+                                   :class="infoValoracion.perfilBioQ_Leutocitos != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -824,7 +826,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_TP"
-                                   :class="infoValoracion.perfilBioQ_TP != '' ?
+                                   :class="infoValoracion.perfilBioQ_TP != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -835,7 +837,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_TT"
-                                   :class="infoValoracion.perfilBioQ_TT != '' ?
+                                   :class="infoValoracion.perfilBioQ_TT != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -846,7 +848,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_TPT"
-                                   :class="infoValoracion.perfilBioQ_TPT != '' ?
+                                   :class="infoValoracion.perfilBioQ_TPT != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -857,7 +859,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_INR"
-                                   :class="infoValoracion.perfilBioQ_INR != '' ?
+                                   :class="infoValoracion.perfilBioQ_INR != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -868,7 +870,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_Glucosa"
-                                   :class="infoValoracion.perfilBioQ_Glucosa != '' ?
+                                   :class="infoValoracion.perfilBioQ_Glucosa != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -878,7 +880,7 @@
                             <input type="text"
                                    class="form-control"
                                    id="" v-model="infoValoracion.perfilBioQ_Creatinina"
-                                   :class="infoValoracion.perfilBioQ_Creatinina != '' ?
+                                   :class="infoValoracion.perfilBioQ_Creatinina != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -889,7 +891,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_Urea"
-                                   :class="infoValoracion.perfilBioQ_Urea != '' ?
+                                   :class="infoValoracion.perfilBioQ_Urea != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -900,7 +902,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_Sodio"
-                                   :class="infoValoracion.perfilBioQ_Sodio != '' ?
+                                   :class="infoValoracion.perfilBioQ_Sodio != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -911,7 +913,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_Potasio"
-                                   :class="infoValoracion.perfilBioQ_Potasio != '' ?
+                                   :class="infoValoracion.perfilBioQ_Potasio != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -922,7 +924,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_Cloro"
-                                   :class="infoValoracion.perfilBioQ_Cloro != '' ?
+                                   :class="infoValoracion.perfilBioQ_Cloro != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -933,7 +935,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_Calcio"
-                                   :class="infoValoracion.perfilBioQ_Calcio != '' ?
+                                   :class="infoValoracion.perfilBioQ_Calcio != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -944,7 +946,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_Magnesio"
-                                   :class="infoValoracion.perfilBioQ_Magnesio != '' ?
+                                   :class="infoValoracion.perfilBioQ_Magnesio != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -955,7 +957,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_BilirrubinaDirecta"
-                                   :class="infoValoracion.perfilBioQ_BilirrubinaDirecta != '' ?
+                                   :class="infoValoracion.perfilBioQ_BilirrubinaDirecta != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -966,7 +968,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_BilirrubinaIndirecta"
-                                   :class="infoValoracion.perfilBioQ_BilirrubinaIndirecta != '' ?
+                                   :class="infoValoracion.perfilBioQ_BilirrubinaIndirecta != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -977,7 +979,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_BilirrubinaTotal"
-                                   :class="infoValoracion.perfilBioQ_BilirrubinaTotal != '' ?
+                                   :class="infoValoracion.perfilBioQ_BilirrubinaTotal != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -988,7 +990,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_Lipasa"
-                                   :class="infoValoracion.perfilBioQ_Lipasa != '' ?
+                                   :class="infoValoracion.perfilBioQ_Lipasa != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>    
                         
@@ -999,7 +1001,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_Amilasa"
-                                   :class="infoValoracion.perfilBioQ_Amilasa != '' ?
+                                   :class="infoValoracion.perfilBioQ_Amilasa != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -1010,7 +1012,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.perfilBioQ_Otros"
-                                   :class="infoValoracion.perfilBioQ_Otros != '' ?
+                                   :class="infoValoracion.perfilBioQ_Otros != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
                     </form>
@@ -1071,7 +1073,7 @@ h5{
   border-radius: 5px;
   padding: 1rem;
   margin-top :10px;
-  margin-bottom: 10px;
+  margin-bottom: 55px;
   background-color: rgba(232, 234, 236, 0.6);
 }
 .largoContenedor{

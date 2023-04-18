@@ -76,7 +76,7 @@ export default defineComponent({
   border-radius: 5px;
   padding: 1rem;
   margin-top :10px;
-  margin-bottom: 10px;
+  margin-bottom: 55px;
   background-color: rgba(232, 234, 236, 0.6);
 }
 .formSombra:focus{
