@@ -425,7 +425,7 @@
             <!-- Div Formulario Vía Aérea -->
             <div class="tab-pane fade" id="via">
                 <div class="col-12 bordePrincipal largoContenedor">
-                    <form class="row g-3">
+                    <form @submit.prevent="" class="row g-3">
                         <h5 class="fw-bold"> Valoración de Vía Aérea y Otras Escalas </h5>
                         
                         <!-- Mallampati -->
@@ -644,6 +644,23 @@
                                 <option>Riesgo Bajo</option>
                             </select>
                         </div>
+
+                        <!-- Botón Guardar/Actuazlizar -->
+                        <div class="col-md-12 margenBoton">
+                            <template v-if="btnActualizarValoracion === false">
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"                                            
+                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
+                            </template>
+
+                            <template v-else>
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"
+                                    @click="preIdStore.updatePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
+                            </template>                                                                                    
+                        </div>
                     </form>
                 </div>
             </div>
@@ -651,7 +668,7 @@
             <!-- Div Formulario Estudios -->
             <div class="tab-pane fade" id="estudios">
                 <div class="col-12 bordePrincipal largoContenedor">
-                    <form class="row g-3">
+                    <form @submit.prevent="" class="row g-3">
                         <h5 class="fw-bold fw-bold">ESTUDIOS</h5>           
                         
                         <!-- Estudio -->
@@ -701,7 +718,7 @@
             <!-- Div Formulario Exámenes -->
             <div class="tab-pane fade" id="examenes">
                 <div class="col-12 bordePrincipal">
-                    <form class="row g-3">
+                    <form @submit.prevent="" class="row g-3">
                         <!-- Exámenes / Perfil Bioquímico -->
                         <h5 class="fw-bold">EXÁMENES</h5>
                         <h5 class="fw-bold">Perfil Bioquímico</h5>

@@ -138,7 +138,12 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
 
                 sigVit_Edad, sigVit_Temperatura, sigVit_FrecuCardiaca,
                 sigVit_FrecuRespiratoria, sigVit_Peso, sigVit_Talla,
-                sigVit_IMC, sigVit_TensionArterial, sigVit_SaturacionOxigeno
+                sigVit_IMC, sigVit_TensionArterial, sigVit_SaturacionOxigeno,
+
+                viaAerea_Mallampati, viaAerea_PatilAldreti, viaAerea_AperturaBucal,
+                viaAerea_Distancia, viaAerea_Protusion, viaAerea_Ipid, viaAerea_Glasgow,
+                viaAerea_NYHA, viaAerea_Goldman, viaAerea_RiesgoTrombosis,
+                viaAerea_ClasificacionASA, viaAerea_TipoCirugia, viaAerea_RiesgoAnestesico,
             } = req.body;
 
         const preval = new PreVal({
@@ -156,22 +161,38 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
             antPersPat_EstadoPsiq: antPersPat_EstadoPsiq,
             antPersPat_MedActual:antPersPat_MedActual ,
             //Personales No Patológicos
-            antPersNoPat_HrsAyuno:antPersNoPat_HrsAyuno ,
-            antPersNoPat_Tabaquismo:antPersNoPat_Tabaquismo ,
-            antPersNoPat_Etilismo:antPersNoPat_Etilismo ,
-            antPersNoPat_Adicciones:antPersNoPat_Adicciones ,
-            antPersNoPat_Inmunizaciones:antPersNoPat_Inmunizaciones ,
-            antPersNoPat_AntImportQx:antPersNoPat_AntImportQx ,
+            antPersNoPat_HrsAyuno: antPersNoPat_HrsAyuno ,
+            antPersNoPat_Tabaquismo: antPersNoPat_Tabaquismo ,
+            antPersNoPat_Etilismo: antPersNoPat_Etilismo ,
+            antPersNoPat_Adicciones: antPersNoPat_Adicciones ,
+            antPersNoPat_Inmunizaciones: antPersNoPat_Inmunizaciones ,
+            antPersNoPat_AntImportQx: antPersNoPat_AntImportQx ,
+            /* Exploración Física */
             //Signos Vitales
-            sigVit_Edad:sigVit_Edad,
-            sigVit_Temperatura:sigVit_Temperatura,
-            sigVit_FrecuCardiaca:sigVit_FrecuCardiaca,
-            sigVit_FrecuRespiratoria:sigVit_FrecuRespiratoria,
-            sigVit_Peso:sigVit_Peso,
-            sigVit_Talla:sigVit_Talla,
-            sigVit_IMC:sigVit_IMC,
-            sigVit_TensionArterial:sigVit_TensionArterial,
-            sigVit_SaturacionOxigeno:sigVit_SaturacionOxigeno
+            sigVit_Edad: sigVit_Edad,
+            sigVit_Temperatura: sigVit_Temperatura,
+            sigVit_FrecuCardiaca: sigVit_FrecuCardiaca,
+            sigVit_FrecuRespiratoria: sigVit_FrecuRespiratoria,
+            sigVit_Peso: sigVit_Peso,
+            sigVit_Talla: sigVit_Talla,
+            sigVit_IMC: sigVit_IMC,
+            sigVit_TensionArterial: sigVit_TensionArterial,
+            sigVit_SaturacionOxigeno: sigVit_SaturacionOxigeno,
+            /* Vía Aérea */
+            // Valoración de Vía Aérea y Otras Escalas
+            viaAerea_Mallampati: viaAerea_Mallampati,
+            viaAerea_PatilAldreti: viaAerea_PatilAldreti,
+            viaAerea_AperturaBucal: viaAerea_AperturaBucal,
+            viaAerea_Distancia: viaAerea_Distancia,
+            viaAerea_Protusion: viaAerea_Protusion,
+            viaAerea_Ipid: viaAerea_Ipid,
+            viaAerea_Glasgow: viaAerea_Glasgow,
+            viaAerea_NYHA: viaAerea_NYHA,
+            viaAerea_Goldman: viaAerea_Goldman,
+            viaAerea_RiesgoTrombosis: viaAerea_RiesgoTrombosis,
+            viaAerea_ClasificacionASA: viaAerea_ClasificacionASA,
+            viaAerea_TipoCirugia: viaAerea_TipoCirugia,
+            viaAerea_RiesgoAnestesico: viaAerea_RiesgoAnestesico,
         });
 
         await preval.save();
@@ -196,7 +217,12 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
 
             sigVit_Edad, sigVit_Temperatura, sigVit_FrecuCardiaca,
             sigVit_FrecuRespiratoria, sigVit_Peso, sigVit_Talla,
-            sigVit_IMC, sigVit_TensionArterial, sigVit_SaturacionOxigeno
+            sigVit_IMC, sigVit_TensionArterial, sigVit_SaturacionOxigeno,
+
+            viaAerea_Mallampati, viaAerea_PatilAldreti, viaAerea_AperturaBucal,
+            viaAerea_Distancia, viaAerea_Protusion, viaAerea_Ipid, viaAerea_Glasgow,
+            viaAerea_NYHA, viaAerea_Goldman, viaAerea_RiesgoTrombosis,
+            viaAerea_ClasificacionASA, viaAerea_TipoCirugia, viaAerea_RiesgoAnestesico,
         } = req.body;
 
         const preval = await PreVal.findOneAndUpdate({pid: id}, { /* Antecedentes */
@@ -227,7 +253,22 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
         sigVit_Talla:sigVit_Talla,
         sigVit_IMC:sigVit_IMC,
         sigVit_TensionArterial:sigVit_TensionArterial,
-        sigVit_SaturacionOxigeno:sigVit_SaturacionOxigeno
+        sigVit_SaturacionOxigeno:sigVit_SaturacionOxigeno,
+        /* Vía Aérea */
+        // Valoración de Vía Aérea y Otras Escalas
+        viaAerea_Mallampati: viaAerea_Mallampati,
+        viaAerea_PatilAldreti: viaAerea_PatilAldreti,
+        viaAerea_AperturaBucal: viaAerea_AperturaBucal,
+        viaAerea_Distancia: viaAerea_Distancia,
+        viaAerea_Protusion: viaAerea_Protusion,
+        viaAerea_Ipid: viaAerea_Ipid,
+        viaAerea_Glasgow: viaAerea_Glasgow,
+        viaAerea_NYHA: viaAerea_NYHA,
+        viaAerea_Goldman: viaAerea_Goldman,
+        viaAerea_RiesgoTrombosis: viaAerea_RiesgoTrombosis,
+        viaAerea_ClasificacionASA: viaAerea_ClasificacionASA,
+        viaAerea_TipoCirugia: viaAerea_TipoCirugia,
+        viaAerea_RiesgoAnestesico: viaAerea_RiesgoAnestesico,
     });
 
         return res.json({ preval })
