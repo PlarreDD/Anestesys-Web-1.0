@@ -89,6 +89,32 @@ export interface regValoracion{
     // Estudios
     estudios_Estudio: string,
     estudio_Especificaciones: string,
+
+    // Laboratorio
+    perfilBioQ_FechaRealizacion: string,
+    perfilBioQ_GrupoSanguineo: string,
+    perfilBioQ_Hemoglobina: string,
+    perfilBioQ_Hematocrito: string,
+    perfilBioQ_Plaquetas: string,
+    perfilBioQ_Leutocitos: string,
+    perfilBioQ_TP: string,
+    perfilBioQ_TT: string,
+    perfilBioQ_TPT: string,
+    perfilBioQ_INR: string,
+    perfilBioQ_Glucosa: string,
+    perfilBioQ_Creatinina: string,
+    perfilBioQ_Urea: string,
+    perfilBioQ_Sodio: string,
+    perfilBioQ_Potasio: string,
+    perfilBioQ_Cloro: string,
+    perfilBioQ_Calcio: string,
+    perfilBioQ_Magnesio: string,
+    perfilBioQ_BilirrubinaDirecta: string,
+    perfilBioQ_BilirrubinaIndirecta: string,
+    perfilBioQ_BilirrubinaTotal: string,
+    perfilBioQ_Lipasa: string,
+    perfilBioQ_Amilasa: string,
+    perfilBioQ_Otros: string,
 }
 
 /* Registro Nota Preanestesica */

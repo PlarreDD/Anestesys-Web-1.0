@@ -138,7 +138,17 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
 
                 sigVit_Edad, sigVit_Temperatura, sigVit_FrecuCardiaca,
                 sigVit_FrecuRespiratoria, sigVit_Peso, sigVit_Talla,
-                sigVit_IMC, sigVit_TensionArterial, sigVit_SaturacionOxigeno
+                sigVit_IMC, sigVit_TensionArterial, sigVit_SaturacionOxigeno,
+
+                perfilBioQ_FechaRealizacion, perfilBioQ_GrupoSanguineo,
+                perfilBioQ_Hemoglobina, perfilBioQ_Hematocrito, perfilBioQ_Plaquetas,
+                perfilBioQ_Leutocitos, perfilBioQ_TP, perfilBioQ_TT,
+                perfilBioQ_TPT, perfilBioQ_INR, perfilBioQ_Glucosa,
+                perfilBioQ_Creatinina, perfilBioQ_Urea, perfilBioQ_Sodio,
+                perfilBioQ_Potasio, perfilBioQ_Cloro, perfilBioQ_Calcio,
+                perfilBioQ_Magnesio, perfilBioQ_BilirrubinaDirecta,
+                perfilBioQ_BilirrubinaIndirecta, perfilBioQ_BilirrubinaTotal,
+                perfilBioQ_Lipasa, perfilBioQ_Amilasa, perfilBioQ_Otros,
             } = req.body;
 
         const preval = new PreVal({
@@ -171,7 +181,32 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
             sigVit_Talla:sigVit_Talla,
             sigVit_IMC:sigVit_IMC,
             sigVit_TensionArterial:sigVit_TensionArterial,
-            sigVit_SaturacionOxigeno:sigVit_SaturacionOxigeno
+            sigVit_SaturacionOxigeno:sigVit_SaturacionOxigeno,
+            //Laboratorio
+            perfilBioQ_FechaRealizacion: perfilBioQ_FechaRealizacion,
+            perfilBioQ_GrupoSanguineo: perfilBioQ_GrupoSanguineo,
+            perfilBioQ_Hemoglobina: perfilBioQ_Hemoglobina,
+            perfilBioQ_Hematocrito: perfilBioQ_Hematocrito,
+            perfilBioQ_Plaquetas: perfilBioQ_Plaquetas,
+            perfilBioQ_Leutocitos: perfilBioQ_Leutocitos,
+            perfilBioQ_TP: perfilBioQ_TP,
+            perfilBioQ_TT: perfilBioQ_TT,
+            perfilBioQ_TPT: perfilBioQ_TPT,
+            perfilBioQ_INR: perfilBioQ_INR,
+            perfilBioQ_Glucosa: perfilBioQ_Glucosa,
+            perfilBioQ_Creatinina: perfilBioQ_Creatinina,
+            perfilBioQ_Urea: perfilBioQ_Urea,
+            perfilBioQ_Sodio: perfilBioQ_Sodio,
+            perfilBioQ_Potasio: perfilBioQ_Potasio,
+            perfilBioQ_Cloro: perfilBioQ_Cloro,
+            perfilBioQ_Calcio: perfilBioQ_Calcio,
+            perfilBioQ_Magnesio: perfilBioQ_Magnesio,
+            perfilBioQ_BilirrubinaDirecta: perfilBioQ_BilirrubinaDirecta,
+            perfilBioQ_BilirrubinaIndirecta: perfilBioQ_BilirrubinaIndirecta,
+            perfilBioQ_BilirrubinaTotal: perfilBioQ_BilirrubinaTotal,
+            perfilBioQ_Lipasa: perfilBioQ_Lipasa,
+            perfilBioQ_Amilasa: perfilBioQ_Amilasa,
+            perfilBioQ_Otros: perfilBioQ_Otros,
         });
 
         await preval.save();
@@ -196,9 +231,29 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
 
             sigVit_Edad, sigVit_Temperatura, sigVit_FrecuCardiaca,
             sigVit_FrecuRespiratoria, sigVit_Peso, sigVit_Talla,
-            sigVit_IMC, sigVit_TensionArterial, sigVit_SaturacionOxigeno
+            sigVit_IMC, sigVit_TensionArterial, sigVit_SaturacionOxigeno,
+
+            perfilBioQ_FechaRealizacion, perfilBioQ_GrupoSanguineo,
+            perfilBioQ_Hemoglobina, perfilBioQ_Hematocrito, perfilBioQ_Plaquetas,
+            perfilBioQ_Leutocitos, perfilBioQ_TP, perfilBioQ_TT,
+            perfilBioQ_TPT, perfilBioQ_INR, perfilBioQ_Glucosa,
+            perfilBioQ_Creatinina, perfilBioQ_Urea, perfilBioQ_Sodio,
+            perfilBioQ_Potasio, perfilBioQ_Cloro, perfilBioQ_Calcio,
+            perfilBioQ_Magnesio, perfilBioQ_BilirrubinaDirecta,
+            perfilBioQ_BilirrubinaIndirecta, perfilBioQ_BilirrubinaTotal,
+            perfilBioQ_Lipasa, perfilBioQ_Amilasa, perfilBioQ_Otros,
         } = req.body;
 
+        console.log(perfilBioQ_FechaRealizacion + " " + perfilBioQ_GrupoSanguineo + " " +
+            perfilBioQ_Hemoglobina + " " + perfilBioQ_Hematocrito + " " + perfilBioQ_Plaquetas + " " +
+            perfilBioQ_Leutocitos + " " + perfilBioQ_TP + " " + perfilBioQ_TT + " " +
+            perfilBioQ_TPT + " " + perfilBioQ_INR + " " + perfilBioQ_Glucosa + " " +
+            perfilBioQ_Creatinina + " " + perfilBioQ_Urea + " " + perfilBioQ_Sodio + " " +
+            perfilBioQ_Potasio + " " + perfilBioQ_Cloro + " " + perfilBioQ_Calcio + " " +
+            perfilBioQ_Magnesio + " " + perfilBioQ_BilirrubinaDirecta + " " +
+            perfilBioQ_BilirrubinaIndirecta + " " + perfilBioQ_BilirrubinaTotal + " " +
+            perfilBioQ_Lipasa + " " + perfilBioQ_Amilasa + " " + perfilBioQ_Otros);
+        
         const preval = await PreVal.findOneAndUpdate({pid: id}, { /* Antecedentes */
         // Personales Patológicos
         antPersPat_Alergias: antPersPat_Alergias,
@@ -227,7 +282,32 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
         sigVit_Talla:sigVit_Talla,
         sigVit_IMC:sigVit_IMC,
         sigVit_TensionArterial:sigVit_TensionArterial,
-        sigVit_SaturacionOxigeno:sigVit_SaturacionOxigeno
+        sigVit_SaturacionOxigeno:sigVit_SaturacionOxigeno,
+        //Laboratorio
+        perfilBioQ_FechaRealizacion: perfilBioQ_FechaRealizacion,
+        perfilBioQ_GrupoSanguineo: perfilBioQ_GrupoSanguineo,
+        perfilBioQ_Hemoglobina: perfilBioQ_Hemoglobina,
+        perfilBioQ_Hematocrito: perfilBioQ_Hematocrito,
+        perfilBioQ_Plaquetas: perfilBioQ_Plaquetas,
+        perfilBioQ_Leutocitos: perfilBioQ_Leutocitos,
+        perfilBioQ_TP: perfilBioQ_TP,
+        perfilBioQ_TT: perfilBioQ_TT,
+        perfilBioQ_TPT: perfilBioQ_TPT,
+        perfilBioQ_INR: perfilBioQ_INR,
+        perfilBioQ_Glucosa: perfilBioQ_Glucosa,
+        perfilBioQ_Creatinina: perfilBioQ_Creatinina,
+        perfilBioQ_Urea: perfilBioQ_Urea,
+        perfilBioQ_Sodio: perfilBioQ_Sodio,
+        perfilBioQ_Potasio: perfilBioQ_Potasio,
+        perfilBioQ_Cloro: perfilBioQ_Cloro,
+        perfilBioQ_Calcio: perfilBioQ_Calcio,
+        perfilBioQ_Magnesio: perfilBioQ_Magnesio,
+        perfilBioQ_BilirrubinaDirecta: perfilBioQ_BilirrubinaDirecta,
+        perfilBioQ_BilirrubinaIndirecta: perfilBioQ_BilirrubinaIndirecta,
+        perfilBioQ_BilirrubinaTotal: perfilBioQ_BilirrubinaTotal,
+        perfilBioQ_Lipasa: perfilBioQ_Lipasa,
+        perfilBioQ_Amilasa: perfilBioQ_Amilasa,
+        perfilBioQ_Otros: perfilBioQ_Otros,
     });
 
         return res.json({ preval })
