@@ -1,4 +1,4 @@
-/* Modelado para obtener los datos desde las vistas */
+/* Modelado para obtener los datos desde las vistas del registro Preanestésico */
 /* Registro Id del Paciente */
 export interface regIdPaciente{
     /* Informacion Paciente */
@@ -89,6 +89,114 @@ export interface regValoracion{
     // Estudios
     estudios_Estudio: string,
     estudio_Especificaciones: string,
+
+    // Exámenes
+    perfilBioQ_FechaRealizacion: string,
+    perfilBioQ_GrupoSanguineo: string
+    perfilBioQ_Hemoglobina: string,
+    perfilBioQ_Hematocrito: string,
+    perfilBioQ_Plaquetas: string,
+    perfilBioQ_Leutocitos: string,
+    perfilBioQ_TP: string,
+    perfilBioQ_TT: string,
+    perfilBioQ_TPT: string,
+    perfilBioQ_INR: string,
+    perfilBioQ_Glucosa: string,
+    perfilBioQ_Creatinina: string,
+    perfilBioQ_Urea: string,
+    perfilBioQ_Sodio: string,
+    perfilBioQ_Potasio: string,
+    perfilBioQ_Cloro: string,
+    perfilBioQ_Calcio: string,
+    perfilBioQ_Magnesio: string,
+    perfilBioQ_BilirrubinaDirecta: string,
+    perfilBioQ_BilirrubinaIndirecta: string,
+    perfilBioQ_BilirrubinaTotal: string,
+    perfilBioQ_Lipasa: string,
+    perfilBioQ_Amilasa: string,
+    perfilBioQ_Otros: string,
+}
+
+/* Registro Plan Preanestesico */
+export interface regPlan{
+    // Posicion y Cuidados
+    pos_HorasAyuno: string,
+    pos_AccesoVenoso: string,
+    pos_PosicionPaciente: string,
+    pos_PosicionBrazos: string,
+    pos_Torniquete: string,
+    pos_AplicacionTorniquete: string,
+    pos_Sitio: string,
+    pos_TiempoIsquemia: string,
+    pos_ProteccionOjos: string,
+    pos_ProtecProminencias: string,
+    pos_TecnicaAnestesica: string,
+    pos_Premedicacion: string,
+    pos_EspPremedicacion: string,
+    pos_Monitoreo: string,
+
+    // Tipos de Anestésia
+    // Sedación
+    sedacion_Via: string,
+    sedacion_Opcion: string,
+    sedacion_Observaciones: string,
+    sedacion_Medicamentos: string,
+
+    // Regional
+    // Bloqueo Neuro-Axial
+    regional_Tipo: string,
+    regional_TipoAguja: string,
+    regional_Nivel: string,
+    regional_CalibreAguja: string,
+    regional_Cateter: string,
+    regional_OrientacionCateter: string,
+    regional_ProbDificulNeuro: string,
+    regional_EspDificultadesNeuro: string,
+
+    // Bloqueo Plexo
+    regional_Sitio: string,
+    regional_Opcion: string,
+    regional_EspSitio: string,
+    regional_AnestesicoUtilizado: string,
+    regional_EspAnestesico: string,
+    regional_ProbDificulPlexo: string,
+    regional_EspDificulPlexo: string,
+
+    // Equipo de Apoyo
+    regional_Ultrasonido: string,
+    regional_EspUltrasonido: string,
+    regional_Neuroestimulador: string,
+    regional_EspNeuroestimulador: string,
+    regional_ProbComplicaciones: string,
+    regional_EspDificEquipo: string,
+
+    // Tipos de Anestésia
+    // Local
+    local_SitioAnestesiaL: string,
+    local_AnestesicoUtilizado: string,
+    local_Especificar: string,
+
+    // Tipos de Anestésia
+    // General
+    // Intubación
+    general_Induccion: string,
+    general_Tubo: string,
+    general_NumeroTubo: string,
+    general_TipoCanula: string,
+    general_Globo: string,
+    general_Presion: string,
+    general_DifTecnicasIntubacion: string,
+    general_EspDifTecIntubacion: string,
+    
+    // Dispositivos Supraglóticos
+    general_DispositivosSupro: string,
+    general_Calibre: string,
+    general_Complicaciones: string,
+    general_EspComplicaciones: string,
+
+    // Otros Disposotivos
+    general_OtrosDispositivos: string,
+    general_EspOtrosDispositivos: string,
 }
 
 /* Registro Nota Preanestesica */
