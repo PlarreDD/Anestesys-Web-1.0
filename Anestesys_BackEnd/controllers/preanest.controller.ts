@@ -149,6 +149,12 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
                 perfilBioQ_Magnesio, perfilBioQ_BilirrubinaDirecta,
                 perfilBioQ_BilirrubinaIndirecta, perfilBioQ_BilirrubinaTotal,
                 perfilBioQ_Lipasa, perfilBioQ_Amilasa, perfilBioQ_Otros,
+
+                viaAerea_Mallampati, viaAerea_PatilAldreti, viaAerea_AperturaBucal,
+                viaAerea_Distancia, viaAerea_Protusion, viaAerea_Ipid, viaAerea_Glasgow,
+                viaAerea_NYHA, viaAerea_Goldman, viaAerea_RiesgoTrombosis,
+                viaAerea_ClasificacionASA, viaAerea_TipoCirugia, viaAerea_RiesgoAnestesico,
+
             } = req.body;
 
         const preval = new PreVal({
@@ -166,12 +172,13 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
             antPersPat_EstadoPsiq: antPersPat_EstadoPsiq,
             antPersPat_MedActual:antPersPat_MedActual ,
             //Personales No Patológicos
-            antPersNoPat_HrsAyuno:antPersNoPat_HrsAyuno ,
-            antPersNoPat_Tabaquismo:antPersNoPat_Tabaquismo ,
-            antPersNoPat_Etilismo:antPersNoPat_Etilismo ,
-            antPersNoPat_Adicciones:antPersNoPat_Adicciones ,
-            antPersNoPat_Inmunizaciones:antPersNoPat_Inmunizaciones ,
-            antPersNoPat_AntImportQx:antPersNoPat_AntImportQx ,
+            antPersNoPat_HrsAyuno: antPersNoPat_HrsAyuno ,
+            antPersNoPat_Tabaquismo: antPersNoPat_Tabaquismo ,
+            antPersNoPat_Etilismo: antPersNoPat_Etilismo ,
+            antPersNoPat_Adicciones: antPersNoPat_Adicciones ,
+            antPersNoPat_Inmunizaciones: antPersNoPat_Inmunizaciones ,
+            antPersNoPat_AntImportQx: antPersNoPat_AntImportQx ,
+            /* Exploración Física */
             //Signos Vitales
             sigVit_Edad:sigVit_Edad,
             sigVit_Temperatura:sigVit_Temperatura,
@@ -207,6 +214,21 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
             perfilBioQ_Lipasa: perfilBioQ_Lipasa,
             perfilBioQ_Amilasa: perfilBioQ_Amilasa,
             perfilBioQ_Otros: perfilBioQ_Otros,
+            /* Vía Aérea */
+            // Valoración de Vía Aérea y Otras Escalas
+            viaAerea_Mallampati: viaAerea_Mallampati,
+            viaAerea_PatilAldreti: viaAerea_PatilAldreti,
+            viaAerea_AperturaBucal: viaAerea_AperturaBucal,
+            viaAerea_Distancia: viaAerea_Distancia,
+            viaAerea_Protusion: viaAerea_Protusion,
+            viaAerea_Ipid: viaAerea_Ipid,
+            viaAerea_Glasgow: viaAerea_Glasgow,
+            viaAerea_NYHA: viaAerea_NYHA,
+            viaAerea_Goldman: viaAerea_Goldman,
+            viaAerea_RiesgoTrombosis: viaAerea_RiesgoTrombosis,
+            viaAerea_ClasificacionASA: viaAerea_ClasificacionASA,
+            viaAerea_TipoCirugia: viaAerea_TipoCirugia,
+            viaAerea_RiesgoAnestesico: viaAerea_RiesgoAnestesico,
         });
 
         await preval.save();
@@ -214,7 +236,7 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
         return res.json({ preval });
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
-    }    
+    }
 };
 
 export const updatePreAntecedentes = async (req: any, res: Response) => {
@@ -242,6 +264,11 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
             perfilBioQ_Magnesio, perfilBioQ_BilirrubinaDirecta,
             perfilBioQ_BilirrubinaIndirecta, perfilBioQ_BilirrubinaTotal,
             perfilBioQ_Lipasa, perfilBioQ_Amilasa, perfilBioQ_Otros,
+
+            viaAerea_Mallampati, viaAerea_PatilAldreti, viaAerea_AperturaBucal,
+            viaAerea_Distancia, viaAerea_Protusion, viaAerea_Ipid, viaAerea_Glasgow,
+            viaAerea_NYHA, viaAerea_Goldman, viaAerea_RiesgoTrombosis,
+            viaAerea_ClasificacionASA, viaAerea_TipoCirugia, viaAerea_RiesgoAnestesico,
         } = req.body;
 
         console.log(perfilBioQ_FechaRealizacion + " " + perfilBioQ_GrupoSanguineo + " " +
@@ -308,6 +335,21 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
         perfilBioQ_Lipasa: perfilBioQ_Lipasa,
         perfilBioQ_Amilasa: perfilBioQ_Amilasa,
         perfilBioQ_Otros: perfilBioQ_Otros,
+        /* Vía Aérea */
+        // Valoración de Vía Aérea y Otras Escalas
+        viaAerea_Mallampati: viaAerea_Mallampati,
+        viaAerea_PatilAldreti: viaAerea_PatilAldreti,
+        viaAerea_AperturaBucal: viaAerea_AperturaBucal,
+        viaAerea_Distancia: viaAerea_Distancia,
+        viaAerea_Protusion: viaAerea_Protusion,
+        viaAerea_Ipid: viaAerea_Ipid,
+        viaAerea_Glasgow: viaAerea_Glasgow,
+        viaAerea_NYHA: viaAerea_NYHA,
+        viaAerea_Goldman: viaAerea_Goldman,
+        viaAerea_RiesgoTrombosis: viaAerea_RiesgoTrombosis,
+        viaAerea_ClasificacionASA: viaAerea_ClasificacionASA,
+        viaAerea_TipoCirugia: viaAerea_TipoCirugia,
+        viaAerea_RiesgoAnestesico: viaAerea_RiesgoAnestesico,
     });
 
         return res.json({ preval })

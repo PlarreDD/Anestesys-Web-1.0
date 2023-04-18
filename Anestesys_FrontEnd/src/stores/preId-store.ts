@@ -198,6 +198,20 @@ export const usePreIdStore = defineStore('preid', {
                     perfilBioQ_Lipasa: infoValoracion.perfilBioQ_Lipasa,
                     perfilBioQ_Amilasa: infoValoracion.perfilBioQ_Amilasa,
                     perfilBioQ_Otros: infoValoracion.perfilBioQ_Otros,
+                    // Vía Aérea
+                    viaAerea_Mallampati: infoValoracion.viaAerea_Mallampati,
+                    viaAerea_PatilAldreti: infoValoracion.viaAerea_PatilAldreti,
+                    viaAerea_AperturaBucal: infoValoracion.viaAerea_AperturaBucal,
+                    viaAerea_Distancia: infoValoracion.viaAerea_Distancia,
+                    viaAerea_Protusion: infoValoracion.viaAerea_Protusion,
+                    viaAerea_Ipid: infoValoracion.viaAerea_Ipid,
+                    viaAerea_Glasgow: infoValoracion.viaAerea_Glasgow,
+                    viaAerea_NYHA: infoValoracion.viaAerea_NYHA,
+                    viaAerea_Goldman: infoValoracion.viaAerea_Goldman,
+                    viaAerea_RiesgoTrombosis: infoValoracion.viaAerea_RiesgoTrombosis,
+                    viaAerea_ClasificacionASA: infoValoracion.viaAerea_ClasificacionASA,
+                    viaAerea_TipoCirugia: infoValoracion.viaAerea_TipoCirugia,
+                    viaAerea_RiesgoAnestesico: infoValoracion.viaAerea_RiesgoAnestesico,
                 },
             })
             .then((res: any) => {
@@ -279,6 +293,20 @@ export const usePreIdStore = defineStore('preid', {
                     perfilBioQ_Lipasa: infoValoracion.perfilBioQ_Lipasa,
                     perfilBioQ_Amilasa: infoValoracion.perfilBioQ_Amilasa,
                     perfilBioQ_Otros: infoValoracion.perfilBioQ_Otros,
+                    // Vía Aérea
+                    viaAerea_Mallampati: infoValoracion.viaAerea_Mallampati,
+                    viaAerea_PatilAldreti: infoValoracion.viaAerea_PatilAldreti,
+                    viaAerea_AperturaBucal: infoValoracion.viaAerea_AperturaBucal,
+                    viaAerea_Distancia: infoValoracion.viaAerea_Distancia,
+                    viaAerea_Protusion: infoValoracion.viaAerea_Protusion,
+                    viaAerea_Ipid: infoValoracion.viaAerea_Ipid,
+                    viaAerea_Glasgow: infoValoracion.viaAerea_Glasgow,
+                    viaAerea_NYHA: infoValoracion.viaAerea_NYHA,
+                    viaAerea_Goldman: infoValoracion.viaAerea_Goldman,
+                    viaAerea_RiesgoTrombosis: infoValoracion.viaAerea_RiesgoTrombosis,
+                    viaAerea_ClasificacionASA: infoValoracion.viaAerea_ClasificacionASA,
+                    viaAerea_TipoCirugia: infoValoracion.viaAerea_TipoCirugia,
+                    viaAerea_RiesgoAnestesico: infoValoracion.viaAerea_RiesgoAnestesico,
                 }
             })
             .then((res: any) => {

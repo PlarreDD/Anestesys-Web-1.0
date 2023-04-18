@@ -291,57 +291,117 @@
                         <h5 class="fw-bold">EXPLORACIÓN FÍSICA</h5>
                         <h5 class="fw-bold">Signos Vitales</h5>
 
+                        <!-- Edad -->
                         <div class="col-md-2">
                             <label for="" class="form-label fw-bold">Edad</label>
-                            <input type="text" class="form-control" id="" v-model="infoValoracion.sigVit_Edad"
-                            :class="infoValoracion.sigVit_Edad != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
-                        </div>
-                        <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">Temperatura</label>
-                            <input type="text" class="form-control" id="" v-model="infoValoracion.sigVit_Temperatura"
-                            :class="infoValoracion.sigVit_Temperatura != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
-                        </div>
-                        <div class="col-md-2"></div>
-                        <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Frecuencia Cardíaca (x min)</label>
-                            <input type="text" class="form-control" id="" placeholder="x min" v-model="infoValoracion.sigVit_FrecuCardiaca"
-                            :class="infoValoracion.sigVit_FrecuCardiaca != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
-                        </div>
-                        <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Frecuencia Respiratoria (x min)</label>
-                            <input type="text" class="form-control" id="" placeholder="x min" v-model="infoValoracion.sigVit_FrecuRespiratoria"
-                            :class="infoValoracion.sigVit_FrecuRespiratoria != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="infoValoracion.sigVit_Edad"
+                                   :class="infoValoracion.sigVit_Edad != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
+                        <!-- Temperatura -->
+                        <div class="col-md-2">
+                            <label for="" class="form-label fw-bold">Temperatura</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="infoValoracion.sigVit_Temperatura"
+                                   :class="infoValoracion.sigVit_Temperatura != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
+                        </div>
+                        
+                        <div class="col-md-2"></div>
+                        
+                        <!-- Frecuencia Cardíaca (x min) -->
+                        <div class="col-md-3">
+                            <label for="" class="form-label fw-bold">Frecuencia Cardíaca (x min)</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   placeholder="x min"
+                                   v-model="infoValoracion.sigVit_FrecuCardiaca"
+                                   :class="infoValoracion.sigVit_FrecuCardiaca != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
+                        </div>
+
+                        <!-- Frecuencia Respiratoria (x min) -->
+                        <div class="col-md-3">
+                            <label for="" class="form-label fw-bold">Frecuencia Respiratoria (x min)</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   placeholder="x min"
+                                   v-model="infoValoracion.sigVit_FrecuRespiratoria"
+                                   :class="infoValoracion.sigVit_FrecuRespiratoria != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
+                        </div>
+
+                        <!-- Peso (kg) -->
                         <div class="col-md-2">
                             <label for="" class="form-label fw-bold">Peso (kg)</label>
-                            <input type="text" class="form-control" id="" v-model="infoValoracion.sigVit_Peso" @keyup.capture="calcularIMC"
-                            :class="infoValoracion.sigVit_Peso != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="infoValoracion.sigVit_Peso"
+                                   @keyup.capture="calcularIMC"
+                                   :class="infoValoracion.sigVit_Peso != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'">
                         </div>
+
+                        <!-- Talla (m) -->
                         <div class="col-md-2">
                             <label for="" class="form-label fw-bold">Talla (m)</label>
-                            <input type="text" class="form-control" id="" v-model="infoValoracion.sigVit_Talla" @keyup.capture="calcularIMC"
-                            :class="infoValoracion.sigVit_Talla != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="infoValoracion.sigVit_Talla"
+                                   @keyup.capture="calcularIMC"
+                                   :class="infoValoracion.sigVit_Talla != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+                       
+                        <!-- IMC -->
                         <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">IMC                                 
+                            <label for="" class="form-label fw-bold">IMC
                                 <span data-title="IMC=Peso(Kg)/Estatura&sup2(mts)">
                                     <font-awesome-icon icon="fa-solid fa-circle-info" />
                                 </span>
                             </label>
-                            <input type="text" class="form-control" id="" v-model="infoValoracion.sigVit_IMC" readonly
-                            :class="infoValoracion.sigVit_IMC != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="infoValoracion.sigVit_IMC" readonly
+                                   :class="infoValoracion.sigVit_IMC != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+
+                        <!-- Tensión Arterial (mmHg) -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Tensión Arterial (mmHg)</label>
-                            <input type="text" class="form-control" id="" placeholder="mmHg" v-model="infoValoracion.sigVit_TensionArterial"
-                            :class="infoValoracion.sigVit_TensionArterial != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   placeholder="mmHg"
+                                   v-model="infoValoracion.sigVit_TensionArterial"
+                                   :class="infoValoracion.sigVit_TensionArterial != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+
+                        <!-- Saturación de Oxígeno (%) -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Saturación de Oxígeno (%)</label>
-                            <input type="text" class="form-control" id="" placeholder="%" v-model="infoValoracion.sigVit_SaturacionOxigeno"
-                            :class="infoValoracion.sigVit_SaturacionOxigeno != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   placeholder="%"
+                                   v-model="infoValoracion.sigVit_SaturacionOxigeno"
+                                   :class="infoValoracion.sigVit_SaturacionOxigeno != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+
                         <!-- Botón Guardar/Actuazlizar -->
                         <div class="col-md-12 margenBoton">
                             <template v-if="btnActualizarValoracion === false">
@@ -350,6 +410,7 @@
                                     class="btn btn-guardar-datos fw-bold"                                            
                                     @click="cambiarUpdateValoracion"> GUARDAR </button> 
                             </template>
+
                             <template v-else>
                                 <button data-bs-toggle="tab" 
                                     type="submit"
@@ -364,7 +425,7 @@
             <!-- Div Formulario Vía Aérea -->
             <div class="tab-pane fade" id="via">
                 <div class="col-12 bordePrincipal largoContenedor">
-                    <form class="row g-3">
+                    <form @submit.prevent="" class="row g-3">
                         <h5 class="fw-bold"> Valoración de Vía Aérea y Otras Escalas </h5>
                         
                         <!-- Mallampati -->
@@ -582,6 +643,23 @@
                                 <option>Riesgo Medio</option>
                                 <option>Riesgo Bajo</option>
                             </select>
+                        </div>
+
+                        <!-- Botón Guardar/Actuazlizar -->
+                        <div class="col-md-12 margenBoton">
+                            <template v-if="btnActualizarValoracion === false">
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"                                            
+                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
+                            </template>
+
+                            <template v-else>
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"
+                                    @click="preIdStore.updatePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
+                            </template>                                                                                    
                         </div>
                     </form>
                 </div>
@@ -953,9 +1031,7 @@ export default defineComponent({
 
     data () {
         return{
-
             IMC:"",
-
             infoValoracion: {} as regValoracion,
             preIdStore,
             btnActualizarValoracion:false,
@@ -973,10 +1049,6 @@ export default defineComponent({
 
             preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
         },
-
-        prueba(infoValoracion: any){
-            console.log(infoValoracion);            
-        }
     }
 })
 </script>
