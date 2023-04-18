@@ -158,7 +158,7 @@
                                 
                                 <!-- Estado psiquico -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Estado psiquico </label>
+                                    <label for="" class="form-label fw-bold"> Estado psíquico </label>
                                     <textarea type="text"
                                               class="form-control margen-input"
                                               rows="2"
@@ -185,7 +185,33 @@
                         <!-- No patológicos -->
                         <div class="col row">
                             <div class="g-3">
-                                <h5 class="col-12 fw-bold"> No patológicos </h5>
+                                
+                                <div class="col-md-12">
+                                    <div class="col row">
+                                        <div class="col-md-8">
+                                            <h5 class="fw-bold"> No patológicos </h5>
+                                        </div>
+                                        <!-- Botón Guardar/Actuazlizar -->
+                                        <div class="col-md-4">
+                                            <template v-if="btnActualizarValoracion === false">
+                                                <button data-bs-toggle="tab" 
+                                                    type="submit"
+                                                    class="btn btn-guardar-datos fw-bold"                                            
+                                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
+                                            </template>
+                                            <template v-else>
+                                                <button data-bs-toggle="tab" 
+                                                    type="submit"
+                                                    class="btn btn-guardar-datos fw-bold"
+                                                    @click="preIdStore.updatePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
+                                            </template>                                                         
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+                                
+
                                 <!-- Horas de ayuno (hrs) -->
                                 <div class="col-md-6">
                                     <label for="" class="form-label fw-bold"> Horas de ayuno (hrs) </label>
@@ -197,8 +223,7 @@
                                                   'form-control border border-success formSombra' : 'form-control'">
                                 </div>
 
-                                <!-- Tabaquismo -->
-                                <div class="col-md-6"></div>
+                                <!-- Tabaquismo -->                                
                                 <div class="col-md-12">
                                     <label for="" class="form-label fw-bold margen-tabaquismo"> Tabaquismo </label>
                                     <textarea type="text"
@@ -251,23 +276,7 @@
                                               v-model="infoValoracion.antPersNoPat_AntImportQx"
                                               :class="infoValoracion.antPersNoPat_AntImportQx != undefined ?
                                                      'form-control border border-success formSombra' : 'form-control'"></textarea>
-                                </div>
-
-                                <!-- Botón Guardar/Actuazlizar -->
-                                <div class="col-md-12 margenBoton">
-                                    <template v-if="btnActualizarValoracion === false">
-                                        <button data-bs-toggle="tab" 
-                                            type="submit"
-                                            class="btn btn-guardar-datos fw-bold"                                            
-                                            @click="cambiarUpdateValoracion"> GUARDAR </button> 
-                                    </template>
-                                    <template v-else>
-                                        <button data-bs-toggle="tab" 
-                                            type="submit"
-                                            class="btn btn-guardar-datos fw-bold"
-                                            @click="preIdStore.updatePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
-                                    </template>                                                         
-                                </div>
+                                </div>                                
                                         
                             </div>                            
                         </div>
