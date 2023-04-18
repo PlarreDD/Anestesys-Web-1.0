@@ -291,57 +291,117 @@
                         <h5 class="fw-bold">EXPLORACIÓN FÍSICA</h5>
                         <h5 class="fw-bold">Signos Vitales</h5>
 
+                        <!-- Edad -->
                         <div class="col-md-2">
                             <label for="" class="form-label fw-bold">Edad</label>
-                            <input type="text" class="form-control" id="" v-model="infoValoracion.sigVit_Edad"
-                            :class="infoValoracion.sigVit_Edad != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
-                        </div>
-                        <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">Temperatura</label>
-                            <input type="text" class="form-control" id="" v-model="infoValoracion.sigVit_Temperatura"
-                            :class="infoValoracion.sigVit_Temperatura != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
-                        </div>
-                        <div class="col-md-2"></div>
-                        <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Frecuencia Cardíaca (x min)</label>
-                            <input type="text" class="form-control" id="" placeholder="x min" v-model="infoValoracion.sigVit_FrecuCardiaca"
-                            :class="infoValoracion.sigVit_FrecuCardiaca != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
-                        </div>
-                        <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Frecuencia Respiratoria (x min)</label>
-                            <input type="text" class="form-control" id="" placeholder="x min" v-model="infoValoracion.sigVit_FrecuRespiratoria"
-                            :class="infoValoracion.sigVit_FrecuRespiratoria != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="infoValoracion.sigVit_Edad"
+                                   :class="infoValoracion.sigVit_Edad != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
+                        <!-- Temperatura -->
+                        <div class="col-md-2">
+                            <label for="" class="form-label fw-bold">Temperatura</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="infoValoracion.sigVit_Temperatura"
+                                   :class="infoValoracion.sigVit_Temperatura != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
+                        </div>
+                        
+                        <div class="col-md-2"></div>
+                        
+                        <!-- Frecuencia Cardíaca (x min) -->
+                        <div class="col-md-3">
+                            <label for="" class="form-label fw-bold">Frecuencia Cardíaca (x min)</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   placeholder="x min"
+                                   v-model="infoValoracion.sigVit_FrecuCardiaca"
+                                   :class="infoValoracion.sigVit_FrecuCardiaca != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
+                        </div>
+
+                        <!-- Frecuencia Respiratoria (x min) -->
+                        <div class="col-md-3">
+                            <label for="" class="form-label fw-bold">Frecuencia Respiratoria (x min)</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   placeholder="x min"
+                                   v-model="infoValoracion.sigVit_FrecuRespiratoria"
+                                   :class="infoValoracion.sigVit_FrecuRespiratoria != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
+                        </div>
+
+                        <!-- Peso (kg) -->
                         <div class="col-md-2">
                             <label for="" class="form-label fw-bold">Peso (kg)</label>
-                            <input type="text" class="form-control" id="" v-model="infoValoracion.sigVit_Peso" @keyup.capture="calcularIMC"
-                            :class="infoValoracion.sigVit_Peso != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="infoValoracion.sigVit_Peso"
+                                   @keyup.capture="calcularIMC"
+                                   :class="infoValoracion.sigVit_Peso != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'">
                         </div>
+
+                        <!-- Talla (m) -->
                         <div class="col-md-2">
                             <label for="" class="form-label fw-bold">Talla (m)</label>
-                            <input type="text" class="form-control" id="" v-model="infoValoracion.sigVit_Talla" @keyup.capture="calcularIMC"
-                            :class="infoValoracion.sigVit_Talla != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="infoValoracion.sigVit_Talla"
+                                   @keyup.capture="calcularIMC"
+                                   :class="infoValoracion.sigVit_Talla != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+                       
+                        <!-- IMC -->
                         <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">IMC                                 
+                            <label for="" class="form-label fw-bold">IMC
                                 <span data-title="IMC=Peso(Kg)/Estatura&sup2(mts)">
                                     <font-awesome-icon icon="fa-solid fa-circle-info" />
                                 </span>
                             </label>
-                            <input type="text" class="form-control" id="" v-model="infoValoracion.sigVit_IMC" readonly
-                            :class="infoValoracion.sigVit_IMC != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   v-model="infoValoracion.sigVit_IMC" readonly
+                                   :class="infoValoracion.sigVit_IMC != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+
+                        <!-- Tensión Arterial (mmHg) -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Tensión Arterial (mmHg)</label>
-                            <input type="text" class="form-control" id="" placeholder="mmHg" v-model="infoValoracion.sigVit_TensionArterial"
-                            :class="infoValoracion.sigVit_TensionArterial != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   placeholder="mmHg"
+                                   v-model="infoValoracion.sigVit_TensionArterial"
+                                   :class="infoValoracion.sigVit_TensionArterial != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+
+                        <!-- Saturación de Oxígeno (%) -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Saturación de Oxígeno (%)</label>
-                            <input type="text" class="form-control" id="" placeholder="%" v-model="infoValoracion.sigVit_SaturacionOxigeno"
-                            :class="infoValoracion.sigVit_SaturacionOxigeno != undefined ? 'form-control border border-success formSombra' : 'form-control'"> 
+                            <input type="text"
+                                   class="form-control"
+                                   id=""
+                                   placeholder="%"
+                                   v-model="infoValoracion.sigVit_SaturacionOxigeno"
+                                   :class="infoValoracion.sigVit_SaturacionOxigeno != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+
                         <!-- Botón Guardar/Actuazlizar -->
                         <div class="col-md-12 margenBoton">
                             <template v-if="btnActualizarValoracion === false">
@@ -350,6 +410,7 @@
                                     class="btn btn-guardar-datos fw-bold"                                            
                                     @click="cambiarUpdateValoracion"> GUARDAR </button> 
                             </template>
+
                             <template v-else>
                                 <button data-bs-toggle="tab" 
                                     type="submit"
@@ -364,7 +425,7 @@
             <!-- Div Formulario Vía Aérea -->
             <div class="tab-pane fade" id="via">
                 <div class="col-12 bordePrincipal largoContenedor">
-                    <form class="row g-3">
+                    <form @submit.prevent="" class="row g-3">
                         <h5 class="fw-bold"> Valoración de Vía Aérea y Otras Escalas </h5>
                         
                         <!-- Mallampati -->
@@ -583,6 +644,23 @@
                                 <option>Riesgo Bajo</option>
                             </select>
                         </div>
+
+                        <!-- Botón Guardar/Actuazlizar -->
+                        <div class="col-md-12 margenBoton">
+                            <template v-if="btnActualizarValoracion === false">
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"                                            
+                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
+                            </template>
+
+                            <template v-else>
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"
+                                    @click="preIdStore.updatePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
+                            </template>                                                                                    
+                        </div>
                     </form>
                 </div>
             </div>
@@ -590,7 +668,7 @@
             <!-- Div Formulario Estudios -->
             <div class="tab-pane fade" id="estudios">
                 <div class="col-12 bordePrincipal largoContenedor">
-                    <form class="row g-3">
+                    <form @submit.prevent="" class="row g-3">
                         <h5 class="fw-bold fw-bold">ESTUDIOS</h5>           
                         
                         <!-- Estudio -->
@@ -640,20 +718,22 @@
             <!-- Div Formulario Exámenes -->
             <div class="tab-pane fade" id="examenes">
                 <div class="col-12 bordePrincipal">
-                    <form class="row g-3">
+                    <form @submit.prevent="" class="row g-3">
                         <!-- Exámenes / Perfil Bioquímico -->
                         <h5 class="fw-bold">EXÁMENES</h5>
                         <h5 class="fw-bold">Perfil Bioquímico</h5>
 
                         <!-- Fecha de realización -->
+                        <!-- Revisar que funcione el class -->
                         <div class="col-md-6">
                             <label for="" class="form-label fw-bold">Fecha de realización</label>
                             <input type="date"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.fechaRealizacion"
-                                   :class="examenes.fechaRealizacion != Date ?
-                                          'form-control border border-success formSombra' : 'form-control'">
+                                   v-model="infoValoracion.perfilBioQ_FechaRealizacion"
+                                   :class="infoValoracion.perfilBioQ_FechaRealizacion != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'"
+                                          >
                         </div>
 
                         <!-- Grupo sanguíneo -->
@@ -661,8 +741,8 @@
                             <label for="inputState" class="form-label fw-bold">Grupo sanguíneo</label>
                             <select id="inputState"
                                     class="form-select"
-                                    v-model="examenes.grupoSanguineo"
-                                    :class="examenes.grupoSanguineo != 'Seleccione...' ?
+                                    v-model="infoValoracion.perfilBioQ_GrupoSanguineo"
+                                    :class="infoValoracion.perfilBioQ_GrupoSanguineo != 'Seleccione...' ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>A+</option>
@@ -682,8 +762,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.hemoglobina"
-                                   :class="examenes.hemoglobina != '' ?
+                                   v-model="infoValoracion.perfilBioQ_Hemoglobina"
+                                   :class="infoValoracion.perfilBioQ_Hemoglobina != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -693,8 +773,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.hematocrito"
-                                   :class="examenes.hemoglobina != '' ?
+                                   v-model="infoValoracion.perfilBioQ_Hematocrito"
+                                   :class="infoValoracion.perfilBioQ_Hematocrito != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -704,8 +784,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.plaquetas"
-                                   :class="examenes.plaquetas != '' ?
+                                   v-model="infoValoracion.perfilBioQ_Plaquetas"
+                                   :class="infoValoracion.perfilBioQ_Plaquetas != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -715,8 +795,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.leutocitos"
-                                   :class="examenes.leutocitos != '' ?
+                                   v-model="infoValoracion.perfilBioQ_Leutocitos"
+                                   :class="infoValoracion.perfilBioQ_Leutocitos != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -726,8 +806,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.TP"
-                                   :class="examenes.TP != '' ?
+                                   v-model="infoValoracion.perfilBioQ_TP"
+                                   :class="infoValoracion.perfilBioQ_TP != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -737,8 +817,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.TT"
-                                   :class="examenes.TT != '' ?
+                                   v-model="infoValoracion.perfilBioQ_TT"
+                                   :class="infoValoracion.perfilBioQ_TT != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -748,8 +828,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.TPT"
-                                   :class="examenes.TPT != '' ?
+                                   v-model="infoValoracion.perfilBioQ_TPT"
+                                   :class="infoValoracion.perfilBioQ_TPT != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -759,8 +839,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.INR"
-                                   :class="examenes.INR != '' ?
+                                   v-model="infoValoracion.perfilBioQ_INR"
+                                   :class="infoValoracion.perfilBioQ_INR != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -770,8 +850,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.glucosa"
-                                   :class="examenes.glucosa != '' ?
+                                   v-model="infoValoracion.perfilBioQ_Glucosa"
+                                   :class="infoValoracion.perfilBioQ_Glucosa != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -780,8 +860,8 @@
                             <label for="" class="form-label fw-bold">Creatinina</label>
                             <input type="text"
                                    class="form-control"
-                                   id="" v-model="examenes.creatinina"
-                                   :class="examenes.creatinina != '' ?
+                                   id="" v-model="infoValoracion.perfilBioQ_Creatinina"
+                                   :class="infoValoracion.perfilBioQ_Creatinina != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -791,8 +871,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.urea"
-                                   :class="examenes.urea != '' ?
+                                   v-model="infoValoracion.perfilBioQ_Urea"
+                                   :class="infoValoracion.perfilBioQ_Urea != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -802,8 +882,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.sodio"
-                                   :class="examenes.sodio != '' ?
+                                   v-model="infoValoracion.perfilBioQ_Sodio"
+                                   :class="infoValoracion.perfilBioQ_Sodio != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -813,8 +893,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.potasio"
-                                   :class="examenes.potasio != '' ?
+                                   v-model="infoValoracion.perfilBioQ_Potasio"
+                                   :class="infoValoracion.perfilBioQ_Potasio != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -824,8 +904,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.cloro"
-                                   :class="examenes.cloro != '' ?
+                                   v-model="infoValoracion.perfilBioQ_Cloro"
+                                   :class="infoValoracion.perfilBioQ_Cloro != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -835,8 +915,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.calcio"
-                                   :class="examenes.calcio != '' ?
+                                   v-model="infoValoracion.perfilBioQ_Calcio"
+                                   :class="infoValoracion.perfilBioQ_Calcio != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -846,8 +926,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.magnesio"
-                                   :class="examenes.magnesio != '' ?
+                                   v-model="infoValoracion.perfilBioQ_Magnesio"
+                                   :class="infoValoracion.perfilBioQ_Magnesio != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -857,8 +937,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.bilirrubinaDirecta"
-                                   :class="examenes.bilirrubinaDirecta != '' ?
+                                   v-model="infoValoracion.perfilBioQ_BilirrubinaDirecta"
+                                   :class="infoValoracion.perfilBioQ_BilirrubinaDirecta != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -868,8 +948,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.bilirrubinaIndirecta"
-                                   :class="examenes.bilirrubinaIndirecta != '' ?
+                                   v-model="infoValoracion.perfilBioQ_BilirrubinaIndirecta"
+                                   :class="infoValoracion.perfilBioQ_BilirrubinaIndirecta != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -879,8 +959,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.bilirrubinaTotal"
-                                   :class="examenes.bilirrubinaTotal != '' ?
+                                   v-model="infoValoracion.perfilBioQ_BilirrubinaTotal"
+                                   :class="infoValoracion.perfilBioQ_BilirrubinaTotal != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -890,8 +970,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.lipasa"
-                                   :class="examenes.lipasa != '' ?
+                                   v-model="infoValoracion.perfilBioQ_Lipasa"
+                                   :class="infoValoracion.perfilBioQ_Lipasa != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>    
                         
@@ -901,8 +981,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.amilasa"
-                                   :class="examenes.amilasa != '' ?
+                                   v-model="infoValoracion.perfilBioQ_Amilasa"
+                                   :class="infoValoracion.perfilBioQ_Amilasa != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -912,8 +992,8 @@
                             <input type="text"
                                    class="form-control"
                                    id=""
-                                   v-model="examenes.otros"
-                                   :class="examenes.otros != '' ?
+                                   v-model="infoValoracion.perfilBioQ_Otros"
+                                   :class="infoValoracion.perfilBioQ_Otros != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
                     </form>
@@ -934,39 +1014,9 @@ export default defineComponent({
 
     data () {
         return{
-
             IMC:"",
-
             infoValoracion: {} as regValoracion,
             preIdStore,
-
-            examenes: {
-                fechaRealizacion: Date,
-                grupoSanguineo: "Seleccione...",
-                hemoglobina: "",
-                hematocrito: "",
-                plaquetas: "",
-                leutocitos: "",
-                TP: "",
-                TT: "",
-                TPT: "",
-                INR: "",
-                glucosa: "",
-                creatinina: "",
-                urea: "",
-                sodio: "",
-                potasio: "",
-                cloro: "",
-                calcio: "",
-                magnesio: "",
-                bilirrubinaDirecta: "",
-                bilirrubinaIndirecta: "",
-                bilirrubinaTotal: "",
-                lipasa: "",
-                amilasa: "",
-                otros: ""
-            },
-
             btnActualizarValoracion:false,
         }  
     },
@@ -982,10 +1032,6 @@ export default defineComponent({
 
             preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
         },
-
-        prueba(infoValoracion: any){
-            console.log(infoValoracion);            
-        }
     }
 })
 </script>

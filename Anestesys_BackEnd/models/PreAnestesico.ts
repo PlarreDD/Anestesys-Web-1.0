@@ -217,6 +217,7 @@ const PreValoracionSchema = new Schema({
         type: String,
     },
 
+    /* Exploración Física */
     // Signos Vitales
     sigVit_Edad: {
         type: String,
@@ -251,6 +252,60 @@ const PreValoracionSchema = new Schema({
     },
 
     sigVit_SaturacionOxigeno: {
+        type: String,
+    },
+
+    /* Vía Aérea */
+    // Valoración de Vía Aérea y Otras Escalas
+    viaAerea_Mallampati: {
+        type: String,
+    },
+
+    viaAerea_PatilAldreti: {
+        type: String,
+    },
+
+    viaAerea_AperturaBucal: {
+        type: String,
+    },
+
+    viaAerea_Distancia: {
+        type: String,
+    },
+
+    viaAerea_Protusion: {
+        type: String,
+    },
+
+    viaAerea_Ipid: {
+        type: String,
+    },
+
+    viaAerea_Glasgow: {
+        type: String,
+    },
+
+    viaAerea_NYHA: {
+        type: String,
+    },
+
+    viaAerea_Goldman: {
+        type: String,
+    },
+
+    viaAerea_RiesgoTrombosis: {
+        type: String,
+    },
+
+    viaAerea_ClasificacionASA: {
+        type: String,
+    },
+
+    viaAerea_TipoCirugia: {
+        type: String,
+    },
+
+    viaAerea_RiesgoAnestesico: {
         type: String,
     },
 });
