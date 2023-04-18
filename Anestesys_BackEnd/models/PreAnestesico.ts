@@ -254,7 +254,102 @@ const PreValoracionSchema = new Schema({
     sigVit_SaturacionOxigeno: {
         type: String,
     },
+    //Laboratorio
+    perfilBioQ_FechaRealizacion: {
+        type: String,
+    },
 
+    perfilBioQ_GrupoSanguineo: {
+        type: String,
+    },
+
+    perfilBioQ_Hemoglobina: {
+        type: String,
+    },
+
+    perfilBioQ_Hematocrito: {
+        type: String,
+    },
+
+    perfilBioQ_Plaquetas: {
+        type: String,
+    },
+
+    perfilBioQ_Leutocitos: {
+        type: String,
+    },
+
+    perfilBioQ_TP: {
+        type: String,
+    },
+
+    perfilBioQ_TT: {
+        type: String,
+    },
+
+    perfilBioQ_TPT: {
+        type: String,
+    },
+
+    perfilBioQ_INR: {
+        type: String,
+    },
+
+    perfilBioQ_Glucosa: {
+        type: String,
+    },
+
+    perfilBioQ_Creatinina: {
+        type: String,
+    },
+
+    perfilBioQ_Urea: {
+        type: String,
+    },
+
+    perfilBioQ_Sodio: {
+        type: String,
+    },
+
+    perfilBioQ_Potasio: {
+        type: String,
+    },
+
+    perfilBioQ_Cloro: {
+        type: String,
+    },
+
+    perfilBioQ_Calcio: {
+        type: String,
+    },
+
+    perfilBioQ_Magnesio: {
+        type: String,
+    },
+
+    perfilBioQ_BilirrubinaDirecta: {
+        type: String,
+    },
+
+    perfilBioQ_BilirrubinaIndirecta: {
+        type: String,
+    },
+
+    perfilBioQ_BilirrubinaTotal: {
+        type: String,
+    },
+
+    perfilBioQ_Lipasa: {
+        type: String,
+    },
+
+    perfilBioQ_Amilasa: {
+        type: String,
+    },
+
+    perfilBioQ_Otros: {
+        type: String,
+    },
     /* Vía Aérea */
     // Valoración de Vía Aérea y Otras Escalas
     viaAerea_Mallampati: {

@@ -90,9 +90,14 @@ export interface regValoracion{
     estudios_Estudio: string,
     estudio_Especificaciones: string,
 
+    // Laboratorio
+    perfilBioQ_FechaRealizacion: string,
+    perfilBioQ_GrupoSanguineo: string,
+
     // Exámenes
     perfilBioQ_FechaRealizacion: string,
     perfilBioQ_GrupoSanguineo: string
+
     perfilBioQ_Hemoglobina: string,
     perfilBioQ_Hematocrito: string,
     perfilBioQ_Plaquetas: string,

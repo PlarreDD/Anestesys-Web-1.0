@@ -54,7 +54,7 @@
                 data-bs-target="#examenes"
                 type="button"
                 aria-selected="false"
-                data-title="Perfil bioquímico"> EXÁMENES </button>
+                data-title="Perfil bioquímico"> LABORATORIO </button>
             </li>
         </ul>
                 
@@ -720,8 +720,25 @@
                 <div class="col-12 bordePrincipal">
                     <form @submit.prevent="" class="row g-3">
                         <!-- Exámenes / Perfil Bioquímico -->
-                        <h5 class="fw-bold">EXÁMENES</h5>
+                        <h5 class="fw-bold">LABORATORIO</h5>
                         <h5 class="fw-bold">Perfil Bioquímico</h5>
+
+                        <!-- Botón Guardar/Actuazlizar -->
+                        <div class="col-md-12 margenBoton">
+                            <template v-if="btnActualizarValoracion === false">
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"                                            
+                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
+                            </template>
+
+                            <template v-else>
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"
+                                    @click="preIdStore.updatePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
+                            </template>                                                                                    
+                        </div>
 
                         <!-- Fecha de realización -->
                         <!-- Revisar que funcione el class -->
