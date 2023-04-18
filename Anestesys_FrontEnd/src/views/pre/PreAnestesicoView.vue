@@ -135,34 +135,35 @@
             <img src="images/post.svg" class="img-menu-lateral"/>
           </RouterLink>
         </div>
-      </div>
-      
-      <div class="container text-center col-md-9 posicionEstatica fw-bold"
-           style="border-radius: 5px;">
-        <div class="row">
-          <div class="col bordeColumna">
-            <label class="form-label text-white">
-              {{ nomPaciente }}
-            </label>
-          </div>
-          
-          <div class="col bordeColumna">
-            {{ nomCirujano }}
-          </div>
-          
-          <div class="col bordeColumna">
-            {{ nomCirugia }}
-          </div>
-        </div>
-      </div>
 
-      <div class="container col-md-1">
-        <button @click="topFunction()"
-                class="btn btn-arriba fw-bold"
-                id="btnArriba"
-                title="Go to top">
-          <font-awesome-icon icon="fa-solid fa-angle-up" size="2xl" />
-        </button>
+        <!-- Botón para subir -->
+        <div class="container col-md-1">
+          <button @click="topFunction()"
+                  class="btn btn-arriba fw-bold"
+                  id="btnArriba"
+                  title="Go to top">
+            <font-awesome-icon icon="fa-solid fa-angle-up" size="2xl" />
+          </button>
+        </div>
+      </div>            
+      
+    </div>
+
+    <div class=" text-center posicionEstatica fw-bold">
+      <div class="row">
+        <div class="col bordeColumna">
+          <label class="form-label text-white">
+            {{ nomPaciente }}
+          </label>
+        </div>
+        
+        <div class="col bordeColumna">
+          {{ nomCirujano }}
+        </div>
+        
+        <div class="col bordeColumna">
+          {{ nomCirugia }}
+        </div>
       </div>
     </div>
   </div>
@@ -488,13 +489,15 @@ export default defineComponent({
 
 /* Menú estatico */
 .posicionEstatica {
-  position: sticky;
+  position: -webkit-sticky;
+  position: fixed;
   bottom: 0;
   z-index: 1020;
   background-color: #002D60;
-  padding: 1.2rem;
-  border-radius: 5px;
+  padding: 1rem;
+  border-radius: 5px !important;
   color: #ffffff;
+  width: 57.5%;
 }
 .bordeColumna{
   margin-left: auto;
@@ -510,6 +513,7 @@ export default defineComponent({
     bottom: 60px; /* Coloque el botón en la parte inferior de la página. */
     z-index: 99; /* Asegúrese de que no se superponga */  
     border-radius: 6px; /* Esquinas redondeadas */ 
+    /* right: 340px; */
     --bs-btn-bg: #ffffff;
     --bs-btn-color: #002d60;    
     --bs-btn-border-color: #ced4da;
