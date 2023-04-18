@@ -189,6 +189,20 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
             sigVit_IMC:sigVit_IMC,
             sigVit_TensionArterial:sigVit_TensionArterial,
             sigVit_SaturacionOxigeno:sigVit_SaturacionOxigeno,
+            // Vía Aérea
+            viaAerea_Mallampati: viaAerea_Mallampati,
+            viaAerea_PatilAldreti: viaAerea_PatilAldreti,
+            viaAerea_AperturaBucal: viaAerea_AperturaBucal,
+            viaAerea_Distancia: viaAerea_Distancia,
+            viaAerea_Protusion: viaAerea_Protusion,
+            viaAerea_Ipid: viaAerea_Ipid,
+            viaAerea_Glasgow: viaAerea_Glasgow,
+            viaAerea_NYHA: viaAerea_NYHA,
+            viaAerea_Goldman: viaAerea_Goldman,
+            viaAerea_RiesgoTrombosis: viaAerea_RiesgoTrombosis,
+            viaAerea_ClasificacionASA: viaAerea_ClasificacionASA,
+            viaAerea_TipoCirugia: viaAerea_TipoCirugia,
+            viaAerea_RiesgoAnestesico: viaAerea_RiesgoAnestesico,
             //Laboratorio
             perfilBioQ_FechaRealizacion: perfilBioQ_FechaRealizacion,
             perfilBioQ_GrupoSanguineo: perfilBioQ_GrupoSanguineo,
@@ -214,21 +228,6 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
             perfilBioQ_Lipasa: perfilBioQ_Lipasa,
             perfilBioQ_Amilasa: perfilBioQ_Amilasa,
             perfilBioQ_Otros: perfilBioQ_Otros,
-            /* Vía Aérea */
-            // Valoración de Vía Aérea y Otras Escalas
-            viaAerea_Mallampati: viaAerea_Mallampati,
-            viaAerea_PatilAldreti: viaAerea_PatilAldreti,
-            viaAerea_AperturaBucal: viaAerea_AperturaBucal,
-            viaAerea_Distancia: viaAerea_Distancia,
-            viaAerea_Protusion: viaAerea_Protusion,
-            viaAerea_Ipid: viaAerea_Ipid,
-            viaAerea_Glasgow: viaAerea_Glasgow,
-            viaAerea_NYHA: viaAerea_NYHA,
-            viaAerea_Goldman: viaAerea_Goldman,
-            viaAerea_RiesgoTrombosis: viaAerea_RiesgoTrombosis,
-            viaAerea_ClasificacionASA: viaAerea_ClasificacionASA,
-            viaAerea_TipoCirugia: viaAerea_TipoCirugia,
-            viaAerea_RiesgoAnestesico: viaAerea_RiesgoAnestesico,
         });
 
         await preval.save();
