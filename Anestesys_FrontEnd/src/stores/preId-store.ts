@@ -12,6 +12,7 @@ export const usePreIdStore = defineStore('preid', {
     }),
 
     actions: {
+        /************************** Id Paciente **************************/
         savePreId(infoPreIdPaciente: any){
             apiAxios({
                 url: "http://localhost:5000/preId",
@@ -131,7 +132,176 @@ export const usePreIdStore = defineStore('preid', {
             })
             .catch((e: any) => {
                 // console.log("error: " + e);
-            });            
-        }
+            });
+        },
+        /*************************** Valoración **************************/
+        savePreAntecedentes(infoValoracion: any, pid: string){
+            apiAxios({
+                url: "http://localhost:5000/valora",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    // Antecedentes
+                    pid: pid,
+                    // Personales Patológicos
+                    antPersPat_Alergias: infoValoracion.antPersPat_Alergias,
+                    antPersPat_Quirurgicos: infoValoracion.antPersPat_Quirurgicos,
+                    antPersPat_Endocrinologicos: infoValoracion.antPersPat_Endocrinologicos,
+                    antPersPat_Urologicos: infoValoracion.antPersPat_Urologicos,
+                    antPersPat_Traumaticos: infoValoracion.antPersPat_Traumaticos,
+                    antPersPat_Ortopedicos: infoValoracion.antPersPat_Ortopedicos,               
+                    antPersPat_Transfusiones: infoValoracion.antPersPat_Transfusiones,
+                    antPersPat_CompAnestPrev: infoValoracion.antPersPat_CompAnestPrev,
+                    antPersPat_EstadoPsiq: infoValoracion.antPersPat_EstadoPsiq,
+                    antPersPat_MedActual: infoValoracion.antPersPat_MedActual,
+                    // Personales No Patológicos
+                    antPersNoPat_HrsAyuno: infoValoracion.antPersNoPat_HrsAyuno,
+                    antPersNoPat_Tabaquismo: infoValoracion.antPersNoPat_Tabaquismo,
+                    antPersNoPat_Etilismo: infoValoracion.antPersNoPat_Etilismo,
+                    antPersNoPat_Adicciones: infoValoracion.antPersNoPat_Adicciones,
+                    antPersNoPat_Inmunizaciones: infoValoracion.antPersNoPat_Inmunizaciones,
+                    antPersNoPat_AntImportQx: infoValoracion.antPersNoPat_AntImportQx,
+                    // Signos Vitales
+                    sigVit_Edad: infoValoracion.sigVit_Edad,
+                    sigVit_Temperatura: infoValoracion.sigVit_Temperatura,
+                    sigVit_FrecuCardiaca: infoValoracion.sigVit_FrecuCardiaca,
+                    sigVit_FrecuRespiratoria: infoValoracion.sigVit_FrecuRespiratoria,
+                    sigVit_Peso: infoValoracion.sigVit_Peso,
+                    sigVit_Talla: infoValoracion.sigVit_Talla,
+                    sigVit_IMC: infoValoracion.sigVit_IMC,
+                    sigVit_TensionArterial: infoValoracion.sigVit_TensionArterial,
+                    sigVit_SaturacionOxigeno: infoValoracion.sigVit_SaturacionOxigeno
+                },
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos guardados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
+
+        updatePreAntecedentes(infoValoracion: any, pid: string){
+            apiAxios({
+                url: `http://localhost:5000/valora/${String(pid)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    // Antecedentes
+                    pid: pid,
+                    // Personales Patológicos
+                    antPersPat_Alergias: infoValoracion.antPersPat_Alergias,
+                    antPersPat_Quirurgicos: infoValoracion.antPersPat_Quirurgicos,
+                    antPersPat_Endocrinologicos: infoValoracion.antPersPat_Endocrinologicos,
+                    antPersPat_Urologicos: infoValoracion.antPersPat_Urologicos,
+                    antPersPat_Traumaticos: infoValoracion.antPersPat_Traumaticos,
+                    antPersPat_Ortopedicos: infoValoracion.antPersPat_Ortopedicos,               
+                    antPersPat_Transfusiones: infoValoracion.antPersPat_Transfusiones,
+                    antPersPat_CompAnestPrev: infoValoracion.antPersPat_CompAnestPrev,
+                    antPersPat_EstadoPsiq: infoValoracion.antPersPat_EstadoPsiq,
+                    antPersPat_MedActual: infoValoracion.antPersPat_MedActual,
+                    // Personales No Patológicos
+                    antPersNoPat_HrsAyuno: infoValoracion.antPersNoPat_HrsAyuno,
+                    antPersNoPat_Tabaquismo: infoValoracion.antPersNoPat_Tabaquismo,
+                    antPersNoPat_Etilismo: infoValoracion.antPersNoPat_Etilismo,
+                    antPersNoPat_Adicciones: infoValoracion.antPersNoPat_Adicciones,
+                    antPersNoPat_Inmunizaciones: infoValoracion.antPersNoPat_Inmunizaciones,
+                    antPersNoPat_AntImportQx: infoValoracion.antPersNoPat_AntImportQx,
+                    // Signos Vitales
+                    sigVit_Edad: infoValoracion.sigVit_Edad,
+                    sigVit_Temperatura: infoValoracion.sigVit_Temperatura,
+                    sigVit_FrecuCardiaca: infoValoracion.sigVit_FrecuCardiaca,
+                    sigVit_FrecuRespiratoria: infoValoracion.sigVit_FrecuRespiratoria,
+                    sigVit_Peso: infoValoracion.sigVit_Peso,
+                    sigVit_Talla: infoValoracion.sigVit_Talla,
+                    sigVit_IMC: infoValoracion.sigVit_IMC,
+                    sigVit_TensionArterial: infoValoracion.sigVit_TensionArterial,
+                    sigVit_SaturacionOxigeno: infoValoracion.sigVit_SaturacionOxigeno
+                }
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos actualizados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
+        /***************************** Nota ******************************/
+        savePreNota(obsNotaPre: string, pid: string){
+            console.log(obsNotaPre + " - " + pid);
+            
+            apiAxios({
+                url: "http://localhost:5000/nota",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    pid: pid,
+                    obsNotaPre: obsNotaPre,
+                },
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos guardados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
+
+        updatePreNota(obsNotaPre: string, pid: string){
+            apiAxios({
+                url: `http://localhost:5000/nota/${String(pid)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    obsNotaPre: obsNotaPre,
+                }
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos actualizados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
     }
 });

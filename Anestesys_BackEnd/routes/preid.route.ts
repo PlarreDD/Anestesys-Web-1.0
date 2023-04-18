@@ -3,7 +3,7 @@ import { requireToken } from "../middlewares/requireToken";
 import { getAllPacientes,
          getPaciente,
          createPaciente,
-         updatePaciente } from "../controllers/preid.controller";
+         updatePaciente } from "../controllers/preanest.controller";
 
 const router = Router();
 
@@ -12,8 +12,10 @@ const router = Router();
 // POST         /preId          Crear paciente
 // PATCH/PUT    /preId/:id      Actualizar paciente
 
+/*------------------- PreId --------------------*/
 router.get('/', requireToken, getAllPacientes);
 router.get('/:id', requireToken, getPaciente);
 router.post('/', requireToken, createPaciente);
-router.put('/:id',  requireToken, updatePaciente)
+router.put('/:id',  requireToken, updatePaciente);
+
 export default router;

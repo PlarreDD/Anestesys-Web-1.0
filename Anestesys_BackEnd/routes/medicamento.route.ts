@@ -8,5 +8,6 @@ router.get('/', requireToken, getMedicamentos);
 router.get('/:id', requireToken, getMedicamento);
 router.post('/', requireToken, createMedicamento);
 router.put('/:id', requireToken, updateMedicamento);
-router.delete('/:id', requireToken, deleteMedicamento)
+router.delete('/:id', requireToken, deleteMedicamento);
+
 export default router;

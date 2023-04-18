@@ -13,7 +13,7 @@
       </div>
 
       <div class="col-md-2">
-        <div class="alinearBotonDerecha">
+        <div class="centrarBoton">
           <button class="btn btn-icono fw-bold">
             <img class="btn-paciente"
                  src="images/imgIcon/nuevo-pac.svg"/> Nuevo Paciente </button>
@@ -59,8 +59,7 @@
                     data-bs-toggle="tab"
                     aria-selected="false"
                     @click="validaSeleccionValoracion()"
-                    :disabled="numExpediente != '' && nomPaciente != '' 
-                    ? false : true"> VALORACIÓN </button>
+                    v-bind:disabled="deshabilitado"> VALORACIÓN </button>
           </li>
 
           <li class="nav-item col-md-3">
@@ -70,8 +69,7 @@
                     data-bs-toggle="tab"
                     aria-selected="false"
                     @click="validaSeleccionPlan()"
-                    :disabled="numExpediente != '' && nomPaciente != ''
-                    ? false : true"> PLAN </button>
+                    v-bind:disabled="deshabilitado"> PLAN </button>
           </li>
 
           <li class="nav-item col-md-3" >
@@ -81,8 +79,7 @@
                     data-bs-toggle="tab"
                     aria-selected="false"
                     @click="validaSeleccionNota()"
-                    :disabled="numExpediente != '' && nomPaciente != ''
-                    ? false : true"> NOTA </button>
+                    v-bind:disabled="deshabilitado"> NOTA </button>
           </li>
         </ul>
       </div>
@@ -93,15 +90,15 @@
       <div class="tab-content col-md-9" id="">
         <div class="tab-pane fade show active" id="pre-id">
           <id @recibe-datos="actualizaDatos"
-              @validar="validaExpediente" 
+              @validar="validaExpedienteId" 
               :propNumExp="numExpB"
               :propNomPac="nomPacB"
               :propRojoNum="bordeRojoNum"
               :propVerdeNum="bordeVerdeNum"
               :propRojoNom="bordeRojoNom"
               :propVerdeNom="bordeVerdeNom"
-              :propBtnGuardar="btnGuardar"
-              :propBtnActualizar="btnActualizar"/>
+              :propBtnGuardarId="btnGuardarId"
+              :propBtnActualizarId="btnActualizarId"/>
         </div>
 
         <div class="tab-pane fade" id="pre-valoracion">
@@ -126,15 +123,15 @@
         <div :class="numExpediente != '' && nomPaciente != '' ?
                     'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
           <RouterLink to="trans"
-                      :class="numExpediente != '' && nomPaciente != '' ? 'visible' : 'invisible'">
-            <img src="images/trans.svg" class="img-menu-lateral"/>
+                      class="" id="menu-trans">
+            <img src="images/trans.svg" class="img-menu-lateral" v-bind:aria-disabled="true"/>
           </RouterLink>
         </div>
         
         <div :class="numExpediente != '' && nomPaciente != '' ?
                     'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
           <RouterLink to="post"
-                      :class="numExpediente != '' && nomPaciente != '' ? 'visible' : 'invisible'">
+          class="" id="menu-post">
             <img src="images/post.svg" class="img-menu-lateral"/>
           </RouterLink>
         </div>
@@ -164,7 +161,7 @@
                 class="btn btn-arriba fw-bold"
                 id="btnArriba"
                 title="Go to top">
-          <i class="fa-solid fa-3x fa-angle-up"></i>
+          <font-awesome-icon icon="fa-solid fa-angle-up" size="2xl" />
         </button>
       </div>
     </div>
@@ -192,6 +189,8 @@ const idStore = usePreIdStore();
 export default defineComponent({
   data() {
     return {
+      deshabilitado: true,
+
       claseVisible:'visible',
       claseInvisible:'invisible',
 
@@ -214,8 +213,8 @@ export default defineComponent({
       esPlan: false,
       esNota: false,
       
-      btnGuardar: true,
-      btnActualizar: false      
+      btnGuardarId: true,
+      btnActualizarId: false          
     }
   },
 
@@ -233,16 +232,17 @@ export default defineComponent({
   mounted: function() { // Llama el método despues de cargar la página
     this.validaSeleccionId()
     this.ocultarFondo();    
-    this.mostrarHeader();    
+    this.mostrarHeader();  
+    this.ocultarMenuLateral();  
     document.addEventListener('scroll', this.scrollFunction);
   },
   
   destroyed: function(){
     document.addEventListener('scroll', this.scrollFunction)
   },
-  
+
   methods: {
-    async validaExpediente(numExpediente, nombrePaciente) {
+    async validaExpedienteId(numExpediente, nombrePaciente) {
       if(numExpediente === undefined || nombrePaciente === undefined ||
          numExpediente === '' || nombrePaciente === '') {
         if(numExpediente === undefined || numExpediente === ''){
@@ -267,6 +267,10 @@ export default defineComponent({
           this.bordeRojoNom=false
         }
 
+        this.deshabilitado=true
+        document.getElementById("menu-trans").className='invisible'
+        document.getElementById("menu-post").className='invisible'       
+
         swal.fire({
           title: 'Escribir el número de expediente, nombre del paciente y número de episodio',
           icon: 'error',
@@ -289,8 +293,12 @@ export default defineComponent({
         this.bordeRojoNom=false
         this.bordeVerdeNom=true
         
-        this.btnGuardar=false       
-        this.btnActualizar=true
+        this.btnGuardarId=false       
+        this.btnActualizarId=true
+
+        this.deshabilitado=false
+        document.getElementById("menu-trans").className='visible'
+        document.getElementById("menu-post").className='visible'
       }
     },
 
@@ -363,6 +371,11 @@ export default defineComponent({
     async ocultarFondo(){
       document.body.style.backgroundImage = "url('')";
       document.body.style.backgroundColor = '#F5F8FC'
+    },
+
+    async ocultarMenuLateral(){
+      document.getElementById("menu-trans").className='invisible'
+      document.getElementById("menu-post").className='invisible'    
     },
 
     async mostrarHeader(){
