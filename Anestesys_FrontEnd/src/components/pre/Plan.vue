@@ -55,12 +55,7 @@
         </ul>
 
         <div class="tab-content col-md-12" id="">
-            <!-- <div class="col-md-12 margenBoton">
-                <button data-bs-toggle="tab" 
-                        type="submit"
-                        class="btn btn-guardar-datos fw-bold"                                            
-                        @click="prueba(infoPlan)"> GUARDAR </button>
-            </div> -->
+
             <!-- POSICIÓN Y CUIDADOS -->
             <div class="tab-pane fade show active" id="posicion">
                 <div class="col-12 bordePrincipal">  
@@ -293,30 +288,93 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.sedacion_Via"
-                                    :class="infoPlan.sedacion_Via != '' ?
-                                           'form-control border border-success formSombra' : 'form-control'">
-                                <option selected>Seleccione...</option>
-                                <option>Oral</option>
-                                <option>Nasal</option>
-                                <option>Inhalartoria</option>
-                                <option>Intravenosa</option>
-                                <option>Intramuscular</option>
-                                <option>Rectal</option>
+                                    :class="infoPlan.sedacion_Via != undefined ?
+                                           'form-control border border-success formSombra' : 'form-control'"
+                                           @click="cambioSelectSedacion()">
+                                <option id="viaOral">Oral</option>
+                                <option id="viaNasal">Nasal</option>
+                                <option id="viaInhalatoria">Inhalatoria</option>
+                                <option id="viaIntravenosa">Intravenosa</option>
+                                <option id="viaIntramuscular">Intramuscular</option>
+                                <option id="viaRectal">Rectal</option>
                             </select>
                         </div>
 
                         <!-- Opción -->
                         <div class="col-md-2">
-                            <label for="inputState" class="form-label fw-bold">Opción</label>
-                            <select id="inputState"
-                                    class="form-select"
-                                    v-model="infoPlan.sedacion_Opcion"
-                                    :class="infoPlan.sedacion_Opcion != '' ?
-                                           'form-control border border-success formSombra' : 'form-control'">
-                                <option selected>Seleccione...</option>
-                                <option>Superficial</option>
-                                <option>Profunda</option>
-                            </select>
+
+                            <template v-if="sedacionOral === true">
+                                <label for="inputState" class="form-label fw-bold">Opción</label>
+                                <select id="inputState"
+                                        class="form-select"
+                                        v-model="infoPlan.sedacion_Opcion"
+                                        :class="infoPlan.sedacion_Opcion != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                    <option>Superficial Oral</option>
+                                    <option>Profunda Oral</option>
+                                </select>
+                            </template>
+
+                            <template v-if="sedacionNasal === true">
+                                <label for="inputState" class="form-label fw-bold">Opción</label>
+                                <select id="inputState"
+                                        class="form-select"
+                                        v-model="infoPlan.sedacion_Opcion"
+                                        :class="infoPlan.sedacion_Opcion != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                    <option>Superficial Nasal</option>
+                                    <option>Profunda Nasal</option>
+                                </select>
+                            </template>
+
+                            <template v-if="sedacionInhalatoria === true">
+                                <label for="inputState" class="form-label fw-bold">Opción</label>
+                                <select id="inputState"
+                                        class="form-select"
+                                        v-model="infoPlan.sedacion_Opcion"
+                                        :class="infoPlan.sedacion_Opcion != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                    <option>Superficial Inhalatoria</option>
+                                    <option>Profunda Inhalatoria</option>
+                                </select>
+                            </template>
+
+                            <template v-if="sedacionIntravenosa === true">
+                                <label for="inputState" class="form-label fw-bold">Opción</label>
+                                <select id="inputState"
+                                        class="form-select"
+                                        v-model="infoPlan.sedacion_Opcion"
+                                        :class="infoPlan.sedacion_Opcion != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                    <option>Superficial Intravenosa</option>
+                                    <option>Profunda Intravenosa</option>
+                                </select>
+                            </template>
+
+                            <template v-if="sedacionIntramuscular === true">
+                                <label for="inputState" class="form-label fw-bold">Opción</label>
+                                <select id="inputState"
+                                        class="form-select"
+                                        v-model="infoPlan.sedacion_Opcion"
+                                        :class="infoPlan.sedacion_Opcion != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                    <option>Superficial Intramuscula</option>
+                                    <option>Profunda Intramuscula</option>
+                                </select>
+                            </template>
+
+                            <template v-if="sedacionRectal === true">
+                                <label for="inputState" class="form-label fw-bold">Opción</label>
+                                <select id="inputState"
+                                        class="form-select"
+                                        v-model="infoPlan.sedacion_Opcion"
+                                        :class="infoPlan.sedacion_Opcion != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                    <option>Superficial Rectal</option>
+                                    <option>Profunda Rectal</option>
+                                </select>
+                            </template>
+                            
                         </div>
 
                         <!-- Observaciones -->
@@ -326,7 +384,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.sedacion_Observaciones"
-                                      :class="infoPlan.sedacion_Observaciones != '' ?
+                                      :class="infoPlan.sedacion_Observaciones != undefined ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -338,7 +396,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.sedacion_Medicamentos"
-                                   :class="infoPlan.sedacion_Medicamentos != '' ?
+                                   :class="infoPlan.sedacion_Medicamentos != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
                     </form>
@@ -1062,6 +1120,13 @@ export default defineComponent({
             infoPlan: {} as regPlan,
             preIdStore,            
             btnActualizarValoracion:false,
+
+            sedacionOral:false,
+            sedacionNasal:false,
+            sedacionInhalatoria:false,
+            sedacionIntravenosa:false,
+            sedacionIntramuscular:false,
+            sedacionRectal:false
         }
     },
 
@@ -1074,6 +1139,56 @@ export default defineComponent({
 
             preIdStore.savePrePlan(this.infoPlan, preIdStore.pacienteID._id)
         },
+        cambioSelectSedacion(){
+            if((document.getElementById("viaOral") as HTMLOptionElement).selected){
+                this.sedacionOral=true
+                this.sedacionNasal=false
+                this.sedacionInhalatoria=false
+                this.sedacionIntravenosa=false
+                this.sedacionIntramuscular=false
+                this.sedacionRectal=false
+            }
+            else if((document.getElementById("viaNasal") as HTMLOptionElement).selected){
+                this.sedacionOral=false
+                this.sedacionNasal=true
+                this.sedacionInhalatoria=false
+                this.sedacionIntravenosa=false
+                this.sedacionIntramuscular=false
+                this.sedacionRectal=false
+            }
+            else if((document.getElementById("viaInhalatoria") as HTMLOptionElement).selected){
+                this.sedacionOral=false
+                this.sedacionNasal=false
+                this.sedacionInhalatoria=true
+                this.sedacionIntravenosa=false
+                this.sedacionIntramuscular=false
+                this.sedacionRectal=false
+            }
+            else if((document.getElementById("viaIntravenosa") as HTMLOptionElement).selected){
+                this.sedacionOral=false
+                this.sedacionNasal=false
+                this.sedacionInhalatoria=false
+                this.sedacionIntravenosa=true
+                this.sedacionIntramuscular=false
+                this.sedacionRectal=false
+            }
+            else if((document.getElementById("viaIntramuscular") as HTMLOptionElement).selected){
+                this.sedacionOral=false
+                this.sedacionNasal=false
+                this.sedacionInhalatoria=false
+                this.sedacionIntravenosa=false
+                this.sedacionIntramuscular=true
+                this.sedacionRectal=false
+            }
+            else if((document.getElementById("viaRectal") as HTMLOptionElement).selected){
+                this.sedacionOral=false
+                this.sedacionNasal=false
+                this.sedacionInhalatoria=false
+                this.sedacionIntravenosa=false
+                this.sedacionIntramuscular=false
+                this.sedacionRectal=true
+            }
+        }
     },
 })
 </script>
