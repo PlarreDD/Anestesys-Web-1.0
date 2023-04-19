@@ -402,7 +402,243 @@ const PreValoracionSchema = new Schema({
         type: String,
     },
 });
+/* Plan */
+const PrePlanSchema = new Schema({
+    /* Id del paciente para enlazar la tabla */
+    pid: {
+        type: Schema.Types.ObjectId,
+        ref: 'IdPacientes',
+        required: true,
+    },
+    // Posicion y Cuidados
+    pos_HorasAyuno: {
+        type: String,
+    },
 
+    pos_AccesoVenoso: {
+        type: String,
+    },
+
+    pos_PosicionPaciente: {
+        type: String,
+    },
+    pos_PosicionBrazos: {
+        type: String,
+    },
+
+    pos_Torniquete: {
+        type: String,
+    },
+
+    pos_AplicacionTorniquete: {
+        type: String,
+    },
+
+    pos_Sitio: {
+        type: String,
+    },
+
+    pos_TiempoIsquemia: {
+        type: String,
+    },
+
+    pos_ProteccionOjos: {
+        type: String,
+    },
+
+    pos_ProtecProminencias: {
+        type: String,
+    },
+
+    pos_TecnicaAnestesica: {
+        type: String,
+    },
+
+    pos_Premedicacion: {
+        type: String,
+    },
+
+    pos_EspPremedicacion: {
+        type: String,
+    },
+
+    pos_Monitoreo: {
+        type: String,
+    },
+    // Tipos de Anestésia
+    // Sedación
+    sedacion_Via: {
+        type: String,
+    },
+
+    sedacion_Opcion: {
+        type: String,
+    },
+
+    sedacion_Observaciones: {
+        type: String,
+    },
+
+    sedacion_Medicamentos: {
+        type: String,
+    },
+    // Regional
+    // Bloqueo Neuro-Axial
+    regional_Tipo: {
+        type: String,
+    },
+
+    regional_TipoAguja: {
+        type: String,
+    },
+
+    regional_Nivel: {
+        type: String,
+    },
+
+    regional_CalibreAguja: {
+        type: String,
+    },
+
+    regional_Cateter: {
+        type: String,
+    },
+
+    regional_OrientacionCateter: {
+        type: String,
+    },
+
+    regional_ProbDificulNeuro: {
+        type: String,
+    },
+
+    regional_EspDificultadesNeuro: {
+        type: String,
+    },
+    // Bloqueo Plexo
+    regional_Sitio: {
+        type: String,
+    },
+
+    regional_Opcion: {
+        type: String,
+    },
+
+    regional_EspSitio: {
+        type: String,
+    },
+
+    regional_AnestesicoUtilizado: {
+        type: String,
+    },
+
+    regional_EspAnestesico: {
+        type: String,
+    },
+
+    regional_ProbDificulPlexo: {
+        type: String,
+    },
+
+    regional_EspDificulPlexo: {
+        type: String,
+    },
+    // Equipo de Apoyo
+    regional_Ultrasonido: {
+        type: String,
+    },
+
+    regional_EspUltrasonido: {
+        type: String,
+    },
+
+    regional_Neuroestimulador: {
+        type: String,
+    },
+
+    regional_EspNeuroestimulador: {
+        type: String,
+    },
+
+    regional_ProbComplicaciones: {
+        type: String,
+    },
+
+    regional_EspDificEquipo: {
+        type: String,
+    },
+    // Tipos de Anestésia
+    // Local
+    local_SitioAnestesiaL: {
+        type: String,
+    },
+
+    local_AnestesicoUtilizado: {
+        type: String,
+    },
+
+    local_Especificar: {
+        type: String,
+    },
+    // Tipos de Anestésia
+    // General
+    // Intubación
+    general_Induccion: {
+        type: String,
+    },
+
+    general_Tubo: {
+        type: String,
+    },
+
+    general_NumeroTubo: {
+        type: String,
+    },
+
+    general_TipoCanula: {
+        type: String,
+    },
+
+    general_Globo: {
+        type: String,
+    },
+
+    general_Presion: {
+        type: String,
+    },
+
+    general_DifTecnicasIntubacion: {
+        type: String,
+    },
+
+    general_EspDifTecIntubacion: {
+        type: String,
+    },    
+    // Dispositivos Supraglóticos
+    general_DispositivosSupro: {
+        type: String,
+    },
+
+    general_Calibre: {
+        type: String,
+    },
+
+    general_Complicaciones: {
+        type: String,
+    },
+
+    general_EspComplicaciones: {
+        type: String,
+    },
+    // Otros Disposotivos
+    general_OtrosDispositivos: {
+        type: String,
+    },
+    
+    general_EspOtrosDispositivos: {
+        type: String,
+    },
+});
 /* Nota */
 const PreNotaSchema = new Schema({
     /* Id del paciente para enlazar la tabla */
@@ -421,4 +657,5 @@ const PreNotaSchema = new Schema({
 export const PreIdPacientes = model('PreIdPacientes', PreIdPacienteSchema);
 export const PreIdPacientesCx = model('PreIdPacientesCx', PreIdPacienteCxSchema);
 export const PreVal = model('PreVal', PreValoracionSchema);
+export const PrePlan = model('PrePlan', PrePlanSchema);
 export const PreNota = model('PreNota', PreNotaSchema);

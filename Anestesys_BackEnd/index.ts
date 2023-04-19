@@ -6,8 +6,9 @@ import cors from 'cors';
 import authRouter from './routes/auth.route';
 import preidRouter from './routes/preid.route';
 import medicamentoRouter from './routes/medicamento.route';
-import valRouter from './routes/valoracion.route'
-import notaRouter from './routes/nota.route'
+import valRouter from './routes/valoracion.route';
+import planRouter from './routes/plan.route';
+import notaRouter from './routes/nota.route';
 
 const app = express();
 const whiteList = [process.env.ORIGIN1, process.env.ORIGIN2];
@@ -34,6 +35,7 @@ app.use('/', authRouter);
 /*------------ Pre Anestésico -------------*/
 app.use('/preId', preidRouter);
 app.use('/valora', valRouter);
+app.use('/plan', planRouter);
 app.use('/nota', notaRouter);
 /*----------------- Menú ------------------*/
 app.use('/medicamentos', medicamentoRouter);

@@ -2,6 +2,7 @@ import { Response } from "express";
 import { PreIdPacientes,
          PreIdPacientesCx,
          PreVal,
+         PrePlan,
          PreNota } from "../models/PreAnestesico";
 
 /********************************************************************/
@@ -269,16 +270,6 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
             viaAerea_NYHA, viaAerea_Goldman, viaAerea_RiesgoTrombosis,
             viaAerea_ClasificacionASA, viaAerea_TipoCirugia, viaAerea_RiesgoAnestesico,
         } = req.body;
-
-        console.log(perfilBioQ_FechaRealizacion + " " + perfilBioQ_GrupoSanguineo + " " +
-            perfilBioQ_Hemoglobina + " " + perfilBioQ_Hematocrito + " " + perfilBioQ_Plaquetas + " " +
-            perfilBioQ_Leutocitos + " " + perfilBioQ_TP + " " + perfilBioQ_TT + " " +
-            perfilBioQ_TPT + " " + perfilBioQ_INR + " " + perfilBioQ_Glucosa + " " +
-            perfilBioQ_Creatinina + " " + perfilBioQ_Urea + " " + perfilBioQ_Sodio + " " +
-            perfilBioQ_Potasio + " " + perfilBioQ_Cloro + " " + perfilBioQ_Calcio + " " +
-            perfilBioQ_Magnesio + " " + perfilBioQ_BilirrubinaDirecta + " " +
-            perfilBioQ_BilirrubinaIndirecta + " " + perfilBioQ_BilirrubinaTotal + " " +
-            perfilBioQ_Lipasa + " " + perfilBioQ_Amilasa + " " + perfilBioQ_Otros);
         
         const preval = await PreVal.findOneAndUpdate({pid: id}, { /* Antecedentes */
         // Personales Patológicos
@@ -352,6 +343,45 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
     });
 
         return res.json({ preval })
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+/********************************************************************/
+/******************************* PLAN *******************************/
+/********************************************************************/
+export const savePrePlan =async (req: any, res: Response) => {
+    try {
+        const { pid, 
+                // Local
+                local_SitioAnestesiaL, local_AnestesicoUtilizado,
+                local_Especificar, } = req.body;
+        
+        const preplan = new PrePlan({ pid: pid,
+                                      // Local
+                                      local_SitioAnestesiaL, local_AnestesicoUtilizado,
+                                      local_Especificar });
+        await preplan.save();
+        
+        return res.json({ preplan });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const updatePrePlan =async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        const { // Local
+                local_SitioAnestesiaL, local_AnestesicoUtilizado,
+                local_Especificar, } = req.body;
+        
+        const preplan = await PrePlan.findOneAndUpdate( {pid: id},
+                                                        { local_SitioAnestesiaL, local_AnestesicoUtilizado,
+                                                          local_Especificar, })
+
+        return res.json({ preplan });
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
     }

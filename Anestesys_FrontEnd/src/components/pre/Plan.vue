@@ -12,14 +12,14 @@
                         aria-selected="true">POSICIÓN Y CUIDADOS</button>
             </li>
 
-            <!-- SEDACIÓN -->
+            <!-- GENERAL -->
             <li class="nav-item col-md-2" >
                 <button class="btn btn-outline-secondary fw-bold"
                         id="plan"
                         data-bs-toggle="pill"
-                        data-bs-target="#sedacion"
+                        data-bs-target="#general"
                         type="button"
-                        aria-selected="false">SEDACIÓN</button>
+                        aria-selected="false">GENERAL</button>
             </li>
 
             <!-- REGIONAL -->
@@ -31,6 +31,16 @@
                         type="button"
                         aria-selected="false">REGIONAL</button>
             </li>
+
+            <!-- SEDACIÓN -->
+            <li class="nav-item col-md-2" >
+                <button class="btn btn-outline-secondary fw-bold"
+                        id="plan"
+                        data-bs-toggle="pill"
+                        data-bs-target="#sedacion"
+                        type="button"
+                        aria-selected="false">SEDACIÓN</button>
+            </li>            
   
             <!-- LOCAL -->
             <li class="nav-item col-md-2" >
@@ -41,16 +51,7 @@
                         type="button"
                         aria-selected="false">LOCAL</button>
             </li>
-  
-            <!-- GENERAL -->
-            <li class="nav-item col-md-2" >
-                <button class="btn btn-outline-secondary fw-bold"
-                        id="plan"
-                        data-bs-toggle="pill"
-                        data-bs-target="#general"
-                        type="button"
-                        aria-selected="false">GENERAL</button>
-            </li>
+              
         </ul>
 
         <div class="tab-content col-md-12" id="">
@@ -681,7 +682,7 @@
             <!-- Local -->
             <div class="tab-pane fade" id="local">
                 <div class="col-12 bordePrincipal largoContenedor">  
-                    <form class="row g-3">    
+                    <form @submit.prevent="" class="row g-3">    
                         <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5>    
                         <h5 class="fw-bold col-md-12">Local</h5>  
 
@@ -725,6 +726,24 @@
                                       :class="infoPlan.local_Especificar != '' ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
+                        </div>
+
+                        <div class="col-md-10"></div>
+                        <!-- Botón Guardar/Actuazlizar -->
+                        <div class="col-md-2">
+                            <template v-if="btnActualizarValoracion === false">
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"                                            
+                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
+                            </template>
+
+                            <template v-else>
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"
+                                    @click="preIdStore.updatePrePlan(infoPlan, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
+                            </template>                                                         
                         </div>
                     </form>
                 </div>
@@ -979,19 +998,29 @@
 
 <script lang="ts">
 import type { regPlan } from "@/interfaces/regPreAnest";
+import { usePreIdStore } from "@/stores/preId-store";
 import { defineComponent } from "vue"
+
+const preIdStore = usePreIdStore();
 
 export default defineComponent({
     data () {
         return{
             infoPlan: {} as regPlan,
+            preIdStore,            
+            btnActualizarValoracion:false,
         }
     },
 
     methods:{
-        prueba(infoPlan: any){
+        prueba(infoPlan: any){            
             console.log(infoPlan);            
-        }
+        },
+        cambiarUpdateValoracion() {
+            this.btnActualizarValoracion=true
+
+            preIdStore.savePrePlan(this.infoPlan, preIdStore.pacienteID._id)
+        },
     },
 })
 </script>
@@ -1025,5 +1054,17 @@ export default defineComponent({
     --bs-btn-active-bg: #002d60;
     --bs-btn-active-border-color: #ced4da;
     --bs-btn-bg: #ffffff;
+}
+.btn-guardar-datos{
+    --bs-btn-bg: none;
+    --bs-btn-color: #E88300;    
+    --bs-btn-border-color: #E88300;
+    --bs-btn-hover-bg: #E88300;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #E88300;          
+    --bs-btn-active-bg: #E88300;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-border-color: #E88300;
+    width: 150px;        
 }
 </style>
