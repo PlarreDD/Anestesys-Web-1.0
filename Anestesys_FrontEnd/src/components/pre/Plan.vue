@@ -64,7 +64,7 @@
             <!-- POSICIÓN Y CUIDADOS -->
             <div class="tab-pane fade show active" id="posicion">
                 <div class="col-12 bordePrincipal">  
-                    <form class="row g-3">    
+                    <form @submit.prevent="" class="row g-3">    
                         <h5 class="fw-bold">POSICIÓN Y CUIDADOS</h5>
                         <!-- Horas de ayuno -->
                         <div class="col-md-2">
@@ -283,7 +283,7 @@
             <!-- Sedación -->
             <div class="tab-pane fade" id="sedacion">
                 <div class="col-12 bordePrincipal largoContenedor">  
-                    <form class="row g-3">    
+                    <form @submit.prevent="" class="row g-3">    
                         <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5>    
                         <h5 class="fw-bold col-md-12 fw-bold">Sedación</h5>   
 
@@ -348,7 +348,7 @@
             <!-- Regional -->
             <div class="tab-pane fade" id="regional">
                 <div class="col-12 bordePrincipal">  
-                    <form class="row g-3">    
+                    <form @submit.prevent="" class="row g-3">    
                         <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5>    
                         <h5 class="fw-bold col-md-12">Regional</h5>  
                         <h5 class="fw-bold">BLOQUEO NEURO-AXIAL</h5>  
@@ -752,7 +752,7 @@
             <!-- General -->
             <div class="tab-pane fade" id="general">
                 <div class="col-12 bordePrincipal">  
-                    <form class="row g-3"> 
+                    <form @submit.prevent="" class="row g-3"> 
                         <div class="col-md-12">
                             <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5> 
                         </div>   
