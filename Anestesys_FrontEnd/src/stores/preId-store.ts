@@ -187,7 +187,7 @@ export const usePreIdStore = defineStore('preid', {
                     viaAerea_ClasificacionASA: infoValoracion.viaAerea_ClasificacionASA,
                     viaAerea_TipoCirugia: infoValoracion.viaAerea_TipoCirugia,
                     viaAerea_RiesgoAnestesico: infoValoracion.viaAerea_RiesgoAnestesico,
-                    //Laboratorio
+                    // Laboratorio
                     perfilBioQ_FechaRealizacion: infoValoracion.perfilBioQ_FechaRealizacion,
                     perfilBioQ_GrupoSanguineo: infoValoracion.perfilBioQ_GrupoSanguineo,
                     perfilBioQ_Hemoglobina: infoValoracion.perfilBioQ_Hemoglobina,
@@ -324,10 +324,105 @@ export const usePreIdStore = defineStore('preid', {
                 // console.log("error: " + e);
             });
         },
+        /***************************** Plan ******************************/
+        savePrePlan(infoPlan: any, pid: string){
+            apiAxios({
+                url: "http://localhost:5000/plan",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    pid: pid,
+                    // Posición y Cuidados
+                    pos_HorasAyuno: infoPlan.pos_HorasAyuno,
+                    pos_AccesoVenoso: infoPlan.pos_AccesoVenoso,
+                    pos_PosicionPaciente: infoPlan.pos_PosicionPaciente,
+                    pos_PosicionBrazos: infoPlan.pos_PosicionBrazos,
+                    pos_Torniquete: infoPlan.pos_Torniquete,
+                    pos_AplicacionTorniquete: infoPlan.pos_AplicacionTorniquete,
+                    pos_Sitio: infoPlan.pos_Sitio,
+                    pos_TiempoIsquemia: infoPlan.pos_TiempoIsquemia,
+                    pos_ProteccionOjos: infoPlan.pos_ProteccionOjos,
+                    pos_ProtecProminencias: infoPlan.pos_ProtecProminencias,
+                    pos_TecnicaAnestesica: infoPlan.pos_TecnicaAnestesica,
+                    pos_Premedicacion: infoPlan.pos_Premedicacion,
+                    pos_EspPremedicacion: infoPlan.pos_EspPremedicacion,
+                    pos_Monitoreo: infoPlan.pos_Monitoreo,
+                    // Tipos de Anestésia
+                    // Sedación
+                    sedacion_Via: infoPlan.sedacion_Via,
+                    sedacion_Opcion: infoPlan.sedacion_Opcion,
+                    sedacion_Observaciones: infoPlan.sedacion_Observaciones,
+                    sedacion_Medicamentos: infoPlan.sedacion_Medicamentos,
+                    // Regional
+                    // Bloqueo Neuro-Axial
+                    regional_Tipo: infoPlan.regional_Tipo,
+                    regional_TipoAguja: infoPlan.regional_TipoAguja,
+                    regional_Nivel: infoPlan.regional_Nivel,
+                    regional_CalibreAguja: infoPlan.regional_CalibreAguja,
+                    regional_Cateter: infoPlan.regional_Cateter,
+                    regional_OrientacionCateter: infoPlan.regional_OrientacionCateter,
+                    regional_ProbDificulNeuro: infoPlan.regional_ProbDificulNeuro,
+                    regional_EspDificultadesNeuro: infoPlan.regional_EspDificultadesNeuro,
+                    // Bloqueo Plexo
+                    regional_Sitio: infoPlan.regional_Sitio,
+                    regional_Opcion: infoPlan.regional_Opcion,
+                    regional_EspSitio: infoPlan.regional_EspSitio,
+                    regional_AnestesicoUtilizado: infoPlan.regional_AnestesicoUtilizado,
+                    regional_EspAnestesico: infoPlan.regional_EspAnestesico,
+                    regional_ProbDificulPlexo: infoPlan.regional_ProbDificulPlexo,
+                    regional_EspDificulPlexo: infoPlan.regional_EspDificulPlexo,
+                    // Equipo de Apoyo
+                    regional_Ultrasonido: infoPlan.regional_Ultrasonido,
+                    regional_EspUltrasonido: infoPlan.regional_EspUltrasonido,
+                    regional_Neuroestimulador: infoPlan.regional_Neuroestimulador,
+                    regional_EspNeuroestimulador: infoPlan.regional_EspNeuroestimulador,
+                    regional_ProbComplicaciones: infoPlan.regional_ProbComplicaciones,
+                    regional_EspDificEquipo: infoPlan.regional_EspDificEquipo,
+                    // Tipos de Anestésia
+                    // Local
+                    local_SitioAnestesiaL: infoPlan.local_SitioAnestesiaL,
+                    local_AnestesicoUtilizado: infoPlan.local_AnestesicoUtilizado,
+                    local_Especificar: infoPlan.local_Especificar,
+                    // Tipos de Anestésia
+                    // General
+                    // Intubación
+                    general_Induccion: infoPlan.general_Induccion,
+                    general_Tubo: infoPlan.general_Tubo,
+                    general_NumeroTubo: infoPlan.general_NumeroTubo,
+                    general_TipoCanula: infoPlan.general_TipoCanula,
+                    general_Globo: infoPlan.general_Globo,
+                    general_Presion: infoPlan.general_Presion,
+                    general_DifTecnicasIntubacion: infoPlan.general_DifTecnicasIntubacion,
+                    general_EspDifTecIntubacion: infoPlan.general_EspDifTecIntubacion,
+                    // Dispositivos Supraglóticos
+                    general_DispositivosSupro: infoPlan.general_DispositivosSupro,
+                    general_Calibre: infoPlan.general_Calibre,
+                    general_Complicaciones: infoPlan.general_Complicaciones,
+                    general_EspComplicaciones: infoPlan.general_EspComplicaciones,
+                    // Otros Disposotivos
+                    general_OtrosDispositivos: infoPlan.general_OtrosDispositivos,
+                    general_EspOtrosDispositivos: infoPlan.general_EspOtrosDispositivos,
+                },
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos guardados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
         /***************************** Nota ******************************/
         savePreNota(obsNotaPre: string, pid: string){
-            console.log(obsNotaPre + " - " + pid);
-            
             apiAxios({
                 url: "http://localhost:5000/nota",
                 method: "POST",

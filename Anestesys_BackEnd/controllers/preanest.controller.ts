@@ -2,6 +2,7 @@ import { Response } from "express";
 import { PreIdPacientes,
          PreIdPacientesCx,
          PreVal,
+         PrePlan,
          PreNota } from "../models/PreAnestesico";
 
 /********************************************************************/
@@ -356,6 +357,27 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
+/********************************************************************/
+/******************************* PLAN *******************************/
+/********************************************************************/
+export const savePrePlan =async (req: any, res: Response) => {
+    try {
+        const { pid, 
+                // Local
+                local_SitioAnestesiaL, local_AnestesicoUtilizado,
+                local_Especificar, } = req.body;
+        
+        const preplan = new PrePlan({ pid: pid,
+                                      // Local
+                                      local_SitioAnestesiaL, local_AnestesicoUtilizado,
+                                      local_Especificar });
+        await preplan.save();
+        
+        return res.json({ preplan });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+}
 /********************************************************************/
 /******************************* NOTA *******************************/
 /********************************************************************/

@@ -1019,7 +1019,7 @@ export default defineComponent({
         cambiarUpdateValoracion() {
             this.btnActualizarValoracion=true
 
-            preIdStore.savePreAntecedentes(this.infoPlan, preIdStore.pacienteID._id)
+            preIdStore.savePrePlan(this.infoPlan, preIdStore.pacienteID._id)
         },
     },
 })
