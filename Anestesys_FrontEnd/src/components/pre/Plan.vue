@@ -682,7 +682,7 @@
             <!-- Local -->
             <div class="tab-pane fade" id="local">
                 <div class="col-12 bordePrincipal largoContenedor">  
-                    <form class="row g-3">    
+                    <form @submit.prevent="" class="row g-3">    
                         <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5>    
                         <h5 class="fw-bold col-md-12">Local</h5>  
 
@@ -742,7 +742,7 @@
                                 <button data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar-datos fw-bold"
-                                    @click="preIdStore.updatePreAntecedentes(infoPlan, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
+                                    @click="preIdStore.updatePrePlan(infoPlan, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
                             </template>                                                         
                         </div>
                     </form>

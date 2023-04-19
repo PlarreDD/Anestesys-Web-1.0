@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { requireToken } from "../middlewares/requireToken";
 import { savePrePlan,
-         /*updatePreAntecedentes*/ } from "../controllers/preanest.controller";
+         updatePrePlan } from "../controllers/preanest.controller";
 
 
 const router = Router();
@@ -11,6 +11,6 @@ const router = Router();
 
 /*------------------- PreValoración --------------------*/
 router.post('/', requireToken, savePrePlan);
-// router.put('/:id',  requireToken, updatePreAntecedentes);
+router.put('/:id',  requireToken, updatePrePlan);
 
 export default router;
