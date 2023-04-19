@@ -369,6 +369,19 @@ export const savePrePlan =async (req: any, res: Response) => {
                 general_EspComplicaciones, 
                 // Otros Disposotivos
                 general_OtrosDispositivos, general_EspOtrosDispositivos,
+                // Regional
+                // Bloqueo Neuro-Axial
+                regional_Tipo, regional_TipoAguja, regional_Nivel, regional_CalibreAguja,
+                regional_Cateter, regional_OrientacionCateter, regional_ProbDificulNeuro,
+                regional_EspDificultadesNeuro,
+                // Bloqueo Plexo
+                regional_Sitio, regional_Opcion, regional_EspSitio, 
+                regional_AnestesicoUtilizado, regional_EspAnestesico,
+                regional_ProbDificulPlexo, regional_EspDificulPlexo,
+                // Equipo de Apoyo
+                regional_Ultrasonido, regional_EspUltrasonido, regional_Neuroestimulador,
+                regional_EspNeuroestimulador, regional_ProbComplicaciones,
+                regional_EspDificEquipo,
                 // Local
                 local_SitioAnestesiaL, local_AnestesicoUtilizado,
                 local_Especificar, } = req.body;
@@ -380,10 +393,24 @@ export const savePrePlan =async (req: any, res: Response) => {
                                       general_TipoCanula, general_Globo, general_Presion,
                                       general_DifTecnicasIntubacion, general_EspDifTecIntubacion,
                                       // Dispositivos Supraglóticos
-                                      general_DispositivosSupro, general_Calibre, general_Complicaciones,
-                                      general_EspComplicaciones, 
+                                      general_DispositivosSupro, general_Calibre,
+                                      general_Complicaciones, general_EspComplicaciones, 
                                       // Otros Disposotivos
                                       general_OtrosDispositivos, general_EspOtrosDispositivos,
+                                      // Regional
+                                      // Bloqueo Neuro-Axial
+                                      regional_Tipo, regional_TipoAguja, regional_Nivel,
+                                      regional_CalibreAguja, regional_Cateter,
+                                      regional_OrientacionCateter, regional_ProbDificulNeuro,
+                                      regional_EspDificultadesNeuro,
+                                      // Bloqueo Plexo
+                                      regional_Sitio, regional_Opcion, regional_EspSitio, 
+                                      regional_AnestesicoUtilizado, regional_EspAnestesico,
+                                      regional_ProbDificulPlexo, regional_EspDificulPlexo,
+                                      // Equipo de Apoyo
+                                      regional_Ultrasonido, regional_EspUltrasonido,
+                                      regional_Neuroestimulador, regional_EspNeuroestimulador,
+                                      regional_ProbComplicaciones, regional_EspDificEquipo,
                                       // Local
                                       local_SitioAnestesiaL, local_AnestesicoUtilizado,
                                       local_Especificar });
@@ -409,6 +436,19 @@ export const updatePrePlan =async (req: any, res: Response) => {
                 general_EspComplicaciones, 
                 // Otros Disposotivos
                 general_OtrosDispositivos, general_EspOtrosDispositivos,
+                // Regional
+                // Bloqueo Neuro-Axial
+                regional_Tipo, regional_TipoAguja, regional_Nivel, regional_CalibreAguja,
+                regional_Cateter, regional_OrientacionCateter, regional_ProbDificulNeuro,
+                regional_EspDificultadesNeuro,
+                // Bloqueo Plexo
+                regional_Sitio, regional_Opcion, regional_EspSitio, 
+                regional_AnestesicoUtilizado, regional_EspAnestesico,
+                regional_ProbDificulPlexo, regional_EspDificulPlexo,
+                // Equipo de Apoyo
+                regional_Ultrasonido, regional_EspUltrasonido, regional_Neuroestimulador,
+                regional_EspNeuroestimulador, regional_ProbComplicaciones,
+                regional_EspDificEquipo,
                 // Local
                 local_SitioAnestesiaL, local_AnestesicoUtilizado,
                 local_Especificar, } = req.body;
@@ -425,6 +465,20 @@ export const updatePrePlan =async (req: any, res: Response) => {
                                                           general_Complicaciones, general_EspComplicaciones,
                                                           // Otros Disposotivos
                                                           general_OtrosDispositivos, general_EspOtrosDispositivos,
+                                                          // Regional
+                                                          // Bloqueo Neuro-Axial
+                                                          regional_Tipo, regional_TipoAguja, regional_Nivel,
+                                                          regional_CalibreAguja, regional_Cateter,
+                                                          regional_OrientacionCateter, regional_ProbDificulNeuro,
+                                                          regional_EspDificultadesNeuro,
+                                                          // Bloqueo Plexo
+                                                          regional_Sitio, regional_Opcion, regional_EspSitio, 
+                                                          regional_AnestesicoUtilizado, regional_EspAnestesico,
+                                                          regional_ProbDificulPlexo, regional_EspDificulPlexo,
+                                                          // Equipo de Apoyo
+                                                          regional_Ultrasonido, regional_EspUltrasonido,
+                                                          regional_Neuroestimulador, regional_EspNeuroestimulador,
+                                                          regional_ProbComplicaciones, regional_EspDificEquipo,
                                                           // Local
                                                           local_SitioAnestesiaL, local_AnestesicoUtilizado,
                                                           local_Especificar, })

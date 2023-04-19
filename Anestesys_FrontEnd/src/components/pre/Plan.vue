@@ -354,6 +354,8 @@
                         <div class="col-md-10">
                             <h5 class="fw-bold col-md-12">Regional</h5> 
                         </div> 
+
+                        <!-- Botón Guardar/Actuazlizar -->
                         <div class="col-md-2">
                             <template v-if="btnActualizarValoracion === false">
                                 <button data-bs-toggle="tab" 
