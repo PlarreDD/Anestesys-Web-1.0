@@ -349,8 +349,27 @@
             <div class="tab-pane fade" id="regional">
                 <div class="col-12 bordePrincipal">  
                     <form @submit.prevent="" class="row g-3">    
-                        <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5>    
-                        <h5 class="fw-bold col-md-12">Regional</h5>  
+                        <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5>  
+
+                        <div class="col-md-10">
+                            <h5 class="fw-bold col-md-12">Regional</h5> 
+                        </div> 
+                        <div class="col-md-2">
+                            <template v-if="btnActualizarValoracion === false">
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"                                            
+                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
+                            </template>
+
+                            <template v-else>
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"
+                                    @click="preIdStore.updatePrePlan(infoPlan, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
+                            </template>  
+                        </div>
+
                         <h5 class="fw-bold">BLOQUEO NEURO-AXIAL</h5>  
 
                         <!-- Tipo -->
@@ -359,7 +378,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.regional_Tipo"
-                                    :class="infoPlan.regional_Tipo != '' ?
+                                    :class="infoPlan.regional_Tipo != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Espidural</option>
@@ -375,7 +394,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.regional_TipoAguja"
-                                   :class="infoPlan.regional_TipoAguja != '' ?
+                                   :class="infoPlan.regional_TipoAguja != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -386,7 +405,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.regional_Nivel"
-                                   :class="infoPlan.regional_Nivel != '' ?
+                                   :class="infoPlan.regional_Nivel != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -397,7 +416,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.regional_CalibreAguja"
-                                   :class="infoPlan.regional_CalibreAguja != '' ?
+                                   :class="infoPlan.regional_CalibreAguja != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -407,7 +426,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.regional_Cateter"
-                                    :class="infoPlan.regional_Cateter != '' ?
+                                    :class="infoPlan.regional_Cateter != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Sí</option>
@@ -421,7 +440,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.regional_OrientacionCateter"
-                                    :class="infoPlan.regional_OrientacionCateter != '' ?
+                                    :class="infoPlan.regional_OrientacionCateter != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Cefálica</option>
@@ -447,7 +466,8 @@
                                    id="difTecNo"
                                    autocomplete="off"
                                    value="No"
-                                   v-model="infoPlan.regional_ProbDificulNeuro">
+                                   v-model="infoPlan.regional_ProbDificulNeuro"
+                                   checked>
                             <label class="btn btn-radio" for="difTecNo">No</label>
                         </div>
 
@@ -458,7 +478,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.regional_EspDificultadesNeuro"
-                                      :class="infoPlan.regional_EspDificultadesNeuro != '' ?
+                                      :class="infoPlan.regional_EspDificultadesNeuro != undefined ?
                                              'form-control border border-success formSombra' : 'form-control'"></textarea>
                         </div>
 
@@ -471,7 +491,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.regional_Sitio"
-                                    :class="infoPlan.regional_Sitio != '' ?
+                                    :class="infoPlan.regional_Sitio != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Cabeza</option>
@@ -488,7 +508,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.regional_Opcion"
-                                    :class="infoPlan.regional_Opcion != '' ?
+                                    :class="infoPlan.regional_Opcion != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>                  
                             </select>
@@ -501,7 +521,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.regional_EspSitio"
-                                      :class="infoPlan.regional_EspSitio != '' ?
+                                      :class="infoPlan.regional_EspSitio != undefined ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -512,7 +532,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.regional_AnestesicoUtilizado"
-                                    :class="infoPlan.regional_AnestesicoUtilizado != '' ?
+                                    :class="infoPlan.regional_AnestesicoUtilizado != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Lidocaína 1%</option>
@@ -532,7 +552,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.regional_EspAnestesico"
-                                      :class="infoPlan.regional_EspAnestesico != '' ?
+                                      :class="infoPlan.regional_EspAnestesico != undefined ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -555,7 +575,8 @@
                                    id="difNo"
                                    autocomplete="off"
                                    value="No"
-                                   v-model="infoPlan.regional_ProbDificulPlexo">
+                                   v-model="infoPlan.regional_ProbDificulPlexo"
+                                   checked>
                             <label class="btn btn-radio" for="difNo">No</label>
                         </div>
 
@@ -566,7 +587,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.regional_EspDificulPlexo"
-                                      :class="infoPlan.regional_EspDificulPlexo != '' ?
+                                      :class="infoPlan.regional_EspDificulPlexo != undefined ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -592,7 +613,8 @@
                                    id="ultraNo"
                                    autocomplete="off"
                                    value="No"
-                                   v-model="infoPlan.regional_Ultrasonido">
+                                   v-model="infoPlan.regional_Ultrasonido"
+                                   checked>
                             <label class="btn btn-radio" for="ultraNo">No</label>
                         </div>
 
@@ -603,7 +625,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.regional_EspUltrasonido"
-                                      :class="infoPlan.regional_EspUltrasonido != '' ?
+                                      :class="infoPlan.regional_EspUltrasonido != undefined ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -626,7 +648,8 @@
                                    id="neuroNo"
                                    autocomplete="off"
                                    value="No"
-                                   v-model="infoPlan.regional_Neuroestimulador">
+                                   v-model="infoPlan.regional_Neuroestimulador"
+                                   checked>
                             <label class="btn btn-radio" for="neuroNo">No</label>
                         </div>
 
@@ -637,7 +660,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.regional_EspNeuroestimulador"
-                                      :class="infoPlan.regional_EspNeuroestimulador != '' ?
+                                      :class="infoPlan.regional_EspNeuroestimulador != undefined ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -660,7 +683,8 @@
                                    id="compliNo"
                                    autocomplete="off"
                                    value="No"
-                                   v-model="infoPlan.regional_ProbComplicaciones">
+                                   v-model="infoPlan.regional_ProbComplicaciones"
+                                   checked>
                             <label class="btn btn-radio" for="compliNo">No</label>
                         </div>
 
@@ -671,7 +695,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.regional_EspDificEquipo"
-                                      :class="infoPlan.regional_EspDificEquipo != '' ?
+                                      :class="infoPlan.regional_EspDificEquipo != undefined ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
