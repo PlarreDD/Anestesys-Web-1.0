@@ -1130,10 +1130,26 @@ export default defineComponent({
         }
     },
 
+    mounted: function(){
+        this.infoPlan.pos_Torniquete = "No";
+        this.infoPlan.pos_ProteccionOjos = "No";
+        this.infoPlan.pos_ProtecProminencias = "No";
+        this.infoPlan.pos_Premedicacion = "No";
+
+        this.infoPlan.general_Globo = "No";
+        this.infoPlan.general_DifTecnicasIntubacion = "No";
+        this.infoPlan.general_DispositivosSupro = "No";
+        this.infoPlan.general_Complicaciones = "No";
+        this.infoPlan.general_OtrosDispositivos = "No";
+
+        this.infoPlan.regional_ProbDificulNeuro = "No";
+        this.infoPlan.regional_ProbDificulPlexo = "No";
+        this.infoPlan.regional_Ultrasonido = "No";
+        this.infoPlan.regional_ProbComplicaciones = "No";
+        this.infoPlan.regional_Neuroestimulador = "No";
+    },
+
     methods:{
-        prueba(infoPlan: any){            
-            console.log(infoPlan);            
-        },
         cambiarUpdateValoracion() {
             this.btnActualizarValoracion=true
 
