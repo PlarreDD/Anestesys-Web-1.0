@@ -1,10 +1,10 @@
 <template>
     <div>
         <!-- Barra de Navegación -->
-        <ul class="nav nav-pills mb-3 text-center" id="">
+        <ul class="nav nav-pills mb-3 text-center centrar-li" id="">
             <!-- POSICIÓN Y CUIDADOS -->
             <li class="nav-item col-md-3" >
-                <button class="btn btn-outline-secondary fw-bold active"
+                <button class="btn btn-nav-bar fw-bold active"
                         id="plan"
                         data-bs-toggle="pill"
                         data-bs-target="#posicion"
@@ -14,7 +14,7 @@
 
             <!-- GENERAL -->
             <li class="nav-item col-md-2" >
-                <button class="btn btn-outline-secondary fw-bold"
+                <button class="btn btn-nav-bar fw-bold"
                         id="plan"
                         data-bs-toggle="pill"
                         data-bs-target="#general"
@@ -24,7 +24,7 @@
 
             <!-- REGIONAL -->
             <li class="nav-item col-md-2" >
-                <button class="btn btn-outline-secondary fw-bold"
+                <button class="btn btn-nav-bar fw-bold"
                         id="plan"
                         data-bs-toggle="pill"
                         data-bs-target="#regional"
@@ -34,7 +34,7 @@
 
             <!-- SEDACIÓN -->
             <li class="nav-item col-md-2" >
-                <button class="btn btn-outline-secondary fw-bold"
+                <button class="btn btn-nav-bar fw-bold"
                         id="plan"
                         data-bs-toggle="pill"
                         data-bs-target="#sedacion"
@@ -44,7 +44,7 @@
   
             <!-- LOCAL -->
             <li class="nav-item col-md-2" >
-                <button class="btn btn-outline-secondary fw-bold"
+                <button class="btn btn-nav-bar fw-bold"
                         id="plan"
                         data-bs-toggle="pill"
                         data-bs-target="#local"
@@ -64,7 +64,7 @@
             <!-- POSICIÓN Y CUIDADOS -->
             <div class="tab-pane fade show active" id="posicion">
                 <div class="col-12 bordePrincipal">  
-                    <form class="row g-3">    
+                    <form @submit.prevent="" class="row g-3">    
                         <h5 class="fw-bold">POSICIÓN Y CUIDADOS</h5>
                         <!-- Horas de ayuno -->
                         <div class="col-md-2">
@@ -283,7 +283,7 @@
             <!-- Sedación -->
             <div class="tab-pane fade" id="sedacion">
                 <div class="col-12 bordePrincipal largoContenedor">  
-                    <form class="row g-3">    
+                    <form @submit.prevent="" class="row g-3">    
                         <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5>    
                         <h5 class="fw-bold col-md-12 fw-bold">Sedación</h5>   
 
@@ -348,7 +348,7 @@
             <!-- Regional -->
             <div class="tab-pane fade" id="regional">
                 <div class="col-12 bordePrincipal">  
-                    <form class="row g-3">    
+                    <form @submit.prevent="" class="row g-3">    
                         <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5>    
                         <h5 class="fw-bold col-md-12">Regional</h5>  
                         <h5 class="fw-bold">BLOQUEO NEURO-AXIAL</h5>  
@@ -693,7 +693,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.local_SitioAnestesiaL"
-                                   :class="infoPlan.local_SitioAnestesiaL != '' ?
+                                   :class="infoPlan.local_SitioAnestesiaL != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -703,7 +703,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.local_AnestesicoUtilizado"
-                                    :class="infoPlan.local_AnestesicoUtilizado != '' ?
+                                    :class="infoPlan.local_AnestesicoUtilizado != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Lidocaína 1%</option>
@@ -723,7 +723,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.local_Especificar"
-                                      :class="infoPlan.local_Especificar != '' ?
+                                      :class="infoPlan.local_Especificar != undefined ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -752,9 +752,31 @@
             <!-- General -->
             <div class="tab-pane fade" id="general">
                 <div class="col-12 bordePrincipal">  
-                    <form class="row g-3">    
-                        <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5>    
-                        <h5 class="fw-bold col-md-12">General</h5>
+                    <form @submit.prevent="" class="row g-3"> 
+                        <div class="col-md-12">
+                            <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5> 
+                        </div>   
+                        <div class="col-md-10">
+                            <h5 class="col-md-12 fw-bold">General</h5>
+                        </div> 
+
+                        <!-- Botón Guardar/Actuazlizar -->
+                        <div class="col-md-2">
+                            <template v-if="btnActualizarValoracion === false">
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"                                            
+                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
+                            </template>
+
+                            <template v-else>
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"
+                                    @click="preIdStore.updatePrePlan(infoPlan, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
+                            </template>      
+                        </div> 
+                                                   
                         <h5 class="col-md-12 fw-bold">INTUBACIÓN</h5>
                         
                         <!-- Inducción -->
@@ -763,7 +785,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.general_Induccion"
-                                    :class="infoPlan.general_Induccion != '' ?
+                                    :class="infoPlan.general_Induccion != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Endovenosa</option>
@@ -778,7 +800,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.general_Tubo"
-                                    :class="infoPlan.general_Tubo != '' ?
+                                    :class="infoPlan.general_Tubo != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Orotraqueal</option>
@@ -793,7 +815,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.general_NumeroTubo"
-                                   :class="infoPlan.general_NumeroTubo != '' ?
+                                   :class="infoPlan.general_NumeroTubo != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -803,7 +825,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.general_TipoCanula"
-                                    :class="infoPlan.general_TipoCanula != '' ?
+                                    :class="infoPlan.general_TipoCanula != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Oral</option>
@@ -829,7 +851,8 @@
                                    id="globoNo"
                                    autocomplete="off"
                                    value="No"
-                                   v-model="infoPlan.general_Globo">
+                                   v-model="infoPlan.general_Globo"
+                                   checked>
                             <label class="btn btn-radio" for="globoNo">No</label>
                         </div>
 
@@ -839,7 +862,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.general_Presion"
-                                    :class="infoPlan.general_Presion != '' ?
+                                    :class="infoPlan.general_Presion != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected>Seleccione...</option>
                                 <option>Presión baja</option>
@@ -865,7 +888,8 @@
                                    id="difTecIntuNo"
                                    autocomplete="off"
                                    value="No"
-                                   v-model="infoPlan.general_DifTecnicasIntubacion">
+                                   v-model="infoPlan.general_DifTecnicasIntubacion"
+                                   checked>
                             <label class="btn btn-radio" for="difTecIntuNo">No</label>
                         </div>
 
@@ -876,13 +900,13 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.general_EspDifTecIntubacion"
-                                      :class="infoPlan.general_EspDifTecIntubacion != '' ?
+                                      :class="infoPlan.general_EspDifTecIntubacion != undefined ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
 
                         <hr />
-                        <h5 class="col-md-12 Raumanmeri">DISPOSITIVOS SUPRAGLÓTICOS</h5>
+                        <h5 class="col-md-12 fw-bold">DISPOSITIVOS SUPRAGLÓTICOS</h5>
 
                         <!-- Dispositivos suproglóticos -->
                         <div class="col-md-3">
@@ -902,7 +926,8 @@
                                    id="supragloticosNo"
                                    autocomplete="off"
                                    value="No"
-                                   v-model="infoPlan.general_DispositivosSupro">
+                                   v-model="infoPlan.general_DispositivosSupro"
+                                   checked>
                             <label class="btn btn-radio" for="supragloticosNo">No</label>
                         </div>
 
@@ -913,7 +938,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.general_Calibre"
-                                   :class="infoPlan.general_Calibre != '' ?
+                                   :class="infoPlan.general_Calibre != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -937,7 +962,8 @@
                                    id="complicacionesNo"
                                    autocomplete="off"
                                    value="No"
-                                   v-model="infoPlan.general_Complicaciones">
+                                   v-model="infoPlan.general_Complicaciones"
+                                   checked>
                             <label class="btn btn-radio" for="complicacionesNo">No</label>
                         </div>
 
@@ -948,7 +974,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.general_EspComplicaciones"
-                                      :class="infoPlan.general_EspComplicaciones != '' ?
+                                      :class="infoPlan.general_EspComplicaciones != undefined ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -974,7 +1000,8 @@
                                    id="otrosNo"
                                    autocomplete="off"
                                    value="No"
-                                   v-model="infoPlan.general_OtrosDispositivos">
+                                   v-model="infoPlan.general_OtrosDispositivos"
+                                   checked>
                             <label class="btn btn-radio" for="otrosNo">No</label>
                         </div>
 
@@ -985,7 +1012,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.general_EspOtrosDispositivos"
-                                      :class="infoPlan.general_EspOtrosDispositivos != '' ?
+                                      :class="infoPlan.general_EspOtrosDispositivos != undefined ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>             
@@ -1040,10 +1067,14 @@ export default defineComponent({
     height: 535px
 }
 .formSombra:focus{
-    border-color:green;
+    border-color:#6BD99B;
     outline:0;
-    -webkit-box-shadow:0 0 8px green;
-    box-shadow:0 0 8px green
+    -webkit-box-shadow:0 0 8px #6BD99B;
+    box-shadow:0 0 8px #6BD99B
+}
+.border-success {
+    --bs-border-opacity: 1;
+    border-color: #6BD99B !important;
 }
 .btn-radio {
     --bs-btn-color: #000;
@@ -1066,5 +1097,26 @@ export default defineComponent({
     --bs-btn-active-color: #ffffff;
     --bs-btn-active-border-color: #E88300;
     width: 150px;        
+}
+
+h5{
+    color: #002D60;
+    margin-bottom: 20px;    
+}
+
+.btn-nav-bar{
+    --bs-btn-bg: #fff;
+    --bs-btn-color: #002D60;    
+    --bs-btn-border-color: #fff;
+    --bs-btn-hover-bg: #A0A6B2;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #A0A6B2;          
+    --bs-btn-active-bg: #A0A6B2;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-border-color: #A0A6B2;
+    height: auto;
+}
+.centrar-li{
+  justify-content: center; 
 }
 </style>

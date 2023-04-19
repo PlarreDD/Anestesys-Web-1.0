@@ -128,19 +128,22 @@ export const updatePaciente = async (req: any, res: Response) => {
 /* Función de registro de valoración pre anetésica */
 export const savePreAntecedentes = async (req: any, res: Response) => {
     try {
-        const { pid, antPersPat_Alergias, antPersPat_Quirurgicos,
+        const { pid,
+                // Patológicos
+                antPersPat_Alergias, antPersPat_Quirurgicos,
                 antPersPat_Endocrinologicos, antPersPat_Urologicos,
                 antPersPat_Traumaticos, antPersPat_Ortopedicos,
                 antPersPat_Transfusiones, antPersPat_CompAnestPrev,
                 antPersPat_EstadoPsiq, antPersPat_MedActual,
+                // No Patológicos
                 antPersNoPat_HrsAyuno, antPersNoPat_Tabaquismo,
                 antPersNoPat_Etilismo, antPersNoPat_Adicciones,
                 antPersNoPat_Inmunizaciones, antPersNoPat_AntImportQx,
-
+                // Exploración Física
                 sigVit_Edad, sigVit_Temperatura, sigVit_FrecuCardiaca,
                 sigVit_FrecuRespiratoria, sigVit_Peso, sigVit_Talla,
                 sigVit_IMC, sigVit_TensionArterial, sigVit_SaturacionOxigeno,
-
+                // Perfil Bioquímico
                 perfilBioQ_FechaRealizacion, perfilBioQ_GrupoSanguineo,
                 perfilBioQ_Hemoglobina, perfilBioQ_Hematocrito, perfilBioQ_Plaquetas,
                 perfilBioQ_Leutocitos, perfilBioQ_TP, perfilBioQ_TT,
@@ -150,7 +153,7 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
                 perfilBioQ_Magnesio, perfilBioQ_BilirrubinaDirecta,
                 perfilBioQ_BilirrubinaIndirecta, perfilBioQ_BilirrubinaTotal,
                 perfilBioQ_Lipasa, perfilBioQ_Amilasa, perfilBioQ_Otros,
-
+                // Valoración Vía Aérea y Otras Escalas
                 viaAerea_Mallampati, viaAerea_PatilAldreti, viaAerea_AperturaBucal,
                 viaAerea_Distancia, viaAerea_Protusion, viaAerea_Ipid, viaAerea_Glasgow,
                 viaAerea_NYHA, viaAerea_Goldman, viaAerea_RiesgoTrombosis,
@@ -242,105 +245,108 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
 export const updatePreAntecedentes = async (req: any, res: Response) => {
     try {
         const { id } = req.params;
-        const { antPersPat_Alergias, antPersPat_Quirurgicos,
-            antPersPat_Endocrinologicos, antPersPat_Urologicos,
-            antPersPat_Traumaticos, antPersPat_Ortopedicos,
-            antPersPat_Transfusiones, antPersPat_CompAnestPrev,
-            antPersPat_EstadoPsiq, antPersPat_MedActual,
-            antPersNoPat_HrsAyuno, antPersNoPat_Tabaquismo,
-            antPersNoPat_Etilismo, antPersNoPat_Adicciones,
-            antPersNoPat_Inmunizaciones, antPersNoPat_AntImportQx,
-
-            sigVit_Edad, sigVit_Temperatura, sigVit_FrecuCardiaca,
-            sigVit_FrecuRespiratoria, sigVit_Peso, sigVit_Talla,
-            sigVit_IMC, sigVit_TensionArterial, sigVit_SaturacionOxigeno,
-
-            perfilBioQ_FechaRealizacion, perfilBioQ_GrupoSanguineo,
-            perfilBioQ_Hemoglobina, perfilBioQ_Hematocrito, perfilBioQ_Plaquetas,
-            perfilBioQ_Leutocitos, perfilBioQ_TP, perfilBioQ_TT,
-            perfilBioQ_TPT, perfilBioQ_INR, perfilBioQ_Glucosa,
-            perfilBioQ_Creatinina, perfilBioQ_Urea, perfilBioQ_Sodio,
-            perfilBioQ_Potasio, perfilBioQ_Cloro, perfilBioQ_Calcio,
-            perfilBioQ_Magnesio, perfilBioQ_BilirrubinaDirecta,
-            perfilBioQ_BilirrubinaIndirecta, perfilBioQ_BilirrubinaTotal,
-            perfilBioQ_Lipasa, perfilBioQ_Amilasa, perfilBioQ_Otros,
-
-            viaAerea_Mallampati, viaAerea_PatilAldreti, viaAerea_AperturaBucal,
-            viaAerea_Distancia, viaAerea_Protusion, viaAerea_Ipid, viaAerea_Glasgow,
-            viaAerea_NYHA, viaAerea_Goldman, viaAerea_RiesgoTrombosis,
-            viaAerea_ClasificacionASA, viaAerea_TipoCirugia, viaAerea_RiesgoAnestesico,
+        const { // Patológicos
+                antPersPat_Alergias, antPersPat_Quirurgicos,
+                antPersPat_Endocrinologicos, antPersPat_Urologicos,
+                antPersPat_Traumaticos, antPersPat_Ortopedicos,
+                antPersPat_Transfusiones, antPersPat_CompAnestPrev,
+                antPersPat_EstadoPsiq, antPersPat_MedActual,
+                // No Patológicos
+                antPersNoPat_HrsAyuno, antPersNoPat_Tabaquismo,
+                antPersNoPat_Etilismo, antPersNoPat_Adicciones,
+                antPersNoPat_Inmunizaciones, antPersNoPat_AntImportQx,
+                // Exploración Física
+                sigVit_Edad, sigVit_Temperatura, sigVit_FrecuCardiaca,
+                sigVit_FrecuRespiratoria, sigVit_Peso, sigVit_Talla,
+                sigVit_IMC, sigVit_TensionArterial, sigVit_SaturacionOxigeno,
+                // Perfil Bioquímico
+                perfilBioQ_FechaRealizacion, perfilBioQ_GrupoSanguineo,
+                perfilBioQ_Hemoglobina, perfilBioQ_Hematocrito, perfilBioQ_Plaquetas,
+                perfilBioQ_Leutocitos, perfilBioQ_TP, perfilBioQ_TT,
+                perfilBioQ_TPT, perfilBioQ_INR, perfilBioQ_Glucosa,
+                perfilBioQ_Creatinina, perfilBioQ_Urea, perfilBioQ_Sodio,
+                perfilBioQ_Potasio, perfilBioQ_Cloro, perfilBioQ_Calcio,
+                perfilBioQ_Magnesio, perfilBioQ_BilirrubinaDirecta,
+                perfilBioQ_BilirrubinaIndirecta, perfilBioQ_BilirrubinaTotal,
+                perfilBioQ_Lipasa, perfilBioQ_Amilasa, perfilBioQ_Otros,
+                // Valoración Vía Aérea y Otras Escalas
+                viaAerea_Mallampati, viaAerea_PatilAldreti, viaAerea_AperturaBucal,
+                viaAerea_Distancia, viaAerea_Protusion, viaAerea_Ipid, viaAerea_Glasgow,
+                viaAerea_NYHA, viaAerea_Goldman, viaAerea_RiesgoTrombosis,
+                viaAerea_ClasificacionASA, viaAerea_TipoCirugia, viaAerea_RiesgoAnestesico,
         } = req.body;
         
-        const preval = await PreVal.findOneAndUpdate({pid: id}, { /* Antecedentes */
-        // Personales Patológicos
-        antPersPat_Alergias: antPersPat_Alergias,
-        antPersPat_Quirurgicos: antPersPat_Quirurgicos,
-        antPersPat_Endocrinologicos: antPersPat_Endocrinologicos,
-        antPersPat_Urologicos: antPersPat_Urologicos,
-        antPersPat_Traumaticos: antPersPat_Traumaticos,
-        antPersPat_Ortopedicos: antPersPat_Ortopedicos,
-        antPersPat_Transfusiones: antPersPat_Transfusiones,
-        antPersPat_CompAnestPrev: antPersPat_CompAnestPrev,
-        antPersPat_EstadoPsiq: antPersPat_EstadoPsiq,
-        antPersPat_MedActual:antPersPat_MedActual,
-        //Personales No Patológicos
-        antPersNoPat_HrsAyuno:antPersNoPat_HrsAyuno,
-        antPersNoPat_Tabaquismo:antPersNoPat_Tabaquismo,
-        antPersNoPat_Etilismo:antPersNoPat_Etilismo,
-        antPersNoPat_Adicciones:antPersNoPat_Adicciones,
-        antPersNoPat_Inmunizaciones:antPersNoPat_Inmunizaciones,
-        antPersNoPat_AntImportQx:antPersNoPat_AntImportQx, 
-        //Signos Vitales
-        sigVit_Edad:sigVit_Edad,
-        sigVit_Temperatura:sigVit_Temperatura,
-        sigVit_FrecuCardiaca:sigVit_FrecuCardiaca,
-        sigVit_FrecuRespiratoria:sigVit_FrecuRespiratoria,
-        sigVit_Peso:sigVit_Peso,
-        sigVit_Talla:sigVit_Talla,
-        sigVit_IMC:sigVit_IMC,
-        sigVit_TensionArterial:sigVit_TensionArterial,
-        sigVit_SaturacionOxigeno:sigVit_SaturacionOxigeno,
-        //Laboratorio
-        perfilBioQ_FechaRealizacion: perfilBioQ_FechaRealizacion,
-        perfilBioQ_GrupoSanguineo: perfilBioQ_GrupoSanguineo,
-        perfilBioQ_Hemoglobina: perfilBioQ_Hemoglobina,
-        perfilBioQ_Hematocrito: perfilBioQ_Hematocrito,
-        perfilBioQ_Plaquetas: perfilBioQ_Plaquetas,
-        perfilBioQ_Leutocitos: perfilBioQ_Leutocitos,
-        perfilBioQ_TP: perfilBioQ_TP,
-        perfilBioQ_TT: perfilBioQ_TT,
-        perfilBioQ_TPT: perfilBioQ_TPT,
-        perfilBioQ_INR: perfilBioQ_INR,
-        perfilBioQ_Glucosa: perfilBioQ_Glucosa,
-        perfilBioQ_Creatinina: perfilBioQ_Creatinina,
-        perfilBioQ_Urea: perfilBioQ_Urea,
-        perfilBioQ_Sodio: perfilBioQ_Sodio,
-        perfilBioQ_Potasio: perfilBioQ_Potasio,
-        perfilBioQ_Cloro: perfilBioQ_Cloro,
-        perfilBioQ_Calcio: perfilBioQ_Calcio,
-        perfilBioQ_Magnesio: perfilBioQ_Magnesio,
-        perfilBioQ_BilirrubinaDirecta: perfilBioQ_BilirrubinaDirecta,
-        perfilBioQ_BilirrubinaIndirecta: perfilBioQ_BilirrubinaIndirecta,
-        perfilBioQ_BilirrubinaTotal: perfilBioQ_BilirrubinaTotal,
-        perfilBioQ_Lipasa: perfilBioQ_Lipasa,
-        perfilBioQ_Amilasa: perfilBioQ_Amilasa,
-        perfilBioQ_Otros: perfilBioQ_Otros,
-        /* Vía Aérea */
-        // Valoración de Vía Aérea y Otras Escalas
-        viaAerea_Mallampati: viaAerea_Mallampati,
-        viaAerea_PatilAldreti: viaAerea_PatilAldreti,
-        viaAerea_AperturaBucal: viaAerea_AperturaBucal,
-        viaAerea_Distancia: viaAerea_Distancia,
-        viaAerea_Protusion: viaAerea_Protusion,
-        viaAerea_Ipid: viaAerea_Ipid,
-        viaAerea_Glasgow: viaAerea_Glasgow,
-        viaAerea_NYHA: viaAerea_NYHA,
-        viaAerea_Goldman: viaAerea_Goldman,
-        viaAerea_RiesgoTrombosis: viaAerea_RiesgoTrombosis,
-        viaAerea_ClasificacionASA: viaAerea_ClasificacionASA,
-        viaAerea_TipoCirugia: viaAerea_TipoCirugia,
-        viaAerea_RiesgoAnestesico: viaAerea_RiesgoAnestesico,
-    });
+        const preval = await PreVal.findOneAndUpdate({ pid: id },
+                                                     { /* Antecedentes */
+                                                       // Personales Patológicos
+                                                       antPersPat_Alergias: antPersPat_Alergias,
+                                                       antPersPat_Quirurgicos: antPersPat_Quirurgicos,
+                                                       antPersPat_Endocrinologicos: antPersPat_Endocrinologicos,
+                                                       antPersPat_Urologicos: antPersPat_Urologicos,
+                                                       antPersPat_Traumaticos: antPersPat_Traumaticos,
+                                                       antPersPat_Ortopedicos: antPersPat_Ortopedicos,
+                                                       antPersPat_Transfusiones: antPersPat_Transfusiones,
+                                                       antPersPat_CompAnestPrev: antPersPat_CompAnestPrev,
+                                                       antPersPat_EstadoPsiq: antPersPat_EstadoPsiq,
+                                                       antPersPat_MedActual:antPersPat_MedActual,
+                                                       //Personales No Patológicos
+                                                       antPersNoPat_HrsAyuno:antPersNoPat_HrsAyuno,
+                                                       antPersNoPat_Tabaquismo:antPersNoPat_Tabaquismo,
+                                                       antPersNoPat_Etilismo:antPersNoPat_Etilismo,
+                                                       antPersNoPat_Adicciones:antPersNoPat_Adicciones,
+                                                       antPersNoPat_Inmunizaciones:antPersNoPat_Inmunizaciones,
+                                                       antPersNoPat_AntImportQx:antPersNoPat_AntImportQx, 
+                                                       //Signos Vitales
+                                                       sigVit_Edad:sigVit_Edad,
+                                                       sigVit_Temperatura:sigVit_Temperatura,
+                                                       sigVit_FrecuCardiaca:sigVit_FrecuCardiaca,
+                                                       sigVit_FrecuRespiratoria:sigVit_FrecuRespiratoria,
+                                                       sigVit_Peso:sigVit_Peso,
+                                                       sigVit_Talla:sigVit_Talla,
+                                                       sigVit_IMC:sigVit_IMC,
+                                                       sigVit_TensionArterial:sigVit_TensionArterial,
+                                                       sigVit_SaturacionOxigeno:sigVit_SaturacionOxigeno,
+                                                       //Laboratorio
+                                                       perfilBioQ_FechaRealizacion: perfilBioQ_FechaRealizacion,
+                                                       perfilBioQ_GrupoSanguineo: perfilBioQ_GrupoSanguineo,
+                                                       perfilBioQ_Hemoglobina: perfilBioQ_Hemoglobina,
+                                                       perfilBioQ_Hematocrito: perfilBioQ_Hematocrito,
+                                                       perfilBioQ_Plaquetas: perfilBioQ_Plaquetas,
+                                                       perfilBioQ_Leutocitos: perfilBioQ_Leutocitos,
+                                                       perfilBioQ_TP: perfilBioQ_TP,
+                                                       perfilBioQ_TT: perfilBioQ_TT,
+                                                       perfilBioQ_TPT: perfilBioQ_TPT,
+                                                       perfilBioQ_INR: perfilBioQ_INR,
+                                                       perfilBioQ_Glucosa: perfilBioQ_Glucosa,
+                                                       perfilBioQ_Creatinina: perfilBioQ_Creatinina,
+                                                       perfilBioQ_Urea: perfilBioQ_Urea,
+                                                       perfilBioQ_Sodio: perfilBioQ_Sodio,
+                                                       perfilBioQ_Potasio: perfilBioQ_Potasio,
+                                                       perfilBioQ_Cloro: perfilBioQ_Cloro,
+                                                       perfilBioQ_Calcio: perfilBioQ_Calcio,
+                                                       perfilBioQ_Magnesio: perfilBioQ_Magnesio,
+                                                       perfilBioQ_BilirrubinaDirecta: perfilBioQ_BilirrubinaDirecta,
+                                                       perfilBioQ_BilirrubinaIndirecta: perfilBioQ_BilirrubinaIndirecta,
+                                                       perfilBioQ_BilirrubinaTotal: perfilBioQ_BilirrubinaTotal,
+                                                       perfilBioQ_Lipasa: perfilBioQ_Lipasa,
+                                                       perfilBioQ_Amilasa: perfilBioQ_Amilasa,
+                                                       perfilBioQ_Otros: perfilBioQ_Otros,
+                                                       /* Vía Aérea */
+                                                       // Valoración de Vía Aérea y Otras Escalas
+                                                       viaAerea_Mallampati: viaAerea_Mallampati,
+                                                       viaAerea_PatilAldreti: viaAerea_PatilAldreti,
+                                                       viaAerea_AperturaBucal: viaAerea_AperturaBucal,
+                                                       viaAerea_Distancia: viaAerea_Distancia,
+                                                       viaAerea_Protusion: viaAerea_Protusion,
+                                                       viaAerea_Ipid: viaAerea_Ipid,
+                                                       viaAerea_Glasgow: viaAerea_Glasgow,
+                                                       viaAerea_NYHA: viaAerea_NYHA,
+                                                       viaAerea_Goldman: viaAerea_Goldman,
+                                                       viaAerea_RiesgoTrombosis: viaAerea_RiesgoTrombosis,
+                                                       viaAerea_ClasificacionASA: viaAerea_ClasificacionASA,
+                                                       viaAerea_TipoCirugia: viaAerea_TipoCirugia,
+                                                       viaAerea_RiesgoAnestesico: viaAerea_RiesgoAnestesico,
+                                                    });
 
         return res.json({ preval })
     } catch (error) {
@@ -352,12 +358,32 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
 /********************************************************************/
 export const savePrePlan =async (req: any, res: Response) => {
     try {
-        const { pid, 
+        const { pid,
+                // General
+                // Intubación
+                general_Induccion, general_Tubo, general_NumeroTubo,
+                general_TipoCanula, general_Globo, general_Presion,
+                general_DifTecnicasIntubacion, general_EspDifTecIntubacion,
+                // Dispositivos Supraglóticos
+                general_DispositivosSupro, general_Calibre, general_Complicaciones,
+                general_EspComplicaciones, 
+                // Otros Disposotivos
+                general_OtrosDispositivos, general_EspOtrosDispositivos,
                 // Local
                 local_SitioAnestesiaL, local_AnestesicoUtilizado,
                 local_Especificar, } = req.body;
         
         const preplan = new PrePlan({ pid: pid,
+                                      // General
+                                      // Intubación
+                                      general_Induccion, general_Tubo, general_NumeroTubo,
+                                      general_TipoCanula, general_Globo, general_Presion,
+                                      general_DifTecnicasIntubacion, general_EspDifTecIntubacion,
+                                      // Dispositivos Supraglóticos
+                                      general_DispositivosSupro, general_Calibre, general_Complicaciones,
+                                      general_EspComplicaciones, 
+                                      // Otros Disposotivos
+                                      general_OtrosDispositivos, general_EspOtrosDispositivos,
                                       // Local
                                       local_SitioAnestesiaL, local_AnestesicoUtilizado,
                                       local_Especificar });
@@ -373,12 +399,34 @@ export const updatePrePlan =async (req: any, res: Response) => {
     try {
         const { id } = req.params;
 
-        const { // Local
+        const { // General
+                // Intubación
+                general_Induccion, general_Tubo, general_NumeroTubo,
+                general_TipoCanula, general_Globo, general_Presion,
+                general_DifTecnicasIntubacion, general_EspDifTecIntubacion,
+                // Dispositivos Supraglóticos
+                general_DispositivosSupro, general_Calibre, general_Complicaciones,
+                general_EspComplicaciones, 
+                // Otros Disposotivos
+                general_OtrosDispositivos, general_EspOtrosDispositivos,
+                // Local
                 local_SitioAnestesiaL, local_AnestesicoUtilizado,
                 local_Especificar, } = req.body;
         
-        const preplan = await PrePlan.findOneAndUpdate( {pid: id},
-                                                        { local_SitioAnestesiaL, local_AnestesicoUtilizado,
+        const preplan = await PrePlan.findOneAndUpdate( { pid: id },
+                                                        { // General
+                                                          // General
+                                                          // Intubación
+                                                          general_Induccion, general_Tubo, general_NumeroTubo,
+                                                          general_TipoCanula, general_Globo, general_Presion,
+                                                          general_DifTecnicasIntubacion, general_EspDifTecIntubacion,
+                                                          // Dispositivos Supraglóticos
+                                                          general_DispositivosSupro, general_Calibre,
+                                                          general_Complicaciones, general_EspComplicaciones,
+                                                          // Otros Disposotivos
+                                                          general_OtrosDispositivos, general_EspOtrosDispositivos,
+                                                          // Local
+                                                          local_SitioAnestesiaL, local_AnestesicoUtilizado,
                                                           local_Especificar, })
 
         return res.json({ preplan });
