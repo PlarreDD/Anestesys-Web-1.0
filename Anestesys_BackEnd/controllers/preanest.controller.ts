@@ -382,6 +382,9 @@ export const savePrePlan =async (req: any, res: Response) => {
                 regional_Ultrasonido, regional_EspUltrasonido, regional_Neuroestimulador,
                 regional_EspNeuroestimulador, regional_ProbComplicaciones,
                 regional_EspDificEquipo,
+                // Sedación
+                sedacion_Via, sedacion_Opcion, sedacion_Observaciones,
+                sedacion_Medicamentos,
                 // Local
                 local_SitioAnestesiaL, local_AnestesicoUtilizado,
                 local_Especificar, } = req.body;
@@ -411,6 +414,9 @@ export const savePrePlan =async (req: any, res: Response) => {
                                       regional_Ultrasonido, regional_EspUltrasonido,
                                       regional_Neuroestimulador, regional_EspNeuroestimulador,
                                       regional_ProbComplicaciones, regional_EspDificEquipo,
+                                      // Sedación
+                                      sedacion_Via, sedacion_Opcion, sedacion_Observaciones,
+                                      sedacion_Medicamentos,
                                       // Local
                                       local_SitioAnestesiaL, local_AnestesicoUtilizado,
                                       local_Especificar });
@@ -449,6 +455,9 @@ export const updatePrePlan =async (req: any, res: Response) => {
                 regional_Ultrasonido, regional_EspUltrasonido, regional_Neuroestimulador,
                 regional_EspNeuroestimulador, regional_ProbComplicaciones,
                 regional_EspDificEquipo,
+                // Sedación
+                sedacion_Via, sedacion_Opcion, sedacion_Observaciones,
+                sedacion_Medicamentos,
                 // Local
                 local_SitioAnestesiaL, local_AnestesicoUtilizado,
                 local_Especificar, } = req.body;
@@ -479,6 +488,9 @@ export const updatePrePlan =async (req: any, res: Response) => {
                                                           regional_Ultrasonido, regional_EspUltrasonido,
                                                           regional_Neuroestimulador, regional_EspNeuroestimulador,
                                                           regional_ProbComplicaciones, regional_EspDificEquipo,
+                                                          // Sedación
+                                                          sedacion_Via, sedacion_Opcion, sedacion_Observaciones,
+                                                          sedacion_Medicamentos,
                                                           // Local
                                                           local_SitioAnestesiaL, local_AnestesicoUtilizado,
                                                           local_Especificar, })
