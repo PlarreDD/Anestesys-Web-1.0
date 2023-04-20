@@ -95,7 +95,7 @@
                             <input type="date"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.fechaNac"
-                                   :class="infoPreIdPaciente.fechaNac != undefined ?
+                                   :class="infoPreIdPaciente.fechaNac != undefined && infoPreIdPaciente.fechaNac != '' ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -107,7 +107,7 @@
                             <input type="text"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.edadPaciente"
-                                   :class="infoPreIdPaciente.edadPaciente != undefined ?
+                                   :class="infoPreIdPaciente.edadPaciente != undefined && infoPreIdPaciente.edadPaciente != '' ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -148,7 +148,9 @@
 
                                 <input type="text"
                                        class="form-control"
-                                       v-model="infoPreIdPaciente.numEpisodio">
+                                       v-model="infoPreIdPaciente.numEpisodio"
+                                       :class="infoPreIdPaciente.numEpisodio != undefined && infoPreIdPaciente.numEpisodio != '' ?
+                                          'form-control border border-success formSombra' : 'form-control'">
                             </div>
 
                             <div class="col-md-1"></div>
@@ -159,7 +161,7 @@
                                 <input type="text"
                                        class="form-control"
                                        v-model="infoPreIdPaciente.habitacion"
-                                       :class="infoPreIdPaciente.habitacion != undefined ?
+                                       :class="infoPreIdPaciente.habitacion != undefined && infoPreIdPaciente.habitacion != '' ?
                                               'form-control border border-success formSombra' : 'form-control'">
                             </div>
                             <div class="col-md-1"></div>
@@ -170,7 +172,7 @@
                                 <input type="date"
                                        class="form-control"
                                        v-model="infoPreIdPaciente.fechaIn"
-                                       :class="infoPreIdPaciente.fechaIn != undefined ?
+                                       :class="infoPreIdPaciente.fechaIn != undefined && infoPreIdPaciente.fechaIn != '' ?
                                               'form-control border border-success formSombra' : 'form-control'">
                             </div>
                         </div>
@@ -181,7 +183,7 @@
                             <textarea class="form-control"
                                       rows="3"
                                       v-model="infoPreIdPaciente.diagnostico"
-                                      :class="infoPreIdPaciente.diagnostico != undefined ?
+                                      :class="infoPreIdPaciente.diagnostico != undefined && infoPreIdPaciente.diagnostico != '' ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -223,7 +225,7 @@
                             <label for="" class="form-label fw-bold margen-diez"> CIE-10 </label>
                             <el-select v-model="infoPreIdPaciente.cie10"
                                        filterable
-                                       :class="infoPreIdPaciente.cie10 != undefined ?
+                                       :class="infoPreIdPaciente.cie10 != undefined && infoPreIdPaciente.cie10 != '' ?
                                               'form-control-select border border-success formSombra' : 'form-control-select'">
                                 <el-option 
                                     v-for="estadoNacimiento in opcionCIE10"
@@ -241,7 +243,7 @@
                                           rows="3"
                                           @keyup.capture="enviarDatos"
                                           v-model="infoPreIdPaciente.cirugia"
-                                          :class="infoPreIdPaciente.cirugia != undefined ?
+                                          :class="infoPreIdPaciente.cirugia != undefined && infoPreIdPaciente.cirugia != '' ?
                                                  'form-control border border-success formSombra' : 'form-control'">
                                 </textarea>
                             </div>
@@ -252,7 +254,7 @@
                                        class="form-label fw-bold"> CIE-9 </label>
                                 <el-select v-model="infoPreIdPaciente.cie9"
                                            filterable
-                                           :class="infoPreIdPaciente.cie9 != undefined ?
+                                           :class="infoPreIdPaciente.cie9 != undefined && infoPreIdPaciente.cie9 != '' ?
                                                   'form-control-select border border-success formSombra' : 'form-control-select'">
                                     <el-option
                                         v-for="estadoNacimiento in opcionCIE9"
@@ -269,7 +271,7 @@
                             <input type="date"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.fechaCx"
-                                   :class="infoPreIdPaciente.fechaCx != undefined ?
+                                   :class="infoPreIdPaciente.fechaCx != undefined && infoPreIdPaciente.fechaCx != '' ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -279,7 +281,7 @@
                             <input type="time"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.hrCx"
-                                   :class="infoPreIdPaciente.hrCx != undefined ?
+                                   :class="infoPreIdPaciente.hrCx != undefined && infoPreIdPaciente.hrCx != '' ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -292,7 +294,7 @@
                                    class="form-control"
                                    @keyup.capture="enviarDatos"
                                    v-model="infoPreIdPaciente.cirujano"
-                                   :class="infoPreIdPaciente.cirujano != undefined ?
+                                   :class="infoPreIdPaciente.cirujano != undefined && infoPreIdPaciente.cirujano != '' ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -302,7 +304,7 @@
                             <input type="text" 
                                    class="form-control"
                                    v-model="infoPreIdPaciente.anestesiologo"
-                                   :class="infoPreIdPaciente.anestesiologo != undefined ?
+                                   :class="infoPreIdPaciente.anestesiologo != undefined && infoPreIdPaciente.anestesiologo != '' ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -312,7 +314,7 @@
                             <input type="text"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.anestesiologoVPA"
-                                   :class="infoPreIdPaciente.anestesiologoVPA != undefined ?
+                                   :class="infoPreIdPaciente.anestesiologoVPA != undefined && infoPreIdPaciente.anestesiologoVPA != '' ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -322,7 +324,7 @@
                             <input type="text"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.residenteAnestesia"
-                                   :class="infoPreIdPaciente.residenteAnestesia != undefined ?
+                                   :class="infoPreIdPaciente.residenteAnestesia != undefined && infoPreIdPaciente.residenteAnestesia != '' ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
                     </form>
@@ -338,7 +340,7 @@
                             <label for="" class="form-label fw-bold"> Nacionalidad </label>
                             <el-select v-model="infoPreIdPaciente.nacionalidad"
                                        filterable
-                                       :class="infoPreIdPaciente.nacionalidad != undefined ?
+                                       :class="infoPreIdPaciente.nacionalidad != undefined && infoPreIdPaciente.nacionalidad != '' ?
                                               'form-control-select border border-success formSombra' : 'form-control-select'">
                                 <el-option
                                     v-for="nacionalidad in opcionNacionalidad"
@@ -353,7 +355,7 @@
                             <input type="text"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.CURP"
-                                   :class="infoPreIdPaciente.CURP != undefined ?
+                                   :class="infoPreIdPaciente.CURP != undefined && infoPreIdPaciente.CURP != '' ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -363,7 +365,7 @@
                             <input type="text"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.folioID"
-                                   :class="infoPreIdPaciente.folioID != undefined ?
+                                   :class="infoPreIdPaciente.folioID != undefined && infoPreIdPaciente.folioID != '' ?
                                           'form-control border border-success formSombra' : 'form-control'">                
                         </div>
 
@@ -372,7 +374,7 @@
                             <label for="" class="form-label fw-bold"> Estado de Nacimiento </label>
                             <el-select v-model="infoPreIdPaciente.estNacimiento"
                                        filterable
-                                       :class="infoPreIdPaciente.estNacimiento != undefined ?
+                                       :class="infoPreIdPaciente.estNacimiento != undefined && infoPreIdPaciente.estNacimiento != '' ?
                                               'form-control-select border border-success formSombra' : 'form-control-select'">
                                 <el-option
                                     v-for="estadoNacimiento in opcionEstadoNacimiento"
@@ -388,7 +390,7 @@
                             <label for="" class="form-label fw-bold">Estado de residencia</label>
                             <el-select v-model="infoPreIdPaciente.estResidencia"
                                        filterable 
-                                       :class="infoPreIdPaciente.estResidencia != undefined ?
+                                       :class="infoPreIdPaciente.estResidencia != undefined && infoPreIdPaciente.estResidencia != '' ?
                                        'form-control-select border border-success formSombra' : 'form-control-select'">
                                 <el-option v-for="estadoNacimiento in opcionEstadoResidencia"
                                            :value="estadoNacimiento.lblEstRes">
@@ -402,7 +404,7 @@
                             <input type="text"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.alcaldia"
-                                   :class="infoPreIdPaciente.alcaldia != undefined ?
+                                   :class="infoPreIdPaciente.alcaldia != undefined && infoPreIdPaciente.alcaldia != '' ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -412,7 +414,7 @@
                             <input type="text"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.colonia"
-                                   :class="infoPreIdPaciente.colonia != undefined ?
+                                   :class="infoPreIdPaciente.colonia != undefined && infoPreIdPaciente.colonia != '' ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -422,7 +424,7 @@
                             <input type="text"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.codigoPostal"
-                                   :class="infoPreIdPaciente.codigoPostal != undefined ?
+                                   :class="infoPreIdPaciente.codigoPostal != undefined && infoPreIdPaciente.codigoPostal != '' ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -504,21 +506,25 @@ export default defineComponent({
             lblEstRes: String,
 
             opcionCIE10: [
+                { valorCie10: '', lblCie10: '' },
                 { valorCie10: 'opcion1', lblCie10: 'Opción 1' },
                 { valorCie10: 'opcion2', lblCie10: 'Opción 2' }
             ],
             
             opcionCIE9: [
+                { valorCie9: '', lblCie9: '' },
                 { valorCie9: 'opcion1', lblCie9: 'Opción 1' },
                 { valorCie9: 'opcion2', lblCie9: 'Opción 2' }
             ],
             
             opcionNacionalidad: [
+                { valorNac: '', lblNac: '' },
                 { valorNac: 'mexicana', lblNac: 'Mexicana' },
                 { valorNac: 'noMexicana', lblNac: 'Extranjera' }
             ],
             
             opcionEstadoNacimiento: [
+                { valorEst: '', lblEst: '' },
                 { valorEst: 'aguascalientes', lblEst: 'Aguascalientes' },
                 { valorEst: 'bajaCalifornia', lblEst: 'Baja California' },
                 { valorEst: 'bajaCaliforniaSur', lblEst: 'Baja California Sur' },
@@ -556,6 +562,7 @@ export default defineComponent({
             ],
 
             opcionEstadoResidencia: [
+                { valorEstRes: '', lblEstRes: '' },
                 { valorEstRes: 'aguascalientes', lblEstRes: 'Aguascalientes' },
                 { valorEstRes: 'bajaCalifornia', lblEstRes: 'Baja California' },
                 { valorEstRes: 'bajaCaliforniaSur', lblEstRes: 'Baja California Sur' },

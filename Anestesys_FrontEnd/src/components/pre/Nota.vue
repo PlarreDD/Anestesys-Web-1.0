@@ -17,7 +17,7 @@
                           id=""
                           rows="20"
                           v-model="textoNota.nota"
-                          :class="textoNota.nota != undefined ?
+                          :class="textoNota.nota != undefined && textoNota.nota != '' ?
                                  'form-control border border-success formSombra' : 'form-control'">
                 </textarea>
             </div>
