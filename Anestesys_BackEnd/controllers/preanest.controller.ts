@@ -359,6 +359,12 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
 export const savePrePlan =async (req: any, res: Response) => {
     try {
         const { pid,
+                // Posicion y Cuidados
+                pos_HorasAyuno, pos_AccesoVenoso, pos_PosicionPaciente,
+                pos_PosicionBrazos, pos_Torniquete, pos_AplicacionTorniquete,
+                pos_Sitio, pos_TiempoIsquemia, pos_ProteccionOjos,
+                pos_ProtecProminencias, pos_TecnicaAnestesica, pos_Premedicacion,
+                pos_EspPremedicacion, pos_Monitoreo,
                 // General
                 // Intubación
                 general_Induccion, general_Tubo, general_NumeroTubo,
@@ -390,6 +396,12 @@ export const savePrePlan =async (req: any, res: Response) => {
                 local_Especificar, } = req.body;
         
         const preplan = new PrePlan({ pid: pid,
+                                      // Posicion y Cuidados
+                                      pos_HorasAyuno, pos_AccesoVenoso, pos_PosicionPaciente,
+                                      pos_PosicionBrazos, pos_Torniquete, pos_AplicacionTorniquete,
+                                      pos_Sitio, pos_TiempoIsquemia, pos_ProteccionOjos,
+                                      pos_ProtecProminencias, pos_TecnicaAnestesica, pos_Premedicacion,
+                                      pos_EspPremedicacion, pos_Monitoreo,
                                       // General
                                       // Intubación
                                       general_Induccion, general_Tubo, general_NumeroTubo,
@@ -432,7 +444,14 @@ export const updatePrePlan =async (req: any, res: Response) => {
     try {
         const { id } = req.params;
 
-        const { // General
+        const { 
+                // Posicion y Cuidados
+                pos_HorasAyuno, pos_AccesoVenoso, pos_PosicionPaciente,
+                pos_PosicionBrazos, pos_Torniquete, pos_AplicacionTorniquete,
+                pos_Sitio, pos_TiempoIsquemia, pos_ProteccionOjos,
+                pos_ProtecProminencias, pos_TecnicaAnestesica, pos_Premedicacion,
+                pos_EspPremedicacion, pos_Monitoreo,
+                // General
                 // Intubación
                 general_Induccion, general_Tubo, general_NumeroTubo,
                 general_TipoCanula, general_Globo, general_Presion,
@@ -463,7 +482,13 @@ export const updatePrePlan =async (req: any, res: Response) => {
                 local_Especificar, } = req.body;
         
         const preplan = await PrePlan.findOneAndUpdate( { pid: id },
-                                                        { // General
+                                                        { // Posicion y Cuidados
+                                                          pos_HorasAyuno, pos_AccesoVenoso, pos_PosicionPaciente,
+                                                          pos_PosicionBrazos, pos_Torniquete, pos_AplicacionTorniquete,
+                                                          pos_Sitio, pos_TiempoIsquemia, pos_ProteccionOjos,
+                                                          pos_ProtecProminencias, pos_TecnicaAnestesica, pos_Premedicacion,
+                                                          pos_EspPremedicacion, pos_Monitoreo,
+                                                          // General
                                                           // General
                                                           // Intubación
                                                           general_Induccion, general_Tubo, general_NumeroTubo,
