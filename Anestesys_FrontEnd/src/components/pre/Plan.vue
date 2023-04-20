@@ -68,7 +68,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.pos_HorasAyuno"
-                                   :class="infoPlan.pos_HorasAyuno != '' ?
+                                   :class="infoPlan.pos_HorasAyuno != '' && infoPlan.pos_HorasAyuno != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -78,7 +78,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.pos_AccesoVenoso"
-                                    :class="infoPlan.pos_AccesoVenoso != '' ?
+                                    :class="infoPlan.pos_AccesoVenoso != '' && infoPlan.pos_AccesoVenoso != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected></option>
                                 <option>Antebrazo derecho</option>
@@ -98,7 +98,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.pos_PosicionPaciente"
-                                    :class="infoPlan.pos_PosicionPaciente != '' ?
+                                    :class="infoPlan.pos_PosicionPaciente != '' && infoPlan.pos_PosicionPaciente != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected></option>
                                 <option>Concorde</option>
@@ -121,7 +121,7 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.pos_PosicionBrazos"
-                                    :class="infoPlan.pos_PosicionBrazos != '' ?
+                                    :class="infoPlan.pos_PosicionBrazos != '' && infoPlan.pos_PosicionBrazos != undefined ?
                                            'form-control border border-success formSombra' : 'form-control'">
                                 <option selected></option>
                                 <option>Abducción</option>
@@ -138,7 +138,8 @@
                                    id="torniSi"
                                    autocomplete="off"
                                    value="Sí"
-                                   v-model="infoPlan.pos_Torniquete">
+                                   v-model="infoPlan.pos_Torniquete"
+                                   checked>
                             <label class="btn btn-radio margenRadio" for="torniSi">Sí</label>
                             
                             <input type="radio"
@@ -158,7 +159,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.pos_Sitio"
-                                   :class="infoPlan.pos_Sitio != '' ?
+                                   :class="infoPlan.pos_Sitio != '' && infoPlan.pos_Sitio != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -169,7 +170,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.pos_TiempoIsquemia"
-                                   :class="infoPlan.pos_TiempoIsquemia != '' ?
+                                   :class="infoPlan.pos_TiempoIsquemia != '' && infoPlan.pos_TiempoIsquemia != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -191,7 +192,8 @@
                                    id="ojosNo"
                                    autocomplete="off"
                                    value="No"
-                                   v-model="infoPlan.pos_ProteccionOjos">
+                                   v-model="infoPlan.pos_ProteccionOjos"
+                                   checked>
                             <label class="btn btn-radio" for="ojosNo">No</label>
                         </div>
 
@@ -213,7 +215,8 @@
                                    id="oseasNo"
                                    autocomplete="off"
                                    value="No"
-                                   v-model="infoPlan.pos_ProtecProminencias">
+                                   v-model="infoPlan.pos_ProtecProminencias"
+                                   checked>
                             <label class="btn btn-radio" for="oseasNo">No</label>                            
                         </div>
 
@@ -224,7 +227,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.pos_TecnicaAnestesica"
-                                   :class="infoPlan.pos_TecnicaAnestesica != '' ?
+                                   :class="infoPlan.pos_TecnicaAnestesica != '' && infoPlan.pos_TecnicaAnestesica != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -246,7 +249,8 @@
                                    id="premediNo"
                                    autocomplete="off"
                                    value="No"
-                                   v-model="infoPlan.pos_Premedicacion">
+                                   v-model="infoPlan.pos_Premedicacion"
+                                   checked>
                             <label class="btn btn-radio" for="premediNo">No</label>
                         </div>
 
@@ -257,7 +261,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.pos_EspPremedicacion"
-                                   :class="infoPlan.pos_EspPremedicacion != '' ?
+                                   :class="infoPlan.pos_EspPremedicacion != '' && infoPlan.pos_EspPremedicacion != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -268,8 +272,26 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.pos_Monitoreo"
-                                   :class="infoPlan.pos_Monitoreo != '' ?
+                                   :class="infoPlan.pos_Monitoreo != '' && infoPlan.pos_Monitoreo != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
+                        </div>
+
+                        <div class="col-md-10"></div>
+                        <!-- Botón Guardar/Actuazlizar -->
+                        <div class="col-md-2 alinea-boton">
+                            <template v-if="btnActualizarValoracion === false">
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"                                            
+                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
+                            </template>
+
+                            <template v-else>
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"
+                                    @click="preIdStore.updatePrePlan(infoPlan, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
+                            </template>                                                         
                         </div>
                     </form>
                 </div>
@@ -341,7 +363,7 @@
 
                         <div class="col-md-10"></div>
                         <!-- Botón Guardar/Actuazlizar -->
-                        <div class="col-md-2">
+                        <div class="col-md-2 alinea-boton">
                             <template v-if="btnActualizarValoracion === false">
                                 <button data-bs-toggle="tab" 
                                     type="submit"
@@ -372,7 +394,7 @@
                         </div> 
 
                         <!-- Botón Guardar/Actuazlizar -->
-                        <div class="col-md-2">
+                        <div class="col-md-2 alinea-boton">
                             <template v-if="btnActualizarValoracion === false">
                                 <button data-bs-toggle="tab" 
                                     type="submit"
@@ -829,7 +851,7 @@
 
                         <div class="col-md-10"></div>
                         <!-- Botón Guardar/Actuazlizar -->
-                        <div class="col-md-2">
+                        <div class="col-md-2 alinea-boton">
                             <template v-if="btnActualizarValoracion === false">
                                 <button data-bs-toggle="tab" 
                                     type="submit"
@@ -860,7 +882,7 @@
                         </div> 
 
                         <!-- Botón Guardar/Actuazlizar -->
-                        <div class="col-md-2">
+                        <div class="col-md-2 alinea-boton">
                             <template v-if="btnActualizarValoracion === false">
                                 <button data-bs-toggle="tab" 
                                     type="submit"
@@ -1275,5 +1297,8 @@ h5{
 }
 .centrar-li{
   justify-content: center; 
+}
+.alinea-boton{
+    text-align: end;
 }
 </style>

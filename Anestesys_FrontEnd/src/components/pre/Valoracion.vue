@@ -725,7 +725,7 @@
                         </div>
 
                         <!-- Botón Guardar/Actuazlizar -->
-                        <div class="col-md-2">
+                        <div class="col-md-2 margenBoton">
                             <template v-if="btnActualizarValoracion === false">
                                 <button data-bs-toggle="tab" 
                                     type="submit"
