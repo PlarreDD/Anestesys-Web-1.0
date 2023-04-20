@@ -191,7 +191,6 @@ const PreValoracionSchema = new Schema({
     antPersPat_MedActual: {
         type: String,
     },
-
     // Personales No Patológicos
     antPersNoPat_HrsAyuno: {
         type: String,
@@ -216,8 +215,7 @@ const PreValoracionSchema = new Schema({
     antPersNoPat_AntImportQx: {
         type: String,
     },
-
-    // Exploración Física
+    /* Exploración Física */
     sigVit_Edad: {
         type: String,
     },
@@ -253,7 +251,47 @@ const PreValoracionSchema = new Schema({
     sigVit_SaturacionOxigeno: {
         type: String,
     },
-    // Vía Aérea
+    
+    expFis_VASCabeza: {
+        type: String,
+    },
+
+    expFis_VASCuello: {
+        type: String,
+    },
+
+    expFis_VASRespiratorio: {
+        type: String,
+    },
+
+    expFis_VASCardioVasc: {
+        type: String,
+    },
+
+    expFis_VASHipertension: {
+        type: String,
+    },
+
+    expFis_VASAbdomen: {
+        type: String,
+    },
+
+    expFis_VASGenUr: {
+        type: String,
+    },
+
+    expFis_VASMuscEsq: {
+        type: String,
+    },
+
+    expFis_VASNeuro: {
+        type: String,
+    },
+
+    expFis_VASPielFaneras: {
+        type: String,
+    },
+    /* Vía Aérea */
     viaAerea_Mallampati: {
         type: String,
     },
@@ -305,7 +343,7 @@ const PreValoracionSchema = new Schema({
     viaAerea_RiesgoAnestesico: {
         type: String,
     },
-    //Laboratorio
+    /* Laboratorio */
     perfilBioQ_FechaRealizacion: {
         type: String,
     },
@@ -401,6 +439,8 @@ const PreValoracionSchema = new Schema({
     perfilBioQ_Otros: {
         type: String,
     },
+    // Estudios
+
 });
 /* Plan */
 const PrePlanSchema = new Schema({
@@ -422,6 +462,7 @@ const PrePlanSchema = new Schema({
     pos_PosicionPaciente: {
         type: String,
     },
+
     pos_PosicionBrazos: {
         type: String,
     },

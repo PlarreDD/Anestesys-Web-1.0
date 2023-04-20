@@ -115,6 +115,18 @@ export interface regValoracion{
     perfilBioQ_Lipasa: string,
     perfilBioQ_Amilasa: string,
     perfilBioQ_Otros: string,
+
+    // Valoración de Aparatos y Sistemas
+    expFis_VASCabeza: string,
+    expFis_VASCuello: string,
+    expFis_VASRespiratorio: string,
+    expFis_VASCardioVasc: string,
+    expFis_VASHipertension: string,
+    expFis_VASAbdomen: string,
+    expFis_VASGenUr: string,
+    expFis_VASMuscEsq: string,
+    expFis_VASNeuro: string,
+    expFis_VASPielFaneras: string,
 }
 
 /* Registro Plan Preanestesico */
