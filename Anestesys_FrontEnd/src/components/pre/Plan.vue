@@ -55,8 +55,7 @@
         </ul>
 
         <div class="tab-content col-md-12" id="">
-
-            <!-- POSICIÓN Y CUIDADOS -->
+            <!-- Posición y Cuidados -->
             <div class="tab-pane fade show active" id="posicion">
                 <div class="col-12 bordePrincipal">  
                     <form @submit.prevent="" class="row g-3">    

@@ -212,6 +212,17 @@ export const usePreIdStore = defineStore('preid', {
                     perfilBioQ_Lipasa: infoValoracion.perfilBioQ_Lipasa,
                     perfilBioQ_Amilasa: infoValoracion.perfilBioQ_Amilasa,
                     perfilBioQ_Otros: infoValoracion.perfilBioQ_Otros,
+                    // Valoración de Aparatos y Sistemas
+                    expFis_VASCabeza: infoValoracion.expFis_VASCabeza,
+                    expFis_VASCuello: infoValoracion.expFis_VASCuello,
+                    expFis_VASRespiratorio: infoValoracion.expFis_VASRespiratorio,
+                    expFis_VASCardioVasc: infoValoracion.expFis_VASCardioVasc,
+                    expFis_VASHipertension: infoValoracion.expFis_VASHipertension,
+                    expFis_VASAbdomen: infoValoracion.expFis_VASAbdomen,
+                    expFis_VASGenUr: infoValoracion.expFis_VASGenUr,
+                    expFis_VASMuscEsq: infoValoracion.expFis_VASMuscEsq,
+                    expFis_VASNeuro: infoValoracion.expFis_VASNeuro,
+                    expFis_VASPielFaneras: infoValoracion.expFis_VASPielFaneras,
                 },
             })
             .then((res: any) => {
@@ -307,6 +318,17 @@ export const usePreIdStore = defineStore('preid', {
                     perfilBioQ_Lipasa: infoValoracion.perfilBioQ_Lipasa,
                     perfilBioQ_Amilasa: infoValoracion.perfilBioQ_Amilasa,
                     perfilBioQ_Otros: infoValoracion.perfilBioQ_Otros,
+                    // Valoración de Aparatos y Sistemas
+                    expFis_VASCabeza: infoValoracion.expFis_VASCabeza,
+                    expFis_VASCuello: infoValoracion.expFis_VASCuello,
+                    expFis_VASRespiratorio: infoValoracion.expFis_VASRespiratorio,
+                    expFis_VASCardioVasc: infoValoracion.expFis_VASCardioVasc,
+                    expFis_VASHipertension: infoValoracion.expFis_VASHipertension,
+                    expFis_VASAbdomen: infoValoracion.expFis_VASAbdomen,
+                    expFis_VASGenUr: infoValoracion.expFis_VASGenUr,
+                    expFis_VASMuscEsq: infoValoracion.expFis_VASMuscEsq,
+                    expFis_VASNeuro: infoValoracion.expFis_VASNeuro,
+                    expFis_VASPielFaneras: infoValoracion.expFis_VASPielFaneras,
                 }
             })
             .then((res: any) => {
@@ -498,7 +520,8 @@ export const usePreIdStore = defineStore('preid', {
                     general_EspComplicaciones: infoPlan.general_EspComplicaciones,
                     // Otros Disposotivos
                     general_OtrosDispositivos: infoPlan.general_OtrosDispositivos,
-                    general_EspOtrosDispositivos: infoPlan.general_EspOtrosDispositivos
+                    general_EspOtrosDispositivos: infoPlan.general_EspOtrosDispositivos,
+                    // Estudios
                 }
             })
             .then((res: any) => {

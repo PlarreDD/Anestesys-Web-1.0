@@ -158,6 +158,11 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
                 viaAerea_Distancia, viaAerea_Protusion, viaAerea_Ipid, viaAerea_Glasgow,
                 viaAerea_NYHA, viaAerea_Goldman, viaAerea_RiesgoTrombosis,
                 viaAerea_ClasificacionASA, viaAerea_TipoCirugia, viaAerea_RiesgoAnestesico,
+                // Valoración de Aparatos y Sistemas
+                expFis_VASCabeza, expFis_VASCuello, expFis_VASRespiratorio,
+                expFis_VASCardioVasc, expFis_VASHipertension, expFis_VASAbdomen,
+                expFis_VASGenUr, expFis_VASMuscEsq, expFis_VASNeuro, expFis_VASPielFaneras,
+                // Estudios
 
             } = req.body;
 
@@ -232,6 +237,18 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
             perfilBioQ_Lipasa: perfilBioQ_Lipasa,
             perfilBioQ_Amilasa: perfilBioQ_Amilasa,
             perfilBioQ_Otros: perfilBioQ_Otros,
+            // Valoración de Aparatos y Sistemas
+            expFis_VASCabeza: expFis_VASCabeza,
+            expFis_VASCuello: expFis_VASCuello,
+            expFis_VASRespiratorio: expFis_VASRespiratorio,
+            expFis_VASCardioVasc: expFis_VASCardioVasc,
+            expFis_VASHipertension: expFis_VASHipertension,
+            expFis_VASAbdomen: expFis_VASAbdomen,
+            expFis_VASGenUr: expFis_VASGenUr,
+            expFis_VASMuscEsq: expFis_VASMuscEsq,
+            expFis_VASNeuro: expFis_VASNeuro,
+            expFis_VASPielFaneras: expFis_VASPielFaneras,
+            // Estudios
         });
 
         await preval.save();
@@ -274,6 +291,10 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
                 viaAerea_Distancia, viaAerea_Protusion, viaAerea_Ipid, viaAerea_Glasgow,
                 viaAerea_NYHA, viaAerea_Goldman, viaAerea_RiesgoTrombosis,
                 viaAerea_ClasificacionASA, viaAerea_TipoCirugia, viaAerea_RiesgoAnestesico,
+                // Valoración de Aparatos y Sistemas
+                expFis_VASCabeza, expFis_VASCuello, expFis_VASRespiratorio,
+                expFis_VASCardioVasc, expFis_VASHipertension, expFis_VASAbdomen,
+                expFis_VASGenUr, expFis_VASMuscEsq, expFis_VASNeuro, expFis_VASPielFaneras,
         } = req.body;
         
         const preval = await PreVal.findOneAndUpdate({ pid: id },
@@ -346,6 +367,17 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
                                                        viaAerea_ClasificacionASA: viaAerea_ClasificacionASA,
                                                        viaAerea_TipoCirugia: viaAerea_TipoCirugia,
                                                        viaAerea_RiesgoAnestesico: viaAerea_RiesgoAnestesico,
+                                                       // Valoración de Aparatos y Sistemas
+                                                       expFis_VASCabeza: expFis_VASCabeza,
+                                                       expFis_VASCuello: expFis_VASCuello,
+                                                       expFis_VASRespiratorio: expFis_VASRespiratorio,
+                                                       expFis_VASCardioVasc: expFis_VASCardioVasc,
+                                                       expFis_VASHipertension: expFis_VASHipertension,
+                                                       expFis_VASAbdomen: expFis_VASAbdomen,
+                                                       expFis_VASGenUr: expFis_VASGenUr,
+                                                       expFis_VASMuscEsq: expFis_VASMuscEsq,
+                                                       expFis_VASNeuro: expFis_VASNeuro,
+                                                       expFis_VASPielFaneras: expFis_VASPielFaneras,
                                                     });
 
         return res.json({ preval })

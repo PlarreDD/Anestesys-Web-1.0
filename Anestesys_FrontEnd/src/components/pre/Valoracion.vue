@@ -431,10 +431,10 @@
                         <div class="col-md-6">
                             <label for="" class="form-label fw-bold">Cabeza</label>                            
                             <textarea class="form-control"
-                                    rows="2"
-                                    v-model="infoValoracion.sigVit_Edad"
-                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
-                                            'form-control border border-success formSombra' : 'form-control'">
+                                      rows="2"
+                                      v-model="infoValoracion.expFis_VASCabeza"
+                                      :class="infoValoracion.expFis_VASCabeza != undefined && infoValoracion.expFis_VASCabeza != '' ?
+                                             'form-control border border-success formSombra' : 'form-control'">
                             </textarea> 
                         </div>
 
@@ -442,10 +442,10 @@
                         <div class="col-md-6">
                             <label for="" class="form-label fw-bold">Cuello</label>                            
                             <textarea class="form-control"
-                                    rows="2"
-                                    v-model="infoValoracion.sigVit_Edad"
-                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
-                                            'form-control border border-success formSombra' : 'form-control'">
+                                        rows="2"
+                                        v-model="infoValoracion.expFis_VASCuello"
+                                        :class="infoValoracion.expFis_VASCuello != undefined && infoValoracion.expFis_VASCuello != '' ?
+                                               'form-control border border-success formSombra' : 'form-control'">
                             </textarea> 
                         </div>
 
@@ -453,21 +453,21 @@
                         <div class="col-md-6">
                             <label for="" class="form-label fw-bold">Respiratorio</label>                            
                             <textarea class="form-control"
-                                    rows="2"
-                                    v-model="infoValoracion.sigVit_Edad"
-                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
-                                            'form-control border border-success formSombra' : 'form-control'">
-                            </textarea> 
+                                      rows="2"
+                                      v-model="infoValoracion.expFis_VASRespiratorio"
+                                      :class="infoValoracion.expFis_VASRespiratorio != undefined && infoValoracion.expFis_VASRespiratorio != '' ?
+                                             'form-control border border-success formSombra' : 'form-control'">
+                            </textarea>
                         </div>
 
                         <!-- Cardiovascular -->
                         <div class="col-md-6">
                             <label for="" class="form-label fw-bold">Cardiovascular</label>                            
                             <textarea class="form-control"
-                                    rows="2"
-                                    v-model="infoValoracion.sigVit_Edad"
-                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
-                                            'form-control border border-success formSombra' : 'form-control'">
+                                      rows="2"
+                                      v-model="infoValoracion.expFis_VASCardioVasc"
+                                      :class="infoValoracion.expFis_VASCardioVasc != undefined && infoValoracion.expFis_VASCardioVasc != '' ?
+                                             'form-control border border-success formSombra' : 'form-control'">
                             </textarea> 
                         </div>
 
@@ -475,10 +475,10 @@
                         <div class="col-md-6">
                             <label for="" class="form-label fw-bold">Hipertensión arterial</label>                            
                             <textarea class="form-control"
-                                    rows="2"
-                                    v-model="infoValoracion.sigVit_Edad"
-                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
-                                            'form-control border border-success formSombra' : 'form-control'">
+                                      rows="2"
+                                      v-model="infoValoracion.expFis_VASHipertension"
+                                      :class="infoValoracion.expFis_VASHipertension != undefined && infoValoracion.expFis_VASHipertension != '' ?
+                                             'form-control border border-success formSombra' : 'form-control'">
                             </textarea> 
                         </div>
 
@@ -486,32 +486,32 @@
                         <div class="col-md-6">
                             <label for="" class="form-label fw-bold">Abdomen</label>                            
                             <textarea class="form-control"
-                                    rows="2"
-                                    v-model="infoValoracion.sigVit_Edad"
-                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
-                                            'form-control border border-success formSombra' : 'form-control'">
-                            </textarea> 
+                                      rows="2"
+                                      v-model="infoValoracion.expFis_VASAbdomen"
+                                      :class="infoValoracion.expFis_VASAbdomen != undefined && infoValoracion.expFis_VASAbdomen != '' ?
+                                             'form-control border border-success formSombra' : 'form-control'">
+                            </textarea>
                         </div>
 
                         <!-- Genitourinario -->
                         <div class="col-md-6">
                             <label for="" class="form-label fw-bold">Genitourinario</label>                            
                             <textarea class="form-control"
-                                    rows="2"
-                                    v-model="infoValoracion.sigVit_Edad"
-                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
-                                            'form-control border border-success formSombra' : 'form-control'">
-                            </textarea> 
+                                      rows="2"
+                                      v-model="infoValoracion.expFis_VASGenUr"
+                                      :class="infoValoracion.expFis_VASGenUr != undefined && infoValoracion.expFis_VASGenUr != '' ?
+                                             'form-control border border-success formSombra' : 'form-control'">
+                            </textarea>
                         </div>
 
                         <!-- Músculo esquelético -->
                         <div class="col-md-6">
                             <label for="" class="form-label fw-bold">Músculo esquelético</label>                            
                             <textarea class="form-control"
-                                    rows="2"
-                                    v-model="infoValoracion.sigVit_Edad"
-                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
-                                            'form-control border border-success formSombra' : 'form-control'">
+                                      rows="2"
+                                      v-model="infoValoracion.expFis_VASMuscEsq"
+                                      :class="infoValoracion.expFis_VASMuscEsq != undefined && infoValoracion.expFis_VASMuscEsq != '' ?
+                                             'form-control border border-success formSombra' : 'form-control'">
                             </textarea> 
                         </div>
 
@@ -519,21 +519,21 @@
                         <div class="col-md-6">
                             <label for="" class="form-label fw-bold">Neurológico</label>                            
                             <textarea class="form-control"
-                                    rows="2"
-                                    v-model="infoValoracion.sigVit_Edad"
-                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
-                                            'form-control border border-success formSombra' : 'form-control'">
-                            </textarea> 
+                                      rows="2"
+                                      v-model="infoValoracion.expFis_VASNeuro"
+                                      :class="infoValoracion.expFis_VASNeuro != undefined && infoValoracion.expFis_VASNeuro != '' ?
+                                             'form-control border border-success formSombra' : 'form-control'">
+                            </textarea>
                         </div>
 
                         <!-- Piel y faneras -->
                         <div class="col-md-6">
                             <label for="" class="form-label fw-bold">Piel y faneras</label>                            
                             <textarea class="form-control"
-                                    rows="2"
-                                    v-model="infoValoracion.sigVit_Edad"
-                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
-                                            'form-control border border-success formSombra' : 'form-control'">
+                                      rows="2"
+                                      v-model="infoValoracion.expFis_VASPielFaneras"
+                                      :class="infoValoracion.expFis_VASPielFaneras != undefined && infoValoracion.expFis_VASPielFaneras != '' ?
+                                             'form-control border border-success formSombra' : 'form-control'">
                             </textarea> 
                         </div>
                     </form>
