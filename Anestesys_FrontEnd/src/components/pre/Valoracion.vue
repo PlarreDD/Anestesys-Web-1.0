@@ -191,7 +191,7 @@
                                         <div class="col-md-8">
                                             <h5 class="fw-bold"> No patológicos </h5>
                                         </div>
-                                        <!-- Botón Guardar/Actuazlizar -->
+                                        <!-- Botón Guardar/Actualizar -->
                                         <div class="col-md-4">
                                             <template v-if="btnActualizarValoracion === false">
                                                 <button data-bs-toggle="tab" 
@@ -286,10 +286,30 @@
 
             <!-- Div Formulario Exploración Física -->
             <div class="tab-pane fade" id="exploracion">
-                <div class="col-12 bordePrincipal largoContenedor">
+                <div class="col-12 bordePrincipal">
                     <form @submit.prevent="" class="row g-3">
                         <h5 class="fw-bold">EXPLORACIÓN FÍSICA</h5>
-                        <h5 class="fw-bold">Signos Vitales</h5>
+                        
+                        <div class="col-md-10">
+                            <h5 class="fw-bold">Signos Vitales</h5>
+                        </div>
+                        
+                        <!-- Botón Guardar/Actualizar -->
+                        <div class="col-md-2 alinear-boton">
+                            <template v-if="btnActualizarValoracion === false">
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"                                            
+                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
+                            </template>
+
+                            <template v-else>
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"
+                                    @click="preIdStore.updatePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
+                            </template>                                                                                    
+                        </div>
 
                         <!-- Edad -->
                         <div class="col-md-2">
@@ -402,21 +422,119 @@
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
-                        <!-- Botón Guardar/Actuazlizar -->
-                        <div class="col-md-12 margenBoton">
-                            <template v-if="btnActualizarValoracion === false">
-                                <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"                                            
-                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
-                            </template>
+                        <hr class="hrN"/>
 
-                            <template v-else>
-                                <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"
-                                    @click="preIdStore.updatePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
-                            </template>                                                                                    
+                        <!-- ***Valoración de Aparatos y Sistemas*** -->
+                        <h5 class="fw-bold">Valoración de Aparatos y Sistemas</h5>
+
+                        <!-- Cabeza -->
+                        <div class="col-md-6">
+                            <label for="" class="form-label fw-bold">Cabeza</label>                            
+                            <textarea class="form-control"
+                                    rows="2"
+                                    v-model="infoValoracion.sigVit_Edad"
+                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                            </textarea> 
+                        </div>
+
+                        <!-- Cuello -->
+                        <div class="col-md-6">
+                            <label for="" class="form-label fw-bold">Cuello</label>                            
+                            <textarea class="form-control"
+                                    rows="2"
+                                    v-model="infoValoracion.sigVit_Edad"
+                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                            </textarea> 
+                        </div>
+
+                        <!-- Respiratorio -->
+                        <div class="col-md-6">
+                            <label for="" class="form-label fw-bold">Respiratorio</label>                            
+                            <textarea class="form-control"
+                                    rows="2"
+                                    v-model="infoValoracion.sigVit_Edad"
+                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                            </textarea> 
+                        </div>
+
+                        <!-- Cardiovascular -->
+                        <div class="col-md-6">
+                            <label for="" class="form-label fw-bold">Cardiovascular</label>                            
+                            <textarea class="form-control"
+                                    rows="2"
+                                    v-model="infoValoracion.sigVit_Edad"
+                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                            </textarea> 
+                        </div>
+
+                        <!-- Hipertensión arterial -->
+                        <div class="col-md-6">
+                            <label for="" class="form-label fw-bold">Hipertensión arterial</label>                            
+                            <textarea class="form-control"
+                                    rows="2"
+                                    v-model="infoValoracion.sigVit_Edad"
+                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                            </textarea> 
+                        </div>
+
+                        <!-- Abdomen -->
+                        <div class="col-md-6">
+                            <label for="" class="form-label fw-bold">Abdomen</label>                            
+                            <textarea class="form-control"
+                                    rows="2"
+                                    v-model="infoValoracion.sigVit_Edad"
+                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                            </textarea> 
+                        </div>
+
+                        <!-- Genitourinario -->
+                        <div class="col-md-6">
+                            <label for="" class="form-label fw-bold">Genitourinario</label>                            
+                            <textarea class="form-control"
+                                    rows="2"
+                                    v-model="infoValoracion.sigVit_Edad"
+                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                            </textarea> 
+                        </div>
+
+                        <!-- Músculo esquelético -->
+                        <div class="col-md-6">
+                            <label for="" class="form-label fw-bold">Músculo esquelético</label>                            
+                            <textarea class="form-control"
+                                    rows="2"
+                                    v-model="infoValoracion.sigVit_Edad"
+                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                            </textarea> 
+                        </div>
+
+                        <!-- Neurológico -->
+                        <div class="col-md-6">
+                            <label for="" class="form-label fw-bold">Neurológico</label>                            
+                            <textarea class="form-control"
+                                    rows="2"
+                                    v-model="infoValoracion.sigVit_Edad"
+                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                            </textarea> 
+                        </div>
+
+                        <!-- Piel y faneras -->
+                        <div class="col-md-6">
+                            <label for="" class="form-label fw-bold">Piel y faneras</label>                            
+                            <textarea class="form-control"
+                                    rows="2"
+                                    v-model="infoValoracion.sigVit_Edad"
+                                    :class="infoValoracion != undefined && infoValoracion.sigVit_Edad != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                            </textarea> 
                         </div>
                     </form>
                 </div> 
@@ -645,7 +763,7 @@
                             </select>
                         </div>
 
-                        <!-- Botón Guardar/Actuazlizar -->
+                        <!-- Botón Guardar/Actualizar -->
                         <div class="col-md-12 margenBoton">
                             <template v-if="btnActualizarValoracion === false">
                                 <button data-bs-toggle="tab" 
@@ -724,7 +842,7 @@
                             <h5 class="fw-bold">PERFIL BIOQUÍMICO</h5>
                         </div>
 
-                        <!-- Botón Guardar/Actuazlizar -->
+                        <!-- Botón Guardar/Actualizar -->
                         <div class="col-md-2 margenBoton">
                             <template v-if="btnActualizarValoracion === false">
                                 <button data-bs-toggle="tab" 
@@ -1062,6 +1180,14 @@ hr{
     height: auto;
     width: 1px;       
 }
+.hrN{
+    margin: 1rem 0;
+    color: inherit;
+    border: 0;
+    border-top: 1px solid;
+    opacity: .25;
+    width: 100%;
+}
 h5{
     color: #002D60;
     margin-bottom: 20px;    
@@ -1126,6 +1252,9 @@ h5{
 }
 .margenBoton{
     margin-top: 32px;
+    text-align: end;
+}
+.alinear-boton{
     text-align: end;
 }
 .margen-tabaquismo{
