@@ -80,7 +80,7 @@
                                     v-model="infoPlan.pos_AccesoVenoso"
                                     :class="infoPlan.pos_AccesoVenoso != '' ?
                                            'form-control border border-success formSombra' : 'form-control'">
-                                <option selected>Seleccione...</option>
+                                <option selected></option>
                                 <option>Antebrazo derecho</option>
                                 <option>Antebrazo izquierdo</option>
                                 <option>Catéter venoso central</option>
@@ -100,7 +100,7 @@
                                     v-model="infoPlan.pos_PosicionPaciente"
                                     :class="infoPlan.pos_PosicionPaciente != '' ?
                                            'form-control border border-success formSombra' : 'form-control'">
-                                <option selected>Seleccione...</option>
+                                <option selected></option>
                                 <option>Concorde</option>
                                 <option>Fowler</option>
                                 <option>Lateral</option>
@@ -123,7 +123,7 @@
                                     v-model="infoPlan.pos_PosicionBrazos"
                                     :class="infoPlan.pos_PosicionBrazos != '' ?
                                            'form-control border border-success formSombra' : 'form-control'">
-                                <option selected>Seleccione...</option>
+                                <option selected></option>
                                 <option>Abducción</option>
                                 <option>Aducción</option>
                             </select>
@@ -288,9 +288,9 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.sedacion_Via"
-                                    :class="infoPlan.sedacion_Via != undefined ?
-                                           'form-control border border-success formSombra' : 'form-control'"
-                                           @click="cambioSelectSedacion()">
+                                    :class="infoPlan.sedacion_Via != undefined && infoPlan.sedacion_Via != '' ?
+                                           'form-control border border-success formSombra' : 'form-control'">
+                                <option></option>
                                 <option id="viaOral">Oral</option>
                                 <option id="viaNasal">Nasal</option>
                                 <option id="viaInhalatoria">Inhalatoria</option>
@@ -303,77 +303,16 @@
                         <!-- Opción -->
                         <div class="col-md-2">
 
-                            <template v-if="sedacionOral === true">
-                                <label for="inputState" class="form-label fw-bold">Opción</label>
-                                <select id="inputState"
-                                        class="form-select"
-                                        v-model="infoPlan.sedacion_Opcion"
-                                        :class="infoPlan.sedacion_Opcion != '' ?
-                                            'form-control border border-success formSombra' : 'form-control'">
-                                    <option>Superficial Oral</option>
-                                    <option>Profunda Oral</option>
-                                </select>
-                            </template>
-
-                            <template v-if="sedacionNasal === true">
-                                <label for="inputState" class="form-label fw-bold">Opción</label>
-                                <select id="inputState"
-                                        class="form-select"
-                                        v-model="infoPlan.sedacion_Opcion"
-                                        :class="infoPlan.sedacion_Opcion != '' ?
-                                            'form-control border border-success formSombra' : 'form-control'">
-                                    <option>Superficial Nasal</option>
-                                    <option>Profunda Nasal</option>
-                                </select>
-                            </template>
-
-                            <template v-if="sedacionInhalatoria === true">
-                                <label for="inputState" class="form-label fw-bold">Opción</label>
-                                <select id="inputState"
-                                        class="form-select"
-                                        v-model="infoPlan.sedacion_Opcion"
-                                        :class="infoPlan.sedacion_Opcion != '' ?
-                                            'form-control border border-success formSombra' : 'form-control'">
-                                    <option>Superficial Inhalatoria</option>
-                                    <option>Profunda Inhalatoria</option>
-                                </select>
-                            </template>
-
-                            <template v-if="sedacionIntravenosa === true">
-                                <label for="inputState" class="form-label fw-bold">Opción</label>
-                                <select id="inputState"
-                                        class="form-select"
-                                        v-model="infoPlan.sedacion_Opcion"
-                                        :class="infoPlan.sedacion_Opcion != '' ?
-                                            'form-control border border-success formSombra' : 'form-control'">
-                                    <option>Superficial Intravenosa</option>
-                                    <option>Profunda Intravenosa</option>
-                                </select>
-                            </template>
-
-                            <template v-if="sedacionIntramuscular === true">
-                                <label for="inputState" class="form-label fw-bold">Opción</label>
-                                <select id="inputState"
-                                        class="form-select"
-                                        v-model="infoPlan.sedacion_Opcion"
-                                        :class="infoPlan.sedacion_Opcion != '' ?
-                                            'form-control border border-success formSombra' : 'form-control'">
-                                    <option>Superficial Intramuscula</option>
-                                    <option>Profunda Intramuscula</option>
-                                </select>
-                            </template>
-
-                            <template v-if="sedacionRectal === true">
-                                <label for="inputState" class="form-label fw-bold">Opción</label>
-                                <select id="inputState"
-                                        class="form-select"
-                                        v-model="infoPlan.sedacion_Opcion"
-                                        :class="infoPlan.sedacion_Opcion != '' ?
-                                            'form-control border border-success formSombra' : 'form-control'">
-                                    <option>Superficial Rectal</option>
-                                    <option>Profunda Rectal</option>
-                                </select>
-                            </template>
+                            <label for="inputState" class="form-label fw-bold">Opción</label>
+                            <select id="inputState"
+                                    class="form-select"
+                                    v-model="infoPlan.sedacion_Opcion"
+                                    :class="infoPlan.sedacion_Opcion != '' && infoPlan.sedacion_Opcion != undefined ?
+                                        'form-control border border-success formSombra' : 'form-control'">
+                                <option></option>
+                                <option>Superficial</option>
+                                <option>Profunda</option>
+                            </select>
                             
                         </div>
 
@@ -384,7 +323,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.sedacion_Observaciones"
-                                      :class="infoPlan.sedacion_Observaciones != undefined ?
+                                      :class="infoPlan.sedacion_Observaciones != undefined && infoPlan.sedacion_Observaciones != '' ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -396,9 +335,28 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.sedacion_Medicamentos"
-                                   :class="infoPlan.sedacion_Medicamentos != undefined ?
+                                   :class="infoPlan.sedacion_Medicamentos != undefined && infoPlan.sedacion_Medicamentos != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
+
+                        <div class="col-md-10"></div>
+                        <!-- Botón Guardar/Actuazlizar -->
+                        <div class="col-md-2">
+                            <template v-if="btnActualizarValoracion === false">
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"                                            
+                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
+                            </template>
+
+                            <template v-else>
+                                <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-datos fw-bold"
+                                    @click="preIdStore.updatePrePlan(infoPlan, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
+                            </template>                                                         
+                        </div>
+
                     </form>
                 </div>
             </div>
@@ -438,9 +396,9 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.regional_Tipo"
-                                    :class="infoPlan.regional_Tipo != undefined ?
+                                    :class="infoPlan.regional_Tipo != undefined && infoPlan.regional_Tipo != '' ?
                                            'form-control border border-success formSombra' : 'form-control'">
-                                <option selected>Seleccione...</option>
+                                <option selected></option>
                                 <option>Espidural</option>
                                 <option>Espinal</option>
                                 <option>Mixta</option>
@@ -454,7 +412,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.regional_TipoAguja"
-                                   :class="infoPlan.regional_TipoAguja != undefined ?
+                                   :class="infoPlan.regional_TipoAguja != undefined && infoPlan.regional_TipoAguja != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -465,7 +423,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.regional_Nivel"
-                                   :class="infoPlan.regional_Nivel != undefined ?
+                                   :class="infoPlan.regional_Nivel != undefined && infoPlan.regional_Nivel != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -476,7 +434,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.regional_CalibreAguja"
-                                   :class="infoPlan.regional_CalibreAguja != undefined ?
+                                   :class="infoPlan.regional_CalibreAguja != undefined && infoPlan.regional_CalibreAguja != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -486,9 +444,9 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.regional_Cateter"
-                                    :class="infoPlan.regional_Cateter != undefined ?
+                                    :class="infoPlan.regional_Cateter != undefined && infoPlan.regional_Cateter != '' ?
                                            'form-control border border-success formSombra' : 'form-control'">
-                                <option selected>Seleccione...</option>
+                                <option selected></option>
                                 <option>Sí</option>
                                 <option>No</option>
                             </select>
@@ -500,9 +458,9 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.regional_OrientacionCateter"
-                                    :class="infoPlan.regional_OrientacionCateter != undefined ?
+                                    :class="infoPlan.regional_OrientacionCateter != undefined && infoPlan.regional_OrientacionCateter != '' ?
                                            'form-control border border-success formSombra' : 'form-control'">
-                                <option selected>Seleccione...</option>
+                                <option selected></option>
                                 <option>Cefálica</option>
                                 <option>Caudal</option>
                             </select>
@@ -538,7 +496,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.regional_EspDificultadesNeuro"
-                                      :class="infoPlan.regional_EspDificultadesNeuro != undefined ?
+                                      :class="infoPlan.regional_EspDificultadesNeuro != undefined && infoPlan.regional_EspDificultadesNeuro != '' ?
                                              'form-control border border-success formSombra' : 'form-control'"></textarea>
                         </div>
 
@@ -551,28 +509,85 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.regional_Sitio"
-                                    :class="infoPlan.regional_Sitio != undefined ?
-                                           'form-control border border-success formSombra' : 'form-control'">
-                                <option selected>Seleccione...</option>
-                                <option>Cabeza</option>
-                                <option>Cervicales</option>
-                                <option>Torácicos</option>
-                                <option>Lumbares y sacros</option>
-                                <option>Otros</option>                    
-                            </select>
+                                    :class="infoPlan.regional_Sitio != undefined && infoPlan.regional_Sitio != '' ?
+                                           'form-control border border-success formSombra' : 'form-control'"
+                                           @click="cambioSelectRegional()">
+                                <option></option>
+                                <option id="sitioCabeza">Cabeza</option>
+                                <option id="sitioCervical">Cervicales</option>
+                                <option id="sitioToracico">Torácicos</option>
+                                <option id="sitioLumbar">Lumbares y sacros</option>
+                                <option id="sitioOtros">Otros</option>
+                            </select>                            
                         </div>
 
                         <!-- Opción -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold">Opción</label>
-                            <select id="inputState"
-                                    class="form-select"
-                                    v-model="infoPlan.regional_Opcion"
-                                    :class="infoPlan.regional_Opcion != undefined ?
+
+                            <template v-if="sitioCabeza === true">
+                                <label for="inputState" class="form-label fw-bold">Opción</label>
+                                <select id="inputState"
+                                        class="form-select"
+                                        v-model="infoPlan.regional_Opcion"
+                                        :class="infoPlan.regional_Opcion != undefined && infoPlan.regional_Opcion != '' ?
                                            'form-control border border-success formSombra' : 'form-control'">
-                                <option selected>Seleccione...</option>                  
-                            </select>
-                        </div>
+                                    <option></option>
+                                    <option>Bloqueo de escalpe</option>
+                                    <option>Bloqueo retrobulbar</option>
+                                    <option>Bloqueo infraorbitario</option>
+                                    <option>Bloqueo nervio maxilar</option>
+                                    <option>Bloqueo nervio nasal</option>
+                                    <option>Bloqueo lingual</option>
+                                </select>
+                            </template>
+
+                            <template v-if="sitioCervical === true">
+                                <label for="inputState" class="form-label fw-bold">Opción</label>
+                                <select id="inputState"
+                                        class="form-select"
+                                        v-model="infoPlan.regional_Opcion"
+                                        :class="infoPlan.regional_Opcion != undefined && infoPlan.regional_Opcion != '' ?
+                                           'form-control border border-success formSombra' : 'form-control'">
+                                    <option></option>
+                                    <option>Occipital</option>
+                                    <option>Plexo cervical</option>
+                                    <option>Frénico</option>
+                                    <option>Plexo braquial</option>
+                                    <option>Supraescapular</option>
+                                </select>
+                            </template>
+
+                            <template v-if="sitioToracico === true">
+                                <label for="inputState" class="form-label fw-bold">Opción</label>
+                                <select id="inputState"
+                                        class="form-select"
+                                        v-model="infoPlan.regional_Opcion"
+                                        :class="infoPlan.regional_Opcion != undefined && infoPlan.regional_Opcion != '' ?
+                                           'form-control border border-success formSombra' : 'form-control'">
+                                    <option></option>
+                                    <option>Paravertebral</option>
+                                    <option>Intercostal</option>
+                                </select>
+                            </template>
+
+                            <template v-if="sitioLumbar === true">
+                                <label for="inputState" class="form-label fw-bold">Opción</label>
+                                <select id="inputState"
+                                        class="form-select"
+                                        v-model="infoPlan.regional_Opcion"
+                                        :class="infoPlan.regional_Opcion != undefined && infoPlan.regional_Opcion != '' ?
+                                           'form-control border border-success formSombra' : 'form-control'">
+                                    <option></option>
+                                    <option>Paravertebral</option>
+                                    <option>Trans-sacro</option>
+                                    <option>Ilioinguinal</option>
+                                    <option>Femorocutaneo</option>
+                                    <option>Obturador</option>
+                                    <option>Femoral y ciático</option>
+                                </select>
+                            </template>                            
+
+                            </div>
 
                         <!-- Específicar -->
                         <div class="col-md-7">
@@ -581,7 +596,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.regional_EspSitio"
-                                      :class="infoPlan.regional_EspSitio != undefined ?
+                                      :class="infoPlan.regional_EspSitio != undefined && infoPlan.regional_EspSitio != '' ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -592,9 +607,9 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.regional_AnestesicoUtilizado"
-                                    :class="infoPlan.regional_AnestesicoUtilizado != undefined ?
+                                    :class="infoPlan.regional_AnestesicoUtilizado != undefined && infoPlan.regional_AnestesicoUtilizado != '' ?
                                            'form-control border border-success formSombra' : 'form-control'">
-                                <option selected>Seleccione...</option>
+                                <option selected></option>
                                 <option>Lidocaína 1%</option>
                                 <option>Lidocaína 2%</option>
                                 <option>Lidocaína 2% con Epinefrina</option>
@@ -612,7 +627,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.regional_EspAnestesico"
-                                      :class="infoPlan.regional_EspAnestesico != undefined ?
+                                      :class="infoPlan.regional_EspAnestesico != undefined && infoPlan.regional_EspAnestesico != '' ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -647,7 +662,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.regional_EspDificulPlexo"
-                                      :class="infoPlan.regional_EspDificulPlexo != undefined ?
+                                      :class="infoPlan.regional_EspDificulPlexo != undefined && infoPlan.regional_EspDificulPlexo != '' ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -685,7 +700,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.regional_EspUltrasonido"
-                                      :class="infoPlan.regional_EspUltrasonido != undefined ?
+                                      :class="infoPlan.regional_EspUltrasonido != undefined && infoPlan.regional_EspUltrasonido != '' ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -720,7 +735,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.regional_EspNeuroestimulador"
-                                      :class="infoPlan.regional_EspNeuroestimulador != undefined ?
+                                      :class="infoPlan.regional_EspNeuroestimulador != undefined && infoPlan.regional_EspNeuroestimulador != '' ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -755,7 +770,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.regional_EspDificEquipo"
-                                      :class="infoPlan.regional_EspDificEquipo != undefined ?
+                                      :class="infoPlan.regional_EspDificEquipo != undefined && infoPlan.regional_EspDificEquipo != '' ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -777,7 +792,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.local_SitioAnestesiaL"
-                                   :class="infoPlan.local_SitioAnestesiaL != undefined ?
+                                   :class="infoPlan.local_SitioAnestesiaL != undefined && infoPlan.local_SitioAnestesiaL != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -787,9 +802,9 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.local_AnestesicoUtilizado"
-                                    :class="infoPlan.local_AnestesicoUtilizado != undefined ?
+                                    :class="infoPlan.local_AnestesicoUtilizado != undefined && infoPlan.local_AnestesicoUtilizado != '' ?
                                            'form-control border border-success formSombra' : 'form-control'">
-                                <option selected>Seleccione...</option>
+                                <option selected></option>
                                 <option>Lidocaína 1%</option>
                                 <option>Lidocaína 2%</option>
                                 <option>Lidocaína 2% con Epinefrina</option>
@@ -807,7 +822,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.local_Especificar"
-                                      :class="infoPlan.local_Especificar != undefined ?
+                                      :class="infoPlan.local_Especificar != undefined && infoPlan.local_Especificar != '' ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -869,9 +884,9 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.general_Induccion"
-                                    :class="infoPlan.general_Induccion != undefined ?
+                                    :class="infoPlan.general_Induccion != undefined && infoPlan.general_Induccion != '' ?
                                            'form-control border border-success formSombra' : 'form-control'">
-                                <option selected>Seleccione...</option>
+                                <option selected></option>
                                 <option>Endovenosa</option>
                                 <option>Inhalatoria</option>
                                 <option>Intramuscular</option>   
@@ -884,9 +899,9 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.general_Tubo"
-                                    :class="infoPlan.general_Tubo != undefined ?
+                                    :class="infoPlan.general_Tubo != undefined && infoPlan.general_Tubo != '' ?
                                            'form-control border border-success formSombra' : 'form-control'">
-                                <option selected>Seleccione...</option>
+                                <option selected></option>
                                 <option>Orotraqueal</option>
                                 <option>Nasotraqueal</option>
                             </select>
@@ -899,7 +914,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.general_NumeroTubo"
-                                   :class="infoPlan.general_NumeroTubo != undefined ?
+                                   :class="infoPlan.general_NumeroTubo != undefined && infoPlan.general_NumeroTubo != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -909,9 +924,9 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.general_TipoCanula"
-                                    :class="infoPlan.general_TipoCanula != undefined ?
+                                    :class="infoPlan.general_TipoCanula != undefined && infoPlan.general_TipoCanula != '' ?
                                            'form-control border border-success formSombra' : 'form-control'">
-                                <option selected>Seleccione...</option>
+                                <option selected></option>
                                 <option>Oral</option>
                                 <option>Nasal</option>
                             </select>
@@ -946,9 +961,9 @@
                             <select id="inputState"
                                     class="form-select"
                                     v-model="infoPlan.general_Presion"
-                                    :class="infoPlan.general_Presion != undefined ?
+                                    :class="infoPlan.general_Presion != undefined && infoPlan.general_Presion != '' ?
                                            'form-control border border-success formSombra' : 'form-control'">
-                                <option selected>Seleccione...</option>
+                                <option selected></option>
                                 <option>Presión baja</option>
                                 <option>Presión normal</option>
                             </select>
@@ -984,7 +999,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.general_EspDifTecIntubacion"
-                                      :class="infoPlan.general_EspDifTecIntubacion != undefined ?
+                                      :class="infoPlan.general_EspDifTecIntubacion != undefined && infoPlan.general_EspDifTecIntubacion != '' ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -1022,7 +1037,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.general_Calibre"
-                                   :class="infoPlan.general_Calibre != undefined ?
+                                   :class="infoPlan.general_Calibre != undefined && infoPlan.general_Calibre != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -1058,7 +1073,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.general_EspComplicaciones"
-                                      :class="infoPlan.general_EspComplicaciones != undefined ?
+                                      :class="infoPlan.general_EspComplicaciones != undefined && infoPlan.general_EspComplicaciones != '' ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
@@ -1096,7 +1111,7 @@
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.general_EspOtrosDispositivos"
-                                      :class="infoPlan.general_EspOtrosDispositivos != undefined ?
+                                      :class="infoPlan.general_EspOtrosDispositivos != undefined && infoPlan.general_EspOtrosDispositivos != '' ?
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>             
@@ -1121,12 +1136,10 @@ export default defineComponent({
             preIdStore,            
             btnActualizarValoracion:false,
 
-            sedacionOral:false,
-            sedacionNasal:false,
-            sedacionInhalatoria:false,
-            sedacionIntravenosa:false,
-            sedacionIntramuscular:false,
-            sedacionRectal:false
+            sitioCabeza:false,
+            sitioCervical:false,
+            sitioToracico:false,
+            sitioLumbar:false,
         }
     },
 
@@ -1155,54 +1168,41 @@ export default defineComponent({
 
             preIdStore.savePrePlan(this.infoPlan, preIdStore.pacienteID._id)
         },
-        cambioSelectSedacion(){
-            if((document.getElementById("viaOral") as HTMLOptionElement).selected){
-                this.sedacionOral=true
-                this.sedacionNasal=false
-                this.sedacionInhalatoria=false
-                this.sedacionIntravenosa=false
-                this.sedacionIntramuscular=false
-                this.sedacionRectal=false
+        cambioSelectRegional(){
+            if((document.getElementById("sitioCabeza") as HTMLOptionElement).selected){
+                this.sitioCabeza=true
+                this.sitioCervical=false
+                this.sitioToracico=false
+                this.sitioLumbar=false
+                this.infoPlan.regional_Opcion = ""
             }
-            else if((document.getElementById("viaNasal") as HTMLOptionElement).selected){
-                this.sedacionOral=false
-                this.sedacionNasal=true
-                this.sedacionInhalatoria=false
-                this.sedacionIntravenosa=false
-                this.sedacionIntramuscular=false
-                this.sedacionRectal=false
+            else if((document.getElementById("sitioCervical") as HTMLOptionElement).selected){
+                this.sitioCabeza=false
+                this.sitioCervical=true
+                this.sitioToracico=false
+                this.sitioLumbar=false
+                this.infoPlan.regional_Opcion = ""
             }
-            else if((document.getElementById("viaInhalatoria") as HTMLOptionElement).selected){
-                this.sedacionOral=false
-                this.sedacionNasal=false
-                this.sedacionInhalatoria=true
-                this.sedacionIntravenosa=false
-                this.sedacionIntramuscular=false
-                this.sedacionRectal=false
+            else if((document.getElementById("sitioToracico") as HTMLOptionElement).selected){
+                this.sitioCabeza=false
+                this.sitioCervical=false
+                this.sitioToracico=true
+                this.sitioLumbar=false
+                this.infoPlan.regional_Opcion = ""
             }
-            else if((document.getElementById("viaIntravenosa") as HTMLOptionElement).selected){
-                this.sedacionOral=false
-                this.sedacionNasal=false
-                this.sedacionInhalatoria=false
-                this.sedacionIntravenosa=true
-                this.sedacionIntramuscular=false
-                this.sedacionRectal=false
+            else if((document.getElementById("sitioLumbar") as HTMLOptionElement).selected){
+                this.sitioCabeza=false
+                this.sitioCervical=false
+                this.sitioToracico=false
+                this.sitioLumbar=true
+                this.infoPlan.regional_Opcion = ""
             }
-            else if((document.getElementById("viaIntramuscular") as HTMLOptionElement).selected){
-                this.sedacionOral=false
-                this.sedacionNasal=false
-                this.sedacionInhalatoria=false
-                this.sedacionIntravenosa=false
-                this.sedacionIntramuscular=true
-                this.sedacionRectal=false
-            }
-            else if((document.getElementById("viaRectal") as HTMLOptionElement).selected){
-                this.sedacionOral=false
-                this.sedacionNasal=false
-                this.sedacionInhalatoria=false
-                this.sedacionIntravenosa=false
-                this.sedacionIntramuscular=false
-                this.sedacionRectal=true
+            else if((document.getElementById("sitioOtros") as HTMLOptionElement).selected){
+                this.sitioCabeza=false
+                this.sitioCervical=false
+                this.sitioToracico=false
+                this.sitioLumbar=false
+                this.infoPlan.regional_Opcion = ""
             }
         }
     },
