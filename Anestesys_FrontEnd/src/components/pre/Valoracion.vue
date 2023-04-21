@@ -295,7 +295,7 @@
                         </div>
                         
                         <!-- Botón Guardar/Actualizar -->
-                        <div class="col-md-2 alinear-boton">
+                        <div class="col-md-2">
                             <template v-if="btnActualizarValoracion === false">
                                 <button data-bs-toggle="tab" 
                                     type="submit"
@@ -542,7 +542,7 @@
 
             <!-- Div Formulario Vía Aérea -->
             <div class="tab-pane fade" id="via">
-                <div class="col-12 bordePrincipal largoContenedor">
+                <div class="col-12 bordePrincipal">
                     <form @submit.prevent="" class="row g-3">
                         <h5 class="fw-bold"> VALORACIÓN DE VÍA AÉREA Y OTRAS ESCALAS </h5>
                         
@@ -610,7 +610,7 @@
                         </div>
                         
                         <!-- Protusión Mandibular -->
-                        <div class="col-md-6">
+                        <div class="col-md-10">
                             <label for="inputState" class="form-label fw-bold"> Protusión Mandibular </label>
                             <select id="inputState"
                                     class="form-select"
@@ -625,7 +625,7 @@
                         </div>
 
                         <!-- IPID -->
-                        <div class="col-md-6">
+                        <div class="col-md-10">
                             <label for="inputState" class="form-label fw-bold"> IPID </label>
                             <select id="inputState"
                                     class="form-select"
@@ -763,8 +763,9 @@
                             </select>
                         </div>
 
+                        <div class="col-md-10"></div>
                         <!-- Botón Guardar/Actualizar -->
-                        <div class="col-md-12 margenBoton">
+                        <div class="col-md-2 btn-abajo">
                             <template v-if="btnActualizarValoracion === false">
                                 <button data-bs-toggle="tab" 
                                     type="submit"
@@ -789,46 +790,105 @@
                     <form @submit.prevent="" class="row g-3">
                         <h5 class="fw-bold fw-bold">ESTUDIOS</h5>           
                         
-                        <!-- Estudio -->
-                        <div class="col-md-8">
-                            <label for="inputState" class="form-label fw-bold">Estudio</label>
-                            <select id="inputState"
-                                    class="form-select"
-                                    v-model="infoValoracion.estudios_Estudio"
-                                    :class="infoValoracion.estudios_Estudio != undefined && infoValoracion.estudios_Estudio ?
-                                           'form-control border border-success formSombra' : 'form-control'">
-                                <option selected></option>
-                                <option>Electrocardiograma</option>
-                                <option>Electroencefalograma</option>
-                                <option>Electromiograma</option>
-                                <option>Espirometría</option>
-                                <option>Hemodinamia</option>
-                                <option>Pruebas de Función Pulmonar</option>
-                                <option>Rayos X</option>
-                                <option>Resonancia Magnetica</option>
-                                <option>Tomografia Axial Computalizada</option>
-                                <option>Tromboelastograma</option>
-                                <option>Ultrasonido</option>
-                                <option>Otros Estudios</option>
-                            </select>
-                        </div>       
-                        
-                        <!-- Botón Guardar/Actualizar -->
-                        <div class="col-md-2">
-                            <button class="btn btn-outline-secondary fw-bold margenBoton">Guardar</button>
+                        <div class="col-md-6">
+                            <div class="row g-3">
+                                <!-- Estudio -->
+                                <div class="col-md-11">
+                                    <label for="inputState" class="form-label fw-bold">Estudio</label>
+                                    <select id="inputState"
+                                            class="form-select"
+                                            v-model="infoValoracion.estudios_Estudio"
+                                            :class="infoValoracion.estudios_Estudio != undefined && infoValoracion.estudios_Estudio ?
+                                                'form-control border border-success formSombra' : 'form-control'">
+                                        <option selected></option>
+                                        <option>Electrocardiograma</option>
+                                        <option>Electroencefalograma</option>
+                                        <option>Electromiograma</option>
+                                        <option>Espirometría</option>
+                                        <option>Hemodinamia</option>
+                                        <option>Pruebas de Función Pulmonar</option>
+                                        <option>Rayos X</option>
+                                        <option>Resonancia Magnetica</option>
+                                        <option>Tomografia Axial Computalizada</option>
+                                        <option>Tromboelastograma</option>
+                                        <option>Ultrasonido</option>
+                                        <option>Otros Estudios</option>
+                                    </select>
+                                </div>       
+                                
+                                <!-- Botón Guardar/Actualizar -->
+                                <div class="col-md-1 btn-abajo">
+                                    <button class="btn btn-guardar fw-bold"><font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/></button>
+                                </div>
+                                
+                                <!-- Especificaciones -->
+                                <div class="col-md-12">
+                                    <label for="" class="form-label fw-bold">Específicar</label>
+                                    <textarea class="form-control"
+                                            id=""
+                                            rows="3"
+                                            v-model="infoValoracion.estudio_Especificaciones"
+                                            :class="infoValoracion.estudio_Especificaciones != '' && infoValoracion.estudio_Especificaciones != undefined ?
+                                                    'form-control border border-success formSombra' : 'form-control'">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="row g-3">
+                                
+                                <div class="deslizar">
+                                    <table class="table table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th class="color-texto-tabla">#</th>
+                                                <th class="color-texto-tabla">Estudio</th>
+                                                <th class=""></th>
+                                                <th class=""></th>
+                                            </tr>
+                                        </thead>
+                                        <!-- <tbody>
+                                            <tr
+                                                v-for="(
+                                                estudio, index
+                                                ) in medStore.medicamentos"
+                                            >
+                                                <td class="text-white">{{ index + 1 }}</td>
+                                                <td class="text-white">
+                                                {{ estudio.nombreMedicamento }}
+                                                </td>                                            
+                                                <td>
+                                                <button
+                                                    class="btn"
+                                                    @click="cambiarBtnActualizar(estudio._id)"
+                                                >
+                                                    <font-awesome-icon 
+                                                    icon="fa-solid fa-pen-to-square" 
+                                                    size="lg" 
+                                                    class="text-white"/>
+                                                </button>
+                                                </td>
+                                                <td>
+                                                <button
+                                                    class="btn"
+                                                    @click="
+                                                    validaEliminarMedicamento(estudio._id)
+                                                    "
+                                                >
+                                                    <font-awesome-icon 
+                                                        icon="fa-solid fa-trash" 
+                                                        size="lg" class="text-white"/>
+                                                </button>
+                                                </td>
+                                            </tr>
+                                        </tbody> -->
+                                    </table>
+                                </div>
+
+                            </div>
                         </div>
                         
-                        <!-- Especificaciones -->
-                        <div class="col-md-12">
-                            <label for="" class="form-label fw-bold">Específicar</label>
-                            <textarea class="form-control"
-                                      id=""
-                                      rows="3"
-                                      v-model="infoValoracion.estudio_Especificaciones"
-                                      :class="infoValoracion.estudio_Especificaciones != '' && infoValoracion.estudio_Especificaciones != undefined ?
-                                             'form-control border border-success formSombra' : 'form-control'">
-                            </textarea>
-                        </div>
                     </form>
                 </div>            
             </div>
@@ -843,7 +903,7 @@
                         </div>
 
                         <!-- Botón Guardar/Actualizar -->
-                        <div class="col-md-2 margenBoton">
+                        <div class="col-md-2 btn-abajo">
                             <template v-if="btnActualizarValoracion === false">
                                 <button data-bs-toggle="tab" 
                                     type="submit"
@@ -1169,6 +1229,24 @@ export default defineComponent({
 
             preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
         },
+
+        async listarEstudios() {
+            //await medStore.getMedicamentosList();
+        },
+
+        async cambiarBtnActualizar(idMedicamento) {
+            //this.editar = true;
+
+           // await medStore.getMedicamento(idMedicamento);
+
+            // this.infoMedicamento.idMedicamento = medStore.medicamentos._id;
+            // this.infoMedicamento.nombreMedicamento =
+            //     medStore.medicamentos.nombreMedicamento;
+            // this.infoMedicamento.codigoMedicamento =
+            //     medStore.medicamentos.codigoMedicamento;
+
+            await this.listarEstudios();
+        },
     }
 })
 </script>
@@ -1205,6 +1283,9 @@ h5{
 .largoContenedor{
     height: 535px
 }
+.btn-abajo{
+    align-self: flex-end;   
+}
 .formSombra:focus{
     border-color:#6BD99B;
     outline:0;
@@ -1217,6 +1298,9 @@ h5{
 }
 .centrar-li{
   justify-content: center; 
+}
+.color-texto-tabla{
+    color: #002D60;
 }
 /* Botones */
 .btn-nav-bar{
@@ -1241,7 +1325,20 @@ h5{
     --bs-btn-active-bg: #E88300;
     --bs-btn-active-color: #ffffff;
     --bs-btn-active-border-color: #E88300;
-    width: 150px;        
+    width: 100%;        
+}
+.btn-guardar{
+    --bs-btn-bg: none;
+    --bs-btn-color: #A0A6B2;    
+    --bs-btn-border-color: #E88300;
+    --bs-btn-hover-bg: #edeff3;
+    --bs-btn-hover-color: #E88300;
+    --bs-btn-hover-border-color: #E88300;          
+    --bs-btn-active-bg: none;
+    --bs-btn-active-color: #E88300;
+    --bs-btn-active-border-color: #E88300;
+    width: 100%;    
+    border: none;        
 }
 /* Margenes */
 .margen-input{
@@ -1249,13 +1346,6 @@ h5{
 }
 .margenRadio{
     margin-right: 10px;
-}
-.margenBoton{
-    margin-top: 32px;
-    text-align: end;
-}
-.alinear-boton{
-    text-align: end;
 }
 .margen-tabaquismo{
     margin-top: 25px;

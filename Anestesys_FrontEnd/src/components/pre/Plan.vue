@@ -129,7 +129,7 @@
                         </div>
 
                         <!-- Aplicación de torniquete -->
-                        <div class="col-md-2">
+                        <div class="col-md-2 ">
                             <label for="" class="form-label col-12 fw-bold">Aplicación de torniquete</label>
                             <input type="radio"
                                    class="btn-check"
@@ -1240,6 +1240,7 @@ export default defineComponent({
 }
 .margenRadio{
     margin-right: 10px;
+    margin-left: 15px;
 }
 .largoContenedor{
     height: 535px
@@ -1299,5 +1300,8 @@ h5{
 }
 .alinea-boton{
     text-align: end;
+}
+.alinea-radio{
+    align-self: center;
 }
 </style>
