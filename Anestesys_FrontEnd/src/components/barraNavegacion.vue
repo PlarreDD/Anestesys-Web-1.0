@@ -129,7 +129,9 @@
                       data-bs-dismiss="modal"
                       aria-label="Close"
                     >
-                      <i class="fa-solid fa-2x fa-xmark text-white"></i>
+                      <i class="text-white">
+                        <font-awesome-icon icon="fa-solid fa-xmark" size="2xl" />
+                      </i>
                     </button>
                   </div>
 
