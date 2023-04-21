@@ -163,7 +163,7 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
                 expFis_VASCardioVasc, expFis_VASHipertension, expFis_VASAbdomen,
                 expFis_VASGenUr, expFis_VASMuscEsq, expFis_VASNeuro, expFis_VASPielFaneras,
                 // Estudios
-
+                estudios_Estudio, estudio_Especificaciones
             } = req.body;
 
         const preval = new PreVal({
@@ -212,7 +212,7 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
             viaAerea_ClasificacionASA: viaAerea_ClasificacionASA,
             viaAerea_TipoCirugia: viaAerea_TipoCirugia,
             viaAerea_RiesgoAnestesico: viaAerea_RiesgoAnestesico,
-            //Laboratorio
+            // Laboratorio
             perfilBioQ_FechaRealizacion: perfilBioQ_FechaRealizacion,
             perfilBioQ_GrupoSanguineo: perfilBioQ_GrupoSanguineo,
             perfilBioQ_Hemoglobina: perfilBioQ_Hemoglobina,
@@ -249,6 +249,7 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
             expFis_VASNeuro: expFis_VASNeuro,
             expFis_VASPielFaneras: expFis_VASPielFaneras,
             // Estudios
+            val_Estudios: [ estudios_Estudio, estudio_Especificaciones]
         });
 
         await preval.save();
@@ -295,6 +296,8 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
                 expFis_VASCabeza, expFis_VASCuello, expFis_VASRespiratorio,
                 expFis_VASCardioVasc, expFis_VASHipertension, expFis_VASAbdomen,
                 expFis_VASGenUr, expFis_VASMuscEsq, expFis_VASNeuro, expFis_VASPielFaneras,
+                // Estudios
+                // estudios_Estudio, estudio_Especificaciones
         } = req.body;
         
         const preval = await PreVal.findOneAndUpdate({ pid: id },
@@ -378,6 +381,7 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
                                                        expFis_VASMuscEsq: expFis_VASMuscEsq,
                                                        expFis_VASNeuro: expFis_VASNeuro,
                                                        expFis_VASPielFaneras: expFis_VASPielFaneras,
+                                                       // Estudios
                                                     });
 
         return res.json({ preval })

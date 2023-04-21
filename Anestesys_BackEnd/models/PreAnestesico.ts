@@ -152,7 +152,7 @@ const PreValoracionSchema = new Schema({
     },
     /* Antecedentes */
     // Personales Patológicos
-    antPersPat_Alergias: {
+    antPersPat_Alergias: { 
         type: String,
     },
 
@@ -440,7 +440,10 @@ const PreValoracionSchema = new Schema({
         type: String,
     },
     // Estudios
-
+    val_Estudios : [{
+        estudio: { type: String },
+        especifEstudio: { type: String },
+    }],
 });
 /* Plan */
 const PrePlanSchema = new Schema({
