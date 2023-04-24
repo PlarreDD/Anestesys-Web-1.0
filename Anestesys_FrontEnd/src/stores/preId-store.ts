@@ -378,6 +378,35 @@ export const usePreIdStore = defineStore('preid', {
                 // console.log("error: " + e);
             });
         },
+
+        updateEstudios(estudios_Estudio: string, estudio_Especificaciones: string){
+            apiAxios({
+                url: `http://localhost:5000/estudios/${String(this.valoracionID)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    val_Estudios: [ estudios_Estudio, estudio_Especificaciones]
+                },                
+            })
+            .then((res: any) => {
+                console.log(JSON.stringify(res));
+                
+                swal.fire({
+                    title: 'Datos actualizados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
         /***************************** Plan ******************************/
         savePrePlan(infoPlan: any, pid: string){
             apiAxios({

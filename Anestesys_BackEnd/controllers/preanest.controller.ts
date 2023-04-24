@@ -389,15 +389,34 @@ export const saveEstudios = async (req: any, res: Response) => {
     try {
         const { vid,
                 val_Estudios } = req.body;
-        // console.log("Controller:\n" + vid + "\n" + val_Estudios[0] + "\n" + val_Estudios[1]);
         
-        const valest = new ValEstudios({
-            vid: vid,
-            val_Estudios: { estudio: val_Estudios[0],
-                            especifEstudio: val_Estudios[1] },
+        const valest = new ValEstudios({ vid: vid,
+                                         val_Estudios: { estudio: val_Estudios[0],
+                                                         especifEstudio: val_Estudios[1] },
         });
         
         await valest.save();
+                
+        return res.json({ valest });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const updateEstudios = async (req: any, res: Response) => {
+    try {
+        const { vid } = req.params;
+        const { val_Estudios } = req.body;
+        
+        console.log(vid + "\n" + val_Estudios[0] + "\n" + val_Estudios[1]);
+        
+        const valest = await ValEstudios.findOneAndUpdate(
+            { vid: vid },
+            { $addToSet:{
+                estudio: val_Estudios[0],
+                especifEstudio: val_Estudios[1]
+                }
+            });
         
         return res.json({ valest });
     } catch (error) {
