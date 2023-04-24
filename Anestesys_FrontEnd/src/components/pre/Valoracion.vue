@@ -793,7 +793,7 @@
                         <div class="col-md-6">
                             <div class="row g-3">
                                 <!-- Estudio -->
-                                <div class="col-md-11">
+                                <div class="col-md-10">
                                     <label for="inputState" class="form-label fw-bold">Estudio</label>
                                     <select id="inputState"
                                             class="form-select"
@@ -819,7 +819,7 @@
                                 <!-- Botón Guardar/Actualizar -->
                                 <div class="col-md-1 btn-abajo">
                                     <button class="btn btn-guardar fw-bold"
-                                            @click="listarEstudios(infoValoracion.estudios_Estudio, infoValoracion.estudio_Especificaciones)">
+                                            @click="guardarEstudios(infoValoracion.estudios_Estudio, infoValoracion.estudio_Especificaciones)">
                                         <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
                                     </button>
                                 </div>
@@ -851,41 +851,38 @@
                                                 <th class=""></th>
                                             </tr>
                                         </thead>
-                                        <!-- <tbody>
+                                        <tbody>
                                             <tr
                                                 v-for="(
                                                 estudio, index
-                                                ) in medStore.medicamentos"
+                                                ) in preIdStore.estudios"                                              
                                             >
-                                                <td class="text-white">{{ index + 1 }}</td>
-                                                <td class="text-white">
-                                                {{ estudio.nombreMedicamento }}
+                                                <td class="text-black">{{ index + 1 }}</td>
+                                                <td class="text-black" >
+                                                {{ estudio.val_Estudios }}
                                                 </td>                                            
                                                 <td>
                                                 <button
                                                     class="btn"
-                                                    @click="cambiarBtnActualizar(estudio._id)"
-                                                >
+                                                    @click="listarEstudios()">
                                                     <font-awesome-icon 
                                                     icon="fa-solid fa-pen-to-square" 
                                                     size="lg" 
-                                                    class="text-white"/>
+                                                    class="text-black"/>
                                                 </button>
                                                 </td>
                                                 <td>
                                                 <button
                                                     class="btn"
-                                                    @click="
-                                                    validaEliminarMedicamento(estudio._id)
-                                                    "
+                                                    @click=""
                                                 >
                                                     <font-awesome-icon 
                                                         icon="fa-solid fa-trash" 
-                                                        size="lg" class="text-white"/>
+                                                        size="lg" class="text-black"/>
                                                 </button>
                                                 </td>
                                             </tr>
-                                        </tbody> -->
+                                        </tbody>
                                     </table>
                                 </div>
 
@@ -1207,6 +1204,8 @@
 import { defineComponent } from "vue";
 import { usePreIdStore } from "@/stores/preId-store";
 import type { regValoracion } from "@/interfaces/regPreAnest";
+import { PreIdPacientes } from '../../../../Anestesys_BackEnd/models/PreAnestesico';
+import { getEstudios } from '../../../../Anestesys_BackEnd/controllers/preanest.controller';
 
 const preIdStore = usePreIdStore();
 
@@ -1221,6 +1220,10 @@ export default defineComponent({
         }  
     },
 
+    mounted() {
+        this.listarEstudios();
+    },
+
     methods: {
         calcularIMC() {
             this.infoValoracion.sigVit_IMC = (this.infoValoracion.sigVit_Peso / (this.infoValoracion.sigVit_Talla * this.infoValoracion.sigVit_Talla))
@@ -1233,7 +1236,11 @@ export default defineComponent({
             preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
         },
 
-        async listarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
+        async listarEstudios() {
+            await preIdStore.getEstudiosList();
+        },
+
+        async guardarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
             preIdStore.saveEstudios(estudios_Estudio, estudio_Especificaciones);
         },
 

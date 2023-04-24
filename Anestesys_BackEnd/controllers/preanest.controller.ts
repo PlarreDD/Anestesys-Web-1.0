@@ -403,7 +403,17 @@ export const saveEstudios = async (req: any, res: Response) => {
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
     }
-}
+};
+
+/* Función para obtener todos los estudios */
+export const getEstudios = async (req: any, res: Response) => {
+    try {
+        const estudios = await ValEstudios.find({id: req.id}) 
+        return res.json({estudios});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
 /********************************************************************/
 /******************************* PLAN *******************************/
 /********************************************************************/
