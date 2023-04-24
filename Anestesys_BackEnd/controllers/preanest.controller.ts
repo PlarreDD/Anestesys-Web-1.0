@@ -412,17 +412,20 @@ export const updateEstudios = async (req: any, res: Response) => {
         
         const valest = await ValEstudios.findOneAndUpdate(
             { vid: vid },
-            { $addToSet:{
-                estudio: val_Estudios[0],
-                especifEstudio: val_Estudios[1]
+            { $push:{
+                val_Estudios: {
+                    estudio: val_Estudios[0],
+                    especifEstudio: val_Estudios[1]
                 }
-            });
+            }
+            },
+            { upsert: true, new: true });
         
         return res.json({ valest });
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
     }
-}
+};
 /********************************************************************/
 /******************************* PLAN *******************************/
 /********************************************************************/

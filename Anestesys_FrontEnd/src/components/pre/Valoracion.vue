@@ -1247,10 +1247,14 @@ export default defineComponent({
         async guardarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
             this.btnActualizarEstudios=true
             preIdStore.saveEstudios(estudios_Estudio, estudio_Especificaciones);
+            this.infoValoracion.estudios_Estudio = "";
+            this.infoValoracion.estudio_Especificaciones = "";
         },
 
         async actualizarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
             preIdStore.updateEstudios(estudios_Estudio, estudio_Especificaciones);
+            this.infoValoracion.estudios_Estudio = "";
+            this.infoValoracion.estudio_Especificaciones = "";
         },
 
         async cambiarBtnActualizar(idMedicamento) {
