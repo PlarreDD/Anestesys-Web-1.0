@@ -390,9 +390,7 @@ export const usePreIdStore = defineStore('preid', {
                     val_Estudios: [ estudios_Estudio, estudio_Especificaciones]
                 },                
             })
-            .then((res: any) => {
-                console.log(JSON.stringify(res));
-                
+            .then((res: any) => {                
                 swal.fire({
                     title: 'Datos actualizados correctamente',
                     icon: 'success',
