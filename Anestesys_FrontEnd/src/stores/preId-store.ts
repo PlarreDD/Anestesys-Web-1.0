@@ -9,6 +9,7 @@ const userStore = useUserStore();
 export const usePreIdStore = defineStore('preid', {
     state: () => ({
         pacienteID: ref(null),
+        valoracionID: ref(null),
     }),
 
     actions: {
@@ -226,6 +227,9 @@ export const usePreIdStore = defineStore('preid', {
                 },
             })
             .then((res: any) => {
+                this.valoracionID = res.data.preval._id;
+                console.log(this.valoracionID);
+                
                 swal.fire({
                     title: 'Datos guardados correctamente',
                     icon: 'success',
@@ -330,6 +334,34 @@ export const usePreIdStore = defineStore('preid', {
                     expFis_VASNeuro: infoValoracion.expFis_VASNeuro,
                     expFis_VASPielFaneras: infoValoracion.expFis_VASPielFaneras,
                 }
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos actualizados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
+
+        saveEstudios(estudios_Estudio: string, estudio_Especificaciones: string){
+            apiAxios({
+                url: "http://localhost:5000/estudios",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    vid: this.valoracionID,
+                    val_Estudios: [ estudios_Estudio, estudio_Especificaciones]
+                },
             })
             .then((res: any) => {
                 swal.fire({

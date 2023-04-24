@@ -818,7 +818,10 @@
                                 
                                 <!-- Botón Guardar/Actualizar -->
                                 <div class="col-md-1 btn-abajo">
-                                    <button class="btn btn-guardar fw-bold"><font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/></button>
+                                    <button class="btn btn-guardar fw-bold"
+                                            @click="listarEstudios(infoValoracion.estudios_Estudio, infoValoracion.estudio_Especificaciones)">
+                                        <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                                    </button>
                                 </div>
                                 
                                 <!-- Especificaciones -->
@@ -1230,8 +1233,8 @@ export default defineComponent({
             preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
         },
 
-        async listarEstudios() {
-            //await medStore.getMedicamentosList();
+        async listarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
+            preIdStore.saveEstudios(estudios_Estudio, estudio_Especificaciones);
         },
 
         async cambiarBtnActualizar(idMedicamento) {
@@ -1245,7 +1248,7 @@ export default defineComponent({
             // this.infoMedicamento.codigoMedicamento =
             //     medStore.medicamentos.codigoMedicamento;
 
-            await this.listarEstudios();
+            // await this.listarEstudios();
         },
     }
 })

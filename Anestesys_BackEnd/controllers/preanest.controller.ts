@@ -1,7 +1,8 @@
 import { Response } from "express";
 import { PreIdPacientes,
          PreIdPacientesCx,
-         PreVal,
+         PreValoracion,
+         ValEstudios,
          PrePlan,
          PreNota } from "../models/PreAnestesico";
 
@@ -162,11 +163,9 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
                 expFis_VASCabeza, expFis_VASCuello, expFis_VASRespiratorio,
                 expFis_VASCardioVasc, expFis_VASHipertension, expFis_VASAbdomen,
                 expFis_VASGenUr, expFis_VASMuscEsq, expFis_VASNeuro, expFis_VASPielFaneras,
-                // Estudios
-                estudios_Estudio, estudio_Especificaciones
             } = req.body;
 
-        const preval = new PreVal({
+        const preval = new PreValoracion({
             pid: pid,
             /* Antecedentes */
             // Personales Patológicos
@@ -248,8 +247,6 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
             expFis_VASMuscEsq: expFis_VASMuscEsq,
             expFis_VASNeuro: expFis_VASNeuro,
             expFis_VASPielFaneras: expFis_VASPielFaneras,
-            // Estudios
-            val_Estudios: [ estudios_Estudio, estudio_Especificaciones]
         });
 
         await preval.save();
@@ -296,11 +293,9 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
                 expFis_VASCabeza, expFis_VASCuello, expFis_VASRespiratorio,
                 expFis_VASCardioVasc, expFis_VASHipertension, expFis_VASAbdomen,
                 expFis_VASGenUr, expFis_VASMuscEsq, expFis_VASNeuro, expFis_VASPielFaneras,
-                // Estudios
-                // estudios_Estudio, estudio_Especificaciones
         } = req.body;
         
-        const preval = await PreVal.findOneAndUpdate({ pid: id },
+        const preval = await PreValoracion.findOneAndUpdate({ pid: id },
                                                      { /* Antecedentes */
                                                        // Personales Patológicos
                                                        antPersPat_Alergias: antPersPat_Alergias,
@@ -389,10 +384,30 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
+
+export const saveEstudios = async (req: any, res: Response) => {
+    try {
+        const { vid,
+                val_Estudios } = req.body;
+        // console.log("Controller:\n" + vid + "\n" + val_Estudios[0] + "\n" + val_Estudios[1]);
+        
+        const valest = new ValEstudios({
+            vid: vid,
+            val_Estudios: { estudio: val_Estudios[0],
+                            especifEstudio: val_Estudios[1] },
+        });
+        
+        await valest.save();
+        
+        return res.json({ valest });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+}
 /********************************************************************/
 /******************************* PLAN *******************************/
 /********************************************************************/
-export const savePrePlan =async (req: any, res: Response) => {
+export const savePrePlan = async (req: any, res: Response) => {
     try {
         const { pid,
                 // Posicion y Cuidados
@@ -476,7 +491,7 @@ export const savePrePlan =async (req: any, res: Response) => {
     }
 };
 
-export const updatePrePlan =async (req: any, res: Response) => {
+export const updatePrePlan = async (req: any, res: Response) => {
     try {
         const { id } = req.params;
 
