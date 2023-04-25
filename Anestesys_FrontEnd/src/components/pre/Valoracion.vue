@@ -816,12 +816,22 @@
                                     </select>
                                 </div>       
                                 
-                                <!-- Botón Guardar/Actualizar -->
-                                <div class="col-md-1 btn-abajo">
-                                    <button class="btn btn-guardar fw-bold"
+                                <!-- Botón Guardar/Agregar -->
+                                <div class="col-md-1 btn-abajo">                                    
+
+                                    <template v-if="btnActualizarEstudios === false">
+                                        <button class="btn btn-guardar fw-bold"
                                             @click="guardarEstudios(infoValoracion.estudios_Estudio, infoValoracion.estudio_Especificaciones)">
-                                        <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
-                                    </button>
+                                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                                        </button>
+                                    </template>
+
+                                    <template v-else>
+                                        <button class="btn btn-guardar fw-bold"
+                                            @click="actualizarEstudios(infoValoracion.estudios_Estudio, infoValoracion.estudio_Especificaciones)">
+                                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                                        </button>
+                                    </template>  
                                 </div>
                                 
                                 <!-- Especificaciones -->
@@ -1217,6 +1227,7 @@ export default defineComponent({
             infoValoracion: {} as regValoracion,
             preIdStore,
             btnActualizarValoracion:false,
+            btnActualizarEstudios:false
         }  
     },
 
@@ -1241,7 +1252,16 @@ export default defineComponent({
         },
 
         async guardarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
+            this.btnActualizarEstudios=true
             preIdStore.saveEstudios(estudios_Estudio, estudio_Especificaciones);
+            this.infoValoracion.estudios_Estudio = "";
+            this.infoValoracion.estudio_Especificaciones = "";
+        },
+
+        async actualizarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
+            preIdStore.updateEstudios(estudios_Estudio, estudio_Especificaciones);
+            this.infoValoracion.estudios_Estudio = "";
+            this.infoValoracion.estudio_Especificaciones = "";
         },
 
         async cambiarBtnActualizar(idMedicamento) {
