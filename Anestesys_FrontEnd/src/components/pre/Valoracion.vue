@@ -786,14 +786,14 @@
 
             <!-- Div Formulario Estudios -->
             <div class="tab-pane fade" id="estudios">
-                <div class="col-12 bordePrincipal largoContenedor">
+                <div class="col-12 bordePrincipal">
                     <form @submit.prevent="" class="row g-3">
                         <h5 class="fw-bold fw-bold">ESTUDIOS</h5>           
                         
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="row g-3">
                                 <!-- Estudio -->
-                                <div class="col-md-10">
+                                <div class="col-md-5">
                                     <label for="inputState" class="form-label fw-bold">Estudio</label>
                                     <select id="inputState"
                                             class="form-select"
@@ -835,50 +835,69 @@
                                 </div>
                                 
                                 <!-- Especificaciones -->
-                                <div class="col-md-12">
+                                <div class="col-md-10">
                                     <label for="" class="form-label fw-bold">Específicar</label>
                                     <textarea class="form-control"
                                             id=""
                                             rows="3"
                                             v-model="infoValoracion.estudio_Especificaciones"
                                             :class="infoValoracion.estudio_Especificaciones != '' && infoValoracion.estudio_Especificaciones != undefined ?
-                                                    'form-control border border-success formSombra' : 'form-control'">
+                                                    'form-control border border-success formSombra' : 'form-control'"
+                                                    maxlength="200">
                                     </textarea>
                                 </div>
+
+                                <input
+                                    type="hidden"
+                                    v-model="infoValoracion.estudio_Id"
+                                />
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="row g-3">
                                 
                                 <div class="deslizar">
                                     <table class="table table-responsive">
                                         <thead>
                                             <tr>
-                                                <th class="color-texto-tabla">#</th>
+                                                <!-- <th class="color-texto-tabla">#</th> -->
+                                                <th>id</th>
                                                 <th class="color-texto-tabla">Estudio</th>
+                                                <th class="color-texto-tabla">Especificación</th>
                                                 <th class=""></th>
                                                 <th class=""></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody 
+                                            v-for="(
+                                                estudio
+                                            ) in preIdStore.estudios"
+                                        >
                                             <tr
                                                 v-for="(
-                                                estudio, index
-                                                ) in preIdStore.estudios"                                              
+                                                    estudioTipo, index
+                                                ) in estudio.val_Estudios"                                   
                                             >
-                                                <td class="text-black">{{ index + 1 }}</td>
-                                                <td class="text-black" >
-                                                {{ estudio.val_Estudios }}
+                                                <!-- <td class="text-black">{{ index + 1 }}</td> -->
+                                                <td class="text-black">
+                                                    {{ estudioTipo._id }}                                                
+                                                </td>
+                                                <td class="text-black">
+                                                    {{ estudioTipo.estudio}}
+                                                </td> 
+                                                <td class="text-black">
+                                                    {{ estudioTipo.especifEstudio}}
                                                 </td>                                            
                                                 <td>
                                                 <button
                                                     class="btn"
-                                                    @click="listarEstudios()">
+                                                    @click="">
                                                     <font-awesome-icon 
                                                     icon="fa-solid fa-pen-to-square" 
                                                     size="lg" 
-                                                    class="text-black"/>
+                                                    class="text-black"
+                                                    @click="cambiarBtnActualizar(estudioTipo._id)"/>
                                                 </button>
                                                 </td>
                                                 <td>
@@ -1214,8 +1233,6 @@
 import { defineComponent } from "vue";
 import { usePreIdStore } from "@/stores/preId-store";
 import type { regValoracion } from "@/interfaces/regPreAnest";
-import { PreIdPacientes } from '../../../../Anestesys_BackEnd/models/PreAnestesico';
-import { getEstudios } from '../../../../Anestesys_BackEnd/controllers/preanest.controller';
 
 const preIdStore = usePreIdStore();
 
@@ -1227,12 +1244,12 @@ export default defineComponent({
             infoValoracion: {} as regValoracion,
             preIdStore,
             btnActualizarValoracion:false,
-            btnActualizarEstudios:false
+            btnActualizarEstudios:false            
         }  
     },
 
     mounted() {
-        this.listarEstudios();
+        preIdStore.getEstudiosList();
     },
 
     methods: {
@@ -1253,29 +1270,31 @@ export default defineComponent({
 
         async guardarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
             this.btnActualizarEstudios=true
-            preIdStore.saveEstudios(estudios_Estudio, estudio_Especificaciones);
+            await preIdStore.saveEstudios(estudios_Estudio, estudio_Especificaciones);
             this.infoValoracion.estudios_Estudio = "";
             this.infoValoracion.estudio_Especificaciones = "";
+
+            await this.listarEstudios();
         },
 
         async actualizarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
-            preIdStore.updateEstudios(estudios_Estudio, estudio_Especificaciones);
+            await preIdStore.updateEstudios(estudios_Estudio, estudio_Especificaciones);
             this.infoValoracion.estudios_Estudio = "";
             this.infoValoracion.estudio_Especificaciones = "";
+
+            await this.listarEstudios();
         },
 
-        async cambiarBtnActualizar(idMedicamento) {
+        async cambiarBtnActualizar(id) {
             //this.editar = true;
 
-           // await medStore.getMedicamento(idMedicamento);
+            await preIdStore.getEstudio(id);
 
-            // this.infoMedicamento.idMedicamento = medStore.medicamentos._id;
-            // this.infoMedicamento.nombreMedicamento =
-            //     medStore.medicamentos.nombreMedicamento;
-            // this.infoMedicamento.codigoMedicamento =
-            //     medStore.medicamentos.codigoMedicamento;
+            this.infoValoracion.estudio_Id = preIdStore.estudios._id;
+            this.infoValoracion.estudios_Estudio = preIdStore.estudios.estudio;
+            this.infoValoracion.estudio_Especificaciones = preIdStore.estudios.especifEstudio;
 
-            // await this.listarEstudios();
+            await this.listarEstudios();
         },
     }
 })
@@ -1383,7 +1402,7 @@ h5{
 .deslizar {
   overflow: scroll;
   overflow-x: hidden;
-  height: 270px;
+  height: 400px;
   margin-top: 15px;
 }
 /* Title */

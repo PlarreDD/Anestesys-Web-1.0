@@ -385,6 +385,8 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
     }
 };
 
+// ****** Estudios ******
+
 export const saveEstudios = async (req: any, res: Response) => {
     try {
         const { vid,
@@ -425,13 +427,86 @@ export const updateEstudios = async (req: any, res: Response) => {
     }
 };
 
-/* Función para obtener todos los estudios */
+/* Función para obtener los estudios */
 export const getEstudios = async (req: any, res: Response) => {
     try {
-        const estudios = await ValEstudios.find({id: req.id}) 
-        return res.json({estudios});
+        const {vid} = req.params;
+        
+        const estudio = await ValEstudios.find({vid:vid})        
+        return res.json({estudio});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Función para obtener un estudio */
+export const getEstudio = async (req: any, res: Response) => {
+    try {
+        const {id} = req.params;
+        
+        const estudio = await ValEstudios.aggregate([
+            {
+              $unwind: "$val_Estudios"
+            },
+            {
+              $match: {
+                "val_Estudios._id": id
+              }
+            }
+          ])
+    
+        console.log(JSON.stringify(estudio));
+        
+        return res.json({estudio});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Funcion para actualizar un estudio */
+export const updateEstudio = async (req: any, res: Response) => {
+    try {
+        const { vid } = req.params;
+        const { val_Estudios } = req.body;
+
+        const estudio = await ValEstudios.updateOne(
+            { vid: vid },
+            { $set:{
+                    val_Estudios: {
+                        estudio: val_Estudios[0],
+                        especifEstudio: val_Estudios[1],
+                        id: val_Estudios[2]
+                    }
+                }
+            },
+        );
+
+        if (!estudio) 
+            return res.status(404).json({ Error: "No existe el estudio." });        
+        
+        return res.json({ estudio });
+    } catch (error) {
+        if (error.kind === "ObjectId") {
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }        
+        return res.status(500).json({ error: "Error de servidor" });
+    }
+};
+
+/* Funcion para eliminar un estudio */
+export const deleteEstudio = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        const esudio = await ValEstudios.findByIdAndDelete(id);
+
+        return res.json({ esudio });
+    } catch (error) {
+        if (error.kind === "ObjectId") {
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
+        
+        return res.status(500).json({ error: "Error de servidor" });
     }
 };
 /********************************************************************/

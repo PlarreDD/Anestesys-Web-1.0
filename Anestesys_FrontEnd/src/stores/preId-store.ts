@@ -9,6 +9,7 @@ const userStore = useUserStore();
 export const usePreIdStore = defineStore('preid', {
     state: () => ({
         pacienteID: ref(null),
+        estudioID: ref(null),
         valoracionID: ref(null),
         estudios: ref(null),
     }),
@@ -229,7 +230,6 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {
                 this.valoracionID = res.data.preval._id;
-                console.log(this.valoracionID);
                 
                 swal.fire({
                     title: 'Datos guardados correctamente',
@@ -352,8 +352,10 @@ export const usePreIdStore = defineStore('preid', {
             });
         },
 
-        saveEstudios(estudios_Estudio: string, estudio_Especificaciones: string){
-            apiAxios({
+        // ******* ESTUDIOS ********
+
+        async saveEstudios(estudios_Estudio: string, estudio_Especificaciones: string){
+            await apiAxios({
                 url: "http://localhost:5000/estudios",
                 method: "POST",
                 headers: {
@@ -378,26 +380,10 @@ export const usePreIdStore = defineStore('preid', {
             .catch((e: any) => {
                 // console.log("error: " + e);
             });
-        },
-        
-        async getEstudiosList() {
-            await apiAxios({
-              url: "http://localhost:5000/estudios",
-              method: "GET",
-              headers: {
-                Authorization: "Bearer " + userStore.token,
-              },
-            })
-              .then((res: any) => {
-                this.estudios = res.data.estudios;                
-              })
-              .catch((e: any) => {
-              //   console.log(e);
-              });
-          },
+        },            
 
-        updateEstudios(estudios_Estudio: string, estudio_Especificaciones: string){
-            apiAxios({
+        async updateEstudios(estudios_Estudio: string, estudio_Especificaciones: string){
+            await apiAxios({
                 url: `http://localhost:5000/estudios/${String(this.valoracionID)}`,
                 method: "PUT",
                 headers: {
@@ -422,6 +408,40 @@ export const usePreIdStore = defineStore('preid', {
                 // console.log("error: " + e);
             });
         },
+
+        async getEstudio(estudioID) {
+            await apiAxios({
+              url: `http://localhost:5000/estudios/uno/${String(estudioID)}`,
+              method: "GET",
+              headers: {
+                Authorization: "Bearer " + userStore.token,
+              },
+            })
+              .then((res: any) => {
+                this.estudios = res.data.estudio;
+                console.log("store: "+JSON.stringify(this.estudios));                
+              })
+              .catch((e: any) => {
+              //   console.log(e);
+              });
+          },
+      
+
+        async getEstudiosList() {
+            await apiAxios({
+              url: `http://localhost:5000/estudios/${String(this.valoracionID)}`,
+              method: "GET",
+              headers: {
+                Authorization: "Bearer " + userStore.token,
+              },
+            })
+              .then((res: any) => {
+                this.estudios = res.data.estudio;                                
+              })
+              .catch((e: any) => {
+              //   console.log(e);
+              });
+          },
         /***************************** Plan ******************************/
         savePrePlan(infoPlan: any, pid: string){
             apiAxios({

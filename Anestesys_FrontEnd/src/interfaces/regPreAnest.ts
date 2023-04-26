@@ -87,6 +87,7 @@ export interface regValoracion{
     viaAerea_RiesgoAnestesico: string,
 
     // Estudios
+    estudio_Id: string,
     estudios_Estudio: string,
     estudio_Especificaciones: string,
 
