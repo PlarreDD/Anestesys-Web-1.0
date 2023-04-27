@@ -1290,9 +1290,13 @@ export default defineComponent({
 
             await preIdStore.getEstudio(id);
 
-            this.infoValoracion.estudio_Id = preIdStore.estudios._id;
-            this.infoValoracion.estudios_Estudio = preIdStore.estudios.estudio;
-            this.infoValoracion.estudio_Especificaciones = preIdStore.estudios.especifEstudio;
+            this.infoValoracion.estudio_Id = preIdStore.estudios.val_Estudios[0]._id;
+            this.infoValoracion.estudios_Estudio = preIdStore.estudios.val_Estudios[0].estudio;
+            this.infoValoracion.estudio_Especificaciones = preIdStore.estudios.val_Estudios[0].especifEstudio;
+
+            // console.log("Valoración: "+ JSON.stringify(preIdStore.estudios))
+            console.log(JSON.stringify(preIdStore.estudios.val_Estudios[0].estudio));
+            
 
             await this.listarEstudios();
         },

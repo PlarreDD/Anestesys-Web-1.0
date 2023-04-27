@@ -443,18 +443,10 @@ export const getEstudios = async (req: any, res: Response) => {
 export const getEstudio = async (req: any, res: Response) => {
     try {
         const {id} = req.params;
+
+        const estudio = await ValEstudios.findOne({ "val_Estudios._id": id }, { 'val_Estudios.$': 1 })
         
-        const estudio = await ValEstudios.aggregate([
-            {
-              $unwind: "$val_Estudios"
-            },
-            {
-              $match: {
-                "val_Estudios._id": id
-              }
-            }
-          ])
-    
+        console.log(id);          
         console.log(JSON.stringify(estudio));
         
         return res.json({estudio});
@@ -466,16 +458,15 @@ export const getEstudio = async (req: any, res: Response) => {
 /* Funcion para actualizar un estudio */
 export const updateEstudio = async (req: any, res: Response) => {
     try {
-        const { vid } = req.params;
+        const { id } = req.params;
         const { val_Estudios } = req.body;
 
-        const estudio = await ValEstudios.updateOne(
-            { vid: vid },
+        const estudio = await ValEstudios.findByIdAndUpdate(
+            { id: id },
             { $set:{
                     val_Estudios: {
                         estudio: val_Estudios[0],
                         especifEstudio: val_Estudios[1],
-                        id: val_Estudios[2]
                     }
                 }
             },

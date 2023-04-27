@@ -417,16 +417,14 @@ export const usePreIdStore = defineStore('preid', {
                 Authorization: "Bearer " + userStore.token,
               },
             })
-              .then((res: any) => {
-                this.estudios = res.data.estudio;
-                console.log("store: "+JSON.stringify(this.estudios));                
-              })
-              .catch((e: any) => {
-              //   console.log(e);
-              });
-          },
+            .then((res: any) => {
+            this.estudios = res.data.estudio;
+            })
+            .catch((e: any) => {
+            //   console.log(e);
+            });
+        },
       
-
         async getEstudiosList() {
             await apiAxios({
               url: `http://localhost:5000/estudios/${String(this.valoracionID)}`,
