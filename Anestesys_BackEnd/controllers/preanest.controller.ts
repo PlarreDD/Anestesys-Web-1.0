@@ -418,8 +418,7 @@ export const updateEstudios = async (req: any, res: Response) => {
                     especifEstudio: val_Estudios[1]
                 }
             }
-            },
-            { upsert: true, new: true });
+            });
         
         return res.json({ valest });
     } catch (error) {
@@ -446,9 +445,6 @@ export const getEstudio = async (req: any, res: Response) => {
 
         const estudio = await ValEstudios.findOne({ "val_Estudios._id": id }, { 'val_Estudios.$': 1 })
         
-        console.log(id);          
-        console.log(JSON.stringify(estudio));
-        
         return res.json({estudio});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
@@ -459,19 +455,18 @@ export const getEstudio = async (req: any, res: Response) => {
 export const updateEstudio = async (req: any, res: Response) => {
     try {
         const { id } = req.params;
-        const { val_Estudios } = req.body;
-
-        const estudio = await ValEstudios.findByIdAndUpdate(
-            { id: id },
-            { $set:{
-                    val_Estudios: {
-                        estudio: val_Estudios[0],
-                        especifEstudio: val_Estudios[1],
-                    }
-                }
+        // const { val_Estudios } = req.body;
+        
+        const estudio = await ValEstudios.updateOne({ "val_Estudios._id": id },
+            {
+                $set : {"val_Estudios.$.estudio" : "prueba2", "val_Estudios.$.especifEstudio" : "prueba2"}
             },
+            {
+                multi: true,
+                arrayFilters: [{'val_Estudios._id': id}]
+            }
         );
-
+            
         if (!estudio) 
             return res.status(404).json({ Error: "No existe el estudio." });        
         

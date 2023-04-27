@@ -819,17 +819,24 @@
                                 <!-- Botón Guardar/Agregar -->
                                 <div class="col-md-1 btn-abajo">                                    
 
-                                    <template v-if="btnActualizarEstudios === false">
+                                    <template v-if="btnAddEstudios === true">
                                         <button class="btn btn-guardar fw-bold"
                                             @click="guardarEstudios(infoValoracion.estudios_Estudio, infoValoracion.estudio_Especificaciones)">
-                                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>1
                                         </button>
                                     </template>
 
-                                    <template v-else>
+                                    <template v-if="btnUpdateEstudios === true">
                                         <button class="btn btn-guardar fw-bold"
                                             @click="actualizarEstudios(infoValoracion.estudios_Estudio, infoValoracion.estudio_Especificaciones)">
-                                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>2
+                                        </button>
+                                    </template>  
+
+                                    <template v-if="btnActualizaEstudio === true">
+                                        <button class="btn btn-guardar fw-bold"
+                                            @click="actualizarEstudio()">
+                                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>3
                                         </button>
                                     </template>  
                                 </div>
@@ -848,7 +855,7 @@
                                 </div>
 
                                 <input
-                                    type="hidden"
+                                    type="text"
                                     v-model="infoValoracion.estudio_Id"
                                 />
                             </div>
@@ -1233,6 +1240,7 @@
 import { defineComponent } from "vue";
 import { usePreIdStore } from "@/stores/preId-store";
 import type { regValoracion } from "@/interfaces/regPreAnest";
+import swal from "sweetalert2";
 
 const preIdStore = usePreIdStore();
 
@@ -1244,7 +1252,10 @@ export default defineComponent({
             infoValoracion: {} as regValoracion,
             preIdStore,
             btnActualizarValoracion:false,
-            btnActualizarEstudios:false            
+            
+            btnAddEstudios:true,
+            btnUpdateEstudios:false,
+            btnActualizaEstudio:false,
         }  
     },
 
@@ -1269,7 +1280,11 @@ export default defineComponent({
         },
 
         async guardarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
-            this.btnActualizarEstudios=true
+
+            this.btnAddEstudios=false
+            this.btnUpdateEstudios=true
+            this.btnActualizaEstudio=false
+            
             await preIdStore.saveEstudios(estudios_Estudio, estudio_Especificaciones);
             this.infoValoracion.estudios_Estudio = "";
             this.infoValoracion.estudio_Especificaciones = "";
@@ -1286,7 +1301,9 @@ export default defineComponent({
         },
 
         async cambiarBtnActualizar(id) {
-            //this.editar = true;
+            this.btnAddEstudios=false
+            this.btnUpdateEstudios=false
+            this.btnActualizaEstudio=true
 
             await preIdStore.getEstudio(id);
 
@@ -1294,11 +1311,36 @@ export default defineComponent({
             this.infoValoracion.estudios_Estudio = preIdStore.estudios.val_Estudios[0].estudio;
             this.infoValoracion.estudio_Especificaciones = preIdStore.estudios.val_Estudios[0].especifEstudio;
 
-            // console.log("Valoración: "+ JSON.stringify(preIdStore.estudios))
-            console.log(JSON.stringify(preIdStore.estudios.val_Estudios[0].estudio));
-            
-
             await this.listarEstudios();
+        },
+
+        async actualizarEstudio() {
+            if (this.infoValoracion.estudios_Estudio == "") {
+                swal.fire({
+                title: "Seleccione el estudio",
+                icon: "warning",
+                showConfirmButton: false,
+                showCloseButton: true,
+                toast: true,
+                timer: 2500,
+                timerProgressBar: true,
+                position: "top-end",
+                });
+            } else {
+                await preIdStore.updateEstudio(this.infoValoracion.estudio_Id, this.infoValoracion.estudios_Estudio, this.infoValoracion.estudio_Especificaciones);
+
+                console.log("Valoración: "+this.infoValoracion.estudio_Id, this.infoValoracion.estudios_Estudio, this.infoValoracion.estudio_Especificaciones);        
+
+                this.btnAddEstudios=false
+                this.btnUpdateEstudios=true
+                this.btnActualizaEstudio=false
+
+                this.infoValoracion.estudio_Id = "";
+                this.infoValoracion.estudios_Estudio = "";
+                this.infoValoracion.estudio_Especificaciones = "";
+
+                await this.listarEstudios();
+            }
         },
     }
 })

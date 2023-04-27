@@ -354,6 +354,22 @@ export const usePreIdStore = defineStore('preid', {
 
         // ******* ESTUDIOS ********
 
+        async getEstudiosList() {
+            await apiAxios({
+                url: `http://localhost:5000/estudios/${String(this.valoracionID)}`,
+                method: "GET",
+                headers: {
+                Authorization: "Bearer " + userStore.token,
+                },
+            })
+            .then((res: any) => {
+                this.estudios = res.data.estudio;                                
+            })
+            .catch((e: any) => {
+                //   console.log(e);
+            });
+        },
+
         async saveEstudios(estudios_Estudio: string, estudio_Especificaciones: string){
             await apiAxios({
                 url: "http://localhost:5000/estudios",
@@ -368,7 +384,7 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {
                 swal.fire({
-                    title: 'Datos actualizados correctamente',
+                    title: 'Datos agregados correctamente',
                     icon: 'success',
                     showConfirmButton: false,
                     toast: true,
@@ -395,7 +411,7 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {                
                 swal.fire({
-                    title: 'Datos actualizados correctamente',
+                    title: 'Datos agregados correctamente',
                     icon: 'success',
                     showConfirmButton: false,
                     toast: true,
@@ -425,21 +441,32 @@ export const usePreIdStore = defineStore('preid', {
             });
         },
       
-        async getEstudiosList() {
+        async updateEstudio(estudioId : string, estudios_Estudio: string, estudio_Especificaciones: string){
             await apiAxios({
-              url: `http://localhost:5000/estudios/${String(this.valoracionID)}`,
-              method: "GET",
-              headers: {
-                Authorization: "Bearer " + userStore.token,
-              },
+                url: `http://localhost:5000/estudios/uno/${String(this.estudioID)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    val_Estudios: [ estudios_Estudio, estudio_Especificaciones]
+                },                                                          
             })
-              .then((res: any) => {
-                this.estudios = res.data.estudio;                                
-              })
-              .catch((e: any) => {
-              //   console.log(e);
-              });
-          },
+            .then((res: any) => {                
+                swal.fire({
+                    title: 'Datos actualizados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
         /***************************** Plan ******************************/
         savePrePlan(infoPlan: any, pid: string){
             apiAxios({
