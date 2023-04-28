@@ -455,18 +455,14 @@ export const getEstudio = async (req: any, res: Response) => {
 export const updateEstudio = async (req: any, res: Response) => {
     try {
         const { id } = req.params;
-        // const { val_Estudios } = req.body;
+        const { val_Estudios } = req.body;       
         
         const estudio = await ValEstudios.updateOne({ "val_Estudios._id": id },
             {
-                $set : {"val_Estudios.$.estudio" : "prueba2", "val_Estudios.$.especifEstudio" : "prueba2"}
-            },
-            {
-                multi: true,
-                arrayFilters: [{'val_Estudios._id': id}]
+                $set : {"val_Estudios.$.estudio" : val_Estudios[0].estudio, "val_Estudios.$.especifEstudio" : val_Estudios[0].especifEstudio}
             }
         );
-            
+        
         if (!estudio) 
             return res.status(404).json({ Error: "No existe el estudio." });        
         
@@ -484,7 +480,7 @@ export const deleteEstudio = async (req: any, res: Response) => {
     try {
         const { id } = req.params;
 
-        const esudio = await ValEstudios.findByIdAndDelete(id);
+        const esudio = await ValEstudios.deleteOne({ "val_Estudios._id": id });
 
         return res.json({ esudio });
     } catch (error) {

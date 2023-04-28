@@ -1329,8 +1329,6 @@ export default defineComponent({
             } else {
                 await preIdStore.updateEstudio(this.infoValoracion.estudio_Id, this.infoValoracion.estudios_Estudio, this.infoValoracion.estudio_Especificaciones);
 
-                console.log("Valoración: "+this.infoValoracion.estudio_Id, this.infoValoracion.estudios_Estudio, this.infoValoracion.estudio_Especificaciones);        
-
                 this.btnAddEstudios=false
                 this.btnUpdateEstudios=true
                 this.btnActualizaEstudio=false
