@@ -138,8 +138,8 @@ export const usePreIdStore = defineStore('preid', {
             });
         },
         /*************************** Valoración **************************/
-        savePreAntecedentes(infoValoracion: any, pid: string){
-            apiAxios({
+        async savePreAntecedentes(infoValoracion: any, pid: string){
+            await apiAxios({
                 url: "http://localhost:5000/valora",
                 method: "POST",
                 headers: {
@@ -456,7 +456,7 @@ export const usePreIdStore = defineStore('preid', {
             .then((res: any) => {    
                             
                 swal.fire({
-                    title: 'Datos actualizados correctamente',
+                    title: 'Estudio actualizado correctamente',
                     icon: 'success',
                     showConfirmButton: false,
                     toast: true,
@@ -469,6 +469,31 @@ export const usePreIdStore = defineStore('preid', {
                 // console.log("error: " + e);
             });
         },
+
+        async deleteEstudio(estudioId : string) {
+            await apiAxios({
+              url: `http://localhost:5000/estudios/${String(estudioId)}`,
+              method: "DELETE",
+              headers: {
+                Authorization: "Bearer " + userStore.token,
+              },
+            })
+              .then((res: any) => {
+      
+                swal.fire({
+                  title: "Estudio eliminado correctamente",
+                  icon: "success",
+                  showConfirmButton: false,
+                  toast: true,
+                  position: "top-end",
+                  timer: 2500,
+                  timerProgressBar: true,
+                });
+              })
+              .catch((e: any) => {
+              //   console.log(e);
+              });
+          },
         /***************************** Plan ******************************/
         savePrePlan(infoPlan: any, pid: string){
             apiAxios({

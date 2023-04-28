@@ -822,21 +822,21 @@
                                     <template v-if="btnAddEstudios === true">
                                         <button class="btn btn-guardar fw-bold"
                                             @click="guardarEstudios(infoValoracion.estudios_Estudio, infoValoracion.estudio_Especificaciones)">
-                                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>1
+                                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
                                         </button>
                                     </template>
 
                                     <template v-if="btnUpdateEstudios === true">
                                         <button class="btn btn-guardar fw-bold"
                                             @click="actualizarEstudios(infoValoracion.estudios_Estudio, infoValoracion.estudio_Especificaciones)">
-                                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>2
+                                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
                                         </button>
                                     </template>  
 
                                     <template v-if="btnActualizaEstudio === true">
                                         <button class="btn btn-guardar fw-bold"
                                             @click="actualizarEstudio()">
-                                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>3
+                                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
                                         </button>
                                     </template>  
                                 </div>
@@ -850,12 +850,12 @@
                                             v-model="infoValoracion.estudio_Especificaciones"
                                             :class="infoValoracion.estudio_Especificaciones != '' && infoValoracion.estudio_Especificaciones != undefined ?
                                                     'form-control border border-success formSombra' : 'form-control'"
-                                                    maxlength="200">
+                                                    maxlength="300">
                                     </textarea>
                                 </div>
 
                                 <input
-                                    type="text"
+                                    type="hidden"
                                     v-model="infoValoracion.estudio_Id"
                                 />
                             </div>
@@ -869,7 +869,6 @@
                                         <thead>
                                             <tr>
                                                 <!-- <th class="color-texto-tabla">#</th> -->
-                                                <th>id</th>
                                                 <th class="color-texto-tabla">Estudio</th>
                                                 <th class="color-texto-tabla">Especificación</th>
                                                 <th class=""></th>
@@ -888,33 +887,26 @@
                                             >
                                                 <!-- <td class="text-black">{{ index + 1 }}</td> -->
                                                 <td class="text-black">
-                                                    {{ estudioTipo._id }}                                                
-                                                </td>
-                                                <td class="text-black">
                                                     {{ estudioTipo.estudio}}
-                                                </td> 
-                                                <td class="text-black">
+                                                </td>
+                                                <td class="text-black td-ajuste">
                                                     {{ estudioTipo.especifEstudio}}
                                                 </td>                                            
                                                 <td>
-                                                <button
-                                                    class="btn"
-                                                    @click="">
+                                                <button class="btn" @click="cambiarBtnActualizar(estudioTipo._id)">
                                                     <font-awesome-icon 
                                                     icon="fa-solid fa-pen-to-square" 
                                                     size="lg" 
                                                     class="text-black"
-                                                    @click="cambiarBtnActualizar(estudioTipo._id)"/>
+                                                    />
                                                 </button>
                                                 </td>
                                                 <td>
-                                                <button
-                                                    class="btn"
-                                                    @click=""
-                                                >
+                                                <button class="btn" @click="validaEliminarMedicamento(estudioTipo._id)">
                                                     <font-awesome-icon 
                                                         icon="fa-solid fa-trash" 
-                                                        size="lg" class="text-black"/>
+                                                        size="lg" class="text-black"
+                                                        />
                                                 </button>
                                                 </td>
                                             </tr>
@@ -1281,6 +1273,10 @@ export default defineComponent({
 
         async guardarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
 
+            this.btnActualizarValoracion=true
+
+            await preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
+
             this.btnAddEstudios=false
             this.btnUpdateEstudios=true
             this.btnActualizaEstudio=false
@@ -1339,6 +1335,27 @@ export default defineComponent({
 
                 await this.listarEstudios();
             }
+        },
+
+        async validaEliminarMedicamento(idEstudio) {
+            swal
+                .fire({
+                html: "¿Esta seguro de eliminar el estudio?",
+                icon: "warning",
+                showConfirmButton: true,
+                showCancelButton: true,
+                toast: true,
+                })
+                .then((result) => {
+                if (result.isConfirmed) {
+                    this.eliminarEstudio(idEstudio);
+                }
+                });
+        },
+
+        async eliminarEstudio(idEstudio) {
+            await preIdStore.deleteEstudio(idEstudio);
+            await this.listarEstudios();
         },
     }
 })
@@ -1449,6 +1466,12 @@ h5{
   height: 400px;
   margin-top: 15px;
 }
+.deslizar-celda{
+  overflow: scroll;
+  overflow-x: hidden;
+  height: auto;
+  margin-top: 15px;
+}
 /* Title */
 [data-title]:hover:after {
     opacity: 1;
@@ -1476,4 +1499,19 @@ h5{
     position: relative;
     cursor: pointer
 }
+
+/* table{
+    table-layout: fixed;
+    width: 100%;
+} */
+
+.td-ajuste{
+    width:500px; 
+    height:80px; 
+    word-wrap: break-word; 
+    overflow-y: scroll; 
+    overflow-x: hidden; 
+    display: block;
+}
+
 </style>

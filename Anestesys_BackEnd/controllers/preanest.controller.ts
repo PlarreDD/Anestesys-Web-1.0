@@ -483,16 +483,11 @@ export const deleteEstudio = async (req: any, res: Response) => {
     try {
         const { id } = req.params;
 
-        const esudio = await ValEstudios.deleteOne({ "val_Estudios._id": id },
-            // {
-            //     $set : {
-            //                 "val_Estudios.$.estudio" : val_Estudios[0].estudio, 
-            //                 "val_Estudios.$.especifEstudio" : val_Estudios[0].especifEstudio
-            //             }
-            // }
-        );        
-
-        return res.json({ esudio });
+        const estudio = await ValEstudios.findOneAndUpdate({ "val_Estudios._id": id },
+            { $pull: { val_Estudios: { _id: id } } }        
+        );              
+       
+        return res.json({ estudio });
     } catch (error) {
         if (error.kind === "ObjectId") {
             return res.status(403).json({ error: "Formato de ID incorrecto" });
