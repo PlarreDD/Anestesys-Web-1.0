@@ -295,7 +295,7 @@
                         </div>
                         
                         <!-- Botón Guardar/Actualizar -->
-                        <div class="col-md-2 alinear-boton">
+                        <div class="col-md-2">
                             <template v-if="btnActualizarValoracion === false">
                                 <button data-bs-toggle="tab" 
                                     type="submit"
@@ -542,7 +542,7 @@
 
             <!-- Div Formulario Vía Aérea -->
             <div class="tab-pane fade" id="via">
-                <div class="col-12 bordePrincipal largoContenedor">
+                <div class="col-12 bordePrincipal">
                     <form @submit.prevent="" class="row g-3">
                         <h5 class="fw-bold"> VALORACIÓN DE VÍA AÉREA Y OTRAS ESCALAS </h5>
                         
@@ -610,7 +610,7 @@
                         </div>
                         
                         <!-- Protusión Mandibular -->
-                        <div class="col-md-6">
+                        <div class="col-md-10">
                             <label for="inputState" class="form-label fw-bold"> Protusión Mandibular </label>
                             <select id="inputState"
                                     class="form-select"
@@ -625,7 +625,7 @@
                         </div>
 
                         <!-- IPID -->
-                        <div class="col-md-6">
+                        <div class="col-md-10">
                             <label for="inputState" class="form-label fw-bold"> IPID </label>
                             <select id="inputState"
                                     class="form-select"
@@ -763,8 +763,9 @@
                             </select>
                         </div>
 
+                        <div class="col-md-10"></div>
                         <!-- Botón Guardar/Actualizar -->
-                        <div class="col-md-12 margenBoton">
+                        <div class="col-md-2 btn-abajo">
                             <template v-if="btnActualizarValoracion === false">
                                 <button data-bs-toggle="tab" 
                                     type="submit"
@@ -785,50 +786,137 @@
 
             <!-- Div Formulario Estudios -->
             <div class="tab-pane fade" id="estudios">
-                <div class="col-12 bordePrincipal largoContenedor">
+                <div class="col-12 bordePrincipal">
                     <form @submit.prevent="" class="row g-3">
                         <h5 class="fw-bold fw-bold">ESTUDIOS</h5>           
                         
-                        <!-- Estudio -->
-                        <div class="col-md-8">
-                            <label for="inputState" class="form-label fw-bold">Estudio</label>
-                            <select id="inputState"
-                                    class="form-select"
-                                    v-model="infoValoracion.estudios_Estudio"
-                                    :class="infoValoracion.estudios_Estudio != undefined && infoValoracion.estudios_Estudio ?
-                                           'form-control border border-success formSombra' : 'form-control'">
-                                <option selected></option>
-                                <option>Electrocardiograma</option>
-                                <option>Electroencefalograma</option>
-                                <option>Electromiograma</option>
-                                <option>Espirometría</option>
-                                <option>Hemodinamia</option>
-                                <option>Pruebas de Función Pulmonar</option>
-                                <option>Rayos X</option>
-                                <option>Resonancia Magnetica</option>
-                                <option>Tomografia Axial Computalizada</option>
-                                <option>Tromboelastograma</option>
-                                <option>Ultrasonido</option>
-                                <option>Otros Estudios</option>
-                            </select>
-                        </div>       
-                        
-                        <!-- Botón Guardar/Actualizar -->
-                        <div class="col-md-2">
-                            <button class="btn btn-outline-secondary fw-bold margenBoton">Guardar</button>
-                        </div>
-                        
-                        <!-- Especificaciones -->
                         <div class="col-md-12">
-                            <label for="" class="form-label fw-bold">Específicar</label>
-                            <textarea class="form-control"
-                                      id=""
-                                      rows="3"
-                                      v-model="infoValoracion.estudio_Especificaciones"
-                                      :class="infoValoracion.estudio_Especificaciones != '' && infoValoracion.estudio_Especificaciones != undefined ?
-                                             'form-control border border-success formSombra' : 'form-control'">
-                            </textarea>
+                            <div class="row g-3">
+                                <!-- Estudio -->
+                                <div class="col-md-5">
+                                    <label for="inputState" class="form-label fw-bold">Estudio</label>
+                                    <select id="inputState"
+                                            class="form-select"
+                                            v-model="infoValoracion.estudios_Estudio"
+                                            :class="infoValoracion.estudios_Estudio != undefined && infoValoracion.estudios_Estudio ?
+                                                'form-control border border-success formSombra' : 'form-control'">
+                                        <option selected></option>
+                                        <option>Electrocardiograma</option>
+                                        <option>Electroencefalograma</option>
+                                        <option>Electromiograma</option>
+                                        <option>Espirometría</option>
+                                        <option>Hemodinamia</option>
+                                        <option>Pruebas de Función Pulmonar</option>
+                                        <option>Rayos X</option>
+                                        <option>Resonancia Magnetica</option>
+                                        <option>Tomografia Axial Computalizada</option>
+                                        <option>Tromboelastograma</option>
+                                        <option>Ultrasonido</option>
+                                        <option>Otros Estudios</option>
+                                    </select>
+                                </div>       
+                                
+                                <!-- Botón Guardar/Agregar -->
+                                <div class="col-md-1 btn-abajo">                                    
+
+                                    <template v-if="btnAddEstudios === true">
+                                        <button class="btn btn-guardar fw-bold"
+                                            @click="guardarEstudios(infoValoracion.estudios_Estudio, infoValoracion.estudio_Especificaciones)">
+                                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                                        </button>
+                                    </template>
+
+                                    <template v-if="btnUpdateEstudios === true">
+                                        <button class="btn btn-guardar fw-bold"
+                                            @click="actualizarEstudios(infoValoracion.estudios_Estudio, infoValoracion.estudio_Especificaciones)">
+                                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                                        </button>
+                                    </template>  
+
+                                    <template v-if="btnActualizaEstudio === true">
+                                        <button class="btn btn-guardar fw-bold"
+                                            @click="actualizarEstudio()">
+                                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                                        </button>
+                                    </template>  
+                                </div>
+                                
+                                <!-- Especificaciones -->
+                                <div class="col-md-10">
+                                    <label for="" class="form-label fw-bold">Específicar</label>
+                                    <textarea class="form-control"
+                                            id=""
+                                            rows="3"
+                                            v-model="infoValoracion.estudio_Especificaciones"
+                                            :class="infoValoracion.estudio_Especificaciones != '' && infoValoracion.estudio_Especificaciones != undefined ?
+                                                    'form-control border border-success formSombra' : 'form-control'"
+                                                    maxlength="300">
+                                    </textarea>
+                                </div>
+
+                                <input
+                                    type="hidden"
+                                    v-model="infoValoracion.estudio_Id"
+                                />
+                            </div>
                         </div>
+
+                        <div class="col-md-12">
+                            <div class="row g-3">
+                                
+                                <div class="deslizar">
+                                    <table class="table table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <!-- <th class="color-texto-tabla">#</th> -->
+                                                <th class="color-texto-tabla">Estudio</th>
+                                                <th class="color-texto-tabla">Especificación</th>
+                                                <th class=""></th>
+                                                <th class=""></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody 
+                                            v-for="(
+                                                estudio
+                                            ) in preIdStore.estudios"
+                                        >
+                                            <tr
+                                                v-for="(
+                                                    estudioTipo, index
+                                                ) in estudio.val_Estudios"                                   
+                                            >
+                                                <!-- <td class="text-black">{{ index + 1 }}</td> -->
+                                                <td class="text-black">
+                                                    {{ estudioTipo.estudio}}
+                                                </td>
+                                                <td class="text-black td-ajuste">
+                                                    {{ estudioTipo.especifEstudio}}
+                                                </td>                                            
+                                                <td>
+                                                <button class="btn" @click="cambiarBtnActualizar(estudioTipo._id)">
+                                                    <font-awesome-icon 
+                                                    icon="fa-solid fa-pen-to-square" 
+                                                    size="lg" 
+                                                    class="text-black"
+                                                    />
+                                                </button>
+                                                </td>
+                                                <td>
+                                                <button class="btn" @click="validaEliminarMedicamento(estudioTipo._id)">
+                                                    <font-awesome-icon 
+                                                        icon="fa-solid fa-trash" 
+                                                        size="lg" class="text-black"
+                                                        />
+                                                </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        
                     </form>
                 </div>            
             </div>
@@ -843,7 +931,7 @@
                         </div>
 
                         <!-- Botón Guardar/Actualizar -->
-                        <div class="col-md-2 margenBoton">
+                        <div class="col-md-2 btn-abajo">
                             <template v-if="btnActualizarValoracion === false">
                                 <button data-bs-toggle="tab" 
                                     type="submit"
@@ -1144,6 +1232,7 @@
 import { defineComponent } from "vue";
 import { usePreIdStore } from "@/stores/preId-store";
 import type { regValoracion } from "@/interfaces/regPreAnest";
+import swal from "sweetalert2";
 
 const preIdStore = usePreIdStore();
 
@@ -1155,7 +1244,15 @@ export default defineComponent({
             infoValoracion: {} as regValoracion,
             preIdStore,
             btnActualizarValoracion:false,
+            
+            btnAddEstudios:true,
+            btnUpdateEstudios:false,
+            btnActualizaEstudio:false,
         }  
+    },
+
+    mounted() {
+        preIdStore.getEstudiosList();
     },
 
     methods: {
@@ -1168,6 +1265,97 @@ export default defineComponent({
             this.btnActualizarValoracion=true
 
             preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
+        },
+
+        async listarEstudios() {
+            await preIdStore.getEstudiosList();
+        },
+
+        async guardarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
+
+            this.btnActualizarValoracion=true
+
+            await preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
+
+            this.btnAddEstudios=false
+            this.btnUpdateEstudios=true
+            this.btnActualizaEstudio=false
+            
+            await preIdStore.saveEstudios(estudios_Estudio, estudio_Especificaciones);
+            this.infoValoracion.estudios_Estudio = "";
+            this.infoValoracion.estudio_Especificaciones = "";
+
+            await this.listarEstudios();
+        },
+
+        async actualizarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
+            await preIdStore.updateEstudios(estudios_Estudio, estudio_Especificaciones);
+            this.infoValoracion.estudios_Estudio = "";
+            this.infoValoracion.estudio_Especificaciones = "";
+
+            await this.listarEstudios();
+        },
+
+        async cambiarBtnActualizar(id) {
+            this.btnAddEstudios=false
+            this.btnUpdateEstudios=false
+            this.btnActualizaEstudio=true
+
+            await preIdStore.getEstudio(id);
+
+            this.infoValoracion.estudio_Id = preIdStore.estudios.val_Estudios[0]._id;
+            this.infoValoracion.estudios_Estudio = preIdStore.estudios.val_Estudios[0].estudio;
+            this.infoValoracion.estudio_Especificaciones = preIdStore.estudios.val_Estudios[0].especifEstudio;
+
+            await this.listarEstudios();
+        },
+
+        async actualizarEstudio() {
+            if (this.infoValoracion.estudios_Estudio == "") {
+                swal.fire({
+                title: "Seleccione el estudio",
+                icon: "warning",
+                showConfirmButton: false,
+                showCloseButton: true,
+                toast: true,
+                timer: 2500,
+                timerProgressBar: true,
+                position: "top-end",
+                });
+            } else {
+                await preIdStore.updateEstudio(this.infoValoracion.estudio_Id, this.infoValoracion.estudios_Estudio, this.infoValoracion.estudio_Especificaciones);
+
+                this.btnAddEstudios=false
+                this.btnUpdateEstudios=true
+                this.btnActualizaEstudio=false
+
+                this.infoValoracion.estudio_Id = "";
+                this.infoValoracion.estudios_Estudio = "";
+                this.infoValoracion.estudio_Especificaciones = "";
+
+                await this.listarEstudios();
+            }
+        },
+
+        async validaEliminarMedicamento(idEstudio) {
+            swal
+                .fire({
+                html: "¿Esta seguro de eliminar el estudio?",
+                icon: "warning",
+                showConfirmButton: true,
+                showCancelButton: true,
+                toast: true,
+                })
+                .then((result) => {
+                if (result.isConfirmed) {
+                    this.eliminarEstudio(idEstudio);
+                }
+                });
+        },
+
+        async eliminarEstudio(idEstudio) {
+            await preIdStore.deleteEstudio(idEstudio);
+            await this.listarEstudios();
         },
     }
 })
@@ -1205,6 +1393,9 @@ h5{
 .largoContenedor{
     height: 535px
 }
+.btn-abajo{
+    align-self: flex-end;   
+}
 .formSombra:focus{
     border-color:#6BD99B;
     outline:0;
@@ -1217,6 +1408,9 @@ h5{
 }
 .centrar-li{
   justify-content: center; 
+}
+.color-texto-tabla{
+    color: #002D60;
 }
 /* Botones */
 .btn-nav-bar{
@@ -1241,7 +1435,20 @@ h5{
     --bs-btn-active-bg: #E88300;
     --bs-btn-active-color: #ffffff;
     --bs-btn-active-border-color: #E88300;
-    width: 150px;        
+    width: 100%;        
+}
+.btn-guardar{
+    --bs-btn-bg: none;
+    --bs-btn-color: #A0A6B2;    
+    --bs-btn-border-color: #E88300;
+    --bs-btn-hover-bg: #edeff3;
+    --bs-btn-hover-color: #E88300;
+    --bs-btn-hover-border-color: #E88300;          
+    --bs-btn-active-bg: none;
+    --bs-btn-active-color: #E88300;
+    --bs-btn-active-border-color: #E88300;
+    width: 100%;    
+    border: none;        
 }
 /* Margenes */
 .margen-input{
@@ -1250,20 +1457,19 @@ h5{
 .margenRadio{
     margin-right: 10px;
 }
-.margenBoton{
-    margin-top: 32px;
-    text-align: end;
-}
-.alinear-boton{
-    text-align: end;
-}
 .margen-tabaquismo{
     margin-top: 25px;
 }
 .deslizar {
   overflow: scroll;
   overflow-x: hidden;
-  height: 270px;
+  height: 400px;
+  margin-top: 15px;
+}
+.deslizar-celda{
+  overflow: scroll;
+  overflow-x: hidden;
+  height: auto;
   margin-top: 15px;
 }
 /* Title */
@@ -1293,4 +1499,19 @@ h5{
     position: relative;
     cursor: pointer
 }
+
+/* table{
+    table-layout: fixed;
+    width: 100%;
+} */
+
+.td-ajuste{
+    width:500px; 
+    height:80px; 
+    word-wrap: break-word; 
+    overflow-y: scroll; 
+    overflow-x: hidden; 
+    display: block;
+}
+
 </style>

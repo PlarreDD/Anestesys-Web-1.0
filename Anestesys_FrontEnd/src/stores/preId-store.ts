@@ -9,6 +9,9 @@ const userStore = useUserStore();
 export const usePreIdStore = defineStore('preid', {
     state: () => ({
         pacienteID: ref(null),
+        estudioID: ref(null),
+        valoracionID: ref(null),
+        estudios: ref(null),
     }),
 
     actions: {
@@ -135,8 +138,8 @@ export const usePreIdStore = defineStore('preid', {
             });
         },
         /*************************** Valoración **************************/
-        savePreAntecedentes(infoValoracion: any, pid: string){
-            apiAxios({
+        async savePreAntecedentes(infoValoracion: any, pid: string){
+            await apiAxios({
                 url: "http://localhost:5000/valora",
                 method: "POST",
                 headers: {
@@ -226,6 +229,8 @@ export const usePreIdStore = defineStore('preid', {
                 },
             })
             .then((res: any) => {
+                this.valoracionID = res.data.preval._id;
+                
                 swal.fire({
                     title: 'Datos guardados correctamente',
                     icon: 'success',
@@ -346,6 +351,149 @@ export const usePreIdStore = defineStore('preid', {
                 // console.log("error: " + e);
             });
         },
+
+        // ******* ESTUDIOS ********
+
+        async getEstudiosList() {
+            await apiAxios({
+                url: `http://localhost:5000/estudios/${String(this.valoracionID)}`,
+                method: "GET",
+                headers: {
+                Authorization: "Bearer " + userStore.token,
+                },
+            })
+            .then((res: any) => {
+                this.estudios = res.data.estudio;                                
+            })
+            .catch((e: any) => {
+                //   console.log(e);
+            });
+        },
+
+        async saveEstudios(estudios_Estudio: string, estudio_Especificaciones: string){
+            await apiAxios({
+                url: "http://localhost:5000/estudios",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    vid: this.valoracionID,
+                    val_Estudios: [ estudios_Estudio, estudio_Especificaciones]
+                },
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos agregados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },            
+
+        async updateEstudios(estudios_Estudio: string, estudio_Especificaciones: string){
+            await apiAxios({
+                url: `http://localhost:5000/estudios/${String(this.valoracionID)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    val_Estudios: [ estudios_Estudio, estudio_Especificaciones]
+                },                
+            })
+            .then((res: any) => {                
+                swal.fire({
+                    title: 'Datos agregados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
+
+        async getEstudio(estudioID) {
+            await apiAxios({
+              url: `http://localhost:5000/estudios/uno/${String(estudioID)}`,
+              method: "GET",
+              headers: {
+                Authorization: "Bearer " + userStore.token,
+              },
+            })
+            .then((res: any) => {
+            this.estudios = res.data.estudio;
+            })
+            .catch((e: any) => {
+            //   console.log(e);
+            });
+        },
+      
+        async updateEstudio(estudioId : string, estudios_Estudio: string, estudio_Especificaciones: string){
+            
+            await apiAxios({
+                url: `http://localhost:5000/estudios/uno/${String(estudioId)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    val_Estudios: [ {"estudio":estudios_Estudio, "especifEstudio":estudio_Especificaciones}]
+                },                                                          
+            })
+            .then((res: any) => {    
+                            
+                swal.fire({
+                    title: 'Estudio actualizado correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })                
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
+
+        async deleteEstudio(estudioId : string) {
+            await apiAxios({
+              url: `http://localhost:5000/estudios/${String(estudioId)}`,
+              method: "DELETE",
+              headers: {
+                Authorization: "Bearer " + userStore.token,
+              },
+            })
+              .then((res: any) => {
+      
+                swal.fire({
+                  title: "Estudio eliminado correctamente",
+                  icon: "success",
+                  showConfirmButton: false,
+                  toast: true,
+                  position: "top-end",
+                  timer: 2500,
+                  timerProgressBar: true,
+                });
+              })
+              .catch((e: any) => {
+              //   console.log(e);
+              });
+          },
         /***************************** Plan ******************************/
         savePrePlan(infoPlan: any, pid: string){
             apiAxios({

@@ -76,7 +76,7 @@ const PreIdPacienteCxSchema = new Schema({
     /* Id del paciente para enlazar la tabla */
     pid: {
         type: Schema.Types.ObjectId,
-        ref: 'IdPacientes',
+        ref: 'PreIdPacientes',
         required: true,
     },
 
@@ -147,12 +147,12 @@ const PreValoracionSchema = new Schema({
     /* Id del paciente para enlazar la tabla */
     pid: {
         type: Schema.Types.ObjectId,
-        ref: 'IdPacientes',
+        ref: 'PreIdPacientes',
         required: true,
     },
     /* Antecedentes */
     // Personales Patológicos
-    antPersPat_Alergias: {
+    antPersPat_Alergias: { 
         type: String,
     },
 
@@ -439,15 +439,28 @@ const PreValoracionSchema = new Schema({
     perfilBioQ_Otros: {
         type: String,
     },
-    // Estudios
-
 });
+
+const ValEstudiosSchema = new Schema({
+    /* Id de la valoración para enlazar la tabla */
+    vid: {
+        type: Schema.Types.ObjectId,
+        ref: 'PreVal',
+        required: true,
+    },
+    // Estudios
+    val_Estudios: [{
+        estudio: { type: String },
+        especifEstudio: { type: String },
+    }],
+});
+
 /* Plan */
 const PrePlanSchema = new Schema({
     /* Id del paciente para enlazar la tabla */
     pid: {
         type: Schema.Types.ObjectId,
-        ref: 'IdPacientes',
+        ref: 'PreIdPacientes',
         required: true,
     },
     // Posicion y Cuidados
@@ -685,7 +698,7 @@ const PreNotaSchema = new Schema({
     /* Id del paciente para enlazar la tabla */
     pid: {
         type: Schema.Types.ObjectId,
-        ref: 'IdPacientes',
+        ref: 'PreIdPacientes',
         required: true,
     },
 
@@ -697,6 +710,7 @@ const PreNotaSchema = new Schema({
 
 export const PreIdPacientes = model('PreIdPacientes', PreIdPacienteSchema);
 export const PreIdPacientesCx = model('PreIdPacientesCx', PreIdPacienteCxSchema);
-export const PreVal = model('PreVal', PreValoracionSchema);
+export const PreValoracion = model('PreVal', PreValoracionSchema);
+export const ValEstudios = model('PreEst', ValEstudiosSchema);
 export const PrePlan = model('PrePlan', PrePlanSchema);
 export const PreNota = model('PreNota', PreNotaSchema);
