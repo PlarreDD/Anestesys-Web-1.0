@@ -353,7 +353,6 @@ export const usePreIdStore = defineStore('preid', {
         },
 
         // ******* ESTUDIOS ********
-
         async getEstudiosList() {
             await apiAxios({
                 url: `http://localhost:5000/estudios/${String(this.valoracionID)}`,

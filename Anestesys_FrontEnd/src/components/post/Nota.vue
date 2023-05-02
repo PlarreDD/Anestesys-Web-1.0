@@ -2,7 +2,7 @@
     <div>
         <ul class="nav nav-pills mb-3 text-center" id="">
             <li class="nav-item col-md-6" >
-                <button class="btn btn-outline-secondary fw-bold active"
+                <button class="btn btn-nav-bar fw-bold active"
                         id="nota"
                         data-bs-toggle="pill"
                         data-bs-target="#notaPost"
@@ -11,7 +11,7 @@
             </li>
 
             <li class="nav-item col-md-6" >
-                <button class="btn btn-outline-secondary fw-bold"
+                <button class="btn btn-nav-bar fw-bold"
                         id="nota"
                         data-bs-toggle="pill"
                         data-bs-target="#caso"
@@ -303,5 +303,17 @@ legend.bordeScheduler {
     --bs-btn-active-bg: #002d60;
     --bs-btn-active-border-color: #ced4da;
     --bs-btn-bg: #ffffff;
+}
+.btn-nav-bar{
+    --bs-btn-bg: #fff;
+    --bs-btn-color: #002D60;    
+    --bs-btn-border-color: #fff;
+    --bs-btn-hover-bg: #A0A6B2;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #A0A6B2;          
+    --bs-btn-active-bg: #A0A6B2;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-border-color: #A0A6B2;
+    height: auto;
 }
 </style>
