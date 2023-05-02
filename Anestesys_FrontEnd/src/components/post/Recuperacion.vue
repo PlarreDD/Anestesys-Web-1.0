@@ -43,7 +43,7 @@
                             <textarea class="form-control"
                                       id=""
                                       v-model="infoRec.notaEval_Obs"
-                                      rows="20"></textarea>
+                                      rows="15"></textarea>
                         </div>                        
 
                         <div class="col-md-10"></div>
