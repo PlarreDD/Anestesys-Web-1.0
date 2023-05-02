@@ -736,11 +736,18 @@
 <script lang="ts">
 import type { regRecuperacion } from "@/interfaces/regPostAnest";
 import { defineComponent } from "vue";
+import { usePostAnestStore } from "../../stores/postAnest-store";
+import { usePreIdStore } from "@/stores/preId-store";
+
+const postAnestStore = usePostAnestStore();
+const preIdStore = usePreIdStore();
 
 export default defineComponent({
     data() {
         return{
             infoRec: {} as regRecuperacion,
+            postAnestStore,
+            preIdStore,
         }
     },
  })
