@@ -31,7 +31,7 @@
 
         <div class="tab-content col-md-12" id="">
             <!-- Nota de Evaluación de UCPA -->
-            <div class="tab-pane fade show active">
+            <div class="tab-pane fade show active" id="notaEvaluacion">
 
                 <div class="col-12 bordePrincipal">
                     <form @submit.prevent="" class="row g-3">
@@ -61,7 +61,7 @@
                                 <button data-bs-toggle="tab" 
                                         type="submit"
                                         class="btn btn-guardar-info fw-bold"
-                                        @click=""
+                                        @click="postAnestStore.updateNotaUCPA(infoRec, preIdStore.pacienteID._id)"
                                         > ACTUALIZAR </button> 
                             </template>
                         </div>
@@ -781,6 +781,7 @@ export default defineComponent({
             this.btnActualizarRecuperacion=true
 
             // Método Guardar
+            postAnestStore.saveNotaUCPA(this.infoRec, preIdStore.pacienteID._id);
         }
     }
  })
