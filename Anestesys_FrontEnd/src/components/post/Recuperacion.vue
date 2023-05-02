@@ -1,8 +1,8 @@
 <template>
     <div>
-        <ul class="nav nav-pills mb-3 text-center" id="">
+        <ul class="nav nav-pills mb-3 text-center centrar-li" id="">
             <li class="nav-item col-md-4" >
-                <button class="btn btn-outline-secondary fw-bold active"
+                <button class="btn btn-nav-bar fw-bold active"
                         id="recuperacion"
                         data-bs-toggle="pill"
                         data-bs-target="#notaEvaluacion"
@@ -11,7 +11,7 @@
             </li>
 
             <li class="nav-item col-md-4" >
-                <button class="btn btn-outline-secondary fw-bold"
+                <button class="btn btn-nav-bar fw-bold"
                         id="recuperacion"
                         data-bs-toggle="pill"
                         data-bs-target="#aldrete"
@@ -20,7 +20,7 @@
             </li>
 
             <li class="nav-item col-md-4" >
-                <button class="btn btn-outline-secondary fw-bold"
+                <button class="btn btn-nav-bar fw-bold"
                         id="recuperacion"
                         data-bs-toggle="pill"
                         data-bs-target="#alta"
@@ -31,16 +31,39 @@
 
         <div class="tab-content col-md-12" id="">
             <!-- Nota de Evaluación de UCPA -->
-            <div class="tab-pane fade show active" id="notaEvaluacion">
+            <div class="tab-pane fade show active">
+
                 <div class="col-12 bordePrincipal">
-                    <form class="row g-3">
+                    <form @submit.prevent="" class="row g-3">
+
+                        <h5 class="fw-bold">NOTA DE EVALUACIÓN UCPA</h5>
+
                         <!-- Observaciones -->
-                        <div class="col-md-12">
-                            <label for="" class="form-label">Observaciones</label>
+                        <div class="col-md-12">                            
                             <textarea class="form-control"
                                       id=""
                                       v-model="infoRec.notaEval_Obs"
                                       rows="20"></textarea>
+                        </div>                        
+
+                        <div class="col-md-10"></div>
+
+                        <!-- Botón Guardar/Actualizar -->
+                        <div class="col-md-2">                            
+                            <template v-if="btnActualizarRecuperacion === false">
+                                <button data-bs-toggle="tab" 
+                                        type="submit"
+                                        class="btn btn-guardar-info fw-bold"
+                                        @click="cambiarUpdateRecup"
+                                        > GUARDAR </button>
+                            </template>
+                            <template v-else>
+                                <button data-bs-toggle="tab" 
+                                        type="submit"
+                                        class="btn btn-guardar-info fw-bold"
+                                        @click=""
+                                        > ACTUALIZAR </button> 
+                            </template>
                         </div>
                     </form>
                 </div>
@@ -748,12 +771,26 @@ export default defineComponent({
             infoRec: {} as regRecuperacion,
             postAnestStore,
             preIdStore,
+
+            btnActualizarRecuperacion:false
         }
     },
+
+    methods: {
+        cambiarUpdateRecup() {
+            this.btnActualizarRecuperacion=true
+
+            // Método Guardar
+        }
+    }
  })
 </script>
 
 <style scoped>
+h5{
+    color: #002D60;
+    margin-bottom: 10px;    
+}
 .bordePrincipal {
   border-radius: 5px;
   padding: 1rem;
@@ -763,5 +800,32 @@ export default defineComponent({
 }
 .largoContenedor{
     height: 558px
+}
+.btn-guardar-info{
+    --bs-btn-bg: none;
+    --bs-btn-color: #E88300;    
+    --bs-btn-border-color: #E88300;
+    --bs-btn-hover-bg: #E88300;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #E88300;          
+    --bs-btn-active-bg: #E88300;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-border-color: #E88300;
+    width: 150px;     
+}
+.btn-nav-bar{
+    --bs-btn-bg: #fff;
+    --bs-btn-color: #002D60;    
+    --bs-btn-border-color: #fff;
+    --bs-btn-hover-bg: #A0A6B2;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #A0A6B2;          
+    --bs-btn-active-bg: #A0A6B2;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-border-color: #A0A6B2;
+    height: auto;
+}
+.centrar-li{
+  justify-content: center; 
 }
 </style>
