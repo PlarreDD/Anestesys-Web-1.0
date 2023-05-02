@@ -4,28 +4,40 @@
   </header>
   <div class="margen-div-barra">
     <div class="input-group mb-3">
-      <div class="col-10 divform navbar-nav">              
-        <ul class="nav nav-pills mb-3 text-center" id=""> <!--Lista para el menú principal-->
+
+      <div class="col-10 divform navbar-nav">     
+
+        <ul class="nav nav-pills nav-fill mb-3 text-center centrar-li fw-bold" id=""> <!--Lista para el menú principal-->
           <li class="nav-item col-md-6" >
-            <button class="nav-link bold under active"
-                    id="post"
-                    data-bs-toggle="pill"
-                    data-bs-target="#nota"
-                    type="button"
-                    aria-selected="true"> NOTA POST </button>
+            <button :class="esNotaP == true ? 'btn-barra-act fw-bold active' : 'btn-barra-des fw-bold'"
+                    id="notaP-tab"
+                    href="#nota"
+                    data-bs-toggle="tab"
+                    type="submit"
+                    aria-selected="true"
+                    @click="validaSeleccionNota()"> NOTA POST </button>
             <!--Se asigna el contenedor al que apuntara el elemento por medio de data-bs-target-->
           </li>
           
           <li class="nav-item col-md-6" >
-              <button class="nav-link bold under" id="post" data-bs-toggle="pill" data-bs-target="#recuperacion" type="button" aria-selected="false">RECUPERACIÓN</button>
+              <button :class="esRecuperacion == true ? 'btn-barra-act fw-bold active' : 'btn-barra-des fw-bold'" 
+                      id="recuperacion-tab" 
+                      href="#recuperacion"
+                      data-bs-toggle="tab" 
+                      type="submit" 
+                      aria-selected="false"
+                      @click="validaSeleccionRecuperacion()">RECUPERACIÓN</button>
           </li>          
         </ul>
       </div>
+
     </div>
 
     <div class="input-group mb-3 bordePrincipal"> 
       <div class="tab-content col-md-9" id=""> <!--Redirecciona al contenedor seleccionado, cargando la información del componente-->
-        <div class="tab-pane fade show active" id="nota"><nota /></div>
+        <div class="tab-pane fade show active" id="nota">
+            <nota />
+          </div>
         <div class="tab-pane fade" id="recuperacion"><recuperacion /></div>
       </div>
 
@@ -56,10 +68,41 @@ import Recuperacion from "../../components/post/Recuperacion.vue";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
 
 export default ({
+  data(){
+    return{
+      esNotaP: false,
+      esRecuperacion: false  
+    }
+  },
+
   components:{
     Recuperacion, 
     Nota,
     BarraNavegacion
+  },
+
+  mounted: function() { // Llama el método despues de cargar la página
+    this.validaSeleccionNota()
+  },
+
+  methods:{
+    async validaSeleccionNota(){
+      if(document.getElementById("notaP-tab").ariaSelected=="false"){
+        this.esNotaP=false   
+      }
+      else
+        this.esNotaP=true;
+        this.esRecuperacion=false;
+    },
+
+    async validaSeleccionRecuperacion(){
+      if(document.getElementById("recuperacion-tab").ariaSelected=="false"){
+        this.esRecuperacion=false  
+      }
+      else
+        this.esNotaP=false;
+        this.esRecuperacion=true;
+    },
   }
 })
 </script>
@@ -103,24 +146,24 @@ export default ({
 .bordePrincipal {
   width: 108%;
 }
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    color: var(--bs-nav-pills-link-active-color);
+.centrar-li{
+  justify-content: center; 
+}
+/* Barra navegación */
+.btn-barra-act{
     background-color: #F5F8FC;
     color: #E88300;
+    border-bottom: thick solid;
+    border-bottom-width: 5px;
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
+    border-left: none;
+    border-right: none;
+    border-top: none;
 }
-.nav-link {
-    display: block;
-    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
-    font-size: var(--bs-nav-link-font-size);
-    font-weight: var(--bs-nav-link-font-weight);
-    color: #002D60;
-    text-decoration: none;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
-}
-.bold {
-    font-weight: bold;
-}
-.under {
-    text-decoration: underline;
+.btn-barra-des{
+    background-color: #F5F8FC;
+    color: #002d60;
+    border: none;
 }
 </style>
