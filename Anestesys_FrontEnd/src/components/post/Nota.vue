@@ -29,13 +29,18 @@
                         <h5 class="fw-bold">NOTA POST-ANESTÉSICA</h5>
                         
                         <!-- Técnica de anestesia final -->
-                        <div class="col-md-10">
-                            <label for="" class="form-label fw-bold">Técnica de anestesia final</label>                            
-                            <textarea class="form-control"
+                        <div class="col-md-10">                            
+                            <label for="" class="form-label fw-bold">Técnica de anestesia final</label>
+                            <Multiselect
                                 v-model="infoNotaPost.npa_TecAnestFinal"
-                                rows="2"
+                                mode="tags"
+                                placeholder="Seleccione las técnicas de anestesia"
+                                :options="opcionTecnica"
+                                :searchable="true"
+                                :createTag="true"
                                 :class="infoNotaPost.npa_TecAnestFinal != undefined && infoNotaPost.npa_TecAnestFinal != '' ?
-                                'form-control border border-success formSombra' : 'form-control'"></textarea> 
+                                'form-control border border-success formSombra' : 'form-control'"
+                            />
                         </div>
 
                         <!-- Intubación -->
@@ -46,6 +51,7 @@
                                    name="intubacion"
                                    id="intubacionSi"
                                    autocomplete="off"
+                                   value="Sí"
                                    v-model="infoNotaPost.npa_Intubacion"> 
                             <label class="btn btn-radio margenRadio" for="intubacionSi">Sí</label>
 
@@ -54,6 +60,7 @@
                                    name="intubacion"
                                    id="intubacionNo"
                                    autocomplete="off"
+                                   value="No"
                                    v-model="infoNotaPost.npa_Intubacion">
                             <label class="btn btn-radio" for="intubacionNo">No</label>
                         </div>
@@ -298,18 +305,27 @@ import type { regNotaPost } from "@/interfaces/regPostAnest";
 import { defineComponent } from "vue";
 import { usePostAnestStore } from "../../stores/postAnest-store";
 import { usePreIdStore } from "@/stores/preId-store";
+import Multiselect from '@vueform/multiselect';
 
 const postAnestStore = usePostAnestStore();
 const preIdStore = usePreIdStore();
 
 export default defineComponent({
+    components: {
+        Multiselect
+    },
+
     data() {
         return{
             infoNotaPost: {} as regNotaPost,
             postAnestStore,
             preIdStore,
 
-            btnActualizarNotaP:false
+            btnActualizarNotaP:false,
+
+            opcionTecnica: ['Local','Sedación', 'General balanceada', 'TIVA (Anestesia total intravenosa)', 'Multimodal', 'Bloqueo mixto', 'Bloqueo peridural lumbar',
+                        'Bloqueo peridural caudal', 'Bloqueo espinal', 'Bloqueo de plexo', 'Bloqueo troncular', 'Bloqueo peridural torácico',
+                        'Bloqueo peridural cervical', 'Libre de opioides']
         }
     },
 
@@ -327,6 +343,8 @@ export default defineComponent({
     }
  })
 </script>
+
+<style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
 .bordePrincipal {
