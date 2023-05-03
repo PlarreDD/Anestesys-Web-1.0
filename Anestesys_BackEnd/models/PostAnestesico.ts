@@ -13,9 +13,9 @@ const PostNotaPASchema = new Schema({
     },
     
     // Nota Post Anestésica
-    npa_TecAnestFinal: { type: String},
-    npa_Intubacion: { type: String},
-    npa_NotaPostAnest: { type: String},
+    npa_TecAnestFinal: { type: String },
+    npa_Intubacion: { type: String },
+    npa_NotaPostAnest: { type: String },
 
     // Signos Vitales al Egreso del Quirófano
     signVitEgQx_TA: { type:String },

@@ -13,8 +13,6 @@ export const usePostAnestStore = defineStore('postAn', {
     actions: {
         /*------------------- Nota Post Anestésica -------------------*/
         saveNotaPA(infoNotaPost: any, pid: string){
-            console.log(JSON.stringify(infoNotaPost) + "\n" + pid);
-            
             apiAxios({
                 url: "http://localhost:5000/notapa",
                 method: "POST",
@@ -24,7 +22,7 @@ export const usePostAnestStore = defineStore('postAn', {
                 data: {
                     pid: pid,
                     // Nota Post Anestésica
-                    npa_TecAnestFinal: infoNotaPost.npa_TecAnestFinal,
+                    npa_TecAnestFinal: String(infoNotaPost.npa_TecAnestFinal),
                     npa_Intubacion: infoNotaPost.npa_Intubacion,
                     npa_NotaPostAnest: infoNotaPost.npa_NotaPostAnest,
 
@@ -55,8 +53,6 @@ export const usePostAnestStore = defineStore('postAn', {
         },
 
         updateNotaPA(infoNotaPost: any, pid: string){
-            console.log(JSON.stringify(infoNotaPost) + "\n" + pid);
-
             apiAxios({
                 url: `http://localhost:5000/notapa/${String(pid)}`,
                 method: "PUT",
@@ -65,7 +61,7 @@ export const usePostAnestStore = defineStore('postAn', {
                 },
                 data: {
                     // Nota Post Anestésica
-                    npa_TecAnestFinal: infoNotaPost.npa_TecAnestFinal,
+                    npa_TecAnestFinal: String(infoNotaPost.npa_TecAnestFinal),
                     npa_Intubacion: infoNotaPost.npa_Intubacion,
                     npa_NotaPostAnest: infoNotaPost.npa_NotaPostAnest,
 
