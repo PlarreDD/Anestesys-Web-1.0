@@ -13,6 +13,8 @@ export const usePostAnestStore = defineStore('postAn', {
     actions: {
         /*------------------- Nota Post Anestésica -------------------*/
         saveNotaPA(infoNotaPost: any, pid: string){
+            console.log(JSON.stringify(infoNotaPost) + "\n" + pid);
+            
             apiAxios({
                 url: "http://localhost:5000/notapa",
                 method: "POST",
@@ -53,6 +55,8 @@ export const usePostAnestStore = defineStore('postAn', {
         },
 
         updateNotaPA(infoNotaPost: any, pid: string){
+            console.log(JSON.stringify(infoNotaPost) + "\n" + pid);
+
             apiAxios({
                 url: `http://localhost:5000/notapa/${String(pid)}`,
                 method: "PUT",

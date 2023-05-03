@@ -25,7 +25,7 @@
             <!-- Nota Post-Anestésica -->
             <div class="tab-pane fade show active" id="notaPost">
                 <div class="col-12 bordePrincipal">
-                    <form class="row g-3"> 
+                    <form @submit.prevent="" class="row g-3"> 
                         <h5 class="fw-bold">NOTA POST-ANESTÉSICA</h5>
                         
                         <!-- Técnica de anestesia final -->
@@ -175,7 +175,7 @@
                                 <button data-bs-toggle="tab" 
                                         type="submit"
                                         class="btn btn-guardar-info fw-bold"
-                                        @click=""
+                                        @click="postAnestStore.updateNotaPA(infoNotaPost, preIdStore.pacienteID._id)"
                                         > ACTUALIZAR </button> 
                             </template>
                         </div>
@@ -186,7 +186,7 @@
             <!-- Caso Obstétrico Recién Nacido -->
             <div class="tab-pane fade" id="caso">
                 <div class="col-12 bordePrincipal largoContenedor">
-                    <form class="row g-3">
+                    <form @submit.prevent="" class="row g-3">
                         <!-- Número de productos -->
                         <div class="col-md-4">
                             <label for="" class="form-label">Número de productos</label>
@@ -313,11 +313,16 @@ export default defineComponent({
         }
     },
 
+    mounted: function() {
+        this.infoNotaPost.npa_Intubacion = "No";
+    },
+
     methods: {
         cambiarUpdateNota() {
             this.btnActualizarNotaP=true
 
             // Método Guardar
+            postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id);
         }
     }
  })

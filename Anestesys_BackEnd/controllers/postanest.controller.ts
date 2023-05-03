@@ -1,5 +1,6 @@
 import { Response } from "express";
-import { PostRecupera } from "../models/PostAnestesico";
+import { PostRecupera,
+         PostNotaPA } from "../models/PostAnestesico";
 
 /********************************************************************/
 /**************************** RECUPERACION **************************/
@@ -14,20 +15,20 @@ export const saveNotaPA = async (req: any, res: Response) => {
                 signVitEgQx_TA, signVitEgQx_FC, signVitEgQx_FR, signVitEgQx_Temperatura,
                 signVitEgQx_Pulso, signVitEgQx_SpO2, signVitEgQx_EgresoPac, } = req.body;
         
-        const notaPA = new PostRecupera({ pid: pid,
-                                          // Nota Post Anestésica
-                                          npa_TecAnestFinal: npa_TecAnestFinal,
-                                          npa_Intubacion: npa_Intubacion,
-                                          npa_NotaPostAnest: npa_NotaPostAnest,
-                                        
-                                          // Signos Vitales al Egreso del Quirófano
-                                          signVitEgQx_TA: signVitEgQx_TA,
-                                          signVitEgQx_FC: signVitEgQx_FC,
-                                          signVitEgQx_FR: signVitEgQx_FR,
-                                          signVitEgQx_Temperatura: signVitEgQx_Temperatura,
-                                          signVitEgQx_Pulso: signVitEgQx_Pulso,
-                                          signVitEgQx_SpO2: signVitEgQx_SpO2,
-                                          signVitEgQx_EgresoPac: signVitEgQx_EgresoPac, });
+        const notaPA = new PostNotaPA({ pid: pid,
+                                        // Nota Post Anestésica
+                                        npa_TecAnestFinal: npa_TecAnestFinal,
+                                        npa_Intubacion: npa_Intubacion,
+                                        npa_NotaPostAnest: npa_NotaPostAnest,
+                                    
+                                        // Signos Vitales al Egreso del Quirófano
+                                        signVitEgQx_TA: signVitEgQx_TA,
+                                        signVitEgQx_FC: signVitEgQx_FC,
+                                        signVitEgQx_FR: signVitEgQx_FR,
+                                        signVitEgQx_Temperatura: signVitEgQx_Temperatura,
+                                        signVitEgQx_Pulso: signVitEgQx_Pulso,
+                                        signVitEgQx_SpO2: signVitEgQx_SpO2,
+                                        signVitEgQx_EgresoPac: signVitEgQx_EgresoPac, });
 
         await notaPA.save();
 
@@ -47,20 +48,20 @@ export const updateNotaPA = async (req: any, res: Response) => {
                 signVitEgQx_TA, signVitEgQx_FC, signVitEgQx_FR, signVitEgQx_Temperatura,
                 signVitEgQx_Pulso, signVitEgQx_SpO2, signVitEgQx_EgresoPac, } = req.body;
         
-        const recuperacion = await PostRecupera.findOneAndUpdate({ pid: id },
-                                                                 { // Nota Post Anestésica
-                                                                   npa_TecAnestFinal: npa_TecAnestFinal,
-                                                                   npa_Intubacion: npa_Intubacion,
-                                                                   npa_NotaPostAnest: npa_NotaPostAnest,
+        const recuperacion = await PostNotaPA.findOneAndUpdate({ pid: id },
+                                                               { // Nota Post Anestésica
+                                                                 npa_TecAnestFinal: npa_TecAnestFinal,
+                                                                 npa_Intubacion: npa_Intubacion,
+                                                                 npa_NotaPostAnest: npa_NotaPostAnest,
                                                                   
-                                                                   // Signos Vitales al Egreso del Quirófano
-                                                                   signVitEgQx_TA: signVitEgQx_TA,
-                                                                   signVitEgQx_FC: signVitEgQx_FC,
-                                                                   signVitEgQx_FR: signVitEgQx_FR,
-                                                                   signVitEgQx_Temperatura: signVitEgQx_Temperatura,
-                                                                   signVitEgQx_Pulso: signVitEgQx_Pulso,
-                                                                   signVitEgQx_SpO2: signVitEgQx_SpO2,
-                                                                   signVitEgQx_EgresoPac: signVitEgQx_EgresoPac, });
+                                                                 // Signos Vitales al Egreso del Quirófano
+                                                                 signVitEgQx_TA: signVitEgQx_TA,
+                                                                 signVitEgQx_FC: signVitEgQx_FC,
+                                                                 signVitEgQx_FR: signVitEgQx_FR,
+                                                                 signVitEgQx_Temperatura: signVitEgQx_Temperatura,
+                                                                 signVitEgQx_Pulso: signVitEgQx_Pulso,
+                                                                 signVitEgQx_SpO2: signVitEgQx_SpO2,
+                                                                 signVitEgQx_EgresoPac: signVitEgQx_EgresoPac, });
 
         return res.json({ recuperacion })
     } catch (error) {
