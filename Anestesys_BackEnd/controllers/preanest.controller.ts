@@ -587,8 +587,7 @@ export const updatePrePlan = async (req: any, res: Response) => {
     try {
         const { id } = req.params;
 
-        const { 
-                // Posicion y Cuidados
+        const { // Posicion y Cuidados
                 pos_HorasAyuno, pos_AccesoVenoso, pos_PosicionPaciente,
                 pos_PosicionBrazos, pos_Torniquete, pos_AplicacionTorniquete,
                 pos_Sitio, pos_TiempoIsquemia, pos_ProteccionOjos,
