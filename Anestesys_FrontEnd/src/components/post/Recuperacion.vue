@@ -61,7 +61,7 @@
                                 <button data-bs-toggle="tab" 
                                         type="submit"
                                         class="btn btn-guardar-info fw-bold"
-                                        @click="postAnestStore.updateNotaUCPA(infoRec, preIdStore.pacienteID._id)"
+                                        @click="postAnestStore.updateRecupera(infoRec, preIdStore.pacienteID._id)"
                                         > ACTUALIZAR </button> 
                             </template>
                         </div>
@@ -781,7 +781,7 @@ export default defineComponent({
             this.btnActualizarRecuperacion=true
 
             // Método Guardar
-            postAnestStore.saveNotaUCPA(this.infoRec, preIdStore.pacienteID._id);
+            postAnestStore.saveRecupera(this.infoRec, preIdStore.pacienteID._id);
         }
     }
  })
