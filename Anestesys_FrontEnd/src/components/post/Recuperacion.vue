@@ -43,13 +43,15 @@
                             <textarea class="form-control"
                                       id=""
                                       v-model="infoRec.notaEval_Obs"
-                                      rows="15"></textarea>
+                                      rows="15" maxlength="700"
+                                      :class="infoRec.notaEval_Obs != undefined && infoRec.notaEval_Obs != '' ?
+                                    'form-control border border-success formSombra' : 'form-control'"></textarea>
                         </div>                        
 
                         <div class="col-md-10"></div>
 
                         <!-- Botón Guardar/Actualizar -->
-                        <div class="col-md-2">                            
+                        <div class="col-md-2 alinea-boton">                            
                             <template v-if="btnActualizarRecuperacion === false">
                                 <button data-bs-toggle="tab" 
                                         type="submit"
@@ -799,6 +801,7 @@ h5{
   margin-bottom: 10px;
   background-color: rgba(232, 234, 236, 0.6);
 }
+
 .largoContenedor{
     height: 558px
 }
@@ -828,5 +831,18 @@ h5{
 }
 .centrar-li{
   justify-content: center; 
+}
+.alinea-boton{
+    text-align: end;
+}
+.formSombra:focus{
+    border-color:#6BD99B;
+    outline:0;
+    -webkit-box-shadow:0 0 8px #6BD99B;
+    box-shadow:0 0 8px #6BD99B
+}
+.border-success {
+    --bs-border-opacity: 1;
+    border-color: #6BD99B !important;
 }
 </style>
