@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="628" height="239" viewBox="0 0 628 239">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="628" height="193" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Grupo_225" data-name="Grupo 225" transform="translate(-646 -443)">
+    <g id="Cuadrícula_de_repetición_36" data-name="Cuadrícula de repetición 36" transform="translate(646 489)" clip-path="url(#clip-path)">
+      <g transform="translate(-651 -321)">
+        <g id="Rectángulo_458" data-name="Rectángulo 458" transform="translate(650 321)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="126" height="48" stroke="none"/>
+          <rect x="0.5" y="0.5" width="125" height="47" fill="none"/>
+        </g>
+        <g id="Rectángulo_460" data-name="Rectángulo 460" transform="translate(1150 321)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="129" height="48" stroke="none"/>
+          <rect x="0.5" y="0.5" width="128" height="47" fill="none"/>
+        </g>
+        <g id="Rectángulo_459" data-name="Rectángulo 459" transform="translate(776 321)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="374" height="48" stroke="none"/>
+          <rect x="0.5" y="0.5" width="373" height="47" fill="none"/>
+        </g>
+      </g>
+      <g transform="translate(-651 -273)">
+        <g id="Rectángulo_458-2" data-name="Rectángulo 458" transform="translate(650 321)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="126" height="48" stroke="none"/>
+          <rect x="0.5" y="0.5" width="125" height="47" fill="none"/>
+        </g>
+        <g id="Rectángulo_460-2" data-name="Rectángulo 460" transform="translate(1150 321)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="129" height="48" stroke="none"/>
+          <rect x="0.5" y="0.5" width="128" height="47" fill="none"/>
+        </g>
+        <g id="Rectángulo_459-2" data-name="Rectángulo 459" transform="translate(776 321)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="374" height="48" stroke="none"/>
+          <rect x="0.5" y="0.5" width="373" height="47" fill="none"/>
+        </g>
+      </g>
+      <g transform="translate(-651 -225)">
+        <g id="Rectángulo_458-3" data-name="Rectángulo 458" transform="translate(650 321)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="126" height="48" stroke="none"/>
+          <rect x="0.5" y="0.5" width="125" height="47" fill="none"/>
+        </g>
+        <g id="Rectángulo_460-3" data-name="Rectángulo 460" transform="translate(1150 321)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="129" height="48" stroke="none"/>
+          <rect x="0.5" y="0.5" width="128" height="47" fill="none"/>
+        </g>
+        <g id="Rectángulo_459-3" data-name="Rectángulo 459" transform="translate(776 321)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="374" height="48" stroke="none"/>
+          <rect x="0.5" y="0.5" width="373" height="47" fill="none"/>
+        </g>
+      </g>
+      <g transform="translate(-651 -177)">
+        <g id="Rectángulo_458-4" data-name="Rectángulo 458" transform="translate(650 321)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="126" height="48" stroke="none"/>
+          <rect x="0.5" y="0.5" width="125" height="47" fill="none"/>
+        </g>
+        <g id="Rectángulo_460-4" data-name="Rectángulo 460" transform="translate(1150 321)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="129" height="48" stroke="none"/>
+          <rect x="0.5" y="0.5" width="128" height="47" fill="none"/>
+        </g>
+        <g id="Rectángulo_459-4" data-name="Rectángulo 459" transform="translate(776 321)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="374" height="48" stroke="none"/>
+          <rect x="0.5" y="0.5" width="373" height="47" fill="none"/>
+        </g>
+      </g>
+      <g transform="translate(-651 -129)">
+        <g id="Rectángulo_458-5" data-name="Rectángulo 458" transform="translate(650 321)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="126" height="48" stroke="none"/>
+          <rect x="0.5" y="0.5" width="125" height="47" fill="none"/>
+        </g>
+        <g id="Rectángulo_460-5" data-name="Rectángulo 460" transform="translate(1150 321)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="129" height="48" stroke="none"/>
+          <rect x="0.5" y="0.5" width="128" height="47" fill="none"/>
+        </g>
+        <g id="Rectángulo_459-5" data-name="Rectángulo 459" transform="translate(776 321)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="374" height="48" stroke="none"/>
+          <rect x="0.5" y="0.5" width="373" height="47" fill="none"/>
+        </g>
+      </g>
+    </g>
+    <path id="Menu_Grid_Anéstesico" data-name="Menu Grid Anéstesico" d="M15,0H613a15,15,0,0,1,15,15V46a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V15A15,15,0,0,1,15,0Z" transform="translate(646 443)" fill="#002d60"/>
+    <text id="Grado" transform="translate(697 471)" fill="#fff" font-size="16" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">Grado</tspan></text>
+    <text id="Descripción" transform="translate(921 471)" fill="#fff" font-size="16" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">Descripción</tspan></text>
+    <text id="Valor" transform="translate(1171 471)" fill="#fff" font-size="16" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">Valor</tspan></text>
+    <text id="I" transform="translate(709 521)" fill="#5b5b5b" font-size="24" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">I</tspan></text>
+    <text id="Libre_circulación_de_las_piernas_y_los_pies." data-name="Libre circulación de las piernas y los pies." transform="translate(814 518)" fill="#5b5b5b" font-size="16" font-family="SFUIDisplay-Medium, SF UI Display" letter-spacing="0.025em" font-weight="500"><tspan x="0" y="0">Libre circulación de las piernas y los pies.</tspan></text>
+    <text id="Nulo" transform="translate(1191 518)" fill="#5b5b5b" font-size="16" font-family="SFUIDisplay-Medium, SF UI Display" letter-spacing="0.025em" font-weight="500"><tspan x="0" y="0">Nulo</tspan></text>
+    <text id="Parcial" transform="translate(1184 567)" fill="#5b5b5b" font-size="16" font-family="SFUIDisplay-Medium, SF UI Display" letter-spacing="0.025em" font-weight="500"><tspan x="0" y="0">Parcial</tspan></text>
+    <text id="Casi_completo" data-name="Casi completo" transform="translate(1155 614)" fill="#5b5b5b" font-size="16" font-family="SFUIDisplay-Medium, SF UI Display" letter-spacing="0.025em" font-weight="500"><tspan x="0" y="0">Casi completo</tspan></text>
+    <text id="Completo" transform="translate(1172 661)" fill="#5b5b5b" font-size="16" font-family="SFUIDisplay-Medium, SF UI Display" letter-spacing="0.025em" font-weight="500"><tspan x="0" y="0">Completo</tspan></text>
+    <text id="No_se_pueden_mover_las_piernas_o_los_pies_completos." data-name="No se pueden mover las piernas 
+o los pies completos." transform="translate(964 653)" fill="#5b5b5b" font-size="16" font-family="SFUIDisplay-Medium, SF UI Display" letter-spacing="0.025em" font-weight="500"><tspan x="-120.969" y="0">No se pueden mover las piernas </tspan><tspan x="-78.496" y="19">o los pies completos.</tspan></text>
+    <text id="Apenas_capaz_de_flexionar_las_rodillas_con_la_libre_circulación_de_los_pies_parciales." data-name="Apenas capaz de flexionar las rodillas con 
+la libre circulación de los pies parciales." transform="translate(962 557)" fill="#5b5b5b" font-size="16" font-family="SFUIDisplay-Medium, SF UI Display" letter-spacing="0.025em" font-weight="500"><tspan x="-157.634" y="0">Apenas capaz de flexionar las rodillas con </tspan><tspan x="-146.97" y="19">la libre circulación de los pies parciales.</tspan></text>
+    <text id="No_puede_flexionar_las_rodillas_pero_con_la_libre_circulación_de_los_pies." data-name="No puede flexionar las rodillas, pero con la
+libre circulación de los pies." transform="translate(962 605)" fill="#5b5b5b" font-size="16" font-family="SFUIDisplay-Medium, SF UI Display" letter-spacing="0.025em" font-weight="500"><tspan x="-157.303" y="0">No puede flexionar las rodillas, pero con la</tspan><tspan x="-102.792" y="19">libre circulación de los pies.</tspan></text>
+    <text id="II" transform="translate(705 570)" fill="#5b5b5b" font-size="24" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">II</tspan></text>
+    <text id="III" transform="translate(702 617)" fill="#5b5b5b" font-size="24" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">III</tspan></text>
+    <text id="IV" transform="translate(700 664)" fill="#5b5b5b" font-size="24" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">IV</tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="832" height="284" viewBox="0 0 832 284">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="705" height="36" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect width="765" height="73" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Grupo_225" data-name="Grupo 225" transform="translate(-567 -463)">
+    <rect id="Menu_Grid_Anéstesico" data-name="Menu Grid Anéstesico" width="832" height="284" rx="15" transform="translate(567 463)" fill="#002d60"/>
+    <text id="Tabla_del_dolor" data-name="Tabla del dolor" transform="translate(891 502)" fill="#fff" font-size="17" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">TABLA DEL DOLOR</tspan></text>
+    <line id="Línea_35369" data-name="Línea 35369" x2="688" transform="translate(639.5 543.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6"/>
+    <g id="Cuadrícula_de_repetición_37" data-name="Cuadrícula de repetición 37" transform="translate(632.5 540.5)" clip-path="url(#clip-path)">
+      <g transform="translate(-619.5 -340.5)">
+        <line id="Línea_35370" data-name="Línea 35370" y2="25" transform="translate(622.5 342.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6"/>
+      </g>
+      <g transform="translate(-542.5 -340.5)">
+        <line id="Línea_35370-2" data-name="Línea 35370" y2="25" transform="translate(622.5 342.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6"/>
+      </g>
+      <g transform="translate(-465.5 -340.5)">
+        <line id="Línea_35370-3" data-name="Línea 35370" y2="25" transform="translate(622.5 342.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6"/>
+      </g>
+      <g transform="translate(-388.5 -340.5)">
+        <line id="Línea_35370-4" data-name="Línea 35370" y2="25" transform="translate(622.5 342.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6"/>
+      </g>
+      <g transform="translate(-311.5 -340.5)">
+        <line id="Línea_35370-5" data-name="Línea 35370" y2="25" transform="translate(622.5 342.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6"/>
+      </g>
+      <g transform="translate(-234.5 -340.5)">
+        <line id="Línea_35370-6" data-name="Línea 35370" y2="25" transform="translate(622.5 342.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6"/>
+      </g>
+      <g transform="translate(-157.5 -340.5)">
+        <line id="Línea_35370-7" data-name="Línea 35370" y2="25" transform="translate(622.5 342.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6"/>
+      </g>
+      <g transform="translate(-80.5 -340.5)">
+        <line id="Línea_35370-8" data-name="Línea 35370" y2="25" transform="translate(622.5 342.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6"/>
+      </g>
+      <g transform="translate(-3.5 -340.5)">
+        <line id="Línea_35370-9" data-name="Línea 35370" y2="25" transform="translate(622.5 342.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6"/>
+      </g>
+      <g transform="translate(73.5 -340.5)">
+        <line id="Línea_35370-10" data-name="Línea 35370" y2="25" transform="translate(622.5 342.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6"/>
+      </g>
+    </g>
+    <text id="_1" data-name="1" transform="translate(629 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">1</tspan></text>
+    <text id="_2" data-name="2" transform="translate(706 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">2</tspan></text>
+    <text id="_3" data-name="3" transform="translate(782 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">3</tspan></text>
+    <text id="_4" data-name="4" transform="translate(859 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">4</tspan></text>
+    <text id="_5" data-name="5" transform="translate(937 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">5</tspan></text>
+    <text id="_6" data-name="6" transform="translate(1015 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">6</tspan></text>
+    <text id="_7" data-name="7" transform="translate(1094 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">7</tspan></text>
+    <text id="_8" data-name="8" transform="translate(1170 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">8</tspan></text>
+    <text id="_9" data-name="9" transform="translate(1246 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">9</tspan></text>
+    <text id="_10" data-name="10" transform="translate(1320 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">10</tspan></text>
+    <g id="Cuadrícula_de_repetición_38" data-name="Cuadrícula de repetición 38" transform="translate(605 626)" clip-path="url(#clip-path-2)">
+      <g transform="translate(-612 -428)">
+        <circle id="Elipse_42" data-name="Elipse 42" cx="36.5" cy="36.5" r="36.5" transform="translate(612 428)" fill="#fff"/>
+      </g>
+      <g transform="translate(-475 -428)">
+        <circle id="Elipse_42-2" data-name="Elipse 42" cx="36.5" cy="36.5" r="36.5" transform="translate(612 428)" fill="#fff"/>
+      </g>
+      <g transform="translate(-338 -428)">
+        <circle id="Elipse_42-3" data-name="Elipse 42" cx="36.5" cy="36.5" r="36.5" transform="translate(612 428)" fill="#fff"/>
+      </g>
+      <g transform="translate(-201 -428)">
+        <circle id="Elipse_42-4" data-name="Elipse 42" cx="36.5" cy="36.5" r="36.5" transform="translate(612 428)" fill="#fff"/>
+      </g>
+      <g transform="translate(-64 -428)">
+        <circle id="Elipse_42-5" data-name="Elipse 42" cx="36.5" cy="36.5" r="36.5" transform="translate(612 428)" fill="#fff"/>
+      </g>
+      <g transform="translate(73 -428)">
+        <circle id="Elipse_42-6" data-name="Elipse 42" cx="36.5" cy="36.5" r="36.5" transform="translate(612 428)" fill="#fff"/>
+      </g>
+    </g>
+    <ellipse id="Elipse_43" data-name="Elipse 43" cx="4.5" cy="5.5" rx="4.5" ry="5.5" transform="translate(624 647)" fill="#002d60"/>
+    <ellipse id="Elipse_47" data-name="Elipse 47" cx="4.5" cy="5.5" rx="4.5" ry="5.5" transform="translate(761 647)" fill="#002d60"/>
+    <path id="Sustracción_4" data-name="Sustracción 4" d="M4.5,11C2.017,11,0,8.019,0,4.358c0-.256.01-.513.03-.766L7.341-.79A8.148,8.148,0,0,1,9,4.358C9,8.019,6.98,11,4.5,11Z" transform="translate(1173.002 647)" fill="#002d60"/>
+    <path id="Sustracción_6" data-name="Sustracción 6" d="M4.5,11C2.017,11,0,8.019,0,4.358c0-.256.01-.513.03-.766L7.341-.79A8.148,8.148,0,0,1,9,4.358C9,8.019,6.98,11,4.5,11Z" transform="translate(1310.004 647)" fill="#002d60"/>
+    <path id="Sustracción_5" data-name="Sustracción 5" d="M7.3,11.836h0L.02,7.3C.005,7.079,0,6.858,0,6.64,0,2.979,2.017,0,4.5,0S9,2.979,9,6.64a8.1,8.1,0,0,1-1.7,5.195Z" transform="translate(1207.001 657.998) rotate(180)" fill="#002d60"/>
+    <path id="Sustracción_7" data-name="Sustracción 7" d="M7.3,11.836h0L.02,7.3C.005,7.079,0,6.858,0,6.64,0,2.979,2.017,0,4.5,0S9,2.979,9,6.64a8.1,8.1,0,0,1-1.7,5.195Z" transform="translate(1344.003 657.998) rotate(180)" fill="#002d60"/>
+    <ellipse id="Elipse_49" data-name="Elipse 49" cx="4.5" cy="5.5" rx="4.5" ry="5.5" transform="translate(898 647)" fill="#002d60"/>
+    <ellipse id="Elipse_54" data-name="Elipse 54" cx="4.5" cy="5.5" rx="4.5" ry="5.5" transform="translate(1035 646)" fill="#002d60"/>
+    <ellipse id="Elipse_44" data-name="Elipse 44" cx="4.5" cy="5.5" rx="4.5" ry="5.5" transform="translate(649 647)" fill="#002d60"/>
+    <ellipse id="Elipse_46" data-name="Elipse 46" cx="4.5" cy="5.5" rx="4.5" ry="5.5" transform="translate(786 647)" fill="#002d60"/>
+    <ellipse id="Elipse_48" data-name="Elipse 48" cx="4.5" cy="5.5" rx="4.5" ry="5.5" transform="translate(923 647)" fill="#002d60"/>
+    <ellipse id="Elipse_55" data-name="Elipse 55" cx="4.5" cy="5.5" rx="4.5" ry="5.5" transform="translate(1060 646)" fill="#002d60"/>
+    <path id="Intersección_1" data-name="Intersección 1" d="M3548,17092h43c0,10.494-9.626,19-21.5,19S3548,17102.494,3548,17092Z" transform="translate(-2928.999 -16421.5)" fill="#002d60"/>
+    <path id="Intersección_2" data-name="Intersección 2" d="M20,11.188A43.314,43.314,0,0,0,.381,15.425a19.149,19.149,0,0,1,37.666.545A43.747,43.747,0,0,0,20,11.188Z" transform="translate(1308.286 665.744)" fill="#002d60"/>
+    <path id="Trazado_206" data-name="Trazado 206" d="M-2819.043-16468.592s1.769,14.3,20.9,14.461,21.544-14.461,21.544-14.461" transform="translate(3576 17136.846)" fill="none" stroke="#1f315a" stroke-linecap="round" stroke-width="3"/>
+    <path id="Trazado_212" data-name="Trazado 212" d="M-2819.043-16456.937s1.542-11.521,18.221-11.652,18.782,11.652,18.782,11.652" transform="translate(3991.043 17138.652)" fill="none" stroke="#1f315a" stroke-linecap="round" stroke-width="3"/>
+    <path id="Trazado_213" data-name="Trazado 213" d="M-2819.159-16461.123s1.37-7.361,14.939-7.467,15.31,7.467,15.31,7.467" transform="translate(3856.941 17137.844)" fill="none" stroke="#1f315a" stroke-linecap="round" stroke-width="3"/>
+    <line id="Línea_35371" data-name="Línea 35371" x2="27" transform="translate(902.5 675.5)" fill="none" stroke="#1f315a" stroke-linecap="round" stroke-width="3"/>
+  </g>
+</svg>
