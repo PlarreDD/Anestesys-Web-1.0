@@ -1233,125 +1233,170 @@
 
       <!-- Alta de Recuperación -->
       <div class="tab-pane fade" id="alta">
-        <div class="col-12 bordePrincipal largoContenedor">
-          <form class="row g-3">
+        <div class="col-12 bordePrincipal">
+          <form @submit.prevent="" class="row g-3">
+
+            <h5 class="fw-bold">ALTA DE RECUPERACIÓN</h5>
             <!-- Criterio de Aldrete -->
             <div class="col-md-3">
-              <label for="" class="form-label">Criterio de Aldrete</label>
+              <label for="" class="form-label fw-bold">Criterio de Aldrete</label>
             </div>
 
-            <div class="col-md-1"></div>
-
-            <div class="col-md-1">
-              <label for="" class="form-label">0 min</label>
-            </div>
-
-            <div class="col-md-1">
-              <label for="" class="form-label">15 min</label>
-            </div>
-
-            <div class="col-md-1">
-              <label for="" class="form-label">30 min</label>
-            </div>
-
-            <div class="col-md-1">
-              <label for="" class="form-label">45 min</label>
-            </div>
-
-            <div class="col-md-1">
-              <label for="" class="form-label">60 min</label>
-            </div>
-
-            <div class="col-md-1">
-              <label for="" class="form-label">90 min</label>
-            </div>
-
-            <div class="col-md-4"></div>
-
-            <div class="col-md-1">
-              <label for="" class="form-label">-</label>
-            </div>
-
-            <div class="col-md-1">
-              <label for="" class="form-label">-</label>
-            </div>
-
-            <div class="col-md-1">
-              <label for="" class="form-label">-</label>
-            </div>
-
-            <div class="col-md-1">
-              <label for="" class="form-label">-</label>
-            </div>
-
-            <div class="col-md-1">
-              <label for="" class="form-label">-</label>
-            </div>
-
-            <div class="col-md-1">
-              <label for="" class="form-label">-</label>
-            </div>
-
-            <!-- Calificación de Aldrete -->
-            <div class="col-md-10">
-              <label for="" class="form-label">Calificación de Aldrete</label>
-              <input
-                type="text"
+            <div class="col-md-1 text-center">
+              <label for="" class="form-label fw-bold">0 min</label>
+              <input type="text"
                 class="form-control"
-                id="numExpediente"
                 v-model="infoRec.altaRec_CalifAldrete"
-              />
+                :class="infoRec.altaRec_CalifAldrete != undefined && infoRec.altaRec_CalifAldrete != '' ?
+                        'form-control border border-success formSombra' : 'form-control'">
             </div>
 
-            <!-- Observaciones -->
-            <div class="col-md-10">
-              <label for="" class="form-label">Observaciones</label>
-              <textarea
+            <div class="col-md-1 text-center">
+              <label for="" class="form-label fw-bold">15 min</label>
+              <input type="text"
                 class="form-control"
-                id=""
-                v-model="infoRec.altaRec_Obs"
-                rows="3"
-              ></textarea>
+                v-model="infoRec.altaRec_CalifAldrete"
+                :class="infoRec.altaRec_CalifAldrete != undefined && infoRec.altaRec_CalifAldrete != '' ?
+                        'form-control border border-success formSombra' : 'form-control'">
             </div>
 
-            <!-- Observaciones -->
-            <div class="col-md-3">
-              <label for="" class="form-label"
-                >Fecha de la Alta de Recuperación</label
-              >
-              <input
-                type="date"
+            <div class="col-md-1 text-center">
+              <label for="" class="form-label fw-bold">30 min</label>
+              <input type="text"
                 class="form-control"
-                id=""
-                v-model="infoRec.altaRec_FechaAltaRec"
-              />
+                v-model="infoRec.altaRec_CalifAldrete"
+                :class="infoRec.altaRec_CalifAldrete != undefined && infoRec.altaRec_CalifAldrete != '' ?
+                        'form-control border border-success formSombra' : 'form-control'">
             </div>
 
-            <!-- Hora de la Alta de Recuperación -->
-            <div class="col-md-3">
-              <label for="" class="form-label"
-                >Hora de la Alta de Recuperación</label
-              >
-              <input
-                type="time"
+            <div class="col-md-1 text-center">
+              <label for="" class="form-label fw-bold">45 min</label>
+              <input type="text"
                 class="form-control"
-                id="horaCirugia"
-                v-model="infoRec.altaRec_HrAltaRec"
-              />
+                v-model="infoRec.altaRec_CalifAldrete"
+                :class="infoRec.altaRec_CalifAldrete != undefined && infoRec.altaRec_CalifAldrete != '' ?
+                        'form-control border border-success formSombra' : 'form-control'">
             </div>
 
-            <!-- Nombre del Médico Anestesiólogo -->
-            <div class="col-md-10">
-              <label for="" class="form-label"
-                >Nombre del Médico Anestesiólogo</label
-              >
-              <input
-                type="text"
+            <div class="col-md-1 text-center">
+              <label for="" class="form-label fw-bold">60 min</label>
+              <input type="text"
                 class="form-control"
-                id="anestesiologo"
-                v-model="infoRec.altaRec_NomMedAnest"
-              />
+                v-model="infoRec.altaRec_CalifAldrete"
+                :class="infoRec.altaRec_CalifAldrete != undefined && infoRec.altaRec_CalifAldrete != '' ?
+                        'form-control border border-success formSombra' : 'form-control'">
             </div>
+
+            <div class="col-md-1 text-center">
+              <label for="" class="form-label fw-bold">90 min</label>
+              <input type="text"
+                class="form-control"
+                v-model="infoRec.altaRec_CalifAldrete"
+                :class="infoRec.altaRec_CalifAldrete != undefined && infoRec.altaRec_CalifAldrete != '' ?
+                        'form-control border border-success formSombra' : 'form-control'">
+            </div>
+            <div class="col-md-3"></div>    
+            
+            <div class="col row margen-input">
+                <div class="g-3">
+                    <div class="row g-3">
+                        <!-- Calificación de Aldrete -->
+                        <div class="col-md-12">
+                            <label for="" class="form-label fw-bold">Calificación de Aldrete</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="numExpediente"
+                                v-model="infoRec.altaRec_CalifAldrete"
+                                :class="infoRec.altaRec_CalifAldrete != undefined && infoRec.altaRec_CalifAldrete != '' ?
+                                        'form-control border border-success formSombra' : 'form-control'"
+                            />
+                        </div>
+                        
+                        <!-- Nombre del Médico Anestesiólogo -->
+                        <div class="col-md-12">
+                            <label for="" class="form-label fw-bold"
+                                >Nombre del Médico Anestesiólogo</label
+                            >
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="anestesiologo"
+                                v-model="infoRec.altaRec_NomMedAnest"
+                                :class="infoRec.altaRec_NomMedAnest != undefined && infoRec.altaRec_NomMedAnest != '' ?
+                                        'form-control border border-success formSombra' : 'form-control'"
+                            />
+                        </div>
+
+                        <!-- Fecha de Alta -->
+                        <div class="col-md-6">
+                            <label for="" class="form-label fw-bold">Fecha de alta de recuperación</label>
+                            <input
+                                type="date"
+                                class="form-control"
+                                id=""
+                                v-model="infoRec.altaRec_FechaAltaRec"
+                                :class="infoRec.altaRec_FechaAltaRec != undefined && infoRec.altaRec_FechaAltaRec != '' ?
+                                        'form-control border border-success formSombra' : 'form-control'"
+                            />
+                        </div>
+
+                        <!-- Hora de la Alta de Recuperación -->
+                        <div class="col-md-6">
+                            <label for="" class="form-label fw-bold">Hora de alta de recuperación</label>
+                            <input
+                                type="time"
+                                class="form-control"
+                                id="horaCirugia"
+                                v-model="infoRec.altaRec_HrAltaRec"
+                                :class="infoRec.altaRec_HrAltaRec != undefined && infoRec.altaRec_HrAltaRec != '' ?
+                                        'form-control border border-success formSombra' : 'form-control'"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col row margen-input">
+                <div class="g-3">
+                    <div class="row g-3">
+                        <!-- Observaciones -->
+                        <div class="col-md-12">
+                            <label for="" class="form-label fw-bold">Observaciones</label>
+                            <textarea
+                                class="form-control"
+                                id=""
+                                v-model="infoRec.altaRec_Obs"
+                                rows="5"
+                                :class="infoRec.altaRec_Obs != undefined && infoRec.altaRec_Obs != '' ?
+                                        'form-control border border-success formSombra' : 'form-control'"
+                            ></textarea>
+                        </div> 
+                        
+                        <div class="col-md-8"></div>
+                        <!-- Botón Guardar/Actualizar -->
+                        <div class="col-md-2 alinear-btn">
+                            <template v-if="btnActualizarRecuperacion === false">
+                                <button
+                                    data-bs-toggle="tab"
+                                    type="submit"
+                                    class="btn btn-guardar-info fw-bold"
+                                    @click="cambiarUpdateRecup">GUARDAR
+                                </button>
+                            </template>
+                            <template v-else>
+                                <button
+                                    data-bs-toggle="tab"
+                                    type="submit"
+                                    class="btn btn-guardar-info fw-bold"
+                                    @click="postAnestStore.updateRecupera(infoRec,preIdStore.pacienteID._id)">ACTUALIZAR
+                                </button>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>                       
+            
           </form>
         </div>
       </div>
@@ -1446,12 +1491,8 @@ h5 {
   border-radius: 5px;
   padding: 1rem;
   margin-top: 10px;
-  margin-bottom: 55px;
+  margin-bottom: 10px;
   backdrop-filter: blur(40px) brightness(97%);
-}
-
-.largoContenedor {
-  height: 558px;
 }
 .formSombra:focus {
   border-color: #6bd99b;
@@ -1546,5 +1587,9 @@ span {
   border: none;
   border-radius: var(--bs-modal-border-radius);
   outline: 0;
+}
+
+.margen-input{
+    margin-top: 25px;
 }
 </style>
