@@ -105,17 +105,17 @@
         <div class="col-12 bordePrincipal">
           <form @submit.prevent="" class="row g-3">
             <h5 class="fw-bold">ALDRETE DE RECUPERACIÓN</h5>
-            <table class="table table-responsive fw-bold" id="aldrete-tabla">
+            <table class="table table-responsive" id="aldrete-tabla">
               <!-- Fila 1 -->
               <tr>
-                <td class="color-texto">Criterio:</td>
-                <td class="color-texto">Ingreso</td>
-                <td class="color-texto">15 min</td>
-                <td class="color-texto">30 min</td>
-                <td class="color-texto">45 min</td>
-                <td class="color-texto">60 min</td>
-                <td class="color-texto">90 min</td>
-                <td class="color-texto">120 min</td>
+                <td class="color-texto fw-bold">Criterio:</td>
+                <td class="color-texto fw-bold">Ingreso</td>
+                <td class="color-texto fw-bold">15 min</td>
+                <td class="color-texto fw-bold">30 min</td>
+                <td class="color-texto fw-bold">45 min</td>
+                <td class="color-texto fw-bold">60 min</td>
+                <td class="color-texto fw-bold">90 min</td>
+                <td class="color-texto fw-bold">120 min</td>
               </tr>
 
               <!-- Frecuencia Cardiaca -->
@@ -719,7 +719,7 @@
               <!-- Bromage -->
               <tr class="espacio">
                 <td class="col-2 color-texto">
-                  <label for="" class="form-label fw-bold color-td">
+                  <label for="" class="form-label color-td">
                     <span
                       data-bs-toggle="modal"
                       data-bs-target="#bromage-modal"
@@ -1003,7 +1003,7 @@
               <!-- Escala de EVA Dolor -->
               <tr class="espacio">
                 <td class="col-2 color-texto">
-                  <label for="" class="form-label fw-bold color-td">
+                  <label for="" class="form-label color-td">
                     <span
                       data-bs-toggle="modal"
                       data-bs-target="#escala-EVA-modal"
@@ -1217,7 +1217,7 @@
                   type="submit"
                   class="btn btn-guardar-info fw-bold"
                   @click="
-                    postAnestStore.updateNotaUCPA(
+                    postAnestStore.updateRecupera(
                       infoRec,
                       preIdStore.pacienteID._id
                     )
