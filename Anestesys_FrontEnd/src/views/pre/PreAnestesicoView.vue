@@ -152,9 +152,7 @@
     <div class=" text-center posicionEstatica fw-bold">
       <div class="row">
         <div class="col bordeColumna">
-          <label class="form-label text-white">
             {{ nomPaciente }}
-          </label>
         </div>
         
         <div class="col bordeColumna">

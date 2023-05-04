@@ -58,6 +58,23 @@
           <img src="images/post.svg" width="180" class="ajusteImg"/>
         </div>    
       </div>
+
+      <div class=" text-center posicionEstatica fw-bold">
+        <div class="row">
+          <div class="col bordeColumna">
+              {{ preIdStore.NombrePaciente }}
+          </div>
+          
+          <div class="col bordeColumna">
+            {{ preIdStore.NombreCirujano }}
+          </div>
+          
+          <div class="col bordeColumna">
+            {{ preIdStore.NombreCirugia }}
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -66,12 +83,17 @@
 import Nota from '../../components/post/Nota.vue';
 import Recuperacion from "../../components/post/Recuperacion.vue";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
+import { usePreIdStore } from "../../stores/preId-store";
+
+const preIdStore = usePreIdStore();
 
 export default ({
   data(){
     return{
       esNotaP: false,
-      esRecuperacion: false  
+      esRecuperacion: false,
+
+      preIdStore
     }
   },
 
@@ -165,5 +187,24 @@ export default ({
     background-color: #F5F8FC;
     color: #002d60;
     border: none;
+}
+
+/* Menú estatico */
+.posicionEstatica {
+  position: -webkit-sticky;
+  position: fixed;
+  bottom: 0;
+  z-index: 1020;
+  background-color: #002D60;
+  padding: 1rem;
+  border-radius: 5px !important;
+  color: #ffffff;
+  width: 57.5%;
+}
+.bordeColumna{
+  margin-left: auto;
+  margin-right: auto;
+  border-right: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
 }
 </style>

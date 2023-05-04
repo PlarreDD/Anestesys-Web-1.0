@@ -1491,7 +1491,7 @@ h5 {
   border-radius: 5px;
   padding: 1rem;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 55px;
   backdrop-filter: blur(40px) brightness(97%);
 }
 .formSombra:focus {
