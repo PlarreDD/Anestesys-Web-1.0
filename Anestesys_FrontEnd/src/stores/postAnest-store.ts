@@ -167,6 +167,13 @@ export const usePostAnestStore = defineStore('postAn', {
                     aldreteRec_escEVADol60: infoRec.aldreteRec_escEVADol60,
                     aldreteRec_escEVADol90: infoRec.aldreteRec_escEVADol90,
                     aldreteRec_escEVADol120: infoRec.aldreteRec_escEVADol120,
+
+                    // Alta Recuperación
+                    altaRec_CalifAldrete: infoRec.altaRec_CalifAldrete,
+                    altaRec_Obs: infoRec.altaRec_Obs,
+                    altaRec_FechaAltaRec: infoRec.altaRec_FechaAltaRec,
+                    altaRec_HrAltaRec: infoRec.altaRec_HrAltaRec,
+                    altaRec_NomMedAnest: infoRec.altaRec_NomMedAnest,
                 }
             })
             .then((res: any) => {
@@ -260,6 +267,13 @@ export const usePostAnestStore = defineStore('postAn', {
                     aldreteRec_escEVADol60: infoRec.aldreteRec_escEVADol60,
                     aldreteRec_escEVADol90: infoRec.aldreteRec_escEVADol90,
                     aldreteRec_escEVADol120: infoRec.aldreteRec_escEVADol120,
+                    
+                    // Alta Recuperación
+                    altaRec_CalifAldrete: infoRec.altaRec_CalifAldrete,
+                    altaRec_Obs: infoRec.altaRec_Obs,
+                    altaRec_FechaAltaRec: infoRec.altaRec_FechaAltaRec,
+                    altaRec_HrAltaRec: infoRec.altaRec_HrAltaRec,
+                    altaRec_NomMedAnest: infoRec.altaRec_NomMedAnest,
                 }
             })
             .then((res: any) => {
