@@ -49,7 +49,7 @@
                         <div class="col-md-10"></div>
 
                         <!-- Botón Guardar/Actualizar -->
-                        <div class="col-md-2">                            
+                        <div class="col-md-2 alinear-btn">                            
                             <template v-if="btnActualizarRecuperacion === false">
                                 <button data-bs-toggle="tab" 
                                         type="submit"
@@ -71,161 +71,221 @@
 
             <!-- Aldrete de Recuperación -->
             <div class="tab-pane fade" id="aldrete">
-                <div class="col-12 bordePrincipal largoContenedor">
-                    <form class="row g-3">
-                        <table class="table">
+                <div class="col-12 bordePrincipal">
+                    <form @submit.prevent="" class="row g-3">
+
+                        <h5 class="fw-bold">ALDRETE DE RECUPERACIÓN</h5>
+                        <table class="table table-responsive fw-bold" id="aldrete-tabla">
                             <!-- Fila 1 -->
                             <tr>
-                                <td>Criterio</td>
-                                <td>Ingreso</td>
-                                <td>15 min</td>
-                                <td>30 min</td>
-                                <td>45 min</td>
-                                <td>60 min</td>
-                                <td>90 min</td>
-                                <td>120 min</td>
+                                <td class="color-texto">Criterio:</td>
+                                <td class="color-texto">Ingreso</td>
+                                <td class="color-texto">15 min</td>
+                                <td class="color-texto">30 min</td>
+                                <td class="color-texto">45 min</td>
+                                <td class="color-texto">60 min</td>
+                                <td class="color-texto">90 min</td>
+                                <td class="color-texto">120 min</td>
                             </tr>
 
                             <!-- Frecuencia Cardiaca -->
-                            <tr>
-                                <td class="col-2">Frecuencia Cardiaca</td>
+                            <tr class="espacio">
+                                <td class="col-2 color-texto">Frecuencia Cardiaca:</td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_FrecCardIn"></td>
+                                           v-model="infoRec.aldreteRec_FrecCardIn"
+                                           :class="infoRec.aldreteRec_FrecCardIn != undefined && infoRec.aldreteRec_FrecCardIn != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_FrecCard15"></td>
+                                           v-model="infoRec.aldreteRec_FrecCard15"
+                                           :class="infoRec.aldreteRec_FrecCard15 != undefined && infoRec.aldreteRec_FrecCard15 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_FrecCard30"></td>
+                                           v-model="infoRec.aldreteRec_FrecCard30"
+                                           :class="infoRec.aldreteRec_FrecCard30 != undefined && infoRec.aldreteRec_FrecCard30 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_FrecCard45"></td>
+                                           v-model="infoRec.aldreteRec_FrecCard45"
+                                           :class="infoRec.aldreteRec_FrecCard45 != undefined && infoRec.aldreteRec_FrecCard45 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_FrecCard60"></td>
+                                           v-model="infoRec.aldreteRec_FrecCard60"
+                                           :class="infoRec.aldreteRec_FrecCard60 != undefined && infoRec.aldreteRec_FrecCard60 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_FrecCard90"></td>
+                                           v-model="infoRec.aldreteRec_FrecCard90"
+                                           :class="infoRec.aldreteRec_FrecCard90 != undefined && infoRec.aldreteRec_FrecCard90 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_FrecCard120"></td>
+                                           v-model="infoRec.aldreteRec_FrecCard120"
+                                           :class="infoRec.aldreteRec_FrecCard120 != undefined && infoRec.aldreteRec_FrecCard120 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                             </tr>
 
                             <!-- Frecuencia Respiratoria -->
-                            <tr>
-                                <td class="col-2">Frecuencia Respiratoria</td>
+                            <tr class="espacio">
+                                <td class="col-2 color-texto">Frecuencia Respiratoria:</td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_FrecRespIn"></td>
+                                           v-model="infoRec.aldreteRec_FrecRespIn"
+                                           :class="infoRec.aldreteRec_FrecRespIn != undefined && infoRec.aldreteRec_FrecRespIn != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_FrecResp15"></td>
+                                           v-model="infoRec.aldreteRec_FrecResp15"
+                                           :class="infoRec.aldreteRec_FrecResp15 != undefined && infoRec.aldreteRec_FrecResp15 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_FrecResp30"></td>
+                                           v-model="infoRec.aldreteRec_FrecResp30"
+                                           :class="infoRec.aldreteRec_FrecResp30 != undefined && infoRec.aldreteRec_FrecResp30 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_FrecResp45"></td>
+                                           v-model="infoRec.aldreteRec_FrecResp45"
+                                           :class="infoRec.aldreteRec_FrecResp45 != undefined && infoRec.aldreteRec_FrecResp45 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_FrecResp60"></td>
+                                           v-model="infoRec.aldreteRec_FrecResp60"
+                                           :class="infoRec.aldreteRec_FrecResp60 != undefined && infoRec.aldreteRec_FrecResp60 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_FrecResp90"></td>
+                                           v-model="infoRec.aldreteRec_FrecResp90"
+                                           :class="infoRec.aldreteRec_FrecResp90 != undefined && infoRec.aldreteRec_FrecResp90 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_FrecResp120"></td>
+                                           v-model="infoRec.aldreteRec_FrecResp120"
+                                           :class="infoRec.aldreteRec_FrecResp120 != undefined && infoRec.aldreteRec_FrecResp120 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                             </tr>
 
                             <!-- Tensión Arterial -->
-                            <tr>
-                                <td class="col-2">Tensión Arterial</td>
+                            <tr class="espacio">
+                                <td class="col-2 color-texto">Tensión Arterial:</td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_TensArteIn"></td>
+                                           v-model="infoRec.aldreteRec_TensArteIn"
+                                           :class="infoRec.aldreteRec_TensArteIn != undefined && infoRec.aldreteRec_TensArteIn != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_TensArte15"></td>
+                                           v-model="infoRec.aldreteRec_TensArte15"
+                                           :class="infoRec.aldreteRec_TensArte15 != undefined && infoRec.aldreteRec_TensArte15 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_TensArte30"></td>
+                                           v-model="infoRec.aldreteRec_TensArte30"
+                                           :class="infoRec.aldreteRec_TensArte30 != undefined && infoRec.aldreteRec_TensArte30 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_TensArte45"></td>
+                                           v-model="infoRec.aldreteRec_TensArte45"
+                                           :class="infoRec.aldreteRec_TensArte45 != undefined && infoRec.aldreteRec_TensArte45 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_TensArte60"></td>
+                                           v-model="infoRec.aldreteRec_TensArte60"
+                                           :class="infoRec.aldreteRec_TensArte60 != undefined && infoRec.aldreteRec_TensArte60 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_TensArte90"></td>
+                                           v-model="infoRec.aldreteRec_TensArte90"
+                                           :class="infoRec.aldreteRec_TensArte90 != undefined && infoRec.aldreteRec_TensArte90 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_TensArte120"></td>
+                                           v-model="infoRec.aldreteRec_TensArte120"
+                                           :class="infoRec.aldreteRec_TensArte120 != undefined && infoRec.aldreteRec_TensArte120 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                             </tr>
 
                             <!-- Saturación de O2 -->
-                            <tr>
-                                <td class="col-2">Saturación de O2</td>
+                            <tr class="espacio">
+                                <td class="col-2 color-texto">Saturación de O2:</td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_SatO2In"></td>
+                                           v-model="infoRec.aldreteRec_SatO2In"
+                                           :class="infoRec.aldreteRec_SatO2In != undefined && infoRec.aldreteRec_SatO2In != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_SatO215"></td>
+                                           v-model="infoRec.aldreteRec_SatO215"
+                                           :class="infoRec.aldreteRec_SatO215 != undefined && infoRec.aldreteRec_SatO215 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_SatO230"></td>
+                                           v-model="infoRec.aldreteRec_SatO230"
+                                           :class="infoRec.aldreteRec_SatO230 != undefined && infoRec.aldreteRec_SatO230 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_SatO245"></td>
+                                           v-model="infoRec.aldreteRec_SatO245"
+                                           :class="infoRec.aldreteRec_SatO245 != undefined && infoRec.aldreteRec_SatO245 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_SatO260"></td>
+                                           v-model="infoRec.aldreteRec_SatO260"
+                                           :class="infoRec.aldreteRec_SatO260 != undefined && infoRec.aldreteRec_SatO260 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_SatO290"></td>
+                                           v-model="infoRec.aldreteRec_SatO290"
+                                           :class="infoRec.aldreteRec_SatO290 != undefined && infoRec.aldreteRec_SatO290 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                                 <td><input type="text"
                                            class="form-control"
                                            id=""
-                                           v-model="infoRec.aldreteRec_SatO2120"></td>
+                                           v-model="infoRec.aldreteRec_SatO2120"
+                                           :class="infoRec.aldreteRec_SatO2120 != undefined && infoRec.aldreteRec_SatO2120 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'"></td>
                             </tr>
 
                             <!-- Aldrete -->
-                            <tr>
-                                <td class="col-2">Aldrete</td>
+                            <tr class="espacio">
+                                <td class="col-2 color-texto">Aldrete:</td>
                                 <th>                               
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_AldreteIn"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_AldreteIn != undefined && infoRec.aldreteRec_AldreteIn != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -242,8 +302,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_Aldrete15"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_Aldrete15 != undefined && infoRec.aldreteRec_Aldrete15 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -260,8 +322,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_Aldrete30"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_Aldrete30 != undefined && infoRec.aldreteRec_Aldrete30 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -278,8 +342,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_Aldrete45"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_Aldrete45 != undefined && infoRec.aldreteRec_Aldrete45 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -296,8 +362,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_Aldrete60"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_Aldrete60 != undefined && infoRec.aldreteRec_Aldrete60 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -314,8 +382,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_Aldrete90"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_Aldrete90 != undefined && infoRec.aldreteRec_Aldrete90 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -332,8 +402,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_Aldrete120"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_Aldrete120 != undefined && infoRec.aldreteRec_Aldrete120 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -349,13 +421,23 @@
                             </tr>
 
                             <!-- Bromage -->
-                            <tr>
-                                <td class="col-2">Bromage</td>
+                            <tr class="espacio">
+                                <td class="col-2 color-texto"> 
+                                    <label for="" class="form-label fw-bold color-td">
+                                        <span data-bs-toggle="modal"
+                                             data-bs-target="#bromage-modal">
+                                            <font-awesome-icon icon="fa-solid fa-circle-info"/>
+                                        </span>
+                                        Bromage:                                        
+                                    </label>
+                                </td>
                                 <th>                               
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_BromageIn"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_BromageIn != undefined && infoRec.aldreteRec_BromageIn != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option selected></option>
                                         <option>I</option>
                                         <option>II</option>
                                         <option>III</option>
@@ -366,8 +448,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_Bromage15"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_Bromage15 != undefined && infoRec.aldreteRec_Bromage15 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>I</option>
                                         <option>II</option>
                                         <option>III</option>
@@ -378,8 +462,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_Bromage30"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_Bromage30 != undefined && infoRec.aldreteRec_Bromage30 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>I</option>
                                         <option>II</option>
                                         <option>III</option>
@@ -390,8 +476,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_Bromage45"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_Bromage45 != undefined && infoRec.aldreteRec_Bromage45 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>I</option>
                                         <option>II</option>
                                         <option>III</option>
@@ -402,8 +490,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_Bromage60"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_Bromage60 != undefined && infoRec.aldreteRec_Bromage60 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>I</option>
                                         <option>II</option>
                                         <option>III</option>
@@ -414,8 +504,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_Bromage90"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_Bromage90 != undefined && infoRec.aldreteRec_Bromage90 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>I</option>
                                         <option>II</option>
                                         <option>III</option>
@@ -426,8 +518,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_Bromage120"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_Bromage120 != undefined && infoRec.aldreteRec_Bromage120 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>I</option>
                                         <option>II</option>
                                         <option>III</option>
@@ -437,13 +531,15 @@
                             </tr>
 
                             <!-- Nauseas/Vomito -->
-                            <tr>
-                                <td class="col-2">Nauseas/Vomito</td>
+                            <tr class="espacio">
+                                <td class="col-2 color-texto">Nauseas/Vomito:</td>
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_NauseasIn"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_NauseasIn != undefined && infoRec.aldreteRec_NauseasIn != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>Sí</option>
                                         <option>No</option>
                                     </select>
@@ -452,8 +548,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_Nauseas15"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_Nauseas15 != undefined && infoRec.aldreteRec_Nauseas15 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>Sí</option>
                                         <option>No</option>
                                     </select>         
@@ -462,8 +560,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_Nauseas30"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_Nauseas30 != undefined && infoRec.aldreteRec_Nauseas30 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>Sí</option>
                                         <option>No</option>
                                     </select>         
@@ -472,8 +572,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_Nauseas45"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_Nauseas45 != undefined && infoRec.aldreteRec_Nauseas45 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>Sí</option>
                                         <option>No</option>
                                     </select>         
@@ -482,8 +584,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_Nauseas60"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_Nauseas60 != undefined && infoRec.aldreteRec_Nauseas60 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>Sí</option>
                                         <option>No</option>
                                     </select>         
@@ -492,8 +596,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_Nauseas90"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_Nauseas90 != undefined && infoRec.aldreteRec_Nauseas90 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>Sí</option>
                                         <option>No</option>
                                     </select>         
@@ -502,8 +608,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_Nauseas120"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_Nauseas120 != undefined && infoRec.aldreteRec_Nauseas120 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>Sí</option>
                                         <option>No</option>
                                     </select>         
@@ -511,13 +619,23 @@
                             </tr>
 
                             <!-- Escala de EVA Dolor -->
-                            <tr>
-                                <td class="col-2">Escala de EVA Dolor</td>
+                            <tr class="espacio">
+                                <td class="col-2 color-texto">
+                                    <label for="" class="form-label fw-bold color-td">
+                                        <span data-bs-toggle="modal"
+                                             data-bs-target="#escala-EVA-modal">
+                                            <font-awesome-icon icon="fa-solid fa-circle-info"/>
+                                        </span>
+                                        Escala de EVA Dolor:                                        
+                                    </label>
+                                </td>
                                 <th>                               
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_escEVADolIn"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_escEVADolIn != undefined && infoRec.aldreteRec_escEVADolIn != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -534,8 +652,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_escEVADol15"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_escEVADol15 != undefined && infoRec.aldreteRec_escEVADol15 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -552,8 +672,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_escEVADol30"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_escEVADol30 != undefined && infoRec.aldreteRec_escEVADol30 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -570,8 +692,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_escEVADol45"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_escEVADol45 != undefined && infoRec.aldreteRec_escEVADol45 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -588,8 +712,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_escEVADol60"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_escEVADol60 != undefined && infoRec.aldreteRec_escEVADol60 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -606,8 +732,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_escEVADol90"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_escEVADol90 != undefined && infoRec.aldreteRec_escEVADol90 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -624,8 +752,10 @@
                                 <th>
                                     <select id="inputState"
                                             v-model="infoRec.aldreteRec_escEVADol120"
-                                            class="form-select">
-                                        <option selected>Seleccione...</option>
+                                            class="form-select"
+                                            :class="infoRec.aldreteRec_escEVADol120 != undefined && infoRec.aldreteRec_escEVADol120 != '' ?
+                                            'form-control border border-success formSombra' : 'form-control'">
+                                        <option></option>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -640,6 +770,26 @@
                                 </th>
                             </tr>
                         </table>
+
+                        <div class="col-md-10"></div>
+
+                        <!-- Botón Guardar/Actualizar -->
+                        <div class="col-md-2 alinear-btn">                            
+                            <template v-if="btnActualizarRecuperacion === false">
+                                <button data-bs-toggle="tab" 
+                                        type="submit"
+                                        class="btn btn-guardar-info fw-bold"
+                                        @click="cambiarUpdateRecup"
+                                        > GUARDAR </button>
+                            </template>
+                            <template v-else>
+                                <button data-bs-toggle="tab" 
+                                        type="submit"
+                                        class="btn btn-guardar-info fw-bold"
+                                        @click="postAnestStore.updateNotaUCPA(infoRec, preIdStore.pacienteID._id)"
+                                        > ACTUALIZAR </button> 
+                            </template>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -753,6 +903,48 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal"
+            id="bromage-modal"
+            tabindex="-1"
+            aria-labelledby=""
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" >
+                <div class="modal-content">
+                    <div class="input-group mb-3">
+                        <div class="modal-body">
+                            <div class="col-md-12">
+                                <div class="row g-3">                                    
+                                  <img src="images/bromage-info.svg" alt="">  
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal"
+            id="escala-EVA-modal"
+            tabindex="-1"
+            aria-labelledby=""
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="input-group mb-3">
+                        <div class="modal-body">
+                            <div class="col-md-12">
+                                <div class="row g-3">                                    
+                                  <img src="images/escala-EVA-info.svg" alt="">                                      
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -792,15 +984,28 @@ h5{
     color: #002D60;
     margin-bottom: 10px;    
 }
+.color-texto{
+    color: #002D60;
+}
 .bordePrincipal {
   border-radius: 5px;
   padding: 1rem;
   margin-top :10px;
-  margin-bottom: 10px;
-  background-color: rgba(232, 234, 236, 0.6);
+  margin-bottom: 55px;
+  backdrop-filter: blur(40px) brightness(97%); 
 }
 .largoContenedor{
     height: 558px
+}
+.formSombra:focus{
+    border-color:#6BD99B;
+    outline:0;
+    -webkit-box-shadow:0 0 8px #6BD99B;
+    box-shadow:0 0 8px #6BD99B
+}
+.border-success {
+    --bs-border-opacity: 1;
+    border-color: #6BD99B !important;
 }
 .btn-guardar-info{
     --bs-btn-bg: none;
@@ -828,5 +1033,50 @@ h5{
 }
 .centrar-li{
   justify-content: center; 
+}
+.alinear-btn{
+    text-align: end;
+}
+
+#aldrete-tabla tbody tr > td{
+                    border: 1px;
+                    height: 10px;
+                    padding-left: 1px;                
+                }
+                #aldrete-tabla{
+                    padding-left: 10px;
+                    margin-top: 20px;                    
+                }
+                .espacio{
+					height: 55px;
+				}
+
+.table>:not(caption)>*>* {
+    padding: 0.5rem 0.5rem;
+    background-color: white;
+    border-bottom-width: 1px;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+.color-td{
+    background-color: #eef1f4 !important;
+}
+span{
+    cursor: pointer;
+}
+.modal-dialog, .modal-content {
+    height: 25%;
+}
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: var(--bs-modal-color);
+    pointer-events: auto;
+    background-color: transparent;
+    background-clip: padding-box;
+    border: none;
+    border-radius: var(--bs-modal-border-radius);
+    outline: 0;
 }
 </style>

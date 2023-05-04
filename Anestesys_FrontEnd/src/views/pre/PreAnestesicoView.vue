@@ -455,7 +455,7 @@ export default defineComponent({
   width: 200px;
   height: auto;
   background-color: #E88300;
-  padding: 1rem;
+  padding: 0rem;
   border-radius: 10px;
   margin-left: 28px;
   text-align: center;
@@ -464,7 +464,7 @@ export default defineComponent({
   width: 200px;
   height: auto;
   background-color: #d6d6d6;
-  padding: 1rem;
+  padding: 0rem;
   border-radius: 10px;
   margin-left: 28px;
   text-align: center;
@@ -477,14 +477,14 @@ export default defineComponent({
   width: 200px;
   height: auto;
   background-color: #d6d6d6;
-  padding: 1rem;
+  padding: 0rem;
   border-radius: 10px;
   margin-left: 28px;
   text-align: center;
 }
 .img-menu-lateral{
-  width: 90%;
-  height: 95%;
+  width: 100%;
+  height: 100%;
 }
 
 /* Menú estatico */
