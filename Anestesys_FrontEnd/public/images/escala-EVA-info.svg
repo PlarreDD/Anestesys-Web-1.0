@@ -7,9 +7,9 @@
       <rect width="765" height="73" fill="none"/>
     </clipPath>
   </defs>
-  <g id="Grupo_225" data-name="Grupo 225" transform="translate(-567 -463)">
+  <g id="Grupo_228" data-name="Grupo 228" transform="translate(-567 -463)">
     <rect id="Menu_Grid_Anéstesico" data-name="Menu Grid Anéstesico" width="832" height="284" rx="15" transform="translate(567 463)" fill="#002d60"/>
-    <text id="Tabla_del_dolor" data-name="Tabla del dolor" transform="translate(891 502)" fill="#fff" font-size="17" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">TABLA DEL DOLOR</tspan></text>
+    <text id="Tabla_del_dolor" data-name="Tabla del dolor" transform="translate(891 502)" fill="#fff" font-size="17" font-family="SegoeUI-Bold, Segoe UI" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">TABLA DEL DOLOR</tspan></text>
     <line id="Línea_35369" data-name="Línea 35369" x2="688" transform="translate(639.5 543.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6"/>
     <g id="Cuadrícula_de_repetición_37" data-name="Cuadrícula de repetición 37" transform="translate(632.5 540.5)" clip-path="url(#clip-path)">
       <g transform="translate(-619.5 -340.5)">
@@ -43,16 +43,16 @@
         <line id="Línea_35370-10" data-name="Línea 35370" y2="25" transform="translate(622.5 342.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6"/>
       </g>
     </g>
-    <text id="_1" data-name="1" transform="translate(629 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">1</tspan></text>
-    <text id="_2" data-name="2" transform="translate(706 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">2</tspan></text>
-    <text id="_3" data-name="3" transform="translate(782 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">3</tspan></text>
-    <text id="_4" data-name="4" transform="translate(859 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">4</tspan></text>
-    <text id="_5" data-name="5" transform="translate(937 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">5</tspan></text>
-    <text id="_6" data-name="6" transform="translate(1015 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">6</tspan></text>
-    <text id="_7" data-name="7" transform="translate(1094 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">7</tspan></text>
-    <text id="_8" data-name="8" transform="translate(1170 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">8</tspan></text>
-    <text id="_9" data-name="9" transform="translate(1246 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">9</tspan></text>
-    <text id="_10" data-name="10" transform="translate(1320 600)" fill="#fff" font-size="20" font-family="SFUIDisplay-Bold, SF UI Display" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">10</tspan></text>
+    <text id="_1" data-name="1" transform="translate(629 600)" fill="#fff" font-size="20" font-family="SegoeUI-Bold, Segoe UI" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">1</tspan></text>
+    <text id="_2" data-name="2" transform="translate(706 600)" fill="#fff" font-size="20" font-family="SegoeUI-Bold, Segoe UI" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">2</tspan></text>
+    <text id="_3" data-name="3" transform="translate(782 600)" fill="#fff" font-size="20" font-family="SegoeUI-Bold, Segoe UI" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">3</tspan></text>
+    <text id="_4" data-name="4" transform="translate(859 600)" fill="#fff" font-size="20" font-family="SegoeUI-Bold, Segoe UI" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">4</tspan></text>
+    <text id="_5" data-name="5" transform="translate(937 600)" fill="#fff" font-size="20" font-family="SegoeUI-Bold, Segoe UI" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">5</tspan></text>
+    <text id="_6" data-name="6" transform="translate(1015 600)" fill="#fff" font-size="20" font-family="SegoeUI-Bold, Segoe UI" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">6</tspan></text>
+    <text id="_7" data-name="7" transform="translate(1094 600)" fill="#fff" font-size="20" font-family="SegoeUI-Bold, Segoe UI" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">7</tspan></text>
+    <text id="_8" data-name="8" transform="translate(1170 600)" fill="#fff" font-size="20" font-family="SegoeUI-Bold, Segoe UI" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">8</tspan></text>
+    <text id="_9" data-name="9" transform="translate(1246 600)" fill="#fff" font-size="20" font-family="SegoeUI-Bold, Segoe UI" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">9</tspan></text>
+    <text id="_10" data-name="10" transform="translate(1320 600)" fill="#fff" font-size="20" font-family="SegoeUI-Bold, Segoe UI" font-weight="700" letter-spacing="0.046em"><tspan x="0" y="0">10</tspan></text>
     <g id="Cuadrícula_de_repetición_38" data-name="Cuadrícula de repetición 38" transform="translate(605 626)" clip-path="url(#clip-path-2)">
       <g transform="translate(-612 -428)">
         <circle id="Elipse_42" data-name="Elipse 42" cx="36.5" cy="36.5" r="36.5" transform="translate(612 428)" fill="#fff"/>

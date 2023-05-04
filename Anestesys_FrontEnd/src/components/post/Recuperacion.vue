@@ -72,7 +72,7 @@
             <!-- Aldrete de Recuperación -->
             <div class="tab-pane fade" id="aldrete">
                 <div class="col-12 bordePrincipal">
-                    <form class="row g-3">
+                    <form @submit.prevent="" class="row g-3">
 
                         <h5 class="fw-bold">ALDRETE DE RECUPERACIÓN</h5>
                         <table class="table table-responsive fw-bold" id="aldrete-tabla">
@@ -909,7 +909,7 @@
             tabindex="-1"
             aria-labelledby=""
             aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered" >
+            <div class="modal-dialog modal-dialog-centered" >
                 <div class="modal-content">
                     <div class="input-group mb-3">
                         <div class="modal-body">
@@ -930,7 +930,7 @@
             tabindex="-1"
             aria-labelledby=""
             aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="input-group mb-3">
                         <div class="modal-body">
@@ -1064,7 +1064,7 @@ span{
     cursor: pointer;
 }
 .modal-dialog, .modal-content {
-    height: 50%;
+    height: 25%;
 }
 .modal-content {
     position: relative;
