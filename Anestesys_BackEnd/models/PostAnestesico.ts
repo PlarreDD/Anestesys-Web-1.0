@@ -12,9 +12,7 @@ const PostRecuperacionSchema = new Schema({
         required: true,
     },
 
-    notaEval_Obs: {
-        type: String,
-    }
+    notaEval_Obs: { type: String, }
 });
 
 export const PostRecupera = model('PostRecupera', PostRecuperacionSchema);

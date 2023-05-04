@@ -12,64 +12,75 @@
                 <div class="col-md-8">
                     <label for="" class="form-label fw-bold margenLabelR">Nombre(s)</label>
                     <input type="text"
-                        :class="userNombre == true ? 'form-control border border-danger margenInputR' : 'form-control margenInputR'"
-                        v-model="usr.nomUsr"
-                        id="nombre"
-                        placeholder="Nombre completo">
+                           :class="userNombre == true ?
+                                  'form-control border border-danger margenInputR' : 'form-control margenInputR'"
+                           v-model="usr.nomUsr"
+                           id="nombre"
+                           placeholder="Nombre completo">
                     
-                    <div :class="userNombre == true ? 'visible validaCampo' : 'invisible'" id="userNombre">
-                        Escriba sus nombres
+                    <div :class="userNombre == true ?
+                                'visible validaCampo' : 'invisible'"
+                         id="userNombre"> Escriba sus nombres
                     </div>
                 </div>
 
                 <div class="col-md-2"></div>
                 <div class="col-md-2"></div>
+
                 <div class="col-md-8">
                     <label for="" class="form-label fw-bold margenLabelR"> Apellidos </label>
                     <input type="text"
-                        :class="userApellido == true ? 'form-control border border-danger margenInputR' : 'form-control margenInputR'"
-                        v-model="usr.apUsr"
-                        id="apellidos"
-                        placeholder="Apellidos (paterno y materno)">
+                           :class="userApellido == true ?
+                                  'form-control border border-danger margenInputR' : 'form-control margenInputR'"
+                           v-model="usr.apUsr"
+                           id="apellidos"
+                           placeholder="Apellidos (paterno y materno)">
                     
-                    <div :class="userApellido == true ? 'visible validaCampo' : 'invisible'" id="userApellidos">
-                        Escriba sus apellidos
+                    <div :class="userApellido == true ?
+                                'visible validaCampo' : 'invisible'"
+                         id="userApellidos"> Escriba sus apellidos
                     </div> 
                 </div>
 
                 <div class="col-md-2"></div>
                 <div class="col-md-2"></div>
+
                 <div class="col-md-8">
                     <label for="" class="form-label fw-bold margenLabelR"> Correo electrónico </label>
                     <input type="email"
-                        :class="userCorreo == true ? 'form-control border border-danger margenInputR' : 'form-control margenInputR'"
-                        v-model="usr.email"
-                        id="correo"
-                        placeholder="correo@mail.com">
+                           :class="userCorreo == true ?
+                                  'form-control border border-danger margenInputR' : 'form-control margenInputR'"
+                           v-model="usr.email"
+                           id="correo"
+                           placeholder="correo@mail.com">
                     
-                    <div :class="userCorreo == true ? 'visible validaCampo' : 'invisible'" id="userEmail">
-                        Escriba su correo electrónico
+                    <div :class="userCorreo == true ?
+                                'visible validaCampo' : 'invisible'"
+                         id="userEmail"> Escriba su correo electrónico
                     </div> 
                 </div>
 
                 <div class="col-md-2"></div>
                 <div class="col-md-2"></div>
+
                 <div class="col-md-8">
                     <label for="" class="form-label fw-bold margenLabelR"> Fecha de nacimiento </label>
                     <input type="date"
-                        :class="userFecha == true ? 'form-control border border-danger' : 'form-control'"
-                        v-model="usr.fechaNac"
-                        id="fechaN"> 
-                    <div :class="userFecha == true ? 'visible validaCampo' : 'invisible'" id="userFechaN">
+                           :class="userFecha == true ?
+                                  'form-control border border-danger' : 'form-control'"
+                           v-model="usr.fechaNac"
+                           id="fechaN">
+                    <div :class="userFecha == true ?
+                                'visible validaCampo' : 'invisible'" id="userFechaN">
                         Escriba su fecha de nacimiento
-                    </div> 
+                    </div>
                 </div>
+
                 <div class="col-md-2"></div>
 
                 <div class="col-md-12 div-img">
-                        <button @click="validaCamposRegistro()"
-                                class="btn btn-reg fw-bold"
-                                > Crear Cuenta </button>
+                    <button @click="validaCamposRegistro()"
+                            class="btn btn-reg fw-bold"> Crear Cuenta </button>
                 </div>
                 
                 <div class="col-md-12">

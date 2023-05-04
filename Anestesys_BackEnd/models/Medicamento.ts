@@ -8,9 +8,8 @@ const MedicamentoSchema = new Schema({
         unique: true,
         uppercase: true
     },
-    codigoMedicamento:{
-        type: String
-    }
+
+    codigoMedicamento:{ type: String }
 })
 
 export const Medicamento = model ('Medicamento', MedicamentoSchema);
