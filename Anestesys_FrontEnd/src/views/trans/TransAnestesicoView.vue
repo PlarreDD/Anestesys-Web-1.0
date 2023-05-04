@@ -463,7 +463,7 @@ export default({
   width: 200px;
   height: auto;
   background-color: #E88300;
-  padding: 1rem;
+  padding: 0rem;
   border-radius: 10px;
   margin-left: 47px;
   text-align: center;
@@ -472,7 +472,7 @@ export default({
   width: 200px;
   height: auto;
   background-color: #d6d6d6;
-  padding: 1rem;
+  padding: 0rem;
   border-radius: 10px;
   margin-left: 47px;
   text-align: center;
@@ -482,8 +482,8 @@ export default({
   transition: background-color 0.2s ease-in-out;
 }
 .ajusteImg{
-  width: 90%;
-  height: 95%;
+  width: 100%;
+  height: 100%;
 }
 .bordePrincipal {
     width: 108%;

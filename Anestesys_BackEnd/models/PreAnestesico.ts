@@ -28,7 +28,7 @@ const PreIdPacienteSchema = new Schema({
     fechaNPaciente: { type: String, },
     edadPaciente: { type: String, },    
     generoPaciente: { type: String, },
-    
+
     /* Datos Demográficos */
     nacionalidad: { type: String, },
     CURP: { type: String, },
@@ -61,7 +61,7 @@ const PreIdPacienteCxSchema = new Schema({
     /* Datos CIE */
     cie10: { type: String },
     cie9: { type: String },
-    
+
     /* Informacion procedimiento */
     cirugia: { type: String, },
     fechaCx: { type: String, },
@@ -102,7 +102,7 @@ const PreValoracionSchema = new Schema({
     antPersNoPat_Adicciones: { type: String, },
     antPersNoPat_Inmunizaciones: { type: String, },
     antPersNoPat_AntImportQx: { type: String, },
-    
+
     /* Exploración Física */
     sigVit_Edad: { type: String, },
     sigVit_Temperatura: { type: String, },
@@ -173,6 +173,7 @@ const ValEstudiosSchema = new Schema({
         ref: 'PreVal',
         required: true,
     },
+
     // Estudios
     val_Estudios: [{
         estudio: { type: String },
@@ -262,6 +263,7 @@ const PrePlanSchema = new Schema({
     general_OtrosDispositivos: { type: String, },    
     general_EspOtrosDispositivos: { type: String, },
 });
+
 /* Nota */
 const PreNotaSchema = new Schema({
     /* Id del paciente para enlazar la tabla */
