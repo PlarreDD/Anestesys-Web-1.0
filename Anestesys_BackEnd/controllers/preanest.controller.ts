@@ -386,7 +386,6 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
 };
 
 // ****** Estudios ******
-
 export const saveEstudios = async (req: any, res: Response) => {
     try {
         const { vid,

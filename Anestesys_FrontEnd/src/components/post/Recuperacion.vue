@@ -43,13 +43,17 @@
                             <textarea class="form-control"
                                       id=""
                                       v-model="infoRec.notaEval_Obs"
-                                      rows="15"></textarea>
+                                      rows="15" maxlength="700"
+                                      :class="infoRec.notaEval_Obs != undefined && infoRec.notaEval_Obs != '' ?
+                                    'form-control border border-success formSombra' : 'form-control'"></textarea>
                         </div>                        
 
                         <div class="col-md-10"></div>
 
                         <!-- Botón Guardar/Actualizar -->
+
                         <div class="col-md-2 alinear-btn">                            
+
                             <template v-if="btnActualizarRecuperacion === false">
                                 <button data-bs-toggle="tab" 
                                         type="submit"
@@ -61,7 +65,7 @@
                                 <button data-bs-toggle="tab" 
                                         type="submit"
                                         class="btn btn-guardar-info fw-bold"
-                                        @click="postAnestStore.updateNotaUCPA(infoRec, preIdStore.pacienteID._id)"
+                                        @click="postAnestStore.updateRecupera(infoRec, preIdStore.pacienteID._id)"
                                         > ACTUALIZAR </button> 
                             </template>
                         </div>
@@ -973,7 +977,7 @@ export default defineComponent({
             this.btnActualizarRecuperacion=true
 
             // Método Guardar
-            postAnestStore.saveNotaUCPA(this.infoRec, preIdStore.pacienteID._id);
+            postAnestStore.saveRecupera(this.infoRec, preIdStore.pacienteID._id);
         }
     }
  })
@@ -994,6 +998,7 @@ h5{
   margin-bottom: 55px;
   backdrop-filter: blur(40px) brightness(97%); 
 }
+
 .largoContenedor{
     height: 558px
 }
@@ -1034,6 +1039,17 @@ h5{
 .centrar-li{
   justify-content: center; 
 }
+
+.formSombra:focus{
+    border-color:#6BD99B;
+    outline:0;
+    -webkit-box-shadow:0 0 8px #6BD99B;
+    box-shadow:0 0 8px #6BD99B
+}
+.border-success {
+    --bs-border-opacity: 1;
+    border-color: #6BD99B !important;
+
 .alinear-btn{
     text-align: end;
 }
