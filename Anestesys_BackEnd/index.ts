@@ -12,6 +12,7 @@ import planRouter from './routes/plan.route';
 import notaRouter from './routes/nota.route';
 import recuperaRouter from './routes/recuperacion.route';
 import notapaRouter from './routes/notapa.route';
+import  transRouter from "./routes/datosv.route";
 
 const app = express();
 const whiteList = [process.env.ORIGIN1, process.env.ORIGIN2];
@@ -41,6 +42,8 @@ app.use('/valora', valRouter);
 app.use('/estudios', estRouter);
 app.use('/plan', planRouter);
 app.use('/nota', notaRouter);
+/*------------ Trans Anestésico -----------*/
+app.use("/trans", transRouter);
 /*------------ Post Anestésico ------------*/
 app.use('/notapa', notapaRouter);
 app.use('/recupera', recuperaRouter);

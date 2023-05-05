@@ -1,15 +1,11 @@
 import { defineStore } from "pinia";
 import { apiAxios } from '@/boot/axios';
 import { useUserStore } from "./user-store";
-import { ref } from "vue";
 import swal from 'sweetalert2';
 
 const userStore = useUserStore();
 
 export const usePostAnestStore = defineStore('postAn', {
-    // state() {
-        
-    // },
     actions: {
         /*------------------- Nota Post Anestésica -------------------*/
         saveNotaPA(infoNotaPost: any, pid: string){
