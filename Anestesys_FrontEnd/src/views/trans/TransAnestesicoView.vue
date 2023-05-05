@@ -256,12 +256,14 @@
                       </div>
                     </form>
                 </li>
+                <!-- Datos del ventilador -->
                 <li class="col-md-3">
                     <button type="button" class="btn btn-outline-secondary fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">DATOS DEL VENTILADOR</button>
-                    <form class="dropdown-menu p-5">
+                    <form @submit.prevent="" class="dropdown-menu p-4 color-dropdown">
                       <div class="mb-3 estiloDropDownVentilador row g-3">
+                        <h5 class="text-white fw-bold">VENTILADOR</h5>
                         <div class="col-md-9">
-                            <label for="inputState" class="form-label fw-bold">Modos de ventilación</label>
+                            <label for="inputState" class="form-label fw-bold text-white">Modos de ventilación</label>
                             <select id="inputState" class="form-select">
                                 <option selected>Seleccione...</option>
                                 <option>Control volumen</option>
@@ -273,61 +275,75 @@
                             </select>
                         </div>   
                         <div class="col-md-3">
-                            <label class="form-label fw-bold">PEEP</label>
+                            <label class="form-label fw-bold text-white">PEEP</label>
                             <input type="text" class="form-control" id=""> 
                         </div>    
                         
                         <div class="col-md-3">
-                            <label class="form-label fw-bold">VT</label>
+                            <label class="form-label fw-bold text-white">VT</label>
                             <input type="text" class="form-control" id=""> 
                         </div>
                         <div class="col-md-3">
-                            <label class="form-label fw-bold">Frec. Resp</label>
+                            <label class="form-label fw-bold text-white">Frec. Resp</label>
                             <input type="text" class="form-control" id=""> 
                         </div>
                         <div class="col-md-3">
-                            <label class="form-label fw-bold">I:E</label>
+                            <label class="form-label fw-bold text-white">I:E</label>
                             <input type="text" class="form-control" id=""> 
                         </div>
                         <div class="col-md-3">
-                            <label class="form-label fw-bold">P. Límite</label>
+                            <label class="form-label fw-bold text-white">P. Límite</label>
                             <input type="text" class="form-control" id=""> 
                         </div>
 
                         <div class="col-md-9"></div>
 
                         <div class="col-md-2">
-                          <button type="submit" class="btn btn-outline-secondary fw-bold">Guardar</button>
+                          <button type="submit" class="btn btn-dropdown fw-bold">Guardar</button>
                         </div>
 
                         <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Hora</th>
-                                        <th>Modo de ventilación</th>
-                                        <th>Editar</th>
-                                        <th>Eliminar</th>
-                                    </tr>
-                                </thead>
+                          <div class="deslizar">
+                            <table class="table table-responsive text-white">
+                                  <thead>
+                                      <tr>
+                                          <th></th>
+                                          <th>Hora</th>
+                                          <th>Modo de ventilación</th>
+                                          <th></th>
+                                          <th></th>
+                                      </tr>
+                                  </thead>
                                 
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>12:00</td>
-                                        <td>Ventilación control presión con volumen garantizado</td>
-                                        <td><button class="btn btn-outline-secondary fw-bold">Editar</button></td>
-                                        <td><button class="btn btn-outline-secondary fw-bold">Eliminar</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>        
+                                  <tbody>
+                                      <tr>
+                                          <td>1</td>
+                                          <td>12:00</td>
+                                          <td>Ventilación control presión con volumen garantizado</td>
+                                          <td><button class="btn">
+                                                <font-awesome-icon 
+                                                  icon="fa-solid fa-pen-to-square" 
+                                                  size="lg" 
+                                                  class="text-white"/>
+                                              </button>
+                                          </td>
+                                          <td>
+                                            <button class="btn">
+                                              <font-awesome-icon 
+                                                icon="fa-solid fa-trash" 
+                                                size="lg" class="text-white"/>
+                                            </button></td>
+                                      </tr>
+                                  </tbody>
+                            </table>  
+                          </div>      
                         </div>
                       </div>                      
                     </form>
                 </li>
             </ul>
-        </div>       
+        </div>   
+
         <div class="col-1 fw-bold">
           <select id="inputState" class="form-select ">
             <option>1</option>
@@ -386,18 +402,20 @@
           </div>    
         </div>
 
-        <div class="container text-center col-md-9 posicionEstatica bordeContenedor fw-bold">
-            <div class="row">
-              <div class="col bordeColumna">
-                Paciente: {{nomPaciente}}
-              </div>
-              <div class="col bordeColumna">
-                Cirujano: {{}}
-              </div>
-              <div class="col bordeColumna">
-                Cirugía: {{}}
-              </div>
+        <div class=" text-center posicionEstatica fw-bold">
+          <div class="row">
+            <div class="col bordeColumna">
+                {{ nomPaciente }}
             </div>
+            
+            <div class="col bordeColumna">
+              {{ nomCirujano }}
+            </div>
+            
+            <div class="col bordeColumna">
+              {{ nomCirugia }}
+            </div>
+          </div>
         </div>
     </div>    
 
@@ -492,21 +510,21 @@ export default({
   text-align: center;
 }
 .posicionEstatica {
-    position: sticky;
-    bottom: 0;
-    z-index: 1020;
-    background-color: #fff;
-}
-.bordeContenedor{
-  padding: 1.2rem;
-  border-radius: 5px;
-  border: #ccc 1px solid;
+  position: -webkit-sticky;
+  position: fixed;
+  bottom: 0;
+  z-index: 1020;
+  background-color: #002D60;
+  padding: 1rem;
+  border-radius: 5px !important;
+  color: #ffffff;
+  width: 57.5%;
 }
 .bordeColumna{
   margin-left: auto;
   margin-right: auto;
-  border-right: 1px solid #000000;
-  border-left: 1px solid #000000;
+  border-right: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
 }
 .estiloDropDown{
   width: 450px; height: 250px;
@@ -518,6 +536,27 @@ export default({
   width: 600px; height: 400px;
 }
 .estiloDropDownVentilador{
-  width: 500px; height: auto;
+  width: 650px; height: auto;
+}
+.color-dropdown {
+  background-color: #002d60;
+}
+.btn-dropdown {
+  --bs-btn-bg: #ffffff;
+  --bs-btn-color: #002d60;
+  --bs-btn-border-color: #ffffff;
+  --bs-btn-hover-bg: #ffffff;
+  --bs-btn-hover-color: #002d60;
+  --bs-btn-hover-border-color: #ffffff;
+  --bs-btn-active-bg: #002d60;
+  --bs-btn-active-color: #ffffff;
+  --bs-btn-active-border-color: #ffffff;
+  width: 150px;
+}
+.deslizar {
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 150px;
+  margin-top: 15px;
 }
 </style>
