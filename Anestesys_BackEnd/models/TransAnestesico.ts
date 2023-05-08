@@ -13,13 +13,15 @@ const menuTransSchema = new Schema({
     },
 
     // Datos del Ventilador
-    modosVentilacion: { type: String},
-    peep: { type: String},
-    vt: { type: String},
-    frecResp: { type: String},
-    IE: { type: String},
-    PLimite: { type: String},
-    Hr: { type: String},
+    datosVentilador: [{
+        modosVentilacion: { type: String},
+        peep: { type: String},
+        vt: { type: String},
+        frecResp: { type: String},
+        IE: { type: String},
+        PLimite: { type: String},
+        Hr: { type: String},
+    }],
 });
 
 export const MenuTrans = model('MenuTrans', menuTransSchema);

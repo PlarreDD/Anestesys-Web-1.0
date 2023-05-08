@@ -12,7 +12,15 @@ export const saveMenuTrans = async (req: any, res: Response) => {
 
         const menuTrans = new MenuTrans({ pid,
                                           // Datos del ventilador
-                                          modosVentilacion, peep, vt, frecResp, IE, PLimite,});
+                                          datosVentilador: {
+                                            modosVentilacion: modosVentilacion,
+                                            peep: peep,
+                                            vt: vt,
+                                            frecResp: frecResp,
+                                            IE: IE,
+                                            PLimite: PLimite
+                                          },
+                                        });
 
         await menuTrans.save();
 
@@ -38,3 +46,14 @@ export const updateMenuTrans = async (req: any, res: Response) => {
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
+
+export const getModosVent = async (req: any, res: Response) => {
+    try {
+        const{ vid } = req.params;
+        
+        const listaModosVent = await MenuTrans.find({vid: vid});
+        return res.json({listaModosVent});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+}
