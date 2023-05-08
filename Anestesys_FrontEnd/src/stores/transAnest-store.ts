@@ -28,6 +28,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     frecResp: regTransAnest.frecResp,
                     IE: regTransAnest.IE,
                     PLimite: regTransAnest.PLimite,
+                    Hr: regTransAnest.Hr,
                 }
             })
             .then((res: any) => {

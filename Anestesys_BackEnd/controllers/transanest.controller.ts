@@ -7,7 +7,7 @@ export const saveMenuTrans = async (req: any, res: Response) => {
     try {
         const { pid,
                 // Datos del ventilador
-                modosVentilacion, peep, vt, frecResp, IE, PLimite,
+                modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr
              } = req.body;
 
         const menuTrans = new MenuTrans({ pid,
@@ -18,7 +18,8 @@ export const saveMenuTrans = async (req: any, res: Response) => {
                                             vt: vt,
                                             frecResp: frecResp,
                                             IE: IE,
-                                            PLimite: PLimite
+                                            PLimite: PLimite,
+                                            Hr: Hr,
                                           },
                                         });
 
@@ -52,7 +53,7 @@ export const getModosVent = async (req: any, res: Response) => {
         const{ pid } = req.params;
         
         const listaModosVent = await MenuTrans.find({pid: pid});
-        
+
         return res.json({listaModosVent});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});

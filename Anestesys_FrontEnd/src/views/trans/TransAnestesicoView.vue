@@ -249,7 +249,9 @@
                 <!-- Modos de Ventilación -->
                 <div class="col-md-9">
                   <label for="inputState" class="form-label fw-bold text-white">Modos de ventilación</label>
-                  <select id="inputState" class="form-select">
+                  <select id="inputState"
+                          v-model="menuTrans.modosVentilacion"
+                          class="form-select">
                     <option selected>Seleccione...</option>
                     <option>Control volumen</option>
                     <option>Control presión</option>
@@ -301,7 +303,7 @@
                 <div class="col-md-2">
                   <button type="submit"
                           class="btn btn-dropdown fw-bold" 
-                          @click="transAnestStore.saveDatosV(menuTrans, preIdStore.pacienteID._id)">
+                          @click="guardarDatosV()">
                     Guardar
                   </button>
                 </div>
@@ -452,13 +454,16 @@ export default({
       nomCirugia:''
     }
   },
+
   components:{
     Pre,
     BarraNavegacion
   },
+
   mounted: function() { // Llama el método despues de cargar la página
       this.mueveReloj();
   },
+
   methods: {
       async mueveReloj() {
         const clock: HTMLSpanElement = document.getElementById('clock');
@@ -470,13 +475,18 @@ export default({
             minute: '2-digit',
             second: '2-digit'
           });
-
         }, 1000);
       },
+
       actualizaDatos(nombrePaciente, nombreCirujano, cirugia) {
         this.nomPaciente = nombrePaciente,
         this.nomCirujano = nombreCirujano,
         this.nomCirugia = cirugia
+      },
+
+      async guardarDatosV() {
+        this.menuTrans.Hr = document.getElementById('clock').textContent;
+        transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
       },
   }
 })
