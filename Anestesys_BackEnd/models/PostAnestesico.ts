@@ -106,6 +106,12 @@ const PostRecuperacionSchema = new Schema({
     aldreteRec_escEVADol120: { type: String },
 
     // Alta Recuperación
+    altaRec_0min: { type: String },
+    altaRec_15min: { type: String },
+    altaRec_30min: { type: String },
+    altaRec_45min: { type: String },
+    altaRec_60min: { type: String },
+    altaRec_90min: { type: String },
     altaRec_CalifAldrete: { type: String },
     altaRec_Obs: { type: String },
     altaRec_FechaAltaRec: { type: String },

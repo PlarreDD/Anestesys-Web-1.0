@@ -1246,54 +1246,54 @@
               <label for="" class="form-label fw-bold">0 min</label>
               <input type="text"
                 class="form-control"
-                v-model="infoRec.altaRec_CalifAldrete"
-                :class="infoRec.altaRec_CalifAldrete != undefined && infoRec.altaRec_CalifAldrete != '' ?
-                        'form-control border border-success formSombra' : 'form-control'">
+                v-model="infoRec.altaRec_0min"
+                :class="infoRec.altaRec_0min != undefined && infoRec.altaRec_0min != '' ?
+                        'form-control border border-success formSombra' : 'form-control'" readonly>
             </div>
 
             <div class="col-md-1 text-center">
               <label for="" class="form-label fw-bold">15 min</label>
               <input type="text"
                 class="form-control"
-                v-model="infoRec.altaRec_CalifAldrete"
-                :class="infoRec.altaRec_CalifAldrete != undefined && infoRec.altaRec_CalifAldrete != '' ?
-                        'form-control border border-success formSombra' : 'form-control'">
+                v-model="infoRec.altaRec_15min"
+                :class="infoRec.altaRec_15min != undefined && infoRec.altaRec_15min != '' ?
+                        'form-control border border-success formSombra' : 'form-control'" readonly>
             </div>
 
             <div class="col-md-1 text-center">
               <label for="" class="form-label fw-bold">30 min</label>
               <input type="text"
                 class="form-control"
-                v-model="infoRec.altaRec_CalifAldrete"
-                :class="infoRec.altaRec_CalifAldrete != undefined && infoRec.altaRec_CalifAldrete != '' ?
-                        'form-control border border-success formSombra' : 'form-control'">
+                v-model="infoRec.altaRec_30min"
+                :class="infoRec.altaRec_30min != undefined && infoRec.altaRec_30min != '' ?
+                        'form-control border border-success formSombra' : 'form-control'" readonly>
             </div>
 
             <div class="col-md-1 text-center">
               <label for="" class="form-label fw-bold">45 min</label>
               <input type="text"
                 class="form-control"
-                v-model="infoRec.altaRec_CalifAldrete"
-                :class="infoRec.altaRec_CalifAldrete != undefined && infoRec.altaRec_CalifAldrete != '' ?
-                        'form-control border border-success formSombra' : 'form-control'">
+                v-model="infoRec.altaRec_45min"
+                :class="infoRec.altaRec_45min != undefined && infoRec.altaRec_45min != '' ?
+                        'form-control border border-success formSombra' : 'form-control'" readonly>
             </div>
 
             <div class="col-md-1 text-center">
               <label for="" class="form-label fw-bold">60 min</label>
               <input type="text"
                 class="form-control"
-                v-model="infoRec.altaRec_CalifAldrete"
-                :class="infoRec.altaRec_CalifAldrete != undefined && infoRec.altaRec_CalifAldrete != '' ?
-                        'form-control border border-success formSombra' : 'form-control'">
+                v-model="infoRec.altaRec_60min"
+                :class="infoRec.altaRec_60min != undefined && infoRec.altaRec_60min != '' ?
+                        'form-control border border-success formSombra' : 'form-control'" readonly>
             </div>
 
             <div class="col-md-1 text-center">
               <label for="" class="form-label fw-bold">90 min</label>
               <input type="text"
                 class="form-control"
-                v-model="infoRec.altaRec_CalifAldrete"
-                :class="infoRec.altaRec_CalifAldrete != undefined && infoRec.altaRec_CalifAldrete != '' ?
-                        'form-control border border-success formSombra' : 'form-control'">
+                v-model="infoRec.altaRec_90min"
+                :class="infoRec.altaRec_90min != undefined && infoRec.altaRec_90min != '' ?
+                        'form-control border border-success formSombra' : 'form-control'" readonly>
             </div>
             <div class="col-md-3"></div>    
             
@@ -1309,7 +1309,7 @@
                                 id="numExpediente"
                                 v-model="infoRec.altaRec_CalifAldrete"
                                 :class="infoRec.altaRec_CalifAldrete != undefined && infoRec.altaRec_CalifAldrete != '' ?
-                                        'form-control border border-success formSombra' : 'form-control'"
+                                        'form-control border border-success formSombra' : 'form-control'" readonly
                             />
                         </div>
                         
@@ -1463,7 +1463,7 @@ export default defineComponent({
       infoRec: {} as regRecuperacion,
       postAnestStore,
       preIdStore,
-
+      
       btnActualizarRecuperacion: false,
     };
   },

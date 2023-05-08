@@ -112,7 +112,7 @@ export const saveRecuperacion = async (req: any, res: Response) => {
                 aldreteRec_escEVADol120,
 
                 // Alta Recuperación
-                altaRec_CalifAldrete, altaRec_Obs, altaRec_FechaAltaRec, altaRec_HrAltaRec,
+                altaRec_0min, altaRec_15min, altaRec_30min, altaRec_45min, altaRec_60min, altaRec_90min, altaRec_CalifAldrete, altaRec_Obs, altaRec_FechaAltaRec, altaRec_HrAltaRec,
                 altaRec_NomMedAnest,
                 } = req.body;
         
@@ -192,6 +192,12 @@ export const saveRecuperacion = async (req: any, res: Response) => {
                                                 altaRec_FechaAltaRec: altaRec_FechaAltaRec,
                                                 altaRec_HrAltaRec: altaRec_HrAltaRec,
                                                 altaRec_NomMedAnest: altaRec_NomMedAnest,
+                                                altaRec_0min: altaRec_0min,
+                                                altaRec_15min: altaRec_15min,
+                                                altaRec_30min: altaRec_30min,
+                                                altaRec_45min: altaRec_45min,
+                                                altaRec_60min: altaRec_60min,
+                                                altaRec_90min: altaRec_90min
                                             });
 
         await recuperacion.save();
