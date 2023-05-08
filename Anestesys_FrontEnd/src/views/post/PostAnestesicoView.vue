@@ -62,15 +62,21 @@
       <div class=" text-center posicionEstatica fw-bold">
         <div class="row">
           <div class="col bordeColumna">
+            <label class="form-label text-white">              
               {{ preIdStore.NombrePaciente }}
+            </label>
           </div>
           
           <div class="col bordeColumna">
-            {{ preIdStore.NombreCirujano }}
+            <label class="form-label text-white">              
+              {{ preIdStore.NombreCirujano }}
+            </label>
           </div>
           
           <div class="col bordeColumna">
-            {{ preIdStore.NombreCirugia }}
+            <label class="form-label text-white">              
+              {{ preIdStore.NombreCirugia }}
+            </label>
           </div>
         </div>
       </div>

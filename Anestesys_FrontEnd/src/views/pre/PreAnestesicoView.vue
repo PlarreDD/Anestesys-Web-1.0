@@ -152,15 +152,21 @@
     <div class=" text-center posicionEstatica fw-bold">
       <div class="row">
         <div class="col bordeColumna">
+          <label class="form-label text-white">
             {{ nomPaciente }}
+          </label>
         </div>
         
         <div class="col bordeColumna">
-          {{ nomCirujano }}
+          <label class="form-label text-white">
+            {{ nomCirujano }}            
+          </label>
         </div>
         
         <div class="col bordeColumna">
-          {{ nomCirugia }}
+          <label class="form-label text-white">            
+            {{ nomCirugia }}
+          </label>
         </div>
       </div>
     </div>
@@ -501,7 +507,7 @@ export default defineComponent({
   margin-left: auto;
   margin-right: auto;
   border-right: 1px solid #ffffff;
-  border-left: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;  
 }
 
 /* Botón arriba */
