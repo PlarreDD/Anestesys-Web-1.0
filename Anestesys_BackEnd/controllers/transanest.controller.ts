@@ -49,9 +49,10 @@ export const updateMenuTrans = async (req: any, res: Response) => {
 
 export const getModosVent = async (req: any, res: Response) => {
     try {
-        const{ vid } = req.params;
+        const{ pid } = req.params;
         
-        const listaModosVent = await MenuTrans.find({vid: vid});
+        const listaModosVent = await MenuTrans.find({pid: pid});
+        
         return res.json({listaModosVent});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});

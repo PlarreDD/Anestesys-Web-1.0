@@ -362,7 +362,7 @@ export const usePreIdStore = defineStore('preid', {
                 },
             })
             .then((res: any) => {
-                this.estudios = res.data.estudio;                                
+                this.estudios = res.data.estudio;
             })
             .catch((e: any) => {
                 //   console.log(e);
@@ -395,7 +395,7 @@ export const usePreIdStore = defineStore('preid', {
             .catch((e: any) => {
                 // console.log("error: " + e);
             });
-        },            
+        },
 
         async updateEstudios(estudios_Estudio: string, estudio_Especificaciones: string){
             await apiAxios({
@@ -406,9 +406,9 @@ export const usePreIdStore = defineStore('preid', {
                 },
                 data: {
                     val_Estudios: [ estudios_Estudio, estudio_Especificaciones]
-                },                
+                },
             })
-            .then((res: any) => {                
+            .then((res: any) => {
                 swal.fire({
                     title: 'Datos agregados correctamente',
                     icon: 'success',
@@ -450,7 +450,7 @@ export const usePreIdStore = defineStore('preid', {
                 },
                 data: {
                     val_Estudios: [ {"estudio":estudios_Estudio, "especifEstudio":estudio_Especificaciones}]
-                },                                                          
+                },
             })
             .then((res: any) => {    
                             

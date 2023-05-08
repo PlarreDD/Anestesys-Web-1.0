@@ -2,10 +2,15 @@ import { defineStore } from "pinia";
 import { apiAxios } from '@/boot/axios';
 import { useUserStore } from "./user-store";
 import swal from 'sweetalert2';
+import { ref } from "vue";
 
 const userStore = useUserStore();
 
 export const useTransAnestStore = defineStore('transAn', {
+    state: ()=> ({
+        datosVentilacion: ref(null),
+    }),
+
     actions: {
         saveDatosV(regTransAnest: any, pid: string){
             apiAxios({
@@ -73,5 +78,23 @@ export const useTransAnestStore = defineStore('transAn', {
                 // console.log("error: " + e);
             });
         },
+
+        async listDatosV(pid: string) {
+            await apiAxios({
+                url: `http://localhost:5000/trans/${String(pid)}`,
+                method: "GET",
+                headers: {
+                Authorization: "Bearer " + userStore.token,
+                },
+            })
+            .then((res: any) => {
+                console.log(res.data);
+                
+                this.datosVentilacion = res.data.listaModosVent;
+            })
+            .catch((e: any) => {
+                //   console.log(e);
+            });
+        }
     }
 })
