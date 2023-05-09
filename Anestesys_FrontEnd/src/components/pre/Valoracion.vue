@@ -893,21 +893,21 @@
                                                     {{ estudioTipo.especifEstudio}}
                                                 </td>                                            
                                                 <td>
-                                                <button class="btn" @click="cambiarBtnActualizar(estudioTipo._id)">
-                                                    <font-awesome-icon 
-                                                    icon="fa-solid fa-pen-to-square" 
-                                                    size="lg" 
-                                                    class="text-black"
-                                                    />
-                                                </button>
+                                                    <button class="btn" @click="cambiarBtnActualizar(estudioTipo._id)">
+                                                        <font-awesome-icon 
+                                                        icon="fa-solid fa-pen-to-square" 
+                                                        size="lg" 
+                                                        class="text-black"
+                                                        />
+                                                    </button>
                                                 </td>
                                                 <td>
-                                                <button class="btn" @click="validaEliminarMedicamento(estudioTipo._id)">
-                                                    <font-awesome-icon 
-                                                        icon="fa-solid fa-trash" 
-                                                        size="lg" class="text-black"
-                                                        />
-                                                </button>
+                                                    <button class="btn" @click="validaEliminarMedicamento(estudioTipo._id)">
+                                                        <font-awesome-icon 
+                                                            icon="fa-solid fa-trash" 
+                                                            size="lg" class="text-black"
+                                                            />
+                                                    </button>
                                                 </td>
                                             </tr>
                                         </tbody>

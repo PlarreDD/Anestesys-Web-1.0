@@ -9,6 +9,7 @@ const userStore = useUserStore();
 export const useTransAnestStore = defineStore('transAn', {
     state: ()=> ({
         datosVentilacion: ref(null),
+        pacienteID: ref(null),
     }),
 
     actions: {

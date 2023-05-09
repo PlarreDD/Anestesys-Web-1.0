@@ -299,13 +299,28 @@
 
                 <div class="col-md-9"></div>
 
-                <!-- Botón Guardar -->
-                <div class="col-md-2">
-                  <button type="submit"
-                          class="btn btn-dropdown fw-bold" 
-                          @click="guardarDatosV()">
-                    Guardar
-                  </button>
+                <!-- Botón Guardar/Agregar -->
+                <div class="col-md-1 btn-abajo">                                    
+                    <template v-if="btnAddVentilador === true">
+                        <button class="btn btn-guardar fw-bold text-white"
+                            @click="guardarDatosV">
+                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                        </button>
+                    </template>
+
+                    <template v-if="btnUpdateVentilador === true">
+                        <button class="btn btn-guardar fw-bold text-white"
+                            @click="">
+                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                        </button>
+                    </template>  
+
+                    <template v-if="btnActualizaVentilador === true">
+                        <button class="btn btn-guardar fw-bold text-white"
+                            @click="">
+                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                        </button>
+                    </template>  
                 </div>
 
                 <!-- Lista Modo de Ventilación -->
@@ -322,11 +337,16 @@
                         </tr>
                       </thead>
 
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>12:00</td>
-                          <td>Ventilación control presión con volumen garantizado</td>
+                      <tbody 
+                          v-for="(
+                              ventilador
+                          ) in transAnestStore.datosVentilacion"
+                      >
+
+                        <tr v-for="(datoVentilacion, index) in ventilador">
+                          <td>{{index+1}}</td>
+                          <td>{{ datoVentilacion.Hr }}</td>
+                          <td>{{ datoVentilacion.modosVentilacion }}</td>
                           <!-- Botón Editar -->
                           <td>
                             <button class="btn">
@@ -415,15 +435,17 @@
         <div class=" text-center posicionEstatica fw-bold">
           <div class="row">
             <div class="col bordeColumna">
-                {{ nomPaciente }}
+              <label class="form-label text-white">
+                {{  }}
+              </label>
             </div>
 
             <div class="col bordeColumna">
-              {{ nomCirujano }}
+              {{  }}
             </div>
 
             <div class="col bordeColumna">
-              {{ nomCirugia }}
+              {{  }}
             </div>
           </div>
         </div>
@@ -434,7 +456,6 @@
 
 <script lang="ts">
 import type { regMenuTrans } from "@/interfaces/regTransAnest";
-import Pre from "../pre/PreAnestesicoView.vue";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
 import { useTransAnestStore } from "../../stores/transAnest-store";
 import { usePreIdStore } from "@/stores/preId-store";
@@ -446,22 +467,21 @@ export default({
   data() {
     return {
       menuTrans: {} as regMenuTrans,
-      preIdStore,
       transAnestStore,
-      numExpediente:'',
-      nomPaciente:'',
-      nomCirujano:'',
-      nomCirugia:''
+
+      btnAddVentilador:true,
+      btnUpdateVentilador:false,
+      btnActualizaVentilador:false,
     }
   },
 
   components:{
-    Pre,
     BarraNavegacion
   },
 
   mounted: function() { // Llama el método despues de cargar la página
       this.mueveReloj();
+      transAnestStore.listDatosV();
   },
 
   methods: {
@@ -478,15 +498,25 @@ export default({
         }, 1000);
       },
 
-      actualizaDatos(nombrePaciente, nombreCirujano, cirugia) {
-        this.nomPaciente = nombrePaciente,
-        this.nomCirujano = nombreCirujano,
-        this.nomCirugia = cirugia
-      },
-
       async guardarDatosV() {
+        this.btnActualizaVentilador=true
+
+        this.btnAddVentilador=false
+        this.btnUpdateVentilador=true
+        this.btnActualizaVentilador=false
+
         this.menuTrans.Hr = document.getElementById('clock').textContent;
-        transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
+        await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
+
+        this.menuTrans.modosVentilacion = "";
+        this.menuTrans.Hr = "";
+        this.menuTrans.IE = "";
+        this.menuTrans.PLimite = "";
+        this.menuTrans.frecResp = "";
+        this.menuTrans.peep = "";
+        this.menuTrans.vt = "";
+
+        await transAnestStore.listDatosV();
       },
   }
 })
