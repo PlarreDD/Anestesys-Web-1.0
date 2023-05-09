@@ -337,14 +337,9 @@
                         </tr>
                       </thead>
 
-                      <tbody 
-                          v-for="(
-                              ventilador
-                          ) in transAnestStore.datosVentilacion"
-                      >
-
-                        <tr v-for="(datoVentilacion, index) in ventilador">
-                          <td>{{index+1}}</td>
+                      <tbody v-for="( ventilador ) in transAnestStore.datosVentilacion">
+                        <tr v-for="(datoVentilacion, index) in ventilador.datosVentilador">
+                          <td>{{ index + 1 }}</td>
                           <td>{{ datoVentilacion.Hr }}</td>
                           <td>{{ datoVentilacion.modosVentilacion }}</td>
                           <!-- Botón Editar -->
@@ -481,7 +476,7 @@ export default({
 
   mounted: function() { // Llama el método despues de cargar la página
       this.mueveReloj();
-      transAnestStore.listDatosV();
+      transAnestStore.listDatosV(preIdStore.pacienteID._id);
   },
 
   methods: {
@@ -516,7 +511,7 @@ export default({
         this.menuTrans.peep = "";
         this.menuTrans.vt = "";
 
-        await transAnestStore.listDatosV();
+        await transAnestStore.listDatosV(preIdStore.pacienteID._id);
       },
   }
 })

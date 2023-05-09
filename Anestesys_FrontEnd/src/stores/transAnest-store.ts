@@ -90,9 +90,8 @@ export const useTransAnestStore = defineStore('transAn', {
                 },
             })
             .then((res: any) => {
-                console.log(res.data);
-                
                 this.datosVentilacion = res.data.listaModosVent;
+                console.log(this.datosVentilacion);                
             })
             .catch((e: any) => {
                 //   console.log(e);
