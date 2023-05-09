@@ -537,6 +537,7 @@
                   <select
                     id="inputState"
                     v-model="infoRec.aldreteRec_AldreteIn"
+                    @click.capture="obtenerAldrete"
                     class="form-select"
                     :class="
                       infoRec.aldreteRec_AldreteIn != undefined &&
@@ -563,6 +564,7 @@
                   <select
                     id="inputState"
                     v-model="infoRec.aldreteRec_Aldrete15"
+                    @click.capture="obtenerAldrete"
                     class="form-select"
                     :class="
                       infoRec.aldreteRec_Aldrete15 != undefined &&
@@ -589,6 +591,7 @@
                   <select
                     id="inputState"
                     v-model="infoRec.aldreteRec_Aldrete30"
+                    @click.capture="obtenerAldrete"
                     class="form-select"
                     :class="
                       infoRec.aldreteRec_Aldrete30 != undefined &&
@@ -615,6 +618,7 @@
                   <select
                     id="inputState"
                     v-model="infoRec.aldreteRec_Aldrete45"
+                    @click.capture="obtenerAldrete"
                     class="form-select"
                     :class="
                       infoRec.aldreteRec_Aldrete45 != undefined &&
@@ -641,6 +645,7 @@
                   <select
                     id="inputState"
                     v-model="infoRec.aldreteRec_Aldrete60"
+                    @click.capture="obtenerAldrete"
                     class="form-select"
                     :class="
                       infoRec.aldreteRec_Aldrete60 != undefined &&
@@ -667,6 +672,7 @@
                   <select
                     id="inputState"
                     v-model="infoRec.aldreteRec_Aldrete90"
+                    @click.capture="obtenerAldrete"
                     class="form-select"
                     :class="
                       infoRec.aldreteRec_Aldrete90 != undefined &&
@@ -693,6 +699,7 @@
                   <select
                     id="inputState"
                     v-model="infoRec.aldreteRec_Aldrete120"
+                    @click.capture="obtenerAldrete"
                     class="form-select"
                     :class="
                       infoRec.aldreteRec_Aldrete120 != undefined &&
@@ -1248,7 +1255,8 @@
                 class="form-control"
                 v-model="infoRec.altaRec_0min"
                 :class="infoRec.altaRec_0min != undefined && infoRec.altaRec_0min != '' ?
-                        'form-control border border-success formSombra' : 'form-control'" readonly>
+                        'form-control border border-success formSombra' : 'form-control'" readonly
+                        >
             </div>
 
             <div class="col-md-1 text-center">
@@ -1295,11 +1303,21 @@
                 :class="infoRec.altaRec_90min != undefined && infoRec.altaRec_90min != '' ?
                         'form-control border border-success formSombra' : 'form-control'" readonly>
             </div>
-            <div class="col-md-3"></div>    
+
+            <div class="col-md-1 text-center">
+              <label for="" class="form-label fw-bold">120 min</label>
+              <input type="text"
+                class="form-control"
+                v-model="infoRec.altaRec_120min"
+                :class="infoRec.altaRec_120min != undefined && infoRec.altaRec_120min != '' ?
+                        'form-control border border-success formSombra' : 'form-control'" readonly>
+            </div>
+            <div class="col-md-2"></div>    
             
             <div class="col row margen-input">
                 <div class="g-3">
                     <div class="row g-3">
+                      
                         <!-- Calificación de Aldrete -->
                         <div class="col-md-12">
                             <label for="" class="form-label fw-bold">Calificación de Aldrete</label>
@@ -1462,7 +1480,7 @@ export default defineComponent({
     return {
       infoRec: {} as regRecuperacion,
       postAnestStore,
-      preIdStore,
+      preIdStore,    
       
       btnActualizarRecuperacion: false,
     };
@@ -1475,6 +1493,35 @@ export default defineComponent({
       // Método Guardar
       postAnestStore.saveRecupera(this.infoRec, preIdStore.pacienteID._id);
     },
+
+    obtenerAldrete(){
+      this.infoRec.altaRec_0min = this.infoRec.aldreteRec_AldreteIn;
+      this.infoRec.altaRec_15min = this.infoRec.aldreteRec_Aldrete15;
+      this.infoRec.altaRec_30min = this.infoRec.aldreteRec_Aldrete30;
+      this.infoRec.altaRec_45min = this.infoRec.aldreteRec_Aldrete45;
+      this.infoRec.altaRec_60min = this.infoRec.aldreteRec_Aldrete60;
+      this.infoRec.altaRec_90min = this.infoRec.aldreteRec_Aldrete90;
+      this.infoRec.altaRec_120min = this.infoRec.aldreteRec_Aldrete120;
+
+      const arrayFinalAldrete= [this.infoRec.aldreteRec_AldreteIn, 
+                              this.infoRec.aldreteRec_Aldrete15, 
+                              this.infoRec.aldreteRec_Aldrete30,
+                              this.infoRec.aldreteRec_Aldrete45,
+                              this.infoRec.aldreteRec_Aldrete60,
+                              this.infoRec.aldreteRec_Aldrete90,
+                              this.infoRec.aldreteRec_Aldrete120]
+                              
+      let valorFinalAldrete = "";
+
+      for (let i = arrayFinalAldrete.length - 1; i >= 0; i--) {
+        if (arrayFinalAldrete[i] !== undefined && arrayFinalAldrete[i] !== "") {
+          valorFinalAldrete = arrayFinalAldrete[i];
+          break;
+        }
+      }
+
+      this.infoRec.altaRec_CalifAldrete = valorFinalAldrete;
+    }
   },
 });
 </script>
