@@ -105,6 +105,13 @@ export interface regRecuperacion{
     aldreteRec_escEVADol120: string,
 
     // Alta Recuperación
+    altaRec_0min: string,
+    altaRec_15min: string,
+    altaRec_30min: string,
+    altaRec_45min: string,
+    altaRec_60min: string,
+    altaRec_90min: string,
+    altaRec_120min: string,
     altaRec_CalifAldrete: string,
     altaRec_Obs: string,
     altaRec_FechaAltaRec: string,

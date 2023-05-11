@@ -611,7 +611,10 @@ export default defineComponent({
             this.$emit('recibe-datos', this.infoPreIdPaciente.numExped,
                                        this.infoPreIdPaciente.nomPaciente,
                                        this.infoPreIdPaciente.cirujano,
-                                       this.infoPreIdPaciente.cirugia);
+                                       this.infoPreIdPaciente.cirugia,
+                                       preIdStore.NombrePaciente=this.infoPreIdPaciente.nomPaciente,
+                                       preIdStore.NombreCirujano=this.infoPreIdPaciente.cirujano,
+                                       preIdStore.NombreCirugia=this.infoPreIdPaciente.cirugia);
         },
     }
 })

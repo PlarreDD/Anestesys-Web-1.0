@@ -163,6 +163,20 @@ export const usePostAnestStore = defineStore('postAn', {
                     aldreteRec_escEVADol60: infoRec.aldreteRec_escEVADol60,
                     aldreteRec_escEVADol90: infoRec.aldreteRec_escEVADol90,
                     aldreteRec_escEVADol120: infoRec.aldreteRec_escEVADol120,
+
+                    // Alta Recuperación
+                    altaRec_0min: infoRec.altaRec_0min,
+                    altaRec_15min: infoRec.altaRec_15min,
+                    altaRec_30min: infoRec.altaRec_30min,
+                    altaRec_45min: infoRec.altaRec_45min,
+                    altaRec_60min: infoRec.altaRec_60min,
+                    altaRec_90min: infoRec.altaRec_90min,
+                    altaRec_120min: infoRec.aldreteRec_Aldrete120,
+                    altaRec_CalifAldrete: infoRec.altaRec_CalifAldrete,
+                    altaRec_Obs: infoRec.altaRec_Obs,
+                    altaRec_FechaAltaRec: infoRec.altaRec_FechaAltaRec,
+                    altaRec_HrAltaRec: infoRec.altaRec_HrAltaRec,
+                    altaRec_NomMedAnest: infoRec.altaRec_NomMedAnest,
                 }
             })
             .then((res: any) => {
@@ -256,6 +270,20 @@ export const usePostAnestStore = defineStore('postAn', {
                     aldreteRec_escEVADol60: infoRec.aldreteRec_escEVADol60,
                     aldreteRec_escEVADol90: infoRec.aldreteRec_escEVADol90,
                     aldreteRec_escEVADol120: infoRec.aldreteRec_escEVADol120,
+                    
+                    // Alta Recuperación
+                    altaRec_0min: infoRec.altaRec_0min,
+                    altaRec_15min: infoRec.altaRec_15min,
+                    altaRec_30min: infoRec.altaRec_30min,
+                    altaRec_45min: infoRec.altaRec_45min,
+                    altaRec_60min: infoRec.altaRec_60min,
+                    altaRec_90min: infoRec.altaRec_90min,
+                    altaRec_120min: infoRec.aldreteRec_Aldrete120,
+                    altaRec_CalifAldrete: infoRec.altaRec_CalifAldrete,
+                    altaRec_Obs: infoRec.altaRec_Obs,
+                    altaRec_FechaAltaRec: infoRec.altaRec_FechaAltaRec,
+                    altaRec_HrAltaRec: infoRec.altaRec_HrAltaRec,
+                    altaRec_NomMedAnest: infoRec.altaRec_NomMedAnest,
                 }
             })
             .then((res: any) => {

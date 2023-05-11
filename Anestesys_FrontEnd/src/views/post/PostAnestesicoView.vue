@@ -66,6 +66,29 @@
           <img src="images/post.svg" width="180" class="ajusteImg"/>
         </div>    
       </div>
+
+      <div class=" text-center posicionEstatica fw-bold">
+        <div class="row">
+          <div class="col bordeColumna">
+            <label class="form-label text-white">              
+              {{ preIdStore.NombrePaciente }}
+            </label>
+          </div>
+          
+          <div class="col bordeColumna">
+            <label class="form-label text-white">              
+              {{ preIdStore.NombreCirujano }}
+            </label>
+          </div>
+          
+          <div class="col bordeColumna">
+            <label class="form-label text-white">              
+              {{ preIdStore.NombreCirugia }}
+            </label>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -74,12 +97,17 @@
 import Nota from '../../components/post/Nota.vue';
 import Recuperacion from "../../components/post/Recuperacion.vue";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
+import { usePreIdStore } from "../../stores/preId-store";
+
+const preIdStore = usePreIdStore();
 
 export default ({
   data(){
     return{
       esNotaP: false,
-      esRecuperacion: false  
+      esRecuperacion: false,
+
+      preIdStore
     }
   },
 
@@ -176,5 +204,24 @@ export default ({
 }
 .margen-busca{
   margin-bottom: 15px;
+}
+
+/* Menú estatico */
+.posicionEstatica {
+  position: -webkit-sticky;
+  position: fixed;
+  bottom: 0;
+  z-index: 1020;
+  background-color: #002D60;
+  padding: 1rem;
+  border-radius: 5px !important;
+  color: #ffffff;
+  width: 57.5%;
+}
+.bordeColumna{
+  margin-left: auto;
+  margin-right: auto;
+  border-right: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
 }
 </style>
