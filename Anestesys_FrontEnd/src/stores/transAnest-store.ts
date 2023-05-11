@@ -13,8 +13,8 @@ export const useTransAnestStore = defineStore('transAn', {
     }),
 
     actions: {
-        saveDatosV(regTransAnest: any, pid: string){
-            apiAxios({
+        async saveDatosV(regTransAnest: any, pid: string){
+            await apiAxios({
                 url: "http://localhost:5000/trans",
                 method: "POST",
                 headers: {
@@ -48,8 +48,8 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
-        updateDatosV(regTransAnest: any, pid: string){
-            apiAxios({
+        async updateDatosV(regTransAnest: any, pid: string){
+            await apiAxios({
                 url: `http://localhost:5000/trans/${String(pid)}`,
                 method: "PUT",
                 headers: {
@@ -159,7 +159,7 @@ export const useTransAnestStore = defineStore('transAn', {
               })
               .then((res: any) => {      
                   swal.fire({
-                    title: "Estudio eliminado correctamente",
+                    title: "Modo de ventilación eliminado correctamente",
                     icon: "success",
                     showConfirmButton: false,
                     toast: true,

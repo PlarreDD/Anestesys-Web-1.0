@@ -242,7 +242,7 @@
 
           <!-- Datos del ventilador -->
           <li class="col-md-3">
-            <button type="button" class="btn btn-nav-bar fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">DATOS DEL VENTILADOR</button>
+            <button type="button" class="btn btn-nav-bar fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">DATOS DEL VENTILADOR</button>
             <form @submit.prevent="" class="dropdown-menu p-4 color-dropdown">
               <div class="mb-3 estiloDropDownVentilador row g-3">
                 <h5 class="text-white fw-bold">VENTILADOR</h5>
@@ -356,7 +356,7 @@
                           </td>
                           <!-- Botón Eliminar -->
                           <td>
-                            <button class="btn" @click="eliminarDatosV(datoVentilacion._id)">
+                            <button class="btn" @click="validaEliminarVentilacion(datoVentilacion._id)">
                               <font-awesome-icon 
                                 icon="fa-solid fa-trash" 
                                 size="lg" class="text-white"/>
@@ -592,6 +592,22 @@ export default({
 
                 await transAnestStore.listDatosV(preIdStore.pacienteID._id);
             }
+      },
+
+      async validaEliminarVentilacion(idVentilador: string) {
+            swal
+                .fire({
+                    html: "¿Esta seguro de eliminar el modo de ventilación?",
+                    icon: "warning",
+                    showConfirmButton: true,
+                    showCancelButton: true,
+                    toast: true,
+                  })
+                  .then((result) => {
+                  if (result.isConfirmed) {
+                      this.eliminarDatosV(idVentilador);
+                  }
+                });
       },
 
       async eliminarDatosV(id: string) {
