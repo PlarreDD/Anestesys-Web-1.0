@@ -3,7 +3,8 @@ import { requireToken } from "../middlewares/requireToken";
 import { saveMenuTrans,
          updateMenuTrans,
          getModosVent,
-         getModoVentilacion } from "../controllers/transanest.controller";
+         getModoVentilacion,
+         updateVentilacion } from "../controllers/transanest.controller";
 
 const router = Router();
 
@@ -12,5 +13,6 @@ router.post('/', requireToken, saveMenuTrans);
 router.put('/:id',  requireToken, updateMenuTrans);
 router.get('/:pid', requireToken, getModosVent);
 router.get('/uno/:dVId', requireToken, getModoVentilacion);
+router.put('/uno/:id',  requireToken, updateVentilacion);
 
 export default router;

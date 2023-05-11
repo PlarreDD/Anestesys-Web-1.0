@@ -112,6 +112,41 @@ export const useTransAnestStore = defineStore('transAn', {
               .catch((e: any) => {
               //   console.log(e);
               });
-        }
+        },
+
+        async updateVentilador(idVentilador : string, modosVentilacion: string, peep: string, 
+                                vt: string, frecResp: string, IE: string, PLimite: string, Hr:string){
+            
+            await apiAxios({
+                url: `http://localhost:5000/trans/uno/${String(idVentilador)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    datosVentilador: [ {"modosVentilacion":modosVentilacion, 
+                                        "peep":peep,
+                                        "vt":vt, 
+                                        "frecResp":frecResp,
+                                        "IE":IE, 
+                                        "PLimite":PLimite,
+                                        "Hr":Hr}]
+                },
+            })
+            .then((res: any) => {                            
+                swal.fire({
+                    title: 'Modo de ventilación actualizado correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })                
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
     }
 })

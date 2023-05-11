@@ -252,7 +252,7 @@
                   <select id="inputState"
                           v-model="menuTrans.modosVentilacion"
                           class="form-select">
-                    <option selected>Seleccione...</option>
+                    <option selected></option>
                     <option>Control volumen</option>
                     <option>Control presión</option>
                     <option>Presión soporte</option>
@@ -320,7 +320,7 @@
 
                     <template v-if="btnActualizaVentilador === true">
                         <button class="btn btn-guardar fw-bold"
-                            @click="">
+                            @click="actualizarVentilador">
                             <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
                         </button>
                     </template>  
@@ -463,6 +463,7 @@ import type { regMenuTrans } from "@/interfaces/regTransAnest";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
 import { useTransAnestStore } from "../../stores/transAnest-store";
 import { usePreIdStore } from "@/stores/preId-store";
+import swal from "sweetalert2";
 
 const preIdStore = usePreIdStore();
 const transAnestStore = useTransAnestStore();
@@ -558,6 +559,40 @@ export default({
 
           await transAnestStore.listDatosV(preIdStore.pacienteID._id);
       },
+
+      async actualizarVentilador() {
+            if (this.menuTrans.modosVentilacion == "") {
+                swal.fire({
+                title: "Seleccione el modo de ventilación",
+                icon: "warning",
+                showConfirmButton: false,
+                showCloseButton: true,
+                toast: true,
+                timer: 2500,
+                timerProgressBar: true,
+                position: "top-end",
+                });
+            } else {
+                this.menuTrans.Hr = document.getElementById('clock').textContent;
+                await transAnestStore.updateVentilador(this.menuTrans.idVentilador, this.menuTrans.modosVentilacion, this.menuTrans.peep,
+                                      this.menuTrans.vt, this.menuTrans.frecResp, this.menuTrans.IE, this.menuTrans.PLimite, this.menuTrans.Hr);
+
+                this.btnAddVentilador=false
+                this.btnUpdateVentilador=true
+                this.btnActualizaVentilador=false
+
+                this.menuTrans.idVentilador = "";
+                this.menuTrans.modosVentilacion = "";
+                this.menuTrans.Hr = "";
+                this.menuTrans.IE = "";
+                this.menuTrans.PLimite = "";
+                this.menuTrans.frecResp = "";
+                this.menuTrans.peep = "";
+                this.menuTrans.vt = "";
+
+                await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+            }
+        },
   }
 })
 </script>

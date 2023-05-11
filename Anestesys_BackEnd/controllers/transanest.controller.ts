@@ -81,4 +81,36 @@ export const getModoVentilacion =async (req: any, res: Response) => {
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
     }    
-}
+};
+
+/* Funcion para actualizar un estudio */
+export const updateVentilacion = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { datosVentilador } = req.body;       
+        
+        const ventilador = await MenuTrans.updateOne({ "datosVentilador._id": id },
+            {
+                $set : {
+                            "datosVentilador.$.modosVentilacion" : datosVentilador[0].modosVentilacion,
+                            "datosVentilador.$.peep" : datosVentilador[0].peep, 
+                            "datosVentilador.$.vt" : datosVentilador[0].vt, 
+                            "datosVentilador.$.frecResp" : datosVentilador[0].frecResp,
+                            "datosVentilador.$.IE" : datosVentilador[0].IE, 
+                            "datosVentilador.$.PLimite" : datosVentilador[0].PLimite,
+                            "datosVentilador.$.Hr" : datosVentilador[0].Hr
+                        }
+            }
+        );
+        
+        if (!ventilador) 
+            return res.status(404).json({ Error: "No existe el modo de ventilación." });        
+        
+        return res.json({ ventilador });
+    } catch (error) {
+        if (error.kind === "ObjectId") {
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }        
+        return res.status(500).json({ error: "Error de servidor" });
+    }
+};
