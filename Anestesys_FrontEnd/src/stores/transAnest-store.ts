@@ -112,6 +112,30 @@ export const useTransAnestStore = defineStore('transAn', {
               .catch((e: any) => {
               //   console.log(e);
               });
+        },
+
+        async deleteModoVent(dVId: string) {
+            await apiAxios({
+                url: `http://localhost:5000/trans/${String(dVId)}`,
+                method: "DELETE",
+                headers: {
+                  Authorization: "Bearer " + userStore.token,
+                },
+              })
+              .then((res: any) => {      
+                  swal.fire({
+                    title: "Estudio eliminado correctamente",
+                    icon: "success",
+                    showConfirmButton: false,
+                    toast: true,
+                    position: "top-end",
+                    timer: 2500,
+                    timerProgressBar: true,
+                  });
+              })
+              .catch((e: any) => {
+                //   console.log(e);
+              });
         }
     }
 })

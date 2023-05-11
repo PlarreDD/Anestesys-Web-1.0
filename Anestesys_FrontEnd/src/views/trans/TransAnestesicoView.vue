@@ -356,7 +356,7 @@
                           </td>
                           <!-- Botón Eliminar -->
                           <td>
-                            <button class="btn">
+                            <button class="btn" @click="eliminarDatosV(datoVentilacion._id)">
                               <font-awesome-icon 
                                 icon="fa-solid fa-trash" 
                                 size="lg" class="text-white"/>
@@ -540,7 +540,7 @@ export default({
         await transAnestStore.listDatosV(preIdStore.pacienteID._id);
       },
 
-      async cambiarBtnActualizar(id) {
+      async cambiarBtnActualizar(id: string) {
           this.btnAddVentilador=false
           this.btnUpdateVentilador=false
           this.btnActualizaVentilador=true
@@ -557,6 +557,11 @@ export default({
           this.menuTrans.vt = transAnestStore.datosVentilacion.datosVentilador[0].vt;
 
           await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+      },
+
+      async eliminarDatosV(id: string) {
+        await transAnestStore.deleteModoVent(id);
+        await transAnestStore.listDatosV(preIdStore.pacienteID._id);
       },
   }
 })

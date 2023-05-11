@@ -19,6 +19,6 @@ router.get('/uno/:id' , requireToken, getEstudio)
 router.post('/', requireToken, saveEstudios);
 router.put('/:vid',  requireToken, updateEstudios);
 router.put('/uno/:id', requireToken, updateEstudio);
-router.delete('/:id', requireToken, deleteEstudio)
+router.delete('/:id', requireToken, deleteEstudio);
 
 export default router;
