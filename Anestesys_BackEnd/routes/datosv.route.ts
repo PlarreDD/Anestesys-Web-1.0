@@ -4,7 +4,7 @@ import { saveMenuTrans,
          updateMenuTrans,
          getModosVent,
          getModoVentilacion,
-         updateVentilacion } from "../controllers/transanest.controller";
+         updateVentilacion, deleteModoVentilacion } from "../controllers/transanest.controller";
 
 const router = Router();
 
@@ -14,5 +14,6 @@ router.put('/:id',  requireToken, updateMenuTrans);
 router.get('/:pid', requireToken, getModosVent);
 router.get('/uno/:dVId', requireToken, getModoVentilacion);
 router.put('/uno/:id',  requireToken, updateVentilacion);
+router.delete('/:dVId', requireToken, deleteModoVentilacion);
 
 export default router;

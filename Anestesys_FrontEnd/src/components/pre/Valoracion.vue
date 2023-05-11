@@ -1332,7 +1332,7 @@ export default defineComponent({
             }
         },
 
-        async validaEliminarMedicamento(idEstudio) {
+        async validaEliminarMedicamento(idEstudio: string) {
             swal
                 .fire({
                 html: "¿Esta seguro de eliminar el estudio?",
@@ -1348,7 +1348,7 @@ export default defineComponent({
                 });
         },
 
-        async eliminarEstudio(idEstudio) {
+        async eliminarEstudio(idEstudio: string) {
             await preIdStore.deleteEstudio(idEstudio);
             await this.listarEstudios();
         },

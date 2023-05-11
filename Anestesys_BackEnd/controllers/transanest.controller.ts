@@ -75,7 +75,7 @@ export const getModoVentilacion =async (req: any, res: Response) => {
         const { dVId } = req.params;
         
         const modoVent = await MenuTrans.findOne({ "datosVentilador._id": dVId },
-                                                 { "datosVentilador.$": 1 })
+                                                 { "datosVentilador.$": 1 });
 
         return res.json({ modoVent });
     } catch (error) {
@@ -111,6 +111,25 @@ export const updateVentilacion = async (req: any, res: Response) => {
         if (error.kind === "ObjectId") {
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }        
+        return res.status(500).json({ error: "Error de servidor" });
+    }
+};
+
+/* Borrar un modo de ventilación registrado */
+export const deleteModoVentilacion = async (req: any, res: Response) => {
+    try {
+        const { dVId } = req.params;
+        
+        const modoVent = await MenuTrans.findOneAndUpdate({ "datosVentilador._id": dVId },
+                                                          { $pull: { datosVentilador: { _id: dVId }}}
+        );              
+       
+        return res.json({ modoVent });
+    } catch (error) {
+        if (error.kind === "ObjectId") {
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
+        
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
