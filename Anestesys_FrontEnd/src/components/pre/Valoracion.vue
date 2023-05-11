@@ -875,39 +875,34 @@
                                                 <th class=""></th>
                                             </tr>
                                         </thead>
-                                        <tbody 
-                                            v-for="(
-                                                estudio
-                                            ) in preIdStore.estudios"
-                                        >
+                                        <tbody v-for="( estudio ) in preIdStore.estudios">
                                             <tr
-                                                v-for="(
-                                                    estudioTipo, index
-                                                ) in estudio.val_Estudios"                                   
-                                            >
-                                                <!-- <td class="text-black">{{ index + 1 }}</td> -->
+                                                v-for="( estudioTipo, index ) in estudio.val_Estudios">
                                                 <td class="text-black">
                                                     {{ estudioTipo.estudio}}
                                                 </td>
+
                                                 <td class="text-black td-ajuste">
                                                     {{ estudioTipo.especifEstudio}}
                                                 </td>                                            
+                                                
                                                 <td>
-                                                <button class="btn" @click="cambiarBtnActualizar(estudioTipo._id)">
-                                                    <font-awesome-icon 
-                                                    icon="fa-solid fa-pen-to-square" 
-                                                    size="lg" 
-                                                    class="text-black"
-                                                    />
-                                                </button>
-                                                </td>
-                                                <td>
-                                                <button class="btn" @click="validaEliminarMedicamento(estudioTipo._id)">
-                                                    <font-awesome-icon 
-                                                        icon="fa-solid fa-trash" 
-                                                        size="lg" class="text-black"
+                                                    <button class="btn" @click="cambiarBtnActualizar(estudioTipo._id)">
+                                                        <font-awesome-icon 
+                                                        icon="fa-solid fa-pen-to-square" 
+                                                        size="lg" 
+                                                        class="text-black"
                                                         />
-                                                </button>
+                                                    </button>
+                                                </td>
+                                                
+                                                <td>
+                                                    <button class="btn" @click="validaEliminarMedicamento(estudioTipo._id)">
+                                                        <font-awesome-icon 
+                                                            icon="fa-solid fa-trash" 
+                                                            size="lg" class="text-black"
+                                                            />
+                                                    </button>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -1337,7 +1332,7 @@ export default defineComponent({
             }
         },
 
-        async validaEliminarMedicamento(idEstudio) {
+        async validaEliminarMedicamento(idEstudio: string) {
             swal
                 .fire({
                 html: "¿Esta seguro de eliminar el estudio?",
@@ -1353,7 +1348,7 @@ export default defineComponent({
                 });
         },
 
-        async eliminarEstudio(idEstudio) {
+        async eliminarEstudio(idEstudio: string) {
             await preIdStore.deleteEstudio(idEstudio);
             await this.listarEstudios();
         },

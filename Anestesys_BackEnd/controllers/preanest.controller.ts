@@ -442,7 +442,8 @@ export const getEstudio = async (req: any, res: Response) => {
     try {
         const {id} = req.params;
 
-        const estudio = await ValEstudios.findOne({ "val_Estudios._id": id }, { 'val_Estudios.$': 1 })
+        const estudio = await ValEstudios.findOne({ "val_Estudios._id": id },
+                                                  { 'val_Estudios.$': 1 })
         
         return res.json({estudio});
     } catch (error) {
@@ -483,7 +484,7 @@ export const deleteEstudio = async (req: any, res: Response) => {
         const { id } = req.params;
 
         const estudio = await ValEstudios.findOneAndUpdate({ "val_Estudios._id": id },
-            { $pull: { val_Estudios: { _id: id } } }        
+                                                           { $pull: { val_Estudios: { _id: id } } }
         );              
        
         return res.json({ estudio });
