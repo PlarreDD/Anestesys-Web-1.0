@@ -18,7 +18,7 @@
         <ul class="nav text-center" id="">
           <li class="col-md-3">
             <button type="button"
-                    class="btn btn-outline-secondary fw-bold"
+                    class="btn btn-nav-bar fw-bold"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                     data-bs-auto-close="outside"> GRID ANESTÉSICO </button>
@@ -30,7 +30,7 @@
 
           <li class="col-md-3">
               <button type="button"
-                      class="btn btn-outline-secondary fw-bold"
+                      class="btn btn-nav-bar fw-bold"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                       data-bs-auto-close = "outside"> TÉCNICA ANESTÉSICA </button>
@@ -121,7 +121,7 @@
           </li>
 
           <li class="col-md-3">
-            <button type="button" class="btn btn-outline-secondary fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">BALANCE HIDRICO</button>
+            <button type="button" class="btn btn-nav-bar fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">BALANCE HIDRICO</button>
             <form class="dropdown-menu p-5">
               <div class="mb-3 estiloDropDownBalance input-group mb-3">
                 <h6 class="col-md-12 fw-bold">INGRESOS</h6>
@@ -242,7 +242,7 @@
 
           <!-- Datos del ventilador -->
           <li class="col-md-3">
-            <button type="button" class="btn btn-outline-secondary fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">DATOS DEL VENTILADOR</button>
+            <button type="button" class="btn btn-nav-bar fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">DATOS DEL VENTILADOR</button>
             <form @submit.prevent="" class="dropdown-menu p-4 color-dropdown">
               <div class="mb-3 estiloDropDownVentilador row g-3">
                 <h5 class="text-white fw-bold">VENTILADOR</h5>
@@ -303,23 +303,23 @@
                 <div class="col-md-9"></div>
 
                 <!-- Botón Guardar/Agregar -->
-                <div class="col-md-1 btn-abajo">                                    
+                <div class="col-md-3 btn-abajo">                                    
                     <template v-if="btnAddVentilador === true">
-                        <button class="btn btn-guardar fw-bold text-white"
+                        <button class="btn btn-guardar fw-bold"
                             @click="guardarDatosV">
                             <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
                         </button>
                     </template>
 
                     <template v-if="btnUpdateVentilador === true">
-                        <button class="btn btn-guardar fw-bold text-white"
+                        <button class="btn btn-guardar fw-bold"
                             @click="actualizarDatosVentilador">
                             <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
                         </button>
                     </template>  
 
                     <template v-if="btnActualizaVentilador === true">
-                        <button class="btn btn-guardar fw-bold text-white"
+                        <button class="btn btn-guardar fw-bold"
                             @click="">
                             <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
                         </button>
@@ -415,38 +415,44 @@
         <div class="col-2 menuLateralPrincipal"> <!--Menú lateral-->
 
           <div class="col-md-2 menu-pre-post">
-            <RouterLink to="pre"><img src="images/pre.svg" class="ajusteImg"/></RouterLink>
-
+            <RouterLink to="pre">
+              <img src="images/pre.svg" class="ajusteImg"/>
+            </RouterLink>
           </div>
 
           <div class="col-md-2 menu-trans">
             <img src="images/trans.svg" class="ajusteImg"/>
-
           </div>
 
           <div class="col-md-2 menu-pre-post">
-            <RouterLink to="post"><img src="images/post.svg" class="ajusteImg"/></RouterLink>
-
+            <RouterLink to="post">
+              <img src="images/post.svg" class="ajusteImg"/>
+            </RouterLink>
           </div>
         </div>
-
+        
         <div class=" text-center posicionEstatica fw-bold">
           <div class="row">
             <div class="col bordeColumna">
-              <label class="form-label text-white">
-                {{  }}
+              <label class="form-label text-white">              
+                <!-- {{ preIdStore.NombrePaciente }} -->
               </label>
             </div>
-
+          
             <div class="col bordeColumna">
-              {{  }}
+              <label class="form-label text-white">              
+                <!-- {{ preIdStore.NombreCirujano }} -->
+              </label>
             </div>
-
+          
             <div class="col bordeColumna">
-              {{  }}
+              <label class="form-label text-white">              
+                <!-- {{ preIdStore.NombreCirugia }} -->
+              </label>
             </div>
           </div>
         </div>
+        
     </div>
 
   </div>
@@ -470,6 +476,8 @@ export default({
       btnAddVentilador:true,
       btnUpdateVentilador:false,
       btnActualizaVentilador:false,
+
+      preIdStore,
     }
   },
 
@@ -628,22 +636,39 @@ export default({
 .color-dropdown {
   background-color: #002d60;
 }
-.btn-dropdown {
-  --bs-btn-bg: #ffffff;
-  --bs-btn-color: #002d60;
-  --bs-btn-border-color: #ffffff;
-  --bs-btn-hover-bg: #ffffff;
-  --bs-btn-hover-color: #002d60;
-  --bs-btn-hover-border-color: #ffffff;
-  --bs-btn-active-bg: #002d60;
-  --bs-btn-active-color: #ffffff;
-  --bs-btn-active-border-color: #ffffff;
-  width: 150px;
-}
 .deslizar {
   overflow: scroll;
   overflow-x: hidden;
   height: 150px;
   margin-top: 15px;
+}
+.btn-guardar{
+    --bs-btn-bg: none;
+    --bs-btn-color: #fff;    
+    --bs-btn-border-color: #E88300;
+    --bs-btn-hover-bg: none;
+    --bs-btn-hover-color: #E88300;
+    --bs-btn-hover-border-color: #E88300;          
+    --bs-btn-active-bg: none;
+    --bs-btn-active-color: #E88300;
+    --bs-btn-active-border-color: #E88300;
+    justify-self: end;
+    border: none;   
+}
+.btn-nav-bar{
+    --bs-btn-bg: #fff;
+    --bs-btn-color: #002D60;    
+    --bs-btn-border-color: #fff;
+    --bs-btn-hover-bg: #A0A6B2;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #A0A6B2;          
+    --bs-btn-active-bg: #A0A6B2;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-border-color: #A0A6B2;
+    width: 214px;
+    height: auto;
+}
+.btn-abajo{
+    text-align: end;  
 }
 </style>
