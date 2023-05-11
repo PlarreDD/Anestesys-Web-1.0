@@ -1,7 +1,12 @@
 import { Router } from "express";
 import { requireToken } from "../middlewares/requireToken";
-import { saveEstudios, getEstudios, updateEstudios, updateEstudio, deleteEstudio, getEstudio
-          } from "../controllers/preanest.controller";
+import { saveEstudios,
+         getEstudios,
+         updateEstudios,
+         updateEstudio,
+         deleteEstudio,
+         getEstudio
+       } from "../controllers/preanest.controller";
 
 const router = Router();
 

@@ -67,4 +67,18 @@ export const getModosVent = async (req: any, res: Response) => {
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
     }
+};
+
+/* Obtener y mostrar el modo de ventilación seleccionado */
+export const getModoVentilacion =async (req: any, res: Response) => {
+    try {
+        const { dVId } = req.params;
+        
+        const modoVent = await MenuTrans.findOne({ "datosVentilador._id": dVId },
+                                                 { "datosVentilador.$": 1 })
+
+        return res.json({ modoVent });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }    
 }

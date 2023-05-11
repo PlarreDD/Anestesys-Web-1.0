@@ -63,6 +63,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     frecResp: regTransAnest.frecResp,
                     IE: regTransAnest.IE,
                     PLimite: regTransAnest.PLimite,
+                    Hr: regTransAnest.Hr,
                 }
             })
             .then((res: any) => {
@@ -91,11 +92,26 @@ export const useTransAnestStore = defineStore('transAn', {
             })
             .then((res: any) => {
                 this.datosVentilacion = res.data.listaModosVent;
-                console.log(this.datosVentilacion);                
             })
             .catch((e: any) => {
                 //   console.log(e);
             });
+        },
+
+        async getModoVent(dVId: string) {
+            await apiAxios({
+                url: `http://localhost:5000/trans/uno/${String(dVId)}`,
+                method: "GET",
+                headers: {
+                  Authorization: "Bearer " + userStore.token,
+                },
+              })
+              .then((res: any) => {
+                this.datosVentilacion = res.data.modoVent;
+              })
+              .catch((e: any) => {
+              //   console.log(e);
+              });
         }
     }
 })

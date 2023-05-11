@@ -2,6 +2,7 @@
 /* Datos del Ventilador */
 export interface regMenuTrans{
     // DatosVentilador
+    idVentilador: string,
     modosVentilacion: string,
     peep: string,
     vt: string,

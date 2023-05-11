@@ -260,6 +260,9 @@
                     <option>SIMV-PC+PSV</option>
                     <option>Ventilación control presión con volumen garantizado</option>
                   </select>
+                  <input type="hidden"
+                          class="form-control"
+                          v-model="menuTrans.idVentilador">
                 </div>
                 <!-- PEEP -->
                 <div class="col-md-3">
@@ -310,7 +313,7 @@
 
                     <template v-if="btnUpdateVentilador === true">
                         <button class="btn btn-guardar fw-bold text-white"
-                            @click="">
+                            @click="actualizarDatosVentilador">
                             <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
                         </button>
                     </template>  
@@ -344,10 +347,10 @@
                           <td>{{ datoVentilacion.modosVentilacion }}</td>
                           <!-- Botón Editar -->
                           <td>
-                            <button class="btn">
+                            <button class="btn" @click="cambiarBtnActualizar(datoVentilacion._id)">
                               <font-awesome-icon 
                                 icon="fa-solid fa-pen-to-square" 
-                                size="lg" 
+                                size="lg"
                                 class="text-white"/>
                             </button>
                           </td>
@@ -512,6 +515,40 @@ export default({
         this.menuTrans.vt = "";
 
         await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+      },
+
+      async actualizarDatosVentilador() {
+        this.menuTrans.Hr = document.getElementById('clock').textContent;
+        await transAnestStore.updateDatosV(this.menuTrans, preIdStore.pacienteID._id);
+
+        this.menuTrans.modosVentilacion = "";
+        this.menuTrans.Hr = "";
+        this.menuTrans.IE = "";
+        this.menuTrans.PLimite = "";
+        this.menuTrans.frecResp = "";
+        this.menuTrans.peep = "";
+        this.menuTrans.vt = "";
+
+        await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+      },
+
+      async cambiarBtnActualizar(id) {
+          this.btnAddVentilador=false
+          this.btnUpdateVentilador=false
+          this.btnActualizaVentilador=true
+
+          await transAnestStore.getModoVent(id);
+
+          this.menuTrans.idVentilador = transAnestStore.datosVentilacion.datosVentilador[0]._id;
+          this.menuTrans.modosVentilacion = transAnestStore.datosVentilacion.datosVentilador[0].modosVentilacion;
+          this.menuTrans.Hr = transAnestStore.datosVentilacion.datosVentilador[0].Hr;
+          this.menuTrans.IE = transAnestStore.datosVentilacion.datosVentilador[0].IE;
+          this.menuTrans.PLimite = transAnestStore.datosVentilacion.datosVentilador[0].PLimite;
+          this.menuTrans.frecResp = transAnestStore.datosVentilacion.datosVentilador[0].frecResp;
+          this.menuTrans.peep = transAnestStore.datosVentilacion.datosVentilador[0].peep;
+          this.menuTrans.vt = transAnestStore.datosVentilacion.datosVentilador[0].vt;
+
+          await transAnestStore.listDatosV(preIdStore.pacienteID._id);
       },
   }
 })
