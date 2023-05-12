@@ -121,123 +121,127 @@
           </li>
 
           <li class="col-md-3">
-            <button type="button" class="btn btn-nav-bar fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">BALANCE HIDRICO</button>
-            <form class="dropdown-menu p-5">
-              <div class="mb-3 estiloDropDownBalance input-group mb-3">
-                <h6 class="col-md-12 fw-bold">INGRESOS</h6>
+            <button type="button" class="btn btn-nav-bar fw-bold" 
+                    data-bs-toggle="dropdown" aria-expanded="false" 
+                    data-bs-auto-close="false">BALANCE HIDRICO</button>
 
-                <div class="col-md-3 centrarLabel">
-                  <label for="" class="form-label fw-bold">Solución Hartman(ml):</label>
-                </div>
-                <div class="col-md-1 ">
-                  <input class="form-control" type="text" id="">
-                </div>                        
-                <div class="col-md-3 centrarLabel">
-                  <label for="" class="form-label fw-bold">Solución fisiológica(ml):</label>
-                </div>
-                <div class="col-md-1">
-                  <input class="form-control" type="text" id="">
-                </div>
-                <div class="col-md-3 centrarLabel">
-                  <label for="" class="form-label fw-bold">Glucosados(ml):</label>
-                </div>
-                <div class="col-md-1">
-                  <input class="form-control" type="text" id="">
-                </div>
-                
-                <div class="col-md-3 centrarLabel">
-                  <label for="" class="form-label fw-bold">Gelatinas(ml):</label>
-                </div>
-                <div class="col-md-1">
-                  <input class="form-control" type="text" id="">
-                </div>
-                <div class="col-md-3 centrarLabel">
-                  <label for="" class="form-label fw-bold">Almidones(ml):</label>
-                </div>
-                <div class="col-md-1">
-                  <input class="form-control" type="text" id="">
-                </div>                      
-                <div class="col-md-3 centrarLabel">
-                  <label for="" class="form-label fw-bold">Albúminas(ml):</label>
-                </div>
-                <div class="col-md-1">
-                  <input class="form-control" type="text" id="">
-                </div>
+            <div class="col-md-12" id="">
+              <form @submit.prevent="" class="dropdown-menu p-4 color-dropdown">
+                <div class="estiloDropDownBalance row g-3 deslizar-balance">
+                  <h5 class="col-md-12 fw-bold text-white">BALANCE TOTAL</h5>
+                  <h5 class="col-md-12 fw-bold text-white">Ingresos</h5>
 
-                <div class="col-md-3 centrarLabel">
-                  <label for="" class="form-label fw-bold">Paquete globular(ml):</label>
-                </div>
-                <div class="col-md-1">
-                  <input class="form-control" type="text" id="">
-                </div>                     
-                <div class="col-md-3 centrarLabel">
-                  <label for="" class="form-label fw-bold">Plasmas(ml):</label>
-                </div>
-                <div class="col-md-1">
-                  <input class="form-control" type="text" id="">
-                </div>
-                <div class="col-md-3 centrarLabel">
-                  <label for="" class="form-label fw-bold">Plaquetas(ml):</label>
-                </div>
-                <div class="col-md-1">
-                  <input class="form-control" type="text" id="">
-                </div>
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Solución Hartman(ml):</label>
+                    <input class="form-control" type="text" id="">
+                  </div>                  
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Solución fisiológica(ml):</label>
+                    <input class="form-control" type="text" id="">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Glucosados(ml):</label>
+                    <input class="form-control" type="text" id="">
+                  </div>
+                  
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Gelatinas(ml):</label>
+                    <input class="form-control" type="text" id="">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Almidones(ml):</label>
+                    <input class="form-control" type="text" id="">
+                  </div>                  
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Albúminas(ml):</label>
+                    <input class="form-control" type="text" id="">
+                  </div>
 
-                <div class="col-md-3 centrarLabel">
-                  <label for="" class="form-label fw-bold">Crioprecipitados(ml):</label>
-                </div>
-                <div class="col-md-1">
-                  <input class="form-control" type="text" id="">
-                </div>
-                <div class="col-md-3 centrarLabel">
-                  <label for="" class="form-label fw-bold">Factor VII(ml):</label>
-                </div>
-                <div class="col-md-1">
-                  <input class="form-control" type="text" id="">
-                </div>
-                <div class="col-md-3 centrarLabel">
-                  <label for="" class="form-label fw-bold">Factor VIII(ml):</label>
-                </div>
-                <div class="col-md-1">
-                  <input class="form-control" type="text" id="">
-                </div>
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Paquete globular(ml):</label>
+                    <input class="form-control" type="text" id="">
+                  </div>                    
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Plasmas(ml):</label>
+                    <input class="form-control" type="text" id="">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Plaquetas(ml):</label>
+                    <input class="form-control" type="text" id="">
+                  </div>
 
-                <div class="col-md-3 centrarLabel">
-                  <label for="" class="form-label fw-bold">Otros:</label>
-                </div>
-                <div class="col-md-1">
-                  <input class="form-control" type="text" id="">
-                </div>
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Crioprecipitados(ml):</label>
+                    <input class="form-control" type="text" id="">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Factor VII(ml):</label>
+                    <input class="form-control" type="text" id="">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Factor VIII(ml):</label>
+                    <input class="form-control" type="text" id="">
+                  </div>
 
-                <h6 class="col-md-12 fw-bold">EGRESOS</h6>
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Otros:</label>
+                    <input class="form-control" type="text" id="">
+                  </div>
+                  <div class="col-md-5"></div>
+                  <div class="col-md-3 alinear-btn">
+                    <template v-if="btnActualizarBalance === false">
+                      <button data-bs-toggle="tab" 
+                              type="submit"
+                              class="btn btn-guardar-info fw-bold"
+                              @click="cambiarUpdateBalance"
+                              > GUARDAR </button>
+                    </template>
+                    <template v-else>
+                        <button data-bs-toggle="tab" 
+                                type="submit"
+                                class="btn btn-guardar-info fw-bold"
+                                @click=""
+                                > ACTUALIZAR </button> 
+                    </template>   
+                  </div>
 
-                <div class="col-md-3 centrarLabel">
-                  <label for="" class="form-label fw-bold">Liquídos de ascitis(ml):</label>
-                </div>
-                <div class="col-md-1">
-                  <input class="form-control" type="text" id="">
-                </div>
-                <div class="col-md-3 centrarLabel">
-                  <label for="" class="form-label fw-bold">Sangrado aproximado(ml):</label>
-                </div>
-                <div class="col-md-1">
-                  <input class="form-control" type="text" id="">
-                </div>
-                <div class="col-md-3 centrarLabel">
-                  <label for="" class="form-label fw-bold">Uresis(ml):</label>
-                </div>
-                <div class="col-md-1">
-                  <input class="form-control" type="text" id="">
-                </div>
+                  <hr />
 
-                <div class="col-md-3 centrarLabel">
-                  <label for="" class="form-label fw-bold">Otros:</label>
+                  <h5 class="col-md-12 fw-bold text-white text-white">Egresos</h5>
+
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Liquídos de ascitis(ml):</label>
+                    <input class="form-control" type="text" id="">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Sangrado aproximado(ml):</label>
+                    <input class="form-control" type="text" id="">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Uresis(ml):</label>
+                    <input class="form-control" type="text" id="">
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Exposición quirúrgica:</label>
+                    <input class="form-control" type="text" id="">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Requerimientos basales:</label>
+                    <input class="form-control" type="text" id="">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Ayuno:</label>
+                    <input class="form-control" type="text" id="">
+                  </div>
+
+                  <div class="col-md-3">
+                    <label for="" class="form-label fw-bold text-white">Otros:</label>
+                    <input class="form-control" type="text" id="">
+                  </div>
                 </div>
-                <div class="col-md-1">
-                  <input class="form-control" type="text" id="">
-                </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </li>
 
           <!-- Datos del ventilador -->
@@ -478,6 +482,8 @@ export default({
       btnUpdateVentilador:false,
       btnActualizaVentilador:false,
 
+      btnActualizarBalance:false,
+
       preIdStore,
     }
   },
@@ -614,11 +620,20 @@ export default({
         await transAnestStore.deleteModoVent(id);
         await transAnestStore.listDatosV(preIdStore.pacienteID._id);
       },
+
+      cambiarUpdateBalance() {
+          this.btnActualizarBalance=true
+
+          //Metódo para guardar
+      }
   }
 })
 </script>
 
 <style scoped>
+.alinear-btn{
+    align-self: self-end;
+}
 .margen-div-barra{
   margin-top: 120px;
 }
@@ -657,9 +672,6 @@ export default({
 .bordePrincipal {
     width: 108%;
 }
-.centrarLabel{
-  text-align: center;
-}
 .posicionEstatica {
   position: -webkit-sticky;
   position: fixed;
@@ -684,7 +696,7 @@ export default({
   width: 450px; height: auto;
 }
 .estiloDropDownBalance{
-  width: 600px; height: 400px;
+  width: 650px; height: 400px;
 }
 .estiloDropDownVentilador{
   width: 650px; height: auto;
@@ -696,7 +708,12 @@ export default({
   overflow: scroll;
   overflow-x: hidden;
   height: 150px;
-  margin-top: 15px;
+  margin-top: 0px;
+}
+.deslizar-balance {
+  overflow: scroll;
+  overflow-x: hidden;
+  margin-top: 0px;
 }
 .btn-guardar{
     --bs-btn-bg: none;
@@ -710,6 +727,18 @@ export default({
     --bs-btn-active-border-color: #E88300;
     justify-self: end;
     border: none;   
+}
+.btn-guardar-info{
+    --bs-btn-bg: none;
+    --bs-btn-color: #E88300;    
+    --bs-btn-border-color: #E88300;
+    --bs-btn-hover-bg: #E88300;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #E88300;          
+    --bs-btn-active-bg: #E88300;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-border-color: #E88300;  
+    width: -webkit-fill-available; 
 }
 .btn-nav-bar{
     --bs-btn-bg: #fff;
@@ -726,5 +755,12 @@ export default({
 }
 .btn-abajo{
     text-align: end;  
+}
+hr {
+    margin: 1rem 0;
+    color: white;
+    border: 0;
+    border-top: 1px solid;
+    opacity: 1;
 }
 </style>
