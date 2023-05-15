@@ -28,98 +28,136 @@
             </form>
           </li>
 
+          <!-- Técnica Anestésica Final -->
           <li class="col-md-3">
-              <button type="button"
-                      class="btn btn-nav-bar fw-bold"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                      data-bs-auto-close = "outside"> TÉCNICA ANESTÉSICA </button>
+            <button type="button"
+                    class="btn btn-nav-bar fw-bold"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    data-bs-auto-close = "outside"> TÉCNICA ANESTÉSICA </button>
 
-              <form class="dropdown-menu p-5">
-                <div class="mb-3 estiloDropDownTecnica row g-3">
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="checkTecnica">
-                    <label class="form-check-label fw-bold"
-                            for="checkTecnica"> Local </label>
-                  </div>
-
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="checkTecnica">
-                    <label class="form-check-label fw-bold"
-                            for="checkTecnica"> Sedación </label>
-                  </div>
-
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="checkTecnica">
-                    <label class="form-check-label fw-bold"
-                            for="checkTecnica"> General balanceada </label>
-                  </div>
-                  
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="checkTecnica">
-                    <label class="form-check-label fw-bold"
-                            for="checkTecnica"> TIVA (Anestesia total intravenosa) </label>
-                  </div>
-
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Multimodal</label>
-                  </div>
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo mixto</label>
-                  </div>
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural lumbar</label>
-                  </div>
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural caudal</label>
-                  </div>
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo espinal</label>
-                  </div>
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo de plexo</label>
-                  </div>
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo troncular</label>
-                  </div>
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural torácico</label>
-                  </div>
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural cervical</label>
-                  </div>
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Libre de opioides</label>
-                  </div>
+            <form class="dropdown-menu p-5">
+              <div class="mb-3 estiloDropDownTecnica row g-3">
+                <div class="form-check col-md-4">
+                  <input class="form-check-input"
+                         type="checkbox"
+                         value=""
+                         id="checkTecnica">
+                  <label class="form-check-label fw-bold"
+                         for="checkTecnica"> Local </label>
                 </div>
-              </form>
+
+                <div class="form-check col-md-4">
+                  <input class="form-check-input"
+                         type="checkbox"
+                         value=""
+                         id="checkTecnica">
+                  <label class="form-check-label fw-bold"
+                         for="checkTecnica"> Sedación </label>
+                </div>
+
+                <div class="form-check col-md-4">
+                  <input class="form-check-input"
+                         type="checkbox"
+                         value=""
+                         id="checkTecnica">
+                  <label class="form-check-label fw-bold"
+                         for="checkTecnica"> General balanceada </label>
+                </div>
+                
+                <div class="form-check col-md-4">
+                  <input class="form-check-input"
+                         type="checkbox"
+                         value=""
+                         id="checkTecnica">
+                  <label class="form-check-label fw-bold"
+                         for="checkTecnica"> TIVA (Anestesia total intravenosa) </label>
+                </div>
+
+                <div class="form-check col-md-4">
+                  <input class="form-check-input"
+                         type="checkbox"
+                         value=""
+                         id="checkTecnica">
+                  <label class="form-check-label fw-bold" for="checkTecnica">Multimodal</label>
+                </div>
+
+                <div class="form-check col-md-4">
+                  <input class="form-check-input"
+                         type="checkbox"
+                         value=""
+                         id="checkTecnica">
+                  <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo mixto</label>
+                </div>
+
+                <div class="form-check col-md-4">
+                  <input class="form-check-input"
+                         type="checkbox"
+                         value=""
+                         id="checkTecnica">
+                  <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural lumbar</label>
+                </div>
+
+                <div class="form-check col-md-4">
+                  <input class="form-check-input"
+                         type="checkbox"
+                         value=""
+                         id="checkTecnica">
+                  <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural caudal</label>
+                </div>
+
+                <div class="form-check col-md-4">
+                  <input class="form-check-input"
+                         type="checkbox"
+                         value=""
+                         id="checkTecnica">
+                  <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo espinal</label>
+                </div>
+
+                <div class="form-check col-md-4">
+                  <input class="form-check-input"
+                         type="checkbox"
+                         value=""
+                         id="checkTecnica">
+                  <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo de plexo</label>
+                </div>
+
+                <div class="form-check col-md-4">
+                  <input class="form-check-input"
+                         type="checkbox"
+                         value=""
+                         id="checkTecnica">
+                  <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo troncular</label>
+                </div>
+
+                <div class="form-check col-md-4">
+                  <input class="form-check-input"
+                         type="checkbox"
+                         value=""
+                         id="checkTecnica">
+                  <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural torácico</label>
+                </div>
+
+                <div class="form-check col-md-4">
+                  <input class="form-check-input"
+                         type="checkbox"
+                         value=""
+                         id="checkTecnica">
+                  <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural cervical</label>
+                </div>
+
+                <div class="form-check col-md-4">
+                  <input class="form-check-input"
+                         type="checkbox"
+                         value=""
+                         id="checkTecnica">
+                  <label class="form-check-label fw-bold" for="checkTecnica">Libre de opioides</label>
+                </div>
+              </div>
+            </form>
           </li>
 
+          <!-- Balance Hídrico -->
           <li class="col-md-3">
             <button type="button" class="btn btn-nav-bar fw-bold" 
                     data-bs-toggle="dropdown" aria-expanded="false" 
@@ -131,76 +169,138 @@
                   <h5 class="col-md-12 fw-bold text-white">BALANCE TOTAL</h5>
                   <h5 class="col-md-12 fw-bold text-white">Ingresos</h5>
 
+                  <!-- Solución Hartman -->
                   <div class="col-md-4">
                     <label for="" class="form-label fw-bold text-white">Solución Hartman(ml):</label>
-                    <input class="form-control" type="text" id="">
-                  </div>                  
+                    <input class="form-control"
+                           v-model="menuTrans.solHartman"
+                           type="text"
+                           id="">
+                  </div>
+
+                  <!-- Solución fisiológica -->
                   <div class="col-md-4">
                     <label for="" class="form-label fw-bold text-white">Solución fisiológica(ml):</label>
-                    <input class="form-control" type="text" id="">
+                    <input class="form-control"
+                           v-model="menuTrans.solFisio"
+                           type="text"
+                           id="">
                   </div>
+
+                  <!-- Glucosados -->
                   <div class="col-md-4">
                     <label for="" class="form-label fw-bold text-white">Glucosados(ml):</label>
-                    <input class="form-control" type="text" id="">
+                    <input class="form-control"
+                           v-model="menuTrans.glucosados"
+                           type="text"
+                           id="">
                   </div>
                   
+                  <!-- Gelatinas -->
                   <div class="col-md-4">
                     <label for="" class="form-label fw-bold text-white">Gelatinas(ml):</label>
-                    <input class="form-control" type="text" id="">
+                    <input class="form-control"
+                           type="text"
+                           v-model="menuTrans.gelatinas"
+                           id="">
                   </div>
+
+                  <!-- Almidones -->
                   <div class="col-md-4">
                     <label for="" class="form-label fw-bold text-white">Almidones(ml):</label>
-                    <input class="form-control" type="text" id="">
-                  </div>                  
+                    <input class="form-control"
+                           v-model="menuTrans.almidones"
+                           type="text"
+                           id="">
+                  </div>
+
+                  <!-- Albúminas -->
                   <div class="col-md-4">
                     <label for="" class="form-label fw-bold text-white">Albúminas(ml):</label>
-                    <input class="form-control" type="text" id="">
+                    <input class="form-control"
+                           v-model="menuTrans.albuminas"
+                           type="text"
+                           id="">
                   </div>
 
+                  <!-- Paquete globular -->
                   <div class="col-md-4">
                     <label for="" class="form-label fw-bold text-white">Paquete globular(ml):</label>
-                    <input class="form-control" type="text" id="">
-                  </div>                    
+                    <input class="form-control"
+                           v-model="menuTrans.paqGlobular"
+                           type="text"
+                           id="">
+                  </div>
+
+                  <!-- Plasmas -->
                   <div class="col-md-4">
                     <label for="" class="form-label fw-bold text-white">Plasmas(ml):</label>
-                    <input class="form-control" type="text" id="">
+                    <input class="form-control"
+                           v-model="menuTrans.plasmas"
+                           type="text"
+                           id="">
                   </div>
+
+                  <!-- Plaquetas -->
                   <div class="col-md-4">
                     <label for="" class="form-label fw-bold text-white">Plaquetas(ml):</label>
-                    <input class="form-control" type="text" id="">
+                    <input class="form-control"
+                           type="text"
+                           v-model="menuTrans.plaquetas"
+                           id="">
                   </div>
 
+                  <!-- Crioprecipitados -->
                   <div class="col-md-4">
                     <label for="" class="form-label fw-bold text-white">Crioprecipitados(ml):</label>
-                    <input class="form-control" type="text" id="">
-                  </div>
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Factor VII(ml):</label>
-                    <input class="form-control" type="text" id="">
-                  </div>
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Factor VIII(ml):</label>
-                    <input class="form-control" type="text" id="">
+                    <input class="form-control"
+                           type="text"
+                           v-model="menuTrans.crioprecipitados"
+                           id="">
                   </div>
 
+                  <!-- Factor VII -->
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Factor VII(ml):</label>
+                    <input class="form-control"
+                           type="text"
+                           v-model="menuTrans.factor_VII"
+                           id="">
+                  </div>
+
+                  <!-- Factor VIII -->
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Factor VIII(ml):</label>
+                    <input class="form-control"
+                           type="text"
+                           v-model="menuTrans.factor_VIII"
+                           id="">
+                  </div>
+
+                  <!-- Otros Ingresos -->
                   <div class="col-md-4">
                     <label for="" class="form-label fw-bold text-white">Otros:</label>
-                    <input class="form-control" type="text" id="">
+                    <input class="form-control"
+                           type="text"
+                           v-model="menuTrans.otrosIngresos"
+                           id="">
                   </div>
+
                   <div class="col-md-5"></div>
                   <div class="col-md-3 alinear-btn">
                     <template v-if="btnActualizarBalance === false">
                       <button data-bs-toggle="tab" 
                               type="submit"
                               class="btn btn-guardar-info fw-bold"
-                              @click="cambiarUpdateBalance"
+                              @click="cambiarUpdateBalance()"
                               > GUARDAR </button>
                     </template>
+
                     <template v-else>
                         <button data-bs-toggle="tab" 
                                 type="submit"
                                 class="btn btn-guardar-info fw-bold"
-                                @click=""
+                                @click="transAnestStore.updateBalanceH(menuTrans, preIdStore.pacienteID._id)"
                                 > ACTUALIZAR </button> 
                     </template>   
                   </div>
@@ -209,35 +309,67 @@
 
                   <h5 class="col-md-12 fw-bold text-white text-white">Egresos</h5>
 
+                  <!-- Liquídos de ascitis -->
                   <div class="col-md-4">
                     <label for="" class="form-label fw-bold text-white">Liquídos de ascitis(ml):</label>
-                    <input class="form-control" type="text" id="">
+                    <input class="form-control"
+                           type="text"
+                           v-model="menuTrans.liqAscitis"
+                           id="">
                   </div>
+
+                  <!-- Sangrado aproximado -->
                   <div class="col-md-4">
                     <label for="" class="form-label fw-bold text-white">Sangrado aproximado(ml):</label>
-                    <input class="form-control" type="text" id="">
+                    <input class="form-control"
+                           type="text"
+                           v-model="menuTrans.sangradoAprox"
+                           id="">
                   </div>
+
+                  <!-- Uresis -->
                   <div class="col-md-4">
                     <label for="" class="form-label fw-bold text-white">Uresis(ml):</label>
-                    <input class="form-control" type="text" id="">
+                    <input class="form-control"
+                           type="text"
+                           v-model="menuTrans.uresis"
+                           id="">
                   </div>
 
+                  <!-- Exposición quirúrgica -->
                   <div class="col-md-4">
                     <label for="" class="form-label fw-bold text-white">Exposición quirúrgica:</label>
-                    <input class="form-control" type="text" id="">
-                  </div>
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Requerimientos basales:</label>
-                    <input class="form-control" type="text" id="">
-                  </div>
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Ayuno:</label>
-                    <input class="form-control" type="text" id="">
+                    <input class="form-control"
+                           type="text"
+                           v-model="menuTrans.expoQX"
+                           id="">
                   </div>
 
+                  <!-- Requerimientos basales -->
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Requerimientos basales:</label>
+                    <input class="form-control"
+                           type="text"
+                           v-model="menuTrans.reqBasales"
+                           id="">
+                  </div>
+                  
+                  <!-- Ayuno -->
+                  <div class="col-md-4">
+                    <label for="" class="form-label fw-bold text-white">Ayuno:</label>
+                    <input class="form-control"
+                           type="text"
+                           v-model="menuTrans.ayuno"
+                           id="">
+                  </div>
+
+                  <!-- Otros Egresos -->
                   <div class="col-md-3">
                     <label for="" class="form-label fw-bold text-white">Otros:</label>
-                    <input class="form-control" type="text" id="">
+                    <input class="form-control"
+                           type="text"
+                           v-model="menuTrans.otrosEgresos"
+                           id="">
                   </div>
                 </div>
               </form>
@@ -621,10 +753,11 @@ export default({
         await transAnestStore.listDatosV(preIdStore.pacienteID._id);
       },
 
-      cambiarUpdateBalance() {
+      async cambiarUpdateBalance() {
           this.btnActualizarBalance=true
 
           //Metódo para guardar
+          await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
       }
   }
 })
