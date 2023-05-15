@@ -644,8 +644,6 @@ export default({
       },
 
       async guardarDatosV() {
-        this.btnActualizaVentilador=true
-
         this.btnAddVentilador=false
         this.btnUpdateVentilador=true
         this.btnActualizaVentilador=false
@@ -755,6 +753,10 @@ export default({
 
       async cambiarUpdateBalance() {
           this.btnActualizarBalance=true
+
+          this.btnAddVentilador=false
+          this.btnUpdateVentilador=true
+          this.btnActualizaVentilador=false
 
           //Metódo para guardar
           await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
