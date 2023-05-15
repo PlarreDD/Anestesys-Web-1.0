@@ -23,56 +23,66 @@ export const saveMenuTrans = async (req: any, res: Response) => {
                 modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr
              } = req.body;
 
-        const menuTrans = new MenuTrans({ pid,
-                                          /* Balance Total */
-                                          // Ingresos
-                                          solHartman: solHartman,
-                                          solFisio: solFisio,
-                                          glucosados: glucosados,
-                                          gelatinas: gelatinas,
-                                          almidones: almidones,
-                                          albuminas: albuminas,
-                                          paqGlobular: paqGlobular,
-                                          plasmas: plasmas,
-                                          plaquetas: plaquetas,
-                                          crioprecipitados: crioprecipitados,
-                                          factor_VII: factor_VII,
-                                          factor_VIII: factor_VIII,
-                                          otrosIngresos: otrosIngresos,
-                                          // Egresos
-                                          liqAscitis: liqAscitis,
-                                          sangradoAprox: sangradoAprox,
-                                          uresis: uresis,
-                                          expoQX: expoQX,
-                                          reqBasales: reqBasales,
-                                          ayuno: ayuno,
-                                          otrosEgresos: otrosEgresos,
-                                          /* Técnica Anestésica */
-                                          local: local,
-                                          sedación: sedación,
-                                          gralBalanceada: gralBalanceada,
-                                          TIVA: TIVA,
-                                          multimodal: multimodal,
-                                          bloqMixto: bloqMixto,
-                                          bloqPeriLum: bloqPeriLum,
-                                          bloqPeriCaudal: bloqPeriCaudal,
-                                          BloqEspinal: BloqEspinal,
-                                          BloqPlexo: BloqPlexo,
-                                          BloqTroncular: BloqTroncular,
-                                          bloqPeriToracico: bloqPeriToracico,
-                                          bloqPeriCervical: bloqPeriCervical,
-                                          libreOpioides: libreOpioides,
-                                          // Datos del ventilador
-                                          datosVentilador: {
-                                            modosVentilacion: modosVentilacion,
-                                            peep: peep,
-                                            vt: vt,
-                                            frecResp: frecResp,
-                                            IE: IE,
-                                            PLimite: PLimite,
-                                            Hr: Hr,
-                                          },
-                                        });
+             let menuTrans;
+
+             if(modosVentilacion==undefined){
+                menuTrans = new MenuTrans({ pid,
+                    /* Balance Total */
+                    // Ingresos
+                    solHartman: solHartman,
+                    solFisio: solFisio,
+                    glucosados: glucosados,
+                    gelatinas: gelatinas,
+                    almidones: almidones,
+                    albuminas: albuminas,
+                    paqGlobular: paqGlobular,
+                    plasmas: plasmas,
+                    plaquetas: plaquetas,
+                    crioprecipitados: crioprecipitados,
+                    factor_VII: factor_VII,
+                    factor_VIII: factor_VIII,
+                    otrosIngresos: otrosIngresos,
+                    // Egresos
+                    liqAscitis: liqAscitis,
+                    sangradoAprox: sangradoAprox,
+                    uresis: uresis,
+                    expoQX: expoQX,
+                    reqBasales: reqBasales,
+                    ayuno: ayuno,
+                    otrosEgresos: otrosEgresos,
+                    /* Técnica Anestésica */
+                    local: local,
+                    sedación: sedación,
+                    gralBalanceada: gralBalanceada,
+                    TIVA: TIVA,
+                    multimodal: multimodal,
+                    bloqMixto: bloqMixto,
+                    bloqPeriLum: bloqPeriLum,
+                    bloqPeriCaudal: bloqPeriCaudal,
+                    BloqEspinal: BloqEspinal,
+                    BloqPlexo: BloqPlexo,
+                    BloqTroncular: BloqTroncular,
+                    bloqPeriToracico: bloqPeriToracico,
+                    bloqPeriCervical: bloqPeriCervical,
+                    libreOpioides: libreOpioides,
+                  });
+             }
+             else{
+                menuTrans = new MenuTrans({ pid,
+                    // Datos del ventilador
+                    datosVentilador: {
+                      modosVentilacion: modosVentilacion,
+                      peep: peep,
+                      vt: vt,
+                      frecResp: frecResp,
+                      IE: IE,
+                      PLimite: PLimite,
+                      Hr: Hr,
+                    },
+                  });
+             }
+
+        
 
         await menuTrans.save();
 
