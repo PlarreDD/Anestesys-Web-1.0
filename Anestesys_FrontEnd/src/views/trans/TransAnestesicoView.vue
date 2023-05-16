@@ -166,16 +166,17 @@
             <div class="col-md-12" id="">
               <form @submit.prevent="" class="dropdown-menu p-4 color-dropdown">
                 <div class="estiloDropDownBalance row g-3 deslizar-balance">
-                  <h5 class="col-md-12 fw-bold text-white">BALANCE TOTAL: {{}}</h5>
+                  <h5 class="col-md-12 fw-bold text-white">BALANCE TOTAL: {{parseFloat(this.menuTrans.balanceTotal).toFixed(1)}} ml</h5>
                   <h5 class="col-md-12 fw-bold text-white">Ingresos</h5>
 
+                  <input type="hidden" v-model="menuTrans.balanceTotal">
                   <!-- Solución Hartman -->
                   <div class="col-md-4">
                     <label for="" class="form-label fw-bold text-white">Solución Hartman(ml):</label>
                     <input class="form-control"
                            v-model="menuTrans.solHartman"
                            type="text"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
 
                   <!-- Solución fisiológica -->
@@ -184,7 +185,7 @@
                     <input class="form-control"
                            v-model="menuTrans.solFisio"
                            type="text"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
 
                   <!-- Glucosados -->
@@ -193,7 +194,7 @@
                     <input class="form-control"
                            v-model="menuTrans.glucosados"
                            type="text"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
                   
                   <!-- Gelatinas -->
@@ -202,7 +203,7 @@
                     <input class="form-control"
                            type="text"
                            v-model="menuTrans.gelatinas"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
 
                   <!-- Almidones -->
@@ -211,7 +212,7 @@
                     <input class="form-control"
                            v-model="menuTrans.almidones"
                            type="text"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
 
                   <!-- Albúminas -->
@@ -220,7 +221,7 @@
                     <input class="form-control"
                            v-model="menuTrans.albuminas"
                            type="text"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
 
                   <!-- Paquete globular -->
@@ -229,7 +230,7 @@
                     <input class="form-control"
                            v-model="menuTrans.paqGlobular"
                            type="text"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
 
                   <!-- Plasmas -->
@@ -238,7 +239,7 @@
                     <input class="form-control"
                            v-model="menuTrans.plasmas"
                            type="text"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
 
                   <!-- Plaquetas -->
@@ -247,7 +248,7 @@
                     <input class="form-control"
                            type="text"
                            v-model="menuTrans.plaquetas"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
 
                   <!-- Crioprecipitados -->
@@ -256,7 +257,7 @@
                     <input class="form-control"
                            type="text"
                            v-model="menuTrans.crioprecipitados"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
 
                   <!-- Factor VII -->
@@ -265,7 +266,7 @@
                     <input class="form-control"
                            type="text"
                            v-model="menuTrans.factor_VII"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
 
                   <!-- Factor VIII -->
@@ -274,7 +275,7 @@
                     <input class="form-control"
                            type="text"
                            v-model="menuTrans.factor_VIII"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
 
                   <!-- Otros Ingresos -->
@@ -283,7 +284,7 @@
                     <input class="form-control"
                            type="text"
                            v-model="menuTrans.otrosIngresos"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
 
                   <div class="col-md-8"></div>                  
@@ -298,7 +299,7 @@
                     <input class="form-control"
                            type="text"
                            v-model="menuTrans.liqAscitis"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
 
                   <!-- Sangrado aproximado -->
@@ -307,7 +308,7 @@
                     <input class="form-control"
                            type="text"
                            v-model="menuTrans.sangradoAprox"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
 
                   <!-- Uresis -->
@@ -316,7 +317,7 @@
                     <input class="form-control"
                            type="text"
                            v-model="menuTrans.uresis"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
 
                   <!-- Exposición quirúrgica -->
@@ -325,7 +326,7 @@
                     <input class="form-control"
                            type="text"
                            v-model="menuTrans.expoQX"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
 
                   <!-- Requerimientos basales -->
@@ -334,7 +335,7 @@
                     <input class="form-control"
                            type="text"
                            v-model="menuTrans.reqBasales"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
                   
                   <!-- Ayuno -->
@@ -343,7 +344,7 @@
                     <input class="form-control"
                            type="text"
                            v-model="menuTrans.ayuno"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
 
                   <!-- Otros Egresos -->
@@ -352,7 +353,7 @@
                     <input class="form-control"
                            type="text"
                            v-model="menuTrans.otrosEgresos"
-                           id="">
+                           @keyup.capture="calcularBalance">
                   </div>
                   <div class="col-md-9"></div>
 
@@ -632,6 +633,7 @@ export default({
   mounted: function() { // Llama el método despues de cargar la página
       this.mueveReloj();
       transAnestStore.listDatosV(preIdStore.pacienteID._id);
+      this.menuTrans.balanceTotal=0
   },
 
   methods: {
@@ -749,6 +751,33 @@ export default({
 
           //Metódo para guardar
           await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
+      },
+
+      async calcularBalance(){        
+        const arrayIngresos= [parseFloat(this.menuTrans.solHartman ||0).toFixed(1),parseFloat(this.menuTrans.solFisio ||0).toFixed(1),
+                              parseFloat(this.menuTrans.glucosados ||0).toFixed(1),parseFloat(this.menuTrans.gelatinas ||0).toFixed(1),
+                              parseFloat(this.menuTrans.almidones ||0).toFixed(1),parseFloat(this.menuTrans.albuminas ||0).toFixed(1),
+                              parseFloat(this.menuTrans.paqGlobular ||0).toFixed(1),parseFloat(this.menuTrans.plasmas ||0).toFixed(1),
+                              parseFloat(this.menuTrans.plaquetas ||0).toFixed(1),parseFloat(this.menuTrans.crioprecipitados||0).toFixed(1),
+                              parseFloat(this.menuTrans.factor_VII ||0).toFixed(1),parseFloat(this.menuTrans.factor_VII ||0).toFixed(1),
+                              parseFloat(this.menuTrans.otrosIngresos ||0).toFixed(1)]
+        // Filtrar los elementos diferentes de 0
+        const filtroArrayIngresos = arrayIngresos.filter((value) => value != 0);
+        // Sumar los valores filtrados de ingresos
+        let sumaIngresos = filtroArrayIngresos.map(c => parseFloat(c)).reduce((a, b) => a + b, 0);
+                    
+        const arrayEgresos= [parseFloat(this.menuTrans.liqAscitis ||0).toFixed(1),parseFloat(this.menuTrans.sangradoAprox ||0).toFixed(1),
+                              parseFloat(this.menuTrans.uresis ||0).toFixed(1), parseFloat(this.menuTrans.expoQX ||0).toFixed(1),
+                              parseFloat(this.menuTrans.reqBasales ||0).toFixed(1),parseFloat(this.menuTrans.ayuno ||0).toFixed(1),
+                              parseFloat(this.menuTrans.otrosEgresos ||0).toFixed(1)]
+        // Filtrar los elementos diferentes de 0
+        const filtroArrayEgresos = arrayEgresos.filter((value) => value != 0);
+        // Sumar los valores filtrados de egresos
+        let sumaEgresos = filtroArrayEgresos.map(c => parseFloat(c)).reduce((a, b) => a + b, 0);
+        console.log(sumaEgresos);  
+                        
+        //Calculo del balance total
+        this.menuTrans.balanceTotal=sumaIngresos.toFixed(1)-sumaEgresos.toFixed(1);  
       }
   }
 })

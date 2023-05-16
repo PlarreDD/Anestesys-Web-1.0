@@ -32,6 +32,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     PLimite: regTransAnest.PLimite,
                     Hr: regTransAnest.Hr,
                     /* Balance Total */
+                    balanceTotal:regTransAnest.balanceTotal,
                     // Ingresos
                     solHartman: regTransAnest.solHartman,
                     solFisio: regTransAnest.solFisio,
@@ -104,6 +105,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     PLimite: regTransAnest.PLimite,
                     Hr: regTransAnest.Hr,
                     /* Balance Total */
+                    balanceTotal: regTransAnest.balanceTotal,
                     // Ingresos
                     solHartman: regTransAnest.solHartman,
                     solFisio: regTransAnest.solFisio,
@@ -259,6 +261,7 @@ export const useTransAnestStore = defineStore('transAn', {
                 },
                 data: {
                     /* Balance Total */
+                    balanceTotal: regTransAnest.balanceTotal,
                     // Ingresos
                     solHartman: regTransAnest.solHartman,
                     solFisio: regTransAnest.solFisio,

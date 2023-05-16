@@ -13,6 +13,7 @@ const menuTransSchema = new Schema({
     },
     
     /* Balance Total */
+    balanceTotal:{type: String},
     // Ingresos
     solHartman: { type: String },
     solFisio: { type: String },

@@ -6,6 +6,7 @@ export const saveMenuTrans = async (req: any, res: Response) => {
     try {
         const { pid,
                 /* Balance Total */
+                balanceTotal,
                 // Ingresos
                 solHartman, solFisio, glucosados, gelatinas,
                 almidones, albuminas, paqGlobular, plasmas, 
@@ -28,6 +29,7 @@ export const saveMenuTrans = async (req: any, res: Response) => {
              if(modosVentilacion==undefined){
                 menuTrans = new MenuTrans({ pid,
                     /* Balance Total */
+                    balanceTotal: balanceTotal,
                     // Ingresos
                     solHartman: solHartman,
                     solFisio: solFisio,
@@ -201,6 +203,7 @@ export const UpdateBalanceH = async (req: any, res: Response) => {
     try {
         const { id } = req.params;
         const { /* Balance Total */
+                balanceTotal,
                 // Ingresos
                 solHartman, solFisio, glucosados, gelatinas,
                 almidones, albuminas, paqGlobular, plasmas, 
@@ -218,6 +221,7 @@ export const UpdateBalanceH = async (req: any, res: Response) => {
 
         const menuTrans = await MenuTrans.findOneAndUpdate( { pid: id },
                                                             { /* Balance Total */
+                                                              balanceTotal: balanceTotal,
                                                               // Ingresos
                                                               solHartman: solHartman,
                                                               solFisio: solFisio,
