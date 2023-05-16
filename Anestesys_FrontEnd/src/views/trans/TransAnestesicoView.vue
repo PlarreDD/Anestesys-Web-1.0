@@ -35,86 +35,40 @@
                       aria-expanded="false"
                       data-bs-auto-close = "outside"> TÉCNICA ANESTÉSICA </button>
 
-              <form class="dropdown-menu p-5">
+              <form @submit.prevent="" class="dropdown-menu p-4 color-dropdown">
                 <div class="mb-3 estiloDropDownTecnica row g-3">
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="checkTecnica">
-                    <label class="form-check-label fw-bold"
-                            for="checkTecnica"> Local </label>
+                  <h5 class="col-md-12 fw-bold text-white">TÉCNICA ANÉSTESICA</h5>
+                  <!-- Técnica de anestesia final -->
+                  <div class="col-md-12">                            
+                      <label for="" class="form-label fw-bold text-white">Técnica de anestesia final</label>
+                      <Multiselect
+                        mode="tags"
+                        v-model="infoNotaPost.npa_TecAnestFinal"
+                        :class="infoNotaPost.npa_TecAnestFinal != undefined && infoNotaPost.npa_TecAnestFinal != '' ?
+                        'form-control border border-success formSombra' : 'form-control'"
+                        placeholder="Seleccione las técnicas de anestesia"
+                        :options="opcionTecnicas"
+                        :searchable="true"
+                        :createTag="true"
+                      />
                   </div>
 
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="checkTecnica">
-                    <label class="form-check-label fw-bold"
-                            for="checkTecnica"> Sedación </label>
-                  </div>
-
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="checkTecnica">
-                    <label class="form-check-label fw-bold"
-                            for="checkTecnica"> General balanceada </label>
-                  </div>
-                  
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="checkTecnica">
-                    <label class="form-check-label fw-bold"
-                            for="checkTecnica"> TIVA (Anestesia total intravenosa) </label>
-                  </div>
-
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Multimodal</label>
-                  </div>
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo mixto</label>
-                  </div>
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural lumbar</label>
-                  </div>
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural caudal</label>
-                  </div>
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo espinal</label>
-                  </div>
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo de plexo</label>
-                  </div>
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo troncular</label>
-                  </div>
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural torácico</label>
-                  </div>
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural cervical</label>
-                  </div>
-                  <div class="form-check col-md-4">
-                    <input class="form-check-input" type="checkbox" value="" id="checkTecnica">
-                    <label class="form-check-label fw-bold" for="checkTecnica">Libre de opioides</label>
+                  <div class="col-md-8"></div>
+                  <div class="col-md-4 alinear-btn">
+                    <template v-if="btnActualizarBalance === false">
+                      <button data-bs-toggle="tab" 
+                              type="submit"
+                              class="btn btn-guardar-info fw-bold"
+                              @click="cambiarUpdateBalance"
+                              > GUARDAR </button>
+                    </template>
+                    <template v-else>
+                        <button data-bs-toggle="tab" 
+                                type="submit"
+                                class="btn btn-guardar-info fw-bold"
+                                @click=""
+                                > ACTUALIZAR </button> 
+                    </template>   
                   </div>
                 </div>
               </form>
@@ -123,7 +77,7 @@
           <li class="col-md-3">
             <button type="button" class="btn btn-nav-bar fw-bold" 
                     data-bs-toggle="dropdown" aria-expanded="false" 
-                    data-bs-auto-close="false">BALANCE HIDRICO</button>
+                    data-bs-auto-close="outside">BALANCE HIDRICO</button>
 
             <div class="col-md-12" id="">
               <form @submit.prevent="" class="dropdown-menu p-4 color-dropdown">
@@ -246,7 +200,7 @@
 
           <!-- Datos del ventilador -->
           <li class="col-md-3">
-            <button type="button" class="btn btn-nav-bar fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">DATOS DEL VENTILADOR</button>
+            <button type="button" class="btn btn-nav-bar fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">DATOS DEL VENTILADOR</button>
             <form @submit.prevent="" class="dropdown-menu p-4 color-dropdown">
               <div class="mb-3 estiloDropDownVentilador row g-3">
                 <h5 class="text-white fw-bold">VENTILADOR</h5>
@@ -439,19 +393,19 @@
           <div class="row">
             <div class="col bordeColumna">
               <label class="form-label text-white">              
-                <!-- {{ preIdStore.NombrePaciente }} -->
+                {{ preIdStore.NombrePaciente }}
               </label>
             </div>
           
             <div class="col bordeColumna">
               <label class="form-label text-white">              
-                <!-- {{ preIdStore.NombreCirujano }} -->
+                {{ preIdStore.NombreCirujano }}
               </label>
             </div>
           
             <div class="col bordeColumna">
               <label class="form-label text-white">              
-                <!-- {{ preIdStore.NombreCirugia }} -->
+                {{ preIdStore.NombreCirugia }}
               </label>
             </div>
           </div>
@@ -468,6 +422,8 @@ import BarraNavegacion from "../../components/barraNavegacion.vue";
 import { useTransAnestStore } from "../../stores/transAnest-store";
 import { usePreIdStore } from "@/stores/preId-store";
 import swal from "sweetalert2";
+import Multiselect from '@vueform/multiselect';
+import type { regNotaPost } from "@/interfaces/regPostAnest";
 
 const preIdStore = usePreIdStore();
 const transAnestStore = useTransAnestStore();
@@ -477,19 +433,26 @@ export default({
     return {
       menuTrans: {} as regMenuTrans,
       transAnestStore,
-
+      
       btnAddVentilador:true,
       btnUpdateVentilador:false,
       btnActualizaVentilador:false,
-
+      
       btnActualizarBalance:false,
-
+      
       preIdStore,
+      
+      opcionTecnicas: ['Local','Sedación', 'General balanceada', 'TIVA (Anestesia total intravenosa)', 'Multimodal', 'Bloqueo mixto', 'Bloqueo peridural lumbar',
+      'Bloqueo peridural caudal', 'Bloqueo espinal', 'Bloqueo de plexo', 'Bloqueo troncular', 'Bloqueo peridural torácico',
+      'Bloqueo peridural cervical', 'Libre de opioides'],
+      
+      infoNotaPost: {} as regNotaPost,
     }
   },
 
   components:{
-    BarraNavegacion
+    BarraNavegacion,
+    Multiselect
   },
 
   mounted: function() { // Llama el método despues de cargar la página
@@ -629,6 +592,8 @@ export default({
   }
 })
 </script>
+
+<style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
 .alinear-btn{
