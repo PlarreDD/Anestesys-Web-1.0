@@ -59,14 +59,14 @@
                       <button data-bs-toggle="tab" 
                               type="submit"
                               class="btn btn-guardar-info fw-bold"
-                              @click="cambiarUpdateBalance"
+                              @click="cambiarUpdateTecnica"
                               > GUARDAR </button>
                     </template>
                     <template v-else>
                         <button data-bs-toggle="tab" 
                                 type="submit"
                                 class="btn btn-guardar-info fw-bold"
-                                @click=""
+                                @click="postAnestStore.updateNotaPA(infoNotaPost, preIdStore.pacienteID._id)"
                                 > ACTUALIZAR </button> 
                     </template>   
                   </div>
@@ -597,6 +597,12 @@ export default({
       async listaTecAnest() {
         await postAnestStore.listNotaPA(/*preIdStore.pacienteID._id*/"6462b8228501b0c806c76ca1");
         console.log(postAnestStore.NotaPA[0].npa_TecAnestFinal);
+      },
+
+      cambiarUpdateTecnica(){
+        this.btnActualizarBalance=true
+
+        postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id)
       }
   }
 })
