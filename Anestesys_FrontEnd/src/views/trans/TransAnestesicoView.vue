@@ -424,23 +424,26 @@ import { usePreIdStore } from "@/stores/preId-store";
 import swal from "sweetalert2";
 import Multiselect from '@vueform/multiselect';
 import type { regNotaPost } from "@/interfaces/regPostAnest";
+import { usePostAnestStore } from "@/stores/postAnest-store";
 
 const preIdStore = usePreIdStore();
 const transAnestStore = useTransAnestStore();
+const postAnestStore = usePostAnestStore();
 
 export default({
   data() {
     return {
       menuTrans: {} as regMenuTrans,
+      
+      preIdStore,
       transAnestStore,
+      postAnestStore,
       
       btnAddVentilador:true,
       btnUpdateVentilador:false,
       btnActualizaVentilador:false,
       
-      btnActualizarBalance:false,
-      
-      preIdStore,
+      btnActualizarBalance:false,      
       
       opcionTecnicas: ['Local','Sedación', 'General balanceada', 'TIVA (Anestesia total intravenosa)', 'Multimodal', 'Bloqueo mixto', 'Bloqueo peridural lumbar',
       'Bloqueo peridural caudal', 'Bloqueo espinal', 'Bloqueo de plexo', 'Bloqueo troncular', 'Bloqueo peridural torácico',
@@ -458,6 +461,7 @@ export default({
   mounted: function() { // Llama el método despues de cargar la página
       this.mueveReloj();
       transAnestStore.listDatosV(preIdStore.pacienteID._id);
+      this.listaTecAnest();
   },
 
   methods: {
@@ -588,6 +592,11 @@ export default({
           this.btnActualizarBalance=true
 
           //Metódo para guardar
+      },
+
+      async listaTecAnest() {
+        await postAnestStore.listNotaPA(/*preIdStore.pacienteID._id*/"6462b8228501b0c806c76ca1");
+        console.log(postAnestStore.NotaPA[0].npa_TecAnestFinal);
       }
   }
 })
