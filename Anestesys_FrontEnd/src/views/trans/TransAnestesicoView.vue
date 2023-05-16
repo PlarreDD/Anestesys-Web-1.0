@@ -161,12 +161,12 @@
           <li class="col-md-3">
             <button type="button" class="btn btn-nav-bar fw-bold" 
                     data-bs-toggle="dropdown" aria-expanded="false" 
-                    data-bs-auto-close="false">BALANCE HIDRICO</button>
+                    data-bs-auto-close="outside">BALANCE HIDRICO</button>
 
             <div class="col-md-12" id="">
               <form @submit.prevent="" class="dropdown-menu p-4 color-dropdown">
                 <div class="estiloDropDownBalance row g-3 deslizar-balance">
-                  <h5 class="col-md-12 fw-bold text-white">BALANCE TOTAL</h5>
+                  <h5 class="col-md-12 fw-bold text-white">BALANCE TOTAL: {{}}</h5>
                   <h5 class="col-md-12 fw-bold text-white">Ingresos</h5>
 
                   <!-- Solución Hartman -->
@@ -286,24 +286,7 @@
                            id="">
                   </div>
 
-                  <div class="col-md-5"></div>
-                  <div class="col-md-3 alinear-btn">
-                    <template v-if="btnActualizarBalance === false">
-                      <button data-bs-toggle="tab" 
-                              type="submit"
-                              class="btn btn-guardar-info fw-bold"
-                              @click="cambiarUpdateBalance()"
-                              > GUARDAR </button>
-                    </template>
-
-                    <template v-else>
-                        <button data-bs-toggle="tab" 
-                                type="submit"
-                                class="btn btn-guardar-info fw-bold"
-                                @click="transAnestStore.updateBalanceH(menuTrans, preIdStore.pacienteID._id)"
-                                > ACTUALIZAR </button> 
-                    </template>   
-                  </div>
+                  <div class="col-md-8"></div>                  
 
                   <hr />
 
@@ -371,6 +354,28 @@
                            v-model="menuTrans.otrosEgresos"
                            id="">
                   </div>
+                  <div class="col-md-9"></div>
+
+                  <div class="col-md-9"></div>
+
+                  <!-- Botón guardar/actualizar -->
+                  <div class="col-md-3 alinear-btn">
+                    <template v-if="btnActualizarBalance === false">
+                      <button data-bs-toggle="tab" 
+                              type="submit"
+                              class="btn btn-guardar-balance fw-bold"
+                              @click="cambiarUpdateBalance()"
+                              > GUARDAR </button>
+                    </template>
+
+                    <template v-else>
+                        <button data-bs-toggle="tab" 
+                                type="submit"
+                                class="btn btn-guardar-balance fw-bold"
+                                @click="transAnestStore.updateBalanceH(menuTrans, preIdStore.pacienteID._id)"
+                                > ACTUALIZAR </button> 
+                    </template>   
+                  </div>
                 </div>
               </form>
             </div>
@@ -378,7 +383,7 @@
 
           <!-- Datos del ventilador -->
           <li class="col-md-3">
-            <button type="button" class="btn btn-nav-bar fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">DATOS DEL VENTILADOR</button>
+            <button type="button" class="btn btn-nav-bar fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">DATOS DEL VENTILADOR</button>
             <form @submit.prevent="" class="dropdown-menu p-4 color-dropdown">
               <div class="mb-3 estiloDropDownVentilador row g-3">
                 <h5 class="text-white fw-bold">VENTILADOR</h5>
@@ -492,7 +497,7 @@
                           </td>
                           <!-- Botón Eliminar -->
                           <td>
-                            <button class="btn" @click="validaEliminarVentilacion(datoVentilacion._id)">
+                            <button class="btn" @click="eliminarDatosV(datoVentilacion._id)">
                               <font-awesome-icon 
                                 icon="fa-solid fa-trash" 
                                 size="lg" class="text-white"/>
@@ -730,22 +735,6 @@ export default({
             }
       },
 
-      async validaEliminarVentilacion(idVentilador: string) {
-            swal
-                .fire({
-                    html: "¿Esta seguro de eliminar el modo de ventilación?",
-                    icon: "warning",
-                    showConfirmButton: true,
-                    showCancelButton: true,
-                    toast: true,
-                  })
-                  .then((result) => {
-                  if (result.isConfirmed) {
-                      this.eliminarDatosV(idVentilador);
-                  }
-                });
-      },
-
       async eliminarDatosV(id: string) {
         await transAnestStore.deleteModoVent(id);
         await transAnestStore.listDatosV(preIdStore.pacienteID._id);
@@ -874,6 +863,18 @@ export default({
     --bs-btn-active-color: #ffffff;
     --bs-btn-active-border-color: #E88300;  
     width: -webkit-fill-available; 
+}
+.btn-guardar-balance {
+  --bs-btn-bg: #ffffff;
+  --bs-btn-color: #002d60;
+  --bs-btn-border-color: #ffffff;
+  --bs-btn-hover-bg: #E88300;
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-hover-border-color: #E88300;
+  --bs-btn-active-bg: #E88300;
+  --bs-btn-active-color: #ffffff;
+  --bs-btn-active-border-color: #E88300;
+  width: 130px;
 }
 .btn-nav-bar{
     --bs-btn-bg: #fff;
