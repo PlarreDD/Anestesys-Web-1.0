@@ -43,7 +43,7 @@
                       <label for="" class="form-label fw-bold text-white">Técnica de anestesia final</label>
                       <Multiselect
                         mode="tags"
-                        v-model="infoNotaPost.npa_TecAnestFinal"
+                        v-model="postAnestStore.TecnicaAnestesica"
                         :class="infoNotaPost.npa_TecAnestFinal != undefined && infoNotaPost.npa_TecAnestFinal != '' ?
                         'form-control border border-success formSombra' : 'form-control'"
                         placeholder="Seleccione las técnicas de anestesia"

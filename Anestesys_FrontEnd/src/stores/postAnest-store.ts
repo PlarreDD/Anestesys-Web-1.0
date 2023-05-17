@@ -9,6 +9,7 @@ const userStore = useUserStore();
 export const usePostAnestStore = defineStore('postAn', {
     state:() => ({
         NotaPA: ref(null),
+        TecnicaAnestesica: ref(null)
     }),
 
     actions: {
