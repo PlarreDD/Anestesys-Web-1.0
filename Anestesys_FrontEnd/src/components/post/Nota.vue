@@ -32,9 +32,9 @@
                         <div class="col-md-10">                            
                             <label for="" class="form-label fw-bold">Técnica de anestesia final</label>
                             <Multiselect
-                                v-model="infoNotaPost.npa_TecAnestFinal"
-                                @click.capture="enviarTecnica"
+                                v-model="postAnestStore.TecnicaAnestesica"
                                 mode="tags"
+                                aria-readonly="true"
                                 placeholder="Seleccione las técnicas de anestesia"
                                 :options="opcionTecnica"
                                 :searchable="true"
@@ -340,11 +340,7 @@ export default defineComponent({
 
             // Método Guardar
             postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id);
-        },
-        enviarTecnica() {
-            postAnestStore.TecnicaAnestesica= this.infoNotaPost.npa_TecAnestFinal;
-            console.log("Nota: "+ postAnestStore.TecnicaAnestesica)
-        },
+        },        
     }
  })
 </script>

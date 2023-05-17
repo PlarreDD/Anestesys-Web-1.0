@@ -31,6 +31,7 @@
           <li class="col-md-3">
               <button type="button"
                       class="btn btn-nav-bar fw-bold"
+                      @click="clickMulti"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                       data-bs-auto-close = "outside"> TÉCNICA ANESTÉSICA </button>
@@ -39,7 +40,7 @@
                 <div class="mb-3 estiloDropDownTecnica row g-3">
                   <h5 class="col-md-12 fw-bold text-white">TÉCNICA ANÉSTESICA</h5>
                   <!-- Técnica de anestesia final -->
-                  <div class="col-md-12">                            
+                  <div class="col-md-12">
                       <label for="" class="form-label fw-bold text-white">Técnica de anestesia final</label>
                       <Multiselect
                         mode="tags"
@@ -429,6 +430,7 @@ import { usePostAnestStore } from "@/stores/postAnest-store";
 const preIdStore = usePreIdStore();
 const transAnestStore = useTransAnestStore();
 const postAnestStore = usePostAnestStore();
+var taSeparada: Object;
 
 export default({
   data() {
@@ -595,15 +597,25 @@ export default({
       },
 
       async listaTecAnest() {
-        await postAnestStore.listNotaPA(/*preIdStore.pacienteID._id*/"6462b8228501b0c806c76ca1");
-        console.log(postAnestStore.NotaPA[0].npa_TecAnestFinal);
+        await postAnestStore.listNotaPA(preIdStore.pacienteID._id);
+        taSeparada = postAnestStore.NotaPA[0].npa_TecAnestFinal.split(",");
       },
 
       cambiarUpdateTecnica(){
         this.btnActualizarBalance=true
 
         postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id)
-      }
+      },
+
+      clickMulti(){
+        postAnestStore.TecnicaAnestesica = taSeparada;
+        
+        this.enviarTecnica()
+      },
+
+      enviarTecnica() {
+        this.infoNotaPost.npa_TecAnestFinal=postAnestStore.TecnicaAnestesica
+      },
   }
 })
 </script>

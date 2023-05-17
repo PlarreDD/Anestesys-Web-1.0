@@ -103,7 +103,6 @@ export const usePostAnestStore = defineStore('postAn', {
             })
             .then((res: any) => {
                 this.NotaPA = res.data.notaPA;
-                console.log("Store: " + this.NotaPA);                
             })
             .catch((e: any) => {
                 // console.log("error: " + e);
