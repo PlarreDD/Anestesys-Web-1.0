@@ -11,8 +11,48 @@ const menuTransSchema = new Schema({
         ref: 'PreIdPacientes',
         required: true,
     },
+    
+    /* Balance Total */
+    balanceTotal:{type: String},
+    // Ingresos
+    solHartman: { type: String },
+    solFisio: { type: String },
+    glucosados: { type: String },
+    gelatinas: { type: String },
+    almidones: { type: String },
+    albuminas: { type: String },
+    paqGlobular: { type: String },
+    plasmas: { type: String },
+    plaquetas: { type: String },
+    crioprecipitados: { type: String },
+    factor_VII: { type: String },
+    factor_VIII: { type: String },
+    otrosIngresos: { type: String },
+    // Egresos
+    liqAscitis: { type: String },
+    sangradoAprox: { type: String },
+    uresis: { type: String },
+    expoQX: { type: String },
+    reqBasales: { type: String },
+    ayuno: { type: String },
+    otrosEgresos: { type: String },
+    /* Técnica Anestésica */
+    local: { type: String },
+    sedación: { type: String },
+    gralBalanceada: { type: String },
+    TIVA: { type: String },
+    multimodal: { type: String },
+    bloqMixto: { type: String },
+    bloqPeriLum: { type: String },
+    bloqPeriCaudal: { type: String },
+    BloqEspinal: { type: String },
+    BloqPlexo: { type: String },
+    BloqTroncular: { type: String },
+    bloqPeriToracico: { type: String },
+    bloqPeriCervical: { type: String },
+    libreOpioides: { type: String },
 
-    // Datos del Ventilador
+    /* Datos del Ventilador */
     datosVentilador: [{
         modosVentilacion: { type: String},
         peep: { type: String},
