@@ -54,7 +54,10 @@ export const usePostAnestStore = defineStore('postAn', {
             });
         },
 
-        async updateNotaPA(infoNotaPost: any, pid: string){
+        async updateNotaPA(infoNotaPost: any, pid: string, tecnicaAnest: Object){
+            infoNotaPost.npa_TecAnestFinal = String(tecnicaAnest);
+            console.log(tecnicaAnest + " " + infoNotaPost.npa_TecAnestFinal);
+            
             await apiAxios({
                 url: `http://localhost:5000/notapa/${String(pid)}`,
                 method: "PUT",

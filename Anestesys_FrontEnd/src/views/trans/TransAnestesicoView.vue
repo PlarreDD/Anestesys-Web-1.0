@@ -45,6 +45,7 @@
                       <Multiselect
                         mode="tags"
                         v-model="postAnestStore.TecnicaAnestesica"
+                        @click="enviarTecnica"
                         :class="infoNotaPost.npa_TecAnestFinal != undefined && infoNotaPost.npa_TecAnestFinal != '' ?
                         'form-control border border-success formSombra' : 'form-control'"
                         placeholder="Seleccione las técnicas de anestesia"
@@ -67,7 +68,7 @@
                         <button data-bs-toggle="tab" 
                                 type="submit"
                                 class="btn btn-guardar-info fw-bold"
-                                @click="postAnestStore.updateNotaPA(infoNotaPost, preIdStore.pacienteID._id)"
+                                @click="postAnestStore.updateNotaPA(infoNotaPost, preIdStore.pacienteID._id, postAnestStore.TecnicaAnestesica)"
                                 > ACTUALIZAR </button> 
                     </template>   
                   </div>
@@ -464,6 +465,7 @@ export default({
       this.mueveReloj();
       transAnestStore.listDatosV(preIdStore.pacienteID._id);
       this.listaTecAnest();
+      console.log("ENtro")
   },
 
   methods: {
@@ -603,6 +605,9 @@ export default({
 
       cambiarUpdateTecnica(){
         this.btnActualizarBalance=true
+        this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
+
+        console.log(this.infoNotaPost.npa_TecAnestFinal);        
 
         postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id)
       },

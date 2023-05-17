@@ -33,6 +33,7 @@
                             <label for="" class="form-label fw-bold">Técnica de anestesia final</label>
                             <Multiselect
                                 v-model="postAnestStore.TecnicaAnestesica"
+                                :disabled="true"
                                 mode="tags"
                                 aria-readonly="true"
                                 placeholder="Seleccione las técnicas de anestesia"
@@ -183,7 +184,7 @@
                                 <button data-bs-toggle="tab" 
                                         type="submit"
                                         class="btn btn-guardar-info fw-bold"
-                                        @click="postAnestStore.updateNotaPA(infoNotaPost, preIdStore.pacienteID._id)"
+                                        @click="postAnestStore.updateNotaPA(infoNotaPost, preIdStore.pacienteID._id, postAnestStore.TecnicaAnestesica)"
                                         > ACTUALIZAR </button> 
                             </template>
                         </div>
@@ -337,7 +338,7 @@ export default defineComponent({
     methods: {
         cambiarUpdateNota() {
             this.btnActualizarNotaP=true
-
+            this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
             // Método Guardar
             postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id);
         },        
