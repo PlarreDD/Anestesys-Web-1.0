@@ -798,9 +798,7 @@ export default({
                         Number(this.menuTrans.ayuno)+
                         Number(this.menuTrans.otrosEgresos)
                                         
-        //Calculo del balance total
-        console.log(sumaIngresos, sumaEgresos);
-        
+        //Calculo del balance total        
         this.menuTrans.balanceTotal=sumaIngresos-sumaEgresos                            
       }
   }
