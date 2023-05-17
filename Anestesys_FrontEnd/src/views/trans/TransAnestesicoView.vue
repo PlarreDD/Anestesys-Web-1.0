@@ -166,7 +166,7 @@
             <div class="col-md-12" id="">
               <form @submit.prevent="" class="dropdown-menu p-4 color-dropdown">
                 <div class="estiloDropDownBalance row g-3 deslizar-balance">
-                  <h5 class="col-md-12 fw-bold text-white">BALANCE TOTAL: {{parseFloat(this.menuTrans.balanceTotal).toFixed(1)}} ml</h5>
+                  <h5 class="col-md-12 fw-bold text-white">BALANCE TOTAL: {{menuTrans.balanceTotal}} ml</h5>
                   <h5 class="col-md-12 fw-bold text-white">Ingresos</h5>
 
                   <input type="hidden" v-model="menuTrans.balanceTotal">
@@ -633,7 +633,28 @@ export default({
   mounted: function() { // Llama el método despues de cargar la página
       this.mueveReloj();
       transAnestStore.listDatosV(preIdStore.pacienteID._id);
-      this.menuTrans.balanceTotal=0
+      this.menuTrans.balanceTotal=null
+      this.menuTrans.solHartman=null
+      this.menuTrans.glucosados=null
+      this.menuTrans.almidones=null
+      this.menuTrans.paqGlobular=null
+      this.menuTrans.plaquetas=null
+      this.menuTrans.factor_VII=null
+      this.menuTrans.otrosIngresos=null
+      this.menuTrans.solFisio=null
+      this.menuTrans.gelatinas=null
+      this.menuTrans.albuminas=null
+      this.menuTrans.plasmas=null
+      this.menuTrans.crioprecipitados=null
+      this.menuTrans.factor_VII=null
+      this.menuTrans.liqAscitis=null
+      this.menuTrans.sangradoAprox=null
+      this.menuTrans.uresis=null
+      this.menuTrans.expoQX=null
+      this.menuTrans.reqBasales=null
+      this.menuTrans.ayuno=null
+      this.menuTrans.ayuno=null
+      this.menuTrans.otrosEgresos=null
   },
 
   methods: {
@@ -753,31 +774,34 @@ export default({
           await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
       },
 
-      async calcularBalance(){        
-        const arrayIngresos= [parseFloat(this.menuTrans.solHartman ||0).toFixed(1),parseFloat(this.menuTrans.solFisio ||0).toFixed(1),
-                              parseFloat(this.menuTrans.glucosados ||0).toFixed(1),parseFloat(this.menuTrans.gelatinas ||0).toFixed(1),
-                              parseFloat(this.menuTrans.almidones ||0).toFixed(1),parseFloat(this.menuTrans.albuminas ||0).toFixed(1),
-                              parseFloat(this.menuTrans.paqGlobular ||0).toFixed(1),parseFloat(this.menuTrans.plasmas ||0).toFixed(1),
-                              parseFloat(this.menuTrans.plaquetas ||0).toFixed(1),parseFloat(this.menuTrans.crioprecipitados||0).toFixed(1),
-                              parseFloat(this.menuTrans.factor_VII ||0).toFixed(1),parseFloat(this.menuTrans.factor_VII ||0).toFixed(1),
-                              parseFloat(this.menuTrans.otrosIngresos ||0).toFixed(1)]
-        // Filtrar los elementos diferentes de 0
-        const filtroArrayIngresos = arrayIngresos.filter((value) => value != 0);
-        // Sumar los valores filtrados de ingresos
-        let sumaIngresos = filtroArrayIngresos.map(c => parseFloat(c)).reduce((a, b) => a + b, 0);
-                    
-        const arrayEgresos= [parseFloat(this.menuTrans.liqAscitis ||0).toFixed(1),parseFloat(this.menuTrans.sangradoAprox ||0).toFixed(1),
-                              parseFloat(this.menuTrans.uresis ||0).toFixed(1), parseFloat(this.menuTrans.expoQX ||0).toFixed(1),
-                              parseFloat(this.menuTrans.reqBasales ||0).toFixed(1),parseFloat(this.menuTrans.ayuno ||0).toFixed(1),
-                              parseFloat(this.menuTrans.otrosEgresos ||0).toFixed(1)]
-        // Filtrar los elementos diferentes de 0
-        const filtroArrayEgresos = arrayEgresos.filter((value) => value != 0);
-        // Sumar los valores filtrados de egresos
-        let sumaEgresos = filtroArrayEgresos.map(c => parseFloat(c)).reduce((a, b) => a + b, 0);
-        console.log(sumaEgresos);  
-                        
+      async calcularBalance(){    
+        
+        var sumaIngresos=Number(this.menuTrans.solHartman)+
+                        Number(this.menuTrans.glucosados)+
+                        Number(this.menuTrans.almidones)+
+                        Number(this.menuTrans.paqGlobular)+
+                        Number(this.menuTrans.plaquetas)+
+                        Number(this.menuTrans.factor_VII)+
+                        Number(this.menuTrans.otrosIngresos)+
+                        Number(this.menuTrans.solFisio)+
+                        Number(this.menuTrans.gelatinas)+
+                        Number(this.menuTrans.albuminas)+
+                        Number(this.menuTrans.plasmas)+
+                        Number(this.menuTrans.crioprecipitados)+
+                        Number(this.menuTrans.factor_VII)
+
+        var sumaEgresos=Number(this.menuTrans.liqAscitis)+
+                        Number(this.menuTrans.sangradoAprox)+
+                        Number(this.menuTrans.uresis)+
+                        Number(this.menuTrans.expoQX)+
+                        Number(this.menuTrans.reqBasales)+
+                        Number(this.menuTrans.ayuno)+
+                        Number(this.menuTrans.otrosEgresos)
+                                        
         //Calculo del balance total
-        this.menuTrans.balanceTotal=sumaIngresos.toFixed(1)-sumaEgresos.toFixed(1);  
+        console.log(sumaIngresos, sumaEgresos);
+        
+        this.menuTrans.balanceTotal=sumaIngresos-sumaEgresos                            
       }
   }
 })
