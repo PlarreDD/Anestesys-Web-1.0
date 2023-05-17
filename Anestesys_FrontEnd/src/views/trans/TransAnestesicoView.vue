@@ -31,7 +31,7 @@
           <li class="col-md-3">
               <button type="button"
                       class="btn btn-nav-bar fw-bold"
-                      @click="clickMulti"
+                      @click="clickTAbtn"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                       data-bs-auto-close = "outside"> TÉCNICA ANESTÉSICA </button>
@@ -465,7 +465,6 @@ export default({
       this.mueveReloj();
       transAnestStore.listDatosV(preIdStore.pacienteID._id);
       this.listaTecAnest();
-      console.log("ENtro")
   },
 
   methods: {
@@ -607,19 +606,19 @@ export default({
         this.btnActualizarBalance=true
         this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
 
-        console.log(this.infoNotaPost.npa_TecAnestFinal);        
-
         postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id)
       },
 
-      clickMulti(){
-        postAnestStore.TecnicaAnestesica = taSeparada;
-        
+      clickTAbtn(){
+        if (taSeparada != undefined) {
+          postAnestStore.TecnicaAnestesica = taSeparada;          
+        }
+                
         this.enviarTecnica()
       },
 
       enviarTecnica() {
-        this.infoNotaPost.npa_TecAnestFinal=postAnestStore.TecnicaAnestesica
+        this.infoNotaPost.npa_TecAnestFinal = postAnestStore.TecnicaAnestesica;
       },
   }
 })
