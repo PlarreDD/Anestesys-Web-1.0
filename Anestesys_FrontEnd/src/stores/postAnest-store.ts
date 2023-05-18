@@ -1,15 +1,21 @@
 import { defineStore } from "pinia";
 import { apiAxios } from '@/boot/axios';
+import { ref } from "vue";
 import { useUserStore } from "./user-store";
 import swal from 'sweetalert2';
 
 const userStore = useUserStore();
 
 export const usePostAnestStore = defineStore('postAn', {
+    state:() => ({
+        NotaPA: ref(null),
+        TecnicaAnestesica: ref(null)
+    }),
+
     actions: {
         /*------------------- Nota Post Anestésica -------------------*/
-        saveNotaPA(infoNotaPost: any, pid: string){
-            apiAxios({
+        async saveNotaPA(infoNotaPost: any, pid: string){
+            await apiAxios({
                 url: "http://localhost:5000/notapa",
                 method: "POST",
                 headers: {
@@ -48,8 +54,11 @@ export const usePostAnestStore = defineStore('postAn', {
             });
         },
 
-        updateNotaPA(infoNotaPost: any, pid: string){
-            apiAxios({
+        async updateNotaPA(infoNotaPost: any, pid: string, tecnicaAnest: Object){
+            infoNotaPost.npa_TecAnestFinal = String(tecnicaAnest);
+            console.log(tecnicaAnest + " " + infoNotaPost.npa_TecAnestFinal);
+            
+            await apiAxios({
                 url: `http://localhost:5000/notapa/${String(pid)}`,
                 method: "PUT",
                 headers: {
@@ -86,9 +95,25 @@ export const usePostAnestStore = defineStore('postAn', {
                 // console.log("error: " + e);
             });
         },
+
+        async listNotaPA(pid: string){
+            await apiAxios({
+                url: `http://localhost:5000/notapa/${String(pid)}`,
+                method: "GET",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+            })
+            .then((res: any) => {
+                this.NotaPA = res.data.notaPA;
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
         /*----------------------- Recuperación -----------------------*/
-        saveRecupera(infoRec: any, pid: string){
-            apiAxios({
+        async saveRecupera(infoRec: any, pid: string){
+            await apiAxios({
                 url: "http://localhost:5000/recupera",
                 method: "POST",
                 headers: {
@@ -195,8 +220,8 @@ export const usePostAnestStore = defineStore('postAn', {
             });
         },
 
-        updateRecupera(infoRec: any, pid: string){
-            apiAxios({
+        async updateRecupera(infoRec: any, pid: string){
+            await apiAxios({
                 url: `http://localhost:5000/recupera/${String(pid)}`,
                 method: "PUT",
                 headers: {

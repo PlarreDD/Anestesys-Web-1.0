@@ -3,14 +3,6 @@
     <barra-navegacion/>
   </header>
   <div class="margen-div-barra">
-    <div class="input-group mb-3">
-      <div class="col-md-6">
-        <input class="form-control me-2"
-               type="search"
-               placeholder="Buscar número de expediente..."
-               aria-label="Buscar"> <!--Buscador-->
-      </div>
-    </div>
 
     <div class="input-group mb-3">
       <div class="col-9 divform navbar-nav">
@@ -30,131 +22,51 @@
 
           <!-- Técnica Anestésica Final -->
           <li class="col-md-3">
-            <button type="button"
-                    class="btn btn-nav-bar fw-bold"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    data-bs-auto-close = "outside"> TÉCNICA ANESTÉSICA </button>
+              <button type="button"
+                      class="btn btn-nav-bar fw-bold"
+                      @click="clickTAbtn"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      data-bs-auto-close = "outside"> TÉCNICA ANESTÉSICA </button>
 
-            <form class="dropdown-menu p-5">
-              <div class="mb-3 estiloDropDownTecnica row g-3">
-                <div class="form-check col-md-4">
-                  <input class="form-check-input"
-                         type="checkbox"
-                         value=""
-                         id="checkTecnica">
-                  <label class="form-check-label fw-bold"
-                         for="checkTecnica"> Local </label>
-                </div>
+              <form @submit.prevent="" class="dropdown-menu p-4 color-dropdown">
+                <div class="mb-3 estiloDropDownTecnica row g-3">
+                  <h5 class="col-md-12 fw-bold text-white">TÉCNICA ANÉSTESICA</h5>
+                  <!-- Técnica de anestesia final -->
+                  <div class="col-md-12">
+                      <label for="" class="form-label fw-bold text-white">Técnica de anestesia final</label>
+                      <Multiselect
+                        mode="tags"
+                        v-model="postAnestStore.TecnicaAnestesica"
+                        @click="enviarTecnica"
+                        :class="infoNotaPost.npa_TecAnestFinal != undefined && infoNotaPost.npa_TecAnestFinal != '' ?
+                        'form-control border border-success formSombra' : 'form-control'"
+                        placeholder="Seleccione las técnicas de anestesia"
+                        :options="opcionTecnicas"
+                        :searchable="true"
+                        :createTag="true"
+                      />
+                  </div>
 
-                <div class="form-check col-md-4">
-                  <input class="form-check-input"
-                         type="checkbox"
-                         value=""
-                         id="checkTecnica">
-                  <label class="form-check-label fw-bold"
-                         for="checkTecnica"> Sedación </label>
+                  <div class="col-md-8"></div>
+                  <div class="col-md-4 alinear-btn">
+                    <template v-if="btnActualizarTecnica === false">
+                      <button data-bs-toggle="tab" 
+                              type="submit"
+                              class="btn btn-guardar-balance fw-bold"
+                              @click="cambiarUpdateTecnica"
+                              > GUARDAR </button>
+                    </template>
+                    <template v-else>
+                        <button data-bs-toggle="tab" 
+                                type="submit"
+                                class="btn btn-guardar-balance fw-bold"
+                                @click="postAnestStore.updateNotaPA(infoNotaPost, preIdStore.pacienteID._id, postAnestStore.TecnicaAnestesica)"
+                                > ACTUALIZAR </button> 
+                    </template>   
+                  </div>
                 </div>
-
-                <div class="form-check col-md-4">
-                  <input class="form-check-input"
-                         type="checkbox"
-                         value=""
-                         id="checkTecnica">
-                  <label class="form-check-label fw-bold"
-                         for="checkTecnica"> General balanceada </label>
-                </div>
-                
-                <div class="form-check col-md-4">
-                  <input class="form-check-input"
-                         type="checkbox"
-                         value=""
-                         id="checkTecnica">
-                  <label class="form-check-label fw-bold"
-                         for="checkTecnica"> TIVA (Anestesia total intravenosa) </label>
-                </div>
-
-                <div class="form-check col-md-4">
-                  <input class="form-check-input"
-                         type="checkbox"
-                         value=""
-                         id="checkTecnica">
-                  <label class="form-check-label fw-bold" for="checkTecnica">Multimodal</label>
-                </div>
-
-                <div class="form-check col-md-4">
-                  <input class="form-check-input"
-                         type="checkbox"
-                         value=""
-                         id="checkTecnica">
-                  <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo mixto</label>
-                </div>
-
-                <div class="form-check col-md-4">
-                  <input class="form-check-input"
-                         type="checkbox"
-                         value=""
-                         id="checkTecnica">
-                  <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural lumbar</label>
-                </div>
-
-                <div class="form-check col-md-4">
-                  <input class="form-check-input"
-                         type="checkbox"
-                         value=""
-                         id="checkTecnica">
-                  <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural caudal</label>
-                </div>
-
-                <div class="form-check col-md-4">
-                  <input class="form-check-input"
-                         type="checkbox"
-                         value=""
-                         id="checkTecnica">
-                  <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo espinal</label>
-                </div>
-
-                <div class="form-check col-md-4">
-                  <input class="form-check-input"
-                         type="checkbox"
-                         value=""
-                         id="checkTecnica">
-                  <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo de plexo</label>
-                </div>
-
-                <div class="form-check col-md-4">
-                  <input class="form-check-input"
-                         type="checkbox"
-                         value=""
-                         id="checkTecnica">
-                  <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo troncular</label>
-                </div>
-
-                <div class="form-check col-md-4">
-                  <input class="form-check-input"
-                         type="checkbox"
-                         value=""
-                         id="checkTecnica">
-                  <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural torácico</label>
-                </div>
-
-                <div class="form-check col-md-4">
-                  <input class="form-check-input"
-                         type="checkbox"
-                         value=""
-                         id="checkTecnica">
-                  <label class="form-check-label fw-bold" for="checkTecnica">Bloqueo peridural cervical</label>
-                </div>
-
-                <div class="form-check col-md-4">
-                  <input class="form-check-input"
-                         type="checkbox"
-                         value=""
-                         id="checkTecnica">
-                  <label class="form-check-label fw-bold" for="checkTecnica">Libre de opioides</label>
-                </div>
-              </div>
-            </form>
+              </form>
           </li>
 
           <!-- Balance Hídrico -->
@@ -577,19 +489,19 @@
           <div class="row">
             <div class="col bordeColumna">
               <label class="form-label text-white">              
-                <!-- {{ preIdStore.NombrePaciente }} -->
+                {{ preIdStore.NombrePaciente }}
               </label>
             </div>
           
             <div class="col bordeColumna">
               <label class="form-label text-white">              
-                <!-- {{ preIdStore.NombreCirujano }} -->
+                {{ preIdStore.NombreCirujano }}
               </label>
             </div>
           
             <div class="col bordeColumna">
               <label class="form-label text-white">              
-                <!-- {{ preIdStore.NombreCirugia }} -->
+                {{ preIdStore.NombreCirugia }}
               </label>
             </div>
           </div>
@@ -606,55 +518,71 @@ import BarraNavegacion from "../../components/barraNavegacion.vue";
 import { useTransAnestStore } from "../../stores/transAnest-store";
 import { usePreIdStore } from "@/stores/preId-store";
 import swal from "sweetalert2";
+import Multiselect from '@vueform/multiselect';
+import type { regNotaPost } from "@/interfaces/regPostAnest";
+import { usePostAnestStore } from "@/stores/postAnest-store";
 
 const preIdStore = usePreIdStore();
 const transAnestStore = useTransAnestStore();
+const postAnestStore = usePostAnestStore();
+var taSeparada: Object;
 
 export default({
   data() {
     return {
       menuTrans: {} as regMenuTrans,
+      
+      preIdStore,
       transAnestStore,
-
+      postAnestStore,
+      
       btnAddVentilador:true,
       btnUpdateVentilador:false,
       btnActualizaVentilador:false,
-
+      
       btnActualizarBalance:false,
-
-      preIdStore,
+      btnActualizarTecnica:false,      
+      
+      opcionTecnicas: ['Local','Sedación', 'General balanceada', 'TIVA (Anestesia total intravenosa)', 'Multimodal', 'Bloqueo mixto', 'Bloqueo peridural lumbar',
+      'Bloqueo peridural caudal', 'Bloqueo espinal', 'Bloqueo de plexo', 'Bloqueo troncular', 'Bloqueo peridural torácico',
+      'Bloqueo peridural cervical', 'Libre de opioides'],
+      
+      infoNotaPost: {} as regNotaPost,
     }
   },
 
   components:{
-    BarraNavegacion
+    BarraNavegacion,
+    Multiselect
   },
 
   mounted: function() { // Llama el método despues de cargar la página
       this.mueveReloj();
       transAnestStore.listDatosV(preIdStore.pacienteID._id);
-      this.menuTrans.balanceTotal=null
-      this.menuTrans.solHartman=null
-      this.menuTrans.glucosados=null
-      this.menuTrans.almidones=null
-      this.menuTrans.paqGlobular=null
-      this.menuTrans.plaquetas=null
-      this.menuTrans.factor_VII=null
-      this.menuTrans.otrosIngresos=null
-      this.menuTrans.solFisio=null
-      this.menuTrans.gelatinas=null
-      this.menuTrans.albuminas=null
-      this.menuTrans.plasmas=null
-      this.menuTrans.crioprecipitados=null
-      this.menuTrans.factor_VII=null
-      this.menuTrans.liqAscitis=null
-      this.menuTrans.sangradoAprox=null
-      this.menuTrans.uresis=null
-      this.menuTrans.expoQX=null
-      this.menuTrans.reqBasales=null
-      this.menuTrans.ayuno=null
-      this.menuTrans.ayuno=null
-      this.menuTrans.otrosEgresos=null
+      this.listaTecAnest();
+      
+      this.menuTrans.balanceTotal = null;
+      this.menuTrans.solHartman = null;
+      this.menuTrans.glucosados = null;
+      this.menuTrans.almidones = null;
+      this.menuTrans.paqGlobular = null;
+      this.menuTrans.plaquetas = null;
+      this.menuTrans.factor_VII = null;
+      this.menuTrans.otrosIngresos = null;
+      this.menuTrans.solFisio = null;
+      this.menuTrans.gelatinas = null;
+      this.menuTrans.albuminas = null;
+      this.menuTrans.plasmas = null;
+      this.menuTrans.crioprecipitados = null;
+      this.menuTrans.factor_VII = null;
+      this.menuTrans.liqAscitis = null;
+      this.menuTrans.sangradoAprox = null;
+      this.menuTrans.uresis = null;
+      this.menuTrans.expoQX = null;
+      this.menuTrans.reqBasales = null;
+      this.menuTrans.ayuno = null;
+      this.menuTrans.ayuno = null;
+      this.menuTrans.otrosEgresos = null;
   },
 
   methods: {
@@ -706,9 +634,9 @@ export default({
       },
 
       async cambiarBtnActualizar(id: string) {
-          this.btnAddVentilador=false
-          this.btnUpdateVentilador=false
-          this.btnActualizaVentilador=true
+          this.btnAddVentilador = false;
+          this.btnUpdateVentilador = false;
+          this.btnActualizaVentilador = true;
 
           await transAnestStore.getModoVent(id);
 
@@ -774,36 +702,44 @@ export default({
           await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
       },
 
-      async calcularBalance(){    
-        
-        var sumaIngresos=Number(this.menuTrans.solHartman)+
-                        Number(this.menuTrans.glucosados)+
-                        Number(this.menuTrans.almidones)+
-                        Number(this.menuTrans.paqGlobular)+
-                        Number(this.menuTrans.plaquetas)+
-                        Number(this.menuTrans.factor_VII)+
-                        Number(this.menuTrans.otrosIngresos)+
-                        Number(this.menuTrans.solFisio)+
-                        Number(this.menuTrans.gelatinas)+
-                        Number(this.menuTrans.albuminas)+
-                        Number(this.menuTrans.plasmas)+
-                        Number(this.menuTrans.crioprecipitados)+
-                        Number(this.menuTrans.factor_VII)
+      async calcularBalance(){
+        this.menuTrans.balanceTotal = ( Number(this.menuTrans.solHartman) + Number(this.menuTrans.glucosados) + Number(this.menuTrans.almidones) +
+                                        Number(this.menuTrans.paqGlobular) + Number(this.menuTrans.plaquetas) + Number(this.menuTrans.factor_VII) +
+                                        Number(this.menuTrans.otrosIngresos) + Number(this.menuTrans.solFisio) + Number(this.menuTrans.gelatinas) +
+                                        Number(this.menuTrans.albuminas) + Number(this.menuTrans.plasmas) + Number(this.menuTrans.crioprecipitados) +
+                                        Number(this.menuTrans.factor_VII) ) - ( Number(this.menuTrans.liqAscitis) + Number(this.menuTrans.sangradoAprox) +
+                                        Number(this.menuTrans.uresis)+ Number(this.menuTrans.expoQX) + Number(this.menuTrans.reqBasales) +
+                                        Number(this.menuTrans.ayuno) + Number(this.menuTrans.otrosEgresos) );
+      },
 
-        var sumaEgresos=Number(this.menuTrans.liqAscitis)+
-                        Number(this.menuTrans.sangradoAprox)+
-                        Number(this.menuTrans.uresis)+
-                        Number(this.menuTrans.expoQX)+
-                        Number(this.menuTrans.reqBasales)+
-                        Number(this.menuTrans.ayuno)+
-                        Number(this.menuTrans.otrosEgresos)
-                                        
-        //Calculo del balance total        
-        this.menuTrans.balanceTotal=sumaIngresos-sumaEgresos                            
-      }
+      async listaTecAnest() {
+        await postAnestStore.listNotaPA(preIdStore.pacienteID._id);
+        taSeparada = postAnestStore.NotaPA[0].npa_TecAnestFinal.split(",");
+      },
+
+      cambiarUpdateTecnica(){
+        this.btnActualizarTecnica=true
+        this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
+
+        postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id)
+      },
+
+      clickTAbtn(){
+        if (taSeparada != undefined) {
+          postAnestStore.TecnicaAnestesica = taSeparada;          
+        }
+                
+        this.enviarTecnica()
+      },
+
+      enviarTecnica() {
+        this.infoNotaPost.npa_TecAnestFinal = postAnestStore.TecnicaAnestesica;
+      },
   }
 })
 </script>
+
+<style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
 .alinear-btn{
@@ -813,7 +749,7 @@ export default({
   margin-top: 120px;
 }
 .menuLateralPrincipal {
-    margin-top: 11px;
+    margin-top: 65px;
     display: flex;
     flex-direction: column;
     row-gap: 10px;
