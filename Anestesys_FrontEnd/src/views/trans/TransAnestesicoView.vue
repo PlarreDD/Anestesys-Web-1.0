@@ -3,14 +3,6 @@
     <barra-navegacion/>
   </header>
   <div class="margen-div-barra">
-    <div class="input-group mb-3">
-      <div class="col-md-6">
-        <input class="form-control me-2"
-               type="search"
-               placeholder="Buscar número de expediente..."
-               aria-label="Buscar"> <!--Buscador-->
-      </div>
-    </div>
 
     <div class="input-group mb-3">
       <div class="col-9 divform navbar-nav">
@@ -58,17 +50,17 @@
 
                   <div class="col-md-8"></div>
                   <div class="col-md-4 alinear-btn">
-                    <template v-if="btnActualizarBalance === false">
+                    <template v-if="btnActualizarTecnica === false">
                       <button data-bs-toggle="tab" 
                               type="submit"
-                              class="btn btn-guardar-info fw-bold"
+                              class="btn btn-guardar-balance fw-bold"
                               @click="cambiarUpdateTecnica"
                               > GUARDAR </button>
                     </template>
                     <template v-else>
                         <button data-bs-toggle="tab" 
                                 type="submit"
-                                class="btn btn-guardar-info fw-bold"
+                                class="btn btn-guardar-balance fw-bold"
                                 @click="postAnestStore.updateNotaPA(infoNotaPost, preIdStore.pacienteID._id, postAnestStore.TecnicaAnestesica)"
                                 > ACTUALIZAR </button> 
                     </template>   
@@ -548,7 +540,8 @@ export default({
       btnUpdateVentilador:false,
       btnActualizaVentilador:false,
       
-      btnActualizarBalance:false,      
+      btnActualizarBalance:false,
+      btnActualizarTecnica:false,      
       
       opcionTecnicas: ['Local','Sedación', 'General balanceada', 'TIVA (Anestesia total intravenosa)', 'Multimodal', 'Bloqueo mixto', 'Bloqueo peridural lumbar',
       'Bloqueo peridural caudal', 'Bloqueo espinal', 'Bloqueo de plexo', 'Bloqueo troncular', 'Bloqueo peridural torácico',
@@ -742,7 +735,7 @@ export default({
       },
 
       cambiarUpdateTecnica(){
-        this.btnActualizarBalance=true
+        this.btnActualizarTecnica=true
         this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
 
         postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id)
@@ -773,7 +766,7 @@ export default({
   margin-top: 120px;
 }
 .menuLateralPrincipal {
-    margin-top: 11px;
+    margin-top: 65px;
     display: flex;
     flex-direction: column;
     row-gap: 10px;

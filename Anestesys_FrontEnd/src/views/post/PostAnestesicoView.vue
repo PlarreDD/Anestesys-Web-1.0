@@ -5,14 +5,6 @@
   <div class="margen-div-barra">
     <div class="input-group mb-3">
 
-      <div class="col-md-6 margen-busca">
-        <!--Buscador-->
-        <input class="form-control me-2"
-               type="search"
-               placeholder="Buscar número de expediente..."
-               aria-label="Buscar">
-      </div>
-
       <div class="col-10 divform navbar-nav">     
 
         <ul class="nav nav-pills nav-fill mb-3 text-center centrar-li fw-bold" id=""> <!--Lista para el menú principal-->
@@ -148,7 +140,7 @@ export default ({
   margin-top: 120px;
 }
 .menuLateralPrincipal {
-  margin-top: 3px;
+  margin-top: 56px;
   display: flex;
   flex-direction: column;
   row-gap: 10px;
