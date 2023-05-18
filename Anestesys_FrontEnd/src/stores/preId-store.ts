@@ -14,7 +14,8 @@ export const usePreIdStore = defineStore('preid', {
         estudios: ref(null),
         NombrePaciente: ref(null),
         NombreCirujano: ref(null),
-        NombreCirugia: ref(null)
+        NombreCirugia: ref(null),
+        generoPaciente: ref(null)
     }),
 
     actions: {

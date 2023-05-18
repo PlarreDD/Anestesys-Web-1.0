@@ -12,13 +12,7 @@
                aria-label="Buscar">
       </div>
 
-      <div class="col-md-2">
-        <div class="centrarBoton">
-          <button class="btn btn-icono fw-bold">
-            <img class="btn-paciente"
-                 src="images/imgIcon/nuevo-pac.svg"/> Nuevo Paciente </button>
-        </div>
-      </div>
+      <div class="col-md-2"></div>
 
       <div class="col-md-2">
         <div class="centrarBoton">

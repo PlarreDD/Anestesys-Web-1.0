@@ -3,7 +3,7 @@
         <ul class="nav nav-pills mb-3 text-center" id="">
             <li class="nav-item col-md-6" >
                 <button class="btn btn-nav-bar fw-bold active"
-                        id="nota"
+                        id="nota-post-anes"
                         data-bs-toggle="pill"
                         data-bs-target="#notaPost"
                         type="button"
@@ -12,14 +12,15 @@
 
             <li class="nav-item col-md-6" >
                 <button class="btn btn-nav-bar fw-bold"
-                        id="nota"
+                        :disabled="preIdStore.generoPaciente == 'Femenino' ? false : true"
+                        id="caso-obst"
                         data-bs-toggle="pill"
                         data-bs-target="#caso"
                         type="button"
-                        aria-selected="false">CASO OBSTÉTRICO RECIÉN NACIDO</button>
+                        aria-selected="false"
+                        >CASO OBSTÉTRICO RECIÉN NACIDO</button>
             </li>
         </ul>
-
 
         <div class="tab-content col-md-12" id="">
             <!-- Nota Post-Anestésica -->
@@ -194,11 +195,12 @@
 
             <!-- Caso Obstétrico Recién Nacido -->
             <div class="tab-pane fade" id="caso">
-                <div class="col-12 bordePrincipal largoContenedor">
+                <div class="col-12 bordePrincipal">
                     <form @submit.prevent="" class="row g-3">
+                        <h5 class="fw-bold">CASO OBSTETRICO</h5>
                         <!-- Número de productos -->
                         <div class="col-md-4">
-                            <label for="" class="form-label">Número de productos</label>
+                            <label for="" class="form-label fw-bold">Número de productos</label>
                             <input type="text"
                                    class="form-control"
                                    id=""
@@ -207,12 +209,30 @@
 
                         <!-- Datos bebé # -->
                         <div class="col-md-12">
+                            
+                            <ul class="pagination justify-content-start">                                    
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Anterior</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" tabindex="+1">Siguiente</a>
+                                </li>
+                            </ul>
+
+                            <div id="uno">
+                                <h4>Uno</h4>
+                            </div>
+                            
+
                             <fieldset class="bordeScheduler">
-                                <legend class="bordeScheduler">Datos bebé #</legend>
+                                <h5 class="fw-bold">Datos del bebé {{}}</h5>
                                 <div class="row g-3">
                                     <!-- Género -->
                                     <div class="col-md-4">
-                                        <label for="" class="form-label col-12">Género</label>
+                                        <label for="" class="form-label col-12 fw-bold">Género</label>
                                         <input type="radio"
                                                class="btn-check"
                                                name="genero"
@@ -232,7 +252,7 @@
 
                                     <!-- Hora de Nacimiento -->
                                     <div class="col-md-4">
-                                        <label for="" class="form-label">Hora de Nacimiento</label>
+                                        <label for="" class="form-label fw-bold">Hora de Nacimiento</label>
                                         <input type="time"
                                                class="form-control"
                                                id="horaNacimiento"
@@ -241,7 +261,7 @@
 
                                     <!-- Alumbramiento -->
                                     <div class="col-md-4">
-                                        <label for="" class="form-label">Alumbramiento</label>
+                                        <label for="" class="form-label fw-bold">Alumbramiento</label>
                                         <input type="text"
                                                class="form-control"
                                                id=""
@@ -250,7 +270,7 @@
 
                                     <!-- Apgar 1 min -->
                                     <div class="col-md-4">
-                                        <label for="" class="form-label">Apgar 1 min</label>
+                                        <label for="" class="form-label fw-bold">Apgar 1 min</label>
                                         <input type="text"
                                                class="form-control"
                                                id=""
@@ -259,7 +279,7 @@
 
                                     <!-- Apgar 5 min -->
                                     <div class="col-md-4">
-                                        <label for="" class="form-label">Apgar 5 min</label>
+                                        <label for="" class="form-label fw-bold">Apgar 5 min</label>
                                         <input type="text"
                                                class="form-control"
                                                id=""
@@ -268,7 +288,7 @@
 
                                     <!-- Capurro -->
                                     <div class="col-md-4">
-                                        <label for="" class="form-label">Capurro</label>
+                                        <label for="" class="form-label fw-bold">Capurro</label>
                                         <input type="text"
                                                class="form-control"
                                                id=""
@@ -277,7 +297,7 @@
 
                                     <!-- Peso (gm) -->
                                     <div class="col-md-4">
-                                        <label for="" class="form-label">Peso (gm)</label>
+                                        <label for="" class="form-label fw-bold">Peso (gm)</label>
                                         <input type="text"
                                                class="form-control"
                                                id=""
@@ -286,14 +306,33 @@
 
                                     <!-- Talla (cm) -->
                                     <div class="col-md-4">
-                                        <label for="" class="form-label">Talla (cm)</label>
+                                        <label for="" class="form-label fw-bold">Talla (cm)</label>
                                         <input type="text"
                                                class="form-control"
                                                id=""
                                                v-model="infoNotaPost.casoObsRecNac_Talla">
                                     </div>
                                 </div>
-                            </fieldset>
+                            </fieldset>                            
+                        </div>
+
+                        <div class="col-md-10"></div>
+                        <!-- Botón Guardar/Actualizar -->
+                        <div class="col-md-2 alinea-boton">                            
+                            <template v-if="btnActualizarNotaP === false">
+                                <button data-bs-toggle="tab" 
+                                        type="submit"
+                                        class="btn btn-guardar-info fw-bold"
+                                        @click="cambiarUpdateNota"
+                                        > GUARDAR </button>
+                            </template>
+                            <template v-else>
+                                <button data-bs-toggle="tab" 
+                                        type="submit"
+                                        class="btn btn-guardar-info fw-bold"
+                                        @click="postAnestStore.updateNotaPA(infoNotaPost, preIdStore.pacienteID._id, postAnestStore.TecnicaAnestesica)"
+                                        > ACTUALIZAR </button> 
+                            </template>
                         </div>
                     </form>
                 </div>
@@ -341,7 +380,7 @@ export default defineComponent({
             this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
             // Método Guardar
             postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id);
-        },        
+        }
     }
  })
 </script>

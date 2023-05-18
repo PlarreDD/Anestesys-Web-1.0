@@ -115,13 +115,14 @@
                         <div class="col-md-1"></div>
                         <div class="col-md-3">
                             <label for=""
-                                   class="form-label col-12 fw-bold"> Género </label>
+                                   class="form-label col-12 fw-bold"> Género</label>
                             <input type="radio"
                                    class="btn-check"
                                    name="genero"
                                    id="masculino"
                                    autocomplete="off"
                                    value="Masculino"
+                                   @change="enviarDatos"
                                    v-model="infoPreIdPaciente.genero">
                             <label class="btn btn-radio margenRadio"
                                    for="masculino"> Masculino </label>
@@ -132,6 +133,7 @@
                                    id="femenino"
                                    autocomplete="off"
                                    value="Femenino"
+                                   @change="enviarDatos"
                                    v-model="infoPreIdPaciente.genero">
                             <label class="btn btn-radio"
                                    for="femenino"> Femenino </label>
@@ -600,7 +602,7 @@ export default defineComponent({
             ],
         }
     },
-
+    
     methods: {
         obtenerDatos() {
             this.$emit("validar", this.infoPreIdPaciente.numExped,
@@ -614,9 +616,11 @@ export default defineComponent({
                                        this.infoPreIdPaciente.cirugia,
                                        preIdStore.NombrePaciente=this.infoPreIdPaciente.nomPaciente,
                                        preIdStore.NombreCirujano=this.infoPreIdPaciente.cirujano,
-                                       preIdStore.NombreCirugia=this.infoPreIdPaciente.cirugia);
+                                       preIdStore.NombreCirugia=this.infoPreIdPaciente.cirugia,
+                                       preIdStore.generoPaciente=this.infoPreIdPaciente.genero);
         },
-    }
+    },
+
 })
 </script>
 
