@@ -560,28 +560,29 @@ export default({
       this.mueveReloj();
       transAnestStore.listDatosV(preIdStore.pacienteID._id);
       this.listaTecAnest();
-      this.menuTrans.balanceTotal=null
-      this.menuTrans.solHartman=null
-      this.menuTrans.glucosados=null
-      this.menuTrans.almidones=null
-      this.menuTrans.paqGlobular=null
-      this.menuTrans.plaquetas=null
-      this.menuTrans.factor_VII=null
-      this.menuTrans.otrosIngresos=null
-      this.menuTrans.solFisio=null
-      this.menuTrans.gelatinas=null
-      this.menuTrans.albuminas=null
-      this.menuTrans.plasmas=null
-      this.menuTrans.crioprecipitados=null
-      this.menuTrans.factor_VII=null
-      this.menuTrans.liqAscitis=null
-      this.menuTrans.sangradoAprox=null
-      this.menuTrans.uresis=null
-      this.menuTrans.expoQX=null
-      this.menuTrans.reqBasales=null
-      this.menuTrans.ayuno=null
-      this.menuTrans.ayuno=null
-      this.menuTrans.otrosEgresos=null
+      
+      this.menuTrans.balanceTotal = null;
+      this.menuTrans.solHartman = null;
+      this.menuTrans.glucosados = null;
+      this.menuTrans.almidones = null;
+      this.menuTrans.paqGlobular = null;
+      this.menuTrans.plaquetas = null;
+      this.menuTrans.factor_VII = null;
+      this.menuTrans.otrosIngresos = null;
+      this.menuTrans.solFisio = null;
+      this.menuTrans.gelatinas = null;
+      this.menuTrans.albuminas = null;
+      this.menuTrans.plasmas = null;
+      this.menuTrans.crioprecipitados = null;
+      this.menuTrans.factor_VII = null;
+      this.menuTrans.liqAscitis = null;
+      this.menuTrans.sangradoAprox = null;
+      this.menuTrans.uresis = null;
+      this.menuTrans.expoQX = null;
+      this.menuTrans.reqBasales = null;
+      this.menuTrans.ayuno = null;
+      this.menuTrans.ayuno = null;
+      this.menuTrans.otrosEgresos = null;
   },
 
   methods: {
@@ -633,9 +634,9 @@ export default({
       },
 
       async cambiarBtnActualizar(id: string) {
-          this.btnAddVentilador=false
-          this.btnUpdateVentilador=false
-          this.btnActualizaVentilador=true
+          this.btnAddVentilador = false;
+          this.btnUpdateVentilador = false;
+          this.btnActualizaVentilador = true;
 
           await transAnestStore.getModoVent(id);
 
@@ -701,32 +702,14 @@ export default({
           await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
       },
 
-      async calcularBalance(){    
-        
-        var sumaIngresos=Number(this.menuTrans.solHartman)+
-                        Number(this.menuTrans.glucosados)+
-                        Number(this.menuTrans.almidones)+
-                        Number(this.menuTrans.paqGlobular)+
-                        Number(this.menuTrans.plaquetas)+
-                        Number(this.menuTrans.factor_VII)+
-                        Number(this.menuTrans.otrosIngresos)+
-                        Number(this.menuTrans.solFisio)+
-                        Number(this.menuTrans.gelatinas)+
-                        Number(this.menuTrans.albuminas)+
-                        Number(this.menuTrans.plasmas)+
-                        Number(this.menuTrans.crioprecipitados)+
-                        Number(this.menuTrans.factor_VII)
-
-        var sumaEgresos=Number(this.menuTrans.liqAscitis)+
-                        Number(this.menuTrans.sangradoAprox)+
-                        Number(this.menuTrans.uresis)+
-                        Number(this.menuTrans.expoQX)+
-                        Number(this.menuTrans.reqBasales)+
-                        Number(this.menuTrans.ayuno)+
-                        Number(this.menuTrans.otrosEgresos)
-                                        
-        //Calculo del balance total        
-        this.menuTrans.balanceTotal=sumaIngresos-sumaEgresos                            
+      async calcularBalance(){
+        this.menuTrans.balanceTotal = ( Number(this.menuTrans.solHartman) + Number(this.menuTrans.glucosados) + Number(this.menuTrans.almidones) +
+                                        Number(this.menuTrans.paqGlobular) + Number(this.menuTrans.plaquetas) + Number(this.menuTrans.factor_VII) +
+                                        Number(this.menuTrans.otrosIngresos) + Number(this.menuTrans.solFisio) + Number(this.menuTrans.gelatinas) +
+                                        Number(this.menuTrans.albuminas) + Number(this.menuTrans.plasmas) + Number(this.menuTrans.crioprecipitados) +
+                                        Number(this.menuTrans.factor_VII) ) - ( Number(this.menuTrans.liqAscitis) + Number(this.menuTrans.sangradoAprox) +
+                                        Number(this.menuTrans.uresis)+ Number(this.menuTrans.expoQX) + Number(this.menuTrans.reqBasales) +
+                                        Number(this.menuTrans.ayuno) + Number(this.menuTrans.otrosEgresos) );
       },
 
       async listaTecAnest() {
