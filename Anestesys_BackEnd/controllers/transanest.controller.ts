@@ -5,22 +5,86 @@ import { MenuTrans } from "../models/TransAnestesico";
 export const saveMenuTrans = async (req: any, res: Response) => {
     try {
         const { pid,
+                /* Balance Total */
+                balanceTotal,
+                // Ingresos
+                solHartman, solFisio, glucosados, gelatinas,
+                almidones, albuminas, paqGlobular, plasmas, 
+                plaquetas, crioprecipitados, factor_VII, factor_VIII,
+                otrosIngresos,
+                // Egresos
+                liqAscitis, sangradoAprox, uresis, expoQX,
+                reqBasales, ayuno, otrosEgresos,
+                /* Técnica Anestésica */                
+                local, sedación, gralBalanceada, TIVA, multimodal,
+                bloqMixto, bloqPeriLum, bloqPeriCaudal, BloqEspinal,
+                BloqPlexo, BloqTroncular, bloqPeriToracico, bloqPeriCervical,
+                libreOpioides,
                 // Datos del ventilador
                 modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr
              } = req.body;
 
-        const menuTrans = new MenuTrans({ pid,
-                                          // Datos del ventilador
-                                          datosVentilador: {
-                                            modosVentilacion: modosVentilacion,
-                                            peep: peep,
-                                            vt: vt,
-                                            frecResp: frecResp,
-                                            IE: IE,
-                                            PLimite: PLimite,
-                                            Hr: Hr,
-                                          },
-                                        });
+             let menuTrans;
+
+             if(modosVentilacion==undefined){
+                menuTrans = new MenuTrans({ pid,
+                    /* Balance Total */
+                    balanceTotal: balanceTotal,
+                    // Ingresos
+                    solHartman: solHartman,
+                    solFisio: solFisio,
+                    glucosados: glucosados,
+                    gelatinas: gelatinas,
+                    almidones: almidones,
+                    albuminas: albuminas,
+                    paqGlobular: paqGlobular,
+                    plasmas: plasmas,
+                    plaquetas: plaquetas,
+                    crioprecipitados: crioprecipitados,
+                    factor_VII: factor_VII,
+                    factor_VIII: factor_VIII,
+                    otrosIngresos: otrosIngresos,
+                    // Egresos
+                    liqAscitis: liqAscitis,
+                    sangradoAprox: sangradoAprox,
+                    uresis: uresis,
+                    expoQX: expoQX,
+                    reqBasales: reqBasales,
+                    ayuno: ayuno,
+                    otrosEgresos: otrosEgresos,
+                    /* Técnica Anestésica */
+                    local: local,
+                    sedación: sedación,
+                    gralBalanceada: gralBalanceada,
+                    TIVA: TIVA,
+                    multimodal: multimodal,
+                    bloqMixto: bloqMixto,
+                    bloqPeriLum: bloqPeriLum,
+                    bloqPeriCaudal: bloqPeriCaudal,
+                    BloqEspinal: BloqEspinal,
+                    BloqPlexo: BloqPlexo,
+                    BloqTroncular: BloqTroncular,
+                    bloqPeriToracico: bloqPeriToracico,
+                    bloqPeriCervical: bloqPeriCervical,
+                    libreOpioides: libreOpioides,
+                  });
+             }
+             else{
+                menuTrans = new MenuTrans({ pid,
+                    // Datos del ventilador
+                    datosVentilador: {
+                      modosVentilacion: modosVentilacion,
+                      peep: peep,
+                      vt: vt,
+                      frecResp: frecResp,
+                      IE: IE,
+                      PLimite: PLimite,
+                      Hr: Hr,
+                    },
+                  });
+             }
+
+        
 
         await menuTrans.save();
 
@@ -48,7 +112,7 @@ export const updateMenuTrans = async (req: any, res: Response) => {
                                                                         PLimite: PLimite,
                                                                         Hr: Hr,
                                                                       },
-                                                              }
+                                                                     }
                                                             });
 
         return res.json({ menuTrans });
@@ -131,5 +195,74 @@ export const deleteModoVentilacion = async (req: any, res: Response) => {
         }
         
         return res.status(500).json({ error: "Error de servidor" });
+    }
+};
+
+/* Función de actualización de Balance Hídrico */
+export const UpdateBalanceH = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { /* Balance Total */
+                balanceTotal,
+                // Ingresos
+                solHartman, solFisio, glucosados, gelatinas,
+                almidones, albuminas, paqGlobular, plasmas, 
+                plaquetas, crioprecipitados, factor_VII, factor_VIII,
+                otrosIngresos,
+                // Egresos
+                liqAscitis, sangradoAprox, uresis, expoQX,
+                reqBasales, ayuno, otrosEgresos,
+                /* Técnica Anestésica */                
+                local, sedación, gralBalanceada, TIVA, multimodal,
+                bloqMixto, bloqPeriLum, bloqPeriCaudal, BloqEspinal,
+                BloqPlexo, BloqTroncular, bloqPeriToracico, bloqPeriCervical,
+                libreOpioides,
+             } = req.body;
+
+        const menuTrans = await MenuTrans.findOneAndUpdate( { pid: id },
+                                                            { /* Balance Total */
+                                                              balanceTotal: balanceTotal,
+                                                              // Ingresos
+                                                              solHartman: solHartman,
+                                                              solFisio: solFisio,
+                                                              glucosados: glucosados,
+                                                              gelatinas: gelatinas,
+                                                              almidones: almidones,
+                                                              albuminas: albuminas,
+                                                              paqGlobular: paqGlobular,
+                                                              plasmas: plasmas,
+                                                              plaquetas: plaquetas,
+                                                              crioprecipitados: crioprecipitados,
+                                                              factor_VII: factor_VII,
+                                                              factor_VIII: factor_VIII,
+                                                              otrosIngresos: otrosIngresos,
+                                                              // Egresos
+                                                              liqAscitis: liqAscitis,
+                                                              sangradoAprox: sangradoAprox,
+                                                              uresis: uresis,
+                                                              expoQX: expoQX,
+                                                              reqBasales: reqBasales,
+                                                              ayuno: ayuno,
+                                                              otrosEgresos: otrosEgresos,
+                                                              /* Técnica Anestésica */
+                                                              local: local,
+                                                              sedación: sedación,
+                                                              gralBalanceada: gralBalanceada,
+                                                              TIVA: TIVA,
+                                                              multimodal: multimodal,
+                                                              bloqMixto: bloqMixto,
+                                                              bloqPeriLum: bloqPeriLum,
+                                                              bloqPeriCaudal: bloqPeriCaudal,
+                                                              BloqEspinal: BloqEspinal,
+                                                              BloqPlexo: BloqPlexo,
+                                                              BloqTroncular: BloqTroncular,
+                                                              bloqPeriToracico: bloqPeriToracico,
+                                                              bloqPeriCervical: bloqPeriCervical,
+                                                              libreOpioides: libreOpioides,
+                                                            });
+
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
     }
 };

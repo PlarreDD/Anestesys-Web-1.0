@@ -456,12 +456,12 @@ export default defineComponent({
   --bs-btn-bg: #ffffff;
   --bs-btn-color: #002d60;
   --bs-btn-border-color: #ffffff;
-  --bs-btn-hover-bg: #ffffff;
-  --bs-btn-hover-color: #002d60;
-  --bs-btn-hover-border-color: #ffffff;
-  --bs-btn-active-bg: #002d60;
+  --bs-btn-hover-bg: #E88300;
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-hover-border-color: #E88300;
+  --bs-btn-active-bg: #E88300;
   --bs-btn-active-color: #ffffff;
-  --bs-btn-active-border-color: #ffffff;
+  --bs-btn-active-border-color: #E88300;
   width: 130px;
 }
 /* Modal medicamentos */
