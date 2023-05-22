@@ -61,8 +61,7 @@
                   type="button"
                   class="btn btn-configuracion fw-bold"
                   data-bs-toggle="modal"
-                  data-bs-target="#mvsModal"
-                >
+                  data-bs-target="#mvsModal">
                   <img src="images/imgIcon/monitor.svg" />
                   &nbsp;&nbsp;&nbsp;Configuración de monitor
                 </button>
@@ -93,8 +92,7 @@
               <li class="nav-item">
                 <button
                   class="btn btn-configuracion fw-bold"
-                  @click="userStore.logout()"
-                >
+                  @click="userStore.logout()">
                   <img src="images/imgIcon/salir.svg" />
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Salir
                 </button>
@@ -123,59 +121,49 @@
                   </div>
 
                   <div class="col-md-1 div-img">
-                    <button
-                      type="button"
-                      class="btn fw-bold"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    >
+                    <button type="button"
+                            class="btn fw-bold"
+                            data-bs-dismiss="modal"
+                            aria-label="Close">
                       <i class="text-white">
-                        <font-awesome-icon icon="fa-solid fa-xmark" size="2xl" />
+                        <font-awesome-icon icon="fa-solid fa-xmark" size="2xl"/>
                       </i>
                     </button>
                   </div>
 
                   <form class="row g-3" @submit.prevent="">
                     <div class="col-md-4">
-                      <input
-                        type="text"
-                        class="form-control"
-                        v-model="infoMedicamento.nombreMedicamento"
-                        placeholder="Nombre del medicamento"
-                      />
+                      <input type="text"
+                             class="form-control"
+                             v-model="infoMedicamento.nombreMedicamento"
+                             placeholder="Nombre del medicamento"/>
                     </div>
+
                     <div class="col-md-8"></div>
 
                     <div class="col-md-4">
-                      <input
-                        type="text"
-                        class="form-control"
-                        v-model="infoMedicamento.codigoMedicamento"
-                        placeholder="Código de barras"
-                      />
-                      <input
-                        type="hidden"
-                        v-model="infoMedicamento.idMedicamento"
-                      />
+                      <input type="text"
+                             class="form-control"
+                             v-model="infoMedicamento.codigoMedicamento"
+                             placeholder="Código de barras"/>
+                      <input type="hidden"
+                             v-model="infoMedicamento.idMedicamento"/>
                     </div>
 
                     <div class="col-md-1"></div>
                     <div class="col-md-1">
                       <template v-if="editar === false">
-                        <button
-                          type="button"
-                          class="btn btn-modal-medicamentos fw-bold"
-                          @click="agregaMedicamento()"
-                        >
+                        <button type="button"
+                                class="btn btn-modal-medicamentos fw-bold"
+                                @click="agregaMedicamento()">
                           Agregar
                         </button>
                       </template>
+
                       <template v-else>
-                        <button
-                          type="button"
-                          class="btn btn-modal-medicamentos fw-bold"
-                          @click="actualizarMedicamento(infoMedicamento)"
-                        >
+                        <button type="button"
+                                class="btn btn-modal-medicamentos fw-bold"
+                                @click="actualizarMedicamento(infoMedicamento)">
                           Actualizar
                         </button>
                       </template>
@@ -194,37 +182,34 @@
                             <th class="text-white"></th>
                           </tr>
                         </thead>
+
                         <tbody>
-                          <tr
-                            v-for="(
-                              medicamento, index
-                            ) in medStore.medicamentos"
-                          >
-                            <td class="text-white">{{ index + 1 }}</td>
+                          <tr v-for="( medicamento, index ) in medStore.medicamentos">
+                            <td class="text-white">
+                              {{ index + 1 }}
+                            </td>
+
                             <td class="text-white">
                               {{ medicamento.nombreMedicamento }}
                             </td>
+                            
                             <td class="text-white">
                               {{ medicamento.codigoMedicamento }}
                             </td>
+                            
                             <td>
-                              <button
-                                class="btn"
-                                @click="cambiarBtnActualizar(medicamento._id)"
-                              >
+                              <button class="btn"
+                                      @click="cambiarBtnActualizar(medicamento._id)">
                                 <font-awesome-icon 
                                   icon="fa-solid fa-pen-to-square" 
                                   size="lg" 
                                   class="text-white"/>
                               </button>
                             </td>
+
                             <td>
-                              <button
-                                class="btn"
-                                @click="
-                                  validaEliminarMedicamento(medicamento._id)
-                                "
-                              >
+                              <button class="btn"
+                                      @click="validaEliminarMedicamento(medicamento._id)">
                                 <font-awesome-icon 
                                     icon="fa-solid fa-trash" 
                                     size="lg" class="text-white"/>
@@ -273,15 +258,26 @@
                   </div>
 
                   <form class="row g-3" @submit.prevent="">
+                    <!-- Nombre del MSV -->
                     <div class="col-md-4">
-                      <!-- Caja de Texto Dirección IP -->
                       <input
                         type="text"
                         class="form-control"
-                        v-model="infoMedicamento.codigoMedicamento"
+                        v-model="configMonitor.nomMonitor"
+                        placeholder="Nombre del monitor"
+                      />
+                    </div>
+
+                    <div class="col-md-8"></div>
+
+                    <!-- Caja de Texto Dirección IP -->
+                    <div class="col-md-4">
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="configMonitor.dirIPMonitor"
                         placeholder="Dirección IP"/>
 
-                      
                       <input
                         type="hidden"
                         v-model="infoMedicamento.idMedicamento"/>
@@ -294,15 +290,7 @@
                         <button
                           type="button"
                           class="btn btn-modal-medicamentos fw-bold"
-                          @click=""> Agregar
-                        </button>
-                      </template>
-
-                      <template v-else>
-                        <button
-                          type="button"
-                          class="btn btn-modal-medicamentos fw-bold"
-                          @click=""> Actualizar
+                          @click="agregarMVS"> Agregar
                         </button>
                       </template>
                     </div>
@@ -313,19 +301,19 @@
                       <table class="table table-responsive">
                         <thead>
                           <tr>
-                            <th class="text-white">#</th>
+                            <!-- <th class="text-white">#</th> -->
                             <th class="text-white">Nombre</th>
                             <th class="text-white">Direción IP</th>
-                            <th class="text-white"></th>
+                            <!-- <th class="text-white"></th> -->
                             <th class="text-white"></th>
                           </tr>
                         </thead>
 
                         <tbody>
                           <tr v-for="( medicamento, index) in medStore.medicamentos">
-                            <td class="text-white">
+                            <!-- <td class="text-white"> -->
                               <!-- {{  }} -->
-                            </td>
+                            <!-- </td> -->
 
                             <td class="text-white">
                               <!-- {{  }} -->
@@ -335,7 +323,7 @@
                               <!-- {{  }} -->
                             </td>
                             
-                            <td>
+                            <!-- <td>
                               <button class="btn"
                                       @click="">
                                 <font-awesome-icon 
@@ -343,11 +331,12 @@
                                   size="lg" 
                                   class="text-white"/>
                               </button>
-                            </td>
+                            </td> -->
 
+                            <!-- Eliminar MVS -->
                             <td>
                               <button class="btn"
-                                      @click="">
+                                      @click="medStore.deleteMonitor('192.168.0.0')">
                                 <font-awesome-icon 
                                     icon="fa-solid fa-trash" 
                                     size="lg" class="text-white"/>
@@ -374,7 +363,8 @@ import { useUserStore } from "@/stores/user-store";
 import { defineComponent } from "vue";
 import swal from "sweetalert2";
 import { useMedicamentoStore } from "../stores/medicamento-store";
-import type { regMedicamento } from "@/interfaces/regMedicamento";
+import type { regMedicamento,
+              ConfigMonitor } from "@/interfaces/regMedicamento";
 
 const userStore = useUserStore();
 const medStore = useMedicamentoStore();
@@ -385,6 +375,7 @@ export default defineComponent({
       userStore,
       medStore,
       infoMedicamento: {} as regMedicamento,
+      configMonitor: {} as ConfigMonitor,
       editar: false,
     };
   },
@@ -494,6 +485,14 @@ export default defineComponent({
     async eliminarMedicamento(idMedicamento) {
       await medStore.deleteMedicamento(idMedicamento);
       await this.listarMedicamentos();
+    },
+
+    async agregarMVS(){
+      await medStore.pingMonitor(String(this.configMonitor.nomMonitor),
+                                 String(this.configMonitor.dirIPMonitor));
+
+      await medStore.listMonitor(String(this.configMonitor.nomMonitor),
+                                 String(this.configMonitor.dirIPMonitor));
     },
   },
 });

@@ -1,6 +1,10 @@
 import { Router } from "express";
 import { requireToken } from "../middlewares/requireToken";
-import { getMedicamentos, getMedicamento, createMedicamento, updateMedicamento, deleteMedicamento } from '../controllers/medicamento.controller';
+import { getMedicamentos,
+         getMedicamento,
+         createMedicamento,
+         updateMedicamento,
+         deleteMedicamento } from '../controllers/medicamento.controller';
 
 const router = Router();
 

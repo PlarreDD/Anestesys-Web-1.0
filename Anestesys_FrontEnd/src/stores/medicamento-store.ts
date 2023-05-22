@@ -147,5 +147,20 @@ export const useMedicamentoStore = defineStore("medicamento", {
         //   console.log(e);
         });
     },
+
+    /** MVS **/
+    async pingMonitor(nomMonitor: string, dirIPMonitor: string){
+      console.log("->pingMonitor: " + nomMonitor +
+                  "\nIP: " + dirIPMonitor);
+    },
+
+    async listMonitor(nomMonitor: string, dirIPMonitor: string){
+      console.log("->listMonitor: " + nomMonitor +
+                  "\nIP: " + dirIPMonitor);
+    },
+
+    async deleteMonitor(dirIPMonitor: string){
+      console.log("->deleteMonitor:\nIP: " + dirIPMonitor);
+    }
   },
 });
