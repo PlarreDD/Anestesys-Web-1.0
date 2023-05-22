@@ -760,7 +760,7 @@ export default({
   background-color: #E88300;
   padding: 0rem;
   border-radius: 10px;
-  margin-left: 47px;
+  margin-left: 28px;
   text-align: center;
 }
 .menu-pre-post {  
@@ -769,7 +769,7 @@ export default({
   background-color: #d6d6d6;
   padding: 0rem;
   border-radius: 10px;
-  margin-left: 47px;
+  margin-left: 28px;
   text-align: center;
 }
 .menu-pre-post:hover{
@@ -781,7 +781,7 @@ export default({
   height: 100%;
 }
 .bordePrincipal {
-    width: 108%;
+    width: 110%;
 }
 .posicionEstatica {
   position: -webkit-sticky;
