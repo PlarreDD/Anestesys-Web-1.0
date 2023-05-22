@@ -13,7 +13,26 @@ export const saveNotaPA = async (req: any, res: Response) => {
 
                 // Signos Vitales al Egreso del Quirófano
                 signVitEgQx_TA, signVitEgQx_FC, signVitEgQx_FR, signVitEgQx_Temperatura,
-                signVitEgQx_Pulso, signVitEgQx_SpO2, signVitEgQx_EgresoPac, } = req.body;
+                signVitEgQx_Pulso, signVitEgQx_SpO2, signVitEgQx_EgresoPac, 
+            
+                //Caso Obstétrico Recien Nacido
+                casoObsRecNac_NumProd, casoObsRecNac1_Genero, casoObsRecNac1_HrNacimiento,
+                casoObsRecNac1_Alumbramiento, casoObsRecNac1_Apgar1, casoObsRecNac1_Apgar5,
+                casoObsRecNac1_Capurro, casoObsRecNac1_Peso, casoObsRecNac1_Talla,
+                casoObsRecNac2_Genero, casoObsRecNac2_HrNacimiento, casoObsRecNac2_Alumbramiento,
+                casoObsRecNac2_Apgar1, casoObsRecNac2_Apgar5, casoObsRecNac2_Capurro,
+                casoObsRecNac2_Peso, casoObsRecNac2_Talla, casoObsRecNac3_Genero,
+                casoObsRecNac3_HrNacimiento, casoObsRecNac3_Alumbramiento, casoObsRecNac3_Apgar1,
+                casoObsRecNac3_Apgar5, casoObsRecNac3_Capurro, casoObsRecNac3_Peso,
+                casoObsRecNac3_Talla, casoObsRecNac4_Genero, casoObsRecNac4_HrNacimiento,
+                casoObsRecNac4_Alumbramiento, casoObsRecNac4_Apgar1, casoObsRecNac4_Apgar5,
+                casoObsRecNac4_Capurro, casoObsRecNac4_Peso, casoObsRecNac4_Talla,
+                casoObsRecNac5_Genero, casoObsRecNac5_HrNacimiento, casoObsRecNac5_Alumbramiento,
+                casoObsRecNac5_Apgar1, casoObsRecNac5_Apgar5, casoObsRecNac5_Capurro,
+                casoObsRecNac5_Peso, casoObsRecNac5_Talla, casoObsRecNac6_Genero,
+                casoObsRecNac6_HrNacimiento, casoObsRecNac6_Alumbramiento, casoObsRecNac6_Apgar1,
+                casoObsRecNac6_Apgar5, casoObsRecNac6_Capurro, casoObsRecNac6_Peso,
+                casoObsRecNac6_Talla} = req.body;
         
         const notaPA = new PostNotaPA({ pid: pid,
                                         // Nota Post Anestésica
@@ -28,7 +47,35 @@ export const saveNotaPA = async (req: any, res: Response) => {
                                         signVitEgQx_Temperatura: signVitEgQx_Temperatura,
                                         signVitEgQx_Pulso: signVitEgQx_Pulso,
                                         signVitEgQx_SpO2: signVitEgQx_SpO2,
-                                        signVitEgQx_EgresoPac: signVitEgQx_EgresoPac, });
+                                        signVitEgQx_EgresoPac: signVitEgQx_EgresoPac, 
+
+                                        //Caso Obstétrico Recien Nacido
+                                        casoObsRecNac_NumProd:casoObsRecNac_NumProd, casoObsRecNac1_Genero:casoObsRecNac1_Genero, 
+                                        casoObsRecNac1_HrNacimiento:casoObsRecNac1_HrNacimiento, casoObsRecNac1_Alumbramiento:casoObsRecNac1_Alumbramiento, 
+                                        casoObsRecNac1_Apgar1: casoObsRecNac1_Apgar1, casoObsRecNac1_Apgar5:casoObsRecNac1_Apgar5,
+                                        casoObsRecNac1_Capurro: casoObsRecNac1_Capurro, casoObsRecNac1_Peso:casoObsRecNac1_Peso, 
+                                        casoObsRecNac1_Talla:casoObsRecNac1_Talla, casoObsRecNac2_Genero:casoObsRecNac2_Genero, 
+                                        casoObsRecNac2_HrNacimiento:casoObsRecNac2_HrNacimiento, casoObsRecNac2_Alumbramiento:casoObsRecNac2_Alumbramiento,
+                                        casoObsRecNac2_Apgar1:casoObsRecNac2_Apgar1, casoObsRecNac2_Apgar5:casoObsRecNac2_Apgar5, 
+                                        casoObsRecNac2_Capurro:casoObsRecNac2_Capurro, casoObsRecNac2_Peso:casoObsRecNac2_Peso, 
+                                        casoObsRecNac2_Talla:casoObsRecNac2_Talla, casoObsRecNac3_Genero:casoObsRecNac3_Genero,
+                                        casoObsRecNac3_HrNacimiento:casoObsRecNac3_HrNacimiento, casoObsRecNac3_Alumbramiento:casoObsRecNac3_Alumbramiento, 
+                                        casoObsRecNac3_Apgar1:casoObsRecNac3_Apgar1, casoObsRecNac3_Apgar5:casoObsRecNac3_Apgar5, 
+                                        casoObsRecNac3_Capurro:casoObsRecNac3_Capurro, casoObsRecNac3_Peso:casoObsRecNac3_Peso,
+                                        casoObsRecNac3_Talla:casoObsRecNac3_Talla, casoObsRecNac4_Genero:casoObsRecNac4_Genero, 
+                                        casoObsRecNac4_HrNacimiento:casoObsRecNac4_HrNacimiento, casoObsRecNac4_Alumbramiento:casoObsRecNac4_Alumbramiento, 
+                                        casoObsRecNac4_Apgar1:casoObsRecNac4_Apgar1, casoObsRecNac4_Apgar5:casoObsRecNac4_Apgar5,
+                                        casoObsRecNac4_Capurro:casoObsRecNac4_Capurro, casoObsRecNac4_Peso:casoObsRecNac4_Peso, 
+                                        casoObsRecNac4_Talla:casoObsRecNac4_Talla, casoObsRecNac5_Genero:casoObsRecNac5_Genero, 
+                                        casoObsRecNac5_HrNacimiento:casoObsRecNac5_HrNacimiento, casoObsRecNac5_Alumbramiento:casoObsRecNac5_Alumbramiento,
+                                        casoObsRecNac5_Apgar1:casoObsRecNac5_Apgar1, casoObsRecNac5_Apgar5:casoObsRecNac5_Apgar5, 
+                                        casoObsRecNac5_Capurro:casoObsRecNac5_Capurro, casoObsRecNac5_Peso:casoObsRecNac5_Peso, 
+                                        casoObsRecNac5_Talla:casoObsRecNac5_Talla, casoObsRecNac6_Genero:casoObsRecNac6_Genero,
+                                        casoObsRecNac6_HrNacimiento:casoObsRecNac6_HrNacimiento, casoObsRecNac6_Alumbramiento:casoObsRecNac6_Alumbramiento, 
+                                        casoObsRecNac6_Apgar1:casoObsRecNac6_Apgar1, casoObsRecNac6_Apgar5:casoObsRecNac6_Apgar5, 
+                                        casoObsRecNac6_Capurro:casoObsRecNac6_Capurro, casoObsRecNac6_Peso:casoObsRecNac6_Peso,
+                                        casoObsRecNac6_Talla:casoObsRecNac6_Talla
+                                    });
 
         await notaPA.save();
 
@@ -46,7 +93,26 @@ export const updateNotaPA = async (req: any, res: Response) => {
 
                 // Signos Vitales al Egreso del Quirófano
                 signVitEgQx_TA, signVitEgQx_FC, signVitEgQx_FR, signVitEgQx_Temperatura,
-                signVitEgQx_Pulso, signVitEgQx_SpO2, signVitEgQx_EgresoPac, } = req.body;
+                signVitEgQx_Pulso, signVitEgQx_SpO2, signVitEgQx_EgresoPac, 
+            
+                //Caso Obstétrico Recien Nacido
+                casoObsRecNac_NumProd, casoObsRecNac1_Genero, casoObsRecNac1_HrNacimiento,
+                casoObsRecNac1_Alumbramiento, casoObsRecNac1_Apgar1, casoObsRecNac1_Apgar5,
+                casoObsRecNac1_Capurro, casoObsRecNac1_Peso, casoObsRecNac1_Talla,
+                casoObsRecNac2_Genero, casoObsRecNac2_HrNacimiento, casoObsRecNac2_Alumbramiento,
+                casoObsRecNac2_Apgar1, casoObsRecNac2_Apgar5, casoObsRecNac2_Capurro,
+                casoObsRecNac2_Peso, casoObsRecNac2_Talla, casoObsRecNac3_Genero,
+                casoObsRecNac3_HrNacimiento, casoObsRecNac3_Alumbramiento, casoObsRecNac3_Apgar1,
+                casoObsRecNac3_Apgar5, casoObsRecNac3_Capurro, casoObsRecNac3_Peso,
+                casoObsRecNac3_Talla, casoObsRecNac4_Genero, casoObsRecNac4_HrNacimiento,
+                casoObsRecNac4_Alumbramiento, casoObsRecNac4_Apgar1, casoObsRecNac4_Apgar5,
+                casoObsRecNac4_Capurro, casoObsRecNac4_Peso, casoObsRecNac4_Talla,
+                casoObsRecNac5_Genero, casoObsRecNac5_HrNacimiento, casoObsRecNac5_Alumbramiento,
+                casoObsRecNac5_Apgar1, casoObsRecNac5_Apgar5, casoObsRecNac5_Capurro,
+                casoObsRecNac5_Peso, casoObsRecNac5_Talla, casoObsRecNac6_Genero,
+                casoObsRecNac6_HrNacimiento, casoObsRecNac6_Alumbramiento, casoObsRecNac6_Apgar1,
+                casoObsRecNac6_Apgar5, casoObsRecNac6_Capurro, casoObsRecNac6_Peso,
+                casoObsRecNac6_Talla} = req.body;
         
         const notaPA = await PostNotaPA.findOneAndUpdate({ pid: id },
                                                          { // Nota Post Anestésica
@@ -61,7 +127,35 @@ export const updateNotaPA = async (req: any, res: Response) => {
                                                            signVitEgQx_Temperatura: signVitEgQx_Temperatura,
                                                            signVitEgQx_Pulso: signVitEgQx_Pulso,
                                                            signVitEgQx_SpO2: signVitEgQx_SpO2,
-                                                           signVitEgQx_EgresoPac: signVitEgQx_EgresoPac, });
+                                                           signVitEgQx_EgresoPac: signVitEgQx_EgresoPac, 
+                                                        
+                                                            //Caso Obstétrico Recien Nacido
+                                                            casoObsRecNac_NumProd:casoObsRecNac_NumProd, casoObsRecNac1_Genero:casoObsRecNac1_Genero, 
+                                                            casoObsRecNac1_HrNacimiento:casoObsRecNac1_HrNacimiento, casoObsRecNac1_Alumbramiento:casoObsRecNac1_Alumbramiento, 
+                                                            casoObsRecNac1_Apgar1: casoObsRecNac1_Apgar1, casoObsRecNac1_Apgar5:casoObsRecNac1_Apgar5,
+                                                            casoObsRecNac1_Capurro: casoObsRecNac1_Capurro, casoObsRecNac1_Peso:casoObsRecNac1_Peso, 
+                                                            casoObsRecNac1_Talla:casoObsRecNac1_Talla, casoObsRecNac2_Genero:casoObsRecNac2_Genero, 
+                                                            casoObsRecNac2_HrNacimiento:casoObsRecNac2_HrNacimiento, casoObsRecNac2_Alumbramiento:casoObsRecNac2_Alumbramiento,
+                                                            casoObsRecNac2_Apgar1:casoObsRecNac2_Apgar1, casoObsRecNac2_Apgar5:casoObsRecNac2_Apgar5, 
+                                                            casoObsRecNac2_Capurro:casoObsRecNac2_Capurro, casoObsRecNac2_Peso:casoObsRecNac2_Peso, 
+                                                            casoObsRecNac2_Talla:casoObsRecNac2_Talla, casoObsRecNac3_Genero:casoObsRecNac3_Genero,
+                                                            casoObsRecNac3_HrNacimiento:casoObsRecNac3_HrNacimiento, casoObsRecNac3_Alumbramiento:casoObsRecNac3_Alumbramiento, 
+                                                            casoObsRecNac3_Apgar1:casoObsRecNac3_Apgar1, casoObsRecNac3_Apgar5:casoObsRecNac3_Apgar5, 
+                                                            casoObsRecNac3_Capurro:casoObsRecNac3_Capurro, casoObsRecNac3_Peso:casoObsRecNac3_Peso,
+                                                            casoObsRecNac3_Talla:casoObsRecNac3_Talla, casoObsRecNac4_Genero:casoObsRecNac4_Genero, 
+                                                            casoObsRecNac4_HrNacimiento:casoObsRecNac4_HrNacimiento, casoObsRecNac4_Alumbramiento:casoObsRecNac4_Alumbramiento, 
+                                                            casoObsRecNac4_Apgar1:casoObsRecNac4_Apgar1, casoObsRecNac4_Apgar5:casoObsRecNac4_Apgar5,
+                                                            casoObsRecNac4_Capurro:casoObsRecNac4_Capurro, casoObsRecNac4_Peso:casoObsRecNac4_Peso, 
+                                                            casoObsRecNac4_Talla:casoObsRecNac4_Talla, casoObsRecNac5_Genero:casoObsRecNac5_Genero, 
+                                                            casoObsRecNac5_HrNacimiento:casoObsRecNac5_HrNacimiento, casoObsRecNac5_Alumbramiento:casoObsRecNac5_Alumbramiento,
+                                                            casoObsRecNac5_Apgar1:casoObsRecNac5_Apgar1, casoObsRecNac5_Apgar5:casoObsRecNac5_Apgar5, 
+                                                            casoObsRecNac5_Capurro:casoObsRecNac5_Capurro, casoObsRecNac5_Peso:casoObsRecNac5_Peso, 
+                                                            casoObsRecNac5_Talla:casoObsRecNac5_Talla, casoObsRecNac6_Genero:casoObsRecNac6_Genero,
+                                                            casoObsRecNac6_HrNacimiento:casoObsRecNac6_HrNacimiento, casoObsRecNac6_Alumbramiento:casoObsRecNac6_Alumbramiento, 
+                                                            casoObsRecNac6_Apgar1:casoObsRecNac6_Apgar1, casoObsRecNac6_Apgar5:casoObsRecNac6_Apgar5, 
+                                                            casoObsRecNac6_Capurro:casoObsRecNac6_Capurro, casoObsRecNac6_Peso:casoObsRecNac6_Peso,
+                                                            casoObsRecNac6_Talla:casoObsRecNac6_Talla
+                                                        });
 
         return res.json({ notaPA })
     } catch (error) {

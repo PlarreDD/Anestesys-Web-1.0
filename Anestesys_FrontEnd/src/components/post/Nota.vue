@@ -219,44 +219,44 @@
                         <!-- Datos bebé # -->
                         <div class="col-md-12">                            
 
-                            <ul class="nav nav-pills justify-content-start">
-
-                                <li class="nav-item" 
-                                    :class="infoNotaPost.casoObsRecNac_NumProd == undefined || infoNotaPost.casoObsRecNac_NumProd == '' ? 'visible' : 'invisible'">
-                                    <button class="btn btn-nav-caso fw-bold active"
-                                            id="casoCero" data-bs-toggle="pill" data-bs-target="#caso-cero"
-                                            type="button" aria-selected="true">-</button>
-                                </li>
+                            <!-- Lista de selección de productor -->
+                            <ul class="nav nav-pills justify-content-start gap-caso">
+                                <!-- Caso un producto -->
                                 <li class="nav-item"
                                     :class="Number(infoNotaPost.casoObsRecNac_NumProd) >=1 ? 'visible' : 'invisible'">
-                                    <button class="btn btn-nav-caso fw-bold"
+                                    <button class="btn btn-nav-caso fw-bold active"
                                             id="casoUno" data-bs-toggle="pill" data-bs-target="#caso-uno"
                                             type="button" aria-selected="false">1</button>
                                 </li>
+                                <!-- Caso dos productos -->
                                 <li class="nav-item"
                                     :class="Number(infoNotaPost.casoObsRecNac_NumProd) >=2 ? 'visible' : 'invisible'">
                                     <button class="btn btn-nav-caso fw-bold"                                            
                                             id="casoDos" data-bs-toggle="pill" data-bs-target="#caso-dos" 
                                             type="button" aria-selected="false">2</button>
                                 </li>
+                                <!-- Caso tres productos -->
                                 <li class="nav-item"
                                     :class="Number(infoNotaPost.casoObsRecNac_NumProd) >=3 ? 'visible' : 'invisible'">
                                     <button class="btn btn-nav-caso fw-bold"
                                             id="casoTres" data-bs-toggle="pill" data-bs-target="#caso-tres"
                                             type="button" aria-selected="false">3</button>
                                 </li>
+                                <!-- Caso cuatro productos -->
                                 <li class="nav-item" 
                                     :class="Number(infoNotaPost.casoObsRecNac_NumProd) >=4 ? 'visible' : 'invisible'">
                                     <button class="btn btn-nav-caso fw-bold"                                            
                                             id="casoCuatro" data-bs-toggle="pill" data-bs-target="#caso-cuatro" 
                                             type="button" aria-selected="false">4</button>
                                 </li>
+                                <!-- Caso cinco productos -->
                                 <li class="nav-item"
                                     :class="Number(infoNotaPost.casoObsRecNac_NumProd) >=5 ? 'visible' : 'invisible'">
                                     <button class="btn btn-nav-caso fw-bold"
                                             id="casoCinco" data-bs-toggle="pill" data-bs-target="#caso-cinco"
                                             type="button" aria-selected="false">5</button>
                                 </li>
+                                <!-- Caso seis productos -->
                                 <li class="nav-item"
                                     :class="Number(infoNotaPost.casoObsRecNac_NumProd) ==6 ? 'visible' : 'invisible'">
                                     <button class="btn btn-nav-caso fw-bold"                                            
@@ -265,751 +265,646 @@
                                 </li>
                             </ul>
 
+                            <hr/>
+
                             <div class="tab-content col-md-12" id="">
-
-                                <div class="tab-pane fade show active" id="caso-cero">
-                                    <fieldset class="bordeScheduler">
-                                        <h5 class="fw-bold">Datos del bebé -</h5>
-                                        <div class="row g-3">
-                                            <!-- Género -->
-                                            <div class="col-md-4">
-                                                <label for="" class="form-label col-12 fw-bold">Género</label>
-                                                <input type="radio"
-                                                    class="btn-check"
-                                                    name="generoCaso"
-                                                    id="masculinoCaso"
-                                                    autocomplete="off"
-                                                    value="Masculino"
-                                                    v-model="infoNotaPost.casoObsRecNac_Genero">
-                                                <label class="btn btn-radio margenRadio" for="masculinoCaso">Masculino</label>
-
-                                                <input type="radio"
-                                                    class="btn-check"
-                                                    name="generoCaso"
-                                                    id="femeninoCaso"
-                                                    autocomplete="off"
-                                                    value="Femenino"
-                                                    v-model="infoNotaPost.casoObsRecNac_Genero">
-                                                <label class="btn btn-radio" for="femeninoCaso">Femenino</label>                            
-                                            </div>
-
-                                            <!-- Hora de Nacimiento -->
-                                            <div class="col-md-4">
-                                                <label for="" class="form-label fw-bold">Hora de Nacimiento</label>
-                                                <input type="time"
-                                                    class="form-control"
-                                                    id="horaNacimiento"
-                                                    v-model="infoNotaPost.casoObsRecNac_HrNacimiento"
-                                                    :class="infoNotaPost.casoObsRecNac_HrNacimiento != '' && infoNotaPost.casoObsRecNac_HrNacimiento != undefined ?
-                                                        'form-control border border-success formSombra' : 'form-control'">
-                                            </div>
-
-                                            <!-- Alumbramiento -->
-                                            <div class="col-md-4">
-                                                <label for="" class="form-label fw-bold">Alumbramiento</label>
-                                                <input type="text"
-                                                    class="form-control"
-                                                    id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Alumbramiento"
-                                                    :class="infoNotaPost.casoObsRecNac_Alumbramiento != '' && infoNotaPost.casoObsRecNac_Alumbramiento != undefined ?
-                                                        'form-control border border-success formSombra' : 'form-control'">
-                                            </div>
-
-                                            <!-- Apgar 1 min -->
-                                            <div class="col-md-4">
-                                                <label for="" class="form-label fw-bold">Apgar 1 min</label>
-                                                <input type="text"
-                                                    class="form-control"
-                                                    id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Apgar1"
-                                                    :class="infoNotaPost.casoObsRecNac_Apgar1 != '' && infoNotaPost.casoObsRecNac_Apgar1 != undefined ?
-                                                        'form-control border border-success formSombra' : 'form-control'">
-                                            </div>
-
-                                            <!-- Apgar 5 min -->
-                                            <div class="col-md-4">
-                                                <label for="" class="form-label fw-bold">Apgar 5 min</label>
-                                                <input type="text"
-                                                    class="form-control"
-                                                    id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Apgar5"
-                                                    :class="infoNotaPost.casoObsRecNac_Apgar5 != '' && infoNotaPost.casoObsRecNac_Apgar5 != undefined ?
-                                                        'form-control border border-success formSombra' : 'form-control'">
-                                            </div>
-
-                                            <!-- Capurro -->
-                                            <div class="col-md-4">
-                                                <label for="" class="form-label fw-bold">Capurro</label>
-                                                <input type="text"
-                                                    class="form-control"
-                                                    id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Capurro"
-                                                    :class="infoNotaPost.casoObsRecNac_Capurro != '' && infoNotaPost.casoObsRecNac_Capurro != undefined ?
-                                                        'form-control border border-success formSombra' : 'form-control'">
-                                            </div>
-
-                                            <!-- Peso (gm) -->
-                                            <div class="col-md-4">
-                                                <label for="" class="form-label fw-bold">Peso (gm)</label>
-                                                <input type="text"
-                                                    class="form-control"
-                                                    id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Peso"
-                                                    :class="infoNotaPost.casoObsRecNac_Peso != '' && infoNotaPost.casoObsRecNac_Peso != undefined ?
-                                                        'form-control border border-success formSombra' : 'form-control'">
-                                            </div>
-
-                                            <!-- Talla (cm) -->
-                                            <div class="col-md-4">
-                                                <label for="" class="form-label fw-bold">Talla (cm)</label>
-                                                <input type="text"
-                                                    class="form-control"
-                                                    id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Talla"
-                                                    :class="infoNotaPost.casoObsRecNac_Talla != '' && infoNotaPost.casoObsRecNac_Talla != undefined ?
-                                                        'form-control border border-success formSombra' : 'form-control'">
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div>
-
-                                <div class="tab-pane fade" id="caso-uno">
-                                    <fieldset class="bordeScheduler">
+                                <!-- Formulario un producto -->
+                                <div class="tab-pane fade show active" id="caso-uno">
+                                    <fieldset class="bordeScheduler" :disabled="Number(infoNotaPost.casoObsRecNac_NumProd) >=1 ? false : true">
                                         <h5 class="fw-bold">Datos del bebé 1</h5>
                                         <div class="row g-3">
                                             <!-- Género -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <label for="" class="form-label col-12 fw-bold">Género</label>
                                                 <input type="radio"
                                                     class="btn-check"
-                                                    name="generoCaso"
-                                                    id="masculinoCaso"
+                                                    name="generoCaso1"
+                                                    id="masculinoCaso1"
                                                     autocomplete="off"
                                                     value="Masculino"
-                                                    v-model="infoNotaPost.casoObsRecNac_Genero">
-                                                <label class="btn btn-radio margenRadio" for="masculinoCaso">Masculino</label>
+                                                    v-model="infoNotaPost.casoObsRecNac1_Genero">
+                                                <label class="btn btn-radio margenRadio" for="masculinoCaso1">Masculino</label>
 
                                                 <input type="radio"
                                                     class="btn-check"
-                                                    name="generoCaso"
-                                                    id="femeninoCaso"
+                                                    name="generoCaso1"
+                                                    id="femeninoCaso1"
                                                     autocomplete="off"
                                                     value="Femenino"
-                                                    v-model="infoNotaPost.casoObsRecNac_Genero">
-                                                <label class="btn btn-radio" for="femeninoCaso">Femenino</label>                            
+                                                    v-model="infoNotaPost.casoObsRecNac1_Genero">
+                                                <label class="btn btn-radio" for="femeninoCaso1">Femenino</label>                            
                                             </div>
 
                                             <!-- Hora de Nacimiento -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Hora de Nacimiento</label>
                                                 <input type="time"
                                                     class="form-control"
                                                     id="horaNacimiento"
-                                                    v-model="infoNotaPost.casoObsRecNac_HrNacimiento"
-                                                    :class="infoNotaPost.casoObsRecNac_HrNacimiento != '' && infoNotaPost.casoObsRecNac_HrNacimiento != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac1_HrNacimiento"
+                                                    :class="infoNotaPost.casoObsRecNac1_HrNacimiento != '' && infoNotaPost.casoObsRecNac1_HrNacimiento != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Alumbramiento -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-7">
                                                 <label for="" class="form-label fw-bold">Alumbramiento</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Alumbramiento"
-                                                    :class="infoNotaPost.casoObsRecNac_Alumbramiento != '' && infoNotaPost.casoObsRecNac_Alumbramiento != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac1_Alumbramiento"
+                                                    :class="infoNotaPost.casoObsRecNac1_Alumbramiento != '' && infoNotaPost.casoObsRecNac1_Alumbramiento != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Apgar 1 min -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Apgar 1 min</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Apgar1"
-                                                    :class="infoNotaPost.casoObsRecNac_Apgar1 != '' && infoNotaPost.casoObsRecNac_Apgar1 != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac1_Apgar1"
+                                                    :class="infoNotaPost.casoObsRecNac1_Apgar1 != '' && infoNotaPost.casoObsRecNac1_Apgar1 != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Apgar 5 min -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Apgar 5 min</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Apgar5"
-                                                    :class="infoNotaPost.casoObsRecNac_Apgar5 != '' && infoNotaPost.casoObsRecNac_Apgar5 != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac1_Apgar5"
+                                                    :class="infoNotaPost.casoObsRecNac1_Apgar5 != '' && infoNotaPost.casoObsRecNac1_Apgar5 != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Capurro -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-8">
                                                 <label for="" class="form-label fw-bold">Capurro</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Capurro"
-                                                    :class="infoNotaPost.casoObsRecNac_Capurro != '' && infoNotaPost.casoObsRecNac_Capurro != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac1_Capurro"
+                                                    :class="infoNotaPost.casoObsRecNac1_Capurro != '' && infoNotaPost.casoObsRecNac1_Capurro != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Peso (gm) -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Peso (gm)</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Peso"
-                                                    :class="infoNotaPost.casoObsRecNac_Peso != '' && infoNotaPost.casoObsRecNac_Peso != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac1_Peso"
+                                                    :class="infoNotaPost.casoObsRecNac1_Peso != '' && infoNotaPost.casoObsRecNac1_Peso != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Talla (cm) -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Talla (cm)</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Talla"
-                                                    :class="infoNotaPost.casoObsRecNac_Talla != '' && infoNotaPost.casoObsRecNac_Talla != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac1_Talla"
+                                                    :class="infoNotaPost.casoObsRecNac1_Talla != '' && infoNotaPost.casoObsRecNac1_Talla != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
                                         </div>
                                     </fieldset>
                                 </div>
-                                
+                                <!-- Formulario dos productos -->
                                 <div class="tab-pane fade" id="caso-dos">
-                                    <fieldset class="bordeScheduler">
+                                    <fieldset class="bordeScheduler" :disabled="Number(infoNotaPost.casoObsRecNac_NumProd) >=2 ? false : true">
                                         <h5 class="fw-bold">Datos del bebé 2</h5>
                                         <div class="row g-3">
                                             <!-- Género -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <label for="" class="form-label col-12 fw-bold">Género</label>
                                                 <input type="radio"
                                                     class="btn-check"
-                                                    name="generoCaso"
-                                                    id="masculinoCaso"
+                                                    name="generoCaso2"
+                                                    id="masculinoCaso2"
                                                     autocomplete="off"
                                                     value="Masculino"
-                                                    v-model="infoNotaPost.casoObsRecNac_Genero">
-                                                <label class="btn btn-radio margenRadio" for="masculinoCaso">Masculino</label>
+                                                    v-model="infoNotaPost.casoObsRecNac2_Genero">
+                                                <label class="btn btn-radio margenRadio" for="masculinoCaso2">Masculino</label>
 
                                                 <input type="radio"
                                                     class="btn-check"
-                                                    name="generoCaso"
-                                                    id="femeninoCaso"
+                                                    name="generoCaso2"
+                                                    id="femeninoCaso2"
                                                     autocomplete="off"
                                                     value="Femenino"
-                                                    v-model="infoNotaPost.casoObsRecNac_Genero">
-                                                <label class="btn btn-radio" for="femeninoCaso">Femenino</label>                            
+                                                    v-model="infoNotaPost.casoObsRecNac2_Genero">
+                                                <label class="btn btn-radio" for="femeninoCaso2">Femenino</label>                            
                                             </div>
 
                                             <!-- Hora de Nacimiento -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Hora de Nacimiento</label>
                                                 <input type="time"
                                                     class="form-control"
                                                     id="horaNacimiento"
-                                                    v-model="infoNotaPost.casoObsRecNac_HrNacimiento"
-                                                    :class="infoNotaPost.casoObsRecNac_HrNacimiento != '' && infoNotaPost.casoObsRecNac_HrNacimiento != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac2_HrNacimiento"
+                                                    :class="infoNotaPost.casoObsRecNac2_HrNacimiento != '' && infoNotaPost.casoObsRecNac2_HrNacimiento != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Alumbramiento -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-7">
                                                 <label for="" class="form-label fw-bold">Alumbramiento</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Alumbramiento"
-                                                    :class="infoNotaPost.casoObsRecNac_Alumbramiento != '' && infoNotaPost.casoObsRecNac_Alumbramiento != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac2_Alumbramiento"
+                                                    :class="infoNotaPost.casoObsRecNac2_Alumbramiento != '' && infoNotaPost.casoObsRecNac2_Alumbramiento != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Apgar 1 min -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Apgar 1 min</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Apgar1"
-                                                    :class="infoNotaPost.casoObsRecNac_Apgar1 != '' && infoNotaPost.casoObsRecNac_Apgar1 != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac2_Apgar1"
+                                                    :class="infoNotaPost.casoObsRecNac2_Apgar1 != '' && infoNotaPost.casoObsRecNac2_Apgar1 != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Apgar 5 min -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Apgar 5 min</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Apgar5"
-                                                    :class="infoNotaPost.casoObsRecNac_Apgar5 != '' && infoNotaPost.casoObsRecNac_Apgar5 != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac2_Apgar5"
+                                                    :class="infoNotaPost.casoObsRecNac2_Apgar5 != '' && infoNotaPost.casoObsRecNac2_Apgar5 != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Capurro -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-8">
                                                 <label for="" class="form-label fw-bold">Capurro</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Capurro"
-                                                    :class="infoNotaPost.casoObsRecNac_Capurro != '' && infoNotaPost.casoObsRecNac_Capurro != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac2_Capurro"
+                                                    :class="infoNotaPost.casoObsRecNac2_Capurro != '' && infoNotaPost.casoObsRecNac2_Capurro != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Peso (gm) -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Peso (gm)</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Peso"
-                                                    :class="infoNotaPost.casoObsRecNac_Peso != '' && infoNotaPost.casoObsRecNac_Peso != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac2_Peso"
+                                                    :class="infoNotaPost.casoObsRecNac2_Peso != '' && infoNotaPost.casoObsRecNac2_Peso != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Talla (cm) -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Talla (cm)</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Talla"
-                                                    :class="infoNotaPost.casoObsRecNac_Talla != '' && infoNotaPost.casoObsRecNac_Talla != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac2_Talla"
+                                                    :class="infoNotaPost.casoObsRecNac2_Talla != '' && infoNotaPost.casoObsRecNac2_Talla != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
                                         </div>
                                     </fieldset>
                                 </div>
-
+                                <!-- Formulario tres productos -->
                                 <div class="tab-pane fade" id="caso-tres">
-                                    <fieldset class="bordeScheduler">
+                                    <fieldset class="bordeScheduler" :disabled="Number(infoNotaPost.casoObsRecNac_NumProd) >=3 ? false : true">
                                         <h5 class="fw-bold">Datos del bebé 3</h5>
                                         <div class="row g-3">
                                             <!-- Género -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <label for="" class="form-label col-12 fw-bold">Género</label>
                                                 <input type="radio"
                                                     class="btn-check"
-                                                    name="generoCaso"
-                                                    id="masculinoCaso"
+                                                    name="generoCaso3"
+                                                    id="masculinoCaso3"
                                                     autocomplete="off"
                                                     value="Masculino"
-                                                    v-model="infoNotaPost.casoObsRecNac_Genero">
-                                                <label class="btn btn-radio margenRadio" for="masculinoCaso">Masculino</label>
+                                                    v-model="infoNotaPost.casoObsRecNac3_Genero">
+                                                <label class="btn btn-radio margenRadio" for="masculinoCaso3">Masculino</label>
 
                                                 <input type="radio"
                                                     class="btn-check"
-                                                    name="generoCaso"
-                                                    id="femeninoCaso"
+                                                    name="generoCaso3"
+                                                    id="femeninoCaso3"
                                                     autocomplete="off"
                                                     value="Femenino"
-                                                    v-model="infoNotaPost.casoObsRecNac_Genero">
-                                                <label class="btn btn-radio" for="femeninoCaso">Femenino</label>                            
+                                                    v-model="infoNotaPost.casoObsRecNac3_Genero">
+                                                <label class="btn btn-radio" for="femeninoCaso3">Femenino</label>                            
                                             </div>
 
                                             <!-- Hora de Nacimiento -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Hora de Nacimiento</label>
                                                 <input type="time"
                                                     class="form-control"
                                                     id="horaNacimiento"
-                                                    v-model="infoNotaPost.casoObsRecNac_HrNacimiento"
-                                                    :class="infoNotaPost.casoObsRecNac_HrNacimiento != '' && infoNotaPost.casoObsRecNac_HrNacimiento != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac3_HrNacimiento"
+                                                    :class="infoNotaPost.casoObsRecNac3_HrNacimiento != '' && infoNotaPost.casoObsRecNac3_HrNacimiento != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Alumbramiento -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-7">
                                                 <label for="" class="form-label fw-bold">Alumbramiento</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Alumbramiento"
-                                                    :class="infoNotaPost.casoObsRecNac_Alumbramiento != '' && infoNotaPost.casoObsRecNac_Alumbramiento != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac3_Alumbramiento"
+                                                    :class="infoNotaPost.casoObsRecNac3_Alumbramiento != '' && infoNotaPost.casoObsRecNac3_Alumbramiento != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Apgar 1 min -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Apgar 1 min</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Apgar1"
-                                                    :class="infoNotaPost.casoObsRecNac_Apgar1 != '' && infoNotaPost.casoObsRecNac_Apgar1 != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac3_Apgar1"
+                                                    :class="infoNotaPost.casoObsRecNac3_Apgar1 != '' && infoNotaPost.casoObsRecNac3_Apgar1 != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Apgar 5 min -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Apgar 5 min</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Apgar5"
-                                                    :class="infoNotaPost.casoObsRecNac_Apgar5 != '' && infoNotaPost.casoObsRecNac_Apgar5 != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac3_Apgar5"
+                                                    :class="infoNotaPost.casoObsRecNac3_Apgar5 != '' && infoNotaPost.casoObsRecNac3_Apgar5 != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Capurro -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-8">
                                                 <label for="" class="form-label fw-bold">Capurro</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Capurro"
-                                                    :class="infoNotaPost.casoObsRecNac_Capurro != '' && infoNotaPost.casoObsRecNac_Capurro != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac3_Capurro"
+                                                    :class="infoNotaPost.casoObsRecNac3_Capurro != '' && infoNotaPost.casoObsRecNac3_Capurro != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Peso (gm) -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Peso (gm)</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Peso"
-                                                    :class="infoNotaPost.casoObsRecNac_Peso != '' && infoNotaPost.casoObsRecNac_Peso != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac3_Peso"
+                                                    :class="infoNotaPost.casoObsRecNac3_Peso != '' && infoNotaPost.casoObsRecNac3_Peso != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Talla (cm) -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Talla (cm)</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Talla"
-                                                    :class="infoNotaPost.casoObsRecNac_Talla != '' && infoNotaPost.casoObsRecNac_Talla != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac3_Talla"
+                                                    :class="infoNotaPost.casoObsRecNac3_Talla != '' && infoNotaPost.casoObsRecNac3_Talla != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
                                         </div>
                                     </fieldset>
                                 </div>
-
+                                <!-- Formulario cuatro productos -->
                                 <div class="tab-pane fade" id="caso-cuatro">
-                                    <fieldset class="bordeScheduler">
+                                    <fieldset class="bordeScheduler" :disabled="Number(infoNotaPost.casoObsRecNac_NumProd) >=4 ? false : true">
                                         <h5 class="fw-bold">Datos del bebé 4</h5>
                                         <div class="row g-3">
                                             <!-- Género -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <label for="" class="form-label col-12 fw-bold">Género</label>
                                                 <input type="radio"
                                                     class="btn-check"
-                                                    name="generoCaso"
-                                                    id="masculinoCaso"
+                                                    name="generoCaso4"
+                                                    id="masculinoCaso4"
                                                     autocomplete="off"
                                                     value="Masculino"
-                                                    v-model="infoNotaPost.casoObsRecNac_Genero">
-                                                <label class="btn btn-radio margenRadio" for="masculinoCaso">Masculino</label>
+                                                    v-model="infoNotaPost.casoObsRecNac4_Genero">
+                                                <label class="btn btn-radio margenRadio" for="masculinoCaso4">Masculino</label>
 
                                                 <input type="radio"
                                                     class="btn-check"
-                                                    name="generoCaso"
-                                                    id="femeninoCaso"
+                                                    name="generoCaso4"
+                                                    id="femeninoCaso4"
                                                     autocomplete="off"
                                                     value="Femenino"
-                                                    v-model="infoNotaPost.casoObsRecNac_Genero">
-                                                <label class="btn btn-radio" for="femeninoCaso">Femenino</label>                            
+                                                    v-model="infoNotaPost.casoObsRecNac4_Genero">
+                                                <label class="btn btn-radio" for="femeninoCaso4">Femenino</label>                            
                                             </div>
 
                                             <!-- Hora de Nacimiento -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Hora de Nacimiento</label>
                                                 <input type="time"
                                                     class="form-control"
                                                     id="horaNacimiento"
-                                                    v-model="infoNotaPost.casoObsRecNac_HrNacimiento"
-                                                    :class="infoNotaPost.casoObsRecNac_HrNacimiento != '' && infoNotaPost.casoObsRecNac_HrNacimiento != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac4_HrNacimiento"
+                                                    :class="infoNotaPost.casoObsRecNac4_HrNacimiento != '' && infoNotaPost.casoObsRecNac4_HrNacimiento != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Alumbramiento -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-7">
                                                 <label for="" class="form-label fw-bold">Alumbramiento</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Alumbramiento"
-                                                    :class="infoNotaPost.casoObsRecNac_Alumbramiento != '' && infoNotaPost.casoObsRecNac_Alumbramiento != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac4_Alumbramiento"
+                                                    :class="infoNotaPost.casoObsRecNac4_Alumbramiento != '' && infoNotaPost.casoObsRecNac4_Alumbramiento != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Apgar 1 min -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Apgar 1 min</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Apgar1"
-                                                    :class="infoNotaPost.casoObsRecNac_Apgar1 != '' && infoNotaPost.casoObsRecNac_Apgar1 != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac4_Apgar1"
+                                                    :class="infoNotaPost.casoObsRecNac4_Apgar1 != '' && infoNotaPost.casoObsRecNac4_Apgar1 != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Apgar 5 min -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Apgar 5 min</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Apgar5"
-                                                    :class="infoNotaPost.casoObsRecNac_Apgar5 != '' && infoNotaPost.casoObsRecNac_Apgar5 != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac4_Apgar5"
+                                                    :class="infoNotaPost.casoObsRecNac4_Apgar5 != '' && infoNotaPost.casoObsRecNac4_Apgar5 != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Capurro -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-8">
                                                 <label for="" class="form-label fw-bold">Capurro</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Capurro"
-                                                    :class="infoNotaPost.casoObsRecNac_Capurro != '' && infoNotaPost.casoObsRecNac_Capurro != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac4_Capurro"
+                                                    :class="infoNotaPost.casoObsRecNac4_Capurro != '' && infoNotaPost.casoObsRecNac4_Capurro != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Peso (gm) -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Peso (gm)</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Peso"
-                                                    :class="infoNotaPost.casoObsRecNac_Peso != '' && infoNotaPost.casoObsRecNac_Peso != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac4_Peso"
+                                                    :class="infoNotaPost.casoObsRecNac4_Peso != '' && infoNotaPost.casoObsRecNac4_Peso != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Talla (cm) -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Talla (cm)</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Talla"
-                                                    :class="infoNotaPost.casoObsRecNac_Talla != '' && infoNotaPost.casoObsRecNac_Talla != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac4_Talla"
+                                                    :class="infoNotaPost.casoObsRecNac4_Talla != '' && infoNotaPost.casoObsRecNac4_Talla != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
                                         </div>
                                     </fieldset>
                                 </div>
-
+                                <!-- Formulario cinco productos -->
                                 <div class="tab-pane fade" id="caso-cinco">
-                                    <fieldset class="bordeScheduler">
+                                    <fieldset class="bordeScheduler" :disabled="Number(infoNotaPost.casoObsRecNac_NumProd) >=5 ? false : true">
                                         <h5 class="fw-bold">Datos del bebé 5</h5>
                                         <div class="row g-3">
                                             <!-- Género -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <label for="" class="form-label col-12 fw-bold">Género</label>
                                                 <input type="radio"
                                                     class="btn-check"
-                                                    name="generoCaso"
-                                                    id="masculinoCaso"
+                                                    name="generoCaso5"
+                                                    id="masculinoCaso5"
                                                     autocomplete="off"
                                                     value="Masculino"
-                                                    v-model="infoNotaPost.casoObsRecNac_Genero">
-                                                <label class="btn btn-radio margenRadio" for="masculinoCaso">Masculino</label>
+                                                    v-model="infoNotaPost.casoObsRecNac5_Genero">
+                                                <label class="btn btn-radio margenRadio" for="masculinoCaso5">Masculino</label>
 
                                                 <input type="radio"
                                                     class="btn-check"
-                                                    name="generoCaso"
-                                                    id="femeninoCaso"
+                                                    name="generoCaso5"
+                                                    id="femeninoCaso5"
                                                     autocomplete="off"
                                                     value="Femenino"
-                                                    v-model="infoNotaPost.casoObsRecNac_Genero">
-                                                <label class="btn btn-radio" for="femeninoCaso">Femenino</label>                            
+                                                    v-model="infoNotaPost.casoObsRecNac5_Genero">
+                                                <label class="btn btn-radio" for="femeninoCaso5">Femenino</label>                            
                                             </div>
 
                                             <!-- Hora de Nacimiento -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Hora de Nacimiento</label>
                                                 <input type="time"
                                                     class="form-control"
                                                     id="horaNacimiento"
-                                                    v-model="infoNotaPost.casoObsRecNac_HrNacimiento"
-                                                    :class="infoNotaPost.casoObsRecNac_HrNacimiento != '' && infoNotaPost.casoObsRecNac_HrNacimiento != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac5_HrNacimiento"
+                                                    :class="infoNotaPost.casoObsRecNac5_HrNacimiento != '' && infoNotaPost.casoObsRecNac5_HrNacimiento != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Alumbramiento -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-7">
                                                 <label for="" class="form-label fw-bold">Alumbramiento</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Alumbramiento"
-                                                    :class="infoNotaPost.casoObsRecNac_Alumbramiento != '' && infoNotaPost.casoObsRecNac_Alumbramiento != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac5_Alumbramiento"
+                                                    :class="infoNotaPost.casoObsRecNac5_Alumbramiento != '' && infoNotaPost.casoObsRecNac5_Alumbramiento != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Apgar 1 min -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Apgar 1 min</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Apgar1"
-                                                    :class="infoNotaPost.casoObsRecNac_Apgar1 != '' && infoNotaPost.casoObsRecNac_Apgar1 != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac5_Apgar1"
+                                                    :class="infoNotaPost.casoObsRecNac5_Apgar1 != '' && infoNotaPost.casoObsRecNac5_Apgar1 != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Apgar 5 min -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Apgar 5 min</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Apgar5"
-                                                    :class="infoNotaPost.casoObsRecNac_Apgar5 != '' && infoNotaPost.casoObsRecNac_Apgar5 != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac5_Apgar5"
+                                                    :class="infoNotaPost.casoObsRecNac5_Apgar5 != '' && infoNotaPost.casoObsRecNac5_Apgar5 != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Capurro -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-8">
                                                 <label for="" class="form-label fw-bold">Capurro</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Capurro"
-                                                    :class="infoNotaPost.casoObsRecNac_Capurro != '' && infoNotaPost.casoObsRecNac_Capurro != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac5_Capurro"
+                                                    :class="infoNotaPost.casoObsRecNac5_Capurro != '' && infoNotaPost.casoObsRecNac5_Capurro != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Peso (gm) -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Peso (gm)</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Peso"
-                                                    :class="infoNotaPost.casoObsRecNac_Peso != '' && infoNotaPost.casoObsRecNac_Peso != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac5_Peso"
+                                                    :class="infoNotaPost.casoObsRecNac5_Peso != '' && infoNotaPost.casoObsRecNac5_Peso != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Talla (cm) -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Talla (cm)</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Talla"
-                                                    :class="infoNotaPost.casoObsRecNac_Talla != '' && infoNotaPost.casoObsRecNac_Talla != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac5_Talla"
+                                                    :class="infoNotaPost.casoObsRecNac5_Talla != '' && infoNotaPost.casoObsRecNac5_Talla != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
                                         </div>
                                     </fieldset>
                                 </div>
-
+                                <!-- Formulario seis productos -->
                                 <div class="tab-pane fade" id="caso-seis">
-                                    <fieldset class="bordeScheduler">
+                                    <fieldset class="bordeScheduler" :disabled="Number(infoNotaPost.casoObsRecNac_NumProd) ==6 ? false : true">
                                         <h5 class="fw-bold">Datos del bebé 6</h5>
                                         <div class="row g-3">
                                             <!-- Género -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <label for="" class="form-label col-12 fw-bold">Género</label>
                                                 <input type="radio"
                                                     class="btn-check"
-                                                    name="generoCaso"
+                                                    name="generoCaso6"
                                                     id="masculinoCaso"
                                                     autocomplete="off"
                                                     value="Masculino"
-                                                    v-model="infoNotaPost.casoObsRecNac_Genero">
+                                                    v-model="infoNotaPost.casoObsRecNac6_Genero">
                                                 <label class="btn btn-radio margenRadio" for="masculinoCaso">Masculino</label>
 
                                                 <input type="radio"
                                                     class="btn-check"
-                                                    name="generoCaso"
+                                                    name="generoCaso6"
                                                     id="femeninoCaso"
                                                     autocomplete="off"
                                                     value="Femenino"
-                                                    v-model="infoNotaPost.casoObsRecNac_Genero">
+                                                    v-model="infoNotaPost.casoObsRecNac6_Genero">
                                                 <label class="btn btn-radio" for="femeninoCaso">Femenino</label>                            
                                             </div>
 
                                             <!-- Hora de Nacimiento -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Hora de Nacimiento</label>
                                                 <input type="time"
                                                     class="form-control"
                                                     id="horaNacimiento"
-                                                    v-model="infoNotaPost.casoObsRecNac_HrNacimiento"
-                                                    :class="infoNotaPost.casoObsRecNac_HrNacimiento != '' && infoNotaPost.casoObsRecNac_HrNacimiento != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac6_HrNacimiento"
+                                                    :class="infoNotaPost.casoObsRecNac6_HrNacimiento != '' && infoNotaPost.casoObsRecNac6_HrNacimiento != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Alumbramiento -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-7">
                                                 <label for="" class="form-label fw-bold">Alumbramiento</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Alumbramiento"
-                                                    :class="infoNotaPost.casoObsRecNac_Alumbramiento != '' && infoNotaPost.casoObsRecNac_Alumbramiento != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac6_Alumbramiento"
+                                                    :class="infoNotaPost.casoObsRecNac6_Alumbramiento != '' && infoNotaPost.casoObsRecNac6_Alumbramiento != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Apgar 1 min -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Apgar 1 min</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Apgar1"
-                                                    :class="infoNotaPost.casoObsRecNac_Apgar1 != '' && infoNotaPost.casoObsRecNac_Apgar1 != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac6_Apgar1"
+                                                    :class="infoNotaPost.casoObsRecNac6_Apgar1 != '' && infoNotaPost.casoObsRecNac6_Apgar1 != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Apgar 5 min -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Apgar 5 min</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Apgar5"
-                                                    :class="infoNotaPost.casoObsRecNac_Apgar5 != '' && infoNotaPost.casoObsRecNac_Apgar5 != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac6_Apgar5"
+                                                    :class="infoNotaPost.casoObsRecNac6_Apgar5 != '' && infoNotaPost.casoObsRecNac6_Apgar5 != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Capurro -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-8">
                                                 <label for="" class="form-label fw-bold">Capurro</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Capurro"
-                                                    :class="infoNotaPost.casoObsRecNac_Capurro != '' && infoNotaPost.casoObsRecNac_Capurro != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac6_Capurro"
+                                                    :class="infoNotaPost.casoObsRecNac6_Capurro != '' && infoNotaPost.casoObsRecNac6_Capurro != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Peso (gm) -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Peso (gm)</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Peso"
-                                                    :class="infoNotaPost.casoObsRecNac_Peso != '' && infoNotaPost.casoObsRecNac_Peso != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac6_Peso"
+                                                    :class="infoNotaPost.casoObsRecNac6_Peso != '' && infoNotaPost.casoObsRecNac6_Peso != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
 
                                             <!-- Talla (cm) -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="" class="form-label fw-bold">Talla (cm)</label>
                                                 <input type="text"
                                                     class="form-control"
                                                     id=""
-                                                    v-model="infoNotaPost.casoObsRecNac_Talla"
-                                                    :class="infoNotaPost.casoObsRecNac_Talla != '' && infoNotaPost.casoObsRecNac_Talla != undefined ?
+                                                    v-model="infoNotaPost.casoObsRecNac6_Talla"
+                                                    :class="infoNotaPost.casoObsRecNac6_Talla != '' && infoNotaPost.casoObsRecNac6_Talla != undefined ?
                                                         'form-control border border-success formSombra' : 'form-control'">
                                             </div>
                                         </div>
                                     </fieldset>
                                 </div>
-                            </div>
-                                                                                    
+                            </div>                                                                                    
                         </div>
 
                         <div class="col-md-10"></div>
@@ -1023,7 +918,7 @@
                                         > GUARDAR </button>
                             </template>
                             <template v-else>
-                                <button data-bs-toggle="tab" 
+                                <button data-bs-toggle="tab"
                                         type="submit"
                                         class="btn btn-guardar-info fw-bold"
                                         @click="postAnestStore.updateNotaPA(infoNotaPost, preIdStore.pacienteID._id, postAnestStore.TecnicaAnestesica)"
@@ -1099,8 +994,7 @@ export default defineComponent({
     margin-right: 10px;
 }
 fieldset.bordeScheduler {
-    border: 1px groove #ddd !important;
-    padding: 1em 1em 1em 1em !important;
+    padding: 0 0 0 0 !important;
     margin: 1em 0 0 0 !important;
     -webkit-box-shadow:  0px 0px 0px 0px #000;
             box-shadow:  0px 0px 0px 0px #000;
@@ -1139,10 +1033,10 @@ legend.bordeScheduler {
     --bs-btn-bg: #fff;
     --bs-btn-color: #002D60;    
     --bs-btn-border-color: #A0A6B2;
-    --bs-btn-hover-bg: #6BD99B;
+    --bs-btn-hover-bg: #10b981;
     --bs-btn-hover-color: #fff;
     --bs-btn-hover-border-color: #A0A6B2;          
-    --bs-btn-active-bg: #6BD99B;
+    --bs-btn-active-bg: #10b981;
     --bs-btn-active-color: #fff;
     --bs-btn-active-border-color: #A0A6B2;
     height: auto;
@@ -1176,5 +1070,8 @@ legend.bordeScheduler {
 h5{
     color: #002D60;
     margin-bottom: 10px;    
+}
+.gap-caso{
+    gap:10px
 }
 </style>
