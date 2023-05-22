@@ -150,8 +150,46 @@ export const useMedicamentoStore = defineStore("medicamento", {
 
     /** MVS **/
     async pingMonitor(nomMonitor: string, dirIPMonitor: string){
-      console.log("->pingMonitor: " + nomMonitor +
-                  "\nIP: " + dirIPMonitor);
+      await apiAxios({
+        url: "http://localhost:5000/mvs",
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + userStore.token,
+        },
+        data: {
+          nombreMVS: nomMonitor,
+          dirIPMVS: dirIPMonitor,
+        },
+      })
+        .then((res: any) => {
+          swal.fire({
+            title: "Monitor registrado",
+            icon: "success",
+            showConfirmButton: false,
+            toast: true,
+            position: "top-end",
+            timer: 2500,
+            timerProgressBar: true,
+          });
+        })
+        .catch((e: any) => {
+          if (e.response) {
+            /* Mensaje de registro fallido */
+            swal.fire({
+              title: "No se puede alcanzar este monitor",
+              icon: "error",
+              showConfirmButton: false,
+              toast: true,
+              timer: 2500,
+              timerProgressBar: true,
+              position: "top-end",
+            });
+          } else if (e.request) {
+            // console.log(e.request);
+          } else {
+            // console.log("ErrorAx: ", e);
+          }
+        });
     },
 
     async listMonitor(nomMonitor: string, dirIPMonitor: string){

@@ -491,8 +491,7 @@ export default defineComponent({
       await medStore.pingMonitor(String(this.configMonitor.nomMonitor),
                                  String(this.configMonitor.dirIPMonitor));
 
-      await medStore.listMonitor(String(this.configMonitor.nomMonitor),
-                                 String(this.configMonitor.dirIPMonitor));
+      // await medStore.listMonitor();
     },
   },
 });
