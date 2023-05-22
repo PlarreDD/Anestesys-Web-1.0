@@ -1,9 +1,7 @@
 import { exec } from 'child_process';
 import ping from 'ping';
 
-const deviceIP = '192.168.0.26';
-
-function pingDevice(deviceIP: string): Promise<boolean> {
+export function pingDevice(deviceIP: string): Promise<boolean> {
   return new Promise<boolean>((resolve, reject) => {
     ping.sys.probe(deviceIP, (isAlive: boolean | null) => {
       if (isAlive !== null) {
@@ -13,9 +11,9 @@ function pingDevice(deviceIP: string): Promise<boolean> {
       }
     }, { timeout: 2 });
   });
-}
+};
 
-function getConnectedDevices(callback: (devices: string[]) => void) {
+export function getConnectedDevices(callback: (devices: string[]) => void) {
   exec('arp -a', (error, stdout) => {
     if (error) {
       console.error(`Error ejecutando el comando arp: ${error.message}`);
@@ -36,23 +34,4 @@ function getConnectedDevices(callback: (devices: string[]) => void) {
 
     callback(devices);
   });
-}
-
-pingDevice(deviceIP)
-  .then(isAlive => {
-    if (isAlive) {
-      console.log(`El dispositivo ${deviceIP} está activo.`);
-    } else {
-      console.log(`El dispositivo ${deviceIP} no está activo.`);
-    }
-  })
-  .catch(error => {
-    console.error(`Error al hacer ping al dispositivo ${deviceIP}: ${error.message}`);
-  });
-
-getConnectedDevices(devices => {
-  console.log('Dispositivos conectados:');
-  devices.forEach(device => {
-    console.log(device);
-  });
-});
+};

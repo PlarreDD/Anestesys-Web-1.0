@@ -13,22 +13,25 @@ import notaRouter from './routes/nota.route';
 import recuperaRouter from './routes/recuperacion.route';
 import notapaRouter from './routes/notapa.route';
 import transRouter from "./routes/datosv.route";
+import { pingDevice,
+         getConnectedDevices } from "./controllers/scanMVS.controller"
 
 const app = express();
 const whiteList = [process.env.ORIGIN1, process.env.ORIGIN2];
+const deviceIP = '192.168.0.26';
 
 app.use(
-    cors({
-        origin: function(origin, callback){
-            if(!origin || whiteList.includes(origin)){
-                return callback(null, origin);
-            }
-            return callback(
-                Error("Error de CORS origin " + origin + " No autorizado")
-            );
-        },
-        credentials: true,
-    })
+  cors({
+    origin: function(origin, callback){
+      if(!origin || whiteList.includes(origin)){
+          return callback(null, origin);
+      }
+      return callback(
+          Error("Error de CORS origin " + origin + " No autorizado")
+      );
+    },
+    credentials: true,
+  })
 );
 
 app.use(express.json()); // Transforma la req.body en formato json
@@ -53,3 +56,22 @@ app.use('/medicamentos', medicamentoRouter);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () =>
     console.log("http://localhost:" + PORT));
+
+/* Funciones de prueba */
+pingDevice(deviceIP)
+  .then(isAlive => {
+    if (isAlive)
+      console.log(`El dispositivo ${deviceIP} está activo.`);
+    else
+      console.log(`El dispositivo ${deviceIP} no está activo.`);
+    })
+  .catch(error => {
+    console.error(`Error al hacer ping al dispositivo ${deviceIP}: ${error.message}`);
+  });
+
+getConnectedDevices(devices => {
+  console.log('Dispositivos conectados:');
+  devices.forEach(device => {
+    console.log(device);
+  });
+});

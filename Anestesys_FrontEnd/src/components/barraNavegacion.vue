@@ -61,7 +61,7 @@
                   type="button"
                   class="btn btn-configuracion fw-bold"
                   data-bs-toggle="modal"
-                  data-bs-target="#monitorModal"
+                  data-bs-target="#mvsModal"
                 >
                   <img src="images/imgIcon/monitor.svg" />
                   &nbsp;&nbsp;&nbsp;Configuración de monitor
@@ -242,6 +242,130 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal MVS -->
+    <div class="modal"
+         id="mvsModal"
+         tabindex="-1"
+         aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
+        <div class="modal-content colorModalMedicamentos modal-med-largo">
+          <div class="input-group mb-3">
+            <div class="modal-body">
+              <div class="col-md-12">
+                <div class="row g-3">
+                  <div class="col-md-11">
+                    <h5 class="text-white fw-bold">MONITOR DE SIGNOS VITALES</h5>
+                    <h6 class="text-white fw-bold">Configuración de Monitor</h6>
+                  </div>
+
+                  <div class="col-md-1 div-img">
+                    <button
+                      type="button"
+                      class="btn fw-bold"
+                      data-bs-dismiss="modal"
+                      aria-label="Close">
+                      <i class="text-white">
+                        <font-awesome-icon icon="fa-solid fa-xmark" size="2xl" />
+                      </i>
+                    </button>
+                  </div>
+
+                  <form class="row g-3" @submit.prevent="">
+                    <div class="col-md-4">
+                      <!-- Caja de Texto Dirección IP -->
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="infoMedicamento.codigoMedicamento"
+                        placeholder="Dirección IP"/>
+
+                      
+                      <input
+                        type="hidden"
+                        v-model="infoMedicamento.idMedicamento"/>
+                    </div>
+
+                    <div class="col-md-1"></div>
+
+                    <div class="col-md-1">
+                      <template v-if="editar === false">
+                        <button
+                          type="button"
+                          class="btn btn-modal-medicamentos fw-bold"
+                          @click=""> Agregar
+                        </button>
+                      </template>
+
+                      <template v-else>
+                        <button
+                          type="button"
+                          class="btn btn-modal-medicamentos fw-bold"
+                          @click=""> Actualizar
+                        </button>
+                      </template>
+                    </div>
+                  </form>
+
+                  <div class="col-md-12">
+                    <div class="deslizar">
+                      <table class="table table-responsive">
+                        <thead>
+                          <tr>
+                            <th class="text-white">#</th>
+                            <th class="text-white">Nombre</th>
+                            <th class="text-white">Direción IP</th>
+                            <th class="text-white"></th>
+                            <th class="text-white"></th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr v-for="( medicamento, index) in medStore.medicamentos">
+                            <td class="text-white">
+                              <!-- {{  }} -->
+                            </td>
+
+                            <td class="text-white">
+                              <!-- {{  }} -->
+                            </td>
+
+                            <td class="text-white">
+                              <!-- {{  }} -->
+                            </td>
+                            
+                            <td>
+                              <button class="btn"
+                                      @click="">
+                                <font-awesome-icon 
+                                  icon="fa-solid fa-pen-to-square" 
+                                  size="lg" 
+                                  class="text-white"/>
+                              </button>
+                            </td>
+
+                            <td>
+                              <button class="btn"
+                                      @click="">
+                                <font-awesome-icon 
+                                    icon="fa-solid fa-trash" 
+                                    size="lg" class="text-white"/>
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
