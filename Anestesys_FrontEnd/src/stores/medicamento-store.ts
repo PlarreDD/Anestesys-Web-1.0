@@ -9,6 +9,7 @@ const userStore = useUserStore();
 export const useMedicamentoStore = defineStore("medicamento", {
   state: () => ({
     medicamentos: ref(null),
+    monitor: ref(null)
   }),
 
   actions: {
@@ -192,13 +193,45 @@ export const useMedicamentoStore = defineStore("medicamento", {
         });
     },
 
-    async listMonitor(nomMonitor: string, dirIPMonitor: string){
-      console.log("->listMonitor: " + nomMonitor +
-                  "\nIP: " + dirIPMonitor);
+    async listMonitor(){
+        await apiAxios({
+          url: "http://localhost:5000/mvs",
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + userStore.token,
+          },
+        })
+        .then((res: any) => {
+          this.monitor = res.data.monitor;
+        })
+        .catch((e: any) => {
+        });
     },
 
-    async deleteMonitor(dirIPMonitor: string){
-      console.log("->deleteMonitor:\nIP: " + dirIPMonitor);
+    async deleteMonitor(infoMonitor: any){
+      await apiAxios({
+        url: `http://localhost:5000/mvs/${String(infoMonitor)}`,
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + userStore.token,
+        },
+      })
+        .then((res: any) => {
+          this.monitor = res.data.monitor;
+
+          swal.fire({
+            title: "Monitor eliminado correctamente",
+            icon: "success",
+            showConfirmButton: false,
+            toast: true,
+            position: "top-end",
+            timer: 2500,
+            timerProgressBar: true,
+          });
+        })
+        .catch((e: any) => {
+        //   console.log(e);
+        });
     }
   },
 });

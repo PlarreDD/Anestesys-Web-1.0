@@ -301,42 +301,36 @@
                       <table class="table table-responsive">
                         <thead>
                           <tr>
-                            <!-- <th class="text-white">#</th> -->
-                            <th class="text-white">Nombre</th>
+                            <th class="text-white">#</th>
+                            <th class="text-white">Modelo</th>
                             <th class="text-white">Direción IP</th>
-                            <!-- <th class="text-white"></th> -->
+                            <th class="text-white">Estatus</th>
                             <th class="text-white"></th>
                           </tr>
                         </thead>
 
                         <tbody>
-                          <tr v-for="( medicamento, index) in medStore.medicamentos">
-                            <!-- <td class="text-white"> -->
-                              <!-- {{  }} -->
-                            <!-- </td> -->
-
+                          <tr v-for="( monitor, index) in medStore.monitor">
                             <td class="text-white">
-                              <!-- {{  }} -->
+                              {{ index + 1 }}
                             </td>
 
                             <td class="text-white">
-                              <!-- {{  }} -->
+                              {{ monitor.nombreMVS }}
                             </td>
-                            
-                            <!-- <td>
-                              <button class="btn"
-                                      @click="">
-                                <font-awesome-icon 
-                                  icon="fa-solid fa-pen-to-square" 
-                                  size="lg" 
-                                  class="text-white"/>
-                              </button>
-                            </td> -->
+
+                            <td class="text-white">
+                              {{ monitor.dirIPMVS }}
+                            </td>
+
+                            <td class="text-white">
+                              {{  }}
+                            </td>                            
 
                             <!-- Eliminar MVS -->
                             <td>
                               <button class="btn"
-                                      @click="medStore.deleteMonitor('192.168.0.0')">
+                                      @click="validaEliminarMonitor(monitor._id)">
                                 <font-awesome-icon 
                                     icon="fa-solid fa-trash" 
                                     size="lg" class="text-white"/>
@@ -382,6 +376,7 @@ export default defineComponent({
 
   mounted() {
     medStore.getMedicamentosList();
+    medStore.listMonitor();
   },
 
   methods: {
@@ -488,11 +483,53 @@ export default defineComponent({
     },
 
     async agregarMVS(){
-      await medStore.pingMonitor(String(this.configMonitor.nomMonitor),
+      if (
+        this.configMonitor.nomMonitor == undefined ||
+        this.configMonitor.nomMonitor == ""
+      ) {
+        swal.fire({
+          title: "Ingrese el modelo del monitor",
+          icon: "warning",
+          showConfirmButton: false,
+          showCloseButton: true,
+          toast: true,
+          timer: 2500,
+          timerProgressBar: true,
+          position: "top-end",
+        });
+      } else {
+        await medStore.pingMonitor(String(this.configMonitor.nomMonitor),
                                  String(this.configMonitor.dirIPMonitor));
 
-      // await medStore.listMonitor();
+        this.configMonitor.nomMonitor = "";
+        this.configMonitor.dirIPMonitor = "";
+
+        await medStore.listMonitor();
+      }
+      
     },
+
+    async validaEliminarMonitor(idMonitor) {
+      swal
+        .fire({
+          html: "¿Esta seguro de eliminar el monitor?",
+          icon: "warning",
+          showConfirmButton: true,
+          showCancelButton: true,
+          toast: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            this.eliminarMonitor(idMonitor);
+          }
+        });
+    },
+
+    async eliminarMonitor(idMonitor) {
+      await medStore.deleteMonitor(idMonitor);
+      await medStore.listMonitor();
+    },
+
   },
 });
 </script>
