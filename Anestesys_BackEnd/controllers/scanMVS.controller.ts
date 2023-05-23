@@ -4,16 +4,28 @@ import { MVS } from "../models/Medicamento";
 import { Response } from "express";
 
 export const registerMSV = async (req: any, res: Response) => {
-  try {
-      const { nombreMVS, dirIPMVS} = req.body;
-
-      const monitor = new MVS({ nombreMVS, dirIPMVS});
-      await monitor.save();
-
-      return res.json({ monitor });
-  } catch (error) {
-      return res.status(500).json({ Error: 'Error de servidor' });
-  }
+  const { nombreMVS, dirIPMVS} = req.body;
+  console.log("ping: " + dirIPMVS);
+  
+  pingDevice(dirIPMVS)
+    .then(async isAlive => {
+      if (isAlive){
+        console.log(`El dispositivo ${dirIPMVS} está activo.`);
+        
+        try {
+          const monitor = new MVS({ nombreMVS, dirIPMVS});
+          await monitor.save();
+          return res.json({ monitor });          
+        } catch (error) {
+          return res.status(500).json({ Error: 'Error de servidor' });          
+        }
+      }
+      else
+        return new Error(`El dispositivo ${dirIPMVS} no está activo.`);
+      })
+    .catch(error => {
+      console.error(`Error al hacer ping al dispositivo ${dirIPMVS}: ${error.message}`);
+    });
 };
 
 export const listMSV = async (req: any, res: Response) => {

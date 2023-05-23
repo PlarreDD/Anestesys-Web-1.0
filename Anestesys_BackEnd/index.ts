@@ -15,6 +15,9 @@ import notapaRouter from './routes/notapa.route';
 import transRouter from "./routes/datosv.route";
 import mvsRouter from "./routes/mvs.route";
 
+// import { pingDevice,
+//   getConnectedDevices } from "./controllers/scanMVS.controller"
+
 const app = express();
 const whiteList = [process.env.ORIGIN1, process.env.ORIGIN2];
 
@@ -55,3 +58,24 @@ app.use('/mvs', mvsRouter);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () =>
     console.log("http://localhost:" + PORT));
+
+/* Funciones de prueba */
+// const deviceIP = '192.168.0.26';
+
+// pingDevice(deviceIP)
+//   .then(isAlive => {
+//     if (isAlive)
+//       console.log(`El dispositivo ${deviceIP} está activo.`);
+//     else
+//       console.log(`El dispositivo ${deviceIP} no está activo.`);
+//     })
+//   .catch(error => {
+//     console.error(`Error al hacer ping al dispositivo ${deviceIP}: ${error.message}`);
+//   });
+
+// getConnectedDevices(devices => {
+//   console.log('Dispositivos conectados:');
+//   devices.forEach(device => {
+//     console.log(device);
+//   });
+// });
