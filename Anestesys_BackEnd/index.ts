@@ -15,9 +15,6 @@ import notapaRouter from './routes/notapa.route';
 import transRouter from "./routes/datosv.route";
 import mvsRouter from "./routes/mvs.route";
 
-// import { pingDevice,
-//   getConnectedDevices } from "./controllers/scanMVS.controller"
-
 const app = express();
 const whiteList = [process.env.ORIGIN1, process.env.ORIGIN2];
 
@@ -59,23 +56,31 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () =>
     console.log("http://localhost:" + PORT));
 
-/* Funciones de prueba */
-// const deviceIP = '192.168.0.26';
+import net from 'net'
+// import hl7 from 'node-hl7'
 
-// pingDevice(deviceIP)
-//   .then(isAlive => {
-//     if (isAlive)
-//       console.log(`El dispositivo ${deviceIP} está activo.`);
-//     else
-//       console.log(`El dispositivo ${deviceIP} no está activo.`);
-//     })
-//   .catch(error => {
-//     console.error(`Error al hacer ping al dispositivo ${deviceIP}: ${error.message}`);
-//   });
+const HOST = '192.168.0.103';  // direccion ip de la comptuadora
+const PORT_HL7 = 6664;        // puerto del monitor de signos vitales
 
-// getConnectedDevices(devices => {
-//   console.log('Dispositivos conectados:');
-//   devices.forEach(device => {
-//     console.log(device);
-//   });
-// });
+const server = net.createServer(function(socket) {
+  console.log('Connected to vital sign monitor');
+
+  // Listen for data from the vital sign monitor
+  socket.on('data', function(data) {    
+    console.log('DATA:', data.toString());    
+  });
+
+  // Handle socket errors
+  socket.on('error', function(error) {
+    console.error('Socket error:', error);
+  });
+
+  // Handle socket disconnects
+  socket.on('close', function() {
+    console.log('Disconnected from vital sign monitor');
+  });
+});
+
+server.listen(PORT_HL7, HOST, function() {
+  console.log('Server listening on', HOST + ':' + PORT_HL7);
+});
