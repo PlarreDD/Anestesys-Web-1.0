@@ -53,34 +53,6 @@ app.use('/medicamentos', medicamentoRouter);
 app.use('/mvs', mvsRouter);
 
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () =>
     console.log("http://localhost:" + PORT));
-
-import net from 'net'
-// import hl7 from 'node-hl7'
-
-const HOST = '192.168.0.103';  // direccion ip de la comptuadora
-const PORT_HL7 = 6664;        // puerto del monitor de signos vitales
-
-const server = net.createServer(function(socket) {
-  console.log('Connected to vital sign monitor');
-
-  // Listen for data from the vital sign monitor
-  socket.on('data', function(data) {    
-    console.log('DATA:', data.toString());    
-  });
-
-  // Handle socket errors
-  socket.on('error', function(error) {
-    console.error('Socket error:', error);
-  });
-
-  // Handle socket disconnects
-  socket.on('close', function() {
-    console.log('Disconnected from vital sign monitor');
-  });
-});
-
-server.listen(PORT_HL7, HOST, function() {
-  console.log('Server listening on', HOST + ':' + PORT_HL7);
-});

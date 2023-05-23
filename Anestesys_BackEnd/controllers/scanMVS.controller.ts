@@ -2,10 +2,33 @@ import { exec } from 'child_process';
 import ping from 'ping';
 import { MVS } from "../models/Medicamento";
 import { Response } from "express";
+import net from 'net'
+
+// const HOST = '192.168.0.100';
+// const HL7_PORT = 6664;
+
+export const server = net.createServer(function(socket) {
+  console.log('Connected to vital sign monitor');
+
+  socket.on('data', function(data) {    
+    console.log('DATA:', data.toString());    
+  });
+
+  socket.on('error', function(error) {
+    console.error('Socket error:', error);
+  });
+
+  socket.on('close', function() {
+    console.log('Disconnected from vital sign monitor');
+  });
+});
+
+// server.listen(HL7_PORT, HOST, function() {
+//   console.log('Server listening on', HOST + ':' + HL7_PORT);
+// });
 
 export const registerMSV = async (req: any, res: Response) => {
   const { nombreMVS, dirIPMVS} = req.body;
-  console.log("ping: " + dirIPMVS);
   
   pingDevice(dirIPMVS)
     .then(async isAlive => {
@@ -89,17 +112,6 @@ export function getConnectedDevices(callback: (devices: string[]) => void) {
 };
 
 /* Funciones de prueba */
-// pingDevice(deviceIP)
-//   .then(isAlive => {
-//     if (isAlive)
-//       console.log(`El dispositivo ${deviceIP} está activo.`);
-//     else
-//       console.log(`El dispositivo ${deviceIP} no está activo.`);
-//     })
-//   .catch(error => {
-//     console.error(`Error al hacer ping al dispositivo ${deviceIP}: ${error.message}`);
-//   });
-
 // getConnectedDevices(devices => {
 //   console.log('Dispositivos conectados:');
 //   devices.forEach(device => {
