@@ -9,6 +9,7 @@ const userStore = useUserStore();
 export const useMedicamentoStore = defineStore("medicamento", {
   state: () => ({
     medicamentos: ref(null),
+    monitor: ref(null)
   }),
 
   actions: {
@@ -147,5 +148,90 @@ export const useMedicamentoStore = defineStore("medicamento", {
         //   console.log(e);
         });
     },
+
+    /** MVS **/
+    async pingMonitor(nomMonitor: string, dirIPMonitor: string){
+      await apiAxios({
+        url: "http://localhost:5000/mvs",
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + userStore.token,
+        },
+        data: {
+          nombreMVS: nomMonitor,
+          dirIPMVS: dirIPMonitor,
+        },
+      })
+        .then((res: any) => {
+          swal.fire({
+            title: "Monitor registrado",
+            icon: "success",
+            showConfirmButton: false,
+            toast: true,
+            position: "top-end",
+            timer: 2500,
+            timerProgressBar: true,
+          });
+        })
+        .catch((e: any) => {
+          if (e.response) {
+            /* Mensaje de registro fallido */
+            swal.fire({
+              title: "No se puede alcanzar este monitor",
+              icon: "error",
+              showConfirmButton: false,
+              toast: true,
+              timer: 2500,
+              timerProgressBar: true,
+              position: "top-end",
+            });
+          } else if (e.request) {
+            // console.log(e.request);
+          } else {
+            // console.log("ErrorAx: ", e);
+          }
+        });
+    },
+
+    async listMonitor(){
+        await apiAxios({
+          url: "http://localhost:5000/mvs",
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + userStore.token,
+          },
+        })
+        .then((res: any) => {
+          this.monitor = res.data.monitor;
+        })
+        .catch((e: any) => {
+        });
+    },
+
+    async deleteMonitor(infoMonitor: any){
+      await apiAxios({
+        url: `http://localhost:5000/mvs/${String(infoMonitor)}`,
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + userStore.token,
+        },
+      })
+        .then((res: any) => {
+          this.monitor = res.data.monitor;
+
+          swal.fire({
+            title: "Monitor eliminado correctamente",
+            icon: "success",
+            showConfirmButton: false,
+            toast: true,
+            position: "top-end",
+            timer: 2500,
+            timerProgressBar: true,
+          });
+        })
+        .catch((e: any) => {
+        //   console.log(e);
+        });
+    }
   },
 });

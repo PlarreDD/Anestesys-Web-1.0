@@ -124,10 +124,10 @@ export const useUserStore = defineStore('user', {
                                 swal.fire({
                                     html: '<center></br>Usuario: <b>' + email +
                                           '</b></br>Contraseña: <b>' + genPswd.value +
-                                          '</b></center></br></br>Guarde esta contraseña en</br>un lugar seguro o consulte su correo',                                    
+                                          '</b></center></br></br>Guarde esta contraseña en</br>un lugar seguro o consulte su correo',
                                     icon: 'info',
                                     showConfirmButton: true,
-                                    showCloseButton: false,                                    
+                                    showCloseButton: false,
                                     width:680,
                                 });
                             }
@@ -169,10 +169,10 @@ export const useUserStore = defineStore('user', {
                             if (result.isConfirmed) {
                                 this.token = null;
                                 this.expiresIn = null;
-                                window.location.href="/"                               
+                                window.location.href="/"
                             }
                         })
-                    })                    
+                    })
         },
     }
 });

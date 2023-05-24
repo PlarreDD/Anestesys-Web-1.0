@@ -12,23 +12,24 @@ import planRouter from './routes/plan.route';
 import notaRouter from './routes/nota.route';
 import recuperaRouter from './routes/recuperacion.route';
 import notapaRouter from './routes/notapa.route';
-import  transRouter from "./routes/datosv.route";
+import transRouter from "./routes/datosv.route";
+import mvsRouter from "./routes/mvs.route";
 
 const app = express();
 const whiteList = [process.env.ORIGIN1, process.env.ORIGIN2];
 
 app.use(
-    cors({
-        origin: function(origin, callback){
-            if(!origin || whiteList.includes(origin)){
-                return callback(null, origin);
-            }
-            return callback(
-                Error("Error de CORS origin " + origin + " No autorizado")
-            );
-        },
-        credentials: true,
-    })
+  cors({
+    origin: function(origin, callback){
+      if(!origin || whiteList.includes(origin)){
+          return callback(null, origin);
+      }
+      return callback(
+          Error("Error de CORS origin " + origin + " No autorizado")
+      );
+    },
+    credentials: true,
+  })
 );
 
 app.use(express.json()); // Transforma la req.body en formato json
@@ -49,7 +50,9 @@ app.use('/notapa', notapaRouter);
 app.use('/recupera', recuperaRouter);
 /*----------------- Menú ------------------*/
 app.use('/medicamentos', medicamentoRouter);
+app.use('/mvs', mvsRouter);
 
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () =>
     console.log("http://localhost:" + PORT));
