@@ -22,7 +22,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    pid: pid,                    
+                    pid: pid,
                     // Datos del Ventilador
                     modosVentilacion: regTransAnest.modosVentilacion,
                     peep: regTransAnest.peep,
@@ -212,7 +212,7 @@ export const useTransAnestStore = defineStore('transAn', {
                                         "Hr":Hr}]
                 },
             })
-            .then((res: any) => {                            
+            .then((res: any) => {
                 swal.fire({
                     title: 'Modo de ventilación actualizado correctamente',
                     icon: 'success',
@@ -221,7 +221,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     position: 'top-end',
                     timer: 2000,
                     timerProgressBar: true
-                })                
+                })
             })
             .catch((e: any) => {
                 // console.log("error: " + e);
@@ -236,7 +236,7 @@ export const useTransAnestStore = defineStore('transAn', {
                   Authorization: "Bearer " + userStore.token,
                 },
               })
-              .then((res: any) => {      
+              .then((res: any) => {
                   swal.fire({
                     title: "Modo de ventilación eliminado correctamente",
                     icon: "success",
@@ -315,6 +315,6 @@ export const useTransAnestStore = defineStore('transAn', {
             .catch((e: any) => {
                 // console.log("error: " + e);
             });
-        }
+        },
     }
 })
