@@ -1,5 +1,10 @@
 import { Response } from "express";
 import { MenuTrans } from "../models/TransAnestesico";
+import { UpdateResult } from "mongodb";
+
+// interface TiempoResult {
+//     tiemposQX: any[];
+// };
 
 /******************* Menu Trans Anestesico *******************/
 export const saveMenuTrans = async (req: any, res: Response) => {
@@ -309,7 +314,50 @@ export const UpdateBalanceH = async (req: any, res: Response) => {
     }
 };
 
-/* Actualización Tiempos QX */
+/* Tiempos QX */
+export const saveTiemposQX = async (req: any, res: Response) => {
+    try {
+        const { pid,
+                // Tiempos Qx
+                ingresoQX, inicioAn, inicioCx, finCx, finAn, egresoQx,
+              } = req.body;
+
+        var tiempo: UpdateResult | null = await MenuTrans.findOne({ pid: pid });
+        const tiempo2: any = tiempo;
+        
+        if (tiempo) {
+            console.log("Existe, Actualiza con: " + ingresoQX, inicioAn, inicioCx, finCx, finAn, egresoQx + "\n" + tiempo2?.tiemposQX[0]._id);
+            tiempo = await MenuTrans.updateOne({ "tiemposQX._id": tiempo2?.tiemposQX[0]._id },
+                                               { $set : { "tiemposQX.$.inicioAn": inicioAn,
+                                                          "tiemposQX.$.inicioCx": inicioCx,
+                                                          "tiemposQX.$.finCx": finCx,
+                                                          "tiemposQX.$.finAn": finAn,
+                                                        }
+                                               });
+
+        } else {
+            console.log("No existe, Crea con: " + ingresoQX, inicioAn, inicioCx, finCx, finAn, egresoQx,);
+            const menuTrans  = new MenuTrans({ pid,
+                                                // Datos del ventilador
+                                                tiemposQX: {
+                                                    ingresoQX: ingresoQX,
+                                                    inicioAn: inicioAn,
+                                                    inicioCx: inicioCx,
+                                                    finCx: finCx,
+                                                    finAn: finAn,
+                                                    egresoQx: egresoQx,
+                                                },
+                                });
+
+            await menuTrans.save();
+        }
+
+        return res.json({ tiempo });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 // Basado en updateVentilacion
 export const updateTiempoQx = async (req: any, res: Response) => {
     try {
@@ -339,3 +387,4 @@ export const updateTiempoQx = async (req: any, res: Response) => {
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
+

@@ -203,13 +203,14 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    datosVentilador: [ {"modosVentilacion":modosVentilacion, 
+                    datosVentilador: [{ "modosVentilacion":modosVentilacion, 
                                         "peep":peep,
                                         "vt":vt, 
                                         "frecResp":frecResp,
                                         "IE":IE, 
                                         "PLimite":PLimite,
-                                        "Hr":Hr}]
+                                        "Hr":Hr
+                                    }]
                 },
             })
             .then((res: any) => {
