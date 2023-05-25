@@ -5,6 +5,118 @@
   <div class="margen-div-barra">
 
     <div class="input-group mb-3">
+      <div class="col-md-10">
+        <div class="row g-3 mb-3">
+          <div class="col-md-3">
+            <button
+              type="button"
+              class="btn btn-menu fw-bold">
+              <img src="images/monitoreo.svg" />
+              &nbsp;&nbsp;&nbsp;INICIAR MONITOREO
+            </button>
+          </div>
+
+          <div class="col-md-4"></div>
+
+          <div class="col-md-2">
+            <button type="button"
+                    class="btn btn-menu fw-bold"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    data-bs-auto-close="outside"> RELEVO </button>
+            <!--Botón para abrir el dropdown-->
+            <form class="dropdown-menu p-5">
+              <div class="mb-3 input-group mb-3"></div>
+            </form>
+          </div>
+
+          <div class="col-md-2">
+            <button type="button"
+                    class="btn btn-menu fw-bold"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    data-bs-auto-close="outside"> EVENTO CRITICO </button>
+            <!--Botón para abrir el dropdown-->
+            <form class="dropdown-menu p-5">
+              <div class="mb-3 input-group mb-3"></div>
+            </form>
+          </div>
+
+          <div class="col-md-1">
+            <button type="button"
+                    class="btn btn-menu fw-bold">Imprimir</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 row g-3 mb-3">
+        <div class="col-md-9">
+          <div class="row g-3 mb-3">
+
+                
+            <div class="col-md-2 dropdown-center">
+              <button class="btn btn-menu fw-bold" type="button" @click="obtenerHora" data-bs-toggle="dropdown" aria-expanded="false">
+                  <label>QX IN <small class="fw-normal">{{hora}}</small></label>
+              </button>
+              <ul class="dropdown-menu" id="dropdownHora">
+                <input class="form-control" type="text" v-model="hora">
+              </ul>
+            </div>
+            
+
+            <div class="col-md-2">
+              <button type="button"
+                      class="btn btn-menu fw-bold"
+                      @click="obtenerHora"> 
+                      <label>ANES IN <small class="fw-normal">{{hora}}</small></label> 
+              </button>                    
+            </div>
+
+            <div class="col-md-2"> 
+              <button type="button"
+                      class="btn btn-menu fw-bold"
+                      @click="obtenerHora"> 
+                      <label>CX IN <small class="fw-normal">{{hora}}</small></label> 
+              </button>           
+            </div>
+
+            <div class="col-md-2"> 
+              <button type="button"
+                      class="btn btn-menu fw-bold" 
+                      @click="obtenerHora"> 
+                      <label>CX OUT <small class="fw-normal">{{hora}}</small></label>
+              </button>           
+            </div>
+
+            <div class="col-md-2">    
+              <button type="button"
+                      class="btn btn-menu fw-bold" 
+                      @click="obtenerHora"> 
+                      <label>ANES OUT <small class="fw-normal">{{hora}}</small></label>
+              </button>        
+            </div>
+
+            <div class="col-md-2">    
+              <button type="button"
+                      class="btn btn-menu fw-bold" 
+                      @click="obtenerHora"> 
+                      <label>QX OUT <small class="fw-normal">{{hora}}</small></label>
+              </button>        
+            </div>
+          </div>
+        </div>
+
+        <div class="col-1 fw-bold">
+          <select id="inputState" class="form-select">
+            <option>1</option>
+            <option>2</option>
+            <option>5</option>
+            <option>10</option>
+            <option>15</option>
+          </select>
+        </div>
+      </div>
+
       <div class="col-9 divform navbar-nav">
         <!--Lista para el menú principal-->
         <ul class="nav text-center" id="">
@@ -408,17 +520,7 @@
             </form>
           </li>
         </ul>
-      </div>
-
-      <div class="col-1 fw-bold">
-        <select id="inputState" class="form-select ">
-          <option>1</option>
-          <option>2</option>
-          <option>5</option>
-          <option>10</option>
-          <option>15</option>
-        </select>
-      </div>
+      </div>      
 
       <div class="col-2 fw-bold">
         <div class="centrarLabel">
@@ -494,6 +596,32 @@
 </template>
 
 <script lang="ts">
+// Espera a que se cargue el documento
+  document.addEventListener('DOMContentLoaded', function() {
+    // Obtiene una referencia al elemento del dropdown
+    var elemento = document.getElementById('dropdownHora');
+
+    // Manejador de eventos de doble clic
+    // var doubleClickHandler = function(event) {
+    //   // Abre el dropdown utilizando la función de Bootstrap
+    //   var bootstrapDropdown = new bootstrap.Dropdown(dropdown);
+    //   bootstrapDropdown.show();
+
+    //   // Evita que el doble clic propague a otros elementos
+    //   event.stopPropagation();
+    // };
+
+    // Manejador de eventos de doble clic
+    var doubleClickHandler = function() {
+      // Realiza la acción para abrir el elemento
+      elemento.classList.add('abierto'); // Agrega una clase CSS para mostrar el elemento abierto
+      // Puedes agregar aquí cualquier otra lógica para abrir el elemento
+    };
+
+    // Agrega el manejador de eventos al elemento
+    dropdown.addEventListener('dblclick', doubleClickHandler);
+  });
+
 import type { regMenuTrans } from "@/interfaces/regTransAnest";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
 import { useTransAnestStore } from "../../stores/transAnest-store";
@@ -529,7 +657,9 @@ export default({
                        'Bloqueo de plexo', 'Bloqueo troncular', 'Bloqueo peridural torácico', 'Bloqueo peridural cervical',
                        'Libre de opioides'],
       
-      infoNotaPost: {} as regNotaPost,
+      infoNotaPost: {} as regNotaPost,  
+
+      hora: "--:--"
     }
   },
 
@@ -717,6 +847,12 @@ export default({
       enviarTecnica() {
         this.infoNotaPost.npa_TecAnestFinal = postAnestStore.TecnicaAnestesica;
       },
+
+      obtenerHora() {
+        var hoy = new Date();
+        this.hora=  ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes()
+        console.log(this.hora)
+      }
   }
 })
 </script>
@@ -858,6 +994,18 @@ export default({
     width: 214px;
     height: auto;
 }
+.btn-menu{
+    --bs-btn-bg: #fff;
+    --bs-btn-color: #002D60;    
+    --bs-btn-border-color: #fff;
+    --bs-btn-hover-bg: #A0A6B2;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #A0A6B2;          
+    --bs-btn-active-bg: #A0A6B2;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-border-color: #A0A6B2;
+    inline-size: -webkit-fill-available;
+}
 .btn-abajo{
     text-align: end;  
 }
@@ -867,5 +1015,10 @@ hr {
     border: 0;
     border-top: 1px solid;
     opacity: 1;
+}
+.dropdown-menu{
+  --bs-dropdown-padding-x: 0;
+  --bs-dropdown-padding-y: 0;
+  border:none
 }
 </style>

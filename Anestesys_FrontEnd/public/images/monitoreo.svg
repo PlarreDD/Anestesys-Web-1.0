@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="26" height="18" viewBox="0 0 26 18">
+  <g id="Grupo_221" data-name="Grupo 221" transform="translate(-282 -152)">
+    <g id="Grupo_220" data-name="Grupo 220" transform="translate(283 151)">
+      <path id="Trazado_184" data-name="Trazado 184" d="M125.5,227.572h4.662L131.2,225.5l1.036,4.144,1.036-2.072.518,1.036H140l.518,1.036,1.036-3.626.518,2.59h2.072" transform="translate(-122.392 -221.211)" fill="none" stroke="#1f315a" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="0.65"/>
+      <path id="Trazado_185" data-name="Trazado 185" d="M151.824,237.09H148.2l-.518-1.554-1.036,3.108-1.036-4.144-.518,3.108H142.5" transform="translate(-130.586 -225.705)" fill="none" stroke="#1f315a" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="0.65"/>
+      <path id="Trazado_186" data-name="Trazado 186" d="M140.5,240.5" transform="translate(-129.622 -228.615)" fill="none" stroke="#1f315a" stroke-miterlimit="10" stroke-width="1.5"/>
+      <line id="Línea_35350" data-name="Línea 35350" x2="4.662" transform="translate(6.216 11.885)" fill="none" stroke="#1f315a" stroke-miterlimit="10" stroke-width="0.65"/>
+      <line id="Línea_35351" data-name="Línea 35351" x2="2.59" transform="translate(2.849 11.885)" fill="none" stroke="#1f315a" stroke-miterlimit="10" stroke-width="0.65"/>
+      <g id="Rectángulo_469" data-name="Rectángulo 469" transform="translate(-1 1)" fill="none" stroke="#1f315a" stroke-width="1">
+        <rect width="26" height="18" rx="2" stroke="none"/>
+        <rect x="0.5" y="0.5" width="25" height="17" rx="1.5" fill="none"/>
+      </g>
+    </g>
+    <g id="Rectángulo_470" data-name="Rectángulo 470" transform="translate(285 154)" fill="none" stroke="#1f315a" stroke-width="1">
+      <rect width="20" height="13" rx="1" stroke="none"/>
+      <rect x="0.5" y="0.5" width="19" height="12" rx="0.5" fill="none"/>
+    </g>
+  </g>
+</svg>
