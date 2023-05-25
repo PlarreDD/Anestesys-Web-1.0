@@ -53,54 +53,59 @@
         <div class="col-md-9">
           <div class="row g-3 mb-3">
 
-                
             <div class="col-md-2 dropdown-center">
-              <button class="btn btn-menu fw-bold" type="button" @click="obtenerHora" data-bs-toggle="dropdown" aria-expanded="false">
-                  <label>QX IN <small class="fw-normal">{{hora}}</small></label>
+              <button class="btn btn-menu fw-bold"
+                      type="button"
+                      @click="hrIngresoQX()"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                  <label>QX IN <small class="fw-normal">{{menuTrans.ingresoQX}}</small></label>
               </button>
-              <ul class="dropdown-menu" id="dropdownHora">
-                <input class="form-control" type="text" v-model="hora">
-              </ul>
+              <!-- <ul class="dropdown-menu" id="dropdownHora">
+                <input class="form-control"
+                       type="text"
+                       v-model="menuTrans.ingresoQX">
+              </ul> -->
             </div>
             
 
             <div class="col-md-2">
               <button type="button"
                       class="btn btn-menu fw-bold"
-                      @click="obtenerHora"> 
-                      <label>ANES IN <small class="fw-normal">{{hora}}</small></label> 
+                      @click="actualizarTQX('ANESIN')"> 
+                      <label>ANES IN <small class="fw-normal">{{menuTrans.inicioAn}}</small></label> 
               </button>                    
             </div>
 
             <div class="col-md-2"> 
               <button type="button"
                       class="btn btn-menu fw-bold"
-                      @click="obtenerHora"> 
-                      <label>CX IN <small class="fw-normal">{{hora}}</small></label> 
+                      @click="actualizarTQX('CXIN')"> 
+                      <label>CX IN <small class="fw-normal">{{menuTrans.inicioCx}}</small></label> 
               </button>           
             </div>
 
             <div class="col-md-2"> 
               <button type="button"
                       class="btn btn-menu fw-bold" 
-                      @click="obtenerHora"> 
-                      <label>CX OUT <small class="fw-normal">{{hora}}</small></label>
+                      @click="actualizarTQX('CXOUT')"> 
+                      <label>CX OUT <small class="fw-normal">{{menuTrans.finCx}}</small></label>
               </button>           
             </div>
 
             <div class="col-md-2">    
               <button type="button"
                       class="btn btn-menu fw-bold" 
-                      @click="obtenerHora"> 
-                      <label>ANES OUT <small class="fw-normal">{{hora}}</small></label>
+                      @click="actualizarTQX('ANESOUT')"> 
+                      <label>ANES OUT <small class="fw-normal">{{menuTrans.finAn}}</small></label>
               </button>        
             </div>
 
             <div class="col-md-2">    
               <button type="button"
                       class="btn btn-menu fw-bold" 
-                      @click="obtenerHora"> 
-                      <label>QX OUT <small class="fw-normal">{{hora}}</small></label>
+                      @click="actualizarTQX('QXOUT')"> 
+                      <label>QX OUT <small class="fw-normal">{{menuTrans.egresoQx}}</small></label>
               </button>        
             </div>
           </div>
@@ -619,7 +624,7 @@
     };
 
     // Agrega el manejador de eventos al elemento
-    dropdown.addEventListener('dblclick', doubleClickHandler);
+    // dropdown.addEventListener('dblclick', doubleClickHandler);
   });
 
 import type { regMenuTrans } from "@/interfaces/regTransAnest";
@@ -658,7 +663,8 @@ export default({
                        'Libre de opioides'],
       
       infoNotaPost: {} as regNotaPost,  
-
+      
+      // PRUEBAS
       hora: "--:--"
     }
   },
@@ -695,6 +701,8 @@ export default({
       this.menuTrans.ayuno = null;
       this.menuTrans.ayuno = null;
       this.menuTrans.otrosEgresos = null;
+
+      this.menuTrans.ingresoQX = "--:--"
   },
 
   methods: {
@@ -848,10 +856,35 @@ export default({
         this.infoNotaPost.npa_TecAnestFinal = postAnestStore.TecnicaAnestesica;
       },
 
-      obtenerHora() {
-        var hoy = new Date();
-        this.hora=  ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes()
-        console.log(this.hora)
+      hrIngresoQX() {
+        this.menuTrans.ingresoQX = document.getElementById('clock').textContent;
+      },
+
+      actualizarTQX(tiemposQX: string){
+        switch (tiemposQX) {
+          case "ANESIN":
+            this.menuTrans.inicioAn = document.getElementById('clock').textContent;
+          break;
+
+          case "CXIN":
+            this.menuTrans.inicioCx = document.getElementById('clock').textContent;
+          break;
+
+          case "CXOUT":
+            this.menuTrans.finCx = document.getElementById('clock').textContent;
+          break;
+
+          case "ANESOUT":
+            this.menuTrans.finAn = document.getElementById('clock').textContent;
+          break;
+
+          case "QXOUT":
+            this.menuTrans.egresoQx = document.getElementById('clock').textContent;
+          break;
+        
+          default:
+          break;
+        }
       }
   }
 })

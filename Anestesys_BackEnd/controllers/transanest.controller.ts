@@ -31,7 +31,7 @@ export const saveMenuTrans = async (req: any, res: Response) => {
 
         let menuTrans;
 
-        if( modosVentilacion == undefined){
+        if( modosVentilacion == undefined ){
             menuTrans = new MenuTrans({ pid,
                                         /* Balance Total */
                                         balanceTotal: balanceTotal,
@@ -287,6 +287,7 @@ export const saveTiemposQX = async (req: any, res: Response) => {
                                                           "tiemposQX.$.inicioCx": inicioCx,
                                                           "tiemposQX.$.finCx": finCx,
                                                           "tiemposQX.$.finAn": finAn,
+                                                          "tiemposQX.$.egresoQx": egresoQx,
                                                         }
                                                });
 
@@ -296,11 +297,6 @@ export const saveTiemposQX = async (req: any, res: Response) => {
                                                 // Datos del ventilador
                                                 tiemposQX: {
                                                     ingresoQX: ingresoQX,
-                                                    inicioAn: inicioAn,
-                                                    inicioCx: inicioCx,
-                                                    finCx: finCx,
-                                                    finAn: finAn,
-                                                    egresoQx: egresoQx,
                                                 },
                                 });
 
