@@ -26,20 +26,12 @@ export const saveMenuTrans = async (req: any, res: Response) => {
                 BloqPlexo, BloqTroncular, bloqPeriToracico, bloqPeriCervical,
                 libreOpioides,
                 // Datos del ventilador
-                modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr,
-                // Tiempos Qx
-                ingresoQX, inicioAn, inicioCx, finCx, finAn, egresoQx,
-                // Relevo
-                hrRelevo, nomAnestesiologo, matriculaAnest, obsRelevo,
-                accionesRelevo,
-                // Relevo
-                hrEvCrt, detalleEvCrt, obsEvCrt, accionesEvCrt,
+                modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr
         } = req.body;
 
         let menuTrans;
 
-        if( modosVentilacion == undefined && ingresoQX == undefined
-            && hrRelevo != undefined){
+        if( modosVentilacion == undefined){
             menuTrans = new MenuTrans({ pid,
                                         /* Balance Total */
                                         balanceTotal: balanceTotal,
@@ -82,7 +74,7 @@ export const saveMenuTrans = async (req: any, res: Response) => {
                                         libreOpioides: libreOpioides,
             });
         }
-        else if(modosVentilacion != undefined){
+        else{
             menuTrans = new MenuTrans({ pid,
                                         // Datos del ventilador
                                         datosVentilador: {
@@ -93,42 +85,6 @@ export const saveMenuTrans = async (req: any, res: Response) => {
                                             IE: IE,
                                             PLimite: PLimite,
                                             Hr: Hr,
-                                        },
-            });
-        }
-        else if(ingresoQX != undefined){
-            menuTrans = new MenuTrans({ pid,
-                                        // Datos del ventilador
-                                        tiemposQX: {
-                                            ingresoQX: ingresoQX,
-                                            inicioAn: inicioAn,
-                                            inicioCx: inicioCx,
-                                            finCx: finCx,
-                                            finAn: finAn,
-                                            egresoQx: egresoQx,
-                                        },
-            });
-        }
-        else if(hrRelevo != undefined){
-            menuTrans = new MenuTrans({ pid,
-                                        // Relevo
-                                        relevoCx: {
-                                            hrRelevo: hrRelevo,
-                                            nomAnestesiologo: nomAnestesiologo,
-                                            matriculaAnest: matriculaAnest,
-                                            obsRelevo: obsRelevo,
-                                            accionesRelevo: accionesRelevo,
-                                        },
-            });
-        }
-        else{
-            menuTrans = new MenuTrans({ pid,
-                                        // Evento Crítico
-                                        evCriticoCx: {
-                                            hrEvCrt: hrEvCrt,
-                                            detalleEvCrt: detalleEvCrt,
-                                            obsEvCrt: obsEvCrt,
-                                            accionesEvCrt: accionesEvCrt,
                                         },
             });
         }
@@ -314,7 +270,7 @@ export const UpdateBalanceH = async (req: any, res: Response) => {
     }
 };
 
-/* Tiempos QX */
+/* Tiempos QX Guardado/Actualización */
 export const saveTiemposQX = async (req: any, res: Response) => {
     try {
         const { pid,
@@ -326,7 +282,6 @@ export const saveTiemposQX = async (req: any, res: Response) => {
         const tiempo2: any = tiempo;
         
         if (tiempo) {
-            console.log("Existe, Actualiza con: " + ingresoQX, inicioAn, inicioCx, finCx, finAn, egresoQx + "\n" + tiempo2?.tiemposQX[0]._id);
             tiempo = await MenuTrans.updateOne({ "tiemposQX._id": tiempo2?.tiemposQX[0]._id },
                                                { $set : { "tiemposQX.$.inicioAn": inicioAn,
                                                           "tiemposQX.$.inicioCx": inicioCx,
@@ -357,34 +312,3 @@ export const saveTiemposQX = async (req: any, res: Response) => {
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
-
-// Basado en updateVentilacion
-export const updateTiempoQx = async (req: any, res: Response) => {
-    try {
-        const { id } = req.params;
-        const { tiemposQX } = req.body;
-        
-        const tiempo = await MenuTrans.updateOne({ "tiemposQX._id": id },
-            {
-                $set : {
-                            "tiemposQX.$.inicioAn": tiemposQX[0].inicioAn,
-                            "tiemposQX.$.inicioCx": tiemposQX[0].inicioCx,
-                            "tiemposQX.$.finCx": tiemposQX[0].finCx,
-                            "tiemposQX.$.finAn": tiemposQX[0].finAn,
-                            "tiemposQX.$.egresoQx": tiemposQX[0].egresoQx,
-                        }
-            }
-        );
-        
-        if (!tiempo) 
-            return res.status(404).json({ Error: "No hay tiempo quirúrgico." });
-        
-        return res.json({ tiempo });
-    } catch (error) {
-        if (error.kind === "ObjectId") {
-            return res.status(403).json({ error: "Formato de ID incorrecto" });
-        }        
-        return res.status(500).json({ error: "Error de servidor" });
-    }
-};
-
