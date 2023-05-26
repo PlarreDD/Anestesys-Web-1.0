@@ -80,7 +80,7 @@
                          id="appt-time"
                          type="time"
                          v-model="menuTrans.inicioAn"
-                         step="300" @change="actualizaHora">
+                         step="300" @change="actualizarTQX('ANESIN')">
                 </form>
               </ul>
             </div>

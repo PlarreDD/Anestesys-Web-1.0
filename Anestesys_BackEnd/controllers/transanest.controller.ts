@@ -278,12 +278,8 @@ export const saveTiemposQX = async (req: any, res: Response) => {
                 ingresoQX, inicioAn, inicioCx, finCx, finAn, egresoQx,
               } = req.body;
 
-        console.log(pid);
-              
         var tiempo: UpdateResult | null = await MenuTrans.findOne({ pid: pid });
         const tiempo2: any = tiempo;
-        
-        console.log(tiempo);
         
         if (tiempo) {
             tiempo = await MenuTrans.updateOne({ "tiemposQX._id": tiempo2?.tiemposQX[0]._id },
