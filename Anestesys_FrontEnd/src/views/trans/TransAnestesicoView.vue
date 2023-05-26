@@ -49,63 +49,78 @@
         </div>
       </div>
 
-      <div class="col-md-12 row g-3 mb-3">
+      <!-- Tiempos quirurgicos -->
+      <div class="col-md-12 row g-3">
         <div class="col-md-9">
           <div class="row g-3 mb-3">
-
-            <div class="col-md-2 dropdown-center">
-              <button class="btn btn-menu fw-bold"
-                      type="button"
-                      @click="hrIngresoQX()"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false">
-                  <label>QX IN <small class="fw-normal">{{menuTrans.ingresoQX}}</small></label>
-              </button>
-              <!-- <ul class="dropdown-menu" id="dropdownHora">
-                <input class="form-control"
-                       type="text"
-                       v-model="menuTrans.ingresoQX">
-              </ul> -->
+                
+            <div class="col-md-2">
+              <button class="btn btn-menu fw-bold" type="button" @click.right="obtenerHora">
+                  <label>QX IN <small class="fw-normal">{{hora}}</small></label>
+              </button>              
             </div>
             
-
-            <div class="col-md-2">
+            <div class="col-md-2 dropdown-center">
               <button type="button"
                       class="btn btn-menu fw-bold"
-                      @click="actualizarTQX('ANESIN')"> 
-                      <label>ANES IN <small class="fw-normal">{{menuTrans.inicioAn}}</small></label> 
-              </button>                    
+                      @click.right="obtenerHora" aria-expanded="false" data-bs-toggle="dropdown" data-bs-auto-close="outside"> 
+                      <label>ANES IN <small class="fw-normal">{{hora}}</small></label> 
+              </button>    
+              <ul class="" id="dropdownHora">
+                <form class="dropdown-menu p-1 color-dropdown text-center">
+                  <label class="text-white fw-bold">Modificar Tiempo</label>
+                  <input class="form-control" id="appt-time" type="time" v-model="hora" step="300">
+                </form>
+              </ul>                
             </div>
 
-            <div class="col-md-2"> 
+            <div class="col-md-2 dropdown-center"> 
               <button type="button"
                       class="btn btn-menu fw-bold"
-                      @click="actualizarTQX('CXIN')"> 
-                      <label>CX IN <small class="fw-normal">{{menuTrans.inicioCx}}</small></label> 
-              </button>           
+                      @click.right="obtenerHora" aria-expanded="false" data-bs-toggle="dropdown" data-bs-auto-close="outside"> 
+                      <label>CX IN <small class="fw-normal">{{hora}}</small></label> 
+              </button>
+              <ul class="" id="dropdownHora">
+                <form class="dropdown-menu p-1 color-dropdown text-center">
+                  <label class="text-white fw-bold">Modificar Tiempo</label>
+                  <input class="form-control" id="appt-time" type="time" v-model="hora" step="300">
+                </form>
+              </ul>           
             </div>
 
-            <div class="col-md-2"> 
+            <div class="col-md-2 dropdown-center"> 
               <button type="button"
                       class="btn btn-menu fw-bold" 
-                      @click="actualizarTQX('CXOUT')"> 
-                      <label>CX OUT <small class="fw-normal">{{menuTrans.finCx}}</small></label>
+                      @click.right="obtenerHora" aria-expanded="false" data-bs-toggle="dropdown" data-bs-auto-close="outside"> 
+                      <label>CX OUT <small class="fw-normal">{{hora}}</small></label>
               </button>           
+              <ul class="" id="dropdownHora">
+                <form class="dropdown-menu p-1 color-dropdown text-center">
+                  <label class="text-white fw-bold">Modificar Tiempo</label>
+                  <input class="form-control" id="appt-time" type="time" v-model="hora" step="300">
+                </form>
+              </ul> 
+            </div>
+
+            <div class="col-md-2 dropdown-center">    
+              <button type="button"
+                      class="btn btn-menu fw-bold" 
+                      @click.right="obtenerHora" aria-expanded="false" data-bs-toggle="dropdown" data-bs-auto-close="outside"> 
+                      <label>ANES OUT <small class="fw-normal">{{hora}}</small></label>
+              </button>    
+              <ul class="" id="dropdownHora">
+                <form class="dropdown-menu p-1 color-dropdown text-center">
+                  <label class="text-white fw-bold">Modificar Tiempo</label>
+                  <input class="form-control" id="appt-time" type="time" v-model="hora" step="300">
+                </form>
+              </ul>     
             </div>
 
             <div class="col-md-2">    
               <button type="button"
                       class="btn btn-menu fw-bold" 
-                      @click="actualizarTQX('ANESOUT')"> 
-                      <label>ANES OUT <small class="fw-normal">{{menuTrans.finAn}}</small></label>
-              </button>        
-            </div>
-
-            <div class="col-md-2">    
-              <button type="button"
-                      class="btn btn-menu fw-bold" 
-                      @click="actualizarTQX('QXOUT')"> 
-                      <label>QX OUT <small class="fw-normal">{{menuTrans.egresoQx}}</small></label>
+                      @click.right="obtenerHora"> 
+                      <label>QX OUT <small class="fw-normal">{{hora}}</small></label>
               </button>        
             </div>
           </div>
@@ -601,31 +616,9 @@
 </template>
 
 <script lang="ts">
-// Espera a que se cargue el documento
-  document.addEventListener('DOMContentLoaded', function() {
-    // Obtiene una referencia al elemento del dropdown
-    var elemento = document.getElementById('dropdownHora');
-
-    // Manejador de eventos de doble clic
-    // var doubleClickHandler = function(event) {
-    //   // Abre el dropdown utilizando la función de Bootstrap
-    //   var bootstrapDropdown = new bootstrap.Dropdown(dropdown);
-    //   bootstrapDropdown.show();
-
-    //   // Evita que el doble clic propague a otros elementos
-    //   event.stopPropagation();
-    // };
-
-    // Manejador de eventos de doble clic
-    var doubleClickHandler = function() {
-      // Realiza la acción para abrir el elemento
-      elemento.classList.add('abierto'); // Agrega una clase CSS para mostrar el elemento abierto
-      // Puedes agregar aquí cualquier otra lógica para abrir el elemento
-    };
-
-    // Agrega el manejador de eventos al elemento
-    // dropdown.addEventListener('dblclick', doubleClickHandler);
-  });
+document.oncontextmenu = (event) => {
+  event.preventDefault();
+}
 
 import type { regMenuTrans } from "@/interfaces/regTransAnest";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
