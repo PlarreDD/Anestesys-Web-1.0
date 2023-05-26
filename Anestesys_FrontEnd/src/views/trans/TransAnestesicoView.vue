@@ -57,8 +57,9 @@
             <div class="col-md-2">
               <button class="btn btn-menu fw-bold"
                       type="button"
-                      @click.right="actualizarTQX('QXIN')">
-                  <label>QX IN <small class="fw-normal">{{menuTrans.ingresoQX}}</small></label>
+                      @click.right="actualizarTQX('QXIN')" 
+                      :disabled="menuTrans.ingresoQX != undefined ? true : false">
+                  <label>QX IN <small class="fw-normal">{{menuTrans.ingresoQX}}</small></label>                  
               </button>
             </div>
             
@@ -79,7 +80,7 @@
                          id="appt-time"
                          type="time"
                          v-model="menuTrans.inicioAn"
-                         step="300">
+                         step="300" @change="actualizaHora">
                 </form>
               </ul>
             </div>
@@ -152,7 +153,8 @@
             <div class="col-md-2">    
               <button type="button"
                       class="btn btn-menu fw-bold" 
-                      @click.right="actualizarTQX('QXOUT')"> 
+                      @click.right="actualizarTQX('QXOUT')"
+                      :disabled="menuTrans.egresoQx != undefined ? true : false"> 
                       <label>QX OUT <small class="fw-normal">{{menuTrans.egresoQx}}</small></label>
               </button>        
             </div>
@@ -688,10 +690,7 @@ export default({
                        'Bloqueo de plexo', 'Bloqueo troncular', 'Bloqueo peridural torácico', 'Bloqueo peridural cervical',
                        'Libre de opioides'],
       
-      infoNotaPost: {} as regNotaPost,  
-      
-      // PRUEBAS
-      hora: "--:--"
+      infoNotaPost: {} as regNotaPost,             
     }
   },
 
@@ -883,7 +882,8 @@ export default({
       actualizarTQX(tiemposQX: string){
         switch (tiemposQX) {
           case "QXIN":
-            this.menuTrans.ingresoQX = document.getElementById('clock').textContent;            
+            this.menuTrans.ingresoQX = document.getElementById('clock').textContent;
+            
           break;
 
           case "ANESIN":
@@ -909,6 +909,10 @@ export default({
           default:
           break;
         }
+      },
+
+      actualizaHora(){
+        console.log(this.menuTrans.inicioAn);        
       }
   }
 })
@@ -1077,5 +1081,12 @@ hr {
   --bs-dropdown-padding-x: 0;
   --bs-dropdown-padding-y: 0;
   border:none
+}
+
+.btn.disabled, .btn:disabled, fieldset:disabled .btn {
+    color: white;
+    pointer-events: none;
+    background-color: white;
+    opacity: 1;
 }
 </style>
