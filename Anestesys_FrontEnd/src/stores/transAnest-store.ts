@@ -317,5 +317,9 @@ export const useTransAnestStore = defineStore('transAn', {
                 // console.log("error: " + e);
             });
         },
+
+        async saveTiemposQX(regTransAnest: any, pid: string) {
+            console.log(regTransAnest);
+        }
     }
 })

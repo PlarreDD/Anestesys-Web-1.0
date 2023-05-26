@@ -55,63 +55,96 @@
           <div class="row g-3 mb-3">
                 
             <div class="col-md-2">
-              <button class="btn btn-menu fw-bold" type="button" @click.right="obtenerHora">
-                  <label>QX IN <small class="fw-normal">{{hora}}</small></label>
-              </button>              
+              <button class="btn btn-menu fw-bold"
+                      type="button"
+                      @click.right="actualizarTQX('QXIN')">
+                  <label>QX IN <small class="fw-normal">{{menuTrans.ingresoQX}}</small></label>
+              </button>
             </div>
             
             <div class="col-md-2 dropdown-center">
               <button type="button"
                       class="btn btn-menu fw-bold"
-                      @click.right="obtenerHora" aria-expanded="false" data-bs-toggle="dropdown" data-bs-auto-close="outside"> 
-                      <label>ANES IN <small class="fw-normal">{{hora}}</small></label> 
-              </button>    
+                      @click.right="actualizarTQX('ANESIN')"
+                      aria-expanded="false"
+                      data-bs-toggle="dropdown"
+                      data-bs-auto-close="outside"> 
+                      <label>ANES IN <small class="fw-normal">{{menuTrans.inicioAn}}</small></label> 
+              </button>
+
               <ul class="" id="dropdownHora">
                 <form class="dropdown-menu p-1 color-dropdown text-center">
                   <label class="text-white fw-bold">Modificar Tiempo</label>
-                  <input class="form-control" id="appt-time" type="time" v-model="hora" step="300">
+                  <input class="form-control"
+                         id="appt-time"
+                         type="time"
+                         v-model="menuTrans.inicioAn"
+                         step="300">
                 </form>
-              </ul>                
+              </ul>
             </div>
 
             <div class="col-md-2 dropdown-center"> 
               <button type="button"
                       class="btn btn-menu fw-bold"
-                      @click.right="obtenerHora" aria-expanded="false" data-bs-toggle="dropdown" data-bs-auto-close="outside"> 
-                      <label>CX IN <small class="fw-normal">{{hora}}</small></label> 
+                      @click.right="actualizarTQX('CXIN')"
+                      aria-expanded="false"
+                      data-bs-toggle="dropdown"
+                      data-bs-auto-close="outside"> 
+                <label>CX IN <small class="fw-normal">{{menuTrans.inicioCx}}</small></label> 
               </button>
+
               <ul class="" id="dropdownHora">
                 <form class="dropdown-menu p-1 color-dropdown text-center">
                   <label class="text-white fw-bold">Modificar Tiempo</label>
-                  <input class="form-control" id="appt-time" type="time" v-model="hora" step="300">
+                  <input class="form-control"
+                         id="appt-time"
+                         type="time"
+                         v-model="menuTrans.inicioCx" step="300">
                 </form>
-              </ul>           
+              </ul>
             </div>
 
             <div class="col-md-2 dropdown-center"> 
               <button type="button"
                       class="btn btn-menu fw-bold" 
-                      @click.right="obtenerHora" aria-expanded="false" data-bs-toggle="dropdown" data-bs-auto-close="outside"> 
-                      <label>CX OUT <small class="fw-normal">{{hora}}</small></label>
-              </button>           
+                      @click.right="actualizarTQX('CXOUT')"
+                      aria-expanded="false"
+                      data-bs-toggle="dropdown"
+                      data-bs-auto-close="outside"> 
+                <label>CX OUT <small class="fw-normal">{{menuTrans.finCx}}</small></label>
+              </button>
+
               <ul class="" id="dropdownHora">
                 <form class="dropdown-menu p-1 color-dropdown text-center">
                   <label class="text-white fw-bold">Modificar Tiempo</label>
-                  <input class="form-control" id="appt-time" type="time" v-model="hora" step="300">
+                  <input class="form-control"
+                         id="appt-time"
+                         type="time"
+                         v-model="menuTrans.finCx"
+                         step="300">
                 </form>
-              </ul> 
+              </ul>
             </div>
 
             <div class="col-md-2 dropdown-center">    
               <button type="button"
                       class="btn btn-menu fw-bold" 
-                      @click.right="obtenerHora" aria-expanded="false" data-bs-toggle="dropdown" data-bs-auto-close="outside"> 
-                      <label>ANES OUT <small class="fw-normal">{{hora}}</small></label>
-              </button>    
+                      @click.right="actualizarTQX('ANESOUT')"
+                      aria-expanded="false"
+                      data-bs-toggle="dropdown"
+                      data-bs-auto-close="outside"> 
+                <label>ANES OUT <small class="fw-normal">{{menuTrans.finAn}}</small></label>
+              </button>
+              
               <ul class="" id="dropdownHora">
                 <form class="dropdown-menu p-1 color-dropdown text-center">
                   <label class="text-white fw-bold">Modificar Tiempo</label>
-                  <input class="form-control" id="appt-time" type="time" v-model="hora" step="300">
+                  <input class="form-control"
+                         id="appt-time"
+                         type="time"
+                         v-model="menuTrans.finAn"
+                         step="300">
                 </form>
               </ul>     
             </div>
@@ -119,8 +152,8 @@
             <div class="col-md-2">    
               <button type="button"
                       class="btn btn-menu fw-bold" 
-                      @click.right="obtenerHora"> 
-                      <label>QX OUT <small class="fw-normal">{{hora}}</small></label>
+                      @click.right="actualizarTQX('QXOUT')"> 
+                      <label>QX OUT <small class="fw-normal">{{menuTrans.egresoQx}}</small></label>
               </button>        
             </div>
           </div>
@@ -694,8 +727,6 @@ export default({
       this.menuTrans.ayuno = null;
       this.menuTrans.ayuno = null;
       this.menuTrans.otrosEgresos = null;
-
-      this.menuTrans.ingresoQX = "--:--"
   },
 
   methods: {
@@ -707,7 +738,7 @@ export default({
           clock.innerText = date.toLocaleTimeString('es-MX', {
             hour: '2-digit',
             minute: '2-digit',
-            second: '2-digit'
+            // second: '2-digit'
           });
         }, 1000);
       },
@@ -848,13 +879,13 @@ export default({
       enviarTecnica() {
         this.infoNotaPost.npa_TecAnestFinal = postAnestStore.TecnicaAnestesica;
       },
-
-      hrIngresoQX() {
-        this.menuTrans.ingresoQX = document.getElementById('clock').textContent;
-      },
-
+      
       actualizarTQX(tiemposQX: string){
         switch (tiemposQX) {
+          case "QXIN":
+            this.menuTrans.ingresoQX = document.getElementById('clock').textContent;            
+          break;
+
           case "ANESIN":
             this.menuTrans.inicioAn = document.getElementById('clock').textContent;
           break;
