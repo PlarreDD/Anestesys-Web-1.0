@@ -880,30 +880,36 @@ export default({
         this.infoNotaPost.npa_TecAnestFinal = postAnestStore.TecnicaAnestesica;
       },
       
-      actualizarTQX(tiemposQX: string){
+      async actualizarTQX(tiemposQX: string){
         switch (tiemposQX) {
           case "QXIN":
-            this.menuTrans.ingresoQX = document.getElementById('clock').textContent;            
+            this.menuTrans.ingresoQX = document.getElementById('clock').textContent;
+            await transAnestStore.saveTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID._id, tiemposQX);
           break;
 
           case "ANESIN":
             this.menuTrans.inicioAn = document.getElementById('clock').textContent;
+            await transAnestStore.saveTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID._id, tiemposQX);
           break;
 
           case "CXIN":
             this.menuTrans.inicioCx = document.getElementById('clock').textContent;
+            await transAnestStore.saveTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID._id, tiemposQX);
           break;
 
           case "CXOUT":
             this.menuTrans.finCx = document.getElementById('clock').textContent;
+            await transAnestStore.saveTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID._id, tiemposQX);
           break;
 
           case "ANESOUT":
             this.menuTrans.finAn = document.getElementById('clock').textContent;
+            await transAnestStore.saveTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID._id, tiemposQX);
           break;
 
           case "QXOUT":
             this.menuTrans.egresoQx = document.getElementById('clock').textContent;
+            await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX);
           break;
         
           default:
