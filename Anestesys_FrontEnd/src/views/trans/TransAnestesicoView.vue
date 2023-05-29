@@ -2,7 +2,7 @@
   <header>
     <barra-navegacion/>
   </header>
-  <div class="margen-div-barra">
+  <div class="margen-div-barra" @click="ocultarDropDown">
 
     <div class="input-group mb-3">
       <div class="row g-3 col-md-12">
@@ -511,7 +511,7 @@
             <div class="col-md-2">
               <button class="btn btn-menu fw-bold"
                       type="button"
-                      @click.right="actualizarTQX('QXIN')" 
+                      @dblclick="actualizarTQX('QXIN')" 
                       :disabled="menuTrans.ingresoQX != undefined ? true : false">
                   <label>QX IN <small class="fw-normal">{{menuTrans.ingresoQX}}</small></label>                  
               </button>
@@ -520,95 +520,83 @@
             <div class="col-md-2 dropdown-center">
               <button type="button"
                       class="btn btn-menu fw-bold"
-                      @click.right="actualizarTQX('ANESIN')"
-                      aria-expanded="false"
-                      data-bs-toggle="dropdown"
-                      data-bs-auto-close="outside"> 
-                      <label>ANES IN <small class="fw-normal">{{menuTrans.inicioAn}}</small></label> 
+                      :class="{ 'show': activoAnesIN, ' ': noActivoAnesIN }"
+                      @dblclick="actualizarTQX('ANESIN')"
+                      @click.right="mostrarDropDown('ANESIN')" id="btn-anes"> 
+                      <label>ANES IN <label class="fw-normal">{{menuTrans.inicioAn}}</label></label> 
               </button>
-
-              <ul class="" id="dropdownHora">
-                <form class="dropdown-menu p-1 color-dropdown text-center">
-                  <label class="text-white fw-bold">Modificar Tiempo</label>
-                  <input class="form-control"
-                         id="appt-time"
-                         type="time"
-                         v-model="menuTrans.inicioAn"
-                         step="300" @change="actualizaHora('ANESIN')">
-                </form>
-              </ul>
+              
+              <form class="dropdown-menu p-1 color-dropdown text-center" :class="{ 'show': activoAnesIN, ' ': noActivoAnesIN }">
+                <label class="text-white fw-bold">Modificar Tiempo</label>
+                <input class="form-control"
+                        id="appt-time"
+                        type="time"
+                        v-model="menuTrans.inicioAn"
+                        step="300" @change="actualizaHora('ANESIN')">
+              </form>
+              
             </div>
 
             <div class="col-md-2 dropdown-center">
               <button type="button"
-                      class="btn btn-menu fw-bold"
-                      @click.right="actualizarTQX('CXIN')"
-                      aria-expanded="false"
-                      data-bs-toggle="dropdown"
-                      data-bs-auto-close="outside"> 
-                <label>CX IN <small class="fw-normal">{{menuTrans.inicioCx}}</small></label> 
+                      class="btn btn-menu fw-bold" :class="{ 'show': activoCxIN, ' ': noActivoCxIN }"
+                      @dblclick="actualizarTQX('CXIN')"
+                      @click.right="mostrarDropDown('CXIN')"> 
+                <label>CX IN <label class="fw-normal">{{menuTrans.inicioCx}}</label></label>
               </button>
 
-              <ul class="" id="dropdownHora">
-                <form class="dropdown-menu p-1 color-dropdown text-center">
-                  <label class="text-white fw-bold">Modificar Tiempo</label>
-                  <input class="form-control"
-                         id="appt-time"
-                         type="time"
-                         v-model="menuTrans.inicioCx" 
-                         step="300" @change="actualizaHora('CXIN')">
-                </form>
-              </ul>
+              <form class="dropdown-menu p-1 color-dropdown" :class="{ 'show': activoCxIN, ' ': noActivoCxIN }">
+                <label class="text-white fw-bold">Modificar Tiempo </label>
+                <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="sm"/></i>
+                <input class="form-control"
+                        id="appt-time"
+                        type="time"
+                        v-model="menuTrans.inicioCx" 
+                        step="300" @change="actualizaHora('CXIN')">
+              </form>
             </div>
 
             <div class="col-md-2 dropdown-center"> 
               <button type="button"
-                      class="btn btn-menu fw-bold" 
-                      @click.right="actualizarTQX('CXOUT')"
-                      aria-expanded="false"
-                      data-bs-toggle="dropdown"
-                      data-bs-auto-close="outside"> 
-                <label>CX OUT <small class="fw-normal">{{menuTrans.finCx}}</small></label>
+                      class="btn btn-menu fw-bold" :class="{ 'show': activoCxOUT, ' ': noActivoCxOUT }"
+                      @dblclick="actualizarTQX('CXOUT')"
+                      @click.right="mostrarDropDown('CXOUT')"> 
+                <label>CX OUT <label class="fw-normal">{{menuTrans.finCx}}</label></label>
               </button>
 
-              <ul class="" id="dropdownHora">
-                <form class="dropdown-menu p-1 color-dropdown text-center">
-                  <label class="text-white fw-bold">Modificar Tiempo</label>
-                  <input class="form-control"
-                         id="appt-time"
-                         type="time"
-                         v-model="menuTrans.finCx"
-                         step="300" @change="actualizaHora('CXOUT')">
-                </form>
-              </ul>
+              <form class="dropdown-menu p-1 color-dropdown text-center" :class="{ 'show': activoCxOUT, ' ': noActivoCxOUT }">
+                <label class="text-white fw-bold">Modificar Tiempo</label>
+                <input class="form-control"
+                        id="appt-time"
+                        type="time"
+                        v-model="menuTrans.finCx"
+                        step="300" @change="actualizaHora('CXOUT')">
+              </form>
+
             </div>
 
             <div class="col-md-2 dropdown-center">    
               <button type="button"
-                      class="btn btn-menu fw-bold" 
-                      @click.right="actualizarTQX('ANESOUT')"
-                      aria-expanded="false"
-                      data-bs-toggle="dropdown"
-                      data-bs-auto-close="outside"> 
-                <label>ANES OUT <small class="fw-normal">{{menuTrans.finAn}}</small></label>
+                      class="btn btn-menu fw-bold" :class="{ 'show': activoAnesOUT, ' ': noActivoAnesOUT }" 
+                      @dblclick="actualizarTQX('ANESOUT')"
+                      @click.right="mostrarDropDown('ANESOUT')"> 
+                <label>ANES OUT <label class="fw-normal">{{menuTrans.finAn}}</label></label>
               </button>
               
-              <ul class="" id="dropdownHora">
-                <form class="dropdown-menu p-1 color-dropdown text-center">
-                  <label class="text-white fw-bold">Modificar Tiempo</label>
-                  <input class="form-control"
-                         id="appt-time"
-                         type="time"
-                         v-model="menuTrans.finAn"
-                         step="300" @change="actualizaHora('ANESOUT')">
-                </form>
-              </ul>     
+              <form class="dropdown-menu p-1 color-dropdown text-center" :class="{ 'show': activoAnesOUT, ' ': noActivoAnesOUT }">
+                <label class="text-white fw-bold">Modificar Tiempo</label>
+                <input class="form-control"
+                        id="appt-time"
+                        type="time"
+                        v-model="menuTrans.finAn"
+                        step="300" @change="actualizaHora('ANESOUT')">
+              </form>   
             </div>
 
             <div class="col-md-2">    
               <button type="button"
                       class="btn btn-menu fw-bold" 
-                      @click.right="actualizarTQX('QXOUT')"
+                      @dblclick="actualizarTQX('QXOUT')"
                       :disabled="menuTrans.egresoQx != undefined ? true : false"> 
                       <label>QX OUT <small class="fw-normal">{{menuTrans.egresoQx}}</small></label>
               </button>        
@@ -695,9 +683,9 @@
 </template>
 
 <script lang="ts">
-document.oncontextmenu = (event) => {
-  event.preventDefault();
-}
+// document.oncontextmenu = (event) => {
+//   event.preventDefault();
+// }
 
 import type { regMenuTrans } from "@/interfaces/regTransAnest";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
@@ -736,7 +724,17 @@ export default({
       
       infoNotaPost: {} as regNotaPost,      
       
-      hora:Date()
+      activoAnesIN: false,
+      noActivoAnesIN: true,
+
+      activoCxIN: false,
+      noActivoCxIN: true,
+
+      activoCxOUT: false,
+      noActivoCxOUT: true,
+
+      activoAnesOUT: false,
+      noActivoAnesOUT: true,
     }
   },
 
@@ -998,6 +996,47 @@ export default({
           break;
         }        
       },
+
+      async mostrarDropDown(tiemposQX : string){
+        switch (tiemposQX) {
+          case "ANESIN":
+            this.activoAnesIN=true;
+            this.noActivoAnesIN=false;
+          break;
+
+          case "CXIN":
+            this.activoCxIN=true;
+            this.noActivoCxIN=false;
+          break;
+
+          case "CXOUT":
+            this.activoCxOUT=true;
+            this.noActivoCxOUT=false;
+          break;
+
+          case "ANESOUT":
+            this.activoAnesOUT=true;
+            this.noActivoAnesOUT=false;
+          break;
+        
+          default:
+          break;
+        }
+      },
+
+      async ocultarDropDown(){
+        this.activoAnesIN= false
+        this.noActivoAnesIN= true
+
+        this.activoCxIN= false
+        this.noActivoCxIN= true
+
+        this.activoCxOUT= false
+        this.noActivoCxOUT= true
+
+        this.activoAnesOUT= false
+        this.noActivoAnesOUT= true
+      }
   }
 })
 </script>
