@@ -52,83 +52,120 @@
 
         <div class="dropdown col-md-2 text-end">
             <a class="btn btn-menu dropdown-toggle fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown link
+              MENÚ DE ACCIONES
             </a>
 
             <ul class="dropdown-menu">
+              <!-- Grid Anestésico -->
               <li class="col-md-3">
                 <button type="button"
                         class="btn btn-nav-bar fw-bold"
                         data-bs-toggle="modal"
                         data-bs-target="#modal-grid"> GRID ANESTÉSICO </button>
-                <!--Botón para abrir el dropdown-->
-                <div class="modal" id="modal-grid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
-                    <div class="modal-content colorModalMedicamentos modal-med-largo">
-                      <form class="dropdown-menu p-5">
-                          <div class="mb-3 estiloDropDown input-group mb-3"></div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
+                
               </li>
               <!-- Técnica Anestésica Final -->
               <li class="col-md-3">
                 <button type="button"
                         class="btn btn-nav-bar fw-bold"
-                        @click="clickTAbtn"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                        data-bs-auto-close = "outside"> TÉCNICA ANESTÉSICA </button>
-
-                <form @submit.prevent="" class="dropdown-menu p-4 color-dropdown">
-                  <div class="mb-3 estiloDropDownTecnica row g-3">
-                    <h5 class="col-md-12 fw-bold text-white">TÉCNICA ANÉSTESICA</h5>
-                    <!-- Técnica de anestesia final -->
-                    <div class="col-md-12">
-                      <label for="" class="form-label fw-bold text-white">Técnica de anestesia final</label>
-                      <Multiselect mode="tags"
-                                    v-model="postAnestStore.TecnicaAnestesica"
-                                    @click="enviarTecnica"
-                                    :class="infoNotaPost.npa_TecAnestFinal != undefined && infoNotaPost.npa_TecAnestFinal != '' ?
-                                                                              'form-control border border-success formSombra' : 'form-control'"
-                                    placeholder="Seleccione las técnicas de anestesia"
-                                    :options="opcionTecnicas"
-                                    :searchable="true"
-                                    :createTag="true"/>
-                    </div>
-
-                    <div class="col-md-8"></div>
-
-                    <div class="col-md-4 alinear-btn">                    
-                      <template v-if="btnActualizarTecnica === false">
-                        <button data-bs-toggle="tab" 
-                                type="submit"
-                                class="btn btn-guardar-balance fw-bold"
-                                @click="cambiarUpdateTecnica"
-                                > GUARDAR </button>
-                      </template>
-
-                      <template v-else>
-                        <button data-bs-toggle="tab" 
-                                type="submit"
-                                class="btn btn-guardar-balance fw-bold"
-                                @click="postAnestStore.updateNotaPA(infoNotaPost, preIdStore.pacienteID._id, postAnestStore.TecnicaAnestesica)"
-                                > ACTUALIZAR </button> 
-                      </template>   
-                    </div>
-                  </div>
-                </form>
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal-tecnica"> TÉCNICA ANESTÉSICA </button>                
               </li>
               <!-- Balance Hídrico -->
               <li class="col-md-3">
                 <button type="button" class="btn btn-nav-bar fw-bold" 
-                        data-bs-toggle="dropdown" aria-expanded="false" 
-                        data-bs-auto-close="outside">BALANCE HIDRICO</button>
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal-balance">BALANCE HIDRICO</button>
+              </li>
+              <!-- Datos del ventilador -->
+              <li class="col-md-3">
+                <button type="button"
+                        class="btn btn-nav-bar fw-bold"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal-ventilador">DATOS DEL VENTILADOR</button>
+              </li>
+            </ul>
+        </div>
+      </div>
 
-                <div class="col-md-12" id="">
-                  <form @submit.prevent="" class="dropdown-menu p-4 color-dropdown">
-                    <div class="estiloDropDownBalance row g-3 deslizar-balance">
+      <!--Abrir el modal Grid Anestésico-->
+      <div class="modal" id="modal-grid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
+          <div class="modal-content color-dropdown">
+            <div class="input-group mb-3">
+              <div class="modal-body">
+                <div class="col-md-12">
+                  <div class="row g-3">
+                      <div class="col-md-12">
+                        <h5 class="text-white fw-bold">GRID ANESTÉSICO</h5>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Abrir el modal Técnica Anestésica-->
+      <div class="modal" id="modal-tecnica" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content color-dropdown">
+            <div class="input-group mb-3">
+              <div class="modal-body">
+                <div class="col-md-12">
+                  <div class="row g-3">
+                        <h5 class="col-md-12 fw-bold text-white">TÉCNICA ANÉSTESICA</h5>
+                        <!-- Técnica de anestesia final -->
+                        <div class="col-md-12">
+                          <label for="" class="form-label fw-bold text-white">Técnica de anestesia final</label>
+                          <Multiselect mode="tags"
+                                        v-model="postAnestStore.TecnicaAnestesica"
+                                        @click="enviarTecnica"
+                                        :class="infoNotaPost.npa_TecAnestFinal != undefined && infoNotaPost.npa_TecAnestFinal != '' ?
+                                                                                  'form-control border border-success formSombra' : 'form-control'"
+                                        placeholder="Seleccione las técnicas de anestesia"
+                                        :options="opcionTecnicas"
+                                        :searchable="true"
+                                        :createTag="true"/>
+                        </div>
+
+                        <div class="col-md-10"></div>
+
+                        <div class="col-md-2 alinear-btn">                    
+                          <template v-if="btnActualizarTecnica === false">
+                            <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-balance fw-bold"
+                                    @click="cambiarUpdateTecnica"
+                                    > GUARDAR </button>
+                          </template>
+
+                          <template v-else>
+                            <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-balance fw-bold"
+                                    @click="postAnestStore.updateNotaPA(infoNotaPost, preIdStore.pacienteID._id, postAnestStore.TecnicaAnestesica)"
+                                    > ACTUALIZAR </button> 
+                          </template>   
+                        </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Abrir el modal Balance Hídrico-->
+      <div class="modal" id="modal-balance" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content color-dropdown">
+            <div class="input-group mb-3">
+              <div class="modal-body">
+                <div class="col-md-12">
+                  <div class="row g-3">
+                    <div class="estiloDropDownBalance row g-2 deslizar-balance">
                       <h5 class="col-md-12 fw-bold text-white">BALANCE TOTAL: {{menuTrans.balanceTotal}} ml</h5>
                       <h5 class="col-md-12 fw-bold text-white">Ingresos</h5>
 
@@ -302,10 +339,10 @@
                       </div>
 
                       <div class="col-md-9"></div>
-                      <div class="col-md-9"></div>
+                      <div class="col-md-10"></div>
 
                       <!-- Botón guardar/actualizar -->
-                      <div class="col-md-3 alinear-btn">
+                      <div class="col-md-2 alinear-btn">
                         <template v-if="btnActualizarBalance === false">
                           <button data-bs-toggle="tab"
                                   type="submit"
@@ -321,18 +358,22 @@
                         </template>   
                       </div>
                     </div>
-                  </form>
+                  </div>
                 </div>
-              </li>
-              <!-- Datos del ventilador -->
-              <li class="col-md-3">
-                <button type="button"
-                        class="btn btn-nav-bar fw-bold"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                        data-bs-auto-close="outside">DATOS DEL VENTILADOR</button>
-                <form @submit.prevent="" class="dropdown-menu p-4 color-dropdown">
-                  <div class="mb-3 estiloDropDownVentilador row g-3">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Abrir el modal Datos del Ventilador-->
+      <div class="modal" id="modal-ventilador" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content color-dropdown modal-med-largo">
+            <div class="input-group mb-3">
+              <div class="modal-body">
+                <div class="col-md-12">
+                  <div class="row g-3">
                     <h5 class="text-white fw-bold">VENTILADOR</h5>
                     <!-- Modos de Ventilación -->
                     <div class="col-md-9">
@@ -414,7 +455,7 @@
                       </template>  
                     </div>
                     <!-- Lista Modo de Ventilación -->
-                    <div class="table-responsive">
+                    <div class="">
                       <div class="deslizar">
                         <table class="table table-responsive text-white">
                           <thead>
@@ -455,9 +496,10 @@
                       </div>
                     </div>
                   </div>
-                </form>
-              </li>
-            </ul>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -692,7 +734,9 @@ export default({
                        'Bloqueo de plexo', 'Bloqueo troncular', 'Bloqueo peridural torácico', 'Bloqueo peridural cervical',
                        'Libre de opioides'],
       
-      infoNotaPost: {} as regNotaPost,             
+      infoNotaPost: {} as regNotaPost,      
+      
+      hora:Date()
     }
   },
 
@@ -884,32 +928,38 @@ export default({
       async actualizarTQX(tiemposQX: string){
         switch (tiemposQX) {
           case "QXIN":
-            this.menuTrans.ingresoQX = document.getElementById('clock').textContent;
+            var hoy = new Date();
+            this.menuTrans.ingresoQX = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID._id, tiemposQX);
           break;
 
           case "ANESIN":
-            this.menuTrans.inicioAn = document.getElementById('clock').textContent;
+            var hoy = new Date();
+            this.menuTrans.inicioAn = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID._id, tiemposQX);
           break;
 
           case "CXIN":
-            this.menuTrans.inicioCx = document.getElementById('clock').textContent;
+            var hoy = new Date();
+            this.menuTrans.inicioCx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID._id, tiemposQX);
           break;
 
           case "CXOUT":
-            this.menuTrans.finCx = document.getElementById('clock').textContent;
+            var hoy = new Date();
+            this.menuTrans.finCx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID._id, tiemposQX);
           break;
 
           case "ANESOUT":
-            this.menuTrans.finAn = document.getElementById('clock').textContent;
+            var hoy = new Date();
+            this.menuTrans.finAn = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID._id, tiemposQX);
           break;
 
           case "QXOUT":
-            this.menuTrans.egresoQx = document.getElementById('clock').textContent;
+            var hoy = new Date();
+            this.menuTrans.egresoQx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX);
           break;
         
@@ -947,7 +997,7 @@ export default({
           default:
           break;
         }        
-      }
+      },
   }
 })
 </script>
@@ -1020,7 +1070,7 @@ export default({
   width: 450px; height: auto;
 }
 .estiloDropDownBalance{
-  width: 650px; height: 400px;
+  width: auto; height: 400px;
 }
 .estiloDropDownVentilador{
   width: 650px; height: auto;
@@ -1037,7 +1087,7 @@ export default({
 .deslizar-balance {
   overflow: scroll;
   overflow-x: hidden;
-  margin-top: 0px;
+  margin-top: 10px;
 }
 .btn-guardar{
     --bs-btn-bg: none;
@@ -1074,7 +1124,6 @@ export default({
   --bs-btn-active-bg: #E88300;
   --bs-btn-active-color: #ffffff;
   --bs-btn-active-border-color: #E88300;
-  width: 130px;
 }
 .btn-nav-bar{
     --bs-btn-bg: #fff;
@@ -1101,6 +1150,9 @@ export default({
     --bs-btn-active-border-color: #A0A6B2;
     inline-size: -webkit-fill-available;
 }
+.modal-med-largo {
+  height: auto;
+}
 .btn-abajo{
     text-align: end;  
 }
@@ -1116,7 +1168,6 @@ hr {
   --bs-dropdown-padding-y: 0;
   border:none
 }
-
 .btn.disabled, .btn:disabled, fieldset:disabled .btn {
     color: white;
     pointer-events: none;
