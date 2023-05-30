@@ -17,30 +17,181 @@
               </button>
             </div>
 
-            <div class="col-md-4"></div>
+            <div class="col-md-2"></div>
 
             <div class="col-md-2">
               <button type="button"
                       class="btn btn-menu fw-bold"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                      data-bs-auto-close="outside"> RELEVO </button>
-              <!--Botón para abrir el dropdown-->
-              <form class="dropdown-menu p-5">
-                <div class="mb-3 input-group mb-3"></div>
-              </form>
+                      data-bs-toggle="modal"
+                      data-bs-target="#modal-medicamento"> MEDICAMENTO </button>
+            </div>
+            <!--Abrir el modal de Medicamentos-->
+            <div class="modal" id="modal-medicamento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content color-dropdown">
+                  <div class="input-group mb-3">
+                    <div class="modal-body">
+                      <div class="col-md-12">
+                        <div class="row g-3">
+                            
+                          <h5 class="text-white fw-bold">DATOS DEL MEDICAMENTO</h5>
+
+                          <div class="col-md-8">
+                            <label for="" class="form-label text-white fw-bold"> Medicamento </label>
+                            <input type="text"
+                            class="form-control">
+                          </div>
+                          <div class="col-md-4">
+                            <label for="inputState" class="form-label fw-bold">Tipo</label>
+                            <select id="inputState"
+                                    class="form-select">
+                                <option></option>
+                                <option>Bolo</option>
+                                <option>Infusión</option>
+                            </select>
+                          </div>
+
+                          <div class="col-md-2">
+                            <label for="" class="form-label text-white fw-bold"> Dosis </label>
+                            <input type="text"
+                            class="form-control">
+                          </div>
+                          <div class="col-md-2">
+                            <label for="inputState" class="form-label text-white fw-bold">Unidad</label>
+                            <select id="inputState" class="form-select">
+                                <option></option>
+                                <option>UI.</option>
+                                <option>L. X min.</option>
+                                <option>%</option>
+                                <option>g.</option>
+                                <option>mg.</option>
+                                <option>ml.</option>
+                                <option>MUI</option>
+                                <option>MUI/min.</option>
+                                <option>ug/Kg min.</option>
+                                <option>mEq.</option>
+                                <option>mcg.</option>
+                                <option>mcg/kg/hr.</option>
+                                <option>mcg/kg/min.</option>
+                                <option>mg/kg/hr.</option>
+                                <option>mg/kg/min.</option>
+                            </select>
+                          </div>
+
+                          <div class="col-md-8">
+                              <label for="inputState" class="form-label text-white fw-bold">Vía</label>
+                              <select id="inputState" class="form-select">
+                                  <option></option>
+                                  <option>Intravenoso - IV</option>
+                                  <option>Intramuscular - IM</option>
+                                  <option>Inhalatorio - INH</option>
+                                  <option>Subaracnoideo - SA</option>
+                                  <option>Peridural - PD</option>
+                                  <option>Subcutáneo - SC</option>
+                                  <option>Subdérmico - SD</option>
+                                  <option>Intraarticular - IA</option>
+                                  <option>Sublingual - SL</option>
+                                  <option>Intranasal - NASAL</option>
+                                  <option>Intraóseo - IO</option>
+                                  <option>Bloque de plexo - PLEXO</option>
+                                  <option>Transdermico - TD</option>
+                              </select>
+                          </div>
+
+                          <div class="col-md-2">
+                            <label for="" class="form-label text-white fw-bold"> Hora de Inicio </label>
+                            <input type="time" class="form-control">
+                          </div>
+                          <!-- <div class="col-md-8"></div> -->
+                          <div class="col-md-2">
+                            <label for="" class="form-label text-white fw-bold"> Hora Final </label>
+                            <input type="time" class="form-control">
+                          </div>
+
+                          <div class="col-md-8">
+                              <label for="" class="form-label text-white fw-bold"> Observaciones </label>
+                              <textarea class="form-control" rows="2">
+                              </textarea>
+                          </div>
+
+                          <div class="col-md-8"></div>
+
+                          <div class="col-md-2">
+                            <button data-bs-toggle="tab" 
+                                          type="submit"
+                                          class="btn btn-guardar-balance fw-bold"> ELIMINAR </button>
+                          </div>
+
+                          <!-- Botón Guardar/Actualizar --> 
+                          <div class="col-md-2">
+                              <template v-if="btnActualizarMedicamento === false">
+                                  <button data-bs-toggle="tab" 
+                                          type="submit"
+                                          class="btn btn-guardar-balance fw-bold"> GUARDAR </button>
+                              </template>
+                              <template v-else>
+                                  <button data-bs-toggle="tab" 
+                                          type="submit"
+                                          class="btn btn-guardar-balance fw-bold"> ACTUALIZAR </button> 
+                              </template>                                                         
+                          </div>
+                            
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="col-md-2">
               <button type="button"
                       class="btn btn-menu fw-bold"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                      data-bs-auto-close="outside"> EVENTO CRITICO </button>
-              <!--Botón para abrir el dropdown-->
-              <form class="dropdown-menu p-5">
-                <div class="mb-3 input-group mb-3"></div>
-              </form>
+                      data-bs-toggle="modal"
+                      data-bs-target="#modal-relevo"> RELEVO </button>
+            </div>
+            <!--Abrir el modal de Relevo-->
+            <div class="modal" id="modal-relevo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
+                <div class="modal-content color-dropdown">
+                  <div class="input-group mb-3">
+                    <div class="modal-body">
+                      <div class="col-md-12">
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                              <h5 class="text-white fw-bold">DATOS DEL RELEVO</h5>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <button type="button"
+                      class="btn btn-menu fw-bold"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modal-evento"> EVENTO CRÍTICO </button>
+            </div>
+            <!--Abrir el modal de evento critico-->
+            <div class="modal" id="modal-evento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
+                <div class="modal-content color-dropdown">
+                  <div class="input-group mb-3">
+                    <div class="modal-body">
+                      <div class="col-md-12">
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                              <h5 class="text-white fw-bold">DATOS DEL EVENTO CRÍTICO</h5>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="col-md-1">
@@ -50,6 +201,7 @@
           </div>
         </div>
 
+        <!-- Menú de acciones -->
         <div class="dropdown col-md-2 text-end">
             <a class="btn btn-menu dropdown-toggle fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               MENÚ DE ACCIONES
@@ -506,7 +658,7 @@
       <!-- Tiempos quirurgicos -->
       <div class="col-md-12 row g-3">
         <div class="col-md-9">
-          <div class="row g-3 mb-3">
+          <div class="row g-3">
                 
             <div class="col-md-2">
               <button class="btn btn-menu fw-bold"
@@ -617,8 +769,27 @@
       </div>     
     </div>
 
+    <!-- Contenedor Grid -->
     <div class="input-group mb-3 bordePrincipal">
-      <div class="tab-content col-md-9" id="">
+     
+      <div class="col-md-3 menu-vista-previa">       
+
+        <!-- Vista medicamentos -->
+        <div class= "col-md-11 vista-medicamentos deslizar-balance">
+          <div class="col-md-12">
+            <input type="text" class="form-control" placeholder="Buscar medicamento">          
+          </div>
+          <hr/>
+          <!-- Lista de medicamentos -->
+        </div>
+        
+        <!-- Vista eventos/relevos -->
+        <div class="col-md-11 vista-eventos-relevos"> 
+          <input type="text" class="form-control">             
+        </div>
+      </div>
+
+      <div class="col-md-6 tab-content" id="">
         <div class="row g-3">
           <table class="table table-hover table-bordered">
             <thead>
@@ -684,9 +855,6 @@
 </template>
 
 <script lang="ts">
-// document.oncontextmenu = (event) => {
-//   event.preventDefault();
-// }
 import type { regMenuTrans } from "@/interfaces/regTransAnest";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
 import { useTransAnestStore } from "../../stores/transAnest-store";
@@ -735,6 +903,8 @@ export default({
 
       activoAnesOUT: false,
       noActivoAnesOUT: true,
+
+      btnActualizarMedicamento:false
     }
   },
 
@@ -800,7 +970,8 @@ export default({
         this.btnUpdateVentilador=true
         this.btnActualizaVentilador=false
 
-        this.menuTrans.Hr = document.getElementById('clock').textContent;
+        var hoy = new Date();
+        this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
         await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
 
         this.menuTrans.modosVentilacion = "";
@@ -815,7 +986,8 @@ export default({
       },
 
       async actualizarDatosVentilador() {
-        this.menuTrans.Hr = document.getElementById('clock').textContent;
+        var hoy = new Date();
+        this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
         await transAnestStore.updateDatosV(this.menuTrans, preIdStore.pacienteID._id);
 
         this.menuTrans.modosVentilacion = "";
@@ -861,7 +1033,8 @@ export default({
                 position: "top-end",
                 });
             } else {
-                this.menuTrans.Hr = document.getElementById('clock').textContent;
+                var hoy = new Date();
+                this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
                 await transAnestStore.updateVentilador(this.menuTrans.idVentilador, this.menuTrans.modosVentilacion, this.menuTrans.peep,
                                       this.menuTrans.vt, this.menuTrans.frecResp, this.menuTrans.IE, this.menuTrans.PLimite, this.menuTrans.Hr);
 
@@ -1088,8 +1261,25 @@ export default({
 .margen-div-barra{
   margin-top: 110px;
 }
+.menu-vista-previa {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+.vista-medicamentos{
+  height: 420px;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.vista-eventos-relevos{
+  height: 200px;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+}
 .menuLateralPrincipal {
-    margin-top: 5px;
+    margin-top: 21px;
     display: flex;
     flex-direction: column;
     row-gap: 10px;
@@ -1100,7 +1290,7 @@ export default({
   background-color: #E88300;
   padding: 0rem;
   border-radius: 10px;
-  margin-left: 28px;
+  margin-left: 29px;
   text-align: center;
 }
 .menu-pre-post {  
@@ -1109,7 +1299,7 @@ export default({
   background-color: #d6d6d6;
   padding: 0rem;
   border-radius: 10px;
-  margin-left: 28px;
+  margin-left: 29px;
   text-align: center;
 }
 .menu-pre-post:hover{
@@ -1140,17 +1330,8 @@ export default({
   border-right: 1px solid #ffffff;
   border-left: 1px solid #ffffff;
 }
-.estiloDropDown{
-  width: 450px; height: 250px;
-}
-.estiloDropDownTecnica{
-  width: 450px; height: auto;
-}
 .estiloDropDownBalance{
   width: auto; height: 400px;
-}
-.estiloDropDownVentilador{
-  width: 650px; height: auto;
 }
 .color-dropdown {
   background-color: #002d60;
@@ -1178,18 +1359,6 @@ export default({
     --bs-btn-active-border-color: #E88300;
     justify-self: end;
     border: none;   
-}
-.btn-guardar-info{
-    --bs-btn-bg: none;
-    --bs-btn-color: #E88300;    
-    --bs-btn-border-color: #E88300;
-    --bs-btn-hover-bg: #E88300;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-border-color: #E88300;          
-    --bs-btn-active-bg: #E88300;
-    --bs-btn-active-color: #ffffff;
-    --bs-btn-active-border-color: #E88300;  
-    width: -webkit-fill-available; 
 }
 .btn-guardar-balance {
   --bs-btn-bg: #ffffff;
@@ -1235,7 +1404,7 @@ export default({
 }
 hr {
     margin: 1rem 0;
-    color: white;
+    color: #A0A6B2;
     border: 0;
     border-top: 1px solid;
     opacity: 1;
@@ -1251,8 +1420,5 @@ hr {
     pointer-events: none;
     background-color: white;
     opacity: 1;
-}
-.form-alinear{
-  text-align: -webkit-center
 }
 </style>
