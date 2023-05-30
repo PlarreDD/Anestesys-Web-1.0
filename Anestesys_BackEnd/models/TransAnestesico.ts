@@ -62,6 +62,33 @@ const menuTransSchema = new Schema({
         PLimite: { type: String},
         Hr: { type: String},
     }],
+
+    /* Tiempos Qx */
+    tiemposQX: [{
+        ingresoQX: { type: String },
+        inicioAn: { type: String },
+        inicioCx: { type: String },
+        finCx: { type: String },
+        finAn: { type: String },
+        egresoQx: { type: String },
+    }],
+
+    /* Relevo */
+    relevoCx: [{
+        hrRelevo: { type: String },
+        nomAnestesiologo: { type: String },
+        matriculaAnest: { type: String },
+        obsRelevo: { type: String },
+        accionesRelevo: { type: String },
+    }],
+
+    /* Evento Crítico */
+    evCriticoCx: [{
+        hrEvCrt: { type: String },
+        detalleEvCrt: { type: String },
+        obsEvCrt: { type: String },
+        accionesEvCrt: { type: String },
+    }],
 });
 
 export const MenuTrans = model('MenuTrans', menuTransSchema);

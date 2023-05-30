@@ -1,5 +1,10 @@
 import { Response } from "express";
 import { MenuTrans } from "../models/TransAnestesico";
+import { UpdateResult } from "mongodb";
+
+// interface TiempoResult {
+//     tiemposQX: any[];
+// };
 
 /******************* Menu Trans Anestesico *******************/
 export const saveMenuTrans = async (req: any, res: Response) => {
@@ -15,76 +20,74 @@ export const saveMenuTrans = async (req: any, res: Response) => {
                 // Egresos
                 liqAscitis, sangradoAprox, uresis, expoQX,
                 reqBasales, ayuno, otrosEgresos,
-                /* Técnica Anestésica */                
+                /* Técnica Anestésica */
                 local, sedación, gralBalanceada, TIVA, multimodal,
                 bloqMixto, bloqPeriLum, bloqPeriCaudal, BloqEspinal,
                 BloqPlexo, BloqTroncular, bloqPeriToracico, bloqPeriCervical,
                 libreOpioides,
                 // Datos del ventilador
                 modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr
-             } = req.body;
+        } = req.body;
 
-             let menuTrans;
+        let menuTrans;
 
-             if(modosVentilacion==undefined){
-                menuTrans = new MenuTrans({ pid,
-                    /* Balance Total */
-                    balanceTotal: balanceTotal,
-                    // Ingresos
-                    solHartman: solHartman,
-                    solFisio: solFisio,
-                    glucosados: glucosados,
-                    gelatinas: gelatinas,
-                    almidones: almidones,
-                    albuminas: albuminas,
-                    paqGlobular: paqGlobular,
-                    plasmas: plasmas,
-                    plaquetas: plaquetas,
-                    crioprecipitados: crioprecipitados,
-                    factor_VII: factor_VII,
-                    factor_VIII: factor_VIII,
-                    otrosIngresos: otrosIngresos,
-                    // Egresos
-                    liqAscitis: liqAscitis,
-                    sangradoAprox: sangradoAprox,
-                    uresis: uresis,
-                    expoQX: expoQX,
-                    reqBasales: reqBasales,
-                    ayuno: ayuno,
-                    otrosEgresos: otrosEgresos,
-                    /* Técnica Anestésica */
-                    local: local,
-                    sedación: sedación,
-                    gralBalanceada: gralBalanceada,
-                    TIVA: TIVA,
-                    multimodal: multimodal,
-                    bloqMixto: bloqMixto,
-                    bloqPeriLum: bloqPeriLum,
-                    bloqPeriCaudal: bloqPeriCaudal,
-                    BloqEspinal: BloqEspinal,
-                    BloqPlexo: BloqPlexo,
-                    BloqTroncular: BloqTroncular,
-                    bloqPeriToracico: bloqPeriToracico,
-                    bloqPeriCervical: bloqPeriCervical,
-                    libreOpioides: libreOpioides,
-                  });
-             }
-             else{
-                menuTrans = new MenuTrans({ pid,
-                    // Datos del ventilador
-                    datosVentilador: {
-                      modosVentilacion: modosVentilacion,
-                      peep: peep,
-                      vt: vt,
-                      frecResp: frecResp,
-                      IE: IE,
-                      PLimite: PLimite,
-                      Hr: Hr,
-                    },
-                  });
-             }
-
-        
+        if( modosVentilacion == undefined ){
+            menuTrans = new MenuTrans({ pid,
+                                        /* Balance Total */
+                                        balanceTotal: balanceTotal,
+                                        // Ingresos
+                                        solHartman: solHartman,
+                                        solFisio: solFisio,
+                                        glucosados: glucosados,
+                                        gelatinas: gelatinas,
+                                        almidones: almidones,
+                                        albuminas: albuminas,
+                                        paqGlobular: paqGlobular,
+                                        plasmas: plasmas,
+                                        plaquetas: plaquetas,
+                                        crioprecipitados: crioprecipitados,
+                                        factor_VII: factor_VII,
+                                        factor_VIII: factor_VIII,
+                                        otrosIngresos: otrosIngresos,
+                                        // Egresos
+                                        liqAscitis: liqAscitis,
+                                        sangradoAprox: sangradoAprox,
+                                        uresis: uresis,
+                                        expoQX: expoQX,
+                                        reqBasales: reqBasales,
+                                        ayuno: ayuno,
+                                        otrosEgresos: otrosEgresos,
+                                        /* Técnica Anestésica */
+                                        local: local,
+                                        sedación: sedación,
+                                        gralBalanceada: gralBalanceada,
+                                        TIVA: TIVA,
+                                        multimodal: multimodal,
+                                        bloqMixto: bloqMixto,
+                                        bloqPeriLum: bloqPeriLum,
+                                        bloqPeriCaudal: bloqPeriCaudal,
+                                        BloqEspinal: BloqEspinal,
+                                        BloqPlexo: BloqPlexo,
+                                        BloqTroncular: BloqTroncular,
+                                        bloqPeriToracico: bloqPeriToracico,
+                                        bloqPeriCervical: bloqPeriCervical,
+                                        libreOpioides: libreOpioides,
+            });
+        }
+        else{
+            menuTrans = new MenuTrans({ pid,
+                                        // Datos del ventilador
+                                        datosVentilador: {
+                                            modosVentilacion: modosVentilacion,
+                                            peep: peep,
+                                            vt: vt,
+                                            frecResp: frecResp,
+                                            IE: IE,
+                                            PLimite: PLimite,
+                                            Hr: Hr,
+                                        },
+            });
+        }
 
         await menuTrans.save();
 
@@ -151,7 +154,7 @@ export const getModoVentilacion =async (req: any, res: Response) => {
 export const updateVentilacion = async (req: any, res: Response) => {
     try {
         const { id } = req.params;
-        const { datosVentilador } = req.body;       
+        const { datosVentilador } = req.body;
         
         const ventilador = await MenuTrans.updateOne({ "datosVentilador._id": id },
             {
@@ -262,6 +265,45 @@ export const UpdateBalanceH = async (req: any, res: Response) => {
                                                             });
 
         return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Tiempos QX Guardado/Actualización */
+export const saveTiemposQX = async (req: any, res: Response) => {
+    try {
+        const { pid,
+                // Tiempos Qx
+                ingresoQX, inicioAn, inicioCx, finCx, finAn, egresoQx,
+              } = req.body;
+
+        var tiempo: UpdateResult | null = await MenuTrans.findOne({ pid: pid });
+        const tiempo2: any = tiempo;
+        
+        if (tiempo) {
+            tiempo = await MenuTrans.updateOne({ "tiemposQX._id": tiempo2?.tiemposQX[0]._id },
+                                               { $set : { "tiemposQX.$.ingresoQX": ingresoQX,
+                                                          "tiemposQX.$.inicioAn": inicioAn,
+                                                          "tiemposQX.$.inicioCx": inicioCx,
+                                                          "tiemposQX.$.finCx": finCx,
+                                                          "tiemposQX.$.finAn": finAn,
+                                                          "tiemposQX.$.egresoQx": egresoQx,
+                                                        }
+                                               });
+
+        } else {
+            const menuTrans  = new MenuTrans({ pid,
+                                                // Datos del ventilador
+                                                tiemposQX: {
+                                                    ingresoQX: ingresoQX,
+                                                },
+                                });
+
+            await menuTrans.save();
+        }
+
+        return res.json({ tiempo });
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
     }

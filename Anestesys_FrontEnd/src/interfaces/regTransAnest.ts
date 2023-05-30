@@ -1,7 +1,7 @@
 /* Modelado para obtener los datos desde las vistas del registro Transanestésico */
 /* Datos del Ventilador */
 export interface regMenuTrans{
-    // DatosVentilador
+    /* DatosVentilador */
     idVentilador: string,
     modosVentilacion: string,
     peep: string,
@@ -49,4 +49,11 @@ export interface regMenuTrans{
     bloqPeriToracico: string,
     bloqPeriCervical: string,
     libreOpioides: string,
+    /* Tiempos QX */
+    ingresoQX: string,
+    inicioAn: string,
+    inicioCx: string,
+    finCx: string,
+    finAn: string,
+    egresoQx: string,
 }

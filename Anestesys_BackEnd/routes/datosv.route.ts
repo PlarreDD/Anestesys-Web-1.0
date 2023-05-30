@@ -6,7 +6,8 @@ import { saveMenuTrans,
          getModoVentilacion,
          updateVentilacion,
          deleteModoVentilacion,
-         UpdateBalanceH } from "../controllers/transanest.controller";
+         UpdateBalanceH,
+         saveTiemposQX } from "../controllers/transanest.controller";
 
 const router = Router();
 
@@ -18,5 +19,7 @@ router.get('/uno/:dVId', requireToken, getModoVentilacion);
 router.put('/uno/:id',  requireToken, updateVentilacion);
 router.delete('/:dVId', requireToken, deleteModoVentilacion);
 router.put('/bh/:id',  requireToken, UpdateBalanceH);
+/*----------------------- Tiempos QX ----------------------*/
+router.post('/tqx', requireToken, saveTiemposQX);
 
 export default router;

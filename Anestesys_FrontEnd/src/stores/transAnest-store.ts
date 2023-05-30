@@ -22,7 +22,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    pid: pid,                    
+                    pid: pid,
                     // Datos del Ventilador
                     modosVentilacion: regTransAnest.modosVentilacion,
                     peep: regTransAnest.peep,
@@ -203,16 +203,17 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    datosVentilador: [ {"modosVentilacion":modosVentilacion, 
+                    datosVentilador: [{ "modosVentilacion":modosVentilacion, 
                                         "peep":peep,
                                         "vt":vt, 
                                         "frecResp":frecResp,
                                         "IE":IE, 
                                         "PLimite":PLimite,
-                                        "Hr":Hr}]
+                                        "Hr":Hr
+                                    }]
                 },
             })
-            .then((res: any) => {                            
+            .then((res: any) => {
                 swal.fire({
                     title: 'Modo de ventilación actualizado correctamente',
                     icon: 'success',
@@ -221,7 +222,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     position: 'top-end',
                     timer: 2000,
                     timerProgressBar: true
-                })                
+                })
             })
             .catch((e: any) => {
                 // console.log("error: " + e);
@@ -236,7 +237,7 @@ export const useTransAnestStore = defineStore('transAn', {
                   Authorization: "Bearer " + userStore.token,
                 },
               })
-              .then((res: any) => {      
+              .then((res: any) => {
                   swal.fire({
                     title: "Modo de ventilación eliminado correctamente",
                     icon: "success",
@@ -315,6 +316,188 @@ export const useTransAnestStore = defineStore('transAn', {
             .catch((e: any) => {
                 // console.log("error: " + e);
             });
+        },
+
+        async saveTiemposQX(regTransAnest: any, pid: string, tqx: string) {
+            switch (tqx) {
+                case "QXIN":
+                    console.log(regTransAnest, pid, tqx);
+                    await apiAxios({
+                        url: "http://localhost:5000/trans/tqx",
+                        method: "POST",
+                        headers: {
+                            Authorization: "Bearer " + userStore.token,
+                        },
+                        data: {
+                            pid: pid,
+                            ingresoQX: regTransAnest
+                        }
+                    })
+                    .then((res: any) => {
+                        swal.fire({
+                            title: 'Datos guardados correctamente',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            toast: true,
+                            position: 'top-end',
+                            timer: 2000,
+                            timerProgressBar: true
+                        })
+                    })
+                    .catch((e: any) => {
+                        // console.log("error: " + e);
+                    });
+                break;
+      
+                case "ANESIN":
+                    console.log(regTransAnest, pid, tqx);
+                    await apiAxios({
+                        url: 'http://localhost:5000/trans/tqx',
+                        method: "POST",
+                        headers: {
+                            Authorization: "Bearer " + userStore.token,
+                        },
+                        data: {
+                            pid: pid,
+                            inicioAn: regTransAnest
+                        }
+                    })
+                    .then((res: any) => {
+                        swal.fire({
+                            title: 'Datos guardados correctamente',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            toast: true,
+                            position: 'top-end',
+                            timer: 2000,
+                            timerProgressBar: true
+                        })
+                    })
+                    .catch((e: any) => {
+                        // console.log("error: " + e);
+                    });
+                break;
+      
+                case "CXIN":
+                    console.log(regTransAnest, pid, tqx);
+                    await apiAxios({
+                        url: 'http://localhost:5000/trans/tqx',
+                        method: "POST",
+                        headers: {
+                            Authorization: "Bearer " + userStore.token,
+                        },
+                        data: {
+                            pid: pid,
+                            inicioCx: regTransAnest
+                        }
+                    })
+                    .then((res: any) => {
+                        swal.fire({
+                            title: 'Datos guardados correctamente',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            toast: true,
+                            position: 'top-end',
+                            timer: 2000,
+                            timerProgressBar: true
+                        })
+                    })
+                    .catch((e: any) => {
+                        // console.log("error: " + e);
+                    });
+                break;
+      
+                case "CXOUT":
+                    console.log(regTransAnest, pid, tqx);
+                    await apiAxios({
+                        url: 'http://localhost:5000/trans/tqx',
+                        method: "POST",
+                        headers: {
+                            Authorization: "Bearer " + userStore.token,
+                        },
+                        data: {
+                            pid: pid,
+                            finCx: regTransAnest
+                        }
+                    })
+                    .then((res: any) => {
+                        swal.fire({
+                            title: 'Datos guardados correctamente',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            toast: true,
+                            position: 'top-end',
+                            timer: 2000,
+                            timerProgressBar: true
+                        })
+                    })
+                    .catch((e: any) => {
+                        // console.log("error: " + e);
+                    });
+                break;
+      
+                case "ANESOUT":
+                    console.log(regTransAnest, pid, tqx);
+                    await apiAxios({
+                        url: 'http://localhost:5000/trans/tqx',
+                        method: "POST",
+                        headers: {
+                            Authorization: "Bearer " + userStore.token,
+                        },
+                        data: {
+                            pid: pid,
+                            finAn: regTransAnest
+                        }
+                    })
+                    .then((res: any) => {
+                        swal.fire({
+                            title: 'Datos guardados correctamente',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            toast: true,
+                            position: 'top-end',
+                            timer: 2000,
+                            timerProgressBar: true
+                        })
+                    })
+                    .catch((e: any) => {
+                        // console.log("error: " + e);
+                    });
+                break;
+      
+                case "QXOUT":
+                    console.log(regTransAnest, pid, tqx);
+                    await apiAxios({
+                        url: 'http://localhost:5000/trans/tqx',
+                        method: "POST",
+                        headers: {
+                            Authorization: "Bearer " + userStore.token,
+                        },
+                        data: {
+                            pid: pid,
+                            egresoQx: regTransAnest
+                        }
+                    })
+                    .then((res: any) => {
+                        swal.fire({
+                            title: 'Datos guardados correctamente',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            toast: true,
+                            position: 'top-end',
+                            timer: 2000,
+                            timerProgressBar: true
+                        })
+                    })
+                    .catch((e: any) => {
+                        // console.log("error: " + e);
+                    });
+                break;
+              
+                default:
+                    console.log('Hola');                    
+                break;
+              }
         }
     }
 })

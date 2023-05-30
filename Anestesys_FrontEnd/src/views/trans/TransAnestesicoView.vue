@@ -5,426 +5,616 @@
   <div class="margen-div-barra">
 
     <div class="input-group mb-3">
-      <div class="col-9 divform navbar-nav">
-        <!--Lista para el menú principal-->
-        <ul class="nav text-center" id="">
-          <li class="col-md-3">
-            <button type="button"
-                    class="btn btn-nav-bar fw-bold"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    data-bs-auto-close="outside"> GRID ANESTÉSICO </button>
-            <!--Botón para abrir el dropdown-->
-            <form class="dropdown-menu p-5">
-              <div class="mb-3 estiloDropDown input-group mb-3"></div>
-            </form>
-          </li>
+      <div class="row g-3 col-md-12">
+        <div class="col-md-10">
+          <div class="row g-3 mb-3">
+            <div class="col-md-3">
+              <button
+                type="button"
+                class="btn btn-menu fw-bold">
+                <img src="images/monitoreo.svg" />
+                &nbsp;&nbsp;&nbsp;INICIAR MONITOREO
+              </button>
+            </div>
 
-          <!-- Técnica Anestésica Final -->
-          <li class="col-md-3">
-            <button type="button"
-                    class="btn btn-nav-bar fw-bold"
-                    @click="clickTAbtn"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    data-bs-auto-close = "outside"> TÉCNICA ANESTÉSICA </button>
+            <div class="col-md-4"></div>
 
-            <form @submit.prevent="" class="dropdown-menu p-4 color-dropdown">
-              <div class="mb-3 estiloDropDownTecnica row g-3">
-                <h5 class="col-md-12 fw-bold text-white">TÉCNICA ANÉSTESICA</h5>
-                <!-- Técnica de anestesia final -->
-                <div class="col-md-12">
-                  <label for="" class="form-label fw-bold text-white">Técnica de anestesia final</label>
-                  <Multiselect mode="tags"
-                                v-model="postAnestStore.TecnicaAnestesica"
-                                @click="enviarTecnica"
-                                :class="infoNotaPost.npa_TecAnestFinal != undefined && infoNotaPost.npa_TecAnestFinal != '' ?
-                                                                          'form-control border border-success formSombra' : 'form-control'"
-                                placeholder="Seleccione las técnicas de anestesia"
-                                :options="opcionTecnicas"
-                                :searchable="true"
-                                :createTag="true"/>
-                </div>
-
-                <div class="col-md-8"></div>
-
-                <div class="col-md-4 alinear-btn">                    
-                  <template v-if="btnActualizarTecnica === false">
-                    <button data-bs-toggle="tab" 
-                            type="submit"
-                            class="btn btn-guardar-balance fw-bold"
-                            @click="cambiarUpdateTecnica"
-                            > GUARDAR </button>
-                  </template>
-
-                  <template v-else>
-                    <button data-bs-toggle="tab" 
-                            type="submit"
-                            class="btn btn-guardar-balance fw-bold"
-                            @click="postAnestStore.updateNotaPA(infoNotaPost, preIdStore.pacienteID._id, postAnestStore.TecnicaAnestesica)"
-                            > ACTUALIZAR </button> 
-                  </template>   
-                </div>
-              </div>
-            </form>
-          </li>
-
-          <!-- Balance Hídrico -->
-          <li class="col-md-3">
-            <button type="button" class="btn btn-nav-bar fw-bold" 
-                    data-bs-toggle="dropdown" aria-expanded="false" 
-                    data-bs-auto-close="outside">BALANCE HIDRICO</button>
-
-            <div class="col-md-12" id="">
-              <form @submit.prevent="" class="dropdown-menu p-4 color-dropdown">
-                <div class="estiloDropDownBalance row g-3 deslizar-balance">
-                  <h5 class="col-md-12 fw-bold text-white">BALANCE TOTAL: {{menuTrans.balanceTotal}} ml</h5>
-                  <h5 class="col-md-12 fw-bold text-white">Ingresos</h5>
-
-                  <input type="hidden" v-model="menuTrans.balanceTotal">
-                  <!-- Solución Hartman -->
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Solución Hartman(ml):</label>
-                    <input class="form-control"
-                           v-model="menuTrans.solHartman"
-                           type="text"
-                           @keyup.capture="calcularBalance">
-                  </div>
-                  <!-- Solución fisiológica -->
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Solución fisiológica(ml):</label>
-                    <input class="form-control"
-                           v-model="menuTrans.solFisio"
-                           type="text"
-                           @keyup.capture="calcularBalance">
-                  </div>
-                  <!-- Glucosados -->
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Glucosados(ml):</label>
-                    <input class="form-control"
-                           v-model="menuTrans.glucosados"
-                           type="text"
-                           @keyup.capture="calcularBalance">
-                  </div>                  
-                  <!-- Gelatinas -->
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Gelatinas(ml):</label>
-                    <input class="form-control"
-                           type="text"
-                           v-model="menuTrans.gelatinas"
-                           @keyup.capture="calcularBalance">
-                  </div>
-                  <!-- Almidones -->
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Almidones(ml):</label>
-                    <input class="form-control"
-                           v-model="menuTrans.almidones"
-                           type="text"
-                           @keyup.capture="calcularBalance">
-                  </div>
-                  <!-- Albúminas -->
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Albúminas(ml):</label>
-                    <input class="form-control"
-                           v-model="menuTrans.albuminas"
-                           type="text"
-                           @keyup.capture="calcularBalance">
-                  </div>
-                  <!-- Paquete globular -->
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Paquete globular(ml):</label>
-                    <input class="form-control"
-                           v-model="menuTrans.paqGlobular"
-                           type="text"
-                           @keyup.capture="calcularBalance">
-                  </div>
-                  <!-- Plasmas -->
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Plasmas(ml):</label>
-                    <input class="form-control"
-                           v-model="menuTrans.plasmas"
-                           type="text"
-                           @keyup.capture="calcularBalance">
-                  </div>
-                  <!-- Plaquetas -->
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Plaquetas(ml):</label>
-                    <input class="form-control"
-                           type="text"
-                           v-model="menuTrans.plaquetas"
-                           @keyup.capture="calcularBalance">
-                  </div>
-                  <!-- Crioprecipitados -->
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Crioprecipitados(ml):</label>
-                    <input class="form-control"
-                           type="text"
-                           v-model="menuTrans.crioprecipitados"
-                           @keyup.capture="calcularBalance">
-                  </div>
-                  <!-- Factor VII -->
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Factor VII(ml):</label>
-                    <input class="form-control"
-                           type="text"
-                           v-model="menuTrans.factor_VII"
-                           @keyup.capture="calcularBalance">
-                  </div>
-                  <!-- Factor VIII -->
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Factor VIII(ml):</label>
-                    <input class="form-control"
-                           type="text"
-                           v-model="menuTrans.factor_VIII"
-                           @keyup.capture="calcularBalance">
-                  </div>
-                  <!-- Otros Ingresos -->
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Otros:</label>
-                    <input class="form-control"
-                           type="text"
-                           v-model="menuTrans.otrosIngresos"
-                           @keyup.capture="calcularBalance">
-                  </div>
-
-                  <div class="col-md-8"></div>                  
-
-                  <hr />
-
-                  <h5 class="col-md-12 fw-bold text-white text-white">Egresos</h5>
-
-                  <!-- Liquídos de ascitis -->
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Liquídos de ascitis(ml):</label>
-                    <input class="form-control"
-                           type="text"
-                           v-model="menuTrans.liqAscitis"
-                           @keyup.capture="calcularBalance">
-                  </div>
-                  <!-- Sangrado aproximado -->
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Sangrado aproximado(ml):</label>
-                    <input class="form-control"
-                           type="text"
-                           v-model="menuTrans.sangradoAprox"
-                           @keyup.capture="calcularBalance">
-                  </div>
-                  <!-- Uresis -->
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Uresis(ml):</label>
-                    <input class="form-control"
-                           type="text"
-                           v-model="menuTrans.uresis"
-                           @keyup.capture="calcularBalance">
-                  </div>
-                  <!-- Exposición quirúrgica -->
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Exposición quirúrgica:</label>
-                    <input class="form-control"
-                           type="text"
-                           v-model="menuTrans.expoQX"
-                           @keyup.capture="calcularBalance">
-                  </div>
-                  <!-- Requerimientos basales -->
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Requerimientos basales:</label>
-                    <input class="form-control"
-                           type="text"
-                           v-model="menuTrans.reqBasales"
-                           @keyup.capture="calcularBalance">
-                  </div>
-                  <!-- Ayuno -->
-                  <div class="col-md-4">
-                    <label for="" class="form-label fw-bold text-white">Ayuno:</label>
-                    <input class="form-control"
-                           type="text"
-                           v-model="menuTrans.ayuno"
-                           @keyup.capture="calcularBalance">
-                  </div>
-                  <!-- Otros Egresos -->
-                  <div class="col-md-3">
-                    <label for="" class="form-label fw-bold text-white">Otros:</label>
-                    <input class="form-control"
-                           type="text"
-                           v-model="menuTrans.otrosEgresos"
-                           @keyup.capture="calcularBalance">
-                  </div>
-
-                  <div class="col-md-9"></div>
-                  <div class="col-md-9"></div>
-
-                  <!-- Botón guardar/actualizar -->
-                  <div class="col-md-3 alinear-btn">
-                    <template v-if="btnActualizarBalance === false">
-                      <button data-bs-toggle="tab"
-                              type="submit"
-                              class="btn btn-guardar-balance fw-bold"
-                              @click="cambiarUpdateBalance()"> GUARDAR </button>
-                    </template>
-
-                    <template v-else>
-                      <button data-bs-toggle="tab" 
-                              type="submit"
-                              class="btn btn-guardar-balance fw-bold"
-                              @click="transAnestStore.updateBalanceH(menuTrans, preIdStore.pacienteID._id)"> ACTUALIZAR </button> 
-                    </template>   
-                  </div>
-                </div>
+            <div class="col-md-2">
+              <button type="button"
+                      class="btn btn-menu fw-bold"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      data-bs-auto-close="outside"> RELEVO </button>
+              <!--Botón para abrir el dropdown-->
+              <form class="dropdown-menu p-5">
+                <div class="mb-3 input-group mb-3"></div>
               </form>
             </div>
-          </li>
 
-          <!-- Datos del ventilador -->
-          <li class="col-md-3">
-            <button type="button"
-                    class="btn btn-nav-bar fw-bold"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    data-bs-auto-close="outside">DATOS DEL VENTILADOR</button>
-            <form @submit.prevent="" class="dropdown-menu p-4 color-dropdown">
-              <div class="mb-3 estiloDropDownVentilador row g-3">
-                <h5 class="text-white fw-bold">VENTILADOR</h5>
-                <!-- Modos de Ventilación -->
-                <div class="col-md-9">
-                  <label for="inputState" class="form-label fw-bold text-white">Modos de ventilación</label>
-                  <select id="inputState"
-                          v-model="menuTrans.modosVentilacion"
-                          class="form-select">
-                    <option selected></option>
-                    <option>Control volumen</option>
-                    <option>Control presión</option>
-                    <option>Presión soporte</option>
-                    <option>SIMV-VC+PSV</option>
-                    <option>SIMV-PC+PSV</option>
-                    <option>Ventilación control presión con volumen garantizado</option>
-                  </select>
+            <div class="col-md-2">
+              <button type="button"
+                      class="btn btn-menu fw-bold"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      data-bs-auto-close="outside"> EVENTO CRITICO </button>
+              <!--Botón para abrir el dropdown-->
+              <form class="dropdown-menu p-5">
+                <div class="mb-3 input-group mb-3"></div>
+              </form>
+            </div>
 
-                  <input type="hidden"
-                         class="form-control"
-                         v-model="menuTrans.idVentilador">
-                </div>
-                <!-- PEEP -->
-                <div class="col-md-3">
-                  <label class="form-label fw-bold text-white">PEEP</label>
-                  <input type="text"
-                         class="form-control" 
-                         v-model="menuTrans.peep">
-                </div>
-                <!-- VIT -->
-                <div class="col-md-3">
-                  <label class="form-label fw-bold text-white">VT</label>
-                  <input type="text"
-                         class="form-control"
-                         v-model="menuTrans.vt">
-                </div>
-                <!-- Frecuencia Respiratoria -->
-                <div class="col-md-3">
-                  <label class="form-label fw-bold text-white">Frec. Resp</label>
-                  <input type="text"
-                         class="form-control"
-                         v-model="menuTrans.frecResp"> 
-                </div>
-                <!-- I:E -->
-                <div class="col-md-3">
-                  <label class="form-label fw-bold text-white">I:E</label>
-                  <input type="text"
-                         class="form-control"
-                         v-model="menuTrans.IE"> 
-                </div>
-                <!-- Presión Límite -->
-                <div class="col-md-3">
-                  <label class="form-label fw-bold text-white">P. Límite</label>
-                  <input type="text"
-                         class="form-control"
-                         v-model="menuTrans.PLimite"> 
-                </div>
+            <div class="col-md-1">
+              <button type="button"
+                      class="btn btn-menu fw-bold">Imprimir</button>
+            </div>
+          </div>
+        </div>
 
-                <div class="col-md-9"></div>
-                <!-- Botón Guardar/Agregar -->
-                <div class="col-md-3 btn-abajo">                                    
-                  <template v-if="btnAddVentilador === true">
-                    <button class="btn btn-guardar fw-bold"
-                            @click="guardarDatosV">
-                      <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
-                    </button>
-                  </template>
+        <div class="dropdown col-md-2 text-end">
+            <a class="btn btn-menu dropdown-toggle fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              MENÚ DE ACCIONES
+            </a>
 
-                  <template v-if="btnUpdateVentilador === true">
-                    <button class="btn btn-guardar fw-bold"
-                            @click="actualizarDatosVentilador">
-                      <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
-                    </button>
-                  </template>  
+            <ul class="dropdown-menu">
+              <!-- Grid Anestésico -->
+              <li class="col-md-3">
+                <button type="button"
+                        class="btn btn-nav-bar fw-bold"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal-grid"> GRID ANESTÉSICO </button>
+                
+              </li>
+              <!-- Técnica Anestésica Final -->
+              <li class="col-md-3">
+                <button type="button"
+                        class="btn btn-nav-bar fw-bold"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal-tecnica"> TÉCNICA ANESTÉSICA </button>                
+              </li>
+              <!-- Balance Hídrico -->
+              <li class="col-md-3">
+                <button type="button" class="btn btn-nav-bar fw-bold" 
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal-balance">BALANCE HIDRICO</button>
+              </li>
+              <!-- Datos del ventilador -->
+              <li class="col-md-3">
+                <button type="button"
+                        class="btn btn-nav-bar fw-bold"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal-ventilador">DATOS DEL VENTILADOR</button>
+              </li>
+            </ul>
+        </div>
+      </div>
 
-                  <template v-if="btnActualizaVentilador === true">
-                    <button class="btn btn-guardar fw-bold"
-                            @click="actualizarVentilador">
-                      <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
-                    </button>
-                  </template>  
-                </div>
-                <!-- Lista Modo de Ventilación -->
-                <div class="table-responsive">
-                  <div class="deslizar">
-                    <table class="table table-responsive text-white">
-                      <thead>
-                        <tr>
-                          <th></th>
-                          <th>Hora</th>
-                          <th>Modo de ventilación</th>
-                          <th></th>
-                          <th></th>
-                        </tr>
-                      </thead>
-
-                      <tbody v-for="( ventilador ) in transAnestStore.datosVentilacion">
-                        <tr v-for="(datoVentilacion, index) in ventilador.datosVentilador">
-                          <td>{{ index + 1 }}</td>
-                          <td>{{ datoVentilacion.Hr }}</td>
-                          <td>{{ datoVentilacion.modosVentilacion }}</td>
-                          <!-- Botón Editar -->
-                          <td>
-                            <button class="btn" @click="cambiarBtnActualizar(datoVentilacion._id)">
-                              <font-awesome-icon 
-                                icon="fa-solid fa-pen-to-square" 
-                                size="lg"
-                                class="text-white"/>
-                            </button>
-                          </td>
-                          <!-- Botón Eliminar -->
-                          <td>
-                            <button class="btn" @click="eliminarDatosV(datoVentilacion._id)">
-                              <font-awesome-icon 
-                                icon="fa-solid fa-trash" 
-                                size="lg" class="text-white"/>
-                            </button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+      <!--Abrir el modal Grid Anestésico-->
+      <div class="modal" id="modal-grid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
+          <div class="modal-content color-dropdown">
+            <div class="input-group mb-3">
+              <div class="modal-body">
+                <div class="col-md-12">
+                  <div class="row g-3">
+                      <div class="col-md-12">
+                        <h5 class="text-white fw-bold">GRID ANESTÉSICO</h5>
+                      </div>
                   </div>
                 </div>
               </div>
-            </form>
-          </li>
-        </ul>
-      </div>
-
-      <div class="col-1 fw-bold">
-        <select id="inputState" class="form-select ">
-          <option>1</option>
-          <option>2</option>
-          <option>5</option>
-          <option>10</option>
-          <option>15</option>
-        </select>
-      </div>
-
-      <div class="col-2 fw-bold">
-        <div class="centrarLabel">
-          <h4><span id="clock"></span></h4>
+            </div>
+          </div>
         </div>
       </div>
+
+      <!--Abrir el modal Técnica Anestésica-->
+      <div class="modal" id="modal-tecnica" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content color-dropdown">
+            <div class="input-group mb-3">
+              <div class="modal-body">
+                <div class="col-md-12">
+                  <div class="row g-3">
+                        <h5 class="col-md-12 fw-bold text-white">TÉCNICA ANÉSTESICA</h5>
+                        <!-- Técnica de anestesia final -->
+                        <div class="col-md-12">
+                          <label for="" class="form-label fw-bold text-white">Técnica de anestesia final</label>
+                          <Multiselect mode="tags"
+                                        v-model="postAnestStore.TecnicaAnestesica"
+                                        @click="enviarTecnica"
+                                        :class="infoNotaPost.npa_TecAnestFinal != undefined && infoNotaPost.npa_TecAnestFinal != '' ?
+                                                                                  'form-control border border-success formSombra' : 'form-control'"
+                                        placeholder="Seleccione las técnicas de anestesia"
+                                        :options="opcionTecnicas"
+                                        :searchable="true"
+                                        :createTag="true"/>
+                        </div>
+
+                        <div class="col-md-10"></div>
+
+                        <div class="col-md-2 alinear-btn">                    
+                          <template v-if="btnActualizarTecnica === false">
+                            <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-balance fw-bold"
+                                    @click="cambiarUpdateTecnica"
+                                    > GUARDAR </button>
+                          </template>
+
+                          <template v-else>
+                            <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-guardar-balance fw-bold"
+                                    @click="postAnestStore.updateNotaPA(infoNotaPost, preIdStore.pacienteID._id, postAnestStore.TecnicaAnestesica)"
+                                    > ACTUALIZAR </button> 
+                          </template>   
+                        </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Abrir el modal Balance Hídrico-->
+      <div class="modal" id="modal-balance" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content color-dropdown">
+            <div class="input-group mb-3">
+              <div class="modal-body">
+                <div class="col-md-12">
+                  <div class="row g-3">
+                    <div class="estiloDropDownBalance row g-2 deslizar-balance">
+                      <h5 class="col-md-12 fw-bold text-white">BALANCE TOTAL: {{menuTrans.balanceTotal}} ml</h5>
+                      <h5 class="col-md-12 fw-bold text-white">Ingresos</h5>
+
+                      <input type="hidden" v-model="menuTrans.balanceTotal">
+                      <!-- Solución Hartman -->
+                      <div class="col-md-4">
+                        <label for="" class="form-label fw-bold text-white">Solución Hartman(ml):</label>
+                        <input class="form-control"
+                              v-model="menuTrans.solHartman"
+                              type="text"
+                              @keyup.capture="calcularBalance">
+                      </div>
+                      <!-- Solución fisiológica -->
+                      <div class="col-md-4">
+                        <label for="" class="form-label fw-bold text-white">Solución fisiológica(ml):</label>
+                        <input class="form-control"
+                              v-model="menuTrans.solFisio"
+                              type="text"
+                              @keyup.capture="calcularBalance">
+                      </div>
+                      <!-- Glucosados -->
+                      <div class="col-md-4">
+                        <label for="" class="form-label fw-bold text-white">Glucosados(ml):</label>
+                        <input class="form-control"
+                              v-model="menuTrans.glucosados"
+                              type="text"
+                              @keyup.capture="calcularBalance">
+                      </div>                  
+                      <!-- Gelatinas -->
+                      <div class="col-md-4">
+                        <label for="" class="form-label fw-bold text-white">Gelatinas(ml):</label>
+                        <input class="form-control"
+                              type="text"
+                              v-model="menuTrans.gelatinas"
+                              @keyup.capture="calcularBalance">
+                      </div>
+                      <!-- Almidones -->
+                      <div class="col-md-4">
+                        <label for="" class="form-label fw-bold text-white">Almidones(ml):</label>
+                        <input class="form-control"
+                              v-model="menuTrans.almidones"
+                              type="text"
+                              @keyup.capture="calcularBalance">
+                      </div>
+                      <!-- Albúminas -->
+                      <div class="col-md-4">
+                        <label for="" class="form-label fw-bold text-white">Albúminas(ml):</label>
+                        <input class="form-control"
+                              v-model="menuTrans.albuminas"
+                              type="text"
+                              @keyup.capture="calcularBalance">
+                      </div>
+                      <!-- Paquete globular -->
+                      <div class="col-md-4">
+                        <label for="" class="form-label fw-bold text-white">Paquete globular(ml):</label>
+                        <input class="form-control"
+                              v-model="menuTrans.paqGlobular"
+                              type="text"
+                              @keyup.capture="calcularBalance">
+                      </div>
+                      <!-- Plasmas -->
+                      <div class="col-md-4">
+                        <label for="" class="form-label fw-bold text-white">Plasmas(ml):</label>
+                        <input class="form-control"
+                              v-model="menuTrans.plasmas"
+                              type="text"
+                              @keyup.capture="calcularBalance">
+                      </div>
+                      <!-- Plaquetas -->
+                      <div class="col-md-4">
+                        <label for="" class="form-label fw-bold text-white">Plaquetas(ml):</label>
+                        <input class="form-control"
+                              type="text"
+                              v-model="menuTrans.plaquetas"
+                              @keyup.capture="calcularBalance">
+                      </div>
+                      <!-- Crioprecipitados -->
+                      <div class="col-md-4">
+                        <label for="" class="form-label fw-bold text-white">Crioprecipitados(ml):</label>
+                        <input class="form-control"
+                              type="text"
+                              v-model="menuTrans.crioprecipitados"
+                              @keyup.capture="calcularBalance">
+                      </div>
+                      <!-- Factor VII -->
+                      <div class="col-md-4">
+                        <label for="" class="form-label fw-bold text-white">Factor VII(ml):</label>
+                        <input class="form-control"
+                              type="text"
+                              v-model="menuTrans.factor_VII"
+                              @keyup.capture="calcularBalance">
+                      </div>
+                      <!-- Factor VIII -->
+                      <div class="col-md-4">
+                        <label for="" class="form-label fw-bold text-white">Factor VIII(ml):</label>
+                        <input class="form-control"
+                              type="text"
+                              v-model="menuTrans.factor_VIII"
+                              @keyup.capture="calcularBalance">
+                      </div>
+                      <!-- Otros Ingresos -->
+                      <div class="col-md-4">
+                        <label for="" class="form-label fw-bold text-white">Otros:</label>
+                        <input class="form-control"
+                              type="text"
+                              v-model="menuTrans.otrosIngresos"
+                              @keyup.capture="calcularBalance">
+                      </div>
+
+                      <div class="col-md-8"></div>                  
+
+                      <hr />
+
+                      <h5 class="col-md-12 fw-bold text-white text-white">Egresos</h5>
+
+                      <!-- Liquídos de ascitis -->
+                      <div class="col-md-4">
+                        <label for="" class="form-label fw-bold text-white">Liquídos de ascitis(ml):</label>
+                        <input class="form-control"
+                              type="text"
+                              v-model="menuTrans.liqAscitis"
+                              @keyup.capture="calcularBalance">
+                      </div>
+                      <!-- Sangrado aproximado -->
+                      <div class="col-md-4">
+                        <label for="" class="form-label fw-bold text-white">Sangrado aproximado(ml):</label>
+                        <input class="form-control"
+                              type="text"
+                              v-model="menuTrans.sangradoAprox"
+                              @keyup.capture="calcularBalance">
+                      </div>
+                      <!-- Uresis -->
+                      <div class="col-md-4">
+                        <label for="" class="form-label fw-bold text-white">Uresis(ml):</label>
+                        <input class="form-control"
+                              type="text"
+                              v-model="menuTrans.uresis"
+                              @keyup.capture="calcularBalance">
+                      </div>
+                      <!-- Exposición quirúrgica -->
+                      <div class="col-md-4">
+                        <label for="" class="form-label fw-bold text-white">Exposición quirúrgica:</label>
+                        <input class="form-control"
+                              type="text"
+                              v-model="menuTrans.expoQX"
+                              @keyup.capture="calcularBalance">
+                      </div>
+                      <!-- Requerimientos basales -->
+                      <div class="col-md-4">
+                        <label for="" class="form-label fw-bold text-white">Requerimientos basales:</label>
+                        <input class="form-control"
+                              type="text"
+                              v-model="menuTrans.reqBasales"
+                              @keyup.capture="calcularBalance">
+                      </div>
+                      <!-- Ayuno -->
+                      <div class="col-md-4">
+                        <label for="" class="form-label fw-bold text-white">Ayuno:</label>
+                        <input class="form-control"
+                              type="text"
+                              v-model="menuTrans.ayuno"
+                              @keyup.capture="calcularBalance">
+                      </div>
+                      <!-- Otros Egresos -->
+                      <div class="col-md-3">
+                        <label for="" class="form-label fw-bold text-white">Otros:</label>
+                        <input class="form-control"
+                              type="text"
+                              v-model="menuTrans.otrosEgresos"
+                              @keyup.capture="calcularBalance">
+                      </div>
+
+                      <div class="col-md-9"></div>
+                      <div class="col-md-10"></div>
+
+                      <!-- Botón guardar/actualizar -->
+                      <div class="col-md-2 alinear-btn">
+                        <template v-if="btnActualizarBalance === false">
+                          <button data-bs-toggle="tab"
+                                  type="submit"
+                                  class="btn btn-guardar-balance fw-bold"
+                                  @click="cambiarUpdateBalance()"> GUARDAR </button>
+                        </template>
+
+                        <template v-else>
+                          <button data-bs-toggle="tab" 
+                                  type="submit"
+                                  class="btn btn-guardar-balance fw-bold"
+                                  @click="transAnestStore.updateBalanceH(menuTrans, preIdStore.pacienteID._id)"> ACTUALIZAR </button> 
+                        </template>   
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Abrir el modal Datos del Ventilador-->
+      <div class="modal" id="modal-ventilador" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content color-dropdown modal-med-largo">
+            <div class="input-group mb-3">
+              <div class="modal-body">
+                <div class="col-md-12">
+                  <div class="row g-3">
+                    <h5 class="text-white fw-bold">VENTILADOR</h5>
+                    <!-- Modos de Ventilación -->
+                    <div class="col-md-9">
+                      <label for="inputState" class="form-label fw-bold text-white">Modos de ventilación</label>
+                      <select id="inputState"
+                              v-model="menuTrans.modosVentilacion"
+                              class="form-select">
+                        <option selected></option>
+                        <option>Control volumen</option>
+                        <option>Control presión</option>
+                        <option>Presión soporte</option>
+                        <option>SIMV-VC+PSV</option>
+                        <option>SIMV-PC+PSV</option>
+                        <option>Ventilación control presión con volumen garantizado</option>
+                      </select>
+
+                      <input type="hidden"
+                            class="form-control"
+                            v-model="menuTrans.idVentilador">
+                    </div>
+                    <!-- PEEP -->
+                    <div class="col-md-3">
+                      <label class="form-label fw-bold text-white">PEEP</label>
+                      <input type="text"
+                            class="form-control" 
+                            v-model="menuTrans.peep">
+                    </div>
+                    <!-- VIT -->
+                    <div class="col-md-3">
+                      <label class="form-label fw-bold text-white">VT</label>
+                      <input type="text"
+                            class="form-control"
+                            v-model="menuTrans.vt">
+                    </div>
+                    <!-- Frecuencia Respiratoria -->
+                    <div class="col-md-3">
+                      <label class="form-label fw-bold text-white">Frec. Resp</label>
+                      <input type="text"
+                            class="form-control"
+                            v-model="menuTrans.frecResp"> 
+                    </div>
+                    <!-- I:E -->
+                    <div class="col-md-3">
+                      <label class="form-label fw-bold text-white">I:E</label>
+                      <input type="text"
+                            class="form-control"
+                            v-model="menuTrans.IE"> 
+                    </div>
+                    <!-- Presión Límite -->
+                    <div class="col-md-3">
+                      <label class="form-label fw-bold text-white">P. Límite</label>
+                      <input type="text"
+                            class="form-control"
+                            v-model="menuTrans.PLimite"> 
+                    </div>
+
+                    <div class="col-md-9"></div>
+                    <!-- Botón Guardar/Agregar -->
+                    <div class="col-md-3 btn-abajo">                                    
+                      <template v-if="btnAddVentilador === true">
+                        <button class="btn btn-guardar fw-bold"
+                                @click="guardarDatosV">
+                          <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                        </button>
+                      </template>
+
+                      <template v-if="btnUpdateVentilador === true">
+                        <button class="btn btn-guardar fw-bold"
+                                @click="actualizarDatosVentilador">
+                          <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                        </button>
+                      </template>  
+
+                      <template v-if="btnActualizaVentilador === true">
+                        <button class="btn btn-guardar fw-bold"
+                                @click="actualizarVentilador">
+                          <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                        </button>
+                      </template>  
+                    </div>
+                    <!-- Lista Modo de Ventilación -->
+                    <div class="">
+                      <div class="deslizar">
+                        <table class="table table-responsive text-white">
+                          <thead>
+                            <tr>
+                              <th></th>
+                              <th>Hora</th>
+                              <th>Modo de ventilación</th>
+                              <th></th>
+                              <th></th>
+                            </tr>
+                          </thead>
+
+                          <tbody v-for="( ventilador ) in transAnestStore.datosVentilacion">
+                            <tr v-for="(datoVentilacion, index) in ventilador.datosVentilador">
+                              <td>{{ index + 1 }}</td>
+                              <td>{{ datoVentilacion.Hr }}</td>
+                              <td>{{ datoVentilacion.modosVentilacion }}</td>
+                              <!-- Botón Editar -->
+                              <td>
+                                <button class="btn" @click="cambiarBtnActualizar(datoVentilacion._id)">
+                                  <font-awesome-icon 
+                                    icon="fa-solid fa-pen-to-square" 
+                                    size="lg"
+                                    class="text-white"/>
+                                </button>
+                              </td>
+                              <!-- Botón Eliminar -->
+                              <td>
+                                <button class="btn" @click="eliminarDatosV(datoVentilacion._id)">
+                                  <font-awesome-icon 
+                                    icon="fa-solid fa-trash" 
+                                    size="lg" class="text-white"/>
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tiempos quirurgicos -->
+      <div class="col-md-12 row g-3">
+        <div class="col-md-9">
+          <div class="row g-3 mb-3">
+                
+            <div class="col-md-2">
+              <button class="btn btn-menu fw-bold"
+                      type="button"
+                      @dblclick="actualizarTQX('QXIN')" 
+                      :disabled="menuTrans.ingresoQX != undefined ? true : false">
+                  <label>QX IN <label class="fw-normal">{{menuTrans.ingresoQX}}</label></label>                  
+              </button>
+            </div>
+            
+            <div class="col-md-2">
+              <button type="button" id="anes-in"
+                      class="btn btn-menu fw-bold"
+                      :class="{ 'show': activoAnesIN, ' ': noActivoAnesIN }"
+                      @dblclick="actualizarTQX('ANESIN')"
+                      @click.right="mostrarDropDown('ANESIN')"> 
+                      <label>ANES IN <label class="fw-normal">{{menuTrans.inicioAn}}</label></label> 
+              </button>
+
+              <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': activoAnesIN, ' ': noActivoAnesIN }">                                
+                <label class="text-white fw-bold">Modificar</label>
+                <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('ANESIN')"/></i>
+                <input class="form-control"
+                        id="appt-time"
+                        type="time"
+                        v-model="menuTrans.inicioAn"
+                        step="300" @change="actualizaHora('ANESIN')">
+              </form>
+              
+            </div>
+
+            <div class="col-md-2">
+              <button type="button" id="cx-in"
+                      class="btn btn-menu fw-bold" :class="{ 'show': activoCxIN, ' ': noActivoCxIN }"
+                      @dblclick="actualizarTQX('CXIN')"
+                      @click.right="mostrarDropDown('CXIN')"> 
+                <label>CX IN <label class="fw-normal">{{menuTrans.inicioCx}}</label></label>
+              </button>
+
+              <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': activoCxIN, ' ': noActivoCxIN }">
+                <label class="text-white fw-bold">Modificar</label>                
+                <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('CXIN')"/></i>
+                <input class="form-control"
+                        type="time"
+                        v-model="menuTrans.inicioCx" 
+                        step="300" @change="actualizaHora('CXIN')">
+              </form>
+            </div>
+
+            <div class="col-md-2"> 
+              <button type="button" id="cx-out"
+                      class="btn btn-menu fw-bold" :class="{ 'show': activoCxOUT, ' ': noActivoCxOUT }"
+                      @dblclick="actualizarTQX('CXOUT')"
+                      @click.right="mostrarDropDown('CXOUT')"> 
+                <label>CX OUT <label class="fw-normal">{{menuTrans.finCx}}</label></label>
+              </button>
+
+              <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': activoCxOUT, ' ': noActivoCxOUT }">
+                <label class="text-white fw-bold">Modificar</label>                
+                <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('CXOUT')"/></i>
+                <input class="form-control"
+                        id="appt-time"
+                        type="time"
+                        v-model="menuTrans.finCx"
+                        step="300" @change="actualizaHora('CXOUT')">
+              </form>
+            </div>
+
+            <div class="col-md-2">    
+              <button type="button" id="anes-out"
+                      class="btn btn-menu fw-bold" :class="{ 'show': activoAnesOUT, ' ': noActivoAnesOUT }" 
+                      @dblclick="actualizarTQX('ANESOUT')"
+                      @click.right="mostrarDropDown('ANESOUT')"> 
+                <label>ANES OUT <label class="fw-normal">{{menuTrans.finAn}}</label></label>
+              </button>
+              
+              <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': activoAnesOUT, ' ': noActivoAnesOUT }">
+                <label class="text-white fw-bold">Modificar</label>                
+                <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg " @click="ocultarDropDown('ANESOUT')"/></i>
+                <input class="form-control"
+                        id="appt-time"
+                        type="time"
+                        v-model="menuTrans.finAn"
+                        step="300" @change="actualizaHora('ANESOUT')">
+              </form>   
+            </div>
+
+            <div class="col-md-2">    
+              <button type="button"
+                      class="btn btn-menu fw-bold" 
+                      @dblclick="actualizarTQX('QXOUT')"
+                      :disabled="menuTrans.egresoQx != undefined ? true : false"> 
+                      <label>QX OUT <label class="fw-normal">{{menuTrans.egresoQx}}</label></label>
+              </button>        
+            </div>
+          </div>
+        </div>
+
+        <div class="col-1 fw-bold">
+          <select id="inputState" class="form-select">
+            <option>1</option>
+            <option>2</option>
+            <option>5</option>
+            <option>10</option>
+            <option>15</option>
+          </select>
+        </div>
+      </div>     
     </div>
 
     <div class="input-group mb-3 bordePrincipal">
@@ -494,6 +684,9 @@
 </template>
 
 <script lang="ts">
+// document.oncontextmenu = (event) => {
+//   event.preventDefault();
+// }
 import type { regMenuTrans } from "@/interfaces/regTransAnest";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
 import { useTransAnestStore } from "../../stores/transAnest-store";
@@ -529,7 +722,19 @@ export default({
                        'Bloqueo de plexo', 'Bloqueo troncular', 'Bloqueo peridural torácico', 'Bloqueo peridural cervical',
                        'Libre de opioides'],
       
-      infoNotaPost: {} as regNotaPost,
+      infoNotaPost: {} as regNotaPost,      
+      
+      activoAnesIN: false,
+      noActivoAnesIN: true,
+
+      activoCxIN: false,
+      noActivoCxIN: true,
+
+      activoCxOUT: false,
+      noActivoCxOUT: true,
+
+      activoAnesOUT: false,
+      noActivoAnesOUT: true,
     }
   },
 
@@ -565,6 +770,15 @@ export default({
       this.menuTrans.ayuno = null;
       this.menuTrans.ayuno = null;
       this.menuTrans.otrosEgresos = null;
+
+      var anesin = document.getElementById("anes-in");
+      anesin.addEventListener("contextmenu", this.bloquearClicDerecho);
+      var cxin = document.getElementById("cx-in");
+      cxin.addEventListener("contextmenu", this.bloquearClicDerecho);
+      var cxout = document.getElementById("cx-out");
+      cxout.addEventListener("contextmenu", this.bloquearClicDerecho);
+      var anesout = document.getElementById("anes-out");
+      anesout.addEventListener("contextmenu", this.bloquearClicDerecho);
   },
 
   methods: {
@@ -576,7 +790,7 @@ export default({
           clock.innerText = date.toLocaleTimeString('es-MX', {
             hour: '2-digit',
             minute: '2-digit',
-            second: '2-digit'
+            // second: '2-digit'
           });
         }, 1000);
       },
@@ -717,6 +931,150 @@ export default({
       enviarTecnica() {
         this.infoNotaPost.npa_TecAnestFinal = postAnestStore.TecnicaAnestesica;
       },
+      
+      async actualizarTQX(tiemposQX: string){
+        switch (tiemposQX) {
+          case "QXIN":
+            var hoy = new Date();
+            this.menuTrans.ingresoQX = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            await transAnestStore.saveTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID._id, tiemposQX);
+          break;
+
+          case "ANESIN":
+            var hoy = new Date();
+            this.menuTrans.inicioAn = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            await transAnestStore.saveTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID._id, tiemposQX);
+          break;
+
+          case "CXIN":
+            var hoy = new Date();
+            this.menuTrans.inicioCx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            await transAnestStore.saveTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID._id, tiemposQX);
+          break;
+
+          case "CXOUT":
+            var hoy = new Date();
+            this.menuTrans.finCx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            await transAnestStore.saveTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID._id, tiemposQX);
+          break;
+
+          case "ANESOUT":
+            var hoy = new Date();
+            this.menuTrans.finAn = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            await transAnestStore.saveTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID._id, tiemposQX);
+          break;
+
+          case "QXOUT":
+            var hoy = new Date();
+            this.menuTrans.egresoQx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX);
+          break;
+        
+          default:
+          break;
+        }
+      },
+
+      async actualizaHora(tiemposQX : string){
+        switch (tiemposQX) {
+          case "QXIN":
+            await transAnestStore.saveTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID._id, tiemposQX);
+          break;
+
+          case "ANESIN":
+            await transAnestStore.saveTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID._id, tiemposQX);
+          break;
+
+          case "CXIN":
+            await transAnestStore.saveTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID._id, tiemposQX);
+          break;
+
+          case "CXOUT":
+            await transAnestStore.saveTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID._id, tiemposQX);
+          break;
+
+          case "ANESOUT":
+            await transAnestStore.saveTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID._id, tiemposQX);
+          break;
+
+          case "QXOUT":
+            await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX);
+          break;
+        
+          default:
+          break;
+        }        
+      },
+
+      async mostrarDropDown(tiemposQX : string){        
+        switch (tiemposQX) {
+          case "ANESIN":
+            this.activoAnesIN=true;
+            this.noActivoAnesIN=false;
+            this.activoCxIN=false;
+            this.activoCxOUT=false;
+            this.activoAnesOUT=false;
+          break;
+
+          case "CXIN":
+            this.activoCxIN=true;
+            this.noActivoCxIN=false;
+            this.activoAnesIN=false;
+            this.activoCxOUT=false;
+            this.activoAnesOUT=false;
+          break;
+
+          case "CXOUT":
+            this.activoCxOUT=true;
+            this.noActivoCxOUT=false;
+            this.activoAnesIN=false;
+            this.activoCxIN=false;
+            this.activoAnesOUT=false;
+          break;
+
+          case "ANESOUT":
+            this.activoAnesOUT=true;
+            this.noActivoAnesOUT=false;
+            this.activoAnesIN=false;
+            this.activoCxIN=false;
+            this.activoCxOUT=false;
+          break;
+        
+          default:
+          break;
+        }
+      },
+
+      async ocultarDropDown(tiemposQX : string){                                        
+        switch (tiemposQX) {
+          case "ANESIN":
+            this.activoAnesIN= false
+            this.noActivoAnesIN= true
+          break;
+
+          case "CXIN":
+            this.activoCxIN= false
+            this.noActivoCxIN= true
+          break;
+
+          case "CXOUT":
+            this.activoCxOUT= false
+            this.noActivoCxOUT= true
+          break;
+
+          case "ANESOUT":
+            this.activoAnesOUT= false
+            this.noActivoAnesOUT= true
+          break;
+        
+          default:
+          break;
+        }
+      },
+
+      bloquearClicDerecho(event) {
+        event.preventDefault(); // Evita el comportamiento predeterminado del evento
+      }
   }
 })
 </script>
@@ -728,10 +1086,10 @@ export default({
     align-self: self-end;
 }
 .margen-div-barra{
-  margin-top: 120px;
+  margin-top: 110px;
 }
 .menuLateralPrincipal {
-    margin-top: 65px;
+    margin-top: 5px;
     display: flex;
     flex-direction: column;
     row-gap: 10px;
@@ -789,7 +1147,7 @@ export default({
   width: 450px; height: auto;
 }
 .estiloDropDownBalance{
-  width: 650px; height: 400px;
+  width: auto; height: 400px;
 }
 .estiloDropDownVentilador{
   width: 650px; height: auto;
@@ -806,7 +1164,7 @@ export default({
 .deslizar-balance {
   overflow: scroll;
   overflow-x: hidden;
-  margin-top: 0px;
+  margin-top: 10px;
 }
 .btn-guardar{
     --bs-btn-bg: none;
@@ -843,7 +1201,6 @@ export default({
   --bs-btn-active-bg: #E88300;
   --bs-btn-active-color: #ffffff;
   --bs-btn-active-border-color: #E88300;
-  width: 130px;
 }
 .btn-nav-bar{
     --bs-btn-bg: #fff;
@@ -858,6 +1215,21 @@ export default({
     width: 214px;
     height: auto;
 }
+.btn-menu{
+    --bs-btn-bg: #fff;
+    --bs-btn-color: #002D60;    
+    --bs-btn-border-color: #fff;
+    --bs-btn-hover-bg: #A0A6B2;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #A0A6B2;          
+    --bs-btn-active-bg: #A0A6B2;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-border-color: #A0A6B2;
+    inline-size: -webkit-fill-available;
+}
+.modal-med-largo {
+  height: auto;
+}
 .btn-abajo{
     text-align: end;  
 }
@@ -867,5 +1239,20 @@ hr {
     border: 0;
     border-top: 1px solid;
     opacity: 1;
+}
+.dropdown-menu{
+  --bs-dropdown-min-width: 9.2rem;
+  --bs-dropdown-padding-x: 0;
+  --bs-dropdown-padding-y: 0;
+  border:none
+}
+.btn.disabled, .btn:disabled, fieldset:disabled .btn {
+    color: white;
+    pointer-events: none;
+    background-color: white;
+    opacity: 1;
+}
+.form-alinear{
+  text-align: -webkit-center
 }
 </style>
