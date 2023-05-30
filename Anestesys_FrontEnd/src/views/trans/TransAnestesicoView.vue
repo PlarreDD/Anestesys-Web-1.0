@@ -526,11 +526,9 @@
                       <label>ANES IN <label class="fw-normal">{{menuTrans.inicioAn}}</label></label> 
               </button>
 
-              <form class="dropdown-menu p-1 color-dropdown form-alinear" :class="{ 'show': activoAnesIN, ' ': noActivoAnesIN }">
-                <div class="mb-4">
-                  <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('ANESIN')"/></i>
-                </div>
-                <label class="text-white fw-bold">Modificar Tiempo</label>
+              <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': activoAnesIN, ' ': noActivoAnesIN }">                                
+                <label class="text-white fw-bold">Modificar</label>
+                <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('ANESIN')"/></i>
                 <input class="form-control"
                         id="appt-time"
                         type="time"
@@ -548,11 +546,9 @@
                 <label>CX IN <label class="fw-normal">{{menuTrans.inicioCx}}</label></label>
               </button>
 
-              <form class="dropdown-menu p-1 color-dropdown form-alinear" :class="{ 'show': activoCxIN, ' ': noActivoCxIN }">
-                <div class="mb-4">
-                  <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('CXIN')"/></i>
-                </div>
-                <label class="text-white fw-bold">Modificar Tiempo </label>                
+              <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': activoCxIN, ' ': noActivoCxIN }">
+                <label class="text-white fw-bold">Modificar</label>                
+                <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('CXIN')"/></i>
                 <input class="form-control"
                         type="time"
                         v-model="menuTrans.inicioCx" 
@@ -568,11 +564,9 @@
                 <label>CX OUT <label class="fw-normal">{{menuTrans.finCx}}</label></label>
               </button>
 
-              <form class="dropdown-menu p-1 color-dropdown form-alinear" :class="{ 'show': activoCxOUT, ' ': noActivoCxOUT }">
-                <div class="mb-4">
-                  <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('CXOUT')"/></i>
-                </div>
-                <label class="text-white fw-bold">Modificar Tiempo</label>                
+              <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': activoCxOUT, ' ': noActivoCxOUT }">
+                <label class="text-white fw-bold">Modificar</label>                
+                <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('CXOUT')"/></i>
                 <input class="form-control"
                         id="appt-time"
                         type="time"
@@ -589,11 +583,9 @@
                 <label>ANES OUT <label class="fw-normal">{{menuTrans.finAn}}</label></label>
               </button>
               
-              <form class="dropdown-menu p-1 color-dropdown form-alinear" :class="{ 'show': activoAnesOUT, ' ': noActivoAnesOUT }">
-                <div class="mb-4">
-                  <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg " @click="ocultarDropDown('ANESOUT')"/></i>
-                </div>
-                <label class="text-white fw-bold">Modificar Tiempo</label>                
+              <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': activoAnesOUT, ' ': noActivoAnesOUT }">
+                <label class="text-white fw-bold">Modificar</label>                
+                <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg " @click="ocultarDropDown('ANESOUT')"/></i>
                 <input class="form-control"
                         id="appt-time"
                         type="time"
@@ -1019,21 +1011,33 @@ export default({
           case "ANESIN":
             this.activoAnesIN=true;
             this.noActivoAnesIN=false;
+            this.activoCxIN=false;
+            this.activoCxOUT=false;
+            this.activoAnesOUT=false;
           break;
 
           case "CXIN":
             this.activoCxIN=true;
             this.noActivoCxIN=false;
+            this.activoAnesIN=false;
+            this.activoCxOUT=false;
+            this.activoAnesOUT=false;
           break;
 
           case "CXOUT":
             this.activoCxOUT=true;
             this.noActivoCxOUT=false;
+            this.activoAnesIN=false;
+            this.activoCxIN=false;
+            this.activoAnesOUT=false;
           break;
 
           case "ANESOUT":
             this.activoAnesOUT=true;
             this.noActivoAnesOUT=false;
+            this.activoAnesIN=false;
+            this.activoCxIN=false;
+            this.activoCxOUT=false;
           break;
         
           default:
