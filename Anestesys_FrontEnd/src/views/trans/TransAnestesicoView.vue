@@ -2,7 +2,7 @@
   <header>
     <barra-navegacion/>
   </header>
-  <div class="margen-div-barra" @click="ocultarDropDown">
+  <div class="margen-div-barra">
 
     <div class="input-group mb-3">
       <div class="row g-3 col-md-12">
@@ -513,20 +513,23 @@
                       type="button"
                       @dblclick="actualizarTQX('QXIN')" 
                       :disabled="menuTrans.ingresoQX != undefined ? true : false">
-                  <label>QX IN <small class="fw-normal">{{menuTrans.ingresoQX}}</small></label>                  
+                  <label>QX IN <label class="fw-normal">{{menuTrans.ingresoQX}}</label></label>                  
               </button>
             </div>
             
-            <div class="col-md-2 dropdown-center">
-              <button type="button"
+            <div class="col-md-2">
+              <button type="button" id="anes-in"
                       class="btn btn-menu fw-bold"
                       :class="{ 'show': activoAnesIN, ' ': noActivoAnesIN }"
                       @dblclick="actualizarTQX('ANESIN')"
-                      @click.right="mostrarDropDown('ANESIN')" id="btn-anes"> 
+                      @click.right="mostrarDropDown('ANESIN')"> 
                       <label>ANES IN <label class="fw-normal">{{menuTrans.inicioAn}}</label></label> 
               </button>
-              
-              <form class="dropdown-menu p-1 color-dropdown text-center" :class="{ 'show': activoAnesIN, ' ': noActivoAnesIN }">
+
+              <form class="dropdown-menu p-1 color-dropdown form-alinear" :class="{ 'show': activoAnesIN, ' ': noActivoAnesIN }">
+                <div class="mb-4">
+                  <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('ANESIN')"/></i>
+                </div>
                 <label class="text-white fw-bold">Modificar Tiempo</label>
                 <input class="form-control"
                         id="appt-time"
@@ -537,54 +540,60 @@
               
             </div>
 
-            <div class="col-md-2 dropdown-center">
-              <button type="button"
+            <div class="col-md-2">
+              <button type="button" id="cx-in"
                       class="btn btn-menu fw-bold" :class="{ 'show': activoCxIN, ' ': noActivoCxIN }"
                       @dblclick="actualizarTQX('CXIN')"
                       @click.right="mostrarDropDown('CXIN')"> 
                 <label>CX IN <label class="fw-normal">{{menuTrans.inicioCx}}</label></label>
               </button>
 
-              <form class="dropdown-menu p-1 color-dropdown" :class="{ 'show': activoCxIN, ' ': noActivoCxIN }">
-                <label class="text-white fw-bold">Modificar Tiempo </label>
-                <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="sm"/></i>
+              <form class="dropdown-menu p-1 color-dropdown form-alinear" :class="{ 'show': activoCxIN, ' ': noActivoCxIN }">
+                <div class="mb-4">
+                  <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('CXIN')"/></i>
+                </div>
+                <label class="text-white fw-bold">Modificar Tiempo </label>                
                 <input class="form-control"
-                        id="appt-time"
                         type="time"
                         v-model="menuTrans.inicioCx" 
                         step="300" @change="actualizaHora('CXIN')">
               </form>
             </div>
 
-            <div class="col-md-2 dropdown-center"> 
-              <button type="button"
+            <div class="col-md-2"> 
+              <button type="button" id="cx-out"
                       class="btn btn-menu fw-bold" :class="{ 'show': activoCxOUT, ' ': noActivoCxOUT }"
                       @dblclick="actualizarTQX('CXOUT')"
                       @click.right="mostrarDropDown('CXOUT')"> 
                 <label>CX OUT <label class="fw-normal">{{menuTrans.finCx}}</label></label>
               </button>
 
-              <form class="dropdown-menu p-1 color-dropdown text-center" :class="{ 'show': activoCxOUT, ' ': noActivoCxOUT }">
-                <label class="text-white fw-bold">Modificar Tiempo</label>
+              <form class="dropdown-menu p-1 color-dropdown form-alinear" :class="{ 'show': activoCxOUT, ' ': noActivoCxOUT }">
+                <div class="mb-4">
+                  <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('CXOUT')"/></i>
+                </div>
+                <label class="text-white fw-bold">Modificar Tiempo</label>                
                 <input class="form-control"
                         id="appt-time"
                         type="time"
                         v-model="menuTrans.finCx"
                         step="300" @change="actualizaHora('CXOUT')">
               </form>
-
             </div>
 
-            <div class="col-md-2 dropdown-center">    
-              <button type="button"
+            <div class="col-md-2">    
+              <button type="button" id="anes-out"
                       class="btn btn-menu fw-bold" :class="{ 'show': activoAnesOUT, ' ': noActivoAnesOUT }" 
                       @dblclick="actualizarTQX('ANESOUT')"
                       @click.right="mostrarDropDown('ANESOUT')"> 
                 <label>ANES OUT <label class="fw-normal">{{menuTrans.finAn}}</label></label>
               </button>
               
-              <form class="dropdown-menu p-1 color-dropdown text-center" :class="{ 'show': activoAnesOUT, ' ': noActivoAnesOUT }">
-                <label class="text-white fw-bold">Modificar Tiempo</label>
+              <form class="dropdown-menu p-1 color-dropdown form-alinear" :class="{ 'show': activoAnesOUT, ' ': noActivoAnesOUT }">
+                <div class="mb-4">
+                  <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg " @click="ocultarDropDown('ANESOUT')"/></i>
+                </div>
+                <label class="text-white fw-bold">Modificar Tiempo</label>                
                 <input class="form-control"
                         id="appt-time"
                         type="time"
@@ -598,7 +607,7 @@
                       class="btn btn-menu fw-bold" 
                       @dblclick="actualizarTQX('QXOUT')"
                       :disabled="menuTrans.egresoQx != undefined ? true : false"> 
-                      <label>QX OUT <small class="fw-normal">{{menuTrans.egresoQx}}</small></label>
+                      <label>QX OUT <label class="fw-normal">{{menuTrans.egresoQx}}</label></label>
               </button>        
             </div>
           </div>
@@ -686,7 +695,6 @@
 // document.oncontextmenu = (event) => {
 //   event.preventDefault();
 // }
-
 import type { regMenuTrans } from "@/interfaces/regTransAnest";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
 import { useTransAnestStore } from "../../stores/transAnest-store";
@@ -770,6 +778,15 @@ export default({
       this.menuTrans.ayuno = null;
       this.menuTrans.ayuno = null;
       this.menuTrans.otrosEgresos = null;
+
+      var anesin = document.getElementById("anes-in");
+      anesin.addEventListener("contextmenu", this.bloquearClicDerecho);
+      var cxin = document.getElementById("cx-in");
+      cxin.addEventListener("contextmenu", this.bloquearClicDerecho);
+      var cxout = document.getElementById("cx-out");
+      cxout.addEventListener("contextmenu", this.bloquearClicDerecho);
+      var anesout = document.getElementById("anes-out");
+      anesout.addEventListener("contextmenu", this.bloquearClicDerecho);
   },
 
   methods: {
@@ -997,7 +1014,7 @@ export default({
         }        
       },
 
-      async mostrarDropDown(tiemposQX : string){
+      async mostrarDropDown(tiemposQX : string){        
         switch (tiemposQX) {
           case "ANESIN":
             this.activoAnesIN=true;
@@ -1024,18 +1041,35 @@ export default({
         }
       },
 
-      async ocultarDropDown(){
-        this.activoAnesIN= false
-        this.noActivoAnesIN= true
+      async ocultarDropDown(tiemposQX : string){                                        
+        switch (tiemposQX) {
+          case "ANESIN":
+            this.activoAnesIN= false
+            this.noActivoAnesIN= true
+          break;
 
-        this.activoCxIN= false
-        this.noActivoCxIN= true
+          case "CXIN":
+            this.activoCxIN= false
+            this.noActivoCxIN= true
+          break;
 
-        this.activoCxOUT= false
-        this.noActivoCxOUT= true
+          case "CXOUT":
+            this.activoCxOUT= false
+            this.noActivoCxOUT= true
+          break;
 
-        this.activoAnesOUT= false
-        this.noActivoAnesOUT= true
+          case "ANESOUT":
+            this.activoAnesOUT= false
+            this.noActivoAnesOUT= true
+          break;
+        
+          default:
+          break;
+        }
+      },
+
+      bloquearClicDerecho(event) {
+        event.preventDefault(); // Evita el comportamiento predeterminado del evento
       }
   }
 })
@@ -1048,10 +1082,10 @@ export default({
     align-self: self-end;
 }
 .margen-div-barra{
-  margin-top: 120px;
+  margin-top: 110px;
 }
 .menuLateralPrincipal {
-    margin-top: 65px;
+    margin-top: 5px;
     display: flex;
     flex-direction: column;
     row-gap: 10px;
@@ -1203,6 +1237,7 @@ hr {
     opacity: 1;
 }
 .dropdown-menu{
+  --bs-dropdown-min-width: 9.2rem;
   --bs-dropdown-padding-x: 0;
   --bs-dropdown-padding-y: 0;
   border:none
@@ -1212,5 +1247,8 @@ hr {
     pointer-events: none;
     background-color: white;
     opacity: 1;
+}
+.form-alinear{
+  text-align: -webkit-center
 }
 </style>
