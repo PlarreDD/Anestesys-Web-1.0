@@ -23,7 +23,7 @@
               <button type="button"
                       class="btn btn-menu fw-bold"
                       data-bs-toggle="modal"
-                      data-bs-target="#modal-medicamento"> MEDICAMENTO </button>
+                      data-bs-target="#modal-medicamento">+ MEDICAMENTO </button>
             </div>
             <!--Abrir el modal de Medicamentos-->
             <div class="modal" id="modal-medicamento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -35,30 +35,33 @@
                         <div class="row g-3">
                             
                           <h5 class="text-white fw-bold">DATOS DEL MEDICAMENTO</h5>
-
-                          <div class="col-md-8">
-                            <label for="" class="form-label text-white fw-bold"> Medicamento </label>
-                            <input type="text"
-                            class="form-control">
-                          </div>
+                          
                           <div class="col-md-4">
-                            <label for="inputState" class="form-label fw-bold">Tipo</label>
+                            <label for="inputState" class="form-label text-white fw-bold">Tipo</label>
                             <select id="inputState"
-                                    class="form-select">
+                                    class="form-select" v-model="menuTrans.tipoMed">
                                 <option></option>
                                 <option>Bolo</option>
                                 <option>Infusión</option>
                             </select>
                           </div>
+                          <div class="col-md-8">
+                            <label for="" class="form-label text-white fw-bold"> Medicamento </label>
+                            <el-select v-model="menuTrans.medicamento" filterable class="form-control-select">
+                                <el-option
+                                    v-for="medicamento in listaMed"
+                                    :value="medicamento">
+                                </el-option>
+                            </el-select>
+                        </div>
 
                           <div class="col-md-2">
                             <label for="" class="form-label text-white fw-bold"> Dosis </label>
-                            <input type="text"
-                            class="form-control">
+                            <input type="text" class="form-control" v-model="menuTrans.dosisMed">
                           </div>
                           <div class="col-md-2">
                             <label for="inputState" class="form-label text-white fw-bold">Unidad</label>
-                            <select id="inputState" class="form-select">
+                            <select id="inputState" class="form-select" v-model="menuTrans.unidadMed">
                                 <option></option>
                                 <option>UI.</option>
                                 <option>L. X min.</option>
@@ -80,7 +83,7 @@
 
                           <div class="col-md-8">
                               <label for="inputState" class="form-label text-white fw-bold">Vía</label>
-                              <select id="inputState" class="form-select">
+                              <select id="inputState" class="form-select" v-model="menuTrans.viaMed">
                                   <option></option>
                                   <option>Intravenoso - IV</option>
                                   <option>Intramuscular - IM</option>
@@ -100,17 +103,17 @@
 
                           <div class="col-md-2">
                             <label for="" class="form-label text-white fw-bold"> Hora de Inicio </label>
-                            <input type="time" class="form-control">
+                            <input type="time" class="form-control" v-model="menuTrans.horaInicioMed">
                           </div>
-                          <!-- <div class="col-md-8"></div> -->
+
                           <div class="col-md-2">
                             <label for="" class="form-label text-white fw-bold"> Hora Final </label>
-                            <input type="time" class="form-control">
+                            <input type="time" class="form-control" v-model="menuTrans.horaInicioMed">
                           </div>
 
                           <div class="col-md-8">
                               <label for="" class="form-label text-white fw-bold"> Observaciones </label>
-                              <textarea class="form-control" rows="2">
+                              <textarea class="form-control" rows="2" v-model="menuTrans.observacionesMed">
                               </textarea>
                           </div>
 
@@ -127,7 +130,8 @@
                               <template v-if="btnActualizarMedicamento === false">
                                   <button data-bs-toggle="tab" 
                                           type="submit"
-                                          class="btn btn-guardar-balance fw-bold"> GUARDAR </button>
+                                          class="btn btn-guardar-balance fw-bold" 
+                                          @click="transAnestStore.saveDatosMedicamentos(menuTrans, preIdStore.pacienteID._id)"> GUARDAR </button>
                               </template>
                               <template v-else>
                                   <button data-bs-toggle="tab" 
@@ -781,6 +785,9 @@
           </div>
           <hr/>
           <!-- Lista de medicamentos -->
+          <div class="col-md-12">          
+            <label>{{}}</label>
+          </div>
         </div>
         
         <!-- Vista eventos/relevos -->
@@ -855,6 +862,7 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue"
 import type { regMenuTrans } from "@/interfaces/regTransAnest";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
 import { useTransAnestStore } from "../../stores/transAnest-store";
@@ -863,13 +871,16 @@ import swal from "sweetalert2";
 import Multiselect from '@vueform/multiselect';
 import type { regNotaPost } from "@/interfaces/regPostAnest";
 import { usePostAnestStore } from "@/stores/postAnest-store";
+import { useMedicamentoStore } from "../../stores/medicamento-store";
+import { ElSelect, ElOption } from 'element-plus';
 
 const preIdStore = usePreIdStore();
 const transAnestStore = useTransAnestStore();
 const postAnestStore = usePostAnestStore();
+const medStore = useMedicamentoStore();
 var taSeparada: Object;
 
-export default({
+export default defineComponent({
   data() {
     return {
       menuTrans: {} as regMenuTrans,
@@ -877,6 +888,7 @@ export default({
       preIdStore,
       transAnestStore,
       postAnestStore,
+      medStore,
       
       btnAddVentilador:true,
       btnUpdateVentilador:false,
@@ -904,19 +916,23 @@ export default({
       activoAnesOUT: false,
       noActivoAnesOUT: true,
 
-      btnActualizarMedicamento:false
+      btnActualizarMedicamento:false,
+      
+      // Arreglo de medicamentos 
+      listaMed: Object
     }
   },
 
   components:{
     BarraNavegacion,
-    Multiselect
+    Multiselect,
+    ElSelect, ElOption
   },
 
   mounted: function() { // Llama el método despues de cargar la página
-      this.mueveReloj();
       transAnestStore.listDatosV(preIdStore.pacienteID._id);
       this.listaTecAnest();
+      this.listarMedicamentos();
       
       this.menuTrans.balanceTotal = null;
       this.menuTrans.solHartman = null;
@@ -948,23 +964,10 @@ export default({
       var cxout = document.getElementById("cx-out");
       cxout.addEventListener("contextmenu", this.bloquearClicDerecho);
       var anesout = document.getElementById("anes-out");
-      anesout.addEventListener("contextmenu", this.bloquearClicDerecho);
+      anesout.addEventListener("contextmenu", this.bloquearClicDerecho);            
   },
 
   methods: {
-      async mueveReloj() {
-        const clock: HTMLSpanElement = document.getElementById('clock');
-
-        setInterval(()=> {
-          const date: Date = new Date();
-          clock.innerText = date.toLocaleTimeString('es-MX', {
-            hour: '2-digit',
-            minute: '2-digit',
-            // second: '2-digit'
-          });
-        }, 1000);
-      },
-
       async guardarDatosV() {
         this.btnAddVentilador=false
         this.btnUpdateVentilador=true
@@ -1079,6 +1082,11 @@ export default({
                                         Number(this.menuTrans.factor_VII) ) - ( Number(this.menuTrans.liqAscitis) + Number(this.menuTrans.sangradoAprox) +
                                         Number(this.menuTrans.uresis)+ Number(this.menuTrans.expoQX) + Number(this.menuTrans.reqBasales) +
                                         Number(this.menuTrans.ayuno) + Number(this.menuTrans.otrosEgresos) );
+      },
+
+      async listarMedicamentos(){
+        var medicamento= medStore.medicamentos;
+        this.listaMed = medicamento.map(document => document.nombreMedicamento);
       },
 
       async listaTecAnest() {
@@ -1260,6 +1268,46 @@ export default({
 }
 .margen-div-barra{
   margin-top: 110px;
+}
+.form-control-select {
+    display: block;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.3rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.el-select {
+    --el-select-border-color-hover: var(--el-border-color-hover);
+    --el-select-disabled-border: var(--el-disabled-border-color);
+    --el-select-font-size: var(--el-font-size-base);
+    --el-select-close-hover-color: var(--el-text-color-secondary);
+    --el-select-input-color: var(--el-text-color-placeholder);
+    --el-select-multiple-input-color: var(--el-text-color-regular);
+    --el-select-input-focus-border-color: var(--el-disabled-border-color); 
+    --el-select-input-font-size: 14px;
+}
+.el-select-dropdown__item.selected {
+    color: #000;
+    font-weight: 700;
+}
+.el-input__inner {
+    --el-input-inner-height: calc(var(--el-input-height, 32px) - 2px);
+    width: 100%;
+    flex-grow: 1;
+    color: #000;
+    font-size: inherit;
+    height: var(--el-input-inner-height);
+    line-height: var(--el-input-inner-height);
+    padding: 0;
+    outline: 0;
+    border: none;
+    background: 0 0;
+    box-sizing: border-box;
 }
 .menu-vista-previa {
     display: flex;

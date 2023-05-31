@@ -56,4 +56,13 @@ export interface regMenuTrans{
     finCx: string,
     finAn: string,
     egresoQx: string,
+    /* Datos Medicamentos */
+    tipoMed: string,
+    medicamento: string,
+    dosisMed: string,
+    unidadMed: string,
+    viaMed: string,
+    horaInicioMed: string,
+    horaFinalMed: string,
+    observacionesMed: string,
 }

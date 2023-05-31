@@ -498,6 +498,42 @@ export const useTransAnestStore = defineStore('transAn', {
                     console.log('Hola');                    
                 break;
               }
-        }
+        },
+
+        async saveDatosMedicamentos(regTransAnest: any, pid: string){
+            await apiAxios({
+                url: "http://localhost:5000/trans/medic",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    pid: pid,
+                    // Datos del Ventilador
+                    tipoMed: regTransAnest.tipoMed,
+                    medicamento: regTransAnest.medicamento,
+                    dosisMed: regTransAnest.dosisMed,
+                    unidadMed: regTransAnest.unidadMed,
+                    viaMed: regTransAnest.viaMed,
+                    horaInicioMed: regTransAnest.horaFinalMed,
+                    horaFinalMed: regTransAnest.horaFinalMed,
+                    observacionesMed: regTransAnest.observacionesMed
+                }
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos guardados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
     }
 })

@@ -26,7 +26,8 @@ export const saveMenuTrans = async (req: any, res: Response) => {
                 BloqPlexo, BloqTroncular, bloqPeriToracico, bloqPeriCervical,
                 libreOpioides,
                 // Datos del ventilador
-                modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr
+                modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr,
+
         } = req.body;
 
         let menuTrans;
@@ -304,6 +305,39 @@ export const saveTiemposQX = async (req: any, res: Response) => {
         }
 
         return res.json({ tiempo });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Guardado Medicamentos */
+export const saveMedicamentos = async (req: any, res: Response) => {
+    try {
+        const { pid,
+                // Datos medicamentos
+                tipoMed, medicamento, dosisMed, unidadMed, 
+                viaMed, horaInicioMed, horaFinalMed, observacionesMed
+              } = req.body;
+        
+        const menuTrans  = new MenuTrans({ pid,
+                                            // Datos del medicamento
+                                            medicamentosCx: {
+                                                tipoMed: tipoMed,
+                                                medicamento: medicamento,
+                                                dosisMed: dosisMed,
+                                                unidadMed: unidadMed,
+                                                viaMed: viaMed,
+                                                horaInicioMed: horaInicioMed,
+                                                horaFinalMed: horaFinalMed,
+                                                observacionesMed: observacionesMed
+                                            },
+                                        });
+
+        await menuTrans.save();
+
+        console.log(menuTrans);
+        
+        return res.json({ menuTrans });
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
     }
