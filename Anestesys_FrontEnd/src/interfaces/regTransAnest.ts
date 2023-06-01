@@ -57,6 +57,7 @@ export interface regMenuTrans{
     finAn: string,
     egresoQx: string,
     /* Datos Medicamentos */
+    idMed:string,
     tipoMed: string,
     medicamento: string,
     dosisMed: string,

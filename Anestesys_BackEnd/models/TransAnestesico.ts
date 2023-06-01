@@ -74,7 +74,7 @@ const menuTransSchema = new Schema({
     }],
 
     /* Medicamentos */
-    medicamentosCx:[{
+    medicamentosCx: [{
         tipoMed: {type: String},
         medicamento: {type: String},
         dosisMed: {type: String},

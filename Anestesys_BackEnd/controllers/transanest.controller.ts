@@ -315,30 +315,112 @@ export const saveMedicamentos = async (req: any, res: Response) => {
     try {
         const { pid,
                 // Datos medicamentos
-                tipoMed, medicamento, dosisMed, unidadMed, 
-                viaMed, horaInicioMed, horaFinalMed, observacionesMed
-              } = req.body;
-        
-        const menuTrans  = new MenuTrans({ pid,
+                tipoMed, medicamento, dosisMed, unidadMed, viaMed, horaInicioMed, horaFinalMed, observacionesMed
+              } = req.body;        
+        const menuTrans  = await new MenuTrans({ pid,
                                             // Datos del medicamento
                                             medicamentosCx: {
-                                                tipoMed: tipoMed,
-                                                medicamento: medicamento,
-                                                dosisMed: dosisMed,
-                                                unidadMed: unidadMed,
-                                                viaMed: viaMed,
-                                                horaInicioMed: horaInicioMed,
-                                                horaFinalMed: horaFinalMed,
-                                                observacionesMed: observacionesMed
+                                                tipoMed: tipoMed, medicamento: medicamento, dosisMed: dosisMed, unidadMed: unidadMed, viaMed: viaMed, 
+                                                horaInicioMed: horaInicioMed, horaFinalMed: horaFinalMed, observacionesMed: observacionesMed
                                             },
                                         });
-
-        await menuTrans.save();
-
-        console.log(menuTrans);
-        
+        await menuTrans.save();        
         return res.json({ menuTrans });
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const updateMedicamentos = async (req: any, res: Response) => {
+    try {
+        const { pid } = req.params;
+        const { medicamentosCx } = req.body;                
+        const menuTrans = await MenuTrans.findOneAndUpdate(
+            { pid: pid },
+            { $push:{
+                    medicamentosCx: {
+                        tipoMed: medicamentosCx[0], medicamento: medicamentosCx[1], dosisMed: medicamentosCx[2], unidadMed: medicamentosCx[3], 
+                        viaMed: medicamentosCx[4], horaInicioMed: medicamentosCx[5], horaFinalMed: medicamentosCx[6], observacionesMed: medicamentosCx[7], 
+                    }
+                }
+            });        
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Función para obtener los medicamentos */
+export const getMedicamentos = async (req: any, res: Response) => {
+    try {
+        const {pid} = req.params;
+        
+        const medicamento = await MenuTrans.find({pid:pid})
+           
+        return res.json({medicamento});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Función para obtener un medicamento */
+export const getMedicamento = async (req: any, res: Response) => {
+    try {
+        const {id} = req.params;
+
+        const medicamento = await MenuTrans.findOne({ "medicamentosCx._id": id },
+                                                  { 'medicamentosCx.$': 1 })
+        
+        return res.json({medicamento});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Funcion para actualizar un medicamento */
+export const updateMedicamento = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { medicamentosCx } = req.body;       
+        
+        const medicamento = await MenuTrans.updateOne({ "medicamentosCx._id": id },
+            {
+                $set : {
+                            "medicamentosCx.$.tipoMed" : medicamentosCx[0].tipoMed, "medicamentosCx.$.medicamento" : medicamentosCx[0].medicamento,
+                            "medicamentosCx.$.dosisMed" : medicamentosCx[0].dosisMed, "medicamentosCx.$.unidadMed" : medicamentosCx[0].unidadMed,
+                            "medicamentosCx.$.viaMed" : medicamentosCx[0].viaMed, "medicamentosCx.$.horaInicioMed" : medicamentosCx[0].horaInicioMed,
+                            "medicamentosCx.$.horaFinalMed" : medicamentosCx[0].horaFinalMed, "medicamentosCx.$.observacionesMed" : medicamentosCx[0].observacionesMed,
+                        }
+            }
+        );
+        
+        if (!medicamento) 
+            return res.status(404).json({ Error: "No existe el medicamento." });        
+        
+        return res.json({ medicamento });
+    } catch (error) {
+        if (error.kind === "ObjectId") {
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }        
+        return res.status(500).json({ error: "Error de servidor" });
+    }
+};
+
+/* Funcion para eliminar un medicamento */
+export const deleteMedicamento = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        const medicamento = await MenuTrans.findOneAndUpdate({ "medicamentosCx._id": id },
+                                                           { $pull: { medicamentosCx: { _id: id } } }
+        );              
+       
+        return res.json({ medicamento });
+    } catch (error) {
+        if (error.kind === "ObjectId") {
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
+        
+        return res.status(500).json({ error: "Error de servidor" });
     }
 };

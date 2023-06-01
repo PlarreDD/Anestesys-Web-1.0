@@ -37,9 +37,12 @@
                           <h5 class="text-white fw-bold">DATOS DEL MEDICAMENTO</h5>
                           
                           <div class="col-md-4">
+
+                            <input type="hidden" v-model="menuTrans.idMed">
+
                             <label for="inputState" class="form-label text-white fw-bold">Tipo</label>
                             <select id="inputState"
-                                    class="form-select" v-model="menuTrans.tipoMed">
+                                    class="form-select" v-model="menuTrans.tipoMed" @change="vaciarHoraFinalMedicamento">
                                 <option></option>
                                 <option>Bolo</option>
                                 <option>Infusión</option>
@@ -103,12 +106,12 @@
 
                           <div class="col-md-2">
                             <label for="" class="form-label text-white fw-bold"> Hora de Inicio </label>
-                            <input type="time" class="form-control" v-model="menuTrans.horaInicioMed">
+                            <input type="time" class="form-control" v-model="menuTrans.horaInicioMed" @dblclick="actualizarTQX('INCX')">
                           </div>
 
-                          <div class="col-md-2">
+                          <div class="col-md-2" :class="menuTrans.tipoMed == 'Bolo' ? 'invisible' : 'visible'">
                             <label for="" class="form-label text-white fw-bold"> Hora Final </label>
-                            <input type="time" class="form-control" v-model="menuTrans.horaInicioMed">
+                            <input type="time" class="form-control" v-model="menuTrans.horaFinalMed">
                           </div>
 
                           <div class="col-md-8">
@@ -125,19 +128,28 @@
                                           class="btn btn-guardar-balance fw-bold"> ELIMINAR </button>
                           </div>
 
-                          <!-- Botón Guardar/Actualizar --> 
-                          <div class="col-md-2">
-                              <template v-if="btnActualizarMedicamento === false">
-                                  <button data-bs-toggle="tab" 
+                          <!-- Botón Guardar/Agregar -->
+                          <div class="col-md-2">                                    
+                            <template v-if="btnAddMedicamentos === true">
+                              <button data-bs-toggle="tab" 
                                           type="submit"
                                           class="btn btn-guardar-balance fw-bold" 
-                                          @click="transAnestStore.saveDatosMedicamentos(menuTrans, preIdStore.pacienteID._id)"> GUARDAR </button>
-                              </template>
-                              <template v-else>
-                                  <button data-bs-toggle="tab" 
+                                          @click="guardarMedicamentos"> GUARDAR </button>
+                            </template>
+
+                            <template v-if="btnUpdateMedicamentos === true">
+                              <button data-bs-toggle="tab" 
                                           type="submit"
-                                          class="btn btn-guardar-balance fw-bold"> ACTUALIZAR </button> 
-                              </template>                                                         
+                                          class="btn btn-guardar-balance fw-bold"
+                                          @click="actualizarMedicamentos(menuTrans.tipoMed, menuTrans.medicamento, menuTrans.dosisMed, menuTrans.unidadMed,
+                                          menuTrans.viaMed, menuTrans.horaInicioMed, menuTrans.horaFinalMed, menuTrans.observacionesMed)"> GUARDAR </button>
+                            </template>  
+
+                            <template v-if="btnActualizaMedicamento === true">
+                                <button class="btn btn-guardar-balance fw-bold" 
+                                        @click="actualizarMedicamento()"> ACTUALIZAR                                
+                                </button>
+                            </template>  
                           </div>
                             
                         </div>
@@ -231,7 +243,7 @@
               <li class="col-md-3">
                 <button type="button" class="btn btn-nav-bar fw-bold" 
                         data-bs-toggle="modal"
-                        data-bs-target="#modal-balance">BALANCE HIDRICO</button>
+                        data-bs-target="#modal-balance">BALANCE HIDRICO</button> <!-- Modificar guardado -->
               </li>
               <!-- Datos del ventilador -->
               <li class="col-md-3">
@@ -779,14 +791,30 @@
       <div class="col-md-3 menu-vista-previa">       
 
         <!-- Vista medicamentos -->
-        <div class= "col-md-11 vista-medicamentos deslizar-balance">
+        <div class= "col-md-11 vista-medicamentos">
           <div class="col-md-12">
             <input type="text" class="form-control" placeholder="Buscar medicamento">          
           </div>
           <hr/>
           <!-- Lista de medicamentos -->
-          <div class="col-md-12">          
-            <label>{{}}</label>
+          <div class="col-md-12 deslizar-medicamentos"> 
+          <!-- <div class="">           -->
+            <table class="table table-responsive" id="tabla-med">
+              <tbody v-for="( medicamento ) in transAnestStore.medicamentos">
+                <tr class="" v-for="( datosMed ) in medicamento.medicamentosCx" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'"
+                          @click="cambiarBtnActualizarMedic(datosMed._id)" data-bs-toggle="modal" data-bs-target="#modal-medicamento">
+                      <td class="borde-tabla-izq">
+                        <FONT size="2">{{ datosMed.medicamento}}</FONT>
+                      </td>
+                      <td class="">
+                        <FONT size="2">{{ datosMed.dosisMed}} {{ datosMed.unidadMed }}</FONT>
+                      </td>
+                      <td class="borde-tabla-der fw-bold">
+                        <FONT size="2">{{ datosMed.horaInicioMed }}</FONT>
+                      </td>                                                                               
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
         
@@ -919,7 +947,11 @@ export default defineComponent({
       btnActualizarMedicamento:false,
       
       // Arreglo de medicamentos 
-      listaMed: Object
+      listaMed: Object,
+
+      btnAddMedicamentos:true,
+      btnUpdateMedicamentos:false,
+      btnActualizaMedicamento:false,
     }
   },
 
@@ -964,7 +996,9 @@ export default defineComponent({
       var cxout = document.getElementById("cx-out");
       cxout.addEventListener("contextmenu", this.bloquearClicDerecho);
       var anesout = document.getElementById("anes-out");
-      anesout.addEventListener("contextmenu", this.bloquearClicDerecho);            
+      anesout.addEventListener("contextmenu", this.bloquearClicDerecho);
+      
+      transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
   },
 
   methods: {
@@ -1112,9 +1146,15 @@ export default defineComponent({
       enviarTecnica() {
         this.infoNotaPost.npa_TecAnestFinal = postAnestStore.TecnicaAnestesica;
       },
-      
+
       async actualizarTQX(tiemposQX: string){
         switch (tiemposQX) {
+          case "INCX":
+            var hoy = new Date();
+            this.menuTrans.horaInicioMed = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            await transAnestStore.saveTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID._id, tiemposQX);
+          break;
+
           case "QXIN":
             var hoy = new Date();
             this.menuTrans.ingresoQX = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
@@ -1253,9 +1293,107 @@ export default defineComponent({
         }
       },
 
+      async vaciarHoraFinalMedicamento(){
+        this.menuTrans.horaFinalMed="";
+      },
+
       bloquearClicDerecho(event) {
         event.preventDefault(); // Evita el comportamiento predeterminado del evento
-      }
+      },
+
+      async guardarMedicamentos() {
+
+        this.btnActualizarMedicamento=true
+
+        // await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
+        
+        this.btnAddMedicamentos=false
+        this.btnUpdateMedicamentos=true
+        this.btnActualizaMedicamento=false
+        
+        await this.transAnestStore.saveDatosMedicamentos(this.menuTrans, preIdStore.pacienteID._id)
+
+        this.menuTrans.tipoMed = "";
+        this.menuTrans.medicamento = "";
+        this.menuTrans.dosisMed = "";
+        this.menuTrans.unidadMed = "";
+        this.menuTrans.viaMed = "";
+        this.menuTrans.horaInicioMed = "";
+        this.menuTrans.horaFinalMed = "";
+        this.menuTrans.observacionesMed = "";        
+        
+        await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+      },
+
+      async actualizarMedicamentos(m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
+                                    m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string) {
+                                      
+            await transAnestStore.updateMedicamentos(m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed, preIdStore.pacienteID._id);
+            
+            this.menuTrans.tipoMed = "";
+            this.menuTrans.medicamento = "";
+            this.menuTrans.dosisMed = "";
+            this.menuTrans.unidadMed = "";
+            this.menuTrans.viaMed = "";
+            this.menuTrans.horaInicioMed = "";
+            this.menuTrans.horaFinalMed = "";
+            this.menuTrans.observacionesMed = "";
+
+            await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+      },
+
+      async cambiarBtnActualizarMedic(id) {
+            this.btnAddMedicamentos=false
+            this.btnUpdateMedicamentos=false
+            this.btnActualizaMedicamento=true
+
+            await transAnestStore.getMedicamento(id);
+
+            this.menuTrans.idMed = transAnestStore.medicamentos.medicamentosCx[0]._id;
+            this.menuTrans.tipoMed = transAnestStore.medicamentos.medicamentosCx[0].tipoMed;
+            this.menuTrans.medicamento = transAnestStore.medicamentos.medicamentosCx[0].medicamento;
+            this.menuTrans.dosisMed = transAnestStore.medicamentos.medicamentosCx[0].dosisMed;
+            this.menuTrans.unidadMed = transAnestStore.medicamentos.medicamentosCx[0].unidadMed;
+            this.menuTrans.viaMed = transAnestStore.medicamentos.medicamentosCx[0].viaMed;
+            this.menuTrans.horaInicioMed = transAnestStore.medicamentos.medicamentosCx[0].horaInicioMed;
+            this.menuTrans.horaFinalMed = transAnestStore.medicamentos.medicamentosCx[0].horaFinalMed;
+            this.menuTrans.observacionesMed = transAnestStore.medicamentos.medicamentosCx[0].observacionesMed;
+
+            await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+      },
+
+      async actualizarMedicamento() {
+            if (this.menuTrans.tipoMed == "") {
+                swal.fire({
+                title: "Seleccione el tipo de administración",
+                icon: "warning",
+                showConfirmButton: false,
+                showCloseButton: true,
+                toast: true,
+                timer: 2500,
+                timerProgressBar: true,
+                position: "top-end",
+                });
+            } else {
+                //await preIdStore.updateEstudio(this.infoValoracion.estudio_Id, this.infoValoracion.estudios_Estudio, this.infoValoracion.estudio_Especificaciones);
+
+                this.btnAddMedicamentos=false
+                this.btnUpdateMedicamentos=true
+                this.btnActualizaMedicamento=false
+
+                this.menuTrans.idMed = "";
+                this.menuTrans.tipoMed = "";
+                this.menuTrans.medicamento = "";
+                this.menuTrans.dosisMed = "";
+                this.menuTrans.unidadMed = "";
+                this.menuTrans.viaMed = "";
+                this.menuTrans.horaInicioMed = "";
+                this.menuTrans.horaFinalMed = "";
+                this.menuTrans.observacionesMed = "";
+
+                await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+            }
+        },
   }
 })
 </script>
@@ -1263,6 +1401,11 @@ export default defineComponent({
 <style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
+tr {
+  border-color: white;
+  border-top-width:1px;
+  border-bottom-width:1px;
+}
 .alinear-btn{
     align-self: self-end;
 }
@@ -1317,7 +1460,7 @@ export default defineComponent({
 .vista-medicamentos{
   height: 420px;
   background-color: white;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 10px;
 }
 .vista-eventos-relevos{
@@ -1395,6 +1538,12 @@ export default defineComponent({
   overflow-x: hidden;
   margin-top: 10px;
 }
+.deslizar-medicamentos {
+  overflow: scroll;
+  overflow-x: hidden;
+  margin-top: 0px;
+  height: 330px;
+}
 .btn-guardar{
     --bs-btn-bg: none;
     --bs-btn-color: #fff;    
@@ -1468,5 +1617,29 @@ hr {
     pointer-events: none;
     background-color: white;
     opacity: 1;
+}
+.estilo-bolo{
+  color: #002D60;
+  background-color: #EFA9AB;  
+  padding: 3px;  
+}
+.estilo-infusion{
+  color: #002D60;
+  background-color: #97E4B8;
+  padding: 3px;
+}
+.borde-tabla-izq{
+  border-bottom-left-radius: 10px; 
+  border-top-left-radius:10px;
+}
+.borde-tabla-der{
+  border-bottom-right-radius: 10px; 
+  border-top-right-radius:10px   
+}
+#tabla-med tbody tr > td {
+  border: none;
+}
+#tabla-med tbody{
+  height:100px
 }
 </style>
