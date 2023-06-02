@@ -28,5 +28,5 @@ router.get('/medic/uno/:id' , requireToken, getMedicamento);
 router.post('/medic', requireToken, saveMedicamentos);
 router.put('/medic/:pid', requireToken, updateMedicamentos);
 router.put('/medic/uno/:id', requireToken, updateMedicamento);
-router.delete('medic/:id', requireToken, deleteMedicamento);
+router.delete('/medic/:id', requireToken, deleteMedicamento);
 export default router;

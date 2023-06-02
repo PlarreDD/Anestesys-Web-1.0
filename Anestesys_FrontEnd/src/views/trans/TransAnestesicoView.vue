@@ -40,7 +40,7 @@
 
                             <input type="hidden" v-model="menuTrans.idMed">
 
-                            <label for="inputState" class="form-label text-white fw-bold">Tipo</label>
+                            <label for="inputState" class="form-label text-white fw-bold">Tipo {{typeof(menuTrans.tipoMed) }}</label>
                             <select id="inputState"
                                     class="form-select" v-model="menuTrans.tipoMed" @change="vaciarHoraFinalMedicamento">
                                 <option></option>
@@ -50,7 +50,8 @@
                           </div>
                           <div class="col-md-8">
                             <label for="" class="form-label text-white fw-bold"> Medicamento </label>
-                            <el-select v-model="menuTrans.medicamento" filterable class="form-control-select">
+                            <el-select v-model="menuTrans.medicamento" filterable class="form-control-select" 
+                              @click="listarMedicamentos">
                                 <el-option
                                     v-for="medicamento in listaMed"
                                     :value="medicamento">
@@ -125,7 +126,8 @@
                           <div class="col-md-2">
                             <button data-bs-toggle="tab" 
                                           type="submit"
-                                          class="btn btn-guardar-balance fw-bold"> ELIMINAR </button>
+                                          class="btn btn-guardar-balance fw-bold"
+                                          @click="validaEliminarMedicamento(menuTrans.idMed)"> ELIMINAR </button>
                           </div>
 
                           <!-- Botón Guardar/Agregar -->
@@ -964,7 +966,6 @@ export default defineComponent({
   mounted: function() { // Llama el método despues de cargar la página
       transAnestStore.listDatosV(preIdStore.pacienteID._id);
       this.listaTecAnest();
-      this.listarMedicamentos();
       
       this.menuTrans.balanceTotal = null;
       this.menuTrans.solHartman = null;
@@ -1302,32 +1303,53 @@ export default defineComponent({
       },
 
       async guardarMedicamentos() {
-
-        this.btnActualizarMedicamento=true
-
-        // await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
+        if (this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.tipoMed == null) {
+                swal.fire({
+                title: "Seleccione el tipo de administración",
+                icon: "warning",
+                showConfirmButton: false,
+                showCloseButton: true,
+                toast: true,
+                timer: 2500,
+                timerProgressBar: true,
+                position: "top-end",
+                });
+          } else {
+            this.btnActualizarMedicamento=true
         
-        this.btnAddMedicamentos=false
-        this.btnUpdateMedicamentos=true
-        this.btnActualizaMedicamento=false
-        
-        await this.transAnestStore.saveDatosMedicamentos(this.menuTrans, preIdStore.pacienteID._id)
+            this.btnAddMedicamentos=false
+            this.btnUpdateMedicamentos=true
+            this.btnActualizaMedicamento=false
+            
+            await this.transAnestStore.saveDatosMedicamentos(this.menuTrans, preIdStore.pacienteID._id)
 
-        this.menuTrans.tipoMed = "";
-        this.menuTrans.medicamento = "";
-        this.menuTrans.dosisMed = "";
-        this.menuTrans.unidadMed = "";
-        this.menuTrans.viaMed = "";
-        this.menuTrans.horaInicioMed = "";
-        this.menuTrans.horaFinalMed = "";
-        this.menuTrans.observacionesMed = "";        
-        
-        await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+            this.menuTrans.tipoMed = "";
+            this.menuTrans.medicamento = "";
+            this.menuTrans.dosisMed = "";
+            this.menuTrans.unidadMed = "";
+            this.menuTrans.viaMed = "";
+            this.menuTrans.horaInicioMed = "";
+            this.menuTrans.horaFinalMed = "";
+            this.menuTrans.observacionesMed = "";        
+            
+            await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+          }       
       },
 
       async actualizarMedicamentos(m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
                                     m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string) {
-                                      
+                                      if (this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.tipoMed == null) {
+                swal.fire({
+                title: "Seleccione el tipo de administración",
+                icon: "warning",
+                showConfirmButton: false,
+                showCloseButton: true,
+                toast: true,
+                timer: 2500,
+                timerProgressBar: true,
+                position: "top-end",
+                });
+          } else {
             await transAnestStore.updateMedicamentos(m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed, preIdStore.pacienteID._id);
             
             this.menuTrans.tipoMed = "";
@@ -1340,6 +1362,7 @@ export default defineComponent({
             this.menuTrans.observacionesMed = "";
 
             await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+          }                                                
       },
 
       async cambiarBtnActualizarMedic(id) {
@@ -1375,7 +1398,8 @@ export default defineComponent({
                 position: "top-end",
                 });
             } else {
-                //await preIdStore.updateEstudio(this.infoValoracion.estudio_Id, this.infoValoracion.estudios_Estudio, this.infoValoracion.estudio_Especificaciones);
+                await transAnestStore.updateMedicamento(this.menuTrans.idMed, this.menuTrans.tipoMed, this.menuTrans.medicamento, this.menuTrans.dosisMed,
+                this.menuTrans.unidadMed, this.menuTrans.viaMed, this.menuTrans.horaInicioMed, this.menuTrans.horaFinalMed, this.menuTrans.observacionesMed);
 
                 this.btnAddMedicamentos=false
                 this.btnUpdateMedicamentos=true
@@ -1393,6 +1417,42 @@ export default defineComponent({
 
                 await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
             }
+      },
+
+      async validaEliminarMedicamento(idMedicamento: string) {
+            swal
+                .fire({
+                html: "¿Esta seguro de eliminar los datos del medicamento?",
+                icon: "warning",
+                showConfirmButton: true,
+                showCancelButton: true,
+                toast: true,
+                })
+                .then((result) => {
+                if (result.isConfirmed) {
+                    this.eliminarMedicamento(idMedicamento);
+                }
+                });
+        },
+
+        async eliminarMedicamento(idMedicamento: string) {
+            console.log('Entro');            
+
+            await transAnestStore.deleteMedicamento(idMedicamento);
+
+            console.log(idMedicamento);            
+
+            this.menuTrans.idMed = "";
+            this.menuTrans.tipoMed = "";
+            this.menuTrans.medicamento = "";
+            this.menuTrans.dosisMed = "";
+            this.menuTrans.unidadMed = "";
+            this.menuTrans.viaMed = "";
+            this.menuTrans.horaInicioMed = "";
+            this.menuTrans.horaFinalMed = "";
+            this.menuTrans.observacionesMed = "";
+
+            await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
         },
   }
 })

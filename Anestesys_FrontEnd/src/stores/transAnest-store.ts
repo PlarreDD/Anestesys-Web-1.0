@@ -606,8 +606,8 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    medicamentosCx: [ {"m_tipoMed":m_tipoMed, "m_medicamento":m_medicamento, "m_dosisMed":m_dosisMed, "m_unidadMed":m_unidadMed,
-                                        "m_viaMed":m_viaMed, "m_horaInicioMed":m_horaInicioMed,"m_horaFinalMed":m_horaFinalMed, "m_observacionesMed":m_observacionesMed,}]
+                    medicamentosCx: [ {"tipoMed":m_tipoMed, "medicamento":m_medicamento, "dosisMed":m_dosisMed, "unidadMed":m_unidadMed,
+                                        "viaMed":m_viaMed, "horaInicioMed":m_horaInicioMed,"horaFinalMed":m_horaFinalMed, "observacionesMed":m_observacionesMed,}]
                 },
             })
             .then((res: any) => {                            
