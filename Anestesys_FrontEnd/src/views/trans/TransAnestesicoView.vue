@@ -40,7 +40,7 @@
 
                             <input type="hidden" v-model="menuTrans.idMed">
 
-                            <label for="inputState" class="form-label text-white fw-bold">Tipo {{typeof(menuTrans.tipoMed) }}</label>
+                            <label for="inputState" class="form-label text-white fw-bold">Tipo</label>
                             <select id="inputState"
                                     class="form-select" v-model="menuTrans.tipoMed" @change="vaciarHoraFinalMedicamento">
                                 <option></option>
@@ -794,24 +794,32 @@
 
         <!-- Vista medicamentos -->
         <div class= "col-md-11 vista-medicamentos">
-          <div class="col-md-12">
-            <input type="text" class="form-control" placeholder="Buscar medicamento">          
+          <div class="">
+            <Multiselect mode="tags"
+                @click="listarMedicamentosTrans"
+                placeholder="Buscar medicamento..."
+                v-model="medicSeleccionados"                
+                :options="listaMedTrans"
+                :searchable="true"
+                :createTag="true"
+                :max="3"
+                :multiple="false"
+            />    
           </div>
           <hr/>
           <!-- Lista de medicamentos -->
-          <div class="col-md-12 deslizar-medicamentos"> 
-          <!-- <div class="">           -->
-            <table class="table table-responsive" id="tabla-med">
+          <div class="deslizar-medicamentos"> 
+            <table class="table" id="tabla-med">
               <tbody v-for="( medicamento ) in transAnestStore.medicamentos">
-                <tr class="" v-for="( datosMed ) in medicamento.medicamentosCx" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'"
+                <tr class="" v-for="datosMed in medicamento.medicamentosCx"
                           @click="cambiarBtnActualizarMedic(datosMed._id)" data-bs-toggle="modal" data-bs-target="#modal-medicamento">
-                      <td class="borde-tabla-izq">
+                      <td class="borde-tabla-izq p-2" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'" v-if="tablaMedicamentos.includes(datosMed.medicamento)">
                         <FONT size="2">{{ datosMed.medicamento}}</FONT>
                       </td>
-                      <td class="">
+                      <td class="" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'" v-if="tablaMedicamentos.includes(datosMed.medicamento)">
                         <FONT size="2">{{ datosMed.dosisMed}} {{ datosMed.unidadMed }}</FONT>
                       </td>
-                      <td class="borde-tabla-der fw-bold">
+                      <td class="borde-tabla-der fw-bold" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'" v-if="tablaMedicamentos.includes(datosMed.medicamento)">
                         <FONT size="2">{{ datosMed.horaInicioMed }}</FONT>
                       </td>                                                                               
                 </tr>
@@ -914,6 +922,7 @@ export default defineComponent({
   data() {
     return {
       menuTrans: {} as regMenuTrans,
+      medicSeleccionados: [],
       
       preIdStore,
       transAnestStore,
@@ -948,8 +957,11 @@ export default defineComponent({
 
       btnActualizarMedicamento:false,
       
-      // Arreglo de medicamentos 
-      listaMed: Object,
+      // Arreglo de medicamentos menú configuración
+      listaMed: [],
+
+      // Arreglo de medicamentos trans
+      listaMedTrans: [],
 
       btnAddMedicamentos:true,
       btnUpdateMedicamentos:false,
@@ -1122,6 +1134,18 @@ export default defineComponent({
       async listarMedicamentos(){
         var medicamento= medStore.medicamentos;
         this.listaMed = medicamento.map(document => document.nombreMedicamento);
+        this.listaMed.sort()
+      },
+
+      async listarMedicamentosTrans(){
+        var listaMedicamentos = transAnestStore.medicamentos.map(item =>
+          item.medicamentosCx.map(med => med.medicamento)).flat();
+
+         this.listaMedTrans = listaMedicamentos.filter((value, index, self) => {
+            return self.indexOf(value) === index;
+        });
+
+        this.listaMedTrans.sort()
       },
 
       async listaTecAnest() {
@@ -1303,9 +1327,9 @@ export default defineComponent({
       },
 
       async guardarMedicamentos() {
-        if (this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.tipoMed == null) {
+        if (this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.medicamento == "" || this.menuTrans.medicamento == undefined) {
                 swal.fire({
-                title: "Seleccione el tipo de administración",
+                title: "Indique el tipo de administración y medicamento",
                 icon: "warning",
                 showConfirmButton: false,
                 showCloseButton: true,
@@ -1333,14 +1357,16 @@ export default defineComponent({
             this.menuTrans.observacionesMed = "";        
             
             await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+
+            await this.listarMedicamentosTrans()
           }       
       },
 
       async actualizarMedicamentos(m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
                                     m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string) {
-                                      if (this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.tipoMed == null) {
+          if (this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.medicamento == "" || this.menuTrans.medicamento == undefined) {
                 swal.fire({
-                title: "Seleccione el tipo de administración",
+                title: "Indique el tipo de administración y medicamento",
                 icon: "warning",
                 showConfirmButton: false,
                 showCloseButton: true,
@@ -1362,6 +1388,7 @@ export default defineComponent({
             this.menuTrans.observacionesMed = "";
 
             await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+            await this.listarMedicamentosTrans()
           }                                                
       },
 
@@ -1383,12 +1410,13 @@ export default defineComponent({
             this.menuTrans.observacionesMed = transAnestStore.medicamentos.medicamentosCx[0].observacionesMed;
 
             await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+            await this.listarMedicamentosTrans()
       },
 
       async actualizarMedicamento() {
-            if (this.menuTrans.tipoMed == "") {
+            if (this.menuTrans.tipoMed == "" || this.menuTrans.medicamento == "") {
                 swal.fire({
-                title: "Seleccione el tipo de administración",
+                title: "Indique el tipo de administración y medicamento",
                 icon: "warning",
                 showConfirmButton: false,
                 showCloseButton: true,
@@ -1416,6 +1444,7 @@ export default defineComponent({
                 this.menuTrans.observacionesMed = "";
 
                 await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+                await this.listarMedicamentosTrans()
             }
       },
 
@@ -1433,39 +1462,45 @@ export default defineComponent({
                     this.eliminarMedicamento(idMedicamento);
                 }
                 });
-        },
+      },
 
-        async eliminarMedicamento(idMedicamento: string) {
-            console.log('Entro');            
+      async eliminarMedicamento(idMedicamento: string) {
+          console.log('Entro');            
 
-            await transAnestStore.deleteMedicamento(idMedicamento);
+          await transAnestStore.deleteMedicamento(idMedicamento);
 
-            console.log(idMedicamento);            
+          console.log(idMedicamento);            
 
-            this.menuTrans.idMed = "";
-            this.menuTrans.tipoMed = "";
-            this.menuTrans.medicamento = "";
-            this.menuTrans.dosisMed = "";
-            this.menuTrans.unidadMed = "";
-            this.menuTrans.viaMed = "";
-            this.menuTrans.horaInicioMed = "";
-            this.menuTrans.horaFinalMed = "";
-            this.menuTrans.observacionesMed = "";
+          this.menuTrans.idMed = "";
+          this.menuTrans.tipoMed = "";
+          this.menuTrans.medicamento = "";
+          this.menuTrans.dosisMed = "";
+          this.menuTrans.unidadMed = "";
+          this.menuTrans.viaMed = "";
+          this.menuTrans.horaInicioMed = "";
+          this.menuTrans.horaFinalMed = "";
+          this.menuTrans.observacionesMed = "";
 
-            await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
-        },
+          await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+          await this.listarMedicamentosTrans()
+      }      
+  },
+
+  computed: {
+  tablaMedicamentos() {      
+      if (this.medicSeleccionados.length === 0) {
+        return this.listaMedTrans;
+      } else {
+        return this.listaMedTrans.filter(item => this.medicSeleccionados.includes(item));
+      }
   }
+},
 })
 </script>
 
 <style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
-tr {
-  border-color: white;
-  border-top-width:1px;
-  border-bottom-width:1px;
-}
 .alinear-btn{
     align-self: self-end;
 }
@@ -1602,7 +1637,7 @@ tr {
   overflow: scroll;
   overflow-x: hidden;
   margin-top: 0px;
-  height: 330px;
+  height: 325px;
 }
 .btn-guardar{
     --bs-btn-bg: none;
@@ -1689,17 +1724,17 @@ hr {
   padding: 3px;
 }
 .borde-tabla-izq{
-  border-bottom-left-radius: 10px; 
-  border-top-left-radius:10px;
+  border-bottom-left-radius: 12px; 
+  border-top-left-radius:12px;
 }
 .borde-tabla-der{
-  border-bottom-right-radius: 10px; 
-  border-top-right-radius:10px   
+  border-bottom-right-radius: 12px; 
+  border-top-right-radius:12px   
 }
 #tabla-med tbody tr > td {
-  border: none;
-}
-#tabla-med tbody{
-  height:100px
+  border-color: white;
+  border-top-width:1px;
+  border-bottom-width:1px;
+  border-bottom-width:thick
 }
 </style>
