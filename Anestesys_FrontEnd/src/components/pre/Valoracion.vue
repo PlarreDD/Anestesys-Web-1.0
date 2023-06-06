@@ -897,7 +897,7 @@
                                                 </td>
                                                 
                                                 <td>
-                                                    <button class="btn" @click="validaEliminarMedicamento(estudioTipo._id)">
+                                                    <button class="btn" @click="validaEliminarEstudio(estudioTipo._id)">
                                                         <font-awesome-icon 
                                                             icon="fa-solid fa-trash" 
                                                             size="lg" class="text-black"
@@ -1332,7 +1332,7 @@ export default defineComponent({
             }
         },
 
-        async validaEliminarMedicamento(idEstudio: string) {
+        async validaEliminarEstudio(idEstudio: string) {
             swal
                 .fire({
                 html: "¿Esta seguro de eliminar el estudio?",

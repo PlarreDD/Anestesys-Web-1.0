@@ -10,6 +10,8 @@ export const useTransAnestStore = defineStore('transAn', {
     state: ()=> ({
         datosVentilacion: ref(null),
         pacienteID: ref(null),
+        medicamentos: ref(null),
+        medicamentoID: ref(null),
     }),
 
     actions: {
@@ -321,7 +323,6 @@ export const useTransAnestStore = defineStore('transAn', {
         async saveTiemposQX(regTransAnest: any, pid: string, tqx: string) {
             switch (tqx) {
                 case "QXIN":
-                    console.log(regTransAnest, pid, tqx);
                     await apiAxios({
                         url: "http://localhost:5000/trans/tqx",
                         method: "POST",
@@ -350,7 +351,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 break;
       
                 case "ANESIN":
-                    console.log(regTransAnest, pid, tqx);
                     await apiAxios({
                         url: 'http://localhost:5000/trans/tqx',
                         method: "POST",
@@ -498,6 +498,156 @@ export const useTransAnestStore = defineStore('transAn', {
                     console.log('Hola');                    
                 break;
               }
-        }
+        },
+
+        async getMedicamentosList(pid: string) {
+            await apiAxios({
+                url: `http://localhost:5000/trans/medic/${String(pid)}`,
+                method: "GET",
+                headers: {
+                Authorization: "Bearer " + userStore.token,
+                },                
+            })
+            .then((res: any) => {
+                this.medicamentos = res.data.medicamento;                             
+            })
+            .catch((e: any) => {
+                //   console.log(e);
+            });
+        },
+
+        async saveDatosMedicamentos(regTransAnest: any, pid: string){
+            await apiAxios({
+                url: "http://localhost:5000/trans/medic",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    pid: pid,
+                    // Datos del Ventilador
+                    tipoMed: regTransAnest.tipoMed,
+                    medicamento: regTransAnest.medicamento,
+                    dosisMed: regTransAnest.dosisMed,
+                    unidadMed: regTransAnest.unidadMed,
+                    viaMed: regTransAnest.viaMed,
+                    horaInicioMed: regTransAnest.horaInicioMed,
+                    horaFinalMed: regTransAnest.horaFinalMed,
+                    observacionesMed: regTransAnest.observacionesMed
+                }
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos guardados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
+
+        async updateMedicamentos(m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
+                            m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string, pid:string){
+            await apiAxios({
+                url: `http://localhost:5000/trans/medic/${String(pid)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    medicamentosCx: [ m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed]
+                },
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos agregados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
+
+        async getMedicamento(medicamentoID) {
+            await apiAxios({
+              url: `http://localhost:5000/trans/medic/uno/${String(medicamentoID)}`,
+              method: "GET",
+              headers: {
+                Authorization: "Bearer " + userStore.token,
+              },
+            })
+            .then((res: any) => {
+                this.medicamentos = res.data.medicamento;
+            })
+            .catch((e: any) => {
+            //   console.log(e);
+            });
+        },
+
+        async updateMedicamento(medicamentoID : string, m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
+                            m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string){
+            
+            await apiAxios({
+                url: `http://localhost:5000/trans/medic/uno/${String(medicamentoID)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    medicamentosCx: [ {"tipoMed":m_tipoMed, "medicamento":m_medicamento, "dosisMed":m_dosisMed, "unidadMed":m_unidadMed,
+                                        "viaMed":m_viaMed, "horaInicioMed":m_horaInicioMed,"horaFinalMed":m_horaFinalMed, "observacionesMed":m_observacionesMed,}]
+                },
+            })
+            .then((res: any) => {                            
+                swal.fire({
+                    title: 'Datos del medicamento actualizado correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })                
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
+
+        async deleteMedicamento(medicamentoID : string) {
+            await apiAxios({
+              url: `http://localhost:5000/trans/medic/${String(medicamentoID)}`,
+              method: "DELETE",
+              headers: {
+                Authorization: "Bearer " + userStore.token,
+              },
+            })
+            .then((res: any) => {      
+                swal.fire({
+                  title: "Datos del medicamento eliminados correctamente",
+                  icon: "success",
+                  showConfirmButton: false,
+                  toast: true,
+                  position: "top-end",
+                  timer: 2500,
+                  timerProgressBar: true,
+                });
+            })
+            .catch((e: any) => {
+              //   console.log(e);
+            });
+          },
     }
 })

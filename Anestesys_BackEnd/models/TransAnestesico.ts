@@ -73,6 +73,18 @@ const menuTransSchema = new Schema({
         egresoQx: { type: String },
     }],
 
+    /* Medicamentos */
+    medicamentosCx: [{
+        tipoMed: {type: String},
+        medicamento: {type: String},
+        dosisMed: {type: String},
+        unidadMed: {type: String},
+        viaMed: {type: String},
+        horaInicioMed: {type: String},
+        horaFinalMed: {type: String},
+        observacionesMed: {type: String},
+    }],
+
     /* Relevo */
     relevoCx: [{
         hrRelevo: { type: String },
