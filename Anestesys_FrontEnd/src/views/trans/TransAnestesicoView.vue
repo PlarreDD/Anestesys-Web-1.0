@@ -930,14 +930,15 @@
     <!-- Contenedor Grid -->
     <div class="input-group mb-3 bordePrincipal">
      
+      <!-- Vista previa medicamentos/eventos-relevos -->
       <div class="col-md-3 menu-vista-previa">       
 
         <!-- Vista medicamentos -->
         <div class= "col-md-11 vista-medicamentos">
-          <div class="">
+          <div class="col-md-12">
             <Multiselect mode="tags"
                 @click="listarMedicamentosTrans"
-                placeholder="Buscar medicamento..."
+                placeholder="Buscar..."
                 v-model="medicSeleccionados"                
                 :options="listaMedTrans"
                 :searchable="true"
@@ -1002,6 +1003,7 @@
         </div>
       </div>
 
+      <!-- Grid signos vitales -->
       <div class="col-md-6 tab-content" id="">
         <div class="row g-3">
           <table class="table table-hover table-bordered">
