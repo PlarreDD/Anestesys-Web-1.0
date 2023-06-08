@@ -19,14 +19,15 @@
 
             <div class="col-md-2"></div>
 
+            <!-- Botón medicamento -->
             <div class="col-md-2">
               <button type="button"
                       class="btn btn-menu fw-bold"
                       data-bs-toggle="modal"
-                      data-bs-target="#modal-medicamento">+ MEDICAMENTO </button>
+                      data-bs-target="#modal-medicamento" @click="vaciarModalMed">+ MEDICAMENTO </button>
             </div>
             <!--Abrir el modal de Medicamentos-->
-            <div class="modal" id="modal-medicamento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal" ref="medicamentoModal" id="modal-medicamento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content color-dropdown">
                   <div class="input-group mb-3">
@@ -34,7 +35,17 @@
                       <div class="col-md-12">
                         <div class="row g-3">
                             
-                          <h5 class="text-white fw-bold">DATOS DEL MEDICAMENTO</h5>
+                          <h5 class="text-white fw-bold col-md-11">DATOS DEL MEDICAMENTO</h5>
+                          <div class="col-md-1">
+                            <button type="button" id="medica"
+                                    class="btn fw-bold"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close">
+                              <i class="text-white invisible">
+                                <font-awesome-icon icon="fa-solid fa-xmark" size="2xl"/>
+                              </i>
+                            </button>
+                          </div>
                           
                           <div class="col-md-4">
 
@@ -162,11 +173,12 @@
               </div>
             </div>
 
+            <!-- Botón relevo -->
             <div class="col-md-2">
               <button type="button"
                       class="btn btn-menu fw-bold"
                       data-bs-toggle="modal"
-                      data-bs-target="#modal-relevo"> RELEVO </button>
+                      data-bs-target="#modal-relevo" @click="vaciarModalRel"> RELEVO </button>
             </div>
             <!--Abrir el modal de Relevo-->
             <div class="modal" id="modal-relevo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -176,9 +188,78 @@
                     <div class="modal-body">
                       <div class="col-md-12">
                         <div class="row g-3">
-                            <div class="col-md-12">
-                              <h5 class="text-white fw-bold">DATOS DEL RELEVO</h5>
+                            <h5 class="text-white fw-bold col-md-11">DATOS DEL RELEVO</h5>
+                            <div class="col-md-1">
+                              <button type="button" id="relev"
+                                      class="btn fw-bold"
+                                      data-bs-dismiss="modal"
+                                      aria-label="Close">
+                                <i class="text-white invisible">
+                                  <font-awesome-icon icon="fa-solid fa-xmark" size="2xl"/>
+                                </i>
+                              </button>
                             </div>
+
+                            <div class="col-md-2">
+                              <input type="hidden" v-model="menuTrans.idRelevo">
+
+                              <label class="form-label text-white fw-bold"> Hora </label>
+                              <input type="time" class="form-control" v-model="menuTrans.horaRelevo" @dblclick="actualizarTQX('INREL')">
+                            </div>
+
+                            <div class="col-md-7">
+                              <input type="hidden" v-model="menuTrans.tipoRel">
+                            </div>
+
+                            <div class="col-md-3">
+                              <label class="form-label text-white fw-bold"> Matrícula </label>                                
+                              <input type="text" class="form-control" v-model="menuTrans.matriculaRel">
+                            </div>
+
+                            <div class="col-md-12">
+                              <label class="form-label text-white fw-bold"> Anestesiológo </label>                                
+                              <input type="text" class="form-control" v-model="menuTrans.anestesiologoRel">
+                            </div>
+
+                            <div class="col-md-12">
+                              <label for="" class="form-label text-white fw-bold"> Observaciones </label>
+                              <textarea class="form-control" rows="2" v-model="menuTrans.observacionesRel">
+                              </textarea>
+                            </div>
+
+                            <div class="col-md-8"></div>
+
+                            <div class="col-md-2">
+                              <button data-bs-toggle="tab" 
+                                            type="submit"
+                                            class="btn btn-guardar-balance fw-bold"
+                                            @click="validaEliminarRelevos(menuTrans.idRelevo)"> ELIMINAR </button>
+                            </div>
+
+                            <!-- Botón Guardar/Agregar -->
+                            <div class="col-md-2">                                    
+                              <template v-if="btnAddRelevos === true">
+                                <button data-bs-toggle="tab" 
+                                            type="submit"
+                                            class="btn btn-guardar-balance fw-bold" 
+                                            @click="guardarRelevos"> GUARDAR </button>
+                              </template>
+
+                              <template v-if="btnUpdateRelevos === true">
+                                <button data-bs-toggle="tab" 
+                                            type="submit"
+                                            class="btn btn-guardar-balance fw-bold"
+                                            @click="actualizarRelevos(menuTrans.horaRelevo, menuTrans.tipoRel, menuTrans.matriculaRel, 
+                                                                        menuTrans.anestesiologoRel,menuTrans.observacionesRel)"> GUARDAR </button>
+                              </template>  
+
+                              <template v-if="btnActualizaRelevo === true">
+                                  <button class="btn btn-guardar-balance fw-bold" 
+                                          @click="actualizarRelevo()"> ACTUALIZAR                                
+                                  </button>
+                              </template>  
+                            </div>
+
                         </div>
                       </div>
                     </div>
@@ -187,11 +268,12 @@
               </div>
             </div>
 
+            <!-- Botón evento crítico -->
             <div class="col-md-2">
               <button type="button"
                       class="btn btn-menu fw-bold"
                       data-bs-toggle="modal"
-                      data-bs-target="#modal-evento"> EVENTO CRÍTICO </button>
+                      data-bs-target="#modal-evento" @click="vaciarModalEve"> EVENTO CRÍTICO </button>
             </div>
             <!--Abrir el modal de evento critico-->
             <div class="modal" id="modal-evento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -201,9 +283,67 @@
                     <div class="modal-body">
                       <div class="col-md-12">
                         <div class="row g-3">
-                            <div class="col-md-12">
-                              <h5 class="text-white fw-bold">DATOS DEL EVENTO CRÍTICO</h5>
+                            <h5 class="text-white fw-bold col-md-11">DATOS DEL EVENTO CRÍTICO</h5>
+                            <div class="col-md-1">
+                              <button type="button" id="event"
+                                      class="btn fw-bold"
+                                      data-bs-dismiss="modal"
+                                      aria-label="Close">
+                                <i class="text-white invisible">
+                                  <font-awesome-icon icon="fa-solid fa-xmark" size="2xl"/>
+                                </i>
+                              </button>
                             </div>
+
+                            <div class="col-md-2">
+                              <input type="hidden" v-model="menuTrans.idEvento">
+
+                              <label class="form-label text-white fw-bold"> Hora </label>
+                              <input type="time" class="form-control" v-model="menuTrans.horaEvento" @dblclick="actualizarTQX('INEVE')">
+                            </div>
+
+                            <div class="col-md-10">
+                              <input type="hidden" v-model="menuTrans.tipoEve">
+                            </div>
+
+                            <div class="col-md-12">
+                              <label for="" class="form-label text-white fw-bold"> Detalles del Evento </label>
+                              <textarea class="form-control" rows="6" v-model="menuTrans.detalleEvento">
+                              </textarea>
+                            </div>
+
+                            <div class="col-md-8"></div>
+
+                            <div class="col-md-2">
+                              <button data-bs-toggle="tab" 
+                                            type="submit"
+                                            class="btn btn-guardar-balance fw-bold"
+                                            @click="validaEliminarEventos(menuTrans.idEvento)"> ELIMINAR </button>
+                            </div>
+
+                            <!-- Botón Guardar/Agregar -->
+                            <div class="col-md-2">                                    
+                              <template v-if="btnAddEventos === true">
+                                <button data-bs-toggle="tab" 
+                                            type="submit"
+                                            class="btn btn-guardar-balance fw-bold" 
+                                            @click="guardarEventos"> GUARDAR</button>
+                              </template>
+
+                              <template v-if="btnUpdateEventos === true">
+                                <button data-bs-toggle="tab" 
+                                            type="submit"
+                                            class="btn btn-guardar-balance fw-bold"
+                                            @click="actualizarEventos(menuTrans.horaEvento, menuTrans.tipoEve, menuTrans.detalleEvento)"> GUARDAR</button>
+                              </template>  
+
+                              <template v-if="btnActualizaEvento === true">
+                                  <button class="btn btn-guardar-balance fw-bold" 
+                                          @click="actualizarEvento()"> ACTUALIZAR                                
+                                  </button>
+                              </template>  
+                            </div>
+
                         </div>
                       </div>
                     </div>
@@ -806,14 +946,13 @@
                 :multiple="false"
             />    
           </div>
-          <hr/>
           <!-- Lista de medicamentos -->
-          <div class="deslizar-medicamentos"> 
+          <div class="deslizar-medicamentos m-1"> 
             <table class="table" id="tabla-med">
               <tbody v-for="( medicamento ) in transAnestStore.medicamentos">
                 <tr class="" v-for="datosMed in medicamento.medicamentosCx"
                           @click="cambiarBtnActualizarMedic(datosMed._id)" data-bs-toggle="modal" data-bs-target="#modal-medicamento">
-                      <td class="borde-tabla-izq p-2" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'" v-if="tablaMedicamentos.includes(datosMed.medicamento)">
+                      <td class="borde-tabla-izq p-1" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'" v-if="tablaMedicamentos.includes(datosMed.medicamento)">
                         <FONT size="2">{{ datosMed.medicamento}}</FONT>
                       </td>
                       <td class="" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'" v-if="tablaMedicamentos.includes(datosMed.medicamento)">
@@ -829,8 +968,37 @@
         </div>
         
         <!-- Vista eventos/relevos -->
-        <div class="col-md-11 vista-eventos-relevos"> 
-          <input type="text" class="form-control">             
+        <div class="col-md-11 vista-eventos-relevos">  
+          <div class="col-md-12">
+            <button class="btn btn-evento-relevo btn-sm fw-bold">RELEVOS Y EVENTOS CRÍTICOS</button>
+          </div>   
+          <!-- Lista de relevos/eventos -->
+          <div class="deslizar-relevos m-1"> 
+            <table class="table" id="tabla-med" v-for="(relevo) in transAnestStore.relevos" >
+              <tbody v-for="(evento) in transAnestStore.eventos">
+
+                <tr v-for="datosRel in relevo.relevoCx" @click="cambiarBtnActualizarRelevo(datosRel._id)" data-bs-toggle="modal" data-bs-target="#modal-relevo">
+                  <td class="borde-tabla-izq p-1 text-center" :class="datosRel.tipoRel === 'RELEVO' ? 'estilo-relevo' : 'estilo-evento'">
+                    <FONT size="2">{{ datosRel.tipoRel }}</FONT>
+                  </td>
+                  <td class="borde-tabla-der fw-bold text-center" :class="datosRel.tipoRel === 'RELEVO' ? 'estilo-relevo' : 'estilo-evento'">
+                    <FONT size="2">{{ datosRel.horaRelevo }}</FONT>
+                  </td>
+                </tr>
+
+                <tr v-for="datosEve in evento.evCriticoCx" @click="cambiarBtnActualizarEvento(datosEve._id)" data-bs-toggle="modal" data-bs-target="#modal-evento">
+                  <td class="borde-tabla-izq p-1 text-center" :class="datosEve.tipoEve === 'RELEVO' ? 'estilo-relevo' : 'estilo-evento'">
+                    <FONT size="2">{{ datosEve.tipoEve }}</FONT>
+                  </td>
+                  <td class="borde-tabla-der fw-bold text-center" :class="datosEve.horaEvento === 'RELEVO' ? 'estilo-relevo' : 'estilo-evento'">
+                    <FONT size="2">{{ datosEve.horaEvento }}</FONT>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+
+          </div>
         </div>
       </div>
 
@@ -919,30 +1087,44 @@ const medStore = useMedicamentoStore();
 var taSeparada: Object;
 
 export default defineComponent({
+  
   data() {
     return {
+      //Datos interfaces
       menuTrans: {} as regMenuTrans,
-      medicSeleccionados: [],
+      infoNotaPost: {} as regNotaPost,        
       
+      //Store
       preIdStore,
       transAnestStore,
       postAnestStore,
       medStore,
       
+      // Botones ventilador
       btnAddVentilador:true,
       btnUpdateVentilador:false,
       btnActualizaVentilador:false,
       
+      //Botones balance/técnica
       btnActualizarBalance:false,
-      btnActualizarTecnica:false,      
+      btnActualizarTecnica:false,   
       
-      opcionTecnicas: ['Local','Sedación', 'General balanceada', 'TIVA (Anestesia total intravenosa)', 'Multimodal',
-                       'Bloqueo mixto', 'Bloqueo peridural lumbar', 'Bloqueo peridural caudal', 'Bloqueo espinal',
-                       'Bloqueo de plexo', 'Bloqueo troncular', 'Bloqueo peridural torácico', 'Bloqueo peridural cervical',
-                       'Libre de opioides'],
+      //Botones medicamento
+      btnAddMedicamentos:true,
+      btnUpdateMedicamentos:false,
+      btnActualizaMedicamento:false,
       
-      infoNotaPost: {} as regNotaPost,      
-      
+      //Botones relevo
+      btnAddRelevos:true,
+      btnUpdateRelevos:false,
+      btnActualizaRelevo:false, 
+
+      //Botones evento
+      btnAddEventos:true,
+      btnUpdateEventos:false,
+      btnActualizaEvento:false, 
+
+      //Botones tiempos quirurgicos
       activoAnesIN: false,
       noActivoAnesIN: true,
 
@@ -954,18 +1136,18 @@ export default defineComponent({
 
       activoAnesOUT: false,
       noActivoAnesOUT: true,
-
-      btnActualizarMedicamento:false,
       
+      // Arreglo opciones técnicas
+      opcionTecnicas: ['Local','Sedación', 'General balanceada', 'TIVA (Anestesia total intravenosa)', 'Multimodal',
+                       'Bloqueo mixto', 'Bloqueo peridural lumbar', 'Bloqueo peridural caudal', 'Bloqueo espinal',
+                       'Bloqueo de plexo', 'Bloqueo troncular', 'Bloqueo peridural torácico', 'Bloqueo peridural cervical',
+                       'Libre de opioides'],
       // Arreglo de medicamentos menú configuración
       listaMed: [],
-
       // Arreglo de medicamentos trans
-      listaMedTrans: [],
-
-      btnAddMedicamentos:true,
-      btnUpdateMedicamentos:false,
-      btnActualizaMedicamento:false,
+      listaMedTrans: [],    
+      // Arreglo multiselect
+      medicSeleccionados: [],
     }
   },
 
@@ -1012,13 +1194,31 @@ export default defineComponent({
       anesout.addEventListener("contextmenu", this.bloquearClicDerecho);
       
       transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+
+      this.menuTrans.tipoRel= "RELEVO";
+      this.menuTrans.tipoEve= "EVENTO";
   },
 
   methods: {
+      // Gestión datos ventilador 
       async guardarDatosV() {
         this.btnAddVentilador=false
         this.btnUpdateVentilador=true
         this.btnActualizaVentilador=false
+
+        this.btnAddMedicamentos=false
+        this.btnUpdateMedicamentos=true
+        this.btnActualizaMedicamento=false
+
+        this.btnAddRelevos=false
+        this.btnUpdateRelevos=true
+        this.btnActualizaRelevo=false
+
+        this.btnAddEventos=false
+        this.btnUpdateEventos=true
+        this.btnActualizaEvento=false
+
+        this.btnActualizarBalance=true
 
         var hoy = new Date();
         this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
@@ -1088,6 +1288,7 @@ export default defineComponent({
                 await transAnestStore.updateVentilador(this.menuTrans.idVentilador, this.menuTrans.modosVentilacion, this.menuTrans.peep,
                                       this.menuTrans.vt, this.menuTrans.frecResp, this.menuTrans.IE, this.menuTrans.PLimite, this.menuTrans.Hr);
 
+                //Volver al botón agregar
                 this.btnAddVentilador=false
                 this.btnUpdateVentilador=true
                 this.btnActualizaVentilador=false
@@ -1110,12 +1311,25 @@ export default defineComponent({
         await transAnestStore.listDatosV(preIdStore.pacienteID._id);
       },
 
+      //Gestión datos balance
       async cambiarUpdateBalance() {
           this.btnActualizarBalance=true
 
           this.btnAddVentilador=false
           this.btnUpdateVentilador=true
           this.btnActualizaVentilador=false
+
+          this.btnAddMedicamentos=false
+          this.btnUpdateMedicamentos=true
+          this.btnActualizaMedicamento=false
+
+          this.btnAddRelevos=false
+          this.btnUpdateRelevos=true
+          this.btnActualizaRelevo=false
+
+          this.btnAddEventos=false
+          this.btnUpdateEventos=true
+          this.btnActualizaEvento=false
 
           //Metódo para guardar
           await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
@@ -1131,23 +1345,7 @@ export default defineComponent({
                                         Number(this.menuTrans.ayuno) + Number(this.menuTrans.otrosEgresos) );
       },
 
-      async listarMedicamentos(){
-        var medicamento= medStore.medicamentos;
-        this.listaMed = medicamento.map(document => document.nombreMedicamento);
-        this.listaMed.sort()
-      },
-
-      async listarMedicamentosTrans(){
-        var listaMedicamentos = transAnestStore.medicamentos.map(item =>
-          item.medicamentosCx.map(med => med.medicamento)).flat();
-
-         this.listaMedTrans = listaMedicamentos.filter((value, index, self) => {
-            return self.indexOf(value) === index;
-        });
-
-        this.listaMedTrans.sort()
-      },
-
+      //Gestión datos técnica anestesica 
       async listaTecAnest() {
         await postAnestStore.listNotaPA(preIdStore.pacienteID._id);
         taSeparada = postAnestStore.NotaPA[0].npa_TecAnestFinal.split(",");
@@ -1155,8 +1353,8 @@ export default defineComponent({
 
       cambiarUpdateTecnica(){
         this.btnActualizarTecnica=true
-        this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
 
+        this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
         postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id)
       },
 
@@ -1172,45 +1370,163 @@ export default defineComponent({
         this.infoNotaPost.npa_TecAnestFinal = postAnestStore.TecnicaAnestesica;
       },
 
+      // Gestión tiempos quirurgicos
       async actualizarTQX(tiemposQX: string){
         switch (tiemposQX) {
+          case "INEVE":
+            var hoy = new Date();
+            this.menuTrans.horaEvento = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+          break;
+
+          case "INREL":
+            var hoy = new Date();
+            this.menuTrans.horaRelevo = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+          break;
+
           case "INCX":
             var hoy = new Date();
             this.menuTrans.horaInicioMed = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
-            await transAnestStore.saveTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID._id, tiemposQX);
           break;
 
           case "QXIN":
+            this.btnActualizarBalance=true
+
+            this.btnAddVentilador=false
+            this.btnUpdateVentilador=true
+            this.btnActualizaVentilador=false
+
+            this.btnAddMedicamentos=false
+            this.btnUpdateMedicamentos=true
+            this.btnActualizaMedicamento=false
+
+            this.btnAddRelevos=false
+            this.btnUpdateRelevos=true
+            this.btnActualizaRelevo=false
+
+            this.btnAddEventos=false
+            this.btnUpdateEventos=true
+            this.btnActualizaEvento=false
+
             var hoy = new Date();
             this.menuTrans.ingresoQX = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID._id, tiemposQX);
           break;
 
           case "ANESIN":
+            this.btnActualizarBalance=true
+
+            this.btnAddVentilador=false
+            this.btnUpdateVentilador=true
+            this.btnActualizaVentilador=false
+
+            this.btnAddMedicamentos=false
+            this.btnUpdateMedicamentos=true
+            this.btnActualizaMedicamento=false
+
+            this.btnAddRelevos=false
+            this.btnUpdateRelevos=true
+            this.btnActualizaRelevo=false
+
+            this.btnAddEventos=false
+            this.btnUpdateEventos=true
+            this.btnActualizaEvento=false
+
             var hoy = new Date();
             this.menuTrans.inicioAn = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID._id, tiemposQX);
           break;
 
           case "CXIN":
+            this.btnActualizarBalance=true
+
+            this.btnAddVentilador=false
+            this.btnUpdateVentilador=true
+            this.btnActualizaVentilador=false
+
+            this.btnAddMedicamentos=false
+            this.btnUpdateMedicamentos=true
+            this.btnActualizaMedicamento=false
+
+            this.btnAddRelevos=false
+            this.btnUpdateRelevos=true
+            this.btnActualizaRelevo=false
+
+            this.btnAddEventos=false
+            this.btnUpdateEventos=true
+            this.btnActualizaEvento=false
+          
             var hoy = new Date();
             this.menuTrans.inicioCx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID._id, tiemposQX);
           break;
 
           case "CXOUT":
+            this.btnActualizarBalance=true
+
+            this.btnAddVentilador=false
+            this.btnUpdateVentilador=true
+            this.btnActualizaVentilador=false
+
+            this.btnAddMedicamentos=false
+            this.btnUpdateMedicamentos=true
+            this.btnActualizaMedicamento=false
+
+            this.btnAddRelevos=false
+            this.btnUpdateRelevos=true
+            this.btnActualizaRelevo=false
+
+            this.btnAddEventos=false
+            this.btnUpdateEventos=true
+            this.btnActualizaEvento=false
+
             var hoy = new Date();
             this.menuTrans.finCx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID._id, tiemposQX);
           break;
 
           case "ANESOUT":
+            this.btnActualizarBalance=true
+
+            this.btnAddVentilador=false
+            this.btnUpdateVentilador=true
+            this.btnActualizaVentilador=false
+
+            this.btnAddMedicamentos=false
+            this.btnUpdateMedicamentos=true
+            this.btnActualizaMedicamento=false
+
+            this.btnAddRelevos=false
+            this.btnUpdateRelevos=true
+            this.btnActualizaRelevo=false
+
+            this.btnAddEventos=false
+            this.btnUpdateEventos=true
+            this.btnActualizaEvento=false
+
             var hoy = new Date();
             this.menuTrans.finAn = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID._id, tiemposQX);
           break;
 
           case "QXOUT":
+            this.btnActualizarBalance=true
+
+            this.btnAddVentilador=false
+            this.btnUpdateVentilador=true
+            this.btnActualizaVentilador=false
+
+            this.btnAddMedicamentos=false
+            this.btnUpdateMedicamentos=true
+            this.btnActualizaMedicamento=false
+
+            this.btnAddRelevos=false
+            this.btnUpdateRelevos=true
+            this.btnActualizaRelevo=false
+
+            this.btnAddEventos=false
+            this.btnUpdateEventos=true
+            this.btnActualizaEvento=false
+
             var hoy = new Date();
             this.menuTrans.egresoQx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX);
@@ -1316,50 +1632,116 @@ export default defineComponent({
           default:
           break;
         }
+      },      
+
+      bloquearClicDerecho(event) {
+        event.preventDefault(); // Evita el comportamiento predeterminado del evento
+      },
+
+      // Métodos gestión medicamentos
+      async vaciarModalMed(){
+        if(this.menuTrans.tipoMed != "" && this.menuTrans.tipoMed != undefined){
+
+          this.menuTrans.idMed = "";
+          this.menuTrans.tipoMed = "";
+          this.menuTrans.medicamento = "";
+          this.menuTrans.dosisMed = "";
+          this.menuTrans.unidadMed = "";
+          this.menuTrans.viaMed = "";
+          this.menuTrans.horaInicioMed = "";
+          this.menuTrans.horaFinalMed = "";
+          this.menuTrans.observacionesMed = "";
+          
+          this.btnAddMedicamentos=false
+          this.btnUpdateMedicamentos=true
+          this.btnActualizaMedicamento=false
+        }
+      },
+
+      cerrarModalMed() {
+        var closeButton = document.getElementById('medica');
+  
+        // Crea un nuevo evento de clic
+        var event = new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+          view: window
+        });
+
+        // Despacha el evento de clic en el botón
+        closeButton.dispatchEvent(event);
+      },
+
+      async listarMedicamentos(){
+        var medicamento= medStore.medicamentos;
+        this.listaMed = medicamento.map(document => document.nombreMedicamento);
+        this.listaMed.sort()
+      },
+
+      async listarMedicamentosTrans(){
+        var listaMedicamentos = transAnestStore.medicamentos.map(item =>
+          item.medicamentosCx.map(med => med.medicamento)).flat();
+
+         this.listaMedTrans = listaMedicamentos.filter((value, index, self) => {
+            return self.indexOf(value) === index;
+        });
+
+        this.listaMedTrans.sort()
       },
 
       async vaciarHoraFinalMedicamento(){
         this.menuTrans.horaFinalMed="";
       },
 
-      bloquearClicDerecho(event) {
-        event.preventDefault(); // Evita el comportamiento predeterminado del evento
-      },
-
       async guardarMedicamentos() {
-        if (this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.medicamento == "" || this.menuTrans.medicamento == undefined) {
-                swal.fire({
-                title: "Indique el tipo de administración y medicamento",
-                icon: "warning",
-                showConfirmButton: false,
-                showCloseButton: true,
-                toast: true,
-                timer: 2500,
-                timerProgressBar: true,
-                position: "top-end",
-                });
-          } else {
-            this.btnActualizarMedicamento=true
         
-            this.btnAddMedicamentos=false
-            this.btnUpdateMedicamentos=true
-            this.btnActualizaMedicamento=false
-            
-            await this.transAnestStore.saveDatosMedicamentos(this.menuTrans, preIdStore.pacienteID._id)
+        if (this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.medicamento == "" || this.menuTrans.medicamento == undefined) {
+              swal.fire({
+              title: "Indique el tipo de administración y medicamento",
+              icon: "warning",
+              showConfirmButton: false,
+              showCloseButton: true,
+              toast: true,
+              timer: 2500,
+              timerProgressBar: true,
+              position: "top-end",
+              });
+        } else {        
+          this.btnAddMedicamentos=false
+          this.btnUpdateMedicamentos=true
+          this.btnActualizaMedicamento=false
 
-            this.menuTrans.tipoMed = "";
-            this.menuTrans.medicamento = "";
-            this.menuTrans.dosisMed = "";
-            this.menuTrans.unidadMed = "";
-            this.menuTrans.viaMed = "";
-            this.menuTrans.horaInicioMed = "";
-            this.menuTrans.horaFinalMed = "";
-            this.menuTrans.observacionesMed = "";        
-            
-            await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+          this.btnAddVentilador=false
+          this.btnUpdateVentilador=true
+          this.btnActualizaVentilador=false
 
-            await this.listarMedicamentosTrans()
-          }       
+          this.btnAddRelevos=false
+          this.btnUpdateRelevos=true
+          this.btnActualizaRelevo=false
+
+          this.btnAddEventos=false
+          this.btnUpdateEventos=true
+          this.btnActualizaEvento=false
+
+          this.btnActualizarBalance=true
+          
+          await this.transAnestStore.saveDatosMedicamentos(this.menuTrans, preIdStore.pacienteID._id)
+
+          this.menuTrans.tipoMed = "";
+          this.menuTrans.medicamento = "";
+          this.menuTrans.dosisMed = "";
+          this.menuTrans.unidadMed = "";
+          this.menuTrans.viaMed = "";
+          this.menuTrans.horaInicioMed = "";
+          this.menuTrans.horaFinalMed = "";
+          this.menuTrans.observacionesMed = "";      
+          
+          this.cerrarModalMed();
+
+          await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+          await this.listarMedicamentosTrans();
+        }  
+            
       },
 
       async actualizarMedicamentos(m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
@@ -1385,7 +1767,9 @@ export default defineComponent({
             this.menuTrans.viaMed = "";
             this.menuTrans.horaInicioMed = "";
             this.menuTrans.horaFinalMed = "";
-            this.menuTrans.observacionesMed = "";
+            this.menuTrans.observacionesMed = "";    
+            
+            this.cerrarModalMed();
 
             await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
             await this.listarMedicamentosTrans()
@@ -1443,6 +1827,8 @@ export default defineComponent({
                 this.menuTrans.horaFinalMed = "";
                 this.menuTrans.observacionesMed = "";
 
+                this.cerrarModalMed();
+
                 await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
                 await this.listarMedicamentosTrans()
             }
@@ -1465,11 +1851,7 @@ export default defineComponent({
       },
 
       async eliminarMedicamento(idMedicamento: string) {
-          console.log('Entro');            
-
-          await transAnestStore.deleteMedicamento(idMedicamento);
-
-          console.log(idMedicamento);            
+          await transAnestStore.deleteMedicamento(idMedicamento);          
 
           this.menuTrans.idMed = "";
           this.menuTrans.tipoMed = "";
@@ -1481,9 +1863,384 @@ export default defineComponent({
           this.menuTrans.horaFinalMed = "";
           this.menuTrans.observacionesMed = "";
 
+          this.btnAddMedicamentos=false
+          this.btnUpdateMedicamentos=true
+          this.btnActualizaMedicamento=false
+
+          this.cerrarModalMed();
+
           await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
           await this.listarMedicamentosTrans()
-      }      
+      },
+
+      //Métodos gestión de relevo
+      async vaciarModalRel(){
+        if(this.menuTrans.horaRelevo != "" && this.menuTrans.horaRelevo != undefined){
+
+          this.menuTrans.idRelevo = "";
+          this.menuTrans.horaRelevo = "";
+          this.menuTrans.tipoRel= "RELEVO";
+          this.menuTrans.matriculaRel = "";
+          this.menuTrans.anestesiologoRel = "";
+          this.menuTrans.observacionesRel = "";
+
+          this.btnAddRelevos=false
+          this.btnUpdateRelevos=true
+          this.btnActualizaRelevo=false
+        }
+      },
+
+      cerrarModalRel() {
+        var closeButton = document.getElementById('relev');
+        var event = new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+          view: window
+        });
+        closeButton.dispatchEvent(event);
+      },
+
+      async guardarRelevos() {
+        if (this.menuTrans.horaRelevo == "" || this.menuTrans.horaRelevo == undefined) {
+                swal.fire({
+                title: "Ingrese la hora del relevo",
+                icon: "warning",
+                showConfirmButton: false,
+                showCloseButton: true,
+                toast: true,
+                timer: 2500,
+                timerProgressBar: true,
+                position: "top-end",
+                });
+          } else {        
+            this.btnAddMedicamentos=false
+            this.btnUpdateMedicamentos=true
+            this.btnActualizaMedicamento=false
+
+            this.btnAddVentilador=false
+            this.btnUpdateVentilador=true
+            this.btnActualizaVentilador=false
+
+            this.btnAddRelevos=false
+            this.btnUpdateRelevos=true
+            this.btnActualizaRelevo=false
+
+            this.btnAddEventos=false
+            this.btnUpdateEventos=true
+            this.btnActualizaEvento=false
+
+            this.btnActualizarBalance=true
+            
+            await this.transAnestStore.saveDatosRelevos(this.menuTrans, preIdStore.pacienteID._id)
+
+            this.menuTrans.horaRelevo = "";
+            this.menuTrans.tipoRel= "RELEVO";
+            this.menuTrans.matriculaRel = "";
+            this.menuTrans.anestesiologoRel = "";
+            this.menuTrans.observacionesRel = "";   
+            
+            this.cerrarModalRel();
+            
+            await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+            await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+          }       
+      },
+
+      async actualizarRelevos(r_horaRelevo: string, r_tipoRel: string, r_matriculaRel: string, 
+                            r_anestesiologoRel: string, r_observacionesRel: string) {
+          if (this.menuTrans.horaRelevo == "" || this.menuTrans.horaRelevo == undefined) {
+                swal.fire({
+                title: "Ingrese la hora del relevo",
+                icon: "warning",
+                showConfirmButton: false,
+                showCloseButton: true,
+                toast: true,
+                timer: 2500,
+                timerProgressBar: true,
+                position: "top-end",
+                });
+          } else {
+            await transAnestStore.updateRelevos(r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel, preIdStore.pacienteID._id);
+            
+            this.menuTrans.horaRelevo = "";
+            this.menuTrans.tipoRel= "RELEVO";
+            this.menuTrans.matriculaRel = "";
+            this.menuTrans.anestesiologoRel = "";
+            this.menuTrans.observacionesRel = ""; 
+
+            this.cerrarModalRel();
+
+            await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+            await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+
+          }                                                
+      },
+
+      async cambiarBtnActualizarRelevo(id) {
+            this.btnAddRelevos=false
+            this.btnUpdateRelevos=false
+            this.btnActualizaRelevo=true
+
+            await transAnestStore.getRelevo(id);
+
+            this.menuTrans.idRelevo = transAnestStore.relevos.relevoCx[0]._id;
+            this.menuTrans.horaRelevo = transAnestStore.relevos.relevoCx[0].horaRelevo;
+            this.menuTrans.tipoRel = transAnestStore.relevos.relevoCx[0].tipoRel;
+            this.menuTrans.matriculaRel = transAnestStore.relevos.relevoCx[0].matriculaRel;
+            this.menuTrans.anestesiologoRel = transAnestStore.relevos.relevoCx[0].anestesiologoRel;
+            this.menuTrans.observacionesRel = transAnestStore.relevos.relevoCx[0].observacionesRel;
+
+            await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+            await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+      },
+
+      async actualizarRelevo() {
+            if (this.menuTrans.horaRelevo == "") {
+                swal.fire({
+                title: "Ingrese la hora del relevo",
+                icon: "warning",
+                showConfirmButton: false,
+                showCloseButton: true,
+                toast: true,
+                timer: 2500,
+                timerProgressBar: true,
+                position: "top-end",
+                });
+            } else {
+                await transAnestStore.updateRelevo(this.menuTrans.idRelevo, this.menuTrans.horaRelevo, this.menuTrans.tipoRel, this.menuTrans.matriculaRel,
+                                                    this.menuTrans.anestesiologoRel, this.menuTrans.observacionesRel);
+
+                this.btnAddRelevos=false
+                this.btnUpdateRelevos=true
+                this.btnActualizaRelevo=false
+
+                this.menuTrans.idRelevo = "";
+                this.menuTrans.horaRelevo = "";
+                this.menuTrans.tipoRel= "RELEVO";
+                this.menuTrans.matriculaRel = "";
+                this.menuTrans.anestesiologoRel = "";
+                this.menuTrans.observacionesRel = ""; 
+
+                this.cerrarModalRel();
+
+                await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+                await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+            }
+      },
+
+      async validaEliminarRelevos(idRelevo: string) {
+            swal
+                .fire({
+                html: "¿Esta seguro de eliminar los datos del relevo?",
+                icon: "warning",
+                showConfirmButton: true,
+                showCancelButton: true,
+                toast: true,
+                })
+                .then((result) => {
+                if (result.isConfirmed) {
+                    this.eliminarRelevo(idRelevo);
+                }
+                });
+      },
+
+      async eliminarRelevo(idRelevo: string) {         
+
+          await transAnestStore.deleteRelevo(idRelevo);        
+
+          this.menuTrans.idRelevo = "";
+          this.menuTrans.horaRelevo = "";
+          this.menuTrans.tipoRel= "RELEVO";
+          this.menuTrans.matriculaRel = "";
+          this.menuTrans.anestesiologoRel = "";
+          this.menuTrans.observacionesRel = "";
+
+          this.btnAddRelevos=false
+          this.btnUpdateRelevos=true
+          this.btnActualizaRelevo=false
+
+          this.cerrarModalRel();
+
+          await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+          await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+      },
+
+      //Métodos gestión de evento crítico
+      async vaciarModalEve(){
+        if(this.menuTrans.horaEvento != "" && this.menuTrans.horaEvento != undefined){
+
+          this.menuTrans.idEvento = "";
+          this.menuTrans.horaEvento = "";
+          this.menuTrans.tipoEve= "EVENTO";
+          this.menuTrans.detalleEvento = "";
+
+          this.btnAddEventos=false
+          this.btnUpdateEventos=true
+          this.btnActualizaEvento=false
+        }
+      },
+
+      cerrarModalEve() {
+        var closeButton = document.getElementById('event');
+        var event = new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+          view: window
+        });
+        closeButton.dispatchEvent(event);
+      },
+
+      async guardarEventos() {
+        if (this.menuTrans.horaEvento == "" || this.menuTrans.horaEvento == undefined) {
+                swal.fire({
+                title: "Ingrese la hora del evento crítico",
+                icon: "warning",
+                showConfirmButton: false,
+                showCloseButton: true,
+                toast: true,
+                timer: 2500,
+                timerProgressBar: true,
+                position: "top-end",
+                });
+          } else {        
+            this.btnAddMedicamentos=false
+            this.btnUpdateMedicamentos=true
+            this.btnActualizaMedicamento=false
+
+            this.btnAddVentilador=false
+            this.btnUpdateVentilador=true
+            this.btnActualizaVentilador=false
+
+            this.btnAddRelevos=false
+            this.btnUpdateRelevos=true
+            this.btnActualizaRelevo=false
+
+            this.btnAddEventos=false
+            this.btnUpdateEventos=true
+            this.btnActualizaEvento=false
+
+            this.btnActualizarBalance=true
+            
+            await this.transAnestStore.saveDatosEventos(this.menuTrans, preIdStore.pacienteID._id)
+
+            this.menuTrans.horaEvento = "";
+            this.menuTrans.tipoEve= "EVENTO";
+            this.menuTrans.detalleEvento = "";   
+            
+            this.cerrarModalEve();
+            
+            await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+            await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+          }       
+      },
+
+      async actualizarEventos(r_horaEvento: string, e_tipoEve: string, e_detalleEvento: string) {
+          if (this.menuTrans.horaEvento == "" || this.menuTrans.horaEvento == undefined) {
+                swal.fire({
+                title: "Ingrese la hora del evento crítico",
+                icon: "warning",
+                showConfirmButton: false,
+                showCloseButton: true,
+                toast: true,
+                timer: 2500,
+                timerProgressBar: true,
+                position: "top-end",
+                });
+          } else {
+            await transAnestStore.updateEventos(r_horaEvento, e_tipoEve, e_detalleEvento, preIdStore.pacienteID._id);
+            
+            this.menuTrans.horaEvento = "";
+            this.menuTrans.tipoEve= "EVENTO";
+            this.menuTrans.detalleEvento = "";
+            
+            this.cerrarModalEve();
+
+            await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+            await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+          }                                                
+      },
+
+      async cambiarBtnActualizarEvento(id) {
+            this.btnAddEventos=false
+            this.btnUpdateEventos=false
+            this.btnActualizaEvento=true
+
+            await transAnestStore.getEvento(id);
+
+            this.menuTrans.idEvento = transAnestStore.eventos.evCriticoCx[0]._id;
+            this.menuTrans.horaEvento = transAnestStore.eventos.evCriticoCx[0].horaEvento;
+            this.menuTrans.tipoEve = transAnestStore.eventos.evCriticoCx[0].tipoEve;
+            this.menuTrans.detalleEvento = transAnestStore.eventos.evCriticoCx[0].detalleEvento;
+
+            await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+            await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+      },
+
+      async actualizarEvento() {
+            if (this.menuTrans.horaEvento == "") {
+                swal.fire({
+                title: "Ingrese la hora del evento crítico",
+                icon: "warning",
+                showConfirmButton: false,
+                showCloseButton: true,
+                toast: true,
+                timer: 2500,
+                timerProgressBar: true,
+                position: "top-end",
+                });
+            } else {
+                await transAnestStore.updateEvento(this.menuTrans.idEvento, this.menuTrans.horaEvento, this.menuTrans.tipoEve, this.menuTrans.detalleEvento);
+
+                this.btnAddEventos=false
+                this.btnUpdateEventos=true
+                this.btnActualizaEvento=false
+
+                this.menuTrans.idEvento = "";
+                this.menuTrans.horaEvento = "";
+                this.menuTrans.tipoEve= "EVENTO";
+                this.menuTrans.detalleEvento = ""; 
+
+                this.cerrarModalEve();
+
+                await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+                await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+            }
+      },
+
+      async validaEliminarEventos(idEvento: string) {
+            swal
+                .fire({
+                  html: "¿Esta seguro de eliminar los datos del evento crítico?",
+                  icon: "warning",
+                  showConfirmButton: true,
+                  showCancelButton: true,
+                  toast: true,
+                  })
+                  .then((result) => {
+                  if (result.isConfirmed) {
+                      this.eliminarEvento(idEvento);
+                  }
+                });
+      },
+
+      async eliminarEvento(idEvento: string) {         
+
+          await transAnestStore.deleteEvento(idEvento);        
+
+          this.menuTrans.idEvento = "";
+          this.menuTrans.horaEvento = "";
+          this.menuTrans.tipoEve= "EVENTO";
+          this.menuTrans.detalleEvento = "";
+
+          this.btnAddEventos=false
+          this.btnUpdateEventos=true
+          this.btnActualizaEvento=false
+
+          this.cerrarModalEve();
+
+          await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+          await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+      },      
   },
 
   computed: {
@@ -1493,7 +2250,7 @@ export default defineComponent({
       } else {
         return this.listaMedTrans.filter(item => this.medicSeleccionados.includes(item));
       }
-  }
+  },
 },
 })
 </script>
@@ -1553,15 +2310,15 @@ export default defineComponent({
     row-gap: 10px;
 }
 .vista-medicamentos{
-  height: 420px;
+  height: 400px;
   background-color: white;
   padding: 0.5rem;
   border-radius: 10px;
 }
 .vista-eventos-relevos{
-  height: 200px;
+  height: 225px;
   background-color: white;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 10px;
 }
 .menuLateralPrincipal {
@@ -1639,6 +2396,12 @@ export default defineComponent({
   margin-top: 0px;
   height: 325px;
 }
+.deslizar-relevos {
+  overflow: scroll;
+  overflow-x: hidden;
+  margin-top: 0px;
+  height: 175px;
+}
 .btn-guardar{
     --bs-btn-bg: none;
     --bs-btn-color: #fff;    
@@ -1688,6 +2451,18 @@ export default defineComponent({
     --bs-btn-active-border-color: #A0A6B2;
     inline-size: -webkit-fill-available;
 }
+.btn-evento-relevo{
+    --bs-btn-bg: #002D60;
+    --bs-btn-color: #ffffff;    
+    --bs-btn-border-color: #002D60;
+    --bs-btn-hover-bg: #002D60;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #002D60;          
+    --bs-btn-active-bg: #002D60;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-border-color: #002D60;
+    inline-size: -webkit-fill-available;
+}
 .modal-med-largo {
   height: auto;
 }
@@ -1705,7 +2480,8 @@ hr {
   --bs-dropdown-min-width: 9.2rem;
   --bs-dropdown-padding-x: 0;
   --bs-dropdown-padding-y: 0;
-  border:none
+  border-color: #002D60;
+  --bs-dropdown-border-width: 0.5px;
 }
 .btn.disabled, .btn:disabled, fieldset:disabled .btn {
     color: white;
@@ -1715,13 +2491,23 @@ hr {
 }
 .estilo-bolo{
   color: #002D60;
-  background-color: #EFA9AB;  
+  background-color: #97C7FE;  
   padding: 3px;  
 }
 .estilo-infusion{
   color: #002D60;
-  background-color: #97E4B8;
+  background-color: #DAEEFC;
   padding: 3px;
+}
+.estilo-relevo{
+  color: white;
+  background-color: #B1C8E1;  
+  padding: 3px;  
+}
+.estilo-evento{
+  color: white;
+  background-color: #1F5092;  
+  padding: 3px;  
 }
 .borde-tabla-izq{
   border-bottom-left-radius: 12px; 

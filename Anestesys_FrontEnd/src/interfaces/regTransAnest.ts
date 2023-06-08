@@ -66,4 +66,16 @@ export interface regMenuTrans{
     horaInicioMed: string,
     horaFinalMed: string,
     observacionesMed: string,
+    /* Relevos */
+    idRelevo:string,
+    horaRelevo:string,
+    tipoRel:string,
+    matriculaRel:string,
+    anestesiologoRel:string,
+    observacionesRel:string,
+    /* Eventos Criticos */
+    idEvento:string,
+    horaEvento:string,
+    tipoEve:string,
+    detalleEvento:string
 }

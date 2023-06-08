@@ -87,20 +87,19 @@ const menuTransSchema = new Schema({
 
     /* Relevo */
     relevoCx: [{
-        hrRelevo: { type: String },
-        nomAnestesiologo: { type: String },
-        matriculaAnest: { type: String },
-        obsRelevo: { type: String },
-        accionesRelevo: { type: String },
+        horaRelevo:{ type: String },
+        tipoRel:{ type: String },
+        matriculaRel:{ type: String },
+        anestesiologoRel:{ type: String },
+        observacionesRel:{ type: String },
     }],
 
     /* Evento Crítico */
     evCriticoCx: [{
-        hrEvCrt: { type: String },
-        detalleEvCrt: { type: String },
-        obsEvCrt: { type: String },
-        accionesEvCrt: { type: String },
-    }],
+        horaEvento: { type: String },
+        tipoEve: { type: String },
+        detalleEvento: { type: String },
+    }]
 });
 
 export const MenuTrans = model('MenuTrans', menuTransSchema);

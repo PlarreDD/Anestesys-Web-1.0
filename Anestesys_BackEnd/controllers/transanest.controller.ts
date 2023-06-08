@@ -424,3 +424,226 @@ export const deleteMedicamento = async (req: any, res: Response) => {
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
+
+/* Guardado Relevo */
+export const saveRelevos = async (req: any, res: Response) => {
+    try {
+        const { pid,
+                // Datos relevos
+                horaRelevo, tipoRel, matriculaRel, anestesiologoRel, observacionesRel
+              } = req.body;        
+        const menuTrans  = await new MenuTrans({ pid,
+                                            // Datos del relevo
+                                            relevoCx: {
+                                                horaRelevo: horaRelevo, tipoRel: tipoRel, matriculaRel: matriculaRel, anestesiologoRel: anestesiologoRel, observacionesRel: observacionesRel
+                                            },
+                                        });
+        await menuTrans.save();        
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const updateRelevos = async (req: any, res: Response) => {
+    try {
+        const { pid } = req.params;
+        const { relevoCx } = req.body;                
+        const menuTrans = await MenuTrans.findOneAndUpdate(
+            { pid: pid },
+            { $push:{
+                relevoCx: {
+                        horaRelevo: relevoCx[0], tipoRel: relevoCx[1], matriculaRel: relevoCx[2], anestesiologoRel: relevoCx[3], observacionesRel: relevoCx[4]
+                    }
+                }
+            });        
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Función para obtener los relevos */
+export const getRelevos = async (req: any, res: Response) => {
+    try {
+        const {pid} = req.params;
+        
+        const relevo = await MenuTrans.find({pid:pid})
+           
+        return res.json({relevo});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Función para obtener un medicamento */
+export const getRelevo = async (req: any, res: Response) => {
+    try {
+        const {id} = req.params;
+
+        const relevo = await MenuTrans.findOne({ "relevoCx._id": id },
+                                                  { 'relevoCx.$': 1 })
+        
+        return res.json({relevo});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Funcion para actualizar un relevo */
+export const updateRelevo = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { relevoCx } = req.body;       
+        
+        const relevo = await MenuTrans.updateOne({ "relevoCx._id": id },
+            {
+                $set : {
+                            "relevoCx.$.horaRelevo" : relevoCx[0].horaRelevo, "relevoCx.$.tipoRel" : relevoCx[0].tipoRel,
+                            "relevoCx.$.matriculaRel" : relevoCx[0].matriculaRel, "relevoCx.$.anestesiologoRel" : relevoCx[0].anestesiologoRel,
+                            "relevoCx.$.observacionesRel" : relevoCx[0].observacionesRel,
+                        }
+            }
+        );
+        
+        if (!relevo) 
+            return res.status(404).json({ Error: "No existe el relevo." });        
+        
+        return res.json({ relevo });
+    } catch (error) {
+        if (error.kind === "ObjectId") {
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }        
+        return res.status(500).json({ error: "Error de servidor" });
+    }
+};
+
+/* Funcion para eliminar un relevo */
+export const deleteRelevo = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        const relevo = await MenuTrans.findOneAndUpdate({ "relevoCx._id": id },
+                                                           { $pull: { relevoCx: { _id: id } } }
+        );              
+       
+        return res.json({ relevo });
+    } catch (error) {
+        if (error.kind === "ObjectId") {
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
+        
+        return res.status(500).json({ error: "Error de servidor" });
+    }
+};
+
+/* Guardado Eventos */
+export const saveEventos = async (req: any, res: Response) => {
+    try {
+        const { pid,
+                // Datos relevos
+                horaEvento, tipoEve, detalleEvento
+              } = req.body;        
+        const menuTrans  = await new MenuTrans({ pid,
+                                            // Datos del relevo
+                                            evCriticoCx: {
+                                                horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento
+                                            },
+                                        });
+        await menuTrans.save();        
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const updateEventos = async (req: any, res: Response) => {
+    try {
+        const { pid } = req.params;
+        const { evCriticoCx } = req.body;                
+        const menuTrans = await MenuTrans.findOneAndUpdate(
+            { pid: pid },
+            { $push:{
+                evCriticoCx: {
+                        horaEvento: evCriticoCx[0], tipoEve: evCriticoCx[1], detalleEvento: evCriticoCx[2]
+                    }
+                }
+            });        
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Función para obtener los Eventos */
+export const getEventos = async (req: any, res: Response) => {
+    try {
+        const {pid} = req.params;
+        
+        const evento = await MenuTrans.find({pid:pid})
+           
+        return res.json({evento});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Función para obtener un Evento */
+export const getEvento = async (req: any, res: Response) => {
+    try {
+        const {id} = req.params;
+
+        const evento = await MenuTrans.findOne({ "evCriticoCx._id": id },
+                                                  { 'evCriticoCx.$': 1 })
+        
+        return res.json({evento});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Funcion para actualizar un Evento */
+export const updateEvento = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { evCriticoCx } = req.body;       
+        
+        const evento = await MenuTrans.updateOne({ "evCriticoCx._id": id },
+            {
+                $set : {
+                            "evCriticoCx.$.horaEvento" : evCriticoCx[0].horaEvento, "evCriticoCx.$.tipoEve" : evCriticoCx[0].tipoEve,
+                            "evCriticoCx.$.detalleEvento" : evCriticoCx[0].detalleEvento
+                        }
+            }
+        );
+        
+        if (!evento) 
+            return res.status(404).json({ Error: "No existe el relevo." });        
+        
+        return res.json({ evento });
+    } catch (error) {
+        if (error.kind === "ObjectId") {
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }        
+        return res.status(500).json({ error: "Error de servidor" });
+    }
+};
+
+/* Funcion para eliminar un Evento */
+export const deleteEvento = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        const evento = await MenuTrans.findOneAndUpdate({ "evCriticoCx._id": id },
+                                                           { $pull: { evCriticoCx: { _id: id } } }
+        );              
+       
+        return res.json({ evento });
+    } catch (error) {
+        if (error.kind === "ObjectId") {
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
+        
+        return res.status(500).json({ error: "Error de servidor" });
+    }
+};
