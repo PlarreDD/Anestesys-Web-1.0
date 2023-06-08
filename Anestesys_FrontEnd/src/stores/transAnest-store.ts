@@ -12,6 +12,10 @@ export const useTransAnestStore = defineStore('transAn', {
         pacienteID: ref(null),
         medicamentos: ref(null),
         medicamentoID: ref(null),
+        relevos: ref(null),
+        relevoID: ref(null),
+        eventos: ref(null),
+        eventoID: ref(null),
     }),
 
     actions: {
@@ -500,6 +504,7 @@ export const useTransAnestStore = defineStore('transAn', {
               }
         },
 
+        // Gestión de medicamentos
         async getMedicamentosList(pid: string) {
             await apiAxios({
                 url: `http://localhost:5000/trans/medic/${String(pid)}`,
@@ -525,7 +530,7 @@ export const useTransAnestStore = defineStore('transAn', {
                 },
                 data: {
                     pid: pid,
-                    // Datos del Ventilador
+                    // Datos del Medicamento
                     tipoMed: regTransAnest.tipoMed,
                     medicamento: regTransAnest.medicamento,
                     dosisMed: regTransAnest.dosisMed,
@@ -648,6 +653,297 @@ export const useTransAnestStore = defineStore('transAn', {
             .catch((e: any) => {
               //   console.log(e);
             });
-          },
+        },
+
+        // Gestión de relevos
+        async getRelevosList(pid: string) {
+            await apiAxios({
+                url: `http://localhost:5000/trans/relevo/${String(pid)}`,
+                method: "GET",
+                headers: {
+                Authorization: "Bearer " + userStore.token,
+                },                
+            })
+            .then((res: any) => {
+                this.relevos = res.data.relevo;                             
+            })
+            .catch((e: any) => {
+                //   console.log(e);
+            });
+        },
+
+        async saveDatosRelevos(regTransAnest: any, pid: string){
+            await apiAxios({
+                url: "http://localhost:5000/trans/relevo",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    pid: pid,
+                    // Datos del Relevo
+                    tipoRel: regTransAnest.tipoRel,
+                    horaRelevo: regTransAnest.horaRelevo,
+                    matriculaRel: regTransAnest.matriculaRel,
+                    anestesiologoRel: regTransAnest.anestesiologoRel,
+                    observacionesRel: regTransAnest.observacionesRel,
+                }
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos guardados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
+
+        async updateRelevos(r_horaRelevo: string, r_tipoRel: string, r_matriculaRel: string, 
+                            r_anestesiologoRel: string, r_observacionesRel: string, pid:string){
+            await apiAxios({
+                url: `http://localhost:5000/trans/relevo/${String(pid)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    relevoCx: [ r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel ]
+                },
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos agregados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
+
+        async getRelevo(relevoID) {
+            await apiAxios({
+              url: `http://localhost:5000/trans/relevo/uno/${String(relevoID)}`,
+              method: "GET",
+              headers: {
+                Authorization: "Bearer " + userStore.token,
+              },
+            })
+            .then((res: any) => {
+                this.relevos = res.data.relevo;
+            })
+            .catch((e: any) => {
+            //   console.log(e);
+            });
+        },
+
+        async updateRelevo(relevoID : string, r_horaRelevo: string, r_tipoRel: string, r_matriculaRel: string, 
+                                    r_anestesiologoRel: string, r_observacionesRel: string){
+            
+            await apiAxios({
+                url: `http://localhost:5000/trans/relevo/uno/${String(relevoID)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    relevoCx: [ {"tipoRel":r_tipoRel, "horaRelevo":r_horaRelevo, "matriculaRel":r_matriculaRel, 
+                                        "anestesiologoRel":r_anestesiologoRel, "observacionesRel":r_observacionesRel}]
+                },
+            })
+            .then((res: any) => {                            
+                swal.fire({
+                    title: 'Datos del relevo actualizado correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })                
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
+
+        async deleteRelevo(relevoID : string) {
+            await apiAxios({
+              url: `http://localhost:5000/trans/relevo/${String(relevoID)}`,
+              method: "DELETE",
+              headers: {
+                Authorization: "Bearer " + userStore.token,
+              },
+            })
+            .then((res: any) => {      
+                swal.fire({
+                  title: "Datos del relevo eliminados correctamente",
+                  icon: "success",
+                  showConfirmButton: false,
+                  toast: true,
+                  position: "top-end",
+                  timer: 2500,
+                  timerProgressBar: true,
+                });
+            })
+            .catch((e: any) => {
+              //   console.log(e);
+            });
+        },
+
+        // Gestión de eventos
+        async getEventosList(pid: string) {
+            await apiAxios({
+                url: `http://localhost:5000/trans/evento/${String(pid)}`,
+                method: "GET",
+                headers: {
+                Authorization: "Bearer " + userStore.token,
+                },                
+            })
+            .then((res: any) => {
+                this.eventos = res.data.evento;                             
+            })
+            .catch((e: any) => {
+                //   console.log(e);
+            });
+        },
+
+        async saveDatosEventos(regTransAnest: any, pid: string){
+            await apiAxios({
+                url: "http://localhost:5000/trans/evento",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    pid: pid,
+                    // Datos del evento
+                    horaEvento: regTransAnest.horaEvento,
+                    tipoEve: regTransAnest.tipoEve,
+                    detalleEvento: regTransAnest.detalleEvento,
+                }
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos guardados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
+
+        async updateEventos(e_horaEvento: string, e_tipoEve: string, e_detalleEvento: string, pid:string){
+            await apiAxios({
+                url: `http://localhost:5000/trans/evento/${String(pid)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    evCriticoCx: [ e_horaEvento, e_tipoEve, e_detalleEvento ]
+                },
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos agregados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
+
+        async getEvento(eventoID) {
+            await apiAxios({
+              url: `http://localhost:5000/trans/evento/uno/${String(eventoID)}`,
+              method: "GET",
+              headers: {
+                Authorization: "Bearer " + userStore.token,
+              },
+            })
+            .then((res: any) => {
+                this.eventos = res.data.evento;
+            })
+            .catch((e: any) => {
+            //   console.log(e);
+            });
+        },
+
+        async updateEvento(eventoID : string, e_horaEvento: string, e_tipoEve: string, e_detalleEvento: string){
+            
+            await apiAxios({
+                url: `http://localhost:5000/trans/evento/uno/${String(eventoID)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    evCriticoCx: [ {"horaEvento":e_horaEvento, "tipoEve":e_tipoEve, "detalleEvento":e_detalleEvento }]
+                },
+            })
+            .then((res: any) => {                            
+                swal.fire({
+                    title: 'Datos del evento actualizado correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })                
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
+
+        async deleteEvento(eventoID : string) {
+            await apiAxios({
+              url: `http://localhost:5000/trans/evento/${String(eventoID)}`,
+              method: "DELETE",
+              headers: {
+                Authorization: "Bearer " + userStore.token,
+              },
+            })
+            .then((res: any) => {      
+                swal.fire({
+                  title: "Datos del evento eliminados correctamente",
+                  icon: "success",
+                  showConfirmButton: false,
+                  toast: true,
+                  position: "top-end",
+                  timer: 2500,
+                  timerProgressBar: true,
+                });
+            })
+            .catch((e: any) => {
+              //   console.log(e);
+            });
+        },
     }
 })

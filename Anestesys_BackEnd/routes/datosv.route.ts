@@ -8,7 +8,9 @@ import { saveMenuTrans,
          deleteModoVentilacion,
          UpdateBalanceH,
          saveTiemposQX, 
-         saveMedicamentos, updateMedicamentos, getMedicamentos, getMedicamento, updateMedicamento, deleteMedicamento } from "../controllers/transanest.controller";
+         saveMedicamentos, updateMedicamentos, getMedicamentos, getMedicamento, updateMedicamento, deleteMedicamento, 
+         getRelevos, getRelevo, saveRelevos, updateRelevos, updateRelevo, deleteRelevo, 
+         getEventos, getEvento, saveEventos, updateEventos, updateEvento, deleteEvento} from "../controllers/transanest.controller";
 
 const router = Router();
 
@@ -29,4 +31,18 @@ router.post('/medic', requireToken, saveMedicamentos);
 router.put('/medic/:pid', requireToken, updateMedicamentos);
 router.put('/medic/uno/:id', requireToken, updateMedicamento);
 router.delete('/medic/:id', requireToken, deleteMedicamento);
+/*---------- Datos de relevo -------------------- */
+router.get('/relevo/:pid' , requireToken, getRelevos);
+router.get('/relevo/uno/:id' , requireToken, getRelevo);
+router.post('/relevo', requireToken, saveRelevos);
+router.put('/relevo/:pid', requireToken, updateRelevos);
+router.put('/relevo/uno/:id', requireToken, updateRelevo);
+router.delete('/relevo/:id', requireToken, deleteRelevo);
+/*---------- Datos de evento -------------------- */
+router.get('/evento/:pid' , requireToken, getEventos);
+router.get('/evento/uno/:id' , requireToken, getEvento);
+router.post('/evento', requireToken, saveEventos);
+router.put('/evento/:pid', requireToken, updateEventos);
+router.put('/evento/uno/:id', requireToken, updateEvento);
+router.delete('/evento/:id', requireToken, deleteEvento);
 export default router;
