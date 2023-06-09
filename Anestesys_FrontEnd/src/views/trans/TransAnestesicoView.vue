@@ -931,10 +931,10 @@
     <div class="input-group mb-3 bordePrincipal">
      
       <!-- Vista previa medicamentos/eventos-relevos -->
-      <div class="col-md-3 menu-vista-previa">       
+      <div class="" :class="vistaPreviaOff == false ? 'col-md-3 menu-vista-previa' : 'menu-vista-previa oculta-vista-previa'">       
 
         <!-- Vista medicamentos -->
-        <div class= "col-md-11 vista-medicamentos">
+        <div class="" :class="vistaPreviaOff == false ? 'out col-md-11 vista-medicamentos' : 'fade col-md-10 invisible'">
           <div class="col-md-12">
             <Multiselect mode="tags"
                 @click="listarMedicamentosTrans"
@@ -968,8 +968,20 @@
           </div>
         </div>
         
+        <template v-if="vistaPreviaOff === false">
+          <span class="ocultar-izquierdo" @click="mostrarVistaPrevia">
+            <font-awesome-icon :icon="['fas', 'angle-left']" size="xl" />
+          </span>
+        </template>
+
+        <template v-else>
+          <span class="ocultar-derecho" @click="ocultarVistaPrevia">
+            <font-awesome-icon :icon="['fas', 'angle-right']" size="xl" />
+          </span>
+        </template>         
+        
         <!-- Vista eventos/relevos -->
-        <div class="col-md-11 vista-eventos-relevos">  
+        <div class="" :class="vistaPreviaOff == false ? 'out col-md-11 vista-eventos-relevos' : 'fade col-md-10 invisible'">  
           <div class="col-md-12">
             <button class="btn btn-evento-relevo btn-sm fw-bold">RELEVOS Y EVENTOS CRÍTICOS</button>
           </div>   
@@ -1001,10 +1013,10 @@
 
           </div>
         </div>
-      </div>
 
+      </div>
       <!-- Grid signos vitales -->
-      <div class="col-md-6 tab-content" id="">
+      <div class="" :class="vistaPreviaOff == false ? 'col-md-6 tab-content' : 'col-md-9 tab-content'">
         <div class="row g-3">
           <table class="table table-hover table-bordered">
             <thead>
@@ -1027,17 +1039,17 @@
 
       <div class="col-2 menuLateralPrincipal"> <!--Menú lateral-->
 
-        <div class="col-md-2 menu-pre-post">
+        <div class="" :class="vistaPreviaOff == false ? 'col-md-2 menu-pre-post' : 'col-md-2 menu-pre-post-off'">
           <RouterLink to="pre">
             <img src="images/pre.svg" class="ajusteImg"/>
           </RouterLink>
         </div>
 
-        <div class="col-md-2 menu-trans">
+        <div class="" :class="vistaPreviaOff == false ? 'col-md-2 menu-trans' : 'col-md-2 menu-trans-off'">
           <img src="images/trans.svg" class="ajusteImg"/>
         </div>
 
-        <div class="col-md-2 menu-pre-post">
+        <div class="" :class="vistaPreviaOff == false ? 'col-md-2 menu-pre-post' : 'col-md-2 menu-pre-post-off'">
           <RouterLink to="post">
             <img src="images/post.svg" class="ajusteImg"/>
           </RouterLink>
@@ -1150,6 +1162,8 @@ export default defineComponent({
       listaMedTrans: [],    
       // Arreglo multiselect
       medicSeleccionados: [],
+
+      vistaPreviaOff:false,
     }
   },
 
@@ -1638,6 +1652,15 @@ export default defineComponent({
 
       bloquearClicDerecho(event) {
         event.preventDefault(); // Evita el comportamiento predeterminado del evento
+      },
+
+      //Ocultar vista previa
+      mostrarVistaPrevia() {
+          this.vistaPreviaOff = true;
+      },
+
+      ocultarVistaPrevia() {
+          this.vistaPreviaOff = false;
       },
 
       // Métodos gestión medicamentos
@@ -2309,10 +2332,10 @@ export default defineComponent({
 .menu-vista-previa {
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
+    row-gap: 10px;    
 }
 .vista-medicamentos{
-  height: 400px;
+  height: 370px;
   background-color: white;
   padding: 0.5rem;
   border-radius: 10px;
@@ -2345,6 +2368,24 @@ export default defineComponent({
   padding: 0rem;
   border-radius: 10px;
   margin-left: 29px;
+  text-align: center;
+}
+.menu-trans-off {  
+  width: 200px;
+  height: auto;
+  background-color: #E88300;
+  padding: 0rem;
+  border-radius: 10px;
+  margin-left: 15px;
+  text-align: center;
+}
+.menu-pre-post-off {  
+  width: 200px;
+  height: auto;
+  background-color: #d6d6d6;
+  padding: 0rem;
+  border-radius: 10px;
+  margin-left: 15px;
   text-align: center;
 }
 .menu-pre-post:hover{
@@ -2396,7 +2437,7 @@ export default defineComponent({
   overflow: scroll;
   overflow-x: hidden;
   margin-top: 0px;
-  height: 325px;
+  height: 295px;
 }
 .deslizar-relevos {
   overflow: scroll;
@@ -2524,5 +2565,26 @@ hr {
   border-top-width:1px;
   border-bottom-width:1px;
   border-bottom-width:thick
+}
+.oculta-vista-previa{
+  width: 1%;
+}
+.ocultar-izquierdo{
+  align-self: flex-end; 
+  position: sticky; 
+  cursor: pointer;
+}
+.ocultar-derecho{
+  align-self:center; 
+  position: sticky; 
+  cursor: pointer;
+}
+.fade {
+  transform: translateX(0);
+  transition: all 1s ease-in-out;
+}
+
+.out {
+  transform: translateX(0);
 }
 </style>
