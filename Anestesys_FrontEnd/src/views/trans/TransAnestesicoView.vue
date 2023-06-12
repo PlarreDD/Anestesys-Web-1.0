@@ -927,49 +927,9 @@
       </div>     
     </div>
 
-    <!-- Contenedor Grid -->
-    <div class="input-group mb-3 bordePrincipal">
-     
-      <!-- Vista previa medicamentos/eventos-relevos -->
-      <div class="" :class="vistaPreviaOff == false ? 'col-md-3 menu-vista-previa' : 'menu-vista-previa oculta-vista-previa fade-in'">       
-
-        <!-- Vista medicamentos -->
-        
-          <div class="" :class="vistaPreviaOff == false ? 'col-md-11 vista-medicamentos fade-in' : 'col-md-10 invisible'">
-            <div class="col-md-12">
-              <Multiselect mode="tags"
-                  @click="listarMedicamentosTrans"
-                  placeholder="Buscar..."
-                  v-model="medicSeleccionados"                
-                  :options="listaMedTrans"
-                  :searchable="true"
-                  :createTag="true"
-                  :max="3"
-                  :multiple="false"
-              />    
-            </div>
-            <!-- Lista de medicamentos -->
-            <div class="deslizar-medicamentos m-1"> 
-              <table class="table" id="tabla-med">
-                <tbody v-for="( medicamento ) in transAnestStore.medicamentos">
-                  <tr class="" v-for="datosMed in medicamento.medicamentosCx"
-                            @click="cambiarBtnActualizarMedic(datosMed._id)" data-bs-toggle="modal" data-bs-target="#modal-medicamento">
-                        <td class="borde-tabla-izq p-1" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'" v-if="tablaMedicamentos.includes(datosMed.medicamento)">
-                          <FONT size="2">{{ datosMed.medicamento}}</FONT>
-                        </td>
-                        <td class="" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'" v-if="tablaMedicamentos.includes(datosMed.medicamento)">
-                          <FONT size="2">{{ datosMed.dosisMed}} {{ datosMed.unidadMed }}</FONT>
-                        </td>
-                        <td class="borde-tabla-der fw-bold" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'" v-if="tablaMedicamentos.includes(datosMed.medicamento)">
-                          <FONT size="2">{{ datosMed.horaInicioMed }}</FONT>
-                        </td>                                                                               
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        
-        <template v-if="vistaPreviaOff === false">
+    <!-- Botón deslizar -->
+    <div class="btn-ocultar">
+      <template v-if="vistaPreviaOff === false">
           <span class="ocultar-izquierdo" @click="mostrarVistaPrevia">
             <font-awesome-icon :icon="['fas', 'angle-left']" size="xl" />
           </span>
@@ -979,10 +939,52 @@
           <span class="ocultar-derecho" @click="ocultarVistaPrevia">
             <font-awesome-icon :icon="['fas', 'angle-right']" size="xl" />
           </span>
-        </template>         
-        
+        </template>  
+    </div>
+
+    <!-- Contenedor Grid -->
+    <div class="input-group mb-3 bordePrincipal">
+     
+      <!-- Vista previa medicamentos/eventos-relevos -->
+      <div class="" :class="vistaPreviaOff == false ? 'col-md-3 menu-vista-previa mostrar' : 'menu-vista-previa ocultar'">       
+
+        <!-- Vista medicamentos -->        
+        <div class="" :class="vistaPreviaOff == false ? 'col-md-11 vista-medicamentos' : 'col-md-11 vista-medicamentos'">
+          <div class="col-md-12">
+            <Multiselect mode="tags"
+                @click="listarMedicamentosTrans"
+                placeholder="Buscar..."
+                v-model="medicSeleccionados"                
+                :options="listaMedTrans"
+                :searchable="true"
+                :createTag="true"
+                :max="3"
+                :multiple="false"
+            />    
+          </div>
+          <!-- Lista de medicamentos -->
+          <div class="deslizar-medicamentos m-1"> 
+            <table class="table" id="tabla-med">
+              <tbody v-for="( medicamento ) in transAnestStore.medicamentos">
+                <tr class="" v-for="datosMed in medicamento.medicamentosCx"
+                          @click="cambiarBtnActualizarMedic(datosMed._id)" data-bs-toggle="modal" data-bs-target="#modal-medicamento">
+                      <td class="borde-tabla-izq p-1" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'" v-if="tablaMedicamentos.includes(datosMed.medicamento)">
+                        <FONT size="2">{{ datosMed.medicamento}}</FONT>
+                      </td>
+                      <td class="" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'" v-if="tablaMedicamentos.includes(datosMed.medicamento)">
+                        <FONT size="2">{{ datosMed.dosisMed}} {{ datosMed.unidadMed }}</FONT>
+                      </td>
+                      <td class="borde-tabla-der fw-bold" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'" v-if="tablaMedicamentos.includes(datosMed.medicamento)">
+                        <FONT size="2">{{ datosMed.horaInicioMed }}</FONT>
+                      </td>                                                                               
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>                                     
+
         <!-- Vista eventos/relevos -->
-        <div class="" :class="vistaPreviaOff == false ? 'col-md-11 vista-eventos-relevos fade-in' : 'col-md-10 invisible'">  
+        <div class="" :class="vistaPreviaOff == false ? 'col-md-11 vista-eventos-relevos' : 'col-md-11 vista-eventos-relevos'">  
           <div class="col-md-12">
             <button class="btn btn-evento-relevo btn-sm fw-bold">RELEVOS Y EVENTOS CRÍTICOS</button>
           </div>   
@@ -1018,7 +1020,7 @@
       </div>
 
       <!-- Grid signos vitales -->
-      <div class="" :class="vistaPreviaOff == false ? 'col-md-6 tab-content' : 'col-md-9 tab-content fade-in'" id="vitales">
+      <div class="" :class="vistaPreviaOff == false ? 'col-md-6 tab-content' : 'col-md-9 tab-content'">
         <div class="" :class="vistaPreviaOff == false ? 'row g-3 fade-in' : 'row g-3'">
           <table class="table table-hover table-bordered">
             <thead>
@@ -2568,9 +2570,6 @@ hr {
   border-bottom-width:1px;
   border-bottom-width:thick
 }
-.oculta-vista-previa{
-  width: 1%;
-}
 .ocultar-izquierdo{
   align-self: flex-end; 
   position: sticky; 
@@ -2581,25 +2580,24 @@ hr {
   position: sticky; 
   cursor: pointer;
 }
-.fade-in {
-  animation: fadeIn 1s ease-in forwards;
-  opacity: 0;
+.btn-ocultar{
+  position: fixed; 
+  z-index: 1; 
+  top:63%; 
+  color: white; 
+  background-color: #002D60; 
+  border-radius: 50%; 
+  width: 25px; 
+  height: auto; 
+  text-align: center; 
+  opacity: 0.5;
 }
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.ocultar{
+  width: 0;
+  overflow: hidden;
+  transition: all 0.8s ease-in-out;
 }
-
-.fade{
-  transition: all 1s ease-in-out;
-  transform: translateX(-170px);
-}
-.out{ 
-  transform: translateX(0);
+.mostrar{ 
+  transition: all 0.8s ease-in-out;
 }
 </style>
