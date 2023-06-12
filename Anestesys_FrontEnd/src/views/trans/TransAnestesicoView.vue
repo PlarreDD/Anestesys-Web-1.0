@@ -931,42 +931,43 @@
     <div class="input-group mb-3 bordePrincipal">
      
       <!-- Vista previa medicamentos/eventos-relevos -->
-      <div class="" :class="vistaPreviaOff == false ? 'col-md-3 menu-vista-previa' : 'menu-vista-previa oculta-vista-previa'">       
+      <div class="" :class="vistaPreviaOff == false ? 'col-md-3 menu-vista-previa' : 'menu-vista-previa oculta-vista-previa fade-in'">       
 
         <!-- Vista medicamentos -->
-        <div class="" :class="vistaPreviaOff == false ? 'out col-md-11 vista-medicamentos' : 'fade col-md-10 invisible'">
-          <div class="col-md-12">
-            <Multiselect mode="tags"
-                @click="listarMedicamentosTrans"
-                placeholder="Buscar..."
-                v-model="medicSeleccionados"                
-                :options="listaMedTrans"
-                :searchable="true"
-                :createTag="true"
-                :max="3"
-                :multiple="false"
-            />    
+        
+          <div class="" :class="vistaPreviaOff == false ? 'col-md-11 vista-medicamentos fade-in' : 'col-md-10 invisible'">
+            <div class="col-md-12">
+              <Multiselect mode="tags"
+                  @click="listarMedicamentosTrans"
+                  placeholder="Buscar..."
+                  v-model="medicSeleccionados"                
+                  :options="listaMedTrans"
+                  :searchable="true"
+                  :createTag="true"
+                  :max="3"
+                  :multiple="false"
+              />    
+            </div>
+            <!-- Lista de medicamentos -->
+            <div class="deslizar-medicamentos m-1"> 
+              <table class="table" id="tabla-med">
+                <tbody v-for="( medicamento ) in transAnestStore.medicamentos">
+                  <tr class="" v-for="datosMed in medicamento.medicamentosCx"
+                            @click="cambiarBtnActualizarMedic(datosMed._id)" data-bs-toggle="modal" data-bs-target="#modal-medicamento">
+                        <td class="borde-tabla-izq p-1" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'" v-if="tablaMedicamentos.includes(datosMed.medicamento)">
+                          <FONT size="2">{{ datosMed.medicamento}}</FONT>
+                        </td>
+                        <td class="" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'" v-if="tablaMedicamentos.includes(datosMed.medicamento)">
+                          <FONT size="2">{{ datosMed.dosisMed}} {{ datosMed.unidadMed }}</FONT>
+                        </td>
+                        <td class="borde-tabla-der fw-bold" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'" v-if="tablaMedicamentos.includes(datosMed.medicamento)">
+                          <FONT size="2">{{ datosMed.horaInicioMed }}</FONT>
+                        </td>                                                                               
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <!-- Lista de medicamentos -->
-          <div class="deslizar-medicamentos m-1"> 
-            <table class="table" id="tabla-med">
-              <tbody v-for="( medicamento ) in transAnestStore.medicamentos">
-                <tr class="" v-for="datosMed in medicamento.medicamentosCx"
-                          @click="cambiarBtnActualizarMedic(datosMed._id)" data-bs-toggle="modal" data-bs-target="#modal-medicamento">
-                      <td class="borde-tabla-izq p-1" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'" v-if="tablaMedicamentos.includes(datosMed.medicamento)">
-                        <FONT size="2">{{ datosMed.medicamento}}</FONT>
-                      </td>
-                      <td class="" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'" v-if="tablaMedicamentos.includes(datosMed.medicamento)">
-                        <FONT size="2">{{ datosMed.dosisMed}} {{ datosMed.unidadMed }}</FONT>
-                      </td>
-                      <td class="borde-tabla-der fw-bold" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'" v-if="tablaMedicamentos.includes(datosMed.medicamento)">
-                        <FONT size="2">{{ datosMed.horaInicioMed }}</FONT>
-                      </td>                                                                               
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
         
         <template v-if="vistaPreviaOff === false">
           <span class="ocultar-izquierdo" @click="mostrarVistaPrevia">
@@ -981,7 +982,7 @@
         </template>         
         
         <!-- Vista eventos/relevos -->
-        <div class="" :class="vistaPreviaOff == false ? 'out col-md-11 vista-eventos-relevos' : 'fade col-md-10 invisible'">  
+        <div class="" :class="vistaPreviaOff == false ? 'col-md-11 vista-eventos-relevos fade-in' : 'col-md-10 invisible'">  
           <div class="col-md-12">
             <button class="btn btn-evento-relevo btn-sm fw-bold">RELEVOS Y EVENTOS CRÍTICOS</button>
           </div>   
@@ -1015,9 +1016,10 @@
         </div>
 
       </div>
+
       <!-- Grid signos vitales -->
-      <div class="" :class="vistaPreviaOff == false ? 'col-md-6 tab-content' : 'col-md-9 tab-content'">
-        <div class="row g-3">
+      <div class="" :class="vistaPreviaOff == false ? 'col-md-6 tab-content' : 'col-md-9 tab-content fade-in'" id="vitales">
+        <div class="" :class="vistaPreviaOff == false ? 'row g-3 fade-in' : 'row g-3'">
           <table class="table table-hover table-bordered">
             <thead>
               <tr>
@@ -1655,7 +1657,7 @@ export default defineComponent({
       },
 
       //Ocultar vista previa
-      mostrarVistaPrevia() {
+      mostrarVistaPrevia() {         
           this.vistaPreviaOff = true;
       },
 
@@ -2579,12 +2581,25 @@ hr {
   position: sticky; 
   cursor: pointer;
 }
-.fade {
-  transform: translateX(0);
-  transition: all 1s ease-in-out;
+.fade-in {
+  animation: fadeIn 1s ease-in forwards;
+  opacity: 0;
 }
 
-.out {
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade{
+  transition: all 1s ease-in-out;
+  transform: translateX(-170px);
+}
+.out{ 
   transform: translateX(0);
 }
 </style>
