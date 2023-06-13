@@ -2,7 +2,7 @@ import { Router } from "express";
 import { requireToken } from "../middlewares/requireToken";
 import { registerMSV,
          listMSV,
-         deleteMSV } from '../controllers/scanMVS.controller';
+         deleteMSV} from '../controllers/scanMVS.controller';    
 
 const router = Router();
 

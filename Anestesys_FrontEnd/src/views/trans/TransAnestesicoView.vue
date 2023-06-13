@@ -9,7 +9,7 @@
         <div class="col-md-10">
           <div class="row g-3 mb-3">
             <div class="col-md-3">
-              <button
+              <button @click=""
                 type="button"
                 class="btn btn-menu fw-bold">
                 <img src="images/monitoreo.svg" />
@@ -2380,7 +2380,7 @@ export default defineComponent({
   background-color: #E88300;
   padding: 0rem;
   border-radius: 10px;
-  margin-left: 15px;
+  margin-left: 29px;
   text-align: center;
 }
 .menu-pre-post-off {  
@@ -2389,7 +2389,7 @@ export default defineComponent({
   background-color: #d6d6d6;
   padding: 0rem;
   border-radius: 10px;
-  margin-left: 15px;
+  margin-left: 29px;
   text-align: center;
 }
 .menu-pre-post:hover{
@@ -2583,7 +2583,7 @@ hr {
 .btn-ocultar{
   position: fixed; 
   z-index: 1; 
-  top:63%; 
+  top:62%; 
   color: white; 
   background-color: #002D60; 
   border-radius: 50%; 

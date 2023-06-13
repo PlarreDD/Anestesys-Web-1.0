@@ -4,14 +4,18 @@ import { MVS } from "../models/Medicamento";
 import { Response } from "express";
 import net from 'net'
 
-// const HOST = '192.168.0.100';
-// const HL7_PORT = 6664;
+// export const getDataMSV = async (req:any, res:Response) =>{ 
+// }
+
+const HOST = '172.16.22.210';
+const HL7_PORT = 6664;
 
 export const server = net.createServer(function(socket) {
   console.log('Connected to vital sign monitor');
 
-  socket.on('data', function(data) {    
+  socket.on('data', function(data) {   
     console.log('DATA:', data.toString());    
+    return data.toString();
   });
 
   socket.on('error', function(error) {
@@ -23,9 +27,9 @@ export const server = net.createServer(function(socket) {
   });
 });
 
-// server.listen(HL7_PORT, HOST, function() {
-//   console.log('Server listening on', HOST + ':' + HL7_PORT);
-// });
+server.listen(HL7_PORT, HOST, function() {
+  console.log('Server listening on', HOST + ':' + HL7_PORT);
+});
 
 export const registerMSV = async (req: any, res: Response) => {
   const { nombreMVS, dirIPMVS} = req.body;
