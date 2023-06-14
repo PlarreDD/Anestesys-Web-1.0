@@ -9,7 +9,7 @@
         <div class="col-md-10">
           <div class="row g-3 mb-3">
             <div class="col-md-3">
-              <button @click=""
+              <button @click="transAnestStore.getDatosMonitor"
                 type="button"
                 class="btn btn-menu fw-bold">
                 <img src="images/monitoreo.svg" />
@@ -1022,21 +1022,12 @@
       <!-- Grid signos vitales -->
       <div class="" :class="vistaPreviaOff == false ? 'col-md-6 tab-content' : 'col-md-9 tab-content'">
         <div class="" :class="vistaPreviaOff == false ? 'row g-3 fade-in' : 'row g-3'">
-          <table class="table table-hover table-bordered">
-            <thead>
+          <table class="table table-bordered">
+            <tbody>
               <tr>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
+                <th>{{transAnestStore.datosMSV}}</th>
               </tr>
-            </thead>
+            </tbody>
           </table>
         </div>
       </div>
