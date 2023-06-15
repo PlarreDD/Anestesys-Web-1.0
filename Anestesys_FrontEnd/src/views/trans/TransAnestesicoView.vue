@@ -9,7 +9,7 @@
         <div class="col-md-10">
           <div class="row g-3 mb-3">
             <div class="col-md-3">
-              <button @click="transAnestStore.getDatosMonitor"
+              <button @click="iniMSV"
                 type="button"
                 class="btn btn-menu fw-bold">
                 <img src="images/monitoreo.svg" />
@@ -1714,7 +1714,6 @@ export default defineComponent({
       },
 
       async guardarMedicamentos() {
-        
         if (this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.medicamento == "" || this.menuTrans.medicamento == undefined) {
               swal.fire({
               title: "Indique el tipo de administración y medicamento",
@@ -2260,7 +2259,16 @@ export default defineComponent({
 
           await transAnestStore.getEventosList(preIdStore.pacienteID._id);
           await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
-      },      
+      },
+
+      async iniMSV(){
+        transAnestStore.getDatosMonitor();
+        // setInterval(this.comMSV, 20000);
+      },
+
+      // comMSV(){
+      //   transAnestStore.getDatosMonitor();
+      // },
   },
 
   computed: {

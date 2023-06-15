@@ -1,46 +1,47 @@
 import { exec } from 'child_process';
 import ping from 'ping';
 import { MVS } from "../models/Medicamento";
-import { Request, Response, NextFunction } from "express";
+import { Request,
+         Response,
+         /*NextFunction*/ } from "express";
 import net from "net";
 
-const HOST = '172.16.22.210';
+const HOST = '192.168.0.100';
 const HL7_PORT = 6664;
 
-export const getMSVData = (_req: Request, res: Response, _next: NextFunction) => {
-  let responseSent = false; // Bandera para controlar si ya se ha enviado una respuesta
+let capturedMsg: any;
 
-  const server = net.createServer(function(socket) {
-    console.log('Conectado al monitor de signos vítales');
-
-    socket.on('data', function(data) {   
-      console.log('DATA:', data.toString());      
-
-      if (!responseSent) {
-        const jsonData = data.toString();
-        res.json({ datosMSV: jsonData }); // Enviar los datos como parte del objeto de respuesta
-        responseSent = true;
-        socket.destroy();
-      }
-    });
-
-    socket.on('error', function(error) {
-      console.error('Socket error:', error);
-      if (!responseSent) {
-        res.status(500).send("Internal Server Error"); // Enviar una respuesta de error si no se ha enviado ninguna respuesta
-        responseSent = true; // Actualizar la bandera para indicar que ya se envió una respuesta
-      }
-    });
-
-    socket.on('close', function() {
-      console.log('Disconnected from vital sign monitor');
-    });
+const server = net.createServer(function(socket) {
+  console.log('Conectado al monitor de signos vítales');
+  
+  socket.on('data', function(data) {
+    capturedMsg = data;
   });
+  
+  socket.on('error', function(error) {
+    console.error('Socket error:', error);
+  });
+  
+  socket.on('close', function() {
+    console.log('Disconnected from vital sign monitor');
+  });
+});
 
+export const startMSVData = () => {
   server.listen(HL7_PORT, HOST, function() {
     console.log(`Listening for vital sign data on ${HOST}:${HL7_PORT}`);
   });
 };
+
+export const handleData = async (_req: Request, res: Response) => {
+  if (capturedMsg) {
+    console.log('DATA:', capturedMsg.toString());
+    
+    return res.json({capturedMsg});
+  } else {
+    console.log('No se ha capturado ningún dato aún');
+  }
+}
 
 export const registerMSV = async (req: any, res: Response) => {
   const { nombreMVS, dirIPMVS} = req.body;
