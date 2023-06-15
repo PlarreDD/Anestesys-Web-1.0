@@ -8,13 +8,25 @@
       <div class="row g-3 col-md-12">
         <div class="col-md-10">
           <div class="row g-3 mb-3">
+            <!-- Botón monitoreo -->
             <div class="col-md-3">
-              <button @click="transAnestStore.getDatosMonitor"
-                type="button"
-                class="btn btn-menu fw-bold">
-                <img src="images/monitoreo.svg" />
-                &nbsp;&nbsp;&nbsp;INICIAR MONITOREO
-              </button>
+              <template v-if="btnCambioMonitor === false">
+                <button @click="transAnestStore.getDatosMonitor"
+                  type="button"
+                  class="btn btn-monitor fw-bold">
+                  <img src="images/monitoreo.svg" />
+                  &nbsp;&nbsp;&nbsp;INICIAR MONITOREO
+                </button>
+              </template>
+              <template v-else>
+                <button @click=""
+                  type="button"
+                  class="btn btn-monitor-off fw-bold">
+                  <img src="images/monitoreo.svg" />
+                  &nbsp;&nbsp;&nbsp;DETENER MONITOREO
+                </button>
+              </template>      
+              
             </div>
 
             <div class="col-md-2"></div>
@@ -986,7 +998,7 @@
         <!-- Vista eventos/relevos -->
         <div class="" :class="vistaPreviaOff == false ? 'col-md-11 vista-eventos-relevos' : 'col-md-11 vista-eventos-relevos'">  
           <div class="col-md-12">
-            <button class="btn btn-evento-relevo btn-sm fw-bold">RELEVOS Y EVENTOS CRÍTICOS</button>
+            <button class="btn btn-evento-relevo btn-sm fw-bold" @click="vaciarMensajeHL7">RELEVOS Y EVENTOS CRÍTICOS</button>
           </div>   
           <!-- Lista de relevos/eventos -->
           <div class="deslizar-relevos m-1"> 
@@ -1020,12 +1032,26 @@
       </div>
 
       <!-- Grid signos vitales -->
-      <div class="" :class="vistaPreviaOff == false ? 'col-md-6 tab-content' : 'col-md-9 tab-content'">
-        <div class="" :class="vistaPreviaOff == false ? 'row g-3 fade-in' : 'row g-3'">
+      <div class="" :class="vistaPreviaOff == false ? 'col-md-6' : 'col-md-9'">
+        <div class="" :class="vistaPreviaOff == false ? 'fade-in vista-grid-monitoreo' : 'vista-grid-monitoreo'">
           <table class="table table-bordered">
-            <tbody>
+            <thead>
               <tr>
-                <th>{{transAnestStore.datosMSV}}</th>
+                <th>00:00</th>
+                <th>00:00</th>
+                <th>00:00</th>
+                <th>00:00</th>
+                <th>00:00</th>
+                <th>00:00</th>
+                <th>00:00</th>
+                <th>00:00</th>
+                <th>00:00</th>
+                <th>00:00</th>
+              </tr>
+            </thead>
+            <tbody v-for="dato in hl7mess">
+              <tr>{{ dato }}
+                <!-- <td></td> -->
               </tr>
             </tbody>
           </table>
@@ -1159,6 +1185,11 @@ export default defineComponent({
       medicSeleccionados: [],
 
       vistaPreviaOff:false,
+
+      //btn Iniciar-Detener Monitor
+      btnCambioMonitor:false,
+
+      hl7mess:[]
     }
   },
 
@@ -2261,6 +2292,26 @@ export default defineComponent({
           await transAnestStore.getEventosList(preIdStore.pacienteID._id);
           await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
       },      
+
+      async vaciarMensajeHL7(){
+        var hl7Message = "MSH|^~\\&|MINDRAY_N_SERIES^00A037009B001572^EUI-64|MINDRAY|||20230614112759.0000+0000||ORU^R01^ORU_R01|583|P|2.6|||AL|NE||UNICODE UTF-8|||IHE_PCD_001^IHE PCD^1.3.6.1.4.1.19376.1.6.1.1.1^ISO\nPID|||^^^Hospital^PI||John^Smith-Demo^^^^^L|||M||unknownrace\nPV1||I|Diseño\nOBR|1|583^MINDRAY_N_SERIES^00A037009B001572^EUI-64|583^MINDRAY_N_SERIES^00A037009B001572^EUI-64|182777000^monitoring of patient^SCT|||20230614112759.0000+0000\nOBX|1|NM|150037^MDC_PRESS_BLD_ART_ABP_SYS^MDC|1.1.1.150037|81|266016^MDC_DIM_MMHG^MDC||DEMO|||R|||20230614112759.0000+0000||||00A037009B001572^^00A037009B001572^EUI-64\nOBX|2|NM|150039^MDC_PRESS_BLD_ART_ABP_MEAN^MDC|1.1.1.150039|93|266016^MDC_DIM_MMHG^MDC||DEMO|||R|||20230614112759.0000+0000\nOBX|3|NM|150038^MDC_PRESS_BLD_ART_ABP_DIA^MDC|1.1.1.150038|80|266016^MDC_DIM_MMHG^MDC||DEMO|||R|||20230614112759.0000+0000\nOBX|4|NM|364^MNDRY_BLD_PULS_RATE_ART_ABP^99MNDRY|1.1.1.364|60|264864^MDC_DIM_BEAT_PER_MIN^MDC||DEMO|||R|||20230614112759.0000+0000\nOBX|5|NM|149522^MDC_BLD_PULS_RATE_INV^MDC|1.1.11.149522|60|264864^MDC_DIM_BEAT_PER_MIN^MDC||DEMO|||R|||20230614112759.0000+0000\nOBX|6|NM|150034^MDC_PRESS_BLD_ART_DIA^MDC|1.1.11.150034|80|266016^MDC_DIM_MMHG^MDC||DEMO|||R|||20230614112759.0000+0000\nOBX|7|NM|150035^MDC_PRESS_BLD_ART_MEAN^MDC|1.1.11.150035|93|266016^MDC_DIM_MMHG^MDC||DEMO|||R|||20230614112759.0000+0000";
+        // Dividir la cadena de texto en líneas
+        var lineas = hl7Message.split('\n');
+        var lineasOBX = lineas.filter(function(linea) {
+          return /^OBX/.test(linea);
+        });
+        
+        var valorSegmentos = lineasOBX.map(function(fila) {
+          var segmentos = fila.split('|');
+          return segmentos[5];
+        });
+
+        valorSegmentos.forEach(function(valor) {
+          console.log(valor);
+        });
+
+        this.hl7mess = valorSegmentos
+      }
   },
 
   computed: {
@@ -2338,6 +2389,12 @@ export default defineComponent({
 .vista-eventos-relevos{
   height: 225px;
   background-color: white;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+.vista-grid-monitoreo{
+  height: 600px;
+  background-color: #E8EBEF;
   padding: 0.5rem;
   border-radius: 10px;
 }
@@ -2499,6 +2556,32 @@ export default defineComponent({
     --bs-btn-active-bg: #002D60;
     --bs-btn-active-color: #fff;
     --bs-btn-active-border-color: #002D60;
+    inline-size: -webkit-fill-available;
+}
+
+.btn-monitor{
+    --bs-btn-bg: #fff;
+    --bs-btn-color: #002D60;    
+    --bs-btn-border-color: #fff;
+    --bs-btn-hover-bg: #E88300;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #E88300;          
+    --bs-btn-active-bg: #E88300;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-border-color: #E88300;
+    inline-size: -webkit-fill-available;
+}
+
+.btn-monitor-off{
+    --bs-btn-bg: #E88300;
+    --bs-btn-color: #fff;    
+    --bs-btn-border-color: #E88300;
+    --bs-btn-hover-bg: #E88300;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #E88300;          
+    --bs-btn-active-bg: #fff;
+    --bs-btn-active-color: #002D60;
+    --bs-btn-active-border-color: #fff;
     inline-size: -webkit-fill-available;
 }
 .modal-med-largo {
