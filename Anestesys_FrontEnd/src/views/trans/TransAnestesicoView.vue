@@ -1034,7 +1034,7 @@
       <!-- Grid signos vitales -->
       <div class="" :class="vistaPreviaOff == false ? 'col-md-6' : 'col-md-9'">
         <div class="" :class="vistaPreviaOff == false ? 'fade-in vista-grid-monitoreo' : 'vista-grid-monitoreo'">
-          <table class="table table-bordered">
+          <table class="table table-responsive" id="grid-signos">
             <thead>
               <tr>
                 <th>00:00</th>
@@ -1050,9 +1050,11 @@
               </tr>
             </thead>
             <tbody v-for="dato in hl7mess">
+
               <tr>{{ dato }}
                 <!-- <td></td> -->
               </tr>
+              
             </tbody>
           </table>
         </div>
@@ -2643,6 +2645,28 @@ hr {
   border-top-width:1px;
   border-bottom-width:1px;
   border-bottom-width:thick
+}
+#grid-signos thead tr > th {
+  border-color: white;
+  background-color: #FFF !important;
+}
+#grid-signos > :not(caption) > * > * {
+  padding: 0.5rem 0.5rem;
+  background-color: white;
+  border-bottom-width: 1px;
+  box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+#grid-signos tbody tr > td {
+  border: 1px;
+  height: 10px;
+  padding-left: 1px;
+}
+#grid-signos {
+  padding-left: 10px;
+  margin-top: 20px;
+}
+.espacio {
+  height: 55px;
 }
 .ocultar-izquierdo{
   align-self: flex-end; 
