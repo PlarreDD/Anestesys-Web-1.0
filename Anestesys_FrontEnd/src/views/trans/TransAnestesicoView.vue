@@ -998,7 +998,7 @@
         <!-- Vista eventos/relevos -->
         <div class="" :class="vistaPreviaOff == false ? 'col-md-11 vista-eventos-relevos' : 'col-md-11 vista-eventos-relevos'">  
           <div class="col-md-12">
-            <button class="btn btn-evento-relevo btn-sm fw-bold" @click="vaciarMensajeHL7">RELEVOS Y EVENTOS CRÍTICOS</button>
+            <button class="btn btn-evento-relevo btn-sm fw-bold" @click="">RELEVOS Y EVENTOS CRÍTICOS</button>
           </div>   
           <!-- Lista de relevos/eventos -->
           <div class="deslizar-relevos m-1"> 
@@ -2314,13 +2314,14 @@ export default defineComponent({
       },
 
       async iniMSV(){
-        transAnestStore.getDatosMonitor();
-        // setInterval(this.comMSV, 20000);
+        transAnestStore.getIniciaMonitoreo();
+        setInterval(this.comMSV, 20000);
       },
 
-      // comMSV(){
-      //   transAnestStore.getDatosMonitor();
-      // },
+      comMSV(){
+        transAnestStore.getDatosMonitor();
+        this.vaciarMensajeHL7();
+      },
   },
 
   computed: {

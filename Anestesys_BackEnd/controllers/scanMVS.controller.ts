@@ -6,7 +6,7 @@ import { Request,
          /*NextFunction*/ } from "express";
 import net from "net";
 
-const HOST = '192.168.0.100';
+const HOST = '172.16.22.216';
 const HL7_PORT = 6664;
 
 let capturedMsg: any;
@@ -33,12 +33,12 @@ export const startMSVData = () => {
   });
 };
 
-export const handleData = async (_req: Request, res: Response) => {
+export const handleMonitorData = async (_req: Request, res: Response) => {
   if (capturedMsg) {
-    console.log('DATA:', capturedMsg.toString());
     const hl7String = capturedMsg.toString();
+    console.log('DATA:', hl7String +'FIN');
     
-    return res.json({hl7String});
+    return res.json({datosMSV:hl7String});
   } else {
     console.log('No se ha capturado ningún dato aún');
   }
