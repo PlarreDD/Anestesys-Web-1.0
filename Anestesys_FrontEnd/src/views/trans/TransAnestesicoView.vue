@@ -8,13 +8,25 @@
       <div class="row g-3 col-md-12">
         <div class="col-md-10">
           <div class="row g-3 mb-3">
+            <!-- Botón monitoreo -->
             <div class="col-md-3">
-              <button @click="iniMSV"
-                type="button"
-                class="btn btn-menu fw-bold">
-                <img src="images/monitoreo.svg" />
-                &nbsp;&nbsp;&nbsp;INICIAR MONITOREO
-              </button>
+              <template v-if="btnCambioMonitor === false">
+                <button @click="iniMSV"
+                  type="button"
+                  class="btn btn-monitor fw-bold">
+                  <img src="images/monitoreo.svg" />
+                  &nbsp;&nbsp;&nbsp;INICIAR MONITOREO
+                </button>
+              </template>
+              <template v-else>
+                <button @click=""
+                  type="button"
+                  class="btn btn-monitor-off fw-bold">
+                  <img src="images/monitoreo.svg" />
+                  &nbsp;&nbsp;&nbsp;DETENER MONITOREO
+                </button>
+              </template>      
+              
             </div>
 
             <div class="col-md-2"></div>
@@ -986,7 +998,7 @@
         <!-- Vista eventos/relevos -->
         <div class="" :class="vistaPreviaOff == false ? 'col-md-11 vista-eventos-relevos' : 'col-md-11 vista-eventos-relevos'">  
           <div class="col-md-12">
-            <button class="btn btn-evento-relevo btn-sm fw-bold">RELEVOS Y EVENTOS CRÍTICOS</button>
+            <button class="btn btn-evento-relevo btn-sm fw-bold" @click="vaciarMensajeHL7">RELEVOS Y EVENTOS CRÍTICOS</button>
           </div>   
           <!-- Lista de relevos/eventos -->
           <div class="deslizar-relevos m-1"> 
@@ -1020,13 +1032,29 @@
       </div>
 
       <!-- Grid signos vitales -->
-      <div class="" :class="vistaPreviaOff == false ? 'col-md-6 tab-content' : 'col-md-9 tab-content'">
-        <div class="" :class="vistaPreviaOff == false ? 'row g-3 fade-in' : 'row g-3'">
-          <table class="table table-bordered">
-            <tbody>
+      <div class="" :class="vistaPreviaOff == false ? 'col-md-6' : 'col-md-9'">
+        <div class="" :class="vistaPreviaOff == false ? 'fade-in vista-grid-monitoreo' : 'vista-grid-monitoreo'">
+          <table class="table table-responsive" id="grid-signos">
+            <thead>
               <tr>
-                <th>{{transAnestStore.datosMSV}}</th>
+                <th>00:00</th>
+                <th>00:00</th>
+                <th>00:00</th>
+                <th>00:00</th>
+                <th>00:00</th>
+                <th>00:00</th>
+                <th>00:00</th>
+                <th>00:00</th>
+                <th>00:00</th>
+                <th>00:00</th>
               </tr>
+            </thead>
+            <tbody v-for="dato in hl7mess">
+
+              <tr>{{ dato }}
+                <!-- <td></td> -->
+              </tr>
+              
             </tbody>
           </table>
         </div>
@@ -1159,6 +1187,11 @@ export default defineComponent({
       medicSeleccionados: [],
 
       vistaPreviaOff:false,
+
+      //btn Iniciar-Detener Monitor
+      btnCambioMonitor:false,
+
+      hl7mess:[]
     }
   },
 
@@ -2261,6 +2294,25 @@ export default defineComponent({
           await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
       },
 
+      async vaciarMensajeHL7(){
+        console.log('vaciar');
+        
+        var hl7Message= transAnestStore.datosMSV        
+
+        var lineas = hl7Message.split('\r');
+
+        var lineasOBX = lineas.filter(function(linea) {
+          return /^OBX/.test(linea);
+        });        
+        
+        var valorSegmentos = lineasOBX.map(function(fila) {
+          var segmentos = fila.split('|');
+          return segmentos[5];
+        });
+
+        this.hl7mess = valorSegmentos
+      },
+
       async iniMSV(){
         transAnestStore.getDatosMonitor();
         // setInterval(this.comMSV, 20000);
@@ -2346,6 +2398,12 @@ export default defineComponent({
 .vista-eventos-relevos{
   height: 225px;
   background-color: white;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+.vista-grid-monitoreo{
+  height: 600px;
+  background-color: #E8EBEF;
   padding: 0.5rem;
   border-radius: 10px;
 }
@@ -2509,6 +2567,32 @@ export default defineComponent({
     --bs-btn-active-border-color: #002D60;
     inline-size: -webkit-fill-available;
 }
+
+.btn-monitor{
+    --bs-btn-bg: #fff;
+    --bs-btn-color: #002D60;    
+    --bs-btn-border-color: #fff;
+    --bs-btn-hover-bg: #E88300;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #E88300;          
+    --bs-btn-active-bg: #E88300;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-border-color: #E88300;
+    inline-size: -webkit-fill-available;
+}
+
+.btn-monitor-off{
+    --bs-btn-bg: #E88300;
+    --bs-btn-color: #fff;    
+    --bs-btn-border-color: #E88300;
+    --bs-btn-hover-bg: #E88300;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #E88300;          
+    --bs-btn-active-bg: #fff;
+    --bs-btn-active-color: #002D60;
+    --bs-btn-active-border-color: #fff;
+    inline-size: -webkit-fill-available;
+}
 .modal-med-largo {
   height: auto;
 }
@@ -2568,6 +2652,28 @@ hr {
   border-top-width:1px;
   border-bottom-width:1px;
   border-bottom-width:thick
+}
+#grid-signos thead tr > th {
+  border-color: white;
+  background-color: #FFF !important;
+}
+#grid-signos > :not(caption) > * > * {
+  padding: 0.5rem 0.5rem;
+  background-color: white;
+  border-bottom-width: 1px;
+  box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+#grid-signos tbody tr > td {
+  border: 1px;
+  height: 10px;
+  padding-left: 1px;
+}
+#grid-signos {
+  padding-left: 10px;
+  margin-top: 20px;
+}
+.espacio {
+  height: 55px;
 }
 .ocultar-izquierdo{
   align-self: flex-end; 
