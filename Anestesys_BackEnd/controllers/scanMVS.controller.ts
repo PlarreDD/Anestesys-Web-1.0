@@ -36,8 +36,9 @@ export const startMSVData = () => {
 export const handleData = async (_req: Request, res: Response) => {
   if (capturedMsg) {
     console.log('DATA:', capturedMsg.toString());
+    const hl7String = capturedMsg.toString();
     
-    return res.json({capturedMsg});
+    return res.json({hl7String});
   } else {
     console.log('No se ha capturado ningún dato aún');
   }
