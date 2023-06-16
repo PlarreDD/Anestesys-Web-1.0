@@ -958,14 +958,6 @@ export const useTransAnestStore = defineStore('transAn', {
             .then((res: any) => {
               this.datosMSV = res.data.datosMSV; // Acceder a los datos usando res.data.datosMSV
               console.log("datosMSV "+ this.datosMSV);
-              
-            //   const lines = this.datosMSV.split("\n");
-            //   console.log("lines "+lines);
-              
-            //   const obxLines = lines.filter((line) => /^OBX/.test(line));
-            //   console.log("obxLines "+ obxLines);
-              
-
             })
             .catch((e: any) => {
               // Manejar el error

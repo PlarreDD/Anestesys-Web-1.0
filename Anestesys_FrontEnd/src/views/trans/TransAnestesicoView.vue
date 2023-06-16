@@ -2296,20 +2296,19 @@ export default defineComponent({
       },      
 
       async vaciarMensajeHL7(){
-        var hl7Message = "MSH|^~\\&|MINDRAY_N_SERIES^00A037009B001572^EUI-64|MINDRAY|||20230614112759.0000+0000||ORU^R01^ORU_R01|583|P|2.6|||AL|NE||UNICODE UTF-8|||IHE_PCD_001^IHE PCD^1.3.6.1.4.1.19376.1.6.1.1.1^ISO\nPID|||^^^Hospital^PI||John^Smith-Demo^^^^^L|||M||unknownrace\nPV1||I|Diseño\nOBR|1|583^MINDRAY_N_SERIES^00A037009B001572^EUI-64|583^MINDRAY_N_SERIES^00A037009B001572^EUI-64|182777000^monitoring of patient^SCT|||20230614112759.0000+0000\nOBX|1|NM|150037^MDC_PRESS_BLD_ART_ABP_SYS^MDC|1.1.1.150037|81|266016^MDC_DIM_MMHG^MDC||DEMO|||R|||20230614112759.0000+0000||||00A037009B001572^^00A037009B001572^EUI-64\nOBX|2|NM|150039^MDC_PRESS_BLD_ART_ABP_MEAN^MDC|1.1.1.150039|93|266016^MDC_DIM_MMHG^MDC||DEMO|||R|||20230614112759.0000+0000\nOBX|3|NM|150038^MDC_PRESS_BLD_ART_ABP_DIA^MDC|1.1.1.150038|80|266016^MDC_DIM_MMHG^MDC||DEMO|||R|||20230614112759.0000+0000\nOBX|4|NM|364^MNDRY_BLD_PULS_RATE_ART_ABP^99MNDRY|1.1.1.364|60|264864^MDC_DIM_BEAT_PER_MIN^MDC||DEMO|||R|||20230614112759.0000+0000\nOBX|5|NM|149522^MDC_BLD_PULS_RATE_INV^MDC|1.1.11.149522|60|264864^MDC_DIM_BEAT_PER_MIN^MDC||DEMO|||R|||20230614112759.0000+0000\nOBX|6|NM|150034^MDC_PRESS_BLD_ART_DIA^MDC|1.1.11.150034|80|266016^MDC_DIM_MMHG^MDC||DEMO|||R|||20230614112759.0000+0000\nOBX|7|NM|150035^MDC_PRESS_BLD_ART_MEAN^MDC|1.1.11.150035|93|266016^MDC_DIM_MMHG^MDC||DEMO|||R|||20230614112759.0000+0000";
-        // Dividir la cadena de texto en líneas
-        var lineas = hl7Message.split('\n');
+        console.log('vaciar');
+        
+        var hl7Message= transAnestStore.datosMSV        
+
+        var lineas = hl7Message.split('\r');
+
         var lineasOBX = lineas.filter(function(linea) {
           return /^OBX/.test(linea);
-        });
+        });        
         
         var valorSegmentos = lineasOBX.map(function(fila) {
           var segmentos = fila.split('|');
           return segmentos[5];
-        });
-
-        valorSegmentos.forEach(function(valor) {
-          console.log(valor);
         });
 
         this.hl7mess = valorSegmentos

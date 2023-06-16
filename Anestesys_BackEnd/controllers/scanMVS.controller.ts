@@ -4,7 +4,7 @@ import { MVS } from "../models/Medicamento";
 import { Request, Response, NextFunction } from "express";
 import net from "net";
 
-const HOST = '172.16.22.210';
+const HOST = '172.16.22.216';
 const HL7_PORT = 6664;
 
 export const getMSVData = (_req: Request, res: Response, _next: NextFunction) => {
