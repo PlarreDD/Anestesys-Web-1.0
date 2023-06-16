@@ -2306,7 +2306,7 @@ export default defineComponent({
       async finMSV(){
         console.log("Detiene Monitoreo");
 
-        setTimeOut(() => {clearInterval(monitor);});
+        // setTimeOut(() => {clearInterval(monitor);});
         
         this.btnCambioMonitor=false;
         transAnestStore.getDetieneMonitoreo();
