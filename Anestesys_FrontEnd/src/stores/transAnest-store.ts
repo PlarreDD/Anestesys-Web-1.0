@@ -960,6 +960,19 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
+        async getDetieneMonitoreo() {
+            await apiAxios({
+              url: 'http://localhost:5000/mvs/stop',
+              method: 'GET',
+              headers: {
+                Authorization: "Bearer " + userStore.token,
+              }
+            })
+            .catch((e: any) => {
+              // Manejar el error
+            });
+        },
+
         async getDatosMonitor() {
             await apiAxios({
               url: 'http://localhost:5000/mvs/com',

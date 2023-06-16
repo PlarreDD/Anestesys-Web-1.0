@@ -19,7 +19,7 @@
                 </button>
               </template>
               <template v-else>
-                <button @click=""
+                <button @click="finMSV"
                   type="button"
                   class="btn btn-monitor-off fw-bold">
                   <img src="images/monitoreo.svg" />
@@ -2294,13 +2294,32 @@ export default defineComponent({
           await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
       },
 
-      async vaciarMensajeHL7(){
-        console.log('vaciar');
+      // Eventos de Monitoreo      
+      async iniMSV(){
+        console.log("Inicia Monitoreo");
         
+        transAnestStore.getIniciaMonitoreo();
+        this.btnCambioMonitor=true;
+        setInterval(this.comMSV, 20000);
+      },
+
+      async finMSV(){
+        console.log("Detiene Monitoreo");
+        
+        this.btnCambioMonitor=false;
+        transAnestStore.getDetieneMonitoreo();
+      },
+
+      comMSV(){
+        transAnestStore.getDatosMonitor();
+        this.vaciarMensajeHL7();
+      },
+
+      async vaciarMensajeHL7(){
         var hl7Message= transAnestStore.datosMSV        
-
+    
         var lineas = hl7Message.split('\r');
-
+    
         var lineasOBX = lineas.filter(function(linea) {
           return /^OBX/.test(linea);
         });        
@@ -2309,21 +2328,11 @@ export default defineComponent({
           var segmentos = fila.split('|');
           return segmentos[5];
         });
-
+    
         this.hl7mess = valorSegmentos
       },
-
-      async iniMSV(){
-        transAnestStore.getIniciaMonitoreo();
-        setInterval(this.comMSV, 20000);
-      },
-
-      comMSV(){
-        transAnestStore.getDatosMonitor();
-        this.vaciarMensajeHL7();
-      },
   },
-
+  
   computed: {
   tablaMedicamentos() {      
       if (this.medicSeleccionados.length === 0) {
