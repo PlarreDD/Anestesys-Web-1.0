@@ -1129,7 +1129,7 @@ export default defineComponent({
     return {
       //Datos interfaces
       menuTrans: {} as regMenuTrans,
-      infoNotaPost: {} as regNotaPost,        
+      infoNotaPost: {} as regNotaPost,
       
       //Store
       preIdStore,
@@ -1191,7 +1191,9 @@ export default defineComponent({
       //btn Iniciar-Detener Monitor
       btnCambioMonitor:false,
 
-      hl7mess:[]
+      hl7mess:[],
+
+      intervalId: null,
     }
   },
 
@@ -2298,16 +2300,13 @@ export default defineComponent({
       async iniMSV(){
         this.btnCambioMonitor = true;
         await transAnestStore.getIniciaMonitoreo();
-
-        // let monitor = setInterval(this.comMSV, 20000);
+        this.iniRecepDatos();
       },
 
       async finMSV(){
         this.btnCambioMonitor = false;
         await transAnestStore.getDetieneMonitoreo();
-
-        // setTimeOut(() => {clearInterval(monitor);});
-        
+        this.termRecepDatos();
       },
 
       comMSV(){
@@ -2316,13 +2315,13 @@ export default defineComponent({
       },
 
       async vaciarMensajeHL7(){
-        var hl7Message= transAnestStore.datosMSV        
+        var hl7Message= transAnestStore.datosMSV
     
         var lineas = hl7Message.split('\r');
     
         var lineasOBX = lineas.filter(function(linea) {
           return /^OBX/.test(linea);
-        });        
+        });
         
         var valorSegmentos = lineasOBX.map(function(fila) {
           var segmentos = fila.split('|');
@@ -2330,6 +2329,16 @@ export default defineComponent({
         });
     
         this.hl7mess = valorSegmentos
+      },
+
+      iniRecepDatos(){
+        this.intervalId = setInterval(() => {
+          this.comMSV();
+        }, 15000);
+      },
+
+      termRecepDatos(){
+        clearInterval(this.intervalId);
       },
   },
   
