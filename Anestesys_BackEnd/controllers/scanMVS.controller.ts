@@ -5,7 +5,7 @@ import { Request,
          Response } from "express";
 import net from "net";
 
-const HOST = '192.168.0.100';
+const HOST = '172.16.22.216';
 const HL7_PORT = 6664;
 
 let capturedMsg: any;

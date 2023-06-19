@@ -1033,30 +1033,35 @@
 
       <!-- Grid signos vitales -->
       <div class="" :class="vistaPreviaOff == false ? 'col-md-6' : 'col-md-9'">
-        <div class="" :class="vistaPreviaOff == false ? 'fade-in vista-grid-monitoreo' : 'vista-grid-monitoreo'">
-          <table class="table table-responsive" id="grid-signos">
-            <thead>
-              <tr>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-              </tr>
-            </thead>
-            <tbody v-for="dato in hl7mess">
+        <div class="row" :class="vistaPreviaOff == false ? 'fade-in vista-grid-monitoreo' : 'vista-grid-monitoreo'">
+          <div class="col-md-1" style="display: flex; flex-direction: column; row-gap: 5px;  ">
+            <label>FR</label>
+          </div>
+          <div class="col-md-11 deslizar-grid">          
+            <table class="table table-responsive" id="grid-signos">
+              <thead>
+                <tr>
+                  <th>00:00</th>
+                  <th>00:00</th>
+                  <th>00:00</th>
+                  <th>00:00</th>
+                  <th>00:00</th>
+                  <th>00:00</th>
+                  <th>00:00</th>
+                  <th>00:00</th>
+                  <th>00:00</th>
+                  <th>00:00</th>
+                </tr>
+              </thead>
+              <tbody v-for="dato in hl7mess">
 
-              <tr>{{ dato }}
-                <!-- <td></td> -->
-              </tr>
-              
-            </tbody>
-          </table>
+                <tr>{{ dato }}
+                  <!-- <td></td> -->
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -2406,13 +2411,13 @@ export default defineComponent({
   border-radius: 10px;
 }
 .vista-eventos-relevos{
-  height: 225px;
+  height: 255px;
   background-color: white;
   padding: 0.5rem;
   border-radius: 10px;
 }
 .vista-grid-monitoreo{
-  height: 600px;
+  height: 635px;
   background-color: #E8EBEF;
   padding: 0.5rem;
   border-radius: 10px;
@@ -2499,6 +2504,12 @@ export default defineComponent({
   height: 150px;
   margin-top: 0px;
 }
+.deslizar-grid{
+  overflow: scroll;
+  overflow-x: scroll;
+  height: 620px;
+  margin-top: 0px;
+}
 .deslizar-balance {
   overflow: scroll;
   overflow-x: hidden;
@@ -2514,7 +2525,7 @@ export default defineComponent({
   overflow: scroll;
   overflow-x: hidden;
   margin-top: 0px;
-  height: 175px;
+  height: 205px;
 }
 .btn-guardar{
     --bs-btn-bg: none;
