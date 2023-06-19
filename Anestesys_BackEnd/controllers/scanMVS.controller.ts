@@ -5,7 +5,7 @@ import { Request,
          Response } from "express";
 import net from "net";
 
-const HOST = '192.168.0.100';
+let HOST = '192.168.100.3';
 const HL7_PORT = 6664;
 
 let capturedMsg: any;
@@ -26,13 +26,17 @@ const server = net.createServer(function(socket) {
   });
 });
 
-export const startMSVData = () => {
+export const startMSVData = async () => {
+  getConnectedDevices(devices => {
+    HOST = devices[0];
+  });
+
   server.listen(HL7_PORT, HOST, function() {
     console.log(`Listening for vital sign data on ${HOST}:${HL7_PORT}`);
   });
 };
 
-export const stopMSVData = () => {
+export const stopMSVData = async () => {
   server.close(function() {
     console.log('Sign monitor stopped');
   });

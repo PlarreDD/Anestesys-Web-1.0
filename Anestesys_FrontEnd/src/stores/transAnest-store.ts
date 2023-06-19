@@ -956,7 +956,7 @@ export const useTransAnestStore = defineStore('transAn', {
               }
             })
             .then(() => {
-                console.log("Vital sign monitor listening");                
+                console.log("Vital sign monitor listening");
             })
             .catch((e: any) => {
               // Manejar el error
@@ -972,7 +972,7 @@ export const useTransAnestStore = defineStore('transAn', {
               }
             })
             .then(() => {
-                console.log("Vital sign monitor stopped");                
+                console.log("Vital sign monitor stopped");
             })
             .catch((e: any) => {
               // Manejar el error
