@@ -30,14 +30,18 @@ const server = net.createServer(function(socket) {
 export const startMSVData = async () => {
   getConnectedDevices(devices => {
     HOST = devices[0];
-  });
 
-  serverAnest = server.listen(HL7_PORT, HOST, function() {
-    console.log(`Listening for vital sign data on ${HOST}:${HL7_PORT}`);
+    serverAnest = server.listen(HL7_PORT, HOST, function() {
+      console.log(`Listening for vital sign data on ${HOST}:${HL7_PORT}`);
+    });
+    console.log("FinserverAnest");
   });
+  console.log("FingetConnectedDevices");  
 };
 
 export const stopMSVData = async () => {
+  console.log("stopMSVData");
+  
   if(serverAnest){
     serverAnest.close(function() {
       console.log('Sign monitor stopped');
