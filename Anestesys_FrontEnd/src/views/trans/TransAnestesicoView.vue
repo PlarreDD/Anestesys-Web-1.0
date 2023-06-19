@@ -2304,15 +2304,12 @@ export default defineComponent({
       },
 
       async finMSV(){
-        console.log("finMSV");
-        
         this.btnCambioMonitor = false;
         transAnestStore.getDetieneMonitoreo();
         this.termRecepDatos();
       },
 
       comMSV(){
-        console.log("comMSV");        
         transAnestStore.getDatosMonitor();
         this.vaciarMensajeHL7();
       },
@@ -2335,16 +2332,12 @@ export default defineComponent({
       },
 
       iniRecepDatos(){
-        console.log("iniRecepDatos");
-
         this.intervalId = setInterval(() => {
           this.comMSV();
         }, 15000);
       },
 
-      termRecepDatos(){
-        console.log("termRecepDatos");
-        
+      termRecepDatos(){        
         clearInterval(this.intervalId);
       },
   },

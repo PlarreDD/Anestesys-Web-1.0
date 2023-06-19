@@ -34,14 +34,10 @@ export const startMSVData = async () => {
     serverAnest = server.listen(HL7_PORT, HOST, function() {
       console.log(`Listening for vital sign data on ${HOST}:${HL7_PORT}`);
     });
-    console.log("FinserverAnest");
   });
-  console.log("FingetConnectedDevices");  
 };
 
-export const stopMSVData = async () => {
-  console.log("stopMSVData");
-  
+export const stopMSVData = async () => {  
   if(serverAnest){
     serverAnest.close(function() {
       console.log('Sign monitor stopped');
