@@ -5,7 +5,8 @@ import { Request,
          Response } from "express";
 import net from "net";
 
-const HOST = '172.16.22.216';
+let HOST = '';
+let serverAnest: any;
 const HL7_PORT = 6664;
 
 let capturedMsg: any;
@@ -26,16 +27,22 @@ const server = net.createServer(function(socket) {
   });
 });
 
-export const startMSVData = () => {
-  server.listen(HL7_PORT, HOST, function() {
-    console.log(`Listening for vital sign data on ${HOST}:${HL7_PORT}`);
+export const startMSVData = async () => {
+  getConnectedDevices(devices => {
+    HOST = devices[0];
+
+    serverAnest = server.listen(HL7_PORT, HOST, function() {
+      console.log(`Listening for vital sign data on ${HOST}:${HL7_PORT}`);
+    });
   });
 };
 
-export const stopMSVData = () => {
-  server.close(function() {
-    console.log('Sign monitor stopped');
-  });
+export const stopMSVData = async () => {  
+  if(serverAnest){
+    serverAnest.close(function() {
+      console.log('Sign monitor stopped');
+    });
+  }
 };
 
 export const handleMonitorData = async (_req: Request, res: Response) => {
@@ -131,11 +138,3 @@ export function getConnectedDevices(callback: (devices: string[]) => void) {
     callback(devices);
   });
 };
-
-/* Funciones de prueba */
-// getConnectedDevices(devices => {
-//   console.log('Dispositivos conectados:');
-//   devices.forEach(device => {
-//     console.log(device);
-//   });
-// });

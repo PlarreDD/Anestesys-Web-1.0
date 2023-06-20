@@ -12,12 +12,14 @@
             <div class="col-md-3">
               <template v-if="btnCambioMonitor === false">
                 <button @click="iniMSV"
+                  :disabled="btnMSV"
                   type="button"
                   class="btn btn-monitor fw-bold">
                   <img src="images/monitoreo.svg" />
                   &nbsp;&nbsp;&nbsp;INICIAR MONITOREO
                 </button>
               </template>
+
               <template v-else>
                 <button @click="finMSV"
                   type="button"
@@ -25,8 +27,7 @@
                   <img src="images/monitoreo.svg" />
                   &nbsp;&nbsp;&nbsp;DETENER MONITOREO
                 </button>
-              </template>      
-              
+              </template>
             </div>
 
             <div class="col-md-2"></div>
@@ -355,7 +356,6 @@
                                   </button>
                               </template>  
                             </div>
-
                         </div>
                       </div>
                     </div>
@@ -833,7 +833,7 @@
             <div class="col-md-2">
               <button class="btn btn-menu fw-bold"
                       type="button"
-                      @dblclick="actualizarTQX('QXIN')" 
+                      @dblclick="actualizarTQX('QXIN')"
                       :disabled="menuTrans.ingresoQX != undefined ? true : false">
                   <label>QX IN <label class="fw-normal">{{menuTrans.ingresoQX}}</label></label>                  
               </button>
@@ -998,7 +998,8 @@
         <!-- Vista eventos/relevos -->
         <div class="" :class="vistaPreviaOff == false ? 'col-md-11 vista-eventos-relevos' : 'col-md-11 vista-eventos-relevos'">  
           <div class="col-md-12">
-            <button class="btn btn-evento-relevo btn-sm fw-bold" @click="">RELEVOS Y EVENTOS CRÍTICOS</button>
+            <button class="btn btn-evento-relevo btn-sm fw-bold"
+                    @click="capturaGrid">RELEVOS Y EVENTOS CRÍTICOS</button>
           </div>   
           <!-- Lista de relevos/eventos -->
           <div class="deslizar-relevos m-1"> 
@@ -1134,7 +1135,7 @@ export default defineComponent({
     return {
       //Datos interfaces
       menuTrans: {} as regMenuTrans,
-      infoNotaPost: {} as regNotaPost,        
+      infoNotaPost: {} as regNotaPost,
       
       //Store
       preIdStore,
@@ -1196,7 +1197,13 @@ export default defineComponent({
       //btn Iniciar-Detener Monitor
       btnCambioMonitor:false,
 
-      hl7mess:[]
+      hl7mess:[],
+
+      intervalId: null,
+      saveGrid: null,
+      btnMSV: true,
+      temporizador: null,
+      grid: [],
     }
   },
 
@@ -1456,9 +1463,12 @@ export default defineComponent({
             this.btnUpdateEventos=true
             this.btnActualizaEvento=false
 
+            this.btnMSV=false
+
             var hoy = new Date();
             this.menuTrans.ingresoQX = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID._id, tiemposQX);
+            this.siguesAhi();
           break;
 
           case "ANESIN":
@@ -1617,7 +1627,7 @@ export default defineComponent({
         }        
       },
 
-      async mostrarDropDown(tiemposQX : string){        
+      async mostrarDropDown(tiemposQX : string){
         switch (tiemposQX) {
           case "ANESIN":
             this.activoAnesIN=true;
@@ -1830,7 +1840,7 @@ export default defineComponent({
 
             await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
             await this.listarMedicamentosTrans()
-          }                                                
+          }
       },
 
       async cambiarBtnActualizarMedic(id) {
@@ -1969,7 +1979,7 @@ export default defineComponent({
                 timerProgressBar: true,
                 position: "top-end",
                 });
-          } else {        
+          } else {
             this.btnAddMedicamentos=false
             this.btnUpdateMedicamentos=true
             this.btnActualizaMedicamento=false
@@ -2000,7 +2010,7 @@ export default defineComponent({
             
             await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
             await transAnestStore.getEventosList(preIdStore.pacienteID._id);
-          }       
+          }
       },
 
       async actualizarRelevos(r_horaRelevo: string, r_tipoRel: string, r_matriculaRel: string, 
@@ -2030,7 +2040,7 @@ export default defineComponent({
             await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
             await transAnestStore.getEventosList(preIdStore.pacienteID._id);
 
-          }                                                
+          }
       },
 
       async cambiarBtnActualizarRelevo(id) {
@@ -2101,9 +2111,9 @@ export default defineComponent({
                 });
       },
 
-      async eliminarRelevo(idRelevo: string) {         
+      async eliminarRelevo(idRelevo: string) {
 
-          await transAnestStore.deleteRelevo(idRelevo);        
+          await transAnestStore.deleteRelevo(idRelevo);
 
           this.menuTrans.idRelevo = "";
           this.menuTrans.horaRelevo = "";
@@ -2159,7 +2169,7 @@ export default defineComponent({
                 timerProgressBar: true,
                 position: "top-end",
                 });
-          } else {        
+          } else {
             this.btnAddMedicamentos=false
             this.btnUpdateMedicamentos=true
             this.btnActualizaMedicamento=false
@@ -2188,7 +2198,7 @@ export default defineComponent({
             
             await transAnestStore.getEventosList(preIdStore.pacienteID._id);
             await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
-          }       
+          }
       },
 
       async actualizarEventos(r_horaEvento: string, e_tipoEve: string, e_detalleEvento: string) {
@@ -2214,7 +2224,7 @@ export default defineComponent({
 
             await transAnestStore.getEventosList(preIdStore.pacienteID._id);
             await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
-          }                                                
+          }
       },
 
       async cambiarBtnActualizarEvento(id) {
@@ -2280,9 +2290,9 @@ export default defineComponent({
                 });
       },
 
-      async eliminarEvento(idEvento: string) {         
+      async eliminarEvento(idEvento: string) {
 
-          await transAnestStore.deleteEvento(idEvento);        
+          await transAnestStore.deleteEvento(idEvento);
 
           this.menuTrans.idEvento = "";
           this.menuTrans.horaEvento = "";
@@ -2299,20 +2309,19 @@ export default defineComponent({
           await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
       },
 
-      // Eventos de Monitoreo      
+      // Eventos de Monitoreo
       async iniMSV(){
-        console.log("Inicia Monitoreo");
-        
+        this.btnCambioMonitor = true;
+        this.siAquisigo();
         transAnestStore.getIniciaMonitoreo();
-        this.btnCambioMonitor=true;
-        setInterval(this.comMSV, 20000);
+        this.iniRecepDatos();
+        this.capturaGrid();
       },
 
       async finMSV(){
-        console.log("Detiene Monitoreo");
-        
-        this.btnCambioMonitor=false;
+        this.btnCambioMonitor = false;
         transAnestStore.getDetieneMonitoreo();
+        this.termRecepDatos();
       },
 
       comMSV(){
@@ -2321,13 +2330,13 @@ export default defineComponent({
       },
 
       async vaciarMensajeHL7(){
-        var hl7Message= transAnestStore.datosMSV        
+        var hl7Message = transAnestStore.datosMSV
     
         var lineas = hl7Message.split('\r');
     
         var lineasOBX = lineas.filter(function(linea) {
           return /^OBX/.test(linea);
-        });        
+        });
         
         var valorSegmentos = lineasOBX.map(function(fila) {
           var segmentos = fila.split('|');
@@ -2336,17 +2345,45 @@ export default defineComponent({
     
         this.hl7mess = valorSegmentos
       },
+
+      iniRecepDatos(){
+        this.intervalId = setInterval(() => {
+          this.comMSV();
+        }, 15000);
+      },
+
+      termRecepDatos(){        
+        clearInterval(this.intervalId);
+      },
+      
+      siAquisigo(){
+        clearTimeout(this.temporizador);
+      },
+
+      siguesAhi(){
+        this.temporizador = setTimeout(() => {
+          console.log("Sigues Ahi?");
+          this.siAquisigo();
+        }, 1000 /** 60 * 30*/);        
+      },
+      
+      capturaGrid(){
+        this.saveGrid = setInterval(() => {
+          this.grid.push(this.hl7mess);
+          console.log("GRID:" + this.grid);
+        }, 1000 * 60);
+      },
   },
   
   computed: {
-  tablaMedicamentos() {      
-      if (this.medicSeleccionados.length === 0) {
-        return this.listaMedTrans;
-      } else {
-        return this.listaMedTrans.filter(item => this.medicSeleccionados.includes(item));
-      }
+    tablaMedicamentos() {      
+        if (this.medicSeleccionados.length === 0) {
+          return this.listaMedTrans;
+        } else {
+          return this.listaMedTrans.filter(item => this.medicSeleccionados.includes(item));
+        }
+    },
   },
-},
 })
 </script>
 

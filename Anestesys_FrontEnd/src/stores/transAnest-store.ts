@@ -955,6 +955,9 @@ export const useTransAnestStore = defineStore('transAn', {
                 Authorization: "Bearer " + userStore.token,
               }
             })
+            .then(() => {
+                console.log("Vital sign monitor listening");
+            })
             .catch((e: any) => {
               // Manejar el error
             });
@@ -967,6 +970,9 @@ export const useTransAnestStore = defineStore('transAn', {
               headers: {
                 Authorization: "Bearer " + userStore.token,
               }
+            })
+            .then(() => {
+                console.log("Vital sign monitor stopped");
             })
             .catch((e: any) => {
               // Manejar el error
