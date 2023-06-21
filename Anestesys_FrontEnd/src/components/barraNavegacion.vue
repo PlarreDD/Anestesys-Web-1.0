@@ -324,8 +324,8 @@
                             </td>
 
                             <td class="text-white">
-                              {{  }}
-                            </td>                            
+                              {{ medStore.status }}
+                            </td>
 
                             <!-- Eliminar MVS -->
                             <td>
@@ -499,7 +499,7 @@ export default defineComponent({
         });
       } else {
         await medStore.pingMonitor(String(this.configMonitor.nomMonitor),
-                                 String(this.configMonitor.dirIPMonitor));
+                                   String(this.configMonitor.dirIPMonitor));
 
         this.configMonitor.nomMonitor = "";
         this.configMonitor.dirIPMonitor = "";
