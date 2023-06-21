@@ -1,31 +1,59 @@
 import { exec } from 'child_process';
 import ping from 'ping';
 import { MVS } from "../models/Medicamento";
-import { Response } from "express";
-import net from 'net'
+import { Request,
+         Response } from "express";
+import net from "net";
 
-// const HOST = '192.168.0.100';
-// const HL7_PORT = 6664;
+let HOST = '';
+let serverAnest: any;
+const HL7_PORT = 6664;
 
-export const server = net.createServer(function(socket) {
-  console.log('Connected to vital sign monitor');
+let capturedMsg: any;
 
-  socket.on('data', function(data) {    
-    console.log('DATA:', data.toString());    
+const server = net.createServer(function(socket) {
+  console.log('Conectado al monitor de signos vítales');
+  
+  socket.on('data', function(data) {
+    capturedMsg = data;
   });
-
+  
   socket.on('error', function(error) {
     console.error('Socket error:', error);
   });
-
+  
   socket.on('close', function() {
     console.log('Disconnected from vital sign monitor');
   });
 });
 
-// server.listen(HL7_PORT, HOST, function() {
-//   console.log('Server listening on', HOST + ':' + HL7_PORT);
-// });
+export const startMSVData = async () => {
+  getConnectedDevices(devices => {
+    HOST = devices[0];
+
+    serverAnest = server.listen(HL7_PORT, HOST, function() {
+      console.log(`Listening for vital sign data on ${HOST}:${HL7_PORT}`);
+    });
+  });
+};
+
+export const stopMSVData = async () => {  
+  if(serverAnest){
+    serverAnest.close(function() {
+      console.log('Sign monitor stopped');
+    });
+  }
+};
+
+export const handleMonitorData = async (_req: Request, res: Response) => {
+  if (capturedMsg) {
+    const hl7String = capturedMsg.toString();
+    
+    return res.json({datosMSV:hl7String});
+  } else {
+    console.log('No se ha capturado ningún dato aún');
+  }
+}
 
 export const registerMSV = async (req: any, res: Response) => {
   const { nombreMVS, dirIPMVS} = req.body;
@@ -110,11 +138,3 @@ export function getConnectedDevices(callback: (devices: string[]) => void) {
     callback(devices);
   });
 };
-
-/* Funciones de prueba */
-// getConnectedDevices(devices => {
-//   console.log('Dispositivos conectados:');
-//   devices.forEach(device => {
-//     console.log(device);
-//   });
-// });

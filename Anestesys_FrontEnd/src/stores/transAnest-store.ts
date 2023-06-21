@@ -16,6 +16,7 @@ export const useTransAnestStore = defineStore('transAn', {
         relevoID: ref(null),
         eventos: ref(null),
         eventoID: ref(null),
+        datosMSV: ref(null),
     }),
 
     actions: {
@@ -943,6 +944,55 @@ export const useTransAnestStore = defineStore('transAn', {
             })
             .catch((e: any) => {
               //   console.log(e);
+            });
+        },
+
+        async getIniciaMonitoreo() {
+            await apiAxios({
+              url: 'http://localhost:5000/mvs/monitor',
+              method: 'GET',
+              headers: {
+                Authorization: "Bearer " + userStore.token,
+              }
+            })
+            .then(() => {
+                console.log("Vital sign monitor listening");
+            })
+            .catch((e: any) => {
+              // Manejar el error
+            });
+        },
+
+        async getDetieneMonitoreo() {
+            await apiAxios({
+              url: 'http://localhost:5000/mvs/stop',
+              method: 'GET',
+              headers: {
+                Authorization: "Bearer " + userStore.token,
+              }
+            })
+            .then(() => {
+                console.log("Vital sign monitor stopped");
+            })
+            .catch((e: any) => {
+              // Manejar el error
+            });
+        },
+
+        async getDatosMonitor() {
+            await apiAxios({
+              url: 'http://localhost:5000/mvs/com',
+              method: 'GET',
+              headers: {
+                Authorization: "Bearer " + userStore.token,
+              }
+            })
+            .then((res: any) => {
+              this.datosMSV = res.data.datosMSV; // Acceder a los datos usando res.data.datosMSV
+              console.log("GetDatosMonitor: "+this.datosMSV);              
+            })
+            .catch((e: any) => {
+              // Manejar el error
             });
         },
     }

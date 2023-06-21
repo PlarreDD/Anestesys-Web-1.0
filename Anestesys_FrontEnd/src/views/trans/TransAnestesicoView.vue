@@ -8,13 +8,26 @@
       <div class="row g-3 col-md-12">
         <div class="col-md-10">
           <div class="row g-3 mb-3">
+            <!-- Botón monitoreo -->
             <div class="col-md-3">
-              <button
-                type="button"
-                class="btn btn-menu fw-bold">
-                <img src="images/monitoreo.svg" />
-                &nbsp;&nbsp;&nbsp;INICIAR MONITOREO
-              </button>
+              <template v-if="btnCambioMonitor === false">
+                <button @click="iniMSV"
+                  :disabled="btnMSV"
+                  type="button"
+                  class="btn btn-monitor fw-bold">
+                  <img src="images/monitoreo.svg" />
+                  <label>&nbsp;&nbsp;&nbsp;INICIAR MONITOREO</label>
+                </button>
+              </template>
+
+              <template v-else>
+                <button @click="finMSV"
+                  type="button"
+                  class="btn btn-monitor-off fw-bold">
+                  <img src="images/monitoreo.svg" />
+                  <label>&nbsp;&nbsp;&nbsp;DETENER MONITOREO</label>
+                </button>
+              </template>
             </div>
 
             <div class="col-md-2"></div>
@@ -343,7 +356,6 @@
                                   </button>
                               </template>  
                             </div>
-
                         </div>
                       </div>
                     </div>
@@ -821,7 +833,7 @@
             <div class="col-md-2">
               <button class="btn btn-menu fw-bold"
                       type="button"
-                      @dblclick="actualizarTQX('QXIN')" 
+                      @dblclick="actualizarTQX('QXIN')"
                       :disabled="menuTrans.ingresoQX != undefined ? true : false">
                   <label>QX IN <label class="fw-normal">{{menuTrans.ingresoQX}}</label></label>                  
               </button>
@@ -831,6 +843,7 @@
               <button type="button" id="anes-in"
                       class="btn btn-menu fw-bold"
                       :class="{ 'show': activoAnesIN, ' ': noActivoAnesIN }"
+                      :disabled="btnTQX == true ? true : false"
                       @dblclick="actualizarTQX('ANESIN')"
                       @click.right="mostrarDropDown('ANESIN')"> 
                       <label>ANES IN <label class="fw-normal">{{menuTrans.inicioAn}}</label></label> 
@@ -851,6 +864,7 @@
             <div class="col-md-2">
               <button type="button" id="cx-in"
                       class="btn btn-menu fw-bold" :class="{ 'show': activoCxIN, ' ': noActivoCxIN }"
+                      :disabled="btnTQX == true ? true : false"
                       @dblclick="actualizarTQX('CXIN')"
                       @click.right="mostrarDropDown('CXIN')"> 
                 <label>CX IN <label class="fw-normal">{{menuTrans.inicioCx}}</label></label>
@@ -869,6 +883,7 @@
             <div class="col-md-2"> 
               <button type="button" id="cx-out"
                       class="btn btn-menu fw-bold" :class="{ 'show': activoCxOUT, ' ': noActivoCxOUT }"
+                      :disabled="btnTQX == true ? true : false"
                       @dblclick="actualizarTQX('CXOUT')"
                       @click.right="mostrarDropDown('CXOUT')"> 
                 <label>CX OUT <label class="fw-normal">{{menuTrans.finCx}}</label></label>
@@ -887,7 +902,8 @@
 
             <div class="col-md-2">    
               <button type="button" id="anes-out"
-                      class="btn btn-menu fw-bold" :class="{ 'show': activoAnesOUT, ' ': noActivoAnesOUT }" 
+                      class="btn btn-menu fw-bold" :class="{ 'show': activoAnesOUT, ' ': noActivoAnesOUT }"
+                      :disabled="btnTQX == true ? true : false"
                       @dblclick="actualizarTQX('ANESOUT')"
                       @click.right="mostrarDropDown('ANESOUT')"> 
                 <label>ANES OUT <label class="fw-normal">{{menuTrans.finAn}}</label></label>
@@ -927,20 +943,7 @@
       </div>     
     </div>
 
-    <!-- Botón deslizar -->
-    <div class="btn-ocultar">
-      <template v-if="vistaPreviaOff === false">
-          <span class="ocultar-izquierdo" @click="mostrarVistaPrevia">
-            <font-awesome-icon :icon="['fas', 'angle-left']" size="xl" />
-          </span>
-        </template>
-
-        <template v-else>
-          <span class="ocultar-derecho" @click="ocultarVistaPrevia">
-            <font-awesome-icon :icon="['fas', 'angle-right']" size="xl" />
-          </span>
-        </template>  
-    </div>
+    
 
     <!-- Contenedor Grid -->
     <div class="input-group mb-3 bordePrincipal">
@@ -986,7 +989,8 @@
         <!-- Vista eventos/relevos -->
         <div class="" :class="vistaPreviaOff == false ? 'col-md-11 vista-eventos-relevos' : 'col-md-11 vista-eventos-relevos'">  
           <div class="col-md-12">
-            <button class="btn btn-evento-relevo btn-sm fw-bold">RELEVOS Y EVENTOS CRÍTICOS</button>
+            <button class="btn btn-evento-relevo btn-sm fw-bold"
+                    @click="capturaGrid">RELEVOS Y EVENTOS CRÍTICOS</button>
           </div>   
           <!-- Lista de relevos/eventos -->
           <div class="deslizar-relevos m-1"> 
@@ -1017,27 +1021,63 @@
           </div>
         </div>
 
+        <!-- Botón deslizar -->
+        <div class="btn-ocultar">
+          <template v-if="vistaPreviaOff === false">
+              <span class="ocultar-izquierdo" @click="mostrarVistaPrevia">
+                <font-awesome-icon :icon="['fas', 'angle-left']" size="xl" />
+              </span>
+            </template>
+
+            <template v-else>
+              <span class="ocultar-derecho" @click="ocultarVistaPrevia">
+                <font-awesome-icon :icon="['fas', 'angle-right']" size="xl" />
+              </span>
+            </template>  
+        </div>
+
       </div>
 
       <!-- Grid signos vitales -->
-      <div class="" :class="vistaPreviaOff == false ? 'col-md-6 tab-content' : 'col-md-9 tab-content'">
-        <div class="" :class="vistaPreviaOff == false ? 'row g-3 fade-in' : 'row g-3'">
-          <table class="table table-hover table-bordered">
-            <thead>
-              <tr>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-                <th>00:00</th>
-              </tr>
-            </thead>
-          </table>
+      <div class="" :class="vistaPreviaOff == false ? 'col-md-6' : 'col-md-9'">
+        <div class="" :class="vistaPreviaOff == false ? 'fade-in vista-grid-monitoreo' : 'vista-grid-monitoreo'">
+          <div class="col-md-12 deslizar-grid">          
+            <table class="table table-responsive" id="grid-signos">
+              <thead>
+                <tr>
+                  <th>00:00</th>
+                  <th>00:00</th>
+                  <th>00:00</th>
+                  <th>00:00</th>
+                  <th>00:00</th>
+                  <th>00:00</th>
+                  <th>00:00</th>
+                  <th>00:00</th>
+                  <th>00:00</th>
+                  <th>00:00</th>
+                </tr>
+              </thead>
+              <!-- <tbody v-for="fila in hl7mess">
+
+                <tr v-for="valor in fila">
+                  {{ valor }}
+                </tr>              
+                
+              </tbody> -->
+              <!-- <tbody>
+                <tr v-for="fila in hl7mess">
+                  <td v-for="valor in fila">{{ valor }}</td>
+                </tr>
+              </tbody> -->
+              <tbody>
+                <tr v-for="fila in hl7mess">
+                  <template v-for="valor in fila">
+                    <td>{{ valor }}</td>
+                  </template>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -1110,7 +1150,7 @@ export default defineComponent({
     return {
       //Datos interfaces
       menuTrans: {} as regMenuTrans,
-      infoNotaPost: {} as regNotaPost,        
+      infoNotaPost: {} as regNotaPost,
       
       //Store
       preIdStore,
@@ -1143,6 +1183,8 @@ export default defineComponent({
       btnActualizaEvento:false, 
 
       //Botones tiempos quirurgicos
+      btnTQX: false,
+
       activoAnesIN: false,
       noActivoAnesIN: true,
 
@@ -1168,6 +1210,17 @@ export default defineComponent({
       medicSeleccionados: [],
 
       vistaPreviaOff:false,
+
+      //btn Iniciar-Detener Monitor
+      btnCambioMonitor:false,
+
+      hl7mess:[],
+
+      intervalId: null,
+      saveGrid: null,
+      btnMSV: true,
+      temporizador: null,
+      grid: [],
     }
   },
 
@@ -1427,9 +1480,12 @@ export default defineComponent({
             this.btnUpdateEventos=true
             this.btnActualizaEvento=false
 
+            this.btnMSV=false
+
             var hoy = new Date();
             this.menuTrans.ingresoQX = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID._id, tiemposQX);
+            this.siguesAhi();
           break;
 
           case "ANESIN":
@@ -1449,7 +1505,7 @@ export default defineComponent({
 
             this.btnAddEventos=false
             this.btnUpdateEventos=true
-            this.btnActualizaEvento=false
+            this.btnActualizaEvento=false            
 
             var hoy = new Date();
             this.menuTrans.inicioAn = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
@@ -1547,6 +1603,10 @@ export default defineComponent({
             this.btnUpdateEventos=true
             this.btnActualizaEvento=false
 
+            this.btnMSV=true
+            this.btnTQX=true
+            this.finMSV()
+
             var hoy = new Date();
             this.menuTrans.egresoQx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX);
@@ -1588,7 +1648,7 @@ export default defineComponent({
         }        
       },
 
-      async mostrarDropDown(tiemposQX : string){        
+      async mostrarDropDown(tiemposQX : string){
         switch (tiemposQX) {
           case "ANESIN":
             this.activoAnesIN=true;
@@ -1723,7 +1783,6 @@ export default defineComponent({
       },
 
       async guardarMedicamentos() {
-        
         if (this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.medicamento == "" || this.menuTrans.medicamento == undefined) {
               swal.fire({
               title: "Indique el tipo de administración y medicamento",
@@ -1802,7 +1861,7 @@ export default defineComponent({
 
             await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
             await this.listarMedicamentosTrans()
-          }                                                
+          }
       },
 
       async cambiarBtnActualizarMedic(id) {
@@ -1941,7 +2000,7 @@ export default defineComponent({
                 timerProgressBar: true,
                 position: "top-end",
                 });
-          } else {        
+          } else {
             this.btnAddMedicamentos=false
             this.btnUpdateMedicamentos=true
             this.btnActualizaMedicamento=false
@@ -1972,7 +2031,7 @@ export default defineComponent({
             
             await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
             await transAnestStore.getEventosList(preIdStore.pacienteID._id);
-          }       
+          }
       },
 
       async actualizarRelevos(r_horaRelevo: string, r_tipoRel: string, r_matriculaRel: string, 
@@ -2002,7 +2061,7 @@ export default defineComponent({
             await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
             await transAnestStore.getEventosList(preIdStore.pacienteID._id);
 
-          }                                                
+          }
       },
 
       async cambiarBtnActualizarRelevo(id) {
@@ -2073,9 +2132,9 @@ export default defineComponent({
                 });
       },
 
-      async eliminarRelevo(idRelevo: string) {         
+      async eliminarRelevo(idRelevo: string) {
 
-          await transAnestStore.deleteRelevo(idRelevo);        
+          await transAnestStore.deleteRelevo(idRelevo);
 
           this.menuTrans.idRelevo = "";
           this.menuTrans.horaRelevo = "";
@@ -2131,7 +2190,7 @@ export default defineComponent({
                 timerProgressBar: true,
                 position: "top-end",
                 });
-          } else {        
+          } else {
             this.btnAddMedicamentos=false
             this.btnUpdateMedicamentos=true
             this.btnActualizaMedicamento=false
@@ -2160,7 +2219,7 @@ export default defineComponent({
             
             await transAnestStore.getEventosList(preIdStore.pacienteID._id);
             await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
-          }       
+          }
       },
 
       async actualizarEventos(r_horaEvento: string, e_tipoEve: string, e_detalleEvento: string) {
@@ -2186,7 +2245,7 @@ export default defineComponent({
 
             await transAnestStore.getEventosList(preIdStore.pacienteID._id);
             await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
-          }                                                
+          }
       },
 
       async cambiarBtnActualizarEvento(id) {
@@ -2252,9 +2311,9 @@ export default defineComponent({
                 });
       },
 
-      async eliminarEvento(idEvento: string) {         
+      async eliminarEvento(idEvento: string) {
 
-          await transAnestStore.deleteEvento(idEvento);        
+          await transAnestStore.deleteEvento(idEvento);
 
           this.menuTrans.idEvento = "";
           this.menuTrans.horaEvento = "";
@@ -2269,18 +2328,86 @@ export default defineComponent({
 
           await transAnestStore.getEventosList(preIdStore.pacienteID._id);
           await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
-      },      
-  },
+      },
 
-  computed: {
-  tablaMedicamentos() {      
-      if (this.medicSeleccionados.length === 0) {
-        return this.listaMedTrans;
-      } else {
-        return this.listaMedTrans.filter(item => this.medicSeleccionados.includes(item));
-      }
+      // Eventos de Monitoreo
+      async iniMSV(){
+        this.btnCambioMonitor = true;
+        this.siAquisigo();
+        transAnestStore.getIniciaMonitoreo();
+        this.iniRecepDatos();
+        this.capturaGrid();
+      },
+
+      async finMSV(){
+        this.btnCambioMonitor = false;
+        transAnestStore.getDetieneMonitoreo();
+        this.termRecepDatos();
+      },
+
+      comMSV(){
+        transAnestStore.getDatosMonitor();
+        this.vaciarMensajeHL7();
+      },
+
+      async vaciarMensajeHL7(){
+        var hl7Message = transAnestStore.datosMSV
+    
+        var lineas = hl7Message.split('\r');
+    
+        var lineasOBX = lineas.filter(function(linea) {
+          return /^OBX/.test(linea);
+        });
+        
+        var valorSegmentos = lineasOBX.map(function(fila) {
+          var segmentos = fila.split('|');
+          return segmentos[5];
+        });
+    
+        //this.hl7mess = valorSegmentos
+        this.hl7mess.push(valorSegmentos);
+
+        console.log("HL7: "+this.hl7mess);        
+      },
+
+      iniRecepDatos(){
+        this.intervalId = setInterval(() => {
+          this.comMSV();
+        }, 15000);
+      },
+
+      termRecepDatos(){        
+        clearInterval(this.intervalId);
+      },
+      
+      siAquisigo(){
+        clearTimeout(this.temporizador);
+      },
+
+      siguesAhi(){
+        this.temporizador = setTimeout(() => {
+          console.log("Sigues Ahi?");
+          this.siAquisigo();
+        }, 1000 /** 60 * 30*/);        
+      },
+      
+      capturaGrid(){
+        this.saveGrid = setInterval(() => {
+          this.grid.push(this.hl7mess);
+          console.log("GRID:" + this.grid);
+        }, 1000 * 60);
+      },
   },
-},
+  
+  computed: {
+    tablaMedicamentos() {      
+        if (this.medicSeleccionados.length === 0) {
+          return this.listaMedTrans;
+        } else {
+          return this.listaMedTrans.filter(item => this.medicSeleccionados.includes(item));
+        }
+    },
+  },
 })
 </script>
 
@@ -2345,8 +2472,14 @@ export default defineComponent({
   border-radius: 10px;
 }
 .vista-eventos-relevos{
-  height: 225px;
+  height: 255px;
   background-color: white;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+.vista-grid-monitoreo{
+  height: 635px;
+  background-color: #E8EBEF;
   padding: 0.5rem;
   border-radius: 10px;
 }
@@ -2380,7 +2513,7 @@ export default defineComponent({
   background-color: #E88300;
   padding: 0rem;
   border-radius: 10px;
-  margin-left: 15px;
+  margin-left: 29px;
   text-align: center;
 }
 .menu-pre-post-off {  
@@ -2389,7 +2522,7 @@ export default defineComponent({
   background-color: #d6d6d6;
   padding: 0rem;
   border-radius: 10px;
-  margin-left: 15px;
+  margin-left: 29px;
   text-align: center;
 }
 .menu-pre-post:hover{
@@ -2432,6 +2565,12 @@ export default defineComponent({
   height: 150px;
   margin-top: 0px;
 }
+.deslizar-grid{
+  overflow: scroll;
+  overflow-x: scroll;
+  height: 620px;
+  margin-top: 0px;
+}
 .deslizar-balance {
   overflow: scroll;
   overflow-x: hidden;
@@ -2447,7 +2586,7 @@ export default defineComponent({
   overflow: scroll;
   overflow-x: hidden;
   margin-top: 0px;
-  height: 175px;
+  height: 205px;
 }
 .btn-guardar{
     --bs-btn-bg: none;
@@ -2510,6 +2649,32 @@ export default defineComponent({
     --bs-btn-active-border-color: #002D60;
     inline-size: -webkit-fill-available;
 }
+
+.btn-monitor{
+    --bs-btn-bg: #fff;
+    --bs-btn-color: #002D60;    
+    --bs-btn-border-color: #fff;
+    --bs-btn-hover-bg: #E88300;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #E88300;          
+    --bs-btn-active-bg: #E88300;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-border-color: #E88300;
+    inline-size: -webkit-fill-available;
+}
+
+.btn-monitor-off{
+    --bs-btn-bg: #E88300;
+    --bs-btn-color: #fff;    
+    --bs-btn-border-color: #E88300;
+    --bs-btn-hover-bg: #E88300;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: #E88300;          
+    --bs-btn-active-bg: #fff;
+    --bs-btn-active-color: #002D60;
+    --bs-btn-active-border-color: #fff;
+    inline-size: -webkit-fill-available;
+}
 .modal-med-largo {
   height: auto;
 }
@@ -2531,9 +2696,9 @@ hr {
   --bs-dropdown-border-width: 0.5px;
 }
 .btn.disabled, .btn:disabled, fieldset:disabled .btn {
-    color: white;
+    color: #E8EBEF;
     pointer-events: none;
-    background-color: white;
+    background-color: #E8EBEF;
     opacity: 1;
 }
 .estilo-bolo{
@@ -2570,20 +2735,43 @@ hr {
   border-bottom-width:1px;
   border-bottom-width:thick
 }
+#grid-signos thead tr > th {
+  border-color: white;
+  background-color: #FFF !important;
+}
+#grid-signos > :not(caption) > * > * {
+  padding: 0.5rem 0.5rem;
+  background-color: white;
+  border-bottom-width: 1px;
+  box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+#grid-signos tbody tr > td {
+  border: 1px;
+  height: 10px;
+  padding-left: 1px;
+}
+#grid-signos {
+  padding-left: 10px;
+  margin-top: 20px;
+}
+.espacio {
+  height: 55px;
+}
 .ocultar-izquierdo{
-  align-self: flex-end; 
-  position: sticky; 
+  align-self: center; 
+  position: relative; 
   cursor: pointer;
 }
 .ocultar-derecho{
   align-self:center; 
-  position: sticky; 
+  position: relative; 
   cursor: pointer;
 }
 .btn-ocultar{
-  position: fixed; 
+  position: absolute; 
+  align-self: flex-end;
   z-index: 1; 
-  top:63%; 
+  top:50%; 
   color: white; 
   background-color: #002D60; 
   border-radius: 50%; 
