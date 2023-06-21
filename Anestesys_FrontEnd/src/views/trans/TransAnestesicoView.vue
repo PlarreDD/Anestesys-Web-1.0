@@ -1586,6 +1586,9 @@ export default defineComponent({
             this.btnUpdateEventos=true
             this.btnActualizaEvento=false
 
+            this.btnMSV=true
+            this.finMSV()
+
             var hoy = new Date();
             this.menuTrans.egresoQx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX);
