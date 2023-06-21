@@ -16,7 +16,7 @@
                   type="button"
                   class="btn btn-monitor fw-bold">
                   <img src="images/monitoreo.svg" />
-                  &nbsp;&nbsp;&nbsp;INICIAR MONITOREO
+                  <label>&nbsp;&nbsp;&nbsp;INICIAR MONITOREO</label>
                 </button>
               </template>
 
@@ -25,7 +25,7 @@
                   type="button"
                   class="btn btn-monitor-off fw-bold">
                   <img src="images/monitoreo.svg" />
-                  &nbsp;&nbsp;&nbsp;DETENER MONITOREO
+                  <label>&nbsp;&nbsp;&nbsp;DETENER MONITOREO</label>
                 </button>
               </template>
             </div>
@@ -843,6 +843,7 @@
               <button type="button" id="anes-in"
                       class="btn btn-menu fw-bold"
                       :class="{ 'show': activoAnesIN, ' ': noActivoAnesIN }"
+                      :disabled="btnTQX == true ? true : false"
                       @dblclick="actualizarTQX('ANESIN')"
                       @click.right="mostrarDropDown('ANESIN')"> 
                       <label>ANES IN <label class="fw-normal">{{menuTrans.inicioAn}}</label></label> 
@@ -863,6 +864,7 @@
             <div class="col-md-2">
               <button type="button" id="cx-in"
                       class="btn btn-menu fw-bold" :class="{ 'show': activoCxIN, ' ': noActivoCxIN }"
+                      :disabled="btnTQX == true ? true : false"
                       @dblclick="actualizarTQX('CXIN')"
                       @click.right="mostrarDropDown('CXIN')"> 
                 <label>CX IN <label class="fw-normal">{{menuTrans.inicioCx}}</label></label>
@@ -881,6 +883,7 @@
             <div class="col-md-2"> 
               <button type="button" id="cx-out"
                       class="btn btn-menu fw-bold" :class="{ 'show': activoCxOUT, ' ': noActivoCxOUT }"
+                      :disabled="btnTQX == true ? true : false"
                       @dblclick="actualizarTQX('CXOUT')"
                       @click.right="mostrarDropDown('CXOUT')"> 
                 <label>CX OUT <label class="fw-normal">{{menuTrans.finCx}}</label></label>
@@ -899,7 +902,8 @@
 
             <div class="col-md-2">    
               <button type="button" id="anes-out"
-                      class="btn btn-menu fw-bold" :class="{ 'show': activoAnesOUT, ' ': noActivoAnesOUT }" 
+                      class="btn btn-menu fw-bold" :class="{ 'show': activoAnesOUT, ' ': noActivoAnesOUT }"
+                      :disabled="btnTQX == true ? true : false"
                       @dblclick="actualizarTQX('ANESOUT')"
                       @click.right="mostrarDropDown('ANESOUT')"> 
                 <label>ANES OUT <label class="fw-normal">{{menuTrans.finAn}}</label></label>
@@ -939,20 +943,7 @@
       </div>     
     </div>
 
-    <!-- Botón deslizar -->
-    <div class="btn-ocultar">
-      <template v-if="vistaPreviaOff === false">
-          <span class="ocultar-izquierdo" @click="mostrarVistaPrevia">
-            <font-awesome-icon :icon="['fas', 'angle-left']" size="xl" />
-          </span>
-        </template>
-
-        <template v-else>
-          <span class="ocultar-derecho" @click="ocultarVistaPrevia">
-            <font-awesome-icon :icon="['fas', 'angle-right']" size="xl" />
-          </span>
-        </template>  
-    </div>
+    
 
     <!-- Contenedor Grid -->
     <div class="input-group mb-3 bordePrincipal">
@@ -1030,15 +1021,27 @@
           </div>
         </div>
 
+        <!-- Botón deslizar -->
+        <div class="btn-ocultar">
+          <template v-if="vistaPreviaOff === false">
+              <span class="ocultar-izquierdo" @click="mostrarVistaPrevia">
+                <font-awesome-icon :icon="['fas', 'angle-left']" size="xl" />
+              </span>
+            </template>
+
+            <template v-else>
+              <span class="ocultar-derecho" @click="ocultarVistaPrevia">
+                <font-awesome-icon :icon="['fas', 'angle-right']" size="xl" />
+              </span>
+            </template>  
+        </div>
+
       </div>
 
       <!-- Grid signos vitales -->
       <div class="" :class="vistaPreviaOff == false ? 'col-md-6' : 'col-md-9'">
-        <div class="row" :class="vistaPreviaOff == false ? 'fade-in vista-grid-monitoreo' : 'vista-grid-monitoreo'">
-          <div class="col-md-1" style="display: flex; flex-direction: column; row-gap: 5px;  ">
-            <label>FR</label>
-          </div>
-          <div class="col-md-11 deslizar-grid">          
+        <div class="" :class="vistaPreviaOff == false ? 'fade-in vista-grid-monitoreo' : 'vista-grid-monitoreo'">
+          <div class="col-md-12 deslizar-grid">          
             <table class="table table-responsive" id="grid-signos">
               <thead>
                 <tr>
@@ -1180,6 +1183,8 @@ export default defineComponent({
       btnActualizaEvento:false, 
 
       //Botones tiempos quirurgicos
+      btnTQX: false,
+
       activoAnesIN: false,
       noActivoAnesIN: true,
 
@@ -1500,7 +1505,7 @@ export default defineComponent({
 
             this.btnAddEventos=false
             this.btnUpdateEventos=true
-            this.btnActualizaEvento=false
+            this.btnActualizaEvento=false            
 
             var hoy = new Date();
             this.menuTrans.inicioAn = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
@@ -1599,6 +1604,7 @@ export default defineComponent({
             this.btnActualizaEvento=false
 
             this.btnMSV=true
+            this.btnTQX=true
             this.finMSV()
 
             var hoy = new Date();
@@ -2690,9 +2696,9 @@ hr {
   --bs-dropdown-border-width: 0.5px;
 }
 .btn.disabled, .btn:disabled, fieldset:disabled .btn {
-    color: white;
+    color: #E8EBEF;
     pointer-events: none;
-    background-color: white;
+    background-color: #E8EBEF;
     opacity: 1;
 }
 .estilo-bolo{
@@ -2752,19 +2758,20 @@ hr {
   height: 55px;
 }
 .ocultar-izquierdo{
-  align-self: flex-end; 
-  position: sticky; 
+  align-self: center; 
+  position: relative; 
   cursor: pointer;
 }
 .ocultar-derecho{
   align-self:center; 
-  position: sticky; 
+  position: relative; 
   cursor: pointer;
 }
 .btn-ocultar{
-  position: fixed; 
+  position: absolute; 
+  align-self: flex-end;
   z-index: 1; 
-  top:62%; 
+  top:50%; 
   color: white; 
   background-color: #002D60; 
   border-radius: 50%; 
