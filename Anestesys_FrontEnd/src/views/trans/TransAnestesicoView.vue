@@ -1054,12 +1054,24 @@
                   <th>00:00</th>
                 </tr>
               </thead>
-              <tbody v-for="dato in hl7mess">
+              <!-- <tbody v-for="fila in hl7mess">
 
-                <tr>{{ dato }}
-                  <!-- <td></td> -->
-                </tr>
+                <tr v-for="valor in fila">
+                  {{ valor }}
+                </tr>              
                 
+              </tbody> -->
+              <!-- <tbody>
+                <tr v-for="fila in hl7mess">
+                  <td v-for="valor in fila">{{ valor }}</td>
+                </tr>
+              </tbody> -->
+              <tbody>
+                <tr v-for="fila in hl7mess">
+                  <template v-for="valor in fila">
+                    <td>{{ valor }}</td>
+                  </template>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -2343,7 +2355,10 @@ export default defineComponent({
           return segmentos[5];
         });
     
-        this.hl7mess = valorSegmentos
+        //this.hl7mess = valorSegmentos
+        this.hl7mess.push(valorSegmentos);
+
+        console.log("HL7: "+this.hl7mess);        
       },
 
       iniRecepDatos(){
