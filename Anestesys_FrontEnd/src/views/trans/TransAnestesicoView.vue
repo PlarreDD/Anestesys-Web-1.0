@@ -988,7 +988,7 @@
         <div class="" :class="vistaPreviaOff == false ? 'col-md-11 vista-eventos-relevos' : 'col-md-11 vista-eventos-relevos'">  
           <div class="col-md-12">
             <button class="btn btn-evento-relevo btn-sm fw-bold"
-                    @click="pingMSV('172.16.22.201')">RELEVOS Y EVENTOS CRÍTICOS</button>
+                    @click="">RELEVOS Y EVENTOS CRÍTICOS</button>
           </div>   
           <!-- Lista de relevos/eventos -->
           <div class="deslizar-relevos m-1"> 
@@ -1218,6 +1218,7 @@ export default defineComponent({
       saveGrid: null,
       btnMSV: true,
       temporizador: null,
+      tempMSV: null,
       grid: [],
     }
   },
@@ -1268,6 +1269,12 @@ export default defineComponent({
 
       this.menuTrans.tipoRel= "RELEVO";
       this.menuTrans.tipoEve= "EVENTO";
+      
+      this.tempMSV = setInterval(() => {
+        // console.log(medStore.monitor[0].dirIPMVS);
+        
+          this.pingMSV(medStore.monitor[0].dirIPMVS);
+      }, 15000);
   },
 
   methods: {
@@ -2386,7 +2393,7 @@ export default defineComponent({
         this.temporizador = setTimeout(() => {
           console.log("Sigues Ahi?");
           this.siAquisigo();
-        }, 1000 /** 60 * 30*/);        
+        }, 1000 * 60 * 30);        
       },
       
       capturaGrid(){

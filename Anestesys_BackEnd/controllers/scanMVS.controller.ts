@@ -144,19 +144,21 @@ export const statusMSV = async(req: any, res: Response) => {
   const { dirIPMVS } = req.body;
   
   pingDevice(dirIPMVS)
-  // console.log("statusMSV"+dirIPMVS);
     .then(async isAlive => {
       if (isAlive){
-        console.log(`El dispositivo ${dirIPMVS} está activo.`);
-        
         try {
           return res.json({ statusMSV: "Activo" });
         } catch (error) {
           return res.status(500).json({ Error: 'Error de servidor' });
         }
       }
-      else
-        return new Error(`El dispositivo ${dirIPMVS} no está activo.`);
+      else{
+        try {
+          return res.json({ statusMSV: "Inactivo" });
+        } catch (error) {
+          return res.status(500).json({ Error: 'Error de servidor' });
+        }
+      }
     })
     .catch(error => {
       console.error(`Error al hacer ping al dispositivo ${dirIPMVS}: ${error.message}`);
