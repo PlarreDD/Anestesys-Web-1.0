@@ -1220,6 +1220,7 @@ export default defineComponent({
       temporizador: null,
       tempMSV: null,
       grid: [],
+      statEnvDat: false,
     }
   },
 
@@ -1271,10 +1272,9 @@ export default defineComponent({
       this.menuTrans.tipoEve= "EVENTO";
       
       this.tempMSV = setInterval(() => {
-        // console.log(medStore.monitor[0].dirIPMVS);
-        
-          this.pingMSV(medStore.monitor[0].dirIPMVS);
-      }, 15000);
+        this.pingMSV(medStore.monitor[0].dirIPMVS);
+        console.log("Envío de Datos: " + transAnestStore.envDat + " Estatus Monitor: " + medStore.status); // Status Envío de Datos
+      }, 10000);
   },
 
   methods: {
@@ -2382,6 +2382,8 @@ export default defineComponent({
       },
 
       termRecepDatos(){
+        transAnestStore.envDat = false;
+        console.log(transAnestStore.envDat);        
         clearInterval(this.intervalId);
       },
       

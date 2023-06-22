@@ -17,6 +17,7 @@ export const useTransAnestStore = defineStore('transAn', {
         eventos: ref(null),
         eventoID: ref(null),
         datosMSV: ref(null),
+        envDat: ref(null),
     }),
 
     actions: {
@@ -989,9 +990,11 @@ export const useTransAnestStore = defineStore('transAn', {
             })
             .then((res: any) => {
               this.datosMSV = res.data.datosMSV; // Acceder a los datos usando res.data.datosMSV
-              console.log("GetDatosMonitor: "+this.datosMSV);              
+              this.envDat = true;
+              console.log("GetDatosMonitor: " + this.datosMSV);
             })
             .catch((e: any) => {
+              this.envDat = false;
               // Manejar el error
             });
         },

@@ -56,8 +56,6 @@ export const handleMonitorData = async (_req: Request, res: Response) => {
 }
 
 export const registerMSV = async (req: any, res: Response) => {
-  console.log(req.body);
-  
   const { nombreMVS, dirIPMVS} = req.body;
   
   pingDevice(dirIPMVS)
