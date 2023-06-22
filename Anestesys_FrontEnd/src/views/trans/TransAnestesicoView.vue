@@ -1042,9 +1042,24 @@
         <div class="" :class="vistaPreviaOff == false ? 'fade-in vista-grid-monitoreo' : 'vista-grid-monitoreo'">
           <div class="col-md-12 deslizar-grid">          
 
+              <!-- <div class="d-flex flex-nowrap row g-4">
+                <template v-for="column in hl7mess">
+                  <div class="col">
+                    <template v-for="item in column">
+                      <div class="m-1" style="background-color: white; border: solid; border-color: #DBDEE2; border-radius: 5px; text-align: center; color:#002D60; width: 140%; height: 3.5%;">
+                        {{ item }}
+                      </div>
+                    </template>
+                  </div>
+                </template>
+              </div> -->
+
               <div class="d-flex flex-nowrap row g-4">
                 <template v-for="column in hl7mess">
                   <div class="col">
+                    <div>
+                      {{ traerFechaActual() }}
+                    </div>
                     <template v-for="item in column">
                       <div class="m-1" style="background-color: white; border: solid; border-color: #DBDEE2; border-radius: 5px; text-align: center; color:#002D60; width: 140%; height: 3.5%;">
                         {{ item }}
@@ -2386,6 +2401,12 @@ export default defineComponent({
         // const dirip = '172.16.22.201';
         medStore.statusMSV(dirip);
       },
+
+      traerFechaActual() {
+        var hoy = new Date();
+        const hour = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+        return `${hour}`;
+      }
   },
   
   computed: {
