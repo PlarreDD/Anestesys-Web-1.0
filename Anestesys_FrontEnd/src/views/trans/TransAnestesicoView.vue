@@ -1046,7 +1046,7 @@
                 <template v-for="column in hl7mess">
                   <div class="col">
                     <template v-for="item in column">
-                      <div class="m-1" style="background-color: white; border: solid; border-color: #DBDEE2; border-radius: 5px; text-align: center; color:#002D60; width: 150%; height: 3.5%;">
+                      <div class="m-1" style="background-color: white; border: solid; border-color: #DBDEE2; border-radius: 5px; text-align: center; color:#002D60; width: 140%; height: 3.5%;">
                         {{ item }}
                       </div>
                     </template>
