@@ -238,22 +238,22 @@ export const useMedicamentoStore = defineStore("medicamento", {
     },
 
     async statusMSV(dirIP: string){
-      console.log(dirIP);
-      
       await apiAxios({
         url: "http://localhost:5000/mvs/stat",
-        method: "GET",
+        method: "POST",
         headers: {
           Authorization: "Bearer " + userStore.token,
         },
         data: {
-          dirIPMVS: dirIP,
+          dirIPMVS: dirIP
         },
       })
       .then((res: any) => {
         this.status = res.data.statusMSV;
+        console.log(this.status);        
       })
       .catch((e: any) => {
+          console.log(e);
           
       });
     },

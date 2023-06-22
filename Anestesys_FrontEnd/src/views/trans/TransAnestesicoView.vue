@@ -943,8 +943,6 @@
       </div>
     </div>
 
-    
-
     <!-- Contenedor Grid -->
     <div class="input-group mb-3 bordePrincipal">
      
@@ -990,7 +988,7 @@
         <div class="" :class="vistaPreviaOff == false ? 'col-md-11 vista-eventos-relevos' : 'col-md-11 vista-eventos-relevos'">  
           <div class="col-md-12">
             <button class="btn btn-evento-relevo btn-sm fw-bold"
-                    @click="pingMSV">RELEVOS Y EVENTOS CRÍTICOS</button>
+                    @click="pingMSV('172.16.22.201')">RELEVOS Y EVENTOS CRÍTICOS</button>
           </div>   
           <!-- Lista de relevos/eventos -->
           <div class="deslizar-relevos m-1"> 
@@ -2398,10 +2396,8 @@ export default defineComponent({
         }, 1000 * 60);
       },
 
-      pingMSV(){
-        const dirip = '192.168.100.5';
-        console.log("pingMSV" + dirip);
-        
+      pingMSV(dirip: string){
+        // const dirip = '172.16.22.201';
         medStore.statusMSV(dirip);
       },
   },

@@ -56,6 +56,8 @@ export const handleMonitorData = async (_req: Request, res: Response) => {
 }
 
 export const registerMSV = async (req: any, res: Response) => {
+  console.log(req.body);
+  
   const { nombreMVS, dirIPMVS} = req.body;
   
   pingDevice(dirIPMVS)
@@ -139,15 +141,14 @@ export function getConnectedDevices(callback: (devices: string[]) => void) {
 };
 
 export const statusMSV = async(req: any, res: Response) => {
-  console.log(req.body);
-  
   const { dirIPMVS } = req.body;
-  console.log(dirIPMVS);
   
   pingDevice(dirIPMVS)
+  // console.log("statusMSV"+dirIPMVS);
     .then(async isAlive => {
       if (isAlive){
-        // console.log(`El dispositivo ${dirIPMVS} está activo.`);
+        console.log(`El dispositivo ${dirIPMVS} está activo.`);
+        
         try {
           return res.json({ statusMSV: "Activo" });
         } catch (error) {
@@ -156,7 +157,7 @@ export const statusMSV = async(req: any, res: Response) => {
       }
       else
         return new Error(`El dispositivo ${dirIPMVS} no está activo.`);
-      })
+    })
     .catch(error => {
       console.error(`Error al hacer ping al dispositivo ${dirIPMVS}: ${error.message}`);
     });

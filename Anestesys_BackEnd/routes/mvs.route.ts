@@ -16,6 +16,6 @@ router.delete('/:id', requireToken, deleteMSV);
 router.get('/monitor', requireToken, startMSVData);
 router.get('/stop', requireToken, stopMSVData);
 router.get('/com', requireToken, handleMonitorData);
-router.get('/stat', requireToken, statusMSV);
+router.post('/stat', requireToken, statusMSV);
 
 export default router;
