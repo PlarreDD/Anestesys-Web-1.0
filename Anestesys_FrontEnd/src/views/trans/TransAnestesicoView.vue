@@ -2,6 +2,7 @@
   <header>
     <barra-navegacion/>
   </header>
+
   <div class="margen-div-barra">
 
     <div class="input-group mb-3">
@@ -943,8 +944,6 @@
       </div>     
     </div>
 
-    
-
     <!-- Contenedor Grid -->
     <div class="input-group mb-3 bordePrincipal">
      
@@ -1042,41 +1041,19 @@
       <div class="" :class="vistaPreviaOff == false ? 'col-md-6' : 'col-md-9'">
         <div class="" :class="vistaPreviaOff == false ? 'fade-in vista-grid-monitoreo' : 'vista-grid-monitoreo'">
           <div class="col-md-12 deslizar-grid">          
-            <table class="table table-responsive" id="grid-signos">
-              <thead>
-                <tr>
-                  <th>00:00</th>
-                  <th>00:00</th>
-                  <th>00:00</th>
-                  <th>00:00</th>
-                  <th>00:00</th>
-                  <th>00:00</th>
-                  <th>00:00</th>
-                  <th>00:00</th>
-                  <th>00:00</th>
-                  <th>00:00</th>
-                </tr>
-              </thead>
-              <!-- <tbody v-for="fila in hl7mess">
 
-                <tr v-for="valor in fila">
-                  {{ valor }}
-                </tr>              
-                
-              </tbody> -->
-              <!-- <tbody>
-                <tr v-for="fila in hl7mess">
-                  <td v-for="valor in fila">{{ valor }}</td>
-                </tr>
-              </tbody> -->
-              <tbody>
-                <tr v-for="fila in hl7mess">
-                  <template v-for="valor in fila">
-                    <td>{{ valor }}</td>
-                  </template>
-                </tr>
-              </tbody>
-            </table>
+              <div class="d-flex flex-nowrap row g-4">
+                <template v-for="column in hl7mess">
+                  <div class="col">
+                    <template v-for="item in column">
+                      <div class="m-1" style="background-color: white; border: solid; border-color: #DBDEE2; border-radius: 5px; text-align: center; color:#002D60; width: 150%; height: 3.5%;">
+                        {{ item }}
+                      </div>
+                    </template>
+                  </div>
+                </template>
+              </div>
+
           </div>
         </div>
       </div>
@@ -2735,25 +2712,6 @@ hr {
   border-bottom-width:1px;
   border-bottom-width:thick
 }
-#grid-signos thead tr > th {
-  border-color: white;
-  background-color: #FFF !important;
-}
-#grid-signos > :not(caption) > * > * {
-  padding: 0.5rem 0.5rem;
-  background-color: white;
-  border-bottom-width: 1px;
-  box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
-}
-#grid-signos tbody tr > td {
-  border: 1px;
-  height: 10px;
-  padding-left: 1px;
-}
-#grid-signos {
-  padding-left: 10px;
-  margin-top: 20px;
-}
 .espacio {
   height: 55px;
 }
@@ -2778,7 +2736,7 @@ hr {
   width: 25px; 
   height: auto; 
   text-align: center; 
-  opacity: 0.5;
+  /* opacity: 0.5; */
 }
 .ocultar{
   width: 0;
