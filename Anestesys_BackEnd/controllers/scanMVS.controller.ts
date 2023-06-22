@@ -56,19 +56,20 @@ export const handleMonitorData = async (_req: Request, res: Response) => {
 }
 
 export const registerMSV = async (req: any, res: Response) => {
+  console.log(req.body);
+  
   const { nombreMVS, dirIPMVS} = req.body;
   
   pingDevice(dirIPMVS)
     .then(async isAlive => {
       if (isAlive){
-        console.log(`El dispositivo ${dirIPMVS} está activo.`);
-        
+        // console.log(`El dispositivo ${dirIPMVS} está activo.`);
         try {
           const monitor = new MVS({ nombreMVS, dirIPMVS});
           await monitor.save();
-          return res.json({ monitor });          
+          return res.json({ monitor, statusMSV: "Activo" });
         } catch (error) {
-          return res.status(500).json({ Error: 'Error de servidor' });          
+          return res.status(500).json({ Error: 'Error de servidor' });
         }
       }
       else
@@ -104,7 +105,7 @@ export const deleteMSV = async (req: any, res: Response) => {
 }
 };
 
-export function pingDevice(deviceIP: string): Promise<boolean> {
+function pingDevice(deviceIP: string): Promise<boolean> {
   return new Promise<boolean>((resolve, reject) => {
     ping.sys.probe(deviceIP, (isAlive: boolean | null) => {
       if (isAlive !== null) {
@@ -137,4 +138,29 @@ export function getConnectedDevices(callback: (devices: string[]) => void) {
 
     callback(devices);
   });
+};
+
+export const statusMSV = async(req: any, res: Response) => {
+  const { dirIPMVS } = req.body;
+  
+  pingDevice(dirIPMVS)
+    .then(async isAlive => {
+      if (isAlive){
+        try {
+          return res.json({ statusMSV: "Activo" });
+        } catch (error) {
+          return res.status(500).json({ Error: 'Error de servidor' });
+        }
+      }
+      else{
+        try {
+          return res.json({ statusMSV: "Inactivo" });
+        } catch (error) {
+          return res.status(500).json({ Error: 'Error de servidor' });
+        }
+      }
+    })
+    .catch(error => {
+      console.error(`Error al hacer ping al dispositivo ${dirIPMVS}: ${error.message}`);
+    });
 };

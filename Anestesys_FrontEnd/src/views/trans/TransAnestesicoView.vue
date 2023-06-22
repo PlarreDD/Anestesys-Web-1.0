@@ -941,7 +941,7 @@
             <option>15</option>
           </select>
         </div>
-      </div>     
+      </div>
     </div>
 
     <!-- Contenedor Grid -->
@@ -950,7 +950,7 @@
       <!-- Vista previa medicamentos/eventos-relevos -->
       <div class="" :class="vistaPreviaOff == false ? 'col-md-3 menu-vista-previa mostrar' : 'menu-vista-previa ocultar'">       
 
-        <!-- Vista medicamentos -->        
+        <!-- Vista medicamentos -->
         <div class="" :class="vistaPreviaOff == false ? 'col-md-11 vista-medicamentos' : 'col-md-11 vista-medicamentos'">
           <div class="col-md-12">
             <Multiselect mode="tags"
@@ -983,13 +983,13 @@
               </tbody>
             </table>
           </div>
-        </div>                                     
+        </div>
 
         <!-- Vista eventos/relevos -->
         <div class="" :class="vistaPreviaOff == false ? 'col-md-11 vista-eventos-relevos' : 'col-md-11 vista-eventos-relevos'">  
           <div class="col-md-12">
             <button class="btn btn-evento-relevo btn-sm fw-bold"
-                    @click="capturaGrid">RELEVOS Y EVENTOS CRÍTICOS</button>
+                    @click="">RELEVOS Y EVENTOS CRÍTICOS</button>
           </div>   
           <!-- Lista de relevos/eventos -->
           <div class="deslizar-relevos m-1"> 
@@ -1197,6 +1197,7 @@ export default defineComponent({
       saveGrid: null,
       btnMSV: true,
       temporizador: null,
+      tempMSV: null,
       grid: [],
     }
   },
@@ -1247,6 +1248,12 @@ export default defineComponent({
 
       this.menuTrans.tipoRel= "RELEVO";
       this.menuTrans.tipoEve= "EVENTO";
+      
+      this.tempMSV = setInterval(() => {
+        // console.log(medStore.monitor[0].dirIPMVS);
+        
+          this.pingMSV(medStore.monitor[0].dirIPMVS);
+      }, 15000);
   },
 
   methods: {
@@ -1664,7 +1671,7 @@ export default defineComponent({
         }
       },
 
-      async ocultarDropDown(tiemposQX : string){                                        
+      async ocultarDropDown(tiemposQX : string){
         switch (tiemposQX) {
           case "ANESIN":
             this.activoAnesIN= false
@@ -1696,7 +1703,7 @@ export default defineComponent({
       },
 
       //Ocultar vista previa
-      mostrarVistaPrevia() {         
+      mostrarVistaPrevia() {
           this.vistaPreviaOff = true;
       },
 
@@ -2353,7 +2360,7 @@ export default defineComponent({
         }, 15000);
       },
 
-      termRecepDatos(){        
+      termRecepDatos(){
         clearInterval(this.intervalId);
       },
       
@@ -2365,7 +2372,7 @@ export default defineComponent({
         this.temporizador = setTimeout(() => {
           console.log("Sigues Ahi?");
           this.siAquisigo();
-        }, 1000 /** 60 * 30*/);        
+        }, 1000 * 60 * 30);        
       },
       
       capturaGrid(){
@@ -2373,6 +2380,11 @@ export default defineComponent({
           this.grid.push(this.hl7mess);
           console.log("GRID:" + this.grid);
         }, 1000 * 60);
+      },
+
+      pingMSV(dirip: string){
+        // const dirip = '172.16.22.201';
+        medStore.statusMSV(dirip);
       },
   },
   
