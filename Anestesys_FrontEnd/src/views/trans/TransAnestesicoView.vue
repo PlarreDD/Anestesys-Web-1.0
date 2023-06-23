@@ -10,22 +10,25 @@
         <div class="col-md-10">
           <div class="row g-3 mb-3">
             <!-- Botón monitoreo -->
-            <div class="col-md-3">
+            <div class="col-md-4">
 
               <template v-if="transAnestStore.envDat === true && medStore.status === 'Activo'">
-                <img src="images/imgIcon/MonitorActivoDatos.png" @click="finMSV"/>
+                <img src="images/imgIcon/MonitorActivoDatos.png" @click="finMSV" style="width: 70px; height: auto; cursor: pointer;"/>
+                <span class="fw-bold" style="color:#002D60">&nbsp;&nbsp;Estado: Recibiendo Datos</span>
               </template>
 
               <template v-if="transAnestStore.envDat === false && medStore.status === 'Activo'">
-                <img src="images/imgIcon/MonitorActivo.png" @click="iniMSV" :disabled="btnMSV"/>
+                <img src="images/imgIcon/MonitorActivo.png" @click="iniMSV" :disabled="btnMSV" style="width: 70px; height: auto; cursor: pointer;"/>
+                <span class="fw-bold" style="color:#002D60">&nbsp;&nbsp;Estado: Sin Datos</span>
               </template>  
 
               <template v-if="medStore.status === 'Inactivo'">
-                <img src="images/imgIcon/MonitorInactivo.png" />
-              </template>
+                <img src="images/imgIcon/MonitorInactivo.png" style="width: 70px; height: auto; cursor: pointer;" />
+                <span class="fw-bold" style="color:#002D60">&nbsp;&nbsp;Estado: Desconectado</span>
+              </template>              
             </div>
 
-            <div class="col-md-2"></div>
+            <div class="col-md-1"></div>
 
             <!-- Botón medicamento -->
             <div class="col-md-2">
@@ -1051,11 +1054,11 @@
               <div class="d-flex flex-nowrap row g-4">
                 <template v-for="column in hl7mess">
                   <div class="col">
-                    <div>
+                    <div class="m-1 fw-bold" style="background-color: white; border: solid; border-color: #DBDEE2; border-radius: 5px; text-align: center; color:#002D60; width: 140%; height: 1.5%;">
                       {{ traerFechaActual() }}
                     </div>
                     <template v-for="item in column">
-                      <div class="m-1" style="background-color: white; border: solid; border-color: #DBDEE2; border-radius: 5px; text-align: center; color:#002D60; width: 140%; height: 3.5%;">
+                      <div class="m-1" style="background-color: white; border: solid; border-color: #DBDEE2; border-radius: 5px; text-align: center; color:#002D60; width: 140%; height: 1.5%;">
                         {{ item }}
                       </div>
                     </template>
