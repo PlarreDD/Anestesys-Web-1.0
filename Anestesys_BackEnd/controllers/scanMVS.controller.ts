@@ -58,6 +58,11 @@ export const handleMonitorData = async (_req: Request, res: Response) => {
 export const registerMSV = async (req: any, res: Response) => {
   const { nombreMVS, dirIPMVS} = req.body;
   
+  getConnectedDevices(devices => {
+    HOST = devices[0];
+
+  });
+
   pingDevice(dirIPMVS)
     .then(async isAlive => {
       if (isAlive){

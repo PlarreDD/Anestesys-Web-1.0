@@ -250,7 +250,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
       })
       .then((res: any) => {
         this.status = res.data.statusMSV;
-        console.log(`El dispositivo está ${this.status}.`);
+        // console.log(`El dispositivo está ${this.status}.`);
       })
       .catch((e: any) => {
           console.log(e);

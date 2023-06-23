@@ -1219,49 +1219,51 @@ export default defineComponent({
   },
 
   mounted: function() { // Llama el método despues de cargar la página
-      transAnestStore.listDatosV(preIdStore.pacienteID._id);
-      this.listaTecAnest();
-      
-      this.menuTrans.balanceTotal = null;
-      this.menuTrans.solHartman = null;
-      this.menuTrans.glucosados = null;
-      this.menuTrans.almidones = null;
-      this.menuTrans.paqGlobular = null;
-      this.menuTrans.plaquetas = null;
-      this.menuTrans.factor_VII = null;
-      this.menuTrans.otrosIngresos = null;
-      this.menuTrans.solFisio = null;
-      this.menuTrans.gelatinas = null;
-      this.menuTrans.albuminas = null;
-      this.menuTrans.plasmas = null;
-      this.menuTrans.crioprecipitados = null;
-      this.menuTrans.factor_VII = null;
-      this.menuTrans.liqAscitis = null;
-      this.menuTrans.sangradoAprox = null;
-      this.menuTrans.uresis = null;
-      this.menuTrans.expoQX = null;
-      this.menuTrans.reqBasales = null;
-      this.menuTrans.ayuno = null;
-      this.menuTrans.ayuno = null;
-      this.menuTrans.otrosEgresos = null;
+    transAnestStore.getDetieneMonitoreo();
+    this.pingMSV(medStore.monitor[0].dirIPMVS);
+    transAnestStore.listDatosV(preIdStore.pacienteID._id);
+    this.listaTecAnest();
+    
+    this.menuTrans.balanceTotal = null;
+    this.menuTrans.solHartman = null;
+    this.menuTrans.glucosados = null;
+    this.menuTrans.almidones = null;
+    this.menuTrans.paqGlobular = null;
+    this.menuTrans.plaquetas = null;
+    this.menuTrans.factor_VII = null;
+    this.menuTrans.otrosIngresos = null;
+    this.menuTrans.solFisio = null;
+    this.menuTrans.gelatinas = null;
+    this.menuTrans.albuminas = null;
+    this.menuTrans.plasmas = null;
+    this.menuTrans.crioprecipitados = null;
+    this.menuTrans.factor_VII = null;
+    this.menuTrans.liqAscitis = null;
+    this.menuTrans.sangradoAprox = null;
+    this.menuTrans.uresis = null;
+    this.menuTrans.expoQX = null;
+    this.menuTrans.reqBasales = null;
+    this.menuTrans.ayuno = null;
+    this.menuTrans.ayuno = null;
+    this.menuTrans.otrosEgresos = null;
 
-      var anesin = document.getElementById("anes-in");
-      anesin.addEventListener("contextmenu", this.bloquearClicDerecho);
-      var cxin = document.getElementById("cx-in");
-      cxin.addEventListener("contextmenu", this.bloquearClicDerecho);
-      var cxout = document.getElementById("cx-out");
-      cxout.addEventListener("contextmenu", this.bloquearClicDerecho);
-      var anesout = document.getElementById("anes-out");
-      anesout.addEventListener("contextmenu", this.bloquearClicDerecho);
-      
-      transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+    var anesin = document.getElementById("anes-in");
+    anesin.addEventListener("contextmenu", this.bloquearClicDerecho);
+    var cxin = document.getElementById("cx-in");
+    cxin.addEventListener("contextmenu", this.bloquearClicDerecho);
+    var cxout = document.getElementById("cx-out");
+    cxout.addEventListener("contextmenu", this.bloquearClicDerecho);
+    var anesout = document.getElementById("anes-out");
+    anesout.addEventListener("contextmenu", this.bloquearClicDerecho);
+    
+    transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
 
-      this.menuTrans.tipoRel= "RELEVO";
-      this.menuTrans.tipoEve= "EVENTO";
-      
-      this.tempMSV = setInterval(() => {
-        this.pingMSV(medStore.monitor[0].dirIPMVS);
-      }, 10000);
+    this.menuTrans.tipoRel= "RELEVO";
+    this.menuTrans.tipoEve= "EVENTO";
+    
+    this.tempMSV = setInterval(() => {
+      this.pingMSV(medStore.monitor[0].dirIPMVS);
+    }, 10000);
   },
 
   methods: {
@@ -2324,6 +2326,7 @@ export default defineComponent({
 
       // Eventos de Monitoreo
       async iniMSV(){
+        transAnestStore.envDat = true;
         this.btnCambioMonitor = true;
         this.siAquisigo();
         transAnestStore.getIniciaMonitoreo();
@@ -2332,6 +2335,7 @@ export default defineComponent({
       },
 
       async finMSV(){
+        transAnestStore.envDat = false;
         this.btnCambioMonitor = false;
         transAnestStore.getDetieneMonitoreo();
         this.termRecepDatos();
@@ -2370,7 +2374,8 @@ export default defineComponent({
 
       termRecepDatos(){
         transAnestStore.envDat = false;
-        console.log(transAnestStore.envDat);        
+        console.log(transAnestStore.envDat);
+        transAnestStore.datosMSV = null;
         clearInterval(this.intervalId);
       },
       
