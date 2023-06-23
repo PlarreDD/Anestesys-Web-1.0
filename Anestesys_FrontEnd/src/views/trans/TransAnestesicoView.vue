@@ -11,23 +11,17 @@
           <div class="row g-3 mb-3">
             <!-- Botón monitoreo -->
             <div class="col-md-3">
-              <template v-if="btnCambioMonitor === false">
-                <button @click="iniMSV"
-                  :disabled="btnMSV"
-                  type="button"
-                  class="btn btn-monitor fw-bold">
-                  <img src="images/monitoreo.svg" />
-                  <label>&nbsp;&nbsp;&nbsp;INICIAR MONITOREO</label>
-                </button>
+
+              <template v-if="transAnestStore.envDat === true && medStore.status === 'Activo'">
+                <img src="images/imgIcon/MonitorActivoDatos.png" @click="finMSV"/>
               </template>
 
-              <template v-else>
-                <button @click="finMSV"
-                  type="button"
-                  class="btn btn-monitor-off fw-bold">
-                  <img src="images/monitoreo.svg" />
-                  <label>&nbsp;&nbsp;&nbsp;DETENER MONITOREO</label>
-                </button>
+              <template v-if="transAnestStore.envDat === false && medStore.status === 'Activo'">
+                <img src="images/imgIcon/MonitorActivo.png" @click="iniMSV" :disabled="btnMSV"/>
+              </template>  
+
+              <template v-if="medStore.status === 'Inactivo'">
+                <img src="images/imgIcon/MonitorInactivo.png" />
               </template>
             </div>
 
@@ -1267,7 +1261,6 @@ export default defineComponent({
       
       this.tempMSV = setInterval(() => {
         this.pingMSV(medStore.monitor[0].dirIPMVS);
-        console.log("Envío de Datos: " + transAnestStore.envDat + " Estatus Monitor: " + medStore.status); // Status Envío de Datos
       }, 10000);
   },
 

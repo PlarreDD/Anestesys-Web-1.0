@@ -17,7 +17,7 @@ export const useTransAnestStore = defineStore('transAn', {
         eventos: ref(null),
         eventoID: ref(null),
         datosMSV: ref(null),
-        envDat: ref(null),
+        envDat: ref(false),
     }),
 
     actions: {
