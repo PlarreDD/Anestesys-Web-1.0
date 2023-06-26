@@ -67,7 +67,6 @@ export const registerMSV = async (req: any, res: Response) => {
     if (isAlive){
       // console.log(`El dispositivo ${dirIPMVS} está activo.`);
       try {
-          console.log(HOST);
           // const monitor = new MVS({ nombreMVS, dirIPMVS });
           const monitor = new MVS({ nombreMVS, dirIPMVS, HOST });
           await monitor.save();
@@ -84,12 +83,19 @@ export const registerMSV = async (req: any, res: Response) => {
     });
 };
 
-export const listMSV = async (req: any, res: Response) => {
+export const listMSV = async (_req: any, res: Response) => {
   try {
-      const monitor = await MVS.find({id: req.id}) 
-      return res.json({ monitor });
+    const IP_HOST = await new Promise((resolve) => {
+      getConnectedDevices(devices => {
+        resolve(devices[0]);
+      });
+    });
+
+    const monitor = await MVS.find({ HOST: IP_HOST });
+
+    return res.json({ monitor });
   } catch (error) {
-      return res.status(500).json({Error: 'Error de servidor'});
+    return res.status(500).json({ Error: 'Error de servidor' });
   }
 };
 
