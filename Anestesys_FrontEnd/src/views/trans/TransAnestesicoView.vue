@@ -2401,7 +2401,6 @@ export default defineComponent({
       },
 
       pingMSV(dirip: string){
-        // const dirip = '172.16.22.201';
         medStore.statusMSV(dirip);
       },
 
