@@ -59,16 +59,17 @@ export const registerMSV = async (req: any, res: Response) => {
   const { nombreMVS, dirIPMVS} = req.body;
   
   getConnectedDevices(devices => {
-    HOST = devices[0];
-
+    HOST = devices[0];    
   });
-
+  
   pingDevice(dirIPMVS)
-    .then(async isAlive => {
-      if (isAlive){
-        // console.log(`El dispositivo ${dirIPMVS} está activo.`);
-        try {
-          const monitor = new MVS({ nombreMVS, dirIPMVS});
+  .then(async isAlive => {
+    if (isAlive){
+      // console.log(`El dispositivo ${dirIPMVS} está activo.`);
+      try {
+          console.log(HOST);
+          // const monitor = new MVS({ nombreMVS, dirIPMVS });
+          const monitor = new MVS({ nombreMVS, dirIPMVS, HOST });
           await monitor.save();
           return res.json({ monitor, statusMSV: "Activo" });
         } catch (error) {
