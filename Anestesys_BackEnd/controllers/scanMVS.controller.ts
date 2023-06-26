@@ -91,7 +91,11 @@ export const listMSV = async (_req: any, res: Response) => {
       });
     });
 
+    console.log(IP_HOST);
+    
     const monitor = await MVS.find({ HOST: IP_HOST });
+    console.log(monitor);
+    
 
     return res.json({ monitor });
   } catch (error) {
