@@ -55,32 +55,60 @@ export const handleMonitorData = async (_req: Request, res: Response) => {
   }
 }
 
+// export const registerMSV = async (req: any, res: Response) => {
+//   const { nombreMVS, dirIPMVS} = req.body;
+//   let IP_HOST: any;
+
+//   getConnectedDevices(devices => {
+//     IP_HOST = devices[0];    
+//   });
+  
+//   pingDevice(dirIPMVS)
+//   .then(async isAlive => {
+//     if (isAlive){
+//       // console.log(`El dispositivo ${dirIPMVS} está activo.`);
+//       try {
+//           // const monitor = new MVS({ nombreMVS, dirIPMVS });
+//           const monitor = new MVS({ nombreMVS, dirIPMVS, IP_HOST });
+//           await monitor.save();
+//           return res.json({ monitor, statusMSV: "Activo" });
+//         } catch (error) {
+//           return res.status(500).json({ Error: 'Error de servidor' });
+//         }
+//       }
+//       else
+//         return new Error(`El dispositivo ${dirIPMVS} no está activo.`);
+//       })
+//     .catch(error => {
+//       console.error(`Error al hacer ping al dispositivo ${dirIPMVS}: ${error.message}`);
+//     });
+// };
+
 export const registerMSV = async (req: any, res: Response) => {
-  const { nombreMVS, dirIPMVS} = req.body;
-  
-  getConnectedDevices(devices => {
-    HOST = devices[0];    
-  });
-  
-  pingDevice(dirIPMVS)
-  .then(async isAlive => {
-    if (isAlive){
-      // console.log(`El dispositivo ${dirIPMVS} está activo.`);
-      try {
-          // const monitor = new MVS({ nombreMVS, dirIPMVS });
-          const monitor = new MVS({ nombreMVS, dirIPMVS, HOST });
-          await monitor.save();
-          return res.json({ monitor, statusMSV: "Activo" });
-        } catch (error) {
-          return res.status(500).json({ Error: 'Error de servidor' });
-        }
-      }
-      else
-        return new Error(`El dispositivo ${dirIPMVS} no está activo.`);
-      })
-    .catch(error => {
-      console.error(`Error al hacer ping al dispositivo ${dirIPMVS}: ${error.message}`);
+  const { nombreMVS, dirIPMVS } = req.body;
+  let IP_HOST;
+
+  const IP_HOSTPromise = new Promise((resolve) => {
+    getConnectedDevices(devices => {
+      resolve(devices[0]);
     });
+  });
+
+  IP_HOST = await IP_HOSTPromise;
+  
+  try {
+    const isAlive = await pingDevice(dirIPMVS);
+    if (isAlive) {
+      const monitor = new MVS({ nombreMVS, dirIPMVS, IP_HOST });
+      await monitor.save();
+      return res.json({ monitor, statusMSV: "Activo" });
+    } else {
+      throw new Error(`El dispositivo ${dirIPMVS} no está activo.`);
+    }
+  } catch (error) {
+    console.error(`Error al hacer ping al dispositivo ${dirIPMVS}: ${error.message}`);
+    return res.status(500).json({ Error: 'Error de servidor' });
+  }
 };
 
 export const listMSV = async (_req: any, res: Response) => {
@@ -91,11 +119,7 @@ export const listMSV = async (_req: any, res: Response) => {
       });
     });
 
-    console.log(IP_HOST);
-    
-    const monitor = await MVS.find({ HOST: IP_HOST });
-    console.log(monitor);
-    
+    const monitor = await MVS.find({ IP_HOST: IP_HOST });
 
     return res.json({ monitor });
   } catch (error) {
