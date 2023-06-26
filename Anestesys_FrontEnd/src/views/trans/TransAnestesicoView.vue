@@ -13,18 +13,17 @@
             <div class="col-md-4">
 
               <template v-if="transAnestStore.envDat === true && medStore.status === 'Activo'">
-                <img src="images/imgIcon/MonitorActivoDatos.png" @click="finMSV" style="width: 70px; height: auto; cursor: pointer;"/>
+                <button style="border: none;" @click="finMSV"><img src="images/imgIcon/MonitorActivoDatos.png" style="width: 70px; height: auto; cursor: pointer;"/></button>
                 <span class="fw-bold" style="color:#002D60">&nbsp;&nbsp;Estado: Recibiendo Datos</span>
               </template>
 
-              <template v-if="transAnestStore.envDat === false && medStore.status === 'Activo'">
-                <!-- <img src="images/imgIcon/MonitorActivo.png" @click="iniMSV" :disabled="btnMSV" style="width: 70px; height: auto; cursor: pointer;"/> -->
-                <input type="image" src="images/imgIcon/MonitorActivo.png" @click="iniMSV" :disabled="btnMSV" style="width: 70px; height: auto; cursor: pointer;">  
-                <span class="fw-bold" style="color:#002D60; vertical-align: super;">&nbsp;&nbsp;Estado: Sin Datos</span>
+              <template v-if="transAnestStore.envDat === false && medStore.status === 'Activo'">                
+                <button style="border: none;" @click="iniMSV" :disabled="btnMSV"><img src="images/imgIcon/MonitorActivo.png" style="width: 70px; height: auto; cursor: pointer;"/></button>
+                <span class="fw-bold" style="color:#002D60;">&nbsp;&nbsp;Estado: Sin Datos</span>
               </template>  
 
               <template v-if="medStore.status === 'Inactivo'">
-                <img src="images/imgIcon/MonitorInactivo.png" style="width: 70px; height: auto; cursor: pointer;" />
+                <button style="border: none;"><img src="images/imgIcon/MonitorInactivo.png" style="width: 70px; height: auto; cursor: pointer;" /></button>
                 <span class="fw-bold" style="color:#002D60">&nbsp;&nbsp;Estado: Desconectado</span>
               </template>              
             </div>
