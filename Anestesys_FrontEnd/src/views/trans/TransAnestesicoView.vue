@@ -13,18 +13,18 @@
             <div class="col-md-4">
 
               <template v-if="transAnestStore.envDat === true && medStore.status === 'Activo'">
-                <button style="border: none;" @click="finMSV"><img src="images/imgIcon/MonitorActivoDatos.png" style="width: 70px; height: auto; cursor: pointer;"/></button>
-                <span class="fw-bold" style="color:#002D60">&nbsp;&nbsp;Estado: Recibiendo Datos</span>
+                <button class="borde-btn-msv" @click="finMSV"><img src="images/imgIcon/MonitorActivoDatos.png" class="btn-msv" /></button>
+                <span class="fw-bold msv-color-txt">&nbsp;&nbsp;Estado: Recibiendo Datos</span>
               </template>
 
               <template v-if="transAnestStore.envDat === false && medStore.status === 'Activo'">                
-                <button style="border: none;" @click="iniMSV" :disabled="btnMSV"><img src="images/imgIcon/MonitorActivo.png" style="width: 70px; height: auto; cursor: pointer;"/></button>
-                <span class="fw-bold" style="color:#002D60;">&nbsp;&nbsp;Estado: Sin Datos</span>
+                <button class="borde-btn-msv" style="border: none;" @click="iniMSV" :disabled="btnMSV"><img src="images/imgIcon/MonitorActivo.png" class="btn-msv" /></button>
+                <span class="fw-bold msv-color-txt" >&nbsp;&nbsp;Estado: Sin Datos</span>
               </template>  
 
               <template v-if="medStore.status === 'Inactivo'">
-                <button style="border: none;"><img src="images/imgIcon/MonitorInactivo.png" style="width: 70px; height: auto; cursor: pointer;" /></button>
-                <span class="fw-bold" style="color:#002D60">&nbsp;&nbsp;Estado: Desconectado</span>
+                <button class="borde-btn-msv" style="border: none;"><img src="images/imgIcon/MonitorInactivo.png" class="btn-msv" /></button>
+                <span class="fw-bold msv-color-txt">&nbsp;&nbsp;Estado: Desconectado</span>
               </template>              
             </div>
 
@@ -2781,5 +2781,16 @@ hr {
 }
 .mostrar{ 
   transition: all 0.8s ease-in-out;
+}
+.borde-btn-msv{
+  border: none;
+}
+.btn-msv{
+  width: 70px; 
+  height: auto; 
+  cursor: pointer;
+}
+.msv-color-txt{
+  color:#002D60
 }
 </style>
