@@ -1040,7 +1040,7 @@
           <div class="col-md-12 deslizar-grid">          
 
               <div class="d-flex flex-nowrap g-4">
-                <template v-for="(column) in hl7mess">
+                <template v-for="(column) in grid">
                   <div class="">
                     <div class="m-1 fw-bold celda-msv">
                       {{ column.horaGeneracion }}
@@ -2382,12 +2382,7 @@ export default defineComponent({
       
       capturaGrid(){
         this.saveGrid = setInterval(() => {
-          // console.log("GRID:" + this.grid);
-          // console.log("capturaGrid" + this.hl7mess.length);
-          // console.log(this.hl7mess);
-          // console.log(this.hl7mess[this.hl7mess.length - 1]);
           this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
-          // console.log(this.grid);          
         }, 1000 * 60);
       },
 
