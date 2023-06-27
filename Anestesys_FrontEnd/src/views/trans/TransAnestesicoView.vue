@@ -1035,25 +1035,26 @@
       </div>
 
       <!-- Grid signos vitales -->
-      <div class="" :class="vistaPreviaOff == false ? 'col-md-6' : 'col-md-9'">
-        <div class="" :class="vistaPreviaOff == false ? 'fade-in vista-grid-monitoreo' : 'vista-grid-monitoreo'">
-          <div class="col-md-12 deslizar-grid">          
-
-              <div class="d-flex flex-nowrap g-4">
-                <template v-for="(column,index) in hl7mess">
-                  <div class="">
-                    <div class="m-1 fw-bold celda-msv">
-                      {{ traerHoraActual +1}}                     
-                    </div>
-                    <template v-for="item in column">
-                      <div class="m-1 celda-msv">
-                        {{ item }}
-                      </div>
-                    </template>
+      <div class=""
+           :class="vistaPreviaOff == false ? 'col-md-6' : 'col-md-9'">
+        <div class=""
+             :class="vistaPreviaOff == false ? 'fade-in vista-grid-monitoreo' : 'vista-grid-monitoreo'">
+          <div class="col-md-12 deslizar-grid">
+            <div class="d-flex flex-nowrap g-4">
+              <template v-for="(column,index) in grid">
+                <div class="">
+                  <div class="m-1 fw-bold celda-msv">
+                    {{ traerHoraActual +1}}
                   </div>
-                </template>
-              </div>
 
+                  <template v-for="item in column">
+                    <div class="m-1 celda-msv">
+                      {{ item }}
+                    </div>
+                  </template>
+                </div>
+              </template>
+            </div>
           </div>
         </div>
       </div>
@@ -2355,7 +2356,7 @@ export default defineComponent({
     
         this.hl7mess.push(valorSegmentos);
 
-        console.log("HL7: "+this.hl7mess);        
+        // console.log("HL7: "+this.hl7mess);
       },
 
       iniRecepDatos(){
@@ -2384,8 +2385,12 @@ export default defineComponent({
       
       capturaGrid(){
         this.saveGrid = setInterval(() => {
-          this.grid.push(this.hl7mess);
-          console.log("GRID:" + this.grid);
+          // console.log("GRID:" + this.grid);
+          // console.log("capturaGrid" + this.hl7mess.length);
+          // console.log(this.hl7mess);
+          // console.log(this.hl7mess[this.hl7mess.length - 1]);
+          this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
+          // console.log(this.grid);          
         }, 1000 * 60);
       },
 
