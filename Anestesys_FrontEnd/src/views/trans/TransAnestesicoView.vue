@@ -1039,26 +1039,14 @@
         <div class="" :class="vistaPreviaOff == false ? 'fade-in vista-grid-monitoreo' : 'vista-grid-monitoreo'">
           <div class="col-md-12 deslizar-grid">          
 
-              <!-- <div class="d-flex flex-nowrap row g-4">
-                <template v-for="column in hl7mess">
-                  <div class="col">
-                    <template v-for="item in column">
-                      <div class="m-1" style="background-color: white; border: solid; border-color: #DBDEE2; border-radius: 5px; text-align: center; color:#002D60; width: 140%; height: 3.5%;">
-                        {{ item }}
-                      </div>
-                    </template>
-                  </div>
-                </template>
-              </div> -->
-
-              <div class="d-flex flex-nowrap row g-4">
-                <template v-for="column in hl7mess">
-                  <div class="col">
-                    <div class="m-1 fw-bold" style="background-color: white; border: solid; border-color: #DBDEE2; border-radius: 5px; text-align: center; color:#002D60; width: 140%; height: 1.5%;">
-                      {{ traerFechaActual() }}
+              <div class="d-flex flex-nowrap g-4">
+                <template v-for="(column,index) in hl7mess">
+                  <div class="">
+                    <div class="m-1 fw-bold celda-msv">
+                      {{ traerHoraActual +1}}                     
                     </div>
                     <template v-for="item in column">
-                      <div class="m-1" style="background-color: white; border: solid; border-color: #DBDEE2; border-radius: 5px; text-align: center; color:#002D60; width: 140%; height: 1.5%;">
+                      <div class="m-1 celda-msv">
                         {{ item }}
                       </div>
                     </template>
@@ -1212,6 +1200,8 @@ export default defineComponent({
       tempMSV: null,
       grid: [],
       statEnvDat: false,
+
+      horaActual: ''
     }
   },
 
@@ -2363,7 +2353,6 @@ export default defineComponent({
           return segmentos[5];
         });
     
-        //this.hl7mess = valorSegmentos
         this.hl7mess.push(valorSegmentos);
 
         console.log("HL7: "+this.hl7mess);        
@@ -2404,11 +2393,12 @@ export default defineComponent({
         medStore.statusMSV(dirip);
       },
 
-      traerFechaActual() {
-        var hoy = new Date();
-        const hour = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
-        return `${hour}`;
-      }
+      // traerHoraActual() {
+      //   var hoy = new Date();
+      //   //hoy.setMinutes(hoy.getMinutes() + index);
+      //   const hour = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+      //   return hour;
+      // }
   },
   
   computed: {
@@ -2419,6 +2409,11 @@ export default defineComponent({
           return this.listaMedTrans.filter(item => this.medicSeleccionados.includes(item));
         }
     },
+    traerHoraActual() {
+        var hoy = new Date();
+        const hour = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+        return hour;
+    }
   },
 })
 </script>
@@ -2791,5 +2786,15 @@ hr {
 }
 .msv-color-txt{
   color:#002D60
+}
+.celda-msv{
+  background-color: white; 
+  border: solid; 
+  border-color: #DBDEE2; 
+  border-radius: 5px; 
+  text-align: center; 
+  color:#002D60; 
+  height: auto; 
+  width: 55px;
 }
 </style>
