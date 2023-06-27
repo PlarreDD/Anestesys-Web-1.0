@@ -1040,14 +1040,30 @@
           <div class="col-md-12 deslizar-grid">          
 
               <div class="d-flex flex-nowrap g-4">
-                <template v-for="(column) in grid">
+                <div class="flex-nowrap fw-bold">
+                  <div class="m-1 celda-msv invisible">0</div>
+                  <div class="m-1 celda-msv">FC</div>
+                  <div class="m-1 celda-msv">Pulso</div>
+                  <div class="m-1 celda-msv">PAS</div>
+                  <div class="m-1 celda-msv">PAD</div>
+                  <div class="m-1 celda-msv">PAM</div>
+                  <div class="m-1 celda-msv">SpO2</div>
+                  <div class="m-1 celda-msv">EtCO2</div>
+                  <div class="m-1 celda-msv">Temp1</div>
+                  <div class="m-1 celda-msv">Temp2</div>
+                  <div class="m-1 celda-msv">PVC</div>
+                  <div class="m-1 celda-msv">FiCO2</div>
+                  <div class="m-1 celda-msv">FR</div>
+                </div>
+
+                <template v-for="(columna) in grid">
                   <div class="">
                     <div class="m-1 fw-bold celda-msv">
-                      {{ column.horaGeneracion }}
+                      {{ columna.horaGeneracion }}
                     </div>
-                    <template v-for="item in column.datos">
-                      <div class="m-1 celda-msv">
-                        {{ item }}
+                    <template v-for="(item, index) in columna.datos">
+                      <div class="m-1 celda-msv" :class="'color-celda-msv-' + ((index % 9))">
+                        {{ item.valor }}
                       </div>
                     </template>
                   </div>
@@ -2350,7 +2366,10 @@ export default defineComponent({
         
         var valorSegmentos = lineasOBX.map(function(fila) {
           var segmentos = fila.split('|');
-          return segmentos[5];
+          return {
+            id: segmentos[1],
+            valor: segmentos[5]
+          };
         });
     
         this.hl7mess.push({ datos: valorSegmentos, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
@@ -2778,8 +2797,34 @@ hr {
   border-color: #DBDEE2; 
   border-radius: 5px; 
   text-align: center; 
-  color:#002D60; 
   height: auto; 
   width: 55px;
+}
+.color-celda-msv-0{
+  color:#EB2883
+}
+.color-celda-msv-1{
+  color:#4D9DB7
+}
+.color-celda-msv-2{
+  color:#6A2A00
+}
+.color-celda-msv-3{
+  color:#70E5E1
+}
+.color-celda-msv-4{
+  color:#A21BEF
+}
+.color-celda-msv-5{
+  color:#60BA25
+}
+.color-celda-msv-6{
+  color:#022B9B
+}
+.color-celda-msv-7{
+  color:#FFC400
+}
+.color-celda-msv-8{
+  color:#E97917
 }
 </style>
