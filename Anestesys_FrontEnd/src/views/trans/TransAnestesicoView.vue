@@ -930,7 +930,10 @@
         </div>
 
         <div class="col-1 fw-bold">
-          <select id="inputState" class="form-select">
+          <select id="inputState"
+                  class="form-select"
+                  @change="valSeleccionado"
+                  v-model="selected">
             <option>1</option>
             <option>2</option>
             <option>5</option>
@@ -1217,7 +1220,10 @@ export default defineComponent({
       grid: [],
       statEnvDat: false,
 
-      horaActual: ''
+      horaActual: '',
+
+      selected: '',
+      gridAux: [],
     }
   },
 
@@ -2402,12 +2408,20 @@ export default defineComponent({
       capturaGrid(){
         this.saveGrid = setInterval(() => {
           this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
+          this.hl7mess = [];
         }, 1000 * 60);
       },
 
       pingMSV(dirip: string){
         medStore.statusMSV(dirip);
-      }
+      },
+
+      valSeleccionado(){
+        console.log("Valor: " + this.selected);
+        console.log(this.grid);
+        this.gridAux = this.grid;
+
+      },
   },
   
   computed: {
