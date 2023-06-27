@@ -1040,12 +1040,12 @@
           <div class="col-md-12 deslizar-grid">          
 
               <div class="d-flex flex-nowrap g-4">
-                <template v-for="(column,index) in hl7mess">
+                <template v-for="(column) in hl7mess">
                   <div class="">
                     <div class="m-1 fw-bold celda-msv">
-                      {{ traerHoraActual +1}}                     
+                      {{ column.horaGeneracion }}
                     </div>
-                    <template v-for="item in column">
+                    <template v-for="item in column.datos">
                       <div class="m-1 celda-msv">
                         {{ item }}
                       </div>
@@ -2353,9 +2353,7 @@ export default defineComponent({
           return segmentos[5];
         });
     
-        this.hl7mess.push(valorSegmentos);
-
-        console.log("HL7: "+this.hl7mess);        
+        this.hl7mess.push({ datos: valorSegmentos, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
       },
 
       iniRecepDatos(){
@@ -2392,14 +2390,7 @@ export default defineComponent({
       pingMSV(dirip: string){
         // const dirip = '172.16.22.201';
         medStore.statusMSV(dirip);
-      },
-
-      // traerHoraActual() {
-      //   var hoy = new Date();
-      //   //hoy.setMinutes(hoy.getMinutes() + index);
-      //   const hour = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
-      //   return hour;
-      // }
+      }
   },
   
   computed: {
@@ -2409,11 +2400,6 @@ export default defineComponent({
         } else {
           return this.listaMedTrans.filter(item => this.medicSeleccionados.includes(item));
         }
-    },
-    traerHoraActual() {
-        var hoy = new Date();
-        const hour = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
-        return hour;
     }
   },
 })
