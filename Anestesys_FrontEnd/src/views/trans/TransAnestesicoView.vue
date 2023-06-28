@@ -932,8 +932,7 @@
         <div class="col-1 fw-bold">
           <select id="inputState"
                   class="form-select"
-                  @change="valSeleccionado"
-                  v-model="selected">
+                  v-model="stepSize">
             <option>1</option>
             <option>2</option>
             <option>5</option>
@@ -1040,23 +1039,39 @@
       <!-- Grid signos vitales -->
       <div class="" :class="vistaPreviaOff == false ? 'col-md-6' : 'col-md-9'">
         <div class="" :class="vistaPreviaOff == false ? 'fade-in vista-grid-monitoreo' : 'vista-grid-monitoreo'">
-          <div class="col-md-12 deslizar-grid">          
+          <div class="col-md-12 deslizar-grid">
+            <div class="d-flex flex-nowrap g-4">
 
-              <div class="d-flex flex-nowrap g-4">
-                <template v-for="(column) in grid">
-                  <div class="">
-                    <div class="m-1 fw-bold celda-msv">
-                      {{ column.horaGeneracion }}
-                    </div>
-                    <template v-for="item in column.datos">
-                      <div class="m-1 celda-msv">
-                        {{ item }}
-                      </div>
-                    </template>
+              <!-- <template v-for="(column) in grid">
+                <div class="">
+                  
+                  <div class="m-1 fw-bold celda-msv">
+                    {{ column.horaGeneracion }}
                   </div>
-                </template>
-              </div>
+                  
+                  <template v-for="item in column.datos">
+                    <div class="m-1 celda-msv">
+                      {{ item }}
+                    </div>
+                  </template>
 
+                </div>
+              </template> -->
+
+              <template v-for="( itemMSV ) in saltoArreglo">
+                <div class="">
+                  <div class="m-1 fw-bold celda-msv">
+                    {{ itemMSV.horaGeneracion }}
+                  </div>
+
+                  <template v-for="item in itemMSV.datos">
+                    <div class="m-1 celda-msv">
+                      {{ item }}
+                    </div>
+                  </template>
+                </div>
+              </template>              
+            </div>
           </div>
         </div>
       </div>
@@ -1206,7 +1221,7 @@ export default defineComponent({
 
       horaActual: '',
 
-      selected: '',
+      stepSize: 1,
       gridAux: [],
     }
   },
@@ -2397,22 +2412,26 @@ export default defineComponent({
         medStore.statusMSV(dirip);
       },
 
-      valSeleccionado(){
-        console.log("Valor: " + this.selected);
-        console.log(this.grid);
-        this.gridAux = this.grid;
-
-      },
+      // valSeleccionado(){
+      //   console.log("Valor: " + this.stepSize);
+      //   console.log(this.grid);
+      //   this.gridAux = this.grid;
+      // },
   },
   
   computed: {
     tablaMedicamentos() {      
-        if (this.medicSeleccionados.length === 0) {
-          return this.listaMedTrans;
-        } else {
-          return this.listaMedTrans.filter(item => this.medicSeleccionados.includes(item));
-        }
-    }
+      if (this.medicSeleccionados.length === 0) {
+        return this.listaMedTrans;
+      } else {
+        return this.listaMedTrans.filter(item => this.medicSeleccionados.includes(item));
+      }
+    },
+
+    saltoArreglo(){
+      const step = this.stepSize;
+      return this.grid.filter((itemMSV, index) => index % step === 0);
+    },
   },
 })
 </script>
