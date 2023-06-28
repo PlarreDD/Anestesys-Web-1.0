@@ -1066,7 +1066,7 @@
                     </div>
                     <template v-for="(item, index) in columna.datos">
                       <div class="m-1 celda-msv" :class="'color-celda-msv-' + ((index % 9))">
-                        {{ item.valor }}
+                        {{ item }}
                       </div>
                     </template>
                   </div>
@@ -2373,9 +2373,38 @@ export default defineComponent({
         var valorSegmentos = lineasOBX.map(function(fila) {
           var segmentos = fila.split('|');
           return {
-            id: segmentos[1],
+            segmento2: segmentos[1],
             valor: segmentos[5]
           };
+        });
+
+        valorSegmentos.sort(function(a, b) {
+          var aSegmento2 = a.segmento2;
+          var bSegmento2 = b.segmento2;
+      
+          var ordenPrioridad = {
+            '37': 0,
+            '5': 1,
+            '8': 2,
+            '6': 3,
+            '7': 4,
+            '13': 5,
+            '39': 6,
+            '10': 7,
+            '11': 8,
+            '31': 9,
+            '38': 10,
+            '43': 11,
+          };
+
+          var aPrioridad = ordenPrioridad[aSegmento2] !== undefined ? ordenPrioridad[aSegmento2] : Infinity;
+          var bPrioridad = ordenPrioridad[bSegmento2] !== undefined ? ordenPrioridad[bSegmento2] : Infinity;
+          
+          if (aPrioridad !== bPrioridad) {
+            return aPrioridad - bPrioridad;
+          } else {
+            return valorSegmentos.indexOf(a) - valorSegmentos.indexOf(b);
+          }
         });
     
         this.hl7mess.push({ datos: valorSegmentos, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
