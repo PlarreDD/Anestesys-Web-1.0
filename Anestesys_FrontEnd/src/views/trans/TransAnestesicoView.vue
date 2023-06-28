@@ -1054,9 +1054,61 @@
                   <div class="m-1 celda-msv">EtCO2</div>
                   <div class="m-1 celda-msv">Temp1</div>
                   <div class="m-1 celda-msv">Temp2</div>
+                  <div class="m-1 celda-msv">ΔTemp</div>
+
                   <div class="m-1 celda-msv">PVC</div>
                   <div class="m-1 celda-msv">FiCO2</div>
                   <div class="m-1 celda-msv">FR</div>
+                  <div class="m-1 celda-msv">PAIS</div>
+                  <div class="m-1 celda-msv">PAIM</div>
+                  <div class="m-1 celda-msv">PAID</div>
+                  <div class="m-1 celda-msv">FPAA</div>
+                  <div class="m-1 celda-msv">FCP</div>
+                  <div class="m-1 celda-msv">IP</div>
+                  <div class="m-1 celda-msv">Tb</div>
+
+                  <div class="m-1 celda-msv">△Tb</div>
+                  <div class="m-1 celda-msv">CCI</div>
+                  <div class="m-1 celda-msv">CCO</div>
+                  <div class="m-1 celda-msv">VPP</div>
+                  <div class="m-1 celda-msv">VVS</div>
+                  <div class="m-1 celda-msv">LPM</div>
+                  <div class="m-1 celda-msv">IVGS</div>
+                  <div class="m-1 celda-msv">VS</div>
+                  <div class="m-1 celda-msv">PEC</div>
+                  <div class="m-1 celda-msv">IPEC</div>
+
+                  <div class="m-1 celda-msv">CVI</div>
+                  <div class="m-1 celda-msv">RVS</div>
+                  <div class="m-1 celda-msv">IRVS</div>
+                  <div class="m-1 celda-msv">FRT</div>
+                  <div class="m-1 celda-msv">CVP</div>
+                  <div class="m-1 celda-msv">FPC</div>
+                  <div class="m-1 celda-msv">CEV</div>
+                  <div class="m-1 celda-msv">FCA</div>
+                  <div class="m-1 celda-msv">FLO</div>
+                  <div class="m-1 celda-msv">FVP</div>
+
+                  <div class="m-1 celda-msv">FRCO2</div>
+                  <div class="m-1 celda-msv">Ht</div>
+                  <div class="m-1 celda-msv">Pt</div>
+                  <div class="m-1 celda-msv">FRT</div>
+                  <div class="m-1 celda-msv">VMVI</div>
+                  <div class="m-1 celda-msv">VME</div>
+                  <div class="m-1 celda-msv">VM</div>
+                  <div class="m-1 celda-msv">VTap</div>
+                  <div class="m-1 celda-msv">VTEsp</div>
+                  <div class="m-1 celda-msv">VTE/P</div>
+
+                  <div class="m-1 celda-msv">VTI</div>
+                  <div class="m-1 celda-msv">VTExp</div>
+                  <div class="m-1 celda-msv">VT</div>
+                  <div class="m-1 celda-msv">PVA</div>
+                  <div class="m-1 celda-msv">PVM</div>
+                  <div class="m-1 celda-msv">Pplat</div>
+                  <div class="m-1 celda-msv">PPI</div>
+                  <div class="m-1 celda-msv">PEEP</div>
+                  <div class="m-1 celda-msv">PEEPM</div>
                 </div>
 
                 <template v-for="(columna) in grid">
@@ -2383,18 +2435,12 @@ export default defineComponent({
           var bSegmento2 = b.segmento2;
       
           var ordenPrioridad = {
-            '37': 0,
-            '5': 1,
-            '8': 2,
-            '6': 3,
-            '7': 4,
-            '13': 5,
-            '39': 6,
-            '10': 7,
-            '11': 8,
-            '31': 9,
-            '38': 10,
-            '43': 11,
+            '37': 0, '5': 1, '8': 2, '6': 3, '7': 4, '13': 5, '39': 6, '10': 7, '11': 8, '12': 9,
+            '9': 10, '38': 11, '43': 12, '1': 13, '2': 14, '3': 15, '4': 16, '14': 17, '15': 18, '16': 19,
+            '17': 20, '18': 21, '19': 22, '20': 23, '21': 24, '22': 25, '23': 26, '24': 27, '25': 28, '26': 29,
+            '27': 30, '28': 31, '29': 32, '30': 33, '31': 34, '32': 35, '33': 36, '34': 37, '35': 38, '36': 39,
+            '40': 40, '41': 41, '42': 42, '44': 43, '45': 44, '46': 45, '47': 46, '48': 47, '49': 48, '50': 49,
+            '51': 50, '52': 51, '53': 52, '54': 53, '55': 54, '56': 55, '57': 56, '58': 57, '59': 58,
           };
 
           var aPrioridad = ordenPrioridad[aSegmento2] !== undefined ? ordenPrioridad[aSegmento2] : Infinity;
