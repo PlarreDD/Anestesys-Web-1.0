@@ -1130,9 +1130,10 @@
                     {{ itemMSV.horaGeneracion }}
                   </div>
 
-                  <template v-for="item in itemMSV.datos">
-                    <div class="m-1 celda-msv">
-                      {{ item }}
+                  <template v-for="(item, index) in itemMSV.datos">
+                    <!-- <div class="m-1 celda-msv" :class="'color-celda-msv-' + ((index % 9))"> -->
+                    <div class="m-1 celda-msv fw-bold" :class="'color-celda-msv-' + item.segmento2">
+                      {{ item.segmento2 }}
                     </div>
                   </template>
                 </div>
@@ -2499,6 +2500,8 @@ export default defineComponent({
           this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
           this.hl7mess = [];
         }, 1000 * 60);
+
+        console.log(this.saltoArreglo);        
       },
 
       pingMSV(dirip: string){
