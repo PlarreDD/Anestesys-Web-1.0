@@ -1117,8 +1117,9 @@
                       {{ columna.horaGeneracion }}
                     </div>
                     <template v-for="(item, index) in columna.datos">
-                      <div class="m-1 celda-msv" :class="'color-celda-msv-' + ((index % 9))">
-                        {{ item }}
+                      <!-- <div class="m-1 celda-msv" :class="'color-celda-msv-' + ((index % 9))"> -->
+                      <div class="m-1 celda-msv fw-bold" :class="'color-celda-msv-' + item.segmento2">
+                        {{ item.valor }}
                       </div>
                     </template>
                   </div>
@@ -2889,11 +2890,9 @@ hr {
   height: auto; 
   width: 55px;
 }
-.color-celda-msv-0{
-  color:#EB2883
-}
+/* Colores valores MSV */
 .color-celda-msv-1{
-  color:#4D9DB7
+  color:#A21BEF
 }
 .color-celda-msv-2{
   color:#6A2A00
@@ -2905,15 +2904,168 @@ hr {
   color:#A21BEF
 }
 .color-celda-msv-5{
-  color:#60BA25
+  color:#7589BE
 }
 .color-celda-msv-6{
-  color:#022B9B
+  color:#A1C5E3
 }
 .color-celda-msv-7{
-  color:#FFC400
+  color:#EC6618
 }
 .color-celda-msv-8{
+  color:#EC5A55
+}
+.color-celda-msv-9{
+  color:#00A597
+}
+.color-celda-msv-10{
+  color:#E7D370
+}
+.color-celda-msv-11{
+  color:#ae231e
+}
+.color-celda-msv-12{
+  color:#6A2A00
+}
+.color-celda-msv-13{
+  color:#44A3D3
+}
+.color-celda-msv-14{
+  color:#A21BEF
+}
+.color-celda-msv-15{
+  color:#60BA25
+}
+.color-celda-msv-16{
+  color:#022B9B
+}
+.color-celda-msv-17{
+  color:#FFC400
+}
+.color-celda-msv-18{
   color:#E97917
+}
+.color-celda-msv-19{
+  color:#E97917
+}
+.color-celda-msv-20{
+  color:#EB2883
+}
+.color-celda-msv-21{
+  color:#4D9DB7
+}
+.color-celda-msv-22{
+  color:#6A2A00
+}
+.color-celda-msv-23{
+  color:#70E5E1
+}
+.color-celda-msv-24{
+  color:#A21BEF
+}
+.color-celda-msv-25{
+  color:#60BA25
+}
+.color-celda-msv-26{
+  color:#022B9B
+}
+.color-celda-msv-27{
+  color:#FFC400
+}
+.color-celda-msv-28{
+  color:#E97917
+}
+.color-celda-msv-29{
+  color:#E97917
+}
+.color-celda-msv-30{
+  color:#EB2883
+}
+.color-celda-msv-31{
+  color:#4D9DB7
+}
+.color-celda-msv-32{
+  color:#6A2A00
+}
+.color-celda-msv-33{
+  color:#70E5E1
+}
+.color-celda-msv-34{
+  color:#A21BEF
+}
+.color-celda-msv-35{
+  color:#60BA25
+}
+.color-celda-msv-36{
+  color:#022B9B
+}
+.color-celda-msv-37{
+  color: #00A597
+}
+.color-celda-msv-38{
+  color:#44A3D3
+}
+.color-celda-msv-39{
+  color:#44A3D3
+}
+.color-celda-msv-40{
+  color:#EB2883
+}
+.color-celda-msv-41{
+  color:#4D9DB7
+}
+.color-celda-msv-42{
+  color:#6A2A00
+}
+.color-celda-msv-43{
+  color:#FFC400
+}
+.color-celda-msv-44{
+  color:#A21BEF
+}
+.color-celda-msv-45{
+  color:#60BA25
+}
+.color-celda-msv-46{
+  color:#022B9B
+}
+.color-celda-msv-47{
+  color:#FFC400
+}
+.color-celda-msv-48{
+  color:#E97917
+}
+.color-celda-msv-49{
+  color:#E97917
+}
+.color-celda-msv-50{
+  color:#EB2883
+}
+.color-celda-msv-51{
+  color:#4D9DB7
+}
+.color-celda-msv-52{
+  color:#6A2A00
+}
+.color-celda-msv-53{
+  color:#70E5E1
+}
+.color-celda-msv-54{
+  color:#A21BEF
+}
+.color-celda-msv-55{
+  color:#60BA25
+}
+.color-celda-msv-56{
+  color:#022B9B
+}
+.color-celda-msv-57{
+  color:#FFC400
+}
+.color-celda-msv-58{
+  color:#E97917
+}
+.color-celda-msv-59{
+  color:#EB2883
 }
 </style>
