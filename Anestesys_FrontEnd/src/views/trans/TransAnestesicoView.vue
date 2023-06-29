@@ -1039,7 +1039,7 @@
       <!-- Grid signos vitales -->
       <div class="" :class="vistaPreviaOff == false ? 'col-md-6' : 'col-md-9'">
         <div class="" :class="vistaPreviaOff == false ? 'fade-in vista-grid-monitoreo' : 'vista-grid-monitoreo'">
-          <div class="col-md-12 deslizar-grid">          
+          <div class="col-md-12 deslizar-grid" id="contenedor-fila">          
 
               <div class="d-flex flex-nowrap g-4">
                 <div class="flex-nowrap fw-bold">
@@ -1125,19 +1125,19 @@
                 </template> -->
 
                 <template v-for="( itemMSV ) in saltoArreglo">
-                <div class="">
-                  <div class="m-1 fw-bold celda-msv">
-                    {{ itemMSV.horaGeneracion }}
-                  </div>
-
-                  <template v-for="(item, index) in itemMSV.datos">
-                    <!-- <div class="m-1 celda-msv" :class="'color-celda-msv-' + ((index % 9))"> -->
-                    <div class="m-1 celda-msv fw-bold" :class="'color-celda-msv-' + item.segmento2">
-                      {{ item.segmento2 }}
+                  <div class="">
+                    <div class="m-1 fw-bold celda-msv">
+                      {{ itemMSV.horaGeneracion }}
                     </div>
-                  </template>
-                </div>
-              </template>
+
+                    <template v-for="(item, index) in itemMSV.datos">
+                      <div class="m-1 celda-msv fw-bold" :class="'color-celda-msv-' + ((index % 4))">
+                      <!-- <div class="m-1 celda-msv fw-bold" :class="'color-celda-msv-' + item.segmento2" > -->
+                        {{ item.segmento2 }}
+                      </div>
+                    </template>
+                  </div>
+                </template>
               </div>
 
           </div>
@@ -2499,9 +2499,7 @@ export default defineComponent({
         this.saveGrid = setInterval(() => {
           this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
           this.hl7mess = [];
-        }, 1000 * 60);
-
-        console.log(this.saltoArreglo);        
+        }, 1000 * 30);
       },
 
       pingMSV(dirip: string){
@@ -2518,9 +2516,17 @@ export default defineComponent({
       }
     },
 
-    saltoArreglo(){
+    saltoArreglo(){      
       const step = this.stepSize;
-      return this.grid.filter((itemMSV, index) => index % step === 0);
+      const filas = this.grid.filter((itemMSV, index) => index % step === 0);
+
+      this.$nextTick(() => {
+        var filaContenedor = document.getElementById('contenedor-fila');
+        // Desplazar automáticamente el scroll hacia la derecha
+        filaContenedor.scrollLeft = filaContenedor.scrollWidth;
+      });
+
+      return filas;
     },
   },
 })
@@ -2682,7 +2688,9 @@ export default defineComponent({
 }
 .deslizar-grid{
   overflow: scroll;
-  overflow-x: scroll;
+  overflow-x: auto;
+  white-space: nowrap;
+  scroll-behavior: smooth;
   height: 620px;
   margin-top: 0px;
 }
@@ -2904,8 +2912,22 @@ hr {
   color:#002D60; 
   height: auto; 
   width: 55px;
-/* Colores valores MSV */
+}
+.color-celda-msv-0{
+  color:#97C7FE
+}
 .color-celda-msv-1{
+  color:#DAEEFC
+}
+.color-celda-msv-2{
+  color:#B1C8E1
+}
+.color-celda-msv-3{
+  color:#1F5092
+}
+/* Colores valores MSV */
+
+/* .color-celda-msv-1{
   color:#A21BEF
 }
 .color-celda-msv-2{
@@ -2916,7 +2938,7 @@ hr {
 }
 .color-celda-msv-4{
   color:#A21BEF
-}
+} */
 .color-celda-msv-5{
   color:#7589BE
 }
@@ -3082,5 +3104,5 @@ hr {
 .color-celda-msv-59{
   color:#EB2883
 }
-}
+
 </style>
