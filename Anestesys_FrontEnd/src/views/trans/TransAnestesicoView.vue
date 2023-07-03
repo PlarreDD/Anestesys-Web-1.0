@@ -1039,105 +1039,108 @@
       <!-- Grid signos vitales -->
       <div class="" :class="vistaPreviaOff == false ? 'col-md-6' : 'col-md-9'">
         <div class="" :class="vistaPreviaOff == false ? 'fade-in vista-grid-monitoreo' : 'vista-grid-monitoreo'">
-          <div class="col-md-12 deslizar-grid" id="contenedor-fila">          
+          <div class="col-md-12">          
 
               <div class="d-flex flex-nowrap g-4">
-                <div class="flex-nowrap fw-bold">
-                  <div class="m-1 celda-msv invisible">0</div>
-                  <div class="m-1 celda-msv">FC</div>
-                  <div class="m-1 celda-msv">Pulso</div>
-                  <div class="m-1 celda-msv">PAS</div>
-                  <div class="m-1 celda-msv">PAD</div>
-                  <div class="m-1 celda-msv">PAM</div>
-                  <div class="m-1 celda-msv">SpO2</div>
-                  <div class="m-1 celda-msv">EtCO2</div>
-                  <div class="m-1 celda-msv">Temp1</div>
-                  <div class="m-1 celda-msv">Temp2</div>
-                  <div class="m-1 celda-msv">ΔTemp</div>
+                <!-- Barra lateral -->
+                <div class="col-md-1">
+                  <div class="flex-nowrap fw-bold">
+                    <div class="m-1 celda-msv invisible">0</div>
+                    <div class="m-1 celda-msv">FC</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">Pulso</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">PAS</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">PAD</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">PAM</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">SpO2</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">EtCO2</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">Temp1</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">Temp2</div>
+                    <hr class="mt-2 mb-2 invisible"/>                    
+                    <div class="m-1 celda-msv">PVC</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">FiCO2</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">FR</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <!-- <div class="m-1 celda-msv">ΔTemp</div> -->
+                    <!-- <div class="m-1 celda-msv">PAIS</div>
+                    <div class="m-1 celda-msv">PAIM</div>
+                    <div class="m-1 celda-msv">PAID</div>
+                    <div class="m-1 celda-msv">FPAA</div>
+                    <div class="m-1 celda-msv">FCP</div>
+                    <div class="m-1 celda-msv">IP</div>
+                    <div class="m-1 celda-msv">Tb</div>
 
-                  <div class="m-1 celda-msv">PVC</div>
-                  <div class="m-1 celda-msv">FiCO2</div>
-                  <div class="m-1 celda-msv">FR</div>
-                  <div class="m-1 celda-msv">PAIS</div>
-                  <div class="m-1 celda-msv">PAIM</div>
-                  <div class="m-1 celda-msv">PAID</div>
-                  <div class="m-1 celda-msv">FPAA</div>
-                  <div class="m-1 celda-msv">FCP</div>
-                  <div class="m-1 celda-msv">IP</div>
-                  <div class="m-1 celda-msv">Tb</div>
+                    <div class="m-1 celda-msv">△Tb</div>
+                    <div class="m-1 celda-msv">CCI</div>
+                    <div class="m-1 celda-msv">CCO</div>
+                    <div class="m-1 celda-msv">VPP</div>
+                    <div class="m-1 celda-msv">VVS</div>
+                    <div class="m-1 celda-msv">LPM</div>
+                    <div class="m-1 celda-msv">IVGS</div>
+                    <div class="m-1 celda-msv">VS</div>
+                    <div class="m-1 celda-msv">PEC</div>
+                    <div class="m-1 celda-msv">IPEC</div>
 
-                  <div class="m-1 celda-msv">△Tb</div>
-                  <div class="m-1 celda-msv">CCI</div>
-                  <div class="m-1 celda-msv">CCO</div>
-                  <div class="m-1 celda-msv">VPP</div>
-                  <div class="m-1 celda-msv">VVS</div>
-                  <div class="m-1 celda-msv">LPM</div>
-                  <div class="m-1 celda-msv">IVGS</div>
-                  <div class="m-1 celda-msv">VS</div>
-                  <div class="m-1 celda-msv">PEC</div>
-                  <div class="m-1 celda-msv">IPEC</div>
+                    <div class="m-1 celda-msv">CVI</div>
+                    <div class="m-1 celda-msv">RVS</div>
+                    <div class="m-1 celda-msv">IRVS</div>
+                    <div class="m-1 celda-msv">FRT</div>
+                    <div class="m-1 celda-msv">CVP</div>
+                    <div class="m-1 celda-msv">FPC</div>
+                    <div class="m-1 celda-msv">CEV</div>
+                    <div class="m-1 celda-msv">FCA</div>
+                    <div class="m-1 celda-msv">FLO</div>
+                    <div class="m-1 celda-msv">FVP</div>
 
-                  <div class="m-1 celda-msv">CVI</div>
-                  <div class="m-1 celda-msv">RVS</div>
-                  <div class="m-1 celda-msv">IRVS</div>
-                  <div class="m-1 celda-msv">FRT</div>
-                  <div class="m-1 celda-msv">CVP</div>
-                  <div class="m-1 celda-msv">FPC</div>
-                  <div class="m-1 celda-msv">CEV</div>
-                  <div class="m-1 celda-msv">FCA</div>
-                  <div class="m-1 celda-msv">FLO</div>
-                  <div class="m-1 celda-msv">FVP</div>
+                    <div class="m-1 celda-msv">FRCO2</div>
+                    <div class="m-1 celda-msv">Ht</div>
+                    <div class="m-1 celda-msv">Pt</div>
+                    <div class="m-1 celda-msv">FRT</div>
+                    <div class="m-1 celda-msv">VMVI</div>
+                    <div class="m-1 celda-msv">VME</div>
+                    <div class="m-1 celda-msv">VM</div>
+                    <div class="m-1 celda-msv">VTap</div>
+                    <div class="m-1 celda-msv">VTEsp</div>
+                    <div class="m-1 celda-msv">VTE/P</div>
 
-                  <div class="m-1 celda-msv">FRCO2</div>
-                  <div class="m-1 celda-msv">Ht</div>
-                  <div class="m-1 celda-msv">Pt</div>
-                  <div class="m-1 celda-msv">FRT</div>
-                  <div class="m-1 celda-msv">VMVI</div>
-                  <div class="m-1 celda-msv">VME</div>
-                  <div class="m-1 celda-msv">VM</div>
-                  <div class="m-1 celda-msv">VTap</div>
-                  <div class="m-1 celda-msv">VTEsp</div>
-                  <div class="m-1 celda-msv">VTE/P</div>
-
-                  <div class="m-1 celda-msv">VTI</div>
-                  <div class="m-1 celda-msv">VTExp</div>
-                  <div class="m-1 celda-msv">VT</div>
-                  <div class="m-1 celda-msv">PVA</div>
-                  <div class="m-1 celda-msv">PVM</div>
-                  <div class="m-1 celda-msv">Pplat</div>
-                  <div class="m-1 celda-msv">PPI</div>
-                  <div class="m-1 celda-msv">PEEP</div>
-                  <div class="m-1 celda-msv">PEEPM</div>
+                    <div class="m-1 celda-msv">VTI</div>
+                    <div class="m-1 celda-msv">VTExp</div>
+                    <div class="m-1 celda-msv">VT</div>
+                    <div class="m-1 celda-msv">PVA</div>
+                    <div class="m-1 celda-msv">PVM</div>
+                    <div class="m-1 celda-msv">Pplat</div>
+                    <div class="m-1 celda-msv">PPI</div>
+                    <div class="m-1 celda-msv">PEEP</div>
+                    <div class="m-1 celda-msv">PEEPM</div> -->
+                  </div>
                 </div>
 
-                <!-- <template v-for="(columna) in grid">
-                  <div class="">
-                    <div class="m-1 fw-bold celda-msv">
-                      {{ columna.horaGeneracion }}
-                    </div>
-                    <template v-for="(item, index) in columna.datos">
-                      <div class="m-1 celda-msv" :class="'color-celda-msv-' + ((index % 9))">
-                      <div class="m-1 celda-msv fw-bold" :class="'color-celda-msv-' + item.segmento2">
-                        {{ item.valor }}
+                <div class="d-flex flex-nowrap col-md-11 deslizar-grid ms-1" id="contenedor-fila">
+                  <template v-for="( itemMSV ) in saltoArreglo">
+                    <div class="">
+                      <div class="m-1 fw-bold celda-msv">
+                        {{ itemMSV.horaGeneracion }}
                       </div>
-                    </template>
-                  </div>
-                </template> -->
 
-                <template v-for="( itemMSV ) in saltoArreglo">
-                  <div class="">
-                    <div class="m-1 fw-bold celda-msv">
-                      {{ itemMSV.horaGeneracion }}
+                      <template v-for="(item, index) in itemMSV.datos">
+                        <div class="m-1 celda-msv fw-bold" :class="'color-msv-' + item.segmento4" >
+                          {{ item }}
+
+                        </div>    
+                        <hr class="mt-2 mb-2 hr-grid"/>                    
+                      </template>
                     </div>
-
-                    <template v-for="(item, index) in itemMSV.datos">
-                      <div class="m-1 celda-msv fw-bold" :class="'color-celda-msv-' + ((index % 4))">
-                      <!-- <div class="m-1 celda-msv fw-bold" :class="'color-celda-msv-' + item.segmento2" > -->
-                        {{ item.segmento2 }}
-                      </div>
-                    </template>
-                  </div>
-                </template>
+                  </template>
+                </div>
               </div>
 
           </div>
@@ -2439,27 +2442,29 @@ export default defineComponent({
         
         var valorSegmentos = lineasOBX.map(function(fila) {
           var segmentos = fila.split('|');
+          var segmento4 = segmentos[4].replace(/\./g, "");
           return {
-            segmento2: segmentos[1],
+            segmento4: segmento4,
             valor: segmentos[5]
           };
         });
 
         valorSegmentos.sort(function(a, b) {
-          var aSegmento2 = a.segmento2;
-          var bSegmento2 = b.segmento2;
+          var aSegmento4 = a.segmento4;
+          var bSegmento4 = b.segmento4;
       
           var ordenPrioridad = {
-            '37': 0, '5': 1, '8': 2, '6': 3, '7': 4, '13': 5, '39': 6, '10': 7, '11': 8, '12': 9,
-            '9': 10, '38': 11, '43': 12, '1': 13, '2': 14, '3': 15, '4': 16, '14': 17, '15': 18, '16': 19,
+            '174147842': 0, '1111149522': 1, '1111150033': 2, '1111150034': 3, '1111150035': 4, '131150456': 5, 
+            '181151708': 6, '121150344': 7, '122150344': 8, '1112150087': 9, '181151716': 10, '1131180': 11, 
+            '1': 12, '2': 13, '3': 14, '4': 15, '12': 16, '14': 17, '15': 18, '16': 19,
             '17': 20, '18': 21, '19': 22, '20': 23, '21': 24, '22': 25, '23': 26, '24': 27, '25': 28, '26': 29,
             '27': 30, '28': 31, '29': 32, '30': 33, '31': 34, '32': 35, '33': 36, '34': 37, '35': 38, '36': 39,
             '40': 40, '41': 41, '42': 42, '44': 43, '45': 44, '46': 45, '47': 46, '48': 47, '49': 48, '50': 49,
             '51': 50, '52': 51, '53': 52, '54': 53, '55': 54, '56': 55, '57': 56, '58': 57, '59': 58,
           };
 
-          var aPrioridad = ordenPrioridad[aSegmento2] !== undefined ? ordenPrioridad[aSegmento2] : Infinity;
-          var bPrioridad = ordenPrioridad[bSegmento2] !== undefined ? ordenPrioridad[bSegmento2] : Infinity;
+          var aPrioridad = ordenPrioridad[aSegmento4] !== undefined ? ordenPrioridad[aSegmento4] : Infinity;
+          var bPrioridad = ordenPrioridad[bSegmento4] !== undefined ? ordenPrioridad[bSegmento4] : Infinity;
           
           if (aPrioridad !== bPrioridad) {
             return aPrioridad - bPrioridad;
@@ -2467,14 +2472,16 @@ export default defineComponent({
             return valorSegmentos.indexOf(a) - valorSegmentos.indexOf(b);
           }
         });
+
+        var primerosValores = valorSegmentos.slice(0, 12);
     
-        this.hl7mess.push({ datos: valorSegmentos, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+        this.hl7mess.push({ datos: primerosValores, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
       },
 
       iniRecepDatos(){
         this.intervalId = setInterval(() => {
           this.comMSV();
-        }, 15000);
+        }, 10000);
       },
 
       termRecepDatos(){
@@ -2499,7 +2506,9 @@ export default defineComponent({
         this.saveGrid = setInterval(() => {
           this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
           this.hl7mess = [];
-        }, 1000 * 30);
+          console.log("capturaGrid: "+ this.hl7mess);
+          
+        }, 1000 * 60);
       },
 
       pingMSV(dirip: string){
@@ -2772,7 +2781,6 @@ export default defineComponent({
     --bs-btn-active-border-color: #002D60;
     inline-size: -webkit-fill-available;
 }
-
 .btn-monitor{
     --bs-btn-bg: #fff;
     --bs-btn-color: #002D60;    
@@ -2785,7 +2793,6 @@ export default defineComponent({
     --bs-btn-active-border-color: #E88300;
     inline-size: -webkit-fill-available;
 }
-
 .btn-monitor-off{
     --bs-btn-bg: #E88300;
     --bs-btn-color: #fff;    
@@ -2810,6 +2817,9 @@ hr {
     border: 0;
     border-top: 1px solid;
     opacity: 1;
+}
+.hr-grid{
+  color: #002D60 !important;
 }
 .dropdown-menu{
   --bs-dropdown-min-width: 9.2rem;
@@ -2913,196 +2923,41 @@ hr {
   height: auto; 
   width: 55px;
 }
-.color-celda-msv-0{
-  color:#97C7FE
-}
-.color-celda-msv-1{
-  color:#DAEEFC
-}
-.color-celda-msv-2{
-  color:#B1C8E1
-}
-.color-celda-msv-3{
-  color:#1F5092
-}
 /* Colores valores MSV */
-
-/* .color-celda-msv-1{
-  color:#A21BEF
-}
-.color-celda-msv-2{
-  color:#6A2A00
-}
-.color-celda-msv-3{
-  color:#70E5E1
-}
-.color-celda-msv-4{
-  color:#A21BEF
-} */
-.color-celda-msv-5{
-  color:#7589BE
-}
-.color-celda-msv-6{
-  color:#A1C5E3
-}
-.color-celda-msv-7{
-  color:#EC6618
-}
-.color-celda-msv-8{
-  color:#EC5A55
-}
-.color-celda-msv-9{
+.color-msv-174147842{
   color:#00A597
 }
-.color-celda-msv-10{
-  color:#E7D370
+.color-msv-1111149522{
+  color:#7589BE
 }
-.color-celda-msv-11{
-  color:#ae231e
+.color-msv-1111150033{
+  color:#EC5A55
 }
-.color-celda-msv-12{
-  color:#6A2A00
+.color-msv-1111150034{
+  color:#A1C5E3
 }
-.color-celda-msv-13{
+.color-msv-1111150035{
+  color:#EC6618
+}
+.color-msv-131150456{
   color:#44A3D3
 }
-.color-celda-msv-14{
-  color:#A21BEF
-}
-.color-celda-msv-15{
-  color:#60BA25
-}
-.color-celda-msv-16{
-  color:#022B9B
-}
-.color-celda-msv-17{
-  color:#FFC400
-}
-.color-celda-msv-18{
-  color:#E97917
-}
-.color-celda-msv-19{
-  color:#E97917
-}
-.color-celda-msv-20{
-  color:#EB2883
-}
-.color-celda-msv-21{
-  color:#4D9DB7
-}
-.color-celda-msv-22{
-  color:#6A2A00
-}
-.color-celda-msv-23{
+.color-msv-181151708{
   color:#70E5E1
 }
-.color-celda-msv-24{
-  color:#A21BEF
+.color-msv-121150344{
+  color:#9D9D9D
 }
-.color-celda-msv-25{
-  color:#60BA25
+.color-msv-122150344{
+  color:#AE231E
 }
-.color-celda-msv-26{
-  color:#022B9B
-}
-.color-celda-msv-27{
-  color:#FFC400
-}
-.color-celda-msv-28{
-  color:#E97917
-}
-.color-celda-msv-29{
-  color:#E97917
-}
-.color-celda-msv-30{
-  color:#EB2883
-}
-.color-celda-msv-31{
+.color-msv-1112150087{
   color:#4D9DB7
 }
-.color-celda-msv-32{
-  color:#6A2A00
-}
-.color-celda-msv-33{
-  color:#70E5E1
-}
-.color-celda-msv-34{
-  color:#A21BEF
-}
-.color-celda-msv-35{
-  color:#60BA25
-}
-.color-celda-msv-36{
+.color-msv-181151716{
   color:#022B9B
 }
-.color-celda-msv-37{
-  color: #00A597
-}
-.color-celda-msv-38{
-  color:#44A3D3
-}
-.color-celda-msv-39{
-  color:#44A3D3
-}
-.color-celda-msv-40{
-  color:#EB2883
-}
-.color-celda-msv-41{
-  color:#4D9DB7
-}
-.color-celda-msv-42{
-  color:#6A2A00
-}
-.color-celda-msv-43{
+.color-msv-1131180{
   color:#FFC400
 }
-.color-celda-msv-44{
-  color:#A21BEF
-}
-.color-celda-msv-45{
-  color:#60BA25
-}
-.color-celda-msv-46{
-  color:#022B9B
-}
-.color-celda-msv-47{
-  color:#FFC400
-}
-.color-celda-msv-48{
-  color:#E97917
-}
-.color-celda-msv-49{
-  color:#E97917
-}
-.color-celda-msv-50{
-  color:#EB2883
-}
-.color-celda-msv-51{
-  color:#4D9DB7
-}
-.color-celda-msv-52{
-  color:#6A2A00
-}
-.color-celda-msv-53{
-  color:#70E5E1
-}
-.color-celda-msv-54{
-  color:#A21BEF
-}
-.color-celda-msv-55{
-  color:#60BA25
-}
-.color-celda-msv-56{
-  color:#022B9B
-}
-.color-celda-msv-57{
-  color:#FFC400
-}
-.color-celda-msv-58{
-  color:#E97917
-}
-.color-celda-msv-59{
-  color:#EB2883
-}
-
 </style>

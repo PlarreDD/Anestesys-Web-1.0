@@ -57,15 +57,15 @@
     <div class="col-5 divBorder posicionEstaticaL">
       <div class="margenL">
         <div class="div-img">
-            <img src="images/logoA.png" class="imgLogo"/>
+            <img src="images/logoB.png" class="imgLogo"/>
         </div>
 
-        <h2 class="fw-bold h2Estilo"> Inicia Sesión </h2>
+        <h2 class="fw-bold h2Estilo m-4"> Inicia Sesión </h2>
 
         <form class="row g-3" method="post" autocomplete="new-password" @submit.prevent="">
           <div class="col-md-2"></div>
           <div class="col-md-8">
-            <label for="" class="form-label fw-bold">Correo electrónico</label>
+            <label for="" class="form-label fw-bold m-3">Correo electrónico</label>
             <input type="text"
                   :class="userCorreo == true ? 'form-control border border-danger margenInput' : 'form-control margenInput'"
                   v-model="usr.email"

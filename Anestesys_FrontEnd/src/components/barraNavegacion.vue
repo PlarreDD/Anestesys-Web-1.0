@@ -578,7 +578,7 @@ export default defineComponent({
   text-align: center;
 }
 .imgLogoBarra {
-  width: 280px;
+  width: 200px;
   height: auto;
 }
 .imgPerfil {

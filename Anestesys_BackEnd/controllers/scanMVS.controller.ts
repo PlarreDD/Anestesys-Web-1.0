@@ -47,11 +47,9 @@ export const stopMSVData = async () => {
 
 export const handleMonitorData = async (_req: Request, res: Response) => {
   if (capturedMsg) {
-    const hl7String = capturedMsg.toString();
-    console.log(hl7String);
-    
+    const hl7String = await capturedMsg.toString();
 
-    return res.json({datosMSV:hl7String});
+    return await res.json({datosMSV:hl7String});
   } else {
     console.log('No se ha capturado ningún dato aún');
   }
