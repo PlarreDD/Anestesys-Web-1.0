@@ -2432,50 +2432,109 @@ export default defineComponent({
       },
 
       async vaciarMensajeHL7(){
-        var hl7Message = transAnestStore.datosMSV
+        let DSV = Array.from({ length: 12 }, () => "-");
+        
+        let hl7Message = transAnestStore.datosMSV
     
-        var lineas = hl7Message.split('\r');
+        let lineas = hl7Message.split('\r');
     
-        var lineasOBX = lineas.filter(function(linea) {
+        let lineasOBX = lineas.filter(function(linea) {
           return /^OBX/.test(linea);
         });
         
-        var valorSegmentos = lineasOBX.map(function(fila) {
-          var segmentos = fila.split('|');
-          var segmento4 = segmentos[4].replace(/\./g, "");
+        let valorSegmentos = lineasOBX.map(function(fila) {
+          let segmentos = fila.split('|');
+          let segmento4 = segmentos[4].replace(/\./g, "");
           return {
             segmento4: segmento4,
             valor: segmentos[5]
           };
         });
 
-        valorSegmentos.sort(function(a, b) {
-          var aSegmento4 = a.segmento4;
-          var bSegmento4 = b.segmento4;
-      
-          var ordenPrioridad = {
-            '174147842': 0, '1111149522': 1, '1111150033': 2, '1111150034': 3, '1111150035': 4, '131150456': 5, 
-            '181151708': 6, '121150344': 7, '122150344': 8, '1112150087': 9, '181151716': 10, '1131180': 11, 
-            '1': 12, '2': 13, '3': 14, '4': 15, '12': 16, '14': 17, '15': 18, '16': 19,
-            '17': 20, '18': 21, '19': 22, '20': 23, '21': 24, '22': 25, '23': 26, '24': 27, '25': 28, '26': 29,
-            '27': 30, '28': 31, '29': 32, '30': 33, '31': 34, '32': 35, '33': 36, '34': 37, '35': 38, '36': 39,
-            '40': 40, '41': 41, '42': 42, '44': 43, '45': 44, '46': 45, '47': 46, '48': 47, '49': 48, '50': 49,
-            '51': 50, '52': 51, '53': 52, '54': 53, '55': 54, '56': 55, '57': 56, '58': 57, '59': 58,
-          };
+        switch (valorSegmentos.segmento4) {
+          case '174147842':
+            console.log("FC");
+          break;
+        
+          case '1111149522':
+            console.log("Pulso");
+          break;
 
-          var aPrioridad = ordenPrioridad[aSegmento4] !== undefined ? ordenPrioridad[aSegmento4] : Infinity;
-          var bPrioridad = ordenPrioridad[bSegmento4] !== undefined ? ordenPrioridad[bSegmento4] : Infinity;
+          case '1111150033':
+            console.log("PAS");
+          break;
+        
+          case '1111150034':
+            console.log("PAD");
+          break;
+
+          case '1111150035':
+            console.log("PAM");
+          break;
+        
+          case '131150456':
+            console.log("SpO2");
+          break;
+
+          case '181151708':
+            console.log("EtCO2");
+          break;
+        
+          case '121150344':
+            console.log("Temp1");
+          break;
+
+          case '122150344':
+            console.log("Temp2");
+          break;
+        
+          case '1112150087':
+            console.log("PVC");
+          break;
+
+          case '181151716':
+            console.log("FiCO2");
+          break;
+        
+          case '1131180':
+            console.log("FR");
+          break;
+
+          default:
+          break;
+        }
+
+        // valorSegmentos.sort(function(a, b) {
+        //   var aSegmento4 = a.segmento4;
+        //   var bSegmento4 = b.segmento4;
           
-          if (aPrioridad !== bPrioridad) {
-            return aPrioridad - bPrioridad;
-          } else {
-            return valorSegmentos.indexOf(a) - valorSegmentos.indexOf(b);
-          }
-        });
+        //   console.log("->" + aSegmento4 + " / " + bSegmento4);
 
-        var primerosValores = valorSegmentos.slice(0, 12);
+          // var ordenPrioridad = {
+          //   '174147842': 0, '1111149522': 1, '1111150033': 2, '1111150034': 3, '1111150035': 4, '131150456': 5, 
+          //   '181151708': 6, '121150344': 7, '122150344': 8, '1112150087': 9, '181151716': 10, '1131180': 11, 
+          //   '1': 12, '2': 13, '3': 14, '4': 15, '12': 16, '14': 17, '15': 18, '16': 19,
+          //   '17': 20, '18': 21, '19': 22, '20': 23, '21': 24, '22': 25, '23': 26, '24': 27, '25': 28, '26': 29,
+          //   '27': 30, '28': 31, '29': 32, '30': 33, '31': 34, '32': 35, '33': 36, '34': 37, '35': 38, '36': 39,
+          //   '40': 40, '41': 41, '42': 42, '44': 43, '45': 44, '46': 45, '47': 46, '48': 47, '49': 48, '50': 49,
+          //   '51': 50, '52': 51, '53': 52, '54': 53, '55': 54, '56': 55, '57': 56, '58': 57, '59': 58,
+          // };
+
+        //   var aPrioridad = ordenPrioridad[aSegmento4] !== undefined ? ordenPrioridad[aSegmento4] : Infinity;
+        //   var bPrioridad = ordenPrioridad[bSegmento4] !== undefined ? ordenPrioridad[bSegmento4] : Infinity;
+          
+        //   if (aPrioridad !== bPrioridad) {
+        //     return aPrioridad - bPrioridad;
+        //   } else {
+        //     return valorSegmentos.indexOf(a) - valorSegmentos.indexOf(b);
+        //   }
+        // });
+
+        // var primerosValores = valorSegmentos.slice(0, 12);
     
-        this.hl7mess.push({ datos: primerosValores, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+        // this.hl7mess.push({ datos: primerosValores, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+        // this.hl7mess.push({DSV});
+        // console.log("hl7mess:>" + JSON.stringify(this.hl7mess));
       },
 
       iniRecepDatos(){
