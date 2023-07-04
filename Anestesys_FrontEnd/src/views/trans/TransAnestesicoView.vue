@@ -1131,13 +1131,20 @@
                         {{ itemMSV.horaGeneracion }}
                       </div>
 
-                      <template v-for="(item, index) in itemMSV.datos">
+                      <!-- <template v-for="(item, index) in itemMSV.datos">
                         <div class="m-1 celda-msv fw-bold" :class="'color-msv-' + item.segmento4" >
-                          {{ item }}
-
+                          {{ item.valor }}
                         </div>    
                         <hr class="mt-2 mb-2 hr-grid"/>                    
-                      </template>
+                      </template> -->
+
+                      <template v-for="(item, index) in itemMSV.datos">
+        <div class="m-1 celda-msv fw-bold" :class="'color-msv-' + item.segmento4">
+          {{ item.segmento4 in ordenPrioridad ? item.segmento4 : '-' }}
+        </div>
+        <hr class="mt-2 mb-2 hr-grid" />
+      </template>
+
                     </div>
                   </template>
                 </div>
@@ -1208,7 +1215,7 @@ const preIdStore = usePreIdStore();
 const transAnestStore = useTransAnestStore();
 const postAnestStore = usePostAnestStore();
 const medStore = useMedicamentoStore();
-var taSeparada: Object;
+var taSeparada: Object; 
 
 export default defineComponent({
   
@@ -1294,8 +1301,23 @@ export default defineComponent({
 
       stepSize: 1,
       gridAux: [],
+
+      ordenPrioridad: {
+        '174147842': 0,
+        '1111149522': 1,
+        '1111150033': 2,
+        '1111150034': 3,
+        '1111150035': 4,
+        '131150456': 5,
+        '181151708': 6,
+        '121150344': 7,
+        '122150344': 8,
+        '1112150087': 9,
+        '181151716': 10,
+        '1131180': 11,
+      }
     }
-  },
+  }, 
 
   components:{
     BarraNavegacion,
@@ -2430,39 +2452,45 @@ export default defineComponent({
         transAnestStore.getDatosMonitor();
         this.vaciarMensajeHL7();
       },
-
+      
       async vaciarMensajeHL7(){
+        var contador: 0
+        var posicionMap: {}
+
+        //Obtiene el arreglo con el mensaje HL7
         var hl7Message = transAnestStore.datosMSV
     
+        //Separa las líneas del mensaje HL7
         var lineas = hl7Message.split('\r');
     
+        //Obtiene las líneas OBX
         var lineasOBX = lineas.filter(function(linea) {
           return /^OBX/.test(linea);
         });
         
+        //Obtiene los valores requeridos de las líneas OBX, en este caso los segmentos 4 y 5
         var valorSegmentos = lineasOBX.map(function(fila) {
           var segmentos = fila.split('|');
           var segmento4 = segmentos[4].replace(/\./g, "");
           return {
-            segmento4: segmento4,
+            segmento4: segmento4,                        
             valor: segmentos[5]
           };
-        });
-
+        });     
+                        
+        //Ordena los valores obtenidos de los segmentos 4 y 5
         valorSegmentos.sort(function(a, b) {
           var aSegmento4 = a.segmento4;
           var bSegmento4 = b.segmento4;
-      
+          
           var ordenPrioridad = {
             '174147842': 0, '1111149522': 1, '1111150033': 2, '1111150034': 3, '1111150035': 4, '131150456': 5, 
-            '181151708': 6, '121150344': 7, '122150344': 8, '1112150087': 9, '181151716': 10, '1131180': 11, 
-            '1': 12, '2': 13, '3': 14, '4': 15, '12': 16, '14': 17, '15': 18, '16': 19,
-            '17': 20, '18': 21, '19': 22, '20': 23, '21': 24, '22': 25, '23': 26, '24': 27, '25': 28, '26': 29,
-            '27': 30, '28': 31, '29': 32, '30': 33, '31': 34, '32': 35, '33': 36, '34': 37, '35': 38, '36': 39,
-            '40': 40, '41': 41, '42': 42, '44': 43, '45': 44, '46': 45, '47': 46, '48': 47, '49': 48, '50': 49,
-            '51': 50, '52': 51, '53': 52, '54': 53, '55': 54, '56': 55, '57': 56, '58': 57, '59': 58,
-          };
-
+            '181151708': 6, '121150344': 7, '122150344': 8, '1112150087': 9, '181151716': 10, '1131180': 11,
+          };      
+          
+          console.log("orden"+JSON.stringify(ordenPrioridad));
+          
+          
           var aPrioridad = ordenPrioridad[aSegmento4] !== undefined ? ordenPrioridad[aSegmento4] : Infinity;
           var bPrioridad = ordenPrioridad[bSegmento4] !== undefined ? ordenPrioridad[bSegmento4] : Infinity;
           
@@ -2471,10 +2499,20 @@ export default defineComponent({
           } else {
             return valorSegmentos.indexOf(a) - valorSegmentos.indexOf(b);
           }
+        });     
+        
+        contador = 0;
+        posicionMap = {};
+        valorSegmentos.forEach(function(item) {
+          if (!(item.segmento4 in posicionMap)) {
+            contador++;
+            posicionMap[item.segmento4] = contador;
+          }
         });
 
+        //Obtiene unicamento los primeros 12 valores ordenads
         var primerosValores = valorSegmentos.slice(0, 12);
-    
+                    
         this.hl7mess.push({ datos: primerosValores, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
       },
 
@@ -2506,8 +2544,6 @@ export default defineComponent({
         this.saveGrid = setInterval(() => {
           this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
           this.hl7mess = [];
-          console.log("capturaGrid: "+ this.hl7mess);
-          
         }, 1000 * 60);
       },
 
@@ -2533,8 +2569,8 @@ export default defineComponent({
         var filaContenedor = document.getElementById('contenedor-fila');
         // Desplazar automáticamente el scroll hacia la derecha
         filaContenedor.scrollLeft = filaContenedor.scrollWidth;
-      });
-
+      });      
+      
       return filas;
     },
   },
