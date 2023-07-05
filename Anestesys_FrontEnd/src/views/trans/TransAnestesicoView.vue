@@ -1041,9 +1041,9 @@
         <div class="" :class="vistaPreviaOff == false ? 'fade-in vista-grid-monitoreo' : 'vista-grid-monitoreo'">
           <div class="col-md-12">          
 
-              <div class="d-flex flex-nowrap g-4">
+              <div class="d-flex flex-nowrap g-4 ms-1">
                 <!-- Barra lateral -->
-                <div class="col-md-1">
+                <div class="d-flex col-md-1 deslizar-grid-lateral" id="grid-lateral">
                   <div class="flex-nowrap fw-bold">
                     <div class="m-1 celda-msv invisible">0</div>
                     <div class="m-1 celda-msv">FC</div>
@@ -1066,84 +1066,32 @@
                     <hr class="mt-2 mb-2 invisible"/>                    
                     <div class="m-1 celda-msv">PVC</div>
                     <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">PAS_IN</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">PAD_IN</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">PAM_IN</div>
+                    <hr class="mt-2 mb-2 invisible"/>
                     <div class="m-1 celda-msv">FiCO2</div>
                     <hr class="mt-2 mb-2 invisible"/>
                     <div class="m-1 celda-msv">FR</div>
                     <hr class="mt-2 mb-2 invisible"/>
-                    <!-- <div class="m-1 celda-msv">ΔTemp</div> -->
-                    <!-- <div class="m-1 celda-msv">PAIS</div>
-                    <div class="m-1 celda-msv">PAIM</div>
-                    <div class="m-1 celda-msv">PAID</div>
-                    <div class="m-1 celda-msv">FPAA</div>
-                    <div class="m-1 celda-msv">FCP</div>
-                    <div class="m-1 celda-msv">IP</div>
-                    <div class="m-1 celda-msv">Tb</div>
-
-                    <div class="m-1 celda-msv">△Tb</div>
-                    <div class="m-1 celda-msv">CCI</div>
-                    <div class="m-1 celda-msv">CCO</div>
-                    <div class="m-1 celda-msv">VPP</div>
-                    <div class="m-1 celda-msv">VVS</div>
-                    <div class="m-1 celda-msv">LPM</div>
-                    <div class="m-1 celda-msv">IVGS</div>
-                    <div class="m-1 celda-msv">VS</div>
-                    <div class="m-1 celda-msv">PEC</div>
-                    <div class="m-1 celda-msv">IPEC</div>
-
-                    <div class="m-1 celda-msv">CVI</div>
-                    <div class="m-1 celda-msv">RVS</div>
-                    <div class="m-1 celda-msv">IRVS</div>
-                    <div class="m-1 celda-msv">FRT</div>
-                    <div class="m-1 celda-msv">CVP</div>
-                    <div class="m-1 celda-msv">FPC</div>
-                    <div class="m-1 celda-msv">CEV</div>
-                    <div class="m-1 celda-msv">FCA</div>
-                    <div class="m-1 celda-msv">FLO</div>
-                    <div class="m-1 celda-msv">FVP</div>
-
-                    <div class="m-1 celda-msv">FRCO2</div>
-                    <div class="m-1 celda-msv">Ht</div>
-                    <div class="m-1 celda-msv">Pt</div>
-                    <div class="m-1 celda-msv">FRT</div>
-                    <div class="m-1 celda-msv">VMVI</div>
-                    <div class="m-1 celda-msv">VME</div>
-                    <div class="m-1 celda-msv">VM</div>
-                    <div class="m-1 celda-msv">VTap</div>
-                    <div class="m-1 celda-msv">VTEsp</div>
-                    <div class="m-1 celda-msv">VTE/P</div>
-
-                    <div class="m-1 celda-msv">VTI</div>
-                    <div class="m-1 celda-msv">VTExp</div>
-                    <div class="m-1 celda-msv">VT</div>
-                    <div class="m-1 celda-msv">PVA</div>
-                    <div class="m-1 celda-msv">PVM</div>
-                    <div class="m-1 celda-msv">Pplat</div>
-                    <div class="m-1 celda-msv">PPI</div>
-                    <div class="m-1 celda-msv">PEEP</div>
-                    <div class="m-1 celda-msv">PEEPM</div> -->
                   </div>
                 </div>
 
-                <div class="d-flex flex-nowrap col-md-11 deslizar-grid ms-1" id="contenedor-fila">
+                <div class="d-flex flex-nowrap col-md-11 deslizar-grid ms-1" id="grid">
                   <template v-for="( itemMSV ) in saltoArreglo">
                     <div class="">
                       <div class="m-1 fw-bold celda-msv">
                         {{ itemMSV.horaGeneracion }}
                       </div>
 
-                      <!-- <template v-for="(item, index) in itemMSV.datos">
+                      <template v-for="(item, index) in itemMSV.datos">
                         <div class="m-1 celda-msv fw-bold" :class="'color-msv-' + item.segmento4" >
-                          {{ item.valor }}
+                          {{ item === '-' ? item : item.valor }}
                         </div>    
                         <hr class="mt-2 mb-2 hr-grid"/>                    
-                      </template> -->
-
-                      <template v-for="(item, index) in itemMSV.datos">
-        <div class="m-1 celda-msv fw-bold" :class="'color-msv-' + item.segmento4">
-          {{ item.segmento4 in ordenPrioridad ? item.segmento4 : '-' }}
-        </div>
-        <hr class="mt-2 mb-2 hr-grid" />
-      </template>
+                      </template>
 
                     </div>
                   </template>
@@ -1371,9 +1319,26 @@ export default defineComponent({
     this.tempMSV = setInterval(() => {
       this.pingMSV(medStore.monitor[0].dirIPMVS);
     }, 10000);
+
+    this.moverScroll();
   },
 
   methods: {
+      async moverScroll(){
+        var div1 = document.getElementById('grid');
+        var div2 = document.getElementById('grid-lateral');
+
+        // Función para sincronizar el scroll del div1 con el div2
+        div1.addEventListener('scroll', function() {
+          div2.scrollTop = div1.scrollTop;
+        });
+
+        // Función para sincronizar el scroll del div2 con el div1
+        div2.addEventListener('scroll', function() {
+          div1.scrollTop = div2.scrollTop;
+        });
+      },
+
       // Gestión datos ventilador 
       async guardarDatosV() {
         this.btnAddVentilador=false
@@ -2454,24 +2419,23 @@ export default defineComponent({
       },
       
       async vaciarMensajeHL7(){
-        var contador: 0
-        var posicionMap: {}
+        let valoresOrdenados = Array.from({ length: 15 }, () => "-");
 
         //Obtiene el arreglo con el mensaje HL7
-        var hl7Message = transAnestStore.datosMSV
+        let hl7Message = transAnestStore.datosMSV
     
         //Separa las líneas del mensaje HL7
-        var lineas = hl7Message.split('\r');
+        let lineas = hl7Message.split('\r');
     
         //Obtiene las líneas OBX
-        var lineasOBX = lineas.filter(function(linea) {
+        let lineasOBX = lineas.filter(function(linea) {
           return /^OBX/.test(linea);
         });
         
         //Obtiene los valores requeridos de las líneas OBX, en este caso los segmentos 4 y 5
-        var valorSegmentos = lineasOBX.map(function(fila) {
-          var segmentos = fila.split('|');
-          var segmento4 = segmentos[4].replace(/\./g, "");
+        let valorSegmentos = lineasOBX.map(function(fila) {
+          let segmentos = fila.split('|');
+          let segmento4 = segmentos[4].replace(/\./g, "");
           return {
             segmento4: segmento4,                        
             valor: segmentos[5]
@@ -2479,41 +2443,77 @@ export default defineComponent({
         });     
                         
         //Ordena los valores obtenidos de los segmentos 4 y 5
-        valorSegmentos.sort(function(a, b) {
-          var aSegmento4 = a.segmento4;
-          var bSegmento4 = b.segmento4;
+        for (let index = 0; index < valorSegmentos.length; index++) {          
+          switch (valorSegmentos[index].segmento4) {
+            case '174147842':
+              valoresOrdenados[0]=valorSegmentos[index];
+            break;
           
-          var ordenPrioridad = {
-            '174147842': 0, '1111149522': 1, '1111150033': 2, '1111150034': 3, '1111150035': 4, '131150456': 5, 
-            '181151708': 6, '121150344': 7, '122150344': 8, '1112150087': 9, '181151716': 10, '1131180': 11,
-          };      
-          
-          console.log("orden"+JSON.stringify(ordenPrioridad));
-          
-          
-          var aPrioridad = ordenPrioridad[aSegmento4] !== undefined ? ordenPrioridad[aSegmento4] : Infinity;
-          var bPrioridad = ordenPrioridad[bSegmento4] !== undefined ? ordenPrioridad[bSegmento4] : Infinity;
-          
-          if (aPrioridad !== bPrioridad) {
-            return aPrioridad - bPrioridad;
-          } else {
-            return valorSegmentos.indexOf(a) - valorSegmentos.indexOf(b);
-          }
-        });     
-        
-        contador = 0;
-        posicionMap = {};
-        valorSegmentos.forEach(function(item) {
-          if (!(item.segmento4 in posicionMap)) {
-            contador++;
-            posicionMap[item.segmento4] = contador;
-          }
-        });
+            case '131149530':
+              valoresOrdenados[1]=valorSegmentos[index];
+            break;
 
-        //Obtiene unicamento los primeros 12 valores ordenads
-        var primerosValores = valorSegmentos.slice(0, 12);
+            case '119150301':
+              valoresOrdenados[2]=valorSegmentos[index];
+            break;
+          
+            case '119150301':
+              valoresOrdenados[3]=valorSegmentos[index];
+            break;
+
+            case '119150303':
+              valoresOrdenados[4]=valorSegmentos[index];
+            break;
+          
+            case '131150456':
+              valoresOrdenados[5]=valorSegmentos[index];
+            break;
+
+            case '181151708':
+              valoresOrdenados[6]=valorSegmentos[index];
+            break;
+          
+            case '121150344':
+              valoresOrdenados[7]=valorSegmentos[index];
+            break;
+
+            case '122150344':
+              valoresOrdenados[8]=valorSegmentos[index];
+            break;
+          
+            case '1112150087':
+              valoresOrdenados[9]=valorSegmentos[index];
+            break;
+
+            case '111150037':
+              valoresOrdenados[10]=valorSegmentos[index];
+            break;
+
+            case '111150038':
+              valoresOrdenados[11]=valorSegmentos[index];
+            break;
+
+            case '111150039':
+              valoresOrdenados[12]=valorSegmentos[index];
+            break;
+
+            case '181151716':
+              valoresOrdenados[13]=valorSegmentos[index];
+            break;
+          
+            case '181151594':
+              valoresOrdenados[14]=valorSegmentos[index];
+            break;
+
+            default:
+            break;
+          }                          
+        }
+
+        //Asignar los valores ordenads
+        //let primerosValores = valoresOrdenados
                     
-        this.hl7mess.push({ datos: primerosValores, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+        this.hl7mess.push({ datos: valoresOrdenados, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
       },
 
       iniRecepDatos(){
@@ -2734,6 +2734,14 @@ export default defineComponent({
 .deslizar-grid{
   overflow: scroll;
   overflow-x: auto;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  height: 620px;
+  margin-top: 0px;
+}
+.deslizar-grid-lateral{
+  overflow-y: hidden;
+  overflow-x: hidden;
   white-space: nowrap;
   scroll-behavior: smooth;
   height: 620px;
@@ -2963,16 +2971,16 @@ hr {
 .color-msv-174147842{
   color:#00A597
 }
-.color-msv-1111149522{
+.color-msv-131149530{
   color:#7589BE
 }
-.color-msv-1111150033{
+.color-msv-119150301{
   color:#EC5A55
 }
-.color-msv-1111150034{
+.color-msv-119150301{
   color:#A1C5E3
 }
-.color-msv-1111150035{
+.color-msv-119150303{
   color:#EC6618
 }
 .color-msv-131150456{
@@ -2993,7 +3001,16 @@ hr {
 .color-msv-181151716{
   color:#022B9B
 }
-.color-msv-1131180{
+.color-msv-181151594{
   color:#FFC400
+}
+.color-msv-111150037{
+  color:rgb(198, 27, 27)
+}
+.color-msv-111150038{
+  color:rgb(198, 27, 27)
+}
+.color-msv-111150039{
+  color:rgb(198, 27, 27)
 }
 </style>
