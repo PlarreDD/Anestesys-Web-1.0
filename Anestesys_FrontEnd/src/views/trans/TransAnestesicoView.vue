@@ -2510,9 +2510,7 @@ export default defineComponent({
           }                          
         }
 
-        //Asignar los valores ordenads
-        //let primerosValores = valoresOrdenados
-                    
+        //Asignar los valores ordenads                    
         this.hl7mess.push({ datos: valoresOrdenados, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
       },
 
