@@ -9,7 +9,8 @@ const userStore = useUserStore();
 export const useMedicamentoStore = defineStore("medicamento", {
   state: () => ({
     medicamentos: ref(null),
-    monitor: ref(null)
+    monitor: ref(null),
+    status: ref(null),
   }),
 
   actions: {
@@ -162,18 +163,20 @@ export const useMedicamentoStore = defineStore("medicamento", {
           dirIPMVS: dirIPMonitor,
         },
       })
-        .then((res: any) => {
-          swal.fire({
-            title: "Monitor registrado",
-            icon: "success",
-            showConfirmButton: false,
-            toast: true,
-            position: "top-end",
-            timer: 2500,
-            timerProgressBar: true,
-          });
-        })
-        .catch((e: any) => {
+      .then((res: any) => {
+        this.status = res.data.statusMSV;
+          // console.log(JSON.stringify(res.data.statusMSV));
+        swal.fire({
+          title: "Monitor registrado",
+          icon: "success",
+          showConfirmButton: false,
+          toast: true,
+          position: "top-end",
+          timer: 2500,
+          timerProgressBar: true,
+        });
+      })
+      .catch((e: any) => {
           if (e.response) {
             /* Mensaje de registro fallido */
             swal.fire({
@@ -190,7 +193,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
           } else {
             // console.log("ErrorAx: ", e);
           }
-        });
+      });
     },
 
     async listMonitor(){
@@ -232,6 +235,27 @@ export const useMedicamentoStore = defineStore("medicamento", {
         .catch((e: any) => {
         //   console.log(e);
         });
-    }
+    },
+
+    async statusMSV(dirIP: string){
+      await apiAxios({
+        url: "http://localhost:5000/mvs/stat",
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + userStore.token,
+        },
+        data: {
+          dirIPMVS: dirIP
+        },
+      })
+      .then((res: any) => {
+        this.status = res.data.statusMSV;
+        // console.log(`El dispositivo está ${this.status}.`);
+      })
+      .catch((e: any) => {
+          console.log(e);
+          
+      });
+    },
   },
 });

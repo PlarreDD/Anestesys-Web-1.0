@@ -21,7 +21,8 @@ const MVSSchema = new Schema({
         required: true,
         trim: true,
         unique: true,
-    }
+    },
+    IP_HOST: { type: String },
 })
 
 export const Medicamento = model ('Medicamento', MedicamentoSchema);

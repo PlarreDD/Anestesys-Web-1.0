@@ -324,8 +324,8 @@
                             </td>
 
                             <td class="text-white">
-                              {{  }}
-                            </td>                            
+                              {{ medStore.status }}
+                            </td>
 
                             <!-- Eliminar MVS -->
                             <td>
@@ -483,30 +483,43 @@ export default defineComponent({
     },
 
     async agregarMVS(){
-      if (
-        this.configMonitor.nomMonitor == undefined ||
-        this.configMonitor.nomMonitor == ""
-      ) {
+      if(medStore.monitor.length != 0){
         swal.fire({
-          title: "Ingrese el modelo del monitor",
-          icon: "warning",
-          showConfirmButton: false,
-          showCloseButton: true,
-          toast: true,
-          timer: 2500,
-          timerProgressBar: true,
-          position: "top-end",
-        });
-      } else {
-        await medStore.pingMonitor(String(this.configMonitor.nomMonitor),
-                                 String(this.configMonitor.dirIPMonitor));
-
-        this.configMonitor.nomMonitor = "";
-        this.configMonitor.dirIPMonitor = "";
-
-        await medStore.listMonitor();
+            title: "Elimine el monitor antes de agregar uno nuevo",
+            icon: "warning",
+            showConfirmButton: false,
+            showCloseButton: true,
+            toast: true,
+            timer: 2500,
+            timerProgressBar: true,
+            position: "top-end",
+          });
       }
-      
+      else{
+        if (
+          this.configMonitor.nomMonitor == undefined ||
+          this.configMonitor.nomMonitor == ""
+        ) {
+          swal.fire({
+            title: "Ingrese el modelo del monitor",
+            icon: "warning",
+            showConfirmButton: false,
+            showCloseButton: true,
+            toast: true,
+            timer: 2500,
+            timerProgressBar: true,
+            position: "top-end",
+          });
+        } else {
+          await medStore.pingMonitor(String(this.configMonitor.nomMonitor),
+                                     String(this.configMonitor.dirIPMonitor));
+  
+          this.configMonitor.nomMonitor = "";
+          this.configMonitor.dirIPMonitor = "";  
+        }
+      }
+
+      await medStore.listMonitor();
     },
 
     async validaEliminarMonitor(idMonitor) {
@@ -565,7 +578,7 @@ export default defineComponent({
   text-align: center;
 }
 .imgLogoBarra {
-  width: 280px;
+  width: 200px;
   height: auto;
 }
 .imgPerfil {

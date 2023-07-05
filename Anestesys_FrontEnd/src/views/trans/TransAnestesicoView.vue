@@ -2,6 +2,7 @@
   <header>
     <barra-navegacion/>
   </header>
+
   <div class="margen-div-barra">
 
     <div class="input-group mb-3">
@@ -9,28 +10,25 @@
         <div class="col-md-10">
           <div class="row g-3 mb-3">
             <!-- Botón monitoreo -->
-            <div class="col-md-3">
-              <template v-if="btnCambioMonitor === false">
-                <button @click="iniMSV"
-                  :disabled="btnMSV"
-                  type="button"
-                  class="btn btn-monitor fw-bold">
-                  <img src="images/monitoreo.svg" />
-                  <label>&nbsp;&nbsp;&nbsp;INICIAR MONITOREO</label>
-                </button>
+            <div class="col-md-4">
+
+              <template v-if="transAnestStore.envDat === true && medStore.status === 'Activo'">
+                <button class="borde-btn-msv" @click="finMSV"><img src="images/imgIcon/MonitorActivoDatos.png" class="btn-msv" /></button>
+                <span class="fw-bold msv-color-txt">&nbsp;&nbsp;Estado: Recibiendo Datos</span>
               </template>
 
-              <template v-else>
-                <button @click="finMSV"
-                  type="button"
-                  class="btn btn-monitor-off fw-bold">
-                  <img src="images/monitoreo.svg" />
-                  <label>&nbsp;&nbsp;&nbsp;DETENER MONITOREO</label>
-                </button>
-              </template>
+              <template v-if="transAnestStore.envDat === false && medStore.status === 'Activo'">                
+                <button class="borde-btn-msv" style="border: none;" @click="iniMSV" :disabled="btnMSV"><img src="images/imgIcon/MonitorActivo.png" class="btn-msv" /></button>
+                <span class="fw-bold msv-color-txt" >&nbsp;&nbsp;Estado: Sin Datos</span>
+              </template>  
+
+              <template v-if="medStore.status === 'Inactivo'">
+                <button class="borde-btn-msv" style="border: none;"><img src="images/imgIcon/MonitorInactivo.png" class="btn-msv" /></button>
+                <span class="fw-bold msv-color-txt">&nbsp;&nbsp;Estado: Desconectado</span>
+              </template>              
             </div>
 
-            <div class="col-md-2"></div>
+            <div class="col-md-1"></div>
 
             <!-- Botón medicamento -->
             <div class="col-md-2">
@@ -932,7 +930,9 @@
         </div>
 
         <div class="col-1 fw-bold">
-          <select id="inputState" class="form-select">
+          <select id="inputState"
+                  class="form-select"
+                  v-model="stepSize">
             <option>1</option>
             <option>2</option>
             <option>5</option>
@@ -940,10 +940,8 @@
             <option>15</option>
           </select>
         </div>
-      </div>     
+      </div>
     </div>
-
-    
 
     <!-- Contenedor Grid -->
     <div class="input-group mb-3 bordePrincipal">
@@ -951,7 +949,7 @@
       <!-- Vista previa medicamentos/eventos-relevos -->
       <div class="" :class="vistaPreviaOff == false ? 'col-md-3 menu-vista-previa mostrar' : 'menu-vista-previa ocultar'">       
 
-        <!-- Vista medicamentos -->        
+        <!-- Vista medicamentos -->
         <div class="" :class="vistaPreviaOff == false ? 'col-md-11 vista-medicamentos' : 'col-md-11 vista-medicamentos'">
           <div class="col-md-12">
             <Multiselect mode="tags"
@@ -984,13 +982,13 @@
               </tbody>
             </table>
           </div>
-        </div>                                     
+        </div>
 
         <!-- Vista eventos/relevos -->
         <div class="" :class="vistaPreviaOff == false ? 'col-md-11 vista-eventos-relevos' : 'col-md-11 vista-eventos-relevos'">  
           <div class="col-md-12">
             <button class="btn btn-evento-relevo btn-sm fw-bold"
-                    @click="capturaGrid">RELEVOS Y EVENTOS CRÍTICOS</button>
+                    @click="">RELEVOS Y EVENTOS CRÍTICOS</button>
           </div>   
           <!-- Lista de relevos/eventos -->
           <div class="deslizar-relevos m-1"> 
@@ -1041,42 +1039,65 @@
       <!-- Grid signos vitales -->
       <div class="" :class="vistaPreviaOff == false ? 'col-md-6' : 'col-md-9'">
         <div class="" :class="vistaPreviaOff == false ? 'fade-in vista-grid-monitoreo' : 'vista-grid-monitoreo'">
-          <div class="col-md-12 deslizar-grid">          
-            <table class="table table-responsive" id="grid-signos">
-              <thead>
-                <tr>
-                  <th>00:00</th>
-                  <th>00:00</th>
-                  <th>00:00</th>
-                  <th>00:00</th>
-                  <th>00:00</th>
-                  <th>00:00</th>
-                  <th>00:00</th>
-                  <th>00:00</th>
-                  <th>00:00</th>
-                  <th>00:00</th>
-                </tr>
-              </thead>
-              <!-- <tbody v-for="fila in hl7mess">
+          <div class="col-md-12">          
 
-                <tr v-for="valor in fila">
-                  {{ valor }}
-                </tr>              
-                
-              </tbody> -->
-              <!-- <tbody>
-                <tr v-for="fila in hl7mess">
-                  <td v-for="valor in fila">{{ valor }}</td>
-                </tr>
-              </tbody> -->
-              <tbody>
-                <tr v-for="fila in hl7mess">
-                  <template v-for="valor in fila">
-                    <td>{{ valor }}</td>
+              <div class="d-flex flex-nowrap g-4 ms-1">
+                <!-- Barra lateral -->
+                <div class="d-flex col-md-1 deslizar-grid-lateral" id="grid-lateral">
+                  <div class="flex-nowrap fw-bold">
+                    <div class="m-1 celda-msv invisible">0</div>
+                    <div class="m-1 celda-msv">FC</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">Pulso</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">PAS</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">PAD</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">PAM</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">SpO2</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">EtCO2</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">Temp1</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">Temp2</div>
+                    <hr class="mt-2 mb-2 invisible"/>                    
+                    <div class="m-1 celda-msv">PVC</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">PAS_IN</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">PAD_IN</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">PAM_IN</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">FiCO2</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                    <div class="m-1 celda-msv">FR</div>
+                    <hr class="mt-2 mb-2 invisible"/>
+                  </div>
+                </div>
+
+                <div class="d-flex flex-nowrap col-md-11 deslizar-grid ms-1" id="grid">
+                  <template v-for="( itemMSV ) in saltoArreglo">
+                    <div class="">
+                      <div class="m-1 fw-bold celda-msv">
+                        {{ itemMSV.horaGeneracion }}
+                      </div>
+
+                      <template v-for="(item, index) in itemMSV.datos">
+                        <div class="m-1 celda-msv fw-bold" :class="'color-msv-' + item.segmento4" >
+                          {{ item === '-' ? item : item.valor }}
+                        </div>    
+                        <hr class="mt-2 mb-2 hr-grid"/>                    
+                      </template>
+
+                    </div>
                   </template>
-                </tr>
-              </tbody>
-            </table>
+                </div>
+              </div>
+
           </div>
         </div>
       </div>
@@ -1142,7 +1163,7 @@ const preIdStore = usePreIdStore();
 const transAnestStore = useTransAnestStore();
 const postAnestStore = usePostAnestStore();
 const medStore = useMedicamentoStore();
-var taSeparada: Object;
+var taSeparada: Object; 
 
 export default defineComponent({
   
@@ -1220,9 +1241,31 @@ export default defineComponent({
       saveGrid: null,
       btnMSV: true,
       temporizador: null,
+      tempMSV: null,
       grid: [],
+      statEnvDat: false,
+
+      horaActual: '',
+
+      stepSize: 1,
+      gridAux: [],
+
+      ordenPrioridad: {
+        '174147842': 0,
+        '1111149522': 1,
+        '1111150033': 2,
+        '1111150034': 3,
+        '1111150035': 4,
+        '131150456': 5,
+        '181151708': 6,
+        '121150344': 7,
+        '122150344': 8,
+        '1112150087': 9,
+        '181151716': 10,
+        '1131180': 11,
+      }
     }
-  },
+  }, 
 
   components:{
     BarraNavegacion,
@@ -1231,48 +1274,71 @@ export default defineComponent({
   },
 
   mounted: function() { // Llama el método despues de cargar la página
-      transAnestStore.listDatosV(preIdStore.pacienteID._id);
-      this.listaTecAnest();
-      
-      this.menuTrans.balanceTotal = null;
-      this.menuTrans.solHartman = null;
-      this.menuTrans.glucosados = null;
-      this.menuTrans.almidones = null;
-      this.menuTrans.paqGlobular = null;
-      this.menuTrans.plaquetas = null;
-      this.menuTrans.factor_VII = null;
-      this.menuTrans.otrosIngresos = null;
-      this.menuTrans.solFisio = null;
-      this.menuTrans.gelatinas = null;
-      this.menuTrans.albuminas = null;
-      this.menuTrans.plasmas = null;
-      this.menuTrans.crioprecipitados = null;
-      this.menuTrans.factor_VII = null;
-      this.menuTrans.liqAscitis = null;
-      this.menuTrans.sangradoAprox = null;
-      this.menuTrans.uresis = null;
-      this.menuTrans.expoQX = null;
-      this.menuTrans.reqBasales = null;
-      this.menuTrans.ayuno = null;
-      this.menuTrans.ayuno = null;
-      this.menuTrans.otrosEgresos = null;
+    transAnestStore.getDetieneMonitoreo();
+    this.pingMSV(medStore.monitor[0].dirIPMVS);
+    transAnestStore.listDatosV(preIdStore.pacienteID._id);
+    this.listaTecAnest();
+    
+    this.menuTrans.balanceTotal = null;
+    this.menuTrans.solHartman = null;
+    this.menuTrans.glucosados = null;
+    this.menuTrans.almidones = null;
+    this.menuTrans.paqGlobular = null;
+    this.menuTrans.plaquetas = null;
+    this.menuTrans.factor_VII = null;
+    this.menuTrans.otrosIngresos = null;
+    this.menuTrans.solFisio = null;
+    this.menuTrans.gelatinas = null;
+    this.menuTrans.albuminas = null;
+    this.menuTrans.plasmas = null;
+    this.menuTrans.crioprecipitados = null;
+    this.menuTrans.factor_VII = null;
+    this.menuTrans.liqAscitis = null;
+    this.menuTrans.sangradoAprox = null;
+    this.menuTrans.uresis = null;
+    this.menuTrans.expoQX = null;
+    this.menuTrans.reqBasales = null;
+    this.menuTrans.ayuno = null;
+    this.menuTrans.ayuno = null;
+    this.menuTrans.otrosEgresos = null;
 
-      var anesin = document.getElementById("anes-in");
-      anesin.addEventListener("contextmenu", this.bloquearClicDerecho);
-      var cxin = document.getElementById("cx-in");
-      cxin.addEventListener("contextmenu", this.bloquearClicDerecho);
-      var cxout = document.getElementById("cx-out");
-      cxout.addEventListener("contextmenu", this.bloquearClicDerecho);
-      var anesout = document.getElementById("anes-out");
-      anesout.addEventListener("contextmenu", this.bloquearClicDerecho);
-      
-      transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+    var anesin = document.getElementById("anes-in");
+    anesin.addEventListener("contextmenu", this.bloquearClicDerecho);
+    var cxin = document.getElementById("cx-in");
+    cxin.addEventListener("contextmenu", this.bloquearClicDerecho);
+    var cxout = document.getElementById("cx-out");
+    cxout.addEventListener("contextmenu", this.bloquearClicDerecho);
+    var anesout = document.getElementById("anes-out");
+    anesout.addEventListener("contextmenu", this.bloquearClicDerecho);
+    
+    transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
 
-      this.menuTrans.tipoRel= "RELEVO";
-      this.menuTrans.tipoEve= "EVENTO";
+    this.menuTrans.tipoRel= "RELEVO";
+    this.menuTrans.tipoEve= "EVENTO";
+    
+    this.tempMSV = setInterval(() => {
+      this.pingMSV(medStore.monitor[0].dirIPMVS);
+    }, 10000);
+
+    this.moverScroll();
   },
 
   methods: {
+      async moverScroll(){
+        var div1 = document.getElementById('grid');
+        var div2 = document.getElementById('grid-lateral');
+
+        // Función para sincronizar el scroll del div1 con el div2
+        div1.addEventListener('scroll', function() {
+          div2.scrollTop = div1.scrollTop;
+        });
+
+        // Función para sincronizar el scroll del div2 con el div1
+        div2.addEventListener('scroll', function() {
+          div1.scrollTop = div2.scrollTop;
+        });
+      },
+
       // Gestión datos ventilador 
       async guardarDatosV() {
         this.btnAddVentilador=false
@@ -1687,7 +1753,7 @@ export default defineComponent({
         }
       },
 
-      async ocultarDropDown(tiemposQX : string){                                        
+      async ocultarDropDown(tiemposQX : string){
         switch (tiemposQX) {
           case "ANESIN":
             this.activoAnesIN= false
@@ -1719,7 +1785,7 @@ export default defineComponent({
       },
 
       //Ocultar vista previa
-      mostrarVistaPrevia() {         
+      mostrarVistaPrevia() {
           this.vistaPreviaOff = true;
       },
 
@@ -2332,6 +2398,7 @@ export default defineComponent({
 
       // Eventos de Monitoreo
       async iniMSV(){
+        transAnestStore.envDat = true;
         this.btnCambioMonitor = true;
         this.siAquisigo();
         transAnestStore.getIniciaMonitoreo();
@@ -2340,6 +2407,7 @@ export default defineComponent({
       },
 
       async finMSV(){
+        transAnestStore.envDat = false;
         this.btnCambioMonitor = false;
         transAnestStore.getDetieneMonitoreo();
         this.termRecepDatos();
@@ -2349,34 +2417,113 @@ export default defineComponent({
         transAnestStore.getDatosMonitor();
         this.vaciarMensajeHL7();
       },
-
+      
       async vaciarMensajeHL7(){
-        var hl7Message = transAnestStore.datosMSV
+        let valoresOrdenados = Array.from({ length: 15 }, () => "-");
+
+        //Obtiene el arreglo con el mensaje HL7
+        let hl7Message = transAnestStore.datosMSV
     
-        var lineas = hl7Message.split('\r');
+        //Separa las líneas del mensaje HL7
+        let lineas = hl7Message.split('\r');
     
-        var lineasOBX = lineas.filter(function(linea) {
+        //Obtiene las líneas OBX
+        let lineasOBX = lineas.filter(function(linea) {
           return /^OBX/.test(linea);
         });
         
-        var valorSegmentos = lineasOBX.map(function(fila) {
-          var segmentos = fila.split('|');
-          return segmentos[5];
-        });
-    
-        //this.hl7mess = valorSegmentos
-        this.hl7mess.push(valorSegmentos);
+        //Obtiene los valores requeridos de las líneas OBX, en este caso los segmentos 4 y 5
+        let valorSegmentos = lineasOBX.map(function(fila) {
+          let segmentos = fila.split('|');
+          let segmento4 = segmentos[4].replace(/\./g, "");
+          return {
+            segmento4: segmento4,                        
+            valor: segmentos[5]
+          };
+        });     
+                        
+        //Ordena los valores obtenidos de los segmentos 4 y 5
+        for (let index = 0; index < valorSegmentos.length; index++) {          
+          switch (valorSegmentos[index].segmento4) {
+            case '174147842':
+              valoresOrdenados[0]=valorSegmentos[index];
+            break;
+          
+            case '131149530':
+              valoresOrdenados[1]=valorSegmentos[index];
+            break;
 
-        console.log("HL7: "+this.hl7mess);        
+            case '119150301':
+              valoresOrdenados[2]=valorSegmentos[index];
+            break;
+          
+            case '119150301':
+              valoresOrdenados[3]=valorSegmentos[index];
+            break;
+
+            case '119150303':
+              valoresOrdenados[4]=valorSegmentos[index];
+            break;
+          
+            case '131150456':
+              valoresOrdenados[5]=valorSegmentos[index];
+            break;
+
+            case '181151708':
+              valoresOrdenados[6]=valorSegmentos[index];
+            break;
+          
+            case '121150344':
+              valoresOrdenados[7]=valorSegmentos[index];
+            break;
+
+            case '122150344':
+              valoresOrdenados[8]=valorSegmentos[index];
+            break;
+          
+            case '1112150087':
+              valoresOrdenados[9]=valorSegmentos[index];
+            break;
+
+            case '111150037':
+              valoresOrdenados[10]=valorSegmentos[index];
+            break;
+
+            case '111150038':
+              valoresOrdenados[11]=valorSegmentos[index];
+            break;
+
+            case '111150039':
+              valoresOrdenados[12]=valorSegmentos[index];
+            break;
+
+            case '181151716':
+              valoresOrdenados[13]=valorSegmentos[index];
+            break;
+          
+            case '181151594':
+              valoresOrdenados[14]=valorSegmentos[index];
+            break;
+
+            default:
+            break;
+          }                          
+        }
+
+        //Asignar los valores ordenads                    
+        this.hl7mess.push({ datos: valoresOrdenados, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
       },
 
       iniRecepDatos(){
         this.intervalId = setInterval(() => {
           this.comMSV();
-        }, 15000);
+        }, 10000);
       },
 
-      termRecepDatos(){        
+      termRecepDatos(){
+        transAnestStore.envDat = false;
+        console.log(transAnestStore.envDat);
+        transAnestStore.datosMSV = null;
         clearInterval(this.intervalId);
       },
       
@@ -2388,24 +2535,41 @@ export default defineComponent({
         this.temporizador = setTimeout(() => {
           console.log("Sigues Ahi?");
           this.siAquisigo();
-        }, 1000 /** 60 * 30*/);        
+        }, 1000 * 60 * 30);        
       },
       
       capturaGrid(){
         this.saveGrid = setInterval(() => {
-          this.grid.push(this.hl7mess);
-          console.log("GRID:" + this.grid);
+          this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
+          this.hl7mess = [];
         }, 1000 * 60);
+      },
+
+      pingMSV(dirip: string){
+        medStore.statusMSV(dirip);
       },
   },
   
   computed: {
     tablaMedicamentos() {      
-        if (this.medicSeleccionados.length === 0) {
-          return this.listaMedTrans;
-        } else {
-          return this.listaMedTrans.filter(item => this.medicSeleccionados.includes(item));
-        }
+      if (this.medicSeleccionados.length === 0) {
+        return this.listaMedTrans;
+      } else {
+        return this.listaMedTrans.filter(item => this.medicSeleccionados.includes(item));
+      }
+    },
+
+    saltoArreglo(){      
+      const step = this.stepSize;
+      const filas = this.grid.filter((itemMSV, index) => index % step === 0);
+
+      this.$nextTick(() => {
+        var filaContenedor = document.getElementById('contenedor-fila');
+        // Desplazar automáticamente el scroll hacia la derecha
+        filaContenedor.scrollLeft = filaContenedor.scrollWidth;
+      });      
+      
+      return filas;
     },
   },
 })
@@ -2567,7 +2731,17 @@ export default defineComponent({
 }
 .deslizar-grid{
   overflow: scroll;
-  overflow-x: scroll;
+  overflow-x: auto;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  height: 620px;
+  margin-top: 0px;
+}
+.deslizar-grid-lateral{
+  overflow-y: hidden;
+  overflow-x: hidden;
+  white-space: nowrap;
+  scroll-behavior: smooth;
   height: 620px;
   margin-top: 0px;
 }
@@ -2649,7 +2823,6 @@ export default defineComponent({
     --bs-btn-active-border-color: #002D60;
     inline-size: -webkit-fill-available;
 }
-
 .btn-monitor{
     --bs-btn-bg: #fff;
     --bs-btn-color: #002D60;    
@@ -2662,7 +2835,6 @@ export default defineComponent({
     --bs-btn-active-border-color: #E88300;
     inline-size: -webkit-fill-available;
 }
-
 .btn-monitor-off{
     --bs-btn-bg: #E88300;
     --bs-btn-color: #fff;    
@@ -2687,6 +2859,9 @@ hr {
     border: 0;
     border-top: 1px solid;
     opacity: 1;
+}
+.hr-grid{
+  color: #002D60 !important;
 }
 .dropdown-menu{
   --bs-dropdown-min-width: 9.2rem;
@@ -2735,25 +2910,6 @@ hr {
   border-bottom-width:1px;
   border-bottom-width:thick
 }
-#grid-signos thead tr > th {
-  border-color: white;
-  background-color: #FFF !important;
-}
-#grid-signos > :not(caption) > * > * {
-  padding: 0.5rem 0.5rem;
-  background-color: white;
-  border-bottom-width: 1px;
-  box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
-}
-#grid-signos tbody tr > td {
-  border: 1px;
-  height: 10px;
-  padding-left: 1px;
-}
-#grid-signos {
-  padding-left: 10px;
-  margin-top: 20px;
-}
 .espacio {
   height: 55px;
 }
@@ -2778,7 +2934,7 @@ hr {
   width: 25px; 
   height: auto; 
   text-align: center; 
-  opacity: 0.5;
+  /* opacity: 0.5; */
 }
 .ocultar{
   width: 0;
@@ -2787,5 +2943,72 @@ hr {
 }
 .mostrar{ 
   transition: all 0.8s ease-in-out;
+}
+.borde-btn-msv{
+  border: none;
+}
+.btn-msv{
+  width: 70px; 
+  height: auto; 
+  cursor: pointer;
+}
+.msv-color-txt{
+  color:#002D60
+}
+.celda-msv{
+  background-color: white; 
+  border: solid; 
+  border-color: #DBDEE2; 
+  border-radius: 5px; 
+  text-align: center; 
+  color:#002D60; 
+  height: auto; 
+  width: 55px;
+}
+/* Colores valores MSV */
+.color-msv-174147842{
+  color:#00A597
+}
+.color-msv-131149530{
+  color:#7589BE
+}
+.color-msv-119150301{
+  color:#EC5A55
+}
+.color-msv-119150301{
+  color:#A1C5E3
+}
+.color-msv-119150303{
+  color:#EC6618
+}
+.color-msv-131150456{
+  color:#44A3D3
+}
+.color-msv-181151708{
+  color:#70E5E1
+}
+.color-msv-121150344{
+  color:#9D9D9D
+}
+.color-msv-122150344{
+  color:#AE231E
+}
+.color-msv-1112150087{
+  color:#4D9DB7
+}
+.color-msv-181151716{
+  color:#022B9B
+}
+.color-msv-181151594{
+  color:#FFC400
+}
+.color-msv-111150037{
+  color:rgb(198, 27, 27)
+}
+.color-msv-111150038{
+  color:rgb(198, 27, 27)
+}
+.color-msv-111150039{
+  color:rgb(198, 27, 27)
 }
 </style>
