@@ -1261,7 +1261,6 @@ export default defineComponent({
       statEnvDat: false,
 
       stepSize: 1,
-      gridAux: [],
     }
   }, 
 
@@ -2434,6 +2433,7 @@ export default defineComponent({
         let valorSegmentos = lineasOBX.map(function(fila) {
           let segmentos = fila.split('|');
           let segmento4 = segmentos[4].replace(/\./g, "");
+
           return {
             segmento4: segmento4,                        
             valor: segmentos[5]
@@ -2538,9 +2538,6 @@ export default defineComponent({
           valoresOrdenados[13] = FiCO2;
         if(FR != undefined)
           valoresOrdenados[14] = FR;
-
-        console.log("Valores: " + JSON.stringify(valoresOrdenados));
-        console.log("Valores2: " + (valoresOrdenados));
 
         //Asignar los valores ordenads                    
         this.hl7mess.push({ datos: valoresOrdenados, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
