@@ -1163,10 +1163,25 @@ const preIdStore = usePreIdStore();
 const transAnestStore = useTransAnestStore();
 const postAnestStore = usePostAnestStore();
 const medStore = useMedicamentoStore();
-var taSeparada: Object; 
+let FC: any;
+let Pulso: any;
+let PAS: any;
+let PAD: any;
+let PAM: any;
+let SpO2: any;
+let EtCO2: any;
+let Temp1: any;
+let Temp2: any;
+let PVC: any;
+let PAS_In: any;
+let PAD_In: any;
+let PAM_In: any;
+let FiCO2: any;
+let FR: any;
+
+var taSeparada: Object;
 
 export default defineComponent({
-  
   data() {
     return {
       //Datos interfaces
@@ -1245,25 +1260,8 @@ export default defineComponent({
       grid: [],
       statEnvDat: false,
 
-      horaActual: '',
-
       stepSize: 1,
       gridAux: [],
-
-      ordenPrioridad: {
-        '174147842': 0,
-        '1111149522': 1,
-        '1111150033': 2,
-        '1111150034': 3,
-        '1111150035': 4,
-        '131150456': 5,
-        '181151708': 6,
-        '121150344': 7,
-        '122150344': 8,
-        '1112150087': 9,
-        '181151716': 10,
-        '1131180': 11,
-      }
     }
   }, 
 
@@ -2440,75 +2438,109 @@ export default defineComponent({
             segmento4: segmento4,                        
             valor: segmentos[5]
           };
-        });     
-                        
+        });
+
         //Ordena los valores obtenidos de los segmentos 4 y 5
         for (let index = 0; index < valorSegmentos.length; index++) {          
           switch (valorSegmentos[index].segmento4) {
-            case '174147842':
-              valoresOrdenados[0]=valorSegmentos[index];
+            case '174147842': // FC
+              FC = valorSegmentos[index];
             break;
           
-            case '131149530':
-              valoresOrdenados[1]=valorSegmentos[index];
+            case '131149530': // Pulso
+              Pulso = valorSegmentos[index];
             break;
 
-            case '119150301':
-              valoresOrdenados[2]=valorSegmentos[index];
+            case '119150301': // PAS
+              PAS = valorSegmentos[index];
             break;
           
-            case '119150301':
-              valoresOrdenados[3]=valorSegmentos[index];
+            case '119150302': // PAD
+              PAD = valorSegmentos[index];
             break;
 
-            case '119150303':
-              valoresOrdenados[4]=valorSegmentos[index];
+            case '119150303': // PAM
+              PAM = valorSegmentos[index];
             break;
           
-            case '131150456':
-              valoresOrdenados[5]=valorSegmentos[index];
+            case '131150456': // SpO2
+              SpO2 = valorSegmentos[index];
             break;
 
-            case '181151708':
-              valoresOrdenados[6]=valorSegmentos[index];
+            case '181151708': // EtCO2
+              EtCO2 = valorSegmentos[index];
             break;
           
-            case '121150344':
-              valoresOrdenados[7]=valorSegmentos[index];
+            case '121150344': // Temp1
+              Temp1 = valorSegmentos[index];
             break;
 
-            case '122150344':
-              valoresOrdenados[8]=valorSegmentos[index];
+            case '122150344': // Temp2
+              Temp2 = valorSegmentos[index];
             break;
           
-            case '1112150087':
-              valoresOrdenados[9]=valorSegmentos[index];
+            case '1112150087':// PVC
+              PVC = valorSegmentos[index];
             break;
 
-            case '111150037':
-              valoresOrdenados[10]=valorSegmentos[index];
+            case '111150037': // PAS In
+              PAS_In = valorSegmentos[index];
             break;
 
-            case '111150038':
-              valoresOrdenados[11]=valorSegmentos[index];
+            case '111150038': // PAD In
+              PAD_In = valorSegmentos[index];
             break;
 
-            case '111150039':
-              valoresOrdenados[12]=valorSegmentos[index];
+            case '111150039': // PAM In
+              PAM_In = valorSegmentos[index];
             break;
 
-            case '181151716':
-              valoresOrdenados[13]=valorSegmentos[index];
+            case '181151716': // FiCO2
+              FiCO2 = valorSegmentos[index];
             break;
           
-            case '181151594':
-              valoresOrdenados[14]=valorSegmentos[index];
+            case '181151594': // FR
+              FR = valorSegmentos[index];
             break;
 
             default:
             break;
-          }                          
+          }
         }
+
+        if(FC != undefined)
+          valoresOrdenados[0] = FC;
+        if(Pulso != undefined)
+          valoresOrdenados[1] = Pulso;
+        if(FC != undefined)
+          valoresOrdenados[2] = PAS;
+        if(PAD != undefined)
+          valoresOrdenados[3] = PAD;
+        if(PAM != undefined)
+          valoresOrdenados[4] = PAM;
+        if(SpO2 != undefined)
+          valoresOrdenados[5] = SpO2;
+        if(EtCO2 != undefined)
+          valoresOrdenados[6] = EtCO2;
+        if(Temp1 != undefined)
+          valoresOrdenados[7] = Temp1;
+        if(Temp2 != undefined)
+          valoresOrdenados[8] = Temp2;
+        if(PVC != undefined)
+          valoresOrdenados[9] = PVC;
+        if(PAS_In != undefined)
+          valoresOrdenados[10] = PAS_In;
+        if(PAD_In != undefined)
+          valoresOrdenados[11] = PAD_In;
+        if(PAM_In != undefined)
+          valoresOrdenados[12] = PAM_In;
+        if(FiCO2 != undefined)
+          valoresOrdenados[13] = FiCO2;
+        if(FR != undefined)
+          valoresOrdenados[14] = FR;
+
+        console.log("Valores: " + JSON.stringify(valoresOrdenados));
+        console.log("Valores2: " + (valoresOrdenados));
 
         //Asignar los valores ordenads                    
         this.hl7mess.push({ datos: valoresOrdenados, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
@@ -2539,8 +2571,11 @@ export default defineComponent({
       },
       
       capturaGrid(){
+        console.log("capturegrid");
+        
         this.saveGrid = setInterval(() => {
           this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
+          // console.log("Grid: " + JSON.stringify(this.grid));
           this.hl7mess = [];
         }, 1000 * 60);
       },
