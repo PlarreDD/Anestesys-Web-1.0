@@ -1219,7 +1219,7 @@ const preIdStore = usePreIdStore();
 const transAnestStore = useTransAnestStore();
 const postAnestStore = usePostAnestStore();
 const medStore = useMedicamentoStore();
-var taSeparada: Object; 
+let taSeparada: Object; 
 
 export default defineComponent({
   
@@ -1358,13 +1358,13 @@ export default defineComponent({
     this.menuTrans.ayuno = null;
     this.menuTrans.otrosEgresos = null;
 
-    var anesin = document.getElementById("anes-in");
+    let anesin = document.getElementById("anes-in");
     anesin.addEventListener("contextmenu", this.bloquearClicDerecho);
-    var cxin = document.getElementById("cx-in");
+    let cxin = document.getElementById("cx-in");
     cxin.addEventListener("contextmenu", this.bloquearClicDerecho);
-    var cxout = document.getElementById("cx-out");
+    let cxout = document.getElementById("cx-out");
     cxout.addEventListener("contextmenu", this.bloquearClicDerecho);
-    var anesout = document.getElementById("anes-out");
+    let anesout = document.getElementById("anes-out");
     anesout.addEventListener("contextmenu", this.bloquearClicDerecho);
     
     transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
@@ -1415,7 +1415,7 @@ export default defineComponent({
 
         this.btnActualizarBalance=true
 
-        var hoy = new Date();
+        let hoy = new Date();
         this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
         await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
 
@@ -1431,7 +1431,7 @@ export default defineComponent({
       },
 
       async actualizarDatosVentilador() {
-        var hoy = new Date();
+        let hoy = new Date();
         this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
         await transAnestStore.updateDatosV(this.menuTrans, preIdStore.pacienteID._id);
 
@@ -1478,7 +1478,7 @@ export default defineComponent({
                 position: "top-end",
                 });
             } else {
-                var hoy = new Date();
+                let hoy = new Date();
                 this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
                 await transAnestStore.updateVentilador(this.menuTrans.idVentilador, this.menuTrans.modosVentilacion, this.menuTrans.peep,
                                       this.menuTrans.vt, this.menuTrans.frecResp, this.menuTrans.IE, this.menuTrans.PLimite, this.menuTrans.Hr);
@@ -1569,18 +1569,18 @@ export default defineComponent({
       async actualizarTQX(tiemposQX: string){
         switch (tiemposQX) {
           case "INEVE":
-            var hoy = new Date();
+            let hoy = new Date();
             this.menuTrans.horaEvento = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
           break;
 
           case "INREL":
-            var hoy = new Date();
-            this.menuTrans.horaRelevo = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            let hoy_1 = new Date();
+            this.menuTrans.horaRelevo = ((hoy_1.getHours() <10) ? '0':'') + hoy_1.getHours() + ':' + ((hoy_1.getMinutes() <10) ? '0':'')+hoy_1.getMinutes();
           break;
 
           case "INCX":
-            var hoy = new Date();
-            this.menuTrans.horaInicioMed = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            let hoy_2 = new Date();
+            this.menuTrans.horaInicioMed = ((hoy_2.getHours() <10) ? '0':'') + hoy_2.getHours() + ':' + ((hoy_2.getMinutes() <10) ? '0':'')+hoy_2.getMinutes();
           break;
 
           case "QXIN":
@@ -1604,8 +1604,8 @@ export default defineComponent({
 
             this.btnMSV=false
 
-            var hoy = new Date();
-            this.menuTrans.ingresoQX = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            let hoy_3 = new Date();
+            this.menuTrans.ingresoQX = ((hoy_3.getHours() <10) ? '0':'') + hoy_3.getHours() + ':' + ((hoy_3.getMinutes() <10) ? '0':'')+hoy_3.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID._id, tiemposQX);
             this.siguesAhi();
           break;
@@ -1629,8 +1629,8 @@ export default defineComponent({
             this.btnUpdateEventos=true
             this.btnActualizaEvento=false            
 
-            var hoy = new Date();
-            this.menuTrans.inicioAn = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            let hoy_4 = new Date();
+            this.menuTrans.inicioAn = ((hoy_4.getHours() <10) ? '0':'') + hoy_4.getHours() + ':' + ((hoy_4.getMinutes() <10) ? '0':'')+hoy_4.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID._id, tiemposQX);
           break;
 
@@ -1653,8 +1653,8 @@ export default defineComponent({
             this.btnUpdateEventos=true
             this.btnActualizaEvento=false
           
-            var hoy = new Date();
-            this.menuTrans.inicioCx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            let hoy_5 = new Date();
+            this.menuTrans.inicioCx = ((hoy_5.getHours() <10) ? '0':'') + hoy_5.getHours() + ':' + ((hoy_5.getMinutes() <10) ? '0':'')+hoy_5.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID._id, tiemposQX);
           break;
 
@@ -1677,8 +1677,8 @@ export default defineComponent({
             this.btnUpdateEventos=true
             this.btnActualizaEvento=false
 
-            var hoy = new Date();
-            this.menuTrans.finCx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            let hoy_6 = new Date();
+            this.menuTrans.finCx = ((hoy.getHours() <10) ? '0':'') + hoy_6.getHours() + ':' + ((hoy_6.getMinutes() <10) ? '0':'')+hoy_6.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID._id, tiemposQX);
           break;
 
@@ -1701,8 +1701,8 @@ export default defineComponent({
             this.btnUpdateEventos=true
             this.btnActualizaEvento=false
 
-            var hoy = new Date();
-            this.menuTrans.finAn = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            let hoy_7 = new Date();
+            this.menuTrans.finAn = ((hoy.getHours() <10) ? '0':'') + hoy_7.getHours() + ':' + ((hoy_7.getMinutes() <10) ? '0':'')+hoy_7.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID._id, tiemposQX);
           break;
 
@@ -1729,8 +1729,8 @@ export default defineComponent({
             this.btnTQX=true
             this.finMSV()
 
-            var hoy = new Date();
-            this.menuTrans.egresoQx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            let hoy_8 = new Date();
+            this.menuTrans.egresoQx = ((hoy_8.getHours() <10) ? '0':'') + hoy_8.getHours() + ':' + ((hoy_8.getMinutes() <10) ? '0':'')+hoy_8.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX);
           break;
         
@@ -1870,10 +1870,10 @@ export default defineComponent({
       },
 
       cerrarModalMed() {
-        var closeButton = document.getElementById('medica');
+        let closeButton = document.getElementById('medica');
   
         // Crea un nuevo evento de clic
-        var event = new MouseEvent('click', {
+        let event = new MouseEvent('click', {
           bubbles: true,
           cancelable: true,
           view: window
@@ -1884,13 +1884,13 @@ export default defineComponent({
       },
 
       async listarMedicamentos(){
-        var medicamento= medStore.medicamentos;
+        let medicamento= medStore.medicamentos;
         this.listaMed = medicamento.map(document => document.nombreMedicamento);
         this.listaMed.sort()
       },
 
       async listarMedicamentosTrans(){
-        var listaMedicamentos = transAnestStore.medicamentos.map(item =>
+        let listaMedicamentos = transAnestStore.medicamentos.map(item =>
           item.medicamentosCx.map(med => med.medicamento)).flat();
 
          this.listaMedTrans = listaMedicamentos.filter((value, index, self) => {
@@ -2101,8 +2101,8 @@ export default defineComponent({
       },
 
       cerrarModalRel() {
-        var closeButton = document.getElementById('relev');
-        var event = new MouseEvent('click', {
+        let closeButton = document.getElementById('relev');
+        let event = new MouseEvent('click', {
           bubbles: true,
           cancelable: true,
           view: window
@@ -2291,8 +2291,8 @@ export default defineComponent({
       },
 
       cerrarModalEve() {
-        var closeButton = document.getElementById('event');
-        var event = new MouseEvent('click', {
+        let closeButton = document.getElementById('event');
+        let event = new MouseEvent('click', {
           bubbles: true,
           cancelable: true,
           view: window
@@ -2621,7 +2621,7 @@ export default defineComponent({
 
       this.$nextTick(() => {
       // Desplazar automáticamente el scroll hacia la derecha y hacia arriba
-        var filaContenedor = document.getElementById('grid');
+        let filaContenedor = document.getElementById('grid');
         filaContenedor.scrollBy({
           left: filaContenedor.scrollWidth,
           top: -filaContenedor.scrollTop,
