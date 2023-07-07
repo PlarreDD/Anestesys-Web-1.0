@@ -27,8 +27,8 @@
         <div class="tab-content col-md-12" id="">
             <!-- Información del paciente -->
             <div class="tab-pane fade show active" id="informacion">
-                <div class="col-12 borderPrincipal">  
-                    <form @submit.prevent="obtenerDatos" class="row g-3 margen-input">
+                <div class="col-12 borderPrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">  
+                    <form @submit.prevent="obtenerDatos" class="row g-3 mt-1">
                         <!-- Número de Expediente -->
                         <div class="col-md-4">
                             <label for="" class="form-label fw-bold"> Número de Expediente 
@@ -39,6 +39,7 @@
                             </label>
 
                             <input type="text"
+                                   @keyup.capture="enviarDatos"
                                    v-model="infoPreIdPaciente.numExped"
                                    id="numExpediente"
                                    class="form-control"
@@ -94,6 +95,7 @@
                                    class="form-label fw-bold"> Fecha de Nacimiento </label>
                             <input type="date"
                                    class="form-control"
+                                   @keyup.capture="enviarDatos"
                                    v-model="infoPreIdPaciente.fechaNac"
                                    :class="infoPreIdPaciente.fechaNac != undefined && infoPreIdPaciente.fechaNac != '' ?
                                           'form-control border border-success formSombra' : 'form-control'">
@@ -106,6 +108,7 @@
                                    class="form-label fw-bold"> Edad </label>
                             <input type="text"
                                    class="form-control"
+                                   @keyup.capture="enviarDatos"
                                    v-model="infoPreIdPaciente.edadPaciente"
                                    :class="infoPreIdPaciente.edadPaciente != undefined && infoPreIdPaciente.edadPaciente != '' ?
                                           'form-control border border-success formSombra' : 'form-control'">
@@ -141,7 +144,7 @@
 
                         <hr /> <!-- Separación datos de Cirugía -->
         
-                        <div class="row g-3 margen-cinco">
+                        <div class="row g-3 mt-1">
                             <!-- Número de Episodio -->
                             <div class="col-md-3">
                                 <label for=""
@@ -224,7 +227,7 @@
 
                         <!-- CIE-10 -->
                         <div class="col-md-8">
-                            <label for="" class="form-label fw-bold margen-diez"> CIE-10 </label>
+                            <label for="" class="form-label fw-bold mt-2"> CIE-10 </label>
                             <el-select v-model="infoPreIdPaciente.cie10"
                                        filterable
                                        :class="infoPreIdPaciente.cie10 != undefined && infoPreIdPaciente.cie10 != '' ?
@@ -236,7 +239,7 @@
                             </el-select>
                         </div>
 
-                        <div class="row g-3 margen-quince">
+                        <div class="row g-3 mt-2">
                             <!-- Cirugía -->
                             <div class="col-md-6">
                                 <label for="" class="form-label fw-bold">Cirugía</label>
@@ -305,13 +308,14 @@
                             <label for="" class="form-label fw-bold"> Anestesiólogo </label>
                             <input type="text" 
                                    class="form-control"
+                                   @keyup.capture="enviarDatos"
                                    v-model="infoPreIdPaciente.anestesiologo"
                                    :class="infoPreIdPaciente.anestesiologo != undefined && infoPreIdPaciente.anestesiologo != '' ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
                         <!-- Anestesiólogo VPA -->
-                        <div class="col-md-6 margen-25">
+                        <div class="col-md-6 mt-4">
                             <label for="" class="form-label fw-bold"> Anestesiólogo VPA </label>
                             <input type="text"
                                    class="form-control"
@@ -321,7 +325,7 @@
                         </div>
 
                         <!-- Residente de Anestesia -->
-                        <div class="col-md-6 margen-25">
+                        <div class="col-md-6 mt-4">
                             <label for="" class="form-label fw-bold"> Residente de Anestesia </label>
                             <input type="text"
                                    class="form-control"
@@ -335,8 +339,8 @@
 
             <!-- Datos Demográficos -->
             <div class="tab-pane fade" id="demograficos">
-                <div class="col-12 borderPrincipal">
-                    <form @submit.prevent="obtenerDatos" class="row g-3 margen-input">
+                <div class="col-12 borderPrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">
+                    <form @submit.prevent="obtenerDatos" class="row g-3 mt-1">
                         <!-- Nacionalidad -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold"> Nacionalidad </label>
@@ -616,8 +620,12 @@ export default defineComponent({
                                        this.infoPreIdPaciente.cirugia,
                                        preIdStore.NombrePaciente=this.infoPreIdPaciente.nomPaciente,
                                        preIdStore.NombreCirujano=this.infoPreIdPaciente.cirujano,
+                                       preIdStore.NombreAnestesiologo=this.infoPreIdPaciente.anestesiologo,
                                        preIdStore.NombreCirugia=this.infoPreIdPaciente.cirugia,
-                                       preIdStore.generoPaciente=this.infoPreIdPaciente.genero);
+                                       preIdStore.generoPaciente=this.infoPreIdPaciente.genero,
+                                       preIdStore.numeroExpediente=this.infoPreIdPaciente.numExped,
+                                       preIdStore.fechaNacimientoPaciente= this.infoPreIdPaciente.fechaNac,
+                                       preIdStore.edadPaciente=this.infoPreIdPaciente.edadPaciente);
         },
     },
 
@@ -628,8 +636,7 @@ export default defineComponent({
 .borderPrincipal {
   border-radius: 5px;
   padding: 1rem;
-  margin-top :10px;
-  margin-bottom: 55px;
+  margin-top :10px;  
   backdrop-filter: blur(40px) brightness(97%);  
 }
 .formSombra:focus {
@@ -710,21 +717,6 @@ export default defineComponent({
     margin-top: 48px;
     margin-bottom: 48px;
     margin-left: 5px;
-}
-.margen-input{
-    margin-top: -1px;
-}
-.margen-cinco{
-    margin-top: 5px;
-}
-.margen-diez{
-    margin-top: 10px;
-}
-.margen-quince{
-    margin-top: 15px;
-}
-.margen-25{
-    margin-top: 25px;
 }
 h5{
     color: #002D60;

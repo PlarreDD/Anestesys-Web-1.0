@@ -1,5 +1,5 @@
 <template>
-    <div class="col-12 borderPrincipal">  
+    <div class="col-12 borderPrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">  
         <form @submit.prevent="" class="row g-3">                
             <div class="col-md-11">
                     <h5 class="col-12 fw-bold"> NOTA PREANESTÉSICA </h5>                                                                                                                    
@@ -76,8 +76,7 @@ export default defineComponent({
   border-radius: 5px;
   padding: 1rem;
   margin-top :10px;
-  margin-bottom: 55px;
-  background-color: rgba(232, 234, 236, 0.6);
+  backdrop-filter: blur(40px) brightness(97%);
 }
 .formSombra:focus{
     border-color:#6BD99B;
