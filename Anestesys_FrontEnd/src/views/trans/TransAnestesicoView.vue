@@ -11,21 +11,31 @@
           <div class="row g-3 mb-3">
             <!-- Botón monitoreo -->
             <div class="col-md-4">
-
               <template v-if="transAnestStore.envDat === true && medStore.status === 'Activo'">
-                <button class="borde-btn-msv" @click="finMSV"><img src="images/imgIcon/MonitorActivoDatos.png" class="btn-msv" /></button>
+                <button class="borde-btn-msv"
+                        @click="finMSV">
+                  <img src="images/imgIcon/MonitorActivoDatos.png" class="btn-msv"/>
+                </button>
                 <span class="fw-bold msv-color-txt">&nbsp;&nbsp;Estado: Recibiendo Datos</span>
               </template>
 
-              <template v-if="transAnestStore.envDat === false && medStore.status === 'Activo'">                
-                <button class="borde-btn-msv" style="border: none;" @click="iniMSV" :disabled="btnMSV"><img src="images/imgIcon/MonitorActivo.png" class="btn-msv" /></button>
+              <template v-if="transAnestStore.envDat === false && medStore.status === 'Activo'">
+                <button class="borde-btn-msv"
+                        style="border: none;"
+                        @click="iniMSV"
+                        :disabled="btnMSV">
+                  <img src="images/imgIcon/MonitorActivo.png" class="btn-msv" />
+                </button>
                 <span class="fw-bold msv-color-txt" >&nbsp;&nbsp;Estado: Sin Datos</span>
-              </template>  
+              </template>
 
               <template v-if="medStore.status === 'Inactivo'">
-                <button class="borde-btn-msv" style="border: none;"><img src="images/imgIcon/MonitorInactivo.png" class="btn-msv" /></button>
+                <button class="borde-btn-msv"
+                        style="border: none;">
+                  <img src="images/imgIcon/MonitorInactivo.png" class="btn-msv"/>
+                </button>
                 <span class="fw-bold msv-color-txt">&nbsp;&nbsp;Estado: Desconectado</span>
-              </template>              
+              </template>
             </div>
 
             <div class="col-md-1"></div>
@@ -1039,7 +1049,7 @@
       <!-- Grid signos vitales -->
       <div class="" :class="vistaPreviaOff == false ? 'col-md-6' : 'col-md-9'">
         <div class="" :class="vistaPreviaOff == false ? 'fade-in vista-grid-monitoreo' : 'vista-grid-monitoreo'">
-          <div class="col-md-12">          
+          <div class="col-md-12">
 
               <div class="d-flex flex-nowrap g-4 ms-1">
                 <!-- Barra lateral -->
@@ -1078,7 +1088,7 @@
                     <hr class="mt-2 mb-2 invisible"/>
                   </div>
                 </div>
-
+                <!-- Muestra los valores del arreglo en el Grid de Signos Vitales -->
                 <div class="d-flex flex-nowrap col-md-11 deslizar-grid ms-1" id="grid">
                   <template v-for="( itemMSV ) in saltoArreglo">
                     <div class="">
@@ -1089,8 +1099,8 @@
                       <template v-for="(item, index) in itemMSV.datos">
                         <div class="m-1 celda-msv fw-bold" :class="'color-msv-' + item.segmento4" >
                           {{ item === '-' ? item : item.valor }}
-                        </div>    
-                        <hr class="mt-2 mb-2 hr-grid"/>                    
+                        </div>
+                        <hr class="mt-2 mb-2 hr-grid"/>
                       </template>
 
                     </div>
@@ -1141,7 +1151,7 @@
             </label>
           </div>
         </div>
-      </div>        
+      </div>
     </div>
   </div>
 </template>
@@ -2435,13 +2445,13 @@ export default defineComponent({
           let segmento4 = segmentos[4].replace(/\./g, "");
 
           return {
-            segmento4: segmento4,                        
+            segmento4: segmento4,
             valor: segmentos[5]
           };
         });
 
         //Ordena los valores obtenidos de los segmentos 4 y 5
-        for (let index = 0; index < valorSegmentos.length; index++) {          
+        for (let index = 0; index < valorSegmentos.length; index++) {
           switch (valorSegmentos[index].segmento4) {
             case '174147842': // FC
               FC = valorSegmentos[index];
@@ -2539,14 +2549,14 @@ export default defineComponent({
         if(FR != undefined)
           valoresOrdenados[14] = FR;
 
-        //Asignar los valores ordenads                    
+        //Asignar los valores ordenads
         this.hl7mess.push({ datos: valoresOrdenados, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
       },
 
       iniRecepDatos(){
         this.intervalId = setInterval(() => {
           this.comMSV();
-        }, 10000);
+        }, 5000);
       },
 
       termRecepDatos(){
@@ -2564,7 +2574,7 @@ export default defineComponent({
         this.temporizador = setTimeout(() => {
           console.log("Sigues Ahi?");
           this.siAquisigo();
-        }, 1000 * 60 * 30);        
+        }, 1000 * 60 * 30);
       },
       
       capturaGrid(){
