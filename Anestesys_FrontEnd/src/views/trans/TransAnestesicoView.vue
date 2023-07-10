@@ -28,8 +28,6 @@
               </template>              
             </div>
 
-            <div class="col-md-1"></div>
-
             <!-- Botón medicamento -->
             <div class="col-md-2">
               <button type="button"
@@ -362,9 +360,11 @@
               </div>
             </div>
 
-            <div class="col-md-1">
-              <button type="button"
-                      class="btn btn-menu fw-bold">Imprimir</button>
+            <!-- Botón imprimir PDF -->
+            <div class="col-md-2">
+              <button type="button" class="btn btn-menu fw-bold" @click="generarPDF">
+                <font-awesome-icon icon="fa-solid fa-file-pdf" size="lg"/> PDF
+              </button>
             </div>
           </div>
         </div>
@@ -1214,6 +1214,7 @@ import type { regNotaPost } from "@/interfaces/regPostAnest";
 import { usePostAnestStore } from "@/stores/postAnest-store";
 import { useMedicamentoStore } from "../../stores/medicamento-store";
 import { ElSelect, ElOption } from 'element-plus';
+import jsPDF from 'jspdf';
 
 const preIdStore = usePreIdStore();
 const transAnestStore = useTransAnestStore();
@@ -2609,6 +2610,13 @@ export default defineComponent({
       pingMSV(dirip: string){
         medStore.statusMSV(dirip);
       },
+
+      // Imprimir PDF
+      generarPDF() {
+        const doc = new jsPDF()
+        doc.text('Prueba', 10, 10)
+        doc.save('test.pdf')
+      }
   },
   
   computed: {
