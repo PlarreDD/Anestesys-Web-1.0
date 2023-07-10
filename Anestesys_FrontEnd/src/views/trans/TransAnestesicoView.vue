@@ -973,6 +973,7 @@
                 :multiple="false"
             />    
           </div>
+          
           <!-- Lista de medicamentos -->
           <div class="deslizar-medicamentos m-1"> 
             <table class="table" id="tabla-med">
@@ -1088,6 +1089,7 @@
                     <hr class="mt-2 mb-2 invisible"/>
                   </div>
                 </div>
+
                 <!-- Muestra los valores del arreglo en el Grid de Signos Vitales -->
                 <div class="d-flex flex-nowrap col-md-11 deslizar-grid ms-1" id="grid">
                   <template v-for="( itemMSV ) in saltoArreglo">
@@ -1102,7 +1104,6 @@
                         </div>
                         <hr class="mt-2 mb-2 hr-grid"/>
                       </template>
-
                     </div>
                   </template>
                 </div>
@@ -2452,6 +2453,7 @@ export default defineComponent({
 
         //Ordena los valores obtenidos de los segmentos 4 y 5
         for (let index = 0; index < valorSegmentos.length; index++) {
+          // Obtiene los valores de los datos del MSV para guardarlos en el grid
           switch (valorSegmentos[index].segmento4) {
             case '174147842': // FC
               FC = valorSegmentos[index];
@@ -2556,7 +2558,7 @@ export default defineComponent({
       iniRecepDatos(){
         this.intervalId = setInterval(() => {
           this.comMSV();
-        }, 5000);
+        }, 1000);
       },
 
       termRecepDatos(){
@@ -2578,11 +2580,8 @@ export default defineComponent({
       },
       
       capturaGrid(){
-        console.log("capturegrid");
-        
         this.saveGrid = setInterval(() => {
           this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
-          // console.log("Grid: " + JSON.stringify(this.grid));
           this.hl7mess = [];
         }, 1000 * 60);
       },
