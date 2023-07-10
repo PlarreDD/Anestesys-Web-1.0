@@ -1,9 +1,9 @@
 <template>
-  <header>
+  <header @click.stop="replegarMenuVistaRapida">
     <barra-navegacion/>
   </header>
 
-  <div class="margen-div-barra">
+  <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">
 
     <div class="input-group mb-3">
       <div class="row g-3 col-md-12">
@@ -1122,33 +1122,33 @@
       </div>
 
       <!-- Menú vista rápida desplegada -->
-      <div class=" text-center posicion-estatica-arriba fw-bold container col-md-9" :class="preIdStore.VistaRapida == true ? 'c-sticky' : 'invisible c-fixed'" @click="replegarMenuVistaRapida()">
-          <label class="form-label text-white fw-bold"> 
+      <div class=" text-center posicion-estatica-arriba fw-bold container col-md-9" :class="preIdStore.VistaRapida == true ? 'c-sticky' : 'invisible c-fixed'" @click.stop="replegarMenuVistaRapida()">
+          <label class="form-label text-white fw-bold" :class="preIdStore.numeroExpediente == '' || preIdStore.numeroExpediente == undefined ? 'invisible':''"> 
             #Expediente: {{ preIdStore.numeroExpediente == '' || preIdStore.numeroExpediente == undefined ? '-': preIdStore.numeroExpediente}}
           </label>
-        <div class="row columna-size-1">
+        <div class="row columna-size-1 mb-4 mt-2">
           <div class="col borde-row">           
             <img class="img-vista-rapida-arriba" src="images/imgIcon/paciente_cuadro.png">                              
-            <label class="form-label text-white"> 
+            <label class="form-label text-white" :class="preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? 'invisible':''"> 
               {{ preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? '-': preIdStore.NombrePaciente }}
             </label>
             <br>
-            <label class="form-label text-white"> 
-              {{ preIdStore.edadPaciente == '' || preIdStore.edadPaciente == undefined ? '-': preIdStore.edadPaciente }}
+            <label class="form-label text-white" :class="preIdStore.edadPaciente == '' || preIdStore.edadPaciente == undefined ? 'invisible':''"> 
+              {{ preIdStore.edadPaciente == '' || preIdStore.edadPaciente == undefined ? '-': preIdStore.edadPaciente }} años
             </label>
             &nbsp&nbsp&nbsp&nbsp&nbsp
-            <label class="form-label text-white"> 
+            <label class="form-label text-white" :class="preIdStore.generoPaciente == '' || preIdStore.generoPaciente == undefined ? 'invisible':''"> 
               {{ preIdStore.generoPaciente == '' || preIdStore.generoPaciente == undefined ? '-': preIdStore.generoPaciente }}
             </label>
             &nbsp&nbsp&nbsp&nbsp&nbsp
-            <label class="form-label text-white"> 
+            <label class="form-label text-white" :class="preIdStore.fechaNacimientoPaciente == '' || preIdStore.fechaNacimientoPaciente == undefined ? 'invisible':''"> 
               {{ preIdStore.fechaNacimientoPaciente == '' || preIdStore.fechaNacimientoPaciente == undefined ? '-': preIdStore.fechaNacimientoPaciente }}
             </label>
           </div>
           
           <div class="col">
             <img class="img-vista-rapida-arriba" src="images/imgIcon/anestesiologo_cuadro.png">
-            <label class="form-label text-white">
+            <label class="form-label text-white" :class="preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? 'invisible':''">
               {{ preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? '-': preIdStore.NombreAnestesiologo }}            
             </label>
           </div>
@@ -1157,14 +1157,14 @@
         <div class="row columna-size-2">
           <div class="col borde-row"> 
             <img class="img-vista-rapida-arriba" src="images/imgIcon/cirujano_cuadro.png">
-            <label class="form-label text-white">            
+            <label class="form-label text-white" :class="preIdStore.NombreCirujano == '' || preIdStore.NombreCirujano == undefined ? 'invisible':''">            
               {{ preIdStore.NombreCirujano == '' || preIdStore.NombreCirujano == undefined ? '-': preIdStore.NombreCirujano }}
             </label>
           </div>
 
           <div class="col"> 
             <img class="img-vista-rapida-arriba" src="images/imgIcon/cirugia_cuadro.png">
-            <label class="form-label text-white">            
+            <label class="form-label text-white" :class="preIdStore.NombreCirugia == '' || preIdStore.NombreCirugia == undefined ? 'invisible':''">            
               {{ preIdStore.NombreCirugia == '' || preIdStore.NombreCirugia == undefined ? '-': preIdStore.NombreCirugia }}
             </label>
           </div>
@@ -1174,25 +1174,25 @@
     </div>
 
     <!-- Menú vista rápida -->
-    <div class="text-center posicion-estatica fw-bold container" :class="preIdStore.VistaRapida == false ? 'c-fixed' : 'c-fixed invisible'" @click="desplegarMenuVistaRapida()">
+    <div class="text-center posicion-estatica fw-bold container" :class="preIdStore.VistaRapida == false ? 'c-fixed' : 'c-fixed invisible'" @click.stop="desplegarMenuVistaRapida()">
       <div class="row">
         <div class="col bordeColumna">           
           <img class="img-vista-rapida" src="images/imgIcon/paciente.png">          
-          <label class="form-label text-white"> 
+          <label class="form-label text-white" :class="preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? '': 'invisible'"> 
             {{ preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? '-': preIdStore.NombrePaciente }}
           </label>
         </div>
         
         <div class="col bordeColumna">
           <img class="img-vista-rapida" src="images/imgIcon/anestesiologo.png">
-          <label class="form-label text-white">
+          <label class="form-label text-white" :class="preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? 'invisible':''">
             {{ preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? '-': preIdStore.NombreAnestesiologo }}            
           </label>
         </div>
         
         <div class="col bordeColumna"> 
           <img class="img-vista-rapida" src="images/imgIcon/cirugia.png">
-          <label class="form-label text-white">            
+          <label class="form-label text-white" :class="preIdStore.NombreCirugia == '' || preIdStore.NombreCirugia == undefined ? 'invisible':''">            
             {{ preIdStore.NombreCirugia == '' || preIdStore.NombreCirugia == undefined ? '-': preIdStore.NombreCirugia}}
           </label>
         </div>
@@ -1319,7 +1319,9 @@ export default defineComponent({
         '1112150087': 9,
         '181151716': 10,
         '1131180': 11,
-      }
+      },
+
+      mostrarVistaRapida : false
     }
   }, 
 
@@ -1388,11 +1390,14 @@ export default defineComponent({
 
   methods: {
       // Menú vista rapida
-      async desplegarMenuVistaRapida(){      
+      async desplegarMenuVistaRapida(){     
         preIdStore.VistaRapida=true
+        this.mostrarVistaRapida=true
       },
-      async replegarMenuVistaRapida(){      
-        preIdStore.VistaRapida=false
+      async replegarMenuVistaRapida(){ 
+        if(this.mostrarVistaRapida=true)     
+          preIdStore.VistaRapida=false
+          this.mostrarVistaRapida=false
       },
 
       // Gestión datos ventilador 
