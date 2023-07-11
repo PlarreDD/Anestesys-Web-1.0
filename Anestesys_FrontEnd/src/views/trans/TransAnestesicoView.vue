@@ -1183,7 +1183,7 @@
           </label>
         </div>
         
-        <div class="col bordeColumna">
+        <div class="col">
           <img class="img-vista-rapida" src="images/imgIcon/anestesiologo.png">
           <label class="form-label text-white" :class="preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? 'invisible':''">
             {{ preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? '-': preIdStore.NombreAnestesiologo }}            
@@ -2613,10 +2613,16 @@ export default defineComponent({
 
       // Imprimir PDF
       generarPDF() {
-        const doc = new jsPDF()
-        doc.text('Prueba', 10, 10)
-        doc.save('test.pdf')
-      }
+        // const doc = new jsPDF()
+        // doc.text('Prueba', 10, 10)
+        // doc.save('test.pdf')
+
+        let pdf = new jsPDF();
+        pdf.setProperties({
+            title: "Report"
+        });
+        pdf.output('dataurlnewwindow');
+        }
   },
   
   computed: {

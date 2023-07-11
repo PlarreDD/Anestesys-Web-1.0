@@ -132,7 +132,7 @@
           </label>
         </div>
         
-        <div class="col bordeColumna">
+        <div class="col">
           <img class="img-vista-rapida" src="images/imgIcon/anestesiologo.png">
           <label class="form-label text-white" :class="preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? 'invisible':''">
             {{ preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? '-': preIdStore.NombreAnestesiologo }}            
