@@ -1,8 +1,8 @@
 <template>
-  <header>
+  <header @click.stop="replegarMenuVistaRapida">
     <barra-navegacion/>
   </header>
-  <div class="margen-div-barra">
+  <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">
     <div class="input-group mb-3">
 
       <div class="col-10 divform navbar-nav">     
@@ -41,7 +41,8 @@
         <div class="tab-pane fade" id="recuperacion"><recuperacion /></div>
       </div>
 
-      <div class="col-2 menuLateralPrincipal"> <!--Menú lateral-->
+      <!--Menú lateral-->
+      <div class="col-2 menuLateralPrincipal"> 
         <div class="col-md-2 menu-pre-trans">
           <RouterLink to="pre">
             <img src="images/pre.svg" class="ajusteImg"/>
@@ -57,31 +58,95 @@
         <div class="col-md-2 menu-post">
           <img src="images/post.svg" width="180" class="ajusteImg"/>
         </div>    
-      </div>
 
-      <div class=" text-center posicionEstatica fw-bold">
-        <div class="row">
-          <div class="col bordeColumna">
-            <label class="form-label text-white">              
-              {{ preIdStore.NombrePaciente }}
-            </label>
-          </div>
-          
-          <div class="col bordeColumna">
-            <label class="form-label text-white">              
-              {{ preIdStore.NombreCirujano }}
-            </label>
-          </div>
-          
-          <div class="col bordeColumna">
-            <label class="form-label text-white">              
-              {{ preIdStore.NombreCirugia }}
-            </label>
-          </div>
+        <!-- Botón para subir -->
+        <div class="container col-md-1">
+          <button @click="topFunction()"
+                  class="btn btn-arriba fw-bold"
+                  id="btnArriba"
+                  title="Go to top">
+            <font-awesome-icon icon="fa-solid fa-angle-up" size="2xl" />
+          </button>
         </div>
       </div>
 
+      <!-- Menú vista rápida desplegada -->
+      <div class=" text-center posicion-estatica-arriba fw-bold container col-md-9" :class="preIdStore.VistaRapida == true ? 'c-sticky' : 'invisible c-fixed'" @click.stop="replegarMenuVistaRapida()">
+          <label class="form-label text-white fw-bold" :class="preIdStore.numeroExpediente == '' || preIdStore.numeroExpediente == undefined ? 'invisible':''"> 
+            #Expediente: {{ preIdStore.numeroExpediente == '' || preIdStore.numeroExpediente == undefined ? '-': preIdStore.numeroExpediente}}
+          </label>
+        <div class="row columna-size-1 mb-4 mt-2">
+          <div class="col borde-row">           
+            <img class="img-vista-rapida-arriba" src="images/imgIcon/paciente_cuadro.png">                              
+            <label class="form-label text-white" :class="preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? 'invisible':''"> 
+              {{ preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? '-': preIdStore.NombrePaciente }}
+            </label>
+            <br>
+            <label class="form-label text-white" :class="preIdStore.edadPaciente == '' || preIdStore.edadPaciente == undefined ? 'invisible':''"> 
+              {{ preIdStore.edadPaciente == '' || preIdStore.edadPaciente == undefined ? '-': preIdStore.edadPaciente }} años
+            </label>
+            &nbsp&nbsp&nbsp&nbsp&nbsp
+            <label class="form-label text-white" :class="preIdStore.generoPaciente == '' || preIdStore.generoPaciente == undefined ? 'invisible':''"> 
+              {{ preIdStore.generoPaciente == '' || preIdStore.generoPaciente == undefined ? '-': preIdStore.generoPaciente }}
+            </label>
+            &nbsp&nbsp&nbsp&nbsp&nbsp
+            <label class="form-label text-white" :class="preIdStore.fechaNacimientoPaciente == '' || preIdStore.fechaNacimientoPaciente == undefined ? 'invisible':''"> 
+              {{ preIdStore.fechaNacimientoPaciente == '' || preIdStore.fechaNacimientoPaciente == undefined ? '-': preIdStore.fechaNacimientoPaciente }}
+            </label>
+          </div>
+          
+          <div class="col">
+            <img class="img-vista-rapida-arriba" src="images/imgIcon/anestesiologo_cuadro.png">
+            <label class="form-label text-white" :class="preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? 'invisible':''">
+              {{ preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? '-': preIdStore.NombreAnestesiologo }}            
+            </label>
+          </div>
+        </div>
+
+        <div class="row columna-size-2">
+          <div class="col borde-row"> 
+            <img class="img-vista-rapida-arriba" src="images/imgIcon/cirujano_cuadro.png">
+            <label class="form-label text-white" :class="preIdStore.NombreCirujano == '' || preIdStore.NombreCirujano == undefined ? 'invisible':''">            
+              {{ preIdStore.NombreCirujano == '' || preIdStore.NombreCirujano == undefined ? '-': preIdStore.NombreCirujano }}
+            </label>
+          </div>
+
+          <div class="col"> 
+            <img class="img-vista-rapida-arriba" src="images/imgIcon/cirugia_cuadro.png">
+            <label class="form-label text-white" :class="preIdStore.NombreCirugia == '' || preIdStore.NombreCirugia == undefined ? 'invisible':''">            
+              {{ preIdStore.NombreCirugia == '' || preIdStore.NombreCirugia == undefined ? '-': preIdStore.NombreCirugia }}
+            </label>
+          </div>
+        </div>                
+      </div>
+      
     </div>
+    
+    <!-- Menú vista rápida -->
+    <div class="text-center posicion-estatica fw-bold container" :class="preIdStore.VistaRapida == false ? 'c-fixed' : 'c-fixed invisible'" @click.stop="desplegarMenuVistaRapida()">
+      <div class="row">
+        <div class="col bordeColumna">           
+          <img class="img-vista-rapida" src="images/imgIcon/paciente.png">          
+          <label class="form-label text-white" :class="preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? 'invisible': ''"> 
+            {{ preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? '-': preIdStore.NombrePaciente }}
+          </label>
+        </div>
+        
+        <div class="col">
+          <img class="img-vista-rapida" src="images/imgIcon/anestesiologo.png">
+          <label class="form-label text-white" :class="preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? 'invisible':''">
+            {{ preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? '-': preIdStore.NombreAnestesiologo }}            
+          </label>
+        </div>
+        
+        <div class="col bordeColumna"> 
+          <img class="img-vista-rapida" src="images/imgIcon/cirugia.png">
+          <label class="form-label text-white" :class="preIdStore.NombreCirugia == '' || preIdStore.NombreCirugia == undefined ? 'invisible':''">            
+            {{ preIdStore.NombreCirugia == '' || preIdStore.NombreCirugia == undefined ? '-': preIdStore.NombreCirugia}}
+          </label>
+        </div>
+      </div>
+    </div>   
   </div>
 </template>
 
@@ -99,7 +164,9 @@ export default ({
       esNotaP: false,
       esRecuperacion: false,
 
-      preIdStore
+      preIdStore,
+
+      mostrarVistaRapida:false
     }
   },
 
@@ -130,6 +197,21 @@ export default ({
       else
         this.esNotaP=false;
         this.esRecuperacion=true;
+    },
+
+    async desplegarMenuVistaRapida(){     
+      preIdStore.VistaRapida=true
+      this.mostrarVistaRapida=true
+    },
+    async replegarMenuVistaRapida(){ 
+      if(this.mostrarVistaRapida=true)     
+        preIdStore.VistaRapida=false
+        this.mostrarVistaRapida=false
+    },
+
+    async topFunction() {
+      document.body.scrollTop = 0; // Para safari
+      document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
     },
   }
 })
@@ -199,21 +281,76 @@ export default ({
 }
 
 /* Menú estatico */
-.posicionEstatica {
-  position: -webkit-sticky;
+.c-fixed{
   position: fixed;
+}
+.c-sticky{
+  position: sticky;
+}
+.posicion-estatica {
   bottom: 0;
+  margin-top: 10px;  
   z-index: 1020;
   background-color: #002D60;
   padding: 1rem;
   border-radius: 5px !important;
   color: #ffffff;
   width: 57.5%;
+  cursor: pointer;  
+}
+.img-vista-rapida{
+  width: 35px;
+  height: auto;
+  float: left;
+}
+.posicion-estatica-arriba {
+  bottom: 0;
+  z-index: 1020;
+  margin-top: 5px; 
+  background-color: #002D60;
+  padding: 1rem;
+  border-radius: 5px !important;
+  color: #ffffff;
+  height: 30%;
+  cursor: pointer
+}
+.img-vista-rapida-arriba{
+  width: 60px;
+  float: left;
 }
 .bordeColumna{
   margin-left: auto;
   margin-right: auto;
   border-right: 1px solid #ffffff;
-  border-left: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;  
+}
+.borde-row{
+  margin-right: auto;
+  border-right: 1px solid #ffffff;
+}
+.columna-size-1{
+  height: 50%;
+}
+.columna-size-2{
+  height: 40%;
+}
+
+/* Botón arriba */
+.btn-arriba {
+    display: none;  /*Oculto por defecto */
+    position: fixed; /* Posición fija */
+    bottom: 60px; /* Coloque el botón en la parte inferior de la página. */
+    z-index: 99; /* Asegúrese de que no se superponga */  
+    border-radius: 6px; /* Esquinas redondeadas */ 
+    /* right: 340px; */
+    --bs-btn-bg: #ffffff;
+    --bs-btn-color: #002d60;    
+    --bs-btn-border-color: #ced4da;
+    --bs-btn-hover-bg: #002d60;
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-border-color: #002d60;          
+    --bs-btn-active-bg: #002d60;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-border-color: #002d60;     
 }
 </style>

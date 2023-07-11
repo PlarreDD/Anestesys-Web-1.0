@@ -61,7 +61,7 @@
         <div class="tab-content col-md-12" id="">
             <!-- Div Formulario Antecedentes -->
             <div class="tab-pane fade show active" id="antecedentes">
-                <div class="col-12 bordePrincipal">
+                <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">
                     <form @submit.prevent="" class="row g-3">    
                         <h5 class="col-md-12 fw-bold">ANTECEDENTES</h5>                        
                         <!-- Personales patológicos -->
@@ -286,7 +286,7 @@
 
             <!-- Div Formulario Exploración Física -->
             <div class="tab-pane fade" id="exploracion">
-                <div class="col-12 bordePrincipal">
+                <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">
                     <form @submit.prevent="" class="row g-3">
                         <h5 class="fw-bold">EXPLORACIÓN FÍSICA</h5>
                         
@@ -542,7 +542,7 @@
 
             <!-- Div Formulario Vía Aérea -->
             <div class="tab-pane fade" id="via">
-                <div class="col-12 bordePrincipal">
+                <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">
                     <form @submit.prevent="" class="row g-3">
                         <h5 class="fw-bold"> VALORACIÓN DE VÍA AÉREA Y OTRAS ESCALAS </h5>
                         
@@ -786,7 +786,7 @@
 
             <!-- Div Formulario Estudios -->
             <div class="tab-pane fade" id="estudios">
-                <div class="col-12 bordePrincipal">
+                <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">
                     <form @submit.prevent="" class="row g-3">
                         <h5 class="fw-bold fw-bold">ESTUDIOS</h5>           
                         
@@ -918,7 +918,7 @@
 
             <!-- Div Formulario Exámenes -->
             <div class="tab-pane fade" id="examenes">
-                <div class="col-12 bordePrincipal">
+                <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">
                     <form @submit.prevent="" class="row g-3">
                         <!-- Exámenes / Perfil Bioquímico -->                        
                         <div class="col-md-10">
@@ -1382,8 +1382,7 @@ h5{
   border-radius: 5px;
   padding: 1rem;
   margin-top :10px;
-  margin-bottom: 55px;
-  background-color: rgba(232, 234, 236, 0.6);
+  backdrop-filter: blur(40px) brightness(97%);
 }
 .largoContenedor{
     height: 535px

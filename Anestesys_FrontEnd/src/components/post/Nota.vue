@@ -25,7 +25,7 @@
         <div class="tab-content col-md-12" id="">
             <!-- Nota Post-Anestésica -->
             <div class="tab-pane fade show active" id="notaPost">
-                <div class="col-12 bordePrincipal">
+                <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">
                     <form @submit.prevent="" class="row g-3"> 
                         <h5 class="fw-bold">NOTA POST-ANESTÉSICA</h5>
                         
@@ -195,7 +195,7 @@
 
             <!-- Caso Obstétrico Recién Nacido -->
             <div class="tab-pane fade" id="caso">
-                <div class="col-12 bordePrincipal">
+                <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">
                     <form @submit.prevent="" class="row g-3">
                         <h5 class="fw-bold">CASO OBSTETRICO</h5>
                         <!-- Número de productos -->
@@ -987,8 +987,7 @@ export default defineComponent({
   border-radius: 5px;
   padding: 1rem;
   margin-top :10px;
-  margin-bottom: 55px;
-  background-color: rgba(232, 234, 236, 0.6);
+  backdrop-filter: blur(40px) brightness(97%);
 }
 .margenRadio {
     margin-right: 10px;
