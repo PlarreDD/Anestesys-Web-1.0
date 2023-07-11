@@ -1085,7 +1085,7 @@
                     <hr class="mt-2 mb-2 invisible"/>
                     <div class="m-1 celda-msv">FiCO2</div>
                     <hr class="mt-2 mb-2 invisible"/>
-                    <div class="m-1 celda-msv">FR</div>
+                    <div class="m-1 celda-msv" style="">FR</div>
                     <hr class="mt-2 mb-2 invisible"/>
                   </div>
                 </div>
@@ -1189,7 +1189,7 @@
       <div class="row">
         <div class="col bordeColumna">           
           <img class="img-vista-rapida" src="images/imgIcon/paciente.png">          
-          <label class="form-label text-white" :class="preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? '': 'invisible'"> 
+          <label class="form-label text-white" :class="preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? 'invisible':''"> 
             {{ preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? '-': preIdStore.NombrePaciente }}
           </label>
         </div>
@@ -2515,6 +2515,8 @@ export default defineComponent({
 
         //Ordena los valores obtenidos de los segmentos 4 y 5
         for (let index = 0; index < valorSegmentos.length; index++) {
+          console.log(valorSegmentos[index]);
+          
           // Obtiene los valores de los datos del MSV para guardarlos en el grid
           switch (valorSegmentos[index].segmento4) {
             case '174147842': // FC
@@ -2586,7 +2588,7 @@ export default defineComponent({
           valoresOrdenados[0] = FC;
         if(Pulso != undefined)
           valoresOrdenados[1] = Pulso;
-        if(FC != undefined)
+        if(PAS != undefined)
           valoresOrdenados[2] = PAS;
         if(PAD != undefined)
           valoresOrdenados[3] = PAD;
@@ -2780,13 +2782,15 @@ export default defineComponent({
   scroll-behavior: smooth;
   height: 620px;
   margin-top: 0px;
+  z-index: 1080;
 }
 #grid-lateral::-webkit-scrollbar {
-  width: 15px;
-  height: 15px;
+  width: auto;
+  height: auto;
 }
 #grid-lateral::-webkit-scrollbar-track {
   background-color: transparent;
+  position: sticky;
 }
 #grid-lateral::-webkit-scrollbar-thumb {
   background-color: blur(40px) brightness(97%);

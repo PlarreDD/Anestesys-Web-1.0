@@ -127,7 +127,7 @@
       <div class="row">
         <div class="col bordeColumna">           
           <img class="img-vista-rapida" src="images/imgIcon/paciente.png">          
-          <label class="form-label text-white" :class="preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? '': 'invisible'"> 
+          <label class="form-label text-white" :class="preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? 'invisible': ''"> 
             {{ preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? '-': preIdStore.NombrePaciente }}
           </label>
         </div>

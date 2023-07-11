@@ -3,11 +3,11 @@
     
     <div class="container mt-3">
       <RouterView v-slot="{Component}"> <!--Mantener los datos en las páginas al cambiar de vista-->
-        <transition>
+        <!-- <transition> -->
           <keep-alive>
             <component :is="Component" />
           </keep-alive>
-        </transition>
+        <!-- </transition> -->
       </RouterView>
     </div>
   </header>
