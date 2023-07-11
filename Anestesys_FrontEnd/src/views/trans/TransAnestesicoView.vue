@@ -2515,7 +2515,6 @@ export default defineComponent({
 
         //Ordena los valores obtenidos de los segmentos 4 y 5
         for (let index = 0; index < valorSegmentos.length; index++) {
-          console.log(valorSegmentos[index]);
           
           // Obtiene los valores de los datos del MSV para guardarlos en el grid
           switch (valorSegmentos[index].segmento4) {

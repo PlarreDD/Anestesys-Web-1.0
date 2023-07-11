@@ -991,7 +991,7 @@ export const useTransAnestStore = defineStore('transAn', {
             .then((res: any) => {
               this.datosMSV = res.data.datosMSV; // Acceder a los datos usando res.data.datosMSV
               this.envDat = true;
-              console.log("GetDatosMonitor: " + this.datosMSV);
+            //   console.log("GetDatosMonitor: " + this.datosMSV);
             })
             .catch((e: any) => {
               this.envDat = false;
