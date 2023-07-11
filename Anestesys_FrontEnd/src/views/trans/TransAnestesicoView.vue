@@ -5,6 +5,7 @@
 
   <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">
 
+    <!-- Barra superior -->
     <div class="input-group mb-3">
       <div class="row g-3 col-md-12">
         <div class="col-md-10">
@@ -1085,7 +1086,7 @@
                     <hr class="mt-2 mb-2 invisible"/>
                     <div class="m-1 celda-msv">FiCO2</div>
                     <hr class="mt-2 mb-2 invisible"/>
-                    <div class="m-1 celda-msv" style="">FR</div>
+                    <div class="m-1 celda-msv">FR</div>
                     <hr class="mt-2 mb-2 invisible"/>
                   </div>
                 </div>
@@ -1208,7 +1209,11 @@
           </label>
         </div>
       </div>
-    </div>  
+    </div> 
+    
+    <div ref='contenidoPDF'>
+      <h1>Prueba PDF</h1>
+    </div>
 
   </div>
 </template>
@@ -2655,16 +2660,22 @@ export default defineComponent({
 
       // Imprimir PDF
       generarPDF() {
-        // const doc = new jsPDF()
-        // doc.text('Prueba', 10, 10)
-        // doc.save('test.pdf')
+        const pdf = new jsPDF();
 
-        let pdf = new jsPDF();
         pdf.setProperties({
-            title: "Report"
+          title: "Report"
         });
+        pdf.rect(20, 20, 10, 10); // empty square
+        pdf.rect(40, 20, 10, 10, 'F'); // filled square
+        pdf.text('#Expediente: ' +preIdStore.numeroExpediente,50,10)
+
+        // let html = this.$refs.contenidoPDF;
+        // pdf.text(html, 15, 15,{
+        //   width:150
+        // });
+
         pdf.output('dataurlnewwindow');
-        }
+      }
   },
   
   computed: {
@@ -2780,16 +2791,14 @@ export default defineComponent({
   white-space: nowrap;
   scroll-behavior: smooth;
   height: 620px;
-  margin-top: 0px;
-  z-index: 1080;
+  margin-top: 0px;  
 }
 #grid-lateral::-webkit-scrollbar {
   width: auto;
-  height: auto;
+  height: auto;  
 }
 #grid-lateral::-webkit-scrollbar-track {
   background-color: transparent;
-  position: sticky;
 }
 #grid-lateral::-webkit-scrollbar-thumb {
   background-color: blur(40px) brightness(97%);
