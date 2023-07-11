@@ -1,9 +1,9 @@
 <template>
-  <header>
+  <header @click.stop="replegarMenuVistaRapida">
     <barra-navegacion/>
   </header>
 
-  <div class="margen-div-barra">
+  <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">
 
     <div class="input-group mb-3">
       <div class="row g-3 col-md-12">
@@ -37,8 +37,6 @@
                 <span class="fw-bold msv-color-txt">&nbsp;&nbsp;Estado: Desconectado</span>
               </template>
             </div>
-
-            <div class="col-md-1"></div>
 
             <!-- Botón medicamento -->
             <div class="col-md-2">
@@ -372,9 +370,11 @@
               </div>
             </div>
 
-            <div class="col-md-1">
-              <button type="button"
-                      class="btn btn-menu fw-bold">Imprimir</button>
+            <!-- Botón imprimir PDF -->
+            <div class="col-md-2">
+              <button type="button" class="btn btn-menu fw-bold" @click="generarPDF">
+                <font-awesome-icon icon="fa-solid fa-file-pdf" size="lg"/> PDF
+              </button>
             </div>
           </div>
         </div>
@@ -1131,29 +1131,85 @@
           </RouterLink>
         </div>
       </div>
-      
-      <div class=" text-center posicionEstatica fw-bold">
-        <div class="row">
-          <div class="col bordeColumna">
-            <label class="form-label text-white">              
-              {{ preIdStore.NombrePaciente }}
+
+      <!-- Menú vista rápida desplegada -->
+      <div class=" text-center posicion-estatica-arriba fw-bold container col-md-9" :class="preIdStore.VistaRapida == true ? 'c-sticky' : 'invisible c-fixed'" @click.stop="replegarMenuVistaRapida()">
+          <label class="form-label text-white fw-bold" :class="preIdStore.numeroExpediente == '' || preIdStore.numeroExpediente == undefined ? 'invisible':''"> 
+            #Expediente: {{ preIdStore.numeroExpediente == '' || preIdStore.numeroExpediente == undefined ? '-': preIdStore.numeroExpediente}}
+          </label>
+        <div class="row columna-size-1 mb-4 mt-2">
+          <div class="col borde-row">           
+            <img class="img-vista-rapida-arriba" src="images/imgIcon/paciente_cuadro.png">                              
+            <label class="form-label text-white" :class="preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? 'invisible':''"> 
+              {{ preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? '-': preIdStore.NombrePaciente }}
+            </label>
+            <br>
+            <label class="form-label text-white" :class="preIdStore.edadPaciente == '' || preIdStore.edadPaciente == undefined ? 'invisible':''"> 
+              {{ preIdStore.edadPaciente == '' || preIdStore.edadPaciente == undefined ? '-': preIdStore.edadPaciente }} años
+            </label>
+            &nbsp&nbsp&nbsp&nbsp&nbsp
+            <label class="form-label text-white" :class="preIdStore.generoPaciente == '' || preIdStore.generoPaciente == undefined ? 'invisible':''"> 
+              {{ preIdStore.generoPaciente == '' || preIdStore.generoPaciente == undefined ? '-': preIdStore.generoPaciente }}
+            </label>
+            &nbsp&nbsp&nbsp&nbsp&nbsp
+            <label class="form-label text-white" :class="preIdStore.fechaNacimientoPaciente == '' || preIdStore.fechaNacimientoPaciente == undefined ? 'invisible':''"> 
+              {{ preIdStore.fechaNacimientoPaciente == '' || preIdStore.fechaNacimientoPaciente == undefined ? '-': preIdStore.fechaNacimientoPaciente }}
             </label>
           </div>
-        
-          <div class="col bordeColumna">
-            <label class="form-label text-white">              
-              {{ preIdStore.NombreCirujano }}
-            </label>
-          </div>
-        
-          <div class="col bordeColumna">
-            <label class="form-label text-white">              
-              {{ preIdStore.NombreCirugia }}
+          
+          <div class="col">
+            <img class="img-vista-rapida-arriba" src="images/imgIcon/anestesiologo_cuadro.png">
+            <label class="form-label text-white" :class="preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? 'invisible':''">
+              {{ preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? '-': preIdStore.NombreAnestesiologo }}            
             </label>
           </div>
         </div>
+
+        <div class="row columna-size-2">
+          <div class="col borde-row"> 
+            <img class="img-vista-rapida-arriba" src="images/imgIcon/cirujano_cuadro.png">
+            <label class="form-label text-white" :class="preIdStore.NombreCirujano == '' || preIdStore.NombreCirujano == undefined ? 'invisible':''">            
+              {{ preIdStore.NombreCirujano == '' || preIdStore.NombreCirujano == undefined ? '-': preIdStore.NombreCirujano }}
+            </label>
+          </div>
+
+          <div class="col"> 
+            <img class="img-vista-rapida-arriba" src="images/imgIcon/cirugia_cuadro.png">
+            <label class="form-label text-white" :class="preIdStore.NombreCirugia == '' || preIdStore.NombreCirugia == undefined ? 'invisible':''">            
+              {{ preIdStore.NombreCirugia == '' || preIdStore.NombreCirugia == undefined ? '-': preIdStore.NombreCirugia }}
+            </label>
+          </div>
+        </div>                  
       </div>
+
     </div>
+
+    <!-- Menú vista rápida -->
+    <div class="text-center posicion-estatica fw-bold container" :class="preIdStore.VistaRapida == false ? 'c-fixed' : 'c-fixed invisible'" @click.stop="desplegarMenuVistaRapida()">
+      <div class="row">
+        <div class="col bordeColumna">           
+          <img class="img-vista-rapida" src="images/imgIcon/paciente.png">          
+          <label class="form-label text-white" :class="preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? '': 'invisible'"> 
+            {{ preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? '-': preIdStore.NombrePaciente }}
+          </label>
+        </div>
+        
+        <div class="col">
+          <img class="img-vista-rapida" src="images/imgIcon/anestesiologo.png">
+          <label class="form-label text-white" :class="preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? 'invisible':''">
+            {{ preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? '-': preIdStore.NombreAnestesiologo }}            
+          </label>
+        </div>
+        
+        <div class="col bordeColumna"> 
+          <img class="img-vista-rapida" src="images/imgIcon/cirugia.png">
+          <label class="form-label text-white" :class="preIdStore.NombreCirugia == '' || preIdStore.NombreCirugia == undefined ? 'invisible':''">            
+            {{ preIdStore.NombreCirugia == '' || preIdStore.NombreCirugia == undefined ? '-': preIdStore.NombreCirugia}}
+          </label>
+        </div>
+      </div>
+    </div>  
+
   </div>
 </template>
 
@@ -1169,6 +1225,7 @@ import type { regNotaPost } from "@/interfaces/regPostAnest";
 import { usePostAnestStore } from "@/stores/postAnest-store";
 import { useMedicamentoStore } from "../../stores/medicamento-store";
 import { ElSelect, ElOption } from 'element-plus';
+import jsPDF from 'jspdf';
 
 const preIdStore = usePreIdStore();
 const transAnestStore = useTransAnestStore();
@@ -1272,6 +1329,8 @@ export default defineComponent({
       statEnvDat: false,
 
       stepSize: 1,
+
+      mostrarVistaRapida : false
     }
   }, 
 
@@ -1310,13 +1369,13 @@ export default defineComponent({
     this.menuTrans.ayuno = null;
     this.menuTrans.otrosEgresos = null;
 
-    var anesin = document.getElementById("anes-in");
+    let anesin = document.getElementById("anes-in");
     anesin.addEventListener("contextmenu", this.bloquearClicDerecho);
-    var cxin = document.getElementById("cx-in");
+    let cxin = document.getElementById("cx-in");
     cxin.addEventListener("contextmenu", this.bloquearClicDerecho);
-    var cxout = document.getElementById("cx-out");
+    let cxout = document.getElementById("cx-out");
     cxout.addEventListener("contextmenu", this.bloquearClicDerecho);
-    var anesout = document.getElementById("anes-out");
+    let anesout = document.getElementById("anes-out");
     anesout.addEventListener("contextmenu", this.bloquearClicDerecho);
     
     transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
@@ -1328,23 +1387,26 @@ export default defineComponent({
       this.pingMSV(medStore.monitor[0].dirIPMVS);
     }, 10000);
 
-    this.moverScroll();
+    const gridLateral = document.getElementById('grid-lateral');
+    const grid = document.getElementById('grid');
+
+    // Escuchar el evento de desplazamiento en el elemento 'grid'
+    grid.addEventListener('scroll', () => {
+      // Sincronizar la posición de desplazamiento en el elemento 'grid-lateral'
+      gridLateral.scrollTop = grid.scrollTop;
+    });
   },
 
   methods: {
-      async moverScroll(){
-        var div1 = document.getElementById('grid');
-        var div2 = document.getElementById('grid-lateral');
-
-        // Función para sincronizar el scroll del div1 con el div2
-        div1.addEventListener('scroll', function() {
-          div2.scrollTop = div1.scrollTop;
-        });
-
-        // Función para sincronizar el scroll del div2 con el div1
-        div2.addEventListener('scroll', function() {
-          div1.scrollTop = div2.scrollTop;
-        });
+      // Menú vista rapida
+      async desplegarMenuVistaRapida(){     
+        preIdStore.VistaRapida=true
+        this.mostrarVistaRapida=true
+      },
+      async replegarMenuVistaRapida(){ 
+        if(this.mostrarVistaRapida=true)     
+          preIdStore.VistaRapida=false
+          this.mostrarVistaRapida=false
       },
 
       // Gestión datos ventilador 
@@ -1367,7 +1429,7 @@ export default defineComponent({
 
         this.btnActualizarBalance=true
 
-        var hoy = new Date();
+        let hoy = new Date();
         this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
         await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
 
@@ -1383,7 +1445,7 @@ export default defineComponent({
       },
 
       async actualizarDatosVentilador() {
-        var hoy = new Date();
+        let hoy = new Date();
         this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
         await transAnestStore.updateDatosV(this.menuTrans, preIdStore.pacienteID._id);
 
@@ -1430,7 +1492,7 @@ export default defineComponent({
                 position: "top-end",
                 });
             } else {
-                var hoy = new Date();
+                let hoy = new Date();
                 this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
                 await transAnestStore.updateVentilador(this.menuTrans.idVentilador, this.menuTrans.modosVentilacion, this.menuTrans.peep,
                                       this.menuTrans.vt, this.menuTrans.frecResp, this.menuTrans.IE, this.menuTrans.PLimite, this.menuTrans.Hr);
@@ -1521,18 +1583,18 @@ export default defineComponent({
       async actualizarTQX(tiemposQX: string){
         switch (tiemposQX) {
           case "INEVE":
-            var hoy = new Date();
+            let hoy = new Date();
             this.menuTrans.horaEvento = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
           break;
 
           case "INREL":
-            var hoy = new Date();
-            this.menuTrans.horaRelevo = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            let hoy_1 = new Date();
+            this.menuTrans.horaRelevo = ((hoy_1.getHours() <10) ? '0':'') + hoy_1.getHours() + ':' + ((hoy_1.getMinutes() <10) ? '0':'')+hoy_1.getMinutes();
           break;
 
           case "INCX":
-            var hoy = new Date();
-            this.menuTrans.horaInicioMed = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            let hoy_2 = new Date();
+            this.menuTrans.horaInicioMed = ((hoy_2.getHours() <10) ? '0':'') + hoy_2.getHours() + ':' + ((hoy_2.getMinutes() <10) ? '0':'')+hoy_2.getMinutes();
           break;
 
           case "QXIN":
@@ -1556,8 +1618,8 @@ export default defineComponent({
 
             this.btnMSV=false
 
-            var hoy = new Date();
-            this.menuTrans.ingresoQX = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            let hoy_3 = new Date();
+            this.menuTrans.ingresoQX = ((hoy_3.getHours() <10) ? '0':'') + hoy_3.getHours() + ':' + ((hoy_3.getMinutes() <10) ? '0':'')+hoy_3.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID._id, tiemposQX);
             this.siguesAhi();
           break;
@@ -1581,8 +1643,8 @@ export default defineComponent({
             this.btnUpdateEventos=true
             this.btnActualizaEvento=false            
 
-            var hoy = new Date();
-            this.menuTrans.inicioAn = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            let hoy_4 = new Date();
+            this.menuTrans.inicioAn = ((hoy_4.getHours() <10) ? '0':'') + hoy_4.getHours() + ':' + ((hoy_4.getMinutes() <10) ? '0':'')+hoy_4.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID._id, tiemposQX);
           break;
 
@@ -1605,8 +1667,8 @@ export default defineComponent({
             this.btnUpdateEventos=true
             this.btnActualizaEvento=false
           
-            var hoy = new Date();
-            this.menuTrans.inicioCx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            let hoy_5 = new Date();
+            this.menuTrans.inicioCx = ((hoy_5.getHours() <10) ? '0':'') + hoy_5.getHours() + ':' + ((hoy_5.getMinutes() <10) ? '0':'')+hoy_5.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID._id, tiemposQX);
           break;
 
@@ -1629,8 +1691,8 @@ export default defineComponent({
             this.btnUpdateEventos=true
             this.btnActualizaEvento=false
 
-            var hoy = new Date();
-            this.menuTrans.finCx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            let hoy_6 = new Date();
+            this.menuTrans.finCx = ((hoy.getHours() <10) ? '0':'') + hoy_6.getHours() + ':' + ((hoy_6.getMinutes() <10) ? '0':'')+hoy_6.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID._id, tiemposQX);
           break;
 
@@ -1653,8 +1715,8 @@ export default defineComponent({
             this.btnUpdateEventos=true
             this.btnActualizaEvento=false
 
-            var hoy = new Date();
-            this.menuTrans.finAn = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            let hoy_7 = new Date();
+            this.menuTrans.finAn = ((hoy.getHours() <10) ? '0':'') + hoy_7.getHours() + ':' + ((hoy_7.getMinutes() <10) ? '0':'')+hoy_7.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID._id, tiemposQX);
           break;
 
@@ -1681,8 +1743,8 @@ export default defineComponent({
             this.btnTQX=true
             this.finMSV()
 
-            var hoy = new Date();
-            this.menuTrans.egresoQx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            let hoy_8 = new Date();
+            this.menuTrans.egresoQx = ((hoy_8.getHours() <10) ? '0':'') + hoy_8.getHours() + ':' + ((hoy_8.getMinutes() <10) ? '0':'')+hoy_8.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX);
           break;
         
@@ -1822,10 +1884,10 @@ export default defineComponent({
       },
 
       cerrarModalMed() {
-        var closeButton = document.getElementById('medica');
+        let closeButton = document.getElementById('medica');
   
         // Crea un nuevo evento de clic
-        var event = new MouseEvent('click', {
+        let event = new MouseEvent('click', {
           bubbles: true,
           cancelable: true,
           view: window
@@ -1836,13 +1898,13 @@ export default defineComponent({
       },
 
       async listarMedicamentos(){
-        var medicamento= medStore.medicamentos;
+        let medicamento= medStore.medicamentos;
         this.listaMed = medicamento.map(document => document.nombreMedicamento);
         this.listaMed.sort()
       },
 
       async listarMedicamentosTrans(){
-        var listaMedicamentos = transAnestStore.medicamentos.map(item =>
+        let listaMedicamentos = transAnestStore.medicamentos.map(item =>
           item.medicamentosCx.map(med => med.medicamento)).flat();
 
          this.listaMedTrans = listaMedicamentos.filter((value, index, self) => {
@@ -2053,8 +2115,8 @@ export default defineComponent({
       },
 
       cerrarModalRel() {
-        var closeButton = document.getElementById('relev');
-        var event = new MouseEvent('click', {
+        let closeButton = document.getElementById('relev');
+        let event = new MouseEvent('click', {
           bubbles: true,
           cancelable: true,
           view: window
@@ -2243,8 +2305,8 @@ export default defineComponent({
       },
 
       cerrarModalEve() {
-        var closeButton = document.getElementById('event');
-        var event = new MouseEvent('click', {
+        let closeButton = document.getElementById('event');
+        let event = new MouseEvent('click', {
           bubbles: true,
           cancelable: true,
           view: window
@@ -2589,6 +2651,19 @@ export default defineComponent({
       pingMSV(dirip: string){
         medStore.statusMSV(dirip);
       },
+
+      // Imprimir PDF
+      generarPDF() {
+        // const doc = new jsPDF()
+        // doc.text('Prueba', 10, 10)
+        // doc.save('test.pdf')
+
+        let pdf = new jsPDF();
+        pdf.setProperties({
+            title: "Report"
+        });
+        pdf.output('dataurlnewwindow');
+        }
   },
   
   computed: {
@@ -2602,13 +2677,17 @@ export default defineComponent({
 
     saltoArreglo(){      
       const step = this.stepSize;
-      const filas = this.grid.filter((itemMSV, index) => index % step === 0);
+      const filas = this.grid.filter((itemMSV, index) => index % step === 0);    
 
       this.$nextTick(() => {
-        var filaContenedor = document.getElementById('contenedor-fila');
-        // Desplazar automáticamente el scroll hacia la derecha
-        filaContenedor.scrollLeft = filaContenedor.scrollWidth;
-      });      
+      // Desplazar automáticamente el scroll hacia la derecha y hacia arriba
+        let filaContenedor = document.getElementById('grid');
+        filaContenedor.scrollBy({
+          left: filaContenedor.scrollWidth,
+          top: -filaContenedor.scrollTop,
+          behavior: 'smooth'
+        });
+      });     
       
       return filas;
     },
@@ -2619,74 +2698,19 @@ export default defineComponent({
 <style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
-.alinear-btn{
-    align-self: self-end;
+.bordePrincipal {
+    width: 110%;
 }
 .margen-div-barra{
   margin-top: 110px;
 }
-.form-control-select {
-    display: block;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.3rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+/* Menú lateral */
+.alinear-btn{
+    align-self: self-end;
 }
-.el-select {
-    --el-select-border-color-hover: var(--el-border-color-hover);
-    --el-select-disabled-border: var(--el-disabled-border-color);
-    --el-select-font-size: var(--el-font-size-base);
-    --el-select-close-hover-color: var(--el-text-color-secondary);
-    --el-select-input-color: var(--el-text-color-placeholder);
-    --el-select-multiple-input-color: var(--el-text-color-regular);
-    --el-select-input-focus-border-color: var(--el-disabled-border-color); 
-    --el-select-input-font-size: 14px;
-}
-.el-select-dropdown__item.selected {
-    color: #000;
-    font-weight: 700;
-}
-.el-input__inner {
-    --el-input-inner-height: calc(var(--el-input-height, 32px) - 2px);
-    width: 100%;
-    flex-grow: 1;
-    color: #000;
-    font-size: inherit;
-    height: var(--el-input-inner-height);
-    line-height: var(--el-input-inner-height);
-    padding: 0;
-    outline: 0;
-    border: none;
-    background: 0 0;
-    box-sizing: border-box;
-}
-.menu-vista-previa {
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;    
-}
-.vista-medicamentos{
-  height: 370px;
-  background-color: white;
-  padding: 0.5rem;
-  border-radius: 10px;
-}
-.vista-eventos-relevos{
-  height: 255px;
-  background-color: white;
-  padding: 0.5rem;
-  border-radius: 10px;
-}
-.vista-grid-monitoreo{
-  height: 635px;
-  background-color: #E8EBEF;
-  padding: 0.5rem;
-  border-radius: 10px;
+.ajusteImg{
+  width: 100%;
+  height: 100%;
 }
 .menuLateralPrincipal {
     margin-top: 21px;
@@ -2734,36 +2758,7 @@ export default defineComponent({
   background-color: #E88300;
   transition: background-color 0.2s ease-in-out;
 }
-.ajusteImg{
-  width: 100%;
-  height: 100%;
-}
-.bordePrincipal {
-    width: 110%;
-}
-.posicionEstatica {
-  position: -webkit-sticky;
-  position: fixed;
-  bottom: 0;
-  z-index: 1020;
-  background-color: #002D60;
-  padding: 1rem;
-  border-radius: 5px !important;
-  color: #ffffff;
-  width: 57.5%;
-}
-.bordeColumna{
-  margin-left: auto;
-  margin-right: auto;
-  border-right: 1px solid #ffffff;
-  border-left: 1px solid #ffffff;
-}
-.estiloDropDownBalance{
-  width: auto; height: 400px;
-}
-.color-dropdown {
-  background-color: #002d60;
-}
+/* Scroll´s */
 .deslizar {
   overflow: scroll;
   overflow-x: hidden;
@@ -2780,11 +2775,21 @@ export default defineComponent({
 }
 .deslizar-grid-lateral{
   overflow-y: hidden;
-  overflow-x: hidden;
+  overflow-x: scroll;
   white-space: nowrap;
   scroll-behavior: smooth;
   height: 620px;
   margin-top: 0px;
+}
+#grid-lateral::-webkit-scrollbar {
+  width: 15px;
+  height: 15px;
+}
+#grid-lateral::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+#grid-lateral::-webkit-scrollbar-thumb {
+  background-color: blur(40px) brightness(97%);
 }
 .deslizar-balance {
   overflow: scroll;
@@ -2803,6 +2808,7 @@ export default defineComponent({
   margin-top: 0px;
   height: 205px;
 }
+/* Botones */
 .btn-guardar{
     --bs-btn-bg: none;
     --bs-btn-color: #fff;    
@@ -2888,11 +2894,12 @@ export default defineComponent({
     --bs-btn-active-border-color: #fff;
     inline-size: -webkit-fill-available;
 }
-.modal-med-largo {
-  height: auto;
-}
 .btn-abajo{
     text-align: end;  
+}
+/* Estilos de modales */
+.modal-med-largo {
+  height: auto;
 }
 hr {
     margin: 1rem 0;
@@ -2911,11 +2918,24 @@ hr {
   border-color: #002D60;
   --bs-dropdown-border-width: 0.5px;
 }
+.estiloDropDownBalance{
+  width: auto; height: 400px;
+}
+.color-dropdown {
+  background-color: #002d60;
+}
 .btn.disabled, .btn:disabled, fieldset:disabled .btn {
     color: #E8EBEF;
     pointer-events: none;
     background-color: #E8EBEF;
     opacity: 1;
+}
+/* Menu Medicamentos */
+.vista-medicamentos{
+  height: 365px;
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 10px;
 }
 .estilo-bolo{
   color: #002D60;
@@ -2926,6 +2946,13 @@ hr {
   color: #002D60;
   background-color: #DAEEFC;
   padding: 3px;
+}
+/* Menu Eventos/Relevos */
+.vista-eventos-relevos{
+  height: 255px;
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 10px;
 }
 .estilo-relevo{
   color: white;
@@ -2953,6 +2980,12 @@ hr {
 }
 .espacio {
   height: 55px;
+}
+/* Botón mostrar/ocultar vista previa */
+.menu-vista-previa {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;    
 }
 .ocultar-izquierdo{
   align-self: center; 
@@ -2985,6 +3018,13 @@ hr {
 .mostrar{ 
   transition: all 0.8s ease-in-out;
 }
+/* Celdas Grid MSV */
+.vista-grid-monitoreo{
+  height: 630px;
+  backdrop-filter: blur(40px) brightness(97%);
+  padding: 0.5rem;
+  border-radius: 10px;
+}
 .borde-btn-msv{
   border: none;
 }
@@ -3005,6 +3045,47 @@ hr {
   color:#002D60; 
   height: auto; 
   width: 55px;
+}
+/* Buscador en input tipo select */
+.form-control-select {
+    display: block;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.3rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.el-select {
+    --el-select-border-color-hover: var(--el-border-color-hover);
+    --el-select-disabled-border: var(--el-disabled-border-color);
+    --el-select-font-size: var(--el-font-size-base);
+    --el-select-close-hover-color: var(--el-text-color-secondary);
+    --el-select-input-color: var(--el-text-color-placeholder);
+    --el-select-multiple-input-color: var(--el-text-color-regular);
+    --el-select-input-focus-border-color: var(--el-disabled-border-color); 
+    --el-select-input-font-size: 14px;
+}
+.el-select-dropdown__item.selected {
+    color: #000;
+    font-weight: 700;
+}
+.el-input__inner {
+    --el-input-inner-height: calc(var(--el-input-height, 32px) - 2px);
+    width: 100%;
+    flex-grow: 1;
+    color: #000;
+    font-size: inherit;
+    height: var(--el-input-inner-height);
+    line-height: var(--el-input-inner-height);
+    padding: 0;
+    outline: 0;
+    border: none;
+    background: 0 0;
+    box-sizing: border-box;
 }
 /* Colores valores MSV */
 .color-msv-174147842{
@@ -3051,5 +3132,60 @@ hr {
 }
 .color-msv-111150039{
   color:rgb(198, 27, 27)
+}
+
+/* Menú estatico */
+.c-fixed{
+  position: fixed;
+}
+.c-sticky{
+  position: sticky;
+}
+.posicion-estatica {
+  bottom: 0;
+  margin-top: 10px;  
+  z-index: 1020;
+  background-color: #002D60;
+  padding: 1rem;
+  border-radius: 5px !important;
+  color: #ffffff;
+  width: 57.5%;
+  cursor: pointer;  
+}
+.img-vista-rapida{
+  width: 35px;
+  height: auto;
+  float: left;
+}
+.posicion-estatica-arriba {
+  bottom: 0;
+  z-index: 1020;
+  margin-top: 5px; 
+  background-color: #002D60;
+  padding: 1rem;
+  border-radius: 5px !important;
+  color: #ffffff;
+  height: 30%;
+  cursor: pointer
+}
+.img-vista-rapida-arriba{
+  width: 60px;
+  float: left;
+}
+.bordeColumna{
+  margin-left: auto;
+  margin-right: auto;
+  border-right: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;  
+}
+.borde-row{
+  margin-right: auto;
+  border-right: 1px solid #ffffff;
+}
+.columna-size-1{
+  height: 50%;
+}
+.columna-size-2{
+  height: 40%;
 }
 </style>

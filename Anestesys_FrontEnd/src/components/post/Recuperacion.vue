@@ -44,7 +44,7 @@
     <div class="tab-content col-md-12" id="">
       <!-- Nota de Evaluación de UCPA -->
       <div class="tab-pane fade show active" id="notaEvaluacion">
-        <div class="col-12 bordePrincipal">
+        <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">
           <form @submit.prevent="" class="row g-3">
             <h5 class="fw-bold">NOTA DE EVALUACIÓN UCPA</h5>
 
@@ -102,7 +102,7 @@
 
       <!-- Aldrete de Recuperación -->
       <div class="tab-pane fade" id="aldrete">
-        <div class="col-12 bordePrincipal">
+        <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">
           <form @submit.prevent="" class="row g-3">
             <h5 class="fw-bold">ALDRETE DE RECUPERACIÓN</h5>
             <table class="table table-responsive" id="aldrete-tabla">
@@ -1240,7 +1240,7 @@
 
       <!-- Alta de Recuperación -->
       <div class="tab-pane fade" id="alta">
-        <div class="col-12 bordePrincipal">
+        <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">
           <form @submit.prevent="" class="row g-3">
 
             <h5 class="fw-bold">ALTA DE RECUPERACIÓN</h5>
@@ -1538,7 +1538,6 @@ h5 {
   border-radius: 5px;
   padding: 1rem;
   margin-top: 10px;
-  margin-bottom: 55px;
   backdrop-filter: blur(40px) brightness(97%);
 }
 .formSombra:focus {

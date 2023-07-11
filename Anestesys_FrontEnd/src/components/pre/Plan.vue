@@ -57,7 +57,7 @@
         <div class="tab-content col-md-12" id="">
             <!-- Posición y Cuidados -->
             <div class="tab-pane fade show active" id="posicion">
-                <div class="col-12 bordePrincipal">  
+                <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">  
                     <form @submit.prevent="" class="row g-3">    
                         <h5 class="fw-bold">POSICIÓN Y CUIDADOS</h5>
                         <!-- Horas de ayuno -->
@@ -298,7 +298,7 @@
 
             <!-- Sedación -->
             <div class="tab-pane fade" id="sedacion">
-                <div class="col-12 bordePrincipal largoContenedor">  
+                <div class="col-12 bordePrincipal largoContenedor" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">  
                     <form @submit.prevent="" class="row g-3">    
                         <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5>    
                         <h5 class="fw-bold col-md-12 fw-bold">Sedación</h5>   
@@ -384,7 +384,7 @@
 
             <!-- Regional -->
             <div class="tab-pane fade" id="regional">
-                <div class="col-12 bordePrincipal">  
+                <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">  
                     <form @submit.prevent="" class="row g-3">    
                         <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5>  
 
@@ -801,7 +801,7 @@
 
             <!-- Local -->
             <div class="tab-pane fade" id="local">
-                <div class="col-12 bordePrincipal largoContenedor">  
+                <div class="col-12 bordePrincipal largoContenedor" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">  
                     <form @submit.prevent="" class="row g-3">    
                         <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5>    
                         <h5 class="fw-bold col-md-12">Local</h5>  
@@ -871,7 +871,7 @@
 
             <!-- General -->
             <div class="tab-pane fade" id="general">
-                <div class="col-12 bordePrincipal">  
+                <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">  
                     <form @submit.prevent="" class="row g-3"> 
                         <div class="col-md-12">
                             <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5> 
@@ -1235,8 +1235,7 @@ export default defineComponent({
   border-radius: 5px;
   padding: 1rem;
   margin-top :10px;
-  margin-bottom: 55px;
-  background-color: rgba(232, 234, 236, 0.6);
+  backdrop-filter: blur(40px) brightness(97%);
 }
 .margenRadio{
     margin-right: 10px;
