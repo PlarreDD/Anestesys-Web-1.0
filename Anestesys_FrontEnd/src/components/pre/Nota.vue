@@ -66,6 +66,10 @@ export default defineComponent({
             this.btnActualizarNota=true
 
             preIdStore.savePreNota(this.textoNota.nota, preIdStore.pacienteID._id)
+        },
+
+        enviarDatosNota() {
+            this.$emit('recibe-datos-nota', preIdStore.NotaPre=this.textoNota.nota)
         }
     }
 })

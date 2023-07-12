@@ -1211,8 +1211,10 @@
       </div>
     </div> 
     
-    <div ref='contenidoPDF'>
-      <h1>Prueba PDF</h1>
+    <div ref='contenidoPDF' class="invisible" style="position: fixed;">
+      Nota Pre {{ preIdStore.NotaPre }}
+        <h1 ref='contenidoPDF'>#Expediente: {{ preIdStore.numeroExpediente }}</h1>
+        <label>Nombre Paciente: {{ preIdStore.NombrePaciente }}</label>
     </div>
 
   </div>
@@ -1403,6 +1405,20 @@ export default defineComponent({
   },
 
   methods: {
+      // Imprimir PDF
+      generarPDF() {
+        let pdf = new jsPDF();
+
+        pdf.setProperties({
+          title: "Report"
+        });
+      
+        let html = (this.$refs.contenidoPDF as HTMLElement).innerHTML;
+        pdf.text(html, 15, 15);
+
+        pdf.output('dataurlnewwindow');
+      },
+
       // Menú vista rapida
       async desplegarMenuVistaRapida(){     
         preIdStore.VistaRapida=true
@@ -2656,26 +2672,7 @@ export default defineComponent({
 
       pingMSV(dirip: string){
         medStore.statusMSV(dirip);
-      },
-
-      // Imprimir PDF
-      generarPDF() {
-        const pdf = new jsPDF();
-
-        pdf.setProperties({
-          title: "Report"
-        });
-        pdf.rect(20, 20, 10, 10); // empty square
-        pdf.rect(40, 20, 10, 10, 'F'); // filled square
-        pdf.text('#Expediente: ' +preIdStore.numeroExpediente,50,10)
-
-        // let html = this.$refs.contenidoPDF;
-        // pdf.text(html, 15, 15,{
-        //   width:150
-        // });
-
-        pdf.output('dataurlnewwindow');
-      }
+      },      
   },
   
   computed: {

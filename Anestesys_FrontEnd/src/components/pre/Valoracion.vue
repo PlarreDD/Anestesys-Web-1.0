@@ -1352,6 +1352,10 @@ export default defineComponent({
             await preIdStore.deleteEstudio(idEstudio);
             await this.listarEstudios();
         },
+
+        enviarDatosValoracion() {
+            this.$emit('recibe-datos-valoracion', )
+        }
     }
 })
 </script>

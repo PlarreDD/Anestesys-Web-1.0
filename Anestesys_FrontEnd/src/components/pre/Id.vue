@@ -498,7 +498,7 @@ export default defineComponent({
     data () {
         return{
             infoPreIdPaciente: {} as regIdPaciente,
-            preIdStore,
+            preIdStore,            
 
             valorNac: String,
             lblNac: String,  
@@ -618,14 +618,39 @@ export default defineComponent({
                                        this.infoPreIdPaciente.nomPaciente,
                                        this.infoPreIdPaciente.cirujano,
                                        this.infoPreIdPaciente.cirugia,
+
+                                       preIdStore.numeroExpediente=this.infoPreIdPaciente.numExped,
                                        preIdStore.NombrePaciente=this.infoPreIdPaciente.nomPaciente,
+                                       preIdStore.fechaNacimientoPaciente= this.infoPreIdPaciente.fechaNac,
+                                       preIdStore.edadPaciente=this.infoPreIdPaciente.edadPaciente,
+                                       preIdStore.generoPaciente=this.infoPreIdPaciente.genero,
+
+                                       preIdStore.Nacionalidad=this.infoPreIdPaciente.nacionalidad,
+                                       preIdStore.CURP=this.infoPreIdPaciente.CURP,
+                                       preIdStore.FolioID=this.infoPreIdPaciente.folioID,
+                                       preIdStore.EstadoNacimiento=this.infoPreIdPaciente.estNacimiento,
+                                       preIdStore.EstadoResidencia=this.infoPreIdPaciente.estResidencia,
+                                       preIdStore.Alcaldia=this.infoPreIdPaciente.alcaldia,
+                                       preIdStore.Colonia=this.infoPreIdPaciente.colonia,
+                                       preIdStore.CP=this.infoPreIdPaciente.codigoPostal,
+
+                                       preIdStore.NumeroEpisodio=this.infoPreIdPaciente.numEpisodio,
+                                       preIdStore.Habitacion=this.infoPreIdPaciente.habitacion,
+                                       preIdStore.FechaIngreso=this.infoPreIdPaciente.fechaIn,
+                                       preIdStore.Diagnostico=this.infoPreIdPaciente.diagnostico,
+                                       preIdStore.TipoCirugia=this.infoPreIdPaciente.tipoCx,
+
+                                       preIdStore.CIE10=this.infoPreIdPaciente.cie10,
+                                       preIdStore.CIE9=this.infoPreIdPaciente.cie9,
+                                       preIdStore.NombreCirugia=this.infoPreIdPaciente.cirugia,
+                                       preIdStore.FechaCirugia=this.infoPreIdPaciente.fechaCx,
+                                       preIdStore.HoraCirugia=this.infoPreIdPaciente.hrCx,
+
                                        preIdStore.NombreCirujano=this.infoPreIdPaciente.cirujano,
                                        preIdStore.NombreAnestesiologo=this.infoPreIdPaciente.anestesiologo,
-                                       preIdStore.NombreCirugia=this.infoPreIdPaciente.cirugia,
-                                       preIdStore.generoPaciente=this.infoPreIdPaciente.genero,
-                                       preIdStore.numeroExpediente=this.infoPreIdPaciente.numExped,
-                                       preIdStore.fechaNacimientoPaciente= this.infoPreIdPaciente.fechaNac,
-                                       preIdStore.edadPaciente=this.infoPreIdPaciente.edadPaciente);
+                                       preIdStore.AnestesiologoVPA=this.infoPreIdPaciente.anestesiologoVPA,
+                                       preIdStore.residenteAnestesia=this.infoPreIdPaciente.residenteAnestesia
+                                       );
         },
     },
 
