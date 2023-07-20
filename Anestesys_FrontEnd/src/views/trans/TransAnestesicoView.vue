@@ -373,7 +373,7 @@
 
             <!-- Botón imprimir PDF -->
             <div class="col-md-2">
-              <button type="button" class="btn btn-menu fw-bold" @click="generarPDF">
+              <button type="button" class="btn btn-menu fw-bold" @click="crearPdf">
                 <font-awesome-icon icon="fa-solid fa-file-pdf" size="lg"/> PDF
               </button>
             </div>
@@ -1209,13 +1209,7 @@
           </label>
         </div>
       </div>
-    </div> 
-    
-    <div ref='contenidoPDF' class="invisible" style="position: fixed;">
-      Nota Pre {{ preIdStore.NotaPre }}
-        <h1 ref='contenidoPDF'>#Expediente: {{ preIdStore.numeroExpediente }}</h1>
-        <label>Nombre Paciente: {{ preIdStore.NombrePaciente }}</label>
-    </div>
+    </div>       
 
   </div>
 </template>
@@ -1232,7 +1226,10 @@ import type { regNotaPost } from "@/interfaces/regPostAnest";
 import { usePostAnestStore } from "@/stores/postAnest-store";
 import { useMedicamentoStore } from "../../stores/medicamento-store";
 import { ElSelect, ElOption } from 'element-plus';
-import jsPDF from 'jspdf';
+
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import pdfMake from "pdfmake/build/pdfmake";
+window.pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const preIdStore = usePreIdStore();
 const transAnestStore = useTransAnestStore();
@@ -1257,6 +1254,8 @@ let FR: any;
 var taSeparada: Object;
 
 export default defineComponent({
+  name: 'App',
+
   data() {
     return {
       //Datos interfaces
@@ -1347,7 +1346,7 @@ export default defineComponent({
     ElSelect, ElOption
   },
 
-  mounted: function() { // Llama el método despues de cargar la página
+  mounted: function() { // Llama el método despues de cargar la página    
     transAnestStore.getDetieneMonitoreo();
     this.pingMSV(medStore.monitor[0].dirIPMVS);
     transAnestStore.listDatosV(preIdStore.pacienteID._id);
@@ -1405,19 +1404,38 @@ export default defineComponent({
   },
 
   methods: {
-      // Imprimir PDF
-      generarPDF() {
-        let pdf = new jsPDF();
+      // Imprimir PDF      
+      crearPdf() {       
+        window.pdfMake.fonts = {
+          SF: {
+            normal: 'SF-UI-Display-Regular.otf',
+            bold: 'SF-UI-Display-Bold.otf',
+            italics: 'SF-UI-Display-Regular.otf',
+            bolditalics: 'SF-UI-Display-Bold.otf',
+          }
+        };
 
-        pdf.setProperties({
-          title: "Report"
-        });
-      
-        let html = (this.$refs.contenidoPDF as HTMLElement).innerHTML;
-        pdf.text(html, 15, 15);
+        // Contenido del documento PDF
+        let docDefinition = {
+          content: [
+            {
+              text: preIdStore.NombrePaciente,
+              font: 'SF',           
+              fontSize: 10,              
+              margin: [0, 0, 0, 20],
+            },
+            {
+              text: 'Texto normal',
+              font: 'SF',
+              bold: true,
+              fontSize: 8,
+            },
+          ],
+        };
 
-        pdf.output('dataurlnewwindow');
-      },
+        // Generar el documento PDF
+        pdfMake.createPdf(docDefinition as any).open();
+      },      
 
       // Menú vista rapida
       async desplegarMenuVistaRapida(){     
@@ -2707,6 +2725,10 @@ export default defineComponent({
 <style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
+#app {
+  font-family: SF UI Display;
+  src: url("@/assets/fonts/SF-UI-Display-Regular.otf") format("opentype");
+}
 .bordePrincipal {
     width: 110%;
 }

@@ -63,9 +63,8 @@
                         <!-- Horas de ayuno -->
                         <div class="col-md-2">
                             <label for="" class="form-label fw-bold">Horas de ayuno</label>
-                            <input type="text"
+                            <input type="text" @keyup.capture="enviarDatosPlan"
                                    class="form-control"
-                                   id=""
                                    v-model="infoPlan.pos_HorasAyuno"
                                    :class="infoPlan.pos_HorasAyuno != '' && infoPlan.pos_HorasAyuno != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
@@ -74,7 +73,7 @@
                         <!-- Acceso Venoso -->
                         <div class="col-md-4">
                             <label for="inputState" class="form-label fw-bold">Acceso Venoso</label>
-                            <select id="inputState"
+                            <select id="inputState" @change="enviarDatosPlan"
                                     class="form-select"
                                     v-model="infoPlan.pos_AccesoVenoso"
                                     :class="infoPlan.pos_AccesoVenoso != '' && infoPlan.pos_AccesoVenoso != undefined ?
@@ -94,7 +93,7 @@
                         <!-- Posición del paciente -->
                         <div class="col-md-3">
                             <label for="inputState" class="form-label fw-bold">Posición del paciente</label>
-                            <select id="inputState"
+                            <select id="inputState" @change="enviarDatosPlan"
                                     class="form-select"
                                     v-model="infoPlan.pos_PosicionPaciente"
                                     :class="infoPlan.pos_PosicionPaciente != '' && infoPlan.pos_PosicionPaciente != undefined ?
@@ -117,7 +116,7 @@
                         <!-- Posición de los brazos -->
                         <div class="col-md-3">
                             <label for="inputState" class="form-label fw-bold">Posición de los brazos</label>
-                            <select id="inputState"
+                            <select id="inputState" @change="enviarDatosPlan"
                                     class="form-select"
                                     v-model="infoPlan.pos_PosicionBrazos"
                                     :class="infoPlan.pos_PosicionBrazos != '' && infoPlan.pos_PosicionBrazos != undefined ?
@@ -131,7 +130,7 @@
                         <!-- Aplicación de torniquete -->
                         <div class="col-md-2 ">
                             <label for="" class="form-label col-12 fw-bold">Aplicación de torniquete</label>
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="torniquete"
                                    id="torniSi"
@@ -141,7 +140,7 @@
                                    checked>
                             <label class="btn btn-radio margenRadio" for="torniSi">Sí</label>
                             
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="torniquete"
                                    id="torniNo"
@@ -154,9 +153,8 @@
                         <!-- Sitio -->
                         <div class="col-md-5">
                             <label for="" class="form-label fw-bold">Sitio</label>
-                            <input type="text"
+                            <input type="text" @keyup.capture="enviarDatosPlan"
                                    class="form-control"
-                                   id=""
                                    v-model="infoPlan.pos_Sitio"
                                    :class="infoPlan.pos_Sitio != '' && infoPlan.pos_Sitio != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
@@ -165,7 +163,7 @@
                         <!-- Probable tiempo de isquemia -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Probable tiempo de isquemia</label>
-                            <input type="text"
+                            <input type="text" @keyup.capture="enviarDatosPlan"
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.pos_TiempoIsquemia"
@@ -176,7 +174,7 @@
                         <!-- Protección de ojos -->
                         <div class="col-md-2">
                             <label for="" class="form-label col-12 fw-bold">Protección de ojos</label>
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="ojos"
                                    id="ojosSi"
@@ -185,7 +183,7 @@
                                    v-model="infoPlan.pos_ProteccionOjos">
                             <label class="btn btn-radio margenRadio" for="ojosSi">Sí</label>
                             
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="ojos"
                                    id="ojosNo"
@@ -199,7 +197,7 @@
                         <!-- Protección de prominencias oseas -->
                         <div class="col-md-2">
                             <label for="" class="form-label col-12 fw-bold">Protección de prominencias oseas</label>
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="oseas"
                                    id="oseasSi"
@@ -208,7 +206,7 @@
                                    v-model="infoPlan.pos_ProtecProminencias">
                             <label class="btn btn-radio margenRadio" for="oseasSi">Sí</label>
 
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="oseas"
                                    id="oseasNo"
@@ -222,7 +220,7 @@
                         <!-- Técnica anéstesica -->
                         <div class="col-md-10">
                             <label for="" class="form-label fw-bold">Técnica anéstesica</label>
-                            <input type="text"
+                            <input type="text" @keyup.capture="enviarDatosPlan"
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.pos_TecnicaAnestesica"
@@ -233,7 +231,7 @@
                         <!-- Premedicación -->
                         <div class="col-md-2">
                             <label for="" class="form-label col-12 fw-bold">Premedicación</label>
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="premedicacion"
                                    id="premediSi"
@@ -242,7 +240,7 @@
                                    v-model="infoPlan.pos_Premedicacion">
                             <label class="btn btn-radio margenRadio" for="premediSi">Sí</label>
 
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="premedicacion"
                                    id="premediNo"
@@ -256,7 +254,7 @@
                         <!-- Específicar -->
                         <div class="col-md-10">
                             <label for="" class="form-label fw-bold">Específicar</label>
-                            <input type="text"
+                            <input type="text" @keyup.capture="enviarDatosPlan"
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.pos_EspPremedicacion"
@@ -267,7 +265,7 @@
                         <!-- Monitoreo -->
                         <div class="col-md-12">
                             <label for="" class="form-label fw-bold">Monitoreo</label>
-                            <input type="text"
+                            <input type="text" @keyup.capture="enviarDatosPlan"
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.pos_Monitoreo"
@@ -306,7 +304,7 @@
                         <!-- Vía -->
                         <div class="col-md-3">
                             <label for="inputState" class="form-label fw-bold">Vía</label>
-                            <select id="inputState"
+                            <select id="inputState" @change="enviarDatosPlan"
                                     class="form-select"
                                     v-model="infoPlan.sedacion_Via"
                                     :class="infoPlan.sedacion_Via != undefined && infoPlan.sedacion_Via != '' ?
@@ -325,7 +323,7 @@
                         <div class="col-md-2">
 
                             <label for="inputState" class="form-label fw-bold">Opción</label>
-                            <select id="inputState"
+                            <select id="inputState" @keyup.capture="enviarDatosPlan"
                                     class="form-select"
                                     v-model="infoPlan.sedacion_Opcion"
                                     :class="infoPlan.sedacion_Opcion != '' && infoPlan.sedacion_Opcion != undefined ?
@@ -340,7 +338,7 @@
                         <!-- Observaciones -->
                         <div class="col-md-7">
                             <label for="" class="form-label fw-bold">Observaciones</label>
-                            <textarea class="form-control"
+                            <textarea class="form-control" @keyup.capture="enviarDatosPlan"
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.sedacion_Observaciones"
@@ -352,7 +350,7 @@
                         <!-- Medicamentos utilizados -->
                         <div class="col-md-12">
                             <label for="" class="form-label fw-bold">Medicamentos utilizados</label>
-                            <input type="text"
+                            <input type="text" @keyup.capture="enviarDatosPlan"
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.sedacion_Medicamentos"
@@ -414,7 +412,7 @@
                         <!-- Tipo -->
                         <div class="col-md-2">
                             <label for="inputState" class="form-label fw-bold">Tipo</label>
-                            <select id="inputState"
+                            <select id="inputState" @change="enviarDatosPlan"
                                     class="form-select"
                                     v-model="infoPlan.regional_Tipo"
                                     :class="infoPlan.regional_Tipo != undefined && infoPlan.regional_Tipo != '' ?
@@ -429,7 +427,7 @@
                         <!-- Tipo de aguja -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Tipo de aguja</label>
-                            <input type="text"
+                            <input type="text" @keyup.capture="enviarDatosPlan"
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.regional_TipoAguja"
@@ -440,7 +438,7 @@
                         <!-- Nivel -->
                         <div class="col-md-2">
                             <label for="" class="form-label fw-bold">Nivel</label>
-                            <input type="text"
+                            <input type="text" @keyup.capture="enviarDatosPlan"
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.regional_Nivel"
@@ -451,7 +449,7 @@
                         <!-- Calibre de aguja -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Calibre de aguja</label>
-                            <input type="text"
+                            <input type="text" @keyup.capture="enviarDatosPlan"
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.regional_CalibreAguja"
@@ -462,7 +460,7 @@
                         <!-- Catéter -->
                         <div class="col-md-2">
                             <label for="inputState" class="form-label fw-bold">Catéter</label>
-                            <select id="inputState"
+                            <select id="inputState" @change="enviarDatosPlan"
                                     class="form-select"
                                     v-model="infoPlan.regional_Cateter"
                                     :class="infoPlan.regional_Cateter != undefined && infoPlan.regional_Cateter != '' ?
@@ -476,7 +474,7 @@
                         <!-- Orientación de catéter -->
                         <div class="col-md-3">
                             <label for="inputState" class="form-label fw-bold">Orientación de catéter</label>
-                            <select id="inputState"
+                            <select id="inputState" @change="enviarDatosPlan"
                                     class="form-select"
                                     v-model="infoPlan.regional_OrientacionCateter"
                                     :class="infoPlan.regional_OrientacionCateter != undefined && infoPlan.regional_OrientacionCateter != '' ?
@@ -490,7 +488,7 @@
                         <!-- Probables dificultades técnicas -->
                         <div class="col-md-3">
                             <label for="" class="form-label col-12 fw-bold">Probables dificultades técnicas</label>
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="difTec"
                                    id="difTecSi"
@@ -499,7 +497,7 @@
                                    v-model="infoPlan.regional_ProbDificulNeuro">
                             <label class="btn btn-radio margenRadio" for="difTecSi">Sí</label>
 
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="difTec"
                                    id="difTecNo"
@@ -513,7 +511,7 @@
                         <!-- Específicar -->
                         <div class="col-md-6">
                             <label for="" class="form-label fw-bold">Específicar</label>
-                            <textarea class="form-control"
+                            <textarea class="form-control" @keyup.capture="enviarDatosPlan"
                                       id=""
                                       rows="3"
                                       v-model="infoPlan.regional_EspDificultadesNeuro"
@@ -527,7 +525,7 @@
                         <!-- Sitio -->
                         <div class="col-md-2">
                             <label for="inputState" class="form-label fw-bold">Sitio</label>
-                            <select id="inputState"
+                            <select id="inputState" @change="enviarDatosPlan"
                                     class="form-select"
                                     v-model="infoPlan.regional_Sitio"
                                     :class="infoPlan.regional_Sitio != undefined && infoPlan.regional_Sitio != '' ?
@@ -547,7 +545,7 @@
 
                             <template v-if="sitioCabeza === true">
                                 <label for="inputState" class="form-label fw-bold">Opción</label>
-                                <select id="inputState"
+                                <select id="inputState" @change="enviarDatosPlan"
                                         class="form-select"
                                         v-model="infoPlan.regional_Opcion"
                                         :class="infoPlan.regional_Opcion != undefined && infoPlan.regional_Opcion != '' ?
@@ -564,7 +562,7 @@
 
                             <template v-if="sitioCervical === true">
                                 <label for="inputState" class="form-label fw-bold">Opción</label>
-                                <select id="inputState"
+                                <select id="inputState" @change="enviarDatosPlan"
                                         class="form-select"
                                         v-model="infoPlan.regional_Opcion"
                                         :class="infoPlan.regional_Opcion != undefined && infoPlan.regional_Opcion != '' ?
@@ -580,7 +578,7 @@
 
                             <template v-if="sitioToracico === true">
                                 <label for="inputState" class="form-label fw-bold">Opción</label>
-                                <select id="inputState"
+                                <select id="inputState" @change="enviarDatosPlan"
                                         class="form-select"
                                         v-model="infoPlan.regional_Opcion"
                                         :class="infoPlan.regional_Opcion != undefined && infoPlan.regional_Opcion != '' ?
@@ -593,7 +591,7 @@
 
                             <template v-if="sitioLumbar === true">
                                 <label for="inputState" class="form-label fw-bold">Opción</label>
-                                <select id="inputState"
+                                <select id="inputState" @change="enviarDatosPlan"
                                         class="form-select"
                                         v-model="infoPlan.regional_Opcion"
                                         :class="infoPlan.regional_Opcion != undefined && infoPlan.regional_Opcion != '' ?
@@ -614,7 +612,7 @@
                         <div class="col-md-7">
                             <label for="" class="form-label fw-bold">Específicar</label>
                             <textarea class="form-control"
-                                      id=""
+                                      @keyup.capture="enviarDatosPlan"
                                       rows="3"
                                       v-model="infoPlan.regional_EspSitio"
                                       :class="infoPlan.regional_EspSitio != undefined && infoPlan.regional_EspSitio != '' ?
@@ -625,7 +623,7 @@
                         <!-- Anestésico utilizado -->
                         <div class="col-md-3">
                             <label for="inputState" class="form-label fw-bold">Anestésico utilizado</label>
-                            <select id="inputState"
+                            <select id="inputState" @change="enviarDatosPlan"
                                     class="form-select"
                                     v-model="infoPlan.regional_AnestesicoUtilizado"
                                     :class="infoPlan.regional_AnestesicoUtilizado != undefined && infoPlan.regional_AnestesicoUtilizado != '' ?
@@ -644,8 +642,7 @@
                         <!-- Específicar -->
                         <div class="col-md-9">
                             <label for="" class="form-label fw-bold">Específicar</label>
-                            <textarea class="form-control"
-                                      id=""
+                            <textarea class="form-control" @keyup.capture="enviarDatosPlan"
                                       rows="3"
                                       v-model="infoPlan.regional_EspAnestesico"
                                       :class="infoPlan.regional_EspAnestesico != undefined && infoPlan.regional_EspAnestesico != '' ?
@@ -656,7 +653,7 @@
                         <!-- Probables dificultades técnicas -->
                         <div class="col-md-3">
                             <label for="" class="form-label col-12 fw-bold">Probables dificultades técnicas</label>
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="dif"
                                    id="difSi"
@@ -665,7 +662,7 @@
                                    v-model="infoPlan.regional_ProbDificulPlexo">
                             <label class="btn btn-radio margenRadio" for="difSi">Sí</label>
 
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="dif"
                                    id="difNo"
@@ -679,8 +676,7 @@
                         <!-- Específicar -->
                         <div class="col-md-9">
                             <label for="" class="form-label fw-bold">Específicar</label>
-                            <textarea class="form-control"
-                                      id=""
+                            <textarea class="form-control" @keyup.capture="enviarDatosPlan"
                                       rows="3"
                                       v-model="infoPlan.regional_EspDificulPlexo"
                                       :class="infoPlan.regional_EspDificulPlexo != undefined && infoPlan.regional_EspDificulPlexo != '' ?
@@ -694,7 +690,7 @@
                         <!-- Ultrasonido -->
                         <div class="col-md-2">
                             <label for="" class="form-label col-12 fw-bold">Ultrasonido</label>
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="ultrasonido"
                                    id="ultraSi"
@@ -703,7 +699,7 @@
                                    v-model="infoPlan.regional_Ultrasonido">
                             <label class="btn btn-radio margenRadio" for="ultraSi">Sí</label>
 
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="ultrasonido"
                                    id="ultraNo"
@@ -717,8 +713,7 @@
                         <!-- Específicar -->
                         <div class="col-md-4">
                             <label for="" class="form-label fw-bold">Específicar</label>
-                            <textarea class="form-control"
-                                      id=""
+                            <textarea class="form-control" @keyup.capture="enviarDatosPlan"
                                       rows="3"
                                       v-model="infoPlan.regional_EspUltrasonido"
                                       :class="infoPlan.regional_EspUltrasonido != undefined && infoPlan.regional_EspUltrasonido != '' ?
@@ -729,7 +724,7 @@
                         <!-- Neuroestimulador -->
                         <div class="col-md-2">
                             <label for="" class="form-label col-12 fw-bold">Neuroestimulador</label>
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="neuro"
                                    id="neuroSi"
@@ -738,7 +733,7 @@
                                    v-model="infoPlan.regional_Neuroestimulador">
                             <label class="btn btn-radio margenRadio" for="neuroSi">Sí</label>
 
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="neuro"
                                    id="neuroNo"
@@ -752,8 +747,7 @@
                         <!-- Específicar -->
                         <div class="col-md-4">
                             <label for="" class="form-label fw-bold">Específicar</label>
-                            <textarea class="form-control"
-                                      id=""
+                            <textarea class="form-control" @keyup.capture="enviarDatosPlan"
                                       rows="3"
                                       v-model="infoPlan.regional_EspNeuroestimulador"
                                       :class="infoPlan.regional_EspNeuroestimulador != undefined && infoPlan.regional_EspNeuroestimulador != '' ?
@@ -764,7 +758,7 @@
                         <!-- Probables complicaciones -->
                         <div class="col-md-2">
                             <label for="" class="form-label col-12 fw-bold">Probables complicaciones</label>
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="complicaciones"
                                    id="compliSi"
@@ -773,7 +767,7 @@
                                    v-model="infoPlan.regional_ProbComplicaciones">
                             <label class="btn btn-radio margenRadio" for="compliSi">Sí</label>
 
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="complicaciones"
                                    id="compliNo"
@@ -787,8 +781,7 @@
                         <!-- Específicar -->
                         <div class="col-md-4">
                             <label for="" class="form-label fw-bold">Específicar</label>
-                            <textarea class="form-control"
-                                      id=""
+                            <textarea class="form-control" @keyup.capture="enviarDatosPlan"
                                       rows="3"
                                       v-model="infoPlan.regional_EspDificEquipo"
                                       :class="infoPlan.regional_EspDificEquipo != undefined && infoPlan.regional_EspDificEquipo != '' ?
@@ -809,7 +802,7 @@
                         <!-- Sitio de la anéstesia -->
                         <div class="col-md-8">
                             <label for="" class="form-label fw-bold">Sitio de la anéstesia</label>
-                            <input type="text"
+                            <input type="text" @keyup.capture="enviarDatosPlan"
                                    class="form-control"
                                    id=""
                                    v-model="infoPlan.local_SitioAnestesiaL"
@@ -820,7 +813,7 @@
                         <!-- Anéstesico utilizado -->
                         <div class="col-md-4">
                             <label for="inputState" class="form-label fw-bold">Anéstesico utilizado</label>
-                            <select id="inputState"
+                            <select id="inputState" @change="enviarDatosPlan"
                                     class="form-select"
                                     v-model="infoPlan.local_AnestesicoUtilizado"
                                     :class="infoPlan.local_AnestesicoUtilizado != undefined && infoPlan.local_AnestesicoUtilizado != '' ?
@@ -840,7 +833,7 @@
                         <div class="col-md-12">
                             <label for="" class="form-label fw-bold">Específicar</label>
                             <textarea class="form-control"
-                                      id=""
+                                      @keyup.capture="enviarDatosPlan"
                                       rows="3"
                                       v-model="infoPlan.local_Especificar"
                                       :class="infoPlan.local_Especificar != undefined && infoPlan.local_Especificar != '' ?
@@ -902,7 +895,7 @@
                         <!-- Inducción -->
                         <div class="col-md-3">
                             <label for="inputState" class="form-label fw-bold">Inducción</label>
-                            <select id="inputState"
+                            <select id="inputState" @change="enviarDatosPlan"
                                     class="form-select"
                                     v-model="infoPlan.general_Induccion"
                                     :class="infoPlan.general_Induccion != undefined && infoPlan.general_Induccion != '' ?
@@ -917,7 +910,7 @@
                         <!-- Tubo -->
                         <div class="col-md-3">
                             <label for="inputState" class="form-label fw-bold">Tubo</label>
-                            <select id="inputState"
+                            <select id="inputState" @change="enviarDatosPlan"
                                     class="form-select"
                                     v-model="infoPlan.general_Tubo"
                                     :class="infoPlan.general_Tubo != undefined && infoPlan.general_Tubo != '' ?
@@ -931,9 +924,8 @@
                         <!-- Número de tubo -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Número de tubo</label>
-                            <input type="text"
+                            <input type="text" @keyup.capture="enviarDatosPlan"
                                    class="form-control"
-                                   id=""
                                    v-model="infoPlan.general_NumeroTubo"
                                    :class="infoPlan.general_NumeroTubo != undefined && infoPlan.general_NumeroTubo != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
@@ -942,7 +934,7 @@
                         <!-- Tipo de canula -->
                         <div class="col-md-3">
                             <label for="inputState" class="form-label fw-bold">Tipo de canula</label>
-                            <select id="inputState"
+                            <select id="inputState" @change="enviarDatosPlan"
                                     class="form-select"
                                     v-model="infoPlan.general_TipoCanula"
                                     :class="infoPlan.general_TipoCanula != undefined && infoPlan.general_TipoCanula != '' ?
@@ -956,7 +948,7 @@
                         <!-- Globo -->
                         <div class="col-md-2">
                             <label for="" class="form-label col-12 fw-bold">Globo</label>
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="globo"
                                    id="globoSi"
@@ -965,7 +957,7 @@
                                    v-model="infoPlan.general_Globo">
                             <label class="btn btn-radio margenRadio" for="globoSi">Sí</label>
 
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="globo"
                                    id="globoNo"
@@ -979,7 +971,7 @@
                         <!-- Presión -->
                         <div class="col-md-2">
                             <label for="inputState" class="form-label fw-bold">Presión</label>
-                            <select id="inputState"
+                            <select id="inputState" @change="enviarDatosPlan"
                                     class="form-select"
                                     v-model="infoPlan.general_Presion"
                                     :class="infoPlan.general_Presion != undefined && infoPlan.general_Presion != '' ?
@@ -993,7 +985,7 @@
                         <!-- Probables dificultades técnicas -->
                         <div class="col-md-3">
                             <label for="" class="form-label col-12 fw-bold">Probables dificultades técnicas</label>
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="difTecIntu"
                                    id="difTecIntuSi"
@@ -1002,7 +994,7 @@
                                    v-model="infoPlan.general_DifTecnicasIntubacion">
                             <label class="btn btn-radio margenRadio" for="difTecIntuSi">Sí</label>
 
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="difTecIntu"
                                    id="difTecIntuNo"
@@ -1017,7 +1009,7 @@
                         <div class="col-md-5">
                             <label for="" class="form-label fw-bold">Específicar</label>
                             <textarea class="form-control"
-                                      id=""
+                                      @keyup.capture="enviarDatosPlan"
                                       rows="3"
                                       v-model="infoPlan.general_EspDifTecIntubacion"
                                       :class="infoPlan.general_EspDifTecIntubacion != undefined && infoPlan.general_EspDifTecIntubacion != '' ?
@@ -1031,7 +1023,7 @@
                         <!-- Dispositivos suproglóticos -->
                         <div class="col-md-3">
                             <label for="" class="form-label col-12 fw-bold">Dispositivos supraglóticos</label>
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="supragloticos"
                                    id="supragloticosSi"
@@ -1040,7 +1032,7 @@
                                    v-model="infoPlan.general_DispositivosSupro">
                             <label class="btn btn-radio margenRadio" for="supragloticosSi">Sí</label>
 
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="supragloticos"
                                    id="supragloticosNo"
@@ -1054,9 +1046,8 @@
                         <!-- Calibre -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold">Calibre</label>
-                            <input type="text"
+                            <input type="text" @keyup.capture="enviarDatosPlan"
                                    class="form-control"
-                                   id=""
                                    v-model="infoPlan.general_Calibre"
                                    :class="infoPlan.general_Calibre != undefined && infoPlan.general_Calibre != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
@@ -1067,7 +1058,7 @@
                         <!-- Complicaciones -->
                         <div class="col-md-3">
                             <label for="" class="form-label col-12 fw-bold">Complicaciones</label>
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="complicaciones"
                                    id="complicacionesSi"
@@ -1076,7 +1067,7 @@
                                    v-model="infoPlan.general_Complicaciones">
                             <label class="btn btn-radio margenRadio" for="complicacionesSi">Sí</label>
 
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="complicaciones"
                                    id="complicacionesNo"
@@ -1090,8 +1081,7 @@
                         <!-- Específicar -->
                         <div class="col-md-8">
                             <label for="" class="form-label fw-bold">Específicar</label>
-                            <textarea class="form-control"
-                                      id=""
+                            <textarea class="form-control" @keyup.capture="enviarDatosPlan"
                                       rows="3"
                                       v-model="infoPlan.general_EspComplicaciones"
                                       :class="infoPlan.general_EspComplicaciones != undefined && infoPlan.general_EspComplicaciones != '' ?
@@ -1105,7 +1095,7 @@
                         <!-- Uso de otros dispositivos -->
                         <div class="col-md-3">
                             <label for="" class="form-label col-12 fw-bold">Uso de otros dispositivos</label>
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="otros"
                                    id="otrosSi"
@@ -1114,7 +1104,7 @@
                                    v-model="infoPlan.general_OtrosDispositivos">
                             <label class="btn btn-radio margenRadio" for="otrosSi">Sí</label>
 
-                            <input type="radio"
+                            <input type="radio" @change="enviarDatosPlan"
                                    class="btn-check"
                                    name="otros"
                                    id="otrosNo"
@@ -1128,8 +1118,7 @@
                         <!-- Específicar -->
                         <div class="col-md-8">
                             <label for="" class="form-label fw-bold">Específicar</label>
-                            <textarea class="form-control"
-                                      id=""
+                            <textarea class="form-control" @keyup.capture="enviarDatosPlan"
                                       rows="3"
                                       v-model="infoPlan.general_EspOtrosDispositivos"
                                       :class="infoPlan.general_EspOtrosDispositivos != undefined && infoPlan.general_EspOtrosDispositivos != '' ?
@@ -1225,6 +1214,71 @@ export default defineComponent({
                 this.sitioLumbar=false
                 this.infoPlan.regional_Opcion = ""
             }
+        },
+        enviarDatosPlan() {
+            this.$emit('recibe-datos-plan', preIdStore.HorasAyuno = this.infoPlan.pos_HorasAyuno,
+                                            preIdStore.AccesoVenoso = this.infoPlan.pos_AccesoVenoso,
+                                            preIdStore.PosicionPaciente = this.infoPlan.pos_PosicionPaciente,
+                                            preIdStore.PosicionBrazos = this.infoPlan.pos_PosicionBrazos,
+                                            preIdStore.Torniquete = this.infoPlan.pos_Torniquete,
+                                            preIdStore.AplicacionTorniquete = this.infoPlan.pos_AplicacionTorniquete,
+                                            preIdStore.Sitio = this.infoPlan.pos_Sitio,
+                                            preIdStore.TiempoIsquemia = this.infoPlan.pos_TiempoIsquemia,
+                                            preIdStore.ProteccionOjos = this.infoPlan.pos_ProteccionOjos,
+                                            preIdStore.ProteccionProminencias = this.infoPlan.pos_ProtecProminencias,
+                                            preIdStore.TecnicaAnestesica = this.infoPlan.pos_TecnicaAnestesica,
+                                            preIdStore.Premedicacion = this.infoPlan.pos_Premedicacion,
+                                            preIdStore.EspecPremedicacion = this.infoPlan.pos_EspPremedicacion,
+                                            preIdStore.Monitoreo = this.infoPlan.pos_Monitoreo,
+
+                                            preIdStore.ViaSedacion = this.infoPlan.sedacion_Via,
+                                            preIdStore.OpcionSedacion = this.infoPlan.sedacion_Opcion,
+                                            preIdStore.ObservacionesSedacion = this.infoPlan.sedacion_Observaciones,
+                                            preIdStore.MedicamentosSedacion = this.infoPlan.sedacion_Medicamentos,
+
+                                            preIdStore.TipoRegional = this.infoPlan.regional_Tipo,
+                                            preIdStore.TipoAguja = this.infoPlan.regional_TipoAguja,
+                                            preIdStore.Nivel = this.infoPlan.regional_Nivel,
+                                            preIdStore.CalibreAguja = this.infoPlan.regional_CalibreAguja,
+                                            preIdStore.Cateter = this.infoPlan.regional_Cateter,
+                                            preIdStore.OrientacionCateter = this.infoPlan.regional_OrientacionCateter,
+                                            preIdStore.DificultadesOrientacion = this.infoPlan.regional_ProbDificulNeuro,
+                                            preIdStore.EspecificarRegional = this.infoPlan.regional_EspDificultadesNeuro,
+
+                                            preIdStore.SitioRegional = this.infoPlan.regional_Sitio,
+                                            preIdStore.OpcionRegional = this.infoPlan.regional_Opcion,
+                                            preIdStore.EspecificarSitionRegional = this.infoPlan.regional_EspSitio,
+                                            preIdStore.AnestesicoUtilizado = this.infoPlan.regional_AnestesicoUtilizado,
+                                            preIdStore.EspecificarAnestesico = this.infoPlan.regional_EspAnestesico,
+                                            preIdStore.DificultadesPlexo = this.infoPlan.regional_ProbDificulPlexo,
+                                            preIdStore.EspecificarDificPlexo = this.infoPlan.regional_EspDificulPlexo,
+
+                                            preIdStore.Ultrasonido = this.infoPlan.regional_Ultrasonido,
+                                            preIdStore.EspecUltrasonido = this.infoPlan.regional_EspUltrasonido,
+                                            preIdStore.Neuroestimulador = this.infoPlan.regional_Neuroestimulador,
+                                            preIdStore.ComplicacionesNeuroestimulador = this.infoPlan.regional_ProbComplicaciones,
+                                            preIdStore.EspecificarNeuroestimulador = this.infoPlan.regional_EspNeuroestimulador,
+
+                                            preIdStore.SitioLocal = this.infoPlan.local_SitioAnestesiaL,
+                                            preIdStore.AnestesicoLocal = this.infoPlan.local_AnestesicoUtilizado,
+                                            preIdStore.EspecificarLocal = this.infoPlan.local_Especificar,
+
+                                            preIdStore.Induccion = this.infoPlan.general_Induccion,
+                                            preIdStore.Tubo = this.infoPlan.general_Tubo,
+                                            preIdStore.NumeroTubo = this.infoPlan.general_NumeroTubo,
+                                            preIdStore.TipoCanula = this.infoPlan.general_TipoCanula,
+                                            preIdStore.Globo = this.infoPlan.general_Globo,
+                                            preIdStore.Presion = this.infoPlan.general_Presion,
+                                            preIdStore.DificultadesGeneral = this.infoPlan.general_DifTecnicasIntubacion,
+                                            preIdStore.EspecificarGeneral = this.infoPlan.general_EspDifTecIntubacion,
+
+                                            preIdStore.DispositivosSupra = this.infoPlan.general_DispositivosSupro,
+                                            preIdStore.Calibre = this.infoPlan.general_Calibre,
+                                            preIdStore.ComplicacionesDispositivos = this.infoPlan.general_Complicaciones,
+                                            preIdStore.EspecificarDispositivos = this.infoPlan.general_EspComplicaciones,
+
+                                            preIdStore.OtrosDispositivos = this.infoPlan.general_OtrosDispositivos,
+                                            preIdStore.EspecificarOtrosDispositivos = this.infoPlan.general_EspOtrosDispositivos)
         }
     },
 })
