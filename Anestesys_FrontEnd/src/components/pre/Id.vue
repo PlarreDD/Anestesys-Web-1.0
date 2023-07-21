@@ -95,7 +95,7 @@
                                    class="form-label fw-bold"> Fecha de Nacimiento </label>
                             <input type="date"
                                    class="form-control"
-                                   @keyup.capture="enviarDatos"
+                                   @change="calcularEdad"
                                    v-model="infoPreIdPaciente.fechaNac"
                                    :class="infoPreIdPaciente.fechaNac != undefined && infoPreIdPaciente.fechaNac != '' ?
                                           'form-control border border-success formSombra' : 'form-control'">
@@ -106,11 +106,11 @@
                         <div class="col-md-2">
                             <label for=""
                                    class="form-label fw-bold"> Edad </label>
-                            <input type="text"
+                            <input type="text" readonly
                                    class="form-control"
-                                   @keyup.capture="enviarDatos"
+                                   @change="enviarDatos"
                                    v-model="infoPreIdPaciente.edadPaciente"
-                                   :class="infoPreIdPaciente.edadPaciente != undefined && infoPreIdPaciente.edadPaciente != '' ?
+                                   :class="infoPreIdPaciente.edadPaciente != undefined && infoPreIdPaciente.edadPaciente != 0 ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
@@ -174,7 +174,7 @@
                             <!-- Fecha de Ingreso -->
                             <div class="col-md-3">
                                 <label for="" class="form-label fw-bold"> Fecha de Ingreso </label>
-                                <input type="date" @keyup.capture="enviarDatos"
+                                <input type="date" @click="calcularFechaIngreso"
                                        class="form-control"
                                        v-model="infoPreIdPaciente.fechaIn"
                                        :class="infoPreIdPaciente.fechaIn != undefined && infoPreIdPaciente.fechaIn != '' ?
@@ -652,6 +652,27 @@ export default defineComponent({
                                        preIdStore.residenteAnestesia=this.infoPreIdPaciente.residenteAnestesia
                                        );
         },
+
+        calcularEdad() {
+            let fechaNacimiento = new Date(this.infoPreIdPaciente.fechaNac);
+            let fechaActual = new Date();
+
+            let diferencia = fechaActual.getTime() - fechaNacimiento.getTime();
+            let edad = Math.floor(diferencia / (1000 * 60 * 60 * 24 * 365.25));
+            this.infoPreIdPaciente.edadPaciente = edad;
+
+            this.enviarDatos();
+        },
+
+        calcularFechaIngreso(){
+            const fecha = new Date();
+            const año = fecha.getFullYear();
+            const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+            const dia = String(fecha.getDate()).padStart(2, '0');
+            this.infoPreIdPaciente.fechaIn = `${año}-${mes}-${dia}`;
+
+            this.enviarDatos();
+        }
     },
 
 })

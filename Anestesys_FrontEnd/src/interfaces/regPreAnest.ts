@@ -5,7 +5,7 @@ export interface regIdPaciente{
     numExped: string,
     nomPaciente: string,
     fechaNac: string, 
-    edadPaciente: string,
+    edadPaciente: Number,
     genero: string,
     /* Datos Demográficos */
     nacionalidad: string, 
