@@ -273,7 +273,7 @@
                         <!-- Fecha de Cirugía -->
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold"> Fecha de Cirugía </label>
-                            <input type="date" @keyup.capture="enviarDatos"
+                            <input type="date" @click="calcularFechaCirugia"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.fechaCx"
                                    :class="infoPreIdPaciente.fechaCx != undefined && infoPreIdPaciente.fechaCx != '' ?
@@ -284,7 +284,7 @@
                         <div class="col-md-3">
                             <label for="" class="form-label fw-bold"> Hora de Cirugía </label>
                             <input type="time"
-                                   class="form-control" @keyup.capture="enviarDatos"
+                                   class="form-control" @click="calcularHoraCirugia"
                                    v-model="infoPreIdPaciente.hrCx"
                                    :class="infoPreIdPaciente.hrCx != undefined && infoPreIdPaciente.hrCx != '' ?
                                           'form-control border border-success formSombra' : 'form-control'">
@@ -665,11 +665,28 @@ export default defineComponent({
         },
 
         calcularFechaIngreso(){
-            const fecha = new Date();
-            const año = fecha.getFullYear();
-            const mes = String(fecha.getMonth() + 1).padStart(2, '0');
-            const dia = String(fecha.getDate()).padStart(2, '0');
+            let fecha = new Date();
+            let año = fecha.getFullYear();
+            let mes = String(fecha.getMonth() + 1).padStart(2, '0');
+            let dia = String(fecha.getDate()).padStart(2, '0');
             this.infoPreIdPaciente.fechaIn = `${año}-${mes}-${dia}`;
+
+            this.enviarDatos();
+        },
+
+        calcularFechaCirugia(){
+            let fecha = new Date();
+            let año = fecha.getFullYear();
+            let mes = String(fecha.getMonth() + 1).padStart(2, '0');
+            let dia = String(fecha.getDate()).padStart(2, '0');
+            this.infoPreIdPaciente.fechaCx = `${año}-${mes}-${dia}`;
+
+            this.enviarDatos();
+        },
+
+        calcularHoraCirugia(){
+            let hoy = new Date();
+            this.infoPreIdPaciente.hrCx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
 
             this.enviarDatos();
         }

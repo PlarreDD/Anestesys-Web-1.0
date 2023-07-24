@@ -1416,28 +1416,69 @@ export default defineComponent({
         };
 
         /*ID PACIENTE*/
-         //Nombre
+        // Nombre
         let nomPaciente = preIdStore.NombrePaciente === undefined ? ' ' : preIdStore.NombrePaciente;
         const txtNomPaciente = nomPaciente.length > 45 ? nomPaciente.substring(0, 45) + '...' : nomPaciente;
         // Fecha Nacimiento
         let fechaNac = preIdStore.fechaNacimientoPaciente === undefined ? ' ' : preIdStore.fechaNacimientoPaciente
-        //Edad
+        // Edad
         let edad = preIdStore.edadPaciente === undefined ? ' ' : preIdStore.edadPaciente;       
         // Sexo
         let sexo = preIdStore.generoPaciente === undefined ? ' ' : preIdStore.generoPaciente;
         // CURP
         let curp = preIdStore.CURP === undefined ? '' : preIdStore.CURP;
-        // //Número Habitación
+        // Número Habitación
         let numHabitacion = preIdStore.Habitacion === undefined ? ' ' : preIdStore.Habitacion;
-        //Número Episodio
+        // Número Episodio
         let numEpisodio = preIdStore.NumeroEpisodio === undefined ? ' ' : preIdStore.NumeroEpisodio;
-        //Número Expediente
+        // Número Expediente
         let numExp = preIdStore.numeroExpediente === undefined ? ' ' : preIdStore.numeroExpediente;
-        //Fecha Ingreso
+        // Fecha Ingreso
         let fechaIngreso = preIdStore.FechaIngreso === undefined ? ' ' : preIdStore.FechaIngreso;
         // Nacionalidad
         let nacionalidad = preIdStore.Nacionalidad === undefined ? ' ' : preIdStore.Nacionalidad;
- 
+        // Folio ID
+        let folioId = preIdStore.FolioID === undefined ? ' ' : preIdStore.FolioID;
+        // Estado Nacimiento
+        let estNacimiento = preIdStore.EstadoNacimiento === undefined ? ' ' : preIdStore.EstadoNacimiento;
+        // Residencia
+        let estResidencia = preIdStore.EstadoResidencia === undefined ? ' ' : preIdStore.EstadoResidencia;
+        // Alcaldía
+        let alcaldia = preIdStore.Alcaldia === undefined ? ' ' : preIdStore.Alcaldia;
+        // Colonia
+        let colonia = preIdStore.Colonia === undefined ? ' ' : preIdStore.Colonia;
+        // Diagnóstico
+        let diagnostico = preIdStore.Diagnostico === undefined ? ' ' : preIdStore.Diagnostico;
+        let txtDiagnostico = diagnostico.length > 50 ? diagnostico.substring(0, 50) + '...' : diagnostico;
+        // Tipo Cirugía
+        let tipoCirugia = preIdStore.TipoCirugia === undefined ? ' ' : preIdStore.TipoCirugia;
+        // Cirujano
+        let cirujano = preIdStore.NombreCirujano === undefined ? ' ' : preIdStore.NombreCirujano;
+        let txtNomCirujano = cirujano.length > 45 ? cirujano.substring(0, 45) + '...' : cirujano;
+        // Anestesiólogo
+        let anestesiologo = preIdStore.NombreAnestesiologo === undefined ? ' ' : preIdStore.NombreAnestesiologo;
+        let txtAnestesiologo = anestesiologo.length > 45 ? anestesiologo.substring(0, 45) + '...' : anestesiologo;
+        // Residente de Anestesia
+        let resiAnestesia = preIdStore.residenteAnestesia === undefined ? ' ' : preIdStore.residenteAnestesia;
+        let txtResidente = resiAnestesia.length > 45 ? resiAnestesia.substring(0, 45) + '...' : resiAnestesia;
+        // Anestesiólogo VPA
+        let anestesiologoVPA = preIdStore.AnestesiologoVPA === undefined ? ' ' : preIdStore.AnestesiologoVPA;
+        let txtAnestesiologoVPA = anestesiologoVPA.length > 45 ? anestesiologoVPA.substring(0, 45) + '...' : anestesiologoVPA;
+        // Fecha de Cirugía
+        let fechaCx = preIdStore.FechaCirugia === undefined ? ' ' : preIdStore.FechaCirugia;
+        // Hora de Cirugía
+        let horaCx = preIdStore.HoraCirugia === undefined ? ' ' : preIdStore.HoraCirugia;
+        // Cirugía
+        let cirugia = preIdStore.NombreCirugia === undefined ? ' ' : preIdStore.NombreCirugia;
+        let txtCirugia= cirugia.length > 80 ? cirugia.substring(0, 80) + '...' : cirugia;
+        // CIE-10
+        let CIE10 = preIdStore.CIE10 === undefined ? ' ' : preIdStore.CIE10
+        // CIE-9
+        let CIE9 = preIdStore.CIE9 === undefined ? ' ' : preIdStore.CIE9
+
+        /*VALORACIÓN*/
+
+
         // Contenido del documento PDF
         let docDefinition = {
           content: [
@@ -1445,7 +1486,7 @@ export default defineComponent({
               columns: [                
                 {                  
                   width:'30%',
-                  margin: [0, 40],
+                  margin: [0, 40, 0, 0],
                     stack: [
                       // Nombre paciente
                       {
@@ -1514,7 +1555,7 @@ export default defineComponent({
                 },
                 {
                   width:'30%',
-                  margin: [0, 40],
+                  margin: [0, 40, 0, 0],
                     stack: [
                       {
                         text:{text: 'DEMOGRAFÍA', font:'SF', fontSize: 8, bold:true,}
@@ -1522,7 +1563,7 @@ export default defineComponent({
                       // Nacionalidad  
                       {
                         text: [
-                          { text: '\nNacionalidad: ', font: 'SF', fontSize: 8 },
+                          { text: 'Nacionalidad: ', font: 'SF', fontSize: 8 },
                           { text: nacionalidad, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
@@ -1530,35 +1571,35 @@ export default defineComponent({
                       {
                         text: [
                           { text: 'Folio ID: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                          { text: folioId, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                       // Estado de Nacimiento
                       {
                         text: [
                           { text: 'Estado de Nac: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                          { text: estNacimiento, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                       // Residencia  
                       {
                         text: [
                           { text: 'Residencia: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                          { text: estResidencia, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                       // Alcaldía  
                       {
                         text: [
                           { text: 'Alcaldía: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                          { text: alcaldia, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                       // Colonia  
                       {
                         text: [
                           { text: 'Colonia: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                          { text: colonia, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                       {
@@ -1567,55 +1608,194 @@ export default defineComponent({
                       // Diagnóstico  
                       {
                         text: [
-                          { text: '\nDiagnóstico: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                          { text: 'Diagnóstico: ', font: 'SF', fontSize: 8 },
+                          { text: txtDiagnostico, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
-                      // Colonia  
+                      // Tipo de Cirugía  
                       {
                         text: [
                           { text: 'Tipo de Cirugía: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                          { text: tipoCirugia, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                     ]
                 },
                 {
-                  width:'40%',
-                  margin: [0, 40],
+                  width:'30%',
+                  margin: [0, 40, 0, 0],
                     stack: [
-                      // Cirujano  
+                      // Cirujano
                       {
-                        text: [
-                          { text: 'Cirujano: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
-                        ],
+                        text:{ text: 'Cirujano: ', font: 'SF', fontSize: 8 },
                       },
-                      // Anestesiólogo  
                       {
-                        text: [
-                          { text: '\nAnestesiólogo: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
-                        ],
+                        text:{ text: txtNomCirujano, font: 'SF', fontSize: 8, bold:true },
                       },
-                      // Residente de Anestesia  
+                      // Anestesiólogo
                       {
-                        text: [
-                          { text: '\nResidente de Anestesia: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
-                        ],
+                        text:{ text: 'Anestesiólogo: ', font: 'SF', fontSize: 8 },
+                      },
+                      {
+                        text:{ text: txtAnestesiologo, font: 'SF', fontSize: 8, bold:true },
+                      },
+                      // Residente de Anestesia
+                      {
+                        text:{ text: 'Residente de Anestesia: ', font: 'SF', fontSize: 8 },
+                      },
+                      {
+                        text:{ text: txtResidente, font: 'SF', fontSize: 8, bold:true },
                       },
                       // Anestesiólogo VPA
                       {
+                        text:{ text: 'Anestesiólogo VPA: ', font: 'SF', fontSize: 8 },
+                      },
+                      {
+                        text:{ text: txtAnestesiologoVPA, font: 'SF', fontSize: 8, bold:true },
+                      },
+                      // Fecha de Cirugía  
+                      {
                         text: [
-                          { text: '\nAnestesiólogo VPA: ', font: 'SF', fontSize: 8 },
+                          { text: '\nFecha de Cirugía: ', font: 'SF', fontSize: 8 },
+                          { text: fechaCx, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Hora de Cirugía  
+                      {
+                        text: [
+                          { text: 'Hora de Cirugía: ', font: 'SF', fontSize: 8 },
+                          { text: horaCx, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },                      
+                    ]                            
+                },
+              ],              
+            },
+            {
+              columns: [
+                {                  
+                  width:'30%',
+                  margin: [0, 10, 0, 0],
+                    stack: [                    
+                      {
+                        text:{text: 'SIGNOS VITALES:', font:'SF', fontSize: 10, bold:true}
+                      },                     
+                      // Frecuencia Cardiáca  
+                      {
+                        text: [
+                          { text: 'Frecuencia Cardiáca: ', font: 'SF', fontSize: 8 },
                           { text: '', font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
-                    ]                            
+                      // Frecuencia Respiratoria  
+                      {
+                        text: [
+                          { text: 'Frecuencia Respiratoria: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },      
+                      // Tensión Arterial  
+                      {
+                        text: [
+                          { text: 'Tensión Arterial: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Saturación de O2  
+                      {
+                        text: [
+                          { text: 'Saturación de O2: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Temperatura  
+                      {
+                        text: [
+                          { text: 'Temperatura: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      {
+                        text: [
+                          { text: '\nSIGNOS VITALES: ', font: 'SF', fontSize: 8, bold:true }
+                        ],
+                      },
+                      // Peso  
+                      {
+                        text: [
+                          { text: 'Peso: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Talla  
+                      {
+                        text: [
+                          { text: 'Talla: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // IMC  
+                      {
+                        text: [
+                          { text: 'IMC: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                    ],
+                },
+                {                  
+                  width:'70%',
+                  margin: [0, 10, 0, 0],
+                    stack: [      
+                      // Cirugía Planeada
+                      {
+                        text:{ text: 'Cirugía Planeada: ', font: 'SF', fontSize: 8 },
+                      },
+                      {
+                        text:{ text: txtCirugia, font: 'SF', fontSize: 8, bold:true },
+                      },
+                      // CIE-10  
+                      {
+                        text: [
+                          { text: '\n\nCIE-10: ', font: 'SF', fontSize: 8 },
+                          { text: CIE10, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // CIE-9
+                      {
+                        text: [
+                          { text: '\n\nCIE-9: ', font: 'SF', fontSize: 8 },
+                          { text: CIE9, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Antecedentes de Importancia para el procedimiento quirúrgico 
+                      {
+                        text:{ text: '\nAntecedentes de Importancia para el Procedimiento Quirúrgico : ', font: 'SF', fontSize: 8 },
+                      },
+                      {
+                        text:{ text: txtCirugia, font: 'SF', fontSize: 8, bold:true },
+                      },
+                    ],
                 },
               ]
-            }     
+            },
+            {
+              columns: [
+                {                                        
+                  width:'50%',
+                  margin: [0, 10, 0, 0],
+                    stack: [
+                      // Cabeza  
+                      {
+                        text: [
+                          { text: 'Cabeza: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                    ]                    
+                }
+              ]
+            },
           ],
           styles:{
             normal:{
