@@ -268,7 +268,6 @@
                                 <div class="col-md-12">                                    
                                     <h5 class="col-12 fw-bold margen-ante-impor"> Antecedentes de importancia </h5>
                                     <textarea class="form-control deslizar" @keyup.capture="enviarDatosValoracion"
-                                              id=""
                                               rows="12"
                                               v-model="infoValoracion.antPersNoPat_AntImportQx"
                                               :class="infoValoracion.antPersNoPat_AntImportQx != undefined && infoValoracion.antPersNoPat_AntImportQx != '' ?
@@ -311,11 +310,10 @@
                         <!-- Edad -->
                         <div class="col-md-2">
                             <label for="" class="form-label fw-bold">Edad</label>
-                            <input type="text" @keyup.capture="enviarDatosValoracion"
+                            <input type="text" readonly
                                    class="form-control"
-                                   id=""
-                                   v-model="infoValoracion.sigVit_Edad"
-                                   :class="infoValoracion.sigVit_Edad != undefined && infoValoracion.sigVit_Edad != '' ?
+                                   v-model="preIdStore.edadPaciente"
+                                   :class="preIdStore.edadPaciente != undefined && preIdStore.edadPaciente != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
 
@@ -363,7 +361,7 @@
                                    class="form-control"
                                    id=""
                                    v-model="infoValoracion.sigVit_Peso"
-                                   @keyup.capture="calcularIMC, enviarDatosValoracion"
+                                   @change="calcularIMC"
                                    :class="infoValoracion.sigVit_Peso != undefined && infoValoracion.sigVit_Peso != 0 ?
                                           'form-control border border-success formSombra' : 'form-control'">
                         </div>
@@ -372,10 +370,9 @@
                         <div class="col-md-2">
                             <label for="" class="form-label fw-bold">Talla (m)</label>
                             <input type="text"
-                                   class="form-control"
-                                   id=""
+                                   class="form-control"                                   
                                    v-model="infoValoracion.sigVit_Talla"
-                                   @keyup.capture="calcularIMC, enviarDatosValoracion"
+                                   @change="calcularIMC"
                                    :class="infoValoracion.sigVit_Talla != undefined && infoValoracion.sigVit_Talla != 0 ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
@@ -1249,8 +1246,18 @@ export default defineComponent({
 
     methods: {
         calcularIMC() {
-            this.infoValoracion.sigVit_IMC = (this.infoValoracion.sigVit_Peso / (this.infoValoracion.sigVit_Talla * this.infoValoracion.sigVit_Talla))
-            this.infoValoracion.sigVit_IMC = Number(this.infoValoracion.sigVit_IMC.toFixed(2));
+
+            if(this.infoValoracion.sigVit_Peso && this.infoValoracion.sigVit_Talla){
+                this.infoValoracion.sigVit_IMC = (this.infoValoracion.sigVit_Peso / (this.infoValoracion.sigVit_Talla * this.infoValoracion.sigVit_Talla))
+                this.infoValoracion.sigVit_IMC = Number(this.infoValoracion.sigVit_IMC.toFixed(2));
+
+                this.enviarDatosValoracion();
+            }
+            else{
+                this.infoValoracion.sigVit_IMC = 0;
+                
+                this.enviarDatosValoracion();
+            }
         },
 
         cambiarUpdateValoracion() {

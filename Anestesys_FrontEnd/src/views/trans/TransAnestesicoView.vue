@@ -1417,7 +1417,7 @@ export default defineComponent({
 
         /*ID PACIENTE*/
         // Nombre
-        let nomPaciente = preIdStore.NombrePaciente === undefined ? ' ' : preIdStore.NombrePaciente;
+        let nomPaciente = preIdStore.NombrePaciente === undefined || preIdStore.NombrePaciente === null ? ' ' : preIdStore.NombrePaciente;
         const txtNomPaciente = nomPaciente.length > 45 ? nomPaciente.substring(0, 45) + '...' : nomPaciente;
         // Fecha Nacimiento
         let fechaNac = preIdStore.fechaNacimientoPaciente === undefined ? ' ' : preIdStore.fechaNacimientoPaciente
@@ -1448,36 +1448,127 @@ export default defineComponent({
         // Colonia
         let colonia = preIdStore.Colonia === undefined ? ' ' : preIdStore.Colonia;
         // Diagnóstico
-        let diagnostico = preIdStore.Diagnostico === undefined ? ' ' : preIdStore.Diagnostico;
+        let diagnostico = preIdStore.Diagnostico === undefined || preIdStore.Diagnostico === null ? ' ' : preIdStore.Diagnostico;
         let txtDiagnostico = diagnostico.length > 50 ? diagnostico.substring(0, 50) + '...' : diagnostico;
         // Tipo Cirugía
         let tipoCirugia = preIdStore.TipoCirugia === undefined ? ' ' : preIdStore.TipoCirugia;
         // Cirujano
-        let cirujano = preIdStore.NombreCirujano === undefined ? ' ' : preIdStore.NombreCirujano;
+        let cirujano = preIdStore.NombreCirujano === undefined || preIdStore.NombreCirujano === null ? ' ' : preIdStore.NombreCirujano;
         let txtNomCirujano = cirujano.length > 45 ? cirujano.substring(0, 45) + '...' : cirujano;
         // Anestesiólogo
-        let anestesiologo = preIdStore.NombreAnestesiologo === undefined ? ' ' : preIdStore.NombreAnestesiologo;
+        let anestesiologo = preIdStore.NombreAnestesiologo === undefined || preIdStore.NombreAnestesiologo === null ? ' ' : preIdStore.NombreAnestesiologo;
         let txtAnestesiologo = anestesiologo.length > 45 ? anestesiologo.substring(0, 45) + '...' : anestesiologo;
         // Residente de Anestesia
-        let resiAnestesia = preIdStore.residenteAnestesia === undefined ? ' ' : preIdStore.residenteAnestesia;
+        let resiAnestesia = preIdStore.residenteAnestesia === undefined || preIdStore.residenteAnestesia === null ? ' ' : preIdStore.residenteAnestesia;
         let txtResidente = resiAnestesia.length > 45 ? resiAnestesia.substring(0, 45) + '...' : resiAnestesia;
         // Anestesiólogo VPA
-        let anestesiologoVPA = preIdStore.AnestesiologoVPA === undefined ? ' ' : preIdStore.AnestesiologoVPA;
+        let anestesiologoVPA = preIdStore.AnestesiologoVPA === undefined || preIdStore.AnestesiologoVPA === null ? ' ' : preIdStore.AnestesiologoVPA;
         let txtAnestesiologoVPA = anestesiologoVPA.length > 45 ? anestesiologoVPA.substring(0, 45) + '...' : anestesiologoVPA;
         // Fecha de Cirugía
         let fechaCx = preIdStore.FechaCirugia === undefined ? ' ' : preIdStore.FechaCirugia;
         // Hora de Cirugía
         let horaCx = preIdStore.HoraCirugia === undefined ? ' ' : preIdStore.HoraCirugia;
         // Cirugía
-        let cirugia = preIdStore.NombreCirugia === undefined ? ' ' : preIdStore.NombreCirugia;
+        let cirugia = preIdStore.NombreCirugia === undefined || preIdStore.NombreCirugia === null ? ' ' : preIdStore.NombreCirugia;
         let txtCirugia= cirugia.length > 80 ? cirugia.substring(0, 80) + '...' : cirugia;
         // CIE-10
-        let CIE10 = preIdStore.CIE10 === undefined ? ' ' : preIdStore.CIE10
+        let CIE10 = preIdStore.CIE10 === undefined ? ' ' : preIdStore.CIE10;
         // CIE-9
-        let CIE9 = preIdStore.CIE9 === undefined ? ' ' : preIdStore.CIE9
-
+        let CIE9 = preIdStore.CIE9 === undefined ? ' ' : preIdStore.CIE9;       
+        
         /*VALORACIÓN*/
-
+        let antecImportancia = preIdStore.AntecedentesImportancia === null || preIdStore.AntecedentesImportancia === undefined ? ' ' : preIdStore.AntecedentesImportancia;
+        let txtAntecImportancia= antecImportancia.length > 300 ? antecImportancia.substring(0, 300) + '...' : antecImportancia;
+        // Frecuencia Cardiáca
+        let FC= preIdStore.FrecuenciaCardiaca === undefined ? ' ' : preIdStore.FrecuenciaCardiaca;
+        // Frecuencia Respiratoria
+        let FR= preIdStore.FrecuenciaRespiratoria === undefined ? ' ' : preIdStore.FrecuenciaRespiratoria;
+        // Tensión Anterial
+        let tensionArterial= preIdStore.TensionArterial === undefined ? ' ' : preIdStore.TensionArterial;
+        // Saturación de O2
+        let SpO2= preIdStore.SaturacionOxigeno === undefined ? ' ' : preIdStore.SaturacionOxigeno;
+        // Temperatura
+        let temperatura= preIdStore.Temperatura === undefined ? ' ' : preIdStore.Temperatura;
+        // Peso
+        let peso= preIdStore.Peso === undefined ? ' ' : preIdStore.Peso;
+        // Talla
+        let talla= preIdStore.Talla === undefined ? ' ' : preIdStore.Talla;
+        // IMC
+        let IMC= preIdStore.IMC === undefined ? ' ' : preIdStore.IMC;
+        // Cabeza
+        let cabeza= preIdStore.Cabeza === undefined || preIdStore.Cabeza === null ? ' ' : preIdStore.Cabeza
+        let txtCabeza= cabeza.length > 120 ? cabeza.substring(0, 120) + '...' : cabeza;
+        // Cuello
+        let cuello= preIdStore.Cuello === undefined || preIdStore.Cuello === null ? ' ' : preIdStore.Cuello
+        let txtCuello= cuello.length > 120 ? cuello.substring(0, 120) + '...' : cuello;
+        // Respiratorio
+        let respiratorio= preIdStore.Respiratorio === undefined || preIdStore.Respiratorio === null ? ' ' : preIdStore.Respiratorio
+        let txtRespiratorio= respiratorio.length > 120 ? respiratorio.substring(0, 120) + '...' : respiratorio;
+        // Cardiovascular
+        let cardiovascular= preIdStore.Cadiovascular === undefined || preIdStore.Cadiovascular === null ? ' ' : preIdStore.Cadiovascular
+        let txtCardiovascular= cardiovascular.length > 120 ? cardiovascular.substring(0, 120) + '...' : cardiovascular;
+        // Hipertensión Arterial
+        let hipArterial= preIdStore.Hipertension === undefined || preIdStore.Hipertension === null ? ' ' : preIdStore.Hipertension
+        let txtHipArterial= hipArterial.length > 120 ? hipArterial.substring(0, 120) + '...' : hipArterial;
+        // Abdomen
+        let abdomen= preIdStore.Abdomen === undefined || preIdStore.Abdomen === null ? ' ' : preIdStore.Abdomen
+        let txtAbdomen= abdomen.length > 120 ? abdomen.substring(0, 120) + '...' : abdomen;
+        // Genitourinario
+        let genitourinario= preIdStore.Genitourinario === undefined || preIdStore.Genitourinario === null ? ' ' : preIdStore.Genitourinario
+        let txtGenitourinario= genitourinario.length > 120 ? genitourinario.substring(0, 120) + '...' : genitourinario;
+        // Músculo Esquelético
+        let musEsq= preIdStore.MusculoEsqueletico === undefined || preIdStore.MusculoEsqueletico === null ? ' ' : preIdStore.MusculoEsqueletico
+        let txtMusEsq= musEsq.length > 120 ? musEsq.substring(0, 120) + '...' : musEsq;
+        // Neurológico
+        let neurologico= preIdStore.Neurologico === undefined || preIdStore.Neurologico === null ? ' ' : preIdStore.Neurologico
+        let txtNeurologico= neurologico.length > 120 ? neurologico.substring(0, 120) + '...' : neurologico;
+        // Piel y Fanareas
+        let piel= preIdStore.PielFaneras === undefined || preIdStore.PielFaneras === null ? ' ' : preIdStore.PielFaneras
+        let txtPiel= piel.length > 120 ? piel.substring(0, 120) + '...' : piel;
+        // Ayuno
+        let ayuno = preIdStore.HorasAyuno === undefined ? ' ' : preIdStore.HorasAyuno;
+        // Tabaquismo
+        let tabaquismo = preIdStore.APNPTabaquismo === undefined || preIdStore.APNPTabaquismo === null ? ' ' : preIdStore.APNPTabaquismo;
+        let txtTabaqismo= tabaquismo.length > 40 ? tabaquismo.substring(0, 40) + '...' : tabaquismo;
+        // Etilismo
+        let etilismo = preIdStore.APNPEtilismo === undefined || preIdStore.APNPEtilismo === null ? ' ' : preIdStore.APNPEtilismo;
+        let txtEtilismo= etilismo.length > 40 ? etilismo.substring(0, 40) + '...' : etilismo;
+        // Adicciones
+        let adicciones = preIdStore.APNPAdicciones === undefined || preIdStore.APNPAdicciones === null ? ' ' : preIdStore.APNPAdicciones;
+        let txtAdicciones= adicciones.length > 40 ? adicciones.substring(0, 40) + '...' : adicciones;
+        // Inmunizaciones
+        let inmunizaciones = preIdStore.APNPInmunizaciones === undefined || preIdStore.APNPInmunizaciones === null ? ' ' : preIdStore.APNPInmunizaciones;
+        let txtInmunizaciones= inmunizaciones.length > 40 ? inmunizaciones.substring(0, 40) + '...' : inmunizaciones;
+        // Alergias
+        let alergias = preIdStore.APPAlergias === undefined || preIdStore.APPAlergias === null ? ' ' : preIdStore.APPAlergias;
+        let txtAlergias= alergias.length > 40 ? alergias.substring(0, 40) + '...' : alergias;
+        // Quirúrgicos
+        let quirurgicos = preIdStore.APPQuirurgicos === undefined || preIdStore.APPQuirurgicos === null ? ' ' : preIdStore.APPQuirurgicos;
+        let txtTabaqismo= tabaquismo.length > 40 ? tabaquismo.substring(0, 40) + '...' : tabaquismo;
+        // Endocronológicos
+        let endocronológicos = preIdStore.APNPTabaquismo === undefined || preIdStore.APNPTabaquismo === null ? ' ' : preIdStore.APNPTabaquismo;
+        let txtTabaqismo= tabaquismo.length > 40 ? tabaquismo.substring(0, 40) + '...' : tabaquismo;
+        // Urológicos
+        let urologicos = preIdStore.APNPTabaquismo === undefined || preIdStore.APNPTabaquismo === null ? ' ' : preIdStore.APNPTabaquismo;
+        let txtTabaqismo= tabaquismo.length > 40 ? tabaquismo.substring(0, 40) + '...' : tabaquismo;
+        // Traumáticos
+        let traumaticos = preIdStore.APNPTabaquismo === undefined || preIdStore.APNPTabaquismo === null ? ' ' : preIdStore.APNPTabaquismo;
+        let txtTabaqismo= tabaquismo.length > 40 ? tabaquismo.substring(0, 40) + '...' : tabaquismo;
+        // Ortopédicos
+        let ortopedicos = preIdStore.APNPTabaquismo === undefined || preIdStore.APNPTabaquismo === null ? ' ' : preIdStore.APNPTabaquismo;
+        let txtTabaqismo= tabaquismo.length > 40 ? tabaquismo.substring(0, 40) + '...' : tabaquismo;        
+        // Transfusiones Previas
+        let transPrevias = preIdStore.APNPTabaquismo === undefined || preIdStore.APNPTabaquismo === null ? ' ' : preIdStore.APNPTabaquismo;
+        let txtTabaqismo= tabaquismo.length > 40 ? tabaquismo.substring(0, 40) + '...' : tabaquismo;
+        // Estado Psiquico
+        let estadoPsiquico = preIdStore.APNPTabaquismo === undefined || preIdStore.APNPTabaquismo === null ? ' ' : preIdStore.APNPTabaquismo;
+        let txtTabaqismo= tabaquismo.length > 40 ? tabaquismo.substring(0, 40) + '...' : tabaquismo;
+        // Complicaciones Anestésicas Previas
+        let compliPrevias = preIdStore.APNPTabaquismo === undefined || preIdStore.APNPTabaquismo === null ? ' ' : preIdStore.APNPTabaquismo;
+        let txtTabaqismo= tabaquismo.length > 40 ? tabaquismo.substring(0, 80) + '...' : tabaquismo;
+        // Medicación Actual
+        let medicaActual = preIdStore.APNPTabaquismo === undefined || preIdStore.APNPTabaquismo === null ? ' ' : preIdStore.APNPTabaquismo;
+        let txtTabaqismo= tabaquismo.length > 40 ? tabaquismo.substring(0, 80) + '...' : tabaquismo;       
 
         // Contenido del documento PDF
         let docDefinition = {
@@ -1492,7 +1583,7 @@ export default defineComponent({
                       {
                         text:{text: 'Nombre del paciente:', font:'SF', fontSize: 10,}
                       },
-                      {
+                      {                        
                         text:{text: txtNomPaciente, font:'SF', fontSize: 10, bold:true,}
                       },
                       // Fecha de nacimiento
@@ -1504,6 +1595,7 @@ export default defineComponent({
                       },
                       // Edad
                       {
+                        margin: [0, 2.5, 0, 0],
                         text: [
                           { text: 'Edad: ', font: 'SF', fontSize: 8 },
                           { text: edad, font: 'SF', fontSize: 8, bold:true },
@@ -1511,6 +1603,7 @@ export default defineComponent({
                       },
                       // Sexo 
                       {
+                        margin: [0, 2.5, 0, 0],
                         text: [
                           { text: 'Sexo: ', font: 'SF', fontSize: 8 },
                           { text: sexo, font: 'SF', fontSize: 8, bold:true },
@@ -1518,6 +1611,7 @@ export default defineComponent({
                       },
                       // CURP 
                       {
+                        margin: [0, 2.5, 0, 0],
                         text: [
                           { text: 'CURP: ', font: 'SF', fontSize: 8 },
                           { text: curp, font: 'SF', fontSize: 8, bold:true },
@@ -1532,6 +1626,7 @@ export default defineComponent({
                       },
                       // No. Episodio  
                       {
+                        margin: [0, 2.5, 0, 0],
                         text: [
                           { text: 'No. de Episodio: ', font: 'SF', fontSize: 8 },
                           { text: numEpisodio, font: 'SF', fontSize: 8, bold:true },
@@ -1539,6 +1634,7 @@ export default defineComponent({
                       },
                       // No. Expediente  
                       {
+                        margin: [0, 2.5, 0, 0],
                         text: [
                           { text: 'No. Expediente: ', font: 'SF', fontSize: 8 },
                           { text: numExp, font: 'SF', fontSize: 8, bold:true },
@@ -1546,6 +1642,7 @@ export default defineComponent({
                       },
                       // Fecha Ingreso  
                       {
+                        margin: [0, 2.5, 0, 0],
                         text: [
                           { text: 'Fecha Ingreso: ', font: 'SF', fontSize: 8 },
                           { text: fechaIngreso, font: 'SF', fontSize: 8, bold:true },
@@ -1563,12 +1660,13 @@ export default defineComponent({
                       // Nacionalidad  
                       {
                         text: [
-                          { text: 'Nacionalidad: ', font: 'SF', fontSize: 8 },
+                          { text: '\nNacionalidad: ', font: 'SF', fontSize: 8 },
                           { text: nacionalidad, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                       // Folio ID  
                       {
+                        margin: [0, 2.5, 0, 0],
                         text: [
                           { text: 'Folio ID: ', font: 'SF', fontSize: 8 },
                           { text: folioId, font: 'SF', fontSize: 8, bold:true },
@@ -1576,6 +1674,7 @@ export default defineComponent({
                       },
                       // Estado de Nacimiento
                       {
+                        margin: [0, 2.5, 0, 0],
                         text: [
                           { text: 'Estado de Nac: ', font: 'SF', fontSize: 8 },
                           { text: estNacimiento, font: 'SF', fontSize: 8, bold:true },
@@ -1583,6 +1682,7 @@ export default defineComponent({
                       },
                       // Residencia  
                       {
+                        margin: [0, 2.5, 0, 0],
                         text: [
                           { text: 'Residencia: ', font: 'SF', fontSize: 8 },
                           { text: estResidencia, font: 'SF', fontSize: 8, bold:true },
@@ -1590,6 +1690,7 @@ export default defineComponent({
                       },
                       // Alcaldía  
                       {
+                        margin: [0, 2.5, 0, 0],
                         text: [
                           { text: 'Alcaldía: ', font: 'SF', fontSize: 8 },
                           { text: alcaldia, font: 'SF', fontSize: 8, bold:true },
@@ -1597,23 +1698,25 @@ export default defineComponent({
                       },
                       // Colonia  
                       {
+                        margin: [0, 2.5, 0, 0],
                         text: [
                           { text: 'Colonia: ', font: 'SF', fontSize: 8 },
                           { text: colonia, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                       {
-                        text:{text: '\nINFORMACIÓN', font:'SF', fontSize: 8, bold:true,}
+                        text:{text: '\nINFORMACIÓN CIRUGÍA', font:'SF', fontSize: 8, bold:true,}
                       },
                       // Diagnóstico  
                       {
                         text: [
-                          { text: 'Diagnóstico: ', font: 'SF', fontSize: 8 },
+                          { text: '\nDiagnóstico: ', font: 'SF', fontSize: 8 },
                           { text: txtDiagnostico, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                       // Tipo de Cirugía  
                       {
+                        margin: [0, 2.5, 0, 0],
                         text: [
                           { text: 'Tipo de Cirugía: ', font: 'SF', fontSize: 8 },
                           { text: tipoCirugia, font: 'SF', fontSize: 8, bold:true },
@@ -1662,6 +1765,7 @@ export default defineComponent({
                       },
                       // Hora de Cirugía  
                       {
+                        margin: [0, 2.5, 0, 0],
                         text: [
                           { text: 'Hora de Cirugía: ', font: 'SF', fontSize: 8 },
                           { text: horaCx, font: 'SF', fontSize: 8, bold:true },
@@ -1678,67 +1782,73 @@ export default defineComponent({
                   margin: [0, 10, 0, 0],
                     stack: [                    
                       {
-                        text:{text: 'SIGNOS VITALES:', font:'SF', fontSize: 10, bold:true}
+                        text:{text: 'SIGNOS VITALES:', font:'SF', fontSize: 8, bold:true}
                       },                     
                       // Frecuencia Cardiáca  
                       {
                         text: [
-                          { text: 'Frecuencia Cardiáca: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                          { text: '\nFrecuencia Cardiáca: ', font: 'SF', fontSize: 8 },
+                          { text: FC, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                       // Frecuencia Respiratoria  
                       {
-                        text: [
+                        margin: [0, 2.5, 0, 0],
+                        text: [                          
                           { text: 'Frecuencia Respiratoria: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                          { text: FR, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },      
                       // Tensión Arterial  
                       {
+                        margin: [0, 2.5, 0, 0],
                         text: [
                           { text: 'Tensión Arterial: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                          { text: tensionArterial, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                       // Saturación de O2  
                       {
+                        margin: [0, 2.5, 0, 0],
                         text: [
                           { text: 'Saturación de O2: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                          { text: SpO2, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                       // Temperatura  
                       {
+                        margin: [0, 2.5, 0, 0],
                         text: [
                           { text: 'Temperatura: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                          { text: temperatura, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                       {
                         text: [
-                          { text: '\nSIGNOS VITALES: ', font: 'SF', fontSize: 8, bold:true }
+                          { text: '\nEXPLORACIÓN FÍSICA: ', font: 'SF', fontSize: 8, bold:true }
                         ],
                       },
                       // Peso  
                       {
                         text: [
-                          { text: 'Peso: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                          { text: '\nPeso: ', font: 'SF', fontSize: 8 },
+                          { text: peso, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                       // Talla  
                       {
+                        margin: [0, 2.5, 0, 0],
                         text: [
                           { text: 'Talla: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                          { text: talla, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                       // IMC  
                       {
+                        margin: [0, 2.5, 0, 0],
                         text: [
                           { text: 'IMC: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                          { text: IMC, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                     ],
@@ -1757,23 +1867,23 @@ export default defineComponent({
                       // CIE-10  
                       {
                         text: [
-                          { text: '\n\nCIE-10: ', font: 'SF', fontSize: 8 },
+                          { text: '\nCIE-10: ', font: 'SF', fontSize: 8 },
                           { text: CIE10, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                       // CIE-9
                       {
                         text: [
-                          { text: '\n\nCIE-9: ', font: 'SF', fontSize: 8 },
+                          { text: '\nCIE-9: ', font: 'SF', fontSize: 8 },
                           { text: CIE9, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                       // Antecedentes de Importancia para el procedimiento quirúrgico 
                       {
-                        text:{ text: '\nAntecedentes de Importancia para el Procedimiento Quirúrgico : ', font: 'SF', fontSize: 8 },
+                        text:{ text: '\nAntecedentes de Importancia para el Procedimiento Quirúrgico: ', font: 'SF', fontSize: 8 },
                       },
                       {
-                        text:{ text: txtCirugia, font: 'SF', fontSize: 8, bold:true },
+                        text:{ text: txtAntecImportancia, font: 'SF', fontSize: 8, bold:true },
                       },
                     ],
                 },
@@ -1789,13 +1899,195 @@ export default defineComponent({
                       {
                         text: [
                           { text: 'Cabeza: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                          { text: txtCabeza, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Cuello  
+                      {
+                        text: [
+                          { text: ' \nCuello: ', font: 'SF', fontSize: 8 },
+                          { text: txtCuello, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Respiratorio  
+                      {
+                        text: [
+                          { text: ' \nRespiratorio: ', font: 'SF', fontSize: 8 },
+                          { text: txtRespiratorio, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Cardiovascular  
+                      {
+                        text: [
+                          { text: ' \nCardiovascular: ', font: 'SF', fontSize: 8 },
+                          { text: txtCardiovascular, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Hipertensión Arterial  
+                      {
+                        text: [
+                          { text: ' \nHipertensión Arterial: ', font: 'SF', fontSize: 8 },
+                          { text: txtHipArterial, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Abdomen  
+                      {
+                        text: [
+                          { text: ' \nAbdomen: ', font: 'SF', fontSize: 8 },
+                          { text: txtAbdomen, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Genitourinario  
+                      {
+                        text: [
+                          { text: ' \nGenitourinario: ', font: 'SF', fontSize: 8 },
+                          { text: txtGenitourinario, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Músculo Esquelético  
+                      {
+                        text: [
+                          { text: ' \nMúsculo Esquelético : ', font: 'SF', fontSize: 8 },
+                          { text: txtMusEsq, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Neurológico  
+                      {
+                        text: [
+                          { text: ' \nNeurológico: ', font: 'SF', fontSize: 8 },
+                          { text: txtNeurologico, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Piel y Fanareas  
+                      {
+                        text: [
+                          { text: ' \nPiel y Fanareas: ', font: 'SF', fontSize: 8 },
+                          { text: txtPiel, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                     ]                    
+                },
+                {                                        
+                  width:'50%',
+                  margin: [0, 10, 0, 0],
+                    stack: [
+                      //  
+                      {
+                        text: [
+                          { text: 'ANTECEDENTES', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Ayuno  
+                      {
+                        text: [
+                          { text: '\nHoras de Ayuno: ', font: 'SF', fontSize: 8 },
+                          { text: ayuno, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Tabaquismo
+                      {
+                        text: [
+                          { text: '\nTabaquismo: ', font: 'SF', fontSize: 8 },
+                          { text: txtTabaqismo, font: 'SF', fontSize: 8, bold:true},
+                        ],
+                      },
+                      // Etilismo
+                      {
+                        text: [
+                          { text: '\nEtilismo: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Adicciones
+                      {
+                        text: [
+                          { text: '\nAdicciones: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Inmunizaciones
+                      {
+                        text: [
+                          { text: '\nInmunizaciones: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Alergias
+                      {
+                        text: [
+                          { text: '\nAlergias: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Quirúrgicos
+                      {
+                        text: [
+                          { text: '\nQuirúrgicos: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Endocronológicos
+                      {
+                        text: [
+                          { text: '\nEndocronológicos: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Urológicos
+                      {
+                        text: [
+                          { text: '\nUrológicos: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Traumáticos
+                      {
+                        text: [
+                          { text: '\nTraumáticos: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Ortopédicos
+                      {
+                        text: [
+                          { text: '\nOrtopédicos: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Transfusiones Previas
+                      {
+                        text: [
+                          { text: '\nTransfusiones Previas: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Estado Psiquico
+                      {
+                        text: [
+                          { text: '\nEstado Psiquico: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Complicaciones Anestésicas Previas
+                      {
+                        text: [
+                          { text: '\nComplicaciones Anestésicas Previas: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Medicación Actual
+                      {
+                        text: [
+                          { text: '\nMedicación Actual: ', font: 'SF', fontSize: 8 },
+                          { text: '', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                    ]
                 }
               ]
             },
+            { text: 'Segunda página', pageBreak: 'before', fontSize: 18, bold: true, font:'SF' },
+            { text: 'Contenido de la segunda página...' ,font:'SF'},
           ],
           styles:{
             normal:{
