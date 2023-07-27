@@ -172,6 +172,7 @@ export const usePreIdStore = defineStore('preid', {
         Neuroestimulador:ref(null),
         ComplicacionesNeuroestimulador:ref(null),
         EspecificarNeuroestimulador:ref(null),
+        EspecificarComplicacNeuroes:ref(null),
 
         SitioLocal:ref(null),
         AnestesicoLocal:ref(null),

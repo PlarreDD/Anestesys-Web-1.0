@@ -1258,6 +1258,7 @@ export default defineComponent({
                                             preIdStore.Neuroestimulador = this.infoPlan.regional_Neuroestimulador,
                                             preIdStore.ComplicacionesNeuroestimulador = this.infoPlan.regional_ProbComplicaciones,
                                             preIdStore.EspecificarNeuroestimulador = this.infoPlan.regional_EspNeuroestimulador,
+                                            preIdStore.EspecificarComplicacNeuroes = this.infoPlan.regional_EspDificEquipo,
 
                                             preIdStore.SitioLocal = this.infoPlan.local_SitioAnestesiaL,
                                             preIdStore.AnestesicoLocal = this.infoPlan.local_AnestesicoUtilizado,

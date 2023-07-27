@@ -1191,21 +1191,24 @@
         <div class="col bordeColumna">           
           <img class="img-vista-rapida" src="images/imgIcon/paciente.png">          
           <label class="form-label text-white" :class="preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? 'invisible':''"> 
-            {{ preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? '-': preIdStore.NombrePaciente }}
+            {{ preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? '-': 
+               preIdStore.NombrePaciente.length > 30 ? preIdStore.NombrePaciente.substring(0,30) + '...' : preIdStore.NombrePaciente }}
           </label>
         </div>
         
         <div class="col">
           <img class="img-vista-rapida" src="images/imgIcon/anestesiologo.png">
           <label class="form-label text-white" :class="preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? 'invisible':''">
-            {{ preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? '-': preIdStore.NombreAnestesiologo }}            
+            {{ preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? '-': 
+               preIdStore.NombreAnestesiologo.length > 30 ? preIdStore.NombreAnestesiologo.substring(0,30) + '...' : preIdStore.NombreAnestesiologo }}            
           </label>
         </div>
         
         <div class="col bordeColumna"> 
           <img class="img-vista-rapida" src="images/imgIcon/cirugia.png">
           <label class="form-label text-white" :class="preIdStore.NombreCirugia == '' || preIdStore.NombreCirugia == undefined ? 'invisible':''">            
-            {{ preIdStore.NombreCirugia == '' || preIdStore.NombreCirugia == undefined ? '-': preIdStore.NombreCirugia}}
+            {{ preIdStore.NombreCirugia == '' || preIdStore.NombreCirugia == undefined ? '-' : 
+               preIdStore.NombreCirugia.length > 30 ? preIdStore.NombreCirugia.substring(0, 30) + '...': preIdStore.NombreCirugia }}
           </label>
         </div>
       </div>
@@ -1476,9 +1479,9 @@ export default defineComponent({
         // CIE-9
         let CIE9 = preIdStore.CIE9 === undefined ? ' ' : preIdStore.CIE9;       
         
-        /*VALORACIÓN*/
-        
+        /*VALORACIÓN*/        
         /*Exploración Física*/
+        // Antecedentes de Importancia
         let antecImportancia = preIdStore.AntecedentesImportancia === null || preIdStore.AntecedentesImportancia === undefined ? ' ' : preIdStore.AntecedentesImportancia;
         let txtAntecImportancia= antecImportancia.length > 300 ? antecImportancia.substring(0, 300) + '...' : antecImportancia;
         // Frecuencia Cardiáca
@@ -1528,7 +1531,7 @@ export default defineComponent({
         let piel= preIdStore.PielFaneras === undefined || preIdStore.PielFaneras === null ? ' ' : preIdStore.PielFaneras
         let txtPiel= piel.length > 120 ? piel.substring(0, 120) + '...' : piel;
         
-        /*Valoración*/
+        /*Antecedentes*/
         // Ayuno
         let ayuno = preIdStore.APNPHorasAyuno === undefined ? ' ' : preIdStore.APNPHorasAyuno;
         // Tabaquismo
@@ -1653,12 +1656,103 @@ export default defineComponent({
         let riesgo = preIdStore.RiesgoAnestesico === undefined || preIdStore.RiesgoAnestesico === null ? ' ' : preIdStore.RiesgoAnestesico;
 
         /*Estudios*/
-        preIdStore.estudios === null ? [' ',' '] : preIdStore.estudios;
-        console.log(JSON.stringify(preIdStore.estudios));      
+        let listaEstudios = preIdStore.estudios === null ? [' '] : preIdStore.estudios.map(item => item.val_Estudios.map(estudio => estudio.estudio)).flat();
+        let estudios = listaEstudios.slice(0,5);
+
+        /*PLAN*/        
+        /*Posición y Cuidados*/
+        // Horas Ayuno
+        let hrsAyuno = preIdStore.HorasAyuno === undefined || preIdStore.HorasAyuno === null ? ' ' : preIdStore.HorasAyuno;
+        // Acceso Venoso
+        let accesoVenoso = preIdStore.AccesoVenoso === undefined || preIdStore.AccesoVenoso === null ? ' ' : preIdStore.AccesoVenoso;
+        // Posición Paciente
+        let posicionPaciente = preIdStore.PosicionPaciente === undefined || preIdStore.PosicionPaciente === null ? ' ' : preIdStore.PosicionPaciente;
+        // Posición Brazos
+        let posicionBrazos = preIdStore.PosicionBrazos === undefined || preIdStore.PosicionBrazos === null ? ' ' : preIdStore.PosicionBrazos;
+        // Torniquete
+        let aplicacionTorniquete = preIdStore.Sitio === undefined || preIdStore.Sitio === null ? ' ' : preIdStore.Sitio;        
+        // Tiempo Isquemia
+        let tiempoIsquemia = preIdStore.TiempoIsquemia === undefined || preIdStore.TiempoIsquemia === null ? ' ' : preIdStore.TiempoIsquemia;
+        // Protección Ojos
+        let proteccionOjos = preIdStore.ProteccionOjos === undefined || preIdStore.ProteccionOjos === null ? ' ' : preIdStore.ProteccionOjos;
+        // Protección Prominencias Oseas
+        let proteccionProminencias = preIdStore.ProteccionProminencias === undefined || preIdStore.ProteccionProminencias === null ? ' ' : preIdStore.ProteccionProminencias;
+        // Técnica Anestesica 
+        let tecnicaAnestesica = preIdStore.TecnicaAnestesica === undefined || preIdStore.TecnicaAnestesica === null ? ' ' : preIdStore.TecnicaAnestesica;
+        // Premedicación
+        let premedicacion = preIdStore.EspecPremedicacion === undefined || preIdStore.EspecPremedicacion === null ? ' ' : preIdStore.EspecPremedicacion;
+        let txtPremedicacion= premedicacion.length > 80 ? premedicacion.substring(0, 80) + '...' : premedicacion;
+        // Monitoreo
+        let monitoreo = preIdStore.Monitoreo === undefined || preIdStore.Monitoreo === null ? ' ' : preIdStore.Monitoreo;
+        let txtMonitoreo= monitoreo.length > 80 ? monitoreo.substring(0, 80) + '...' : monitoreo;
+
+        /*Anestesia General*/
+        // Inducción
+        let induccion = preIdStore.Induccion === undefined || preIdStore.Induccion === null ? ' ' : preIdStore.Induccion;
+        // Tubo
+        let tubo = preIdStore.Tubo === undefined || preIdStore.Tubo === null ? ' ' : preIdStore.Tubo;
+        // Número Tubo
+        let numeroTubo = preIdStore.NumeroTubo === undefined || preIdStore.NumeroTubo === null ? ' ' : preIdStore.NumeroTubo;
+        // Tipo Canula
+        let tipoCanula = preIdStore.TipoCanula === undefined || preIdStore.TipoCanula === null ? ' ' : preIdStore.TipoCanula;
+        // Globo
+        let globo = preIdStore.Globo === undefined || preIdStore.Globo === null ? ' ' : preIdStore.Globo;
+        // Presión 
+        let presion = preIdStore.Presion === undefined || preIdStore.Presion === null ? ' ' : preIdStore.Presion;
+        // Intubación 
+        let intubacion = preIdStore.EspecificarGeneral === undefined || preIdStore.EspecificarGeneral === null ? ' ' : preIdStore.EspecificarGeneral;
+        let txtIntubacion= intubacion.length > 100 ? intubacion.substring(0, 100) + '...' : intubacion;
+        // Calibre 
+        let calibre = preIdStore.Calibre === undefined || preIdStore.Calibre === null ? ' ' : preIdStore.Calibre;
+        // Complicaciones 
+        let complicacionesCalibre = preIdStore.EspecificarGeneral === undefined || preIdStore.EspecificarGeneral === null ? ' ' : preIdStore.EspecificarGeneral;
+        let txtComplicacionesCal = complicacionesCalibre.length > 100 ? complicacionesCalibre.substring(0, 100) + '...' : complicacionesCalibre;
+        // Uso de otros dispositivos 
+        let otrosDispositivos = preIdStore.EspecificarGeneral === undefined || preIdStore.EspecificarGeneral === null ? ' ' : preIdStore.EspecificarGeneral;
+        let txtOtrosDispositivos= otrosDispositivos.length > 100 ? otrosDispositivos.substring(0, 100) + '...' : otrosDispositivos;
+
+        /*Anestesia Regional*/
+        // BNA Tipo 
+        let tipoBloqueo = preIdStore.TipoRegional === undefined || preIdStore.TipoRegional === null ? ' ' : preIdStore.TipoRegional;
+        // BNA Tipo Aguja 
+        let tipoAguja = preIdStore.TipoAguja === undefined || preIdStore.TipoAguja === null ? ' ' : preIdStore.TipoAguja;
+        // BNA Nivel 
+        let nivel = preIdStore.Nivel === undefined || preIdStore.Nivel === null ? ' ' : preIdStore.Nivel;
+        // BNA Calibre Aguja 
+        let calibreAguja = preIdStore.CalibreAguja === undefined || preIdStore.CalibreAguja === null ? ' ' : preIdStore.CalibreAguja;      
+        // BNA Orientacion Cateter 
+        let orientacionCateter = preIdStore.OrientacionCateter === undefined || preIdStore.OrientacionCateter === null ? ' ' : preIdStore.OrientacionCateter;
+        // BNA Especificar Dificultades 
+        let dificultadesBloqueo = preIdStore.EspecificarRegional === undefined || preIdStore.EspecificarRegional === null ? ' ' : preIdStore.EspecificarRegional;
+        let txtComplicacionesBNA = dificultadesBloqueo.length > 100 ? dificultadesBloqueo.substring(0, 100) + '...' : dificultadesBloqueo;
+        // BP Sitio 
+        let sitioPlexo = preIdStore.SitioRegional === undefined || preIdStore.SitioRegional === null ? ' ' : preIdStore.SitioRegional;
+        // BP Opcion Sitio
+        let opcionPlexo = preIdStore.OpcionRegional === undefined || preIdStore.OpcionRegional === null ? ' ' : preIdStore.OpcionRegional;
+        // BNA Especificar Sitio 
+        let especificarSitio = preIdStore.EspecificarSitionRegional === undefined || preIdStore.EspecificarSitionRegional === null ? ' ' : preIdStore.EspecificarSitionRegional;
+        let txtEspecificarSitio = especificarSitio.length > 100 ? especificarSitio.substring(0, 100) + '...' : especificarSitio;
+        // BP Anestesico Utilizado 
+        let anestesico = preIdStore.AnestesicoUtilizado === undefined || preIdStore.AnestesicoUtilizado === null ? ' ' : preIdStore.AnestesicoUtilizado;
+        // BNA Especificar Anestesico 
+        let especificarAnest = preIdStore.EspecificarAnestesico === undefined || preIdStore.EspecificarAnestesico === null ? ' ' : preIdStore.EspecificarAnestesico;
+        let txtEspecificarAnestesico = especificarAnest.length > 100 ? especificarAnest.substring(0, 100) + '...' : especificarAnest;
+        // BP Dificultades 
+        let dificultadesPlexo = preIdStore.EspecificarDificPlexo === undefined || preIdStore.EspecificarDificPlexo === null ? ' ' : preIdStore.EspecificarDificPlexo;
+        let txtDificultadesPlexo = dificultadesPlexo.length > 100 ? dificultadesPlexo.substring(0, 100) + '...' : dificultadesPlexo;
+        // Ultrasonido 
+        let ultrasonido = preIdStore.EspecUltrasonido === undefined || preIdStore.EspecUltrasonido === null ? ' ' : preIdStore.EspecUltrasonido;
+        let txtUltrasonido = ultrasonido.length > 100 ? ultrasonido.substring(0, 100) + '...' : ultrasonido;
+        // Neuroestimulador 
+        let neuroestimulador = preIdStore.EspecificarNeuroestimulador === undefined || preIdStore.EspecificarNeuroestimulador === null ? ' ' : preIdStore.EspecificarNeuroestimulador;
+        let txtNeuroestimulador = neuroestimulador.length > 100 ? neuroestimulador.substring(0, 100) + '...' : neuroestimulador;
+        // Complicaciones Equipo Apoyo 
+        let complicacionesEquipo = preIdStore.EspecificarComplicacNeuroes === undefined || preIdStore.EspecificarComplicacNeuroes === null ? ' ' : preIdStore.EspecificarComplicacNeuroes;
+        let txtComplicacionesEquipo= complicacionesEquipo.length > 100 ? complicacionesEquipo.substring(0, 100) + '...' : complicacionesEquipo;
 
         // Contenido del documento PDF
         let docDefinition = {
-          content: [
+          content: [           
             {
               columns: [                
                 {                  
@@ -2172,10 +2266,11 @@ export default defineComponent({
                 }
               ]
             },
+            //Segunda Hoja
             {
               columns:[
                 {
-                  width: '25%',
+                  width: '30%',
                   margin: [0, 40, 0, 0],
                   pageBreak: 'before',
                     stack: [
@@ -2375,53 +2470,7 @@ export default defineComponent({
                           { text: 'Otros: ', font: 'SF', fontSize: 8 },
                           { text: otros, font: 'SF', fontSize: 8, bold:true },
                         ],
-                      },
-
-                      // EXAMENES  
-                      {
-                        text: [
-                          { text: '\n\nANESTESIA REGIONAL', font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Tipo
-                      {
-                        text: [
-                          { text: '\nTipo: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Tipo Aguja
-                      {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Tipo Aguja: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Nivel
-                      {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Nivel: ', font: 'SF', fontSize: 8 },
-                          { text: otros, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Cateter
-                      {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Cateter: ', font: 'SF', fontSize: 8 },
-                          { text: '', font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Probables Dificultades Técnicas
-                      {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Probables Dificultades Técnicas: ', font: 'SF', fontSize: 8 },
-                          { text: '100 caracteres', font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
+                      },                      
                     ]
                 },
                 {
@@ -2538,24 +2587,366 @@ export default defineComponent({
                           { text: riesgo, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
+
+                      // POSICIÓN Y CUIDADOS
+                      {
+                        text: [
+                          { text: '\n\nPOSICIÓN Y CUIDADOS', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Horas de Ayuno
+                      {
+                        text: [
+                          { text: '\nHoras de Ayuno: ', font: 'SF', fontSize: 8 },
+                          { text: hrsAyuno, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Acceso Venoso
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Acceso Venoso: ', font: 'SF', fontSize: 8 },
+                          { text: accesoVenoso, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Posición del Paciente
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Posición del Paciente: ', font: 'SF', fontSize: 8 },
+                          { text: posicionPaciente, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Posición de los Brazos
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Posición de los Brazos: ', font: 'SF', fontSize: 8 },
+                          { text: posicionBrazos, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Aplicación de Torniquete
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Aplicación de Torniquete: ', font: 'SF', fontSize: 8 },
+                          { text: aplicacionTorniquete, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Probable tiempo de Isquemia
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Probable Tiempo de Isquemia: ', font: 'SF', fontSize: 8 },
+                          { text: tiempoIsquemia, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Protección de Ojos
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Protección de Ojos: ', font: 'SF', fontSize: 8 },
+                          { text: proteccionOjos, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Protección de prominencias oseas
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Protección de Prominencias Oseas: ', font: 'SF', fontSize: 8 },
+                          { text: proteccionProminencias, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Técnica Anéstesica
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Técnica Anéstesica: ', font: 'SF', fontSize: 8 },
+                          { text: tecnicaAnestesica, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Premedicación
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Premedicación: ', font: 'SF', fontSize: 8 },
+                          { text: txtPremedicacion, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Monitoreo
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Monitoreo: ', font: 'SF', fontSize: 8 },
+                          { text: txtMonitoreo, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },                      
                     ]
                 },
                 {
-                  width: '45%',
+                  width: '40%',
                   margin: [0, 40, 0, 0],
                   pageBreak: 'before',
                     stack: [
                       // ESTUDIOS  
                       {
                         text: [
-                          { text: 'ESTUDIOS', font: 'SF', fontSize: 8, bold:true },
+                          { text: 'ESTUDIOS', font: 'SF', fontSize: 8, bold:true},
                         ],
                       },
                       // Estudio
                       {
                         text: [
-                          { text: '\nEstudio: ', font: 'SF', fontSize: 8 },
-                          { ul: preIdStore.estudios[0].val_Estudios.map(estudio => ({ text: estudio.estudio + ' - ' + estudio.especifEstudio })) },
+                          { text: '\nEstudio:', font: 'SF', fontSize: 8 },
+                        ],                        
+                      },
+                      {
+                        ul: estudios.map(estudio => ({ text: estudio})),font: 'SF', fontSize: 8, bold:true
+                      },
+                      // ANESTESIA GENERAL
+                      {
+                        margin: [0, 50, 0, 0],
+                        text: [
+                          { text: 'ANESTESIA GENERAL', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Inducción
+                      {                        
+                        text: [
+                          { text: '\nInducción: ', font: 'SF', fontSize: 8 },
+                          { text: induccion, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Tubo
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Tubo: ', font: 'SF', fontSize: 8 },
+                          { text: tubo, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Número de Tubo
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Número de Tubo: ', font: 'SF', fontSize: 8 },
+                          { text: numeroTubo, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Tipo de Canula
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Tipo de Canula: ', font: 'SF', fontSize: 8 },
+                          { text: tipoCanula, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Globo
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Globo: ', font: 'SF', fontSize: 8 },
+                          { text: globo, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Presión
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Presión: ', font: 'SF', fontSize: 8 },
+                          { text: presion, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Probable Intubación Dificil
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Probable Intubación Difícil: ', font: 'SF', fontSize: 8 },
+                          { text: txtIntubacion, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Dispositivos supraglóticos
+                      {
+                        text: [
+                          { text: '\nDispositivos supraglóticos', font: 'SF', fontSize: 8},
+                        ],
+                      },
+                      // Calibre
+                      {
+                        text: [
+                          { text: '\nCalibre: ', font: 'SF', fontSize: 8 },
+                          { text: calibre, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Probable Intubación Dificil
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Complicaciones: ', font: 'SF', fontSize: 8 },
+                          { text: txtComplicacionesCal, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Otros Dispositivos
+                      {
+                        text: [
+                          { text: '\nUso de Otros Dispositivos: ', font: 'SF', fontSize: 8 },
+                          { text: txtOtrosDispositivos, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                    ]
+                }
+              ]
+            },
+            {
+              columns:[
+                {
+                  width: '33%',
+                  margin: [0, 25, 0, 0],
+                    stack: [
+                      // ANESTESIA REGIONAL  
+                      {
+                        text: [
+                          { text: 'ANESTESIA REGIONAL', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      {
+                        text: [
+                          { text: '\nBloqueo Neuro-Axial', font: 'SF', fontSize: 8},
+                        ],
+                      },
+                      // Tipo
+                      {
+                        text: [
+                          { text: '\nTipo: ', font: 'SF', fontSize: 8 },
+                          { text: tipoBloqueo, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Tipo Aguja
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Tipo Aguja: ', font: 'SF', fontSize: 8 },
+                          { text: tipoAguja, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Nivel
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Nivel: ', font: 'SF', fontSize: 8 },
+                          { text: nivel, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Calibre Aguja
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Nivel: ', font: 'SF', fontSize: 8 },
+                          { text: calibreAguja, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Orientación Cateter
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Cateter: ', font: 'SF', fontSize: 8 },
+                          { text: orientacionCateter, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Probables Dificultades Técnicas
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Probables Dificultades Técnicas: ', font: 'SF', fontSize: 8 },
+                          { text: txtComplicacionesBNA, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                    ]
+                },
+                {
+                  width: '33%',
+                  margin: [0, 25, 0, 0],
+                    stack: [
+                      {
+                        text: [
+                          { text: 'Bloqueo Plexo', font: 'SF', fontSize: 8},
+                        ],
+                      },
+                      // Sitio
+                      {
+                        text: [
+                          { text: '\nSitio: ', font: 'SF', fontSize: 8 },
+                          { text: sitioPlexo, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Opción
+                      {
+                        text: [
+                          { text: 'Opcion: ', font: 'SF', fontSize: 8 },
+                          { text: opcionPlexo, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Especificar Sitio Plexo
+                      {
+                        text: [
+                          { text: 'Especificar: ', font: 'SF', fontSize: 8 },
+                          { text: txtEspecificarSitio, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Anestesico Utilizado
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Anestésico utilizado: ', font: 'SF', fontSize: 8 },
+                          { text: anestesico, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Especificar
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Especificar: ', font: 'SF', fontSize: 8 },
+                          { text: txtEspecificarAnestesico, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Dificultades Técnicas
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Probables Dificultades Técnicas: ', font: 'SF', fontSize: 8 },
+                          { text: txtDificultadesPlexo, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                    ]
+                },
+                {
+                  width: '34%',
+                  margin: [0, 25, 0, 0],
+                    stack: [
+                      {
+                        text: [
+                          { text: 'Equipo de Apoyo', font: 'SF', fontSize: 8},
+                        ],
+                      },
+                      // Ultrasonido
+                      {
+                        text: [
+                          { text: '\nUltrasonido: ', font: 'SF', fontSize: 8 },
+                          { text: txtUltrasonido, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Neuroestimulador
+                      {
+                        text: [
+                          { text: 'Neuroestimulador: ', font: 'SF', fontSize: 8 },
+                          { text: txtNeuroestimulador, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Complicaciones Equipo Apoyo
+                      {
+                        text: [
+                          { text: 'Complicaciones: ', font: 'SF', fontSize: 8 },
+                          { text: txtComplicacionesEquipo, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                     ]
