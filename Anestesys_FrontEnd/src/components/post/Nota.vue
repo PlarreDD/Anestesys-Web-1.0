@@ -41,7 +41,7 @@
                                 :options="opcionTecnica"
                                 :searchable="true"
                                 :createTag="true"
-                                :class="infoNotaPost.npa_TecAnestFinal != undefined && infoNotaPost.npa_TecAnestFinal != '' ?
+                                :class="postAnestStore.TecnicaAnestesica != undefined && postAnestStore.TecnicaAnestesica != '' ?
                                 'form-control border border-success formSombra' : 'form-control'"
                             />
                         </div>
@@ -73,7 +73,7 @@
                             <label for="" class="form-label fw-bold">Nota Post-anestésica</label>
                             <textarea class="form-control" @keyup.capture="enviarDatosNotaPost"
                                       rows="8"
-                                      maxlength="700"
+                                      maxlength="1000"
                                       v-model="infoNotaPost.npa_NotaPostAnest"
                                       :class="infoNotaPost.npa_NotaPostAnest != undefined && infoNotaPost.npa_NotaPostAnest != '' ?
                                         'form-control border border-success formSombra' : 'form-control'">

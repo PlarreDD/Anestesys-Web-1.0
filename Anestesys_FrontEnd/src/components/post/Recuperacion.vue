@@ -54,7 +54,7 @@
                 class="form-control"
                 v-model="infoRec.notaEval_Obs"
                 rows="15"
-                maxlength="700"
+                maxlength="1000"
                 :class="
                   infoRec.notaEval_Obs != undefined &&
                   infoRec.notaEval_Obs != ''
@@ -536,7 +536,7 @@
                   <select
                     id="inputState"
                     v-model="infoRec.aldreteRec_AldreteIn"
-                    @click.capture="obtenerAldrete, enviarDatosRecuperacion"
+                    @click.capture="obtenerAldrete"
                     class="form-select"
                     :class="
                       infoRec.aldreteRec_AldreteIn != undefined &&
@@ -563,7 +563,7 @@
                   <select
                     id="inputState"
                     v-model="infoRec.aldreteRec_Aldrete15"
-                    @click.capture="obtenerAldrete, enviarDatosRecuperacion"
+                    @click.capture="obtenerAldrete"
                     class="form-select"
                     :class="
                       infoRec.aldreteRec_Aldrete15 != undefined &&
@@ -590,7 +590,7 @@
                   <select
                     id="inputState"
                     v-model="infoRec.aldreteRec_Aldrete30"
-                    @click.capture="obtenerAldrete, enviarDatosRecuperacion"
+                    @click.capture="obtenerAldrete"
                     class="form-select"
                     :class="
                       infoRec.aldreteRec_Aldrete30 != undefined &&
@@ -617,7 +617,7 @@
                   <select
                     id="inputState"
                     v-model="infoRec.aldreteRec_Aldrete45"
-                    @click.capture="obtenerAldrete, enviarDatosRecuperacion"
+                    @click.capture="obtenerAldrete"
                     class="form-select"
                     :class="
                       infoRec.aldreteRec_Aldrete45 != undefined &&
@@ -644,7 +644,7 @@
                   <select
                     id="inputState"
                     v-model="infoRec.aldreteRec_Aldrete60"
-                    @click.capture="obtenerAldrete, enviarDatosRecuperacion"
+                    @click.capture="obtenerAldrete"
                     class="form-select"
                     :class="
                       infoRec.aldreteRec_Aldrete60 != undefined &&
@@ -671,7 +671,7 @@
                   <select
                     id="inputState"
                     v-model="infoRec.aldreteRec_Aldrete90"
-                    @click.capture="obtenerAldrete, enviarDatosRecuperacion"
+                    @click.capture="obtenerAldrete"
                     class="form-select"
                     :class="
                       infoRec.aldreteRec_Aldrete90 != undefined &&
@@ -698,7 +698,7 @@
                   <select
                     id="inputState"
                     v-model="infoRec.aldreteRec_Aldrete120"
-                    @click.capture="obtenerAldrete, enviarDatosRecuperacion"
+                    @click.capture="obtenerAldrete"
                     class="form-select"
                     :class="
                       infoRec.aldreteRec_Aldrete120 != undefined &&
@@ -1335,10 +1335,10 @@
                                 >Nombre del Médico Anestesiólogo</label
                             >
                             <input
-                                type="text" @keyup.capture="enviarDatosRecuperacion"
+                                type="text" @change.passive="enviarDatosRecuperacion"
                                 class="form-control"                                
-                                v-model="infoRec.altaRec_NomMedAnest"
-                                :class="infoRec.altaRec_NomMedAnest != undefined && infoRec.altaRec_NomMedAnest != '' ?
+                                v-model="preIdStore.NombreAnestesiologo"
+                                :class="preIdStore.NombreAnestesiologo != undefined && preIdStore.NombreAnestesiologo != '' ?
                                         'form-control border border-success formSombra' : 'form-control'"
                             />
                         </div>
@@ -1518,6 +1518,8 @@ export default defineComponent({
       }
 
       this.infoRec.altaRec_CalifAldrete = valorFinalAldrete;
+
+      this.enviarDatosRecuperacion();
     },
 
     enviarDatosRecuperacion(){
@@ -1553,7 +1555,7 @@ export default defineComponent({
                                               postAnestStore.Saturacion45Min=this.infoRec.aldreteRec_SatO245,
                                               postAnestStore.Saturacion60Min=this.infoRec.aldreteRec_SatO260,
                                               postAnestStore.Saturacion90Min=this.infoRec.aldreteRec_SatO290,
-                                              postAnestStore.Saturacion120Min=this.infoRec.aldreteRec_Aldrete120,
+                                              postAnestStore.Saturacion120Min=this.infoRec.aldreteRec_SatO2120,
 
                                               postAnestStore.AldreteIngreso=this.infoRec.aldreteRec_AldreteIn,
                                               postAnestStore.Aldrete15Min=this.infoRec.aldreteRec_Aldrete15,
@@ -1597,7 +1599,7 @@ export default defineComponent({
 
                                               postAnestStore.CalificacionAldrete=this.infoRec.altaRec_CalifAldrete,
                                               postAnestStore.ObservacionesAlta=this.infoRec.altaRec_Obs,
-                                              postAnestStore.NombreAnestesiologo=this.infoRec.altaRec_NomMedAnest,
+                                              postAnestStore.NombreAnestesiologo=preIdStore.NombreAnestesiologo,
                                               postAnestStore.FechaAlta=this.infoRec.altaRec_FechaAltaRec,
                                               postAnestStore.HoraAlta=this.infoRec.altaRec_HrAltaRec,)
     }

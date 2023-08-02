@@ -1407,6 +1407,10 @@ export default defineComponent({
   },
 
   methods: {
+      enviarDatosNotaPost() {
+
+      },
+
       // Imprimir PDF      
       crearPdf() {       
         window.pdfMake.fonts = {
@@ -1417,6 +1421,7 @@ export default defineComponent({
             bolditalics: 'SF-UI-Display-Bold.otf',
           }
         };
+        /***********************PRE***********************/
 
         /*ID PACIENTE*/
         // Nombre
@@ -1750,14 +1755,314 @@ export default defineComponent({
         let complicacionesEquipo = preIdStore.EspecificarComplicacNeuroes === undefined || preIdStore.EspecificarComplicacNeuroes === null ? ' ' : preIdStore.EspecificarComplicacNeuroes;
         let txtComplicacionesEquipo= complicacionesEquipo.length > 100 ? complicacionesEquipo.substring(0, 100) + '...' : complicacionesEquipo;
 
-        // Contenido del documento PDF
+        /*Anestesia Sedación*/
+        // Vía Sedación
+        let viaSedacion = preIdStore.ViaSedacion === undefined || preIdStore.ViaSedacion === null ? ' ' : preIdStore.ViaSedacion;
+        // Opción Sedación
+        let opcionSedacion = preIdStore.OpcionSedacion === undefined || preIdStore.OpcionSedacion === null ? ' ' : preIdStore.OpcionSedacion;
+        // Vía Sedación
+        let obserSedacion = preIdStore.ObservacionesSedacion === undefined || preIdStore.ObservacionesSedacion === null ? ' ' : preIdStore.ObservacionesSedacion;
+        let txtObserSedacion= obserSedacion.length > 100 ? obserSedacion.substring(0, 100) + '...' : obserSedacion;
+        // Vía Sedación
+        let medicamentosSedacion = preIdStore.MedicamentosSedacion === undefined || preIdStore.MedicamentosSedacion === null ? ' ' : preIdStore.MedicamentosSedacion;
+        let txtMedicaSedacion= medicamentosSedacion.length > 100 ? medicamentosSedacion.substring(0, 100) + '...' : medicamentosSedacion;
+
+        /*Anestesia Local*/
+        // Sitio Anestesia
+        let sitioLocal = preIdStore.SitioLocal === undefined || preIdStore.SitioLocal === null ? ' ' : preIdStore.SitioLocal;
+        // Anestesico Utilizado
+        let anestesicoLocal = preIdStore.AnestesicoLocal === undefined || preIdStore.AnestesicoLocal === null ? ' ' : preIdStore.AnestesicoLocal;
+        // Especificar
+        let especificarLocal = preIdStore.EspecificarLocal === undefined || preIdStore.EspecificarLocal === null ? ' ' : preIdStore.EspecificarLocal;
+        let txtEspecifLocal= especificarLocal.length > 100 ? especificarLocal.substring(0, 100) + '...' : especificarLocal;
+
+        /*NOTA PREANÉSTESICA*/
+        let notaPre = preIdStore.NotaPre === undefined || preIdStore.NotaPre === null ? ' ' : preIdStore.NotaPre;
+        let txtNotaPre = notaPre.length > 6500 ? notaPre.substring(0, 6500) + '...' : notaPre;
+
+        /***********************POST***********************/
+
+        /*NOTA POST*/
+
+        /*Caso Obstetrico Recién Nacido*/
+        // Número de Productos        
+        let numProductos = postAnestStore.NumeroProductos === undefined || postAnestStore.NumeroProductos === null ? ' ' : postAnestStore.NumeroProductos;
+        // Tipo Alumbramiento        
+        let alumbramiento = postAnestStore.AlumbramientoUno === undefined || postAnestStore.AlumbramientoUno === null ? ' ' : postAnestStore.AlumbramientoUno;
+        // Hora Nacimiento       
+        let horaNacimiento = postAnestStore.HoraNacimientoUno === undefined || postAnestStore.HoraNacimientoUno === null ? ' ' : postAnestStore.HoraNacimientoUno;
+        // Genero        
+        let genero = postAnestStore.GeneroUno === undefined || postAnestStore.GeneroUno === null ? ' ' : postAnestStore.GeneroUno;
+        // Apgar 1 min       
+        let apgar1 = postAnestStore.Apgar1Uno === undefined || postAnestStore.Apgar1Uno === null ? ' ' : postAnestStore.Apgar1Uno;
+        // Apgar 5 min        
+        let apgar5 = postAnestStore.Apgar5Uno === undefined || postAnestStore.Apgar5Uno === null ? ' ' : postAnestStore.Apgar5Uno;
+        // Capurro       
+        let capurro = postAnestStore.CapurroUno === undefined || postAnestStore.CapurroUno === null ? ' ' : postAnestStore.CapurroUno;
+        // Peso       
+        let pesoNacido = postAnestStore.PesoUno === undefined || postAnestStore.PesoUno === null ? ' ' : postAnestStore.PesoUno;
+        // Talla        
+        let tallaNacido = postAnestStore.TallaUno === undefined || postAnestStore.TallaUno === null ? ' ' : postAnestStore.TallaUno;
+
+        /*Nota Post-Anestésica*/
+
+        // Técnica de Anestesia Final
+        let tecnicaAnestFinal = postAnestStore.TecnicaAnestesica === undefined || postAnestStore.TecnicaAnestesica === null ? ' ' : String(postAnestStore.TecnicaAnestesica);
+        // Intubación
+        let intubacionPost = postAnestStore.Intubacion === undefined || postAnestStore.Intubacion === null ? ' ' : postAnestStore.Intubacion;
+        // Nota Post Anestésica
+        let notaPost = postAnestStore.NotaPost === undefined || postAnestStore.NotaPost === null ? ' ' : postAnestStore.NotaPost;
+        let txtNotaPost = notaPost.length > 1000 ? notaPost.substring(0, 1000) + '...' : notaPost;
+        // TA
+        let TAPost = postAnestStore.EgresoTA === undefined || postAnestStore.EgresoTA === null ? ' ' : postAnestStore.EgresoTA;
+        // FC
+        let FCPost = postAnestStore.EgresoFC === undefined || postAnestStore.EgresoFC === null ? ' ' : postAnestStore.EgresoFC;
+        // FR
+        let FRPost = postAnestStore.EgresoFR === undefined || postAnestStore.EgresoFC === null ? ' ' : postAnestStore.EgresoFC;
+        // Temperatura
+        let TemperaturaPost = postAnestStore.EgresoTemp === undefined || postAnestStore.EgresoTemp === null ? ' ' : postAnestStore.EgresoTemp;
+        // Pulso
+        let PulsoPost = postAnestStore.EgresoPulso === undefined || postAnestStore.EgresoPulso === null ? ' ' : postAnestStore.EgresoPulso;
+        // SpO2
+        let SpO2Post = postAnestStore.EgresoSpO2 === undefined || postAnestStore.EgresoSpO2 === null ? ' ' : postAnestStore.EgresoSpO2;
+        // Paciente Pasa a
+        let pacientePasa = postAnestStore.DestinoEgreso === undefined || postAnestStore.DestinoEgreso === null ? ' ' : postAnestStore.DestinoEgreso;
+        
+        /*RECUPERACIÓN*/
+        /*Nota de Evaluación UCPA*/
+        let notaUCPA = postAnestStore.NotaUCPA === undefined || postAnestStore.NotaUCPA === null ? ' ' : postAnestStore.NotaUCPA;
+        let txtNotaUCPA = notaUCPA.length > 1000 ? notaUCPA.substring(0, 1000) + '...' : notaUCPA;
+
+        /*Aldrete de Recuperación*/
+        // FC Ingreso
+        let FCIngreso = postAnestStore.FCIngreso === undefined || postAnestStore.FCIngreso === null ? ' ' : postAnestStore.FCIngreso;
+        // FC 15 min
+        let FC15 = postAnestStore.FC15Min === undefined || postAnestStore.FC15Min === null ? ' ' : postAnestStore.FC15Min;
+        // FC 30 min
+        let FC30 = postAnestStore.FC30Min === undefined || postAnestStore.FC30Min === null ? ' ' : postAnestStore.FC30Min;
+        // FC 45 min
+        let FC45 = postAnestStore.FC45Min === undefined || postAnestStore.FC45Min === null ? ' ' : postAnestStore.FC45Min;
+        // FC 60 min
+        let FC60 = postAnestStore.FC60Min === undefined || postAnestStore.FC60Min === null ? ' ' : postAnestStore.FC60Min;
+        // FC 90 min
+        let FC90 = postAnestStore.FC90Min === undefined || postAnestStore.FC90Min === null ? ' ' : postAnestStore.FC90Min;
+        // FC 120 min
+        let FC120 = postAnestStore.FC120Min === undefined || postAnestStore.FC120Min === null ? ' ' : postAnestStore.FC120Min;
+        // FR Ingreso
+        let FRIngreso = postAnestStore.FRIngreso === undefined || postAnestStore.FRIngreso === null ? ' ' : postAnestStore.FRIngreso;
+        // FR 15 min
+        let FR15 = postAnestStore.FR15Min === undefined || postAnestStore.FR15Min === null ? ' ' : postAnestStore.FR15Min;
+        // FR 30 min
+        let FR30 = postAnestStore.FR30Min === undefined || postAnestStore.FR30Min === null ? ' ' : postAnestStore.FR30Min;
+        // FR 45 min
+        let FR45 = postAnestStore.FR45Min === undefined || postAnestStore.FR45Min === null ? ' ' : postAnestStore.FR45Min;
+        // FR 60 min
+        let FR60 = postAnestStore.FR60Min === undefined || postAnestStore.FR60Min === null ? ' ' : postAnestStore.FR60Min;
+        // FR 90 min
+        let FR90 = postAnestStore.FR90Min === undefined || postAnestStore.FR90Min === null ? ' ' : postAnestStore.FR90Min;
+        // FR 120 min
+        let FR120 = postAnestStore.FR120Min === undefined || postAnestStore.FR120Min === null ? ' ' : postAnestStore.FR120Min;
+        // Tensión Arterial Ingreso
+        let tensionIngreso = postAnestStore.TensionIngreso === undefined || postAnestStore.TensionIngreso === null ? ' ' : postAnestStore.TensionIngreso;
+        // Tensión Arterial 15 min
+        let tension15 = postAnestStore.Tension15Min === undefined || postAnestStore.Tension15Min === null ? ' ' : postAnestStore.Tension15Min;
+        // Tensión Arterial 30 min
+        let tension30 = postAnestStore.Tension30Min === undefined || postAnestStore.Tension30Min === null ? ' ' : postAnestStore.Tension30Min;
+        // Tensión Arterial 45 min
+        let tension45 = postAnestStore.Tension45Min === undefined || postAnestStore.Tension45Min === null ? ' ' : postAnestStore.Tension45Min;
+        // Tensión Arterial 60 min
+        let tension60 = postAnestStore.Tension60Min === undefined || postAnestStore.Tension60Min === null ? ' ' : postAnestStore.Tension60Min;
+        // Tensión Arterial 90 min
+        let tension90 = postAnestStore.Tension90Min === undefined || postAnestStore.Tension90Min === null ? ' ' : postAnestStore.Tension90Min;
+        // Tensión Arterial 120 min
+        let tension120 = postAnestStore.Tension120Min === undefined || postAnestStore.Tension120Min === null ? ' ' : postAnestStore.Tension120Min;
+        // SpO2 Ingreso
+        let saturacionIngreso = postAnestStore.SaturacionIngreso === undefined || postAnestStore.SaturacionIngreso === null ? ' ' : postAnestStore.SaturacionIngreso;
+        // SpO2 15 min
+        let saturacion15 = postAnestStore.Saturacion15Min === undefined || postAnestStore.Saturacion15Min === null ? ' ' : postAnestStore.Saturacion15Min;
+        // SpO2 30 min
+        let saturacion30 = postAnestStore.Saturacion30Min === undefined || postAnestStore.Saturacion30Min === null ? ' ' : postAnestStore.Saturacion30Min;
+        // SpO2 45 min
+        let saturacion45 = postAnestStore.Saturacion45Min === undefined || postAnestStore.Saturacion45Min === null ? ' ' : postAnestStore.Saturacion45Min;
+        // SpO2 60 min
+        let saturacion60 = postAnestStore.Saturacion60Min === undefined || postAnestStore.Saturacion60Min === null ? ' ' : postAnestStore.Saturacion60Min;
+        // SpO2 90 min
+        let saturacion90 = postAnestStore.Saturacion90Min === undefined || postAnestStore.Saturacion90Min === null ? ' ' : postAnestStore.Saturacion90Min;
+        // SpO2 120 min
+        let saturacion120 = postAnestStore.Saturacion120Min === undefined || postAnestStore.Saturacion120Min === null ? ' ' : postAnestStore.Saturacion120Min;
+        // Aldrete Ingreso
+        let aldreteIngreso = postAnestStore.AldreteIngreso === undefined || postAnestStore.AldreteIngreso === null ? ' ' : postAnestStore.AldreteIngreso;
+        // Aldrete 15 min
+        let aldrete15 = postAnestStore.Aldrete15Min === undefined || postAnestStore.Aldrete15Min === null ? ' ' : postAnestStore.Aldrete15Min;
+        // Aldrete 30 min
+        let aldrete30 = postAnestStore.Aldrete30Min === undefined || postAnestStore.Aldrete30Min === null ? ' ' : postAnestStore.Aldrete30Min;
+        // Aldrete 45 min
+        let aldrete45 = postAnestStore.Aldrete45Min === undefined || postAnestStore.Aldrete45Min === null ? ' ' : postAnestStore.Aldrete45Min;
+        // Aldrete 60 min
+        let aldrete60 = postAnestStore.Aldrete60Min === undefined || postAnestStore.Aldrete60Min === null ? ' ' : postAnestStore.Aldrete60Min;
+        // Aldrete 90 min
+        let aldrete90 = postAnestStore.Aldrete90Min === undefined || postAnestStore.Aldrete90Min === null ? ' ' : postAnestStore.Aldrete90Min;
+        // Aldrete 120 min
+        let aldrete120 = postAnestStore.Aldrete120Min === undefined || postAnestStore.Aldrete120Min === null ? ' ' : postAnestStore.Aldrete120Min;
+        // Bromage Ingreso
+        let bromageIngreso = postAnestStore.BromageIngreso === undefined || postAnestStore.BromageIngreso === null ? ' ' : postAnestStore.BromageIngreso;
+        // Bromage 15 min
+        let bromage15 = postAnestStore.Bromage15Min === undefined || postAnestStore.Bromage15Min === null ? ' ' : postAnestStore.Bromage15Min;
+        // Bromage 30 min
+        let bromage30 = postAnestStore.Bromage30Min === undefined || postAnestStore.Bromage30Min === null ? ' ' : postAnestStore.Bromage30Min;
+        // Bromage 45 min
+        let bromage45 = postAnestStore.Bromage45Min === undefined || postAnestStore.Bromage45Min === null ? ' ' : postAnestStore.Bromage45Min;
+        // Bromage 60 min
+        let bromage60 = postAnestStore.Bromage60Min === undefined || postAnestStore.Bromage60Min === null ? ' ' : postAnestStore.Bromage60Min;
+        // Bromage 90 min
+        let bromage90 = postAnestStore.Bromage90Min === undefined || postAnestStore.Bromage90Min === null ? ' ' : postAnestStore.Bromage90Min;
+        // Bromage 120 min
+        let bromage120 = postAnestStore.Bromage120Min === undefined || postAnestStore.Bromage120Min === null ? ' ' : postAnestStore.Bromage120Min;
+        // Nauseas/Vomito Ingreso
+        let nauseasIngreso = postAnestStore.NauseaIngreso === undefined || postAnestStore.NauseaIngreso === null ? ' ' : postAnestStore.NauseaIngreso;
+        // Nauseas/Vomito 15 min
+        let nauseas15 = postAnestStore.Nausea15Min === undefined || postAnestStore.Nausea15Min === null ? ' ' : postAnestStore.Nausea15Min;
+        // Nauseas/Vomito 30 min
+        let nauseas30 = postAnestStore.Nausea30Min === undefined || postAnestStore.Nausea30Min === null ? ' ' : postAnestStore.Nausea30Min;
+        // Nauseas/Vomito 45 min
+        let nauseas45 = postAnestStore.Nausea45Min === undefined || postAnestStore.Nausea45Min === null ? ' ' : postAnestStore.Nausea45Min;
+        // Nauseas/Vomito 60 min
+        let nauseas60 = postAnestStore.Nausea60Min === undefined || postAnestStore.Nausea60Min === null ? ' ' : postAnestStore.Nausea60Min;
+        // Nauseas/Vomito 90 min
+        let nauseas90 = postAnestStore.Nausea90Min === undefined || postAnestStore.Nausea90Min === null ? ' ' : postAnestStore.Nausea90Min;
+        // Nauseas/Vomito 120 min
+        let nauseas120 = postAnestStore.Nausea120Min === undefined || postAnestStore.Nausea120Min === null ? ' ' : postAnestStore.Nausea120Min;
+        // Escala de EVA Dolor Ingreso
+        let EVAIngreso = postAnestStore.EscalaEVAIngreso === undefined || postAnestStore.EscalaEVAIngreso === null ? ' ' : postAnestStore.EscalaEVAIngreso;
+        // Escala de EVA Dolor 15 min
+        let EVA15 = postAnestStore.EscalaEVA15Min === undefined || postAnestStore.EscalaEVA15Min === null ? ' ' : postAnestStore.EscalaEVA15Min;
+        // Escala de EVA Dolor 30 min
+        let EVA30 = postAnestStore.EscabaEVA30Min === undefined || postAnestStore.EscabaEVA30Min === null ? ' ' : postAnestStore.EscabaEVA30Min;
+        // Escala de EVA Dolor 45 min
+        let EVA45 = postAnestStore.EscalaEVA45Min === undefined || postAnestStore.EscalaEVA45Min === null ? ' ' : postAnestStore.EscalaEVA45Min;
+        // Escala de EVA Dolor 60 min
+        let EVA60 = postAnestStore.EscalaEVA60Min === undefined || postAnestStore.EscalaEVA60Min === null ? ' ' : postAnestStore.EscalaEVA60Min;
+        // Escala de EVA Dolor 90 min
+        let EVA90 = postAnestStore.EscalaEVA90Min === undefined || postAnestStore.EscalaEVA90Min === null ? ' ' : postAnestStore.EscalaEVA90Min;
+        // Escala de EVA Dolor 120 min
+        let EVA120 = postAnestStore.EscalaEVA120Min === undefined || postAnestStore.EscalaEVA120Min === null ? ' ' : postAnestStore.EscalaEVA120Min;
+
+        /*Alta de Recuperación*/
+        // Aldrete Final 0 min
+        let aldreteFinalIngreso = postAnestStore.AldreteFinal0Min === undefined || postAnestStore.AldreteFinal0Min === null ? ' ' : postAnestStore.AldreteFinal0Min;
+        // Aldrete Final 15 min
+        let aldreteFinal15 = postAnestStore.AldreteFinal15Min === undefined || postAnestStore.AldreteFinal15Min === null ? ' ' : postAnestStore.AldreteFinal15Min;
+        // Aldrete Final 30 min
+        let aldreteFinal30 = postAnestStore.AldreteFinal30Min === undefined || postAnestStore.AldreteFinal30Min === null ? ' ' : postAnestStore.AldreteFinal30Min;
+        // Aldrete Final 45 min
+        let aldreteFinal45 = postAnestStore.AldreteFinal45Min === undefined || postAnestStore.AldreteFinal45Min === null ? ' ' : postAnestStore.AldreteFinal45Min;
+        // Aldrete Final 60 min
+        let aldreteFinal60 = postAnestStore.AldreteFinal60Min === undefined || postAnestStore.AldreteFinal60Min === null ? ' ' : postAnestStore.AldreteFinal60Min;
+        // Aldrete Final 90 min
+        let aldreteFinal90 = postAnestStore.AldreteFinal90Min === undefined || postAnestStore.AldreteFinal90Min === null ? ' ' : postAnestStore.AldreteFinal90Min;
+        // Aldrete 120 min
+        let aldreteFinal120 = postAnestStore.AldreteFinal120Min === undefined || postAnestStore.AldreteFinal120Min === null ? ' ' : postAnestStore.AldreteFinal120Min;
+        // Calificación Aldrete
+        let calificacionAldrete = postAnestStore.CalificacionAldrete === undefined || postAnestStore.CalificacionAldrete === null ? ' ' : postAnestStore.CalificacionAldrete;
+        // Observaciones Alta
+        let observAlta = postAnestStore.ObservacionesAlta === undefined || postAnestStore.ObservacionesAlta === null ? ' ' : postAnestStore.ObservacionesAlta;
+        let txtObservAlta = observAlta.length > 1000 ? observAlta.substring(0, 1000) + '...' : observAlta;      
+        // Fecha Alta Recuperación
+        let fechaAlta = postAnestStore.FechaAlta === undefined || postAnestStore.FechaAlta === null ? ' ' : postAnestStore.FechaAlta;
+        // Hora Alta Recuperación
+        let horaAlta = postAnestStore.HoraAlta === undefined || postAnestStore.HoraAlta === null ? ' ' : postAnestStore.HoraAlta;
+
+        /***********************TRANS***********************/
+
+        /*Datos del Medicamento*/
+        let listaMedicamentos = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
+            item.medicamentosCx.map(medicamento => 
+            medicamento.tipoMed+ ' '+ 
+            medicamento.medicamento+ ' '+ 
+            medicamento.dosisMed+ ' '+ 
+            medicamento.unidadMed+ ' '+ 
+            medicamento.viaMed+ ' ' +
+            medicamento.horaInicioMed+ ' '+ 
+            medicamento.horaFinalMed+ ' '+ 
+            medicamento.observacionesMed)).flat();
+        let medicamentos = listaMedicamentos.slice(0,20);
+
+        /*Datos del Relevo*/
+        let listaRelevos = transAnestStore.relevos === null ? [' '] : transAnestStore.relevos.map(item=>
+            item.relevoCx.map(relevo => 
+            relevo.horaRelevo+ ' '+ 
+            relevo.matriculaRel+ ' '+ 
+            relevo.anestesiologoRel+ ' '+ 
+            relevo.observacionesRel)).flat();
+        let relevos = listaRelevos.slice(0,20);
+
+        /*Datos del Evento Crítico*/
+        let listaEventos = transAnestStore.eventos === null ? [' '] : transAnestStore.eventos.map(item=>
+            item.evCriticoCx.map(evento => 
+            evento.horaEvento+ ' '+ 
+            evento.detalleEvento)).flat();
+        let eventos = listaEventos.slice(0,20);
+
+        /*Técnica Anestésica*/
+        // Técnica Anestésica Final
+
+        /*Balance Hidrico*/
+        // Solución Hartman
+        // Solución Fisiológica
+        // Glucosados
+        // Gelatinas
+        // Almidones
+        // Albúminas
+        // Paquete Globular
+        // Plasmas
+        // Plaquetas
+        // Crioprecipitados
+        // Factor VII
+        // Factor VIII
+        // Otros Ingresos
+        // Liquidos de Ascitis
+        // Sangrado Aproximado
+        // Uresis
+        // Exposición Quirúrgica
+        // Requerimientos Basales
+        // Ayuno
+        // Otros Egresos
+
+        /*Datos del Ventilador*/
+        // Modos de Ventilación
+        // PEEP
+        // VT
+        // Frec. Resp
+        // I:E
+        // P.Límite
+
+        /*Tiempos Quirurgicos*/
+        // QX IN
+        // ANES IN
+        // CX IN
+        // CX OUT
+        // ANES OUT
+        // QX OUT
+
+        /*Grid Anestésico*/
+
+        // Construcción del PDF
         let docDefinition = {
-          content: [           
-            {
+          //Header
+          header: {
+            margin: [33, 10],
+            image: 'data:image/png;base64,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',
+			      width: 120,
+            alignment: 'left',                
+          },
+          content: [
+            /*PRE*/
+            //Primera Hoja
+            {              
               columns: [                
-                {                  
+                {
                   width:'30%',
-                  margin: [0, 40, 0, 0],
+                  margin: [0, 20, 0, 0],
                     stack: [
                       // Nombre paciente
                       {
@@ -1832,7 +2137,7 @@ export default defineComponent({
                 },
                 {
                   width:'30%',
-                  margin: [0, 40, 0, 0],
+                  margin: [0, 20, 0, 0],
                     stack: [
                       {
                         text:{text: 'DEMOGRAFÍA', font:'SF', fontSize: 8, bold:true,}
@@ -1906,7 +2211,7 @@ export default defineComponent({
                 },
                 {
                   width:'30%',
-                  margin: [0, 40, 0, 0],
+                  margin: [0, 20, 0, 0],
                     stack: [
                       // Cirujano
                       {
@@ -2271,7 +2576,7 @@ export default defineComponent({
               columns:[
                 {
                   width: '30%',
-                  margin: [0, 40, 0, 0],
+                  margin: [0, 20, 0, 0],
                   pageBreak: 'before',
                     stack: [
                       // EXAMENES  
@@ -2475,7 +2780,7 @@ export default defineComponent({
                 },
                 {
                   width: '30%',
-                  margin: [0, 40, 0, 0],
+                  margin: [0, 20, 0, 0],
                   pageBreak: 'before',
                     stack: [
                       // VÍA AÉREA
@@ -2685,7 +2990,7 @@ export default defineComponent({
                 },
                 {
                   width: '40%',
-                  margin: [0, 40, 0, 0],
+                  margin: [0, 20, 0, 0],
                   pageBreak: 'before',
                     stack: [
                       // ESTUDIOS  
@@ -2952,12 +3257,484 @@ export default defineComponent({
                     ]
                 }
               ]
-            }
-          ],
+            },
+            //Tercera Hoja
+            {
+              columns:[
+                {
+                  width: '50%',
+                  margin: [0, 20 ,0 ,0],
+                  pageBreak: 'before',
+                    stack: [
+                      // SEDACIÓN  
+                      {
+                        text: [
+                          { text: 'SEDACIÓN', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Vía
+                      {
+                        text: [
+                          { text: '\nVía: ', font: 'SF', fontSize: 8 },
+                          { text: viaSedacion, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Opción
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Opción: ', font: 'SF', fontSize: 8 },
+                          { text: opcionSedacion, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Medicamentos Utilizados
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Medicamentos Utilizados: ', font: 'SF', fontSize: 8 },
+                          { text: txtMedicaSedacion, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Observaciones
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Observaciones: ', font: 'SF', fontSize: 8 },
+                          { text: txtObserSedacion, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                    ]
+                },
+                {
+                  width: '50%',
+                  margin: [0,20,0,0],
+                  pageBreak: 'before',
+                    stack: [
+                      // ANESTESIA LOCAL  
+                      {
+                        text: [
+                          { text: 'ANESTESIA LOCAL', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Vía
+                      {
+                        text: [
+                          { text: '\nSitio de la Anestesia: ', font: 'SF', fontSize: 8 },
+                          { text: sitioLocal, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Anéstesico Utilizado
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Anéstesico Utilizado: ', font: 'SF', fontSize: 8 },
+                          { text: anestesicoLocal, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Especificar
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Especificar: ', font: 'SF', fontSize: 8 },
+                          { text: txtEspecifLocal, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                    ]
+                }
+              ]
+            },
+            {
+              columns: [
+                {
+                  width: '34%',
+                  margin: [0, 20 ,0 ,0],
+                    stack: [
+                      // SEDACIÓN  
+                      {
+                        text: [
+                          { text: 'CASO OBSTETRICO', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Número de Productos
+                      {
+                        text: [
+                          { text: '\nNúmero de Productos: ', font: 'SF', fontSize: 8 },
+                          { text: numProductos, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Tipo Alumbramiento
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Tipo Alumbramiento: ', font: 'SF', fontSize: 8 },
+                          { text: alumbramiento, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Hora Nacimiento
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Hora Nacimiento: ', font: 'SF', fontSize: 8 },
+                          { text: horaNacimiento, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                    ]
+                },
+                {
+                  width: '33%',
+                  margin: [0, 20, 0, 0],
+                    stack: [
+                      {
+                        text: [
+                          { text: ' ', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Genero
+                      {
+                        text: [
+                          { text: '\nGenero: ', font: 'SF', fontSize: 8 },
+                          { text: genero, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Apgar 1 min
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Apgar 1 min: ', font: 'SF', fontSize: 8 },
+                          { text: apgar1, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                       // Apgar 5 min
+                       {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Apgar 5 min: ', font: 'SF', fontSize: 8 },
+                          { text: apgar5, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                    ]
+                },
+                {
+                  width: '34%',
+                  margin: [0, 20, 0, 0],
+                    stack: [
+                      {
+                        text: [
+                          { text: ' ', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Capurro
+                      {
+                        text: [
+                          { text: '\nCapurro: ', font: 'SF', fontSize: 8 },
+                          { text: capurro, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Peso
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Peso (gm): ', font: 'SF', fontSize: 8 },
+                          { text: pesoNacido, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                       // Talla
+                       {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Talla (cm): ', font: 'SF', fontSize: 8 },
+                          { text: tallaNacido, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                    ]
+                }
+              ]
+            },
+            {
+              margin: [0, 20 ,0 ,0],
+                stack: [
+                  {
+                    text: [
+                      { text: 'NOTA PREANÉSTESICA', font: 'SF', fontSize: 8, bold:true },
+                    ],
+                  },
+                  // Nota Pre Anéstesica
+                  {
+                    text: [
+                      { text: txtNotaPre, font: 'SF', fontSize: 8, bold:true },
+                    ],
+                  },
+                ]
+            },            
+            /*TRANS*/
+            {
+              columns:[
+                {
+                  margin: [0, 20, 0, 0],
+                  pageOrientation: 'landscape', // Orientación Horizontal
+                  pageBreak: 'before',
+                    stack:[
+                      /*NOTA TRANS-ANESTÉSICA*/
+                      // Técnica de Anestesia Final
+                      {
+                        text: [
+                          { text: 'TRANS-ANESTÉSICA', font: 'SF', fontSize: 8, bold: true },
+                        ],
+                      },
+                      // Tipo Medicamento
+                      {
+                        text: [
+                          { text: 'Tipo Medicamento: ', font: 'SF', fontSize: 8 },
+                        ],
+                      },
+                      {
+                        ul: medicamentos.map(medicamento => ({ text: medicamento})),font: 'SF', fontSize: 8, bold:true
+                      },
+                      // Tipo Relevo
+                      {
+                        text: [
+                          { text: 'Tipo Relevo: ', font: 'SF', fontSize: 8 },
+                        ],
+                      },
+                      {
+                        ul: relevos.map(relevo => ({ text: relevo})),font: 'SF', fontSize: 8, bold:true
+                      },
+                      // Tipo Evento
+                      {
+                        text: [
+                          { text: 'Tipo Evento: ', font: 'SF', fontSize: 8 },
+                        ],
+                      },
+                      {
+                        ul: eventos.map(evento => ({ text: evento})),font: 'SF', fontSize: 8, bold:true
+                      },
+                    ]
+                }
+              ]
+            },
+            /*POST*/
+            {
+              pageOrientation: 'portrait',
+              pageBreak: 'before',
+              columns:[
+                { 
+                  width: '100%',
+                  margin: [0, 20, 0, 0],
+                    stack: [
+                      /*NOTA POST-ANESTÉSICA*/
+                      /*NOTA DE EVALUACIÓN UCPA*/
+                      {
+                        text: [
+                          { text: 'NOTA DE EVALUACIÓN UCP', font: 'SF', fontSize: 8},
+                        ],
+                      },
+                      {
+                        text: [
+                          { text: txtNotaUCPA, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      /*ALDRETE DE RECUPERACIÓN*/
+                      {
+                        margin: [0, 10, 0, 0],
+                        text: [
+                          { text: 'ALDRETE DE RECUPERACIÓN', font: 'SF', fontSize: 8, bold:true},
+                        ]
+                      },
+                      {
+                        margin: [0, 10, 0, 0],
+                        table: {
+                          body: [
+                            ['Criterio: ', 'Ingreso', '15 min', '30 min', '45 min', '60 min', '90 min', '120 min'],
+                            ['Frecuencia Cardiáca', {text: FCIngreso, style: 'bold'}, {text: FC15, style: 'bold'}, {text: FC30, style: 'bold'}, {text: FC45, style: 'bold'}, {text: FC60, style: 'bold'}, {text: FC90, style: 'bold'}, {text: FC120, style: 'bold'}],
+                            ['Frecuencia Respiratorio', {text: FRIngreso, style: 'bold'}, {text: FR15, style: 'bold'}, {text: FR30, style: 'bold'}, {text: FR45, style: 'bold'}, {text: FR60, style: 'bold'}, {text: FR90, style: 'bold'}, {text: FR120, style: 'bold'}],
+                            ['Tensión Arterial', {text: tensionIngreso, style: 'bold'}, {text: tension15, style: 'bold'}, {text: tension30, style: 'bold'}, {text: tension45, style: 'bold'}, {text: tension60, style: 'bold'}, {text: tension90, style: 'bold'}, {text: tension120, style: 'bold'}],
+                            ['Saturación de O2', {text: saturacionIngreso, style: 'bold'}, {text: saturacion15, style: 'bold'}, {text: saturacion30, style: 'bold'}, {text: saturacion45, style: 'bold'}, {text: saturacion60, style: 'bold'}, {text: saturacion90, style: 'bold'}, {text: saturacion120, style: 'bold'}],
+                            ['Aldrete', {text: aldreteIngreso, style: 'bold'}, {text: aldrete15, style: 'bold'}, {text: aldrete30, style: 'bold'}, {text: aldrete45, style: 'bold'}, {text: aldrete60, style: 'bold'}, {text: aldrete90, style: 'bold'}, {text: aldrete120, style: 'bold'}],
+                            ['Bromage', {text: bromageIngreso, style: 'bold'}, {text: bromage15, style: 'bold'}, {text: bromage30, style: 'bold'}, {text: bromage45, style: 'bold'}, {text: bromage60, style: 'bold'}, {text: bromage90, style: 'bold'}, {text: bromage120, style: 'bold'}],
+                            ['Nauseas/Vómito', {text: nauseasIngreso, style: 'bold'}, {text: nauseas15, style: 'bold'}, {text: nauseas30, style: 'bold'}, {text: nauseas45, style: 'bold'}, {text: nauseas60, style: 'bold'}, {text: nauseas90, style: 'bold'}, {text: nauseas120, style: 'bold'}],
+                            ['Escala de EVA Dolor', {text: EVAIngreso, style: 'bold'}, {text: EVA15, style: 'bold'}, {text: EVA30, style: 'bold'}, {text: EVA45, style: 'bold'}, {text: EVA60, style: 'bold'}, {text: EVA90, style: 'bold'}, {text: EVA120, style: 'bold'}],
+                          ]
+                        }, font: 'SF', fontSize: 8
+                      },                          
+                    ]
+                }
+              ]
+            },
+            {
+              columns:[
+                {
+                  width: '70%',
+                  margin: [0, 10, 0, 0],
+                    stack: [
+                      /*ALTA DE RECUPERACIÓN*/
+                      {
+                        text:[
+                          {text: 'ALTA DE RECUPERACIÓN', font:'SF', fontSize:8, bold:true}
+                        ],
+                      },
+                      // Calificación de Aldrete
+                      {
+                        text: [
+                          { text: '\nCalificación de Aldrete: ', font: 'SF', fontSize: 8 },
+                          { text: calificacionAldrete, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Nombre del Médico Anestesiólogo
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Nombre del Médico Anestesiólogo: ', font: 'SF', fontSize: 8 },
+                          { text: txtAnestesiologo, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },                                                
+                    ]
+                },
+                {
+                  width: '30%',
+                  margin: [0, 10, 0, 0],
+                    stack: [                      
+                      {
+                        text:[
+                          {text: 'ALTA DE RECUPERACIÓN', font:'SF', fontSize:8, bold:true}
+                        ],
+                      },
+                      // Fecha de Alta de Recuperación
+                      {
+                        text: [
+                          { text: '\nFecha: ', font: 'SF', fontSize: 8 },
+                          { text: fechaAlta, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Hora de Alta de Recuperación
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Hora: ', font: 'SF', fontSize: 8 },
+                          { text: horaAlta, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },                      
+                    ]
+                },                
+              ]
+            },
+            {
+              columns: [
+              {
+                width: '100%',
+                  stack: [
+                    // Observaciones
+                    {
+                      margin: [0, 2.5, 0, 0],
+                      text: [
+                        { text: 'Observaciones: ', font: 'SF', fontSize: 8 },
+                        { text: txtObservAlta, font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },                      
+                  ]                    
+                }
+              ]
+            },
+            {
+              columns:[
+                {
+                  width: '50%',
+                  margin: [0, 10, 0, 0],
+                    stack: [
+                      /*NOTA POST-ANÉSTESICA*/
+                      {
+                        text:[
+                          {text: 'NOTA POST-ANÉSTESICA', font:'SF', fontSize:8, bold:true}
+                        ],
+                      },
+                      // Técnica de Anestesia Final
+                      {
+                        text: [
+                          { text: '\nTécnica de Anestesia Final: ', font: 'SF', fontSize: 8 },
+                          { text: tecnicaAnestFinal, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },                                                               
+                    ]
+                },
+                {
+                  width: '50%',
+                  margin: [0, 10, 0, 0],
+                    stack: [                      
+                      {
+                        text:[
+                          {text: ' ', font:'SF', fontSize:8, bold:true}
+                        ],
+                      },
+                      // Intubación
+                      {
+                        text: [
+                          { text: '\nIntubación: ', font: 'SF', fontSize: 8 },
+                          { text: intubacionPost, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },                                                     
+                    ]
+                },                
+              ]
+            },
+            {
+              columns: [
+              {
+                width: '100%',
+                  stack: [
+                    // Nota Post-Anestésica
+                    {
+                      margin: [0, 2.5, 0, 0],
+                      text: [
+                        { text: 'Nota: ', font: 'SF', fontSize: 8 },
+                        { text: txtNotaPost, font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },
+                  ]                    
+                }
+              ]
+            },
+            {
+              // Signos Vitales al Egreso
+              columns: [
+                {
+                  width: '100%',
+                  margin: [0, 10, 0, 0],
+                    stack: [
+                      {
+                        text:[
+                          { text: 'SIGNOS VITALES AL EGRESO', font: 'SF', fontSize: 8, bold:true},
+                        ]
+                      },
+                      {
+                        margin: [0, 10, 0, 0],
+                        table: {
+                          body: [
+                            ['TA: ', 'FC', 'FR', 'Temp', 'Pulso', 'SpO2'],
+                            [TAPost, FCPost, FRPost, TemperaturaPost, PulsoPost, SpO2Post],
+                          ]
+                        }, font: 'SF', fontSize: 8
+                      },                                                             
+                      
+                      // El paciente pasa a
+                      {
+                        text: [
+                          { text: '\nEl Paciente Pasa a: ', font: 'SF', fontSize: 8 },
+                          { text: pacientePasa, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },            
+                    ]
+                },                
+              ],
+            },
+          ],        
           styles:{
             normal:{
               font:'SF',
               fontSize: 8
+            },
+            bold:{
+              font:'SF',
+              fontSize: 8,
+              bold: true
             }
           }
         };
