@@ -1351,7 +1351,7 @@ export default defineComponent({
 
   mounted: function() { // Llama el método despues de cargar la página    
     transAnestStore.getDetieneMonitoreo();
-    // this.pingMSV(medStore.monitor[0].dirIPMVS);
+    this.pingMSV(medStore.monitor[0].dirIPMVS);
     transAnestStore.listDatosV(preIdStore.pacienteID._id);
     this.listaTecAnest();
     
@@ -1392,9 +1392,9 @@ export default defineComponent({
     this.menuTrans.tipoRel= "RELEVO";
     this.menuTrans.tipoEve= "EVENTO";
     
-    // this.tempMSV = setInterval(() => {
-    //   this.pingMSV(medStore.monitor[0].dirIPMVS);
-    // }, 10000);
+    this.tempMSV = setInterval(() => {
+      this.pingMSV(medStore.monitor[0].dirIPMVS);
+    }, 10000);
 
     const gridLateral = document.getElementById('grid-lateral');
     const grid = document.getElementById('grid');
@@ -1957,33 +1957,76 @@ export default defineComponent({
         /***********************TRANS***********************/
 
         /*Datos del Medicamento*/
-        let listaMedicamentos = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
-            item.medicamentosCx.map(medicamento => 
-            medicamento.tipoMed+ '     '+ 
-            medicamento.medicamento+ '     '+ 
-            (medicamento.dosisMed ?? ' ')+ '     '+ 
-            (medicamento.unidadMed ?? ' ')+ '     '+ 
-            (medicamento.viaMed ?? ' ')+ '     ' +
-            (medicamento.horaInicioMed ?? ' ')+ '     '+ 
-            (medicamento.horaFinalMed ?? ' ')+ '     '+ 
-            (medicamento.observacionesMed ?? '     '))).flat();
-        let medicamentos = listaMedicamentos.slice(0,20);
+        let listaMedicamentosTipo = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
+            item.medicamentosCx.map(medicamento => medicamento.tipoMed)).flat();
+        let tipoMed = listaMedicamentosTipo.slice(0,20);
+        let listaMedicamentosMedi = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
+            item.medicamentosCx.map(medicamento => medicamento.medicamento)).flat();
+        let medicamento = listaMedicamentosMedi.slice(0,20);
+        let listaMedicamentosDosis = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
+            item.medicamentosCx.map(medicamento => (medicamento.dosisMed ?? ' '))).flat();
+        let dosisMed = listaMedicamentosDosis.slice(0,20);
+        let listaMedicamentosUnidad = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
+            item.medicamentosCx.map(medicamento => (medicamento.unidadMed ?? ' '))).flat();
+        let unidadMed = listaMedicamentosUnidad.slice(0,20);
+        let listaMedicamentosVia = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
+            item.medicamentosCx.map(medicamento => (medicamento.viaMed ?? ' '))).flat();
+        let viaMed = listaMedicamentosVia.slice(0,20);
+        let listaMedicamentosHoraIn = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
+            item.medicamentosCx.map(medicamento => (medicamento.horaInicioMed ?? ' '))).flat();
+        let horaInicio = listaMedicamentosHoraIn.slice(0,20);
+        let listaMedicamentosHoraFi = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
+            item.medicamentosCx.map(medicamento => (medicamento.horaFinalMed ?? ' '))).flat();
+        let horaFinal = listaMedicamentosHoraFi.slice(0,20);
+        let listaMedicamentosObs = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
+            item.medicamentosCx.map(medicamento => (medicamento.observacionesMed ?? ' '))).flat();
+        let observacionesMed = listaMedicamentosObs.slice(0,20);
 
-        /*Datos del Relevo*/
-        let listaRelevos = transAnestStore.relevos === null ? [' '] : transAnestStore.relevos.map(item=>
-            item.relevoCx.map(relevo => 
-            relevo.horaRelevo+ '     '+ 
-            // (relevo.matriculaRel ?? ' ')+ '     '+ 
-            // (relevo.anestesiologoRel ?? ' ')+ '     '+ 
-            (relevo.observacionesRel ?? '     '))).flat();
-        let relevos = listaRelevos.slice(0,2);
+        let tablaMedicamentos = [];
+        for (let i = 0; i < Math.max(tipoMed.length, medicamento.length, dosisMed.length, unidadMed.length, viaMed.length, horaInicio.length,horaFinal.length, observacionesMed.length); i++) {
+          tablaMedicamentos.push([
+                { text: i < tipoMed.length ? tipoMed[i] : '', style: 'SF', fontSize: 8, bold: true },
+                { text: i < medicamento.length ? medicamento[i] : '', style: 'SF', fontSize: 8, bold: true },
+                { text: i < dosisMed.length ? dosisMed[i] : '', style: 'SF', fontSize: 8, bold: true },
+                { text: i < unidadMed.length ? unidadMed[i] : '', style: 'SF', fontSize: 8, bold: true },
+                { text: i < viaMed.length ? viaMed[i] : '', style: 'SF', fontSize: 8, bold: true },
+                { text: i < horaInicio.length ? horaInicio[i] : '', style: 'SF', fontSize: 8, bold: true },
+                { text: i < horaFinal.length ? horaFinal[i] : '', style: 'SF', fontSize: 8, bold: true },
+                { text: i < observacionesMed.length ? observacionesMed[i] : '', style: 'SF', fontSize: 8, bold: true },
+            ]);
+        };
+
+        /*Datos del Relevo*/        
+        let listaRelevosHr = transAnestStore.relevos === null ? [' '] : transAnestStore.relevos.map(item=>
+            item.relevoCx.map(relevo => relevo.horaRelevo)).flat();
+        let hrRelevo = listaRelevosHr.slice(0,2);
+        let listaRelevosObs = transAnestStore.relevos === null ? [' '] : transAnestStore.relevos.map(item=>
+            item.relevoCx.map(relevo => (relevo.observacionesRel ?? ' '))).flat();            
+        let obsRelevo = listaRelevosObs.slice(0,2);
+
+        let tablaRelevos = [];
+        for (let i = 0; i < Math.max(hrRelevo.length, obsRelevo.length); i++) {
+            tablaRelevos.push([
+                { text: i < hrRelevo.length ? hrRelevo[i] : '', style: 'SF', fontSize: 8, bold: true },
+                { text: i < obsRelevo.length ? obsRelevo[i] : '', style: 'SF', fontSize: 8, bold: true }
+            ]);
+        };
 
         /*Datos del Evento Crítico*/
-        let listaEventos = transAnestStore.eventos === null ? [' '] : transAnestStore.eventos.map(item=>
-            item.evCriticoCx.map(evento => 
-            evento.horaEvento+ '     '+ 
-            (evento.detalleEvento ?? ' '))).flat();
-        let eventos = listaEventos.slice(0,5);
+        let listaEventosHr = transAnestStore.eventos === null ? [' '] : transAnestStore.eventos.map(item=>
+            item.evCriticoCx.map(evento => evento.horaEvento)).flat();
+        let hrEvento = listaEventosHr.slice(0,5);
+        let listaEventosDet = transAnestStore.eventos === null ? [' '] : transAnestStore.eventos.map(item=>
+            item.evCriticoCx.map(evento => (evento.detalleEvento ?? ' '))).flat();
+        let detalleEvento = listaEventosDet.slice(0,5);
+
+        let tablaEventos = [];
+        for (let i = 0; i < Math.max(hrEvento.length, detalleEvento.length); i++) {
+            tablaEventos.push([
+                { text: i < hrEvento.length ? hrEvento[i] : '', style: 'SF', fontSize: 8, bold: true },
+                { text: i < detalleEvento.length ? detalleEvento[i] : '', style: 'SF', fontSize: 8, bold: true }
+            ]);
+        };
 
         /*Balance Hidrico*/
         // Solución Hartman
@@ -2068,7 +2111,23 @@ export default defineComponent({
         let QXOUT = this.menuTrans.egresoQx === undefined || this.menuTrans.egresoQx === null ? ' ' : this.menuTrans.egresoQx;
 
         /*Grid Anestésico*/
-        let datosGrid = JSON.stringify(this.grid)
+        let datosGrid = this.grid;
+
+        let tablaDatosGrid = [];
+
+        datosGrid.forEach(entry => {
+          const columnData = [];
+
+          // Agregar la hora de generación como primer elemento en la columna
+          columnData.push({ text: entry.horaGeneracion, style: 'SF', fontSize: 8, bold: true });
+
+          // Agregar cada valor del conjunto de datos en una fila separada
+          entry.datos.forEach(item => {
+            columnData.push({ text: item.valor ? item.valor : '-', style: 'SF', fontSize: 8 });
+          });
+
+          tablaDatosGrid.push(columnData);
+        });        
 
         // Construcción del PDF
         let docDefinition = {
@@ -3210,6 +3269,7 @@ export default defineComponent({
                       },
                       // Opción
                       {
+                        margin:[0, 2.5, 0, 0],
                         text: [
                           { text: 'Opcion: ', font: 'SF', fontSize: 8 },
                           { text: opcionPlexo, font: 'SF', fontSize: 8, bold:true },
@@ -3217,6 +3277,7 @@ export default defineComponent({
                       },
                       // Especificar Sitio Plexo
                       {
+                        margin:[0, 2.5, 0, 0],
                         text: [
                           { text: 'Especificar: ', font: 'SF', fontSize: 8 },
                           { text: txtEspecificarSitio, font: 'SF', fontSize: 8, bold:true },
@@ -3266,6 +3327,7 @@ export default defineComponent({
                       },
                       // Neuroestimulador
                       {
+                        margin:[0, 2.5, 0, 0],
                         text: [
                           { text: 'Neuroestimulador: ', font: 'SF', fontSize: 8 },
                           { text: txtNeuroestimulador, font: 'SF', fontSize: 8, bold:true },
@@ -3273,6 +3335,7 @@ export default defineComponent({
                       },
                       // Complicaciones Equipo Apoyo
                       {
+                        margin:[0, 2.5, 0, 0],
                         text: [
                           { text: 'Complicaciones: ', font: 'SF', fontSize: 8 },
                           { text: txtComplicacionesEquipo, font: 'SF', fontSize: 8, bold:true },
@@ -3632,15 +3695,34 @@ export default defineComponent({
                       },
                     ]
                 },
-                // Tabla Grid Anéstesico
+                // Tabla Grid Anéstesico.
                 {
-                  width: '80%',
+                  width: 'auto',
                   margin: [0, 20, 0, 0],
                     stack:[
                       {
-                        text:[
-                          {text: datosGrid, font: 'SF', fontSize: 8}
-                        ]
+                        table:{
+                          headerRows: 1,
+                          body: [
+                            [{text:"Hora\nFC\nPulso\nPAS\nPAD\nPAM\nSpO2\nEtCO2\nTemp1\nTemp2\nPVC\nPAS_IN\nPAD_IN\nPAM_IN\nFiCO2\nFR"}]
+                          ]
+                        }, 
+                        layout: 'noBorders', font: 'SF', fontSize:8
+                      },
+                    ]
+                },
+                {
+                  width: '*',
+                  margin: [0, 20, 0, 0],
+                    stack:[                      
+                      {
+                        table:{
+                          headerRows: 1,
+                          body: [
+                            tablaDatosGrid
+                          ]
+                        }, 
+                        layout: 'noBorders', font: 'SF', fontSize:8
                       }
                     ]
                 }
@@ -3679,65 +3761,62 @@ export default defineComponent({
                         table: {
                           body: [
                             [
-                              {text: 'REGISTRO DE MEDICAMENTOS', font: 'SF', fontSize: 8, bold:true}, 
-                              {text: 'EVENTOS CRÍTICOS', font: 'SF', fontSize: 8, bold:true}
+                              {text: 'REGISTRO DE MEDICAMENTOS', font: 'SF', fontSize: 8, bold:true, colSpan:2}, 
+                              {}
                             ],
                             [
                               [
                                 {
                                   table: {
-                                    // headerRows: 1,
+                                    widths: ['*', '*', '*', '*', 80, '*', '*', 200],
                                     body: [
                                       [
-                                        {text: 'Tipo', style: 'SF', fontSize: 8, bold:true}, 
-                                        {text: 'Medicamento', style: 'SF', fontSize:8, bold: true},
-                                        {text: 'Dosis', style: 'SF', fontSize:8, bold: true},
-                                        {text: 'Unidad', style: 'SF', fontSize:8, bold: true},
-                                        {text: 'Vía', style: 'SF', fontSize:8, bold: true},
-                                        {text: 'Hora Inicio', style: 'SF', fontSize:8, bold: true},
-                                        {text: 'Hora Final', style: 'SF', fontSize:8, bold: true},
-                                        {text: 'Observaciones', style: 'SF', fontSize:8, bold: true}
+                                        {text: 'Tipo', style: 'SF', fontSize: 8}, 
+                                        {text: 'Medicamento', style: 'SF', fontSize:8},
+                                        {text: 'Dosis', style: 'SF', fontSize:8},
+                                        {text: 'Unidad', style: 'SF', fontSize:8},
+                                        {text: 'Vía', style: 'SF', fontSize:8},
+                                        {text: 'Hora Inicio', style: 'SF', fontSize:8},
+                                        {text: 'Hora Final', style: 'SF', fontSize:8},
+                                        {text: 'Observaciones', style: 'SF', fontSize:8}
                                       ],
-                                      [
-                                        { ul: medicamentos.map(medicamento => ({ text: medicamento})),font: 'SF', fontSize: 8, bold:true, colSpan:8, type: 'none'},
-                                      ],
+                                      ...tablaMedicamentos
                                     ]
                                   },
-                                  // layout: 'headerLineOnly'
-                                  // ul: medicamentos.map(medicamento => ({ text: medicamento})),font: 'SF', fontSize: 8, bold:true
+                                  layout: 'noBorders',
                                 },
                                 {
                                   margin: [0, 15, 0, 0],
                                   table: {
+                                    headerRows: 1,
                                     body: [
                                       [
                                         {text: 'BALANCE HÍDRICO', style: 'SF', fontSize: 8, bold: true, colSpan: 2}, 
                                         {}
                                       ],
                                       [
-                                        'Ingresos:', 
-                                        'Egresos:'],
-                                      [
                                         {
                                           text:[
-                                              {text: 'Sol. Hartman: ', sont:'SF', fontSize:8},{text:hartman, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Sol. Fisiológica: ', sont:'SF', fontSize:8},{text:solFisiolo, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Glucosados: ', sont:'SF', fontSize:8},{text:glucosados, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Gelatinas: ', sont:'SF', fontSize:8},{text:gelatinas, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Almidones: ', sont:'SF', fontSize:8},{text:almidones, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Albúminas: ', sont:'SF', fontSize:8},{text:albuminas, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Paquete Globular: ', sont:'SF', fontSize:8},{text:paqGlobular, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Plasmas: ', sont:'SF', fontSize:8},{text:plasmas, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Plaquetas: ', sont:'SF', fontSize:8},{text:plaquetasIngreso, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Crioprecipitados: ', sont:'SF', fontSize:8},{text:crioprecipitados, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Factor VII: ', sont:'SF', fontSize:8},{text:factorVII, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Factor VIII: ', sont:'SF', fontSize:8},{text:factorVIII, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Otros: ', sont:'SF', fontSize:8},{text:otrosIngreso, font:'SF', fontSize:8, bold:true},
+                                              {text: 'Ingresos', font:'SF', fontSize:8, bold: true},
+                                              {text: '\n\nSol. Hartman: ', font:'SF', fontSize:8},{text:hartman, font:'SF', fontSize:8, bold:true},
+                                              {text: 'Sol. Fisiológica: ', font:'SF', fontSize:8},{text:solFisiolo, font:'SF', fontSize:8, bold:true},
+                                              {text: 'Glucosados: ', font:'SF', fontSize:8},{text:glucosados, font:'SF', fontSize:8, bold:true},
+                                              {text: 'Gelatinas: ', font:'SF', fontSize:8},{text:gelatinas, font:'SF', fontSize:8, bold:true},
+                                              {text: 'Almidones: ', font:'SF', fontSize:8},{text:almidones, font:'SF', fontSize:8, bold:true},
+                                              {text: 'Albúminas: ', font:'SF', fontSize:8},{text:albuminas, font:'SF', fontSize:8, bold:true},
+                                              {text: 'Paquete Globular: ', font:'SF', fontSize:8},{text:paqGlobular, font:'SF', fontSize:8, bold:true},
+                                              {text: 'Plasmas: ', font:'SF', fontSize:8},{text:plasmas, font:'SF', fontSize:8, bold:true},
+                                              {text: 'Plaquetas: ', font:'SF', fontSize:8},{text:plaquetasIngreso, font:'SF', fontSize:8, bold:true},
+                                              {text: 'Crioprecipitados: ', font:'SF', fontSize:8},{text:crioprecipitados, font:'SF', fontSize:8, bold:true},
+                                              {text: 'Factor VII: ', font:'SF', fontSize:8},{text:factorVII, font:'SF', fontSize:8, bold:true},
+                                              {text: 'Factor VIII: ', font:'SF', fontSize:8},{text:factorVIII, font:'SF', fontSize:8, bold:true},
+                                              {text: 'Otros: ', font:'SF', fontSize:8},{text:otrosIngreso, font:'SF', fontSize:8, bold:true},
                                           ]
                                         }, 
                                         {
                                           text:[
-                                              {text: 'Liquídos de Ascitis: ', sont:'SF', fontSize:8},{text:liqAscitis, font:'SF', fontSize:8, bold:true},
+                                              {text: 'Egresos', font:'SF', fontSize:8, bold: true},
+                                              {text: '\n\nLiquídos de Ascitis: ', sont:'SF', fontSize:8},{text:liqAscitis, font:'SF', fontSize:8, bold:true},
                                               {text: 'Sangrado Aprox.: ', sont:'SF', fontSize:8},{text:sangradoAprox, font:'SF', fontSize:8, bold:true},
                                               {text: 'Uresis: ', sont:'SF', fontSize:8},{text:uresis, font:'SF', fontSize:8, bold:true},
                                               {text: 'Exposición Quirúrgica: ', sont:'SF', fontSize:8},{text:expQuirurgica, font:'SF', fontSize:8, bold:true},
@@ -3749,42 +3828,43 @@ export default defineComponent({
                                       ]
                                     ]
                                   },
+                                  layout: 'headerLineOnly',
                                 }
                               ],                              
                               [
                                 [
                                   {
                                     table: {
+                                      headerRows: 1,
                                       body: [
                                         [
-                                          {text: 'Hora', style: 'SF', fontSize: 8, alignment: 'center'}, 
-                                          {text: 'Observaciones', style: 'SF', fontSize:8,}
+                                          {text: 'EVENTOS', style: 'SF', fontSize: 8, bold:true, alignment: 'center'},
+                                          {text: 'CRÍTICOS', style: 'SF', fontSize: 8, bold:true,},
                                         ],
                                         [
-                                          { ul: eventos.map(evento => ({ text: evento})),font: 'SF', fontSize: 8, bold:true, colSpan:2, type: 'none'},
-                                          ''
-                                        ],                                        
+                                          {text: 'Hora', style: 'SF', fontSize: 8}, 
+                                          {text: 'Observaciones', style: 'SF', fontSize:8,}
+                                        ],
+                                        ...tablaEventos                             
                                       ]
                                     },                                    
-                                    layout: 'noBorders',
+                                    layout: 'headerLineOnly',
                                   },
                                   [
                                     {
+                                      margin:[0, 10, 0, 0],
                                       table: {
                                         headerRows: 1,
                                         body: [
                                           [
-                                            {text: 'RELEVOS', style: 'SF', fontSize: 8, bold:true},
+                                            {text: 'RELEVOS', style: 'SF', fontSize: 8, bold:true, alignment: 'center'},
                                             ''
                                           ],
                                           [
-                                            {text: 'Hora', style: 'SF', fontSize: 8, alignment: 'center'}, 
+                                            {text: 'Hora', style: 'SF', fontSize: 8}, 
                                             {text: 'Observaciones', style: 'SF', fontSize:8,}
                                           ],
-                                          [
-                                            { ul: relevos.map(relevo => ({ text: relevo})),font: 'SF', fontSize: 8, bold:true, colSpan:2, type: 'none'},
-                                            ''
-                                          ],
+                                          ...tablaRelevos
                                         ]
                                       },
                                       layout: 'headerLineOnly'
