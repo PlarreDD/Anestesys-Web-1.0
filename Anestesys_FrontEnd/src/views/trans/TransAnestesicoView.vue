@@ -2069,6 +2069,8 @@ export default defineComponent({
         let ayunoEgreso = this.menuTrans.ayuno === undefined || this.menuTrans.ayuno === null ? '0 ml, ' : this.menuTrans.ayuno+' ml, ';
         // Otros Egresos
         let otrosEgresos = this.menuTrans.otrosEgresos === undefined || this.menuTrans.otrosEgresos === null ? '0 ml' : this.menuTrans.otrosEgresos+' ml';
+        // Balance Total
+        let balanceTotal = this.menuTrans.balanceTotal === undefined || this.menuTrans.balanceTotal === null ? '0 ' : this.menuTrans.balanceTotal;
 
         /*Datos del Ventilador*/
         // Modo Ventilación
@@ -2112,20 +2114,16 @@ export default defineComponent({
 
         /*Grid Anestésico*/
         let datosGrid = this.grid;
-
         let tablaDatosGrid = [];
 
         datosGrid.forEach(entry => {
           const columnData = [];
-
-          // Agregar la hora de generación como primer elemento en la columna
-          columnData.push({ text: entry.horaGeneracion, style: 'SF', fontSize: 8, bold: true });
-
-          // Agregar cada valor del conjunto de datos en una fila separada
+          // Agregar la Hora 
+          columnData.push({ text: entry.horaGeneracion, style: 'SF', fontSize: 8, alignment:'center', margin: [0, 0, 0, 4] });
+          // Agregar Signos Vítales
           entry.datos.forEach(item => {
-            columnData.push({ text: item.valor ? item.valor : '-', style: 'SF', fontSize: 8 });
-          });
-
+            columnData.push({ text: item.valor ? item.valor : '-', style: 'SF', fontSize: 8, bold: true, alignment:'center', margin: [0, 0, 0, 4] });
+          });        
           tablaDatosGrid.push(columnData);
         });        
 
@@ -3704,27 +3702,46 @@ export default defineComponent({
                         table:{
                           headerRows: 1,
                           body: [
-                            [{text:"Hora\nFC\nPulso\nPAS\nPAD\nPAM\nSpO2\nEtCO2\nTemp1\nTemp2\nPVC\nPAS_IN\nPAD_IN\nPAM_IN\nFiCO2\nFR"}]
+                            [{text:"Hora"}],
+                            [{text:"FC"}],
+                            [{text:"Pulso"}],
+                            [{text:"PAS"}],
+                            [{text:"PAD"}],
+                            [{text:"PAM"}],
+                            [{text:"SpO2"}],
+                            [{text:"EtCO2"}],
+                            [{text:"Temp1"}],
+                            [{text:"Temp2"}],
+                            [{text:"PVC"}],
+                            [{text:"PAS_IN"}],
+                            [{text:"PAD_IN"}],
+                            [{text:"PAM_IN"}],
+                            [{text:"FiCO2"}],
+                            [{text:"FR"}],
                           ]
                         }, 
-                        layout: 'noBorders', font: 'SF', fontSize:8
+                        layout: 'noBorders', 
+                        font: 'SF', fontSize:8
                       },
                     ]
                 },
                 {
-                  width: '*',
+                  width: 'auto',
                   margin: [0, 20, 0, 0],
                     stack:[                      
                       {
                         table:{
+                          dontBreakRows: true,
                           headerRows: 1,
-                          body: [
+                          body:[
                             tablaDatosGrid
                           ]
                         }, 
-                        layout: 'noBorders', font: 'SF', fontSize:8
+                        layout: 'noBorders',                         
+                        font: 'SF', 
+                        fontSize:8,
                       }
-                    ]
+                    ],
                 }
               ]
             },
@@ -3791,7 +3808,13 @@ export default defineComponent({
                                     headerRows: 1,
                                     body: [
                                       [
-                                        {text: 'BALANCE HÍDRICO', style: 'SF', fontSize: 8, bold: true, colSpan: 2}, 
+                                        {
+                                          text:[
+                                            {text: 'BALANCE HÍDRICO: ', style: 'SF', fontSize: 8, bold: true, colSpan: 2}, 
+                                            {text: balanceTotal, bold:true},
+                                            {text: ' ml', bold:true}
+                                          ]
+                                        },
                                         {}
                                       ],
                                       [
@@ -4093,6 +4116,29 @@ export default defineComponent({
                 },                
               ],
             },
+
+            // {
+            //   pageOrientation: 'landscape', // Orientación Horizontal
+            //   pageBreak: 'before',
+            //   columns:[
+            //     {
+            //       stack:[
+            //         {           
+            //           table:{
+            //             dontBreakRows: false,
+            //             headerRows: 1,
+            //             body: [
+            //               tablaDatosGrid
+            //             ]
+            //           },
+            //           layout: 'noBorders',                         
+            //           font: 'SF', 
+            //           fontSize:8,
+            //         },
+            //       ],      
+            //     },
+            //   ],
+            // }
           ],        
           styles:{
             normal:{
@@ -5360,7 +5406,7 @@ export default defineComponent({
         this.saveGrid = setInterval(() => {
           this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
           this.hl7mess = [];
-        }, 1000 * 60);
+        }, 1000 * 20);
       },
 
       pingMSV(dirip: string){
