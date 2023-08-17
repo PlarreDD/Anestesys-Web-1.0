@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { requireToken } from "../middlewares/requireToken";
-import { getAllPacientes,
+import { getAllInfo,
          getPaciente,
          createPaciente,
          updatePaciente } from "../controllers/preanest.controller";
@@ -13,7 +13,7 @@ const router = Router();
 // PATCH/PUT    /preId/:id      Actualizar paciente
 
 /*------------------- PreId --------------------*/
-router.get('/', requireToken, getAllPacientes);
+router.get('/', requireToken, getAllInfo);
 router.get('/:id', requireToken, getPaciente);
 router.post('/', requireToken, createPaciente);
 router.put('/:id',  requireToken, updatePaciente);

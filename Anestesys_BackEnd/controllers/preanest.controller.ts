@@ -9,12 +9,20 @@ import { PreIdPacientes,
 /********************************************************************/
 /***************************  ID PACIENTE ***************************/
 /********************************************************************/
-/* Función para obtener todos los pacientes asociados a un usuario */
-export const getAllPacientes = async (req: any, res: Response) => {
+/* Función para obtener toda la información del paciente */
+export const getAllInfo = async (req: any, res: Response) => {
     try {
-        const pacientes = await PreIdPacientes.find({uid: req.uid})
+        const {pid} = req.body
+        console.log(pid);
         
-        return res.json({pacientes});
+        // const pacientescx = await PreIdPacientesCx.find({pid: pid});
+        const prevals = await PreValoracion.find({pid: pid});
+        const preests = await ValEstudios.find({vid: prevals[0]._id});
+        // const preplan = await PrePlan.find({pid: pid});
+        // const prenota = await PreNota.find({pid: pid});
+        console.log( prevals, preests);
+        
+        // return res.json({pacientes});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
     }
@@ -23,9 +31,13 @@ export const getAllPacientes = async (req: any, res: Response) => {
 /* Funcion para la busqueda de un paciente. Debe estar asociado al usuario */
 export const getPaciente = async (req: any, res: Response) => {
     try {
-        const pacientes = await PreIdPacientes.find({numExpediente: req.numExpediente})
-        
-        return res.json({pacientes});
+        const {id} = req.params;
+
+        const pacientes = await PreIdPacientes.find({numExpediente: id});
+        const pacientescx = await PreIdPacientesCx.find({pid: pacientes[0].id});
+        console.log(pacientes[0].numExpediente + " - " + pacientes[0].nomPaciente + "\n\t- " + pacientescx[0].fechaCx + "\n\t- " + pacientescx[0].cirugia);
+
+        return res.json({pacientes, pacientescx});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
     }
@@ -430,7 +442,7 @@ export const getEstudios = async (req: any, res: Response) => {
     try {
         const {vid} = req.params;
         
-        const estudio = await ValEstudios.find({vid:vid})        
+        const estudio = await ValEstudios.find({vid:vid})
         return res.json({estudio});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
