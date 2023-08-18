@@ -256,8 +256,8 @@ export const usePreIdStore = defineStore('preid', {
             });
         },
 
-        updatePreAntecedentes(infoValoracion: any, pid: string){
-            apiAxios({
+        async updatePreAntecedentes(infoValoracion: any, pid: string){
+            await apiAxios({
                 url: `http://localhost:5000/valora/${String(pid)}`,
                 method: "PUT",
                 headers: {
