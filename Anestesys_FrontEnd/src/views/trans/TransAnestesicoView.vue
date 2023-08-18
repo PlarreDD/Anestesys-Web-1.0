@@ -1960,49 +1960,40 @@ export default defineComponent({
         /*Datos del Medicamento*/
         let listaMedicamentosTipo = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
             item.medicamentosCx.map(medicamento => medicamento.tipoMed)).flat();
-        let tipoMed = listaMedicamentosTipo.slice(0,20);
+        let tipoMed = listaMedicamentosTipo.slice(0,30);
         let listaMedicamentosMedi = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
             item.medicamentosCx.map(medicamento => medicamento.medicamento)).flat();
-        let medicamento = listaMedicamentosMedi.slice(0,20);
+        let medicamento = listaMedicamentosMedi.slice(0,30);
         let listaMedicamentosDosis = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
             item.medicamentosCx.map(medicamento => (medicamento.dosisMed ?? ' '))).flat();
-        let dosisMed = listaMedicamentosDosis.slice(0,20);
+        let dosisMed = listaMedicamentosDosis.slice(0,30);
         let listaMedicamentosUnidad = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
             item.medicamentosCx.map(medicamento => (medicamento.unidadMed ?? ' '))).flat();
-        let unidadMed = listaMedicamentosUnidad.slice(0,20);
+        let unidadMed = listaMedicamentosUnidad.slice(0,30);
         let listaMedicamentosVia = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
             item.medicamentosCx.map(medicamento => (medicamento.viaMed ?? ' '))).flat();
-        let viaMed = listaMedicamentosVia.slice(0,20);
+        let viaMed = listaMedicamentosVia.slice(0,30);
         let listaMedicamentosHoraIn = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
             item.medicamentosCx.map(medicamento => (medicamento.horaInicioMed ?? ' '))).flat();
-        let horaInicio = listaMedicamentosHoraIn.slice(0,20);
+        let horaInicio = listaMedicamentosHoraIn.slice(0,30);
         let listaMedicamentosHoraFi = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
             item.medicamentosCx.map(medicamento => (medicamento.horaFinalMed ?? ' '))).flat();
-        let horaFinal = listaMedicamentosHoraFi.slice(0,20);
-        let listaMedicamentosObs = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
-            item.medicamentosCx.map(medicamento => (medicamento.observacionesMed ?? ' '))).flat();
-        let observacionesMed = listaMedicamentosObs.slice(0,20);
+        let horaFinal = listaMedicamentosHoraFi.slice(0,30);
 
         let tablaMedicamentos = [];
-        for (let i = 0; i < Math.max(tipoMed.length, medicamento.length, dosisMed.length, unidadMed.length, viaMed.length, horaInicio.length,horaFinal.length, observacionesMed.length); i++) {
+        for (let i = 0; i < Math.max(tipoMed.length, medicamento.length, dosisMed.length, unidadMed.length, viaMed.length, horaInicio.length,horaFinal.length); i++) {
           tablaMedicamentos.push([
-                { text: i < tipoMed.length ? tipoMed[i] : '', style: 'SF', fontSize: 8, bold: true },
-                { text: i < medicamento.length ? medicamento[i] : '', style: 'SF', fontSize: 8, bold: true },
-                { text: i < dosisMed.length ? dosisMed[i] : '', style: 'SF', fontSize: 8, bold: true },
-                { text: i < unidadMed.length ? unidadMed[i] : '', style: 'SF', fontSize: 8, bold: true },
-                { text: i < viaMed.length ? viaMed[i] : '', style: 'SF', fontSize: 8, bold: true },
-                { text: i < horaInicio.length ? horaInicio[i] : '', style: 'SF', fontSize: 8, bold: true },
-                { text: i < horaFinal.length ? horaFinal[i] : '', style: 'SF', fontSize: 8, bold: true },
-                { text: i < observacionesMed.length ? observacionesMed[i] : '', style: 'SF', fontSize: 8, bold: true },
-            ]);
-        };
-
-        let tablaMedicamentosRes = [];
-        for (let i = 0; i < Math.max(medicamento.length, horaInicio.length); i++) {
-          tablaMedicamentosRes.push([
-                { text: i < medicamento.length ? medicamento[i] : '', style: 'SF', fontSize: 8, bold: true },
-                { text: i < horaInicio.length ? horaInicio[i] : '', style: 'SF', fontSize: 8, bold: true },
-            ]);
+            { text: i < tipoMed.length ? tipoMed[i] : '', style: 'SF', fontSize: 8, bold: true },
+            { text: i < medicamento.length ? medicamento[i] : '', style: 'SF', fontSize: 8, bold: true },
+            {text:[
+              { text: i < dosisMed.length ? dosisMed[i] : '', style: 'SF', fontSize: 8, bold: true },
+              { text: ' ', style: 'SF', fontSize: 8},
+              { text: i < unidadMed.length ? unidadMed[i] : '', style: 'SF', fontSize: 8, bold: true },
+            ]},
+            { text: i < viaMed.length ? viaMed[i] : '', style: 'SF', fontSize: 8, bold: true },
+            { text: i < horaInicio.length ? horaInicio[i] : '', style: 'SF', fontSize: 8, bold: true },
+            { text: i < horaFinal.length ? horaFinal[i] : '', style: 'SF', fontSize: 8, bold: true },
+          ]);
         };
 
         /*Datos del Relevo*/        
@@ -2039,47 +2030,68 @@ export default defineComponent({
 
         /*Balance Hidrico*/
         // Solución Hartman
-        let hartman = this.menuTrans.solHartman === undefined || this.menuTrans.solHartman === null ? '0 ml, ' : this.menuTrans.solHartman+' ml, ';
+        let txtHartman = this.menuTrans.solHartman === '' || this.menuTrans.solHartman === null || this.menuTrans.solHartman === undefined ? '' : 'Sol. Hartman: '
+        let hartman = this.menuTrans.solHartman === '' || this.menuTrans.solHartman === null || this.menuTrans.solHartman === undefined ? '' : this.menuTrans.solHartman+' ml, ';
         // Solución Fisiológica
-        let solFisiolo = this.menuTrans.solFisio === undefined || this.menuTrans.solFisio === null ? '0 ml, ' : this.menuTrans.solFisio+' ml, ';
+        let txtSolFisiolo = this.menuTrans.solFisio === '' || this.menuTrans.solFisio === null || this.menuTrans.solFisio === undefined ? '' : 'Sol. Fisiológica: ';
+        let solFisiolo = this.menuTrans.solFisio === '' || this.menuTrans.solFisio === null || this.menuTrans.solFisio === undefined ? '' : this.menuTrans.solFisio+' ml, ';
         // Glucosados
-        let glucosados = this.menuTrans.glucosados === undefined || this.menuTrans.glucosados === null ? '0 ml, ' : this.menuTrans.glucosados+' ml, ';
+        let txtGlucosados = this.menuTrans.glucosados === '' || this.menuTrans.glucosados === null || this.menuTrans.glucosados === undefined ? '' : 'Glucosados: ';
+        let glucosados = this.menuTrans.glucosados === '' || this.menuTrans.glucosados === null || this.menuTrans.glucosados === undefined ? '' : this.menuTrans.glucosados+' ml, ';
         // Gelatinas
-        let gelatinas = this.menuTrans.gelatinas === undefined || this.menuTrans.gelatinas === null ? '0 ml, ' : this.menuTrans.gelatinas+' ml, ';
+        let txtGelatinas = this.menuTrans.gelatinas === '' || this.menuTrans.gelatinas === null || this.menuTrans.gelatinas === undefined ? '' : 'Gelatinas: ';
+        let gelatinas = this.menuTrans.gelatinas === '' || this.menuTrans.gelatinas === null || this.menuTrans.gelatinas === undefined ? '' : this.menuTrans.gelatinas+' ml, ';
         // Almidones
-        let almidones = this.menuTrans.almidones === undefined || this.menuTrans.almidones === null ? '0 ml, ' : this.menuTrans.almidones+' ml, ';
+        let txtAlmidones = this.menuTrans.almidones === '' || this.menuTrans.almidones === null || this.menuTrans.almidones === undefined ? '' : 'Almidones: ';
+        let almidones = this.menuTrans.almidones === '' || this.menuTrans.almidones === null || this.menuTrans.almidones === undefined ? '' : this.menuTrans.almidones+' ml, ';
         // Albúminas
-        let albuminas = this.menuTrans.albuminas === undefined || this.menuTrans.albuminas === null ? '0 ml, ' : this.menuTrans.albuminas+' ml, ';
+        let txtAlbuminas = this.menuTrans.albuminas === '' || this.menuTrans.albuminas === null || this.menuTrans.albuminas === undefined ? '' : 'Albúminas: ';
+        let albuminas = this.menuTrans.albuminas === '' || this.menuTrans.albuminas === null || this.menuTrans.albuminas === undefined ? '' : this.menuTrans.albuminas+' ml, ';
         // Paquete Globular
-        let paqGlobular = this.menuTrans.paqGlobular === undefined || this.menuTrans.paqGlobular === null ? '0 ml, ' : this.menuTrans.paqGlobular+' ml, ';
+        let txtPaqGlobular = this.menuTrans.paqGlobular === '' || this.menuTrans.paqGlobular === null || this.menuTrans.paqGlobular === undefined ? '' : 'Paquete Globular: ';
+        let paqGlobular = this.menuTrans.paqGlobular === '' || this.menuTrans.paqGlobular === null || this.menuTrans.paqGlobular === undefined ? '' : this.menuTrans.paqGlobular+' ml, ';
         // Plasmas
-        let plasmas = this.menuTrans.plasmas === undefined || this.menuTrans.plasmas === null ? '0 ml, ' : this.menuTrans.plasmas+' ml, ';
+        let txtPlasmas = this.menuTrans.plasmas === '' || this.menuTrans.plasmas === null || this.menuTrans.plasmas === undefined ? '' : 'Plasmas: ';
+        let plasmas = this.menuTrans.plasmas === '' || this.menuTrans.plasmas === null || this.menuTrans.plasmas === undefined ? '' : this.menuTrans.plasmas+' ml, ';
         // Plaquetas
-        let plaquetasIngreso = this.menuTrans.plaquetas === undefined || this.menuTrans.plaquetas === null ? '0 ml, ' : this.menuTrans.plaquetas+' ml, ';
+        let txtPlaquetas = this.menuTrans.plaquetas === '' || this.menuTrans.plaquetas === null || this.menuTrans.plaquetas === undefined ? '' : 'Plaquetas: ';
+        let plaquetasIngreso = this.menuTrans.plaquetas === '' || this.menuTrans.plaquetas === null || this.menuTrans.plaquetas === undefined ? '' : this.menuTrans.plaquetas+' ml, ';
         // Crioprecipitados
-        let crioprecipitados = this.menuTrans.crioprecipitados === undefined || this.menuTrans.crioprecipitados === null ? '0 ml, ' : this.menuTrans.crioprecipitados+' ml, ';
+        let txtCrioprecipitados = this.menuTrans.crioprecipitados === '' || this.menuTrans.crioprecipitados === null || this.menuTrans.crioprecipitados === undefined ? '' : 'Crioprecipitados: ';
+        let crioprecipitados = this.menuTrans.crioprecipitados === '' || this.menuTrans.crioprecipitados === null || this.menuTrans.crioprecipitados === undefined ? '' : this.menuTrans.crioprecipitados+' ml, ';
         // Factor VII
-        let factorVII = this.menuTrans.factor_VII === undefined || this.menuTrans.factor_VII === null ? '0 ml, ' : this.menuTrans.factor_VII+' ml, ';
+        let txtFactorVII = this.menuTrans.factor_VII === '' || this.menuTrans.factor_VII === null || this.menuTrans.factor_VII === undefined ? '' : 'Factor VII: ';
+        let factorVII = this.menuTrans.factor_VII === '' || this.menuTrans.factor_VII === null || this.menuTrans.factor_VII === undefined ? '' : this.menuTrans.factor_VII+' ml, ';
         // Factor VIII
-        let factorVIII = this.menuTrans.factor_VIII === undefined || this.menuTrans.factor_VIII === null ? '0 ml, ' : this.menuTrans.factor_VIII+' ml, ';
+        let txtFactorVIII = this.menuTrans.factor_VIII === '' || this.menuTrans.factor_VIII === null || this.menuTrans.factor_VIII === undefined ? '' : 'Factor VIII: ';
+        let factorVIII = this.menuTrans.factor_VIII === '' || this.menuTrans.factor_VIII === null || this.menuTrans.factor_VIII === undefined ? '' : this.menuTrans.factor_VIII+' ml, ';
         // Otros Ingresos
-        let otrosIngreso = this.menuTrans.otrosIngresos === undefined || this.menuTrans.otrosIngresos === null ? '0 ml' : this.menuTrans.otrosIngresos+' ml';
+        let txtOtrosIngresos = this.menuTrans.otrosIngresos === '' || this.menuTrans.otrosIngresos === null || this.menuTrans.otrosIngresos === undefined ? '' : 'Otros: ';
+        let otrosIngreso = this.menuTrans.otrosIngresos === '' || this.menuTrans.otrosIngresos === null || this.menuTrans.otrosIngresos === undefined ? '' : this.menuTrans.otrosIngresos+' ml';
+
         // Liquidos de Ascitis
-        let liqAscitis = this.menuTrans.liqAscitis === undefined || this.menuTrans.liqAscitis === null ? '0 ml, ' : this.menuTrans.liqAscitis+' ml, ';
+        let txtLiqAscitis = this.menuTrans.liqAscitis === '' || this.menuTrans.liqAscitis === null || this.menuTrans.liqAscitis === undefined ? '' : 'Liquídos de Ascitis: ';
+        let liqAscitis = this.menuTrans.liqAscitis === '' || this.menuTrans.liqAscitis === null || this.menuTrans.liqAscitis === undefined ? '' : this.menuTrans.liqAscitis+' ml, ';
         // Sangrado Aproximado
-        let sangradoAprox = this.menuTrans.sangradoAprox === undefined || this.menuTrans.sangradoAprox === null ? '0 ml, ' : this.menuTrans.sangradoAprox+' ml, ';
+        let txtSangradoAprox = this.menuTrans.sangradoAprox === '' || this.menuTrans.sangradoAprox === null || this.menuTrans.sangradoAprox === undefined ? '' : 'Sangrado Aprox.: ';
+        let sangradoAprox = this.menuTrans.sangradoAprox === '' || this.menuTrans.sangradoAprox === null || this.menuTrans.sangradoAprox === undefined ? '' : this.menuTrans.sangradoAprox+' ml, ';
         // Uresis
-        let uresis = this.menuTrans.uresis === undefined || this.menuTrans.uresis === null ? '0 ml, ' : this.menuTrans.uresis+' ml, ';
+        let txtUresis = this.menuTrans.uresis === '' || this.menuTrans.uresis === null || this.menuTrans.uresis === undefined ? '' : 'Uresis: ';
+        let uresis = this.menuTrans.uresis === '' || this.menuTrans.uresis === null || this.menuTrans.uresis === undefined ? '' : this.menuTrans.uresis+' ml, ';
         // Exposición Quirúrgica
-        let expQuirurgica = this.menuTrans.expoQX === undefined || this.menuTrans.expoQX === null ? '0 ml, ' : this.menuTrans.expoQX+' ml, ';
+        let txtExpQuirurgica = this.menuTrans.expoQX === '' || this.menuTrans.expoQX === null || this.menuTrans.expoQX === undefined ? '' : 'Exposición Quirúrgica: ';
+        let expQuirurgica = this.menuTrans.expoQX === '' || this.menuTrans.expoQX === null || this.menuTrans.expoQX === undefined ? '' : this.menuTrans.expoQX+' ml, ';
         // Requerimientos Basales
-        let reqBasales = this.menuTrans.reqBasales === undefined || this.menuTrans.reqBasales === null ? '0 ml, ' : this.menuTrans.reqBasales+' ml, ';
+        let txtReqBasales = this.menuTrans.reqBasales === '' || this.menuTrans.reqBasales === null || this.menuTrans.reqBasales === undefined ? '' : 'Requerimientos Basales: ';
+        let reqBasales = this.menuTrans.reqBasales === '' || this.menuTrans.reqBasales === null || this.menuTrans.reqBasales === undefined ? '' : this.menuTrans.reqBasales+' ml, ';
         // Ayuno
-        let ayunoEgreso = this.menuTrans.ayuno === undefined || this.menuTrans.ayuno === null ? '0 ml, ' : this.menuTrans.ayuno+' ml, ';
+        let txtAyuno = this.menuTrans.ayuno === '' || this.menuTrans.ayuno === null || this.menuTrans.ayuno === undefined ? '' : 'Ayuno: ';
+        let ayunoEgreso = this.menuTrans.ayuno === '' || this.menuTrans.ayuno === null || this.menuTrans.ayuno === undefined ? '' : this.menuTrans.ayuno+' ml, ';
         // Otros Egresos
-        let otrosEgresos = this.menuTrans.otrosEgresos === undefined || this.menuTrans.otrosEgresos === null ? '0 ml' : this.menuTrans.otrosEgresos+' ml';
+        let txtOtrosEgresos = this.menuTrans.otrosEgresos === '' || this.menuTrans.otrosEgresos === null || this.menuTrans.otrosEgresos === undefined ? '' : 'Otros: ';
+        let otrosEgresos = this.menuTrans.otrosEgresos === '' || this.menuTrans.otrosEgresos === null || this.menuTrans.otrosEgresos === undefined ? '' : this.menuTrans.otrosEgresos+' ml';
         // Balance Total
-        let balanceTotal = this.menuTrans.balanceTotal === undefined || this.menuTrans.balanceTotal === null ? '0 ' : this.menuTrans.balanceTotal;
+        let balanceTotal = this.menuTrans.balanceTotal === undefined || this.menuTrans.balanceTotal === null ? '' : this.menuTrans.balanceTotal+' ml';    
 
         /*Datos del Ventilador*/
         // Modo Ventilación
@@ -2121,6 +2133,9 @@ export default defineComponent({
         // QX OUT
         let QXOUT = this.menuTrans.egresoQx === undefined || this.menuTrans.egresoQx === null ? ' ' : this.menuTrans.egresoQx;
 
+        let cirugiaTrans = preIdStore.NombreCirugia === undefined || preIdStore.NombreCirugia === null ? ' ' : preIdStore.NombreCirugia;
+        let txtCirugiaTrans= cirugiaTrans.length > 60 ? cirugiaTrans.substring(0, 60) + '...' : cirugiaTrans;
+
         /*Grid Anestésico*/
         let datosGrid = this.grid;
         let tablaDatosGrid = [];
@@ -2137,7 +2152,7 @@ export default defineComponent({
         });
 
         // Dividir el arreglo en partes más pequeñas
-        const numColumnas = 2; // Número de columnas que se mostraran por página
+        const numColumnas = 26; // Número de columnas que se mostraran por página
         const columnasDatos = tablaDatosGrid.length > 0 ? [] : [[]];
         for (let i = 0; i < tablaDatosGrid.length; i += numColumnas) {
           columnasDatos.push(tablaDatosGrid.slice(i, i + numColumnas));
@@ -2155,7 +2170,7 @@ export default defineComponent({
           content: [
             /*PRE*/
             //Primera Hoja
-            {              
+            {
               columns: [                
                 {
                   width:'30%',
@@ -3567,8 +3582,8 @@ export default defineComponent({
                   },
                 ]
             },            
-            /*TRANS*/
-            {
+            /*TRANS*/            
+            {              
               pageOrientation: 'landscape', // Orientación Horizontal
               pageBreak: 'before',
               columns:[
@@ -3614,7 +3629,7 @@ export default defineComponent({
                         margin: [0, 2.5, 0, 0],
                         text: [
                           {text: 'Cirugía: ', font: 'SF', fontSize: 8},
-                          {text: cirugia, font: 'SF', fontSize: 8, bold:true},
+                          {text: txtCirugiaTrans, font: 'SF', fontSize: 8, bold:true},
                         ]
                       },
                       // Tiempos Quirúrgicos 
@@ -3759,7 +3774,7 @@ export default defineComponent({
                       }
                     ],
                 }
-              ]
+              ],              
             },            
             {
               columns:[
@@ -3783,142 +3798,7 @@ export default defineComponent({
                     ]
                 }
               ]
-            },
-            {              
-              columns:[
-                {
-                  width: '100%',
-                  margin: [0, 10, 0, 0],
-                    stack:[
-                      {
-                        table: {
-                          body: [
-                            [
-                              {text: 'REGISTRO DE MEDICAMENTOS', font: 'SF', fontSize: 8, bold:true, colSpan:2}, 
-                              {}
-                            ],
-                            [
-                              [
-                                {
-                                  table: {
-                                    widths: ['*', '*', '*', '*', 80, '*', '*', 200],
-                                    body: [
-                                      [
-                                        {text: 'Tipo', style: 'SF', fontSize: 8}, 
-                                        {text: 'Medicamento', style: 'SF', fontSize:8},
-                                        {text: 'Dosis', style: 'SF', fontSize:8},
-                                        {text: 'Unidad', style: 'SF', fontSize:8},
-                                        {text: 'Vía', style: 'SF', fontSize:8},
-                                        {text: 'Hora Inicio', style: 'SF', fontSize:8},
-                                        {text: 'Hora Final', style: 'SF', fontSize:8},
-                                        {text: 'Observaciones', style: 'SF', fontSize:8}
-                                      ],
-                                      ...tablaMedicamentos
-                                    ]
-                                  },
-                                  layout: 'noBorders',
-                                },
-                                {
-                                  margin: [0, 15, 0, 0],
-                                  table: {
-                                    headerRows: 1,
-                                    body: [
-                                      [
-                                        {
-                                          text:[
-                                            {text: 'BALANCE HÍDRICO: ', style: 'SF', fontSize: 8, bold: true, colSpan: 2}, 
-                                            {text: balanceTotal, bold:true},
-                                            {text: ' ml', bold:true}
-                                          ]
-                                        },
-                                        {}
-                                      ],
-                                      [
-                                        {
-                                          text:[
-                                              {text: 'Ingresos', font:'SF', fontSize:8, bold: true},
-                                              {text: '\n\nSol. Hartman: ', font:'SF', fontSize:8},{text:hartman, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Sol. Fisiológica: ', font:'SF', fontSize:8},{text:solFisiolo, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Glucosados: ', font:'SF', fontSize:8},{text:glucosados, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Gelatinas: ', font:'SF', fontSize:8},{text:gelatinas, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Almidones: ', font:'SF', fontSize:8},{text:almidones, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Albúminas: ', font:'SF', fontSize:8},{text:albuminas, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Paquete Globular: ', font:'SF', fontSize:8},{text:paqGlobular, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Plasmas: ', font:'SF', fontSize:8},{text:plasmas, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Plaquetas: ', font:'SF', fontSize:8},{text:plaquetasIngreso, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Crioprecipitados: ', font:'SF', fontSize:8},{text:crioprecipitados, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Factor VII: ', font:'SF', fontSize:8},{text:factorVII, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Factor VIII: ', font:'SF', fontSize:8},{text:factorVIII, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Otros: ', font:'SF', fontSize:8},{text:otrosIngreso, font:'SF', fontSize:8, bold:true},
-                                          ]
-                                        }, 
-                                        {
-                                          text:[
-                                              {text: 'Egresos', font:'SF', fontSize:8, bold: true},
-                                              {text: '\n\nLiquídos de Ascitis: ', sont:'SF', fontSize:8},{text:liqAscitis, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Sangrado Aprox.: ', sont:'SF', fontSize:8},{text:sangradoAprox, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Uresis: ', sont:'SF', fontSize:8},{text:uresis, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Exposición Quirúrgica: ', sont:'SF', fontSize:8},{text:expQuirurgica, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Requerimientos Basales: ', sont:'SF', fontSize:8},{text:reqBasales, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Ayuno: ', sont:'SF', fontSize:8},{text:ayunoEgreso, font:'SF', fontSize:8, bold:true},
-                                              {text: 'Otros: ', sont:'SF', fontSize:8},{text:otrosEgresos, font:'SF', fontSize:8, bold:true},
-                                          ]
-                                        }
-                                      ]
-                                    ]
-                                  },
-                                  layout: 'headerLineOnly',
-                                }
-                              ],                              
-                              [
-                                [
-                                  {
-                                    table: {
-                                      headerRows: 1,
-                                      body: [
-                                        [
-                                          {text: 'EVENTOS', style: 'SF', fontSize: 8, bold:true, alignment: 'center'},
-                                          {text: 'CRÍTICOS', style: 'SF', fontSize: 8, bold:true,},
-                                        ],
-                                        [
-                                          {text: 'Hora', style: 'SF', fontSize: 8}, 
-                                          {text: 'Observaciones', style: 'SF', fontSize:8,}
-                                        ],
-                                        ...tablaEventos                             
-                                      ]
-                                    },                                    
-                                    layout: 'headerLineOnly',
-                                  },
-                                  [
-                                    {
-                                      margin:[0, 10, 0, 0],
-                                      table: {
-                                        headerRows: 1,
-                                        body: [
-                                          [
-                                            {text: 'RELEVOS', style: 'SF', fontSize: 8, bold:true, alignment: 'center'},
-                                            ''
-                                          ],
-                                          [
-                                            {text: 'Hora', style: 'SF', fontSize: 8}, 
-                                            {text: 'Observaciones', style: 'SF', fontSize:8,}
-                                          ],
-                                          ...tablaRelevos
-                                        ]
-                                      },
-                                      layout: 'headerLineOnly'
-                                    },
-                                  ]
-                                ],                                
-                              ],
-                            ],
-                          ]
-                        }, font: 'SF', fontSize: 8
-                      }
-                    ]
-                }
-              ]
-            },
+            },            
             // Agregar cada parte de tablaDatosGrid en una página nueva
             ...columnasDatos.slice(1).map((columna) => ({
               pageBreak: 'before',
@@ -3967,29 +3847,8 @@ export default defineComponent({
                           {text: 'Cirugía: ', font: 'SF', fontSize: 8},
                           {text: cirugia, font: 'SF', fontSize: 8, bold:true},
                         ]
-                      },
-                      {
-                        text: [
-                          {text: '\nMEDICAMENTOS: ', font: 'SF', fontSize: 8, bold:true}
-                        ]
-                      },
-                      [
-                        {
-                          table: {
-                            widths: ['*', '*'],
-                            body: [
-                              [
-                                {text: 'Medicamento', style: 'SF', fontSize:8},                               
-                                {text: 'Hora Inicio', style: 'SF', fontSize:8},                               
-                              ],
-                              ...tablaMedicamentosRes
-                            ]
-                          },
-                          layout: 'noBorders',
-                          font: 'SF', fontSize: 8,
-                        },
-                      ]
-                    ]
+                      },                    
+                    ],
                 },
                 // Tabla Grid Anéstesico.
                 {
@@ -4034,9 +3893,155 @@ export default defineComponent({
                   layout: 'noBorders',
                   font: 'SF', 
                   fontSize: 6,                    
-                }
-              ]              
+                },
+              ],                
             })),
+            {              
+              pageOrientation: 'landscape', // Orientación Horizontal
+              pageBreak: 'before',
+              columns:[
+                {
+                  margin: [0, 10, 0, 0],
+                  height:'75%',
+                  stack:[
+                    // Medicamentos
+                    {
+                      relativePosition: { x: 0, y: 0 },
+                      table: {
+                        widths: ['60%', '40%'],
+                        body: [
+                          [
+                            {text: 'REGISTRO DE MEDICAMENTOS', font: 'SF', fontSize: 8, bold:true, colSpan:2}, 
+                            {}
+                          ],
+                          [
+                            [
+                              {
+                                table: {
+                                  widths: [30, '*', 65, 95, 40, 40],
+                                  body: [
+                                    [
+                                      {text: 'Tipo', style: 'SF', fontSize: 8}, 
+                                      {text: 'Medicamento', style: 'SF', fontSize:8},
+                                      {text: 'Dosis', style: 'SF', fontSize:8},
+                                      {text: 'Vía', style: 'SF', fontSize:8},
+                                      {text: 'Hora Inicio', style: 'SF', fontSize:8},
+                                      {text: 'Hora Final', style: 'SF', fontSize:8},
+                                    ],
+                                    ...tablaMedicamentos
+                                  ]
+                                },
+                                layout: 'noBorders',
+                                dontBreakRows: true
+                              },                                
+                            ],                              
+                            [
+                              [
+                                {
+                                  table: {
+                                    headerRows: 1,
+                                    widths: [25, '*'],
+                                    body: [
+                                      [
+                                        '',
+                                        {text: 'EVENTOS CRÍTICOS', style: 'SF', fontSize: 8, bold:true},
+                                      ],
+                                      [
+                                        {text: 'Hora', style: 'SF', fontSize: 8}, 
+                                        {text: 'Observaciones', style: 'SF', fontSize:8,}
+                                      ],
+                                      ...tablaEventos                             
+                                    ]
+                                  },                                    
+                                  layout: 'headerLineOnly',
+                                },
+                                [
+                                  {
+                                    margin:[0, 10, 0, 0],
+                                    table: {
+                                      headerRows: 1,
+                                      widths: [25, '*'],
+                                      body: [
+                                        [
+                                          '',
+                                          {text: 'RELEVOS', style: 'SF', fontSize: 8, bold:true}
+                                        ],
+                                        [
+                                          {text: 'Hora', style: 'SF', fontSize: 8}, 
+                                          {text: 'Observaciones', style: 'SF', fontSize:8,}
+                                        ],
+                                        ...tablaRelevos
+                                      ]
+                                    },
+                                    layout: 'headerLineOnly'
+                                  },
+                                ]
+                              ],                                
+                            ],
+                          ],
+                        ]
+                      }, font: 'SF', fontSize: 8
+                    },
+                  ]
+                }
+              ]
+            },
+            {
+              columns:[
+                {
+                  margin: [0, 10, 0, 0],
+                    relativePosition: { x: 0, y: 420 },
+                    table: {
+                      widths: ['60%', '40%'],
+                      body: [
+                        [
+                          {
+                            text:[
+                              {text: 'BALANCE HÍDRICO: ', style: 'SF', fontSize: 8, bold: true}, 
+                              {text: balanceTotal, bold:true}
+                            ], colSpan: 2
+                          },
+                          {}
+                        ],
+                        [
+                          {                                
+                            text:[
+                                {text: 'Ingresos', font:'SF', fontSize:8, bold: true},
+                                {text: '\n\n', font:'SF', fontSize:8},
+                                {text: txtHartman, font:'SF', fontSize:8},{text:hartman, font:'SF', fontSize:8, bold:true},
+                                {text: txtSolFisiolo, font:'SF', fontSize:8}, {text:solFisiolo, font:'SF', fontSize:8, bold:true}, 
+                                {text: txtGlucosados, font:'SF', fontSize:8},{text:glucosados, font:'SF', fontSize:8, bold:true},
+                                {text: txtGelatinas, font:'SF', fontSize:8},{text:gelatinas, font:'SF', fontSize:8, bold:true},
+                                {text: txtAlmidones, font:'SF', fontSize:8},{text:almidones, font:'SF', fontSize:8, bold:true},
+                                {text: txtAlbuminas, font:'SF', fontSize:8},{text:albuminas, font:'SF', fontSize:8, bold:true},
+                                {text: txtPaqGlobular, font:'SF', fontSize:8},{text:paqGlobular, font:'SF', fontSize:8, bold:true},
+                                {text: txtPlasmas, font:'SF', fontSize:8},{text:plasmas, font:'SF', fontSize:8, bold:true},
+                                {text: txtPlaquetas, font:'SF', fontSize:8},{text:plaquetasIngreso, font:'SF', fontSize:8, bold:true},
+                                {text: txtCrioprecipitados, font:'SF', fontSize:8},{text:crioprecipitados, font:'SF', fontSize:8, bold:true},
+                                {text: txtFactorVII, font:'SF', fontSize:8},{text:factorVII, font:'SF', fontSize:8, bold:true},
+                                {text: txtFactorVIII, font:'SF', fontSize:8},{text:factorVIII, font:'SF', fontSize:8, bold:true},
+                                {text: txtOtrosIngresos, font:'SF', fontSize:8},{text:otrosIngreso, font:'SF', fontSize:8, bold:true},
+                            ]
+                          }, 
+                          {
+                            text:[
+                                {text: 'Egresos', font:'SF', fontSize:8, bold: true},
+                                {text: '\n\n', font:'SF', fontSize:8},
+                                {text: txtLiqAscitis, font:'SF', fontSize:8},{text:liqAscitis, font:'SF', fontSize:8, bold:true},
+                                {text: txtSangradoAprox, font:'SF', fontSize:8},{text:sangradoAprox, font:'SF', fontSize:8, bold:true},
+                                {text: txtUresis, font:'SF', fontSize:8},{text:uresis, font:'SF', fontSize:8, bold:true},
+                                {text: txtExpQuirurgica, font:'SF', fontSize:8},{text:expQuirurgica, font:'SF', fontSize:8, bold:true},
+                                {text: txtReqBasales, font:'SF', fontSize:8},{text:reqBasales, font:'SF', fontSize:8, bold:true},
+                                {text: txtAyuno, font:'SF', fontSize:8},{text:ayunoEgreso, font:'SF', fontSize:8, bold:true},
+                                {text: txtOtrosEgresos, font:'SF', fontSize:8},{text:otrosEgresos, font:'SF', fontSize:8, bold:true},
+                            ]
+                          }
+                        ]
+                      ]
+                    }, font: 'SF', fontSize: 8
+                }
+              ]
+            },
             /*POST*/
             {
               pageOrientation: 'portrait',
@@ -5517,7 +5522,7 @@ export default defineComponent({
         this.saveGrid = setInterval(() => {
           this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
           this.hl7mess = [];
-        }, 1000 * 20);
+        }, 1000 * 60);
       },
 
       pingMSV(dirip: string){
