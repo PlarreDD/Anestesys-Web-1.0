@@ -2137,7 +2137,7 @@ export default defineComponent({
         let txtCirugiaTrans= cirugiaTrans.length > 60 ? cirugiaTrans.substring(0, 60) + '...' : cirugiaTrans;
 
         /*Grid Anestésico*/
-        let datosGrid = this.grid;
+        let datosGrid = this.saltoArreglo;
         let tablaDatosGrid = [];
 
         datosGrid.forEach(entry => {
