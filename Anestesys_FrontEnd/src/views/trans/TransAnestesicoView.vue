@@ -392,7 +392,7 @@
                 <button type="button"
                         class="btn btn-nav-bar fw-bold"
                         data-bs-toggle="modal"
-                        data-bs-target="#modal-grid"> GRID ANESTÉSICO </button>
+                        data-bs-target="#modal-grid" @click="renderBlock"> GRID ANESTÉSICO </button>
                 
               </li>
               <!-- Técnica Anestésica Final -->
@@ -429,6 +429,9 @@
                   <div class="row g-3">
                       <div class="col-md-12">
                         <h5 class="text-white fw-bold">GRID ANESTÉSICO</h5>
+                        <div>
+                          <line-chart :data="chartData" :options="chartOptions" />
+                        </div>
                       </div>
                   </div>
                 </div>
@@ -1229,9 +1232,11 @@ import type { regNotaPost } from "@/interfaces/regPostAnest";
 import { usePostAnestStore } from "@/stores/postAnest-store";
 import { useMedicamentoStore } from "../../stores/medicamento-store";
 import { ElSelect, ElOption } from 'element-plus';
+import { Line } from 'vue-chartjs';
 
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import pdfMake from "pdfmake/build/pdfmake";
+import { renderBlock } from "element-plus/es/utils";
 window.pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const preIdStore = usePreIdStore();
@@ -1339,19 +1344,35 @@ export default defineComponent({
 
       stepSize: 1,
 
-      mostrarVistaRapida : false
+      mostrarVistaRapida : false,
+
+      chartData: {
+        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
+        datasets: [
+          {
+            label: 'Ventas',
+            borderColor: '#f87979',
+            data: [40, 20, 30, 25, 50],
+            fill: false,
+          },
+        ],
+      },
+      chartOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+      },
     }
   }, 
 
   components:{
     BarraNavegacion,
     Multiselect,
-    ElSelect, ElOption
+    ElSelect, ElOption, LineChart: Line,
   },
 
   mounted: function() { // Llama el método despues de cargar la página    
     transAnestStore.getDetieneMonitoreo();
-    this.pingMSV(medStore.monitor[0].dirIPMVS);
+    // this.pingMSV(medStore.monitor[0].dirIPMVS);
     transAnestStore.listDatosV(preIdStore.pacienteID._id);
     this.listaTecAnest();
     
@@ -1392,9 +1413,9 @@ export default defineComponent({
     this.menuTrans.tipoRel= "RELEVO";
     this.menuTrans.tipoEve= "EVENTO";
     
-    this.tempMSV = setInterval(() => {
-      this.pingMSV(medStore.monitor[0].dirIPMVS);
-    }, 10000);
+    // this.tempMSV = setInterval(() => {
+    //   this.pingMSV(medStore.monitor[0].dirIPMVS);
+    // }, 10000);
 
     const gridLateral = document.getElementById('grid-lateral');
     const grid = document.getElementById('grid');
@@ -1403,7 +1424,7 @@ export default defineComponent({
     grid.addEventListener('scroll', () => {
       // Sincronizar la posición de desplazamiento en el elemento 'grid-lateral'
       gridLateral.scrollTop = grid.scrollTop;
-    });
+    });    
   },
 
   methods: {
