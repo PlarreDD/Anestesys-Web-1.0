@@ -199,21 +199,24 @@
         <div class="col bordeColumna">           
           <img class="img-vista-rapida" src="images/imgIcon/paciente.png">          
           <label class="form-label text-white" :class="idStore.NombrePaciente == '' || idStore.NombrePaciente == undefined ? 'invisible':''"> 
-            {{ idStore.NombrePaciente == '' || idStore.NombrePaciente == undefined ? '-': idStore.NombrePaciente }}
+            {{ idStore.NombrePaciente == '' || idStore.NombrePaciente == undefined ? '-': 
+               idStore.NombrePaciente.length > 30 ? idStore.NombrePaciente.substring(0,30) + '...' : idStore.NombrePaciente }}
           </label>
         </div>
         
         <div class="col">
           <img class="img-vista-rapida" src="images/imgIcon/anestesiologo.png">
           <label class="form-label text-white" :class="idStore.NombreAnestesiologo == '' || idStore.NombreAnestesiologo == undefined ? 'invisible':''">
-            {{ idStore.NombreAnestesiologo == '' || idStore.NombreAnestesiologo == undefined ? '-': idStore.NombreAnestesiologo }}            
+            {{ idStore.NombreAnestesiologo == '' || idStore.NombreAnestesiologo == undefined ? '-': 
+               idStore.NombreAnestesiologo.length > 30 ? idStore.NombreAnestesiologo.substring(0,30) + '...' : idStore.NombreAnestesiologo }}            
           </label>
         </div>
         
         <div class="col bordeColumna"> 
           <img class="img-vista-rapida" src="images/imgIcon/cirugia.png">
           <label class="form-label text-white" :class="idStore.NombreCirugia == '' || idStore.NombreCirugia == undefined ? 'invisible':''">            
-            {{ idStore.NombreCirugia == '' || idStore.NombreCirugia == undefined ? '-': idStore.NombreCirugia}}
+            {{ idStore.NombreCirugia == '' || idStore.NombreCirugia == undefined ? '-' : 
+               idStore.NombreCirugia.length > 30 ? idStore.NombreCirugia.substring(0, 30) + '...': idStore.NombreCirugia }}
           </label>
         </div>
       </div>

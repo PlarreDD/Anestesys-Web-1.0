@@ -16,6 +16,7 @@
                 <textarea class="form-control"
                           id=""
                           rows="20"
+                          @keyup.capture="enviarDatosNota"
                           v-model="textoNota.nota"
                           :class="textoNota.nota != undefined && textoNota.nota != '' ?
                                  'form-control border border-success formSombra' : 'form-control'">
@@ -66,6 +67,10 @@ export default defineComponent({
             this.btnActualizarNota=true
 
             preIdStore.savePreNota(this.textoNota.nota, preIdStore.pacienteID._id)
+        },
+
+        enviarDatosNota() {
+            this.$emit('recibe-datos-nota', preIdStore.NotaPre=this.textoNota.nota)
         }
     }
 })
