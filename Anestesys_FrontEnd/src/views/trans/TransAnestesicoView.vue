@@ -428,8 +428,8 @@
                   <div class="row g-3">
                       <div class="col-md-12">
                         <h5 class="text-white fw-bold">GRID ANESTÉSICO</h5>
-                        <div>
-                          <line-chart :data="chartData" :options="chartOptions" />
+                        <div class="chart-container">
+                          <!-- <Line :data="chartData" :options="chartOptions" /> -->
                         </div>
                       </div>
                   </div>
@@ -1187,6 +1187,10 @@
 
     </div>
 
+    <div>
+      <LineChart />
+    </div>
+
     <!-- Menú vista rápida -->
     <div class="text-center posicion-estatica fw-bold container" :class="preIdStore.VistaRapida == false ? 'c-fixed' : 'c-fixed invisible'" @click.stop="desplegarMenuVistaRapida()">
       <div class="row">
@@ -1214,7 +1218,7 @@
           </label>
         </div>
       </div>
-    </div>       
+    </div>  
 
   </div>
 </template>
@@ -1231,7 +1235,7 @@ import type { regNotaPost } from "@/interfaces/regPostAnest";
 import { usePostAnestStore } from "@/stores/postAnest-store";
 import { useMedicamentoStore } from "../../stores/medicamento-store";
 import { ElSelect, ElOption } from 'element-plus';
-import { Line } from 'vue-chartjs';
+import LineChart from '../../components/LineChart.vue';
 
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import pdfMake from "pdfmake/build/pdfmake";
@@ -1344,28 +1348,28 @@ export default defineComponent({
 
       mostrarVistaRapida : false,
 
-      chartData: {
+      lineChartData: {
         labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
         datasets: [
           {
-            label: 'Ventas',
-            borderColor: '#f87979',
-            data: [40, 20, 30, 25, 50],
-            fill: false,
+            label: 'Datos de ejemplo',
+            borderColor: '#42b983',
+            data: [10, 20, 15, 25, 30],
           },
         ],
       },
-      chartOptions: {
+      lineChartOptions: {
         responsive: true,
         maintainAspectRatio: false,
       },
     }
-  }, 
+  },
 
   components:{
     BarraNavegacion,
     Multiselect,
-    ElSelect, ElOption, LineChart: Line,
+    ElSelect, ElOption,
+    LineChart
   },
 
   mounted: function() { // Llama el método despues de cargar la página    
