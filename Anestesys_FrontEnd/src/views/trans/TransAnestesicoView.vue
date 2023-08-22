@@ -392,8 +392,7 @@
                 <button type="button"
                         class="btn btn-nav-bar fw-bold"
                         data-bs-toggle="modal"
-                        data-bs-target="#modal-grid" @click="renderBlock"> GRID ANESTÉSICO </button>
-                
+                        data-bs-target="#modal-grid" @click=""> GRID ANESTÉSICO </button>                
               </li>
               <!-- Técnica Anestésica Final -->
               <li class="col-md-3">
@@ -1236,7 +1235,6 @@ import { Line } from 'vue-chartjs';
 
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import pdfMake from "pdfmake/build/pdfmake";
-import { renderBlock } from "element-plus/es/utils";
 window.pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const preIdStore = usePreIdStore();
@@ -1372,7 +1370,7 @@ export default defineComponent({
 
   mounted: function() { // Llama el método despues de cargar la página    
     transAnestStore.getDetieneMonitoreo();
-    // this.pingMSV(medStore.monitor[0].dirIPMVS);
+    this.pingMSV(medStore.monitor[0].dirIPMVS);
     transAnestStore.listDatosV(preIdStore.pacienteID._id);
     this.listaTecAnest();
     
@@ -1413,9 +1411,9 @@ export default defineComponent({
     this.menuTrans.tipoRel= "RELEVO";
     this.menuTrans.tipoEve= "EVENTO";
     
-    // this.tempMSV = setInterval(() => {
-    //   this.pingMSV(medStore.monitor[0].dirIPMVS);
-    // }, 10000);
+    this.tempMSV = setInterval(() => {
+      this.pingMSV(medStore.monitor[0].dirIPMVS);
+    }, 10000);
 
     const gridLateral = document.getElementById('grid-lateral');
     const grid = document.getElementById('grid');
