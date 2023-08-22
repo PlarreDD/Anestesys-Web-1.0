@@ -289,9 +289,9 @@ export default defineComponent({
   
   mounted: function() { // Llama el método despues de cargar la página
     this.validaSeleccionId()
-    this.ocultarFondo();    
-    this.mostrarHeader();  
-    this.ocultarMenuLateral();  
+    this.ocultarFondo();
+    this.mostrarHeader();
+    this.ocultarMenuLateral();
     document.addEventListener('scroll', this.scrollFunction);
   },
   
@@ -444,6 +444,7 @@ export default defineComponent({
       idStore.VistaRapida=true
       this.mostrarVistaRapida=true
     },
+    
     async replegarMenuVistaRapida(){ 
       if(this.mostrarVistaRapida=true)     
         idStore.VistaRapida=false

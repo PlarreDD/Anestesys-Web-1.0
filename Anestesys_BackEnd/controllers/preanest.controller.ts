@@ -13,14 +13,17 @@ import { PreIdPacientes,
 export const getAllInfo = async (req: any, res: Response) => {
     try {
         const {pid} = req.body
-        console.log(pid);
         
-        // const pacientescx = await PreIdPacientesCx.find({pid: pid});
+        const pacientescx = await PreIdPacientesCx.find({pid: pid});
         const prevals = await PreValoracion.find({pid: pid});
         const preests = await ValEstudios.find({vid: prevals[0]._id});
-        // const preplan = await PrePlan.find({pid: pid});
-        // const prenota = await PreNota.find({pid: pid});
-        console.log( prevals, preests);
+        const preplan = await PrePlan.find({pid: pid});
+        const prenota = await PreNota.find({pid: pid});
+        
+        console.log( "PREANESTÉSICO:\n\t" + pacientescx +
+                     "\nVALORACIÓN:\n\t" + prevals + "\n" + preests +
+                     "\nPLAN:\n\t" + preplan +
+                     "\nNOTA\n\t" + prenota);
         
         // return res.json({pacientes});
     } catch (error) {
