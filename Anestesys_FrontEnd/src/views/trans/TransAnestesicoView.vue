@@ -428,8 +428,8 @@
                   <div class="row g-3">
                       <div class="col-md-12">
                         <h5 class="text-white fw-bold">GRID ANESTÉSICO</h5>
-                        <div class="chart-container">
-                          <!-- <Line :data="chartData" :options="chartOptions" /> -->
+                        <div>
+                          <LineChart ref="lineChartComponent" />
                         </div>
                       </div>
                   </div>
@@ -1187,9 +1187,7 @@
 
     </div>
 
-    <div>
-      <LineChart />
-    </div>
+    <!--  -->
 
     <!-- Menú vista rápida -->
     <div class="text-center posicion-estatica fw-bold container" :class="preIdStore.VistaRapida == false ? 'c-fixed' : 'c-fixed invisible'" @click.stop="desplegarMenuVistaRapida()">
@@ -1346,22 +1344,7 @@ export default defineComponent({
 
       stepSize: 1,
 
-      mostrarVistaRapida : false,
-
-      lineChartData: {
-        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
-        datasets: [
-          {
-            label: 'Datos de ejemplo',
-            borderColor: '#42b983',
-            data: [10, 20, 15, 25, 30],
-          },
-        ],
-      },
-      lineChartOptions: {
-        responsive: true,
-        maintainAspectRatio: false,
-      },
+      mostrarVistaRapida : false,     
     }
   },
 
@@ -1374,7 +1357,7 @@ export default defineComponent({
 
   mounted: function() { // Llama el método despues de cargar la página    
     transAnestStore.getDetieneMonitoreo();
-    this.pingMSV(medStore.monitor[0].dirIPMVS);
+    // this.pingMSV(medStore.monitor[0].dirIPMVS);
     transAnestStore.listDatosV(preIdStore.pacienteID._id);
     this.listaTecAnest();
     
@@ -1415,9 +1398,9 @@ export default defineComponent({
     this.menuTrans.tipoRel= "RELEVO";
     this.menuTrans.tipoEve= "EVENTO";
     
-    this.tempMSV = setInterval(() => {
-      this.pingMSV(medStore.monitor[0].dirIPMVS);
-    }, 10000);
+    // this.tempMSV = setInterval(() => {
+    //   this.pingMSV(medStore.monitor[0].dirIPMVS);
+    // }, 10000);
 
     const gridLateral = document.getElementById('grid-lateral');
     const grid = document.getElementById('grid');
@@ -1431,7 +1414,7 @@ export default defineComponent({
 
   methods: {
       // Imprimir PDF      
-      crearPdf() {
+      async crearPdf() {
         // Fuentes Personalizadas
         window.pdfMake.fonts = {
           SF: {
@@ -2162,6 +2145,10 @@ export default defineComponent({
         /*Grid Anestésico*/
         let datosGrid = this.saltoArreglo;
         let tablaDatosGrid = [];
+
+        /*Gráfica Grid*/
+        const lineChartComponent = this.$refs.lineChartComponent as LineChart;
+        const imageData = await lineChartComponent.generateImage();
 
         datosGrid.forEach(entry => {
           const columnData = [];
@@ -3821,7 +3808,7 @@ export default defineComponent({
                     ]
                 }
               ]
-            },            
+            },
             // Agregar cada parte de tablaDatosGrid en una página nueva
             ...columnasDatos.slice(1).map((columna) => ({
               pageBreak: 'before',
@@ -4062,6 +4049,17 @@ export default defineComponent({
                         ]
                       ]
                     }, font: 'SF', fontSize: 8
+                }
+              ]
+            },
+            {
+              pageOrientation: 'portrait',
+              pageBreak: 'before',
+              columns:[
+                { 
+                  stack:[
+                    { image: imageData, width: 400 },
+                  ]
                 }
               ]
             },
