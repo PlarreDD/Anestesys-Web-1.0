@@ -428,8 +428,8 @@
                   <div class="row g-3">
                       <div class="col-md-12">
                         <h5 class="text-white fw-bold">GRID ANESTÉSICO</h5>
-                        <div>
-                          <LineChart ref="lineChartComponent" />
+                        <div ref="chartRef">
+                          <Line id="my-chart-id" :options="chartOptions" :data="chartData" />
                         </div>
                       </div>
                   </div>
@@ -1188,6 +1188,9 @@
     </div>
 
     <!--  -->
+    <div class="grafica" ref="chartRef">
+      <Line id="my-chart-id" :options="chartOptions" :data="chartData" />
+    </div>
 
     <!-- Menú vista rápida -->
     <div class="text-center posicion-estatica fw-bold container" :class="preIdStore.VistaRapida == false ? 'c-fixed' : 'c-fixed invisible'" @click.stop="desplegarMenuVistaRapida()">
@@ -1222,7 +1225,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue"
+import { defineComponent, ref } from "vue"
 import type { regMenuTrans } from "@/interfaces/regTransAnest";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
 import { useTransAnestStore } from "../../stores/transAnest-store";
@@ -1233,11 +1236,14 @@ import type { regNotaPost } from "@/interfaces/regPostAnest";
 import { usePostAnestStore } from "@/stores/postAnest-store";
 import { useMedicamentoStore } from "../../stores/medicamento-store";
 import { ElSelect, ElOption } from 'element-plus';
-import LineChart from '../../components/LineChart.vue';
-
+import { Line } from 'vue-chartjs';
+import { Chart as ChartJS,  CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
+import html2canvas from 'html2canvas';
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import pdfMake from "pdfmake/build/pdfmake";
 window.pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const preIdStore = usePreIdStore();
 const transAnestStore = useTransAnestStore();
@@ -1259,7 +1265,9 @@ let PAM_In: any;
 let FiCO2: any;
 let FR: any;
 
-var taSeparada: Object;
+let taSeparada: Object;
+
+let FrecCardiaca: Object;
 
 export default defineComponent({
   name: 'App',
@@ -1344,7 +1352,32 @@ export default defineComponent({
 
       stepSize: 1,
 
-      mostrarVistaRapida : false,     
+      mostrarVistaRapida : false,
+
+      chartData: {
+          labels: [ 'January', 'February', 'March' ],
+          datasets: [
+              {
+                  label: 'FC',
+                  borderColor: 'rgba(75, 192, 192, 1)',
+                  data: [40, 20, 12],
+                  fill: false,
+                  // borderDash: [5, 5], // Estilo de línea de puntos y guiones
+                  pointStyle: 'rect', // Estilo del punto en los datos
+                  // pointRadius: 8
+              },
+              {
+                  label: 'SpO2',
+                  borderColor: 'rgba(192, 75, 192, 1)',
+                  data: [15, 30, 25],
+                  fill: false,
+                  pointStyle: 'triangle'
+              }
+          ]
+      },
+      chartOptions: {
+          responsive: true
+      }
     }
   },
 
@@ -1352,12 +1385,12 @@ export default defineComponent({
     BarraNavegacion,
     Multiselect,
     ElSelect, ElOption,
-    LineChart
+    Line
   },
 
   mounted: function() { // Llama el método despues de cargar la página    
     transAnestStore.getDetieneMonitoreo();
-    // this.pingMSV(medStore.monitor[0].dirIPMVS);
+    this.pingMSV(medStore.monitor[0].dirIPMVS);
     transAnestStore.listDatosV(preIdStore.pacienteID._id);
     this.listaTecAnest();
     
@@ -1413,6 +1446,13 @@ export default defineComponent({
   },
 
   methods: {
+      // Generar Grafica a Imagen
+      async convertirGrafica() {
+        let grafica = (this.$refs.chartRef as HTMLElement);
+        let canvas = await html2canvas(grafica);
+        return canvas.toDataURL('image/png'); // Devuelve la imagen como base64
+      },
+
       // Imprimir PDF      
       async crearPdf() {
         // Fuentes Personalizadas
@@ -1424,7 +1464,7 @@ export default defineComponent({
             bolditalics: 'SF-UI-Display-Bold.otf',
           }
         };
-        /***********************PRE***********************/
+        /***********************PRE***********************/        
 
         /*ID PACIENTE*/
         // Nombre
@@ -2147,8 +2187,7 @@ export default defineComponent({
         let tablaDatosGrid = [];
 
         /*Gráfica Grid*/
-        const lineChartComponent = this.$refs.lineChartComponent as LineChart;
-        const imageData = await lineChartComponent.generateImage();
+        let chartImage = await this.convertirGrafica();
 
         datosGrid.forEach(entry => {
           const columnData = [];
@@ -2159,14 +2198,14 @@ export default defineComponent({
             columnData.push({ text: item.valor ? item.valor : '-', style: 'SF', fontSize: 6, bold: true, alignment:'center', margin: [0, 0, 0, 4] });
           });        
           tablaDatosGrid.push(columnData);
-        });
+        });        
 
         // Dividir el arreglo en partes más pequeñas
-        const numColumnas = 26; // Número de columnas que se mostraran por página
-        const columnasDatos = tablaDatosGrid.length > 0 ? [] : [[]];
+        let numColumnas = 26; // Número de columnas que se mostraran por página
+        let columnasDatos = tablaDatosGrid.length > 0 ? [] : [[]];
         for (let i = 0; i < tablaDatosGrid.length; i += numColumnas) {
           columnasDatos.push(tablaDatosGrid.slice(i, i + numColumnas));
-        }
+        }        
 
         // Construcción del PDF
         let docDefinition = {
@@ -4052,13 +4091,14 @@ export default defineComponent({
                 }
               ]
             },
+            // Grafica
             {
-              pageOrientation: 'portrait',
+              pageOrientation: 'landscape',
               pageBreak: 'before',
               columns:[
                 { 
                   stack:[
-                    { image: imageData, width: 400 },
+                    { image: chartImage, width: 400 },
                   ]
                 }
               ]
@@ -4292,7 +4332,7 @@ export default defineComponent({
 
         // Generar el documento PDF
         pdfMake.createPdf(docDefinition as any).open();
-      },
+      },            
 
       // Menú vista rapida
       async desplegarMenuVistaRapida(){     
@@ -5586,6 +5626,11 @@ export default defineComponent({
 #app {
   font-family: SF UI Display;
   src: url("@/assets/fonts/SF-UI-Display-Regular.otf") format("opentype");
+}
+.grafica {
+  position: fixed; 
+  width: 100%; 
+  height: 100%;
 }
 .bordePrincipal {
     width: 110%;

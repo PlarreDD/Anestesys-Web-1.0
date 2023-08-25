@@ -1,11 +1,10 @@
 <template>
-    <Line id="my-chart-id" :options="chartOptions" :data="chartData" ref="chartRef" />
+    <Line id="my-chart-id" :options="chartOptions" :data="chartData"/>
 </template>
 
 <script lang="ts">
 import { Line } from 'vue-chartjs';
 import { Chart as ChartJS,  CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
-import html2canvas from 'html2canvas';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -22,9 +21,7 @@ export default {
                         borderColor: 'rgba(75, 192, 192, 1)',
                         data: [40, 20, 12],
                         fill: false,
-                        // borderDash: [5, 5], // Estilo de línea de puntos y guiones
                         pointStyle: 'rect', // Estilo del punto en los datos
-                        // pointRadius: 8
                     },
                     {
                         label: 'SpO2',
@@ -39,14 +36,6 @@ export default {
                 responsive: true
             }
         }
-    },
-    methods: {
-        async generateImage() {
-            const chartRef = this.$refs.chartRef as HTMLCanvasElement;
-            const canvas = await html2canvas(chartRef);
-            const imageData = canvas.toDataURL('image/png');
-            return imageData;
-        },
-    },
+    },    
 }
 </script>
