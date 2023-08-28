@@ -392,7 +392,7 @@
                 <button type="button"
                         class="btn btn-nav-bar fw-bold"
                         data-bs-toggle="modal"
-                        data-bs-target="#modal-grid" @click=""> GRID ANESTÉSICO </button>                
+                        data-bs-target="#modal-grid" @click="obtenerValoresGrafica"> GRID ANESTÉSICO </button>                
               </li>
               <!-- Técnica Anestésica Final -->
               <li class="col-md-3">
@@ -421,7 +421,7 @@
       <!--Abrir el modal Grid Anestésico-->
       <div class="modal" id="modal-grid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
-          <div class="modal-content color-dropdown">
+          <div class="modal-content color-dropdown1">
             <div class="input-group mb-3">
               <div class="modal-body">
                 <div class="col-md-12">
@@ -429,7 +429,7 @@
                       <div class="col-md-12">
                         <h5 class="text-white fw-bold">GRID ANESTÉSICO</h5>
                         <div ref="chartRef">
-                          <Line id="my-chart-id" :options="chartOptions" :data="chartData" />
+                          <Line id="my-chart-id" :options="chartOptions" :data="chartData" :key="chartKey"/>
                         </div>
                       </div>
                   </div>
@@ -1189,7 +1189,7 @@
 
     <!--  -->
     <div class="grafica" ref="chartRef">
-      <Line id="my-chart-id" :options="chartOptions" :data="chartData" />
+      <Line ref="lineChart" id="my-chart-id" :options="chartOptions" :data="chartData" :key="chartKey"/>
     </div>
 
     <!-- Menú vista rápida -->
@@ -1266,8 +1266,6 @@ let FiCO2: any;
 let FR: any;
 
 let taSeparada: Object;
-
-let FrecCardiaca: Object;
 
 export default defineComponent({
   name: 'App',
@@ -1355,29 +1353,37 @@ export default defineComponent({
       mostrarVistaRapida : false,
 
       chartData: {
-          labels: [ 'January', 'February', 'March' ],
+          labels: ['1','2','3','4','5','6','7','8','9','10'],
           datasets: [
               {
                   label: 'FC',
                   borderColor: 'rgba(75, 192, 192, 1)',
-                  data: [40, 20, 12],
+                  data: [],
                   fill: false,
                   // borderDash: [5, 5], // Estilo de línea de puntos y guiones
                   pointStyle: 'rect', // Estilo del punto en los datos
                   // pointRadius: 8
               },
               {
-                  label: 'SpO2',
+                  label: 'Pulso',
                   borderColor: 'rgba(192, 75, 192, 1)',
-                  data: [15, 30, 25],
+                  data: [],
                   fill: false,
                   pointStyle: 'triangle'
+              },
+              {
+                  label: 'SpO2',
+                  borderColor: 'rgba(127, 164, 255, 1)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'rect'
               }
           ]
       },
       chartOptions: {
           responsive: true
-      }
+      },
+      chartKey: 0,
     }
   },
 
@@ -1431,9 +1437,9 @@ export default defineComponent({
     this.menuTrans.tipoRel= "RELEVO";
     this.menuTrans.tipoEve= "EVENTO";
     
-    // this.tempMSV = setInterval(() => {
-    //   this.pingMSV(medStore.monitor[0].dirIPMVS);
-    // }, 10000);
+    this.tempMSV = setInterval(() => {
+      this.pingMSV(medStore.monitor[0].dirIPMVS);
+    }, 10000);
 
     const gridLateral = document.getElementById('grid-lateral');
     const grid = document.getElementById('grid');
@@ -1442,7 +1448,7 @@ export default defineComponent({
     grid.addEventListener('scroll', () => {
       // Sincronizar la posición de desplazamiento en el elemento 'grid-lateral'
       gridLateral.scrollTop = grid.scrollTop;
-    });    
+    });
   },
 
   methods: {
@@ -1452,6 +1458,105 @@ export default defineComponent({
         let canvas = await html2canvas(grafica);
         return canvas.toDataURL('image/png'); // Devuelve la imagen como base64
       },
+
+      async obtenerValoresGrafica(){
+        let FC = this.grid.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "174147842")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let Pulso = this.grid.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "131149530")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let PAS = this.grid.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "119150301")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let PAD = this.grid.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "119150302")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let PAM = this.grid.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "119150303")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let SpO2 = this.grid.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "131150456")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let EtCO2 = this.grid.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "181151708")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let Temp1 = this.grid.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "121150344")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let Temp2 = this.grid.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "122150344")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let PVC = this.grid.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "1112150087")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let PAS_IN = this.grid.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "111150037")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let PAD_IN = this.grid.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "111150038")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let PAM_IN = this.grid.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "111150039")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let FiCO2 = this.grid.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "181151716")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let FR = this.grid.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "181151594")
+            .map(dato => dato.valor ?? ' ')
+        );
+
+        this.chartData.datasets[0].data = FC;
+        this.chartData.datasets[1].data = Pulso;
+        this.chartData.datasets[2].data = SpO2;
+        this.chartData.datasets[3].data = FC;
+        this.chartData.datasets[4].data = Pulso;
+        this.chartData.datasets[5].data = SpO2;
+        this.chartData.datasets[6].data = FC;
+        this.chartData.datasets[7].data = Pulso;
+        this.chartData.datasets[8].data = SpO2;
+        this.chartData.datasets[9].data = FC;
+        this.chartData.datasets[10].data = Pulso;
+        this.chartData.datasets[11].data = SpO2;
+        this.chartData.datasets[12].data = FC;
+        this.chartData.datasets[13].data = Pulso;
+        this.chartData.datasets[14].data = SpO2;
+        this.chartKey += 1;
+
+        console.log("Objeto Chart: "+this.chartData.datasets[0].data);
+        
+        console.log("FC: "+JSON.stringify(FC));   
+      },                          
 
       // Imprimir PDF      
       async crearPdf() {
@@ -5629,8 +5734,8 @@ export default defineComponent({
 }
 .grafica {
   position: fixed; 
-  width: 100%; 
-  height: 100%;
+  /* width: auto; 
+  height: auto; */
 }
 .bordePrincipal {
     width: 110%;
