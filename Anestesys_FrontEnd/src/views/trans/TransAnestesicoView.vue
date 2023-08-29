@@ -427,8 +427,8 @@
                 <div class="col-md-12">
                   <div class="row g-3">
                       <div class="col-md-12">
-                        <h5 class="text-white fw-bold">GRID ANESTÉSICO</h5>
-                        <div ref="chartRef">
+                        <h5 class="text-black fw-bold">GRID ANESTÉSICO</h5>
+                        <div ref="chartRef" class="deslizar-grafica">
                           <Line id="my-chart-id" :options="chartOptions" :data="chartData" :key="chartKey"/>
                         </div>
                       </div>
@@ -1103,7 +1103,7 @@
 
                       <template v-for="(item, index) in itemMSV.datos">
                         <div class="m-1 celda-msv fw-bold" :class="'color-msv-' + item.segmento4" >
-                          {{ item === '-' ? item : item.valor }}
+                          {{ item === 0 ? item : item.valor }}
                         </div>
                         <hr class="mt-2 mb-2 hr-grid"/>
                       </template>
@@ -1225,7 +1225,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue"
+import { defineComponent } from "vue"
 import type { regMenuTrans } from "@/interfaces/regTransAnest";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
 import { useTransAnestStore } from "../../stores/transAnest-store";
@@ -1357,27 +1357,124 @@ export default defineComponent({
           datasets: [
               {
                   label: 'FC',
-                  borderColor: 'rgba(75, 192, 192, 1)',
+                  borderColor: 'rgba(0, 165, 151)',
                   data: [],
                   fill: false,
-                  // borderDash: [5, 5], // Estilo de línea de puntos y guiones
-                  pointStyle: 'rect', // Estilo del punto en los datos
-                  // pointRadius: 8
+                  pointStyle: 'circle', //Estilo del punto en los datos
+                  radius: 4 //Tamaño punto
               },
               {
                   label: 'Pulso',
-                  borderColor: 'rgba(192, 75, 192, 1)',
+                  borderColor: 'rgba(117, 137, 190)',
                   data: [],
                   fill: false,
-                  pointStyle: 'triangle'
+                  pointStyle: 'cross',
+                  radius: 4
+              },
+              {
+                  label: 'PAS',
+                  borderColor: 'rgba(236, 90, 85)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'crossRot',
+                  radius: 4
+              },
+              {
+                  label: 'PAD',
+                  borderColor: 'rgba(161, 197, 227)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'cross',
+                  radius: 4
+              },
+              {
+                  label: 'PAM',
+                  borderColor: 'rgba(236, 102, 24)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'rectRounded',
+                  radius: 4
               },
               {
                   label: 'SpO2',
-                  borderColor: 'rgba(127, 164, 255, 1)',
+                  borderColor: 'rgba(68, 163, 211)',
                   data: [],
                   fill: false,
-                  pointStyle: 'rect'
-              }
+                  pointStyle: 'rectRot',
+                  radius: 4
+              },
+              {
+                  label: 'EtCO2',
+                  borderColor: 'rgba(112, 229, 225)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'star',
+                  radius: 4
+              },
+              {
+                  label: 'Temp1',
+                  borderColor: 'rgba(157, 157, 157)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'triangle',
+                  radius: 4
+              },
+              {
+                  label: 'Temp2',
+                  borderColor: 'rgba(174, 35, 30)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'circle',
+                  radius: 4
+              },
+              {
+                  label: 'PVC',
+                  borderColor: 'rgba(77, 157, 183)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'rectRot',
+                  radius: 4
+              },
+              {
+                  label: 'PAS_IN',
+                  borderColor: 'rgba(198, 27, 27)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'crossRot',
+                  radius: 4
+              },
+              {
+                  label: 'PAD_IN',
+                  borderColor: 'rgba(198, 27, 27)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'cross',
+                  radius: 4
+              },
+              {
+                  label: 'PAM_IN',
+                  borderColor: 'rgba(198, 27, 27)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'rectRounded',
+                  radius: 4
+              },
+              {
+                  label: 'FiCO2',
+                  borderColor: 'rgba(2, 43, 155)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'star',
+                  radius: 4
+              },
+              {
+                  label: 'FR',
+                  borderColor: 'rgba(255, 196, 0)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'triangle',
+                  radius: 4
+              },
           ]
       },
       chartOptions: {
@@ -1460,102 +1557,105 @@ export default defineComponent({
       },
 
       async obtenerValoresGrafica(){
-        let FC = this.grid.flatMap(item =>
+        let FC = this.saltoArreglo.flatMap(item =>
           item.datos
             .filter(dato => dato.segmento4 === "174147842")
             .map(dato => dato.valor ?? ' ')
         );
-        let Pulso = this.grid.flatMap(item =>
+        let Pulso = this.saltoArreglo.flatMap(item =>
           item.datos
             .filter(dato => dato.segmento4 === "131149530")
             .map(dato => dato.valor ?? ' ')
         );
-        let PAS = this.grid.flatMap(item =>
+        let PAS = this.saltoArreglo.flatMap(item =>
           item.datos
             .filter(dato => dato.segmento4 === "119150301")
             .map(dato => dato.valor ?? ' ')
         );
-        let PAD = this.grid.flatMap(item =>
+        let PAD = this.saltoArreglo.flatMap(item =>
           item.datos
             .filter(dato => dato.segmento4 === "119150302")
             .map(dato => dato.valor ?? ' ')
         );
-        let PAM = this.grid.flatMap(item =>
+        let PAM = this.saltoArreglo.flatMap(item =>
           item.datos
             .filter(dato => dato.segmento4 === "119150303")
             .map(dato => dato.valor ?? ' ')
         );
-        let SpO2 = this.grid.flatMap(item =>
+        let SpO2 = this.saltoArreglo.flatMap(item =>
           item.datos
             .filter(dato => dato.segmento4 === "131150456")
             .map(dato => dato.valor ?? ' ')
         );
-        let EtCO2 = this.grid.flatMap(item =>
+        let EtCO2 = this.saltoArreglo.flatMap(item =>
           item.datos
             .filter(dato => dato.segmento4 === "181151708")
             .map(dato => dato.valor ?? ' ')
         );
-        let Temp1 = this.grid.flatMap(item =>
+        let Temp1 = this.saltoArreglo.flatMap(item =>
           item.datos
             .filter(dato => dato.segmento4 === "121150344")
             .map(dato => dato.valor ?? ' ')
         );
-        let Temp2 = this.grid.flatMap(item =>
+        let Temp2 = this.saltoArreglo.flatMap(item =>
           item.datos
             .filter(dato => dato.segmento4 === "122150344")
             .map(dato => dato.valor ?? ' ')
         );
-        let PVC = this.grid.flatMap(item =>
+        let PVC = this.saltoArreglo.flatMap(item =>
           item.datos
             .filter(dato => dato.segmento4 === "1112150087")
             .map(dato => dato.valor ?? ' ')
         );
-        let PAS_IN = this.grid.flatMap(item =>
+        let PAS_IN = this.saltoArreglo.flatMap(item =>
           item.datos
             .filter(dato => dato.segmento4 === "111150037")
             .map(dato => dato.valor ?? ' ')
         );
-        let PAD_IN = this.grid.flatMap(item =>
+        let PAD_IN = this.saltoArreglo.flatMap(item =>
           item.datos
             .filter(dato => dato.segmento4 === "111150038")
             .map(dato => dato.valor ?? ' ')
         );
-        let PAM_IN = this.grid.flatMap(item =>
+        let PAM_IN = this.saltoArreglo.flatMap(item =>
           item.datos
             .filter(dato => dato.segmento4 === "111150039")
             .map(dato => dato.valor ?? ' ')
         );
-        let FiCO2 = this.grid.flatMap(item =>
+        let FiCO2 = this.saltoArreglo.flatMap(item =>
           item.datos
             .filter(dato => dato.segmento4 === "181151716")
             .map(dato => dato.valor ?? ' ')
         );
-        let FR = this.grid.flatMap(item =>
+        let FR = this.saltoArreglo.flatMap(item =>
           item.datos
             .filter(dato => dato.segmento4 === "181151594")
             .map(dato => dato.valor ?? ' ')
         );
 
+        let horaGeneracion = this.saltoArreglo.map(item => item.horaGeneracion);
+
         this.chartData.datasets[0].data = FC;
         this.chartData.datasets[1].data = Pulso;
-        this.chartData.datasets[2].data = SpO2;
-        this.chartData.datasets[3].data = FC;
-        this.chartData.datasets[4].data = Pulso;
+        this.chartData.datasets[2].data = PAS;
+        this.chartData.datasets[3].data = PAD;
+        this.chartData.datasets[4].data = PAM;
         this.chartData.datasets[5].data = SpO2;
-        this.chartData.datasets[6].data = FC;
-        this.chartData.datasets[7].data = Pulso;
-        this.chartData.datasets[8].data = SpO2;
-        this.chartData.datasets[9].data = FC;
-        this.chartData.datasets[10].data = Pulso;
-        this.chartData.datasets[11].data = SpO2;
-        this.chartData.datasets[12].data = FC;
-        this.chartData.datasets[13].data = Pulso;
-        this.chartData.datasets[14].data = SpO2;
+        this.chartData.datasets[6].data = EtCO2;
+        this.chartData.datasets[7].data = Temp1;
+        this.chartData.datasets[8].data = Temp2;
+        this.chartData.datasets[9].data = PVC;
+        this.chartData.datasets[10].data = PAS_IN;
+        this.chartData.datasets[11].data = PAD_IN;
+        this.chartData.datasets[12].data = PAM_IN;
+        this.chartData.datasets[13].data = FiCO2;
+        this.chartData.datasets[14].data = FR;
+        
+        this.chartData.labels = horaGeneracion;
+
         this.chartKey += 1;
 
-        console.log("Objeto Chart: "+this.chartData.datasets[0].data);
-        
-        console.log("FC: "+JSON.stringify(FC));   
+        console.log("hora: "+horaGeneracion);        
       },                          
 
       // Imprimir PDF      
@@ -5531,7 +5631,7 @@ export default defineComponent({
       },
       
       async vaciarMensajeHL7(){
-        let valoresOrdenados = Array.from({ length: 15 }, () => "-");
+        let valoresOrdenados = Array.from({ length: 15 }, () => 0);
 
         //Obtiene el arreglo con el mensaje HL7
         let hl7Message = transAnestStore.datosMSV
@@ -5803,6 +5903,14 @@ export default defineComponent({
   overflow-x: hidden;
   height: 150px;
   margin-top: 0px;
+}
+.deslizar-grafica{
+  overflow-y: hidden;
+  overflow-x: scroll;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  height: 380px;
+  margin-top: 0px;  
 }
 .deslizar-grid{
   overflow: scroll;
