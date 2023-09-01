@@ -420,15 +420,16 @@
 
       <!--Abrir el modal Grid Anestésico-->
       <div class="modal" id="modal-grid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
+        <div class="modal-dialog modal-lg modal-dialog-centered"> 
+          <!-- modal-dialog-scrollable -->
           <div class="modal-content color-dropdown1">
             <div class="input-group mb-3">
               <div class="modal-body">
-                <div class="col-md-12">
+                <div class="col-md-12 chart-container">
                   <div class="row g-3">
                       <div class="col-md-12">
                         <h5 class="text-black fw-bold">GRID ANESTÉSICO</h5>
-                        <div ref="chartRef" class="deslizar-grafica">
+                        <div ref="chartRef" class="">
                           <Line id="my-chart-id" :options="chartOptions" :data="chartData" :key="chartKey"/>
                         </div>
                       </div>
@@ -1188,7 +1189,7 @@
     </div>
 
     <!--  -->
-    <div class="grafica" ref="chartRef">
+    <div class="" ref="chartRef">
       <Line ref="lineChart" id="my-chart-id" :options="chartOptions" :data="chartData" :key="chartKey"/>
     </div>
 
@@ -1353,7 +1354,7 @@ export default defineComponent({
       mostrarVistaRapida : false,
 
       chartData: {
-          labels: ['1','2','3','4','5','6','7','8','9','10'],
+          // labels: [],
           datasets: [
               {
                   label: 'FC',
@@ -1478,7 +1479,17 @@ export default defineComponent({
           ]
       },
       chartOptions: {
-          responsive: true
+          responsive: true,
+          scales: {
+            x: {
+              type: 'time', // Puedes cambiar a 'time' si es una escala de tiempo
+              labels: [],
+              stacked: false
+              // ticks: {
+              //   stepSize: 10, // Tamaño de los intervalos entre las etiquetas
+              // },
+            },
+          },        
       },
       chartKey: 0,
     }
@@ -1651,7 +1662,8 @@ export default defineComponent({
         this.chartData.datasets[13].data = FiCO2;
         this.chartData.datasets[14].data = FR;
         
-        this.chartData.labels = horaGeneracion;
+        // this.chartData.labels = horaGeneracion;
+        this.chartOptions.scales.x.labels = horaGeneracion;
 
         this.chartKey += 1;
 
@@ -4303,7 +4315,7 @@ export default defineComponent({
               columns:[
                 { 
                   stack:[
-                    { image: chartImage, width: 400 },
+                    { image: chartImage, width: 750 },
                   ]
                 }
               ]
@@ -5788,7 +5800,7 @@ export default defineComponent({
         this.saveGrid = setInterval(() => {
           this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
           this.hl7mess = [];
-        }, 1000 * 60);
+        }, 1000 * 30);
       },
 
       pingMSV(dirip: string){
@@ -5831,11 +5843,6 @@ export default defineComponent({
 #app {
   font-family: SF UI Display;
   src: url("@/assets/fonts/SF-UI-Display-Regular.otf") format("opentype");
-}
-.grafica {
-  position: fixed; 
-  /* width: auto; 
-  height: auto; */
 }
 .bordePrincipal {
     width: 110%;
@@ -5904,14 +5911,10 @@ export default defineComponent({
   height: 150px;
   margin-top: 0px;
 }
-.deslizar-grafica{
-  overflow-y: hidden;
-  overflow-x: scroll;
-  white-space: nowrap;
-  scroll-behavior: smooth;
-  height: 380px;
-  margin-top: 0px;  
-}
+/* .chart-container {
+  overflow-x: auto; 
+  max-width: 100%;
+} */
 .deslizar-grid{
   overflow: scroll;
   overflow-x: auto;
