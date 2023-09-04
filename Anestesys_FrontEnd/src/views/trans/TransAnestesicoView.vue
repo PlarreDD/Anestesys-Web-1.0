@@ -1240,11 +1240,12 @@ import { ElSelect, ElOption } from 'element-plus';
 import { Line } from 'vue-chartjs';
 import { Chart as ChartJS,  CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
+import zoomPlugin from 'chartjs-plugin-zoom';
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import pdfMake from "pdfmake/build/pdfmake";
 window.pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 
 const preIdStore = usePreIdStore();
 const transAnestStore = useTransAnestStore();
@@ -1482,14 +1483,30 @@ export default defineComponent({
           responsive: true,
           scales: {
             x: {
-              type: 'time', // Puedes cambiar a 'time' si es una escala de tiempo
               labels: [],
               stacked: false
               // ticks: {
               //   stepSize: 10, // Tamaño de los intervalos entre las etiquetas
               // },
             },
-          },        
+          },
+          plugins: {
+            zoom: {
+              // pan: {
+              //   enabled: true,
+              //   mode: 'xy',
+              // },
+              zoom: {
+                wheel: {
+                  enabled: true,
+                },
+                pinch: {
+                  enabled: true,
+                },
+                mode: 'xy',
+              },
+            },
+          },
       },
       chartKey: 0,
     }
@@ -1504,7 +1521,7 @@ export default defineComponent({
 
   mounted: function() { // Llama el método despues de cargar la página    
     transAnestStore.getDetieneMonitoreo();
-    this.pingMSV(medStore.monitor[0].dirIPMVS);
+    // this.pingMSV(medStore.monitor[0].dirIPMVS);
     transAnestStore.listDatosV(preIdStore.pacienteID._id);
     this.listaTecAnest();
     
@@ -1545,9 +1562,9 @@ export default defineComponent({
     this.menuTrans.tipoRel= "RELEVO";
     this.menuTrans.tipoEve= "EVENTO";
     
-    this.tempMSV = setInterval(() => {
-      this.pingMSV(medStore.monitor[0].dirIPMVS);
-    }, 10000);
+    // this.tempMSV = setInterval(() => {
+    //   this.pingMSV(medStore.monitor[0].dirIPMVS);
+    // }, 10000);
 
     const gridLateral = document.getElementById('grid-lateral');
     const grid = document.getElementById('grid');
@@ -1662,12 +1679,9 @@ export default defineComponent({
         this.chartData.datasets[13].data = FiCO2;
         this.chartData.datasets[14].data = FR;
         
-        // this.chartData.labels = horaGeneracion;
         this.chartOptions.scales.x.labels = horaGeneracion;
 
-        this.chartKey += 1;
-
-        console.log("hora: "+horaGeneracion);        
+        this.chartKey += 1;       
       },                          
 
       // Imprimir PDF      
