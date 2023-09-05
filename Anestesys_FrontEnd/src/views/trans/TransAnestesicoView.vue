@@ -429,7 +429,7 @@
                   <div class="row g-3">
                       <div class="col-md-12">
                         <h5 class="text-black fw-bold">GRID ANESTÉSICO</h5>
-                        <div ref="chartRef" class="">
+                        <div ref="chartRef">
                           <Line id="my-chart-id" :options="chartOptions" :data="chartData" :key="chartKey"/>
                         </div>
                       </div>
@@ -1189,8 +1189,8 @@
     </div>
 
     <!--  -->
-    <div class="" ref="chartRef">
-      <Line ref="lineChart" id="my-chart-id" :options="chartOptions" :data="chartData" :key="chartKey"/>
+    <div ref="chartRef">
+      <Line id="my-chart-id" :options="chartOptions" :data="chartData" :key="chartKey"/>
     </div>
 
     <!-- Menú vista rápida -->
@@ -1355,7 +1355,7 @@ export default defineComponent({
       mostrarVistaRapida : false,
 
       chartData: {
-          // labels: [],
+          labels: [],
           datasets: [
               {
                   label: 'FC',
@@ -1363,7 +1363,7 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'circle', //Estilo del punto en los datos
-                  radius: 4 //Tamaño punto
+                  radius: 4, //Tamaño punto
               },
               {
                   label: 'Pulso',
@@ -1481,21 +1481,12 @@ export default defineComponent({
       },
       chartOptions: {
           responsive: true,
-          scales: {
-            x: {
-              labels: [],
-              stacked: false
-              // ticks: {
-              //   stepSize: 10, // Tamaño de los intervalos entre las etiquetas
-              // },
-            },
-          },
           plugins: {
             zoom: {
-              // pan: {
-              //   enabled: true,
-              //   mode: 'xy',
-              // },
+              pan: {
+                enabled: true,
+                mode: 'xy',
+              },
               zoom: {
                 wheel: {
                   enabled: true,
@@ -1503,7 +1494,7 @@ export default defineComponent({
                 pinch: {
                   enabled: true,
                 },
-                mode: 'xy',
+                mode: 'xy', //
               },
             },
           },
@@ -1521,7 +1512,7 @@ export default defineComponent({
 
   mounted: function() { // Llama el método despues de cargar la página    
     transAnestStore.getDetieneMonitoreo();
-    // this.pingMSV(medStore.monitor[0].dirIPMVS);
+    this.pingMSV(medStore.monitor[0].dirIPMVS);
     transAnestStore.listDatosV(preIdStore.pacienteID._id);
     this.listaTecAnest();
     
@@ -1562,9 +1553,9 @@ export default defineComponent({
     this.menuTrans.tipoRel= "RELEVO";
     this.menuTrans.tipoEve= "EVENTO";
     
-    // this.tempMSV = setInterval(() => {
-    //   this.pingMSV(medStore.monitor[0].dirIPMVS);
-    // }, 10000);
+    this.tempMSV = setInterval(() => {
+      this.pingMSV(medStore.monitor[0].dirIPMVS);
+    }, 10000);
 
     const gridLateral = document.getElementById('grid-lateral');
     const grid = document.getElementById('grid');
@@ -1679,9 +1670,14 @@ export default defineComponent({
         this.chartData.datasets[13].data = FiCO2;
         this.chartData.datasets[14].data = FR;
         
-        this.chartOptions.scales.x.labels = horaGeneracion;
+        this.chartData.labels = horaGeneracion;
 
-        this.chartKey += 1;       
+        this.chartKey += 1;
+
+        console.log("Grid: "+JSON.stringify(this.grid));
+        console.log("FC: "+FC);
+        console.log("PAS: "+PAS);
+        console.log("Temp1: "+Temp1);
       },                          
 
       // Imprimir PDF      
@@ -5756,7 +5752,11 @@ export default defineComponent({
         if(Pulso != undefined)
           valoresOrdenados[1] = Pulso;
         if(PAS != undefined)
+        // {
           valoresOrdenados[2] = PAS;
+        // }else{
+        //   valoresOrdenados[2] = // Asignar valor {segmento4:"0",valor:" "}
+        // }
         if(PAD != undefined)
           valoresOrdenados[3] = PAD;
         if(PAM != undefined)
@@ -5784,6 +5784,8 @@ export default defineComponent({
 
         //Asignar los valores ordenads
         this.hl7mess.push({ datos: valoresOrdenados, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+
+        console.log("hl7 FC: "+JSON.stringify(FC) );        
       },
 
       iniRecepDatos(){
@@ -5813,8 +5815,8 @@ export default defineComponent({
       capturaGrid(){
         this.saveGrid = setInterval(() => {
           this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
-          this.hl7mess = [];
-        }, 1000 * 30);
+          this.hl7mess = [];          
+        }, 1000 * 60);
       },
 
       pingMSV(dirip: string){
@@ -5831,7 +5833,7 @@ export default defineComponent({
       }
     },
 
-    saltoArreglo(){      
+    saltoArreglo(){
       const step = this.stepSize;
       const filas = this.grid.filter((itemMSV, index) => index % step === 0);    
 
