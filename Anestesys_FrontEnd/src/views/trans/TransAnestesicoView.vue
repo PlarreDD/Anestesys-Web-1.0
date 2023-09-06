@@ -373,7 +373,7 @@
 
             <!-- Botón imprimir PDF -->
             <div class="col-md-2">
-              <button type="button" class="btn btn-menu fw-bold" @click="crearPdf">
+              <button type="button" class="btn btn-menu fw-bold" data-bs-toggle="modal" data-bs-target="#modal-grid" @click="crearPdf">
                 <font-awesome-icon icon="fa-solid fa-file-pdf" size="lg"/> PDF
               </button>
             </div>
@@ -426,9 +426,19 @@
             <div class="input-group mb-3">
               <div class="modal-body">
                 <div class="col-md-12 chart-container">
-                  <div class="row g-3">
-                      <div class="col-md-12">
-                        <h5 class="text-black fw-bold">GRID ANESTÉSICO</h5>
+                  <div class="col-md-12">
+                      <div class="row g-3">
+                        <h5 class="text-black fw-bold col-md-11">GRID ANESTÉSICO</h5>
+                        <div class="col-md-1">
+                          <button type="button" id="grid-anes"
+                                  class="btn fw-bold"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close">
+                            <i class="text-black invisible">
+                              <font-awesome-icon icon="fa-solid fa-xmark" size="sm"/>
+                            </i>
+                          </button>
+                        </div>
                         <div ref="chartRef">
                           <Line id="my-chart-id" :options="chartOptions" :data="chartData" :key="chartKey"/>
                         </div>
@@ -1189,9 +1199,9 @@
     </div>
 
     <!--  -->
-    <div ref="chartRef">
+    <!-- <div ref="chartRef">
       <Line id="my-chart-id" :options="chartOptions" :data="chartData" :key="chartKey"/>
-    </div>
+    </div> -->
 
     <!-- Menú vista rápida -->
     <div class="text-center posicion-estatica fw-bold container" :class="preIdStore.VistaRapida == false ? 'c-fixed' : 'c-fixed invisible'" @click.stop="desplegarMenuVistaRapida()">
@@ -1512,7 +1522,7 @@ export default defineComponent({
 
   mounted: function() { // Llama el método despues de cargar la página    
     transAnestStore.getDetieneMonitoreo();
-    this.pingMSV(medStore.monitor[0].dirIPMVS);
+    // this.pingMSV(medStore.monitor[0].dirIPMVS);
     transAnestStore.listDatosV(preIdStore.pacienteID._id);
     this.listaTecAnest();
     
@@ -1553,9 +1563,9 @@ export default defineComponent({
     this.menuTrans.tipoRel= "RELEVO";
     this.menuTrans.tipoEve= "EVENTO";
     
-    this.tempMSV = setInterval(() => {
-      this.pingMSV(medStore.monitor[0].dirIPMVS);
-    }, 10000);
+    // this.tempMSV = setInterval(() => {
+    //   this.pingMSV(medStore.monitor[0].dirIPMVS);
+    // }, 10000);
 
     const gridLateral = document.getElementById('grid-lateral');
     const grid = document.getElementById('grid');
@@ -1672,16 +1682,33 @@ export default defineComponent({
         
         this.chartData.labels = horaGeneracion;
 
-        this.chartKey += 1;
+        this.chartKey += 1;        
 
         console.log("Grid: "+JSON.stringify(this.grid));
         console.log("FC: "+FC);
         console.log("PAS: "+PAS);
         console.log("Temp1: "+Temp1);
-      },                          
+      },                
+      
+      async cerrarModalGrid() {
+        let closeButton = document.getElementById('grid-anes');
+  
+        // Crea un nuevo evento de clic
+        let event = new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+          view: window
+        });
+
+        // Despacha el evento de clic en el botón
+        closeButton.dispatchEvent(event);
+      },
 
       // Imprimir PDF      
       async crearPdf() {
+        this.obtenerValoresGrafica();
+        await new Promise(resolve => setTimeout(resolve, 100));
+
         // Fuentes Personalizadas
         window.pdfMake.fonts = {
           SF: {
@@ -4559,6 +4586,11 @@ export default defineComponent({
 
         // Generar el documento PDF
         pdfMake.createPdf(docDefinition as any).open();
+
+        // Esperar 5 segundos antes de cerrar el modal
+        await new Promise(resolve => setTimeout(resolve, 5000));
+
+        this.cerrarModalGrid();
       },            
 
       // Menú vista rapida
@@ -5653,7 +5685,8 @@ export default defineComponent({
       },
       
       async vaciarMensajeHL7(){
-        let valoresOrdenados = Array.from({ length: 15 }, () => 0);
+        // let valoresOrdenados = Array.from({ length: 15 }, () => 0);
+        let valoresOrdenados = Array.from({ length: 15 }, () => ({ segmento4: "", valor: "" }));
 
         //Obtiene el arreglo con el mensaje HL7
         let hl7Message = transAnestStore.datosMSV
@@ -5752,11 +5785,11 @@ export default defineComponent({
         if(Pulso != undefined)
           valoresOrdenados[1] = Pulso;
         if(PAS != undefined)
-        // {
+        {
           valoresOrdenados[2] = PAS;
-        // }else{
-        //   valoresOrdenados[2] = // Asignar valor {segmento4:"0",valor:" "}
-        // }
+        }else{
+          valoresOrdenados[2] = {segmento4:"119150301", valor:" "}
+        }
         if(PAD != undefined)
           valoresOrdenados[3] = PAD;
         if(PAM != undefined)
