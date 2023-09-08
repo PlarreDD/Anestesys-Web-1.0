@@ -3,7 +3,7 @@
     <barra-navegacion/>
   </header>
 
-  <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">
+  <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">    
 
     <!-- Barra superior -->
     <div class="input-group mb-3">
@@ -419,15 +419,25 @@
       </div>
 
       <!--Abrir el modal Grid Anestésico-->
-      <div class="modal" id="modal-grid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal" id="modal-grid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">        
         <div class="modal-dialog modal-lg modal-dialog-centered"> 
           <!-- modal-dialog-scrollable -->
-          <div class="modal-content color-dropdown1">
-            <div class="input-group mb-3">
+          <div class="modal-content">
+            <div class="div-spinner" id="pdf-spinner"> 
+              <div class="row txt-spinner">
+                <div id="pdf-spinner" class="spinner-border text-white fw-bold col-md-1" role="status"> 
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="col-md-4 text-white">
+                  <h2>Generando PDF...</h2>
+                </div>
+              </div>
+            </div>
+            <div class="input-group">
               <div class="modal-body">
-                <div class="col-md-12 chart-container">
-                  <div class="col-md-12">
-                      <div class="row g-3">
+                <div class="col-md-12 chart-container">                                                      
+                  <div class="col-md-12">                      
+                      <div class="row">                        
                         <h5 class="text-black fw-bold col-md-11">GRID ANESTÉSICO</h5>
                         <div class="col-md-1">
                           <button type="button" id="grid-anes"
@@ -439,9 +449,9 @@
                             </i>
                           </button>
                         </div>
-                        <div ref="chartRef">
-                          <Line id="my-chart-id" :options="chartOptions" :data="chartData" :key="chartKey"/>
-                        </div>
+                        <div class="" ref="chartRef">                          
+                          <Line class="" id="my-chart-id" :options="chartOptions" :data="chartData" :key="chartKey"/>                                                  
+                        </div>                        
                       </div>
                   </div>
                 </div>
@@ -1114,7 +1124,7 @@
 
                       <template v-for="(item, index) in itemMSV.datos">
                         <div class="m-1 celda-msv fw-bold" :class="'color-msv-' + item.segmento4" >
-                          {{ item === 0 ? item : item.valor }}
+                          {{ item === '-' ? item : item.valor }}
                         </div>
                         <hr class="mt-2 mb-2 hr-grid"/>
                       </template>
@@ -1197,11 +1207,6 @@
       </div>
 
     </div>
-
-    <!--  -->
-    <!-- <div ref="chartRef">
-      <Line id="my-chart-id" :options="chartOptions" :data="chartData" :key="chartKey"/>
-    </div> -->
 
     <!-- Menú vista rápida -->
     <div class="text-center posicion-estatica fw-bold container" :class="preIdStore.VistaRapida == false ? 'c-fixed' : 'c-fixed invisible'" @click.stop="desplegarMenuVistaRapida()">
@@ -1522,7 +1527,7 @@ export default defineComponent({
 
   mounted: function() { // Llama el método despues de cargar la página    
     transAnestStore.getDetieneMonitoreo();
-    // this.pingMSV(medStore.monitor[0].dirIPMVS);
+    this.pingMSV(medStore.monitor[0].dirIPMVS);
     transAnestStore.listDatosV(preIdStore.pacienteID._id);
     this.listaTecAnest();
     
@@ -1563,9 +1568,9 @@ export default defineComponent({
     this.menuTrans.tipoRel= "RELEVO";
     this.menuTrans.tipoEve= "EVENTO";
     
-    // this.tempMSV = setInterval(() => {
-    //   this.pingMSV(medStore.monitor[0].dirIPMVS);
-    // }, 10000);
+    this.tempMSV = setInterval(() => {
+      this.pingMSV(medStore.monitor[0].dirIPMVS);
+    }, 10000);
 
     const gridLateral = document.getElementById('grid-lateral');
     const grid = document.getElementById('grid');
@@ -1590,7 +1595,7 @@ export default defineComponent({
           item.datos
             .filter(dato => dato.segmento4 === "174147842")
             .map(dato => dato.valor ?? ' ')
-        );
+        )
         let Pulso = this.saltoArreglo.flatMap(item =>
           item.datos
             .filter(dato => dato.segmento4 === "131149530")
@@ -1682,12 +1687,7 @@ export default defineComponent({
         
         this.chartData.labels = horaGeneracion;
 
-        this.chartKey += 1;        
-
-        console.log("Grid: "+JSON.stringify(this.grid));
-        console.log("FC: "+FC);
-        console.log("PAS: "+PAS);
-        console.log("Temp1: "+Temp1);
+        this.chartKey += 1;
       },                
       
       async cerrarModalGrid() {
@@ -1707,7 +1707,10 @@ export default defineComponent({
       // Imprimir PDF      
       async crearPdf() {
         this.obtenerValoresGrafica();
-        await new Promise(resolve => setTimeout(resolve, 100));
+
+        document.getElementById('pdf-spinner').style.display = 'block';
+
+        await new Promise(resolve => setTimeout(resolve, 3000));        
 
         // Fuentes Personalizadas
         window.pdfMake.fonts = {
@@ -2460,7 +2463,7 @@ export default defineComponent({
         for (let i = 0; i < tablaDatosGrid.length; i += numColumnas) {
           columnasDatos.push(tablaDatosGrid.slice(i, i + numColumnas));
         }        
-
+        
         // Construcción del PDF
         let docDefinition = {
           //Header
@@ -3892,7 +3895,7 @@ export default defineComponent({
               columns:[
                 {
                   width: '20%',
-                  margin: [0, 5, 0, 0],
+                  margin: [0, 10, 0, 0],
                     stack:[
                       /*NOTA TRANS-ANESTÉSICA*/
                       {
@@ -4351,8 +4354,12 @@ export default defineComponent({
               pageBreak: 'before',
               columns:[
                 { 
+                  margin: [0, 20, 0, 0],
                   stack:[
-                    { image: chartImage, width: 750 },
+                    { 
+                      image: chartImage,
+                      width: 750
+                    },
                   ]
                 }
               ]
@@ -4585,12 +4592,10 @@ export default defineComponent({
         };
 
         // Generar el documento PDF
-        pdfMake.createPdf(docDefinition as any).open();
-
-        // Esperar 5 segundos antes de cerrar el modal
-        await new Promise(resolve => setTimeout(resolve, 5000));
+        pdfMake.createPdf(docDefinition as any).open();     
 
         this.cerrarModalGrid();
+        document.getElementById('pdf-spinner').style.display = 'none';
       },            
 
       // Menú vista rapida
@@ -4888,7 +4893,7 @@ export default defineComponent({
             this.btnActualizaEvento=false
 
             let hoy_6 = new Date();
-            this.menuTrans.finCx = ((hoy.getHours() <10) ? '0':'') + hoy_6.getHours() + ':' + ((hoy_6.getMinutes() <10) ? '0':'')+hoy_6.getMinutes();
+            this.menuTrans.finCx = ((hoy_6.getHours() <10) ? '0':'') + hoy_6.getHours() + ':' + ((hoy_6.getMinutes() <10) ? '0':'')+hoy_6.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID._id, tiemposQX);
           break;
 
@@ -4912,7 +4917,7 @@ export default defineComponent({
             this.btnActualizaEvento=false
 
             let hoy_7 = new Date();
-            this.menuTrans.finAn = ((hoy.getHours() <10) ? '0':'') + hoy_7.getHours() + ':' + ((hoy_7.getMinutes() <10) ? '0':'')+hoy_7.getMinutes();
+            this.menuTrans.finAn = ((hoy_7.getHours() <10) ? '0':'') + hoy_7.getHours() + ':' + ((hoy_7.getMinutes() <10) ? '0':'')+hoy_7.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID._id, tiemposQX);
           break;
 
@@ -5115,7 +5120,8 @@ export default defineComponent({
       },
 
       async guardarMedicamentos() {
-        if (this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.medicamento == "" || this.menuTrans.medicamento == undefined) {
+
+        if(this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.medicamento == "" || this.menuTrans.medicamento == undefined) {
               swal.fire({
               title: "Indique el tipo de administración y medicamento",
               icon: "warning",
@@ -5126,7 +5132,7 @@ export default defineComponent({
               timerProgressBar: true,
               position: "top-end",
               });
-        } else {        
+        }else {        
           this.btnAddMedicamentos=false
           this.btnUpdateMedicamentos=true
           this.btnActualizaMedicamento=false
@@ -5160,8 +5166,7 @@ export default defineComponent({
 
           await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
           await this.listarMedicamentosTrans();
-        }  
-            
+        }            
       },
 
       async actualizarMedicamentos(m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
@@ -5685,7 +5690,6 @@ export default defineComponent({
       },
       
       async vaciarMensajeHL7(){
-        // let valoresOrdenados = Array.from({ length: 15 }, () => 0);
         let valoresOrdenados = Array.from({ length: 15 }, () => ({ segmento4: "", valor: "" }));
 
         //Obtiene el arreglo con el mensaje HL7
@@ -5780,45 +5784,99 @@ export default defineComponent({
           }
         }
 
-        if(FC != undefined)
+        if(FC != undefined){
           valoresOrdenados[0] = FC;
-        if(Pulso != undefined)
+        }else if(FC == undefined){
+          valoresOrdenados[0] = {segmento4:"174147842", valor:"-"}
+        }
+
+        if(Pulso != undefined){
           valoresOrdenados[1] = Pulso;
+        }else if(Pulso == undefined){
+          valoresOrdenados[1] = {segmento4:"131149530", valor:"-"}
+        }
+
         if(PAS != undefined)
         {
           valoresOrdenados[2] = PAS;
-        }else{
-          valoresOrdenados[2] = {segmento4:"119150301", valor:" "}
+        }else if(PAS == undefined){
+          valoresOrdenados[2] = {segmento4:"119150301", valor:"-"}
         }
-        if(PAD != undefined)
+
+        if(PAD != undefined){
           valoresOrdenados[3] = PAD;
-        if(PAM != undefined)
+        }else if(PAD == undefined){
+          valoresOrdenados[3] = {segmento4:"119150302", valor:"-"}
+        }
+
+        if(PAM != undefined){
           valoresOrdenados[4] = PAM;
-        if(SpO2 != undefined)
+        }else if(PAM == undefined){
+          valoresOrdenados[4] = {segmento4:"119150303", valor:"-"}
+        }
+
+        if(SpO2 != undefined){
           valoresOrdenados[5] = SpO2;
-        if(EtCO2 != undefined)
+        }else if(SpO2 == undefined){
+          valoresOrdenados[5] = {segmento4:"131150456", valor:"-"}
+        }
+
+        if(EtCO2 != undefined){
           valoresOrdenados[6] = EtCO2;
-        if(Temp1 != undefined)
+        }else if(EtCO2 == undefined){
+          valoresOrdenados[6] = {segmento4:"181151708", valor:"-"}
+        }
+
+        if(Temp1 != undefined){
           valoresOrdenados[7] = Temp1;
-        if(Temp2 != undefined)
+        }else if(Temp1 == undefined){
+          valoresOrdenados[7] = {segmento4:"121150344", valor:"-"}
+        }
+
+        if(Temp2 != undefined){
           valoresOrdenados[8] = Temp2;
-        if(PVC != undefined)
+        }else if(Temp2 == undefined){
+          valoresOrdenados[8] = {segmento4:"122150344", valor:"-"}
+        }
+
+        if(PVC != undefined){
           valoresOrdenados[9] = PVC;
-        if(PAS_In != undefined)
+        }else if(PVC == undefined){
+          valoresOrdenados[9] = {segmento4:"1112150087", valor:"-"}
+        }
+
+        if(PAS_In != undefined){
           valoresOrdenados[10] = PAS_In;
-        if(PAD_In != undefined)
+        }else if(PAS_In == undefined){
+          valoresOrdenados[10] = {segmento4:"111150037", valor:"-"}
+        }
+
+        if(PAD_In != undefined){
           valoresOrdenados[11] = PAD_In;
-        if(PAM_In != undefined)
+        }else if(PAD_In == undefined){
+          valoresOrdenados[11] = {segmento4:"111150038", valor:"-"}
+        }
+
+        if(PAM_In != undefined){
           valoresOrdenados[12] = PAM_In;
-        if(FiCO2 != undefined)
+        }else if(PAM_In == undefined){
+          valoresOrdenados[12] = {segmento4:"111150039", valor:"-"}
+        }
+
+        if(FiCO2 != undefined){
           valoresOrdenados[13] = FiCO2;
-        if(FR != undefined)
+        }else if(FiCO2 == undefined){
+          valoresOrdenados[13] = {segmento4:"181151716", valor:"-"}
+        }
+
+        if(FR != undefined){
           valoresOrdenados[14] = FR;
+        }else if(FR == undefined){
+          valoresOrdenados[14] = {segmento4:"181151594", valor:"-"}
+        }
 
         //Asignar los valores ordenads
-        this.hl7mess.push({ datos: valoresOrdenados, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
-
-        console.log("hl7 FC: "+JSON.stringify(FC) );        
+        this.hl7mess.push({ datos: valoresOrdenados, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });       
       },
 
       iniRecepDatos(){
@@ -5893,6 +5951,23 @@ export default defineComponent({
   font-family: SF UI Display;
   src: url("@/assets/fonts/SF-UI-Display-Regular.otf") format("opentype");
 }
+.div-spinner{
+  display: none;
+  position: absolute; 
+  background-color: #002d60; 
+  width: 100%; 
+  height: 100%; 
+  left: 0; 
+  right: 0;
+  bottom:0; 
+  z-index: 9999;
+  border-radius: 5px;
+}
+.txt-spinner{
+  position: relative; 
+  left: 35%; 
+  top: 45%;
+}
 .bordePrincipal {
     width: 110%;
 }
@@ -5960,10 +6035,6 @@ export default defineComponent({
   height: 150px;
   margin-top: 0px;
 }
-/* .chart-container {
-  overflow-x: auto; 
-  max-width: 100%;
-} */
 .deslizar-grid{
   overflow: scroll;
   overflow-x: auto;
