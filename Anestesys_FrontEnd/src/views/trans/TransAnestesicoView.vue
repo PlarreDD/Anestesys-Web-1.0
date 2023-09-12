@@ -1209,7 +1209,7 @@
     </div>
 
     <div>
-      <canvas ref="chartCanvas"></canvas>
+      <div ref="chartContainer"></div> 
     </div>
 
     <!-- Menú vista rápida -->
@@ -1520,9 +1520,7 @@ export default defineComponent({
       },
       chartKey: 0,
 
-      chartDataDiv :{
-        labels: []
-      }
+      chartElements: [],
     }
   },
 
@@ -1598,7 +1596,13 @@ export default defineComponent({
         return canvas.toDataURL('image/png'); // Devuelve la imagen como base64
       },
 
-      async obtenerValoresGrafica(){
+      async obtenerValoresGrafica() {
+
+        this.chartElements.forEach(chart => {
+          chart.destroy();
+        });
+        this.chartElements = [];
+
         let FC = this.saltoArreglo.flatMap(item =>
           item.datos
             .filter(dato => dato.segmento4 === "174147842")
@@ -1678,12 +1682,71 @@ export default defineComponent({
         let horaGeneracion = this.saltoArreglo.map(item => item.horaGeneracion);
 
         let gruposFC = [];
-        for (let i = 0; i < FC.length; i += 2) {
-          gruposFC.push(FC.slice(i, i + 2));
-        }        
+        for (let i = 0; i < FC.length; i += 5) {
+          gruposFC.push(FC.slice(i, i + 5));
+        };
+        let gruposPulso = [];
+        for (let i = 0; i < Pulso.length; i += 5) {
+          gruposPulso.push(Pulso.slice(i, i + 5));
+        };
+        let gruposPAS = [];
+        for (let i = 0; i < PAS.length; i += 5) {
+          gruposPAS.push(PAS.slice(i, i + 5));
+        };
+        let gruposPAD = [];
+        for (let i = 0; i < PAD.length; i += 5) {
+          gruposPAD.push(PAD.slice(i, i + 5));
+        };
+        let gruposPAM = [];
+        for (let i = 0; i < PAM.length; i += 5) {
+          gruposPAM.push(PAM.slice(i, i + 5));
+        };
+        let gruposSpO2 = [];
+        for (let i = 0; i < SpO2.length; i += 5) {
+          gruposSpO2.push(SpO2.slice(i, i + 5));
+        };
+        let gruposEtCO2 = [];
+        for (let i = 0; i < EtCO2.length; i += 5) {
+          gruposEtCO2.push(EtCO2.slice(i, i + 5));
+        };
+        let gruposTemp1 = [];
+        for (let i = 0; i < Temp1.length; i += 5) {
+          gruposTemp1.push(Temp1.slice(i, i + 5));
+        };
+        let gruposTemp2 = [];
+        for (let i = 0; i < Temp2.length; i += 5) {
+          gruposTemp2.push(Temp2.slice(i, i + 5));
+        };
+        let gruposPVC = [];
+        for (let i = 0; i < PVC.length; i += 5) {
+          gruposPVC.push(PVC.slice(i, i + 5));
+        };
+        let gruposPASIN = [];
+        for (let i = 0; i < PAS_IN.length; i += 5) {
+          gruposPASIN.push(PAS_IN.slice(i, i + 5));
+        };
+        let gruposPADIN = [];
+        for (let i = 0; i < PAD_IN.length; i += 5) {
+          gruposPADIN.push(PAD_IN.slice(i, i + 5));
+        };
+        let gruposPAMIN = [];
+        for (let i = 0; i < PAM_IN.length; i += 5) {
+          gruposPAMIN.push(PAM_IN.slice(i, i + 5));
+        };
+        let gruposFiCO2 = [];
+        for (let i = 0; i < FiCO2.length; i += 5) {
+          gruposFiCO2.push(FiCO2.slice(i, i + 5));
+        };
+        let gruposFR = [];
+        for (let i = 0; i < FR.length; i += 5) {
+          gruposFR.push(FR.slice(i, i + 5));
+        };
+        let gruposHora = [];
+        for (let i = 0; i < horaGeneracion.length; i += 5) {
+          gruposHora.push(horaGeneracion.slice(i, i + 5));
+        };
 
-        console.log("Grupos: "+JSON.stringify(gruposFC));        
-
+        // Asignar valores a gráfica principal
         this.chartData.datasets[0].data = FC;
         this.chartData.datasets[1].data = Pulso;
         this.chartData.datasets[2].data = PAS;
@@ -1699,11 +1762,155 @@ export default defineComponent({
         this.chartData.datasets[12].data = PAM_IN;
         this.chartData.datasets[13].data = FiCO2;
         this.chartData.datasets[14].data = FR;
-        
-        this.chartData.labels = horaGeneracion;    
+        // Asignar hora a valores de la gráfica principal
+        this.chartData.labels = horaGeneracion;
+
+        // Crear gráficas dependiendo el número de grupos en el arreglo
+        for (let i = 0; i < gruposFC.length; i++) {
+          const canvasElement = document.createElement('canvas');
+          (this.$refs.chartContainer as HTMLElement).appendChild(canvasElement);
+
+          const chart = this.crearGraficasPDF(gruposFC[i], gruposPulso[i], gruposPAS[i], gruposPAD[i], gruposPAM[i], gruposSpO2[i], gruposEtCO2[i], gruposTemp1[i], 
+                      gruposTemp2[i], gruposPVC[i], gruposPASIN[i], gruposPADIN[i], gruposPAMIN[i], gruposFiCO2[i], gruposFR[i], gruposHora[i], canvasElement);
+          this.chartElements.push(chart);
+        }
 
         this.chartKey += 1;             
-      },                      
+      },
+
+      crearGraficasPDF(fc, pulso, pas, pad, pam, spo2, etco2, temp1, temp2, pvc, pasin, padin, pamin, fico2, fr, horas, element) {
+        return new ChartJS(element, {
+          type: 'line',
+          data: {
+            labels: horas,
+            datasets: [
+              {
+                label: 'FC',
+                data: fc,
+                borderColor: 'rgba(0, 165, 151)',
+                fill: false,
+                pointStyle: 'circle', //Estilo del punto en los datos
+                pointRadius: 4, //Tamaño punto
+              },
+              {
+                label: 'Pulso',
+                borderColor: 'rgba(117, 137, 190)',
+                data: pulso,
+                fill: false,
+                pointStyle: 'cross',
+                pointRadius: 4
+              },
+              {
+                label: 'PAS',
+                borderColor: 'rgba(236, 90, 85)',
+                data: pas,
+                fill: false,
+                pointStyle: 'crossRot',
+                pointRadius: 4
+              },
+              {
+                label: 'PAD',
+                borderColor: 'rgba(161, 197, 227)',
+                data: pad,
+                fill: false,
+                pointStyle: 'cross',
+                pointRadius: 4
+              },
+              {
+                  label: 'PAM',
+                  borderColor: 'rgba(236, 102, 24)',
+                  data: pam,
+                  fill: false,
+                  pointStyle: 'rectRounded',
+                  pointRadius: 4
+              },
+              {
+                  label: 'SpO2',
+                  borderColor: 'rgba(68, 163, 211)',
+                  data: spo2,
+                  fill: false,
+                  pointStyle: 'rectRot',
+                  pointRadius: 4
+              },
+              {
+                  label: 'EtCO2',
+                  borderColor: 'rgba(112, 229, 225)',
+                  data: etco2,
+                  fill: false,
+                  pointStyle: 'star',
+                  pointRadius: 4
+              },
+              {
+                  label: 'Temp1',
+                  borderColor: 'rgba(157, 157, 157)',
+                  data: temp1,
+                  fill: false,
+                  pointStyle: 'triangle',
+                  pointRadius: 4
+              },
+              {
+                  label: 'Temp2',
+                  borderColor: 'rgba(174, 35, 30)',
+                  data: temp2,
+                  fill: false,
+                  pointStyle: 'circle',
+                  pointRadius: 4
+              },
+              {
+                  label: 'PVC',
+                  borderColor: 'rgba(77, 157, 183)',
+                  data: pvc,
+                  fill: false,
+                  pointStyle: 'rectRot',
+                  pointRadius: 4
+              },
+              {
+                  label: 'PAS_IN',
+                  borderColor: 'rgba(198, 27, 27)',
+                  data: pasin,
+                  fill: false,
+                  pointStyle: 'crossRot',
+                  pointRadius: 4
+              },
+              {
+                  label: 'PAD_IN',
+                  borderColor: 'rgba(198, 27, 27)',
+                  data: padin,
+                  fill: false,
+                  pointStyle: 'cross',
+                  pointRadius: 4
+              },
+              {
+                  label: 'PAM_IN',
+                  borderColor: 'rgba(198, 27, 27)',
+                  data: pamin,
+                  fill: false,
+                  pointStyle: 'rectRounded',
+                  pointRadius: 4
+              },
+              {
+                  label: 'FiCO2',
+                  borderColor: 'rgba(2, 43, 155)',
+                  data: fico2,
+                  fill: false,
+                  pointStyle: 'star',
+                  pointRadius: 4
+              },
+              {
+                  label: 'FR',
+                  borderColor: 'rgba(255, 196, 0)',
+                  data: fr,
+                  fill: false,
+                  pointStyle: 'triangle',
+                  pointRadius: 4
+              },
+            ],
+          },
+          options: {
+            responsive: true,            
+          },
+        });
+      },
       
       async cerrarModalGrid() {
         let closeButton = document.getElementById('grid-anes');
