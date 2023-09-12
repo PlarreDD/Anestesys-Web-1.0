@@ -1208,6 +1208,10 @@
 
     </div>
 
+    <div>
+      <canvas ref="chartCanvas"></canvas>
+    </div>
+
     <!-- Menú vista rápida -->
     <div class="text-center posicion-estatica fw-bold container" :class="preIdStore.VistaRapida == false ? 'c-fixed' : 'c-fixed invisible'" @click.stop="desplegarMenuVistaRapida()">
       <div class="row">
@@ -1253,7 +1257,7 @@ import { usePostAnestStore } from "@/stores/postAnest-store";
 import { useMedicamentoStore } from "../../stores/medicamento-store";
 import { ElSelect, ElOption } from 'element-plus';
 import { Line } from 'vue-chartjs';
-import { Chart as ChartJS,  CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import pdfFonts from "pdfmake/build/vfs_fonts";
@@ -1515,6 +1519,10 @@ export default defineComponent({
           },
       },
       chartKey: 0,
+
+      chartDataDiv :{
+        labels: []
+      }
     }
   },
 
@@ -1595,7 +1603,7 @@ export default defineComponent({
           item.datos
             .filter(dato => dato.segmento4 === "174147842")
             .map(dato => dato.valor ?? ' ')
-        )
+        );
         let Pulso = this.saltoArreglo.flatMap(item =>
           item.datos
             .filter(dato => dato.segmento4 === "131149530")
@@ -1669,6 +1677,13 @@ export default defineComponent({
 
         let horaGeneracion = this.saltoArreglo.map(item => item.horaGeneracion);
 
+        let gruposFC = [];
+        for (let i = 0; i < FC.length; i += 2) {
+          gruposFC.push(FC.slice(i, i + 2));
+        }        
+
+        console.log("Grupos: "+JSON.stringify(gruposFC));        
+
         this.chartData.datasets[0].data = FC;
         this.chartData.datasets[1].data = Pulso;
         this.chartData.datasets[2].data = PAS;
@@ -1685,10 +1700,10 @@ export default defineComponent({
         this.chartData.datasets[13].data = FiCO2;
         this.chartData.datasets[14].data = FR;
         
-        this.chartData.labels = horaGeneracion;
+        this.chartData.labels = horaGeneracion;    
 
-        this.chartKey += 1;
-      },                
+        this.chartKey += 1;             
+      },                      
       
       async cerrarModalGrid() {
         let closeButton = document.getElementById('grid-anes');
