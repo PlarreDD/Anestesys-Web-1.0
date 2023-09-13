@@ -4813,6 +4813,27 @@ export default defineComponent({
           }
         };
 
+        const chartContainer = this.$refs.chartContainer;
+
+        const chartImages = [];
+
+        // Iterar a través de las gráficas y convertirlas a imágenes base64
+        for (let i = 0; i < this.chartElements.length; i++) {
+          const chart = this.chartElements[i];
+          const canvas = chart.canvas;
+          
+          // Utilizar html2canvas para convertir el canvas de la gráfica en una imagen base64
+          const imageDataUrl = await html2canvas(canvas).then(canvas => canvas.toDataURL('image/png'));
+
+          // Agregar la imagen base64 al array
+          chartImages.push({ image: imageDataUrl, width: 500 }); // Ancho personalizable
+        }
+
+        // Agregar las imágenes base64 al contenido del PDF
+        chartImages.forEach(imageObj => {
+          docDefinition.content.push(imageObj);
+        });
+
         // Generar el documento PDF
         pdfMake.createPdf(docDefinition as any).open();     
 
