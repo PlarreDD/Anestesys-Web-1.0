@@ -4421,153 +4421,7 @@ export default defineComponent({
                   fontSize: 6,                    
                 },
               ],                
-            })),
-            {              
-              pageOrientation: 'landscape', // Orientación Horizontal
-              pageBreak: 'before',
-              columns:[
-                {
-                  margin: [0, 10, 0, 0],
-                  height:'75%',
-                  stack:[
-                    // Medicamentos
-                    {
-                      relativePosition: { x: 0, y: 0 },
-                      table: {
-                        widths: ['60%', '40%'],
-                        body: [
-                          [
-                            {text: 'REGISTRO DE MEDICAMENTOS', font: 'SF', fontSize: 8, bold:true, colSpan:2}, 
-                            {}
-                          ],
-                          [
-                            [
-                              {
-                                table: {
-                                  widths: [30, '*', 65, 95, 40, 40],
-                                  body: [
-                                    [
-                                      {text: 'Tipo', style: 'SF', fontSize: 8}, 
-                                      {text: 'Medicamento', style: 'SF', fontSize:8},
-                                      {text: 'Dosis', style: 'SF', fontSize:8},
-                                      {text: 'Vía', style: 'SF', fontSize:8},
-                                      {text: 'Hora Inicio', style: 'SF', fontSize:8},
-                                      {text: 'Hora Final', style: 'SF', fontSize:8},
-                                    ],
-                                    ...tablaMedicamentos
-                                  ]
-                                },
-                                layout: 'noBorders',
-                                dontBreakRows: true
-                              },                                
-                            ],                              
-                            [
-                              [
-                                {
-                                  table: {
-                                    headerRows: 1,
-                                    widths: [25, '*'],
-                                    body: [
-                                      [
-                                        '',
-                                        {text: 'EVENTOS CRÍTICOS', style: 'SF', fontSize: 8, bold:true},
-                                      ],
-                                      [
-                                        {text: 'Hora', style: 'SF', fontSize: 8}, 
-                                        {text: 'Observaciones', style: 'SF', fontSize:8,}
-                                      ],
-                                      ...tablaEventos                             
-                                    ]
-                                  },                                    
-                                  layout: 'headerLineOnly',
-                                },
-                                [
-                                  {
-                                    margin:[0, 10, 0, 0],
-                                    table: {
-                                      headerRows: 1,
-                                      widths: [25, '*'],
-                                      body: [
-                                        [
-                                          '',
-                                          {text: 'RELEVOS', style: 'SF', fontSize: 8, bold:true}
-                                        ],
-                                        [
-                                          {text: 'Hora', style: 'SF', fontSize: 8}, 
-                                          {text: 'Observaciones', style: 'SF', fontSize:8,}
-                                        ],
-                                        ...tablaRelevos
-                                      ]
-                                    },
-                                    layout: 'headerLineOnly'
-                                  },
-                                ]
-                              ],                                
-                            ],
-                          ],
-                        ]
-                      }, font: 'SF', fontSize: 8
-                    },
-                  ]
-                }
-              ]
-            },
-            {
-              columns:[
-                {
-                  margin: [0, 10, 0, 0],
-                    relativePosition: { x: 0, y: 420 },
-                    table: {
-                      widths: ['60%', '40%'],
-                      body: [
-                        [
-                          {
-                            text:[
-                              {text: 'BALANCE HÍDRICO: ', style: 'SF', fontSize: 8, bold: true}, 
-                              {text: balanceTotal, bold:true}
-                            ], colSpan: 2
-                          },
-                          {}
-                        ],
-                        [
-                          {                                
-                            text:[
-                                {text: 'Ingresos', font:'SF', fontSize:8, bold: true},
-                                {text: '\n\n', font:'SF', fontSize:8},
-                                {text: txtHartman, font:'SF', fontSize:8},{text:hartman, font:'SF', fontSize:8, bold:true},
-                                {text: txtSolFisiolo, font:'SF', fontSize:8}, {text:solFisiolo, font:'SF', fontSize:8, bold:true}, 
-                                {text: txtGlucosados, font:'SF', fontSize:8},{text:glucosados, font:'SF', fontSize:8, bold:true},
-                                {text: txtGelatinas, font:'SF', fontSize:8},{text:gelatinas, font:'SF', fontSize:8, bold:true},
-                                {text: txtAlmidones, font:'SF', fontSize:8},{text:almidones, font:'SF', fontSize:8, bold:true},
-                                {text: txtAlbuminas, font:'SF', fontSize:8},{text:albuminas, font:'SF', fontSize:8, bold:true},
-                                {text: txtPaqGlobular, font:'SF', fontSize:8},{text:paqGlobular, font:'SF', fontSize:8, bold:true},
-                                {text: txtPlasmas, font:'SF', fontSize:8},{text:plasmas, font:'SF', fontSize:8, bold:true},
-                                {text: txtPlaquetas, font:'SF', fontSize:8},{text:plaquetasIngreso, font:'SF', fontSize:8, bold:true},
-                                {text: txtCrioprecipitados, font:'SF', fontSize:8},{text:crioprecipitados, font:'SF', fontSize:8, bold:true},
-                                {text: txtFactorVII, font:'SF', fontSize:8},{text:factorVII, font:'SF', fontSize:8, bold:true},
-                                {text: txtFactorVIII, font:'SF', fontSize:8},{text:factorVIII, font:'SF', fontSize:8, bold:true},
-                                {text: txtOtrosIngresos, font:'SF', fontSize:8},{text:otrosIngreso, font:'SF', fontSize:8, bold:true},
-                            ]
-                          }, 
-                          {
-                            text:[
-                                {text: 'Egresos', font:'SF', fontSize:8, bold: true},
-                                {text: '\n\n', font:'SF', fontSize:8},
-                                {text: txtLiqAscitis, font:'SF', fontSize:8},{text:liqAscitis, font:'SF', fontSize:8, bold:true},
-                                {text: txtSangradoAprox, font:'SF', fontSize:8},{text:sangradoAprox, font:'SF', fontSize:8, bold:true},
-                                {text: txtUresis, font:'SF', fontSize:8},{text:uresis, font:'SF', fontSize:8, bold:true},
-                                {text: txtExpQuirurgica, font:'SF', fontSize:8},{text:expQuirurgica, font:'SF', fontSize:8, bold:true},
-                                {text: txtReqBasales, font:'SF', fontSize:8},{text:reqBasales, font:'SF', fontSize:8, bold:true},
-                                {text: txtAyuno, font:'SF', fontSize:8},{text:ayunoEgreso, font:'SF', fontSize:8, bold:true},
-                                {text: txtOtrosEgresos, font:'SF', fontSize:8},{text:otrosEgresos, font:'SF', fontSize:8, bold:true},
-                            ]
-                          }
-                        ]
-                      ]
-                    }, font: 'SF', fontSize: 8
-                }
-              ]
-            },                                               
+            })),                                                         
             // Grafica            
           ],        
           styles:{
@@ -4585,12 +4439,12 @@ export default defineComponent({
 
         let chartContainer = this.$refs.chartContainer;
 
-        let chartImages = [];
+        let crearPDF = [];
 
         // Agregar gráfica si no tiene datos
         let chartImage = await this.convertirGrafica();
         if(this.chartElements.length === 0){
-          chartImages.push(
+          crearPDF.push(
             {
               pageOrientation: 'landscape',
               pageBreak: 'before',
@@ -4632,7 +4486,7 @@ export default defineComponent({
           let imageDataUrl = await html2canvas(canvas).then(canvas => canvas.toDataURL('image/png'));
                                   
           // Agregar la imagen base64 al array
-          chartImages.push(
+          crearPDF.push(
             {
               pageOrientation: 'landscape',
               pageBreak: 'before',
@@ -4668,8 +4522,158 @@ export default defineComponent({
           // chartImages.push({ image: imageDataUrl, width: 750 }); // Ancho personalizable
         };
 
+        // Lista Medicamentos/Balance Hídrico
+        crearPDF.push(
+          {
+            pageOrientation: 'landscape', // Orientación Horizontal
+            pageBreak: 'before',
+            columns:[
+              {
+                margin: [0, 10, 0, 0],
+                height:'75%',
+                stack:[
+                  // Medicamentos
+                  {
+                    relativePosition: { x: 0, y: 0 },
+                    table: {
+                      widths: ['60%', '40%'],
+                      body: [
+                        [
+                          {text: 'REGISTRO DE MEDICAMENTOS', font: 'SF', fontSize: 8, bold:true, colSpan:2}, 
+                          {}
+                        ],
+                        [
+                          [
+                            {
+                              table: {
+                                widths: [30, '*', 65, 95, 40, 40],
+                                body: [
+                                  [
+                                    {text: 'Tipo', style: 'SF', fontSize: 8}, 
+                                    {text: 'Medicamento', style: 'SF', fontSize:8},
+                                    {text: 'Dosis', style: 'SF', fontSize:8},
+                                    {text: 'Vía', style: 'SF', fontSize:8},
+                                    {text: 'Hora Inicio', style: 'SF', fontSize:8},
+                                    {text: 'Hora Final', style: 'SF', fontSize:8},
+                                  ],
+                                  ...tablaMedicamentos
+                                ]
+                              },
+                              layout: 'noBorders',
+                              dontBreakRows: true
+                            },                                
+                          ],                              
+                          [
+                            [
+                              {
+                                table: {
+                                  headerRows: 1,
+                                  widths: [25, '*'],
+                                  body: [
+                                    [
+                                      '',
+                                      {text: 'EVENTOS CRÍTICOS', style: 'SF', fontSize: 8, bold:true},
+                                    ],
+                                    [
+                                      {text: 'Hora', style: 'SF', fontSize: 8}, 
+                                      {text: 'Observaciones', style: 'SF', fontSize:8,}
+                                    ],
+                                    ...tablaEventos                             
+                                  ]
+                                },                                    
+                                layout: 'headerLineOnly',
+                              },
+                              [
+                                {
+                                  margin:[0, 10, 0, 0],
+                                  table: {
+                                    headerRows: 1,
+                                    widths: [25, '*'],
+                                    body: [
+                                      [
+                                        '',
+                                        {text: 'RELEVOS', style: 'SF', fontSize: 8, bold:true}
+                                      ],
+                                      [
+                                        {text: 'Hora', style: 'SF', fontSize: 8}, 
+                                        {text: 'Observaciones', style: 'SF', fontSize:8,}
+                                      ],
+                                      ...tablaRelevos
+                                    ]
+                                  },
+                                  layout: 'headerLineOnly'
+                                },
+                              ]
+                            ],                                
+                          ],
+                        ],
+                      ]
+                    }, font: 'SF', fontSize: 8
+                  },
+                ]
+              }
+            ]
+          },
+          {
+            columns:[
+              {
+                margin: [0, 10, 0, 0],
+                  relativePosition: { x: 0, y: 420 },
+                  table: {
+                    widths: ['60%', '40%'],
+                    body: [
+                      [
+                        {
+                          text:[
+                            {text: 'BALANCE HÍDRICO: ', style: 'SF', fontSize: 8, bold: true}, 
+                            {text: balanceTotal, bold:true}
+                          ], colSpan: 2
+                        },
+                        {}
+                      ],
+                      [
+                        {                                
+                          text:[
+                              {text: 'Ingresos', font:'SF', fontSize:8, bold: true},
+                              {text: '\n\n', font:'SF', fontSize:8},
+                              {text: txtHartman, font:'SF', fontSize:8},{text:hartman, font:'SF', fontSize:8, bold:true},
+                              {text: txtSolFisiolo, font:'SF', fontSize:8}, {text:solFisiolo, font:'SF', fontSize:8, bold:true}, 
+                              {text: txtGlucosados, font:'SF', fontSize:8},{text:glucosados, font:'SF', fontSize:8, bold:true},
+                              {text: txtGelatinas, font:'SF', fontSize:8},{text:gelatinas, font:'SF', fontSize:8, bold:true},
+                              {text: txtAlmidones, font:'SF', fontSize:8},{text:almidones, font:'SF', fontSize:8, bold:true},
+                              {text: txtAlbuminas, font:'SF', fontSize:8},{text:albuminas, font:'SF', fontSize:8, bold:true},
+                              {text: txtPaqGlobular, font:'SF', fontSize:8},{text:paqGlobular, font:'SF', fontSize:8, bold:true},
+                              {text: txtPlasmas, font:'SF', fontSize:8},{text:plasmas, font:'SF', fontSize:8, bold:true},
+                              {text: txtPlaquetas, font:'SF', fontSize:8},{text:plaquetasIngreso, font:'SF', fontSize:8, bold:true},
+                              {text: txtCrioprecipitados, font:'SF', fontSize:8},{text:crioprecipitados, font:'SF', fontSize:8, bold:true},
+                              {text: txtFactorVII, font:'SF', fontSize:8},{text:factorVII, font:'SF', fontSize:8, bold:true},
+                              {text: txtFactorVIII, font:'SF', fontSize:8},{text:factorVIII, font:'SF', fontSize:8, bold:true},
+                              {text: txtOtrosIngresos, font:'SF', fontSize:8},{text:otrosIngreso, font:'SF', fontSize:8, bold:true},
+                          ]
+                        }, 
+                        {
+                          text:[
+                              {text: 'Egresos', font:'SF', fontSize:8, bold: true},
+                              {text: '\n\n', font:'SF', fontSize:8},
+                              {text: txtLiqAscitis, font:'SF', fontSize:8},{text:liqAscitis, font:'SF', fontSize:8, bold:true},
+                              {text: txtSangradoAprox, font:'SF', fontSize:8},{text:sangradoAprox, font:'SF', fontSize:8, bold:true},
+                              {text: txtUresis, font:'SF', fontSize:8},{text:uresis, font:'SF', fontSize:8, bold:true},
+                              {text: txtExpQuirurgica, font:'SF', fontSize:8},{text:expQuirurgica, font:'SF', fontSize:8, bold:true},
+                              {text: txtReqBasales, font:'SF', fontSize:8},{text:reqBasales, font:'SF', fontSize:8, bold:true},
+                              {text: txtAyuno, font:'SF', fontSize:8},{text:ayunoEgreso, font:'SF', fontSize:8, bold:true},
+                              {text: txtOtrosEgresos, font:'SF', fontSize:8},{text:otrosEgresos, font:'SF', fontSize:8, bold:true},
+                          ]
+                        }
+                      ]
+                    ]
+                  }, font: 'SF', fontSize: 8
+              }
+            ]
+          },  
+        )
+
         /*POST*/
-        chartImages.push(
+        crearPDF.push(
           {
             pageOrientation: 'portrait',
             pageBreak: 'before',
@@ -4885,7 +4889,7 @@ export default defineComponent({
         )
 
         // Agregar las imágenes al PDF
-        chartImages.forEach(imageObj => {          
+        crearPDF.forEach(imageObj => {          
           docDefinition.content.push(imageObj);
         });
 
