@@ -432,7 +432,8 @@
                   <h2>Generando PDF...</h2>
                 </div>
               </div>
-            </div>
+            </div>            
+
             <div class="input-group">
               <div class="modal-body">
                 <div class="col-md-12 chart-container">                                                      
@@ -450,7 +451,7 @@
                           </button>
                         </div>
                         <div class="" ref="chartRef">                          
-                          <Line class="" id="my-chart-id" :options="chartOptions" :data="chartData" :key="chartKey"/>                                                  
+                          <Line class="" id="my-chart-id" :options="chartOptions" :data="chartData" :key="chartKey"/>
                         </div>                        
                       </div>
                   </div>
@@ -2665,9 +2666,6 @@ export default defineComponent({
         let datosGrid = this.saltoArreglo;
         let tablaDatosGrid = [];
 
-        /*Gráfica Grid*/
-        let chartImage = await this.convertirGrafica();
-
         datosGrid.forEach(entry => {
           const columnData = [];
           // Agregar la Hora 
@@ -4569,236 +4567,8 @@ export default defineComponent({
                     }, font: 'SF', fontSize: 8
                 }
               ]
-            },
-            // Grafica
-            {
-              pageOrientation: 'landscape',
-              pageBreak: 'before',
-              columns:[
-                { 
-                  margin: [0, 20, 0, 0],
-                  stack:[
-                    { 
-                      image: chartImage,
-                      width: 750
-                    },
-                  ]
-                }
-              ]
-            },
-            /*POST*/
-            {
-              pageOrientation: 'portrait',
-              pageBreak: 'before',
-              columns:[
-                { 
-                  width: '100%',
-                  margin: [0, 20, 0, 0],
-                    stack: [
-                      /*NOTA POST-ANESTÉSICA*/
-                      /*NOTA DE EVALUACIÓN UCPA*/
-                      {
-                        text: [
-                          { text: 'NOTA DE EVALUACIÓN UCP', font: 'SF', fontSize: 8},
-                        ],
-                      },
-                      {
-                        text: [
-                          { text: txtNotaUCPA, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      /*ALDRETE DE RECUPERACIÓN*/
-                      {
-                        margin: [0, 10, 0, 0],
-                        text: [
-                          { text: 'ALDRETE DE RECUPERACIÓN', font: 'SF', fontSize: 8, bold:true},
-                        ]
-                      },
-                      {
-                        margin: [0, 10, 0, 0],
-                        table: {
-                          body: [
-                            ['Criterio: ', 'Ingreso', '15 min', '30 min', '45 min', '60 min', '90 min', '120 min'],
-                            ['Frecuencia Cardiáca', {text: FCIngreso, style: 'bold'}, {text: FC15, style: 'bold'}, {text: FC30, style: 'bold'}, {text: FC45, style: 'bold'}, {text: FC60, style: 'bold'}, {text: FC90, style: 'bold'}, {text: FC120, style: 'bold'}],
-                            ['Frecuencia Respiratorio', {text: FRIngreso, style: 'bold'}, {text: FR15, style: 'bold'}, {text: FR30, style: 'bold'}, {text: FR45, style: 'bold'}, {text: FR60, style: 'bold'}, {text: FR90, style: 'bold'}, {text: FR120, style: 'bold'}],
-                            ['Tensión Arterial', {text: tensionIngreso, style: 'bold'}, {text: tension15, style: 'bold'}, {text: tension30, style: 'bold'}, {text: tension45, style: 'bold'}, {text: tension60, style: 'bold'}, {text: tension90, style: 'bold'}, {text: tension120, style: 'bold'}],
-                            ['Saturación de O2', {text: saturacionIngreso, style: 'bold'}, {text: saturacion15, style: 'bold'}, {text: saturacion30, style: 'bold'}, {text: saturacion45, style: 'bold'}, {text: saturacion60, style: 'bold'}, {text: saturacion90, style: 'bold'}, {text: saturacion120, style: 'bold'}],
-                            ['Aldrete', {text: aldreteIngreso, style: 'bold'}, {text: aldrete15, style: 'bold'}, {text: aldrete30, style: 'bold'}, {text: aldrete45, style: 'bold'}, {text: aldrete60, style: 'bold'}, {text: aldrete90, style: 'bold'}, {text: aldrete120, style: 'bold'}],
-                            ['Bromage', {text: bromageIngreso, style: 'bold'}, {text: bromage15, style: 'bold'}, {text: bromage30, style: 'bold'}, {text: bromage45, style: 'bold'}, {text: bromage60, style: 'bold'}, {text: bromage90, style: 'bold'}, {text: bromage120, style: 'bold'}],
-                            ['Nauseas/Vómito', {text: nauseasIngreso, style: 'bold'}, {text: nauseas15, style: 'bold'}, {text: nauseas30, style: 'bold'}, {text: nauseas45, style: 'bold'}, {text: nauseas60, style: 'bold'}, {text: nauseas90, style: 'bold'}, {text: nauseas120, style: 'bold'}],
-                            ['Escala de EVA Dolor', {text: EVAIngreso, style: 'bold'}, {text: EVA15, style: 'bold'}, {text: EVA30, style: 'bold'}, {text: EVA45, style: 'bold'}, {text: EVA60, style: 'bold'}, {text: EVA90, style: 'bold'}, {text: EVA120, style: 'bold'}],
-                          ]
-                        }, font: 'SF', fontSize: 8
-                      },                          
-                    ]
-                }
-              ]
-            },
-            {
-              columns:[
-                {
-                  width: '70%',
-                  margin: [0, 10, 0, 0],
-                    stack: [
-                      /*ALTA DE RECUPERACIÓN*/
-                      {
-                        text:[
-                          {text: 'ALTA DE RECUPERACIÓN', font:'SF', fontSize:8, bold:true}
-                        ],
-                      },
-                      // Calificación de Aldrete
-                      {
-                        text: [
-                          { text: '\nCalificación de Aldrete: ', font: 'SF', fontSize: 8 },
-                          { text: calificacionAldrete, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Nombre del Médico Anestesiólogo
-                      {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Nombre del Médico Anestesiólogo: ', font: 'SF', fontSize: 8 },
-                          { text: txtAnestesiologo, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },                                                
-                    ]
-                },
-                {
-                  width: '30%',
-                  margin: [0, 10, 0, 0],
-                    stack: [                      
-                      {
-                        text:[
-                          {text: 'ALTA DE RECUPERACIÓN', font:'SF', fontSize:8, bold:true}
-                        ],
-                      },
-                      // Fecha de Alta de Recuperación
-                      {
-                        text: [
-                          { text: '\nFecha: ', font: 'SF', fontSize: 8 },
-                          { text: fechaAlta, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Hora de Alta de Recuperación
-                      {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Hora: ', font: 'SF', fontSize: 8 },
-                          { text: horaAlta, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },                      
-                    ]
-                },                
-              ]
-            },
-            {
-              columns: [
-              {
-                width: '100%',
-                  stack: [
-                    // Observaciones
-                    {
-                      margin: [0, 2.5, 0, 0],
-                      text: [
-                        { text: 'Observaciones: ', font: 'SF', fontSize: 8 },
-                        { text: txtObservAlta, font: 'SF', fontSize: 8, bold:true },
-                      ],
-                    },                      
-                  ]                    
-                }
-              ]
-            },
-            {
-              columns:[
-                {
-                  width: '50%',
-                  margin: [0, 10, 0, 0],
-                    stack: [
-                      /*NOTA POST-ANÉSTESICA*/
-                      {
-                        text:[
-                          {text: 'NOTA POST-ANÉSTESICA', font:'SF', fontSize:8, bold:true}
-                        ],
-                      },
-                      // Técnica de Anestesia Final
-                      {
-                        text: [
-                          { text: '\nTécnica de Anestesia Final: ', font: 'SF', fontSize: 8 },
-                          { text: tecnicaAnestFinal, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },                                                               
-                    ]
-                },
-                {
-                  width: '50%',
-                  margin: [0, 10, 0, 0],
-                    stack: [                      
-                      {
-                        text:[
-                          {text: ' ', font:'SF', fontSize:8, bold:true}
-                        ],
-                      },
-                      // Intubación
-                      {
-                        text: [
-                          { text: '\nIntubación: ', font: 'SF', fontSize: 8 },
-                          { text: intubacionPost, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },                                                     
-                    ]
-                },                
-              ]
-            },
-            {
-              columns: [
-              {
-                width: '100%',
-                  stack: [
-                    // Nota Post-Anestésica
-                    {
-                      margin: [0, 2.5, 0, 0],
-                      text: [
-                        { text: 'Nota: ', font: 'SF', fontSize: 8 },
-                        { text: txtNotaPost, font: 'SF', fontSize: 8, bold:true },
-                      ],
-                    },
-                  ]                    
-                }
-              ]
-            },
-            {
-              // Signos Vitales al Egreso
-              columns: [
-                {
-                  width: '100%',
-                  margin: [0, 10, 0, 0],
-                    stack: [
-                      {
-                        text:[
-                          { text: 'SIGNOS VITALES AL EGRESO', font: 'SF', fontSize: 8, bold:true},
-                        ]
-                      },
-                      {
-                        margin: [0, 10, 0, 0],
-                        table: {
-                          body: [
-                            ['TA: ', 'FC', 'FR', 'Temp', 'Pulso', 'SpO2'],
-                            [TAPost, FCPost, FRPost, TemperaturaPost, PulsoPost, SpO2Post],
-                          ]
-                        }, font: 'SF', fontSize: 8
-                      },                                                             
-                      
-                      // El paciente pasa a
-                      {
-                        text: [
-                          { text: '\nEl Paciente Pasa a: ', font: 'SF', fontSize: 8 },
-                          { text: pacientePasa, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },            
-                    ]
-                },                
-              ],
-            },           
+            },                                               
+            // Grafica            
           ],        
           styles:{
             normal:{
@@ -4813,24 +4583,309 @@ export default defineComponent({
           }
         };
 
-        const chartContainer = this.$refs.chartContainer;
+        let chartContainer = this.$refs.chartContainer;
 
-        const chartImages = [];
+        let chartImages = [];
 
-        // Iterar a través de las gráficas y convertirlas a imágenes base64
+        // Agregar gráfica si no tiene datos
+        let chartImage = await this.convertirGrafica();
+        if(this.chartElements.length === 0){
+          chartImages.push(
+            {
+              pageOrientation: 'landscape',
+              pageBreak: 'before',
+              columns:[
+                { 
+                  margin: [0, 20, 0, 0],
+                  stack:[
+                    {                       
+                      //Carga de las gráficas
+                      text: [{text: 'Nombre del Paciente: ', font: 'SF', fontSize: 8},{text: nomPaciente, font: 'SF', fontSize: 8, bold:true},
+                                   {text: '     No. Expediente: ', font: 'SF', fontSize: 8},{text: numExp, font: 'SF', fontSize: 8, bold:true}],
+                      
+                    },
+                    {
+                      text: [{text: 'Peso: ', font: 'SF', fontSize: 8},{text: peso, font: 'SF', fontSize: 8, bold:true},
+                            {text: '     Talla: ', font: 'SF', fontSize: 8},{text: talla, font: 'SF', fontSize: 8, bold:true},
+                            {text: '     Edad: ', font: 'SF', fontSize: 8},{text: edad, font: 'SF', fontSize: 8, bold:true},
+                            {text: '     Cirugía: ', font: 'SF', fontSize: 8},{text: txtCirugiaTrans, font: 'SF', fontSize: 8, bold:true}],
+                    },
+                    {
+                      text: [{text: '\n', font: 'SF', fontSize: 8}]
+                    },
+                    {
+                      image: chartImage, width:750
+                    }
+                  ]
+                }
+              ]
+            },
+          )
+        };
+
+        // Iterar a través de las gráficas y convertirlas a imágenes
         for (let i = 0; i < this.chartElements.length; i++) {
-          const chart = this.chartElements[i];
-          const canvas = chart.canvas;
+          let chart = this.chartElements[i];
+          let canvas = chart.canvas;
           
           // Utilizar html2canvas para convertir el canvas de la gráfica en una imagen base64
-          const imageDataUrl = await html2canvas(canvas).then(canvas => canvas.toDataURL('image/png'));
-
+          let imageDataUrl = await html2canvas(canvas).then(canvas => canvas.toDataURL('image/png'));
+                                  
           // Agregar la imagen base64 al array
-          chartImages.push({ image: imageDataUrl, width: 500 }); // Ancho personalizable
-        }
+          chartImages.push(
+            {
+              pageOrientation: 'landscape',
+              pageBreak: 'before',
+              columns:[
+                { 
+                  margin: [0, 20, 0, 0],
+                  stack:[
+                    {                       
+                      //Carga de las gráficas
+                      text: [{text: 'Nombre del Paciente: ', font: 'SF', fontSize: 8},{text: nomPaciente, font: 'SF', fontSize: 8, bold:true},
+                                   {text: '     No. Expediente: ', font: 'SF', fontSize: 8},{text: numExp, font: 'SF', fontSize: 8, bold:true}],
+                      
+                    },
+                    {
+                      text: [{text: 'Peso: ', font: 'SF', fontSize: 8},{text: peso, font: 'SF', fontSize: 8, bold:true},
+                            {text: '     Talla: ', font: 'SF', fontSize: 8},{text: talla, font: 'SF', fontSize: 8, bold:true},
+                            {text: '     Edad: ', font: 'SF', fontSize: 8},{text: edad, font: 'SF', fontSize: 8, bold:true},
+                            {text: '     Cirugía: ', font: 'SF', fontSize: 8},{text: txtCirugiaTrans, font: 'SF', fontSize: 8, bold:true}],
+                    },
+                    {
+                      text: [{text: '\n', font: 'SF', fontSize: 8}]
+                    },
+                    {
+                      image: imageDataUrl, width:750
+                    }
+                  ]
+                }
+              ]
+            },
+          )
 
-        // Agregar las imágenes base64 al contenido del PDF
-        chartImages.forEach(imageObj => {
+          // chartImages.push({text: 'Nombre del Paciente: ', font: 'SF', fontSize: 8}, {text: nomPaciente, font: 'SF', fontSize: 8, bold:true});
+          // chartImages.push({ image: imageDataUrl, width: 750 }); // Ancho personalizable
+        };
+
+        /*POST*/
+        chartImages.push(
+          {
+            pageOrientation: 'portrait',
+            pageBreak: 'before',
+            columns:[
+              { 
+                width: '100%',
+                margin: [0, 20, 0, 0],
+                  stack: [
+                    /*NOTA POST-ANESTÉSICA*/
+                    /*NOTA DE EVALUACIÓN UCPA*/
+                    {
+                      text: [
+                        { text: 'NOTA DE EVALUACIÓN UCP', font: 'SF', fontSize: 8},
+                      ],
+                    },
+                    {
+                      text: [
+                        { text: txtNotaUCPA, font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },
+                    /*ALDRETE DE RECUPERACIÓN*/
+                    {
+                      margin: [0, 10, 0, 0],
+                      text: [
+                        { text: 'ALDRETE DE RECUPERACIÓN', font: 'SF', fontSize: 8, bold:true},
+                      ]
+                    },
+                    {
+                      margin: [0, 10, 0, 0],
+                      table: {
+                        body: [
+                          ['Criterio: ', 'Ingreso', '15 min', '30 min', '45 min', '60 min', '90 min', '120 min'],
+                          ['Frecuencia Cardiáca', {text: FCIngreso, style: 'bold'}, {text: FC15, style: 'bold'}, {text: FC30, style: 'bold'}, {text: FC45, style: 'bold'}, {text: FC60, style: 'bold'}, {text: FC90, style: 'bold'}, {text: FC120, style: 'bold'}],
+                          ['Frecuencia Respiratorio', {text: FRIngreso, style: 'bold'}, {text: FR15, style: 'bold'}, {text: FR30, style: 'bold'}, {text: FR45, style: 'bold'}, {text: FR60, style: 'bold'}, {text: FR90, style: 'bold'}, {text: FR120, style: 'bold'}],
+                          ['Tensión Arterial', {text: tensionIngreso, style: 'bold'}, {text: tension15, style: 'bold'}, {text: tension30, style: 'bold'}, {text: tension45, style: 'bold'}, {text: tension60, style: 'bold'}, {text: tension90, style: 'bold'}, {text: tension120, style: 'bold'}],
+                          ['Saturación de O2', {text: saturacionIngreso, style: 'bold'}, {text: saturacion15, style: 'bold'}, {text: saturacion30, style: 'bold'}, {text: saturacion45, style: 'bold'}, {text: saturacion60, style: 'bold'}, {text: saturacion90, style: 'bold'}, {text: saturacion120, style: 'bold'}],
+                          ['Aldrete', {text: aldreteIngreso, style: 'bold'}, {text: aldrete15, style: 'bold'}, {text: aldrete30, style: 'bold'}, {text: aldrete45, style: 'bold'}, {text: aldrete60, style: 'bold'}, {text: aldrete90, style: 'bold'}, {text: aldrete120, style: 'bold'}],
+                          ['Bromage', {text: bromageIngreso, style: 'bold'}, {text: bromage15, style: 'bold'}, {text: bromage30, style: 'bold'}, {text: bromage45, style: 'bold'}, {text: bromage60, style: 'bold'}, {text: bromage90, style: 'bold'}, {text: bromage120, style: 'bold'}],
+                          ['Nauseas/Vómito', {text: nauseasIngreso, style: 'bold'}, {text: nauseas15, style: 'bold'}, {text: nauseas30, style: 'bold'}, {text: nauseas45, style: 'bold'}, {text: nauseas60, style: 'bold'}, {text: nauseas90, style: 'bold'}, {text: nauseas120, style: 'bold'}],
+                          ['Escala de EVA Dolor', {text: EVAIngreso, style: 'bold'}, {text: EVA15, style: 'bold'}, {text: EVA30, style: 'bold'}, {text: EVA45, style: 'bold'}, {text: EVA60, style: 'bold'}, {text: EVA90, style: 'bold'}, {text: EVA120, style: 'bold'}],
+                        ]
+                      }, font: 'SF', fontSize: 8
+                    },                          
+                  ]
+              }
+            ]
+          },
+          {
+            columns:[
+              {
+                width: '70%',
+                margin: [0, 10, 0, 0],
+                  stack: [
+                    /*ALTA DE RECUPERACIÓN*/
+                    {
+                      text:[
+                        {text: 'ALTA DE RECUPERACIÓN', font:'SF', fontSize:8, bold:true}
+                      ],
+                    },
+                    // Calificación de Aldrete
+                    {
+                      text: [
+                        { text: '\nCalificación de Aldrete: ', font: 'SF', fontSize: 8 },
+                        { text: calificacionAldrete, font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },
+                    // Nombre del Médico Anestesiólogo
+                    {
+                      margin: [0, 2.5, 0, 0],
+                      text: [
+                        { text: 'Nombre del Médico Anestesiólogo: ', font: 'SF', fontSize: 8 },
+                        { text: txtAnestesiologo, font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },                                                
+                  ]
+              },
+              {
+                width: '30%',
+                margin: [0, 10, 0, 0],
+                  stack: [                      
+                    {
+                      text:[
+                        {text: 'ALTA DE RECUPERACIÓN', font:'SF', fontSize:8, bold:true}
+                      ],
+                    },
+                    // Fecha de Alta de Recuperación
+                    {
+                      text: [
+                        { text: '\nFecha: ', font: 'SF', fontSize: 8 },
+                        { text: fechaAlta, font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },
+                    // Hora de Alta de Recuperación
+                    {
+                      margin: [0, 2.5, 0, 0],
+                      text: [
+                        { text: 'Hora: ', font: 'SF', fontSize: 8 },
+                        { text: horaAlta, font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },                      
+                  ]
+              },                
+            ]
+          },
+          {
+            columns: [
+            {
+              width: '100%',
+                stack: [
+                  // Observaciones
+                  {
+                    margin: [0, 2.5, 0, 0],
+                    text: [
+                      { text: 'Observaciones: ', font: 'SF', fontSize: 8 },
+                      { text: txtObservAlta, font: 'SF', fontSize: 8, bold:true },
+                    ],
+                  },                      
+                ]                    
+              }
+            ]
+          },
+          {
+            columns:[
+              {
+                width: '50%',
+                margin: [0, 10, 0, 0],
+                  stack: [
+                    /*NOTA POST-ANÉSTESICA*/
+                    {
+                      text:[
+                        {text: 'NOTA POST-ANÉSTESICA', font:'SF', fontSize:8, bold:true}
+                      ],
+                    },
+                    // Técnica de Anestesia Final
+                    {
+                      text: [
+                        { text: '\nTécnica de Anestesia Final: ', font: 'SF', fontSize: 8 },
+                        { text: tecnicaAnestFinal, font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },                                                               
+                  ]
+              },
+              {
+                width: '50%',
+                margin: [0, 10, 0, 0],
+                  stack: [                      
+                    {
+                      text:[
+                        {text: ' ', font:'SF', fontSize:8, bold:true}
+                      ],
+                    },
+                    // Intubación
+                    {
+                      text: [
+                        { text: '\nIntubación: ', font: 'SF', fontSize: 8 },
+                        { text: intubacionPost, font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },                                                     
+                  ]
+              },                
+            ]
+          },
+          {
+            columns: [
+            {
+              width: '100%',
+                stack: [
+                  // Nota Post-Anestésica
+                  {
+                    margin: [0, 2.5, 0, 0],
+                    text: [
+                      { text: 'Nota: ', font: 'SF', fontSize: 8 },
+                      { text: txtNotaPost, font: 'SF', fontSize: 8, bold:true },
+                    ],
+                  },
+                ]                    
+              }
+            ]
+          },
+          {
+            // Signos Vitales al Egreso
+            columns: [
+              {
+                width: '100%',
+                margin: [0, 10, 0, 0],
+                  stack: [
+                    {
+                      text:[
+                        { text: 'SIGNOS VITALES AL EGRESO', font: 'SF', fontSize: 8, bold:true},
+                      ]
+                    },
+                    {
+                      margin: [0, 10, 0, 0],
+                      table: {
+                        body: [
+                          ['TA: ', 'FC', 'FR', 'Temp', 'Pulso', 'SpO2'],
+                          [TAPost, FCPost, FRPost, TemperaturaPost, PulsoPost, SpO2Post],
+                        ]
+                      }, font: 'SF', fontSize: 8
+                    },                                                             
+                    
+                    // El paciente pasa a
+                    {
+                      text: [
+                        { text: '\nEl Paciente Pasa a: ', font: 'SF', fontSize: 8 },
+                        { text: pacientePasa, font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },            
+                  ]
+              },                
+            ],
+          },
+        )
+
+        // Agregar las imágenes al PDF
+        chartImages.forEach(imageObj => {          
           docDefinition.content.push(imageObj);
         });
 
