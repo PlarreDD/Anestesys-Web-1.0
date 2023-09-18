@@ -420,7 +420,7 @@
 
       <!--Abrir el modal Grid Anestésico-->
       <div class="modal" id="modal-grid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">        
-        <div class="modal-dialog modal-lg modal-dialog-centered"> 
+        <div class="modal-dialog modal-lg modal-dialog-centered" id="tamano-modal"> <!--modal-fullscreen-->
           <div class="modal-content">
             <!-- Ventana de carga PDF -->
             <div class="div-spinner" id="pdf-spinner"> 
@@ -1534,7 +1534,7 @@ export default defineComponent({
 
   mounted: function() { // Llama el método despues de cargar la página    
     transAnestStore.getDetieneMonitoreo();
-    this.pingMSV(medStore.monitor[0].dirIPMVS);
+    // this.pingMSV(medStore.monitor[0].dirIPMVS);
     transAnestStore.listDatosV(preIdStore.pacienteID._id);
     this.listaTecAnest();
     
@@ -1575,9 +1575,9 @@ export default defineComponent({
     this.menuTrans.tipoRel= "RELEVO";
     this.menuTrans.tipoEve= "EVENTO";
     
-    this.tempMSV = setInterval(() => {
-      this.pingMSV(medStore.monitor[0].dirIPMVS);
-    }, 10000);
+    // this.tempMSV = setInterval(() => {
+    //   this.pingMSV(medStore.monitor[0].dirIPMVS);
+    // }, 10000);
 
     const gridLateral = document.getElementById('grid-lateral');
     const grid = document.getElementById('grid');
