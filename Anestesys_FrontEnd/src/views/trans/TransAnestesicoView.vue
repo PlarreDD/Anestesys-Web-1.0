@@ -1210,7 +1210,7 @@
     </div>
 
     <div>
-      <div ref="chartContainer"></div> 
+      <div ref="chartContainer" class="grafica-div"></div> 
     </div>
 
     <!-- Menú vista rápida -->
@@ -1597,6 +1597,7 @@ export default defineComponent({
         return canvas.toDataURL('image/png'); // Devuelve la imagen como base64
       },
 
+      // Asignar valores del MSV a las graficas
       async obtenerValoresGrafica() {
 
         this.chartElements.forEach(chart => {
@@ -1767,8 +1768,16 @@ export default defineComponent({
         this.chartData.labels = horaGeneracion;
 
         // Crear gráficas dependiendo el número de grupos en el arreglo
+        let topPosition = 0;
+
         for (let i = 0; i < gruposFC.length; i++) {
           const canvasElement = document.createElement('canvas');
+
+          // Sobreponer todas las graficas en el mismo div
+          canvasElement.style.position = 'absolute'; 
+          canvasElement.style.top = `${topPosition}px`;
+          canvasElement.style.left = '0';
+
           (this.$refs.chartContainer as HTMLElement).appendChild(canvasElement);
 
           const chart = this.crearGraficasPDF(gruposFC[i], gruposPulso[i], gruposPAS[i], gruposPAD[i], gruposPAM[i], gruposSpO2[i], gruposEtCO2[i], gruposTemp1[i], 
@@ -1779,6 +1788,7 @@ export default defineComponent({
         this.chartKey += 1;             
       },
 
+      // Dividir y crear graficas para cargar en documento PDF
       crearGraficasPDF(fc, pulso, pas, pad, pam, spo2, etco2, temp1, temp2, pvc, pasin, padin, pamin, fico2, fr, horas, element) {
         return new ChartJS(element, {
           type: 'line',
@@ -4517,9 +4527,6 @@ export default defineComponent({
               ]
             },
           )
-
-          // chartImages.push({text: 'Nombre del Paciente: ', font: 'SF', fontSize: 8}, {text: nomPaciente, font: 'SF', fontSize: 8, bold:true});
-          // chartImages.push({ image: imageDataUrl, width: 750 }); // Ancho personalizable
         };
 
         // Lista Medicamentos/Balance Hídrico
@@ -6249,6 +6256,9 @@ export default defineComponent({
 <style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
+.grafica-div {
+  position: relative;
+}
 #app {
   font-family: SF UI Display;
   src: url("@/assets/fonts/SF-UI-Display-Regular.otf") format("opentype");
