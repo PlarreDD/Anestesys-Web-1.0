@@ -421,8 +421,8 @@
       <!--Abrir el modal Grid Anestésico-->
       <div class="modal" id="modal-grid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">        
         <div class="modal-dialog modal-lg modal-dialog-centered"> 
-          <!-- modal-dialog-scrollable -->
           <div class="modal-content">
+            <!-- Ventana de carga PDF -->
             <div class="div-spinner" id="pdf-spinner"> 
               <div class="row txt-spinner">
                 <div id="pdf-spinner" class="spinner-border text-white fw-bold col-md-1" role="status"> 
@@ -432,7 +432,11 @@
                   <h2>Generando PDF...</h2>
                 </div>
               </div>
-            </div>            
+            </div>
+            <!-- Graficas divididas -->
+            <div>
+              <div ref="chartContainer" class="grafica-div"></div> 
+            </div>
 
             <div class="input-group">
               <div class="modal-body">
@@ -1207,11 +1211,7 @@
         </div>                  
       </div>
 
-    </div>
-
-    <div>
-      <div ref="chartContainer" class="grafica-div"></div> 
-    </div>
+    </div>    
 
     <!-- Menú vista rápida -->
     <div class="text-center posicion-estatica fw-bold container" :class="preIdStore.VistaRapida == false ? 'c-fixed' : 'c-fixed invisible'" @click.stop="desplegarMenuVistaRapida()">
