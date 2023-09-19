@@ -420,11 +420,11 @@
 
       <!--Abrir el modal Grid Anestésico-->
       <div class="modal" id="modal-grid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">        
-        <div class="modal-dialog modal-lg modal-dialog-centered" id="tamano-modal-grid">
+        <div class="" :class="tamanoModalGrid == false ? 'modal-dialog modal-lg modal-dialog-centered' : 'modal-fullscreen modal-dialog-centered'">
           <div class="modal-content">
 
             <!-- Ventana de carga PDF -->
-            <div class="div-spinner" id="pdf-spinner"> 
+            <div class="" :class="mostrarSpinner == false ? 'div-spinner' : 'div-spinner-on'"> 
               <div class="row txt-spinner">
                 <div id="pdf-spinner" class="spinner-border text-white fw-bold col-md-1" role="status"> 
                   <span class="visually-hidden">Loading...</span>
@@ -436,7 +436,7 @@
             </div>
 
             <!-- Graficas divididas -->
-            <div class="div-graficas" id="pdf-graficas">
+            <div class="div-graficas" :class="zoomGrafica == false ? 'div-none' : 'div-block'">
               <div ref="chartContainer" class="grafica-div"></div> 
             </div>
 
@@ -456,7 +456,7 @@
                             </i>
                           </button>
                         </div>
-                        <div class="" ref="chartRef" id="grafica-completa">                          
+                        <div class="" :class="mostrarGraficas == false ? 'div-block' : 'div-none'" ref="chartRef" >                          
                           <Line class="" id="my-chart-id" :options="chartOptions" :data="chartData" :key="chartKey"/>
                         </div>
                       </div>
@@ -1549,6 +1549,11 @@ export default defineComponent({
       },
       chartKey: 0,
 
+      tamanoModalGrid: false,
+      zoomGrafica: false,
+      mostrarGraficas: false,
+      mostrarSpinner: false,
+
       chartElements: [],
     }
   },
@@ -1997,13 +2002,15 @@ export default defineComponent({
       async crearPdf() {
         this.obtenerValoresGrafica();
 
-        document.getElementById('tamano-modal-grid').className = 'modal-fullscreen modal-dialog-centered';
+        this.tamanoModalGrid = true;
 
         if(this.chartElements.length != 0){
-          document.getElementById('grafica-completa').style.display = 'none'; 
+          this.mostrarGraficas = true;
         };
-        document.getElementById('pdf-spinner').style.display = 'block';
-        document.getElementById('pdf-graficas').style.display = 'block'; 
+
+        this.mostrarSpinner=true
+        
+        this.zoomGrafica = true;
 
         await new Promise(resolve => setTimeout(resolve, 3000));        
 
@@ -4967,10 +4974,13 @@ export default defineComponent({
 
         this.cerrarModalGrid();
 
-        document.getElementById('tamano-modal-grid').className = 'modal-dialog modal-lg modal-dialog-centered';
-        document.getElementById('grafica-completa').style.display = 'block';
-        document.getElementById('pdf-graficas').style.display = 'none'; 
-        document.getElementById('pdf-spinner').style.display = 'none';
+        this.tamanoModalGrid = false;
+
+        this.zoomGrafica = false;
+
+        this.mostrarGraficas=false;
+
+        this.mostrarSpinner=false;
       },            
 
       // Menú vista rapida
@@ -6342,8 +6352,24 @@ export default defineComponent({
   z-index: 9999;
   border-radius: 5px;
 }
-.div-graficas{
+.div-spinner-on{
+  display: block;
+  position: absolute; 
+  background-color: #002d60; 
+  width: 100%; 
+  height: 100%; 
+  left: 0; 
+  right: 0;
+  bottom:0;
+  top:0;
+  z-index: 9999;
+  border-radius: 5px;
+}
+.div-none{
   display:none;
+}
+.div-block{
+  display:block;
 }
 .txt-spinner{
   position: relative; 
