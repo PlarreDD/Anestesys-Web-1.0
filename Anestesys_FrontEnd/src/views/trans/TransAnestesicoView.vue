@@ -420,8 +420,9 @@
 
       <!--Abrir el modal Grid Anestésico-->
       <div class="modal" id="modal-grid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">        
-        <div class="modal-dialog modal-lg modal-dialog-centered" id="tamano-modal"> <!--modal-fullscreen-->
+        <div class="modal-dialog modal-lg modal-dialog-centered" id="tamano-modal-grid">
           <div class="modal-content">
+
             <!-- Ventana de carga PDF -->
             <div class="div-spinner" id="pdf-spinner"> 
               <div class="row txt-spinner">
@@ -433,8 +434,9 @@
                 </div>
               </div>
             </div>
+
             <!-- Graficas divididas -->
-            <div>
+            <div class="div-graficas" id="pdf-graficas">
               <div ref="chartContainer" class="grafica-div"></div> 
             </div>
 
@@ -454,9 +456,9 @@
                             </i>
                           </button>
                         </div>
-                        <div class="" ref="chartRef">                          
+                        <div class="" ref="chartRef" id="grafica-completa">                          
                           <Line class="" id="my-chart-id" :options="chartOptions" :data="chartData" :key="chartKey"/>
-                        </div>                        
+                        </div>
                       </div>
                   </div>
                 </div>
@@ -1378,12 +1380,12 @@ export default defineComponent({
           labels: [],
           datasets: [
               {
-                  label: 'FC',
+                  label: 'FC',            
                   borderColor: 'rgba(0, 165, 151)',
                   data: [],
                   fill: false,
                   pointStyle: 'circle', //Estilo del punto en los datos
-                  radius: 4, //Tamaño punto
+                  radius: 4, //Tamaño punto                 
               },
               {
                   label: 'Pulso',
@@ -1502,6 +1504,14 @@ export default defineComponent({
       chartOptions: {
           responsive: true,
           plugins: {
+            legend: {
+              labels: {
+                font: {
+                    size: 12,
+                    weight: 'bold', // Establece la fuente en negrita
+                }
+              }
+            },
             zoom: {
               pan: {
                 enabled: true,
@@ -1515,6 +1525,24 @@ export default defineComponent({
                   enabled: true,
                 },
                 mode: 'xy', //
+              },              
+            },
+          },
+          scales: {
+            x: {
+              ticks: {
+                font: {
+                  size: 12, // Tamaño del texto del eje X
+                  weight: 'bold', // Establece la fuente en negrita
+                },
+              },
+            },
+            y: {
+              ticks: {
+                font: {
+                  size: 12, // Tamaño del texto del eje Y
+                  weight: 'bold', // Establece la fuente en negrita
+                },
               },
             },
           },
@@ -1534,7 +1562,7 @@ export default defineComponent({
 
   mounted: function() { // Llama el método despues de cargar la página    
     transAnestStore.getDetieneMonitoreo();
-    // this.pingMSV(medStore.monitor[0].dirIPMVS);
+    this.pingMSV(medStore.monitor[0].dirIPMVS);
     transAnestStore.listDatosV(preIdStore.pacienteID._id);
     this.listaTecAnest();
     
@@ -1575,9 +1603,9 @@ export default defineComponent({
     this.menuTrans.tipoRel= "RELEVO";
     this.menuTrans.tipoEve= "EVENTO";
     
-    // this.tempMSV = setInterval(() => {
-    //   this.pingMSV(medStore.monitor[0].dirIPMVS);
-    // }, 10000);
+    this.tempMSV = setInterval(() => {
+      this.pingMSV(medStore.monitor[0].dirIPMVS);
+    }, 10000);
 
     const gridLateral = document.getElementById('grid-lateral');
     const grid = document.getElementById('grid');
@@ -1684,68 +1712,68 @@ export default defineComponent({
         let horaGeneracion = this.saltoArreglo.map(item => item.horaGeneracion);
 
         let gruposFC = [];
-        for (let i = 0; i < FC.length; i += 5) {
-          gruposFC.push(FC.slice(i, i + 5));
+        for (let i = 0; i < FC.length; i += 26) {
+          gruposFC.push(FC.slice(i, i + 26));
         };
         let gruposPulso = [];
-        for (let i = 0; i < Pulso.length; i += 5) {
-          gruposPulso.push(Pulso.slice(i, i + 5));
+        for (let i = 0; i < Pulso.length; i += 26) {
+          gruposPulso.push(Pulso.slice(i, i + 26));
         };
         let gruposPAS = [];
-        for (let i = 0; i < PAS.length; i += 5) {
-          gruposPAS.push(PAS.slice(i, i + 5));
+        for (let i = 0; i < PAS.length; i += 26) {
+          gruposPAS.push(PAS.slice(i, i + 26));
         };
         let gruposPAD = [];
-        for (let i = 0; i < PAD.length; i += 5) {
-          gruposPAD.push(PAD.slice(i, i + 5));
+        for (let i = 0; i < PAD.length; i += 26) {
+          gruposPAD.push(PAD.slice(i, i + 26));
         };
         let gruposPAM = [];
-        for (let i = 0; i < PAM.length; i += 5) {
-          gruposPAM.push(PAM.slice(i, i + 5));
+        for (let i = 0; i < PAM.length; i += 26) {
+          gruposPAM.push(PAM.slice(i, i + 26));
         };
         let gruposSpO2 = [];
-        for (let i = 0; i < SpO2.length; i += 5) {
-          gruposSpO2.push(SpO2.slice(i, i + 5));
+        for (let i = 0; i < SpO2.length; i += 26) {
+          gruposSpO2.push(SpO2.slice(i, i + 26));
         };
         let gruposEtCO2 = [];
-        for (let i = 0; i < EtCO2.length; i += 5) {
-          gruposEtCO2.push(EtCO2.slice(i, i + 5));
+        for (let i = 0; i < EtCO2.length; i += 26) {
+          gruposEtCO2.push(EtCO2.slice(i, i + 26));
         };
         let gruposTemp1 = [];
-        for (let i = 0; i < Temp1.length; i += 5) {
-          gruposTemp1.push(Temp1.slice(i, i + 5));
+        for (let i = 0; i < Temp1.length; i += 26) {
+          gruposTemp1.push(Temp1.slice(i, i + 26));
         };
         let gruposTemp2 = [];
-        for (let i = 0; i < Temp2.length; i += 5) {
-          gruposTemp2.push(Temp2.slice(i, i + 5));
+        for (let i = 0; i < Temp2.length; i += 26) {
+          gruposTemp2.push(Temp2.slice(i, i + 26));
         };
         let gruposPVC = [];
-        for (let i = 0; i < PVC.length; i += 5) {
-          gruposPVC.push(PVC.slice(i, i + 5));
+        for (let i = 0; i < PVC.length; i += 26) {
+          gruposPVC.push(PVC.slice(i, i + 26));
         };
         let gruposPASIN = [];
-        for (let i = 0; i < PAS_IN.length; i += 5) {
-          gruposPASIN.push(PAS_IN.slice(i, i + 5));
+        for (let i = 0; i < PAS_IN.length; i += 26) {
+          gruposPASIN.push(PAS_IN.slice(i, i + 26));
         };
         let gruposPADIN = [];
-        for (let i = 0; i < PAD_IN.length; i += 5) {
-          gruposPADIN.push(PAD_IN.slice(i, i + 5));
+        for (let i = 0; i < PAD_IN.length; i += 26) {
+          gruposPADIN.push(PAD_IN.slice(i, i + 26));
         };
         let gruposPAMIN = [];
-        for (let i = 0; i < PAM_IN.length; i += 5) {
-          gruposPAMIN.push(PAM_IN.slice(i, i + 5));
+        for (let i = 0; i < PAM_IN.length; i += 26) {
+          gruposPAMIN.push(PAM_IN.slice(i, i + 26));
         };
         let gruposFiCO2 = [];
-        for (let i = 0; i < FiCO2.length; i += 5) {
-          gruposFiCO2.push(FiCO2.slice(i, i + 5));
+        for (let i = 0; i < FiCO2.length; i += 26) {
+          gruposFiCO2.push(FiCO2.slice(i, i + 26));
         };
         let gruposFR = [];
-        for (let i = 0; i < FR.length; i += 5) {
-          gruposFR.push(FR.slice(i, i + 5));
+        for (let i = 0; i < FR.length; i += 26) {
+          gruposFR.push(FR.slice(i, i + 26));
         };
         let gruposHora = [];
-        for (let i = 0; i < horaGeneracion.length; i += 5) {
-          gruposHora.push(horaGeneracion.slice(i, i + 5));
+        for (let i = 0; i < horaGeneracion.length; i += 26) {
+          gruposHora.push(horaGeneracion.slice(i, i + 26));
         };
 
         // Asignar valores a gráfica principal
@@ -1917,8 +1945,36 @@ export default defineComponent({
               },
             ],
           },
-          options: {
-            responsive: true,            
+          options: {            
+            responsive: true,
+            plugins: {
+              legend: {
+                labels: {
+                  font: {
+                      size: 20,
+                      weight: 'bold', // Establece la fuente en negrita
+                  }
+                }
+              },              
+            },
+            scales: {
+              x: {
+                ticks: {
+                  font: {
+                    size: 20, // Tamaño del texto del eje X
+                    weight: 'bold', // Establece la fuente en negrita
+                  },
+                },
+              },
+              y: {
+                ticks: {
+                  font: {
+                    size: 20, // Tamaño del texto del eje Y
+                    weight: 'bold', // Establece la fuente en negrita
+                  },
+                },
+              },
+            },
           },
         });
       },
@@ -1941,7 +1997,13 @@ export default defineComponent({
       async crearPdf() {
         this.obtenerValoresGrafica();
 
+        document.getElementById('tamano-modal-grid').className = 'modal-fullscreen modal-dialog-centered';
+
+        if(this.chartElements.length != 0){
+          document.getElementById('grafica-completa').style.display = 'none'; 
+        };
         document.getElementById('pdf-spinner').style.display = 'block';
+        document.getElementById('pdf-graficas').style.display = 'block'; 
 
         await new Promise(resolve => setTimeout(resolve, 3000));        
 
@@ -4904,6 +4966,10 @@ export default defineComponent({
         pdfMake.createPdf(docDefinition as any).open();     
 
         this.cerrarModalGrid();
+
+        document.getElementById('tamano-modal-grid').className = 'modal-dialog modal-lg modal-dialog-centered';
+        document.getElementById('grafica-completa').style.display = 'block';
+        document.getElementById('pdf-graficas').style.display = 'none'; 
         document.getElementById('pdf-spinner').style.display = 'none';
       },            
 
@@ -6271,13 +6337,17 @@ export default defineComponent({
   height: 100%; 
   left: 0; 
   right: 0;
-  bottom:0; 
+  bottom:0;
+  top:0;
   z-index: 9999;
   border-radius: 5px;
 }
+.div-graficas{
+  display:none;
+}
 .txt-spinner{
   position: relative; 
-  left: 35%; 
+  left: 40%; 
   top: 45%;
 }
 .bordePrincipal {
