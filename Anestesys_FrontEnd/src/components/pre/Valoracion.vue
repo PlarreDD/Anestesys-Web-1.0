@@ -184,8 +184,7 @@
                         
                         <!-- No patológicos -->
                         <div class="col row">
-                            <div class="g-3">
-                                
+                            <div class="g-3">                                
                                 <div class="col-md-12">
                                     <div class="col row">
                                         <div class="col-md-8">
@@ -811,8 +810,7 @@
                                 </div>       
                                 
                                 <!-- Botón Guardar/Agregar -->
-                                <div class="col-md-1 btn-abajo">                                    
-
+                                <div class="col-md-1 btn-abajo">
                                     <template v-if="btnAddEstudios === true">
                                         <button class="btn btn-guardar fw-bold"
                                             @click="guardarEstudios(infoValoracion.estudios_Estudio, infoValoracion.estudio_Especificaciones)">
@@ -1271,10 +1269,13 @@ export default defineComponent({
         },
 
         async guardarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
-
-            this.btnActualizarValoracion=true
-
-            await preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
+            if(this.btnActualizarValoracion){
+                await preIdStore.updatePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
+            }
+            else{
+                this.btnActualizarValoracion=true
+                await preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
+            }            
 
             this.btnAddEstudios=false
             this.btnUpdateEstudios=true

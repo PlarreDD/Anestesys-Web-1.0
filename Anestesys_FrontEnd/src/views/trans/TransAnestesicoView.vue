@@ -5047,58 +5047,58 @@ export default defineComponent({
       },
 
       async cambiarBtnActualizar(id: string) {
-          this.btnAddVentilador = false;
-          this.btnUpdateVentilador = false;
-          this.btnActualizaVentilador = true;
+        this.btnAddVentilador = false;
+        this.btnUpdateVentilador = false;
+        this.btnActualizaVentilador = true;
 
-          await transAnestStore.getModoVent(id);
+        await transAnestStore.getModoVent(id);
 
-          this.menuTrans.idVentilador = transAnestStore.datosVentilacion.datosVentilador[0]._id;
-          this.menuTrans.modosVentilacion = transAnestStore.datosVentilacion.datosVentilador[0].modosVentilacion;
-          this.menuTrans.Hr = transAnestStore.datosVentilacion.datosVentilador[0].Hr;
-          this.menuTrans.IE = transAnestStore.datosVentilacion.datosVentilador[0].IE;
-          this.menuTrans.PLimite = transAnestStore.datosVentilacion.datosVentilador[0].PLimite;
-          this.menuTrans.frecResp = transAnestStore.datosVentilacion.datosVentilador[0].frecResp;
-          this.menuTrans.peep = transAnestStore.datosVentilacion.datosVentilador[0].peep;
-          this.menuTrans.vt = transAnestStore.datosVentilacion.datosVentilador[0].vt;
+        this.menuTrans.idVentilador = transAnestStore.datosVentilacion.datosVentilador[0]._id;
+        this.menuTrans.modosVentilacion = transAnestStore.datosVentilacion.datosVentilador[0].modosVentilacion;
+        this.menuTrans.Hr = transAnestStore.datosVentilacion.datosVentilador[0].Hr;
+        this.menuTrans.IE = transAnestStore.datosVentilacion.datosVentilador[0].IE;
+        this.menuTrans.PLimite = transAnestStore.datosVentilacion.datosVentilador[0].PLimite;
+        this.menuTrans.frecResp = transAnestStore.datosVentilacion.datosVentilador[0].frecResp;
+        this.menuTrans.peep = transAnestStore.datosVentilacion.datosVentilador[0].peep;
+        this.menuTrans.vt = transAnestStore.datosVentilacion.datosVentilador[0].vt;
 
-          await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+        await transAnestStore.listDatosV(preIdStore.pacienteID._id);
       },
 
       async actualizarVentilador() {
-            if (this.menuTrans.modosVentilacion == "") {
-                swal.fire({
-                title: "Seleccione el modo de ventilación",
-                icon: "warning",
-                showConfirmButton: false,
-                showCloseButton: true,
-                toast: true,
-                timer: 2500,
-                timerProgressBar: true,
-                position: "top-end",
-                });
-            } else {
-                let hoy = new Date();
-                this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
-                await transAnestStore.updateVentilador(this.menuTrans.idVentilador, this.menuTrans.modosVentilacion, this.menuTrans.peep,
-                                      this.menuTrans.vt, this.menuTrans.frecResp, this.menuTrans.IE, this.menuTrans.PLimite, this.menuTrans.Hr);
+        if (this.menuTrans.modosVentilacion == "") {
+            swal.fire({
+            title: "Seleccione el modo de ventilación",
+            icon: "warning",
+            showConfirmButton: false,
+            showCloseButton: true,
+            toast: true,
+            timer: 2500,
+            timerProgressBar: true,
+            position: "top-end",
+            });
+        } else {
+            let hoy = new Date();
+            this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            await transAnestStore.updateVentilador(this.menuTrans.idVentilador, this.menuTrans.modosVentilacion, this.menuTrans.peep,
+                                  this.menuTrans.vt, this.menuTrans.frecResp, this.menuTrans.IE, this.menuTrans.PLimite, this.menuTrans.Hr);
 
-                //Volver al botón agregar
-                this.btnAddVentilador=false
-                this.btnUpdateVentilador=true
-                this.btnActualizaVentilador=false
+            //Volver al botón agregar
+            this.btnAddVentilador=false
+            this.btnUpdateVentilador=true
+            this.btnActualizaVentilador=false
 
-                this.menuTrans.idVentilador = "";
-                this.menuTrans.modosVentilacion = "";
-                this.menuTrans.Hr = "";
-                this.menuTrans.IE = "";
-                this.menuTrans.PLimite = "";
-                this.menuTrans.frecResp = "";
-                this.menuTrans.peep = "";
-                this.menuTrans.vt = "";
+            this.menuTrans.idVentilador = "";
+            this.menuTrans.modosVentilacion = "";
+            this.menuTrans.Hr = "";
+            this.menuTrans.IE = "";
+            this.menuTrans.PLimite = "";
+            this.menuTrans.frecResp = "";
+            this.menuTrans.peep = "";
+            this.menuTrans.vt = "";
 
-                await transAnestStore.listDatosV(preIdStore.pacienteID._id);
-            }
+            await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+        }
       },
 
       async eliminarDatosV(id: string) {

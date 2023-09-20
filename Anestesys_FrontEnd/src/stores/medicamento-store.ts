@@ -165,7 +165,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
       })
       .then((res: any) => {
         this.status = res.data.statusMSV;
-          // console.log(JSON.stringify(res.data.statusMSV));
+
         swal.fire({
           title: "Monitor registrado",
           icon: "success",
@@ -189,26 +189,32 @@ export const useMedicamentoStore = defineStore("medicamento", {
               position: "top-end",
             });
           } else if (e.request) {
-            // console.log(e.request);
+            console.log(e.request);
           } else {
-            // console.log("ErrorAx: ", e);
+            console.log("ErrorAx: ", e);
           }
       });
     },
 
     async listMonitor(){
-        await apiAxios({
-          url: "http://localhost:5000/mvs",
-          method: "GET",
-          headers: {
-            Authorization: "Bearer " + userStore.token,
-          },
-        })
-        .then((res: any) => {
-          this.monitor = res.data.monitor;
-        })
-        .catch((e: any) => {
-        });
+      
+      await apiAxios({
+        url: "http://localhost:5000/mvs",
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + userStore.token,
+        },
+      })
+      .then((res: any) => {
+        if (res.data.monitor.length == 0) {
+          this.monitor = "1.1.1.1";          
+        } else {
+          this.monitor = res.data.monitor;            
+        }
+      })
+      .catch((e: any) => {
+        console.log("Error: ", e);
+      });
     },
 
     async deleteMonitor(infoMonitor: any){
@@ -254,7 +260,6 @@ export const useMedicamentoStore = defineStore("medicamento", {
       })
       .catch((e: any) => {
           console.log(e);
-          
       });
     },
   },

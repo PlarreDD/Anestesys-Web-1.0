@@ -376,7 +376,7 @@ export default defineComponent({
 
   mounted() {
     medStore.getMedicamentosList();
-    medStore.listMonitor();
+    this.listadoMonitor();
   },
 
   methods: {
@@ -473,8 +473,6 @@ export default defineComponent({
             this.eliminarMedicamento(idMedicamento);
           }
         });
-
-      //await medStore.deleteMedicamento(idMedicamento)
     },
 
     async eliminarMedicamento(idMedicamento) {
@@ -543,6 +541,9 @@ export default defineComponent({
       await medStore.listMonitor();
     },
 
+    async listadoMonitor() {
+      await medStore.listMonitor();
+    },
   },
 });
 </script>
