@@ -3,7 +3,7 @@
     <barra-navegacion/>
   </header>
 
-  <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">
+  <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">    
 
     <!-- Barra superior -->
     <div class="input-group mb-3">
@@ -373,7 +373,7 @@
 
             <!-- Botón imprimir PDF -->
             <div class="col-md-2">
-              <button type="button" class="btn btn-menu fw-bold" @click="crearPdf">
+              <button type="button" class="btn btn-menu fw-bold" data-bs-toggle="modal" data-bs-target="#modal-grid" @click="crearPdf">
                 <font-awesome-icon icon="fa-solid fa-file-pdf" size="lg"/> PDF
               </button>
             </div>
@@ -392,8 +392,7 @@
                 <button type="button"
                         class="btn btn-nav-bar fw-bold"
                         data-bs-toggle="modal"
-                        data-bs-target="#modal-grid"> GRID ANESTÉSICO </button>
-                
+                        data-bs-target="#modal-grid" @click="obtenerValoresGrafica"> GRID ANESTÉSICO </button>                
               </li>
               <!-- Técnica Anestésica Final -->
               <li class="col-md-3">
@@ -420,15 +419,46 @@
       </div>
 
       <!--Abrir el modal Grid Anestésico-->
-      <div class="modal" id="modal-grid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
-          <div class="modal-content color-dropdown">
-            <div class="input-group mb-3">
+      <div class="modal" id="modal-grid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">        
+        <div class="" :class="tamanoModalGrid == false ? 'modal-dialog modal-lg modal-dialog-centered' : 'modal-fullscreen modal-dialog-centered'">
+          <div class="modal-content">
+
+            <!-- Ventana de carga PDF -->
+            <div class="" :class="mostrarSpinner == false ? 'div-spinner' : 'div-spinner-on'"> 
+              <div class="row txt-spinner">
+                <div id="pdf-spinner" class="spinner-border text-white fw-bold col-md-1" role="status"> 
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="col-md-4 text-white">
+                  <h2>Generando PDF...</h2>
+                </div>
+              </div>
+            </div>
+
+            <!-- Graficas divididas -->
+            <div class="div-graficas" :class="zoomGrafica == false ? 'div-none' : 'div-block'">
+              <div ref="chartContainer" class="grafica-div"></div> 
+            </div>
+
+            <div class="input-group">
               <div class="modal-body">
-                <div class="col-md-12">
-                  <div class="row g-3">
-                      <div class="col-md-12">
-                        <h5 class="text-white fw-bold">GRID ANESTÉSICO</h5>
+                <div class="col-md-12 chart-container">                                                      
+                  <div class="col-md-12">                      
+                      <div class="row">                        
+                        <h5 class="text-black fw-bold col-md-11">GRID ANESTÉSICO</h5>
+                        <div class="col-md-1">
+                          <button type="button" id="grid-anes"
+                                  class="btn fw-bold"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close">
+                            <i class="text-black invisible">
+                              <font-awesome-icon icon="fa-solid fa-xmark" size="sm"/>
+                            </i>
+                          </button>
+                        </div>
+                        <div class="" :class="mostrarGraficas == false ? 'div-block' : 'div-none'" ref="chartRef" >                          
+                          <Line class="" id="my-chart-id" :options="chartOptions" :data="chartData" :key="chartKey"/>
+                        </div>
                       </div>
                   </div>
                 </div>
@@ -1183,7 +1213,7 @@
         </div>                  
       </div>
 
-    </div>
+    </div>    
 
     <!-- Menú vista rápida -->
     <div class="text-center posicion-estatica fw-bold container" :class="preIdStore.VistaRapida == false ? 'c-fixed' : 'c-fixed invisible'" @click.stop="desplegarMenuVistaRapida()">
@@ -1212,7 +1242,7 @@
           </label>
         </div>
       </div>
-    </div>       
+    </div>  
 
   </div>
 </template>
@@ -1229,10 +1259,15 @@ import type { regNotaPost } from "@/interfaces/regPostAnest";
 import { usePostAnestStore } from "@/stores/postAnest-store";
 import { useMedicamentoStore } from "../../stores/medicamento-store";
 import { ElSelect, ElOption } from 'element-plus';
-
+import { Line } from 'vue-chartjs';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
+import html2canvas from 'html2canvas';
+import zoomPlugin from 'chartjs-plugin-zoom';
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import pdfMake from "pdfmake/build/pdfmake";
 window.pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 
 const preIdStore = usePreIdStore();
 const transAnestStore = useTransAnestStore();
@@ -1254,7 +1289,7 @@ let PAM_In: any;
 let FiCO2: any;
 let FR: any;
 
-var taSeparada: Object;
+let taSeparada: Object;
 
 export default defineComponent({
   name: 'App',
@@ -1339,14 +1374,195 @@ export default defineComponent({
 
       stepSize: 1,
 
-      mostrarVistaRapida : false
+      mostrarVistaRapida : false,
+
+      chartData: {
+          labels: [],
+          datasets: [
+              {
+                  label: 'FC',            
+                  borderColor: 'rgba(0, 165, 151)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'circle', //Estilo del punto en los datos
+                  radius: 4, //Tamaño punto                 
+              },
+              {
+                  label: 'Pulso',
+                  borderColor: 'rgba(117, 137, 190)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'cross',
+                  radius: 4
+              },
+              {
+                  label: 'PAS',
+                  borderColor: 'rgba(236, 90, 85)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'crossRot',
+                  radius: 4
+              },
+              {
+                  label: 'PAD',
+                  borderColor: 'rgba(161, 197, 227)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'cross',
+                  radius: 4
+              },
+              {
+                  label: 'PAM',
+                  borderColor: 'rgba(236, 102, 24)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'rectRounded',
+                  radius: 4
+              },
+              {
+                  label: 'SpO2',
+                  borderColor: 'rgba(68, 163, 211)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'rectRot',
+                  radius: 4
+              },
+              {
+                  label: 'EtCO2',
+                  borderColor: 'rgba(112, 229, 225)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'star',
+                  radius: 4
+              },
+              {
+                  label: 'Temp1',
+                  borderColor: 'rgba(157, 157, 157)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'triangle',
+                  radius: 4
+              },
+              {
+                  label: 'Temp2',
+                  borderColor: 'rgba(174, 35, 30)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'circle',
+                  radius: 4
+              },
+              {
+                  label: 'PVC',
+                  borderColor: 'rgba(77, 157, 183)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'rectRot',
+                  radius: 4
+              },
+              {
+                  label: 'PAS_IN',
+                  borderColor: 'rgba(198, 27, 27)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'crossRot',
+                  radius: 4
+              },
+              {
+                  label: 'PAD_IN',
+                  borderColor: 'rgba(198, 27, 27)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'cross',
+                  radius: 4
+              },
+              {
+                  label: 'PAM_IN',
+                  borderColor: 'rgba(198, 27, 27)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'rectRounded',
+                  radius: 4
+              },
+              {
+                  label: 'FiCO2',
+                  borderColor: 'rgba(2, 43, 155)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'star',
+                  radius: 4
+              },
+              {
+                  label: 'FR',
+                  borderColor: 'rgba(255, 196, 0)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'triangle',
+                  radius: 4
+              },
+          ]
+      },
+      chartOptions: {
+          responsive: true,
+          plugins: {
+            legend: {
+              labels: {
+                font: {
+                    size: 12,
+                    weight: 'bold', // Establece la fuente en negrita
+                }
+              }
+            },
+            zoom: {
+              pan: {
+                enabled: true,
+                mode: 'xy',
+              },
+              zoom: {
+                wheel: {
+                  enabled: true,
+                },
+                pinch: {
+                  enabled: true,
+                },
+                mode: 'xy', //
+              },              
+            },
+          },
+          scales: {
+            x: {
+              ticks: {
+                font: {
+                  size: 12, // Tamaño del texto del eje X
+                  weight: 'bold', // Establece la fuente en negrita
+                },
+              },
+            },
+            y: {
+              ticks: {
+                font: {
+                  size: 12, // Tamaño del texto del eje Y
+                  weight: 'bold', // Establece la fuente en negrita
+                },
+              },
+            },
+          },
+      },
+      chartKey: 0,
+
+      tamanoModalGrid: false,
+      zoomGrafica: false,
+      mostrarGraficas: false,
+      mostrarSpinner: false,
+
+      chartElements: [],
     }
-  }, 
+  },
 
   components:{
     BarraNavegacion,
     Multiselect,
-    ElSelect, ElOption
+    ElSelect, ElOption,
+    Line
   },
 
   mounted: function() { // Llama el método despues de cargar la página    
@@ -1407,8 +1623,397 @@ export default defineComponent({
   },
 
   methods: {
+      // Generar Grafica a Imagen
+      async convertirGrafica() {
+        let grafica = (this.$refs.chartRef as HTMLElement);
+        let canvas = await html2canvas(grafica);
+        return canvas.toDataURL('image/png'); // Devuelve la imagen como base64
+      },
+
+      // Asignar valores del MSV a las graficas
+      async obtenerValoresGrafica() {
+
+        this.chartElements.forEach(chart => {
+          chart.destroy();
+        });
+        this.chartElements = [];
+
+        let FC = this.saltoArreglo.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "174147842")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let Pulso = this.saltoArreglo.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "131149530")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let PAS = this.saltoArreglo.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "119150301")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let PAD = this.saltoArreglo.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "119150302")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let PAM = this.saltoArreglo.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "119150303")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let SpO2 = this.saltoArreglo.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "131150456")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let EtCO2 = this.saltoArreglo.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "181151708")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let Temp1 = this.saltoArreglo.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "121150344")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let Temp2 = this.saltoArreglo.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "122150344")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let PVC = this.saltoArreglo.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "1112150087")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let PAS_IN = this.saltoArreglo.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "111150037")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let PAD_IN = this.saltoArreglo.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "111150038")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let PAM_IN = this.saltoArreglo.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "111150039")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let FiCO2 = this.saltoArreglo.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "181151716")
+            .map(dato => dato.valor ?? ' ')
+        );
+        let FR = this.saltoArreglo.flatMap(item =>
+          item.datos
+            .filter(dato => dato.segmento4 === "181151594")
+            .map(dato => dato.valor ?? ' ')
+        );
+
+        let horaGeneracion = this.saltoArreglo.map(item => item.horaGeneracion);
+
+        let gruposFC = [];
+        for (let i = 0; i < FC.length; i += 26) {
+          gruposFC.push(FC.slice(i, i + 26));
+        };
+        let gruposPulso = [];
+        for (let i = 0; i < Pulso.length; i += 26) {
+          gruposPulso.push(Pulso.slice(i, i + 26));
+        };
+        let gruposPAS = [];
+        for (let i = 0; i < PAS.length; i += 26) {
+          gruposPAS.push(PAS.slice(i, i + 26));
+        };
+        let gruposPAD = [];
+        for (let i = 0; i < PAD.length; i += 26) {
+          gruposPAD.push(PAD.slice(i, i + 26));
+        };
+        let gruposPAM = [];
+        for (let i = 0; i < PAM.length; i += 26) {
+          gruposPAM.push(PAM.slice(i, i + 26));
+        };
+        let gruposSpO2 = [];
+        for (let i = 0; i < SpO2.length; i += 26) {
+          gruposSpO2.push(SpO2.slice(i, i + 26));
+        };
+        let gruposEtCO2 = [];
+        for (let i = 0; i < EtCO2.length; i += 26) {
+          gruposEtCO2.push(EtCO2.slice(i, i + 26));
+        };
+        let gruposTemp1 = [];
+        for (let i = 0; i < Temp1.length; i += 26) {
+          gruposTemp1.push(Temp1.slice(i, i + 26));
+        };
+        let gruposTemp2 = [];
+        for (let i = 0; i < Temp2.length; i += 26) {
+          gruposTemp2.push(Temp2.slice(i, i + 26));
+        };
+        let gruposPVC = [];
+        for (let i = 0; i < PVC.length; i += 26) {
+          gruposPVC.push(PVC.slice(i, i + 26));
+        };
+        let gruposPASIN = [];
+        for (let i = 0; i < PAS_IN.length; i += 26) {
+          gruposPASIN.push(PAS_IN.slice(i, i + 26));
+        };
+        let gruposPADIN = [];
+        for (let i = 0; i < PAD_IN.length; i += 26) {
+          gruposPADIN.push(PAD_IN.slice(i, i + 26));
+        };
+        let gruposPAMIN = [];
+        for (let i = 0; i < PAM_IN.length; i += 26) {
+          gruposPAMIN.push(PAM_IN.slice(i, i + 26));
+        };
+        let gruposFiCO2 = [];
+        for (let i = 0; i < FiCO2.length; i += 26) {
+          gruposFiCO2.push(FiCO2.slice(i, i + 26));
+        };
+        let gruposFR = [];
+        for (let i = 0; i < FR.length; i += 26) {
+          gruposFR.push(FR.slice(i, i + 26));
+        };
+        let gruposHora = [];
+        for (let i = 0; i < horaGeneracion.length; i += 26) {
+          gruposHora.push(horaGeneracion.slice(i, i + 26));
+        };
+
+        // Asignar valores a gráfica principal
+        this.chartData.datasets[0].data = FC;
+        this.chartData.datasets[1].data = Pulso;
+        this.chartData.datasets[2].data = PAS;
+        this.chartData.datasets[3].data = PAD;
+        this.chartData.datasets[4].data = PAM;
+        this.chartData.datasets[5].data = SpO2;
+        this.chartData.datasets[6].data = EtCO2;
+        this.chartData.datasets[7].data = Temp1;
+        this.chartData.datasets[8].data = Temp2;
+        this.chartData.datasets[9].data = PVC;
+        this.chartData.datasets[10].data = PAS_IN;
+        this.chartData.datasets[11].data = PAD_IN;
+        this.chartData.datasets[12].data = PAM_IN;
+        this.chartData.datasets[13].data = FiCO2;
+        this.chartData.datasets[14].data = FR;
+        // Asignar hora a valores de la gráfica principal
+        this.chartData.labels = horaGeneracion;
+
+        // Crear gráficas dependiendo el número de grupos en el arreglo
+        let topPosition = 0;
+
+        for (let i = 0; i < gruposFC.length; i++) {
+          const canvasElement = document.createElement('canvas');
+
+          // Sobreponer todas las graficas en el mismo div
+          canvasElement.style.position = 'absolute'; 
+          canvasElement.style.top = `${topPosition}px`;
+          canvasElement.style.left = '0';
+
+          (this.$refs.chartContainer as HTMLElement).appendChild(canvasElement);
+
+          const chart = this.crearGraficasPDF(gruposFC[i], gruposPulso[i], gruposPAS[i], gruposPAD[i], gruposPAM[i], gruposSpO2[i], gruposEtCO2[i], gruposTemp1[i], 
+                      gruposTemp2[i], gruposPVC[i], gruposPASIN[i], gruposPADIN[i], gruposPAMIN[i], gruposFiCO2[i], gruposFR[i], gruposHora[i], canvasElement);
+          this.chartElements.push(chart);
+        }
+
+        this.chartKey += 1;             
+      },
+
+      // Dividir y crear graficas para cargar en documento PDF
+      crearGraficasPDF(fc, pulso, pas, pad, pam, spo2, etco2, temp1, temp2, pvc, pasin, padin, pamin, fico2, fr, horas, element) {
+        return new ChartJS(element, {
+          type: 'line',
+          data: {
+            labels: horas,
+            datasets: [
+              {
+                label: 'FC',
+                data: fc,
+                borderColor: 'rgba(0, 165, 151)',
+                fill: false,
+                pointStyle: 'circle', //Estilo del punto en los datos
+                pointRadius: 4, //Tamaño punto
+              },
+              {
+                label: 'Pulso',
+                borderColor: 'rgba(117, 137, 190)',
+                data: pulso,
+                fill: false,
+                pointStyle: 'cross',
+                pointRadius: 4
+              },
+              {
+                label: 'PAS',
+                borderColor: 'rgba(236, 90, 85)',
+                data: pas,
+                fill: false,
+                pointStyle: 'crossRot',
+                pointRadius: 4
+              },
+              {
+                label: 'PAD',
+                borderColor: 'rgba(161, 197, 227)',
+                data: pad,
+                fill: false,
+                pointStyle: 'cross',
+                pointRadius: 4
+              },
+              {
+                  label: 'PAM',
+                  borderColor: 'rgba(236, 102, 24)',
+                  data: pam,
+                  fill: false,
+                  pointStyle: 'rectRounded',
+                  pointRadius: 4
+              },
+              {
+                  label: 'SpO2',
+                  borderColor: 'rgba(68, 163, 211)',
+                  data: spo2,
+                  fill: false,
+                  pointStyle: 'rectRot',
+                  pointRadius: 4
+              },
+              {
+                  label: 'EtCO2',
+                  borderColor: 'rgba(112, 229, 225)',
+                  data: etco2,
+                  fill: false,
+                  pointStyle: 'star',
+                  pointRadius: 4
+              },
+              {
+                  label: 'Temp1',
+                  borderColor: 'rgba(157, 157, 157)',
+                  data: temp1,
+                  fill: false,
+                  pointStyle: 'triangle',
+                  pointRadius: 4
+              },
+              {
+                  label: 'Temp2',
+                  borderColor: 'rgba(174, 35, 30)',
+                  data: temp2,
+                  fill: false,
+                  pointStyle: 'circle',
+                  pointRadius: 4
+              },
+              {
+                  label: 'PVC',
+                  borderColor: 'rgba(77, 157, 183)',
+                  data: pvc,
+                  fill: false,
+                  pointStyle: 'rectRot',
+                  pointRadius: 4
+              },
+              {
+                  label: 'PAS_IN',
+                  borderColor: 'rgba(198, 27, 27)',
+                  data: pasin,
+                  fill: false,
+                  pointStyle: 'crossRot',
+                  pointRadius: 4
+              },
+              {
+                  label: 'PAD_IN',
+                  borderColor: 'rgba(198, 27, 27)',
+                  data: padin,
+                  fill: false,
+                  pointStyle: 'cross',
+                  pointRadius: 4
+              },
+              {
+                  label: 'PAM_IN',
+                  borderColor: 'rgba(198, 27, 27)',
+                  data: pamin,
+                  fill: false,
+                  pointStyle: 'rectRounded',
+                  pointRadius: 4
+              },
+              {
+                  label: 'FiCO2',
+                  borderColor: 'rgba(2, 43, 155)',
+                  data: fico2,
+                  fill: false,
+                  pointStyle: 'star',
+                  pointRadius: 4
+              },
+              {
+                  label: 'FR',
+                  borderColor: 'rgba(255, 196, 0)',
+                  data: fr,
+                  fill: false,
+                  pointStyle: 'triangle',
+                  pointRadius: 4
+              },
+            ],
+          },
+          options: {            
+            responsive: true,
+            plugins: {
+              legend: {
+                labels: {
+                  font: {
+                      size: 20,
+                      weight: 'bold', // Establece la fuente en negrita
+                  }
+                }
+              },              
+            },
+            scales: {
+              x: {
+                ticks: {
+                  font: {
+                    size: 20, // Tamaño del texto del eje X
+                    weight: 'bold', // Establece la fuente en negrita
+                  },
+                },
+              },
+              y: {
+                ticks: {
+                  font: {
+                    size: 20, // Tamaño del texto del eje Y
+                    weight: 'bold', // Establece la fuente en negrita
+                  },
+                },
+              },
+            },
+          },
+        });
+      },
+      
+      async cerrarModalGrid() {
+        let closeButton = document.getElementById('grid-anes');
+  
+        // Crea un nuevo evento de clic
+        let event = new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+          view: window
+        });
+
+        // Despacha el evento de clic en el botón
+        closeButton.dispatchEvent(event);
+      },
+
       // Imprimir PDF      
-      crearPdf() {
+      async crearPdf() {
+        this.obtenerValoresGrafica();
+
+        this.tamanoModalGrid = true;
+
+        if(this.chartElements.length != 0){
+          this.mostrarGraficas = true;
+        };
+
+        this.mostrarSpinner=true
+        
+        this.zoomGrafica = true;
+
+        await new Promise(resolve => setTimeout(resolve, 3000));        
+
         // Fuentes Personalizadas
         window.pdfMake.fonts = {
           SF: {
@@ -1418,7 +2023,7 @@ export default defineComponent({
             bolditalics: 'SF-UI-Display-Bold.otf',
           }
         };
-        /***********************PRE***********************/
+        /***********************PRE***********************/        
 
         /*ID PACIENTE*/
         // Nombre
@@ -2149,15 +2754,15 @@ export default defineComponent({
             columnData.push({ text: item.valor ? item.valor : '-', style: 'SF', fontSize: 6, bold: true, alignment:'center', margin: [0, 0, 0, 4] });
           });        
           tablaDatosGrid.push(columnData);
-        });
+        });        
 
         // Dividir el arreglo en partes más pequeñas
-        const numColumnas = 26; // Número de columnas que se mostraran por página
-        const columnasDatos = tablaDatosGrid.length > 0 ? [] : [[]];
+        let numColumnas = 26; // Número de columnas que se mostraran por página
+        let columnasDatos = tablaDatosGrid.length > 0 ? [] : [[]];
         for (let i = 0; i < tablaDatosGrid.length; i += numColumnas) {
           columnasDatos.push(tablaDatosGrid.slice(i, i + numColumnas));
-        }
-
+        }        
+        
         // Construcción del PDF
         let docDefinition = {
           //Header
@@ -3589,7 +4194,7 @@ export default defineComponent({
               columns:[
                 {
                   width: '20%',
-                  margin: [0, 5, 0, 0],
+                  margin: [0, 10, 0, 0],
                     stack:[
                       /*NOTA TRANS-ANESTÉSICA*/
                       {
@@ -3798,7 +4403,7 @@ export default defineComponent({
                     ]
                 }
               ]
-            },            
+            },
             // Agregar cada parte de tablaDatosGrid en una página nueva
             ...columnasDatos.slice(1).map((columna) => ({
               pageBreak: 'before',
@@ -3895,366 +4500,8 @@ export default defineComponent({
                   fontSize: 6,                    
                 },
               ],                
-            })),
-            {              
-              pageOrientation: 'landscape', // Orientación Horizontal
-              pageBreak: 'before',
-              columns:[
-                {
-                  margin: [0, 10, 0, 0],
-                  height:'75%',
-                  stack:[
-                    // Medicamentos
-                    {
-                      relativePosition: { x: 0, y: 0 },
-                      table: {
-                        widths: ['60%', '40%'],
-                        body: [
-                          [
-                            {text: 'REGISTRO DE MEDICAMENTOS', font: 'SF', fontSize: 8, bold:true, colSpan:2}, 
-                            {}
-                          ],
-                          [
-                            [
-                              {
-                                table: {
-                                  widths: [30, '*', 65, 95, 40, 40],
-                                  body: [
-                                    [
-                                      {text: 'Tipo', style: 'SF', fontSize: 8}, 
-                                      {text: 'Medicamento', style: 'SF', fontSize:8},
-                                      {text: 'Dosis', style: 'SF', fontSize:8},
-                                      {text: 'Vía', style: 'SF', fontSize:8},
-                                      {text: 'Hora Inicio', style: 'SF', fontSize:8},
-                                      {text: 'Hora Final', style: 'SF', fontSize:8},
-                                    ],
-                                    ...tablaMedicamentos
-                                  ]
-                                },
-                                layout: 'noBorders',
-                                dontBreakRows: true
-                              },                                
-                            ],                              
-                            [
-                              [
-                                {
-                                  table: {
-                                    headerRows: 1,
-                                    widths: [25, '*'],
-                                    body: [
-                                      [
-                                        '',
-                                        {text: 'EVENTOS CRÍTICOS', style: 'SF', fontSize: 8, bold:true},
-                                      ],
-                                      [
-                                        {text: 'Hora', style: 'SF', fontSize: 8}, 
-                                        {text: 'Observaciones', style: 'SF', fontSize:8,}
-                                      ],
-                                      ...tablaEventos                             
-                                    ]
-                                  },                                    
-                                  layout: 'headerLineOnly',
-                                },
-                                [
-                                  {
-                                    margin:[0, 10, 0, 0],
-                                    table: {
-                                      headerRows: 1,
-                                      widths: [25, '*'],
-                                      body: [
-                                        [
-                                          '',
-                                          {text: 'RELEVOS', style: 'SF', fontSize: 8, bold:true}
-                                        ],
-                                        [
-                                          {text: 'Hora', style: 'SF', fontSize: 8}, 
-                                          {text: 'Observaciones', style: 'SF', fontSize:8,}
-                                        ],
-                                        ...tablaRelevos
-                                      ]
-                                    },
-                                    layout: 'headerLineOnly'
-                                  },
-                                ]
-                              ],                                
-                            ],
-                          ],
-                        ]
-                      }, font: 'SF', fontSize: 8
-                    },
-                  ]
-                }
-              ]
-            },
-            {
-              columns:[
-                {
-                  margin: [0, 10, 0, 0],
-                    relativePosition: { x: 0, y: 420 },
-                    table: {
-                      widths: ['60%', '40%'],
-                      body: [
-                        [
-                          {
-                            text:[
-                              {text: 'BALANCE HÍDRICO: ', style: 'SF', fontSize: 8, bold: true}, 
-                              {text: balanceTotal, bold:true}
-                            ], colSpan: 2
-                          },
-                          {}
-                        ],
-                        [
-                          {                                
-                            text:[
-                                {text: 'Ingresos', font:'SF', fontSize:8, bold: true},
-                                {text: '\n\n', font:'SF', fontSize:8},
-                                {text: txtHartman, font:'SF', fontSize:8},{text:hartman, font:'SF', fontSize:8, bold:true},
-                                {text: txtSolFisiolo, font:'SF', fontSize:8}, {text:solFisiolo, font:'SF', fontSize:8, bold:true}, 
-                                {text: txtGlucosados, font:'SF', fontSize:8},{text:glucosados, font:'SF', fontSize:8, bold:true},
-                                {text: txtGelatinas, font:'SF', fontSize:8},{text:gelatinas, font:'SF', fontSize:8, bold:true},
-                                {text: txtAlmidones, font:'SF', fontSize:8},{text:almidones, font:'SF', fontSize:8, bold:true},
-                                {text: txtAlbuminas, font:'SF', fontSize:8},{text:albuminas, font:'SF', fontSize:8, bold:true},
-                                {text: txtPaqGlobular, font:'SF', fontSize:8},{text:paqGlobular, font:'SF', fontSize:8, bold:true},
-                                {text: txtPlasmas, font:'SF', fontSize:8},{text:plasmas, font:'SF', fontSize:8, bold:true},
-                                {text: txtPlaquetas, font:'SF', fontSize:8},{text:plaquetasIngreso, font:'SF', fontSize:8, bold:true},
-                                {text: txtCrioprecipitados, font:'SF', fontSize:8},{text:crioprecipitados, font:'SF', fontSize:8, bold:true},
-                                {text: txtFactorVII, font:'SF', fontSize:8},{text:factorVII, font:'SF', fontSize:8, bold:true},
-                                {text: txtFactorVIII, font:'SF', fontSize:8},{text:factorVIII, font:'SF', fontSize:8, bold:true},
-                                {text: txtOtrosIngresos, font:'SF', fontSize:8},{text:otrosIngreso, font:'SF', fontSize:8, bold:true},
-                            ]
-                          }, 
-                          {
-                            text:[
-                                {text: 'Egresos', font:'SF', fontSize:8, bold: true},
-                                {text: '\n\n', font:'SF', fontSize:8},
-                                {text: txtLiqAscitis, font:'SF', fontSize:8},{text:liqAscitis, font:'SF', fontSize:8, bold:true},
-                                {text: txtSangradoAprox, font:'SF', fontSize:8},{text:sangradoAprox, font:'SF', fontSize:8, bold:true},
-                                {text: txtUresis, font:'SF', fontSize:8},{text:uresis, font:'SF', fontSize:8, bold:true},
-                                {text: txtExpQuirurgica, font:'SF', fontSize:8},{text:expQuirurgica, font:'SF', fontSize:8, bold:true},
-                                {text: txtReqBasales, font:'SF', fontSize:8},{text:reqBasales, font:'SF', fontSize:8, bold:true},
-                                {text: txtAyuno, font:'SF', fontSize:8},{text:ayunoEgreso, font:'SF', fontSize:8, bold:true},
-                                {text: txtOtrosEgresos, font:'SF', fontSize:8},{text:otrosEgresos, font:'SF', fontSize:8, bold:true},
-                            ]
-                          }
-                        ]
-                      ]
-                    }, font: 'SF', fontSize: 8
-                }
-              ]
-            },
-            /*POST*/
-            {
-              pageOrientation: 'portrait',
-              pageBreak: 'before',
-              columns:[
-                { 
-                  width: '100%',
-                  margin: [0, 20, 0, 0],
-                    stack: [
-                      /*NOTA POST-ANESTÉSICA*/
-                      /*NOTA DE EVALUACIÓN UCPA*/
-                      {
-                        text: [
-                          { text: 'NOTA DE EVALUACIÓN UCP', font: 'SF', fontSize: 8},
-                        ],
-                      },
-                      {
-                        text: [
-                          { text: txtNotaUCPA, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      /*ALDRETE DE RECUPERACIÓN*/
-                      {
-                        margin: [0, 10, 0, 0],
-                        text: [
-                          { text: 'ALDRETE DE RECUPERACIÓN', font: 'SF', fontSize: 8, bold:true},
-                        ]
-                      },
-                      {
-                        margin: [0, 10, 0, 0],
-                        table: {
-                          body: [
-                            ['Criterio: ', 'Ingreso', '15 min', '30 min', '45 min', '60 min', '90 min', '120 min'],
-                            ['Frecuencia Cardiáca', {text: FCIngreso, style: 'bold'}, {text: FC15, style: 'bold'}, {text: FC30, style: 'bold'}, {text: FC45, style: 'bold'}, {text: FC60, style: 'bold'}, {text: FC90, style: 'bold'}, {text: FC120, style: 'bold'}],
-                            ['Frecuencia Respiratorio', {text: FRIngreso, style: 'bold'}, {text: FR15, style: 'bold'}, {text: FR30, style: 'bold'}, {text: FR45, style: 'bold'}, {text: FR60, style: 'bold'}, {text: FR90, style: 'bold'}, {text: FR120, style: 'bold'}],
-                            ['Tensión Arterial', {text: tensionIngreso, style: 'bold'}, {text: tension15, style: 'bold'}, {text: tension30, style: 'bold'}, {text: tension45, style: 'bold'}, {text: tension60, style: 'bold'}, {text: tension90, style: 'bold'}, {text: tension120, style: 'bold'}],
-                            ['Saturación de O2', {text: saturacionIngreso, style: 'bold'}, {text: saturacion15, style: 'bold'}, {text: saturacion30, style: 'bold'}, {text: saturacion45, style: 'bold'}, {text: saturacion60, style: 'bold'}, {text: saturacion90, style: 'bold'}, {text: saturacion120, style: 'bold'}],
-                            ['Aldrete', {text: aldreteIngreso, style: 'bold'}, {text: aldrete15, style: 'bold'}, {text: aldrete30, style: 'bold'}, {text: aldrete45, style: 'bold'}, {text: aldrete60, style: 'bold'}, {text: aldrete90, style: 'bold'}, {text: aldrete120, style: 'bold'}],
-                            ['Bromage', {text: bromageIngreso, style: 'bold'}, {text: bromage15, style: 'bold'}, {text: bromage30, style: 'bold'}, {text: bromage45, style: 'bold'}, {text: bromage60, style: 'bold'}, {text: bromage90, style: 'bold'}, {text: bromage120, style: 'bold'}],
-                            ['Nauseas/Vómito', {text: nauseasIngreso, style: 'bold'}, {text: nauseas15, style: 'bold'}, {text: nauseas30, style: 'bold'}, {text: nauseas45, style: 'bold'}, {text: nauseas60, style: 'bold'}, {text: nauseas90, style: 'bold'}, {text: nauseas120, style: 'bold'}],
-                            ['Escala de EVA Dolor', {text: EVAIngreso, style: 'bold'}, {text: EVA15, style: 'bold'}, {text: EVA30, style: 'bold'}, {text: EVA45, style: 'bold'}, {text: EVA60, style: 'bold'}, {text: EVA90, style: 'bold'}, {text: EVA120, style: 'bold'}],
-                          ]
-                        }, font: 'SF', fontSize: 8
-                      },                          
-                    ]
-                }
-              ]
-            },
-            {
-              columns:[
-                {
-                  width: '70%',
-                  margin: [0, 10, 0, 0],
-                    stack: [
-                      /*ALTA DE RECUPERACIÓN*/
-                      {
-                        text:[
-                          {text: 'ALTA DE RECUPERACIÓN', font:'SF', fontSize:8, bold:true}
-                        ],
-                      },
-                      // Calificación de Aldrete
-                      {
-                        text: [
-                          { text: '\nCalificación de Aldrete: ', font: 'SF', fontSize: 8 },
-                          { text: calificacionAldrete, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Nombre del Médico Anestesiólogo
-                      {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Nombre del Médico Anestesiólogo: ', font: 'SF', fontSize: 8 },
-                          { text: txtAnestesiologo, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },                                                
-                    ]
-                },
-                {
-                  width: '30%',
-                  margin: [0, 10, 0, 0],
-                    stack: [                      
-                      {
-                        text:[
-                          {text: 'ALTA DE RECUPERACIÓN', font:'SF', fontSize:8, bold:true}
-                        ],
-                      },
-                      // Fecha de Alta de Recuperación
-                      {
-                        text: [
-                          { text: '\nFecha: ', font: 'SF', fontSize: 8 },
-                          { text: fechaAlta, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Hora de Alta de Recuperación
-                      {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Hora: ', font: 'SF', fontSize: 8 },
-                          { text: horaAlta, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },                      
-                    ]
-                },                
-              ]
-            },
-            {
-              columns: [
-              {
-                width: '100%',
-                  stack: [
-                    // Observaciones
-                    {
-                      margin: [0, 2.5, 0, 0],
-                      text: [
-                        { text: 'Observaciones: ', font: 'SF', fontSize: 8 },
-                        { text: txtObservAlta, font: 'SF', fontSize: 8, bold:true },
-                      ],
-                    },                      
-                  ]                    
-                }
-              ]
-            },
-            {
-              columns:[
-                {
-                  width: '50%',
-                  margin: [0, 10, 0, 0],
-                    stack: [
-                      /*NOTA POST-ANÉSTESICA*/
-                      {
-                        text:[
-                          {text: 'NOTA POST-ANÉSTESICA', font:'SF', fontSize:8, bold:true}
-                        ],
-                      },
-                      // Técnica de Anestesia Final
-                      {
-                        text: [
-                          { text: '\nTécnica de Anestesia Final: ', font: 'SF', fontSize: 8 },
-                          { text: tecnicaAnestFinal, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },                                                               
-                    ]
-                },
-                {
-                  width: '50%',
-                  margin: [0, 10, 0, 0],
-                    stack: [                      
-                      {
-                        text:[
-                          {text: ' ', font:'SF', fontSize:8, bold:true}
-                        ],
-                      },
-                      // Intubación
-                      {
-                        text: [
-                          { text: '\nIntubación: ', font: 'SF', fontSize: 8 },
-                          { text: intubacionPost, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },                                                     
-                    ]
-                },                
-              ]
-            },
-            {
-              columns: [
-              {
-                width: '100%',
-                  stack: [
-                    // Nota Post-Anestésica
-                    {
-                      margin: [0, 2.5, 0, 0],
-                      text: [
-                        { text: 'Nota: ', font: 'SF', fontSize: 8 },
-                        { text: txtNotaPost, font: 'SF', fontSize: 8, bold:true },
-                      ],
-                    },
-                  ]                    
-                }
-              ]
-            },
-            {
-              // Signos Vitales al Egreso
-              columns: [
-                {
-                  width: '100%',
-                  margin: [0, 10, 0, 0],
-                    stack: [
-                      {
-                        text:[
-                          { text: 'SIGNOS VITALES AL EGRESO', font: 'SF', fontSize: 8, bold:true},
-                        ]
-                      },
-                      {
-                        margin: [0, 10, 0, 0],
-                        table: {
-                          body: [
-                            ['TA: ', 'FC', 'FR', 'Temp', 'Pulso', 'SpO2'],
-                            [TAPost, FCPost, FRPost, TemperaturaPost, PulsoPost, SpO2Post],
-                          ]
-                        }, font: 'SF', fontSize: 8
-                      },                                                             
-                      
-                      // El paciente pasa a
-                      {
-                        text: [
-                          { text: '\nEl Paciente Pasa a: ', font: 'SF', fontSize: 8 },
-                          { text: pacientePasa, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },            
-                    ]
-                },                
-              ],
-            },           
+            })),                                                         
+            // Grafica            
           ],        
           styles:{
             normal:{
@@ -4269,9 +4516,472 @@ export default defineComponent({
           }
         };
 
+        let chartContainer = this.$refs.chartContainer;
+
+        let crearPDF = [];
+
+        // Agregar gráfica si no tiene datos
+        let chartImage = await this.convertirGrafica();
+        if(this.chartElements.length === 0){
+          crearPDF.push(
+            {
+              pageOrientation: 'landscape',
+              pageBreak: 'before',
+              columns:[
+                { 
+                  margin: [0, 20, 0, 0],
+                  stack:[
+                    {                       
+                      //Carga de las gráficas
+                      text: [{text: 'Nombre del Paciente: ', font: 'SF', fontSize: 8},{text: nomPaciente, font: 'SF', fontSize: 8, bold:true},
+                                   {text: '     No. Expediente: ', font: 'SF', fontSize: 8},{text: numExp, font: 'SF', fontSize: 8, bold:true}],
+                      
+                    },
+                    {
+                      text: [{text: 'Peso: ', font: 'SF', fontSize: 8},{text: peso, font: 'SF', fontSize: 8, bold:true},
+                            {text: '     Talla: ', font: 'SF', fontSize: 8},{text: talla, font: 'SF', fontSize: 8, bold:true},
+                            {text: '     Edad: ', font: 'SF', fontSize: 8},{text: edad, font: 'SF', fontSize: 8, bold:true},
+                            {text: '     Cirugía: ', font: 'SF', fontSize: 8},{text: txtCirugiaTrans, font: 'SF', fontSize: 8, bold:true}],
+                    },
+                    {
+                      text: [{text: '\n', font: 'SF', fontSize: 8}]
+                    },
+                    {
+                      image: chartImage, width:750
+                    }
+                  ]
+                }
+              ]
+            },
+          )
+        };
+
+        // Iterar a través de las gráficas y convertirlas a imágenes
+        for (let i = 0; i < this.chartElements.length; i++) {
+          let chart = this.chartElements[i];
+          let canvas = chart.canvas;
+          
+          // Utilizar html2canvas para convertir el canvas de la gráfica en una imagen base64
+          let imageDataUrl = await html2canvas(canvas).then(canvas => canvas.toDataURL('image/png'));
+                                  
+          // Agregar la imagen base64 al array
+          crearPDF.push(
+            {
+              pageOrientation: 'landscape',
+              pageBreak: 'before',
+              columns:[
+                { 
+                  margin: [0, 20, 0, 0],
+                  stack:[
+                    {                       
+                      //Carga de las gráficas
+                      text: [{text: 'Nombre del Paciente: ', font: 'SF', fontSize: 8},{text: nomPaciente, font: 'SF', fontSize: 8, bold:true},
+                                   {text: '     No. Expediente: ', font: 'SF', fontSize: 8},{text: numExp, font: 'SF', fontSize: 8, bold:true}],
+                      
+                    },
+                    {
+                      text: [{text: 'Peso: ', font: 'SF', fontSize: 8},{text: peso, font: 'SF', fontSize: 8, bold:true},
+                            {text: '     Talla: ', font: 'SF', fontSize: 8},{text: talla, font: 'SF', fontSize: 8, bold:true},
+                            {text: '     Edad: ', font: 'SF', fontSize: 8},{text: edad, font: 'SF', fontSize: 8, bold:true},
+                            {text: '     Cirugía: ', font: 'SF', fontSize: 8},{text: txtCirugiaTrans, font: 'SF', fontSize: 8, bold:true}],
+                    },
+                    {
+                      text: [{text: '\n', font: 'SF', fontSize: 8}]
+                    },
+                    {
+                      image: imageDataUrl, width:750
+                    }
+                  ]
+                }
+              ]
+            },
+          )
+        };
+
+        // Lista Medicamentos/Balance Hídrico
+        crearPDF.push(
+          {
+            pageOrientation: 'landscape', // Orientación Horizontal
+            pageBreak: 'before',
+            columns:[
+              {
+                margin: [0, 10, 0, 0],
+                height:'75%',
+                stack:[
+                  // Medicamentos
+                  {
+                    relativePosition: { x: 0, y: 0 },
+                    table: {
+                      widths: ['60%', '40%'],
+                      body: [
+                        [
+                          {text: 'REGISTRO DE MEDICAMENTOS', font: 'SF', fontSize: 8, bold:true, colSpan:2}, 
+                          {}
+                        ],
+                        [
+                          [
+                            {
+                              table: {
+                                widths: [30, '*', 65, 95, 40, 40],
+                                body: [
+                                  [
+                                    {text: 'Tipo', style: 'SF', fontSize: 8}, 
+                                    {text: 'Medicamento', style: 'SF', fontSize:8},
+                                    {text: 'Dosis', style: 'SF', fontSize:8},
+                                    {text: 'Vía', style: 'SF', fontSize:8},
+                                    {text: 'Hora Inicio', style: 'SF', fontSize:8},
+                                    {text: 'Hora Final', style: 'SF', fontSize:8},
+                                  ],
+                                  ...tablaMedicamentos
+                                ]
+                              },
+                              layout: 'noBorders',
+                              dontBreakRows: true
+                            },                                
+                          ],                              
+                          [
+                            [
+                              {
+                                table: {
+                                  headerRows: 1,
+                                  widths: [25, '*'],
+                                  body: [
+                                    [
+                                      '',
+                                      {text: 'EVENTOS CRÍTICOS', style: 'SF', fontSize: 8, bold:true},
+                                    ],
+                                    [
+                                      {text: 'Hora', style: 'SF', fontSize: 8}, 
+                                      {text: 'Observaciones', style: 'SF', fontSize:8,}
+                                    ],
+                                    ...tablaEventos                             
+                                  ]
+                                },                                    
+                                layout: 'headerLineOnly',
+                              },
+                              [
+                                {
+                                  margin:[0, 10, 0, 0],
+                                  table: {
+                                    headerRows: 1,
+                                    widths: [25, '*'],
+                                    body: [
+                                      [
+                                        '',
+                                        {text: 'RELEVOS', style: 'SF', fontSize: 8, bold:true}
+                                      ],
+                                      [
+                                        {text: 'Hora', style: 'SF', fontSize: 8}, 
+                                        {text: 'Observaciones', style: 'SF', fontSize:8,}
+                                      ],
+                                      ...tablaRelevos
+                                    ]
+                                  },
+                                  layout: 'headerLineOnly'
+                                },
+                              ]
+                            ],                                
+                          ],
+                        ],
+                      ]
+                    }, font: 'SF', fontSize: 8
+                  },
+                ]
+              }
+            ]
+          },
+          {
+            columns:[
+              {
+                margin: [0, 10, 0, 0],
+                  relativePosition: { x: 0, y: 420 },
+                  table: {
+                    widths: ['60%', '40%'],
+                    body: [
+                      [
+                        {
+                          text:[
+                            {text: 'BALANCE HÍDRICO: ', style: 'SF', fontSize: 8, bold: true}, 
+                            {text: balanceTotal, bold:true}
+                          ], colSpan: 2
+                        },
+                        {}
+                      ],
+                      [
+                        {                                
+                          text:[
+                              {text: 'Ingresos', font:'SF', fontSize:8, bold: true},
+                              {text: '\n\n', font:'SF', fontSize:8},
+                              {text: txtHartman, font:'SF', fontSize:8},{text:hartman, font:'SF', fontSize:8, bold:true},
+                              {text: txtSolFisiolo, font:'SF', fontSize:8}, {text:solFisiolo, font:'SF', fontSize:8, bold:true}, 
+                              {text: txtGlucosados, font:'SF', fontSize:8},{text:glucosados, font:'SF', fontSize:8, bold:true},
+                              {text: txtGelatinas, font:'SF', fontSize:8},{text:gelatinas, font:'SF', fontSize:8, bold:true},
+                              {text: txtAlmidones, font:'SF', fontSize:8},{text:almidones, font:'SF', fontSize:8, bold:true},
+                              {text: txtAlbuminas, font:'SF', fontSize:8},{text:albuminas, font:'SF', fontSize:8, bold:true},
+                              {text: txtPaqGlobular, font:'SF', fontSize:8},{text:paqGlobular, font:'SF', fontSize:8, bold:true},
+                              {text: txtPlasmas, font:'SF', fontSize:8},{text:plasmas, font:'SF', fontSize:8, bold:true},
+                              {text: txtPlaquetas, font:'SF', fontSize:8},{text:plaquetasIngreso, font:'SF', fontSize:8, bold:true},
+                              {text: txtCrioprecipitados, font:'SF', fontSize:8},{text:crioprecipitados, font:'SF', fontSize:8, bold:true},
+                              {text: txtFactorVII, font:'SF', fontSize:8},{text:factorVII, font:'SF', fontSize:8, bold:true},
+                              {text: txtFactorVIII, font:'SF', fontSize:8},{text:factorVIII, font:'SF', fontSize:8, bold:true},
+                              {text: txtOtrosIngresos, font:'SF', fontSize:8},{text:otrosIngreso, font:'SF', fontSize:8, bold:true},
+                          ]
+                        }, 
+                        {
+                          text:[
+                              {text: 'Egresos', font:'SF', fontSize:8, bold: true},
+                              {text: '\n\n', font:'SF', fontSize:8},
+                              {text: txtLiqAscitis, font:'SF', fontSize:8},{text:liqAscitis, font:'SF', fontSize:8, bold:true},
+                              {text: txtSangradoAprox, font:'SF', fontSize:8},{text:sangradoAprox, font:'SF', fontSize:8, bold:true},
+                              {text: txtUresis, font:'SF', fontSize:8},{text:uresis, font:'SF', fontSize:8, bold:true},
+                              {text: txtExpQuirurgica, font:'SF', fontSize:8},{text:expQuirurgica, font:'SF', fontSize:8, bold:true},
+                              {text: txtReqBasales, font:'SF', fontSize:8},{text:reqBasales, font:'SF', fontSize:8, bold:true},
+                              {text: txtAyuno, font:'SF', fontSize:8},{text:ayunoEgreso, font:'SF', fontSize:8, bold:true},
+                              {text: txtOtrosEgresos, font:'SF', fontSize:8},{text:otrosEgresos, font:'SF', fontSize:8, bold:true},
+                          ]
+                        }
+                      ]
+                    ]
+                  }, font: 'SF', fontSize: 8
+              }
+            ]
+          },  
+        )
+
+        /*POST*/
+        crearPDF.push(
+          {
+            pageOrientation: 'portrait',
+            pageBreak: 'before',
+            columns:[
+              { 
+                width: '100%',
+                margin: [0, 20, 0, 0],
+                  stack: [
+                    /*NOTA POST-ANESTÉSICA*/
+                    /*NOTA DE EVALUACIÓN UCPA*/
+                    {
+                      text: [
+                        { text: 'NOTA DE EVALUACIÓN UCP', font: 'SF', fontSize: 8},
+                      ],
+                    },
+                    {
+                      text: [
+                        { text: txtNotaUCPA, font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },
+                    /*ALDRETE DE RECUPERACIÓN*/
+                    {
+                      margin: [0, 10, 0, 0],
+                      text: [
+                        { text: 'ALDRETE DE RECUPERACIÓN', font: 'SF', fontSize: 8, bold:true},
+                      ]
+                    },
+                    {
+                      margin: [0, 10, 0, 0],
+                      table: {
+                        body: [
+                          ['Criterio: ', 'Ingreso', '15 min', '30 min', '45 min', '60 min', '90 min', '120 min'],
+                          ['Frecuencia Cardiáca', {text: FCIngreso, style: 'bold'}, {text: FC15, style: 'bold'}, {text: FC30, style: 'bold'}, {text: FC45, style: 'bold'}, {text: FC60, style: 'bold'}, {text: FC90, style: 'bold'}, {text: FC120, style: 'bold'}],
+                          ['Frecuencia Respiratorio', {text: FRIngreso, style: 'bold'}, {text: FR15, style: 'bold'}, {text: FR30, style: 'bold'}, {text: FR45, style: 'bold'}, {text: FR60, style: 'bold'}, {text: FR90, style: 'bold'}, {text: FR120, style: 'bold'}],
+                          ['Tensión Arterial', {text: tensionIngreso, style: 'bold'}, {text: tension15, style: 'bold'}, {text: tension30, style: 'bold'}, {text: tension45, style: 'bold'}, {text: tension60, style: 'bold'}, {text: tension90, style: 'bold'}, {text: tension120, style: 'bold'}],
+                          ['Saturación de O2', {text: saturacionIngreso, style: 'bold'}, {text: saturacion15, style: 'bold'}, {text: saturacion30, style: 'bold'}, {text: saturacion45, style: 'bold'}, {text: saturacion60, style: 'bold'}, {text: saturacion90, style: 'bold'}, {text: saturacion120, style: 'bold'}],
+                          ['Aldrete', {text: aldreteIngreso, style: 'bold'}, {text: aldrete15, style: 'bold'}, {text: aldrete30, style: 'bold'}, {text: aldrete45, style: 'bold'}, {text: aldrete60, style: 'bold'}, {text: aldrete90, style: 'bold'}, {text: aldrete120, style: 'bold'}],
+                          ['Bromage', {text: bromageIngreso, style: 'bold'}, {text: bromage15, style: 'bold'}, {text: bromage30, style: 'bold'}, {text: bromage45, style: 'bold'}, {text: bromage60, style: 'bold'}, {text: bromage90, style: 'bold'}, {text: bromage120, style: 'bold'}],
+                          ['Nauseas/Vómito', {text: nauseasIngreso, style: 'bold'}, {text: nauseas15, style: 'bold'}, {text: nauseas30, style: 'bold'}, {text: nauseas45, style: 'bold'}, {text: nauseas60, style: 'bold'}, {text: nauseas90, style: 'bold'}, {text: nauseas120, style: 'bold'}],
+                          ['Escala de EVA Dolor', {text: EVAIngreso, style: 'bold'}, {text: EVA15, style: 'bold'}, {text: EVA30, style: 'bold'}, {text: EVA45, style: 'bold'}, {text: EVA60, style: 'bold'}, {text: EVA90, style: 'bold'}, {text: EVA120, style: 'bold'}],
+                        ]
+                      }, font: 'SF', fontSize: 8
+                    },                          
+                  ]
+              }
+            ]
+          },
+          {
+            columns:[
+              {
+                width: '70%',
+                margin: [0, 10, 0, 0],
+                  stack: [
+                    /*ALTA DE RECUPERACIÓN*/
+                    {
+                      text:[
+                        {text: 'ALTA DE RECUPERACIÓN', font:'SF', fontSize:8, bold:true}
+                      ],
+                    },
+                    // Calificación de Aldrete
+                    {
+                      text: [
+                        { text: '\nCalificación de Aldrete: ', font: 'SF', fontSize: 8 },
+                        { text: calificacionAldrete, font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },
+                    // Nombre del Médico Anestesiólogo
+                    {
+                      margin: [0, 2.5, 0, 0],
+                      text: [
+                        { text: 'Nombre del Médico Anestesiólogo: ', font: 'SF', fontSize: 8 },
+                        { text: txtAnestesiologo, font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },                                                
+                  ]
+              },
+              {
+                width: '30%',
+                margin: [0, 10, 0, 0],
+                  stack: [                      
+                    {
+                      text:[
+                        {text: 'ALTA DE RECUPERACIÓN', font:'SF', fontSize:8, bold:true}
+                      ],
+                    },
+                    // Fecha de Alta de Recuperación
+                    {
+                      text: [
+                        { text: '\nFecha: ', font: 'SF', fontSize: 8 },
+                        { text: fechaAlta, font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },
+                    // Hora de Alta de Recuperación
+                    {
+                      margin: [0, 2.5, 0, 0],
+                      text: [
+                        { text: 'Hora: ', font: 'SF', fontSize: 8 },
+                        { text: horaAlta, font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },                      
+                  ]
+              },                
+            ]
+          },
+          {
+            columns: [
+            {
+              width: '100%',
+                stack: [
+                  // Observaciones
+                  {
+                    margin: [0, 2.5, 0, 0],
+                    text: [
+                      { text: 'Observaciones: ', font: 'SF', fontSize: 8 },
+                      { text: txtObservAlta, font: 'SF', fontSize: 8, bold:true },
+                    ],
+                  },                      
+                ]                    
+              }
+            ]
+          },
+          {
+            columns:[
+              {
+                width: '50%',
+                margin: [0, 10, 0, 0],
+                  stack: [
+                    /*NOTA POST-ANÉSTESICA*/
+                    {
+                      text:[
+                        {text: 'NOTA POST-ANÉSTESICA', font:'SF', fontSize:8, bold:true}
+                      ],
+                    },
+                    // Técnica de Anestesia Final
+                    {
+                      text: [
+                        { text: '\nTécnica de Anestesia Final: ', font: 'SF', fontSize: 8 },
+                        { text: tecnicaAnestFinal, font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },                                                               
+                  ]
+              },
+              {
+                width: '50%',
+                margin: [0, 10, 0, 0],
+                  stack: [                      
+                    {
+                      text:[
+                        {text: ' ', font:'SF', fontSize:8, bold:true}
+                      ],
+                    },
+                    // Intubación
+                    {
+                      text: [
+                        { text: '\nIntubación: ', font: 'SF', fontSize: 8 },
+                        { text: intubacionPost, font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },                                                     
+                  ]
+              },                
+            ]
+          },
+          {
+            columns: [
+            {
+              width: '100%',
+                stack: [
+                  // Nota Post-Anestésica
+                  {
+                    margin: [0, 2.5, 0, 0],
+                    text: [
+                      { text: 'Nota: ', font: 'SF', fontSize: 8 },
+                      { text: txtNotaPost, font: 'SF', fontSize: 8, bold:true },
+                    ],
+                  },
+                ]                    
+              }
+            ]
+          },
+          {
+            // Signos Vitales al Egreso
+            columns: [
+              {
+                width: '100%',
+                margin: [0, 10, 0, 0],
+                  stack: [
+                    {
+                      text:[
+                        { text: 'SIGNOS VITALES AL EGRESO', font: 'SF', fontSize: 8, bold:true},
+                      ]
+                    },
+                    {
+                      margin: [0, 10, 0, 0],
+                      table: {
+                        body: [
+                          ['TA: ', 'FC', 'FR', 'Temp', 'Pulso', 'SpO2'],
+                          [TAPost, FCPost, FRPost, TemperaturaPost, PulsoPost, SpO2Post],
+                        ]
+                      }, font: 'SF', fontSize: 8
+                    },                                                             
+                    
+                    // El paciente pasa a
+                    {
+                      text: [
+                        { text: '\nEl Paciente Pasa a: ', font: 'SF', fontSize: 8 },
+                        { text: pacientePasa, font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },            
+                  ]
+              },                
+            ],
+          },
+        )
+
+        // Agregar las imágenes al PDF
+        crearPDF.forEach(imageObj => {          
+          docDefinition.content.push(imageObj);
+        });
+
         // Generar el documento PDF
-        pdfMake.createPdf(docDefinition as any).open();
-      },
+        pdfMake.createPdf(docDefinition as any).open();     
+
+        this.cerrarModalGrid();
+
+        this.tamanoModalGrid = false;
+
+        this.zoomGrafica = false;
+
+        this.mostrarGraficas=false;
+
+        this.mostrarSpinner=false;
+      },            
 
       // Menú vista rapida
       async desplegarMenuVistaRapida(){     
@@ -4568,7 +5278,7 @@ export default defineComponent({
             this.btnActualizaEvento=false
 
             let hoy_6 = new Date();
-            this.menuTrans.finCx = ((hoy.getHours() <10) ? '0':'') + hoy_6.getHours() + ':' + ((hoy_6.getMinutes() <10) ? '0':'')+hoy_6.getMinutes();
+            this.menuTrans.finCx = ((hoy_6.getHours() <10) ? '0':'') + hoy_6.getHours() + ':' + ((hoy_6.getMinutes() <10) ? '0':'')+hoy_6.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID._id, tiemposQX);
           break;
 
@@ -4592,7 +5302,7 @@ export default defineComponent({
             this.btnActualizaEvento=false
 
             let hoy_7 = new Date();
-            this.menuTrans.finAn = ((hoy.getHours() <10) ? '0':'') + hoy_7.getHours() + ':' + ((hoy_7.getMinutes() <10) ? '0':'')+hoy_7.getMinutes();
+            this.menuTrans.finAn = ((hoy_7.getHours() <10) ? '0':'') + hoy_7.getHours() + ':' + ((hoy_7.getMinutes() <10) ? '0':'')+hoy_7.getMinutes();
             await transAnestStore.saveTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID._id, tiemposQX);
           break;
 
@@ -4795,7 +5505,8 @@ export default defineComponent({
       },
 
       async guardarMedicamentos() {
-        if (this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.medicamento == "" || this.menuTrans.medicamento == undefined) {
+
+        if(this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.medicamento == "" || this.menuTrans.medicamento == undefined) {
               swal.fire({
               title: "Indique el tipo de administración y medicamento",
               icon: "warning",
@@ -4806,7 +5517,7 @@ export default defineComponent({
               timerProgressBar: true,
               position: "top-end",
               });
-        } else {        
+        }else {        
           this.btnAddMedicamentos=false
           this.btnUpdateMedicamentos=true
           this.btnActualizaMedicamento=false
@@ -4840,8 +5551,7 @@ export default defineComponent({
 
           await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
           await this.listarMedicamentosTrans();
-        }  
-            
+        }            
       },
 
       async actualizarMedicamentos(m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
@@ -5365,7 +6075,7 @@ export default defineComponent({
       },
       
       async vaciarMensajeHL7(){
-        let valoresOrdenados = Array.from({ length: 15 }, () => "-");
+        let valoresOrdenados = Array.from({ length: 15 }, () => ({ segmento4: "", valor: "" }));
 
         //Obtiene el arreglo con el mensaje HL7
         let hl7Message = transAnestStore.datosMSV
@@ -5459,39 +6169,99 @@ export default defineComponent({
           }
         }
 
-        if(FC != undefined)
+        if(FC != undefined){
           valoresOrdenados[0] = FC;
-        if(Pulso != undefined)
+        }else if(FC == undefined){
+          valoresOrdenados[0] = {segmento4:"174147842", valor:"-"}
+        }
+
+        if(Pulso != undefined){
           valoresOrdenados[1] = Pulso;
+        }else if(Pulso == undefined){
+          valoresOrdenados[1] = {segmento4:"131149530", valor:"-"}
+        }
+
         if(PAS != undefined)
+        {
           valoresOrdenados[2] = PAS;
-        if(PAD != undefined)
+        }else if(PAS == undefined){
+          valoresOrdenados[2] = {segmento4:"119150301", valor:"-"}
+        }
+
+        if(PAD != undefined){
           valoresOrdenados[3] = PAD;
-        if(PAM != undefined)
+        }else if(PAD == undefined){
+          valoresOrdenados[3] = {segmento4:"119150302", valor:"-"}
+        }
+
+        if(PAM != undefined){
           valoresOrdenados[4] = PAM;
-        if(SpO2 != undefined)
+        }else if(PAM == undefined){
+          valoresOrdenados[4] = {segmento4:"119150303", valor:"-"}
+        }
+
+        if(SpO2 != undefined){
           valoresOrdenados[5] = SpO2;
-        if(EtCO2 != undefined)
+        }else if(SpO2 == undefined){
+          valoresOrdenados[5] = {segmento4:"131150456", valor:"-"}
+        }
+
+        if(EtCO2 != undefined){
           valoresOrdenados[6] = EtCO2;
-        if(Temp1 != undefined)
+        }else if(EtCO2 == undefined){
+          valoresOrdenados[6] = {segmento4:"181151708", valor:"-"}
+        }
+
+        if(Temp1 != undefined){
           valoresOrdenados[7] = Temp1;
-        if(Temp2 != undefined)
+        }else if(Temp1 == undefined){
+          valoresOrdenados[7] = {segmento4:"121150344", valor:"-"}
+        }
+
+        if(Temp2 != undefined){
           valoresOrdenados[8] = Temp2;
-        if(PVC != undefined)
+        }else if(Temp2 == undefined){
+          valoresOrdenados[8] = {segmento4:"122150344", valor:"-"}
+        }
+
+        if(PVC != undefined){
           valoresOrdenados[9] = PVC;
-        if(PAS_In != undefined)
+        }else if(PVC == undefined){
+          valoresOrdenados[9] = {segmento4:"1112150087", valor:"-"}
+        }
+
+        if(PAS_In != undefined){
           valoresOrdenados[10] = PAS_In;
-        if(PAD_In != undefined)
+        }else if(PAS_In == undefined){
+          valoresOrdenados[10] = {segmento4:"111150037", valor:"-"}
+        }
+
+        if(PAD_In != undefined){
           valoresOrdenados[11] = PAD_In;
-        if(PAM_In != undefined)
+        }else if(PAD_In == undefined){
+          valoresOrdenados[11] = {segmento4:"111150038", valor:"-"}
+        }
+
+        if(PAM_In != undefined){
           valoresOrdenados[12] = PAM_In;
-        if(FiCO2 != undefined)
+        }else if(PAM_In == undefined){
+          valoresOrdenados[12] = {segmento4:"111150039", valor:"-"}
+        }
+
+        if(FiCO2 != undefined){
           valoresOrdenados[13] = FiCO2;
-        if(FR != undefined)
+        }else if(FiCO2 == undefined){
+          valoresOrdenados[13] = {segmento4:"181151716", valor:"-"}
+        }
+
+        if(FR != undefined){
           valoresOrdenados[14] = FR;
+        }else if(FR == undefined){
+          valoresOrdenados[14] = {segmento4:"181151594", valor:"-"}
+        }
 
         //Asignar los valores ordenads
-        this.hl7mess.push({ datos: valoresOrdenados, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+        this.hl7mess.push({ datos: valoresOrdenados, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });       
       },
 
       iniRecepDatos(){
@@ -5521,7 +6291,7 @@ export default defineComponent({
       capturaGrid(){
         this.saveGrid = setInterval(() => {
           this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
-          this.hl7mess = [];
+          this.hl7mess = [];          
         }, 1000 * 60);
       },
 
@@ -5539,7 +6309,7 @@ export default defineComponent({
       }
     },
 
-    saltoArreglo(){      
+    saltoArreglo(){
       const step = this.stepSize;
       const filas = this.grid.filter((itemMSV, index) => index % step === 0);    
 
@@ -5562,9 +6332,49 @@ export default defineComponent({
 <style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
+.grafica-div {
+  position: relative;
+}
 #app {
   font-family: SF UI Display;
   src: url("@/assets/fonts/SF-UI-Display-Regular.otf") format("opentype");
+}
+.div-spinner{
+  display: none;
+  position: absolute; 
+  background-color: #002d60; 
+  width: 100%; 
+  height: 100%; 
+  left: 0; 
+  right: 0;
+  bottom:0;
+  top:0;
+  z-index: 9999;
+  border-radius: 5px;
+}
+.div-spinner-on{
+  display: block;
+  position: absolute; 
+  background-color: #002d60; 
+  width: 100%; 
+  height: 100%; 
+  left: 0; 
+  right: 0;
+  bottom:0;
+  top:0;
+  z-index: 9999;
+  border-radius: 5px;
+}
+.div-none{
+  display:none;
+}
+.div-block{
+  display:block;
+}
+.txt-spinner{
+  position: relative; 
+  left: 40%; 
+  top: 45%;
 }
 .bordePrincipal {
     width: 110%;
