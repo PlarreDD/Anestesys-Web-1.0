@@ -12,6 +12,7 @@ export const usePreIdStore = defineStore('preid', {
         estudioID: ref(null),
         valoracionID: ref(null),
         estudios: ref(null),
+        pacientes: ref(null),
         
         // ID
         numeroExpediente: ref(null),
@@ -924,6 +925,23 @@ export const usePreIdStore = defineStore('preid', {
             })
             .catch((e: any) => {
                 // console.log("error: " + e);
+            });
+        },
+
+        /************************** Consulta *************************/
+        async getPaciente(numeroExpediente) {
+            await apiAxios({
+              url: `http://localhost:5000/preId/${String(numeroExpediente)}`,
+              method: "GET",
+              headers: {
+                Authorization: "Bearer " + userStore.token,
+              },
+            })
+            .then((res: any) => {
+                this.pacientes = res.data.paciente;
+            })
+            .catch((e: any) => {
+            //   console.log(e);
             });
         },
     }

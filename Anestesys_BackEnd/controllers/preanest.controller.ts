@@ -1,10 +1,7 @@
 import { Response } from "express";
-import { PreIdPacientes,
-         PreIdPacientesCx,
-         PreValoracion,
-         ValEstudios,
-         PrePlan,
-         PreNota } from "../models/PreAnestesico";
+import { PreIdPacientes, PreIdPacientesCx, PreValoracion, ValEstudios, PrePlan, PreNota } from "../models/PreAnestesico";
+import { PostRecupera, PostNotaPA } from "../models/PostAnestesico";
+import { MenuTrans } from "../models/TransAnestesico";
 
 /********************************************************************/
 /***************************  ID PACIENTE ***************************/
@@ -25,7 +22,7 @@ export const getAllInfo = async (req: any, res: Response) => {
                      "\nPLAN:\n\t" + preplan +
                      "\nNOTA\n\t" + prenota);
         
-        // return res.json({pacientes});
+        return res.json({pacientescx, prevals, preests, preplan, prenota});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
     }
@@ -37,10 +34,19 @@ export const getPaciente = async (req: any, res: Response) => {
         const {id} = req.params;
 
         const pacientes = await PreIdPacientes.find({numExpediente: id});
-        const pacientescx = await PreIdPacientesCx.find({pid: pacientes[0].id});
-        console.log(pacientes[0].numExpediente + " - " + pacientes[0].nomPaciente + "\n\t- " + pacientescx[0].fechaCx + "\n\t- " + pacientescx[0].cirugia);
+        const pacientesCx = await PreIdPacientesCx.find({pid: pacientes[0].id});
+        const pacientesVal = await PreValoracion.find({pid: pacientes[0].id});
+        const pacientesEstu = await ValEstudios.find({pid: pacientes[0].id});
+        const pacientesPlan = await PrePlan.find({pid: pacientes[0].id});
+        const pacientesNotaPre = await PreNota.find({pid: pacientes[0].id});
 
-        return res.json({pacientes, pacientescx});
+        const pacienteTrans = await MenuTrans.find({pid: pacientes[0].id})
+        
+        const pacientesNotaPost = await PostNotaPA.find({pid: pacientes[0].id});
+        const pacientesRecu = await PostRecupera.find({pid: pacientes[0].id});
+
+        return res.json({pacientes, pacientesCx, pacientesVal, pacientesEstu, pacientesPlan, pacientesNotaPre, 
+                        pacienteTrans, pacientesNotaPost, pacientesRecu});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
     }
