@@ -310,6 +310,49 @@ export const saveTiemposQX = async (req: any, res: Response) => {
     }
 };
 
+/* Guardado Datos MSV */
+export const saveDatosMSV = async (req: any, res: Response) => {
+    try {
+        const { pid,
+                // Datos MSV
+                FC, Pulso, PAS, PAD, PAM, SpO2, EtCO2, Temp1, Temp2, PVC, PAS_IN, PAD_IN, PAM_IN, FiCO2, FR, HoraGeneracion
+              } = req.body;        
+        const menuTrans  = await new MenuTrans({ pid,
+                                            // Datos del MSV
+                                            datosMSV: {
+                                                FC: FC, Pulso: Pulso, PAS: PAS, PAD: PAD, PAM: PAM, SpO2: SpO2, EtCO2: EtCO2, Temp1:Temp1, Temp2: Temp2,
+                                                PVC: PVC, PAS_IN: PAS_IN, PAD_IN:PAD_IN, PAM_IN:PAM_IN, FiCO2:FiCO2, FR:FR, HoraGeneracion:HoraGeneracion
+                                            },
+                                        });
+        await menuTrans.save();        
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Actualiza Datos MSV */
+export const updateDatosMSV = async (req: any, res: Response) => {
+    try {
+        const { pid } = req.params;
+        const { datosMSV } = req.body;                
+        const menuTrans = await MenuTrans.findOneAndUpdate(
+            { pid: pid },
+            { $push:{
+                    datosMSV: {
+                        FC: datosMSV[0], Pulso: datosMSV[1], PAS: datosMSV[2], PAD: datosMSV[3], PAM: datosMSV[4], SpO2: datosMSV[5], EtCO2: datosMSV[6], Temp1: datosMSV[7], 
+                        Temp2: datosMSV[8], PVC: datosMSV[9], PAS_IN: datosMSV[10], PAD_IN: datosMSV[11], PAM_IN: datosMSV[12], FiCO2: datosMSV[13], FR: datosMSV[14], 
+                        HoraGeneracion: datosMSV[15]
+                    }
+                }
+            });
+            console.log("datosMSV:"+datosMSV)
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 /* Guardado Medicamentos */
 export const saveMedicamentos = async (req: any, res: Response) => {
     try {
@@ -341,9 +384,9 @@ export const updateMedicamentos = async (req: any, res: Response) => {
                     medicamentosCx: {
                         tipoMed: medicamentosCx[0], medicamento: medicamentosCx[1], dosisMed: medicamentosCx[2], unidadMed: medicamentosCx[3], 
                         viaMed: medicamentosCx[4], horaInicioMed: medicamentosCx[5], horaFinalMed: medicamentosCx[6], observacionesMed: medicamentosCx[7], 
-                    }
+                    }                                        
                 }
-            });        
+            });                
         return res.json({ menuTrans });
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});

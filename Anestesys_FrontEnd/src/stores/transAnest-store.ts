@@ -506,6 +506,74 @@ export const useTransAnestStore = defineStore('transAn', {
               }
         },
 
+        async saveDatosMSV(grid: any, pid: string){
+            await apiAxios({
+                url: "http://localhost:5000/trans/msvData",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    pid: pid,
+                    // Datos del MSV
+                    FC: grid[grid.length -1].datos[0].valor, Pulso: grid[grid.length -1].datos[1].valor, PAS: grid[grid.length -1].datos[2].valor,
+                    PAD: grid[grid.length -1].datos[3].valor, PAM: grid[grid.length -1].datos[4].valor, SpO2: grid[grid.length -1].datos[5].valor,
+                    EtCO2: grid[grid.length -1].datos[6].valor, Temp1: grid[grid.length -1].datos[7].valor, Temp2: grid[grid.length -1].datos[8].valor,
+                    PVC: grid[grid.length -1].datos[9].valor, PAS_IN: grid[grid.length -1].datos[10].valor, PAD_IN: grid[grid.length -1].datos[11].valor,
+                    PAM_IN: grid[grid.length -1].datos[12].valor, FiCO2: grid[grid.length -1].datos[13].valor, FR: grid[grid.length -1].datos[14].valor,
+                    HoraGeneracion: grid[grid.length -1].horaGeneracion
+                }
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos guardados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                // console.log("error: " + e);
+            });
+        },
+
+        async updateDatosMSV(grid:any, pid:string){
+            await apiAxios({
+            url: `http://localhost:5000/trans/msvData/${String(pid)}`,
+            method: "PUT",
+            headers: {
+                Authorization: "Bearer " + userStore.token,
+            },                        
+            data: {
+                datosMSV: [
+                    grid[grid.length -1].datos[0].valor, grid[grid.length -1].datos[1].valor, grid[grid.length -1].datos[2].valor,
+                    grid[grid.length -1].datos[3].valor, grid[grid.length -1].datos[4].valor, grid[grid.length -1].datos[5].valor,
+                    grid[grid.length -1].datos[6].valor, grid[grid.length -1].datos[7].valor, grid[grid.length -1].datos[8].valor,
+                    grid[grid.length -1].datos[9].valor, grid[grid.length -1].datos[10].valor,grid[grid.length -1].datos[11].valor,
+                    grid[grid.length -1].datos[12].valor, grid[grid.length -1].datos[13].valor, grid[grid.length -1].datos[14].valor,
+                    grid[grid.length -1].horaGeneracion,                
+                ]
+            },
+            })
+            .then((res: any) => {
+            swal.fire({
+                title: 'Datos agregados correctamente',
+                icon: 'success',
+                showConfirmButton: false,
+                toast: true,
+                position: 'top-end',
+                timer: 2000,
+                timerProgressBar: true
+            })
+            })
+                .catch((e: any) => {
+                console.log("error: " + e);
+            });
+        },
+
         // Gestión de medicamentos
         async getMedicamentosList(pid: string) {
             await apiAxios({

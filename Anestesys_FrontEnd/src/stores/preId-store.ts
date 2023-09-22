@@ -12,6 +12,7 @@ export const usePreIdStore = defineStore('preid', {
         estudioID: ref(null),
         valoracionID: ref(null),
         estudios: ref(null),
+        numExpediente: ref(null),
         pacientes: ref(null),
         
         // ID
@@ -929,16 +930,20 @@ export const usePreIdStore = defineStore('preid', {
         },
 
         /************************** Consulta *************************/
-        async getPaciente(numeroExpediente) {
+        async getPaciente(numExpediente) {
+            console.log("Entro en store");
+            
             await apiAxios({
-              url: `http://localhost:5000/preId/${String(numeroExpediente)}`,
+              url: `http://localhost:5000/preId/${String(numExpediente)}`,
               method: "GET",
               headers: {
                 Authorization: "Bearer " + userStore.token,
               },
             })
             .then((res: any) => {
-                this.pacientes = res.data.paciente;
+                this.pacientes = res.data;
+                console.log("numExp: "+numExpediente);                
+                console.log("Paciente: "+JSON.stringify(this.pacientes));                
             })
             .catch((e: any) => {
             //   console.log(e);

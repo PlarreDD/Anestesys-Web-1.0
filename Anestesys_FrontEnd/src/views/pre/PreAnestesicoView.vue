@@ -7,9 +7,10 @@
       <div class="col-md-6">
         <!--Buscador-->
         <input class="form-control me-2"
+               v-model="idStore.numExpediente"
                type="search"
                placeholder="Buscar número de expediente..."
-               aria-label="Buscar">
+               aria-label="Buscar" @keyup.capture="idStore.getPaciente(idStore.numExpediente)">
       </div>
 
       <div class="col-md-2"></div>
@@ -303,6 +304,10 @@ export default defineComponent({
   },
 
   methods: {
+    // async consultaPaciente(){
+    //   idStore.getPaciente();
+    // },
+
     async validaExpedienteId(numExpediente, nombrePaciente) {
       if(numExpediente === undefined || nombrePaciente === undefined ||
          numExpediente === '' || nombrePaciente === '') {

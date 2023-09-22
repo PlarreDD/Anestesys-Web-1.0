@@ -10,7 +10,7 @@ import { saveMenuTrans,
          saveTiemposQX, 
          saveMedicamentos, updateMedicamentos, getMedicamentos, getMedicamento, updateMedicamento, deleteMedicamento, 
          getRelevos, getRelevo, saveRelevos, updateRelevos, updateRelevo, deleteRelevo, 
-         getEventos, getEvento, saveEventos, updateEventos, updateEvento, deleteEvento} from "../controllers/transanest.controller";
+         getEventos, getEvento, saveEventos, updateEventos, updateEvento, deleteEvento, saveDatosMSV, updateDatosMSV} from "../controllers/transanest.controller";
 
 const router = Router();
 
@@ -24,6 +24,9 @@ router.delete('/:dVId', requireToken, deleteModoVentilacion);
 router.put('/bh/:id',  requireToken, UpdateBalanceH);
 /*----------------------- Tiempos QX ----------------------*/
 router.post('/tqx', requireToken, saveTiemposQX);
+/*---------- Datos del MSV -------------------- */
+router.post('/msvData', requireToken, saveDatosMSV);
+router.put('/msvData/:pid', requireToken, updateDatosMSV);
 /*---------- Datos de medicamentos -------------------- */
 router.get('/medic/:pid' , requireToken, getMedicamentos);
 router.get('/medic/uno/:id' , requireToken, getMedicamento);

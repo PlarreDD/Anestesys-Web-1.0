@@ -1554,7 +1554,7 @@ export default defineComponent({
       mostrarGraficas: false,
       mostrarSpinner: false,
 
-      chartElements: [],
+      chartElements: []
     }
   },
 
@@ -6261,7 +6261,7 @@ export default defineComponent({
         }
 
         //Asignar los valores ordenads
-        this.hl7mess.push({ datos: valoresOrdenados, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });       
+        this.hl7mess.push({ datos: valoresOrdenados, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
       },
 
       iniRecepDatos(){
@@ -6288,10 +6288,20 @@ export default defineComponent({
         }, 1000 * 60 * 30);
       },
       
-      capturaGrid(){
-        this.saveGrid = setInterval(() => {
+      async capturaGrid(){
+        this.saveGrid = await setInterval(() => {
           this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
-          this.hl7mess = [];          
+          this.hl7mess = [];
+
+          // if(this.guardaDatosMSV === false){
+            // this.transAnestStore.saveDatosMSV(this.grid, preIdStore.pacienteID._id);
+            // this.guardaDatosMSV = true;
+            // console.log("save");
+          // }else if(this.guardaDatosMSV === true){
+            this.transAnestStore.updateDatosMSV(this.grid, preIdStore.pacienteID._id);                      
+            // console.log("update");
+          // }
+          console.log("Datos MSV Guardados.");          
         }, 1000 * 60);
       },
 
