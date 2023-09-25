@@ -494,7 +494,7 @@
                         <div class="col-md-10"></div>
 
                         <div class="col-md-2 alinear-btn">                    
-                          <template v-if="btnActualizarTecnica === false">
+                          <template v-if="transAnestStore.tipoTecnica === false">
                             <button data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar-balance fw-bold"
@@ -1312,8 +1312,7 @@ export default defineComponent({
       btnActualizaVentilador:false,
       
       //Botones balance/técnica
-      btnActualizarBalance:false,
-      btnActualizarTecnica:false,   
+      btnActualizarBalance:false,  
       
       //Botones medicamento
       btnAddMedicamentos:true,
@@ -1554,7 +1553,9 @@ export default defineComponent({
       mostrarGraficas: false,
       mostrarSpinner: false,
 
-      chartElements: []
+      chartElements: [],
+
+      guardaDatosMSV: 0
     }
   },
 
@@ -5147,7 +5148,7 @@ export default defineComponent({
       },
 
       cambiarUpdateTecnica(){
-        this.btnActualizarTecnica=true
+        this.transAnestStore.tipoTecnica=true
 
         this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
         postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id)
@@ -6264,6 +6265,7 @@ export default defineComponent({
         this.hl7mess.push({ datos: valoresOrdenados, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
       },
 
+      // Recibe datos del MSV cada segundo
       iniRecepDatos(){
         this.intervalId = setInterval(() => {
           this.comMSV();
@@ -6288,20 +6290,20 @@ export default defineComponent({
         }, 1000 * 60 * 30);
       },
       
+      // Agrega los datos del MSV al arreglo 'grid' cada minuto
       async capturaGrid(){
         this.saveGrid = await setInterval(() => {
           this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
           this.hl7mess = [];
 
-          // if(this.guardaDatosMSV === false){
-            // this.transAnestStore.saveDatosMSV(this.grid, preIdStore.pacienteID._id);
-            // this.guardaDatosMSV = true;
-            // console.log("save");
-          // }else if(this.guardaDatosMSV === true){
-            this.transAnestStore.updateDatosMSV(this.grid, preIdStore.pacienteID._id);                      
-            // console.log("update");
+          this.guardaDatosMSV=this.guardaDatosMSV +1;
+          
+          //Guardar datos del MSV en la BD
+          // if(this.guardaDatosMSV == 5){
+            // console.log("Entro");            
+          this.transAnestStore.saveDatosMSV(this.grid, preIdStore.pacienteID._id);
+            // this.guardaDatosMSV = 0;
           // }
-          console.log("Datos MSV Guardados.");          
         }, 1000 * 60);
       },
 

@@ -25,11 +25,28 @@
       
       <div class="col-md-2">
         <div class="alinearBotonDerecha">
-          <button class="btn btn-icono fw-bold">
+          <button class="btn btn-icono fw-bold" data-bs-toggle="modal" data-bs-target="#modal-historial">
             <img class="btn-historial"
                  src="images/imgIcon/historial-pac.svg"/> Historial Paciente </button>
         </div>
       </div>
+
+      <!--Abrir el modal de Medicamentos-->
+      <div class="modal" ref="historialModal" id="modal-historial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content color-dropdown">
+                  <div class="input-group mb-3">
+                    <div class="modal-body">
+                      <div class="col-md-12">
+                        <div class="row g-3">                                                      
+                            
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
     </div>
 
     <div class="input-group mb-3">
@@ -463,6 +480,9 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.color-dropdown {
+  background-color: #002d60;
+}
 /* Botones */
 .alinearBotonDerecha{
     text-align: right;

@@ -313,27 +313,6 @@ export const saveTiemposQX = async (req: any, res: Response) => {
 /* Guardado Datos MSV */
 export const saveDatosMSV = async (req: any, res: Response) => {
     try {
-        const { pid,
-                // Datos MSV
-                FC, Pulso, PAS, PAD, PAM, SpO2, EtCO2, Temp1, Temp2, PVC, PAS_IN, PAD_IN, PAM_IN, FiCO2, FR, HoraGeneracion
-              } = req.body;        
-        const menuTrans  = await new MenuTrans({ pid,
-                                            // Datos del MSV
-                                            datosMSV: {
-                                                FC: FC, Pulso: Pulso, PAS: PAS, PAD: PAD, PAM: PAM, SpO2: SpO2, EtCO2: EtCO2, Temp1:Temp1, Temp2: Temp2,
-                                                PVC: PVC, PAS_IN: PAS_IN, PAD_IN:PAD_IN, PAM_IN:PAM_IN, FiCO2:FiCO2, FR:FR, HoraGeneracion:HoraGeneracion
-                                            },
-                                        });
-        await menuTrans.save();        
-        return res.json({ menuTrans });
-    } catch (error) {
-        return res.status(500).json({Error: 'Error de servidor'});
-    }
-};
-
-/* Actualiza Datos MSV */
-export const updateDatosMSV = async (req: any, res: Response) => {
-    try {
         const { pid } = req.params;
         const { datosMSV } = req.body;                
         const menuTrans = await MenuTrans.findOneAndUpdate(
@@ -346,7 +325,6 @@ export const updateDatosMSV = async (req: any, res: Response) => {
                     }
                 }
             });
-            console.log("datosMSV:"+datosMSV)
         return res.json({ menuTrans });
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});

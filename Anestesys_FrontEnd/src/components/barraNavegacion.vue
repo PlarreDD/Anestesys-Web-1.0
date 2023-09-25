@@ -15,7 +15,8 @@
         <!-- Nombre DR -->
         <div class="col-md-2 text-white alinearElementoD">
           <img src="images/perfil.jpg" class="imgPerfil" />
-          {{ "Dr. " + userStore.Nombre + " " + userStore.Apellido }}
+          {{ userStore.Nombre == undefined || userStore.Apellido == undefined ? '-':
+          "Dr. " + userStore.Nombre.split(' ')[0] + " " + userStore.Apellido.split(' ')[0] }}
         </div>
 
         <!-- Menú de configuración -->

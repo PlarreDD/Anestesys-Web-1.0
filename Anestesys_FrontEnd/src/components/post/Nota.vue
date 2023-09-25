@@ -171,7 +171,7 @@
                         <div class="col-md-2"></div>
                         <!-- Botón Guardar/Actualizar -->
                         <div class="col-md-2 alinea-boton">                            
-                            <template v-if="btnActualizarNotaP === false">
+                            <template v-if="transAnestStore.tipoTecnica === false">
                                 <button data-bs-toggle="tab" 
                                         type="submit"
                                         class="btn btn-guardar-info fw-bold"
@@ -872,7 +872,7 @@
                         <div class="col-md-10"></div>
                         <!-- Botón Guardar/Actualizar -->
                         <div class="col-md-2 alinea-boton">                            
-                            <template v-if="btnActualizarNotaP === false">
+                            <template v-if="transAnestStore.tipoTecnica === false">
                                 <button data-bs-toggle="tab" 
                                         type="submit"
                                         class="btn btn-guardar-info fw-bold"
@@ -899,10 +899,12 @@ import type { regNotaPost } from "@/interfaces/regPostAnest";
 import { defineComponent } from "vue";
 import { usePostAnestStore } from "../../stores/postAnest-store";
 import { usePreIdStore } from "@/stores/preId-store";
+import { useTransAnestStore } from "@/stores/transAnest-store";
 import Multiselect from '@vueform/multiselect';
 
 const postAnestStore = usePostAnestStore();
 const preIdStore = usePreIdStore();
+const transAnestStore = useTransAnestStore();
 
 export default defineComponent({
     components: {
@@ -914,8 +916,7 @@ export default defineComponent({
             infoNotaPost: {} as regNotaPost,
             postAnestStore,
             preIdStore,
-
-            btnActualizarNotaP:false,
+            transAnestStore,
 
             opcionTecnica: ['Local','Sedación', 'General balanceada', 'TIVA (Anestesia total intravenosa)', 'Multimodal', 'Bloqueo mixto', 'Bloqueo peridural lumbar',
                         'Bloqueo peridural caudal', 'Bloqueo espinal', 'Bloqueo de plexo', 'Bloqueo troncular', 'Bloqueo peridural torácico',
@@ -929,7 +930,7 @@ export default defineComponent({
 
     methods: {
         cambiarUpdateNota() {
-            this.btnActualizarNotaP=true
+            this.transAnestStore.tipoTecnica=true
             this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
             // Método Guardar
             postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id);
