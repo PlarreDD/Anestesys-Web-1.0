@@ -93,7 +93,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -166,7 +165,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -182,7 +180,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 this.datosVentilacion = res.data.listaModosVent;
             })
             .catch((e: any) => {
-                //   console.log(e);
             });
         },
 
@@ -198,7 +195,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 this.datosVentilacion = res.data.modoVent;
               })
               .catch((e: any) => {
-              //   console.log(e);
               });
         },
 
@@ -234,7 +230,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
         
@@ -258,7 +253,6 @@ export const useTransAnestStore = defineStore('transAn', {
                   });
               })
               .catch((e: any) => {
-                //   console.log(e);
               });
         },
 
@@ -323,7 +317,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -353,7 +346,6 @@ export const useTransAnestStore = defineStore('transAn', {
                         })
                     })
                     .catch((e: any) => {
-                        // console.log("error: " + e);
                     });
                 break;
       
@@ -381,12 +373,10 @@ export const useTransAnestStore = defineStore('transAn', {
                         })
                     })
                     .catch((e: any) => {
-                        // console.log("error: " + e);
                     });
                 break;
       
                 case "CXIN":
-                    console.log(regTransAnest, pid, tqx);
                     await apiAxios({
                         url: 'http://localhost:5000/trans/tqx',
                         method: "POST",
@@ -410,12 +400,10 @@ export const useTransAnestStore = defineStore('transAn', {
                         })
                     })
                     .catch((e: any) => {
-                        // console.log("error: " + e);
                     });
                 break;
       
                 case "CXOUT":
-                    console.log(regTransAnest, pid, tqx);
                     await apiAxios({
                         url: 'http://localhost:5000/trans/tqx',
                         method: "POST",
@@ -439,12 +427,10 @@ export const useTransAnestStore = defineStore('transAn', {
                         })
                     })
                     .catch((e: any) => {
-                        // console.log("error: " + e);
                     });
                 break;
       
                 case "ANESOUT":
-                    console.log(regTransAnest, pid, tqx);
                     await apiAxios({
                         url: 'http://localhost:5000/trans/tqx',
                         method: "POST",
@@ -468,12 +454,10 @@ export const useTransAnestStore = defineStore('transAn', {
                         })
                     })
                     .catch((e: any) => {
-                        // console.log("error: " + e);
                     });
                 break;
       
                 case "QXOUT":
-                    console.log(regTransAnest, pid, tqx);
                     await apiAxios({
                         url: 'http://localhost:5000/trans/tqx',
                         method: "POST",
@@ -497,12 +481,10 @@ export const useTransAnestStore = defineStore('transAn', {
                         })
                     })
                     .catch((e: any) => {
-                        // console.log("error: " + e);
                     });
                 break;
               
-                default:
-                    console.log('Hola');                    
+                default:                
                 break;
               }
         },
@@ -528,7 +510,6 @@ export const useTransAnestStore = defineStore('transAn', {
             .then((res: any) => {            
             })
                 .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -545,7 +526,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 this.medicamentos = res.data.medicamento;                             
             })
             .catch((e: any) => {
-                //   console.log(e);
             });
         },
 
@@ -581,7 +561,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -609,7 +588,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -625,7 +603,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 this.medicamentos = res.data.medicamento;
             })
             .catch((e: any) => {
-            //   console.log(e);
             });
         },
 
@@ -655,7 +632,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 })                
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -679,7 +655,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 });
             })
             .catch((e: any) => {
-              //   console.log(e);
             });
         },
 
@@ -696,7 +671,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 this.relevos = res.data.relevo;                             
             })
             .catch((e: any) => {
-                //   console.log(e);
             });
         },
 
@@ -729,7 +703,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -757,7 +730,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -773,7 +745,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 this.relevos = res.data.relevo;
             })
             .catch((e: any) => {
-            //   console.log(e);
             });
         },
 
@@ -803,7 +774,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 })                
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -827,7 +797,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 });
             })
             .catch((e: any) => {
-              //   console.log(e);
             });
         },
 
@@ -844,7 +813,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 this.eventos = res.data.evento;                             
             })
             .catch((e: any) => {
-                //   console.log(e);
             });
         },
 
@@ -875,7 +843,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -902,7 +869,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -918,7 +884,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 this.eventos = res.data.evento;
             })
             .catch((e: any) => {
-            //   console.log(e);
             });
         },
 
@@ -946,7 +911,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 })                
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -970,7 +934,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 });
             })
             .catch((e: any) => {
-              //   console.log(e);
             });
         },
 
@@ -1017,7 +980,6 @@ export const useTransAnestStore = defineStore('transAn', {
             .then((res: any) => {
               this.datosMSV = res.data.datosMSV; // Acceder a los datos usando res.data.datosMSV
               this.envDat = true;
-            //   console.log("GetDatosMonitor: " + this.datosMSV);
             })
             .catch((e: any) => {
               this.envDat = false;

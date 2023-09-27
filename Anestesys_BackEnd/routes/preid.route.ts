@@ -1,19 +1,19 @@
 import { Router } from "express";
 import { requireToken } from "../middlewares/requireToken";
-import { getAllInfo,
-         getPaciente,
+import { getPaciente,
          createPaciente,
-         updatePaciente } from "../controllers/preanest.controller";
+         updatePaciente, 
+         getExpedientes} from "../controllers/preanest.controller";
 
 const router = Router();
 
-// GET          /preId          Consultar pacientes
+// GET          /preId          Consultar expedientes
 // GET          /preId/:id      Consultar 1 paciente
 // POST         /preId          Crear paciente
 // PATCH/PUT    /preId/:id      Actualizar paciente
 
 /*------------------- PreId --------------------*/
-router.get('/', requireToken, getAllInfo);
+router.get('/exp', requireToken, getExpedientes)
 router.get('/:id', requireToken, getPaciente);
 router.post('/', requireToken, createPaciente);
 router.put('/:id',  requireToken, updatePaciente);

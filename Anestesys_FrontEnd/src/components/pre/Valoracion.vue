@@ -70,7 +70,7 @@
                                 <h5 class="col-md-12 fw-bold"> Personales patológicos </h5>
                                 <!-- Alergias -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Alergias </label>
+                                    <label  class="form-label fw-bold"> Alergias </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -81,7 +81,7 @@
 
                                 <!-- Quirúrgicos -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Quirúrgicos </label>
+                                    <label  class="form-label fw-bold"> Quirúrgicos </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -92,7 +92,7 @@
                                 
                                 <!-- Endocrinológicos -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Endocrinológicos </label>
+                                    <label  class="form-label fw-bold"> Endocrinológicos </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -103,7 +103,7 @@
 
                                 <!-- Urológicos -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Urológicos </label>
+                                    <label  class="form-label fw-bold"> Urológicos </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -114,7 +114,7 @@
 
                                 <!-- Traumáticos -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Traumáticos </label>
+                                    <label  class="form-label fw-bold"> Traumáticos </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -125,7 +125,7 @@
 
                                 <!-- Ortopédicos -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Ortopédicos </label>
+                                    <label  class="form-label fw-bold"> Ortopédicos </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -136,7 +136,7 @@
 
                                 <!-- Transfusiones previas -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Transfusiones previas </label>
+                                    <label  class="form-label fw-bold"> Transfusiones previas </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -147,7 +147,7 @@
 
                                 <!-- Complicaciones anestésicas previas -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Complicaciones anestésicas previas </label>
+                                    <label  class="form-label fw-bold"> Complicaciones anestésicas previas </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -158,7 +158,7 @@
                                 
                                 <!-- Estado psiquico -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Estado psíquico </label>
+                                    <label  class="form-label fw-bold"> Estado psíquico </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -169,7 +169,7 @@
                                 
                                 <!-- Medicación actual -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Medicación actual </label>
+                                    <label  class="form-label fw-bold"> Medicación actual </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control"
                                               rows="2"
@@ -210,7 +210,7 @@
                                                                 
                                 <!-- Horas de ayuno (hrs) -->
                                 <div class="col-md-6">
-                                    <label for="" class="form-label fw-bold"> Horas de ayuno (hrs) </label>
+                                    <label  class="form-label fw-bold"> Horas de ayuno (hrs) </label>
                                     <input type="text" @keyup.capture="enviarDatosValoracion"
                                            class="form-control margen-input"
                                            id=""
@@ -221,7 +221,7 @@
 
                                 <!-- Tabaquismo -->                                
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold margen-tabaquismo"> Tabaquismo </label>
+                                    <label  class="form-label fw-bold margen-tabaquismo"> Tabaquismo </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -232,7 +232,7 @@
 
                                 <!-- Etilismo -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Etilismo </label>
+                                    <label  class="form-label fw-bold"> Etilismo </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -243,7 +243,7 @@
 
                                 <!-- Adicciones -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Adicciones </label>
+                                    <label  class="form-label fw-bold"> Adicciones </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -254,7 +254,7 @@
                                 
                                 <!-- Inmunizaciones -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Inmunizaciones </label>
+                                    <label  class="form-label fw-bold"> Inmunizaciones </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -308,7 +308,7 @@
 
                         <!-- Edad -->
                         <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">Edad</label>
+                            <label  class="form-label fw-bold">Edad</label>
                             <input type="text" readonly
                                    class="form-control"
                                    v-model="preIdStore.edadPaciente"
@@ -318,7 +318,7 @@
 
                         <!-- Temperatura -->
                         <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">Temperatura</label>
+                            <label  class="form-label fw-bold">Temperatura</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -331,7 +331,7 @@
                         
                         <!-- Frecuencia Cardíaca (x min) -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Frecuencia Cardíaca (x min)</label>
+                            <label  class="form-label fw-bold">Frecuencia Cardíaca (x min)</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -343,7 +343,7 @@
 
                         <!-- Frecuencia Respiratoria (x min) -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Frecuencia Respiratoria (x min)</label>
+                            <label  class="form-label fw-bold">Frecuencia Respiratoria (x min)</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -355,7 +355,7 @@
 
                         <!-- Peso (kg) -->
                         <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">Peso (kg)</label>
+                            <label  class="form-label fw-bold">Peso (kg)</label>
                             <input type="text"
                                    class="form-control"
                                    id=""
@@ -367,7 +367,7 @@
 
                         <!-- Talla (m) -->
                         <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">Talla (m)</label>
+                            <label  class="form-label fw-bold">Talla (m)</label>
                             <input type="text"
                                    class="form-control"                                   
                                    v-model="infoValoracion.sigVit_Talla"
@@ -378,7 +378,7 @@
                        
                         <!-- IMC -->
                         <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">IMC
+                            <label  class="form-label fw-bold">IMC
                                 <span data-title="IMC=Peso(Kg)/Estatura&sup2(mts)">
                                     <font-awesome-icon icon="fa-solid fa-circle-info" />
                                 </span>
@@ -393,7 +393,7 @@
 
                         <!-- Tensión Arterial (mmHg) -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Tensión Arterial (mmHg)</label>
+                            <label  class="form-label fw-bold">Tensión Arterial (mmHg)</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -405,7 +405,7 @@
 
                         <!-- Saturación de Oxígeno (%) -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Saturación de Oxígeno (%)</label>
+                            <label  class="form-label fw-bold">Saturación de Oxígeno (%)</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -422,7 +422,7 @@
 
                         <!-- Cabeza -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Cabeza</label>                            
+                            <label  class="form-label fw-bold">Cabeza</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                       rows="2"
                                       v-model="infoValoracion.expFis_VASCabeza"
@@ -433,7 +433,7 @@
 
                         <!-- Cuello -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Cuello</label>                            
+                            <label  class="form-label fw-bold">Cuello</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                         rows="2"
                                         v-model="infoValoracion.expFis_VASCuello"
@@ -444,7 +444,7 @@
 
                         <!-- Respiratorio -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Respiratorio</label>                            
+                            <label  class="form-label fw-bold">Respiratorio</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                       rows="2"
                                       v-model="infoValoracion.expFis_VASRespiratorio"
@@ -455,7 +455,7 @@
 
                         <!-- Cardiovascular -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Cardiovascular</label>                            
+                            <label  class="form-label fw-bold">Cardiovascular</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                       rows="2"
                                       v-model="infoValoracion.expFis_VASCardioVasc"
@@ -466,7 +466,7 @@
 
                         <!-- Hipertensión arterial -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Hipertensión arterial</label>                            
+                            <label  class="form-label fw-bold">Hipertensión arterial</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                       rows="2"
                                       v-model="infoValoracion.expFis_VASHipertension"
@@ -477,7 +477,7 @@
 
                         <!-- Abdomen -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Abdomen</label>                            
+                            <label  class="form-label fw-bold">Abdomen</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                       rows="2"
                                       v-model="infoValoracion.expFis_VASAbdomen"
@@ -488,7 +488,7 @@
 
                         <!-- Genitourinario -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Genitourinario</label>                            
+                            <label  class="form-label fw-bold">Genitourinario</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                       rows="2"
                                       v-model="infoValoracion.expFis_VASGenUr"
@@ -499,7 +499,7 @@
 
                         <!-- Músculo esquelético -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Músculo esquelético</label>                            
+                            <label  class="form-label fw-bold">Músculo esquelético</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                       rows="2"
                                       v-model="infoValoracion.expFis_VASMuscEsq"
@@ -510,7 +510,7 @@
 
                         <!-- Neurológico -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Neurológico</label>                            
+                            <label  class="form-label fw-bold">Neurológico</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                       rows="2"
                                       v-model="infoValoracion.expFis_VASNeuro"
@@ -521,7 +521,7 @@
 
                         <!-- Piel y faneras -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Piel y faneras</label>                            
+                            <label  class="form-label fw-bold">Piel y faneras</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                       rows="2"
                                       v-model="infoValoracion.expFis_VASPielFaneras"
@@ -541,8 +541,8 @@
                         
                         <!-- Mallampati -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold"> Mallampati </label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold"> Mallampati </label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Mallampati"
                                     :class="infoValoracion.viaAerea_Mallampati != undefined && infoValoracion.viaAerea_Mallampati != '' ?
@@ -557,8 +557,8 @@
 
                         <!-- Patil-Aldreti -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold"> Patil-Aldreti </label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold"> Patil-Aldreti </label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_PatilAldreti"
                                     :class="infoValoracion.viaAerea_PatilAldreti != undefined && infoValoracion.viaAerea_PatilAldreti != '' ?
@@ -572,8 +572,8 @@
 
                         <!-- Apertura bucal -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold"> Apertura bucal </label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold"> Apertura bucal </label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_AperturaBucal"
                                     :class="infoValoracion.viaAerea_AperturaBucal != undefined && infoValoracion.viaAerea_AperturaBucal != '' ?
@@ -588,8 +588,8 @@
 
                         <!-- Distancia esternomentoniana -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold">Distancia esternomentoniana</label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold">Distancia esternomentoniana</label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Distancia"
                                     :class="infoValoracion.viaAerea_Distancia != undefined && infoValoracion.viaAerea_Distancia != '' ?
@@ -604,8 +604,8 @@
                         
                         <!-- Protusión Mandibular -->
                         <div class="col-md-10">
-                            <label for="inputState" class="form-label fw-bold"> Protusión Mandibular </label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold"> Protusión Mandibular </label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Protusion"
                                     :class="infoValoracion.viaAerea_Protusion != undefined && infoValoracion.viaAerea_Protusion != '' ?
@@ -619,8 +619,8 @@
 
                         <!-- IPID -->
                         <div class="col-md-10">
-                            <label for="inputState" class="form-label fw-bold"> IPID </label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold"> IPID </label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Ipid"
                                     :class="infoValoracion.viaAerea_Ipid != undefined && infoValoracion.viaAerea_Ipid != '' ?
@@ -636,8 +636,8 @@
 
                         <!-- Escala Glasgow -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold">Escala Glasgow</label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold">Escala Glasgow</label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Glasgow"
                                     :class="infoValoracion.viaAerea_Glasgow != undefined && infoValoracion.viaAerea_Glasgow != '' ?
@@ -663,8 +663,8 @@
 
                         <!-- Escala NYHA -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold"> Escala NYHA </label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold"> Escala NYHA </label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_NYHA"
                                     :class="infoValoracion.viaAerea_NYHA != undefined && infoValoracion.viaAerea_NYHA != '' ?
@@ -679,8 +679,8 @@
 
                         <!-- Escala de Goldman -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold"> Escala de Goldman </label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold"> Escala de Goldman </label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Goldman"
                                     :class="infoValoracion.viaAerea_Goldman != undefined && infoValoracion.viaAerea_Goldman != '' ?
@@ -695,8 +695,8 @@
 
                         <!-- Riesgo de Trombosis -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold"> Riesgo de Trombosis </label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold"> Riesgo de Trombosis </label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_RiesgoTrombosis"
                                     :class="infoValoracion.viaAerea_RiesgoTrombosis != undefined && infoValoracion.viaAerea_RiesgoTrombosis != '' ?
@@ -711,8 +711,8 @@
 
                         <!-- Clasificación ASA -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold"> Clasificación ASA </label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold"> Clasificación ASA </label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_ClasificacionASA"
                                     :class="infoValoracion.viaAerea_ClasificacionASA != undefined && infoValoracion.viaAerea_ClasificacionASA != '' ?
@@ -729,8 +729,8 @@
 
                         <!-- Tipo de Cirugía -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold">Tipo de Cirugía</label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold">Tipo de Cirugía</label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_TipoCirugia"
                                     :class="infoValoracion.viaAerea_TipoCirugia != undefined && infoValoracion.viaAerea_TipoCirugia != '' ?
@@ -743,8 +743,8 @@
 
                         <!-- Riesgo Anéstesico Quirúrgico -->
                         <div class="col-md-4">
-                            <label for="inputState" class="form-label fw-bold">Riesgo Anéstesico Quirúrgico</label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold">Riesgo Anéstesico Quirúrgico</label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_RiesgoAnestesico"
                                     :class="infoValoracion.viaAerea_RiesgoAnestesico != undefined && infoValoracion.viaAerea_RiesgoAnestesico != '' ?
@@ -787,8 +787,8 @@
                             <div class="row g-3">
                                 <!-- Estudio -->
                                 <div class="col-md-5">
-                                    <label for="inputState" class="form-label fw-bold">Estudio</label>
-                                    <select id="inputState" @change="enviarDatosValoracion"
+                                    <label  class="form-label fw-bold">Estudio</label>
+                                    <select  @change="enviarDatosValoracion"
                                             class="form-select"
                                             v-model="infoValoracion.estudios_Estudio"
                                             :class="infoValoracion.estudios_Estudio != undefined && infoValoracion.estudios_Estudio ?
@@ -835,7 +835,7 @@
                                 
                                 <!-- Especificaciones -->
                                 <div class="col-md-10">
-                                    <label for="" class="form-label fw-bold">Específicar</label>
+                                    <label  class="form-label fw-bold">Específicar</label>
                                     <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                             id=""
                                             rows="3"
@@ -938,7 +938,7 @@
                         <!-- Fecha de realización -->
                         <!-- Revisar que funcione el class -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Fecha de realización</label>
+                            <label  class="form-label fw-bold">Fecha de realización</label>
                             <input type="date" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -950,8 +950,8 @@
 
                         <!-- Grupo sanguíneo -->
                         <div class="col-md-6">
-                            <label for="inputState" class="form-label fw-bold">Grupo sanguíneo</label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold">Grupo sanguíneo</label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.perfilBioQ_GrupoSanguineo"
                                     :class="infoValoracion.perfilBioQ_GrupoSanguineo != undefined && infoValoracion.perfilBioQ_GrupoSanguineo !='' ?
@@ -970,7 +970,7 @@
 
                         <!-- Hemoglobina -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Hemoglobina</label>
+                            <label  class="form-label fw-bold">Hemoglobina</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -981,7 +981,7 @@
 
                         <!-- Hematocrito -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Hematocrito</label>
+                            <label  class="form-label fw-bold">Hematocrito</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -992,7 +992,7 @@
 
                         <!-- Plaquetas -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Plaquetas</label>
+                            <label  class="form-label fw-bold">Plaquetas</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1003,7 +1003,7 @@
 
                         <!-- Leutocitos -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Leutocitos</label>
+                            <label  class="form-label fw-bold">Leutocitos</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1014,7 +1014,7 @@
 
                         <!-- TP -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">TP</label>
+                            <label  class="form-label fw-bold">TP</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1025,7 +1025,7 @@
 
                         <!-- TT -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">TT</label>
+                            <label  class="form-label fw-bold">TT</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1036,7 +1036,7 @@
 
                         <!-- TPT -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">TPT</label>
+                            <label  class="form-label fw-bold">TPT</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1047,7 +1047,7 @@
 
                         <!-- INR -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">INR</label>
+                            <label  class="form-label fw-bold">INR</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1058,7 +1058,7 @@
 
                         <!-- Glucosa -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Glucosa</label>
+                            <label  class="form-label fw-bold">Glucosa</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1069,7 +1069,7 @@
 
                         <!-- Creatinina -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Creatinina</label>
+                            <label  class="form-label fw-bold">Creatinina</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id="" v-model="infoValoracion.perfilBioQ_Creatinina"
@@ -1079,7 +1079,7 @@
 
                         <!-- Urea -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Urea</label>
+                            <label  class="form-label fw-bold">Urea</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1090,7 +1090,7 @@
 
                         <!-- Sodio -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Sodio</label>
+                            <label  class="form-label fw-bold">Sodio</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1101,7 +1101,7 @@
 
                         <!-- Potasio -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Potasio</label>
+                            <label  class="form-label fw-bold">Potasio</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1112,7 +1112,7 @@
 
                         <!-- Cloro -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Cloro</label>
+                            <label  class="form-label fw-bold">Cloro</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1123,7 +1123,7 @@
 
                         <!-- Calcio -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Calcio</label>
+                            <label  class="form-label fw-bold">Calcio</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1134,7 +1134,7 @@
 
                         <!-- Magnesio -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Magnesio</label>
+                            <label  class="form-label fw-bold">Magnesio</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1145,7 +1145,7 @@
 
                         <!-- Bilirrubina directa -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Bilirrubina directa</label>
+                            <label  class="form-label fw-bold">Bilirrubina directa</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1156,7 +1156,7 @@
 
                         <!-- Bilirrubina indirecta -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Bilirrubina indirecta</label>
+                            <label  class="form-label fw-bold">Bilirrubina indirecta</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1167,7 +1167,7 @@
 
                         <!-- Bilirrubina Total -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Bilirrubina Total</label>
+                            <label  class="form-label fw-bold">Bilirrubina Total</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1178,7 +1178,7 @@
 
                         <!-- Lipasa -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Lipasa</label>
+                            <label  class="form-label fw-bold">Lipasa</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1189,7 +1189,7 @@
                         
                         <!-- Amilasa -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Amilasa</label>
+                            <label  class="form-label fw-bold">Amilasa</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1200,7 +1200,7 @@
 
                         <!-- Otros -->
                         <div class="col-md-9">
-                            <label for="" class="form-label fw-bold">Otros</label>
+                            <label  class="form-label fw-bold">Otros</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1236,10 +1236,6 @@ export default defineComponent({
             btnUpdateEstudios:false,
             btnActualizaEstudio:false,
         }  
-    },
-
-    mounted() {
-        preIdStore.getEstudiosList();
     },
 
     methods: {

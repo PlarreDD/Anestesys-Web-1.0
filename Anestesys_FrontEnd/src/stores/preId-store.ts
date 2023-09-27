@@ -13,6 +13,7 @@ export const usePreIdStore = defineStore('preid', {
         valoracionID: ref(null),
         estudios: ref(null),
         numExpediente: ref(null),
+        expedientes: ref(null),
         pacientes: ref(null),
         
         // ID
@@ -203,7 +204,7 @@ export const usePreIdStore = defineStore('preid', {
         VistaRapida: false
     }),
 
-    actions: {
+    actions: {        
         /************************** Id Paciente **************************/
         savePreId(infoPreIdPaciente: any){
             apiAxios({
@@ -263,7 +264,6 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -323,7 +323,6 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
         /*************************** Valoración **************************/
@@ -431,7 +430,6 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -537,7 +535,6 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -554,7 +551,6 @@ export const usePreIdStore = defineStore('preid', {
                 this.estudios = res.data.estudio;
             })
             .catch((e: any) => {
-                //   console.log(e);
             });
         },
 
@@ -582,7 +578,6 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -609,7 +604,6 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -625,7 +619,6 @@ export const usePreIdStore = defineStore('preid', {
                 this.estudios = res.data.estudio;
             })
             .catch((e: any) => {
-            //   console.log(e);
             });
         },
       
@@ -653,7 +646,6 @@ export const usePreIdStore = defineStore('preid', {
                 })                
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -677,7 +669,6 @@ export const usePreIdStore = defineStore('preid', {
                 });
             })
             .catch((e: any) => {
-              //   console.log(e);
             });
           },
         /***************************** Plan ******************************/
@@ -774,7 +765,6 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -870,7 +860,6 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
         /***************************** Nota ******************************/
@@ -898,7 +887,6 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -925,14 +913,27 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
+            });
+        },
+
+        /********************** Consulta Expedientes ***********************/
+        async getExpedientesList() {
+            await apiAxios({
+                url: "http://localhost:5000/preId/exp",
+                method: "GET",
+                headers: {
+                Authorization: "Bearer " + userStore.token,
+                },
+            })
+            .then((res: any) => {
+                this.expedientes = res.data.expedientes;
+            })
+            .catch((e: any) => {              
             });
         },
 
         /************************** Consulta *************************/
-        async getPaciente(numExpediente) {
-            console.log("Entro en store");
-            
+        async getPaciente(numExpediente) {            
             await apiAxios({
               url: `http://localhost:5000/preId/${String(numExpediente)}`,
               method: "GET",
@@ -942,11 +943,9 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {
                 this.pacientes = res.data;
-                console.log("numExp: "+numExpediente);                
                 console.log("Paciente: "+JSON.stringify(this.pacientes));                
             })
             .catch((e: any) => {
-            //   console.log(e);
             });
         },
     }

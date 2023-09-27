@@ -5,7 +5,7 @@
                     <h5 class="col-12 fw-bold"> NOTA PREANESTÉSICA </h5>                                                                                                                    
             </div>
             <div class="col-md-1 justificar-icono-nota">
-                <label for=""
+                <label 
                         class="form-label fw-bold alinear-icono-nota">
                             <span style="text-align: right;">
                                 <font-awesome-icon icon="fa-solid fa-microphone" size="2xl"/>

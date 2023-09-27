@@ -3,7 +3,7 @@
     <barra-navegacion/>
   </header>
 
-  <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">    
+  <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">
 
     <!-- Barra superior -->
     <div class="input-group mb-3">
@@ -71,8 +71,8 @@
 
                             <input type="hidden" v-model="menuTrans.idMed">
 
-                            <label for="inputState" class="form-label text-white fw-bold">Tipo</label>
-                            <select id="inputState"
+                            <label  class="form-label text-white fw-bold">Tipo</label>
+                            <select 
                                     class="form-select" v-model="menuTrans.tipoMed" @change="vaciarHoraFinalMedicamento">
                                 <option></option>
                                 <option>Bolo</option>
@@ -80,7 +80,7 @@
                             </select>
                           </div>
                           <div class="col-md-8">
-                            <label for="" class="form-label text-white fw-bold"> Medicamento </label>
+                            <label  class="form-label text-white fw-bold"> Medicamento </label>
                             <el-select v-model="menuTrans.medicamento" filterable class="form-control-select" 
                               @click="listarMedicamentos">
                                 <el-option
@@ -91,12 +91,12 @@
                         </div>
 
                           <div class="col-md-2">
-                            <label for="" class="form-label text-white fw-bold"> Dosis </label>
+                            <label  class="form-label text-white fw-bold"> Dosis </label>
                             <input type="text" class="form-control" v-model="menuTrans.dosisMed">
                           </div>
                           <div class="col-md-2">
-                            <label for="inputState" class="form-label text-white fw-bold">Unidad</label>
-                            <select id="inputState" class="form-select" v-model="menuTrans.unidadMed">
+                            <label  class="form-label text-white fw-bold">Unidad</label>
+                            <select  class="form-select" v-model="menuTrans.unidadMed">
                                 <option></option>
                                 <option>UI.</option>
                                 <option>L. X min.</option>
@@ -117,8 +117,8 @@
                           </div>
 
                           <div class="col-md-8">
-                              <label for="inputState" class="form-label text-white fw-bold">Vía</label>
-                              <select id="inputState" class="form-select" v-model="menuTrans.viaMed">
+                              <label  class="form-label text-white fw-bold">Vía</label>
+                              <select  class="form-select" v-model="menuTrans.viaMed">
                                   <option></option>
                                   <option>Intravenoso - IV</option>
                                   <option>Intramuscular - IM</option>
@@ -137,17 +137,17 @@
                           </div>
 
                           <div class="col-md-2">
-                            <label for="" class="form-label text-white fw-bold"> Hora de Inicio </label>
+                            <label  class="form-label text-white fw-bold"> Hora de Inicio </label>
                             <input type="time" class="form-control" v-model="menuTrans.horaInicioMed" @dblclick="actualizarTQX('INCX')">
                           </div>
 
                           <div class="col-md-2" :class="menuTrans.tipoMed == 'Bolo' ? 'invisible' : 'visible'">
-                            <label for="" class="form-label text-white fw-bold"> Hora Final </label>
+                            <label  class="form-label text-white fw-bold"> Hora Final </label>
                             <input type="time" class="form-control" v-model="menuTrans.horaFinalMed">
                           </div>
 
                           <div class="col-md-8">
-                              <label for="" class="form-label text-white fw-bold"> Observaciones </label>
+                              <label  class="form-label text-white fw-bold"> Observaciones </label>
                               <textarea class="form-control" rows="2" v-model="menuTrans.observacionesMed">
                               </textarea>
                           </div>
@@ -242,7 +242,7 @@
                             </div>
 
                             <div class="col-md-12">
-                              <label for="" class="form-label text-white fw-bold"> Observaciones </label>
+                              <label  class="form-label text-white fw-bold"> Observaciones </label>
                               <textarea class="form-control" rows="2" v-model="menuTrans.observacionesRel">
                               </textarea>
                             </div>
@@ -327,7 +327,7 @@
                             </div>
 
                             <div class="col-md-12">
-                              <label for="" class="form-label text-white fw-bold"> Detalles del Evento </label>
+                              <label  class="form-label text-white fw-bold"> Detalles del Evento </label>
                               <textarea class="form-control" rows="6" v-model="menuTrans.detalleEvento">
                               </textarea>
                             </div>
@@ -479,7 +479,7 @@
                         <h5 class="col-md-12 fw-bold text-white">TÉCNICA ANÉSTESICA</h5>
                         <!-- Técnica de anestesia final -->
                         <div class="col-md-12">
-                          <label for="" class="form-label fw-bold text-white">Técnica de anestesia final</label>
+                          <label  class="form-label fw-bold text-white">Técnica de anestesia final</label>
                           <Multiselect mode="tags"
                                         v-model="postAnestStore.TecnicaAnestesica"
                                         @click="enviarTecnica"
@@ -533,7 +533,7 @@
                       <input type="hidden" v-model="menuTrans.balanceTotal">
                       <!-- Solución Hartman -->
                       <div class="col-md-4">
-                        <label for="" class="form-label fw-bold text-white">Solución Hartman(ml):</label>
+                        <label  class="form-label fw-bold text-white">Solución Hartman(ml):</label>
                         <input class="form-control"
                               v-model="menuTrans.solHartman"
                               type="text"
@@ -541,7 +541,7 @@
                       </div>
                       <!-- Solución fisiológica -->
                       <div class="col-md-4">
-                        <label for="" class="form-label fw-bold text-white">Solución fisiológica(ml):</label>
+                        <label  class="form-label fw-bold text-white">Solución fisiológica(ml):</label>
                         <input class="form-control"
                               v-model="menuTrans.solFisio"
                               type="text"
@@ -549,7 +549,7 @@
                       </div>
                       <!-- Glucosados -->
                       <div class="col-md-4">
-                        <label for="" class="form-label fw-bold text-white">Glucosados(ml):</label>
+                        <label  class="form-label fw-bold text-white">Glucosados(ml):</label>
                         <input class="form-control"
                               v-model="menuTrans.glucosados"
                               type="text"
@@ -557,7 +557,7 @@
                       </div>                  
                       <!-- Gelatinas -->
                       <div class="col-md-4">
-                        <label for="" class="form-label fw-bold text-white">Gelatinas(ml):</label>
+                        <label  class="form-label fw-bold text-white">Gelatinas(ml):</label>
                         <input class="form-control"
                               type="text"
                               v-model="menuTrans.gelatinas"
@@ -565,7 +565,7 @@
                       </div>
                       <!-- Almidones -->
                       <div class="col-md-4">
-                        <label for="" class="form-label fw-bold text-white">Almidones(ml):</label>
+                        <label  class="form-label fw-bold text-white">Almidones(ml):</label>
                         <input class="form-control"
                               v-model="menuTrans.almidones"
                               type="text"
@@ -573,7 +573,7 @@
                       </div>
                       <!-- Albúminas -->
                       <div class="col-md-4">
-                        <label for="" class="form-label fw-bold text-white">Albúminas(ml):</label>
+                        <label  class="form-label fw-bold text-white">Albúminas(ml):</label>
                         <input class="form-control"
                               v-model="menuTrans.albuminas"
                               type="text"
@@ -581,7 +581,7 @@
                       </div>
                       <!-- Paquete globular -->
                       <div class="col-md-4">
-                        <label for="" class="form-label fw-bold text-white">Paquete globular(ml):</label>
+                        <label  class="form-label fw-bold text-white">Paquete globular(ml):</label>
                         <input class="form-control"
                               v-model="menuTrans.paqGlobular"
                               type="text"
@@ -589,7 +589,7 @@
                       </div>
                       <!-- Plasmas -->
                       <div class="col-md-4">
-                        <label for="" class="form-label fw-bold text-white">Plasmas(ml):</label>
+                        <label  class="form-label fw-bold text-white">Plasmas(ml):</label>
                         <input class="form-control"
                               v-model="menuTrans.plasmas"
                               type="text"
@@ -597,7 +597,7 @@
                       </div>
                       <!-- Plaquetas -->
                       <div class="col-md-4">
-                        <label for="" class="form-label fw-bold text-white">Plaquetas(ml):</label>
+                        <label  class="form-label fw-bold text-white">Plaquetas(ml):</label>
                         <input class="form-control"
                               type="text"
                               v-model="menuTrans.plaquetas"
@@ -605,7 +605,7 @@
                       </div>
                       <!-- Crioprecipitados -->
                       <div class="col-md-4">
-                        <label for="" class="form-label fw-bold text-white">Crioprecipitados(ml):</label>
+                        <label  class="form-label fw-bold text-white">Crioprecipitados(ml):</label>
                         <input class="form-control"
                               type="text"
                               v-model="menuTrans.crioprecipitados"
@@ -613,7 +613,7 @@
                       </div>
                       <!-- Factor VII -->
                       <div class="col-md-4">
-                        <label for="" class="form-label fw-bold text-white">Factor VII(ml):</label>
+                        <label  class="form-label fw-bold text-white">Factor VII(ml):</label>
                         <input class="form-control"
                               type="text"
                               v-model="menuTrans.factor_VII"
@@ -621,7 +621,7 @@
                       </div>
                       <!-- Factor VIII -->
                       <div class="col-md-4">
-                        <label for="" class="form-label fw-bold text-white">Factor VIII(ml):</label>
+                        <label  class="form-label fw-bold text-white">Factor VIII(ml):</label>
                         <input class="form-control"
                               type="text"
                               v-model="menuTrans.factor_VIII"
@@ -629,7 +629,7 @@
                       </div>
                       <!-- Otros Ingresos -->
                       <div class="col-md-4">
-                        <label for="" class="form-label fw-bold text-white">Otros:</label>
+                        <label  class="form-label fw-bold text-white">Otros:</label>
                         <input class="form-control"
                               type="text"
                               v-model="menuTrans.otrosIngresos"
@@ -644,7 +644,7 @@
 
                       <!-- Liquídos de ascitis -->
                       <div class="col-md-4">
-                        <label for="" class="form-label fw-bold text-white">Liquídos de ascitis(ml):</label>
+                        <label  class="form-label fw-bold text-white">Liquídos de ascitis(ml):</label>
                         <input class="form-control"
                               type="text"
                               v-model="menuTrans.liqAscitis"
@@ -652,7 +652,7 @@
                       </div>
                       <!-- Sangrado aproximado -->
                       <div class="col-md-4">
-                        <label for="" class="form-label fw-bold text-white">Sangrado aproximado(ml):</label>
+                        <label  class="form-label fw-bold text-white">Sangrado aproximado(ml):</label>
                         <input class="form-control"
                               type="text"
                               v-model="menuTrans.sangradoAprox"
@@ -660,7 +660,7 @@
                       </div>
                       <!-- Uresis -->
                       <div class="col-md-4">
-                        <label for="" class="form-label fw-bold text-white">Uresis(ml):</label>
+                        <label  class="form-label fw-bold text-white">Uresis(ml):</label>
                         <input class="form-control"
                               type="text"
                               v-model="menuTrans.uresis"
@@ -668,7 +668,7 @@
                       </div>
                       <!-- Exposición quirúrgica -->
                       <div class="col-md-4">
-                        <label for="" class="form-label fw-bold text-white">Exposición quirúrgica:</label>
+                        <label  class="form-label fw-bold text-white">Exposición quirúrgica:</label>
                         <input class="form-control"
                               type="text"
                               v-model="menuTrans.expoQX"
@@ -676,7 +676,7 @@
                       </div>
                       <!-- Requerimientos basales -->
                       <div class="col-md-4">
-                        <label for="" class="form-label fw-bold text-white">Requerimientos basales:</label>
+                        <label  class="form-label fw-bold text-white">Requerimientos basales:</label>
                         <input class="form-control"
                               type="text"
                               v-model="menuTrans.reqBasales"
@@ -684,7 +684,7 @@
                       </div>
                       <!-- Ayuno -->
                       <div class="col-md-4">
-                        <label for="" class="form-label fw-bold text-white">Ayuno:</label>
+                        <label  class="form-label fw-bold text-white">Ayuno:</label>
                         <input class="form-control"
                               type="text"
                               v-model="menuTrans.ayuno"
@@ -692,7 +692,7 @@
                       </div>
                       <!-- Otros Egresos -->
                       <div class="col-md-3">
-                        <label for="" class="form-label fw-bold text-white">Otros:</label>
+                        <label  class="form-label fw-bold text-white">Otros:</label>
                         <input class="form-control"
                               type="text"
                               v-model="menuTrans.otrosEgresos"
@@ -738,8 +738,8 @@
                     <h5 class="text-white fw-bold">VENTILADOR</h5>
                     <!-- Modos de Ventilación -->
                     <div class="col-md-9">
-                      <label for="inputState" class="form-label fw-bold text-white">Modos de ventilación</label>
-                      <select id="inputState"
+                      <label  class="form-label fw-bold text-white">Modos de ventilación</label>
+                      <select 
                               v-model="menuTrans.modosVentilacion"
                               class="form-select">
                         <option selected></option>
@@ -874,7 +874,7 @@
                       type="button"
                       @dblclick="actualizarTQX('QXIN')"
                       :disabled="menuTrans.ingresoQX != undefined ? true : false">
-                  <label>QX IN <label class="fw-normal">{{menuTrans.ingresoQX}}</label></label>                  
+                  <label class="cursor-puntero">QX IN <label class="fw-normal">{{menuTrans.ingresoQX}}</label></label>                  
               </button>
             </div>
             
@@ -885,12 +885,12 @@
                       :disabled="btnTQX == true ? true : false"
                       @dblclick="actualizarTQX('ANESIN')"
                       @click.right="mostrarDropDown('ANESIN')"> 
-                      <label>ANES IN <label class="fw-normal">{{menuTrans.inicioAn}}</label></label> 
+                      <label class="cursor-puntero">ANES IN <label class="fw-normal">{{menuTrans.inicioAn}}</label></label> 
               </button>
 
               <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': activoAnesIN, ' ': noActivoAnesIN }">                                
                 <label class="text-white fw-bold">Modificar</label>
-                <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('ANESIN')"/></i>
+                <i class="text-white float-end cursor-puntero"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('ANESIN')"/></i>
                 <input class="form-control"
                         id="appt-time"
                         type="time"
@@ -906,12 +906,12 @@
                       :disabled="btnTQX == true ? true : false"
                       @dblclick="actualizarTQX('CXIN')"
                       @click.right="mostrarDropDown('CXIN')"> 
-                <label>CX IN <label class="fw-normal">{{menuTrans.inicioCx}}</label></label>
+                <label class="cursor-puntero">CX IN <label class="fw-normal">{{menuTrans.inicioCx}}</label></label>
               </button>
 
               <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': activoCxIN, ' ': noActivoCxIN }">
                 <label class="text-white fw-bold">Modificar</label>                
-                <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('CXIN')"/></i>
+                <i class="text-white float-end cursor-puntero"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('CXIN')"/></i>
                 <input class="form-control"
                         type="time"
                         v-model="menuTrans.inicioCx" 
@@ -925,12 +925,12 @@
                       :disabled="btnTQX == true ? true : false"
                       @dblclick="actualizarTQX('CXOUT')"
                       @click.right="mostrarDropDown('CXOUT')"> 
-                <label>CX OUT <label class="fw-normal">{{menuTrans.finCx}}</label></label>
+                <label class="cursor-puntero">CX OUT <label class="fw-normal">{{menuTrans.finCx}}</label></label>
               </button>
 
               <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': activoCxOUT, ' ': noActivoCxOUT }">
                 <label class="text-white fw-bold">Modificar</label>                
-                <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('CXOUT')"/></i>
+                <i class="text-white float-end cursor-puntero"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('CXOUT')"/></i>
                 <input class="form-control"
                         id="appt-time"
                         type="time"
@@ -945,12 +945,12 @@
                       :disabled="btnTQX == true ? true : false"
                       @dblclick="actualizarTQX('ANESOUT')"
                       @click.right="mostrarDropDown('ANESOUT')"> 
-                <label>ANES OUT <label class="fw-normal">{{menuTrans.finAn}}</label></label>
+                <label class="cursor-puntero">ANES OUT <label class="fw-normal">{{menuTrans.finAn}}</label></label>
               </button>
               
               <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': activoAnesOUT, ' ': noActivoAnesOUT }">
                 <label class="text-white fw-bold">Modificar</label>                
-                <i class="text-white float-end"><font-awesome-icon icon="fa-solid fa-xmark" size="lg " @click="ocultarDropDown('ANESOUT')"/></i>
+                <i class="text-white float-end cursor-puntero"><font-awesome-icon icon="fa-solid fa-xmark" size="lg " @click="ocultarDropDown('ANESOUT')"/></i>
                 <input class="form-control"
                         id="appt-time"
                         type="time"
@@ -964,14 +964,14 @@
                       class="btn btn-menu fw-bold" 
                       @dblclick="actualizarTQX('QXOUT')"
                       :disabled="menuTrans.egresoQx != undefined ? true : false"> 
-                      <label>QX OUT <label class="fw-normal">{{menuTrans.egresoQx}}</label></label>
+                      <label class="cursor-puntero">QX OUT <label class="fw-normal">{{menuTrans.egresoQx}}</label></label>
               </button>        
             </div>
           </div>
         </div>
 
         <div class="col-1 fw-bold">
-          <select id="inputState"
+          <select 
                   class="form-select"
                   v-model="stepSize">
             <option>1</option>
@@ -1009,7 +1009,7 @@
           <div class="deslizar-medicamentos m-1"> 
             <table class="table" id="tabla-med">
               <tbody v-for="( medicamento ) in transAnestStore.medicamentos">
-                <tr class="" v-for="datosMed in medicamento.medicamentosCx"
+                <tr class="cursor-puntero" v-for="datosMed in medicamento.medicamentosCx"
                           @click="cambiarBtnActualizarMedic(datosMed._id)" data-bs-toggle="modal" data-bs-target="#modal-medicamento">
                       <td class="borde-tabla-izq p-1" :class="datosMed.tipoMed == 'Bolo' ? 'estilo-bolo' : 'estilo-infusion'" v-if="tablaMedicamentos.includes(datosMed.medicamento)">
                         <FONT size="2">{{ datosMed.medicamento}}</FONT>
@@ -1029,7 +1029,7 @@
         <!-- Vista eventos/relevos -->
         <div class="" :class="vistaPreviaOff == false ? 'col-md-11 vista-eventos-relevos' : 'col-md-11 vista-eventos-relevos'">  
           <div class="col-md-12">
-            <button class="btn btn-evento-relevo btn-sm fw-bold"
+            <button class="btn btn-evento-relevo btn-sm fw-bold cursor-default"
                     @click="">RELEVOS Y EVENTOS CRÍTICOS</button>
           </div>   
           <!-- Lista de relevos/eventos -->
@@ -1038,19 +1038,19 @@
               <tbody v-for="(evento) in transAnestStore.eventos">
 
                 <tr v-for="datosRel in relevo.relevoCx" @click="cambiarBtnActualizarRelevo(datosRel._id)" data-bs-toggle="modal" data-bs-target="#modal-relevo">
-                  <td class="borde-tabla-izq p-1 text-center" :class="datosRel.tipoRel === 'RELEVO' ? 'estilo-relevo' : 'estilo-evento'">
+                  <td class="borde-tabla-izq p-1 text-center cursor-puntero" :class="datosRel.tipoRel === 'RELEVO' ? 'estilo-relevo' : 'estilo-evento'">
                     <FONT size="2">{{ datosRel.tipoRel }}</FONT>
                   </td>
-                  <td class="borde-tabla-der fw-bold text-center" :class="datosRel.tipoRel === 'RELEVO' ? 'estilo-relevo' : 'estilo-evento'">
+                  <td class="borde-tabla-der fw-bold text-center cursor-puntero" :class="datosRel.tipoRel === 'RELEVO' ? 'estilo-relevo' : 'estilo-evento'">
                     <FONT size="2">{{ datosRel.horaRelevo }}</FONT>
                   </td>
                 </tr>
 
                 <tr v-for="datosEve in evento.evCriticoCx" @click="cambiarBtnActualizarEvento(datosEve._id)" data-bs-toggle="modal" data-bs-target="#modal-evento">
-                  <td class="borde-tabla-izq p-1 text-center" :class="datosEve.tipoEve === 'RELEVO' ? 'estilo-relevo' : 'estilo-evento'">
+                  <td class="borde-tabla-izq p-1 text-center cursor-puntero" :class="datosEve.tipoEve === 'RELEVO' ? 'estilo-relevo' : 'estilo-evento'">
                     <FONT size="2">{{ datosEve.tipoEve }}</FONT>
                   </td>
-                  <td class="borde-tabla-der fw-bold text-center" :class="datosEve.horaEvento === 'RELEVO' ? 'estilo-relevo' : 'estilo-evento'">
+                  <td class="borde-tabla-der fw-bold text-center cursor-puntero" :class="datosEve.horaEvento === 'RELEVO' ? 'estilo-relevo' : 'estilo-evento'">
                     <FONT size="2">{{ datosEve.horaEvento }}</FONT>
                   </td>
                 </tr>
@@ -1353,7 +1353,7 @@ export default defineComponent({
       listaMed: [],
       // Arreglo de medicamentos trans
       listaMedTrans: [],    
-      // Arreglo multiselect
+      // Arreglo multiselect medicamentos
       medicSeleccionados: [],
 
       vistaPreviaOff:false,
@@ -1570,7 +1570,6 @@ export default defineComponent({
     transAnestStore.getDetieneMonitoreo();
     this.pingMSV(medStore.monitor[0].dirIPMVS);
     transAnestStore.listDatosV(preIdStore.pacienteID._id);
-    this.listaTecAnest();
     
     this.menuTrans.balanceTotal = null;
     this.menuTrans.solHartman = null;
@@ -5142,11 +5141,6 @@ export default defineComponent({
       },
 
       //Gestión datos técnica anestesica 
-      async listaTecAnest() {
-        await postAnestStore.listNotaPA(preIdStore.pacienteID._id);
-        taSeparada = postAnestStore.NotaPA[0].npa_TecAnestFinal.split(",");
-      },
-
       cambiarUpdateTecnica(){
         this.transAnestStore.tipoTecnica=true
 
@@ -6080,189 +6074,191 @@ export default defineComponent({
 
         //Obtiene el arreglo con el mensaje HL7
         let hl7Message = transAnestStore.datosMSV
-    
-        //Separa las líneas del mensaje HL7
-        let lineas = hl7Message.split('\r');
-    
-        //Obtiene las líneas OBX
-        let lineasOBX = lineas.filter(function(linea) {
-          return /^OBX/.test(linea);
-        });
         
-        //Obtiene los valores requeridos de las líneas OBX, en este caso los segmentos 4 y 5
-        let valorSegmentos = lineasOBX.map(function(fila) {
-          let segmentos = fila.split('|');
-          let segmento4 = segmentos[4].replace(/\./g, "");
-
-          return {
-            segmento4: segmento4,
-            valor: segmentos[5]
-          };
-        });
-
-        //Ordena los valores obtenidos de los segmentos 4 y 5
-        for (let index = 0; index < valorSegmentos.length; index++) {
+        //Separa las líneas del mensaje HL7
+        if(hl7Message != null){          
+          let lineas = hl7Message.split('\r');
           
-          // Obtiene los valores de los datos del MSV para guardarlos en el grid
-          switch (valorSegmentos[index].segmento4) {
-            case '174147842': // FC
-              FC = valorSegmentos[index];
-            break;
+          //Obtiene las líneas OBX
+          let lineasOBX = lineas.filter(function(linea) {
+            return /^OBX/.test(linea);
+          });
           
-            case '131149530': // Pulso
-              Pulso = valorSegmentos[index];
-            break;
+          //Obtiene los valores requeridos de las líneas OBX, en este caso los segmentos 4 y 5
+          let valorSegmentos = lineasOBX.map(function(fila) {
+            let segmentos = fila.split('|');
+            let segmento4 = segmentos[4].replace(/\./g, "");
 
-            case '119150301': // PAS
-              PAS = valorSegmentos[index];
-            break;
-          
-            case '119150302': // PAD
-              PAD = valorSegmentos[index];
-            break;
+            return {
+              segmento4: segmento4,
+              valor: segmentos[5]
+            };
+          });
 
-            case '119150303': // PAM
-              PAM = valorSegmentos[index];
-            break;
-          
-            case '131150456': // SpO2
-              SpO2 = valorSegmentos[index];
-            break;
+          //Ordena los valores obtenidos de los segmentos 4 y 5
+          for (let index = 0; index < valorSegmentos.length; index++) {
+            
+            // Obtiene los valores de los datos del MSV para guardarlos en el grid
+            switch (valorSegmentos[index].segmento4) {
+              case '174147842': // FC
+                FC = valorSegmentos[index];
+              break;
+            
+              case '131149530': // Pulso
+                Pulso = valorSegmentos[index];
+              break;
 
-            case '181151708': // EtCO2
-              EtCO2 = valorSegmentos[index];
-            break;
-          
-            case '121150344': // Temp1
-              Temp1 = valorSegmentos[index];
-            break;
+              case '119150301': // PAS
+                PAS = valorSegmentos[index];
+              break;
+            
+              case '119150302': // PAD
+                PAD = valorSegmentos[index];
+              break;
 
-            case '122150344': // Temp2
-              Temp2 = valorSegmentos[index];
-            break;
-          
-            case '1112150087':// PVC
-              PVC = valorSegmentos[index];
-            break;
+              case '119150303': // PAM
+                PAM = valorSegmentos[index];
+              break;
+            
+              case '131150456': // SpO2
+                SpO2 = valorSegmentos[index];
+              break;
 
-            case '111150037': // PAS In
-              PAS_In = valorSegmentos[index];
-            break;
+              case '181151708': // EtCO2
+                EtCO2 = valorSegmentos[index];
+              break;
+            
+              case '121150344': // Temp1
+                Temp1 = valorSegmentos[index];
+              break;
 
-            case '111150038': // PAD In
-              PAD_In = valorSegmentos[index];
-            break;
+              case '122150344': // Temp2
+                Temp2 = valorSegmentos[index];
+              break;
+            
+              case '1112150087':// PVC
+                PVC = valorSegmentos[index];
+              break;
 
-            case '111150039': // PAM In
-              PAM_In = valorSegmentos[index];
-            break;
+              case '111150037': // PAS In
+                PAS_In = valorSegmentos[index];
+              break;
 
-            case '181151716': // FiCO2
-              FiCO2 = valorSegmentos[index];
-            break;
-          
-            case '181151594': // FR
-              FR = valorSegmentos[index];
-            break;
+              case '111150038': // PAD In
+                PAD_In = valorSegmentos[index];
+              break;
 
-            default:
-            break;
+              case '111150039': // PAM In
+                PAM_In = valorSegmentos[index];
+              break;
+
+              case '181151716': // FiCO2
+                FiCO2 = valorSegmentos[index];
+              break;
+            
+              case '181151594': // FR
+                FR = valorSegmentos[index];
+              break;
+
+              default:
+              break;
+            }
           }
-        }
 
-        if(FC != undefined){
-          valoresOrdenados[0] = FC;
-        }else if(FC == undefined){
-          valoresOrdenados[0] = {segmento4:"174147842", valor:"-"}
-        }
+          if(FC != undefined){
+            valoresOrdenados[0] = FC;
+          }else if(FC == undefined){
+            valoresOrdenados[0] = {segmento4:"174147842", valor:"-"}
+          }
 
-        if(Pulso != undefined){
-          valoresOrdenados[1] = Pulso;
-        }else if(Pulso == undefined){
-          valoresOrdenados[1] = {segmento4:"131149530", valor:"-"}
-        }
+          if(Pulso != undefined){
+            valoresOrdenados[1] = Pulso;
+          }else if(Pulso == undefined){
+            valoresOrdenados[1] = {segmento4:"131149530", valor:"-"}
+          }
 
-        if(PAS != undefined)
-        {
-          valoresOrdenados[2] = PAS;
-        }else if(PAS == undefined){
-          valoresOrdenados[2] = {segmento4:"119150301", valor:"-"}
-        }
+          if(PAS != undefined)
+          {
+            valoresOrdenados[2] = PAS;
+          }else if(PAS == undefined){
+            valoresOrdenados[2] = {segmento4:"119150301", valor:"-"}
+          }
 
-        if(PAD != undefined){
-          valoresOrdenados[3] = PAD;
-        }else if(PAD == undefined){
-          valoresOrdenados[3] = {segmento4:"119150302", valor:"-"}
-        }
+          if(PAD != undefined){
+            valoresOrdenados[3] = PAD;
+          }else if(PAD == undefined){
+            valoresOrdenados[3] = {segmento4:"119150302", valor:"-"}
+          }
 
-        if(PAM != undefined){
-          valoresOrdenados[4] = PAM;
-        }else if(PAM == undefined){
-          valoresOrdenados[4] = {segmento4:"119150303", valor:"-"}
-        }
+          if(PAM != undefined){
+            valoresOrdenados[4] = PAM;
+          }else if(PAM == undefined){
+            valoresOrdenados[4] = {segmento4:"119150303", valor:"-"}
+          }
 
-        if(SpO2 != undefined){
-          valoresOrdenados[5] = SpO2;
-        }else if(SpO2 == undefined){
-          valoresOrdenados[5] = {segmento4:"131150456", valor:"-"}
-        }
+          if(SpO2 != undefined){
+            valoresOrdenados[5] = SpO2;
+          }else if(SpO2 == undefined){
+            valoresOrdenados[5] = {segmento4:"131150456", valor:"-"}
+          }
 
-        if(EtCO2 != undefined){
-          valoresOrdenados[6] = EtCO2;
-        }else if(EtCO2 == undefined){
-          valoresOrdenados[6] = {segmento4:"181151708", valor:"-"}
-        }
+          if(EtCO2 != undefined){
+            valoresOrdenados[6] = EtCO2;
+          }else if(EtCO2 == undefined){
+            valoresOrdenados[6] = {segmento4:"181151708", valor:"-"}
+          }
 
-        if(Temp1 != undefined){
-          valoresOrdenados[7] = Temp1;
-        }else if(Temp1 == undefined){
-          valoresOrdenados[7] = {segmento4:"121150344", valor:"-"}
-        }
+          if(Temp1 != undefined){
+            valoresOrdenados[7] = Temp1;
+          }else if(Temp1 == undefined){
+            valoresOrdenados[7] = {segmento4:"121150344", valor:"-"}
+          }
 
-        if(Temp2 != undefined){
-          valoresOrdenados[8] = Temp2;
-        }else if(Temp2 == undefined){
-          valoresOrdenados[8] = {segmento4:"122150344", valor:"-"}
-        }
+          if(Temp2 != undefined){
+            valoresOrdenados[8] = Temp2;
+          }else if(Temp2 == undefined){
+            valoresOrdenados[8] = {segmento4:"122150344", valor:"-"}
+          }
 
-        if(PVC != undefined){
-          valoresOrdenados[9] = PVC;
-        }else if(PVC == undefined){
-          valoresOrdenados[9] = {segmento4:"1112150087", valor:"-"}
-        }
+          if(PVC != undefined){
+            valoresOrdenados[9] = PVC;
+          }else if(PVC == undefined){
+            valoresOrdenados[9] = {segmento4:"1112150087", valor:"-"}
+          }
 
-        if(PAS_In != undefined){
-          valoresOrdenados[10] = PAS_In;
-        }else if(PAS_In == undefined){
-          valoresOrdenados[10] = {segmento4:"111150037", valor:"-"}
-        }
+          if(PAS_In != undefined){
+            valoresOrdenados[10] = PAS_In;
+          }else if(PAS_In == undefined){
+            valoresOrdenados[10] = {segmento4:"111150037", valor:"-"}
+          }
 
-        if(PAD_In != undefined){
-          valoresOrdenados[11] = PAD_In;
-        }else if(PAD_In == undefined){
-          valoresOrdenados[11] = {segmento4:"111150038", valor:"-"}
-        }
+          if(PAD_In != undefined){
+            valoresOrdenados[11] = PAD_In;
+          }else if(PAD_In == undefined){
+            valoresOrdenados[11] = {segmento4:"111150038", valor:"-"}
+          }
 
-        if(PAM_In != undefined){
-          valoresOrdenados[12] = PAM_In;
-        }else if(PAM_In == undefined){
-          valoresOrdenados[12] = {segmento4:"111150039", valor:"-"}
-        }
+          if(PAM_In != undefined){
+            valoresOrdenados[12] = PAM_In;
+          }else if(PAM_In == undefined){
+            valoresOrdenados[12] = {segmento4:"111150039", valor:"-"}
+          }
 
-        if(FiCO2 != undefined){
-          valoresOrdenados[13] = FiCO2;
-        }else if(FiCO2 == undefined){
-          valoresOrdenados[13] = {segmento4:"181151716", valor:"-"}
-        }
+          if(FiCO2 != undefined){
+            valoresOrdenados[13] = FiCO2;
+          }else if(FiCO2 == undefined){
+            valoresOrdenados[13] = {segmento4:"181151716", valor:"-"}
+          }
 
-        if(FR != undefined){
-          valoresOrdenados[14] = FR;
-        }else if(FR == undefined){
-          valoresOrdenados[14] = {segmento4:"181151594", valor:"-"}
-        }
+          if(FR != undefined){
+            valoresOrdenados[14] = FR;
+          }else if(FR == undefined){
+            valoresOrdenados[14] = {segmento4:"181151594", valor:"-"}
+          }
 
-        //Asignar los valores ordenads
-        this.hl7mess.push({ datos: valoresOrdenados, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+          //Asignar los valores ordenads
+          this.hl7mess.push({ datos: valoresOrdenados, horaGeneracion: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+        }
       },
 
       // Recibe datos del MSV cada segundo
@@ -6274,7 +6270,6 @@ export default defineComponent({
 
       termRecepDatos(){
         transAnestStore.envDat = false;
-        console.log(transAnestStore.envDat);
         transAnestStore.datosMSV = null;
         clearInterval(this.intervalId);
       },
@@ -6285,7 +6280,6 @@ export default defineComponent({
 
       siguesAhi(){
         this.temporizador = setTimeout(() => {
-          console.log("Sigues Ahi?");
           this.siAquisigo();
         }, 1000 * 60 * 30);
       },
@@ -6877,5 +6871,12 @@ hr {
 }
 .columna-size-2{
   height: 40%;
+}
+/* Puntero mano */
+.cursor-puntero{
+  cursor: pointer;
+}
+.cursor-default{
+  cursor:default;
 }
 </style>

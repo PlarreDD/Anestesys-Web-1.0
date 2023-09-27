@@ -534,7 +534,7 @@
                 <td class="col-2 color-texto">Aldrete:</td>
                 <th>
                   <select
-                    id="inputState"
+                    
                     v-model="infoRec.aldreteRec_AldreteIn"
                     @click.capture="obtenerAldrete"
                     class="form-select"
@@ -561,7 +561,7 @@
 
                 <th>
                   <select
-                    id="inputState"
+                    
                     v-model="infoRec.aldreteRec_Aldrete15"
                     @click.capture="obtenerAldrete"
                     class="form-select"
@@ -588,7 +588,7 @@
 
                 <th>
                   <select
-                    id="inputState"
+                    
                     v-model="infoRec.aldreteRec_Aldrete30"
                     @click.capture="obtenerAldrete"
                     class="form-select"
@@ -615,7 +615,7 @@
 
                 <th>
                   <select
-                    id="inputState"
+                    
                     v-model="infoRec.aldreteRec_Aldrete45"
                     @click.capture="obtenerAldrete"
                     class="form-select"
@@ -642,7 +642,7 @@
 
                 <th>
                   <select
-                    id="inputState"
+                    
                     v-model="infoRec.aldreteRec_Aldrete60"
                     @click.capture="obtenerAldrete"
                     class="form-select"
@@ -669,7 +669,7 @@
 
                 <th>
                   <select
-                    id="inputState"
+                    
                     v-model="infoRec.aldreteRec_Aldrete90"
                     @click.capture="obtenerAldrete"
                     class="form-select"
@@ -696,7 +696,7 @@
 
                 <th>
                   <select
-                    id="inputState"
+                    
                     v-model="infoRec.aldreteRec_Aldrete120"
                     @click.capture="obtenerAldrete"
                     class="form-select"
@@ -725,7 +725,7 @@
               <!-- Bromage -->
               <tr class="espacio">
                 <td class="col-2 color-texto">
-                  <label for="" class="form-label color-td">
+                  <label  class="form-label color-td">
                     <span
                       data-bs-toggle="modal"
                       data-bs-target="#bromage-modal"
@@ -737,7 +737,7 @@
                 </td>
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_BromageIn"
                     class="form-select"
                     :class="
@@ -757,7 +757,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Bromage15"
                     class="form-select"
                     :class="
@@ -777,7 +777,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Bromage30"
                     class="form-select"
                     :class="
@@ -797,7 +797,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Bromage45"
                     class="form-select"
                     :class="
@@ -817,7 +817,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Bromage60"
                     class="form-select"
                     :class="
@@ -837,7 +837,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Bromage90"
                     class="form-select"
                     :class="
@@ -857,7 +857,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Bromage120"
                     class="form-select"
                     :class="
@@ -881,7 +881,7 @@
                 <td class="col-2 color-texto">Nauseas/Vomito:</td>
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_NauseasIn"
                     class="form-select"
                     :class="
@@ -899,7 +899,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Nauseas15"
                     class="form-select"
                     :class="
@@ -917,7 +917,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Nauseas30"
                     class="form-select"
                     :class="
@@ -935,7 +935,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Nauseas45"
                     class="form-select"
                     :class="
@@ -953,7 +953,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Nauseas60"
                     class="form-select"
                     :class="
@@ -971,7 +971,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Nauseas90"
                     class="form-select"
                     :class="
@@ -989,7 +989,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Nauseas120"
                     class="form-select"
                     :class="
@@ -1009,7 +1009,7 @@
               <!-- Escala de EVA Dolor -->
               <tr class="espacio">
                 <td class="col-2 color-texto">
-                  <label for="" class="form-label color-td">
+                  <label  class="form-label color-td">
                     <span
                       data-bs-toggle="modal"
                       data-bs-target="#escala-EVA-modal"
@@ -1021,7 +1021,7 @@
                 </td>
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_escEVADolIn"
                     class="form-select"
                     :class="
@@ -1047,7 +1047,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_escEVADol15"
                     class="form-select"
                     :class="
@@ -1073,7 +1073,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_escEVADol30"
                     class="form-select"
                     :class="
@@ -1099,7 +1099,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_escEVADol45"
                     class="form-select"
                     :class="
@@ -1125,7 +1125,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_escEVADol60"
                     class="form-select"
                     :class="
@@ -1151,7 +1151,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_escEVADol90"
                     class="form-select"
                     :class="
@@ -1177,7 +1177,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_escEVADol120"
                     class="form-select"
                     :class="
@@ -1245,11 +1245,11 @@
             <h5 class="fw-bold">ALTA DE RECUPERACIÓN</h5>
             <!-- Criterio de Aldrete -->
             <div class="col-md-3">
-              <label for="" class="form-label fw-bold">Criterio de Aldrete</label>
+              <label  class="form-label fw-bold">Criterio de Aldrete</label>
             </div>
 
             <div class="col-md-1 text-center">
-              <label for="" class="form-label fw-bold">0 min</label>
+              <label  class="form-label fw-bold">0 min</label>
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_0min"
@@ -1259,7 +1259,7 @@
             </div>
 
             <div class="col-md-1 text-center">
-              <label for="" class="form-label fw-bold">15 min</label>
+              <label  class="form-label fw-bold">15 min</label>
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_15min"
@@ -1268,7 +1268,7 @@
             </div>
 
             <div class="col-md-1 text-center">
-              <label for="" class="form-label fw-bold">30 min</label>
+              <label  class="form-label fw-bold">30 min</label>
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_30min"
@@ -1277,7 +1277,7 @@
             </div>
 
             <div class="col-md-1 text-center">
-              <label for="" class="form-label fw-bold">45 min</label>
+              <label  class="form-label fw-bold">45 min</label>
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_45min"
@@ -1286,7 +1286,7 @@
             </div>
 
             <div class="col-md-1 text-center">
-              <label for="" class="form-label fw-bold">60 min</label>
+              <label  class="form-label fw-bold">60 min</label>
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_60min"
@@ -1295,7 +1295,7 @@
             </div>
 
             <div class="col-md-1 text-center">
-              <label for="" class="form-label fw-bold">90 min</label>
+              <label  class="form-label fw-bold">90 min</label>
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_90min"
@@ -1304,7 +1304,7 @@
             </div>
 
             <div class="col-md-1 text-center">
-              <label for="" class="form-label fw-bold">120 min</label>
+              <label  class="form-label fw-bold">120 min</label>
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_120min"
@@ -1319,7 +1319,7 @@
                       
                         <!-- Calificación de Aldrete -->
                         <div class="col-md-12">
-                            <label for="" class="form-label fw-bold">Calificación de Aldrete</label>
+                            <label  class="form-label fw-bold">Calificación de Aldrete</label>
                             <input
                                 type="text" @keyup.capture="enviarDatosRecuperacion"
                                 class="form-control"                                
@@ -1331,7 +1331,7 @@
                         
                         <!-- Nombre del Médico Anestesiólogo -->
                         <div class="col-md-12">
-                            <label for="" class="form-label fw-bold"
+                            <label  class="form-label fw-bold"
                                 >Nombre del Médico Anestesiólogo</label
                             >
                             <input
@@ -1345,7 +1345,7 @@
 
                         <!-- Fecha de Alta -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Fecha de alta de recuperación</label>
+                            <label  class="form-label fw-bold">Fecha de alta de recuperación</label>
                             <input
                                 type="date"
                                 class="form-control"
@@ -1358,7 +1358,7 @@
 
                         <!-- Hora de la Alta de Recuperación -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Hora de alta de recuperación</label>
+                            <label  class="form-label fw-bold">Hora de alta de recuperación</label>
                             <input
                                 type="time"
                                 class="form-control"
@@ -1377,7 +1377,7 @@
                     <div class="row g-3">
                         <!-- Observaciones -->
                         <div class="col-md-12">
-                            <label for="" class="form-label fw-bold">Observaciones</label>
+                            <label  class="form-label fw-bold">Observaciones</label>
                             <textarea
                                 class="form-control"
                                 @keyup.capture="enviarDatosRecuperacion"

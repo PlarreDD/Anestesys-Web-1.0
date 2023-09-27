@@ -6,23 +6,11 @@ import { MenuTrans } from "../models/TransAnestesico";
 /********************************************************************/
 /***************************  ID PACIENTE ***************************/
 /********************************************************************/
-/* Función para obtener toda la información del paciente */
-export const getAllInfo = async (req: any, res: Response) => {
+/* Función para listar los expedientes */
+export const getExpedientes = async (req: any, res: Response) =>{
     try {
-        const {pid} = req.body
-        
-        const pacientescx = await PreIdPacientesCx.find({pid: pid});
-        const prevals = await PreValoracion.find({pid: pid});
-        const preests = await ValEstudios.find({vid: prevals[0]._id});
-        const preplan = await PrePlan.find({pid: pid});
-        const prenota = await PreNota.find({pid: pid});
-        
-        console.log( "PREANESTÉSICO:\n\t" + pacientescx +
-                     "\nVALORACIÓN:\n\t" + prevals + "\n" + preests +
-                     "\nPLAN:\n\t" + preplan +
-                     "\nNOTA\n\t" + prenota);
-        
-        return res.json({pacientescx, prevals, preests, preplan, prenota});
+        const expedientes = await PreIdPacientes.find({id: req.id}) 
+        return res.json({expedientes});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
     }

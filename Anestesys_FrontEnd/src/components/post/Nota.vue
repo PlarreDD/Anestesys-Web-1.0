@@ -31,7 +31,7 @@
                         
                         <!-- Técnica de anestesia final -->
                         <div class="col-md-10">                            
-                            <label for="" class="form-label fw-bold">Técnica de anestesia final</label>
+                            <label  class="form-label fw-bold">Técnica de anestesia final</label>
                             <Multiselect
                                 v-model="postAnestStore.TecnicaAnestesica"
                                 :disabled="true"
@@ -48,7 +48,7 @@
 
                         <!-- Intubación -->
                         <div class="col-md-2">
-                            <label for="" class="form-label col-12 fw-bold">Intubación</label>
+                            <label  class="form-label col-12 fw-bold">Intubación</label>
                             <input type="radio" @change="enviarDatosNotaPost"
                                    class="btn-check"
                                    name="intubacion"
@@ -70,7 +70,7 @@
 
                         <!-- Nota Post-Anestésica -->
                         <div class="col-md-12">
-                            <label for="" class="form-label fw-bold">Nota Post-anestésica</label>
+                            <label  class="form-label fw-bold">Nota Post-anestésica</label>
                             <textarea class="form-control" @keyup.capture="enviarDatosNotaPost"
                                       rows="8"
                                       maxlength="1000"
@@ -86,7 +86,7 @@
 
                         <!-- TA -->
                         <div class="col-md-2 fw-bold">
-                            <label for="" class="form-label">TA</label>
+                            <label  class="form-label">TA</label>
                             <input type="text" @keyup.capture="enviarDatosNotaPost"
                                    class="form-control"
                                    id=""
@@ -97,7 +97,7 @@
 
                         <!-- FC -->
                         <div class="col-md-2 fw-bold">
-                            <label for="" class="form-label">FC</label>
+                            <label  class="form-label">FC</label>
                             <input type="text" @keyup.capture="enviarDatosNotaPost"
                                    class="form-control"
                                    v-model="infoNotaPost.signVitEgQx_FC"
@@ -107,7 +107,7 @@
 
                         <!-- FR -->
                         <div class="col-md-2 fw-bold">
-                            <label for="" class="form-label">FR</label>
+                            <label  class="form-label">FR</label>
                             <input type="text" @keyup.capture="enviarDatosNotaPost"
                                    class="form-control"
                                    v-model="infoNotaPost.signVitEgQx_FR"
@@ -117,7 +117,7 @@
 
                         <!-- Temperatura -->
                         <div class="col-md-2 fw-bold">
-                            <label for="" class="form-label">Temperatura</label>
+                            <label  class="form-label">Temperatura</label>
                             <input type="text" @keyup.capture="enviarDatosNotaPost"
                                    class="form-control"
                                    id=""
@@ -128,7 +128,7 @@
 
                         <!-- Pulso -->
                         <div class="col-md-2 fw-bold">
-                            <label for="" class="form-label">Pulso</label>
+                            <label  class="form-label">Pulso</label>
                             <input type="text" @keyup.capture="enviarDatosNotaPost"
                                    class="form-control"
                                    id=""
@@ -139,7 +139,7 @@
 
                         <!-- SpO2 -->
                         <div class="col-md-2 fw-bold">
-                            <label for="" class="form-label">SpO2</label>
+                            <label  class="form-label">SpO2</label>
                             <input type="text" @keyup.capture="enviarDatosNotaPost"
                                    class="form-control"
                                    id=""
@@ -150,8 +150,8 @@
 
                         <!-- El paciente pasa a -->
                         <div class="col-md-8 fw-bold">
-                            <label for="inputState" class="form-label">El paciente pasa a</label>
-                            <select id="inputState" @change="enviarDatosNotaPost"                            
+                            <label class="form-label">El paciente pasa a</label>
+                            <select  @change="enviarDatosNotaPost"                            
                                     class="form-select"
                                     v-model="infoNotaPost.signVitEgQx_EgresoPac"
                                     :class="infoNotaPost.signVitEgQx_EgresoPac != undefined && infoNotaPost.signVitEgQx_EgresoPac != '' ?
@@ -197,8 +197,8 @@
                         <h5 class="fw-bold">CASO OBSTETRICO</h5>
                         <!-- Número de productos -->
                         <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">Número de productos</label>                            
-                            <select id="inputState" @change="enviarDatosNotaPost"
+                            <label  class="form-label fw-bold">Número de productos</label>                            
+                            <select  @change="enviarDatosNotaPost"
                                     class="form-select"
                                     v-model="infoNotaPost.casoObsRecNac_NumProd"
                                     :class="infoNotaPost.casoObsRecNac_NumProd != '' && infoNotaPost.casoObsRecNac_NumProd != undefined ?
@@ -272,7 +272,7 @@
                                         <div class="row g-3">
                                             <!-- Género -->
                                             <div class="col-md-3">
-                                                <label for="" class="form-label col-12 fw-bold">Género</label>
+                                                <label  class="form-label col-12 fw-bold">Género</label>
                                                 <input type="radio" @change="enviarDatosNotaPost"
                                                     class="btn-check"
                                                     name="generoCaso1"
@@ -294,7 +294,7 @@
 
                                             <!-- Hora de Nacimiento -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Hora de Nacimiento</label>
+                                                <label  class="form-label fw-bold">Hora de Nacimiento</label>
                                                 <input type="time" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     id="horaNacimiento"
@@ -305,7 +305,7 @@
 
                                             <!-- Alumbramiento -->
                                             <div class="col-md-7">
-                                                <label for="" class="form-label fw-bold">Alumbramiento</label>
+                                                <label  class="form-label fw-bold">Alumbramiento</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac1_Alumbramiento"
@@ -315,7 +315,7 @@
 
                                             <!-- Apgar 1 min -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Apgar 1 min</label>
+                                                <label  class="form-label fw-bold">Apgar 1 min</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac1_Apgar1"
@@ -325,7 +325,7 @@
 
                                             <!-- Apgar 5 min -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Apgar 5 min</label>
+                                                <label  class="form-label fw-bold">Apgar 5 min</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac1_Apgar5"
@@ -335,7 +335,7 @@
 
                                             <!-- Capurro -->
                                             <div class="col-md-8">
-                                                <label for="" class="form-label fw-bold">Capurro</label>
+                                                <label  class="form-label fw-bold">Capurro</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac1_Capurro"
@@ -345,7 +345,7 @@
 
                                             <!-- Peso (gm) -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Peso (gm)</label>
+                                                <label  class="form-label fw-bold">Peso (gm)</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac1_Peso"
@@ -355,7 +355,7 @@
 
                                             <!-- Talla (cm) -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Talla (cm)</label>
+                                                <label  class="form-label fw-bold">Talla (cm)</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac1_Talla"
@@ -372,7 +372,7 @@
                                         <div class="row g-3">
                                             <!-- Género -->
                                             <div class="col-md-3">
-                                                <label for="" class="form-label col-12 fw-bold">Género</label>
+                                                <label  class="form-label col-12 fw-bold">Género</label>
                                                 <input type="radio" @change="enviarDatosNotaPost"
                                                     class="btn-check"
                                                     name="generoCaso2"
@@ -394,7 +394,7 @@
 
                                             <!-- Hora de Nacimiento -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Hora de Nacimiento</label>
+                                                <label  class="form-label fw-bold">Hora de Nacimiento</label>
                                                 <input type="time" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     id="horaNacimiento"
@@ -405,7 +405,7 @@
 
                                             <!-- Alumbramiento -->
                                             <div class="col-md-7">
-                                                <label for="" class="form-label fw-bold">Alumbramiento</label>
+                                                <label  class="form-label fw-bold">Alumbramiento</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac2_Alumbramiento"
@@ -415,7 +415,7 @@
 
                                             <!-- Apgar 1 min -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Apgar 1 min</label>
+                                                <label  class="form-label fw-bold">Apgar 1 min</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac2_Apgar1"
@@ -425,7 +425,7 @@
 
                                             <!-- Apgar 5 min -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Apgar 5 min</label>
+                                                <label  class="form-label fw-bold">Apgar 5 min</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac2_Apgar5"
@@ -435,7 +435,7 @@
 
                                             <!-- Capurro -->
                                             <div class="col-md-8">
-                                                <label for="" class="form-label fw-bold">Capurro</label>
+                                                <label  class="form-label fw-bold">Capurro</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac2_Capurro"
@@ -445,7 +445,7 @@
 
                                             <!-- Peso (gm) -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Peso (gm)</label>
+                                                <label  class="form-label fw-bold">Peso (gm)</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac2_Peso"
@@ -455,7 +455,7 @@
 
                                             <!-- Talla (cm) -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Talla (cm)</label>
+                                                <label  class="form-label fw-bold">Talla (cm)</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac2_Talla"
@@ -472,7 +472,7 @@
                                         <div class="row g-3">
                                             <!-- Género -->
                                             <div class="col-md-3">
-                                                <label for="" class="form-label col-12 fw-bold">Género</label>
+                                                <label  class="form-label col-12 fw-bold">Género</label>
                                                 <input type="radio" @change="enviarDatosNotaPost"
                                                     class="btn-check"
                                                     name="generoCaso3"
@@ -494,7 +494,7 @@
 
                                             <!-- Hora de Nacimiento -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Hora de Nacimiento</label>
+                                                <label  class="form-label fw-bold">Hora de Nacimiento</label>
                                                 <input type="time" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     id="horaNacimiento"
@@ -505,7 +505,7 @@
 
                                             <!-- Alumbramiento -->
                                             <div class="col-md-7">
-                                                <label for="" class="form-label fw-bold">Alumbramiento</label>
+                                                <label  class="form-label fw-bold">Alumbramiento</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac3_Alumbramiento"
@@ -515,7 +515,7 @@
 
                                             <!-- Apgar 1 min -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Apgar 1 min</label>
+                                                <label  class="form-label fw-bold">Apgar 1 min</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac3_Apgar1"
@@ -525,7 +525,7 @@
 
                                             <!-- Apgar 5 min -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Apgar 5 min</label>
+                                                <label  class="form-label fw-bold">Apgar 5 min</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac3_Apgar5"
@@ -535,7 +535,7 @@
 
                                             <!-- Capurro -->
                                             <div class="col-md-8">
-                                                <label for="" class="form-label fw-bold">Capurro</label>
+                                                <label  class="form-label fw-bold">Capurro</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac3_Capurro"
@@ -545,7 +545,7 @@
 
                                             <!-- Peso (gm) -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Peso (gm)</label>
+                                                <label  class="form-label fw-bold">Peso (gm)</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac3_Peso"
@@ -555,7 +555,7 @@
 
                                             <!-- Talla (cm) -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Talla (cm)</label>
+                                                <label  class="form-label fw-bold">Talla (cm)</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac3_Talla"
@@ -572,7 +572,7 @@
                                         <div class="row g-3">
                                             <!-- Género -->
                                             <div class="col-md-3">
-                                                <label for="" class="form-label col-12 fw-bold">Género</label>
+                                                <label  class="form-label col-12 fw-bold">Género</label>
                                                 <input type="radio" @change="enviarDatosNotaPost"
                                                     class="btn-check"
                                                     name="generoCaso4"
@@ -594,7 +594,7 @@
 
                                             <!-- Hora de Nacimiento -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Hora de Nacimiento</label>
+                                                <label  class="form-label fw-bold">Hora de Nacimiento</label>
                                                 <input type="time" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     id="horaNacimiento"
@@ -605,7 +605,7 @@
 
                                             <!-- Alumbramiento -->
                                             <div class="col-md-7">
-                                                <label for="" class="form-label fw-bold">Alumbramiento</label>
+                                                <label  class="form-label fw-bold">Alumbramiento</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     id=""
@@ -616,7 +616,7 @@
 
                                             <!-- Apgar 1 min -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Apgar 1 min</label>
+                                                <label  class="form-label fw-bold">Apgar 1 min</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac4_Apgar1"
@@ -626,7 +626,7 @@
 
                                             <!-- Apgar 5 min -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Apgar 5 min</label>
+                                                <label  class="form-label fw-bold">Apgar 5 min</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac4_Apgar5"
@@ -636,7 +636,7 @@
 
                                             <!-- Capurro -->
                                             <div class="col-md-8">
-                                                <label for="" class="form-label fw-bold">Capurro</label>
+                                                <label  class="form-label fw-bold">Capurro</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac4_Capurro"
@@ -646,7 +646,7 @@
 
                                             <!-- Peso (gm) -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Peso (gm)</label>
+                                                <label  class="form-label fw-bold">Peso (gm)</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac4_Peso"
@@ -656,7 +656,7 @@
 
                                             <!-- Talla (cm) -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Talla (cm)</label>
+                                                <label  class="form-label fw-bold">Talla (cm)</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac4_Talla"
@@ -673,7 +673,7 @@
                                         <div class="row g-3">
                                             <!-- Género -->
                                             <div class="col-md-3">
-                                                <label for="" class="form-label col-12 fw-bold">Género</label>
+                                                <label  class="form-label col-12 fw-bold">Género</label>
                                                 <input type="radio" @change="enviarDatosNotaPost"
                                                     class="btn-check"
                                                     name="generoCaso5"
@@ -695,7 +695,7 @@
 
                                             <!-- Hora de Nacimiento -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Hora de Nacimiento</label>
+                                                <label  class="form-label fw-bold">Hora de Nacimiento</label>
                                                 <input type="time" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     id="horaNacimiento"
@@ -706,7 +706,7 @@
 
                                             <!-- Alumbramiento -->
                                             <div class="col-md-7">
-                                                <label for="" class="form-label fw-bold">Alumbramiento</label>
+                                                <label  class="form-label fw-bold">Alumbramiento</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac5_Alumbramiento"
@@ -716,7 +716,7 @@
 
                                             <!-- Apgar 1 min -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Apgar 1 min</label>
+                                                <label  class="form-label fw-bold">Apgar 1 min</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac5_Apgar1"
@@ -726,7 +726,7 @@
 
                                             <!-- Apgar 5 min -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Apgar 5 min</label>
+                                                <label  class="form-label fw-bold">Apgar 5 min</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac5_Apgar5"
@@ -736,7 +736,7 @@
 
                                             <!-- Capurro -->
                                             <div class="col-md-8">
-                                                <label for="" class="form-label fw-bold">Capurro</label>
+                                                <label  class="form-label fw-bold">Capurro</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac5_Capurro"
@@ -746,7 +746,7 @@
 
                                             <!-- Peso (gm) -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Peso (gm)</label>
+                                                <label  class="form-label fw-bold">Peso (gm)</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac5_Peso"
@@ -756,7 +756,7 @@
 
                                             <!-- Talla (cm) -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Talla (cm)</label>
+                                                <label  class="form-label fw-bold">Talla (cm)</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac5_Talla"
@@ -773,7 +773,7 @@
                                         <div class="row g-3">
                                             <!-- Género -->
                                             <div class="col-md-3">
-                                                <label for="" class="form-label col-12 fw-bold">Género</label>
+                                                <label  class="form-label col-12 fw-bold">Género</label>
                                                 <input type="radio" @change="enviarDatosNotaPost"
                                                     class="btn-check"
                                                     name="generoCaso6"
@@ -795,7 +795,7 @@
 
                                             <!-- Hora de Nacimiento -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Hora de Nacimiento</label>
+                                                <label  class="form-label fw-bold">Hora de Nacimiento</label>
                                                 <input type="time" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     id="horaNacimiento"
@@ -806,7 +806,7 @@
 
                                             <!-- Alumbramiento -->
                                             <div class="col-md-7">
-                                                <label for="" class="form-label fw-bold">Alumbramiento</label>
+                                                <label  class="form-label fw-bold">Alumbramiento</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac6_Alumbramiento"
@@ -816,7 +816,7 @@
 
                                             <!-- Apgar 1 min -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Apgar 1 min</label>
+                                                <label  class="form-label fw-bold">Apgar 1 min</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac6_Apgar1"
@@ -826,7 +826,7 @@
 
                                             <!-- Apgar 5 min -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Apgar 5 min</label>
+                                                <label  class="form-label fw-bold">Apgar 5 min</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac6_Apgar5"
@@ -836,7 +836,7 @@
 
                                             <!-- Capurro -->
                                             <div class="col-md-8">
-                                                <label for="" class="form-label fw-bold">Capurro</label>
+                                                <label  class="form-label fw-bold">Capurro</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac6_Capurro"
@@ -846,7 +846,7 @@
 
                                             <!-- Peso (gm) -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Peso (gm)</label>
+                                                <label  class="form-label fw-bold">Peso (gm)</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac6_Peso"
@@ -856,7 +856,7 @@
 
                                             <!-- Talla (cm) -->
                                             <div class="col-md-2">
-                                                <label for="" class="form-label fw-bold">Talla (cm)</label>
+                                                <label  class="form-label fw-bold">Talla (cm)</label>
                                                 <input type="text" @keyup.capture="enviarDatosNotaPost"
                                                     class="form-control"
                                                     v-model="infoNotaPost.casoObsRecNac6_Talla"

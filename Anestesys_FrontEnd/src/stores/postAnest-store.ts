@@ -219,13 +219,11 @@ export const usePostAnestStore = defineStore('postAn', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
         async updateNotaPA(infoNotaPost: any, pid: string, tecnicaAnest: Object){
             infoNotaPost.npa_TecAnestFinal = String(tecnicaAnest);
-            console.log(tecnicaAnest + " " + infoNotaPost.npa_TecAnestFinal);
             
             await apiAxios({
                 url: `http://localhost:5000/notapa/${String(pid)}`,
@@ -288,7 +286,6 @@ export const usePostAnestStore = defineStore('postAn', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -304,7 +301,6 @@ export const usePostAnestStore = defineStore('postAn', {
                 this.NotaPA = res.data.notaPA;
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
         /*----------------------- Recuperación -----------------------*/
@@ -412,7 +408,6 @@ export const usePostAnestStore = defineStore('postAn', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
 
@@ -519,7 +514,6 @@ export const usePostAnestStore = defineStore('postAn', {
                 })
             })
             .catch((e: any) => {
-                // console.log("error: " + e);
             });
         },
     }

@@ -6,11 +6,16 @@
     <div class="input-group mb-3">
       <div class="col-md-6">
         <!--Buscador-->
-        <input class="form-control me-2"
-               v-model="idStore.numExpediente"
-               type="search"
-               placeholder="Buscar número de expediente..."
-               aria-label="Buscar" @keyup.capture="idStore.getPaciente(idStore.numExpediente)">
+        <Multiselect mode="tags"          
+          placeholder="Buscar número de expediente..."
+          v-model="idStore.numExpediente"                
+          :options="listaExpedientes"
+          :searchable="true"
+          :createTag="true"
+          :max="1"
+          :multiple="false"
+          @click="listarExpedientes()"
+        />
       </div>
 
       <div class="col-md-2"></div>
@@ -31,7 +36,7 @@
         </div>
       </div>
 
-      <!--Abrir el modal de Medicamentos-->
+      <!--Abrir el modal de Historial-->
       <div class="modal" ref="historialModal" id="modal-historial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content color-dropdown">
@@ -257,6 +262,7 @@ import swal from 'sweetalert2';
 import { useUserStore } from "@/stores/user-store";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
 import { usePreIdStore } from '../../stores/preId-store';
+import Multiselect from '@vueform/multiselect';
 
 const userStore = useUserStore();
 const idStore = usePreIdStore();
@@ -293,7 +299,10 @@ export default defineComponent({
       
       idStore,
       
-      mostrarVistaRapida: false
+      mostrarVistaRapida: false,
+
+      expSeleccionado: [],
+      listaExpedientes: []
     }
   },
 
@@ -302,7 +311,8 @@ export default defineComponent({
     Nota,
     Plan,
     Valoracion,
-    BarraNavegacion
+    BarraNavegacion,
+    Multiselect
   },
   
   created(){
@@ -321,9 +331,18 @@ export default defineComponent({
   },
 
   methods: {
-    // async consultaPaciente(){
-    //   idStore.getPaciente();
-    // },
+    async listarExpedientes(){
+      await idStore.getExpedientesList()
+
+      let expediente= idStore.expedientes;
+      this.listaExpedientes = expediente.map(document => document.numExpediente);
+      this.listaExpedientes.sort()
+
+      // Sino se elige un expediente no manda la petición
+      if(idStore.numExpediente != null && idStore.numExpediente != ''){        
+        idStore.getPaciente(idStore.numExpediente)
+      }          
+    },
 
     async validaExpedienteId(numExpediente, nombrePaciente) {
       if(numExpediente === undefined || nombrePaciente === undefined ||
@@ -478,6 +497,8 @@ export default defineComponent({
   }  
 })
 </script>
+
+<style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
 .color-dropdown {
