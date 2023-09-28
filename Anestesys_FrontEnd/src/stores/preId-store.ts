@@ -943,7 +943,7 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {
                 this.pacientes = res.data;
-                console.log("Paciente: "+JSON.stringify(this.pacientes));                
+                // console.log("Paciente: "+JSON.stringify(this.pacientes));                
             })
             .catch((e: any) => {
             });

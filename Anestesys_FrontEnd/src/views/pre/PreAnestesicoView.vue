@@ -14,7 +14,7 @@
           :createTag="true"
           :max="1"
           :multiple="false"
-          @click="listarExpedientes()"
+          @select="obtenerPaciente"
         />
       </div>
 
@@ -324,6 +324,8 @@ export default defineComponent({
     this.mostrarHeader();
     this.ocultarMenuLateral();
     document.addEventListener('scroll', this.scrollFunction);
+    
+    this.listarExpedientes();
   },
   
   destroyed: function(){
@@ -331,17 +333,32 @@ export default defineComponent({
   },
 
   methods: {
+    // Obtener expedientes en Multiselect
     async listarExpedientes(){
       await idStore.getExpedientesList()
 
       let expediente= idStore.expedientes;
       this.listaExpedientes = expediente.map(document => document.numExpediente);
-      this.listaExpedientes.sort()
+      this.listaExpedientes.sort();      
+    },
+
+    // Obtener datos de paciente seleccionado
+    async obtenerPaciente(){
+      await this.listarExpedientes();
 
       // Sino se elige un expediente no manda la petición
       if(idStore.numExpediente != null && idStore.numExpediente != ''){        
-        idStore.getPaciente(idStore.numExpediente)
-      }          
+        await idStore.getPaciente(idStore.numExpediente)
+
+        // if(idStore.pacientes != null && idStore.pacientes != ''){
+          console.log("Entro");
+        
+        idStore.numeroExpediente = idStore.pacientes.pacientes[0].numExpediente
+        console.log("NumExp: "+idStore.numeroExpediente);
+      // }
+      }
+
+      
     },
 
     async validaExpedienteId(numExpediente, nombrePaciente) {
