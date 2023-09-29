@@ -462,30 +462,24 @@ export default defineComponent({
     components: { ElSelect, ElOption },
 
     props: {
-        propNumExp: {
-            type: Boolean
-        },
-        propNomPac:{
-            type: Boolean
-        },
-        propRojoNum:{
-            type: Boolean
-        },
-        propVerdeNum:{
-            type: Boolean
-        },
-        propRojoNom:{
-            type: Boolean
-        },
-        propVerdeNom:{
-            type: Boolean
-        },
-        propBtnGuardarId:{
-            type: Boolean
-        },
-        propBtnActualizarId:{
-            type: Boolean
-        },
+        propNumExp: {type: Boolean},
+        propNomPac:{type: Boolean},
+        propRojoNum:{type: Boolean},
+        propVerdeNum:{type: Boolean},
+        propRojoNom:{type: Boolean},
+        propVerdeNom:{type: Boolean},
+        propBtnGuardarId:{type: Boolean},
+        propBtnActualizarId:{type: Boolean},
+
+        propNumeroExp:{type: String},
+        propNombrePac:{type: String},
+        propFechaNacimiento:{type: String},
+        propEdad:{type: Number},
+        propGenero:{type: String},
+        propNacionalidad:{type: String},
+        propCURP:{type: String},
+        propFolioID:{type: String},
+        propEstadoNacimiento:{type: String},
     },
 
     data () {
@@ -682,9 +676,20 @@ export default defineComponent({
             this.infoPreIdPaciente.hrCx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
 
             this.enviarDatos();
+        },
+
+        async asignarValoresPaciente(){
+            this.infoPreIdPaciente.numExped = await this.propNumeroExp;
+            this.infoPreIdPaciente.nomPaciente = await this.propNombrePac;
+            this.infoPreIdPaciente.fechaNac = await this.propFechaNacimiento;
+            this.infoPreIdPaciente.edadPaciente = await this.propEdad;
+            this.infoPreIdPaciente.genero = await this.propGenero;
+            this.infoPreIdPaciente.nacionalidad = await this.propNacionalidad;
+            this.infoPreIdPaciente.CURP = await this.propCURP;
+            this.infoPreIdPaciente.folioID = await this.propFolioID;
+            this.infoPreIdPaciente.estNacimiento = await this.propEstadoNacimiento;
         }
     },
-
 })
 </script>
 

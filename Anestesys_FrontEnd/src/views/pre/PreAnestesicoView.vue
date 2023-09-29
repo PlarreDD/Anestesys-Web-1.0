@@ -14,7 +14,7 @@
           :createTag="true"
           :max="1"
           :multiple="false"
-          @select="obtenerPaciente"
+          @click="obtenerPaciente"
         />
       </div>
 
@@ -22,7 +22,7 @@
 
       <div class="col-md-2">
         <div class="centrarBoton">
-          <button class="btn btn-icono fw-bold">
+          <button class="btn btn-icono fw-bold" :disabled="nuevoRegistro == false ? true : false">
             <img class="btn-registro"
                  src="images/imgIcon/nuevo.svg"/> Nuevo Registro </button>
         </div>
@@ -30,7 +30,7 @@
       
       <div class="col-md-2">
         <div class="alinearBotonDerecha">
-          <button class="btn btn-icono fw-bold" data-bs-toggle="modal" data-bs-target="#modal-historial">
+          <button class="btn btn-icono fw-bold" :disabled="historialPaciente == false ? true : false" data-bs-toggle="modal" data-bs-target="#modal-historial">
             <img class="btn-historial"
                  src="images/imgIcon/historial-pac.svg"/> Historial Paciente </button>
         </div>
@@ -115,7 +115,19 @@
               :propRojoNom="bordeRojoNom"
               :propVerdeNom="bordeVerdeNom"
               :propBtnGuardarId="btnGuardarId"
-              :propBtnActualizarId="btnActualizarId"/>
+              :propBtnActualizarId="btnActualizarId"
+              
+              :propNumeroExp="numeroExpediente"
+              :propNombrePac="nombrePaciente"
+              :propFechaNacimiento="fechaNacimiento"
+              :propEdad="edad"
+              :propGenero="genero"
+              :propNacionalidad="nacionalidad"
+              :propCURP="CURP"
+              :propFolioID="folioID"
+              :propEstadoNacimiento="estadoNacimiento"
+
+              ref="refId"/>
         </div>
 
         <div class="tab-pane fade" id="pre-valoracion">
@@ -259,12 +271,10 @@ import Valoracion from "../../components/pre/Valoracion.vue";
 import Plan from "../../components/pre/Plan.vue";
 import Nota from '../../components/pre/Nota.vue';
 import swal from 'sweetalert2';
-import { useUserStore } from "@/stores/user-store";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
 import { usePreIdStore } from '../../stores/preId-store';
 import Multiselect from '@vueform/multiselect';
 
-const userStore = useUserStore();
 const idStore = usePreIdStore();
 
 export default defineComponent({
@@ -302,7 +312,20 @@ export default defineComponent({
       mostrarVistaRapida: false,
 
       expSeleccionado: [],
-      listaExpedientes: []
+      listaExpedientes: [],
+
+      numeroExpediente: '',
+      nombrePaciente: '',
+      fechaNacimiento: Date,
+      edad: Number,
+      genero: '',
+      nacionalidad: '',
+      CURP: '',
+      folioID: '',
+      estadoNacimiento: '',
+
+      nuevoRegistro:false,
+      historialPaciente:false
     }
   },
 
@@ -324,13 +347,11 @@ export default defineComponent({
     this.mostrarHeader();
     this.ocultarMenuLateral();
     document.addEventListener('scroll', this.scrollFunction);
-    
-    this.listarExpedientes();
   },
   
   destroyed: function(){
     document.addEventListener('scroll', this.scrollFunction)
-  },
+  },  
 
   methods: {
     // Obtener expedientes en Multiselect
@@ -349,16 +370,26 @@ export default defineComponent({
       // Sino se elige un expediente no manda la petición
       if(idStore.numExpediente != null && idStore.numExpediente != ''){        
         await idStore.getPaciente(idStore.numExpediente)
-
-        // if(idStore.pacientes != null && idStore.pacientes != ''){
-          console.log("Entro");
         
         idStore.numeroExpediente = idStore.pacientes.pacientes[0].numExpediente
-        console.log("NumExp: "+idStore.numeroExpediente);
-      // }
-      }
+        this.numeroExpediente = idStore.numeroExpediente
 
-      
+        this.nombrePaciente = idStore.pacientes.pacientes[0].nomPaciente
+        this.fechaNacimiento = idStore.pacientes.pacientes[0].fechaNPaciente
+        this.edad = idStore.pacientes.pacientes[0].edadPaciente
+        this.genero = idStore.pacientes.pacientes[0].generoPaciente
+        this.nacionalidad = idStore.pacientes.pacientes[0].nacionalidad
+        this.CURP = idStore.pacientes.pacientes[0].CURP
+        this.folioID = idStore.pacientes.pacientes[0].folioID
+        this.estadoNacimiento = idStore.pacientes.pacientes[0].estNacimiento
+
+        // Ejecutar método de componente Id
+        const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
+        await componenteId.asignarValoresPaciente();
+
+        this.nuevoRegistro = true;
+        this.historialPaciente = true;
+      }      
     },
 
     async validaExpedienteId(numExpediente, nombrePaciente) {
