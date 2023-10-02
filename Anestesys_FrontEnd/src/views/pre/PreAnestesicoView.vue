@@ -117,6 +117,7 @@
               :propBtnGuardarId="btnGuardarId"
               :propBtnActualizarId="btnActualizarId"
               
+              :propId="idPaciente"
               :propNumeroExp="numeroExpediente"
               :propNombrePac="nombrePaciente"
               :propFechaNacimiento="fechaNacimiento"
@@ -314,6 +315,7 @@ export default defineComponent({
       expSeleccionado: [],
       listaExpedientes: [],
 
+      idPaciente: '',
       numeroExpediente: '',
       nombrePaciente: '',
       fechaNacimiento: Date,
@@ -374,6 +376,7 @@ export default defineComponent({
         idStore.numeroExpediente = idStore.pacientes.pacientes[0].numExpediente
         this.numeroExpediente = idStore.numeroExpediente
 
+        this.idPaciente = idStore.pacientes.pacientes[0]._id
         this.nombrePaciente = idStore.pacientes.pacientes[0].nomPaciente
         this.fechaNacimiento = idStore.pacientes.pacientes[0].fechaNPaciente
         this.edad = idStore.pacientes.pacientes[0].edadPaciente
@@ -383,12 +386,17 @@ export default defineComponent({
         this.folioID = idStore.pacientes.pacientes[0].folioID
         this.estadoNacimiento = idStore.pacientes.pacientes[0].estNacimiento
 
+        console.log("idPac"+this.idPaciente);      
+
         // Ejecutar método de componente Id
         const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
         await componenteId.asignarValoresPaciente();
 
         this.nuevoRegistro = true;
         this.historialPaciente = true;
+
+        this.btnGuardarId=false
+        this.btnActualizarId=true
       }      
     },
 

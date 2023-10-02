@@ -471,6 +471,7 @@ export default defineComponent({
         propBtnGuardarId:{type: Boolean},
         propBtnActualizarId:{type: Boolean},
 
+        propId:{type: String},
         propNumeroExp:{type: String},
         propNombrePac:{type: String},
         propFechaNacimiento:{type: String},

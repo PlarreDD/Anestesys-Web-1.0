@@ -132,6 +132,55 @@ export const updatePaciente = async (req: any, res: Response) => {
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
+
+/* Funcion para crear un nuevo registro de un paciente */
+export const updateNuevoRegistroPaciente = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+        const updVar = req.body;
+
+        const paciente = await PreIdPacientes.findByIdAndUpdate( id, 
+                                                                    // { nomPaciente: updVar.nomPaciente,
+                                                                    // fechaNPaciente: updVar.fechaNac,
+                                                                    // edadPaciente: updVar.edadPaciente,
+                                                                    // generoPaciente: updVar.genero,
+                                                                    // nacionalidad: updVar.nacionalidad,
+                                                                    // CURP: updVar.CURP,
+                                                                    // folioID: updVar.folioID,
+                                                                    // estNacimiento: updVar.estNacimiento,
+                                                                    // estResidencia: updVar.estResidencia,
+                                                                    // alcaldia: updVar.alcaldia,
+                                                                    // colonia: updVar.colonia,
+                                                                    // codigoPostal: updVar.codigoPostal} 
+                                                                    );
+        
+        const infoCx = await PreIdPacientesCx.findOneAndUpdate({ pid: paciente?._id }, { numEpisodio: updVar.numEpisodio,
+                                                                                      habitacionPaciente: updVar.habitacionPaciente,
+                                                                                      fechaInPaciente: updVar.fechaIn,
+                                                                                      /* Datos de cirugía */
+                                                                                      diagnostico: updVar.diagnostico,
+                                                                                      tipoCx: updVar.tipoCx,
+                                                                                      /* Datos CIE */
+                                                                                      cie9: updVar.cie9,
+                                                                                      cie10: updVar.cie10,
+                                                                                      /* Informacion procedimiento */
+                                                                                      cirugia: updVar.cirugia,
+                                                                                      fechaCx: updVar.fechaCx,
+                                                                                      hrCx: updVar.hrCx,
+                                                                                      /* Informacion Médicos */
+                                                                                      cirujano: updVar.cirujano,
+                                                                                      anestesiologo: updVar.anestesiologo,
+                                                                                      anestesiologoVPA: updVar.anestesiologoVPA,
+                                                                                      residenteAnestesia: updVar.residenteAnestesia });
+        
+        return res.json({ paciente, infoCx });
+    } catch (error) {
+        if (error.kind === "ObjectId") 
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+                
+        return res.status(500).json({ error: "Error de servidor" });
+    }
+};
 /********************************************************************/
 /**************************** Valoración ****************************/
 /********************************************************************/
