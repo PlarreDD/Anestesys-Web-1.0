@@ -107,7 +107,7 @@
       <div class="tab-content col-md-9" id="">
         <div class="tab-pane fade show active" id="pre-id">
           <id @recibe-datos="actualizaDatos"
-              @validar="validaExpedienteId" 
+              @validar="validaExpedienteId"
               :propNumExp="numExpB"
               :propNomPac="nomPacB"
               :propRojoNum="bordeRojoNum"
@@ -376,7 +376,7 @@ export default defineComponent({
         idStore.numeroExpediente = idStore.pacientes.pacientes[0].numExpediente
         this.numeroExpediente = idStore.numeroExpediente
 
-        this.idPaciente = idStore.pacientes.pacientes[0]._id
+        // this.idPaciente = idStore.pacientes.pacientes[0]._id                
         this.nombrePaciente = idStore.pacientes.pacientes[0].nomPaciente
         this.fechaNacimiento = idStore.pacientes.pacientes[0].fechaNPaciente
         this.edad = idStore.pacientes.pacientes[0].edadPaciente
@@ -395,8 +395,8 @@ export default defineComponent({
         this.nuevoRegistro = true;
         this.historialPaciente = true;
 
-        this.btnGuardarId=false
-        this.btnActualizarId=true
+        // this.btnGuardarId=false
+        // this.btnActualizarId=true
       }      
     },
 

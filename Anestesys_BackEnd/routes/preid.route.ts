@@ -3,7 +3,9 @@ import { requireToken } from "../middlewares/requireToken";
 import { getPaciente,
          createPaciente,
          updatePaciente, 
-         getExpedientes} from "../controllers/preanest.controller";
+         getExpedientes,
+         createNuevoRegistroPaciente,
+         updateNuevoRegistroPaciente} from "../controllers/preanest.controller";
 
 const router = Router();
 
@@ -17,5 +19,7 @@ router.get('/exp', requireToken, getExpedientes)
 router.get('/:id', requireToken, getPaciente);
 router.post('/', requireToken, createPaciente);
 router.put('/:id',  requireToken, updatePaciente);
+router.post('/add', requireToken, createNuevoRegistroPaciente);
+router.put('/add/:id',  requireToken, updateNuevoRegistroPaciente);
 
 export default router;

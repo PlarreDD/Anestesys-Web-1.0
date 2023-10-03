@@ -79,13 +79,13 @@
                                     type="submit"
                                     class="btn btn-guardar-info fw-bold"
                                     :class="propBtnGuardarId == true ? 'visible' : 'invisible'"
-                                    @click="preIdStore.savePreId( infoPreIdPaciente )"> GUARDAR </button>
+                                    @click="preIdStore.createAddPreId( infoPreIdPaciente )"> GUARDAR </button>                                
                             
                             <button data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar-info fw-bold"
                                     :class="propBtnActualizarId == true ? 'visible' : 'invisible'"
-                                    @click="preIdStore.updatePreId( infoPreIdPaciente )"> ACTUALIZAR </button>
+                                    @click="preIdStore.updateAddPreId( infoPreIdPaciente )"> ACTUALIZAR </button>
                         </div>
 
                         <!-- Fecha de Nacimiento -->

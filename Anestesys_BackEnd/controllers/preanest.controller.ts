@@ -134,25 +134,51 @@ export const updatePaciente = async (req: any, res: Response) => {
 };
 
 /* Funcion para crear un nuevo registro de un paciente */
+export const createNuevoRegistroPaciente = async (req: any, res: Response) => {
+    try {
+        const { 
+                /* Información adicional del paciente */
+                numEpisodio,
+                pid,
+                habitacionPaciente,
+                fechaInPaciente, diagnostico, tipoCx,
+                /* Datos CIE */
+                cie10, cie9, 
+                /* Informacion Médicos */
+                cirugia, fechaCx, hrCx,
+                /* Informacion Médicos */
+                cirujano, anestesiologo, anestesiologoVPA,
+                residenteAnestesia} = req.body;
+
+        const infoCx = new PreIdPacientesCx({ /* Información adicional  del paciente */
+                                           numEpisodio, pid,  habitacionPaciente,
+                                           fechaInPaciente, diagnostico, tipoCx,
+                                           /* Datos CIE */
+                                           cie10, cie9, 
+                                           /* Informacion Médicos */
+                                           cirugia, fechaCx, hrCx,
+                                           /* Informacion Médicos */
+                                           cirujano, anestesiologo, anestesiologoVPA,
+                                           residenteAnestesia });
+
+        await infoCx.save();
+
+        return res.json({ infoCx });
+    } catch (error) {
+        if (error.kind === "ObjectId") 
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+                
+        return res.status(500).json({ error: "Error de servidor" });
+    }
+};
+
+/* Funcion de actualización de la ficha ID de un paciente */
 export const updateNuevoRegistroPaciente = async (req: any, res: Response) => {
     try {
         const { id } = req.params;
         const updVar = req.body;
 
-        const paciente = await PreIdPacientes.findByIdAndUpdate( id, 
-                                                                    // { nomPaciente: updVar.nomPaciente,
-                                                                    // fechaNPaciente: updVar.fechaNac,
-                                                                    // edadPaciente: updVar.edadPaciente,
-                                                                    // generoPaciente: updVar.genero,
-                                                                    // nacionalidad: updVar.nacionalidad,
-                                                                    // CURP: updVar.CURP,
-                                                                    // folioID: updVar.folioID,
-                                                                    // estNacimiento: updVar.estNacimiento,
-                                                                    // estResidencia: updVar.estResidencia,
-                                                                    // alcaldia: updVar.alcaldia,
-                                                                    // colonia: updVar.colonia,
-                                                                    // codigoPostal: updVar.codigoPostal} 
-                                                                    );
+        const paciente = await PreIdPacientes.findByIdAndUpdate( id );
         
         const infoCx = await PreIdPacientesCx.findOneAndUpdate({ pid: paciente?._id }, { numEpisodio: updVar.numEpisodio,
                                                                                       habitacionPaciente: updVar.habitacionPaciente,
@@ -173,7 +199,7 @@ export const updateNuevoRegistroPaciente = async (req: any, res: Response) => {
                                                                                       anestesiologoVPA: updVar.anestesiologoVPA,
                                                                                       residenteAnestesia: updVar.residenteAnestesia });
         
-        return res.json({ paciente, infoCx });
+        return res.json({ infoCx });
     } catch (error) {
         if (error.kind === "ObjectId") 
             return res.status(403).json({ error: "Formato de ID incorrecto" });

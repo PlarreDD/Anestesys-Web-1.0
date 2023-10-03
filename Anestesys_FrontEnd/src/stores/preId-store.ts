@@ -325,6 +325,102 @@ export const usePreIdStore = defineStore('preid', {
             .catch((e: any) => {
             });
         },
+
+        createAddPreId(infoPreIdPaciente: any){
+            apiAxios({
+                url: "http://localhost:5000/preId/add",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {                                                
+                    /* Información de la cirugía del paciente */
+                    numEpisodio: infoPreIdPaciente.numEpisodio,
+                    pid: this.pacientes.pacientes[0]._id,
+                    habitacionPaciente: infoPreIdPaciente.habitacion,
+                    fechaInPaciente: infoPreIdPaciente.fechaIn,
+                    /* Datos de cirugía */
+                    diagnostico: infoPreIdPaciente.diagnostico,
+                    tipoCx: infoPreIdPaciente.tipoCx,
+                    /* Datos CIE */
+                    cie9: infoPreIdPaciente.cie9,
+                    cie10: infoPreIdPaciente.cie10,
+                    /* Informacion procedimiento */
+                    cirugia: infoPreIdPaciente.cirugia,
+                    fechaCx: infoPreIdPaciente.fechaCx,
+                    hrCx: infoPreIdPaciente.hrCx,
+                    /* Informacion Médicos */
+                    cirujano: infoPreIdPaciente.cirujano,
+                    anestesiologo: infoPreIdPaciente.anestesiologo,
+                    anestesiologoVPA: infoPreIdPaciente.anestesiologoVPA,
+                    residenteAnestesia: infoPreIdPaciente.residenteAnestesia,
+                }
+            })
+            .then((res: any) => {
+                this.pacienteID = res.data.paciente;
+                
+                swal.fire({
+                    title: 'Datos agregados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+            });
+        },
+
+        //Modificar para actualizar
+        updateAddPreId( infoPreIdPaciente: any ){
+            console.log("PacienteID: "+this.pacienteID._id);
+            apiAxios({
+                url: `http://localhost:5000/preId/add/${String(this.pacienteID._id)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    /* Información de la cirugía del paciente */
+                    numEpisodio: infoPreIdPaciente.numEpisodio,
+                    habitacionPaciente: infoPreIdPaciente.habitacion,
+                    fechaInPaciente: infoPreIdPaciente.fechaIn,
+                    /* Datos de cirugía */
+                    diagnostico: infoPreIdPaciente.diagnostico,
+                    tipoCx: infoPreIdPaciente.tipoCx,
+                    /* Datos CIE */
+                    cie9: infoPreIdPaciente.cie9,
+                    cie10: infoPreIdPaciente.cie10,
+                    /* Informacion procedimiento */
+                    cirugia: infoPreIdPaciente.cirugia,
+                    fechaCx: infoPreIdPaciente.fechaCx,
+                    hrCx: infoPreIdPaciente.hrCx,
+                    /* Informacion Médicos */
+                    cirujano: infoPreIdPaciente.cirujano,
+                    anestesiologo: infoPreIdPaciente.anestesiologo,
+                    anestesiologoVPA: infoPreIdPaciente.anestesiologoVPA,
+                    residenteAnestesia: infoPreIdPaciente.residenteAnestesia,
+                }                                
+            })
+            .then((res: any) => {                
+                this.pacienteID = res.data.paciente;
+                console.log("PacienteID then: "+this.pacienteID._id);
+                swal.fire({
+                    title: 'Datos actualizados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+            });
+        },
+        
         /*************************** Valoración **************************/
         async savePreAntecedentes(infoValoracion: any, pid: string){
             await apiAxios({
@@ -670,7 +766,7 @@ export const usePreIdStore = defineStore('preid', {
             })
             .catch((e: any) => {
             });
-          },
+        },
         /***************************** Plan ******************************/
         savePrePlan(infoPlan: any, pid: string){
             apiAxios({
