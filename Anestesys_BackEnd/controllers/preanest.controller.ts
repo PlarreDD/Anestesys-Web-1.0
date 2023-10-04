@@ -16,6 +16,16 @@ export const getExpedientes = async (req: any, res: Response) =>{
     }
 };
 
+/* Función para listar las cirugías */
+export const getCirugias = async (req: any, res: Response) =>{
+    try {
+        const expedientes = await PreIdPacientes.find({id: req.id}) 
+        return res.json({expedientes});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 /* Funcion para la busqueda de un paciente. Debe estar asociado al usuario */
 export const getPaciente = async (req: any, res: Response) => {
     try {

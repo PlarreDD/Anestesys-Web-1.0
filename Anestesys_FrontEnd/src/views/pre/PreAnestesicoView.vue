@@ -22,7 +22,7 @@
 
       <div class="col-md-2">
         <div class="centrarBoton">
-          <button class="btn btn-icono fw-bold" :disabled="nuevoRegistro == false ? true : false">
+          <button class="btn btn-icono fw-bold" :disabled="nuevoRegistro == false ? true : false" @click="crearNuevoRegistroExpediente">
             <img class="btn-registro"
                  src="images/imgIcon/nuevo.svg"/> Nuevo Registro </button>
         </div>
@@ -116,6 +116,8 @@
               :propVerdeNom="bordeVerdeNom"
               :propBtnGuardarId="btnGuardarId"
               :propBtnActualizarId="btnActualizarId"
+              :propBtnNuevoGuardarId="btnNuevoGuardarId"
+              :propBtnNuevoActualizarId="btnNuevoActualizarId"
               
               :propId="idPaciente"
               :propNumeroExp="numeroExpediente"
@@ -125,7 +127,6 @@
               :propGenero="genero"
               :propNacionalidad="nacionalidad"
               :propCURP="CURP"
-              :propFolioID="folioID"
               :propEstadoNacimiento="estadoNacimiento"
 
               ref="refId"/>
@@ -308,6 +309,9 @@ export default defineComponent({
       btnGuardarId: true,
       btnActualizarId: false,
       
+      btnNuevoGuardarId: false,
+      btnNuevoActualizarId: false,
+
       idStore,
       
       mostrarVistaRapida: false,
@@ -323,7 +327,6 @@ export default defineComponent({
       genero: '',
       nacionalidad: '',
       CURP: '',
-      folioID: '',
       estadoNacimiento: '',
 
       nuevoRegistro:false,
@@ -369,6 +372,31 @@ export default defineComponent({
     async obtenerPaciente(){
       await this.listarExpedientes();
 
+      console.log("numExp:"+idStore.numExpediente);  
+
+      if(idStore.numExpediente == null || idStore.numExpediente == ''){ 
+        this.numeroExpediente = ''
+        this.nombrePaciente = ''
+        this.fechaNacimiento = null
+        this.edad = null
+        this.genero = ''
+        this.nacionalidad = ''
+        this.CURP = ''
+        this.estadoNacimiento = ''
+
+        // Ejecutar método de componente Id
+        const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
+        await componenteId.asignarValoresPaciente();
+        
+        this.nuevoRegistro = false;
+        this.historialPaciente = false;
+
+        this.btnGuardarId=true
+        this.btnActualizarId=false
+        this.btnNuevoGuardarId=false
+        this.btnNuevoActualizarId=false
+      }
+
       // Sino se elige un expediente no manda la petición
       if(idStore.numExpediente != null && idStore.numExpediente != ''){        
         await idStore.getPaciente(idStore.numExpediente)
@@ -383,10 +411,7 @@ export default defineComponent({
         this.genero = idStore.pacientes.pacientes[0].generoPaciente
         this.nacionalidad = idStore.pacientes.pacientes[0].nacionalidad
         this.CURP = idStore.pacientes.pacientes[0].CURP
-        this.folioID = idStore.pacientes.pacientes[0].folioID
         this.estadoNacimiento = idStore.pacientes.pacientes[0].estNacimiento
-
-        console.log("idPac"+this.idPaciente);      
 
         // Ejecutar método de componente Id
         const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
@@ -394,10 +419,27 @@ export default defineComponent({
 
         this.nuevoRegistro = true;
         this.historialPaciente = true;
-
-        // this.btnGuardarId=false
-        // this.btnActualizarId=true
       }      
+    },
+
+    // Crear nuevo registro del expediente
+    async crearNuevoRegistroExpediente(){
+      swal
+        .fire({
+          html: "¿Esta seguro de crear un nuevo registro para? "+"<b>"+idStore.pacientes.pacientes[0].nomPaciente+"</b>",
+          icon: "warning",
+          showConfirmButton: true,
+          showCancelButton: true,
+          toast: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            this.btnGuardarId=false
+            this.btnActualizarId=false
+            this.btnNuevoGuardarId=true
+            this.btnNuevoActualizarId=false
+          }
+        });        
     },
 
     async validaExpedienteId(numExpediente, nombrePaciente) {
@@ -451,14 +493,14 @@ export default defineComponent({
         this.bordeRojoNom=false
         this.bordeVerdeNom=true
         
-        this.btnGuardarId=false       
+        this.btnGuardarId=false
         this.btnActualizarId=true
 
         this.deshabilitado=false
         document.getElementById("menu-trans").className='visible'
         document.getElementById("menu-post").className='visible'
       }
-    },
+    },    
 
     async validaSeleccionId(){
       if(document.getElementById("id-tab").ariaSelected=="false"){

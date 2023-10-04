@@ -61,7 +61,7 @@
 
                             </label>
                             
-                            <input class="form-control" 
+                            <input class="form-control"
                                    type="text" 
                                    @keyup.capture="enviarDatos"
                                    v-model="infoPreIdPaciente.nomPaciente"
@@ -79,12 +79,24 @@
                                     type="submit"
                                     class="btn btn-guardar-info fw-bold"
                                     :class="propBtnGuardarId == true ? 'visible' : 'invisible'"
-                                    @click="preIdStore.createAddPreId( infoPreIdPaciente )"> GUARDAR </button>                                
+                                    @click="preIdStore.savePreId( infoPreIdPaciente )"> GUARDAR </button>
                             
                             <button data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar-info fw-bold"
                                     :class="propBtnActualizarId == true ? 'visible' : 'invisible'"
+                                    @click="preIdStore.updatePreId( infoPreIdPaciente )"> ACTUALIZAR </button>
+
+                            <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-primary fw-bold"
+                                    :class="propBtnNuevoGuardarId == true ? 'visible' : 'invisible'"
+                                    @click="preIdStore.createAddPreId( infoPreIdPaciente )"> GUARDAR </button>
+                            
+                            <button data-bs-toggle="tab" 
+                                    type="submit"
+                                    class="btn btn-primary fw-bold"
+                                    :class="propBtnNuevoActualizarId == true ? 'visible' : 'invisible'"
                                     @click="preIdStore.updateAddPreId( infoPreIdPaciente )"> ACTUALIZAR </button>
                         </div>
 
@@ -470,6 +482,8 @@ export default defineComponent({
         propVerdeNom:{type: Boolean},
         propBtnGuardarId:{type: Boolean},
         propBtnActualizarId:{type: Boolean},
+        propBtnNuevoGuardarId:{type: Boolean},
+        propBtnNuevoActualizarId:{type: Boolean},
 
         propId:{type: String},
         propNumeroExp:{type: String},
@@ -479,7 +493,6 @@ export default defineComponent({
         propGenero:{type: String},
         propNacionalidad:{type: String},
         propCURP:{type: String},
-        propFolioID:{type: String},
         propEstadoNacimiento:{type: String},
     },
 
@@ -687,7 +700,6 @@ export default defineComponent({
             this.infoPreIdPaciente.genero = await this.propGenero;
             this.infoPreIdPaciente.nacionalidad = await this.propNacionalidad;
             this.infoPreIdPaciente.CURP = await this.propCURP;
-            this.infoPreIdPaciente.folioID = await this.propFolioID;
             this.infoPreIdPaciente.estNacimiento = await this.propEstadoNacimiento;
         }
     },
