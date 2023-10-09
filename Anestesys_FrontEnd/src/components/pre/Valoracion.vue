@@ -192,18 +192,31 @@
                                         </div>
                                         <!-- Botón Guardar/Actualizar -->
                                         <div class="col-md-4">
-                                            <template v-if="btnActualizarValoracion === false">
+                                            <template v-if="btnAgregarValoracion === true">
                                                 <button data-bs-toggle="tab" 
                                                     type="submit"
                                                     class="btn btn-guardar-datos fw-bold"                                            
                                                     @click="cambiarUpdateValoracion"> GUARDAR </button> 
                                             </template>
-                                            <template v-else>
+                                            <template v-else-if="btnActualizarValoracion === true">
                                                 <button data-bs-toggle="tab" 
                                                     type="submit"
                                                     class="btn btn-guardar-datos fw-bold"
                                                     @click="preIdStore.updatePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
-                                            </template>                                                         
+                                            </template>
+
+                                            <template v-if="btnNuevoAgregarValoracion === true">
+                                                <button data-bs-toggle="tab" 
+                                                    type="submit"
+                                                    class="btn btn-primary fw-bold"                                            
+                                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
+                                            </template>
+                                            <template v-else-if="btnNuevoActualizarValoracion === true">
+                                                <button data-bs-toggle="tab" 
+                                                    type="submit"
+                                                    class="btn btn-primary fw-bold"
+                                                    @click="preIdStore.updateNuevoPreAntecedentes(infoValoracion, preIdStore.pacienteID.pid, preIdStore.cirugiaID)"> ACTUALIZAR </button>
+                                            </template>
                                         </div>
                                     </div>
                                 </div>
@@ -1230,7 +1243,10 @@ export default defineComponent({
             IMC:"",
             infoValoracion: {} as regValoracion,
             preIdStore,
+            btnAgregarValoracion:true,
             btnActualizarValoracion:false,
+            btnNuevoAgregarValoracion:false,
+            btnNuevoActualizarValoracion:false,
             
             btnAddEstudios:true,
             btnUpdateEstudios:false,
@@ -1254,10 +1270,35 @@ export default defineComponent({
             }
         },
 
-        cambiarUpdateValoracion() {
-            this.btnActualizarValoracion=true
+        async validarNuevoRegistro(){
+            // console.log("Entro a metodo");
+                        
+            if(preIdStore.nuevoPaciente==true){
+                console.log("Entro a if");
+                
+                this.btnAgregarValoracion=false 
+                this.btnActualizarValoracion=false
+                this.btnNuevoAgregarValoracion=true 
+                this.btnNuevoActualizarValoracion=false
+            }
+        },
 
-            preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
+        cambiarUpdateValoracion() {                       
+            if(preIdStore.nuevoPaciente==false){
+                console.log("Entro if cambiarUpdate")
+                this.btnAgregarValoracion=false 
+                this.btnActualizarValoracion=true                                
+                preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
+            }else if(preIdStore.nuevoPaciente==true){
+                console.log("Entro else if")
+                this.btnAgregarValoracion=false 
+                this.btnActualizarValoracion=false
+                this.btnNuevoAgregarValoracion=false 
+                this.btnNuevoActualizarValoracion=true
+                console.log("pid: "+preIdStore.pacienteID.pid);
+                console.log("cxid: "+preIdStore.pacienteID._id);
+                preIdStore.saveNuevoPreAntecedentes(this.infoValoracion, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
         },
 
         async listarEstudios() {

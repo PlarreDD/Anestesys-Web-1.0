@@ -11,10 +11,12 @@ export const usePreIdStore = defineStore('preid', {
         pacienteID: ref(null),
         estudioID: ref(null),
         valoracionID: ref(null),
-        estudios: ref(null),
         numExpediente: ref(null),
         expedientes: ref(null),
         pacientes: ref(null),
+        estudios: ref(null),
+        nuevoPaciente: false,
+        cirugiaID: ref(null),
         
         // ID
         numeroExpediente: ref(null),
@@ -357,7 +359,8 @@ export const usePreIdStore = defineStore('preid', {
                 }
             })
             .then((res: any) => {
-                this.pacienteID = res.data.paciente;
+                this.pacienteID = res.data.infoCx;
+                console.log("pacienteID: "+ JSON.stringify(this.pacienteID));                
                 
                 swal.fire({
                     title: 'Datos agregados correctamente',
@@ -405,8 +408,7 @@ export const usePreIdStore = defineStore('preid', {
                 }                                
             })
             .then((res: any) => {                
-                this.pacienteID = res.data.paciente;
-                console.log("PacienteID then: "+this.pacienteID._id);
+                this.pacienteID = res.data.infoCx;
                 swal.fire({
                     title: 'Datos actualizados correctamente',
                     icon: 'success',
@@ -422,7 +424,7 @@ export const usePreIdStore = defineStore('preid', {
         },
         
         /*************************** Valoración **************************/
-        async savePreAntecedentes(infoValoracion: any, pid: string){
+        async savePreAntecedentes(infoValoracion: any, pid: string){            
             await apiAxios({
                 url: "http://localhost:5000/valora",
                 method: "POST",
@@ -529,6 +531,115 @@ export const usePreIdStore = defineStore('preid', {
             });
         },
 
+        async saveNuevoPreAntecedentes(infoValoracion: any, pid: string, cxid: string){            
+            await apiAxios({
+                url: "http://localhost:5000/valora/add",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },                
+                data: {
+                    // Antecedentes
+                    pid: pid,
+                    cxid: cxid,
+                    // Personales Patológicos
+                    antPersPat_Alergias: infoValoracion.antPersPat_Alergias,
+                    antPersPat_Quirurgicos: infoValoracion.antPersPat_Quirurgicos,
+                    antPersPat_Endocrinologicos: infoValoracion.antPersPat_Endocrinologicos,
+                    antPersPat_Urologicos: infoValoracion.antPersPat_Urologicos,
+                    antPersPat_Traumaticos: infoValoracion.antPersPat_Traumaticos,
+                    antPersPat_Ortopedicos: infoValoracion.antPersPat_Ortopedicos,               
+                    antPersPat_Transfusiones: infoValoracion.antPersPat_Transfusiones,
+                    antPersPat_CompAnestPrev: infoValoracion.antPersPat_CompAnestPrev,
+                    antPersPat_EstadoPsiq: infoValoracion.antPersPat_EstadoPsiq,
+                    antPersPat_MedActual: infoValoracion.antPersPat_MedActual,
+                    // Personales No Patológicos
+                    antPersNoPat_HrsAyuno: infoValoracion.antPersNoPat_HrsAyuno,
+                    antPersNoPat_Tabaquismo: infoValoracion.antPersNoPat_Tabaquismo,
+                    antPersNoPat_Etilismo: infoValoracion.antPersNoPat_Etilismo,
+                    antPersNoPat_Adicciones: infoValoracion.antPersNoPat_Adicciones,
+                    antPersNoPat_Inmunizaciones: infoValoracion.antPersNoPat_Inmunizaciones,
+                    antPersNoPat_AntImportQx: infoValoracion.antPersNoPat_AntImportQx,
+                    // Signos Vitales
+                    sigVit_Edad: infoValoracion.sigVit_Edad,
+                    sigVit_Temperatura: infoValoracion.sigVit_Temperatura,
+                    sigVit_FrecuCardiaca: infoValoracion.sigVit_FrecuCardiaca,
+                    sigVit_FrecuRespiratoria: infoValoracion.sigVit_FrecuRespiratoria,
+                    sigVit_Peso: infoValoracion.sigVit_Peso,
+                    sigVit_Talla: infoValoracion.sigVit_Talla,
+                    sigVit_IMC: infoValoracion.sigVit_IMC,
+                    sigVit_TensionArterial: infoValoracion.sigVit_TensionArterial,
+                    sigVit_SaturacionOxigeno: infoValoracion.sigVit_SaturacionOxigeno,
+                    // Vía Aérea
+                    viaAerea_Mallampati: infoValoracion.viaAerea_Mallampati,
+                    viaAerea_PatilAldreti: infoValoracion.viaAerea_PatilAldreti,
+                    viaAerea_AperturaBucal: infoValoracion.viaAerea_AperturaBucal,
+                    viaAerea_Distancia: infoValoracion.viaAerea_Distancia,
+                    viaAerea_Protusion: infoValoracion.viaAerea_Protusion,
+                    viaAerea_Ipid: infoValoracion.viaAerea_Ipid,
+                    viaAerea_Glasgow: infoValoracion.viaAerea_Glasgow,
+                    viaAerea_NYHA: infoValoracion.viaAerea_NYHA,
+                    viaAerea_Goldman: infoValoracion.viaAerea_Goldman,
+                    viaAerea_RiesgoTrombosis: infoValoracion.viaAerea_RiesgoTrombosis,
+                    viaAerea_ClasificacionASA: infoValoracion.viaAerea_ClasificacionASA,
+                    viaAerea_TipoCirugia: infoValoracion.viaAerea_TipoCirugia,
+                    viaAerea_RiesgoAnestesico: infoValoracion.viaAerea_RiesgoAnestesico,
+                    // Laboratorio
+                    perfilBioQ_FechaRealizacion: infoValoracion.perfilBioQ_FechaRealizacion,
+                    perfilBioQ_GrupoSanguineo: infoValoracion.perfilBioQ_GrupoSanguineo,
+                    perfilBioQ_Hemoglobina: infoValoracion.perfilBioQ_Hemoglobina,
+                    perfilBioQ_Hematocrito: infoValoracion.perfilBioQ_Hematocrito,
+                    perfilBioQ_Plaquetas: infoValoracion.perfilBioQ_Plaquetas,
+                    perfilBioQ_Leutocitos: infoValoracion.perfilBioQ_Leutocitos,
+                    perfilBioQ_TP: infoValoracion.perfilBioQ_TP,
+                    perfilBioQ_TT: infoValoracion.perfilBioQ_TT,
+                    perfilBioQ_TPT: infoValoracion.perfilBioQ_TPT,
+                    perfilBioQ_INR: infoValoracion.perfilBioQ_INR,
+                    perfilBioQ_Glucosa: infoValoracion.perfilBioQ_Glucosa,
+                    perfilBioQ_Creatinina: infoValoracion.perfilBioQ_Creatinina,
+                    perfilBioQ_Urea: infoValoracion.perfilBioQ_Urea,
+                    perfilBioQ_Sodio: infoValoracion.perfilBioQ_Sodio,
+                    perfilBioQ_Potasio: infoValoracion.perfilBioQ_Potasio,
+                    perfilBioQ_Cloro: infoValoracion.perfilBioQ_Cloro,
+                    perfilBioQ_Calcio: infoValoracion.perfilBioQ_Calcio,
+                    perfilBioQ_Magnesio: infoValoracion.perfilBioQ_Magnesio,
+                    perfilBioQ_BilirrubinaDirecta: infoValoracion.perfilBioQ_BilirrubinaDirecta,
+                    perfilBioQ_BilirrubinaIndirecta: infoValoracion.perfilBioQ_BilirrubinaIndirecta,
+                    perfilBioQ_BilirrubinaTotal: infoValoracion.perfilBioQ_BilirrubinaTotal,
+                    perfilBioQ_Lipasa: infoValoracion.perfilBioQ_Lipasa,
+                    perfilBioQ_Amilasa: infoValoracion.perfilBioQ_Amilasa,
+                    perfilBioQ_Otros: infoValoracion.perfilBioQ_Otros,
+                    // Valoración de Aparatos y Sistemas
+                    expFis_VASCabeza: infoValoracion.expFis_VASCabeza,
+                    expFis_VASCuello: infoValoracion.expFis_VASCuello,
+                    expFis_VASRespiratorio: infoValoracion.expFis_VASRespiratorio,
+                    expFis_VASCardioVasc: infoValoracion.expFis_VASCardioVasc,
+                    expFis_VASHipertension: infoValoracion.expFis_VASHipertension,
+                    expFis_VASAbdomen: infoValoracion.expFis_VASAbdomen,
+                    expFis_VASGenUr: infoValoracion.expFis_VASGenUr,
+                    expFis_VASMuscEsq: infoValoracion.expFis_VASMuscEsq,
+                    expFis_VASNeuro: infoValoracion.expFis_VASNeuro,
+                    expFis_VASPielFaneras: infoValoracion.expFis_VASPielFaneras,
+                },
+            })
+            .then((res: any) => {
+                this.valoracionID = res.data.preval._id;
+                this.cirugiaID = res.data.preval.cxid;
+                
+                swal.fire({
+                    title: 'Datos guardados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+            });
+        },
+
         async updatePreAntecedentes(infoValoracion: any, pid: string){
             await apiAxios({
                 url: `http://localhost:5000/valora/${String(pid)}`,
@@ -620,6 +731,113 @@ export const usePreIdStore = defineStore('preid', {
                 }
             })
             .then((res: any) => {
+                swal.fire({
+                    title: 'Datos actualizados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+            });
+        },
+
+        async updateNuevoPreAntecedentes(infoValoracion: any, pid: string, cxid: string){            
+            await apiAxios({
+                url: `http://localhost:5000/valora/add/${String(pid)}/${String(cxid)}`,                
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    // Antecedentes
+                    pid: pid,
+                    cxid: this.cirugiaID,
+                    // Personales Patológicos
+                    antPersPat_Alergias: infoValoracion.antPersPat_Alergias,
+                    antPersPat_Quirurgicos: infoValoracion.antPersPat_Quirurgicos,
+                    antPersPat_Endocrinologicos: infoValoracion.antPersPat_Endocrinologicos,
+                    antPersPat_Urologicos: infoValoracion.antPersPat_Urologicos,
+                    antPersPat_Traumaticos: infoValoracion.antPersPat_Traumaticos,
+                    antPersPat_Ortopedicos: infoValoracion.antPersPat_Ortopedicos,               
+                    antPersPat_Transfusiones: infoValoracion.antPersPat_Transfusiones,
+                    antPersPat_CompAnestPrev: infoValoracion.antPersPat_CompAnestPrev,
+                    antPersPat_EstadoPsiq: infoValoracion.antPersPat_EstadoPsiq,
+                    antPersPat_MedActual: infoValoracion.antPersPat_MedActual,
+                    // Personales No Patológicos
+                    antPersNoPat_HrsAyuno: infoValoracion.antPersNoPat_HrsAyuno,
+                    antPersNoPat_Tabaquismo: infoValoracion.antPersNoPat_Tabaquismo,
+                    antPersNoPat_Etilismo: infoValoracion.antPersNoPat_Etilismo,
+                    antPersNoPat_Adicciones: infoValoracion.antPersNoPat_Adicciones,
+                    antPersNoPat_Inmunizaciones: infoValoracion.antPersNoPat_Inmunizaciones,
+                    antPersNoPat_AntImportQx: infoValoracion.antPersNoPat_AntImportQx,
+                    // Signos Vitales
+                    sigVit_Edad: infoValoracion.sigVit_Edad,
+                    sigVit_Temperatura: infoValoracion.sigVit_Temperatura,
+                    sigVit_FrecuCardiaca: infoValoracion.sigVit_FrecuCardiaca,
+                    sigVit_FrecuRespiratoria: infoValoracion.sigVit_FrecuRespiratoria,
+                    sigVit_Peso: infoValoracion.sigVit_Peso,
+                    sigVit_Talla: infoValoracion.sigVit_Talla,
+                    sigVit_IMC: infoValoracion.sigVit_IMC,
+                    sigVit_TensionArterial: infoValoracion.sigVit_TensionArterial,
+                    sigVit_SaturacionOxigeno: infoValoracion.sigVit_SaturacionOxigeno,
+                    // Vía Aérea
+                    viaAerea_Mallampati: infoValoracion.viaAerea_Mallampati,
+                    viaAerea_PatilAldreti: infoValoracion.viaAerea_PatilAldreti,
+                    viaAerea_AperturaBucal: infoValoracion.viaAerea_AperturaBucal,
+                    viaAerea_Distancia: infoValoracion.viaAerea_Distancia,
+                    viaAerea_Protusion: infoValoracion.viaAerea_Protusion,
+                    viaAerea_Ipid: infoValoracion.viaAerea_Ipid,
+                    viaAerea_Glasgow: infoValoracion.viaAerea_Glasgow,
+                    viaAerea_NYHA: infoValoracion.viaAerea_NYHA,
+                    viaAerea_Goldman: infoValoracion.viaAerea_Goldman,
+                    viaAerea_RiesgoTrombosis: infoValoracion.viaAerea_RiesgoTrombosis,
+                    viaAerea_ClasificacionASA: infoValoracion.viaAerea_ClasificacionASA,
+                    viaAerea_TipoCirugia: infoValoracion.viaAerea_TipoCirugia,
+                    viaAerea_RiesgoAnestesico: infoValoracion.viaAerea_RiesgoAnestesico,
+                    //Laboratorio
+                    perfilBioQ_FechaRealizacion: infoValoracion.perfilBioQ_FechaRealizacion,
+                    perfilBioQ_GrupoSanguineo: infoValoracion.perfilBioQ_GrupoSanguineo,
+                    perfilBioQ_Hemoglobina: infoValoracion.perfilBioQ_Hemoglobina,
+                    perfilBioQ_Hematocrito: infoValoracion.perfilBioQ_Hematocrito,
+                    perfilBioQ_Plaquetas: infoValoracion.perfilBioQ_Plaquetas,
+                    perfilBioQ_Leutocitos: infoValoracion.perfilBioQ_Leutocitos,
+                    perfilBioQ_TP: infoValoracion.perfilBioQ_TP,
+                    perfilBioQ_TT: infoValoracion.perfilBioQ_TT,
+                    perfilBioQ_TPT: infoValoracion.perfilBioQ_TPT,
+                    perfilBioQ_INR: infoValoracion.perfilBioQ_INR,
+                    perfilBioQ_Glucosa: infoValoracion.perfilBioQ_Glucosa,
+                    perfilBioQ_Creatinina: infoValoracion.perfilBioQ_Creatinina,
+                    perfilBioQ_Urea: infoValoracion.perfilBioQ_Urea,
+                    perfilBioQ_Sodio: infoValoracion.perfilBioQ_Sodio,
+                    perfilBioQ_Potasio: infoValoracion.perfilBioQ_Potasio,
+                    perfilBioQ_Cloro: infoValoracion.perfilBioQ_Cloro,
+                    perfilBioQ_Calcio: infoValoracion.perfilBioQ_Calcio,
+                    perfilBioQ_Magnesio: infoValoracion.perfilBioQ_Magnesio,
+                    perfilBioQ_BilirrubinaDirecta: infoValoracion.perfilBioQ_BilirrubinaDirecta,
+                    perfilBioQ_BilirrubinaIndirecta: infoValoracion.perfilBioQ_BilirrubinaIndirecta,
+                    perfilBioQ_BilirrubinaTotal: infoValoracion.perfilBioQ_BilirrubinaTotal,
+                    perfilBioQ_Lipasa: infoValoracion.perfilBioQ_Lipasa,
+                    perfilBioQ_Amilasa: infoValoracion.perfilBioQ_Amilasa,
+                    perfilBioQ_Otros: infoValoracion.perfilBioQ_Otros,
+                    // Valoración de Aparatos y Sistemas
+                    expFis_VASCabeza: infoValoracion.expFis_VASCabeza,
+                    expFis_VASCuello: infoValoracion.expFis_VASCuello,
+                    expFis_VASRespiratorio: infoValoracion.expFis_VASRespiratorio,
+                    expFis_VASCardioVasc: infoValoracion.expFis_VASCardioVasc,
+                    expFis_VASHipertension: infoValoracion.expFis_VASHipertension,
+                    expFis_VASAbdomen: infoValoracion.expFis_VASAbdomen,
+                    expFis_VASGenUr: infoValoracion.expFis_VASGenUr,
+                    expFis_VASMuscEsq: infoValoracion.expFis_VASMuscEsq,
+                    expFis_VASNeuro: infoValoracion.expFis_VASNeuro,
+                    expFis_VASPielFaneras: infoValoracion.expFis_VASPielFaneras,
+                }
+            })
+            .then((res: any) => {
+                console.log("Prueba update:"+pid, this.cirugiaID);
                 swal.fire({
                     title: 'Datos actualizados correctamente',
                     icon: 'success',

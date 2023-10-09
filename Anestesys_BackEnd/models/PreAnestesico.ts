@@ -47,7 +47,7 @@ const PreIdPacienteCxSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'PreIdPacientes',
         required: true,
-    },
+    },    
 
     /* Información de la cirugía del paciente */
     numEpisodio: { type: String, },
@@ -81,6 +81,12 @@ const PreValoracionSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'PreIdPacientes',
         required: true,
+    },
+
+    cxid:{
+        type: Schema.Types.ObjectId,
+        ref: 'PreIdPacientesCx',
+        required: false
     },
 
     /* Antecedentes */

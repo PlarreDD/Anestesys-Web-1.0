@@ -46,7 +46,7 @@
                                    :class="{ 'form-control border border-danger': propRojoNum,
                                              'form-control border border-success formSombra': propVerdeNum }"
                                    placeholder="Campo obligatorio"
-                                   :disabled="propBtnGuardarId != true">
+                                   :disabled="propBtnGuardarId != true" :readonly="propBloquearInputsPrincipales == true">
                             <div :class="propNumExp == true ? 'visible validaCampo' : 'invisible'"
                                  id="validaNumExp"> Escriba el número de expediente </div>
                         </div>
@@ -68,7 +68,7 @@
                                    id="nombrePaciente" 
                                    :class="{ 'form-control border border-danger': propRojoNom,
                                              'form-control border border-success formSombra': propVerdeNom }"
-                                   placeholder="Campo obligatorio">
+                                   placeholder="Campo obligatorio" :readonly="propBloquearInputsPrincipales == true">
                             <div :class="propNomPac == true ? 'visible validaCampo' : 'invisible'"
                                  id="validaNomPac"> Escriba el nombre del paciente </div>
                         </div>
@@ -79,25 +79,25 @@
                                     type="submit"
                                     class="btn btn-guardar-info fw-bold"
                                     :class="propBtnGuardarId == true ? 'visible' : 'invisible'"
-                                    @click="preIdStore.savePreId( infoPreIdPaciente )"> GUARDAR </button>
+                                    @click="preIdStore.savePreId( infoPreIdPaciente )" :disabled="propBloquearInputs == true"> GUARDAR </button>
                             
                             <button data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar-info fw-bold"
                                     :class="propBtnActualizarId == true ? 'visible' : 'invisible'"
-                                    @click="preIdStore.updatePreId( infoPreIdPaciente )"> ACTUALIZAR </button>
+                                    @click="preIdStore.updatePreId( infoPreIdPaciente )" :disabled="propBloquearInputs == true"> ACTUALIZAR </button>
 
                             <button data-bs-toggle="tab" 
                                     type="submit"
-                                    class="btn btn-primary fw-bold"
+                                    class="btn btn-guardar-info fw-bold"
                                     :class="propBtnNuevoGuardarId == true ? 'visible' : 'invisible'"
-                                    @click="preIdStore.createAddPreId( infoPreIdPaciente )"> GUARDAR </button>
+                                    @click="preIdStore.createAddPreId( infoPreIdPaciente )" :disabled="propBloquearInputs == true"> GUARDAR </button>
                             
                             <button data-bs-toggle="tab" 
                                     type="submit"
-                                    class="btn btn-primary fw-bold"
+                                    class="btn btn-guardar-info fw-bold"
                                     :class="propBtnNuevoActualizarId == true ? 'visible' : 'invisible'"
-                                    @click="preIdStore.updateAddPreId( infoPreIdPaciente )"> ACTUALIZAR </button>
+                                    @click="preIdStore.updateAddPreId( infoPreIdPaciente )" :disabled="propBloquearInputs == true"> ACTUALIZAR </button>
                         </div>
 
                         <!-- Fecha de Nacimiento -->
@@ -108,7 +108,7 @@
                                    @change="calcularEdad"
                                    v-model="infoPreIdPaciente.fechaNac"
                                    :class="infoPreIdPaciente.fechaNac != undefined && infoPreIdPaciente.fechaNac != '' ?
-                                          'form-control border border-success formSombra' : 'form-control'">
+                                          'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputsPrincipales == true">
                         </div>
 
                         <!-- Edad -->
@@ -120,7 +120,7 @@
                                    @change="enviarDatos"
                                    v-model="infoPreIdPaciente.edadPaciente"
                                    :class="infoPreIdPaciente.edadPaciente != undefined && infoPreIdPaciente.edadPaciente != 0 ?
-                                          'form-control border border-success formSombra' : 'form-control'">
+                                          'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
                         </div>
 
                         <!-- Género -->
@@ -134,7 +134,7 @@
                                    autocomplete="off"
                                    value="Masculino"
                                    @change="enviarDatos"
-                                   v-model="infoPreIdPaciente.genero">
+                                   v-model="infoPreIdPaciente.genero" :disabled="propBloquearInputsPrincipales == true">
                             <label class="btn btn-radio margenRadio"
                                    for="masculino"> Masculino </label>
 
@@ -145,7 +145,7 @@
                                    autocomplete="off"
                                    value="Femenino"
                                    @change="enviarDatos"
-                                   v-model="infoPreIdPaciente.genero">
+                                   v-model="infoPreIdPaciente.genero" :disabled="propBloquearInputsPrincipales == true">
                             <label class="btn btn-radio"
                                    for="femenino"> Femenino </label>
                         </div>
@@ -162,7 +162,7 @@
                                        class="form-control"
                                        v-model="infoPreIdPaciente.numEpisodio"
                                        :class="infoPreIdPaciente.numEpisodio != undefined && infoPreIdPaciente.numEpisodio != '' ?
-                                          'form-control border border-success formSombra' : 'form-control'">
+                                          'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
                             </div>
 
                             <div class="col-md-1"></div>
@@ -173,7 +173,7 @@
                                        class="form-control"
                                        v-model="infoPreIdPaciente.habitacion"
                                        :class="infoPreIdPaciente.habitacion != undefined && infoPreIdPaciente.habitacion != '' ?
-                                              'form-control border border-success formSombra' : 'form-control'">
+                                              'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
                             </div>
                             <div class="col-md-1"></div>
 
@@ -184,7 +184,7 @@
                                        class="form-control"
                                        v-model="infoPreIdPaciente.fechaIn"
                                        :class="infoPreIdPaciente.fechaIn != undefined && infoPreIdPaciente.fechaIn != '' ?
-                                              'form-control border border-success formSombra' : 'form-control'">
+                                              'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
                             </div>
                         </div>
 
@@ -195,7 +195,7 @@
                                       rows="3"
                                       v-model="infoPreIdPaciente.diagnostico"
                                       :class="infoPreIdPaciente.diagnostico != undefined && infoPreIdPaciente.diagnostico != '' ?
-                                             'form-control border border-success formSombra' : 'form-control'">
+                                             'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
                             </textarea>
                         </div>
 
@@ -209,7 +209,7 @@
                                    id="mayor"
                                    autocomplete="off"
                                    value="Mayor"
-                                   v-model="infoPreIdPaciente.tipoCx">
+                                   v-model="infoPreIdPaciente.tipoCx" :disabled="propBloquearInputs == true">
                             <label class="btn btn-radio margenRadio" for="mayor"> Mayor </label>
 
                             <input type="radio" @change="enviarDatos"
@@ -218,7 +218,7 @@
                                    id="menor"
                                    autocomplete="off"
                                    value="Menor"
-                                   v-model="infoPreIdPaciente.tipoCx">
+                                   v-model="infoPreIdPaciente.tipoCx" :disabled="propBloquearInputs == true">
                             <label class="btn btn-radio margenRadio" for="menor"> Menor </label>
 
                             <input type="radio" @change="enviarDatos"
@@ -227,7 +227,7 @@
                                    id="ambulatoria"
                                    autocomplete="off"
                                    value="Ambulatoria"
-                                   v-model="infoPreIdPaciente.tipoCx">
+                                   v-model="infoPreIdPaciente.tipoCx" :disabled="propBloquearInputs == true">
                             <label class="btn btn-radio" for="ambulatoria"> Ambulatoria </label>
                         </div>
 
@@ -237,7 +237,7 @@
                             <el-select v-model="infoPreIdPaciente.cie10" @change="enviarDatos"
                                        filterable
                                        :class="infoPreIdPaciente.cie10 != undefined && infoPreIdPaciente.cie10 != '' ?
-                                              'form-control-select border border-success formSombra' : 'form-control-select'">
+                                              'form-control-select border border-success formSombra' : 'form-control-select'" :disabled="propBloquearInputs == true">
                                 <el-option 
                                     v-for="estadoNacimiento in opcionCIE10"
                                     :value="estadoNacimiento.lblCie10">
@@ -255,7 +255,7 @@
                                           @keyup.capture="enviarDatos"
                                           v-model="infoPreIdPaciente.cirugia"
                                           :class="infoPreIdPaciente.cirugia != undefined && infoPreIdPaciente.cirugia != '' ?
-                                                 'form-control border border-success formSombra' : 'form-control'">
+                                                 'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
                                 </textarea>
                             </div>
 
@@ -265,7 +265,7 @@
                                 <el-select v-model="infoPreIdPaciente.cie9" @change="enviarDatos"
                                            filterable
                                            :class="infoPreIdPaciente.cie9 != undefined && infoPreIdPaciente.cie9 != '' ?
-                                                  'form-control-select border border-success formSombra' : 'form-control-select'">
+                                                  'form-control-select border border-success formSombra' : 'form-control-select'" :disabled="propBloquearInputs == true">
                                     <el-option
                                         v-for="estadoNacimiento in opcionCIE9"
                                         :value="estadoNacimiento.lblCie9">
@@ -282,7 +282,7 @@
                                    class="form-control"
                                    v-model="infoPreIdPaciente.fechaCx"
                                    :class="infoPreIdPaciente.fechaCx != undefined && infoPreIdPaciente.fechaCx != '' ?
-                                          'form-control border border-success formSombra' : 'form-control'">
+                                          'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
                         </div>
 
                         <!-- Hora de Cirugía -->
@@ -292,7 +292,7 @@
                                    class="form-control" @click="calcularHoraCirugia"
                                    v-model="infoPreIdPaciente.hrCx"
                                    :class="infoPreIdPaciente.hrCx != undefined && infoPreIdPaciente.hrCx != '' ?
-                                          'form-control border border-success formSombra' : 'form-control'">
+                                          'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
                         </div>
 
                         <hr /> <!-- Datos de los Médicos -->
@@ -305,7 +305,7 @@
                                    @keyup.capture="enviarDatos"
                                    v-model="infoPreIdPaciente.cirujano"
                                    :class="infoPreIdPaciente.cirujano != undefined && infoPreIdPaciente.cirujano != '' ?
-                                          'form-control border border-success formSombra' : 'form-control'">
+                                          'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
                         </div>
 
                         <!-- Anestesiólogo -->
@@ -316,7 +316,7 @@
                                    @keyup.capture="enviarDatos"
                                    v-model="infoPreIdPaciente.anestesiologo"
                                    :class="infoPreIdPaciente.anestesiologo != undefined && infoPreIdPaciente.anestesiologo != '' ?
-                                          'form-control border border-success formSombra' : 'form-control'">
+                                          'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
                         </div>
 
                         <!-- Anestesiólogo VPA -->
@@ -326,7 +326,7 @@
                                    class="form-control"
                                    v-model="infoPreIdPaciente.anestesiologoVPA"
                                    :class="infoPreIdPaciente.anestesiologoVPA != undefined && infoPreIdPaciente.anestesiologoVPA != '' ?
-                                          'form-control border border-success formSombra' : 'form-control'">
+                                          'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
                         </div>
 
                         <!-- Residente de Anestesia -->
@@ -336,7 +336,7 @@
                                    class="form-control"
                                    v-model="infoPreIdPaciente.residenteAnestesia"
                                    :class="infoPreIdPaciente.residenteAnestesia != undefined && infoPreIdPaciente.residenteAnestesia != '' ?
-                                          'form-control border border-success formSombra' : 'form-control'">
+                                          'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
                         </div>
                     </form>
                 </div>
@@ -352,7 +352,8 @@
                             <el-select v-model="infoPreIdPaciente.nacionalidad" @change="enviarDatos"
                                        filterable
                                        :class="infoPreIdPaciente.nacionalidad != undefined && infoPreIdPaciente.nacionalidad != '' ?
-                                              'form-control-select border border-success formSombra' : 'form-control-select'">
+                                              'form-control-select border border-success formSombra' : 'form-control-select'" 
+                                              :disabled="propBloquearInputsPrincipales == true">
                                 <el-option
                                     v-for="nacionalidad in opcionNacionalidad"
                                     :value="nacionalidad.lblNac">
@@ -367,7 +368,8 @@
                                    class="form-control"
                                    v-model="infoPreIdPaciente.CURP"
                                    :class="infoPreIdPaciente.CURP != undefined && infoPreIdPaciente.CURP != '' ?
-                                          'form-control border border-success formSombra' : 'form-control'">
+                                          'form-control border border-success formSombra' : 'form-control'" 
+                                          :disabled="propBloquearInputsPrincipales == true">
                         </div>
 
                         <!-- Folio ID -->
@@ -377,7 +379,7 @@
                                    class="form-control"
                                    v-model="infoPreIdPaciente.folioID"
                                    :class="infoPreIdPaciente.folioID != undefined && infoPreIdPaciente.folioID != '' ?
-                                          'form-control border border-success formSombra' : 'form-control'">                
+                                          'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">                
                         </div>
 
                         <!-- Estado de Nacimiento -->
@@ -386,7 +388,8 @@
                             <el-select v-model="infoPreIdPaciente.estNacimiento" @change="enviarDatos"
                                        filterable
                                        :class="infoPreIdPaciente.estNacimiento != undefined && infoPreIdPaciente.estNacimiento != '' ?
-                                              'form-control-select border border-success formSombra' : 'form-control-select'">
+                                              'form-control-select border border-success formSombra' : 'form-control-select'" 
+                                              :disabled="propBloquearInputsPrincipales == true">
                                 <el-option
                                     v-for="estadoNacimiento in opcionEstadoNacimiento"
                                     :value="estadoNacimiento.lblEst">
@@ -402,7 +405,7 @@
                             <el-select v-model="infoPreIdPaciente.estResidencia" @change="enviarDatos"
                                        filterable 
                                        :class="infoPreIdPaciente.estResidencia != undefined && infoPreIdPaciente.estResidencia != '' ?
-                                       'form-control-select border border-success formSombra' : 'form-control-select'">
+                                       'form-control-select border border-success formSombra' : 'form-control-select'" :disabled="propBloquearInputs == true">
                                 <el-option v-for="estadoNacimiento in opcionEstadoResidencia"
                                            :value="estadoNacimiento.lblEstRes">
                                 </el-option>
@@ -416,7 +419,7 @@
                                    class="form-control"
                                    v-model="infoPreIdPaciente.alcaldia"
                                    :class="infoPreIdPaciente.alcaldia != undefined && infoPreIdPaciente.alcaldia != '' ?
-                                          'form-control border border-success formSombra' : 'form-control'">
+                                          'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
                         </div>
 
                         <!-- Colonia/Localidad -->
@@ -426,7 +429,7 @@
                                    class="form-control"
                                    v-model="infoPreIdPaciente.colonia"
                                    :class="infoPreIdPaciente.colonia != undefined && infoPreIdPaciente.colonia != '' ?
-                                          'form-control border border-success formSombra' : 'form-control'">
+                                          'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
                         </div>
 
                         <!-- Código Postal -->
@@ -436,7 +439,7 @@
                                    class="form-control"
                                    v-model="infoPreIdPaciente.codigoPostal"
                                    :class="infoPreIdPaciente.codigoPostal != undefined && infoPreIdPaciente.codigoPostal != '' ?
-                                          'form-control border border-success formSombra' : 'form-control'">
+                                          'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
                         </div>
 
                         <div class="col-md-10"></div>
@@ -494,6 +497,8 @@ export default defineComponent({
         propNacionalidad:{type: String},
         propCURP:{type: String},
         propEstadoNacimiento:{type: String},
+        propBloquearInputs:{type: Boolean},
+        propBloquearInputsPrincipales:{type:Boolean}
     },
 
     data () {
@@ -655,14 +660,16 @@ export default defineComponent({
         },
 
         calcularEdad() {
-            let fechaNacimiento = new Date(this.infoPreIdPaciente.fechaNac);
-            let fechaActual = new Date();
+            if(this.infoPreIdPaciente.fechaNac != null){
+                let fechaNacimiento = new Date(this.infoPreIdPaciente.fechaNac);
+                let fechaActual = new Date();
 
-            let diferencia = fechaActual.getTime() - fechaNacimiento.getTime();
-            let edad = Math.floor(diferencia / (1000 * 60 * 60 * 24 * 365.25));
-            this.infoPreIdPaciente.edadPaciente = edad;
+                let diferencia = fechaActual.getTime() - fechaNacimiento.getTime();
+                let edad = Math.floor(diferencia / (1000 * 60 * 60 * 24 * 365.25));
+                this.infoPreIdPaciente.edadPaciente = edad;
 
-            this.enviarDatos();
+                this.enviarDatos();
+            }            
         },
 
         calcularFechaIngreso(){
@@ -701,6 +708,8 @@ export default defineComponent({
             this.infoPreIdPaciente.nacionalidad = await this.propNacionalidad;
             this.infoPreIdPaciente.CURP = await this.propCURP;
             this.infoPreIdPaciente.estNacimiento = await this.propEstadoNacimiento;
+
+            this.calcularEdad()
         }
     },
 })

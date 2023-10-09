@@ -15,6 +15,8 @@
           :max="1"
           :multiple="false"
           @click="obtenerPaciente"
+          @keyup.capture="obtenerPaciente"
+          @change="obtenerPaciente"
         />
       </div>
 
@@ -128,12 +130,14 @@
               :propNacionalidad="nacionalidad"
               :propCURP="CURP"
               :propEstadoNacimiento="estadoNacimiento"
+              :propBloquearInputsPrincipales="bloquearInputsPrincipales"
+              :propBloquearInputs="bloquearInputs"
 
               ref="refId"/>
         </div>
 
         <div class="tab-pane fade" id="pre-valoracion">
-          <valoracion/>
+          <valoracion ref="refValoracion"/>
         </div>
         
         <div class="tab-pane fade" id="pre-plan">
@@ -329,6 +333,10 @@ export default defineComponent({
       CURP: '',
       estadoNacimiento: '',
 
+      nuevoRegistroExped: false,
+      bloquearInputsPrincipales: false,
+      bloquearInputs: false,
+
       nuevoRegistro:false,
       historialPaciente:false
     }
@@ -395,6 +403,9 @@ export default defineComponent({
         this.btnActualizarId=false
         this.btnNuevoGuardarId=false
         this.btnNuevoActualizarId=false
+
+        this.bloquearInputs=false
+        this.bloquearInputsPrincipales=false        
       }
 
       // Sino se elige un expediente no manda la petición
@@ -419,6 +430,9 @@ export default defineComponent({
 
         this.nuevoRegistro = true;
         this.historialPaciente = true;
+
+        this.bloquearInputs=true
+        this.bloquearInputsPrincipales=true
       }      
     },
 
@@ -426,8 +440,8 @@ export default defineComponent({
     async crearNuevoRegistroExpediente(){
       swal
         .fire({
-          html: "¿Esta seguro de crear un nuevo registro para? "+"<b>"+idStore.pacientes.pacientes[0].nomPaciente+"</b>",
-          icon: "warning",
+          html: "¿Esta seguro de crear un nuevo registro para "+"<b>"+idStore.pacientes.pacientes[0].nomPaciente+"</b>"+"?",
+          icon: "question",
           showConfirmButton: true,
           showCancelButton: true,
           toast: true,
@@ -438,6 +452,16 @@ export default defineComponent({
             this.btnActualizarId=false
             this.btnNuevoGuardarId=true
             this.btnNuevoActualizarId=false
+
+            this.bloquearInputs=false
+
+            this.nuevoRegistroExped=true
+
+            idStore.nuevoPaciente=true
+
+            // Ejecutar método de componente Valoracion
+            const componenteValoracion = this.$refs.refValoracion as InstanceType<typeof Valoracion>;
+            componenteValoracion.validarNuevoRegistro();
           }
         });        
     },
@@ -484,21 +508,40 @@ export default defineComponent({
         return;
       }
       else{
-        this.numExpB=false
-        this.nomPacB=false
-        
-        this.bordeRojoNum=false
-        this.bordeVerdeNum=true
-        
-        this.bordeRojoNom=false
-        this.bordeVerdeNom=true
-        
-        this.btnGuardarId=false
-        this.btnActualizarId=true
+        if(this.nuevoRegistroExped == false){
+          this.numExpB=false
+          this.nomPacB=false
+          
+          this.bordeRojoNum=false
+          this.bordeVerdeNum=true
+          
+          this.bordeRojoNom=false
+          this.bordeVerdeNom=true
+          
+          this.btnGuardarId=false
+          this.btnActualizarId=true
 
-        this.deshabilitado=false
-        document.getElementById("menu-trans").className='visible'
-        document.getElementById("menu-post").className='visible'
+          this.deshabilitado=false
+          document.getElementById("menu-trans").className='visible'
+          document.getElementById("menu-post").className='visible'
+        }else if(this.nuevoRegistroExped == true){
+          this.numExpB=false
+          this.nomPacB=false
+          
+          this.bordeRojoNum=false
+          this.bordeVerdeNum=true
+          
+          this.bordeRojoNom=false
+          this.bordeVerdeNom=true
+          
+          this.btnNuevoGuardarId=false
+          this.btnNuevoActualizarId=true
+
+          this.deshabilitado=false
+          document.getElementById("menu-trans").className='visible'
+          document.getElementById("menu-post").className='visible'
+        }
+        
       }
     },    
 

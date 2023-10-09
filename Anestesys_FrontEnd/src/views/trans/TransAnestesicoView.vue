@@ -1569,7 +1569,6 @@ export default defineComponent({
   mounted: function() { // Llama el método despues de cargar la página    
     transAnestStore.getDetieneMonitoreo();
     this.pingMSV(medStore.monitor[0].dirIPMVS);
-    transAnestStore.listDatosV(preIdStore.pacienteID._id);
     
     this.menuTrans.balanceTotal = null;
     this.menuTrans.solHartman = null;
@@ -1601,9 +1600,7 @@ export default defineComponent({
     let cxout = document.getElementById("cx-out");
     cxout.addEventListener("contextmenu", this.bloquearClicDerecho);
     let anesout = document.getElementById("anes-out");
-    anesout.addEventListener("contextmenu", this.bloquearClicDerecho);
-    
-    transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+    anesout.addEventListener("contextmenu", this.bloquearClicDerecho);    
 
     this.menuTrans.tipoRel= "RELEVO";
     this.menuTrans.tipoEve= "EVENTO";
