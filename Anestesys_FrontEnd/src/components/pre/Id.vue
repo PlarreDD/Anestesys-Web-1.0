@@ -1,8 +1,8 @@
 <template>
     <div>
-        <ul class="nav nav-pills mb-3 text-center centrar-li" id="">
+        <!-- <ul class="nav nav-pills mb-3 text-center centrar-li" id=""> -->
             <!-- Información -->
-            <li class="nav-item col-md-3">
+            <!-- <li class="nav-item col-md-3">
                 <button class="btn btn-nav-bar fw-bold active"
                         id="plan"
                         data-bs-toggle="pill"
@@ -10,10 +10,10 @@
                         type="button"
                         aria-selected="true"
                         data-title="Información del paciente, cirugía y médicos"> INFORMACIÓN </button>
-            </li>
+            </li> -->
 
             <!-- Datos Demográficos -->
-            <li class="nav-item col-md-2" >
+            <!-- <li class="nav-item col-md-2" >
                 <button class="btn btn-nav-bar fw-bold"
                         id="plan"
                         data-bs-toggle="pill"
@@ -22,7 +22,7 @@
                         aria-selected="false"
                         data-title="Datos demográficos del paciente"> DATOS DEMOGRÁFICOS </button>
             </li>
-        </ul>
+        </ul> -->
 
         <div class="tab-content col-md-12" id="">
             <!-- Información del paciente -->
@@ -343,11 +343,11 @@
             </div>
 
             <!-- Datos Demográficos -->
-            <div class="tab-pane fade" id="demograficos">
+            <!-- <div class="tab-pane fade" id="demograficos">
                 <div class="col-12 borderPrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">
-                    <form @submit.prevent="obtenerDatos" class="row g-3 mt-1">
+                    <form @submit.prevent="obtenerDatos" class="row g-3 mt-1"> -->
                         <!-- Nacionalidad -->
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                             <label class="form-label fw-bold"> Nacionalidad </label>
                             <el-select v-model="infoPreIdPaciente.nacionalidad" @change="enviarDatos"
                                        filterable
@@ -359,10 +359,10 @@
                                     :value="nacionalidad.lblNac">
                                 </el-option>
                             </el-select>
-                        </div>
+                        </div> -->
 
                         <!-- CURP -->
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                             <label class="form-label fw-bold"> CURP </label>
                             <input type="text" @keyup.capture="enviarDatos"
                                    class="form-control"
@@ -370,20 +370,20 @@
                                    :class="infoPreIdPaciente.CURP != undefined && infoPreIdPaciente.CURP != '' ?
                                           'form-control border border-success formSombra' : 'form-control'" 
                                           :disabled="propBloquearInputsPrincipales == true">
-                        </div>
+                        </div> -->
 
                         <!-- Folio ID -->
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                             <label class="form-label fw-bold"> FOLIO ID </label>
                             <input type="text" @keyup.capture="enviarDatos"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.folioID"
                                    :class="infoPreIdPaciente.folioID != undefined && infoPreIdPaciente.folioID != '' ?
                                           'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">                
-                        </div>
+                        </div> -->
 
                         <!-- Estado de Nacimiento -->
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                             <label class="form-label fw-bold"> Estado de Nacimiento </label>
                             <el-select v-model="infoPreIdPaciente.estNacimiento" @change="enviarDatos"
                                        filterable
@@ -397,10 +397,10 @@
                             </el-select>
                         </div>
 
-                        <h5 class="fw-bold"> DATOS DEL DOMICILIO </h5>
+                        <h5 class="fw-bold"> DATOS DEL DOMICILIO </h5> -->
 
                         <!-- Estado de Residencia -->
-                        <div class="col-md-4">
+                        <!-- <div class="col-md-4">
                             <label class="form-label fw-bold">Estado de residencia</label>
                             <el-select v-model="infoPreIdPaciente.estResidencia" @change="enviarDatos"
                                        filterable 
@@ -410,41 +410,41 @@
                                            :value="estadoNacimiento.lblEstRes">
                                 </el-option>
                             </el-select>
-                        </div>
+                        </div> -->
 
                         <!-- Alcaldía/Municipio -->
-                        <div class="col-md-4">
+                        <!-- <div class="col-md-4">
                             <label class="form-label fw-bold"> Alcaldía/Municipio </label>
                             <input type="text" @keyup.capture="enviarDatos"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.alcaldia"
                                    :class="infoPreIdPaciente.alcaldia != undefined && infoPreIdPaciente.alcaldia != '' ?
                                           'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
-                        </div>
+                        </div> -->
 
                         <!-- Colonia/Localidad -->
-                        <div class="col-md-4">
+                        <!-- <div class="col-md-4">
                             <label  class="form-label fw-bold"> Colonia/Localidad </label>
                             <input type="text" @keyup.capture="enviarDatos"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.colonia"
                                    :class="infoPreIdPaciente.colonia != undefined && infoPreIdPaciente.colonia != '' ?
                                           'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
-                        </div>
+                        </div> -->
 
                         <!-- Código Postal -->
-                        <div class="col-md-4">
+                        <!-- <div class="col-md-4">
                             <label  class="form-label fw-bold margen-cp"> Código Postal </label>
                             <input type="text" @keyup.capture="enviarDatos"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.codigoPostal"
                                    :class="infoPreIdPaciente.codigoPostal != undefined && infoPreIdPaciente.codigoPostal != '' ?
                                           'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
-                        </div>
+                        </div> -->
 
-                        <div class="col-md-10"></div>
+                        <!-- <div class="col-md-10"></div> -->
                         <!-- Botón Guardar/Actuazlizar -->
-                        <div class="col-md-1 margenBoton">
+                        <!-- <div class="col-md-1 margenBoton">
                             <button href="#pre-valoracion" 
                                     data-bs-toggle="tab" 
                                     type="submit"
@@ -457,10 +457,10 @@
                                     class="btn btn-guardar-datos fw-bold"
                                     :class="propBtnActualizarId == true ? 'visible' : 'invisible'"
                                     @click="preIdStore.updatePreId( infoPreIdPaciente )"> ACTUALIZAR </button>
-                        </div>
-                    </form>
+                        </div> -->
+                    <!-- </form>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -697,6 +697,36 @@ export default defineComponent({
             this.infoPreIdPaciente.hrCx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
 
             this.enviarDatos();
+        },
+
+        async guardarDatosId(){
+            if(preIdStore.nuevoRegistroPaciente == false){
+                console.log("Entrar if = false")
+                if(preIdStore.actualizarRegId == false ){
+                    console.log("if guardar datos")
+                    // Guardar datos
+                    preIdStore.savePreId(this.infoPreIdPaciente)
+                    preIdStore.actualizarRegId = true
+                }else if(preIdStore.actualizarRegId == true){
+                    console.log("else if actualizar datos")
+                    // Actualizar datos
+                    preIdStore.updatePreId(this.infoPreIdPaciente)
+                }
+
+            }else if(preIdStore.nuevoRegistroPaciente == true){
+                console.log("Entrar if = true")
+                if(preIdStore.actualizarRegId == false ){
+                    console.log("if guardar nuevos datos")
+                    // Guardar nuevos datos
+                    preIdStore.createAddPreId(this.infoPreIdPaciente)
+                    preIdStore.actualizarRegId = true
+                }else if(preIdStore.actualizarRegId == true){
+                    console.log("if actualizar nuevos datos")
+                    // Actualizar nuevos datos
+                    preIdStore.updateAddPreId(this.infoPreIdPaciente)
+                }
+
+            }
         },
 
         async asignarValoresPaciente(){

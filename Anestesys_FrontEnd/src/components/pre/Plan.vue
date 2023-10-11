@@ -1173,11 +1173,39 @@ export default defineComponent({
     },
 
     methods:{
+        async guardarDatosPlan(){
+            if(preIdStore.nuevoRegistroPaciente == false){
+                console.log("Entrar if = false PLAN")
+                if(preIdStore.actualizarRegPlan == false ){
+                    console.log("if guardar datos Plan")
+                    // Guardar datos
+                    preIdStore.savePrePlan(this.infoPlan, preIdStore.pacienteID._id)
+                    preIdStore.actualizarRegPlan = true
+                }else if(preIdStore.actualizarRegPlan == true){
+                    console.log("else if actualizar datos Plan")
+                    // Actualizar datos
+                    preIdStore.updatePrePlan(this.infoPlan, preIdStore.pacienteID._id)
+                }
+
+            }else if(preIdStore.nuevoRegistroPaciente == true){
+                if(preIdStore.actualizarRegPlan == false ){
+                    // Guardar nuevos datos
+                    preIdStore.saveNuevoPrePlan(this.infoPlan, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                    preIdStore.actualizarRegPlan = true
+                }else if(preIdStore.actualizarRegPlan == true){
+                    // Actualizar nuevos datos
+                    preIdStore.updateNuevoPrePlan(this.infoPlan, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
+                }
+
+            }
+        },
+
         cambiarUpdateValoracion() {
             this.btnActualizarValoracion=true
 
             preIdStore.savePrePlan(this.infoPlan, preIdStore.pacienteID._id)
         },
+
         cambioSelectRegional(){
             if((document.getElementById("sitioCabeza") as HTMLOptionElement).selected){
                 this.sitioCabeza=true
@@ -1215,6 +1243,7 @@ export default defineComponent({
                 this.infoPlan.regional_Opcion = ""
             }
         },
+
         enviarDatosPlan() {
             this.$emit('recibe-datos-plan', preIdStore.HorasAyuno = this.infoPlan.pos_HorasAyuno,
                                             preIdStore.AccesoVenoso = this.infoPlan.pos_AccesoVenoso,

@@ -141,11 +141,11 @@
         </div>
         
         <div class="tab-pane fade" id="pre-plan">
-          <plan/>
+          <plan ref="refPlan"/>
         </div>
         
         <div class="tab-pane fade" id="pre-nota">
-          <nota/>
+          <nota ref="refNota"/>
         </div>
       </div>
 
@@ -457,7 +457,7 @@ export default defineComponent({
 
             this.nuevoRegistroExped=true
 
-            idStore.nuevoPaciente=true
+            idStore.nuevoRegistroPaciente=true
 
             // Ejecutar método de componente Valoracion
             const componenteValoracion = this.$refs.refValoracion as InstanceType<typeof Valoracion>;
@@ -557,6 +557,16 @@ export default defineComponent({
     },
 
     async validaSeleccionValoracion(){
+      
+      // const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
+      // await componenteId.guardarDatosId();
+
+      const componenteValoracion = await this.$refs.refValoracion as InstanceType<typeof Valoracion>;
+      await componenteValoracion.guardarDatosValoracion();
+
+      const componentePlan = await this.$refs.refPlan as InstanceType<typeof Plan>;
+      await componentePlan.guardarDatosPlan();
+
       if(document.getElementById("valoracion-tab").ariaSelected=="false"){
         this.esValoracion=false  
       }

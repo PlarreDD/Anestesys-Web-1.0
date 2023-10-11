@@ -935,6 +935,90 @@ export const savePrePlan = async (req: any, res: Response) => {
     }
 };
 
+export const saveNuevoPrePlan = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid,
+                // Posicion y Cuidados
+                pos_HorasAyuno, pos_AccesoVenoso, pos_PosicionPaciente,
+                pos_PosicionBrazos, pos_Torniquete, pos_AplicacionTorniquete,
+                pos_Sitio, pos_TiempoIsquemia, pos_ProteccionOjos,
+                pos_ProtecProminencias, pos_TecnicaAnestesica, pos_Premedicacion,
+                pos_EspPremedicacion, pos_Monitoreo,
+                // General
+                // Intubación
+                general_Induccion, general_Tubo, general_NumeroTubo,
+                general_TipoCanula, general_Globo, general_Presion,
+                general_DifTecnicasIntubacion, general_EspDifTecIntubacion,
+                // Dispositivos Supraglóticos
+                general_DispositivosSupro, general_Calibre, general_Complicaciones,
+                general_EspComplicaciones, 
+                // Otros Disposotivos
+                general_OtrosDispositivos, general_EspOtrosDispositivos,
+                // Regional
+                // Bloqueo Neuro-Axial
+                regional_Tipo, regional_TipoAguja, regional_Nivel, regional_CalibreAguja,
+                regional_Cateter, regional_OrientacionCateter, regional_ProbDificulNeuro,
+                regional_EspDificultadesNeuro,
+                // Bloqueo Plexo
+                regional_Sitio, regional_Opcion, regional_EspSitio, 
+                regional_AnestesicoUtilizado, regional_EspAnestesico,
+                regional_ProbDificulPlexo, regional_EspDificulPlexo,
+                // Equipo de Apoyo
+                regional_Ultrasonido, regional_EspUltrasonido, regional_Neuroestimulador,
+                regional_EspNeuroestimulador, regional_ProbComplicaciones,
+                regional_EspDificEquipo,
+                // Sedación
+                sedacion_Via, sedacion_Opcion, sedacion_Observaciones,
+                sedacion_Medicamentos,
+                // Local
+                local_SitioAnestesiaL, local_AnestesicoUtilizado,
+                local_Especificar, } = req.body;
+        
+        const preplan = new PrePlan({ pid, cxid,
+                                      // Posicion y Cuidados
+                                      pos_HorasAyuno, pos_AccesoVenoso, pos_PosicionPaciente,
+                                      pos_PosicionBrazos, pos_Torniquete, pos_AplicacionTorniquete,
+                                      pos_Sitio, pos_TiempoIsquemia, pos_ProteccionOjos,
+                                      pos_ProtecProminencias, pos_TecnicaAnestesica, pos_Premedicacion,
+                                      pos_EspPremedicacion, pos_Monitoreo,
+                                      // General
+                                      // Intubación
+                                      general_Induccion, general_Tubo, general_NumeroTubo,
+                                      general_TipoCanula, general_Globo, general_Presion,
+                                      general_DifTecnicasIntubacion, general_EspDifTecIntubacion,
+                                      // Dispositivos Supraglóticos
+                                      general_DispositivosSupro, general_Calibre,
+                                      general_Complicaciones, general_EspComplicaciones, 
+                                      // Otros Disposotivos
+                                      general_OtrosDispositivos, general_EspOtrosDispositivos,
+                                      // Regional
+                                      // Bloqueo Neuro-Axial
+                                      regional_Tipo, regional_TipoAguja, regional_Nivel,
+                                      regional_CalibreAguja, regional_Cateter,
+                                      regional_OrientacionCateter, regional_ProbDificulNeuro,
+                                      regional_EspDificultadesNeuro,
+                                      // Bloqueo Plexo
+                                      regional_Sitio, regional_Opcion, regional_EspSitio, 
+                                      regional_AnestesicoUtilizado, regional_EspAnestesico,
+                                      regional_ProbDificulPlexo, regional_EspDificulPlexo,
+                                      // Equipo de Apoyo
+                                      regional_Ultrasonido, regional_EspUltrasonido,
+                                      regional_Neuroestimulador, regional_EspNeuroestimulador,
+                                      regional_ProbComplicaciones, regional_EspDificEquipo,
+                                      // Sedación
+                                      sedacion_Via, sedacion_Opcion, sedacion_Observaciones,
+                                      sedacion_Medicamentos,
+                                      // Local
+                                      local_SitioAnestesiaL, local_AnestesicoUtilizado,
+                                      local_Especificar });
+        await preplan.save();
+        
+        return res.json({ preplan });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 export const updatePrePlan = async (req: any, res: Response) => {
     try {
         const { id } = req.params;
@@ -1019,6 +1103,91 @@ export const updatePrePlan = async (req: any, res: Response) => {
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
+
+export const updateNuevoPrePlan = async (req: any, res: Response) => {
+    try {
+        const { id, cxid} = req.params;
+
+        const { // Posicion y Cuidados
+                pos_HorasAyuno, pos_AccesoVenoso, pos_PosicionPaciente,
+                pos_PosicionBrazos, pos_Torniquete, pos_AplicacionTorniquete,
+                pos_Sitio, pos_TiempoIsquemia, pos_ProteccionOjos,
+                pos_ProtecProminencias, pos_TecnicaAnestesica, pos_Premedicacion,
+                pos_EspPremedicacion, pos_Monitoreo,
+                // General
+                // Intubación
+                general_Induccion, general_Tubo, general_NumeroTubo,
+                general_TipoCanula, general_Globo, general_Presion,
+                general_DifTecnicasIntubacion, general_EspDifTecIntubacion,
+                // Dispositivos Supraglóticos
+                general_DispositivosSupro, general_Calibre, general_Complicaciones,
+                general_EspComplicaciones, 
+                // Otros Disposotivos
+                general_OtrosDispositivos, general_EspOtrosDispositivos,
+                // Regional
+                // Bloqueo Neuro-Axial
+                regional_Tipo, regional_TipoAguja, regional_Nivel, regional_CalibreAguja,
+                regional_Cateter, regional_OrientacionCateter, regional_ProbDificulNeuro,
+                regional_EspDificultadesNeuro,
+                // Bloqueo Plexo
+                regional_Sitio, regional_Opcion, regional_EspSitio, 
+                regional_AnestesicoUtilizado, regional_EspAnestesico,
+                regional_ProbDificulPlexo, regional_EspDificulPlexo,
+                // Equipo de Apoyo
+                regional_Ultrasonido, regional_EspUltrasonido, regional_Neuroestimulador,
+                regional_EspNeuroestimulador, regional_ProbComplicaciones,
+                regional_EspDificEquipo,
+                // Sedación
+                sedacion_Via, sedacion_Opcion, sedacion_Observaciones,
+                sedacion_Medicamentos,
+                // Local
+                local_SitioAnestesiaL, local_AnestesicoUtilizado,
+                local_Especificar, } = req.body;
+        
+        const preplan = await PrePlan.findOneAndUpdate( { pid: id, cxid:cxid },
+                                                        { // Posicion y Cuidados
+                                                          pos_HorasAyuno, pos_AccesoVenoso, pos_PosicionPaciente,
+                                                          pos_PosicionBrazos, pos_Torniquete, pos_AplicacionTorniquete,
+                                                          pos_Sitio, pos_TiempoIsquemia, pos_ProteccionOjos,
+                                                          pos_ProtecProminencias, pos_TecnicaAnestesica, pos_Premedicacion,
+                                                          pos_EspPremedicacion, pos_Monitoreo,
+                                                          // General
+                                                          // General
+                                                          // Intubación
+                                                          general_Induccion, general_Tubo, general_NumeroTubo,
+                                                          general_TipoCanula, general_Globo, general_Presion,
+                                                          general_DifTecnicasIntubacion, general_EspDifTecIntubacion,
+                                                          // Dispositivos Supraglóticos
+                                                          general_DispositivosSupro, general_Calibre,
+                                                          general_Complicaciones, general_EspComplicaciones,
+                                                          // Otros Disposotivos
+                                                          general_OtrosDispositivos, general_EspOtrosDispositivos,
+                                                          // Regional
+                                                          // Bloqueo Neuro-Axial
+                                                          regional_Tipo, regional_TipoAguja, regional_Nivel,
+                                                          regional_CalibreAguja, regional_Cateter,
+                                                          regional_OrientacionCateter, regional_ProbDificulNeuro,
+                                                          regional_EspDificultadesNeuro,
+                                                          // Bloqueo Plexo
+                                                          regional_Sitio, regional_Opcion, regional_EspSitio, 
+                                                          regional_AnestesicoUtilizado, regional_EspAnestesico,
+                                                          regional_ProbDificulPlexo, regional_EspDificulPlexo,
+                                                          // Equipo de Apoyo
+                                                          regional_Ultrasonido, regional_EspUltrasonido,
+                                                          regional_Neuroestimulador, regional_EspNeuroestimulador,
+                                                          regional_ProbComplicaciones, regional_EspDificEquipo,
+                                                          // Sedación
+                                                          sedacion_Via, sedacion_Opcion, sedacion_Observaciones,
+                                                          sedacion_Medicamentos,
+                                                          // Local
+                                                          local_SitioAnestesiaL, local_AnestesicoUtilizado,
+                                                          local_Especificar, })
+
+        return res.json({ preplan });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
 /********************************************************************/
 /******************************* NOTA *******************************/
 /********************************************************************/
@@ -1038,6 +1207,21 @@ export const saveNota = async (req: any, res: Response) => {
     }
 };
 
+export const saveNuevoNota = async (req: any, res: Response) => {
+    try {
+        const { obsNotaPre, pid, cxid } = req.body;
+        
+        const prenota = new PreNota({ pid: pid, cxid:cxid,
+                                      obsNota: obsNotaPre });
+        
+        await prenota.save();
+
+        return res.json({ prenota });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 /* Función de actualización de nota pre anetésica */
 export const updateNota = async (req: any, res: Response) => {
     try {
@@ -1045,6 +1229,19 @@ export const updateNota = async (req: any, res: Response) => {
         const { obsNotaPre } = req.body;
 
         const prenota = await PreNota.findOneAndUpdate({pid: id}, { obsNota: obsNotaPre });
+
+        return res.json({ prenota })
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const updateNuevoNota = async (req: any, res: Response) => {
+    try {
+        const { id, cxid } = req.params;
+        const { obsNotaPre } = req.body;
+
+        const prenota = await PreNota.findOneAndUpdate({pid: id, cxid: cxid}, { obsNota: obsNotaPre });
 
         return res.json({ prenota })
     } catch (error) {
