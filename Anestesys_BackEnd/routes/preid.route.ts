@@ -5,7 +5,8 @@ import { getPaciente,
          updatePaciente, 
          getExpedientes,
          createNuevoRegistroPaciente,
-         updateNuevoRegistroPaciente} from "../controllers/preanest.controller";
+         updateNuevoRegistroPaciente,
+         updateAnteriorPaciente} from "../controllers/preanest.controller";
 
 const router = Router();
 
@@ -21,5 +22,6 @@ router.post('/', requireToken, createPaciente);
 router.put('/:id',  requireToken, updatePaciente);
 router.post('/add', requireToken, createNuevoRegistroPaciente);
 router.put('/add/:id',  requireToken, updateNuevoRegistroPaciente);
+router.put('/ante/:id',  requireToken, updateAnteriorPaciente);
 
 export default router;

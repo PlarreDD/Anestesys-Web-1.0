@@ -79,13 +79,7 @@
                                     type="submit"
                                     class="btn btn-guardar-info fw-bold"
                                     :class="propBtnGuardarId == true ? 'visible' : 'invisible'"
-                                    @click="preIdStore.savePreId( infoPreIdPaciente )" :disabled="propBloquearInputs == true"> GUARDAR </button>
-                            
-                            <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-info fw-bold"
-                                    :class="propBtnActualizarId == true ? 'visible' : 'invisible'"
-                                    @click="preIdStore.updatePreId( infoPreIdPaciente )" :disabled="propBloquearInputs == true"> ACTUALIZAR </button>
+                                    @click="preIdStore.savePreId( infoPreIdPaciente )" :disabled="propBloquearInputs == true"> GUARDAR </button>                        
 
                             <button data-bs-toggle="tab" 
                                     type="submit"
@@ -93,11 +87,6 @@
                                     :class="propBtnNuevoGuardarId == true ? 'visible' : 'invisible'"
                                     @click="preIdStore.createAddPreId( infoPreIdPaciente )" :disabled="propBloquearInputs == true"> GUARDAR </button>
                             
-                            <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-info fw-bold"
-                                    :class="propBtnNuevoActualizarId == true ? 'visible' : 'invisible'"
-                                    @click="preIdStore.updateAddPreId( infoPreIdPaciente )" :disabled="propBloquearInputs == true"> ACTUALIZAR </button>
                         </div>
 
                         <!-- Fecha de Nacimiento -->
@@ -108,7 +97,7 @@
                                    @change="calcularEdad"
                                    v-model="infoPreIdPaciente.fechaNac"
                                    :class="infoPreIdPaciente.fechaNac != undefined && infoPreIdPaciente.fechaNac != '' ?
-                                          'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputsPrincipales == true">
+                                          'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
                         <!-- Edad -->
@@ -120,7 +109,7 @@
                                    @change="enviarDatos"
                                    v-model="infoPreIdPaciente.edadPaciente"
                                    :class="infoPreIdPaciente.edadPaciente != undefined && infoPreIdPaciente.edadPaciente != 0 ?
-                                          'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
+                                          'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
                         <!-- Género -->
@@ -134,7 +123,7 @@
                                    autocomplete="off"
                                    value="Masculino"
                                    @change="enviarDatos"
-                                   v-model="infoPreIdPaciente.genero" :disabled="propBloquearInputsPrincipales == true">
+                                   v-model="infoPreIdPaciente.genero">
                             <label class="btn btn-radio margenRadio"
                                    for="masculino"> Masculino </label>
 
@@ -145,7 +134,7 @@
                                    autocomplete="off"
                                    value="Femenino"
                                    @change="enviarDatos"
-                                   v-model="infoPreIdPaciente.genero" :disabled="propBloquearInputsPrincipales == true">
+                                   v-model="infoPreIdPaciente.genero">
                             <label class="btn btn-radio"
                                    for="femenino"> Femenino </label>
                         </div>
@@ -440,24 +429,7 @@
                                    v-model="infoPreIdPaciente.codigoPostal"
                                    :class="infoPreIdPaciente.codigoPostal != undefined && infoPreIdPaciente.codigoPostal != '' ?
                                           'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
-                        </div> -->
-
-                        <!-- <div class="col-md-10"></div> -->
-                        <!-- Botón Guardar/Actuazlizar -->
-                        <!-- <div class="col-md-1 margenBoton">
-                            <button href="#pre-valoracion" 
-                                    data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"
-                                    :class="propBtnGuardarId == true ? 'visible' : 'invisible'"
-                                    @click="preIdStore.savePreId( infoPreIdPaciente )"> GUARDAR </button> 
-
-                            <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"
-                                    :class="propBtnActualizarId == true ? 'visible' : 'invisible'"
-                                    @click="preIdStore.updatePreId( infoPreIdPaciente )"> ACTUALIZAR </button>
-                        </div> -->
+                        </div> -->                    
                     <!-- </form>
                 </div>
             </div> -->
@@ -494,9 +466,9 @@ export default defineComponent({
         propFechaNacimiento:{type: String},
         propEdad:{type: Number},
         propGenero:{type: String},
-        propNacionalidad:{type: String},
-        propCURP:{type: String},
-        propEstadoNacimiento:{type: String},
+        // propNacionalidad:{type: String},
+        // propCURP:{type: String},
+        // propEstadoNacimiento:{type: String},
         propBloquearInputs:{type: Boolean},
         propBloquearInputsPrincipales:{type:Boolean}
     },
@@ -614,6 +586,35 @@ export default defineComponent({
     },
     
     methods: {
+        async guardarDatosId(){
+            if(preIdStore.nuevoRegistroPaciente == false){
+                if(preIdStore.actualizarRegId == true){
+                    // Actualizar datos
+                    preIdStore.updatePreId(this.infoPreIdPaciente)                    
+                }
+
+            }else if(preIdStore.nuevoRegistroPaciente == true){
+                if(preIdStore.actualizarRegId == true){
+                    // Actualizar nuevos datos
+                    preIdStore.updateAddPreId(this.infoPreIdPaciente)
+                    preIdStore.updatePreIdAnterior(this.infoPreIdPaciente)
+                }
+            }
+        },
+
+        async asignarValoresPaciente(){
+            this.infoPreIdPaciente.numExped = await this.propNumeroExp;
+            this.infoPreIdPaciente.nomPaciente = await this.propNombrePac;
+            this.infoPreIdPaciente.fechaNac = await this.propFechaNacimiento;
+            this.infoPreIdPaciente.edadPaciente = await this.propEdad;
+            this.infoPreIdPaciente.genero = await this.propGenero;
+            // this.infoPreIdPaciente.nacionalidad = await this.propNacionalidad;
+            // this.infoPreIdPaciente.CURP = await this.propCURP;
+            // this.infoPreIdPaciente.estNacimiento = await this.propEstadoNacimiento;
+
+            this.calcularEdad()
+        },
+
         obtenerDatos() {
             this.$emit("validar", this.infoPreIdPaciente.numExped,
                                   this.infoPreIdPaciente.nomPaciente);
@@ -697,50 +698,7 @@ export default defineComponent({
             this.infoPreIdPaciente.hrCx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
 
             this.enviarDatos();
-        },
-
-        async guardarDatosId(){
-            if(preIdStore.nuevoRegistroPaciente == false){
-                console.log("Entrar if = false")
-                if(preIdStore.actualizarRegId == false ){
-                    console.log("if guardar datos")
-                    // Guardar datos
-                    preIdStore.savePreId(this.infoPreIdPaciente)
-                    preIdStore.actualizarRegId = true
-                }else if(preIdStore.actualizarRegId == true){
-                    console.log("else if actualizar datos")
-                    // Actualizar datos
-                    preIdStore.updatePreId(this.infoPreIdPaciente)
-                }
-
-            }else if(preIdStore.nuevoRegistroPaciente == true){
-                console.log("Entrar if = true")
-                if(preIdStore.actualizarRegId == false ){
-                    console.log("if guardar nuevos datos")
-                    // Guardar nuevos datos
-                    preIdStore.createAddPreId(this.infoPreIdPaciente)
-                    preIdStore.actualizarRegId = true
-                }else if(preIdStore.actualizarRegId == true){
-                    console.log("if actualizar nuevos datos")
-                    // Actualizar nuevos datos
-                    preIdStore.updateAddPreId(this.infoPreIdPaciente)
-                }
-
-            }
-        },
-
-        async asignarValoresPaciente(){
-            this.infoPreIdPaciente.numExped = await this.propNumeroExp;
-            this.infoPreIdPaciente.nomPaciente = await this.propNombrePac;
-            this.infoPreIdPaciente.fechaNac = await this.propFechaNacimiento;
-            this.infoPreIdPaciente.edadPaciente = await this.propEdad;
-            this.infoPreIdPaciente.genero = await this.propGenero;
-            this.infoPreIdPaciente.nacionalidad = await this.propNacionalidad;
-            this.infoPreIdPaciente.CURP = await this.propCURP;
-            this.infoPreIdPaciente.estNacimiento = await this.propEstadoNacimiento;
-
-            this.calcularEdad()
-        }
+        },        
     },
 })
 </script>

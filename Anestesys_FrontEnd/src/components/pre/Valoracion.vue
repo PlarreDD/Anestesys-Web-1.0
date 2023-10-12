@@ -1163,10 +1163,8 @@ export default defineComponent({
             IMC:"",
             infoValoracion: {} as regValoracion,
             preIdStore,
-            btnAgregarValoracion:true,
+
             btnActualizarValoracion:false,
-            btnNuevoAgregarValoracion:false,
-            btnNuevoActualizarValoracion:false,
             
             btnAddEstudios:true,
             btnUpdateEstudios:false,
@@ -1190,25 +1188,14 @@ export default defineComponent({
             }
         },
 
-        async validarNuevoRegistro(){                        
-            if(preIdStore.nuevoRegistroPaciente==true){                
-                this.btnAgregarValoracion=false 
-                this.btnActualizarValoracion=false
-                this.btnNuevoAgregarValoracion=true 
-                this.btnNuevoActualizarValoracion=false
-            }
-        },
-
         async guardarDatosValoracion(){
             if(preIdStore.nuevoRegistroPaciente == false){
-                console.log("Entrar if = false VALORACIÓN")
                 if(preIdStore.actualizarRegValoracion == false ){
-                    console.log("if guardar datos Valoración")
                     // Guardar datos
                     preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
                     preIdStore.actualizarRegValoracion = true
+                    this.btnActualizarValoracion = true
                 }else if(preIdStore.actualizarRegValoracion == true){
-                    console.log("else if actualizar datos Valoración")
                     // Actualizar datos
                     preIdStore.updatePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
                 }
@@ -1218,27 +1205,12 @@ export default defineComponent({
                     // Guardar nuevos datos
                     preIdStore.saveNuevoPreAntecedentes(this.infoValoracion, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
                     preIdStore.actualizarRegValoracion = true
+                    this.btnActualizarValoracion = true
                 }else if(preIdStore.actualizarRegValoracion == true){
                     // Actualizar nuevos datos
                     preIdStore.updateNuevoPreAntecedentes(this.infoValoracion, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
                 }
 
-            }
-        },
-
-        cambiarUpdateValoracion() {                       
-            if(preIdStore.nuevoRegistroPaciente == false){
-                console.log("Entro if cambiarUpdate")
-                this.btnAgregarValoracion=false 
-                this.btnActualizarValoracion=true                                
-                preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
-            }else if(preIdStore.nuevoRegistroPaciente == true){
-                console.log("Entro else if")
-                this.btnAgregarValoracion=false 
-                this.btnActualizarValoracion=false
-                this.btnNuevoAgregarValoracion=false
-                this.btnNuevoActualizarValoracion=true
-                preIdStore.saveNuevoPreAntecedentes(this.infoValoracion, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
             }
         },
 
@@ -1248,9 +1220,11 @@ export default defineComponent({
 
         async guardarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
             if(this.btnActualizarValoracion){
+                console.log("Entro if");                
                 await preIdStore.updatePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
             }
             else{
+                console.log("Entro else");
                 this.btnActualizarValoracion=true
                 await preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
             }            

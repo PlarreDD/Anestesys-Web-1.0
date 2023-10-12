@@ -127,14 +127,14 @@
               :propFechaNacimiento="fechaNacimiento"
               :propEdad="edad"
               :propGenero="genero"
-              :propNacionalidad="nacionalidad"
-              :propCURP="CURP"
-              :propEstadoNacimiento="estadoNacimiento"
               :propBloquearInputsPrincipales="bloquearInputsPrincipales"
               :propBloquearInputs="bloquearInputs"
-
+              
               ref="refId"/>
-        </div>
+            </div>
+            <!-- :propNacionalidad="nacionalidad"
+            :propCURP="CURP"
+            :propEstadoNacimiento="estadoNacimiento" -->
 
         <div class="tab-pane fade" id="pre-valoracion">
           <valoracion ref="refValoracion"/>
@@ -156,7 +156,7 @@
         </div>
         
         <div :class="numExpediente != '' && nomPaciente != '' ?
-                    'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
+                    'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'" @click="guardarDatos()">
           <RouterLink to="trans"
                       class="" id="menu-trans">
             <img src="images/trans.svg" class="img-menu-lateral" v-bind:aria-disabled="true"/>
@@ -164,7 +164,7 @@
         </div>
         
         <div :class="numExpediente != '' && nomPaciente != '' ?
-                    'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
+                    'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'" @click="guardarDatos()">
           <RouterLink to="post"
           class="" id="menu-post">
             <img src="images/post.svg" class="img-menu-lateral"/>
@@ -329,9 +329,9 @@ export default defineComponent({
       fechaNacimiento: Date,
       edad: Number,
       genero: '',
-      nacionalidad: '',
-      CURP: '',
-      estadoNacimiento: '',
+      // nacionalidad: '',
+      // CURP: '',
+      // estadoNacimiento: '',
 
       nuevoRegistroExped: false,
       bloquearInputsPrincipales: false,
@@ -372,7 +372,7 @@ export default defineComponent({
       await idStore.getExpedientesList()
 
       let expediente= idStore.expedientes;
-      this.listaExpedientes = expediente.map(document => document.numExpediente);
+      this.listaExpedientes = expediente.map(document => document.numExpediente+" " +document.nomPaciente);
       this.listaExpedientes.sort();      
     },
 
@@ -380,17 +380,15 @@ export default defineComponent({
     async obtenerPaciente(){
       await this.listarExpedientes();
 
-      console.log("numExp:"+idStore.numExpediente);  
-
       if(idStore.numExpediente == null || idStore.numExpediente == ''){ 
         this.numeroExpediente = ''
         this.nombrePaciente = ''
         this.fechaNacimiento = null
         this.edad = null
         this.genero = ''
-        this.nacionalidad = ''
-        this.CURP = ''
-        this.estadoNacimiento = ''
+        // this.nacionalidad = ''
+        // this.CURP = ''
+        // this.estadoNacimiento = ''
 
         // Ejecutar método de componente Id
         const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
@@ -409,20 +407,25 @@ export default defineComponent({
       }
 
       // Sino se elige un expediente no manda la petición
-      if(idStore.numExpediente != null && idStore.numExpediente != ''){        
-        await idStore.getPaciente(idStore.numExpediente)
+      if(idStore.numExpediente != null && idStore.numExpediente != ''){
+        
+        let expediente = await idStore.numExpediente.toString()
+        let numExp = expediente.split(' ')[0];
+
+        await idStore.getPaciente(numExp)
         
         idStore.numeroExpediente = idStore.pacientes.pacientes[0].numExpediente
         this.numeroExpediente = idStore.numeroExpediente
-
+        
+        idStore.pacienteId = idStore.pacientes.pacientes[0]._id        
         // this.idPaciente = idStore.pacientes.pacientes[0]._id                
         this.nombrePaciente = idStore.pacientes.pacientes[0].nomPaciente
         this.fechaNacimiento = idStore.pacientes.pacientes[0].fechaNPaciente
         this.edad = idStore.pacientes.pacientes[0].edadPaciente
         this.genero = idStore.pacientes.pacientes[0].generoPaciente
-        this.nacionalidad = idStore.pacientes.pacientes[0].nacionalidad
-        this.CURP = idStore.pacientes.pacientes[0].CURP
-        this.estadoNacimiento = idStore.pacientes.pacientes[0].estNacimiento
+        // this.nacionalidad = idStore.pacientes.pacientes[0].nacionalidad
+        // this.CURP = idStore.pacientes.pacientes[0].CURP
+        // this.estadoNacimiento = idStore.pacientes.pacientes[0].estNacimiento
 
         // Ejecutar método de componente Id
         const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
@@ -458,10 +461,6 @@ export default defineComponent({
             this.nuevoRegistroExped=true
 
             idStore.nuevoRegistroPaciente=true
-
-            // Ejecutar método de componente Valoracion
-            const componenteValoracion = this.$refs.refValoracion as InstanceType<typeof Valoracion>;
-            componenteValoracion.validarNuevoRegistro();
           }
         });        
     },
@@ -545,6 +544,21 @@ export default defineComponent({
       }
     },    
 
+    async guardarDatos(){
+      
+      const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
+      await componenteId.guardarDatosId();
+
+      const componenteValoracion = await this.$refs.refValoracion as InstanceType<typeof Valoracion>;
+      await componenteValoracion.guardarDatosValoracion();
+
+      const componentePlan = await this.$refs.refPlan as InstanceType<typeof Plan>;
+      await componentePlan.guardarDatosPlan();
+
+      const componenteNota = await this.$refs.refNota as InstanceType<typeof Nota>;
+      await componenteNota.guardarDatosNota();
+    },
+
     async validaSeleccionId(){
       if(document.getElementById("id-tab").ariaSelected=="false"){
         this.esPaciente=false   
@@ -554,12 +568,9 @@ export default defineComponent({
         this.esValoracion=false;
         this.esPlan=false;
         this.esNota=false;
-    },
 
-    async validaSeleccionValoracion(){
-      
-      // const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
-      // await componenteId.guardarDatosId();
+      const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
+      await componenteId.guardarDatosId();
 
       const componenteValoracion = await this.$refs.refValoracion as InstanceType<typeof Valoracion>;
       await componenteValoracion.guardarDatosValoracion();
@@ -567,6 +578,11 @@ export default defineComponent({
       const componentePlan = await this.$refs.refPlan as InstanceType<typeof Plan>;
       await componentePlan.guardarDatosPlan();
 
+      const componenteNota = await this.$refs.refNota as InstanceType<typeof Nota>;
+      await componenteNota.guardarDatosNota();      
+    },
+
+    async validaSeleccionValoracion(){
       if(document.getElementById("valoracion-tab").ariaSelected=="false"){
         this.esValoracion=false  
       }
@@ -575,6 +591,18 @@ export default defineComponent({
         this.esValoracion=true;
         this.esPlan=false;
         this.esNota=false;
+      
+      const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
+      await componenteId.guardarDatosId();
+
+      const componenteValoracion = await this.$refs.refValoracion as InstanceType<typeof Valoracion>;
+      await componenteValoracion.guardarDatosValoracion();
+
+      const componentePlan = await this.$refs.refPlan as InstanceType<typeof Plan>;
+      await componentePlan.guardarDatosPlan();
+
+      const componenteNota = await this.$refs.refNota as InstanceType<typeof Nota>;
+      await componenteNota.guardarDatosNota();      
     },
 
     async validaSeleccionPlan(){
@@ -586,6 +614,18 @@ export default defineComponent({
         this.esPaciente=false;
         this.esValoracion=false;
         this.esNota=false;
+
+      const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
+      await componenteId.guardarDatosId();
+
+      const componenteValoracion = await this.$refs.refValoracion as InstanceType<typeof Valoracion>;
+      await componenteValoracion.guardarDatosValoracion();
+
+      const componentePlan = await this.$refs.refPlan as InstanceType<typeof Plan>;
+      await componentePlan.guardarDatosPlan();
+
+      const componenteNota = await this.$refs.refNota as InstanceType<typeof Nota>;
+      await componenteNota.guardarDatosNota();      
     },
 
     async validaSeleccionNota(){
@@ -597,6 +637,18 @@ export default defineComponent({
         this.esPaciente=false;
         this.esValoracion=false;
         this.esNota=true;
+
+      const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
+      await componenteId.guardarDatosId();
+
+      const componenteValoracion = await this.$refs.refValoracion as InstanceType<typeof Valoracion>;
+      await componenteValoracion.guardarDatosValoracion();
+
+      const componentePlan = await this.$refs.refPlan as InstanceType<typeof Plan>;
+      await componentePlan.guardarDatosPlan();
+
+      const componenteNota = await this.$refs.refNota as InstanceType<typeof Nota>;
+      await componenteNota.guardarDatosNota();      
     },
 
     async actualizaDatos(numeroExpediente, nombrePaciente, nombreCirujano, cirugia, numEpisodio) {

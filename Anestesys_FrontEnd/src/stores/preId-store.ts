@@ -19,8 +19,10 @@ export const usePreIdStore = defineStore('preid', {
         actualizarRegId: false,
         actualizarRegValoracion: false,
         actualizarRegPlan: false,
+        actualizarRegNota: false,
         nuevoRegistroPaciente: false,
         cirugiaID: ref(null),
+        pacienteId: ref(null),
         
         // ID
         numeroExpediente: ref(null),
@@ -256,8 +258,9 @@ export const usePreIdStore = defineStore('preid', {
                     residenteAnestesia: infoPreIdPaciente.residenteAnestesia,
                 }
             })
-            .then((res: any) => {
+            .then((res: any) => {                
                 this.pacienteID = res.data.paciente;
+                this.actualizarRegId = true
                 
                 swal.fire({
                     title: 'Paciente registrado correctamente',
@@ -316,7 +319,7 @@ export const usePreIdStore = defineStore('preid', {
                 }
             })
             .then((res: any) => {
-                this.pacienteID = res.data.paciente;
+                this.pacienteID = res.data.paciente;                
                 
                 swal.fire({
                     title: 'Datos actualizados correctamente',
@@ -364,8 +367,8 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {
                 this.pacienteID = res.data.infoCx;
-                console.log("pacienteID: "+ JSON.stringify(this.pacienteID));                
-                
+                this.actualizarRegId = true;
+
                 swal.fire({
                     title: 'Datos agregados correctamente',
                     icon: 'success',
@@ -380,9 +383,36 @@ export const usePreIdStore = defineStore('preid', {
             });
         },
 
+        updatePreIdAnterior( infoPreIdPaciente: any ){
+            apiAxios({
+                url: `http://localhost:5000/preId/ante/${String(this.pacienteId)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    fechaNPaciente: infoPreIdPaciente.fechaNac,
+                    edadPaciente: infoPreIdPaciente.edadPaciente,
+                    generoPaciente: infoPreIdPaciente.genero,                    
+                }
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos actualizados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+            });
+        },
+
         //Modificar para actualizar
         updateAddPreId( infoPreIdPaciente: any ){
-            console.log("PacienteID: "+this.pacienteID._id);
             apiAxios({
                 url: `http://localhost:5000/preId/add/${String(this.pacienteID._id)}`,
                 method: "PUT",
@@ -390,6 +420,10 @@ export const usePreIdStore = defineStore('preid', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
+                    nomPaciente: infoPreIdPaciente.nomPaciente,
+                    fechaNPaciente: infoPreIdPaciente.fechaNac,
+                    edadPaciente: infoPreIdPaciente.edadPaciente,
+                    generoPaciente: infoPreIdPaciente.genero,
                     /* Información de la cirugía del paciente */
                     numEpisodio: infoPreIdPaciente.numEpisodio,
                     habitacionPaciente: infoPreIdPaciente.habitacion,
@@ -413,6 +447,7 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {                
                 this.pacienteID = res.data.infoCx;
+                console.log("update: "+this.pacienteID._id);
                 swal.fire({
                     title: 'Datos actualizados correctamente',
                     icon: 'success',
@@ -841,7 +876,6 @@ export const usePreIdStore = defineStore('preid', {
                 }
             })
             .then((res: any) => {
-                console.log("Prueba update:"+pid, this.cirugiaID);
                 swal.fire({
                     title: 'Datos actualizados correctamente',
                     icon: 'success',
@@ -1402,6 +1436,34 @@ export const usePreIdStore = defineStore('preid', {
             });
         },
 
+        saveNuevoPreNota(obsNotaPre: string, pid: string, cxid: string){
+            apiAxios({
+                url: "http://localhost:5000/nota/add",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    pid: pid,
+                    cxid: cxid,
+                    obsNotaPre: obsNotaPre,
+                },
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos guardados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+            });
+        },
+
         updatePreNota(obsNotaPre: string, pid: string){
             apiAxios({
                 url: `http://localhost:5000/nota/${String(pid)}`,
@@ -1410,6 +1472,34 @@ export const usePreIdStore = defineStore('preid', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
+                    obsNotaPre: obsNotaPre,
+                }
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos actualizados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+            });
+        },
+
+        updateNuevoPreNota(obsNotaPre: string, pid: string, cxid: string){
+            apiAxios({
+                url: `http://localhost:5000/nota/add/${String(pid)}/${String(cxid)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    pid: pid,
+                    cxid: this.cirugiaID,
                     obsNotaPre: obsNotaPre,
                 }
             })

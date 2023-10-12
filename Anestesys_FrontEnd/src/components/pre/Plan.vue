@@ -271,25 +271,7 @@
                                    v-model="infoPlan.pos_Monitoreo"
                                    :class="infoPlan.pos_Monitoreo != '' && infoPlan.pos_Monitoreo != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
-                        </div>
-
-                        <div class="col-md-10"></div>
-                        <!-- Botón Guardar/Actuazlizar -->
-                        <div class="col-md-2 alinea-boton">
-                            <template v-if="btnActualizarValoracion === false">
-                                <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"                                            
-                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
-                            </template>
-
-                            <template v-else>
-                                <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"
-                                    @click="preIdStore.updatePrePlan(infoPlan, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
-                            </template>                                                         
-                        </div>
+                        </div>                        
                     </form>
                 </div>
             </div>
@@ -357,25 +339,6 @@
                                    :class="infoPlan.sedacion_Medicamentos != undefined && infoPlan.sedacion_Medicamentos != '' ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
                         </div>
-
-                        <div class="col-md-10"></div>
-                        <!-- Botón Guardar/Actuazlizar -->
-                        <div class="col-md-2 alinea-boton">
-                            <template v-if="btnActualizarValoracion === false">
-                                <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"                                            
-                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
-                            </template>
-
-                            <template v-else>
-                                <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"
-                                    @click="preIdStore.updatePrePlan(infoPlan, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
-                            </template>                                                         
-                        </div>
-
                     </form>
                 </div>
             </div>
@@ -386,25 +349,8 @@
                     <form @submit.prevent="" class="row g-3">    
                         <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5>  
 
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             <h5 class="fw-bold col-md-12">Regional</h5> 
-                        </div> 
-
-                        <!-- Botón Guardar/Actuazlizar -->
-                        <div class="col-md-2 alinea-boton">
-                            <template v-if="btnActualizarValoracion === false">
-                                <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"                                            
-                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
-                            </template>
-
-                            <template v-else>
-                                <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"
-                                    @click="preIdStore.updatePrePlan(infoPlan, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
-                            </template>  
                         </div>
 
                         <h5 class="fw-bold">BLOQUEO NEURO-AXIAL</h5>  
@@ -840,24 +786,6 @@
                                              'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
                         </div>
-
-                        <div class="col-md-10"></div>
-                        <!-- Botón Guardar/Actuazlizar -->
-                        <div class="col-md-2 alinea-boton">
-                            <template v-if="btnActualizarValoracion === false">
-                                <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"                                            
-                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
-                            </template>
-
-                            <template v-else>
-                                <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"
-                                    @click="preIdStore.updatePrePlan(infoPlan, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
-                            </template>                                                         
-                        </div>
                     </form>
                 </div>
             </div>
@@ -869,25 +797,8 @@
                         <div class="col-md-12">
                             <h5 class="fw-bold">TIPOS DE ANÉSTESIA</h5> 
                         </div>   
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             <h5 class="col-md-12 fw-bold">General</h5>
-                        </div> 
-
-                        <!-- Botón Guardar/Actuazlizar -->
-                        <div class="col-md-2 alinea-boton">
-                            <template v-if="btnActualizarValoracion === false">
-                                <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"                                            
-                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
-                            </template>
-
-                            <template v-else>
-                                <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"
-                                    @click="preIdStore.updatePrePlan(infoPlan, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
-                            </template>      
                         </div> 
                                                    
                         <h5 class="col-md-12 fw-bold">INTUBACIÓN</h5>
@@ -1175,14 +1086,11 @@ export default defineComponent({
     methods:{
         async guardarDatosPlan(){
             if(preIdStore.nuevoRegistroPaciente == false){
-                console.log("Entrar if = false PLAN")
                 if(preIdStore.actualizarRegPlan == false ){
-                    console.log("if guardar datos Plan")
                     // Guardar datos
                     preIdStore.savePrePlan(this.infoPlan, preIdStore.pacienteID._id)
                     preIdStore.actualizarRegPlan = true
                 }else if(preIdStore.actualizarRegPlan == true){
-                    console.log("else if actualizar datos Plan")
                     // Actualizar datos
                     preIdStore.updatePrePlan(this.infoPlan, preIdStore.pacienteID._id)
                 }
@@ -1198,12 +1106,6 @@ export default defineComponent({
                 }
 
             }
-        },
-
-        cambiarUpdateValoracion() {
-            this.btnActualizarValoracion=true
-
-            preIdStore.savePrePlan(this.infoPlan, preIdStore.pacienteID._id)
         },
 
         cambioSelectRegional(){
