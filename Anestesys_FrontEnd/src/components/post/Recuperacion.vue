@@ -64,37 +64,6 @@
               ></textarea>
             </div>
 
-            <div class="col-md-10"></div>
-
-            <!-- Botón Guardar/Actualizar -->
-
-            <div class="col-md-2 alinear-btn">
-              <template v-if="btnActualizarRecuperacion === false">
-                <button
-                  data-bs-toggle="tab"
-                  type="submit"
-                  class="btn btn-guardar-info fw-bold"
-                  @click="cambiarUpdateRecup"
-                >
-                  GUARDAR
-                </button>
-              </template>
-              <template v-else>
-                <button
-                  data-bs-toggle="tab"
-                  type="submit"
-                  class="btn btn-guardar-info fw-bold"
-                  @click="
-                    postAnestStore.updateRecupera(
-                      infoRec,
-                      preIdStore.pacienteID._id
-                    )
-                  "
-                >
-                  ACTUALIZAR
-                </button>
-              </template>
-            </div>
           </form>
         </div>
       </div>
@@ -1202,37 +1171,6 @@
                 </th>
               </tr>
             </table>
-
-            <div class="col-md-10"></div>
-
-            <!-- Botón Guardar/Actualizar -->
-            <div class="col-md-2 alinear-btn">
-              <template v-if="btnActualizarRecuperacion === false">
-                <button
-                  data-bs-toggle="tab"
-                  type="submit"
-                  class="btn btn-guardar-info fw-bold"
-                  @click="cambiarUpdateRecup"
-                >
-                  GUARDAR
-                </button>
-              </template>
-              <template v-else>
-                <button
-                  data-bs-toggle="tab"
-                  type="submit"
-                  class="btn btn-guardar-info fw-bold"
-                  @click="
-                    postAnestStore.updateRecupera(
-                      infoRec,
-                      preIdStore.pacienteID._id
-                    )
-                  "
-                >
-                  ACTUALIZAR
-                </button>
-              </template>
-            </div>
           </form>
         </div>
       </div>
@@ -1386,27 +1324,6 @@
                                 :class="infoRec.altaRec_Obs != undefined && infoRec.altaRec_Obs != '' ?
                                         'form-control border border-success formSombra' : 'form-control'"
                             ></textarea>
-                        </div> 
-                        
-                        <div class="col-md-8"></div>
-                        <!-- Botón Guardar/Actualizar -->
-                        <div class="col-md-2 alinear-btn">
-                            <template v-if="btnActualizarRecuperacion === false">
-                                <button
-                                    data-bs-toggle="tab"
-                                    type="submit"
-                                    class="btn btn-guardar-info fw-bold"
-                                    @click="cambiarUpdateRecup">GUARDAR
-                                </button>
-                            </template>
-                            <template v-else>
-                                <button
-                                    data-bs-toggle="tab"
-                                    type="submit"
-                                    class="btn btn-guardar-info fw-bold"
-                                    @click="postAnestStore.updateRecupera(infoRec,preIdStore.pacienteID._id)">ACTUALIZAR
-                                </button>
-                            </template>
                         </div>
                     </div>
                 </div>
@@ -1484,12 +1401,33 @@ export default defineComponent({
   },
 
   methods: {
-    cambiarUpdateRecup() {
-      this.btnActualizarRecuperacion = true;
+    async guardarDatosRecuperacion(){
+            if(preIdStore.nuevoRegistroPaciente == false){
+                if(preIdStore.actualizarRegRecuperacion == false ){
+                    console.log("Guardar Recuperacion");
+                    // Guardar datos                    
+                    postAnestStore.saveRecupera(this.infoRec, preIdStore.pacienteID._id);
+                    preIdStore.actualizarRegRecuperacion = true
+                }else if(preIdStore.actualizarRegRecuperacion == true){
+                    console.log("Actualizar Recuperacion");
+                    // Actualizar datos
+                    postAnestStore.updateRecupera(this.infoRec, preIdStore.pacienteID._id)
+                }
 
-      // Método Guardar
-      postAnestStore.saveRecupera(this.infoRec, preIdStore.pacienteID._id);
-    },
+            }else if(preIdStore.nuevoRegistroPaciente == true){
+                if(preIdStore.actualizarRegRecuperacion == false ){
+                  console.log("Guardar Nuevo Recuperacion");
+                    // Guardar nuevos datos                                        
+                    postAnestStore.saveNuevoRecupera(this.infoRec, preIdStore.pacienteID._id, postAnestStore.cirugiaID)
+                    preIdStore.actualizarRegRecuperacion = true
+                }else if(preIdStore.actualizarRegRecuperacion == true){
+                  console.log("Actualizar Nuevo Recuperacion");
+                    // Actualizar nuevos datos
+                    postAnestStore.updateNuevoRecupera(this.infoRec, preIdStore.pacienteID._id, postAnestStore.cirugiaID)
+                }
+
+            }
+        },
 
     obtenerAldrete(){
       this.infoRec.altaRec_0min = this.infoRec.aldreteRec_AldreteIn;

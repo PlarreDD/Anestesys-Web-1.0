@@ -11,6 +11,12 @@ const PostNotaPASchema = new Schema({
         ref: 'PreIdPacientes',
         required: true,
     },
+
+    cxid:{
+        type: Schema.Types.ObjectId,
+        ref: 'PreIdPacientesCx',
+        required: false
+    },
     
     // Nota Post Anestésica
     npa_TecAnestFinal: { type: String },
@@ -85,6 +91,12 @@ const PostRecuperacionSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'PreIdPacientes',
         required: true,
+    },
+
+    cxid:{
+        type: Schema.Types.ObjectId,
+        ref: 'PreIdPacientesCx',
+        required: false
     },
 
     // Nota de Evaluación UCPA

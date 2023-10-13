@@ -33,23 +33,26 @@
 
     </div>
 
+    <!-- Cargar componentes -->
     <div class="input-group mb-3 bordePrincipal"> 
       <div class="tab-content col-md-9" id=""> <!--Redirecciona al contenedor seleccionado, cargando la información del componente-->
         <div class="tab-pane fade show active" id="nota">
-            <nota />
+            <nota ref="refNotaPA"/>
           </div>
-        <div class="tab-pane fade" id="recuperacion"><recuperacion /></div>
+        <div class="tab-pane fade" id="recuperacion">
+          <recuperacion ref="refRecuperacion"/>
+        </div>
       </div>
 
       <!--Menú lateral-->
       <div class="col-2 menuLateralPrincipal"> 
-        <div class="col-md-2 menu-pre-trans">
+        <div class="col-md-2 menu-pre-trans" @click="guardarDatos()">
           <RouterLink to="pre">
             <img src="images/pre.svg" class="ajusteImg"/>
           </RouterLink>
         </div>
 
-        <div class="col-md-2 menu-pre-trans">
+        <div class="col-md-2 menu-pre-trans" @click="guardarDatos()">
           <RouterLink to="trans">
             <img src="images/trans.svg" class="ajusteImg"/>
           </RouterLink>
@@ -184,6 +187,15 @@ export default ({
   },
 
   methods:{
+    async guardarDatos(){
+      
+      const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
+      await componenteNotaPA.guardarDatosNotaPA();
+
+      const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
+      await componenteRecuperacion.guardarDatosRecuperacion();
+    },
+
     async validaSeleccionNota(){
       if(document.getElementById("notaP-tab").ariaSelected=="false"){
         this.esNotaP=false   
@@ -191,6 +203,12 @@ export default ({
       else
         this.esNotaP=true;
         this.esRecuperacion=false;
+
+      const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
+      await componenteNotaPA.guardarDatosNotaPA();
+
+      const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
+      await componenteRecuperacion.guardarDatosRecuperacion();
     },
 
     async validaSeleccionRecuperacion(){
@@ -200,6 +218,12 @@ export default ({
       else
         this.esNotaP=false;
         this.esRecuperacion=true;
+
+      const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
+      await componenteNotaPA.guardarDatosNotaPA();
+
+      const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
+      await componenteRecuperacion.guardarDatosRecuperacion();
     },
 
     async desplegarMenuVistaRapida(){     

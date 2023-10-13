@@ -1151,10 +1151,12 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { usePreIdStore } from "@/stores/preId-store";
+import { usePostAnestStore } from "@/stores/postAnest-store";
 import type { regValoracion } from "@/interfaces/regPreAnest";
 import swal from "sweetalert2";
 
 const preIdStore = usePreIdStore();
+const postStore = usePostAnestStore();
 
 export default defineComponent({
 
@@ -1163,6 +1165,7 @@ export default defineComponent({
             IMC:"",
             infoValoracion: {} as regValoracion,
             preIdStore,
+            postStore,
 
             btnActualizarValoracion:false,
             
@@ -1206,6 +1209,7 @@ export default defineComponent({
                     preIdStore.saveNuevoPreAntecedentes(this.infoValoracion, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
                     preIdStore.actualizarRegValoracion = true
                     this.btnActualizarValoracion = true
+                    postStore.cirugiaID = preIdStore.cirugiaID
                 }else if(preIdStore.actualizarRegValoracion == true){
                     // Actualizar nuevos datos
                     preIdStore.updateNuevoPreAntecedentes(this.infoValoracion, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
@@ -1219,12 +1223,10 @@ export default defineComponent({
         },
 
         async guardarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
-            if(this.btnActualizarValoracion){
-                console.log("Entro if");                
+            if(this.btnActualizarValoracion){            
                 await preIdStore.updatePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
             }
             else{
-                console.log("Entro else");
                 this.btnActualizarValoracion=true
                 await preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
             }            

@@ -20,6 +20,8 @@ export const usePreIdStore = defineStore('preid', {
         actualizarRegValoracion: false,
         actualizarRegPlan: false,
         actualizarRegNota: false,
+        actualizarRegNotaPA: false,
+        actualizarRegRecuperacion: false,
         nuevoRegistroPaciente: false,
         cirugiaID: ref(null),
         pacienteId: ref(null),
@@ -447,7 +449,6 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {                
                 this.pacienteID = res.data.infoCx;
-                console.log("update: "+this.pacienteID._id);
                 swal.fire({
                     title: 'Datos actualizados correctamente',
                     icon: 'success',

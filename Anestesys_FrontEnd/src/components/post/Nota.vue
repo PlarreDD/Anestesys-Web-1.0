@@ -166,26 +166,7 @@
                                 <option>Unidad de cuidados intensivos neonatales</option>
                                 <option>Traslado a otra unidad hospitalaria</option>                    
                             </select>
-                        </div>  
-                        
-                        <div class="col-md-2"></div>
-                        <!-- Botón Guardar/Actualizar -->
-                        <div class="col-md-2 alinea-boton">                            
-                            <template v-if="transAnestStore.tipoTecnica === false">
-                                <button data-bs-toggle="tab" 
-                                        type="submit"
-                                        class="btn btn-guardar-info fw-bold"
-                                        @click="cambiarUpdateNota"
-                                        > GUARDAR </button>
-                            </template>
-                            <template v-else>
-                                <button data-bs-toggle="tab" 
-                                        type="submit"
-                                        class="btn btn-guardar-info fw-bold"
-                                        @click="postAnestStore.updateNotaPA(infoNotaPost, preIdStore.pacienteID._id, postAnestStore.TecnicaAnestesica)"
-                                        > ACTUALIZAR </button> 
-                            </template>
-                        </div>
+                        </div>                                            
                     </form>
                 </div>
             </div>
@@ -867,26 +848,7 @@
                                     </fieldset>
                                 </div>
                             </div>                                                                                    
-                        </div>
-
-                        <div class="col-md-10"></div>
-                        <!-- Botón Guardar/Actualizar -->
-                        <div class="col-md-2 alinea-boton">                            
-                            <template v-if="transAnestStore.tipoTecnica === false">
-                                <button data-bs-toggle="tab" 
-                                        type="submit"
-                                        class="btn btn-guardar-info fw-bold"
-                                        @click="cambiarUpdateNota"
-                                        > GUARDAR </button>
-                            </template>
-                            <template v-else>
-                                <button data-bs-toggle="tab"
-                                        type="submit"
-                                        class="btn btn-guardar-info fw-bold"
-                                        @click="postAnestStore.updateNotaPA(infoNotaPost, preIdStore.pacienteID._id, postAnestStore.TecnicaAnestesica)"
-                                        > ACTUALIZAR </button> 
-                            </template>
-                        </div>
+                        </div>                        
                     </form>
                 </div>
             </div>
@@ -929,11 +891,37 @@ export default defineComponent({
     },
 
     methods: {
-        cambiarUpdateNota() {
-            this.transAnestStore.tipoTecnica=true
-            this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
-            // Método Guardar
-            postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id);
+
+        async guardarDatosNotaPA(){
+            if(preIdStore.nuevoRegistroPaciente == false){
+                if(preIdStore.actualizarRegNotaPA == false ){
+                    console.log("Guardar NotaPA");
+                    // Guardar datos
+                    postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id);
+                    preIdStore.actualizarRegNotaPA = true
+                    this.transAnestStore.tipoTecnica=true
+                    this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
+                }else if(preIdStore.actualizarRegNotaPA == true){
+                    console.log("Actualizar NotaPA");
+                    // Actualizar datos
+                    postAnestStore.updateNotaPA(this.infoNotaPost, preIdStore.pacienteID._id, postAnestStore.TecnicaAnestesica)
+                }
+
+            }else if(preIdStore.nuevoRegistroPaciente == true){
+                if(preIdStore.actualizarRegNotaPA == false ){
+                    console.log("Guardar Nuevo NotaPA");
+                    // Guardar nuevos datos                    
+                    postAnestStore.saveNuevoNotaPA(this.infoNotaPost, preIdStore.pacienteID._id, postAnestStore.cirugiaID)
+                    preIdStore.actualizarRegNotaPA = true
+                    this.transAnestStore.tipoTecnica=true
+                    this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
+                }else if(preIdStore.actualizarRegNotaPA == true){
+                    console.log("Actualizar Nuevo NotaPA");
+                    // Actualizar nuevos datos
+                    postAnestStore.updateNuevoNotaPA(this.infoNotaPost, preIdStore.pacienteID._id, postAnestStore.cirugiaID, postAnestStore.TecnicaAnestesica)
+                }
+
+            }
         },
 
         validarCasoObstetrico(){
