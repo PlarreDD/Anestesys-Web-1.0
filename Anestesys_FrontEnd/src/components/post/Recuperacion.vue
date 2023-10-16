@@ -1418,12 +1418,12 @@ export default defineComponent({
                 if(preIdStore.actualizarRegRecuperacion == false ){
                   console.log("Guardar Nuevo Recuperacion");
                     // Guardar nuevos datos                                        
-                    postAnestStore.saveNuevoRecupera(this.infoRec, preIdStore.pacienteID._id, postAnestStore.cirugiaID)
+                    postAnestStore.saveNuevoRecupera(this.infoRec, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
                     preIdStore.actualizarRegRecuperacion = true
                 }else if(preIdStore.actualizarRegRecuperacion == true){
                   console.log("Actualizar Nuevo Recuperacion");
                     // Actualizar nuevos datos
-                    postAnestStore.updateNuevoRecupera(this.infoRec, preIdStore.pacienteID._id, postAnestStore.cirugiaID)
+                    postAnestStore.updateNuevoRecupera(this.infoRec, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
                 }
 
             }
