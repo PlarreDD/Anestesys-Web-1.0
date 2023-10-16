@@ -5014,7 +5014,7 @@ export default defineComponent({
 
         let hoy = new Date();
         this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
-        await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
+        // await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
 
         this.menuTrans.modosVentilacion = "";
         this.menuTrans.Hr = "";
@@ -5030,7 +5030,13 @@ export default defineComponent({
       async actualizarDatosVentilador() {
         let hoy = new Date();
         this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
-        await transAnestStore.updateDatosV(this.menuTrans, preIdStore.pacienteID._id);
+
+        if(preIdStore.nuevoRegistroPaciente == false){
+          await transAnestStore.updateDatosV(this.menuTrans, preIdStore.pacienteID._id);
+        }else if(preIdStore.nuevoRegistroPaciente == true){
+          console.log("Actualizar nuevo");            
+          await transAnestStore.updateNuevoDatosV(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
+        }
 
         this.menuTrans.modosVentilacion = "";
         this.menuTrans.Hr = "";
@@ -5124,7 +5130,12 @@ export default defineComponent({
           this.btnActualizaEvento=false
 
           //Metódo para guardar
-          await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
+          if(preIdStore.nuevoRegistroPaciente == false){
+            await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){
+            console.log("Guardar nuevo");            
+            await transAnestStore.saveNuevoDatosV(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+          }
       },
 
       async calcularBalance(){

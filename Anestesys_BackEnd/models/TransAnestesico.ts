@@ -11,6 +11,12 @@ const menuTransSchema = new Schema({
         ref: 'PreIdPacientes',
         required: true,
     },
+
+    cxid:{
+        type: Schema.Types.ObjectId,
+        ref: 'PreIdPacientesCx',
+        required: false
+    },
     
     /* Balance Total */
     balanceTotal:{type: String},

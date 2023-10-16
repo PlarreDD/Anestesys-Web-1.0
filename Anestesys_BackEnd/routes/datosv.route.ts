@@ -10,13 +10,15 @@ import { saveMenuTrans,
          saveTiemposQX, 
          saveMedicamentos, updateMedicamentos, getMedicamentos, getMedicamento, updateMedicamento, deleteMedicamento, 
          getRelevos, getRelevo, saveRelevos, updateRelevos, updateRelevo, deleteRelevo, 
-         getEventos, getEvento, saveEventos, updateEventos, updateEvento, deleteEvento, saveDatosMSV} from "../controllers/transanest.controller";
+         getEventos, getEvento, saveEventos, updateEventos, updateEvento, deleteEvento, saveDatosMSV, saveNuevoMenuTrans} from "../controllers/transanest.controller";
 
 const router = Router();
 
 /*----------------- Menú Transanestésico ------------------*/
 router.post('/', requireToken, saveMenuTrans);
+router.post('/add', requireToken, saveNuevoMenuTrans);
 router.put('/:id',  requireToken, updateMenuTrans);
+router.put('/add/:id/:cxid',  requireToken, updateMenuTrans);
 router.get('/:pid', requireToken, getModosVent);
 router.get('/uno/:dVId', requireToken, getModoVentilacion);
 router.put('/uno/:id',  requireToken, updateVentilacion);

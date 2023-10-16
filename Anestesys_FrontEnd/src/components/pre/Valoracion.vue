@@ -1152,11 +1152,13 @@
 import { defineComponent } from "vue";
 import { usePreIdStore } from "@/stores/preId-store";
 import { usePostAnestStore } from "@/stores/postAnest-store";
+import { useTransAnestStore } from "@/stores/transAnest-store";
 import type { regValoracion } from "@/interfaces/regPreAnest";
 import swal from "sweetalert2";
 
 const preIdStore = usePreIdStore();
 const postStore = usePostAnestStore();
+const transStore = useTransAnestStore();
 
 export default defineComponent({
 
@@ -1166,6 +1168,7 @@ export default defineComponent({
             infoValoracion: {} as regValoracion,
             preIdStore,
             postStore,
+            transStore,
 
             btnActualizarValoracion:false,
             
@@ -1210,6 +1213,7 @@ export default defineComponent({
                     preIdStore.actualizarRegValoracion = true
                     this.btnActualizarValoracion = true
                     postStore.cirugiaID = preIdStore.cirugiaID
+                    transStore.cirugiaID = preIdStore.cirugiaID
                 }else if(preIdStore.actualizarRegValoracion == true){
                     // Actualizar nuevos datos
                     preIdStore.updateNuevoPreAntecedentes(this.infoValoracion, preIdStore.pacienteID.pid, preIdStore.cirugiaID)

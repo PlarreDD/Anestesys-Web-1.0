@@ -98,6 +98,97 @@ export const saveMenuTrans = async (req: any, res: Response) => {
     }
 };
 
+export const saveNuevoMenuTrans = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid,
+                /* Balance Total */
+                balanceTotal,
+                // Ingresos
+                solHartman, solFisio, glucosados, gelatinas,
+                almidones, albuminas, paqGlobular, plasmas,
+                plaquetas, crioprecipitados, factor_VII, factor_VIII,
+                otrosIngresos,
+                // Egresos
+                liqAscitis, sangradoAprox, uresis, expoQX,
+                reqBasales, ayuno, otrosEgresos,
+                /* Técnica Anestésica */
+                local, sedación, gralBalanceada, TIVA, multimodal,
+                bloqMixto, bloqPeriLum, bloqPeriCaudal, BloqEspinal,
+                BloqPlexo, BloqTroncular, bloqPeriToracico, bloqPeriCervical,
+                libreOpioides,
+                // Datos del ventilador
+                modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr,
+
+        } = req.body;
+
+        let menuTrans;
+
+        if( modosVentilacion == undefined ){
+            menuTrans = new MenuTrans({ pid, cxid,
+                                        /* Balance Total */
+                                        balanceTotal: balanceTotal,
+                                        // Ingresos
+                                        solHartman: solHartman,
+                                        solFisio: solFisio,
+                                        glucosados: glucosados,
+                                        gelatinas: gelatinas,
+                                        almidones: almidones,
+                                        albuminas: albuminas,
+                                        paqGlobular: paqGlobular,
+                                        plasmas: plasmas,
+                                        plaquetas: plaquetas,
+                                        crioprecipitados: crioprecipitados,
+                                        factor_VII: factor_VII,
+                                        factor_VIII: factor_VIII,
+                                        otrosIngresos: otrosIngresos,
+                                        // Egresos
+                                        liqAscitis: liqAscitis,
+                                        sangradoAprox: sangradoAprox,
+                                        uresis: uresis,
+                                        expoQX: expoQX,
+                                        reqBasales: reqBasales,
+                                        ayuno: ayuno,
+                                        otrosEgresos: otrosEgresos,
+                                        /* Técnica Anestésica */
+                                        local: local,
+                                        sedación: sedación,
+                                        gralBalanceada: gralBalanceada,
+                                        TIVA: TIVA,
+                                        multimodal: multimodal,
+                                        bloqMixto: bloqMixto,
+                                        bloqPeriLum: bloqPeriLum,
+                                        bloqPeriCaudal: bloqPeriCaudal,
+                                        BloqEspinal: BloqEspinal,
+                                        BloqPlexo: BloqPlexo,
+                                        BloqTroncular: BloqTroncular,
+                                        bloqPeriToracico: bloqPeriToracico,
+                                        bloqPeriCervical: bloqPeriCervical,
+                                        libreOpioides: libreOpioides,
+            });
+        }
+        else{
+            menuTrans = new MenuTrans({ pid, cxid,
+                                        // Datos del ventilador
+                                        datosVentilador: {
+                                            modosVentilacion: modosVentilacion,
+                                            peep: peep,
+                                            vt: vt,
+                                            frecResp: frecResp,
+                                            IE: IE,
+                                            PLimite: PLimite,
+                                            Hr: Hr,
+                                        },
+            });
+        }
+
+        await menuTrans.save();
+
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 export const updateMenuTrans = async (req: any, res: Response) => {
     try {
         const { id } = req.params;
@@ -106,6 +197,33 @@ export const updateMenuTrans = async (req: any, res: Response) => {
              } = req.body;
 
         const menuTrans = await MenuTrans.findOneAndUpdate( { pid: id },
+                                                            { $push: {// Datos del ventilador
+                                                                      datosVentilador: {
+                                                                        modosVentilacion: modosVentilacion,
+                                                                        peep: peep,
+                                                                        vt: vt,
+                                                                        frecResp: frecResp,
+                                                                        IE: IE,
+                                                                        PLimite: PLimite,
+                                                                        Hr: Hr,
+                                                                      },
+                                                                     }
+                                                            });
+
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const updateNuevoMenuTrans = async (req: any, res: Response) => {
+    try {
+        const { id, cxid } = req.params;
+        const { // Datos del ventilador
+                modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr
+             } = req.body;
+
+        const menuTrans = await MenuTrans.findOneAndUpdate( { pid: id, cxid: cxid },
                                                             { $push: {// Datos del ventilador
                                                                       datosVentilador: {
                                                                         modosVentilacion: modosVentilacion,

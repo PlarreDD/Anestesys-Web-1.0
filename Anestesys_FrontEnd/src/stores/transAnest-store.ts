@@ -19,6 +19,8 @@ export const useTransAnestStore = defineStore('transAn', {
         datosMSV: ref(null),
         envDat: ref(false),
         tipoTecnica: false,
+
+        cirugiaID: ref(null)
     }),
 
     actions: {
@@ -96,6 +98,79 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
+        async saveNuevoDatosV(regTransAnest: any, pid: string, cxid: string){
+            await apiAxios({
+                url: "http://localhost:5000/trans/add",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    pid: pid, cxid: cxid,
+                    // Datos del Ventilador
+                    modosVentilacion: regTransAnest.modosVentilacion,
+                    peep: regTransAnest.peep,
+                    vt: regTransAnest.vt,
+                    frecResp: regTransAnest.frecResp,
+                    IE: regTransAnest.IE,
+                    PLimite: regTransAnest.PLimite,
+                    Hr: regTransAnest.Hr,
+                    /* Balance Total */
+                    balanceTotal:regTransAnest.balanceTotal,
+                    // Ingresos
+                    solHartman: regTransAnest.solHartman,
+                    solFisio: regTransAnest.solFisio,
+                    glucosados: regTransAnest.glucosados,
+                    gelatinas: regTransAnest.gelatinas,
+                    almidones: regTransAnest.almidones,
+                    albuminas: regTransAnest.albuminas,
+                    paqGlobular: regTransAnest.paqGlobular,
+                    plasmas: regTransAnest.plasmas,
+                    plaquetas: regTransAnest.plaquetas,
+                    crioprecipitados: regTransAnest.crioprecipitados,
+                    factor_VII: regTransAnest.factor_VII,
+                    factor_VIII: regTransAnest.factor_VIII,
+                    otrosIngresos: regTransAnest.otrosIngresos,
+                    // Egresos
+                    liqAscitis: regTransAnest.liqAscitis,
+                    sangradoAprox: regTransAnest.sangradoAprox,
+                    uresis: regTransAnest.uresis,
+                    expoQX: regTransAnest.expoQX,
+                    reqBasales: regTransAnest.reqBasales,
+                    ayuno: regTransAnest.ayuno,
+                    otrosEgresos: regTransAnest.otrosEgresos,
+                    /* Técnica Anestésica */
+                    local: regTransAnest.local,
+                    sedación: regTransAnest.sedación,
+                    gralBalanceada: regTransAnest.gralBalanceada,
+                    TIVA: regTransAnest.TIVA,
+                    multimodal: regTransAnest.multimodal,
+                    bloqMixto: regTransAnest.bloqMixto,
+                    bloqPeriLum: regTransAnest.bloqPeriLum,
+                    bloqPeriCaudal: regTransAnest.bloqPeriCaudal,
+                    BloqEspinal: regTransAnest.BloqEspinal,
+                    BloqPlexo: regTransAnest.BloqPlexo,
+                    BloqTroncular: regTransAnest.BloqTroncular,
+                    bloqPeriToracico: regTransAnest.bloqPeriToracico,
+                    bloqPeriCervical: regTransAnest.bloqPeriCervical,
+                    libreOpioides: regTransAnest.libreOpioides,
+                }
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos guardados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+            });
+        },
+
         async updateDatosV(regTransAnest: any, pid: string){
             await apiAxios({
                 url: `http://localhost:5000/trans/${String(pid)}`,
@@ -104,6 +179,80 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
+                    // Datos del Ventilador
+                    modosVentilacion: regTransAnest.modosVentilacion,
+                    peep: regTransAnest.peep,
+                    vt: regTransAnest.vt,
+                    frecResp: regTransAnest.frecResp,
+                    IE: regTransAnest.IE,
+                    PLimite: regTransAnest.PLimite,
+                    Hr: regTransAnest.Hr,
+                    /* Balance Total */
+                    balanceTotal: regTransAnest.balanceTotal,
+                    // Ingresos
+                    solHartman: regTransAnest.solHartman,
+                    solFisio: regTransAnest.solFisio,
+                    glucosados: regTransAnest.glucosados,
+                    gelatinas: regTransAnest.gelatinas,
+                    almidones: regTransAnest.almidones,
+                    albuminas: regTransAnest.albuminas,
+                    paqGlobular: regTransAnest.paqGlobular,
+                    plasmas: regTransAnest.plasmas,
+                    plaquetas: regTransAnest.plaquetas,
+                    crioprecipitados: regTransAnest.crioprecipitados,
+                    factor_VII: regTransAnest.factor_VII,
+                    factor_VIII: regTransAnest.factor_VIII,
+                    otrosIngresos: regTransAnest.otrosIngresos,
+                    // Egresos
+                    liqAscitis: regTransAnest.liqAscitis,
+                    sangradoAprox: regTransAnest.sangradoAprox,
+                    uresis: regTransAnest.uresis,
+                    expoQX: regTransAnest.expoQX,
+                    reqBasales: regTransAnest.reqBasales,
+                    ayuno: regTransAnest.ayuno,
+                    otrosEgresos: regTransAnest.otrosEgresos,
+                    /* Técnica Anestésica */
+                    local: regTransAnest.local,
+                    sedación: regTransAnest.sedación,
+                    gralBalanceada: regTransAnest.gralBalanceada,
+                    TIVA: regTransAnest.TIVA,
+                    multimodal: regTransAnest.multimodal,
+                    bloqMixto: regTransAnest.bloqMixto,
+                    bloqPeriLum: regTransAnest.bloqPeriLum,
+                    bloqPeriCaudal: regTransAnest.bloqPeriCaudal,
+                    BloqEspinal: regTransAnest.BloqEspinal,
+                    BloqPlexo: regTransAnest.BloqPlexo,
+                    BloqTroncular: regTransAnest.BloqTroncular,
+                    bloqPeriToracico: regTransAnest.bloqPeriToracico,
+                    bloqPeriCervical: regTransAnest.bloqPeriCervical,
+                    libreOpioides: regTransAnest.libreOpioides,
+                }
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos guardados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+            });
+        },
+
+        async updateNuevoDatosV(regTransAnest: any, pid: string, cxid: string){
+            await apiAxios({
+                url: `http://localhost:5000/trans/add/${String(pid)}/${String(cxid)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    pid: pid,
+                    cxid: this.cirugiaID,
                     // Datos del Ventilador
                     modosVentilacion: regTransAnest.modosVentilacion,
                     peep: regTransAnest.peep,
