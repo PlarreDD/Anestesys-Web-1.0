@@ -719,9 +719,202 @@ export const useTransAnestStore = defineStore('transAn', {
               }
         },
 
+        async saveNuevoTiemposQX(regTransAnest: any, pid: string, cxid: string, tqx: string) {
+            switch (tqx) {
+                case "QXIN":
+                    await apiAxios({
+                        url: "http://localhost:5000/trans/tqx/add",
+                        method: "POST",
+                        headers: {
+                            Authorization: "Bearer " + userStore.token,
+                        },
+                        data: {
+                            pid: pid, cxid: cxid,
+                            ingresoQX: regTransAnest
+                        }
+                    })
+                    .then((res: any) => {
+                        swal.fire({
+                            title: 'Datos guardados correctamente',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            toast: true,
+                            position: 'top-end',
+                            timer: 2000,
+                            timerProgressBar: true
+                        })
+                    })
+                    .catch((e: any) => {
+                    });
+                break;
+      
+                case "ANESIN":
+                    await apiAxios({
+                        url: 'http://localhost:5000/trans/tqx/add',
+                        method: "POST",
+                        headers: {
+                            Authorization: "Bearer " + userStore.token,
+                        },
+                        data: {
+                            pid: pid, cxid: cxid,
+                            inicioAn: regTransAnest
+                        }
+                    })
+                    .then((res: any) => {
+                        swal.fire({
+                            title: 'Datos guardados correctamente',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            toast: true,
+                            position: 'top-end',
+                            timer: 2000,
+                            timerProgressBar: true
+                        })
+                    })
+                    .catch((e: any) => {
+                    });
+                break;
+      
+                case "CXIN":
+                    await apiAxios({
+                        url: 'http://localhost:5000/trans/tqx/add',
+                        method: "POST",
+                        headers: {
+                            Authorization: "Bearer " + userStore.token,
+                        },
+                        data: {
+                            pid: pid, cxid: cxid,
+                            inicioCx: regTransAnest
+                        }
+                    })
+                    .then((res: any) => {
+                        swal.fire({
+                            title: 'Datos guardados correctamente',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            toast: true,
+                            position: 'top-end',
+                            timer: 2000,
+                            timerProgressBar: true
+                        })
+                    })
+                    .catch((e: any) => {
+                    });
+                break;
+      
+                case "CXOUT":
+                    await apiAxios({
+                        url: 'http://localhost:5000/trans/tqx/add',
+                        method: "POST",
+                        headers: {
+                            Authorization: "Bearer " + userStore.token,
+                        },
+                        data: {
+                            pid: pid, cxid: cxid,
+                            finCx: regTransAnest
+                        }
+                    })
+                    .then((res: any) => {
+                        swal.fire({
+                            title: 'Datos guardados correctamente',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            toast: true,
+                            position: 'top-end',
+                            timer: 2000,
+                            timerProgressBar: true
+                        })
+                    })
+                    .catch((e: any) => {
+                    });
+                break;
+      
+                case "ANESOUT":
+                    await apiAxios({
+                        url: 'http://localhost:5000/trans/tqx/add',
+                        method: "POST",
+                        headers: {
+                            Authorization: "Bearer " + userStore.token,
+                        },
+                        data: {
+                            pid: pid, cxid: cxid,
+                            finAn: regTransAnest
+                        }
+                    })
+                    .then((res: any) => {
+                        swal.fire({
+                            title: 'Datos guardados correctamente',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            toast: true,
+                            position: 'top-end',
+                            timer: 2000,
+                            timerProgressBar: true
+                        })
+                    })
+                    .catch((e: any) => {
+                    });
+                break;
+      
+                case "QXOUT":
+                    await apiAxios({
+                        url: 'http://localhost:5000/trans/tqx/add',
+                        method: "POST",
+                        headers: {
+                            Authorization: "Bearer " + userStore.token,
+                        },
+                        data: {
+                            pid: pid, cxid: cxid,
+                            egresoQx: regTransAnest
+                        }
+                    })
+                    .then((res: any) => {
+                        swal.fire({
+                            title: 'Datos guardados correctamente',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            toast: true,
+                            position: 'top-end',
+                            timer: 2000,
+                            timerProgressBar: true
+                        })
+                    })
+                    .catch((e: any) => {
+                    });
+                break;
+              
+                default:                
+                break;
+              }
+        },
+
         async saveDatosMSV(grid:any, pid:string){
             await apiAxios({
             url: `http://localhost:5000/trans/msvData/${String(pid)}`,
+            method: "PUT",
+            headers: {
+                Authorization: "Bearer " + userStore.token,
+            },                        
+            data: {
+                datosMSV: [
+                    grid[grid.length -1].datos[0].valor, grid[grid.length -1].datos[1].valor, grid[grid.length -1].datos[2].valor,
+                    grid[grid.length -1].datos[3].valor, grid[grid.length -1].datos[4].valor, grid[grid.length -1].datos[5].valor,
+                    grid[grid.length -1].datos[6].valor, grid[grid.length -1].datos[7].valor, grid[grid.length -1].datos[8].valor,
+                    grid[grid.length -1].datos[9].valor, grid[grid.length -1].datos[10].valor,grid[grid.length -1].datos[11].valor,
+                    grid[grid.length -1].datos[12].valor, grid[grid.length -1].datos[13].valor, grid[grid.length -1].datos[14].valor,
+                    grid[grid.length -1].horaGeneracion,                
+                ]
+            },
+            })
+            .then((res: any) => {            
+            })
+                .catch((e: any) => {
+            });
+        },
+
+        async saveNuevoDatosMSV(grid:any, pid:string, cxid:string){
+            await apiAxios({
+            url: `http://localhost:5000/trans/msvData/add/${String(pid)}/${String(cxid)}`,
             method: "PUT",
             headers: {
                 Authorization: "Bearer " + userStore.token,

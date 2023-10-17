@@ -10,7 +10,7 @@ import { saveMenuTrans,
          saveTiemposQX, 
          saveMedicamentos, updateMedicamentos, getMedicamentos, getMedicamento, updateMedicamento, deleteMedicamento, 
          getRelevos, getRelevo, saveRelevos, updateRelevos, updateRelevo, deleteRelevo, 
-         getEventos, getEvento, saveEventos, updateEventos, updateEvento, deleteEvento, saveDatosMSV, saveNuevoMenuTrans, updateNuevoMenuTrans, UpdateNuevoBalanceH, getNuevoModosVent} from "../controllers/transanest.controller";
+         getEventos, getEvento, saveEventos, updateEventos, updateEvento, deleteEvento, saveDatosMSV, saveNuevoMenuTrans, updateNuevoMenuTrans, UpdateNuevoBalanceH, getNuevoModosVent, saveNuevoTiemposQX, saveNuevoDatosMSV} from "../controllers/transanest.controller";
 
 const router = Router();
 
@@ -28,8 +28,10 @@ router.put('/bh/:id',  requireToken, UpdateBalanceH);
 router.put('/bh/add/:id/:cxid',  requireToken, UpdateNuevoBalanceH);
 /*----------------------- Tiempos QX ----------------------*/
 router.post('/tqx', requireToken, saveTiemposQX);
+router.post('/tqx/add', requireToken, saveNuevoTiemposQX);
 /*---------- Datos del MSV -------------------- */
 router.put('/msvData/:pid', requireToken, saveDatosMSV);
+router.put('/msvData/add/:pid/:cxid', requireToken, saveNuevoDatosMSV);
 /*---------- Datos de medicamentos -------------------- */
 router.get('/medic/:pid' , requireToken, getMedicamentos);
 router.get('/medic/uno/:id' , requireToken, getMedicamento);

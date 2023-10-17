@@ -508,6 +508,44 @@ export const saveTiemposQX = async (req: any, res: Response) => {
     }
 };
 
+export const saveNuevoTiemposQX = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid,
+                // Tiempos Qx
+                ingresoQX, inicioAn, inicioCx, finCx, finAn, egresoQx,
+              } = req.body;
+
+        var tiempo: UpdateResult | null = await MenuTrans.findOne({ pid: pid, cxid: cxid });
+        const tiempo2: any = tiempo;
+        
+        if (tiempo) {
+            tiempo = await MenuTrans.updateOne({ "tiemposQX._id": tiempo2?.tiemposQX[0]._id },
+                                               { $set : { "tiemposQX.$.ingresoQX": ingresoQX,
+                                                          "tiemposQX.$.inicioAn": inicioAn,
+                                                          "tiemposQX.$.inicioCx": inicioCx,
+                                                          "tiemposQX.$.finCx": finCx,
+                                                          "tiemposQX.$.finAn": finAn,
+                                                          "tiemposQX.$.egresoQx": egresoQx,
+                                                        }
+                                               });
+
+        } else {
+            const menuTrans  = new MenuTrans({ pid, cxid,
+                                                // Datos del ventilador
+                                                tiemposQX: {
+                                                    ingresoQX: ingresoQX,
+                                                },
+                                });
+
+            await menuTrans.save();
+        }
+
+        return res.json({ tiempo });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 /* Guardado Datos MSV */
 export const saveDatosMSV = async (req: any, res: Response) => {
     try {
@@ -515,6 +553,26 @@ export const saveDatosMSV = async (req: any, res: Response) => {
         const { datosMSV } = req.body;                
         const menuTrans = await MenuTrans.findOneAndUpdate(
             { pid: pid },
+            { $push:{
+                    datosMSV: {
+                        FC: datosMSV[0], Pulso: datosMSV[1], PAS: datosMSV[2], PAD: datosMSV[3], PAM: datosMSV[4], SpO2: datosMSV[5], EtCO2: datosMSV[6], Temp1: datosMSV[7], 
+                        Temp2: datosMSV[8], PVC: datosMSV[9], PAS_IN: datosMSV[10], PAD_IN: datosMSV[11], PAM_IN: datosMSV[12], FiCO2: datosMSV[13], FR: datosMSV[14], 
+                        HoraGeneracion: datosMSV[15]
+                    }
+                }
+            });
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const saveNuevoDatosMSV = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid } = req.params;
+        const { datosMSV } = req.body;                
+        const menuTrans = await MenuTrans.findOneAndUpdate(
+            { pid: pid, cxid: cxid },
             { $push:{
                     datosMSV: {
                         FC: datosMSV[0], Pulso: datosMSV[1], PAS: datosMSV[2], PAD: datosMSV[3], PAM: datosMSV[4], SpO2: datosMSV[5], EtCO2: datosMSV[6], Temp1: datosMSV[7], 
