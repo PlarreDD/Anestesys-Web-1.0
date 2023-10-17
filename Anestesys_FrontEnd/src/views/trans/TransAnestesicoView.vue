@@ -5636,7 +5636,11 @@ export default defineComponent({
 
           this.btnActualizarBalance=true
           
-          await this.transAnestStore.saveDatosMedicamentos(this.menuTrans, preIdStore.pacienteID._id)
+          if(preIdStore.nuevoRegistroPaciente == false){
+            await this.transAnestStore.saveDatosMedicamentos(this.menuTrans, preIdStore.pacienteID._id)
+          }else if(preIdStore.nuevoRegistroPaciente == true){         
+            await this.transAnestStore.saveNuevoDatosMedicamentos(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+          }          
 
           this.menuTrans.tipoMed = "";
           this.menuTrans.medicamento = "";
@@ -5649,7 +5653,12 @@ export default defineComponent({
           
           this.cerrarModalMed();
 
-          await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+          if(preIdStore.nuevoRegistroPaciente == false){
+            await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){        
+            await transAnestStore.getNuevoMedicamentosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+          }
+          
           await this.listarMedicamentosTrans();
         }            
       },
@@ -5668,7 +5677,12 @@ export default defineComponent({
                 position: "top-end",
                 });
           } else {
-            await transAnestStore.updateMedicamentos(m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed, preIdStore.pacienteID._id);
+
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.updateMedicamentos(m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed, preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.updateNuevoMedicamentos(m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed, preIdStore.pacienteID.pid,  preIdStore.cirugiaID);
+            }            
             
             this.menuTrans.tipoMed = "";
             this.menuTrans.medicamento = "";
@@ -5681,7 +5695,11 @@ export default defineComponent({
             
             this.cerrarModalMed();
 
-            await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.getNuevoMedicamentosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
             await this.listarMedicamentosTrans()
           }
       },
@@ -5703,7 +5721,11 @@ export default defineComponent({
             this.menuTrans.horaFinalMed = transAnestStore.medicamentos.medicamentosCx[0].horaFinalMed;
             this.menuTrans.observacionesMed = transAnestStore.medicamentos.medicamentosCx[0].observacionesMed;
 
-            await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.getNuevoMedicamentosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
             await this.listarMedicamentosTrans()
       },
 
@@ -5739,7 +5761,11 @@ export default defineComponent({
 
                 this.cerrarModalMed();
 
-                await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+                if(preIdStore.nuevoRegistroPaciente == false){
+                  await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+                }else if(preIdStore.nuevoRegistroPaciente == true){        
+                  await transAnestStore.getNuevoMedicamentosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                }
                 await this.listarMedicamentosTrans()
             }
       },
@@ -5779,7 +5805,11 @@ export default defineComponent({
 
           this.cerrarModalMed();
 
-          await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+          if(preIdStore.nuevoRegistroPaciente == false){
+            await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){        
+            await transAnestStore.getNuevoMedicamentosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+          }
           await this.listarMedicamentosTrans()
       },
 

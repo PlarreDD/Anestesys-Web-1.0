@@ -608,6 +608,26 @@ export const saveMedicamentos = async (req: any, res: Response) => {
     }
 };
 
+export const saveNuevoMedicamentos = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid,
+                // Datos medicamentos
+                tipoMed, medicamento, dosisMed, unidadMed, viaMed, horaInicioMed, horaFinalMed, observacionesMed
+              } = req.body;        
+        const menuTrans  = await new MenuTrans({ pid, cxid,
+                                            // Datos del medicamento
+                                            medicamentosCx: {
+                                                tipoMed: tipoMed, medicamento: medicamento, dosisMed: dosisMed, unidadMed: unidadMed, viaMed: viaMed, 
+                                                horaInicioMed: horaInicioMed, horaFinalMed: horaFinalMed, observacionesMed: observacionesMed
+                                            },
+                                        });
+        await menuTrans.save();        
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 export const updateMedicamentos = async (req: any, res: Response) => {
     try {
         const { pid } = req.params;
@@ -627,12 +647,43 @@ export const updateMedicamentos = async (req: any, res: Response) => {
     }
 };
 
+export const updateNuevoMedicamentos = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid } = req.params;
+        const { medicamentosCx } = req.body;                
+        const menuTrans = await MenuTrans.findOneAndUpdate(
+            { pid: pid, cxid: cxid },
+            { $push:{
+                    medicamentosCx: {
+                        tipoMed: medicamentosCx[0], medicamento: medicamentosCx[1], dosisMed: medicamentosCx[2], unidadMed: medicamentosCx[3], 
+                        viaMed: medicamentosCx[4], horaInicioMed: medicamentosCx[5], horaFinalMed: medicamentosCx[6], observacionesMed: medicamentosCx[7], 
+                    }                                        
+                }
+            });                
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 /* Función para obtener los medicamentos */
 export const getMedicamentos = async (req: any, res: Response) => {
     try {
         const {pid} = req.params;
         
         const medicamento = await MenuTrans.find({pid:pid})
+           
+        return res.json({medicamento});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const getNuevoMedicamentos = async (req: any, res: Response) => {
+    try {
+        const {pid, cxid} = req.params;
+        
+        const medicamento = await MenuTrans.find({pid:pid, cxid:cxid})
            
         return res.json({medicamento});
     } catch (error) {
@@ -722,6 +773,25 @@ export const saveRelevos = async (req: any, res: Response) => {
     }
 };
 
+export const saveNuevoRelevos = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid,
+                // Datos relevos
+                horaRelevo, tipoRel, matriculaRel, anestesiologoRel, observacionesRel
+              } = req.body;        
+        const menuTrans  = await new MenuTrans({ pid, cxid,
+                                            // Datos del relevo
+                                            relevoCx: {
+                                                horaRelevo: horaRelevo, tipoRel: tipoRel, matriculaRel: matriculaRel, anestesiologoRel: anestesiologoRel, observacionesRel: observacionesRel
+                                            },
+                                        });
+        await menuTrans.save();        
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 export const updateRelevos = async (req: any, res: Response) => {
     try {
         const { pid } = req.params;
@@ -740,12 +810,42 @@ export const updateRelevos = async (req: any, res: Response) => {
     }
 };
 
+export const updateNuevoRelevos = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid } = req.params;
+        const { relevoCx } = req.body;                
+        const menuTrans = await MenuTrans.findOneAndUpdate(
+            { pid: pid, cxid: cxid },
+            { $push:{
+                relevoCx: {
+                        horaRelevo: relevoCx[0], tipoRel: relevoCx[1], matriculaRel: relevoCx[2], anestesiologoRel: relevoCx[3], observacionesRel: relevoCx[4]
+                    }
+                }
+            });        
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 /* Función para obtener los relevos */
 export const getRelevos = async (req: any, res: Response) => {
     try {
         const {pid} = req.params;
         
         const relevo = await MenuTrans.find({pid:pid})
+           
+        return res.json({relevo});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const getNuevoRelevos = async (req: any, res: Response) => {
+    try {
+        const {pid, cxid} = req.params;
+        
+        const relevo = await MenuTrans.find({pid:pid, cxid:cxid})
            
         return res.json({relevo});
     } catch (error) {
@@ -834,6 +934,25 @@ export const saveEventos = async (req: any, res: Response) => {
     }
 };
 
+export const saveNuevoEventos = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid,
+                // Datos relevos
+                horaEvento, tipoEve, detalleEvento
+              } = req.body;        
+        const menuTrans  = await new MenuTrans({ pid, cxid,
+                                            // Datos del relevo
+                                            evCriticoCx: {
+                                                horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento
+                                            },
+                                        });
+        await menuTrans.save();        
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 export const updateEventos = async (req: any, res: Response) => {
     try {
         const { pid } = req.params;
@@ -852,12 +971,42 @@ export const updateEventos = async (req: any, res: Response) => {
     }
 };
 
+export const updateNuevoEventos = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid } = req.params;
+        const { evCriticoCx } = req.body;                
+        const menuTrans = await MenuTrans.findOneAndUpdate(
+            { pid: pid, cxid: cxid },
+            { $push:{
+                evCriticoCx: {
+                        horaEvento: evCriticoCx[0], tipoEve: evCriticoCx[1], detalleEvento: evCriticoCx[2]
+                    }
+                }
+            });        
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 /* Función para obtener los Eventos */
 export const getEventos = async (req: any, res: Response) => {
     try {
         const {pid} = req.params;
         
         const evento = await MenuTrans.find({pid:pid})
+           
+        return res.json({evento});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const getNuevoEventos = async (req: any, res: Response) => {
+    try {
+        const {pid, cxid} = req.params;
+        
+        const evento = await MenuTrans.find({pid:pid, cxid:cxid})
            
         return res.json({evento});
     } catch (error) {

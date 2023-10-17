@@ -10,7 +10,7 @@ import { saveMenuTrans,
          saveTiemposQX, 
          saveMedicamentos, updateMedicamentos, getMedicamentos, getMedicamento, updateMedicamento, deleteMedicamento, 
          getRelevos, getRelevo, saveRelevos, updateRelevos, updateRelevo, deleteRelevo, 
-         getEventos, getEvento, saveEventos, updateEventos, updateEvento, deleteEvento, saveDatosMSV, saveNuevoMenuTrans, updateNuevoMenuTrans, UpdateNuevoBalanceH, getNuevoModosVent, saveNuevoTiemposQX, saveNuevoDatosMSV} from "../controllers/transanest.controller";
+         getEventos, getEvento, saveEventos, updateEventos, updateEvento, deleteEvento, saveDatosMSV, saveNuevoMenuTrans, updateNuevoMenuTrans, UpdateNuevoBalanceH, getNuevoModosVent, saveNuevoTiemposQX, saveNuevoDatosMSV, saveNuevoMedicamentos, updateNuevoMedicamentos, getNuevoMedicamentos, getNuevoRelevos, saveNuevoRelevos, updateNuevoRelevos, getNuevoEventos, saveNuevoEventos, updateNuevoEventos} from "../controllers/transanest.controller";
 
 const router = Router();
 
@@ -34,23 +34,32 @@ router.put('/msvData/:pid', requireToken, saveDatosMSV);
 router.put('/msvData/add/:pid/:cxid', requireToken, saveNuevoDatosMSV);
 /*---------- Datos de medicamentos -------------------- */
 router.get('/medic/:pid' , requireToken, getMedicamentos);
+router.get('/medic/add/:pid/:cxid' , requireToken, getNuevoMedicamentos);
 router.get('/medic/uno/:id' , requireToken, getMedicamento);
 router.post('/medic', requireToken, saveMedicamentos);
+router.post('/medic/add', requireToken, saveNuevoMedicamentos);
 router.put('/medic/:pid', requireToken, updateMedicamentos);
+router.put('/medic/add/:pid/:cxid', requireToken, updateNuevoMedicamentos);
 router.put('/medic/uno/:id', requireToken, updateMedicamento);
 router.delete('/medic/:id', requireToken, deleteMedicamento);
 /*---------- Datos de relevo -------------------- */
 router.get('/relevo/:pid' , requireToken, getRelevos);
+router.get('/relevo/add/:pid/:cxid' , requireToken, getNuevoRelevos);
 router.get('/relevo/uno/:id' , requireToken, getRelevo);
 router.post('/relevo', requireToken, saveRelevos);
+router.post('/relevo/add', requireToken, saveNuevoRelevos);
 router.put('/relevo/:pid', requireToken, updateRelevos);
+router.put('/relevo/add/:pid/:cxid', requireToken, updateNuevoRelevos);
 router.put('/relevo/uno/:id', requireToken, updateRelevo);
 router.delete('/relevo/:id', requireToken, deleteRelevo);
 /*---------- Datos de evento -------------------- */
 router.get('/evento/:pid' , requireToken, getEventos);
+router.get('/evento/add/:pid/:cxid' , requireToken, getNuevoEventos);
 router.get('/evento/uno/:id' , requireToken, getEvento);
 router.post('/evento', requireToken, saveEventos);
+router.post('/evento/add', requireToken, saveNuevoEventos);
 router.put('/evento/:pid', requireToken, updateEventos);
+router.put('/evento/add/:pid/:cxid', requireToken, updateNuevoEventos);
 router.put('/evento/uno/:id', requireToken, updateEvento);
 router.delete('/evento/:id', requireToken, deleteEvento);
 export default router;

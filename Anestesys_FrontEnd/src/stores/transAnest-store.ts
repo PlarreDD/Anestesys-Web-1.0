@@ -952,6 +952,21 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
+        async getNuevoMedicamentosList(pid: string, cxid: string) {
+            await apiAxios({
+                url: `http://localhost:5000/trans/medic/add/${String(pid)}/${String(cxid)}`,
+                method: "GET",
+                headers: {
+                Authorization: "Bearer " + userStore.token,
+                },                
+            })
+            .then((res: any) => {
+                this.medicamentos = res.data.medicamento;                             
+            })
+            .catch((e: any) => {
+            });
+        },
+
         async saveDatosMedicamentos(regTransAnest: any, pid: string){
             await apiAxios({
                 url: "http://localhost:5000/trans/medic",
@@ -987,10 +1002,72 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
+        async saveNuevoDatosMedicamentos(regTransAnest: any, pid: string, cxid: string){
+            await apiAxios({
+                url: "http://localhost:5000/trans/medic/add",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    pid: pid, cxid: cxid,
+                    // Datos del Medicamento
+                    tipoMed: regTransAnest.tipoMed,
+                    medicamento: regTransAnest.medicamento,
+                    dosisMed: regTransAnest.dosisMed,
+                    unidadMed: regTransAnest.unidadMed,
+                    viaMed: regTransAnest.viaMed,
+                    horaInicioMed: regTransAnest.horaInicioMed,
+                    horaFinalMed: regTransAnest.horaFinalMed,
+                    observacionesMed: regTransAnest.observacionesMed
+                }
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos guardados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+            });
+        },
+
         async updateMedicamentos(m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
                             m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string, pid:string){
             await apiAxios({
                 url: `http://localhost:5000/trans/medic/${String(pid)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    medicamentosCx: [ m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed]
+                },
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos agregados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+            });
+        },
+
+        async updateNuevoMedicamentos(m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
+                            m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string, pid:string, cxid:string){
+            await apiAxios({
+                url: `http://localhost:5000/trans/medic/add/${String(pid)}/${String(cxid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1085,6 +1162,21 @@ export const useTransAnestStore = defineStore('transAn', {
         async getRelevosList(pid: string) {
             await apiAxios({
                 url: `http://localhost:5000/trans/relevo/${String(pid)}`,
+                method: "GET",
+                headers: {
+                Authorization: "Bearer " + userStore.token,
+                },                
+            })
+            .then((res: any) => {
+                this.relevos = res.data.relevo;                             
+            })
+            .catch((e: any) => {
+            });
+        },
+
+        async getNuevoRelevosList(pid: string, cxid: string) {
+            await apiAxios({
+                url: `http://localhost:5000/trans/relevo/add/${String(pid)}/${String(cxid)}`,
                 method: "GET",
                 headers: {
                 Authorization: "Bearer " + userStore.token,
