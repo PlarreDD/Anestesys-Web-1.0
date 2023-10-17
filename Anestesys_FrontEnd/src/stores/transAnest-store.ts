@@ -332,6 +332,21 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
+        async listNuevoDatosV(pid: string, cxid: string) {
+            await apiAxios({
+                url: `http://localhost:5000/trans/add/${String(pid)}/${String(cxid)}`,
+                method: "GET",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+            })
+            .then((res: any) => {
+                this.datosVentilacion = res.data.listaModosVent;
+            })
+            .catch((e: any) => {
+            });
+        },
+
         async getModoVent(dVId: string) {
             await apiAxios({
                 url: `http://localhost:5000/trans/uno/${String(dVId)}`,
@@ -413,6 +428,72 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
+                    /* Balance Total */
+                    balanceTotal: regTransAnest.balanceTotal,
+                    // Ingresos
+                    solHartman: regTransAnest.solHartman,
+                    solFisio: regTransAnest.solFisio,
+                    glucosados: regTransAnest.glucosados,
+                    gelatinas: regTransAnest.gelatinas,
+                    almidones: regTransAnest.almidones,
+                    albuminas: regTransAnest.albuminas,
+                    paqGlobular: regTransAnest.paqGlobular,
+                    plasmas: regTransAnest.plasmas,
+                    plaquetas: regTransAnest.plaquetas,
+                    crioprecipitados: regTransAnest.crioprecipitados,
+                    factor_VII: regTransAnest.factor_VII,
+                    factor_VIII: regTransAnest.factor_VIII,
+                    otrosIngresos: regTransAnest.otrosIngresos,
+                    // Egresos
+                    liqAscitis: regTransAnest.liqAscitis,
+                    sangradoAprox: regTransAnest.sangradoAprox,
+                    uresis: regTransAnest.uresis,
+                    expoQX: regTransAnest.expoQX,
+                    reqBasales: regTransAnest.reqBasales,
+                    ayuno: regTransAnest.ayuno,
+                    otrosEgresos: regTransAnest.otrosEgresos,
+                    /* Técnica Anestésica */
+                    local: regTransAnest.local,
+                    sedación: regTransAnest.sedación,
+                    gralBalanceada: regTransAnest.gralBalanceada,
+                    TIVA: regTransAnest.TIVA,
+                    multimodal: regTransAnest.multimodal,
+                    bloqMixto: regTransAnest.bloqMixto,
+                    bloqPeriLum: regTransAnest.bloqPeriLum,
+                    bloqPeriCaudal: regTransAnest.bloqPeriCaudal,
+                    BloqEspinal: regTransAnest.BloqEspinal,
+                    BloqPlexo: regTransAnest.BloqPlexo,
+                    BloqTroncular: regTransAnest.BloqTroncular,
+                    bloqPeriToracico: regTransAnest.bloqPeriToracico,
+                    bloqPeriCervical: regTransAnest.bloqPeriCervical,
+                    libreOpioides: regTransAnest.libreOpioides,
+                }
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos guardados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+            });
+        },
+
+        async updateNuevoBalanceH (regTransAnest: any, pid: string, cxid: string){
+            await apiAxios({
+                url: `http://localhost:5000/trans/bh/add/${String(pid)}/${String(cxid)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    pid: pid,
+                    cxid: this.cirugiaID,
                     /* Balance Total */
                     balanceTotal: regTransAnest.balanceTotal,
                     // Ingresos

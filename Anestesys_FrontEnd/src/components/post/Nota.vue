@@ -895,28 +895,28 @@ export default defineComponent({
         async guardarDatosNotaPA(){
             if(preIdStore.nuevoRegistroPaciente == false){
                 if(preIdStore.actualizarRegNotaPA == false ){
-                    console.log("Guardar NotaPA");
                     // Guardar datos
-                    postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id);
-                    preIdStore.actualizarRegNotaPA = true
-                    this.transAnestStore.tipoTecnica=true
+                    if(this.transAnestStore.tipoTecnica == false){
+                        postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id);
+                        this.transAnestStore.tipoTecnica=true
+                    }
+                    preIdStore.actualizarRegNotaPA = true                    
                     this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
                 }else if(preIdStore.actualizarRegNotaPA == true){
-                    console.log("Actualizar NotaPA");
                     // Actualizar datos
                     postAnestStore.updateNotaPA(this.infoNotaPost, preIdStore.pacienteID._id, postAnestStore.TecnicaAnestesica)
                 }
 
             }else if(preIdStore.nuevoRegistroPaciente == true){
                 if(preIdStore.actualizarRegNotaPA == false ){
-                    console.log("Guardar Nuevo NotaPA");
-                    // Guardar nuevos datos                    
-                    postAnestStore.saveNuevoNotaPA(this.infoNotaPost, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-                    preIdStore.actualizarRegNotaPA = true
-                    this.transAnestStore.tipoTecnica=true
+                    // Guardar nuevos datos
+                    if(this.transAnestStore.tipoTecnica == false){
+                        postAnestStore.saveNuevoNotaPA(this.infoNotaPost, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                        this.transAnestStore.tipoTecnica=true
+                    }
+                    preIdStore.actualizarRegNotaPA = true                    
                     this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
                 }else if(preIdStore.actualizarRegNotaPA == true){
-                    console.log("Actualizar Nuevo NotaPA");
                     // Actualizar nuevos datos
                     postAnestStore.updateNuevoNotaPA(this.infoNotaPost, preIdStore.pacienteID.pid, preIdStore.cirugiaID, postAnestStore.TecnicaAnestesica)
                 }

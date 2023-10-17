@@ -506,7 +506,7 @@
                             <button data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar-balance fw-bold"
-                                    @click="postAnestStore.updateNotaPA(infoNotaPost, preIdStore.pacienteID._id, postAnestStore.TecnicaAnestesica)"
+                                    @click="updateNotaPA()"
                                     > ACTUALIZAR </button> 
                           </template>   
                         </div>
@@ -715,7 +715,7 @@
                           <button data-bs-toggle="tab" 
                                   type="submit"
                                   class="btn btn-guardar-balance fw-bold"
-                                  @click="transAnestStore.updateBalanceH(menuTrans, preIdStore.pacienteID._id)"> ACTUALIZAR </button> 
+                                  @click="actualizarDatosBalance()"> ACTUALIZAR </button> 
                         </template>   
                       </div>
                     </div>
@@ -5014,7 +5014,12 @@ export default defineComponent({
 
         let hoy = new Date();
         this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
-        // await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
+        
+        if(preIdStore.nuevoRegistroPaciente == false){
+          await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
+        }else if(preIdStore.nuevoRegistroPaciente == true){        
+          await transAnestStore.saveNuevoDatosV(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        }        
 
         this.menuTrans.modosVentilacion = "";
         this.menuTrans.Hr = "";
@@ -5024,8 +5029,12 @@ export default defineComponent({
         this.menuTrans.peep = "";
         this.menuTrans.vt = "";
 
-        await transAnestStore.listDatosV(preIdStore.pacienteID._id);
-      },
+        if(preIdStore.nuevoRegistroPaciente == false){
+          await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+        }else if(preIdStore.nuevoRegistroPaciente == true){        
+          await transAnestStore.listNuevoDatosV(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        }
+      },      
 
       async actualizarDatosVentilador() {
         let hoy = new Date();
@@ -5033,8 +5042,7 @@ export default defineComponent({
 
         if(preIdStore.nuevoRegistroPaciente == false){
           await transAnestStore.updateDatosV(this.menuTrans, preIdStore.pacienteID._id);
-        }else if(preIdStore.nuevoRegistroPaciente == true){
-          console.log("Actualizar nuevo");            
+        }else if(preIdStore.nuevoRegistroPaciente == true){         
           await transAnestStore.updateNuevoDatosV(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
         }
 
@@ -5046,7 +5054,11 @@ export default defineComponent({
         this.menuTrans.peep = "";
         this.menuTrans.vt = "";
 
-        await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+        if(preIdStore.nuevoRegistroPaciente == false){
+          await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+        }else if(preIdStore.nuevoRegistroPaciente == true){          
+          await transAnestStore.listNuevoDatosV(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        }     
       },
 
       async cambiarBtnActualizar(id: string) {
@@ -5065,7 +5077,11 @@ export default defineComponent({
         this.menuTrans.peep = transAnestStore.datosVentilacion.datosVentilador[0].peep;
         this.menuTrans.vt = transAnestStore.datosVentilacion.datosVentilador[0].vt;
 
-        await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+        if(preIdStore.nuevoRegistroPaciente == false){
+          await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+        }else if(preIdStore.nuevoRegistroPaciente == true){         
+          await transAnestStore.listNuevoDatosV(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        }     
       },
 
       async actualizarVentilador() {
@@ -5100,13 +5116,21 @@ export default defineComponent({
             this.menuTrans.peep = "";
             this.menuTrans.vt = "";
 
-            await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+            if(preIdStore.nuevoRegistroPaciente == false){
+          await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+        }else if(preIdStore.nuevoRegistroPaciente == true){          
+          await transAnestStore.listNuevoDatosV(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        }     
         }
       },
 
       async eliminarDatosV(id: string) {
         await transAnestStore.deleteModoVent(id);
-        await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+        if(preIdStore.nuevoRegistroPaciente == false){
+          await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+        }else if(preIdStore.nuevoRegistroPaciente == true){          
+          await transAnestStore.listNuevoDatosV(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        }     
       },
 
       //Gestión datos balance
@@ -5132,10 +5156,17 @@ export default defineComponent({
           //Metódo para guardar
           if(preIdStore.nuevoRegistroPaciente == false){
             await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
-          }else if(preIdStore.nuevoRegistroPaciente == true){
-            console.log("Guardar nuevo");            
+          }else if(preIdStore.nuevoRegistroPaciente == true){         
             await transAnestStore.saveNuevoDatosV(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
           }
+      },
+
+      async actualizarDatosBalance() {
+        if(preIdStore.nuevoRegistroPaciente == false){
+          await transAnestStore.updateBalanceH(this.menuTrans, preIdStore.pacienteID._id)
+        }else if(preIdStore.nuevoRegistroPaciente == true){          
+          await transAnestStore.updateNuevoBalanceH(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
+        }
       },
 
       async calcularBalance(){
@@ -5149,11 +5180,28 @@ export default defineComponent({
       },
 
       //Gestión datos técnica anestesica 
-      cambiarUpdateTecnica(){
-        this.transAnestStore.tipoTecnica=true
-
+      cambiarUpdateTecnica(){        
         this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
-        postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id)
+
+        if(preIdStore.nuevoRegistroPaciente == false){
+          if(this.transAnestStore.tipoTecnica == false){
+            postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id)
+            this.transAnestStore.tipoTecnica=true
+          }
+        }else if(preIdStore.nuevoRegistroPaciente == true){
+          if(this.transAnestStore.tipoTecnica == false){
+            postAnestStore.saveNuevoNotaPA(this.infoNotaPost, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            this.transAnestStore.tipoTecnica=true
+          }
+        }
+      },
+
+      updateNotaPA(){
+        if(preIdStore.nuevoRegistroPaciente == false){
+          postAnestStore.updateNotaPA(this.infoNotaPost, preIdStore.pacienteID._id, postAnestStore.TecnicaAnestesica)
+        }else if(preIdStore.nuevoRegistroPaciente == true){        
+          postAnestStore.updateNuevoNotaPA(this.infoNotaPost, preIdStore.pacienteID.pid, preIdStore.cirugiaID, postAnestStore.TecnicaAnestesica)
+        }
       },
 
       clickTAbtn(){

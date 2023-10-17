@@ -255,6 +255,18 @@ export const getModosVent = async (req: any, res: Response) => {
     }
 };
 
+export const getNuevoModosVent = async (req: any, res: Response) => {
+    try {
+        const{ pid, cxid } = req.params;
+        
+        const listaModosVent = await MenuTrans.find({pid: pid, cxid: cxid});
+
+        return res.json({ listaModosVent });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 /* Obtener y mostrar el modo de ventilación seleccionado */
 export const getModoVentilacion =async (req: any, res: Response) => {
     try {
@@ -342,6 +354,74 @@ export const UpdateBalanceH = async (req: any, res: Response) => {
              } = req.body;
 
         const menuTrans = await MenuTrans.findOneAndUpdate( { pid: id },
+                                                            { /* Balance Total */
+                                                              balanceTotal: balanceTotal,
+                                                              // Ingresos
+                                                              solHartman: solHartman,
+                                                              solFisio: solFisio,
+                                                              glucosados: glucosados,
+                                                              gelatinas: gelatinas,
+                                                              almidones: almidones,
+                                                              albuminas: albuminas,
+                                                              paqGlobular: paqGlobular,
+                                                              plasmas: plasmas,
+                                                              plaquetas: plaquetas,
+                                                              crioprecipitados: crioprecipitados,
+                                                              factor_VII: factor_VII,
+                                                              factor_VIII: factor_VIII,
+                                                              otrosIngresos: otrosIngresos,
+                                                              // Egresos
+                                                              liqAscitis: liqAscitis,
+                                                              sangradoAprox: sangradoAprox,
+                                                              uresis: uresis,
+                                                              expoQX: expoQX,
+                                                              reqBasales: reqBasales,
+                                                              ayuno: ayuno,
+                                                              otrosEgresos: otrosEgresos,
+                                                              /* Técnica Anestésica */
+                                                              local: local,
+                                                              sedación: sedación,
+                                                              gralBalanceada: gralBalanceada,
+                                                              TIVA: TIVA,
+                                                              multimodal: multimodal,
+                                                              bloqMixto: bloqMixto,
+                                                              bloqPeriLum: bloqPeriLum,
+                                                              bloqPeriCaudal: bloqPeriCaudal,
+                                                              BloqEspinal: BloqEspinal,
+                                                              BloqPlexo: BloqPlexo,
+                                                              BloqTroncular: BloqTroncular,
+                                                              bloqPeriToracico: bloqPeriToracico,
+                                                              bloqPeriCervical: bloqPeriCervical,
+                                                              libreOpioides: libreOpioides,
+                                                            });
+
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const UpdateNuevoBalanceH = async (req: any, res: Response) => {
+    try {
+        const { id, cxid } = req.params;
+        const { /* Balance Total */
+                balanceTotal,
+                // Ingresos
+                solHartman, solFisio, glucosados, gelatinas,
+                almidones, albuminas, paqGlobular, plasmas, 
+                plaquetas, crioprecipitados, factor_VII, factor_VIII,
+                otrosIngresos,
+                // Egresos
+                liqAscitis, sangradoAprox, uresis, expoQX,
+                reqBasales, ayuno, otrosEgresos,
+                /* Técnica Anestésica */                
+                local, sedación, gralBalanceada, TIVA, multimodal,
+                bloqMixto, bloqPeriLum, bloqPeriCaudal, BloqEspinal,
+                BloqPlexo, BloqTroncular, bloqPeriToracico, bloqPeriCervical,
+                libreOpioides,
+             } = req.body;
+
+        const menuTrans = await MenuTrans.findOneAndUpdate( { pid: id, cxid: cxid },
                                                             { /* Balance Total */
                                                               balanceTotal: balanceTotal,
                                                               // Ingresos
