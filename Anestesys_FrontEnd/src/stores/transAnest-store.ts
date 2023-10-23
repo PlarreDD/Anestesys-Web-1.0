@@ -1221,10 +1221,69 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
+        async saveNuevoDatosRelevos(regTransAnest: any, pid: string, cxid: string){
+            await apiAxios({
+                url: "http://localhost:5000/trans/relevo/add",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    pid: pid, cxid: cxid,
+                    // Datos del Relevo
+                    tipoRel: regTransAnest.tipoRel,
+                    horaRelevo: regTransAnest.horaRelevo,
+                    matriculaRel: regTransAnest.matriculaRel,
+                    anestesiologoRel: regTransAnest.anestesiologoRel,
+                    observacionesRel: regTransAnest.observacionesRel,
+                }
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos guardados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+            });
+        },
+
         async updateRelevos(r_horaRelevo: string, r_tipoRel: string, r_matriculaRel: string, 
                             r_anestesiologoRel: string, r_observacionesRel: string, pid:string){
             await apiAxios({
                 url: `http://localhost:5000/trans/relevo/${String(pid)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    relevoCx: [ r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel ]
+                },
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos agregados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+            });
+        },
+
+        async updateNuevoRelevos(r_horaRelevo: string, r_tipoRel: string, r_matriculaRel: string, 
+                            r_anestesiologoRel: string, r_observacionesRel: string, pid:string, cxid: string){
+            await apiAxios({
+                url: `http://localhost:5000/trans/relevo/add/${String(pid)}/${String(cxid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1331,6 +1390,21 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
+        async getNuevoEventosList(pid: string, cxid: string) {
+            await apiAxios({
+                url: `http://localhost:5000/trans/evento/add/${String(pid)}/${String(cxid)}`,
+                method: "GET",
+                headers: {
+                Authorization: "Bearer " + userStore.token,
+                },                
+            })
+            .then((res: any) => {
+                this.eventos = res.data.evento;                             
+            })
+            .catch((e: any) => {
+            });
+        },
+
         async saveDatosEventos(regTransAnest: any, pid: string){
             await apiAxios({
                 url: "http://localhost:5000/trans/evento",
@@ -1361,9 +1435,65 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
+        async saveNuevoDatosEventos(regTransAnest: any, pid: string, cxid: string){
+            await apiAxios({
+                url: "http://localhost:5000/trans/evento/add",
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    pid: pid, cxid: cxid,
+                    // Datos del evento
+                    horaEvento: regTransAnest.horaEvento,
+                    tipoEve: regTransAnest.tipoEve,
+                    detalleEvento: regTransAnest.detalleEvento,
+                }
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos guardados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+            });
+        },
+
         async updateEventos(e_horaEvento: string, e_tipoEve: string, e_detalleEvento: string, pid:string){
             await apiAxios({
                 url: `http://localhost:5000/trans/evento/${String(pid)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    evCriticoCx: [ e_horaEvento, e_tipoEve, e_detalleEvento ]
+                },
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos agregados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+            });
+        },
+
+        async updateNuevoEventos(e_horaEvento: string, e_tipoEve: string, e_detalleEvento: string, pid:string, cxid: string){
+            await apiAxios({
+                url: `http://localhost:5000/trans/evento/add/${String(pid)}/${String(cxid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,

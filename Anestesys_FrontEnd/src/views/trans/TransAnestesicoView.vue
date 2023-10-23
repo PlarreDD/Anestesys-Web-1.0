@@ -5871,7 +5871,11 @@ export default defineComponent({
 
             this.btnActualizarBalance=true
             
-            await this.transAnestStore.saveDatosRelevos(this.menuTrans, preIdStore.pacienteID._id)
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await this.transAnestStore.saveDatosRelevos(this.menuTrans, preIdStore.pacienteID._id)
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await this.transAnestStore.saveNuevoDatosRelevos(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }            
 
             this.menuTrans.horaRelevo = "";
             this.menuTrans.tipoRel= "RELEVO";
@@ -5881,8 +5885,18 @@ export default defineComponent({
             
             this.cerrarModalRel();
             
-            await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
-            await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
+
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
+                        
           }
       },
 
@@ -5900,7 +5914,11 @@ export default defineComponent({
                 position: "top-end",
                 });
           } else {
-            await transAnestStore.updateRelevos(r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel, preIdStore.pacienteID._id);
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.updateRelevos(r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel, preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.updateNuevoRelevos(r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel, preIdStore.pacienteID.pid, preIdStore.cirugiaID);
+            }            
             
             this.menuTrans.horaRelevo = "";
             this.menuTrans.tipoRel= "RELEVO";
@@ -5910,8 +5928,17 @@ export default defineComponent({
 
             this.cerrarModalRel();
 
-            await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
-            await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
+
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
 
           }
       },
@@ -5930,8 +5957,17 @@ export default defineComponent({
             this.menuTrans.anestesiologoRel = transAnestStore.relevos.relevoCx[0].anestesiologoRel;
             this.menuTrans.observacionesRel = transAnestStore.relevos.relevoCx[0].observacionesRel;
 
-            await transAnestStore.getEventosList(preIdStore.pacienteID._id);
-            await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
+
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
       },
 
       async actualizarRelevo() {
@@ -5963,8 +5999,17 @@ export default defineComponent({
 
                 this.cerrarModalRel();
 
-                await transAnestStore.getEventosList(preIdStore.pacienteID._id);
-                await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+                if(preIdStore.nuevoRegistroPaciente == false){
+                  await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+                }else if(preIdStore.nuevoRegistroPaciente == true){        
+                  await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                }
+
+                if(preIdStore.nuevoRegistroPaciente == false){
+                  await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+                }else if(preIdStore.nuevoRegistroPaciente == true){        
+                  await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                }
             }
       },
 
@@ -6001,8 +6046,17 @@ export default defineComponent({
 
           this.cerrarModalRel();
 
-          await transAnestStore.getEventosList(preIdStore.pacienteID._id);
-          await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+          if(preIdStore.nuevoRegistroPaciente == false){
+            await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){        
+            await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+          }
+
+          if(preIdStore.nuevoRegistroPaciente == false){
+            await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){        
+            await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+          }
       },
 
       //Métodos gestión de evento crítico
@@ -6061,7 +6115,11 @@ export default defineComponent({
 
             this.btnActualizarBalance=true
             
-            await this.transAnestStore.saveDatosEventos(this.menuTrans, preIdStore.pacienteID._id)
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await this.transAnestStore.saveDatosEventos(this.menuTrans, preIdStore.pacienteID._id)
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await this.transAnestStore.saveNuevoDatosEventos(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }  
 
             this.menuTrans.horaEvento = "";
             this.menuTrans.tipoEve= "EVENTO";
@@ -6069,8 +6127,17 @@ export default defineComponent({
             
             this.cerrarModalEve();
             
-            await transAnestStore.getEventosList(preIdStore.pacienteID._id);
-            await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
+
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
           }
       },
 
@@ -6087,7 +6154,11 @@ export default defineComponent({
                 position: "top-end",
                 });
           } else {
-            await transAnestStore.updateEventos(r_horaEvento, e_tipoEve, e_detalleEvento, preIdStore.pacienteID._id);
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.updateEventos(r_horaEvento, e_tipoEve, e_detalleEvento, preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.updateNuevoEventos(r_horaEvento, e_tipoEve, e_detalleEvento, preIdStore.pacienteID.pid, preIdStore.cirugiaID);
+            }              
             
             this.menuTrans.horaEvento = "";
             this.menuTrans.tipoEve= "EVENTO";
@@ -6095,8 +6166,17 @@ export default defineComponent({
             
             this.cerrarModalEve();
 
-            await transAnestStore.getEventosList(preIdStore.pacienteID._id);
-            await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
+
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
           }
       },
 
@@ -6112,8 +6192,17 @@ export default defineComponent({
             this.menuTrans.tipoEve = transAnestStore.eventos.evCriticoCx[0].tipoEve;
             this.menuTrans.detalleEvento = transAnestStore.eventos.evCriticoCx[0].detalleEvento;
 
-            await transAnestStore.getEventosList(preIdStore.pacienteID._id);
-            await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
+
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
       },
 
       async actualizarEvento() {
@@ -6142,8 +6231,17 @@ export default defineComponent({
 
                 this.cerrarModalEve();
 
-                await transAnestStore.getEventosList(preIdStore.pacienteID._id);
-                await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+                if(preIdStore.nuevoRegistroPaciente == false){
+                  await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+                }else if(preIdStore.nuevoRegistroPaciente == true){        
+                  await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                }
+
+                if(preIdStore.nuevoRegistroPaciente == false){
+                  await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+                }else if(preIdStore.nuevoRegistroPaciente == true){        
+                  await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                }
             }
       },
 
@@ -6178,8 +6276,17 @@ export default defineComponent({
 
           this.cerrarModalEve();
 
-          await transAnestStore.getEventosList(preIdStore.pacienteID._id);
-          await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+          if(preIdStore.nuevoRegistroPaciente == false){
+            await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){        
+            await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+          }
+
+          if(preIdStore.nuevoRegistroPaciente == false){
+            await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){        
+            await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+          }
       },
 
       // Eventos de Monitoreo
