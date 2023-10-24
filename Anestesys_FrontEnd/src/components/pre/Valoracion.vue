@@ -1179,6 +1179,12 @@ export default defineComponent({
     },
 
     methods: {
+        async regresarBotones(){
+            this.btnAddEstudios=true
+            this.btnUpdateEstudios=false
+            this.btnActualizaEstudio=false
+        },
+
         calcularIMC() {
 
             if(this.infoValoracion.sigVit_Peso && this.infoValoracion.sigVit_Talla){

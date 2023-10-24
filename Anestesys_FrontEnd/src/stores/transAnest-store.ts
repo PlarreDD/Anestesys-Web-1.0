@@ -18,9 +18,49 @@ export const useTransAnestStore = defineStore('transAn', {
         eventoID: ref(null),
         datosMSV: ref(null),
         envDat: ref(false),
+        
+        // Botones técnica
         tipoTecnica: false,
 
-        cirugiaID: ref(null)
+        cirugiaID: ref(null),
+
+        // Botones medicamento
+        btnAddMedicamentos: true,
+        btnUpdateMedicamentos: false,
+        btnActualizaMedicamento: false,
+
+        // Botones relevo
+        btnAddRelevos:true,
+        btnUpdateRelevos:false,
+        btnActualizaRelevo:false,
+
+        // Botones evento
+        btnAddEventos:true,
+        btnUpdateEventos:false,
+        btnActualizaEvento:false,
+
+        // Botones ventilador
+        btnAddVentilador:true,
+        btnUpdateVentilador:false,
+        btnActualizaVentilador:false,
+
+        //Botones balance
+        btnActualizarBalance:false,
+
+        //Botones tiempos quirurgicos
+        btnTQX: false,
+
+        activoAnesIN: false,
+        noActivoAnesIN: true,
+
+        activoCxIN: false,
+        noActivoCxIN: true,
+
+        activoCxOUT: false,
+        noActivoCxOUT: true,
+
+        activoAnesOUT: false,
+        noActivoAnesOUT: true,
     }),
 
     actions: {

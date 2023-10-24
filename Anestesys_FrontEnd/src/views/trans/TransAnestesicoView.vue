@@ -163,14 +163,14 @@
 
                           <!-- Botón Guardar/Agregar -->
                           <div class="col-md-2">                                    
-                            <template v-if="btnAddMedicamentos === true">
+                            <template v-if="transAnestStore.btnAddMedicamentos === true">
                               <button data-bs-toggle="tab" 
                                           type="submit"
                                           class="btn btn-guardar-balance fw-bold" 
                                           @click="guardarMedicamentos"> GUARDAR </button>
                             </template>
 
-                            <template v-if="btnUpdateMedicamentos === true">
+                            <template v-if="transAnestStore.btnUpdateMedicamentos === true">
                               <button data-bs-toggle="tab" 
                                           type="submit"
                                           class="btn btn-guardar-balance fw-bold"
@@ -178,7 +178,7 @@
                                           menuTrans.viaMed, menuTrans.horaInicioMed, menuTrans.horaFinalMed, menuTrans.observacionesMed)"> GUARDAR </button>
                             </template>  
 
-                            <template v-if="btnActualizaMedicamento === true">
+                            <template v-if="transAnestStore.btnActualizaMedicamento === true">
                                 <button class="btn btn-guardar-balance fw-bold" 
                                         @click="actualizarMedicamento()"> ACTUALIZAR                                
                                 </button>
@@ -258,14 +258,14 @@
 
                             <!-- Botón Guardar/Agregar -->
                             <div class="col-md-2">                                    
-                              <template v-if="btnAddRelevos === true">
+                              <template v-if="transAnestStore.btnAddRelevos === true">
                                 <button data-bs-toggle="tab" 
                                             type="submit"
                                             class="btn btn-guardar-balance fw-bold" 
                                             @click="guardarRelevos"> GUARDAR </button>
                               </template>
 
-                              <template v-if="btnUpdateRelevos === true">
+                              <template v-if="transAnestStore.btnUpdateRelevos === true">
                                 <button data-bs-toggle="tab" 
                                             type="submit"
                                             class="btn btn-guardar-balance fw-bold"
@@ -273,7 +273,7 @@
                                                                         menuTrans.anestesiologoRel,menuTrans.observacionesRel)"> GUARDAR </button>
                               </template>  
 
-                              <template v-if="btnActualizaRelevo === true">
+                              <template v-if="transAnestStore.btnActualizaRelevo === true">
                                   <button class="btn btn-guardar-balance fw-bold" 
                                           @click="actualizarRelevo()"> ACTUALIZAR                                
                                   </button>
@@ -343,21 +343,21 @@
 
                             <!-- Botón Guardar/Agregar -->
                             <div class="col-md-2">                                    
-                              <template v-if="btnAddEventos === true">
+                              <template v-if="transAnestStore.btnAddEventos === true">
                                 <button data-bs-toggle="tab" 
                                             type="submit"
                                             class="btn btn-guardar-balance fw-bold" 
                                             @click="guardarEventos"> GUARDAR</button>
                               </template>
 
-                              <template v-if="btnUpdateEventos === true">
+                              <template v-if="transAnestStore.btnUpdateEventos === true">
                                 <button data-bs-toggle="tab" 
                                             type="submit"
                                             class="btn btn-guardar-balance fw-bold"
                                             @click="actualizarEventos(menuTrans.horaEvento, menuTrans.tipoEve, menuTrans.detalleEvento)"> GUARDAR</button>
                               </template>  
 
-                              <template v-if="btnActualizaEvento === true">
+                              <template v-if="transAnestStore.btnActualizaEvento === true">
                                   <button class="btn btn-guardar-balance fw-bold" 
                                           @click="actualizarEvento()"> ACTUALIZAR                                
                                   </button>
@@ -704,7 +704,7 @@
 
                       <!-- Botón guardar/actualizar -->
                       <div class="col-md-2 alinear-btn">
-                        <template v-if="btnActualizarBalance === false">
+                        <template v-if="transAnestStore.btnActualizarBalance === false">
                           <button data-bs-toggle="tab"
                                   type="submit"
                                   class="btn btn-guardar-balance fw-bold"
@@ -794,21 +794,21 @@
                     <div class="col-md-9"></div>
                     <!-- Botón Guardar/Agregar -->
                     <div class="col-md-3 btn-abajo">                                    
-                      <template v-if="btnAddVentilador === true">
+                      <template v-if="transAnestStore.btnAddVentilador === true">
                         <button class="btn btn-guardar fw-bold"
                                 @click="guardarDatosV">
                           <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
                         </button>
                       </template>
 
-                      <template v-if="btnUpdateVentilador === true">
+                      <template v-if="transAnestStore.btnUpdateVentilador === true">
                         <button class="btn btn-guardar fw-bold"
                                 @click="actualizarDatosVentilador">
                           <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
                         </button>
                       </template>  
 
-                      <template v-if="btnActualizaVentilador === true">
+                      <template v-if="transAnestStore.btnActualizaVentilador === true">
                         <button class="btn btn-guardar fw-bold"
                                 @click="actualizarVentilador">
                           <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
@@ -881,14 +881,14 @@
             <div class="col-md-2">
               <button type="button" id="anes-in"
                       class="btn btn-menu fw-bold"
-                      :class="{ 'show': activoAnesIN, ' ': noActivoAnesIN }"
-                      :disabled="btnTQX == true ? true : false"
+                      :class="{ 'show': transAnestStore.activoAnesIN, ' ': transAnestStore.noActivoAnesIN }"
+                      :disabled="transAnestStore.btnTQX == true ? true : false"
                       @dblclick="actualizarTQX('ANESIN')"
                       @click.right="mostrarDropDown('ANESIN')"> 
                       <label class="cursor-puntero">ANES IN <label class="fw-normal">{{menuTrans.inicioAn}}</label></label> 
               </button>
 
-              <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': activoAnesIN, ' ': noActivoAnesIN }">                                
+              <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': transAnestStore.activoAnesIN, ' ': transAnestStore.noActivoAnesIN }">                                
                 <label class="text-white fw-bold">Modificar</label>
                 <i class="text-white float-end cursor-puntero"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('ANESIN')"/></i>
                 <input class="form-control"
@@ -902,14 +902,14 @@
 
             <div class="col-md-2">
               <button type="button" id="cx-in"
-                      class="btn btn-menu fw-bold" :class="{ 'show': activoCxIN, ' ': noActivoCxIN }"
-                      :disabled="btnTQX == true ? true : false"
+                      class="btn btn-menu fw-bold" :class="{ 'show': transAnestStore.activoCxIN, ' ': transAnestStore.noActivoCxIN }"
+                      :disabled="transAnestStore.btnTQX == true ? true : false"
                       @dblclick="actualizarTQX('CXIN')"
                       @click.right="mostrarDropDown('CXIN')"> 
                 <label class="cursor-puntero">CX IN <label class="fw-normal">{{menuTrans.inicioCx}}</label></label>
               </button>
 
-              <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': activoCxIN, ' ': noActivoCxIN }">
+              <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': transAnestStore.activoCxIN, ' ': transAnestStore.noActivoCxIN }">
                 <label class="text-white fw-bold">Modificar</label>                
                 <i class="text-white float-end cursor-puntero"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('CXIN')"/></i>
                 <input class="form-control"
@@ -921,14 +921,14 @@
 
             <div class="col-md-2"> 
               <button type="button" id="cx-out"
-                      class="btn btn-menu fw-bold" :class="{ 'show': activoCxOUT, ' ': noActivoCxOUT }"
-                      :disabled="btnTQX == true ? true : false"
+                      class="btn btn-menu fw-bold" :class="{ 'show': transAnestStore.activoCxOUT, ' ': transAnestStore.noActivoCxOUT }"
+                      :disabled="transAnestStore.btnTQX == true ? true : false"
                       @dblclick="actualizarTQX('CXOUT')"
                       @click.right="mostrarDropDown('CXOUT')"> 
                 <label class="cursor-puntero">CX OUT <label class="fw-normal">{{menuTrans.finCx}}</label></label>
               </button>
 
-              <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': activoCxOUT, ' ': noActivoCxOUT }">
+              <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': transAnestStore.activoCxOUT, ' ': transAnestStore.noActivoCxOUT }">
                 <label class="text-white fw-bold">Modificar</label>                
                 <i class="text-white float-end cursor-puntero"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('CXOUT')"/></i>
                 <input class="form-control"
@@ -941,14 +941,14 @@
 
             <div class="col-md-2">    
               <button type="button" id="anes-out"
-                      class="btn btn-menu fw-bold" :class="{ 'show': activoAnesOUT, ' ': noActivoAnesOUT }"
-                      :disabled="btnTQX == true ? true : false"
+                      class="btn btn-menu fw-bold" :class="{ 'show': transAnestStore.activoAnesOUT, ' ': transAnestStore.noActivoAnesOUT }"
+                      :disabled="transAnestStore.btnTQX == true ? true : false"
                       @dblclick="actualizarTQX('ANESOUT')"
                       @click.right="mostrarDropDown('ANESOUT')"> 
                 <label class="cursor-puntero">ANES OUT <label class="fw-normal">{{menuTrans.finAn}}</label></label>
               </button>
               
-              <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': activoAnesOUT, ' ': noActivoAnesOUT }">
+              <form class="dropdown-menu p-2 color-dropdown" :class="{ 'show': transAnestStore.activoAnesOUT, ' ': transAnestStore.noActivoAnesOUT }">
                 <label class="text-white fw-bold">Modificar</label>                
                 <i class="text-white float-end cursor-puntero"><font-awesome-icon icon="fa-solid fa-xmark" size="lg " @click="ocultarDropDown('ANESOUT')"/></i>
                 <input class="form-control"
@@ -1305,44 +1305,6 @@ export default defineComponent({
       transAnestStore,
       postAnestStore,
       medStore,
-      
-      // Botones ventilador
-      btnAddVentilador:true,
-      btnUpdateVentilador:false,
-      btnActualizaVentilador:false,
-      
-      //Botones balance/técnica
-      btnActualizarBalance:false,  
-      
-      //Botones medicamento
-      btnAddMedicamentos:true,
-      btnUpdateMedicamentos:false,
-      btnActualizaMedicamento:false,
-      
-      //Botones relevo
-      btnAddRelevos:true,
-      btnUpdateRelevos:false,
-      btnActualizaRelevo:false, 
-
-      //Botones evento
-      btnAddEventos:true,
-      btnUpdateEventos:false,
-      btnActualizaEvento:false, 
-
-      //Botones tiempos quirurgicos
-      btnTQX: false,
-
-      activoAnesIN: false,
-      noActivoAnesIN: true,
-
-      activoCxIN: false,
-      noActivoCxIN: true,
-
-      activoCxOUT: false,
-      noActivoCxOUT: true,
-
-      activoAnesOUT: false,
-      noActivoAnesOUT: true,
       
       // Arreglo opciones técnicas
       opcionTecnicas: ['Local','Sedación', 'General balanceada', 'TIVA (Anestesia total intravenosa)', 'Multimodal',
@@ -4994,23 +4956,23 @@ export default defineComponent({
 
       // Gestión datos ventilador 
       async guardarDatosV() {
-        this.btnAddVentilador=false
-        this.btnUpdateVentilador=true
-        this.btnActualizaVentilador=false
+        transAnestStore.btnAddVentilador=false
+        transAnestStore.btnUpdateVentilador=true
+        transAnestStore.btnActualizaVentilador=false
 
-        this.btnAddMedicamentos=false
-        this.btnUpdateMedicamentos=true
-        this.btnActualizaMedicamento=false
+        transAnestStore.btnAddMedicamentos =false
+        transAnestStore.btnUpdateMedicamentos=true
+        transAnestStore.btnActualizaMedicamento=false
 
-        this.btnAddRelevos=false
-        this.btnUpdateRelevos=true
-        this.btnActualizaRelevo=false
+        transAnestStore.btnAddRelevos=false
+        transAnestStore.btnUpdateRelevos=true
+        transAnestStore.btnActualizaRelevo=false
 
-        this.btnAddEventos=false
-        this.btnUpdateEventos=true
-        this.btnActualizaEvento=false
+        transAnestStore.btnAddEventos=false
+        transAnestStore.btnUpdateEventos=true
+        transAnestStore.btnActualizaEvento=false
 
-        this.btnActualizarBalance=true
+        transAnestStore.btnActualizarBalance=true
 
         let hoy = new Date();
         this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
@@ -5062,9 +5024,9 @@ export default defineComponent({
       },
 
       async cambiarBtnActualizar(id: string) {
-        this.btnAddVentilador = false;
-        this.btnUpdateVentilador = false;
-        this.btnActualizaVentilador = true;
+        transAnestStore.btnAddVentilador = false;
+        transAnestStore.btnUpdateVentilador = false;
+        transAnestStore.btnActualizaVentilador = true;
 
         await transAnestStore.getModoVent(id);
 
@@ -5103,9 +5065,9 @@ export default defineComponent({
                                   this.menuTrans.vt, this.menuTrans.frecResp, this.menuTrans.IE, this.menuTrans.PLimite, this.menuTrans.Hr);
 
             //Volver al botón agregar
-            this.btnAddVentilador=false
-            this.btnUpdateVentilador=true
-            this.btnActualizaVentilador=false
+            transAnestStore.btnAddVentilador=false
+            transAnestStore.btnUpdateVentilador=true
+            transAnestStore.btnActualizaVentilador=false
 
             this.menuTrans.idVentilador = "";
             this.menuTrans.modosVentilacion = "";
@@ -5135,23 +5097,23 @@ export default defineComponent({
 
       //Gestión datos balance
       async cambiarUpdateBalance() {
-          this.btnActualizarBalance=true
+        transAnestStore.btnActualizarBalance=true
 
-          this.btnAddVentilador=false
-          this.btnUpdateVentilador=true
-          this.btnActualizaVentilador=false
+          transAnestStore.btnAddVentilador=false
+          transAnestStore.btnUpdateVentilador=true
+          transAnestStore.btnActualizaVentilador=false
 
-          this.btnAddMedicamentos=false
-          this.btnUpdateMedicamentos=true
-          this.btnActualizaMedicamento=false
+          transAnestStore.btnAddMedicamentos=false
+          transAnestStore.btnUpdateMedicamentos=true
+          transAnestStore.btnActualizaMedicamento=false
 
-          this.btnAddRelevos=false
-          this.btnUpdateRelevos=true
-          this.btnActualizaRelevo=false
+          transAnestStore.btnAddRelevos=false
+          transAnestStore.btnUpdateRelevos=true
+          transAnestStore.btnActualizaRelevo=false
 
-          this.btnAddEventos=false
-          this.btnUpdateEventos=true
-          this.btnActualizaEvento=false
+          transAnestStore.btnAddEventos=false
+          transAnestStore.btnUpdateEventos=true
+          transAnestStore.btnActualizaEvento=false
 
           //Metódo para guardar
           if(preIdStore.nuevoRegistroPaciente == false){
@@ -5235,23 +5197,23 @@ export default defineComponent({
           break;
 
           case "QXIN":
-            this.btnActualizarBalance=true
+          transAnestStore.btnActualizarBalance=true
 
-            this.btnAddVentilador=false
-            this.btnUpdateVentilador=true
-            this.btnActualizaVentilador=false
+            transAnestStore.btnAddVentilador=false
+            transAnestStore.btnUpdateVentilador=true
+            transAnestStore.btnActualizaVentilador=false
 
-            this.btnAddMedicamentos=false
-            this.btnUpdateMedicamentos=true
-            this.btnActualizaMedicamento=false
+            transAnestStore.btnAddMedicamentos=false
+            transAnestStore.btnUpdateMedicamentos=true
+            transAnestStore.btnActualizaMedicamento=false
 
-            this.btnAddRelevos=false
-            this.btnUpdateRelevos=true
-            this.btnActualizaRelevo=false
+            transAnestStore.btnAddRelevos=false
+            transAnestStore.btnUpdateRelevos=true
+            transAnestStore.btnActualizaRelevo=false
 
-            this.btnAddEventos=false
-            this.btnUpdateEventos=true
-            this.btnActualizaEvento=false
+            transAnestStore.btnAddEventos=false
+            transAnestStore.btnUpdateEventos=true
+            transAnestStore.btnActualizaEvento=false
 
             this.btnMSV=false
 
@@ -5267,23 +5229,23 @@ export default defineComponent({
           break;
 
           case "ANESIN":
-            this.btnActualizarBalance=true
+            transAnestStore.btnActualizarBalance=true
 
-            this.btnAddVentilador=false
-            this.btnUpdateVentilador=true
-            this.btnActualizaVentilador=false
+            transAnestStore.btnAddVentilador=false
+            transAnestStore.btnUpdateVentilador=true
+            transAnestStore.btnActualizaVentilador=false
 
-            this.btnAddMedicamentos=false
-            this.btnUpdateMedicamentos=true
-            this.btnActualizaMedicamento=false
+            transAnestStore.btnAddMedicamentos=false
+            transAnestStore.btnUpdateMedicamentos=true
+            transAnestStore.btnActualizaMedicamento=false
 
-            this.btnAddRelevos=false
-            this.btnUpdateRelevos=true
-            this.btnActualizaRelevo=false
+            transAnestStore.btnAddRelevos=false
+            transAnestStore.btnUpdateRelevos=true
+            transAnestStore.btnActualizaRelevo=false
 
-            this.btnAddEventos=false
-            this.btnUpdateEventos=true
-            this.btnActualizaEvento=false            
+            transAnestStore.btnAddEventos=false
+            transAnestStore.btnUpdateEventos=true
+            transAnestStore.btnActualizaEvento=false            
 
             let hoy_4 = new Date();
             this.menuTrans.inicioAn = ((hoy_4.getHours() <10) ? '0':'') + hoy_4.getHours() + ':' + ((hoy_4.getMinutes() <10) ? '0':'')+hoy_4.getMinutes();
@@ -5295,23 +5257,23 @@ export default defineComponent({
           break;
 
           case "CXIN":
-            this.btnActualizarBalance=true
+            transAnestStore.btnActualizarBalance=true
 
-            this.btnAddVentilador=false
-            this.btnUpdateVentilador=true
-            this.btnActualizaVentilador=false
+            transAnestStore.btnAddVentilador=false
+            transAnestStore.btnUpdateVentilador=true
+            transAnestStore.btnActualizaVentilador=false
 
-            this.btnAddMedicamentos=false
-            this.btnUpdateMedicamentos=true
-            this.btnActualizaMedicamento=false
+            transAnestStore.btnAddMedicamentos=false
+            transAnestStore.btnUpdateMedicamentos=true
+            transAnestStore.btnActualizaMedicamento=false
 
-            this.btnAddRelevos=false
-            this.btnUpdateRelevos=true
-            this.btnActualizaRelevo=false
+            transAnestStore.btnAddRelevos=false
+            transAnestStore.btnUpdateRelevos=true
+            transAnestStore.btnActualizaRelevo=false
 
-            this.btnAddEventos=false
-            this.btnUpdateEventos=true
-            this.btnActualizaEvento=false
+            transAnestStore.btnAddEventos=false
+            transAnestStore.btnUpdateEventos=true
+            transAnestStore.btnActualizaEvento=false
           
             let hoy_5 = new Date();
             this.menuTrans.inicioCx = ((hoy_5.getHours() <10) ? '0':'') + hoy_5.getHours() + ':' + ((hoy_5.getMinutes() <10) ? '0':'')+hoy_5.getMinutes();
@@ -5323,23 +5285,23 @@ export default defineComponent({
           break;
 
           case "CXOUT":
-            this.btnActualizarBalance=true
+            transAnestStore.btnActualizarBalance=true
 
-            this.btnAddVentilador=false
-            this.btnUpdateVentilador=true
-            this.btnActualizaVentilador=false
+            transAnestStore.btnAddVentilador=false
+            transAnestStore.btnUpdateVentilador=true
+            transAnestStore.btnActualizaVentilador=false
 
-            this.btnAddMedicamentos=false
-            this.btnUpdateMedicamentos=true
-            this.btnActualizaMedicamento=false
+            transAnestStore.btnAddMedicamentos=false
+            transAnestStore.btnUpdateMedicamentos=true
+            transAnestStore.btnActualizaMedicamento=false
 
-            this.btnAddRelevos=false
-            this.btnUpdateRelevos=true
-            this.btnActualizaRelevo=false
+            transAnestStore.btnAddRelevos=false
+            transAnestStore.btnUpdateRelevos=true
+            transAnestStore.btnActualizaRelevo=false
 
-            this.btnAddEventos=false
-            this.btnUpdateEventos=true
-            this.btnActualizaEvento=false
+            transAnestStore.btnAddEventos=false
+            transAnestStore.btnUpdateEventos=true
+            transAnestStore.btnActualizaEvento=false
 
             let hoy_6 = new Date();
             this.menuTrans.finCx = ((hoy_6.getHours() <10) ? '0':'') + hoy_6.getHours() + ':' + ((hoy_6.getMinutes() <10) ? '0':'')+hoy_6.getMinutes();
@@ -5351,23 +5313,23 @@ export default defineComponent({
           break;
 
           case "ANESOUT":
-            this.btnActualizarBalance=true
+            transAnestStore.btnActualizarBalance=true
 
-            this.btnAddVentilador=false
-            this.btnUpdateVentilador=true
-            this.btnActualizaVentilador=false
+            transAnestStore.btnAddVentilador=false
+            transAnestStore.btnUpdateVentilador=true
+            transAnestStore.btnActualizaVentilador=false
 
-            this.btnAddMedicamentos=false
-            this.btnUpdateMedicamentos=true
-            this.btnActualizaMedicamento=false
+            transAnestStore.btnAddMedicamentos=false
+            transAnestStore.btnUpdateMedicamentos=true
+            transAnestStore.btnActualizaMedicamento=false
 
-            this.btnAddRelevos=false
-            this.btnUpdateRelevos=true
-            this.btnActualizaRelevo=false
+            transAnestStore.btnAddRelevos=false
+            transAnestStore.btnUpdateRelevos=true
+            transAnestStore.btnActualizaRelevo=false
 
-            this.btnAddEventos=false
-            this.btnUpdateEventos=true
-            this.btnActualizaEvento=false
+            transAnestStore.btnAddEventos=false
+            transAnestStore.btnUpdateEventos=true
+            transAnestStore.btnActualizaEvento=false
 
             let hoy_7 = new Date();
             this.menuTrans.finAn = ((hoy_7.getHours() <10) ? '0':'') + hoy_7.getHours() + ':' + ((hoy_7.getMinutes() <10) ? '0':'')+hoy_7.getMinutes();
@@ -5379,26 +5341,26 @@ export default defineComponent({
           break;
 
           case "QXOUT":
-            this.btnActualizarBalance=true
+            transAnestStore.btnActualizarBalance=true
 
-            this.btnAddVentilador=false
-            this.btnUpdateVentilador=true
-            this.btnActualizaVentilador=false
+            transAnestStore.btnAddVentilador=false
+            transAnestStore.btnUpdateVentilador=true
+            transAnestStore.btnActualizaVentilador=false
 
-            this.btnAddMedicamentos=false
-            this.btnUpdateMedicamentos=true
-            this.btnActualizaMedicamento=false
+            transAnestStore.btnAddMedicamentos=false
+            transAnestStore.btnUpdateMedicamentos=true
+            transAnestStore.btnActualizaMedicamento=false
 
-            this.btnAddRelevos=false
-            this.btnUpdateRelevos=true
-            this.btnActualizaRelevo=false
+            transAnestStore.btnAddRelevos=false
+            transAnestStore.btnUpdateRelevos=true
+            transAnestStore.btnActualizaRelevo=false
 
-            this.btnAddEventos=false
-            this.btnUpdateEventos=true
-            this.btnActualizaEvento=false
+            transAnestStore.btnAddEventos=false
+            transAnestStore.btnUpdateEventos=true
+            transAnestStore.btnActualizaEvento=false
 
             this.btnMSV=true
-            this.btnTQX=true
+            transAnestStore.btnTQX
             this.finMSV()
 
             let hoy_8 = new Date();
@@ -5473,35 +5435,35 @@ export default defineComponent({
       async mostrarDropDown(tiemposQX : string){
         switch (tiemposQX) {
           case "ANESIN":
-            this.activoAnesIN=true;
-            this.noActivoAnesIN=false;
-            this.activoCxIN=false;
-            this.activoCxOUT=false;
-            this.activoAnesOUT=false;
+            transAnestStore.activoAnesIN=true;
+            transAnestStore.noActivoAnesIN=false;
+            transAnestStore.activoCxIN=false;
+            transAnestStore.activoCxOUT=false;
+            transAnestStore.activoAnesOUT=false;
           break;
 
           case "CXIN":
-            this.activoCxIN=true;
-            this.noActivoCxIN=false;
-            this.activoAnesIN=false;
-            this.activoCxOUT=false;
-            this.activoAnesOUT=false;
+            transAnestStore.activoCxIN=true;
+            transAnestStore.noActivoCxIN=false;
+            transAnestStore.activoAnesIN=false;
+            transAnestStore.activoCxOUT=false;
+            transAnestStore.activoAnesOUT=false;
           break;
 
           case "CXOUT":
-            this.activoCxOUT=true;
-            this.noActivoCxOUT=false;
-            this.activoAnesIN=false;
-            this.activoCxIN=false;
-            this.activoAnesOUT=false;
+            transAnestStore.activoCxOUT=true;
+            transAnestStore.noActivoCxOUT=false;
+            transAnestStore.activoAnesIN=false;
+            transAnestStore.activoCxIN=false;
+            transAnestStore.activoAnesOUT=false;
           break;
 
           case "ANESOUT":
-            this.activoAnesOUT=true;
-            this.noActivoAnesOUT=false;
-            this.activoAnesIN=false;
-            this.activoCxIN=false;
-            this.activoCxOUT=false;
+            transAnestStore.activoAnesOUT=true;
+            transAnestStore.noActivoAnesOUT=false;
+            transAnestStore.activoAnesIN=false;
+            transAnestStore.activoCxIN=false;
+            transAnestStore.activoCxOUT=false;
           break;
         
           default:
@@ -5512,23 +5474,23 @@ export default defineComponent({
       async ocultarDropDown(tiemposQX : string){
         switch (tiemposQX) {
           case "ANESIN":
-            this.activoAnesIN= false
-            this.noActivoAnesIN= true
+          transAnestStore.activoAnesIN= false
+          transAnestStore.noActivoAnesIN= true
           break;
 
           case "CXIN":
-            this.activoCxIN= false
-            this.noActivoCxIN= true
+            transAnestStore.activoCxIN= false
+            transAnestStore.noActivoCxIN= true
           break;
 
           case "CXOUT":
-            this.activoCxOUT= false
-            this.noActivoCxOUT= true
+            transAnestStore.activoCxOUT= false
+            transAnestStore.noActivoCxOUT= true
           break;
 
           case "ANESOUT":
-            this.activoAnesOUT= false
-            this.noActivoAnesOUT= true
+            transAnestStore.activoAnesOUT= false
+            transAnestStore.noActivoAnesOUT= true
           break;
         
           default:
@@ -5563,9 +5525,9 @@ export default defineComponent({
           this.menuTrans.horaFinalMed = "";
           this.menuTrans.observacionesMed = "";
           
-          this.btnAddMedicamentos=false
-          this.btnUpdateMedicamentos=true
-          this.btnActualizaMedicamento=false
+          transAnestStore.btnAddMedicamentos=false
+          transAnestStore.btnUpdateMedicamentos=true
+          transAnestStore.btnActualizaMedicamento=false
         }
       },
 
@@ -5618,23 +5580,23 @@ export default defineComponent({
               position: "top-end",
               });
         }else {        
-          this.btnAddMedicamentos=false
-          this.btnUpdateMedicamentos=true
-          this.btnActualizaMedicamento=false
+          transAnestStore.btnAddMedicamentos=false
+          transAnestStore.btnUpdateMedicamentos=true
+          transAnestStore.btnActualizaMedicamento=false
 
-          this.btnAddVentilador=false
-          this.btnUpdateVentilador=true
-          this.btnActualizaVentilador=false
+          transAnestStore.btnAddVentilador=false
+          transAnestStore.btnUpdateVentilador=true
+          transAnestStore.btnActualizaVentilador=false
 
-          this.btnAddRelevos=false
-          this.btnUpdateRelevos=true
-          this.btnActualizaRelevo=false
+          transAnestStore.btnAddRelevos=false
+          transAnestStore.btnUpdateRelevos=true
+          transAnestStore.btnActualizaRelevo=false
 
-          this.btnAddEventos=false
-          this.btnUpdateEventos=true
-          this.btnActualizaEvento=false
+          transAnestStore.btnAddEventos=false
+          transAnestStore.btnUpdateEventos=true
+          transAnestStore.btnActualizaEvento=false
 
-          this.btnActualizarBalance=true
+          transAnestStore.btnActualizarBalance=true
           
           if(preIdStore.nuevoRegistroPaciente == false){
             await this.transAnestStore.saveDatosMedicamentos(this.menuTrans, preIdStore.pacienteID._id)
@@ -5705,9 +5667,9 @@ export default defineComponent({
       },
 
       async cambiarBtnActualizarMedic(id) {
-            this.btnAddMedicamentos=false
-            this.btnUpdateMedicamentos=false
-            this.btnActualizaMedicamento=true
+            transAnestStore.btnAddMedicamentos=false
+            transAnestStore.btnUpdateMedicamentos=false
+            transAnestStore.btnActualizaMedicamento=true
 
             await transAnestStore.getMedicamento(id);
 
@@ -5745,9 +5707,9 @@ export default defineComponent({
                 await transAnestStore.updateMedicamento(this.menuTrans.idMed, this.menuTrans.tipoMed, this.menuTrans.medicamento, this.menuTrans.dosisMed,
                 this.menuTrans.unidadMed, this.menuTrans.viaMed, this.menuTrans.horaInicioMed, this.menuTrans.horaFinalMed, this.menuTrans.observacionesMed);
 
-                this.btnAddMedicamentos=false
-                this.btnUpdateMedicamentos=true
-                this.btnActualizaMedicamento=false
+                transAnestStore.btnAddMedicamentos=false
+                transAnestStore.btnUpdateMedicamentos=true
+                transAnestStore.btnActualizaMedicamento=false
 
                 this.menuTrans.idMed = "";
                 this.menuTrans.tipoMed = "";
@@ -5799,9 +5761,9 @@ export default defineComponent({
           this.menuTrans.horaFinalMed = "";
           this.menuTrans.observacionesMed = "";
 
-          this.btnAddMedicamentos=false
-          this.btnUpdateMedicamentos=true
-          this.btnActualizaMedicamento=false
+          transAnestStore.btnAddMedicamentos=false
+          transAnestStore.btnUpdateMedicamentos=true
+          transAnestStore.btnActualizaMedicamento=false
 
           this.cerrarModalMed();
 
@@ -5824,9 +5786,9 @@ export default defineComponent({
           this.menuTrans.anestesiologoRel = "";
           this.menuTrans.observacionesRel = "";
 
-          this.btnAddRelevos=false
-          this.btnUpdateRelevos=true
-          this.btnActualizaRelevo=false
+          transAnestStore.btnAddRelevos=false
+          transAnestStore.btnUpdateRelevos=true
+          transAnestStore.btnActualizaRelevo=false
         }
       },
 
@@ -5853,23 +5815,23 @@ export default defineComponent({
                 position: "top-end",
                 });
           } else {
-            this.btnAddMedicamentos=false
-            this.btnUpdateMedicamentos=true
-            this.btnActualizaMedicamento=false
+            transAnestStore.btnAddMedicamentos=false
+            transAnestStore.btnUpdateMedicamentos=true
+            transAnestStore.btnActualizaMedicamento=false
 
-            this.btnAddVentilador=false
-            this.btnUpdateVentilador=true
-            this.btnActualizaVentilador=false
+            transAnestStore.btnAddVentilador=false
+            transAnestStore.btnUpdateVentilador=true
+            transAnestStore.btnActualizaVentilador=false
 
-            this.btnAddRelevos=false
-            this.btnUpdateRelevos=true
-            this.btnActualizaRelevo=false
+            transAnestStore.btnAddRelevos=false
+            transAnestStore.btnUpdateRelevos=true
+            transAnestStore.btnActualizaRelevo=false
 
-            this.btnAddEventos=false
-            this.btnUpdateEventos=true
-            this.btnActualizaEvento=false
+            transAnestStore.btnAddEventos=false
+            transAnestStore.btnUpdateEventos=true
+            transAnestStore.btnActualizaEvento=false
 
-            this.btnActualizarBalance=true
+            transAnestStore.btnActualizarBalance=true
             
             if(preIdStore.nuevoRegistroPaciente == false){
               await this.transAnestStore.saveDatosRelevos(this.menuTrans, preIdStore.pacienteID._id)
@@ -5944,9 +5906,9 @@ export default defineComponent({
       },
 
       async cambiarBtnActualizarRelevo(id) {
-            this.btnAddRelevos=false
-            this.btnUpdateRelevos=false
-            this.btnActualizaRelevo=true
+            transAnestStore.btnAddRelevos=false
+            transAnestStore.btnUpdateRelevos=false
+            transAnestStore.btnActualizaRelevo=true
 
             await transAnestStore.getRelevo(id);
 
@@ -5986,9 +5948,9 @@ export default defineComponent({
                 await transAnestStore.updateRelevo(this.menuTrans.idRelevo, this.menuTrans.horaRelevo, this.menuTrans.tipoRel, this.menuTrans.matriculaRel,
                                                     this.menuTrans.anestesiologoRel, this.menuTrans.observacionesRel);
 
-                this.btnAddRelevos=false
-                this.btnUpdateRelevos=true
-                this.btnActualizaRelevo=false
+                transAnestStore.btnAddRelevos=false
+                transAnestStore.btnUpdateRelevos=true
+                transAnestStore.btnActualizaRelevo=false
 
                 this.menuTrans.idRelevo = "";
                 this.menuTrans.horaRelevo = "";
@@ -6040,9 +6002,9 @@ export default defineComponent({
           this.menuTrans.anestesiologoRel = "";
           this.menuTrans.observacionesRel = "";
 
-          this.btnAddRelevos=false
-          this.btnUpdateRelevos=true
-          this.btnActualizaRelevo=false
+          transAnestStore.btnAddRelevos=false
+          transAnestStore.btnUpdateRelevos=true
+          transAnestStore.btnActualizaRelevo=false
 
           this.cerrarModalRel();
 
@@ -6068,9 +6030,9 @@ export default defineComponent({
           this.menuTrans.tipoEve= "EVENTO";
           this.menuTrans.detalleEvento = "";
 
-          this.btnAddEventos=false
-          this.btnUpdateEventos=true
-          this.btnActualizaEvento=false
+          transAnestStore.btnAddEventos=false
+          transAnestStore.btnUpdateEventos=true
+          transAnestStore.btnActualizaEvento=false
         }
       },
 
@@ -6097,23 +6059,23 @@ export default defineComponent({
                 position: "top-end",
                 });
           } else {
-            this.btnAddMedicamentos=false
-            this.btnUpdateMedicamentos=true
-            this.btnActualizaMedicamento=false
+            transAnestStore.btnAddMedicamentos=false
+            transAnestStore.btnUpdateMedicamentos=true
+            transAnestStore.btnActualizaMedicamento=false
 
-            this.btnAddVentilador=false
-            this.btnUpdateVentilador=true
-            this.btnActualizaVentilador=false
+            transAnestStore.btnAddVentilador=false
+            transAnestStore.btnUpdateVentilador=true
+            transAnestStore.btnActualizaVentilador=false
 
-            this.btnAddRelevos=false
-            this.btnUpdateRelevos=true
-            this.btnActualizaRelevo=false
+            transAnestStore.btnAddRelevos=false
+            transAnestStore.btnUpdateRelevos=true
+            transAnestStore.btnActualizaRelevo=false
 
-            this.btnAddEventos=false
-            this.btnUpdateEventos=true
-            this.btnActualizaEvento=false
+            transAnestStore.btnAddEventos=false
+            transAnestStore.btnUpdateEventos=true
+            transAnestStore.btnActualizaEvento=false
 
-            this.btnActualizarBalance=true
+            transAnestStore.btnActualizarBalance=true
             
             if(preIdStore.nuevoRegistroPaciente == false){
               await this.transAnestStore.saveDatosEventos(this.menuTrans, preIdStore.pacienteID._id)
@@ -6181,9 +6143,9 @@ export default defineComponent({
       },
 
       async cambiarBtnActualizarEvento(id) {
-            this.btnAddEventos=false
-            this.btnUpdateEventos=false
-            this.btnActualizaEvento=true
+            transAnestStore.btnAddEventos=false
+            transAnestStore.btnUpdateEventos=false
+            transAnestStore.btnActualizaEvento=true
 
             await transAnestStore.getEvento(id);
 
@@ -6220,9 +6182,9 @@ export default defineComponent({
             } else {
                 await transAnestStore.updateEvento(this.menuTrans.idEvento, this.menuTrans.horaEvento, this.menuTrans.tipoEve, this.menuTrans.detalleEvento);
 
-                this.btnAddEventos=false
-                this.btnUpdateEventos=true
-                this.btnActualizaEvento=false
+                transAnestStore.btnAddEventos=false
+                transAnestStore.btnUpdateEventos=true
+                transAnestStore.btnActualizaEvento=false
 
                 this.menuTrans.idEvento = "";
                 this.menuTrans.horaEvento = "";
@@ -6270,9 +6232,9 @@ export default defineComponent({
           this.menuTrans.tipoEve= "EVENTO";
           this.menuTrans.detalleEvento = "";
 
-          this.btnAddEventos=false
-          this.btnUpdateEventos=true
-          this.btnActualizaEvento=false
+          transAnestStore.btnAddEventos=false
+          transAnestStore.btnUpdateEventos=true
+          transAnestStore.btnActualizaEvento=false
 
           this.cerrarModalEve();
 

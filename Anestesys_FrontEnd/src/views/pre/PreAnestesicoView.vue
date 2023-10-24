@@ -156,18 +156,18 @@
         </div>
         
         <div :class="numExpediente != '' && nomPaciente != '' ?
-                    'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'" @click="guardarDatos()">
+                    'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
           <RouterLink to="trans"
                       class="" id="menu-trans">
-            <img src="images/trans.svg" class="img-menu-lateral" v-bind:aria-disabled="true"/>
+            <img src="images/trans.svg" class="img-menu-lateral" @click="guardarDatos()"/>
           </RouterLink>
         </div>
         
         <div :class="numExpediente != '' && nomPaciente != '' ?
-                    'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'" @click="guardarDatos()">
+                    'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
           <RouterLink to="post"
-          class="" id="menu-post">
-            <img src="images/post.svg" class="img-menu-lateral"/>
+                      class="" id="menu-post">
+            <img src="images/post.svg" class="img-menu-lateral" @click="guardarDatos()"/>
           </RouterLink>
         </div>
 
@@ -279,17 +279,16 @@ import Nota from '../../components/pre/Nota.vue';
 import swal from 'sweetalert2';
 import BarraNavegacion from "../../components/barraNavegacion.vue";
 import { usePreIdStore } from '../../stores/preId-store';
+import { useTransAnestStore } from "@/stores/transAnest-store";
 import Multiselect from '@vueform/multiselect';
 
 const idStore = usePreIdStore();
+const transStore = useTransAnestStore();
 
 export default defineComponent({
   data() {
     return {
       deshabilitado: true,
-
-      claseVisible:'visible',
-      claseInvisible:'invisible',
 
       numExpediente:'',
       nomPaciente:'',
@@ -305,7 +304,7 @@ export default defineComponent({
       bordeRojoNom:false,
       bordeVerdeNom:false,
       
-      esPaciente: false,
+      esPaciente: false, //
       esValoracion: false,
       esPlan: false,
       esNota: false,
@@ -317,6 +316,7 @@ export default defineComponent({
       btnNuevoActualizarId: false,
 
       idStore,
+      transStore,
       
       mostrarVistaRapida: false,
 
@@ -394,16 +394,76 @@ export default defineComponent({
         const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
         await componenteId.asignarValoresPaciente();
         
-        this.nuevoRegistro = false;
-        this.historialPaciente = false;
+        this.nuevoRegistro = false; // Bloquear botón nuevo registro
+        this.historialPaciente = false; // Bloquear botón historial paciente
 
-        this.btnGuardarId=true
+        // Botones de guardar
+        this.btnGuardarId=true        
         this.btnActualizarId=false
         this.btnNuevoGuardarId=false
         this.btnNuevoActualizarId=false
 
+        // Bloquear inputs ID
         this.bloquearInputs=false
-        this.bloquearInputsPrincipales=false        
+        this.bloquearInputsPrincipales=false
+
+        this.deshabilitado=true // Deshabilitar botones menú pre
+
+        // Deshabilitar nuevo registro de paciente
+        idStore.nuevoRegistroPaciente=false
+        
+        idStore.actualizarRegId=false
+        idStore.actualizarRegValoracion=false
+        idStore.actualizarRegPlan=false 
+        idStore.actualizarRegNota=false
+        idStore.actualizarRegNotaPA=false
+        idStore.actualizarRegRecuperacion=false
+
+        document.getElementById("menu-trans").className = "invisible"
+        document.getElementById("menu-post").className = "invisible"        
+
+        this.nuevoRegistroExped = false
+
+        this.numExpediente = ''
+        this.nombrePaciente = ''
+
+        const componenteValoracion = await this.$refs.refValoracion as InstanceType<typeof Valoracion>;
+        await componenteValoracion.regresarBotones();
+
+        // Devolver todos los botones de trans a estado inicial
+        transStore.btnAddMedicamentos = true
+        transStore.btnUpdateMedicamentos = false
+        transStore.btnActualizaMedicamento = false
+
+        transStore.btnAddRelevos = true
+        transStore.btnUpdateRelevos = false
+        transStore.btnActualizaRelevo = false
+
+        transStore.btnAddEventos = true
+        transStore.btnUpdateEventos = false
+        transStore.btnActualizaEvento = false
+
+        transStore.btnAddVentilador = true
+        transStore.btnUpdateVentilador = false
+        transStore.btnActualizaVentilador = false
+
+        transStore.btnActualizarBalance = false
+
+        transStore.tipoTecnica = false
+
+        transStore.btnTQX = false
+
+        transStore.activoAnesIN = false
+        transStore.noActivoAnesIN = true
+
+        transStore.activoCxIN = false
+        transStore.noActivoCxIN = true
+
+        transStore.activoCxOUT = false
+        transStore.noActivoCxOUT = true
+
+        transStore.activoAnesOUT = false
+        transStore.noActivoAnesOUT = true
       }
 
       // Sino se elige un expediente no manda la petición
@@ -461,6 +521,8 @@ export default defineComponent({
             this.nuevoRegistroExped=true
 
             idStore.nuevoRegistroPaciente=true
+
+            this.nuevoRegistro = false; // Bloquear botón nuevo registro
           }
         });        
     },
