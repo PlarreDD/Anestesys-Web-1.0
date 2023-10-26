@@ -14,10 +14,10 @@
           :createTag="true"
           :max="1"
           :multiple="false"
-          @click="obtenerPaciente"
           @keyup.capture="obtenerPaciente"
           @change="obtenerPaciente"
-        />
+          />
+          <!-- @click="obtenerPaciente" -->
       </div>
 
       <div class="col-md-2"></div>
@@ -261,7 +261,7 @@
           </label>
         </div>
       </div>
-    </div>   
+    </div>
 
   </div>
 </template>
@@ -281,6 +281,8 @@ import BarraNavegacion from "../../components/barraNavegacion.vue";
 import { usePreIdStore } from '../../stores/preId-store';
 import { useTransAnestStore } from "@/stores/transAnest-store";
 import Multiselect from '@vueform/multiselect';
+
+import PostAnestesicoView from "../post/PostAnestesicoView.vue";
 
 const idStore = usePreIdStore();
 const transStore = useTransAnestStore();
@@ -348,7 +350,9 @@ export default defineComponent({
     Plan,
     Valoracion,
     BarraNavegacion,
-    Multiselect
+    Multiselect,
+
+    PostAnestesicoView
   },
   
   created(){
@@ -381,6 +385,7 @@ export default defineComponent({
       await this.listarExpedientes();
 
       if(idStore.numExpediente == null || idStore.numExpediente == ''){ 
+
         this.numeroExpediente = ''
         this.nombrePaciente = ''
         this.fechaNacimiento = null
@@ -393,17 +398,30 @@ export default defineComponent({
         // Ejecutar método de componente Id
         const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
         await componenteId.asignarValoresPaciente();
+
+        // Vaciar Inputs
+        // Pre
+        await this.vaciarInputsPre()
+        // Post        
+        // const vistaPost = await this.$refs.PostAnestesicoView as InstanceType<typeof PostAnestesicoView>;
+        // await vistaPost.vaciarInputsPost();
+        // if (vistaPost) {
+        //   await vistaPost.vaciarInputsPost();
+        // }
+        this.$emit('vaciar-inputs-post');
+
+        console.log("Pasó");        
         
         this.nuevoRegistro = false; // Bloquear botón nuevo registro
         this.historialPaciente = false; // Bloquear botón historial paciente
 
-        // Botones de guardar
+        // Botones de guardar a estado inicial
         this.btnGuardarId=true        
         this.btnActualizarId=false
         this.btnNuevoGuardarId=false
         this.btnNuevoActualizarId=false
 
-        // Bloquear inputs ID
+        // Bloquear inputs ID a estado inicial
         this.bloquearInputs=false
         this.bloquearInputsPrincipales=false
 
@@ -468,7 +486,7 @@ export default defineComponent({
 
       // Sino se elige un expediente no manda la petición
       if(idStore.numExpediente != null && idStore.numExpediente != ''){
-        
+
         let expediente = await idStore.numExpediente.toString()
         let numExp = expediente.split(' ')[0];
 
@@ -497,6 +515,20 @@ export default defineComponent({
         this.bloquearInputs=true
         this.bloquearInputsPrincipales=true
       }      
+    },
+
+    async vaciarInputsPre(){
+        const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
+        await componenteId.vaciarInputsId();        
+        
+        const componenteValoracion = await this.$refs.refValoracion as InstanceType<typeof Valoracion>;
+        await componenteValoracion.vaciarInputsValoracion();
+
+        const componentePlan = await this.$refs.refPlan as InstanceType<typeof Plan>;
+        await componentePlan.vaciarInputsPlan();
+
+        const componenteNota = await this.$refs.refNota as InstanceType<typeof Nota>;
+        await componenteNota.vaciarInputsNota();
     },
 
     // Crear nuevo registro del expediente

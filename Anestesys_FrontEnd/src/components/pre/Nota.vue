@@ -45,6 +45,12 @@ export default defineComponent({
     },
 
     methods: {
+        async vaciarInputsNota(){
+            this.textoNota.nota = ""
+
+            this.enviarDatosNota()
+        },
+
         async guardarDatosNota(){
             if(preIdStore.nuevoRegistroPaciente == false){
                 if(preIdStore.actualizarRegNota == false ){

@@ -78,7 +78,7 @@
                                       :class="infoNotaPost.npa_NotaPostAnest != undefined && infoNotaPost.npa_NotaPostAnest != '' ?
                                         'form-control border border-success formSombra' : 'form-control'">
                             </textarea>
-                        </div>
+                        </div>                        
 
                         <hr/>
 
@@ -891,6 +891,17 @@ export default defineComponent({
     },
 
     methods: {
+        async vaciarInputsNotaPA(){
+
+            console.log("Entro a vaciar Nota PA");
+                
+            this.infoNotaPost.npa_Intubacion = ""
+            this.infoNotaPost.npa_NotaPostAnest = ""
+
+            this.$emit('inputs-vaciados'); // Emitir el evento personalizado
+            
+            this.enviarDatosNotaPost()
+        },
 
         async guardarDatosNotaPA(){
             if(preIdStore.nuevoRegistroPaciente == false){
@@ -922,10 +933,6 @@ export default defineComponent({
                 }
 
             }
-        },
-
-        validarCasoObstetrico(){
-
         },
 
         enviarDatosNotaPost() {

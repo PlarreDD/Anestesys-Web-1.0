@@ -586,6 +586,25 @@ export default defineComponent({
     },
     
     methods: {
+        async vaciarInputsId(){            
+            this.infoPreIdPaciente.numEpisodio = ""
+            this.infoPreIdPaciente.habitacion = ""
+            this.infoPreIdPaciente.fechaIn = ""
+            this.infoPreIdPaciente.diagnostico = ""
+            this.infoPreIdPaciente.tipoCx = ""
+            this.infoPreIdPaciente.cie10 = ""
+            this.infoPreIdPaciente.cie9 = ""
+            this.infoPreIdPaciente.cirugia = ""
+            this.infoPreIdPaciente.fechaCx = ""
+            this.infoPreIdPaciente.hrCx = ""
+            this.infoPreIdPaciente.cirujano = ""
+            this.infoPreIdPaciente.anestesiologo = ""
+            this.infoPreIdPaciente.anestesiologoVPA = ""
+            this.infoPreIdPaciente.residenteAnestesia = ""
+
+            this.enviarDatos()
+        },
+
         async guardarDatosId(){
             if(preIdStore.nuevoRegistroPaciente == false){
                 if(preIdStore.actualizarRegId == true){

@@ -27,7 +27,7 @@
                       type="submit" 
                       aria-selected="false"
                       @click="validaSeleccionRecuperacion()">RECUPERACIÓN</button>
-          </li>          
+          </li>
         </ul>
       </div>
 
@@ -37,8 +37,8 @@
     <div class="input-group mb-3 bordePrincipal"> 
       <div class="tab-content col-md-9" id=""> <!--Redirecciona al contenedor seleccionado, cargando la información del componente-->
         <div class="tab-pane fade show active" id="nota">
-            <nota ref="refNotaPA"/>
-          </div>
+            <nota ref="refNotaPA" @inputs-vaciados="vaciarInputsPost"/>
+        </div>
         <div class="tab-pane fade" id="recuperacion">
           <recuperacion ref="refRecuperacion"/>
         </div>
@@ -187,6 +187,14 @@ export default ({
   },
 
   methods:{
+    async vaciarInputsPost(){
+      const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
+      await componenteNotaPA.vaciarInputsNotaPA();
+
+      // const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
+      // await componenteRecuperacion.guardarDatosRecuperacion();
+    },
+
     async guardarDatos(){
       
       const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
