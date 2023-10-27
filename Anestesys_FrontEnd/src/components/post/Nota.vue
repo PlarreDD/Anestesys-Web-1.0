@@ -900,7 +900,7 @@ export default defineComponent({
 
             this.$emit('inputs-vaciados'); // Emitir el evento personalizado
             
-            this.enviarDatosNotaPost()
+            // this.enviarDatosNotaPost()
         },
 
         async guardarDatosNotaPA(){
