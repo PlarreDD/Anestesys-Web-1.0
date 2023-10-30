@@ -24,7 +24,7 @@
 
         <div class="tab-content col-md-12" id="">
             <!-- Nota Post-Anestésica -->
-            <div class="tab-pane fade show active" id="notaPost">
+            <div class="tab-pane fade show active" id="notaPost" @passive="vaciarInputsNotaPA">
                 <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">
                     <form @submit.prevent="" class="row g-3"> 
                         <h5 class="fw-bold">NOTA POST-ANESTÉSICA</h5>
@@ -883,6 +883,17 @@ export default defineComponent({
             opcionTecnica: ['Local','Sedación', 'General balanceada', 'TIVA (Anestesia total intravenosa)', 'Multimodal', 'Bloqueo mixto', 'Bloqueo peridural lumbar',
                         'Bloqueo peridural caudal', 'Bloqueo espinal', 'Bloqueo de plexo', 'Bloqueo troncular', 'Bloqueo peridural torácico',
                         'Bloqueo peridural cervical', 'Libre de opioides'],
+
+            miVariableBooleana: preIdStore.vaciarInputs
+        }
+    },
+
+    watch: {
+        miVariableBooleana(nuevoValor, valorAnterior) {
+            if (nuevoValor === true) {
+                // Ejecutar la función cuando miVariableBooleana cambie a true
+                this.vaciarInputsNotaPA();
+            }
         }
     },
 
@@ -892,15 +903,15 @@ export default defineComponent({
 
     methods: {
         async vaciarInputsNotaPA(){
-
             console.log("Entro a vaciar Nota PA");
                 
-            this.infoNotaPost.npa_Intubacion = ""
-            this.infoNotaPost.npa_NotaPostAnest = ""
-
-            this.$emit('inputs-vaciados'); // Emitir el evento personalizado
-            
-            // this.enviarDatosNotaPost()
+            // if(preIdStore.numeroExpediente== "" && preIdStore.NombrePaciente == ""){
+            // if(preIdStore.vaciarInputs == true){
+                console.log("Nota Post: "+postAnestStore.NotaPost);
+                
+                this.infoNotaPost.npa_NotaPostAnest = postAnestStore.NotaPost
+                this.infoNotaPost.npa_Intubacion = postAnestStore.Intubacion
+            // }
         },
 
         async guardarDatosNotaPA(){

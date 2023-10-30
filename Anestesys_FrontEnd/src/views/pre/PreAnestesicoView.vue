@@ -280,12 +280,12 @@ import swal from 'sweetalert2';
 import BarraNavegacion from "../../components/barraNavegacion.vue";
 import { usePreIdStore } from '../../stores/preId-store';
 import { useTransAnestStore } from "@/stores/transAnest-store";
+import { usePostAnestStore } from "@/stores/postAnest-store";
 import Multiselect from '@vueform/multiselect';
-
-import PostAnestesicoView from "../post/PostAnestesicoView.vue";
 
 const idStore = usePreIdStore();
 const transStore = useTransAnestStore();
+const postAnestStore = usePostAnestStore();
 
 export default defineComponent({
   data() {
@@ -319,6 +319,7 @@ export default defineComponent({
 
       idStore,
       transStore,
+      postAnestStore,
       
       mostrarVistaRapida: false,
 
@@ -351,8 +352,6 @@ export default defineComponent({
     Valoracion,
     BarraNavegacion,
     Multiselect,
-
-    PostAnestesicoView
   },
   
   created(){
@@ -402,15 +401,13 @@ export default defineComponent({
         // Vaciar Inputs
         // Pre
         await this.vaciarInputsPre()
-        // Post        
-        // const vistaPost = await this.$refs.PostAnestesicoView as InstanceType<typeof PostAnestesicoView>;
-        // await vistaPost.vaciarInputsPost();
-        // if (vistaPost) {
-        //   await vistaPost.vaciarInputsPost();
-        // }
-        this.$emit('vaciar-inputs-post');
+        // Post
+        await this.vaciarStoreNotaPost()
+        await this.vaciarStoreRecuperacion()
 
-        console.log("Pasó");        
+        idStore.vaciarInputs=true
+
+        console.log("Pasó");
         
         this.nuevoRegistro = false; // Bloquear botón nuevo registro
         this.historialPaciente = false; // Bloquear botón historial paciente
@@ -515,6 +512,151 @@ export default defineComponent({
         this.bloquearInputs=true
         this.bloquearInputsPrincipales=true
       }      
+    },
+
+    async vaciarStoreNotaPost() {
+        postAnestStore.NotaPost=""
+        postAnestStore.Intubacion="No"
+
+        postAnestStore.EgresoTA=""
+        postAnestStore.EgresoFC=""
+        postAnestStore.EgresoFR=""
+        postAnestStore.EgresoTemp=""
+        postAnestStore.EgresoPulso=""
+        postAnestStore.EgresoSpO2=""
+        postAnestStore.DestinoEgreso=""
+
+        postAnestStore.NumeroProductos=""
+        postAnestStore.GeneroUno=""
+        postAnestStore.HoraNacimientoUno=""
+        postAnestStore.AlumbramientoUno=""
+        postAnestStore.Apgar1Uno=""
+        postAnestStore.Apgar5Uno=""
+        postAnestStore.CapurroUno=""
+        postAnestStore.PesoUno=""
+        postAnestStore.TallaUno=""
+        postAnestStore.GeneroDos=""
+        postAnestStore.HoraNacimientoDos=""
+        postAnestStore.AlumbramientoDos=""
+        postAnestStore.Apgar1Dos=""
+        postAnestStore.Apgar5Dos=""
+        postAnestStore.CapurroDos=""
+        postAnestStore.PesoDos=""
+        postAnestStore.TallaDos=""
+        postAnestStore.GeneroTres=""
+        postAnestStore.HoraNacimientoTres=""
+        postAnestStore.AlumbramientoTres=""
+        postAnestStore.Apgar1Tres=""
+        postAnestStore.Apgar5Tres=""
+        postAnestStore.CapurroTres=""
+        postAnestStore.PesoTres=""
+        postAnestStore.TallaTres=""
+        postAnestStore.GeneroCuatro=""
+        postAnestStore.HoraNacimientoCuatro=""
+        postAnestStore.AlumbramientoCuatro=""
+        postAnestStore.Apgar1Cuatro=""
+        postAnestStore.Apgar5Cuatro=""
+        postAnestStore.CapurroCuatro=""
+        postAnestStore.PesoCuatro=""
+        postAnestStore.TallaCuatro=""
+        postAnestStore.GeneroCinco=""
+        postAnestStore.HoraNacimientoCinco=""
+        postAnestStore.AlumbramientoCinco=""
+        postAnestStore.Apgar1Cinco=""
+        postAnestStore.Apgar5Cinco=""
+        postAnestStore.CapurroCinco=""
+        postAnestStore.PesoCinco=""
+        postAnestStore.TallaCinco=""
+        postAnestStore.GeneroSeis=""
+        postAnestStore.HoraNacimientoSeis=""
+        postAnestStore.AlumbramientoSeis=""
+        postAnestStore.Apgar1Seis=""
+        postAnestStore.Apgar5Seis=""
+        postAnestStore.CapurroSeis=""
+        postAnestStore.PesoSeis=""
+        postAnestStore.TallaSeis=""                                  
+    },
+
+    async vaciarStoreRecuperacion(){
+      postAnestStore.NotaUCPA=""
+
+      postAnestStore.FCIngreso=""
+      postAnestStore.FC15Min=""
+      postAnestStore.FC30Min=""
+      postAnestStore.FC45Min=""
+      postAnestStore.FC60Min=""
+      postAnestStore.FC90Min=""
+      postAnestStore.FC120Min=""
+
+      postAnestStore.FRIngreso=""
+      postAnestStore.FR15Min=""
+      postAnestStore.FR30Min=""
+      postAnestStore.FR45Min=""
+      postAnestStore.FR60Min=""
+      postAnestStore.FR90Min=""
+      postAnestStore.FR120Min=""
+
+      postAnestStore.TensionIngreso=""
+      postAnestStore.Tension15Min=""
+      postAnestStore.Tension30Min=""
+      postAnestStore.Tension45Min=""
+      postAnestStore.Tension60Min=""
+      postAnestStore.Tension90Min=""
+      postAnestStore.Tension120Min=""
+
+      postAnestStore.SaturacionIngreso=""
+      postAnestStore.Saturacion15Min=""
+      postAnestStore.Saturacion30Min=""
+      postAnestStore.Saturacion45Min=""
+      postAnestStore.Saturacion60Min=""
+      postAnestStore.Saturacion90Min=""
+      postAnestStore.Saturacion120Min=""
+
+      postAnestStore.AldreteIngreso=""
+      postAnestStore.Aldrete15Min=""
+      postAnestStore.Aldrete30Min=""
+      postAnestStore.Aldrete45Min=""
+      postAnestStore.Aldrete60Min=""
+      postAnestStore.Aldrete90Min=""
+      postAnestStore.Aldrete120Min=""
+
+      postAnestStore.BromageIngreso=""
+      postAnestStore.Bromage15Min=""
+      postAnestStore.Bromage30Min=""
+      postAnestStore.Bromage45Min=""
+      postAnestStore.Bromage60Min=""
+      postAnestStore.Bromage90Min=""
+      postAnestStore.Bromage120Min=""
+
+      postAnestStore.NauseaIngreso=""
+      postAnestStore.Nausea15Min=""
+      postAnestStore.Nausea30Min=""
+      postAnestStore.Nausea45Min=""
+      postAnestStore.Nausea60Min=""
+      postAnestStore.Nausea90Min=""
+      postAnestStore.Nausea120Min=""
+
+      postAnestStore.EscalaEVAIngreso=""
+      postAnestStore.EscalaEVA15Min=""
+      postAnestStore.EscabaEVA30Min=""
+      postAnestStore.EscalaEVA45Min=""
+      postAnestStore.EscalaEVA60Min=""
+      postAnestStore.EscalaEVA90Min=""
+      postAnestStore.EscalaEVA120Min=""
+
+      postAnestStore.AldreteFinal0Min=""
+      postAnestStore.AldreteFinal15Min=""
+      postAnestStore.AldreteFinal30Min=""
+      postAnestStore.AldreteFinal45Min=""
+      postAnestStore.AldreteFinal60Min=""
+      postAnestStore.AldreteFinal90Min=""
+      postAnestStore.AldreteFinal120Min=""
+
+      postAnestStore.CalificacionAldrete=""
+      postAnestStore.ObservacionesAlta=""
+      postAnestStore.NombreAnestesiologo=""
+      postAnestStore.FechaAlta=""
+      postAnestStore.HoraAlta=""
     },
 
     async vaciarInputsPre(){

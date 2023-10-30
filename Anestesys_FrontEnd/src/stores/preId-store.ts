@@ -25,6 +25,8 @@ export const usePreIdStore = defineStore('preid', {
         nuevoRegistroPaciente: false,
         cirugiaID: ref(null),
         pacienteId: ref(null),
+
+        vaciarInputs: false,
         
         // ID
         numeroExpediente: ref(null),

@@ -37,7 +37,7 @@
     <div class="input-group mb-3 bordePrincipal"> 
       <div class="tab-content col-md-9" id=""> <!--Redirecciona al contenedor seleccionado, cargando la información del componente-->
         <div class="tab-pane fade show active" id="nota">
-            <nota ref="refNotaPA" @inputs-vaciados="vaciarInputsPost"/>
+            <nota ref="refNotaPA"/>
         </div>
         <div class="tab-pane fade" id="recuperacion">
           <recuperacion ref="refRecuperacion"/>
