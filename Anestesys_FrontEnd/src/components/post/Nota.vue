@@ -22,9 +22,9 @@
             </li>
         </ul>
 
-        <div class="tab-content col-md-12" id="">
+        <div class="tab-content col-md-12" id="" @mouseover="vaciarInputsNotaPA">
             <!-- Nota Post-Anestésica -->
-            <div class="tab-pane fade show active" id="notaPost" @passive="vaciarInputsNotaPA">
+            <div class="tab-pane fade show active" id="notaPost">
                 <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">
                     <form @submit.prevent="" class="row g-3"> 
                         <h5 class="fw-bold">NOTA POST-ANESTÉSICA</h5>
@@ -903,15 +903,66 @@ export default defineComponent({
 
     methods: {
         async vaciarInputsNotaPA(){
-            console.log("Entro a vaciar Nota PA");
-                
-            // if(preIdStore.numeroExpediente== "" && preIdStore.NombrePaciente == ""){
-            // if(preIdStore.vaciarInputs == true){
-                console.log("Nota Post: "+postAnestStore.NotaPost);
-                
-                this.infoNotaPost.npa_NotaPostAnest = postAnestStore.NotaPost
-                this.infoNotaPost.npa_Intubacion = postAnestStore.Intubacion
-            // }
+            this.infoNotaPost.npa_NotaPostAnest = postAnestStore.NotaPost
+            this.infoNotaPost.npa_Intubacion = postAnestStore.Intubacion
+
+            this.infoNotaPost.signVitEgQx_TA = postAnestStore.EgresoTA
+            this.infoNotaPost.signVitEgQx_FC = postAnestStore.EgresoFC
+            this.infoNotaPost.signVitEgQx_FR = postAnestStore.EgresoFR
+            this.infoNotaPost.signVitEgQx_Temperatura = postAnestStore.EgresoTemp
+            this.infoNotaPost.signVitEgQx_Pulso = postAnestStore.EgresoPulso
+            this.infoNotaPost.signVitEgQx_SpO2 = postAnestStore.EgresoSpO2
+            this.infoNotaPost.signVitEgQx_EgresoPac = postAnestStore.DestinoEgreso
+
+            this.infoNotaPost.casoObsRecNac_NumProd = postAnestStore.NumeroProductos
+            this.infoNotaPost.casoObsRecNac1_Genero = postAnestStore.GeneroUno
+            this.infoNotaPost.casoObsRecNac1_HrNacimiento = postAnestStore.HoraNacimientoUno
+            this.infoNotaPost.casoObsRecNac1_Alumbramiento = postAnestStore.AlumbramientoUno
+            this.infoNotaPost.casoObsRecNac1_Apgar1 = postAnestStore.Apgar1Uno
+            this.infoNotaPost.casoObsRecNac1_Apgar5 = postAnestStore.Apgar5Uno
+            this.infoNotaPost.casoObsRecNac1_Capurro = postAnestStore.CapurroUno
+            this.infoNotaPost.casoObsRecNac1_Peso =  postAnestStore.PesoUno
+            this.infoNotaPost.casoObsRecNac1_Talla = postAnestStore.TallaUno
+            this.infoNotaPost.casoObsRecNac2_Genero = postAnestStore.GeneroDos
+            this.infoNotaPost.casoObsRecNac2_HrNacimiento = postAnestStore.HoraNacimientoDos
+            this.infoNotaPost.casoObsRecNac2_Alumbramiento = postAnestStore.AlumbramientoDos
+            this.infoNotaPost.casoObsRecNac2_Apgar1 = postAnestStore.Apgar1Dos
+            this.infoNotaPost.casoObsRecNac2_Apgar5 = postAnestStore.Apgar5Dos
+            this.infoNotaPost.casoObsRecNac2_Capurro = postAnestStore.CapurroDos
+            this.infoNotaPost.casoObsRecNac2_Peso = postAnestStore.PesoDos
+            this.infoNotaPost.casoObsRecNac2_Talla = postAnestStore.TallaDos
+            this.infoNotaPost.casoObsRecNac3_Genero = postAnestStore.GeneroTres
+            this.infoNotaPost.casoObsRecNac3_HrNacimiento = postAnestStore.HoraNacimientoTres
+            this.infoNotaPost.casoObsRecNac3_Alumbramiento = postAnestStore.AlumbramientoTres
+            this.infoNotaPost.casoObsRecNac3_Apgar1 = postAnestStore.Apgar1Tres
+            this.infoNotaPost.casoObsRecNac3_Apgar5 = postAnestStore.Apgar5Tres
+            this.infoNotaPost.casoObsRecNac3_Capurro = postAnestStore.CapurroTres
+            this.infoNotaPost.casoObsRecNac3_Peso = postAnestStore.PesoTres
+            this.infoNotaPost.casoObsRecNac3_Talla = postAnestStore.TallaTres
+            this.infoNotaPost.casoObsRecNac4_Genero = postAnestStore.GeneroCuatro
+            this.infoNotaPost.casoObsRecNac4_HrNacimiento = postAnestStore.HoraNacimientoCuatro
+            this.infoNotaPost.casoObsRecNac4_Alumbramiento = postAnestStore.AlumbramientoCuatro
+            this.infoNotaPost.casoObsRecNac4_Apgar1 = postAnestStore.Apgar1Cuatro
+            this.infoNotaPost.casoObsRecNac4_Apgar5 = postAnestStore.Apgar5Cuatro
+            this.infoNotaPost.casoObsRecNac4_Capurro = postAnestStore.CapurroCuatro
+            this.infoNotaPost.casoObsRecNac4_Peso = postAnestStore.PesoCuatro
+            this.infoNotaPost.casoObsRecNac4_Talla = postAnestStore.TallaCuatro
+            this.infoNotaPost.casoObsRecNac5_Genero = postAnestStore.GeneroCinco
+            this.infoNotaPost.casoObsRecNac5_HrNacimiento = postAnestStore.HoraNacimientoCinco
+            this.infoNotaPost.casoObsRecNac5_Alumbramiento = postAnestStore.AlumbramientoCinco
+            this.infoNotaPost.casoObsRecNac5_Apgar1 = postAnestStore.Apgar1Cinco
+            this.infoNotaPost.casoObsRecNac5_Apgar5 = postAnestStore.Apgar5Cinco
+            this.infoNotaPost.casoObsRecNac5_Capurro = postAnestStore.CapurroCinco
+            this.infoNotaPost.casoObsRecNac5_Peso = postAnestStore.PesoCinco
+            this.infoNotaPost.casoObsRecNac5_Talla = postAnestStore.TallaCinco
+            this.infoNotaPost.casoObsRecNac6_Genero = postAnestStore.GeneroSeis
+            this.infoNotaPost.casoObsRecNac6_HrNacimiento = postAnestStore.HoraNacimientoSeis
+            this.infoNotaPost.casoObsRecNac6_Alumbramiento = postAnestStore.AlumbramientoSeis
+            this.infoNotaPost.casoObsRecNac6_Apgar1 = postAnestStore.Apgar1Seis
+            this.infoNotaPost.casoObsRecNac6_Apgar5 = postAnestStore.Apgar5Seis
+            this.infoNotaPost.casoObsRecNac6_Capurro = postAnestStore.CapurroSeis
+            this.infoNotaPost.casoObsRecNac6_Peso = postAnestStore.PesoSeis
+            this.infoNotaPost.casoObsRecNac6_Talla = postAnestStore.TallaSeis
         },
 
         async guardarDatosNotaPA(){

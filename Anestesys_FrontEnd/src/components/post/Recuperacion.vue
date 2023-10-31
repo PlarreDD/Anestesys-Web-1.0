@@ -41,7 +41,7 @@
       </li>
     </ul>
 
-    <div class="tab-content col-md-12" id="">
+    <div class="tab-content col-md-12" id="" @mouseover="vaciarInputsRecuperacion">
       <!-- Nota de Evaluación de UCPA -->
       <div class="tab-pane fade show active" id="notaEvaluacion">
         <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">
@@ -1401,29 +1401,111 @@ export default defineComponent({
   },
 
   methods: {
+    async vaciarInputsRecuperacion(){
+      this.infoRec.notaEval_Obs=postAnestStore.NotaUCPA
+
+      this.infoRec.aldreteRec_FrecCardIn=postAnestStore.FCIngreso
+      this.infoRec.aldreteRec_FrecCard15=postAnestStore.FC15Min
+      this.infoRec.aldreteRec_FrecCard30=postAnestStore.FC30Min
+      this.infoRec.aldreteRec_FrecCard45=postAnestStore.FC45Min
+      this.infoRec.aldreteRec_FrecCard60=postAnestStore.FC60Min
+      this.infoRec.aldreteRec_FrecCard90=postAnestStore.FC90Min
+      this.infoRec.aldreteRec_FrecCard120=postAnestStore.FC120Min
+
+      this.infoRec.aldreteRec_FrecRespIn=postAnestStore.FRIngreso
+      this.infoRec.aldreteRec_FrecResp15=postAnestStore.FR15Min
+      this.infoRec.aldreteRec_FrecResp30=postAnestStore.FR30Min
+      this.infoRec.aldreteRec_FrecResp45=postAnestStore.FR45Min
+      this.infoRec.aldreteRec_FrecResp60=postAnestStore.FR60Min
+      this.infoRec.aldreteRec_FrecResp90=postAnestStore.FR90Min
+      this.infoRec.aldreteRec_FrecResp120=postAnestStore.FR120Min
+
+      this.infoRec.aldreteRec_TensArteIn=postAnestStore.TensionIngreso
+      this.infoRec.aldreteRec_TensArte15=postAnestStore.Tension15Min
+      this.infoRec.aldreteRec_TensArte30=postAnestStore.Tension30Min
+      this.infoRec.aldreteRec_TensArte45=postAnestStore.Tension45Min
+      this.infoRec.aldreteRec_TensArte60=postAnestStore.Tension60Min
+      this.infoRec.aldreteRec_TensArte90=postAnestStore.Tension90Min
+      this.infoRec.aldreteRec_TensArte120=postAnestStore.Tension120Min
+
+      this.infoRec.aldreteRec_SatO2In=postAnestStore.SaturacionIngreso
+      this.infoRec.aldreteRec_SatO215=postAnestStore.Saturacion15Min
+      this.infoRec.aldreteRec_SatO230=postAnestStore.Saturacion30Min
+      this.infoRec.aldreteRec_SatO245=postAnestStore.Saturacion45Min
+      this.infoRec.aldreteRec_SatO260=postAnestStore.Saturacion60Min
+      this.infoRec.aldreteRec_SatO290=postAnestStore.Saturacion90Min
+      this.infoRec.aldreteRec_SatO2120=postAnestStore.Saturacion120Min
+
+      this.infoRec.aldreteRec_AldreteIn=postAnestStore.AldreteIngreso
+      this.infoRec.aldreteRec_Aldrete15=postAnestStore.Aldrete15Min
+      this.infoRec.aldreteRec_Aldrete30=postAnestStore.Aldrete30Min
+      this.infoRec.aldreteRec_Aldrete45=postAnestStore.Aldrete45Min
+      this.infoRec.aldreteRec_Aldrete60=postAnestStore.Aldrete60Min
+      this.infoRec.aldreteRec_Aldrete90=postAnestStore.Aldrete90Min
+      this.infoRec.aldreteRec_Aldrete120=postAnestStore.Aldrete120Min
+
+      this.infoRec.aldreteRec_BromageIn=postAnestStore.BromageIngreso
+      this.infoRec.aldreteRec_Bromage15=postAnestStore.Bromage15Min
+      this.infoRec.aldreteRec_Bromage30=postAnestStore.Bromage30Min
+      this.infoRec.aldreteRec_Bromage45=postAnestStore.Bromage45Min
+      this.infoRec.aldreteRec_Bromage60=postAnestStore.Bromage60Min
+      this.infoRec.aldreteRec_Bromage90=postAnestStore.Bromage90Min
+      this.infoRec.aldreteRec_Bromage120=postAnestStore.Bromage120Min
+
+      this.infoRec.aldreteRec_NauseasIn=postAnestStore.NauseaIngreso
+      this.infoRec.aldreteRec_Nauseas15=postAnestStore.Nausea15Min
+      this.infoRec.aldreteRec_Nauseas30=postAnestStore.Nausea30Min
+      this.infoRec.aldreteRec_Nauseas45=postAnestStore.Nausea45Min
+      this.infoRec.aldreteRec_Nauseas60=postAnestStore.Nausea60Min
+      this.infoRec.aldreteRec_Nauseas90=postAnestStore.Nausea90Min
+      this.infoRec.aldreteRec_Nauseas120=postAnestStore.Nausea120Min
+
+      this.infoRec.aldreteRec_escEVADolIn=postAnestStore.EscalaEVAIngreso
+      this.infoRec.aldreteRec_escEVADol15=postAnestStore.EscalaEVA15Min
+      this.infoRec.aldreteRec_escEVADol30=postAnestStore.EscabaEVA30Min
+      this.infoRec.aldreteRec_escEVADol45=postAnestStore.EscalaEVA45Min
+      this.infoRec.aldreteRec_escEVADol60=postAnestStore.EscalaEVA60Min
+      this.infoRec.aldreteRec_escEVADol90=postAnestStore.EscalaEVA90Min
+      this.infoRec.aldreteRec_escEVADol120=postAnestStore.EscalaEVA120Min
+
+      this.infoRec.altaRec_0min=postAnestStore.AldreteFinal0Min
+      this.infoRec.altaRec_15min=postAnestStore.AldreteFinal15Min
+      this.infoRec.altaRec_30min=postAnestStore.AldreteFinal30Min
+      this.infoRec.altaRec_45min=postAnestStore.AldreteFinal45Min
+      this.infoRec.altaRec_60min=postAnestStore.AldreteFinal60Min
+      this.infoRec.altaRec_90min=postAnestStore.AldreteFinal90Min
+      this.infoRec.altaRec_120min=postAnestStore.AldreteFinal120Min
+
+      this.infoRec.altaRec_CalifAldrete=postAnestStore.CalificacionAldrete
+      this.infoRec.altaRec_Obs=postAnestStore.ObservacionesAlta
+      preIdStore.NombreAnestesiologo=postAnestStore.NombreAnestesiologo
+      this.infoRec.altaRec_FechaAltaRec=postAnestStore.FechaAlta
+      this.infoRec.altaRec_HrAltaRec=postAnestStore.HoraAlta
+    },
+
     async guardarDatosRecuperacion(){
-            if(preIdStore.nuevoRegistroPaciente == false){
-                if(preIdStore.actualizarRegRecuperacion == false ){
-                    // Guardar datos                    
-                    postAnestStore.saveRecupera(this.infoRec, preIdStore.pacienteID._id);
-                    preIdStore.actualizarRegRecuperacion = true
-                }else if(preIdStore.actualizarRegRecuperacion == true){
-                    // Actualizar datos
-                    postAnestStore.updateRecupera(this.infoRec, preIdStore.pacienteID._id)
-                }
-
-            }else if(preIdStore.nuevoRegistroPaciente == true){
-                if(preIdStore.actualizarRegRecuperacion == false ){
-                    // Guardar nuevos datos                                        
-                    postAnestStore.saveNuevoRecupera(this.infoRec, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-                    preIdStore.actualizarRegRecuperacion = true
-                }else if(preIdStore.actualizarRegRecuperacion == true){
-                    // Actualizar nuevos datos
-                    postAnestStore.updateNuevoRecupera(this.infoRec, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
-                }
-
+        if(preIdStore.nuevoRegistroPaciente == false){
+            if(preIdStore.actualizarRegRecuperacion == false ){
+                // Guardar datos                    
+                postAnestStore.saveRecupera(this.infoRec, preIdStore.pacienteID._id);
+                preIdStore.actualizarRegRecuperacion = true
+            }else if(preIdStore.actualizarRegRecuperacion == true){
+                // Actualizar datos
+                postAnestStore.updateRecupera(this.infoRec, preIdStore.pacienteID._id)
             }
-        },
+
+        }else if(preIdStore.nuevoRegistroPaciente == true){
+            if(preIdStore.actualizarRegRecuperacion == false ){
+                // Guardar nuevos datos                                        
+                postAnestStore.saveNuevoRecupera(this.infoRec, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                preIdStore.actualizarRegRecuperacion = true
+            }else if(preIdStore.actualizarRegRecuperacion == true){
+                // Actualizar nuevos datos
+                postAnestStore.updateNuevoRecupera(this.infoRec, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
+            }
+
+        }
+    },
 
     obtenerAldrete(){
       this.infoRec.altaRec_0min = this.infoRec.aldreteRec_AldreteIn;

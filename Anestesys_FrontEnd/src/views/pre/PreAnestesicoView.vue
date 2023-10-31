@@ -406,8 +406,6 @@ export default defineComponent({
         await this.vaciarStoreRecuperacion()
 
         idStore.vaciarInputs=true
-
-        console.log("Pasó");
         
         this.nuevoRegistro = false; // Bloquear botón nuevo registro
         this.historialPaciente = false; // Bloquear botón historial paciente

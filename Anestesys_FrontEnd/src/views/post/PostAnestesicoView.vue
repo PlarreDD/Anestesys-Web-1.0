@@ -187,13 +187,13 @@ export default ({
   },
 
   methods:{
-    async vaciarInputsPost(){
-      const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
-      await componenteNotaPA.vaciarInputsNotaPA();
+    // async vaciarInputsPost(){
+    //   const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
+    //   await componenteNotaPA.vaciarInputsNotaPA();
 
-      // const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
-      // await componenteRecuperacion.guardarDatosRecuperacion();
-    },
+    //   const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
+    //   await componenteRecuperacion.vaciarInputsRecuperacion();
+    // },
 
     async guardarDatos(){
       
