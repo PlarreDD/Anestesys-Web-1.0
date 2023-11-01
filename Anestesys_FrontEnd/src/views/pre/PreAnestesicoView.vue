@@ -401,6 +401,9 @@ export default defineComponent({
         // Vaciar Inputs
         // Pre
         await this.vaciarInputsPre()
+        await this.vaciarStoresPre()
+        //Trans
+        await this.vaciarStoreTrans()
         // Post
         await this.vaciarStoreNotaPost()
         await this.vaciarStoreRecuperacion()
@@ -512,7 +515,124 @@ export default defineComponent({
       }      
     },
 
+    async vaciarInputsPre(){
+        const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
+        await componenteId.vaciarInputsId();        
+        
+        const componenteValoracion = await this.$refs.refValoracion as InstanceType<typeof Valoracion>;
+        await componenteValoracion.vaciarInputsValoracion();
+
+        const componentePlan = await this.$refs.refPlan as InstanceType<typeof Plan>;
+        await componentePlan.vaciarInputsPlan();
+
+        const componenteNota = await this.$refs.refNota as InstanceType<typeof Nota>;
+        await componenteNota.vaciarInputsNota();
+    },
+
+    async vaciarStoresPre(){
+      idStore.pacienteID = ""
+      idStore.estudioID = ""
+      idStore.valoracionID = ""
+      idStore.numExpediente = ""
+      idStore.expedientes = ""
+      idStore.estudios = ""
+      idStore.pacientes = ""
+    },
+
+    async vaciarStoreTrans(){
+      transStore.datosVentilacion= "",
+      transStore.pacienteID= "",
+      transStore.medicamentos= "",
+      transStore.medicamentoID= "",
+      transStore.relevos= "",
+      transStore.relevoID= "",
+      transStore.eventos= "",
+      transStore.eventoID= "",
+      transStore.datosMSV= "",
+      transStore.envDat= false,
+      // DatosVentilador
+      transStore.modosVentilacion=""
+      transStore.PEEP=""
+      transStore.VT=""
+      transStore.FC=""
+      transStore.IE=""
+      transStore.PLimite=""
+      transStore.Hr=""
+      // Balance Total
+      transStore.balanceTotal=""
+      // Ingresos
+      transStore.solHartman=""
+      transStore.solFisio=""
+      transStore.glucosados=""
+      transStore.gelatinas=""
+      transStore.almidones=""
+      transStore.albuminas=""
+      transStore.paqGlobular=""
+      transStore.plasmas=""
+      transStore.plaquetas=""
+      transStore.crioprecipitados=""
+      transStore.factor_VII=""
+      transStore.factor_VIII=""
+      transStore.otrosIngresos=""
+      // Egresos
+      transStore.liqAscitis=""
+      transStore.sangradoAprox=""
+      transStore.uresis=""
+      transStore.expoQX=""
+      transStore.reqBasales=""
+      transStore.ayuno=""
+      transStore.otrosEgresos=""
+      // Técnica Anestésica
+      transStore.local=""
+      transStore.sedación=""
+      transStore.gralBalanceada=""
+      transStore.TIVA=""
+      transStore.multimodal=""
+      transStore.bloqMixto=""
+      transStore.bloqPeriLum=""
+      transStore.bloqPeriCaudal=""
+      transStore.BloqEspinal=""
+      transStore.BloqPlexo=""
+      transStore.BloqTroncular=""
+      transStore.bloqPeriToracico=""
+      transStore.bloqPeriCervical=""
+      transStore.libreOpioides=""
+      // Tiempos QX
+      transStore.ingresoQX=""
+      transStore.inicioAn=""
+      transStore.inicioCx=""
+      transStore.finCx=""
+      transStore.finAn=""
+      transStore.egresoQx=""
+      // Datos Medicamentos
+      transStore.idMed=""
+      transStore.tipoMed=""
+      transStore.medicamento=""
+      transStore.dosisMed=""
+      transStore.unidadMed=""
+      transStore.viaMed=""
+      transStore.horaInicioMed=""
+      transStore.horaFinalMed=""
+      transStore.observacionesMed=""
+      // Relevos
+      transStore.idRelevo=""
+      transStore.horaRelevo=""
+      transStore.tipoRel=""
+      transStore.matriculaRel=""
+      transStore.anestesiologoRel=""
+      transStore.observacionesRel=""
+      // Eventos Criticos
+      transStore.idEvento=""
+      transStore.horaEvento=""
+      transStore.tipoEve=""
+      transStore.detalleEvento=""
+    },
+
     async vaciarStoreNotaPost() {
+
+        postAnestStore.NotaPA=""
+        postAnestStore.cirugiaID=""
+
         postAnestStore.NotaPost=""
         postAnestStore.Intubacion="No"
 
@@ -655,20 +775,6 @@ export default defineComponent({
       postAnestStore.NombreAnestesiologo=""
       postAnestStore.FechaAlta=""
       postAnestStore.HoraAlta=""
-    },
-
-    async vaciarInputsPre(){
-        const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
-        await componenteId.vaciarInputsId();        
-        
-        const componenteValoracion = await this.$refs.refValoracion as InstanceType<typeof Valoracion>;
-        await componenteValoracion.vaciarInputsValoracion();
-
-        const componentePlan = await this.$refs.refPlan as InstanceType<typeof Plan>;
-        await componentePlan.vaciarInputsPlan();
-
-        const componenteNota = await this.$refs.refNota as InstanceType<typeof Nota>;
-        await componenteNota.vaciarInputsNota();
     },
 
     // Crear nuevo registro del expediente

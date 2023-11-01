@@ -883,8 +883,6 @@ export default defineComponent({
             opcionTecnica: ['Local','Sedación', 'General balanceada', 'TIVA (Anestesia total intravenosa)', 'Multimodal', 'Bloqueo mixto', 'Bloqueo peridural lumbar',
                         'Bloqueo peridural caudal', 'Bloqueo espinal', 'Bloqueo de plexo', 'Bloqueo troncular', 'Bloqueo peridural torácico',
                         'Bloqueo peridural cervical', 'Libre de opioides'],
-
-            miVariableBooleana: preIdStore.vaciarInputs
         }
     },
 

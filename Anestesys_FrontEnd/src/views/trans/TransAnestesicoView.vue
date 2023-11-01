@@ -6,7 +6,7 @@
   <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">
 
     <!-- Barra superior -->
-    <div class="input-group mb-3">
+    <div class="input-group mb-3" @mouseover="vaciarInputsTrans">
       <div class="row g-3 col-md-12">
         <div class="col-md-10">
           <div class="row g-3 mb-3">
@@ -1582,6 +1582,84 @@ export default defineComponent({
   },
 
   methods: {
+      async vaciarInputsTrans(){
+        /* DatosVentilador */
+        this.menuTrans.modosVentilacion= transAnestStore.modosVentilacion
+        this.menuTrans.peep= transAnestStore.PEEP
+        this.menuTrans.vt= transAnestStore.VT
+        this.menuTrans.frecResp= transAnestStore.FC
+        this.menuTrans.IE= transAnestStore.IE
+        this.menuTrans.PLimite= transAnestStore.PLimite
+        this.menuTrans.Hr= transAnestStore.Hr
+        /* Balance Total */
+        this.menuTrans.balanceTotal= transAnestStore.balanceTotal
+        // Ingresos
+        this.menuTrans.solHartman= transAnestStore.solHartman
+        this.menuTrans.solFisio= transAnestStore.solFisio
+        this.menuTrans.glucosados= transAnestStore.glucosados
+        this.menuTrans.gelatinas= transAnestStore.gelatinas
+        this.menuTrans.almidones= transAnestStore.almidones
+        this.menuTrans.albuminas= transAnestStore.albuminas
+        this.menuTrans.paqGlobular= transAnestStore.paqGlobular
+        this.menuTrans.plasmas= transAnestStore.plasmas
+        this.menuTrans.plaquetas= transAnestStore.plaquetas
+        this.menuTrans.crioprecipitados= transAnestStore.crioprecipitados
+        this.menuTrans.factor_VII= transAnestStore.factor_VII
+        this.menuTrans.factor_VIII= transAnestStore.factor_VIII
+        this.menuTrans.otrosIngresos= transAnestStore.otrosIngresos
+        // Egresos
+        this.menuTrans.liqAscitis= transAnestStore.liqAscitis
+        this.menuTrans.sangradoAprox= transAnestStore.sangradoAprox
+        this.menuTrans.uresis= transAnestStore.uresis
+        this.menuTrans.expoQX= transAnestStore.expoQX
+        this.menuTrans.reqBasales= transAnestStore.reqBasales
+        this.menuTrans.ayuno= transAnestStore.ayuno
+        this.menuTrans.otrosEgresos= transAnestStore.otrosEgresos
+        /* Técnica Anestésica */
+        this.menuTrans.local= transAnestStore.local
+        this.menuTrans.sedación= transAnestStore.sedación
+        this.menuTrans.gralBalanceada= transAnestStore.gralBalanceada
+        this.menuTrans.TIVA= transAnestStore.TIVA
+        this.menuTrans.multimodal= transAnestStore.multimodal
+        this.menuTrans.bloqMixto= transAnestStore.bloqMixto
+        this.menuTrans.bloqPeriLum= transAnestStore.bloqPeriLum
+        this.menuTrans.bloqPeriCaudal= transAnestStore.bloqPeriCaudal
+        this.menuTrans.BloqEspinal= transAnestStore.BloqEspinal
+        this.menuTrans.BloqPlexo= transAnestStore.BloqPlexo
+        this.menuTrans.BloqTroncular= transAnestStore.BloqTroncular
+        this.menuTrans.bloqPeriToracico= transAnestStore.bloqPeriToracico
+        this.menuTrans.bloqPeriCervical= transAnestStore.bloqPeriCervical
+        this.menuTrans.libreOpioides= transAnestStore.libreOpioides
+        /* Tiempos QX */
+        this.menuTrans.ingresoQX= transAnestStore.ingresoQX
+        this.menuTrans.inicioAn= transAnestStore.inicioAn
+        this.menuTrans.inicioCx= transAnestStore.inicioCx
+        this.menuTrans.finCx= transAnestStore.finCx
+        this.menuTrans.finAn= transAnestStore.finAn
+        this.menuTrans.egresoQx= transAnestStore.egresoQx
+        /* Datos Medicamentos */
+        this.menuTrans.idMed= transAnestStore.idMed
+        this.menuTrans.tipoMed= transAnestStore.tipoMed
+        this.menuTrans.medicamento= transAnestStore.medicamento
+        this.menuTrans.dosisMed= transAnestStore.dosisMed
+        this.menuTrans.unidadMed= transAnestStore.unidadMed
+        this.menuTrans.viaMed= transAnestStore.viaMed
+        this.menuTrans.horaInicioMed= transAnestStore.horaInicioMed
+        this.menuTrans.horaFinalMed= transAnestStore.horaFinalMed
+        this.menuTrans.observacionesMed= transAnestStore.observacionesMed
+        /* Relevos */
+        this.menuTrans.idRelevo= transAnestStore.idRelevo
+        this.menuTrans.horaRelevo= transAnestStore.horaRelevo
+        this.menuTrans.tipoRel= transAnestStore.tipoRel
+        this.menuTrans.matriculaRel= transAnestStore.matriculaRel
+        this.menuTrans.anestesiologoRel= transAnestStore.anestesiologoRel
+        this.menuTrans.observacionesRel= transAnestStore.observacionesRel
+        /* Eventos Criticos */
+        this.menuTrans.idEvento= transAnestStore.idEvento
+        this.menuTrans.horaEvento= transAnestStore.horaEvento
+        this.menuTrans.tipoEve= transAnestStore.tipoEve
+        this.menuTrans.detalleEvento= transAnestStore.detalleEvento
+      },
       // Generar Grafica a Imagen
       async convertirGrafica() {
         let grafica = (this.$refs.chartRef as HTMLElement);
