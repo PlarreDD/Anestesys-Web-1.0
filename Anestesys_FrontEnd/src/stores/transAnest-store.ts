@@ -119,7 +119,6 @@ export const useTransAnestStore = defineStore('transAn', {
         finAn: ref(null),
         egresoQx: ref(null),
         // Datos Medicamentos
-        idMed: ref(null),
         tipoMed: ref(null),
         medicamento: ref(null),
         dosisMed: ref(null),
@@ -129,14 +128,12 @@ export const useTransAnestStore = defineStore('transAn', {
         horaFinalMed: ref(null),
         observacionesMed: ref(null),
         // Relevos
-        idRelevo: ref(null),
         horaRelevo: ref(null),
         tipoRel: ref(null),
         matriculaRel: ref(null),
         anestesiologoRel: ref(null),
         observacionesRel: ref(null),
         // Eventos Criticos
-        idEvento:ref(null),
         horaEvento:ref(null),
         tipoEve:ref(null),
         detalleEvento:ref(null),

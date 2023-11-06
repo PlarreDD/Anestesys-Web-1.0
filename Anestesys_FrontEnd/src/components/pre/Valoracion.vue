@@ -1256,7 +1256,7 @@ export default defineComponent({
             this.infoValoracion.expFis_VASNeuro = ""
             this.infoValoracion.expFis_VASPielFaneras = ""
 
-            preIdStore.estudios = ""
+            preIdStore.estudios = null
 
             this.enviarDatosValoracion()
         },

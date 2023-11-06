@@ -72,7 +72,7 @@
                             <input type="hidden" v-model="menuTrans.idMed">
 
                             <label  class="form-label text-white fw-bold">Tipo</label>
-                            <select 
+                            <select @click="enviarDatosTrans"
                                     class="form-select" v-model="menuTrans.tipoMed" @change="vaciarHoraFinalMedicamento">
                                 <option></option>
                                 <option>Bolo</option>
@@ -83,7 +83,7 @@
                             <label  class="form-label text-white fw-bold"> Medicamento </label>
                             <el-select v-model="menuTrans.medicamento" filterable class="form-control-select" 
                               @click="listarMedicamentos">
-                                <el-option
+                                <el-option @click="enviarDatosTrans"
                                     v-for="medicamento in listaMed"
                                     :value="medicamento">
                                 </el-option>
@@ -92,11 +92,11 @@
 
                           <div class="col-md-2">
                             <label  class="form-label text-white fw-bold"> Dosis </label>
-                            <input type="text" class="form-control" v-model="menuTrans.dosisMed">
+                            <input type="text" class="form-control" v-model="menuTrans.dosisMed" @keyup.capture="enviarDatosTrans">
                           </div>
                           <div class="col-md-2">
                             <label  class="form-label text-white fw-bold">Unidad</label>
-                            <select  class="form-select" v-model="menuTrans.unidadMed">
+                            <select  class="form-select" v-model="menuTrans.unidadMed" @click="enviarDatosTrans">
                                 <option></option>
                                 <option>UI.</option>
                                 <option>L. X min.</option>
@@ -118,7 +118,7 @@
 
                           <div class="col-md-8">
                               <label  class="form-label text-white fw-bold">Vía</label>
-                              <select  class="form-select" v-model="menuTrans.viaMed">
+                              <select  class="form-select" v-model="menuTrans.viaMed" @click="enviarDatosTrans">
                                   <option></option>
                                   <option>Intravenoso - IV</option>
                                   <option>Intramuscular - IM</option>
@@ -143,12 +143,12 @@
 
                           <div class="col-md-2" :class="menuTrans.tipoMed == 'Bolo' ? 'invisible' : 'visible'">
                             <label  class="form-label text-white fw-bold"> Hora Final </label>
-                            <input type="time" class="form-control" v-model="menuTrans.horaFinalMed">
+                            <input type="time" class="form-control" v-model="menuTrans.horaFinalMed" @keyup.capture="enviarDatosTrans">
                           </div>
 
                           <div class="col-md-8">
                               <label  class="form-label text-white fw-bold"> Observaciones </label>
-                              <textarea class="form-control" rows="2" v-model="menuTrans.observacionesMed">
+                              <textarea class="form-control" rows="2" v-model="menuTrans.observacionesMed" @keyup.capture="enviarDatosTrans">
                               </textarea>
                           </div>
 
@@ -233,17 +233,17 @@
 
                             <div class="col-md-3">
                               <label class="form-label text-white fw-bold"> Matrícula </label>                                
-                              <input type="text" class="form-control" v-model="menuTrans.matriculaRel">
+                              <input type="text" class="form-control" v-model="menuTrans.matriculaRel" @keyup.capture="enviarDatosTrans">
                             </div>
 
                             <div class="col-md-12">
                               <label class="form-label text-white fw-bold"> Anestesiológo </label>                                
-                              <input type="text" class="form-control" v-model="menuTrans.anestesiologoRel">
+                              <input type="text" class="form-control" v-model="menuTrans.anestesiologoRel" @keyup.capture="enviarDatosTrans">
                             </div>
 
                             <div class="col-md-12">
                               <label  class="form-label text-white fw-bold"> Observaciones </label>
-                              <textarea class="form-control" rows="2" v-model="menuTrans.observacionesRel">
+                              <textarea class="form-control" rows="2" v-model="menuTrans.observacionesRel" @keyup.capture="enviarDatosTrans">
                               </textarea>
                             </div>
 
@@ -328,7 +328,7 @@
 
                             <div class="col-md-12">
                               <label  class="form-label text-white fw-bold"> Detalles del Evento </label>
-                              <textarea class="form-control" rows="6" v-model="menuTrans.detalleEvento">
+                              <textarea class="form-control" rows="6" v-model="menuTrans.detalleEvento" @keyup.capture="enviarDatosTrans">
                               </textarea>
                             </div>
 
@@ -741,7 +741,7 @@
                       <label  class="form-label fw-bold text-white">Modos de ventilación</label>
                       <select 
                               v-model="menuTrans.modosVentilacion"
-                              class="form-select">
+                              class="form-select" @click="enviarDatosTrans">
                         <option selected></option>
                         <option>Control volumen</option>
                         <option>Control presión</option>
@@ -760,35 +760,35 @@
                       <label class="form-label fw-bold text-white">PEEP</label>
                       <input type="text"
                             class="form-control" 
-                            v-model="menuTrans.peep">
+                            v-model="menuTrans.peep" @keyup.capture="enviarDatosTrans">
                     </div>
                     <!-- VIT -->
                     <div class="col-md-3">
                       <label class="form-label fw-bold text-white">VT</label>
                       <input type="text"
                             class="form-control"
-                            v-model="menuTrans.vt">
+                            v-model="menuTrans.vt" @keyup.capture="enviarDatosTrans">
                     </div>
                     <!-- Frecuencia Respiratoria -->
                     <div class="col-md-3">
                       <label class="form-label fw-bold text-white">Frec. Resp</label>
                       <input type="text"
                             class="form-control"
-                            v-model="menuTrans.frecResp"> 
+                            v-model="menuTrans.frecResp" @keyup.capture="enviarDatosTrans"> 
                     </div>
                     <!-- I:E -->
                     <div class="col-md-3">
                       <label class="form-label fw-bold text-white">I:E</label>
                       <input type="text"
                             class="form-control"
-                            v-model="menuTrans.IE"> 
+                            v-model="menuTrans.IE" @keyup.capture="enviarDatosTrans"> 
                     </div>
                     <!-- Presión Límite -->
                     <div class="col-md-3">
                       <label class="form-label fw-bold text-white">P. Límite</label>
                       <input type="text"
                             class="form-control"
-                            v-model="menuTrans.PLimite"> 
+                            v-model="menuTrans.PLimite" @keyup.capture="enviarDatosTrans"> 
                     </div>
 
                     <div class="col-md-9"></div>
@@ -873,7 +873,7 @@
               <button class="btn btn-menu fw-bold"
                       type="button"
                       @dblclick="actualizarTQX('QXIN')"
-                      :disabled="menuTrans.ingresoQX != undefined ? true : false">
+                      :disabled="menuTrans.ingresoQX != undefined && menuTrans.ingresoQX != ''  ? true : false">
                   <label class="cursor-puntero">QX IN <label class="fw-normal">{{menuTrans.ingresoQX}}</label></label>                  
               </button>
             </div>
@@ -963,7 +963,7 @@
               <button type="button"
                       class="btn btn-menu fw-bold" 
                       @dblclick="actualizarTQX('QXOUT')"
-                      :disabled="menuTrans.egresoQx != undefined ? true : false"> 
+                      :disabled="menuTrans.egresoQx != undefined && menuTrans.egresoQx != '' ? true : false"> 
                       <label class="cursor-puntero">QX OUT <label class="fw-normal">{{menuTrans.egresoQx}}</label></label>
               </button>        
             </div>
@@ -1582,6 +1582,82 @@ export default defineComponent({
   },
 
   methods: {
+      async enviarDatosTrans() {          
+          // DatosVentilador
+          transAnestStore.modosVentilacion=this.menuTrans.modosVentilacion
+          transAnestStore.PEEP=this.menuTrans.peep
+          transAnestStore.VT=this.menuTrans.vt
+          transAnestStore.FC=this.menuTrans.frecResp
+          transAnestStore.IE=this.menuTrans.IE
+          transAnestStore.PLimite=this.menuTrans.PLimite
+          transAnestStore.Hr=this.menuTrans.Hr
+          // Balance Total
+          // transAnestStore.balanceTotal=this.menuTrans.balanceTotal
+          // Ingresos
+          transAnestStore.solHartman=this.menuTrans.solHartman
+          transAnestStore.solFisio=this.menuTrans.solFisio
+          transAnestStore.glucosados=this.menuTrans.glucosados
+          transAnestStore.gelatinas=this.menuTrans.gelatinas
+          transAnestStore.almidones=this.menuTrans.almidones
+          transAnestStore.albuminas=this.menuTrans.albuminas
+          transAnestStore.paqGlobular=this.menuTrans.paqGlobular
+          transAnestStore.plasmas=this.menuTrans.plasmas
+          transAnestStore.plaquetas=this.menuTrans.plaquetas
+          transAnestStore.crioprecipitados=this.menuTrans.crioprecipitados
+          transAnestStore.factor_VII=this.menuTrans.factor_VII
+          transAnestStore.factor_VIII=this.menuTrans.factor_VIII
+          transAnestStore.otrosIngresos=this.menuTrans.otrosIngresos
+          // Egresos
+          transAnestStore.liqAscitis=this.menuTrans.liqAscitis
+          transAnestStore.sangradoAprox=this.menuTrans.sangradoAprox
+          transAnestStore.uresis=this.menuTrans.uresis
+          transAnestStore.expoQX=this.menuTrans.expoQX
+          transAnestStore.reqBasales=this.menuTrans.reqBasales
+          transAnestStore.ayuno=this.menuTrans.ayuno
+          transAnestStore.otrosEgresos=this.menuTrans.otrosEgresos
+          // Técnica Anestésica
+          transAnestStore.local=this.menuTrans.local
+          transAnestStore.sedación=this.menuTrans.sedación
+          transAnestStore.gralBalanceada=this.menuTrans.gralBalanceada
+          transAnestStore.TIVA=this.menuTrans.TIVA
+          transAnestStore.multimodal=this.menuTrans.multimodal
+          transAnestStore.bloqMixto=this.menuTrans.bloqMixto
+          transAnestStore.bloqPeriLum=this.menuTrans.bloqPeriLum
+          transAnestStore.bloqPeriCaudal=this.menuTrans.bloqPeriCaudal
+          transAnestStore.BloqEspinal=this.menuTrans.BloqEspinal
+          transAnestStore.BloqPlexo=this.menuTrans.BloqPlexo
+          transAnestStore.BloqTroncular=this.menuTrans.BloqTroncular
+          transAnestStore.bloqPeriToracico=this.menuTrans.bloqPeriToracico
+          transAnestStore.bloqPeriCervical=this.menuTrans.bloqPeriCervical
+          transAnestStore.libreOpioides=this.menuTrans.libreOpioides
+          // Tiempos QX
+          transAnestStore.ingresoQX=this.menuTrans.ingresoQX
+          transAnestStore.inicioAn=this.menuTrans.inicioAn
+          transAnestStore.inicioCx=this.menuTrans.inicioCx
+          transAnestStore.finCx=this.menuTrans.finCx
+          transAnestStore.finAn=this.menuTrans.finAn
+          transAnestStore.egresoQx=this.menuTrans.egresoQx
+          // Datos Medicamentos
+          transAnestStore.tipoMed = this.menuTrans.tipoMed
+          transAnestStore.medicamento=this.menuTrans.medicamento
+          transAnestStore.dosisMed=this.menuTrans.dosisMed
+          transAnestStore.unidadMed=this.menuTrans.unidadMed
+          transAnestStore.viaMed=this.menuTrans.viaMed
+          transAnestStore.horaInicioMed=this.menuTrans.horaInicioMed
+          transAnestStore.horaFinalMed=this.menuTrans.horaFinalMed
+          transAnestStore.observacionesMed=this.menuTrans.observacionesMed
+          // Relevos
+          transAnestStore.horaRelevo=this.menuTrans.horaRelevo
+          transAnestStore.tipoRel=this.menuTrans.tipoRel
+          transAnestStore.matriculaRel=this.menuTrans.matriculaRel
+          transAnestStore.anestesiologoRel=this.menuTrans.anestesiologoRel
+          transAnestStore.observacionesRel=this.menuTrans.observacionesRel
+          // Eventos Criticos
+          transAnestStore.horaEvento=this.menuTrans.horaEvento
+          transAnestStore.tipoEve=this.menuTrans.tipoEve
+          transAnestStore.detalleEvento=this.menuTrans.detalleEvento
+      },
+
       async vaciarInputsTrans(){
         /* DatosVentilador */
         this.menuTrans.modosVentilacion= transAnestStore.modosVentilacion
@@ -1592,7 +1668,7 @@ export default defineComponent({
         this.menuTrans.PLimite= transAnestStore.PLimite
         this.menuTrans.Hr= transAnestStore.Hr
         /* Balance Total */
-        this.menuTrans.balanceTotal= transAnestStore.balanceTotal
+        // this.menuTrans.balanceTotal= transAnestStore.balanceTotal
         // Ingresos
         this.menuTrans.solHartman= transAnestStore.solHartman
         this.menuTrans.solFisio= transAnestStore.solFisio
@@ -1638,7 +1714,6 @@ export default defineComponent({
         this.menuTrans.finAn= transAnestStore.finAn
         this.menuTrans.egresoQx= transAnestStore.egresoQx
         /* Datos Medicamentos */
-        this.menuTrans.idMed= transAnestStore.idMed
         this.menuTrans.tipoMed= transAnestStore.tipoMed
         this.menuTrans.medicamento= transAnestStore.medicamento
         this.menuTrans.dosisMed= transAnestStore.dosisMed
@@ -1648,18 +1723,17 @@ export default defineComponent({
         this.menuTrans.horaFinalMed= transAnestStore.horaFinalMed
         this.menuTrans.observacionesMed= transAnestStore.observacionesMed
         /* Relevos */
-        this.menuTrans.idRelevo= transAnestStore.idRelevo
         this.menuTrans.horaRelevo= transAnestStore.horaRelevo
         this.menuTrans.tipoRel= transAnestStore.tipoRel
         this.menuTrans.matriculaRel= transAnestStore.matriculaRel
         this.menuTrans.anestesiologoRel= transAnestStore.anestesiologoRel
         this.menuTrans.observacionesRel= transAnestStore.observacionesRel
         /* Eventos Criticos */
-        this.menuTrans.idEvento= transAnestStore.idEvento
         this.menuTrans.horaEvento= transAnestStore.horaEvento
         this.menuTrans.tipoEve= transAnestStore.tipoEve
         this.menuTrans.detalleEvento= transAnestStore.detalleEvento
       },
+
       // Generar Grafica a Imagen
       async convertirGrafica() {
         let grafica = (this.$refs.chartRef as HTMLElement);
@@ -5210,11 +5284,13 @@ export default defineComponent({
       },
 
       async calcularBalance(){
+        this.enviarDatosTrans()
+        
         this.menuTrans.balanceTotal = ( Number(this.menuTrans.solHartman) + Number(this.menuTrans.glucosados) + Number(this.menuTrans.almidones) +
                                         Number(this.menuTrans.paqGlobular) + Number(this.menuTrans.plaquetas) + Number(this.menuTrans.factor_VII) +
                                         Number(this.menuTrans.otrosIngresos) + Number(this.menuTrans.solFisio) + Number(this.menuTrans.gelatinas) +
                                         Number(this.menuTrans.albuminas) + Number(this.menuTrans.plasmas) + Number(this.menuTrans.crioprecipitados) +
-                                        Number(this.menuTrans.factor_VII) ) - ( Number(this.menuTrans.liqAscitis) + Number(this.menuTrans.sangradoAprox) +
+                                        Number(this.menuTrans.factor_VIII) ) - ( Number(this.menuTrans.liqAscitis) + Number(this.menuTrans.sangradoAprox) +
                                         Number(this.menuTrans.uresis)+ Number(this.menuTrans.expoQX) + Number(this.menuTrans.reqBasales) +
                                         Number(this.menuTrans.ayuno) + Number(this.menuTrans.otrosEgresos) );
       },
@@ -5262,16 +5338,22 @@ export default defineComponent({
           case "INEVE":
             let hoy = new Date();
             this.menuTrans.horaEvento = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+
+            this.enviarDatosTrans()
           break;
 
           case "INREL":
             let hoy_1 = new Date();
             this.menuTrans.horaRelevo = ((hoy_1.getHours() <10) ? '0':'') + hoy_1.getHours() + ':' + ((hoy_1.getMinutes() <10) ? '0':'')+hoy_1.getMinutes();
+
+            this.enviarDatosTrans()
           break;
 
           case "INCX":
             let hoy_2 = new Date();
             this.menuTrans.horaInicioMed = ((hoy_2.getHours() <10) ? '0':'') + hoy_2.getHours() + ':' + ((hoy_2.getMinutes() <10) ? '0':'')+hoy_2.getMinutes();
+
+            this.enviarDatosTrans()
           break;
 
           case "QXIN":
@@ -5296,7 +5378,9 @@ export default defineComponent({
             this.btnMSV=false
 
             let hoy_3 = new Date();
-            this.menuTrans.ingresoQX = ((hoy_3.getHours() <10) ? '0':'') + hoy_3.getHours() + ':' + ((hoy_3.getMinutes() <10) ? '0':'')+hoy_3.getMinutes();     
+            this.menuTrans.ingresoQX = ((hoy_3.getHours() <10) ? '0':'') + hoy_3.getHours() + ':' + ((hoy_3.getMinutes() <10) ? '0':'')+hoy_3.getMinutes();   
+            
+            this.enviarDatosTrans()
 
             if(preIdStore.nuevoRegistroPaciente == false){
               await transAnestStore.saveTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID._id, tiemposQX);
@@ -5327,6 +5411,9 @@ export default defineComponent({
 
             let hoy_4 = new Date();
             this.menuTrans.inicioAn = ((hoy_4.getHours() <10) ? '0':'') + hoy_4.getHours() + ':' + ((hoy_4.getMinutes() <10) ? '0':'')+hoy_4.getMinutes();
+
+            this.enviarDatosTrans()
+
             if(preIdStore.nuevoRegistroPaciente == false){
               await transAnestStore.saveTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID._id, tiemposQX);
             }else if(preIdStore.nuevoRegistroPaciente == true){            
@@ -5355,6 +5442,8 @@ export default defineComponent({
           
             let hoy_5 = new Date();
             this.menuTrans.inicioCx = ((hoy_5.getHours() <10) ? '0':'') + hoy_5.getHours() + ':' + ((hoy_5.getMinutes() <10) ? '0':'')+hoy_5.getMinutes();
+
+            this.enviarDatosTrans()
             if(preIdStore.nuevoRegistroPaciente == false){
               await transAnestStore.saveTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID._id, tiemposQX);
             }else if(preIdStore.nuevoRegistroPaciente == true){            
@@ -5383,6 +5472,9 @@ export default defineComponent({
 
             let hoy_6 = new Date();
             this.menuTrans.finCx = ((hoy_6.getHours() <10) ? '0':'') + hoy_6.getHours() + ':' + ((hoy_6.getMinutes() <10) ? '0':'')+hoy_6.getMinutes();
+
+            this.enviarDatosTrans()
+
             if(preIdStore.nuevoRegistroPaciente == false){
               await transAnestStore.saveTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID._id, tiemposQX);
             }else if(preIdStore.nuevoRegistroPaciente == true){            
@@ -5411,6 +5503,9 @@ export default defineComponent({
 
             let hoy_7 = new Date();
             this.menuTrans.finAn = ((hoy_7.getHours() <10) ? '0':'') + hoy_7.getHours() + ':' + ((hoy_7.getMinutes() <10) ? '0':'')+hoy_7.getMinutes();
+
+            this.enviarDatosTrans()
+
             if(preIdStore.nuevoRegistroPaciente == false){
               await transAnestStore.saveTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID._id, tiemposQX);
             }else if(preIdStore.nuevoRegistroPaciente == true){            
@@ -5443,6 +5538,9 @@ export default defineComponent({
 
             let hoy_8 = new Date();
             this.menuTrans.egresoQx = ((hoy_8.getHours() <10) ? '0':'') + hoy_8.getHours() + ':' + ((hoy_8.getMinutes() <10) ? '0':'')+hoy_8.getMinutes();
+
+            this.enviarDatosTrans()
+
             if(preIdStore.nuevoRegistroPaciente == false){
               await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX);
             }else if(preIdStore.nuevoRegistroPaciente == true){            
@@ -5460,39 +5558,49 @@ export default defineComponent({
           case "QXIN":
             if(preIdStore.nuevoRegistroPaciente == false){
               await transAnestStore.saveTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID._id, tiemposQX);
+              this.enviarDatosTrans()
             }else if(preIdStore.nuevoRegistroPaciente == true){            
               await transAnestStore.saveNuevoTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
+              this.enviarDatosTrans()
             }            
           break;
 
           case "ANESIN":
             if(preIdStore.nuevoRegistroPaciente == false){
+              this.enviarDatosTrans()
               await transAnestStore.saveTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID._id, tiemposQX);
             }else if(preIdStore.nuevoRegistroPaciente == true){            
+              this.enviarDatosTrans()
               await transAnestStore.saveNuevoTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
             }            
           break;
 
           case "CXIN":
             if(preIdStore.nuevoRegistroPaciente == false){
+              this.enviarDatosTrans()
               await transAnestStore.saveTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID._id, tiemposQX);
             }else if(preIdStore.nuevoRegistroPaciente == true){            
+              this.enviarDatosTrans()
               await transAnestStore.saveNuevoTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
             }
           break;
 
           case "CXOUT":
             if(preIdStore.nuevoRegistroPaciente == false){
+              this.enviarDatosTrans()
               await transAnestStore.saveTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID._id, tiemposQX);
-            }else if(preIdStore.nuevoRegistroPaciente == true){            
+            }else if(preIdStore.nuevoRegistroPaciente == true){       
+              this.enviarDatosTrans()     
               await transAnestStore.saveNuevoTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
             }            
           break;
 
           case "ANESOUT":
             if(preIdStore.nuevoRegistroPaciente == false){
+              this.enviarDatosTrans()
               await transAnestStore.saveTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID._id, tiemposQX);
-            }else if(preIdStore.nuevoRegistroPaciente == true){            
+            }else if(preIdStore.nuevoRegistroPaciente == true){      
+              this.enviarDatosTrans()      
               await transAnestStore.saveNuevoTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
             }            
           break;
@@ -5623,10 +5731,10 @@ export default defineComponent({
         closeButton.dispatchEvent(event);
       },
 
-      async listarMedicamentos(){
+      async listarMedicamentos(){        
         let medicamento= medStore.medicamentos;
         this.listaMed = medicamento.map(document => document.nombreMedicamento);
-        this.listaMed.sort()
+        this.listaMed.sort();        
       },
 
       async listarMedicamentosTrans(){
@@ -5642,6 +5750,7 @@ export default defineComponent({
 
       async vaciarHoraFinalMedicamento(){
         this.menuTrans.horaFinalMed="";
+        this.enviarDatosTrans()
       },
 
       async guardarMedicamentos() {

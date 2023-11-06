@@ -354,9 +354,6 @@ export default defineComponent({
     Multiselect,
   },
   
-  created(){
-  },
-  
   mounted: function() { // Llama el método despues de cargar la página
     this.validaSeleccionId()
     this.ocultarFondo();
@@ -404,11 +401,10 @@ export default defineComponent({
         await this.vaciarStoresPre()
         //Trans
         await this.vaciarStoreTrans()
+        transStore.balanceTotal=""
         // Post
         await this.vaciarStoreNotaPost()
         await this.vaciarStoreRecuperacion()
-
-        idStore.vaciarInputs=true
         
         this.nuevoRegistro = false; // Bloquear botón nuevo registro
         this.historialPaciente = false; // Bloquear botón historial paciente
@@ -530,26 +526,25 @@ export default defineComponent({
     },
 
     async vaciarStoresPre(){
-      idStore.pacienteID = ""
-      idStore.estudioID = ""
-      idStore.valoracionID = ""
-      idStore.numExpediente = ""
+      // idStore.pacienteID = ""
+      // idStore.estudioID = ""
+      // idStore.valoracionID = ""
+      // idStore.numExpediente = ""
       idStore.expedientes = ""
-      idStore.estudios = ""
       idStore.pacientes = ""
     },
 
     async vaciarStoreTrans(){
-      transStore.datosVentilacion= "",
-      transStore.pacienteID= "",
-      transStore.medicamentos= "",
-      transStore.medicamentoID= "",
-      transStore.relevos= "",
-      transStore.relevoID= "",
-      transStore.eventos= "",
-      transStore.eventoID= "",
-      transStore.datosMSV= "",
-      transStore.envDat= false,
+      transStore.datosVentilacion= null
+      transStore.pacienteID= ""
+      transStore.medicamentos= null
+      transStore.medicamentoID= ""
+      transStore.relevos= null
+      transStore.relevoID= ""
+      transStore.eventos= null
+      transStore.eventoID= ""
+      transStore.datosMSV= ""
+      transStore.envDat= false
       // DatosVentilador
       transStore.modosVentilacion=""
       transStore.PEEP=""
@@ -557,9 +552,7 @@ export default defineComponent({
       transStore.FC=""
       transStore.IE=""
       transStore.PLimite=""
-      transStore.Hr=""
-      // Balance Total
-      transStore.balanceTotal=""
+      transStore.Hr=""            
       // Ingresos
       transStore.solHartman=""
       transStore.solFisio=""
@@ -605,7 +598,6 @@ export default defineComponent({
       transStore.finAn=""
       transStore.egresoQx=""
       // Datos Medicamentos
-      transStore.idMed=""
       transStore.tipoMed=""
       transStore.medicamento=""
       transStore.dosisMed=""
@@ -615,16 +607,12 @@ export default defineComponent({
       transStore.horaFinalMed=""
       transStore.observacionesMed=""
       // Relevos
-      transStore.idRelevo=""
       transStore.horaRelevo=""
-      transStore.tipoRel=""
       transStore.matriculaRel=""
       transStore.anestesiologoRel=""
       transStore.observacionesRel=""
       // Eventos Criticos
-      transStore.idEvento=""
       transStore.horaEvento=""
-      transStore.tipoEve=""
       transStore.detalleEvento=""
     },
 
@@ -692,7 +680,9 @@ export default defineComponent({
         postAnestStore.Apgar5Seis=""
         postAnestStore.CapurroSeis=""
         postAnestStore.PesoSeis=""
-        postAnestStore.TallaSeis=""                                  
+        postAnestStore.TallaSeis=""
+
+        postAnestStore.TecnicaAnestesica=null
     },
 
     async vaciarStoreRecuperacion(){
