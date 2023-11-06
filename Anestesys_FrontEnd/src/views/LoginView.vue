@@ -65,7 +65,7 @@
         <form class="row g-3" method="post" autocomplete="new-password" @submit.prevent="">
           <div class="col-md-2"></div>
           <div class="col-md-8">
-            <label for="" class="form-label fw-bold m-3">Correo electrónico</label>
+            <label  class="form-label fw-bold m-3">Correo electrónico</label>
             <input type="text"
                   :class="userCorreo == true ? 'form-control border border-danger margenInput' : 'form-control margenInput'"
                   v-model="usr.email"
@@ -81,7 +81,7 @@
           <div class="col-md-2"></div>
           <div class="col-md-2"></div>
           <div class="col-md-8">
-            <label for="" class="form-label fw-bold">Contraseña</label>
+            <label  class="form-label fw-bold">Contraseña</label>
             <input type="password"
                   :class="userContrasena == true ? 'form-control border border-danger' : 'form-control'"
                   v-model="usr.pswd"

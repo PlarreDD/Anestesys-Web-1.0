@@ -11,6 +11,12 @@ const menuTransSchema = new Schema({
         ref: 'PreIdPacientes',
         required: true,
     },
+
+    cxid:{
+        type: Schema.Types.ObjectId,
+        ref: 'PreIdPacientesCx',
+        required: false
+    },
     
     /* Balance Total */
     balanceTotal:{type: String},
@@ -99,6 +105,25 @@ const menuTransSchema = new Schema({
         horaEvento: { type: String },
         tipoEve: { type: String },
         detalleEvento: { type: String },
+    }],
+
+    datosMSV: [{
+        FC: {type:String},
+        Pulso: {type:String},
+        PAS: {type:String},
+        PAD: {type:String},
+        PAM: {type:String},
+        SpO2: {type:String},
+        EtCO2: {type:String},
+        Temp1: {type:String},
+        Temp2: {type:String},
+        PVC: {type:String},
+        PAS_IN: {type:String},
+        PAD_IN: {type:String},
+        PAM_IN: {type:String},
+        FiCO2: {type:String},
+        FR: {type:String},
+        HoraGeneracion: {type:String}
     }]
 });
 

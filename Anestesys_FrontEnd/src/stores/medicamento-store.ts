@@ -26,7 +26,6 @@ export const useMedicamentoStore = defineStore("medicamento", {
           this.medicamentos = res.data.medicamentos;
         })
         .catch((e: any) => {
-        //   console.log(e);
         });
     },
 
@@ -41,8 +40,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
         .then((res: any) => {
           this.medicamentos = res.data.medicamento;
         })
-        .catch((e: any) => {
-        //   console.log(e);
+        .catch((e: any) => {        
         });
     },
 
@@ -83,10 +81,8 @@ export const useMedicamentoStore = defineStore("medicamento", {
               timerProgressBar: true,
               position: "top-end",
             });
-          } else if (e.request) {
-            // console.log(e.request);
-          } else {
-            // console.log("ErrorAx: ", e);
+          } else if (e.request) {            
+          } else {          
           }
         });
     },
@@ -119,8 +115,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
             timerProgressBar: true,
           });
         })
-        .catch((e: any) => {
-        //   console.log(e);
+        .catch((e: any) => {        
         });
     },
 
@@ -145,8 +140,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
             timerProgressBar: true,
           });
         })
-        .catch((e: any) => {
-        //   console.log(e);
+        .catch((e: any) => {        
         });
     },
 
@@ -188,10 +182,8 @@ export const useMedicamentoStore = defineStore("medicamento", {
               timerProgressBar: true,
               position: "top-end",
             });
-          } else if (e.request) {
-            console.log(e.request);
-          } else {
-            console.log("ErrorAx: ", e);
+          } else if (e.request) {            
+          } else {            
           }
       });
     },
@@ -212,8 +204,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
           this.monitor = res.data.monitor;            
         }
       })
-      .catch((e: any) => {
-        console.log("Error: ", e);
+      .catch((e: any) => {       
       });
     },
 
@@ -239,7 +230,6 @@ export const useMedicamentoStore = defineStore("medicamento", {
           });
         })
         .catch((e: any) => {
-        //   console.log(e);
         });
     },
 
@@ -256,10 +246,8 @@ export const useMedicamentoStore = defineStore("medicamento", {
       })
       .then((res: any) => {
         this.status = res.data.statusMSV;
-        // console.log(`El dispositivo está ${this.status}.`);
       })
       .catch((e: any) => {
-          console.log(e);
       });
     },
   },

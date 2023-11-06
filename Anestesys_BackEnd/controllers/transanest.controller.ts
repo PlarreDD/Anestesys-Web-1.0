@@ -98,6 +98,97 @@ export const saveMenuTrans = async (req: any, res: Response) => {
     }
 };
 
+export const saveNuevoMenuTrans = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid,
+                /* Balance Total */
+                balanceTotal,
+                // Ingresos
+                solHartman, solFisio, glucosados, gelatinas,
+                almidones, albuminas, paqGlobular, plasmas,
+                plaquetas, crioprecipitados, factor_VII, factor_VIII,
+                otrosIngresos,
+                // Egresos
+                liqAscitis, sangradoAprox, uresis, expoQX,
+                reqBasales, ayuno, otrosEgresos,
+                /* Técnica Anestésica */
+                local, sedación, gralBalanceada, TIVA, multimodal,
+                bloqMixto, bloqPeriLum, bloqPeriCaudal, BloqEspinal,
+                BloqPlexo, BloqTroncular, bloqPeriToracico, bloqPeriCervical,
+                libreOpioides,
+                // Datos del ventilador
+                modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr,
+
+        } = req.body;
+
+        let menuTrans;
+
+        if( modosVentilacion == undefined ){
+            menuTrans = new MenuTrans({ pid, cxid,
+                                        /* Balance Total */
+                                        balanceTotal: balanceTotal,
+                                        // Ingresos
+                                        solHartman: solHartman,
+                                        solFisio: solFisio,
+                                        glucosados: glucosados,
+                                        gelatinas: gelatinas,
+                                        almidones: almidones,
+                                        albuminas: albuminas,
+                                        paqGlobular: paqGlobular,
+                                        plasmas: plasmas,
+                                        plaquetas: plaquetas,
+                                        crioprecipitados: crioprecipitados,
+                                        factor_VII: factor_VII,
+                                        factor_VIII: factor_VIII,
+                                        otrosIngresos: otrosIngresos,
+                                        // Egresos
+                                        liqAscitis: liqAscitis,
+                                        sangradoAprox: sangradoAprox,
+                                        uresis: uresis,
+                                        expoQX: expoQX,
+                                        reqBasales: reqBasales,
+                                        ayuno: ayuno,
+                                        otrosEgresos: otrosEgresos,
+                                        /* Técnica Anestésica */
+                                        local: local,
+                                        sedación: sedación,
+                                        gralBalanceada: gralBalanceada,
+                                        TIVA: TIVA,
+                                        multimodal: multimodal,
+                                        bloqMixto: bloqMixto,
+                                        bloqPeriLum: bloqPeriLum,
+                                        bloqPeriCaudal: bloqPeriCaudal,
+                                        BloqEspinal: BloqEspinal,
+                                        BloqPlexo: BloqPlexo,
+                                        BloqTroncular: BloqTroncular,
+                                        bloqPeriToracico: bloqPeriToracico,
+                                        bloqPeriCervical: bloqPeriCervical,
+                                        libreOpioides: libreOpioides,
+            });
+        }
+        else{
+            menuTrans = new MenuTrans({ pid, cxid,
+                                        // Datos del ventilador
+                                        datosVentilador: {
+                                            modosVentilacion: modosVentilacion,
+                                            peep: peep,
+                                            vt: vt,
+                                            frecResp: frecResp,
+                                            IE: IE,
+                                            PLimite: PLimite,
+                                            Hr: Hr,
+                                        },
+            });
+        }
+
+        await menuTrans.save();
+
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 export const updateMenuTrans = async (req: any, res: Response) => {
     try {
         const { id } = req.params;
@@ -125,11 +216,50 @@ export const updateMenuTrans = async (req: any, res: Response) => {
     }
 };
 
+export const updateNuevoMenuTrans = async (req: any, res: Response) => {
+    try {
+        const { id, cxid } = req.params;
+        const { // Datos del ventilador
+                modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr
+             } = req.body;
+
+        const menuTrans = await MenuTrans.findOneAndUpdate( { pid: id, cxid: cxid },
+                                                            { $push: {// Datos del ventilador
+                                                                      datosVentilador: {
+                                                                        modosVentilacion: modosVentilacion,
+                                                                        peep: peep,
+                                                                        vt: vt,
+                                                                        frecResp: frecResp,
+                                                                        IE: IE,
+                                                                        PLimite: PLimite,
+                                                                        Hr: Hr,
+                                                                      },
+                                                                     }
+                                                            });
+
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 export const getModosVent = async (req: any, res: Response) => {
     try {
         const{ pid } = req.params;
         
         const listaModosVent = await MenuTrans.find({pid: pid});
+
+        return res.json({ listaModosVent });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const getNuevoModosVent = async (req: any, res: Response) => {
+    try {
+        const{ pid, cxid } = req.params;
+        
+        const listaModosVent = await MenuTrans.find({pid: pid, cxid: cxid});
 
         return res.json({ listaModosVent });
     } catch (error) {
@@ -271,6 +401,74 @@ export const UpdateBalanceH = async (req: any, res: Response) => {
     }
 };
 
+export const UpdateNuevoBalanceH = async (req: any, res: Response) => {
+    try {
+        const { id, cxid } = req.params;
+        const { /* Balance Total */
+                balanceTotal,
+                // Ingresos
+                solHartman, solFisio, glucosados, gelatinas,
+                almidones, albuminas, paqGlobular, plasmas, 
+                plaquetas, crioprecipitados, factor_VII, factor_VIII,
+                otrosIngresos,
+                // Egresos
+                liqAscitis, sangradoAprox, uresis, expoQX,
+                reqBasales, ayuno, otrosEgresos,
+                /* Técnica Anestésica */                
+                local, sedación, gralBalanceada, TIVA, multimodal,
+                bloqMixto, bloqPeriLum, bloqPeriCaudal, BloqEspinal,
+                BloqPlexo, BloqTroncular, bloqPeriToracico, bloqPeriCervical,
+                libreOpioides,
+             } = req.body;
+
+        const menuTrans = await MenuTrans.findOneAndUpdate( { pid: id, cxid: cxid },
+                                                            { /* Balance Total */
+                                                              balanceTotal: balanceTotal,
+                                                              // Ingresos
+                                                              solHartman: solHartman,
+                                                              solFisio: solFisio,
+                                                              glucosados: glucosados,
+                                                              gelatinas: gelatinas,
+                                                              almidones: almidones,
+                                                              albuminas: albuminas,
+                                                              paqGlobular: paqGlobular,
+                                                              plasmas: plasmas,
+                                                              plaquetas: plaquetas,
+                                                              crioprecipitados: crioprecipitados,
+                                                              factor_VII: factor_VII,
+                                                              factor_VIII: factor_VIII,
+                                                              otrosIngresos: otrosIngresos,
+                                                              // Egresos
+                                                              liqAscitis: liqAscitis,
+                                                              sangradoAprox: sangradoAprox,
+                                                              uresis: uresis,
+                                                              expoQX: expoQX,
+                                                              reqBasales: reqBasales,
+                                                              ayuno: ayuno,
+                                                              otrosEgresos: otrosEgresos,
+                                                              /* Técnica Anestésica */
+                                                              local: local,
+                                                              sedación: sedación,
+                                                              gralBalanceada: gralBalanceada,
+                                                              TIVA: TIVA,
+                                                              multimodal: multimodal,
+                                                              bloqMixto: bloqMixto,
+                                                              bloqPeriLum: bloqPeriLum,
+                                                              bloqPeriCaudal: bloqPeriCaudal,
+                                                              BloqEspinal: BloqEspinal,
+                                                              BloqPlexo: BloqPlexo,
+                                                              BloqTroncular: BloqTroncular,
+                                                              bloqPeriToracico: bloqPeriToracico,
+                                                              bloqPeriCervical: bloqPeriCervical,
+                                                              libreOpioides: libreOpioides,
+                                                            });
+
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 /* Tiempos QX Guardado/Actualización */
 export const saveTiemposQX = async (req: any, res: Response) => {
     try {
@@ -310,6 +508,85 @@ export const saveTiemposQX = async (req: any, res: Response) => {
     }
 };
 
+export const saveNuevoTiemposQX = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid,
+                // Tiempos Qx
+                ingresoQX, inicioAn, inicioCx, finCx, finAn, egresoQx,
+              } = req.body;
+
+        var tiempo: UpdateResult | null = await MenuTrans.findOne({ pid: pid, cxid: cxid });
+        const tiempo2: any = tiempo;
+        
+        if (tiempo) {
+            tiempo = await MenuTrans.updateOne({ "tiemposQX._id": tiempo2?.tiemposQX[0]._id },
+                                               { $set : { "tiemposQX.$.ingresoQX": ingresoQX,
+                                                          "tiemposQX.$.inicioAn": inicioAn,
+                                                          "tiemposQX.$.inicioCx": inicioCx,
+                                                          "tiemposQX.$.finCx": finCx,
+                                                          "tiemposQX.$.finAn": finAn,
+                                                          "tiemposQX.$.egresoQx": egresoQx,
+                                                        }
+                                               });
+
+        } else {
+            const menuTrans  = new MenuTrans({ pid, cxid,
+                                                // Datos del ventilador
+                                                tiemposQX: {
+                                                    ingresoQX: ingresoQX,
+                                                },
+                                });
+
+            await menuTrans.save();
+        }
+
+        return res.json({ tiempo });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Guardado Datos MSV */
+export const saveDatosMSV = async (req: any, res: Response) => {
+    try {
+        const { pid } = req.params;
+        const { datosMSV } = req.body;                
+        const menuTrans = await MenuTrans.findOneAndUpdate(
+            { pid: pid },
+            { $push:{
+                    datosMSV: {
+                        FC: datosMSV[0], Pulso: datosMSV[1], PAS: datosMSV[2], PAD: datosMSV[3], PAM: datosMSV[4], SpO2: datosMSV[5], EtCO2: datosMSV[6], Temp1: datosMSV[7], 
+                        Temp2: datosMSV[8], PVC: datosMSV[9], PAS_IN: datosMSV[10], PAD_IN: datosMSV[11], PAM_IN: datosMSV[12], FiCO2: datosMSV[13], FR: datosMSV[14], 
+                        HoraGeneracion: datosMSV[15]
+                    }
+                }
+            });
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const saveNuevoDatosMSV = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid } = req.params;
+        const { datosMSV } = req.body;                
+        const menuTrans = await MenuTrans.findOneAndUpdate(
+            { pid: pid, cxid: cxid },
+            { $push:{
+                    datosMSV: {
+                        FC: datosMSV[0], Pulso: datosMSV[1], PAS: datosMSV[2], PAD: datosMSV[3], PAM: datosMSV[4], SpO2: datosMSV[5], EtCO2: datosMSV[6], Temp1: datosMSV[7], 
+                        Temp2: datosMSV[8], PVC: datosMSV[9], PAS_IN: datosMSV[10], PAD_IN: datosMSV[11], PAM_IN: datosMSV[12], FiCO2: datosMSV[13], FR: datosMSV[14], 
+                        HoraGeneracion: datosMSV[15]
+                    }
+                }
+            });
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 /* Guardado Medicamentos */
 export const saveMedicamentos = async (req: any, res: Response) => {
     try {
@@ -318,6 +595,26 @@ export const saveMedicamentos = async (req: any, res: Response) => {
                 tipoMed, medicamento, dosisMed, unidadMed, viaMed, horaInicioMed, horaFinalMed, observacionesMed
               } = req.body;        
         const menuTrans  = await new MenuTrans({ pid,
+                                            // Datos del medicamento
+                                            medicamentosCx: {
+                                                tipoMed: tipoMed, medicamento: medicamento, dosisMed: dosisMed, unidadMed: unidadMed, viaMed: viaMed, 
+                                                horaInicioMed: horaInicioMed, horaFinalMed: horaFinalMed, observacionesMed: observacionesMed
+                                            },
+                                        });
+        await menuTrans.save();        
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const saveNuevoMedicamentos = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid,
+                // Datos medicamentos
+                tipoMed, medicamento, dosisMed, unidadMed, viaMed, horaInicioMed, horaFinalMed, observacionesMed
+              } = req.body;        
+        const menuTrans  = await new MenuTrans({ pid, cxid,
                                             // Datos del medicamento
                                             medicamentosCx: {
                                                 tipoMed: tipoMed, medicamento: medicamento, dosisMed: dosisMed, unidadMed: unidadMed, viaMed: viaMed, 
@@ -341,9 +638,28 @@ export const updateMedicamentos = async (req: any, res: Response) => {
                     medicamentosCx: {
                         tipoMed: medicamentosCx[0], medicamento: medicamentosCx[1], dosisMed: medicamentosCx[2], unidadMed: medicamentosCx[3], 
                         viaMed: medicamentosCx[4], horaInicioMed: medicamentosCx[5], horaFinalMed: medicamentosCx[6], observacionesMed: medicamentosCx[7], 
-                    }
+                    }                                        
                 }
-            });        
+            });                
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const updateNuevoMedicamentos = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid } = req.params;
+        const { medicamentosCx } = req.body;                
+        const menuTrans = await MenuTrans.findOneAndUpdate(
+            { pid: pid, cxid: cxid },
+            { $push:{
+                    medicamentosCx: {
+                        tipoMed: medicamentosCx[0], medicamento: medicamentosCx[1], dosisMed: medicamentosCx[2], unidadMed: medicamentosCx[3], 
+                        viaMed: medicamentosCx[4], horaInicioMed: medicamentosCx[5], horaFinalMed: medicamentosCx[6], observacionesMed: medicamentosCx[7], 
+                    }                                        
+                }
+            });                
         return res.json({ menuTrans });
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
@@ -356,6 +672,18 @@ export const getMedicamentos = async (req: any, res: Response) => {
         const {pid} = req.params;
         
         const medicamento = await MenuTrans.find({pid:pid})
+           
+        return res.json({medicamento});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const getNuevoMedicamentos = async (req: any, res: Response) => {
+    try {
+        const {pid, cxid} = req.params;
+        
+        const medicamento = await MenuTrans.find({pid:pid, cxid:cxid})
            
         return res.json({medicamento});
     } catch (error) {
@@ -445,6 +773,25 @@ export const saveRelevos = async (req: any, res: Response) => {
     }
 };
 
+export const saveNuevoRelevos = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid,
+                // Datos relevos
+                horaRelevo, tipoRel, matriculaRel, anestesiologoRel, observacionesRel
+              } = req.body;        
+        const menuTrans  = await new MenuTrans({ pid, cxid,
+                                            // Datos del relevo
+                                            relevoCx: {
+                                                horaRelevo: horaRelevo, tipoRel: tipoRel, matriculaRel: matriculaRel, anestesiologoRel: anestesiologoRel, observacionesRel: observacionesRel
+                                            },
+                                        });
+        await menuTrans.save();        
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 export const updateRelevos = async (req: any, res: Response) => {
     try {
         const { pid } = req.params;
@@ -463,12 +810,42 @@ export const updateRelevos = async (req: any, res: Response) => {
     }
 };
 
+export const updateNuevoRelevos = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid } = req.params;
+        const { relevoCx } = req.body;                
+        const menuTrans = await MenuTrans.findOneAndUpdate(
+            { pid: pid, cxid: cxid },
+            { $push:{
+                relevoCx: {
+                        horaRelevo: relevoCx[0], tipoRel: relevoCx[1], matriculaRel: relevoCx[2], anestesiologoRel: relevoCx[3], observacionesRel: relevoCx[4]
+                    }
+                }
+            });        
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 /* Función para obtener los relevos */
 export const getRelevos = async (req: any, res: Response) => {
     try {
         const {pid} = req.params;
         
         const relevo = await MenuTrans.find({pid:pid})
+           
+        return res.json({relevo});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const getNuevoRelevos = async (req: any, res: Response) => {
+    try {
+        const {pid, cxid} = req.params;
+        
+        const relevo = await MenuTrans.find({pid:pid, cxid:cxid})
            
         return res.json({relevo});
     } catch (error) {
@@ -557,6 +934,25 @@ export const saveEventos = async (req: any, res: Response) => {
     }
 };
 
+export const saveNuevoEventos = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid,
+                // Datos relevos
+                horaEvento, tipoEve, detalleEvento
+              } = req.body;        
+        const menuTrans  = await new MenuTrans({ pid, cxid,
+                                            // Datos del relevo
+                                            evCriticoCx: {
+                                                horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento
+                                            },
+                                        });
+        await menuTrans.save();        
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 export const updateEventos = async (req: any, res: Response) => {
     try {
         const { pid } = req.params;
@@ -575,12 +971,42 @@ export const updateEventos = async (req: any, res: Response) => {
     }
 };
 
+export const updateNuevoEventos = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid } = req.params;
+        const { evCriticoCx } = req.body;                
+        const menuTrans = await MenuTrans.findOneAndUpdate(
+            { pid: pid, cxid: cxid },
+            { $push:{
+                evCriticoCx: {
+                        horaEvento: evCriticoCx[0], tipoEve: evCriticoCx[1], detalleEvento: evCriticoCx[2]
+                    }
+                }
+            });        
+        return res.json({ menuTrans });
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 /* Función para obtener los Eventos */
 export const getEventos = async (req: any, res: Response) => {
     try {
         const {pid} = req.params;
         
         const evento = await MenuTrans.find({pid:pid})
+           
+        return res.json({evento});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const getNuevoEventos = async (req: any, res: Response) => {
+    try {
+        const {pid, cxid} = req.params;
+        
+        const evento = await MenuTrans.find({pid:pid, cxid:cxid})
            
         return res.json({evento});
     } catch (error) {

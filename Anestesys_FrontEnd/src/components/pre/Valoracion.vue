@@ -70,7 +70,7 @@
                                 <h5 class="col-md-12 fw-bold"> Personales patológicos </h5>
                                 <!-- Alergias -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Alergias </label>
+                                    <label  class="form-label fw-bold"> Alergias </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -81,7 +81,7 @@
 
                                 <!-- Quirúrgicos -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Quirúrgicos </label>
+                                    <label  class="form-label fw-bold"> Quirúrgicos </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -92,7 +92,7 @@
                                 
                                 <!-- Endocrinológicos -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Endocrinológicos </label>
+                                    <label  class="form-label fw-bold"> Endocrinológicos </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -103,7 +103,7 @@
 
                                 <!-- Urológicos -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Urológicos </label>
+                                    <label  class="form-label fw-bold"> Urológicos </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -114,7 +114,7 @@
 
                                 <!-- Traumáticos -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Traumáticos </label>
+                                    <label  class="form-label fw-bold"> Traumáticos </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -125,7 +125,7 @@
 
                                 <!-- Ortopédicos -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Ortopédicos </label>
+                                    <label  class="form-label fw-bold"> Ortopédicos </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -136,7 +136,7 @@
 
                                 <!-- Transfusiones previas -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Transfusiones previas </label>
+                                    <label  class="form-label fw-bold"> Transfusiones previas </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -147,7 +147,7 @@
 
                                 <!-- Complicaciones anestésicas previas -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Complicaciones anestésicas previas </label>
+                                    <label  class="form-label fw-bold"> Complicaciones anestésicas previas </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -158,7 +158,7 @@
                                 
                                 <!-- Estado psiquico -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Estado psíquico </label>
+                                    <label  class="form-label fw-bold"> Estado psíquico </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -169,7 +169,7 @@
                                 
                                 <!-- Medicación actual -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Medicación actual </label>
+                                    <label  class="form-label fw-bold"> Medicación actual </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control"
                                               rows="2"
@@ -189,28 +189,13 @@
                                     <div class="col row">
                                         <div class="col-md-8">
                                             <h5 class="fw-bold"> No patológicos </h5>
-                                        </div>
-                                        <!-- Botón Guardar/Actualizar -->
-                                        <div class="col-md-4">
-                                            <template v-if="btnActualizarValoracion === false">
-                                                <button data-bs-toggle="tab" 
-                                                    type="submit"
-                                                    class="btn btn-guardar-datos fw-bold"                                            
-                                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
-                                            </template>
-                                            <template v-else>
-                                                <button data-bs-toggle="tab" 
-                                                    type="submit"
-                                                    class="btn btn-guardar-datos fw-bold"
-                                                    @click="preIdStore.updatePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
-                                            </template>                                                         
-                                        </div>
+                                        </div>                                        
                                     </div>
                                 </div>
                                                                 
                                 <!-- Horas de ayuno (hrs) -->
                                 <div class="col-md-6">
-                                    <label for="" class="form-label fw-bold"> Horas de ayuno (hrs) </label>
+                                    <label  class="form-label fw-bold"> Horas de ayuno (hrs) </label>
                                     <input type="text" @keyup.capture="enviarDatosValoracion"
                                            class="form-control margen-input"
                                            id=""
@@ -221,7 +206,7 @@
 
                                 <!-- Tabaquismo -->                                
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold margen-tabaquismo"> Tabaquismo </label>
+                                    <label  class="form-label fw-bold margen-tabaquismo"> Tabaquismo </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -232,7 +217,7 @@
 
                                 <!-- Etilismo -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Etilismo </label>
+                                    <label  class="form-label fw-bold"> Etilismo </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -243,7 +228,7 @@
 
                                 <!-- Adicciones -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Adicciones </label>
+                                    <label  class="form-label fw-bold"> Adicciones </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -254,7 +239,7 @@
                                 
                                 <!-- Inmunizaciones -->
                                 <div class="col-md-12">
-                                    <label for="" class="form-label fw-bold"> Inmunizaciones </label>
+                                    <label  class="form-label fw-bold"> Inmunizaciones </label>
                                     <textarea type="text" @keyup.capture="enviarDatosValoracion"
                                               class="form-control margen-input"
                                               rows="2"
@@ -285,30 +270,13 @@
                     <form @submit.prevent="" class="row g-3">
                         <h5 class="fw-bold">EXPLORACIÓN FÍSICA</h5>
                         
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             <h5 class="fw-bold">Signos Vitales</h5>
-                        </div>
-                        
-                        <!-- Botón Guardar/Actualizar -->
-                        <div class="col-md-2">
-                            <template v-if="btnActualizarValoracion === false">
-                                <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"                                            
-                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
-                            </template>
-
-                            <template v-else>
-                                <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"
-                                    @click="preIdStore.updatePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
-                            </template>                                                                                    
-                        </div>
+                        </div>                                            
 
                         <!-- Edad -->
                         <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">Edad</label>
+                            <label  class="form-label fw-bold">Edad</label>
                             <input type="text" readonly
                                    class="form-control"
                                    v-model="preIdStore.edadPaciente"
@@ -318,7 +286,7 @@
 
                         <!-- Temperatura -->
                         <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">Temperatura</label>
+                            <label  class="form-label fw-bold">Temperatura</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -331,7 +299,7 @@
                         
                         <!-- Frecuencia Cardíaca (x min) -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Frecuencia Cardíaca (x min)</label>
+                            <label  class="form-label fw-bold">Frecuencia Cardíaca (x min)</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -343,7 +311,7 @@
 
                         <!-- Frecuencia Respiratoria (x min) -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Frecuencia Respiratoria (x min)</label>
+                            <label  class="form-label fw-bold">Frecuencia Respiratoria (x min)</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -355,7 +323,7 @@
 
                         <!-- Peso (kg) -->
                         <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">Peso (kg)</label>
+                            <label  class="form-label fw-bold">Peso (kg)</label>
                             <input type="text"
                                    class="form-control"
                                    id=""
@@ -367,7 +335,7 @@
 
                         <!-- Talla (m) -->
                         <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">Talla (m)</label>
+                            <label  class="form-label fw-bold">Talla (m)</label>
                             <input type="text"
                                    class="form-control"                                   
                                    v-model="infoValoracion.sigVit_Talla"
@@ -378,7 +346,7 @@
                        
                         <!-- IMC -->
                         <div class="col-md-2">
-                            <label for="" class="form-label fw-bold">IMC
+                            <label  class="form-label fw-bold">IMC
                                 <span data-title="IMC=Peso(Kg)/Estatura&sup2(mts)">
                                     <font-awesome-icon icon="fa-solid fa-circle-info" />
                                 </span>
@@ -393,7 +361,7 @@
 
                         <!-- Tensión Arterial (mmHg) -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Tensión Arterial (mmHg)</label>
+                            <label  class="form-label fw-bold">Tensión Arterial (mmHg)</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -405,7 +373,7 @@
 
                         <!-- Saturación de Oxígeno (%) -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Saturación de Oxígeno (%)</label>
+                            <label  class="form-label fw-bold">Saturación de Oxígeno (%)</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -422,7 +390,7 @@
 
                         <!-- Cabeza -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Cabeza</label>                            
+                            <label  class="form-label fw-bold">Cabeza</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                       rows="2"
                                       v-model="infoValoracion.expFis_VASCabeza"
@@ -433,7 +401,7 @@
 
                         <!-- Cuello -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Cuello</label>                            
+                            <label  class="form-label fw-bold">Cuello</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                         rows="2"
                                         v-model="infoValoracion.expFis_VASCuello"
@@ -444,7 +412,7 @@
 
                         <!-- Respiratorio -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Respiratorio</label>                            
+                            <label  class="form-label fw-bold">Respiratorio</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                       rows="2"
                                       v-model="infoValoracion.expFis_VASRespiratorio"
@@ -455,7 +423,7 @@
 
                         <!-- Cardiovascular -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Cardiovascular</label>                            
+                            <label  class="form-label fw-bold">Cardiovascular</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                       rows="2"
                                       v-model="infoValoracion.expFis_VASCardioVasc"
@@ -466,7 +434,7 @@
 
                         <!-- Hipertensión arterial -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Hipertensión arterial</label>                            
+                            <label  class="form-label fw-bold">Hipertensión arterial</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                       rows="2"
                                       v-model="infoValoracion.expFis_VASHipertension"
@@ -477,7 +445,7 @@
 
                         <!-- Abdomen -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Abdomen</label>                            
+                            <label  class="form-label fw-bold">Abdomen</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                       rows="2"
                                       v-model="infoValoracion.expFis_VASAbdomen"
@@ -488,7 +456,7 @@
 
                         <!-- Genitourinario -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Genitourinario</label>                            
+                            <label  class="form-label fw-bold">Genitourinario</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                       rows="2"
                                       v-model="infoValoracion.expFis_VASGenUr"
@@ -499,7 +467,7 @@
 
                         <!-- Músculo esquelético -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Músculo esquelético</label>                            
+                            <label  class="form-label fw-bold">Músculo esquelético</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                       rows="2"
                                       v-model="infoValoracion.expFis_VASMuscEsq"
@@ -510,7 +478,7 @@
 
                         <!-- Neurológico -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Neurológico</label>                            
+                            <label  class="form-label fw-bold">Neurológico</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                       rows="2"
                                       v-model="infoValoracion.expFis_VASNeuro"
@@ -521,7 +489,7 @@
 
                         <!-- Piel y faneras -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Piel y faneras</label>                            
+                            <label  class="form-label fw-bold">Piel y faneras</label>                            
                             <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                       rows="2"
                                       v-model="infoValoracion.expFis_VASPielFaneras"
@@ -541,8 +509,8 @@
                         
                         <!-- Mallampati -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold"> Mallampati </label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold"> Mallampati </label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Mallampati"
                                     :class="infoValoracion.viaAerea_Mallampati != undefined && infoValoracion.viaAerea_Mallampati != '' ?
@@ -557,8 +525,8 @@
 
                         <!-- Patil-Aldreti -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold"> Patil-Aldreti </label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold"> Patil-Aldreti </label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_PatilAldreti"
                                     :class="infoValoracion.viaAerea_PatilAldreti != undefined && infoValoracion.viaAerea_PatilAldreti != '' ?
@@ -572,8 +540,8 @@
 
                         <!-- Apertura bucal -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold"> Apertura bucal </label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold"> Apertura bucal </label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_AperturaBucal"
                                     :class="infoValoracion.viaAerea_AperturaBucal != undefined && infoValoracion.viaAerea_AperturaBucal != '' ?
@@ -588,8 +556,8 @@
 
                         <!-- Distancia esternomentoniana -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold">Distancia esternomentoniana</label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold">Distancia esternomentoniana</label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Distancia"
                                     :class="infoValoracion.viaAerea_Distancia != undefined && infoValoracion.viaAerea_Distancia != '' ?
@@ -604,8 +572,8 @@
                         
                         <!-- Protusión Mandibular -->
                         <div class="col-md-10">
-                            <label for="inputState" class="form-label fw-bold"> Protusión Mandibular </label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold"> Protusión Mandibular </label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Protusion"
                                     :class="infoValoracion.viaAerea_Protusion != undefined && infoValoracion.viaAerea_Protusion != '' ?
@@ -619,8 +587,8 @@
 
                         <!-- IPID -->
                         <div class="col-md-10">
-                            <label for="inputState" class="form-label fw-bold"> IPID </label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold"> IPID </label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Ipid"
                                     :class="infoValoracion.viaAerea_Ipid != undefined && infoValoracion.viaAerea_Ipid != '' ?
@@ -636,8 +604,8 @@
 
                         <!-- Escala Glasgow -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold">Escala Glasgow</label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold">Escala Glasgow</label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Glasgow"
                                     :class="infoValoracion.viaAerea_Glasgow != undefined && infoValoracion.viaAerea_Glasgow != '' ?
@@ -663,8 +631,8 @@
 
                         <!-- Escala NYHA -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold"> Escala NYHA </label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold"> Escala NYHA </label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_NYHA"
                                     :class="infoValoracion.viaAerea_NYHA != undefined && infoValoracion.viaAerea_NYHA != '' ?
@@ -679,8 +647,8 @@
 
                         <!-- Escala de Goldman -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold"> Escala de Goldman </label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold"> Escala de Goldman </label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Goldman"
                                     :class="infoValoracion.viaAerea_Goldman != undefined && infoValoracion.viaAerea_Goldman != '' ?
@@ -695,8 +663,8 @@
 
                         <!-- Riesgo de Trombosis -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold"> Riesgo de Trombosis </label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold"> Riesgo de Trombosis </label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_RiesgoTrombosis"
                                     :class="infoValoracion.viaAerea_RiesgoTrombosis != undefined && infoValoracion.viaAerea_RiesgoTrombosis != '' ?
@@ -711,8 +679,8 @@
 
                         <!-- Clasificación ASA -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold"> Clasificación ASA </label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold"> Clasificación ASA </label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_ClasificacionASA"
                                     :class="infoValoracion.viaAerea_ClasificacionASA != undefined && infoValoracion.viaAerea_ClasificacionASA != '' ?
@@ -729,8 +697,8 @@
 
                         <!-- Tipo de Cirugía -->
                         <div class="col-md-3">
-                            <label for="inputState" class="form-label fw-bold">Tipo de Cirugía</label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold">Tipo de Cirugía</label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_TipoCirugia"
                                     :class="infoValoracion.viaAerea_TipoCirugia != undefined && infoValoracion.viaAerea_TipoCirugia != '' ?
@@ -743,8 +711,8 @@
 
                         <!-- Riesgo Anéstesico Quirúrgico -->
                         <div class="col-md-4">
-                            <label for="inputState" class="form-label fw-bold">Riesgo Anéstesico Quirúrgico</label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold">Riesgo Anéstesico Quirúrgico</label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_RiesgoAnestesico"
                                     :class="infoValoracion.viaAerea_RiesgoAnestesico != undefined && infoValoracion.viaAerea_RiesgoAnestesico != '' ?
@@ -755,24 +723,7 @@
                                 <option>Riesgo Bajo</option>
                             </select>
                         </div>
-
-                        <div class="col-md-10"></div>
-                        <!-- Botón Guardar/Actualizar -->
-                        <div class="col-md-2 btn-abajo">
-                            <template v-if="btnActualizarValoracion === false">
-                                <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"                                            
-                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
-                            </template>
-
-                            <template v-else>
-                                <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"
-                                    @click="preIdStore.updatePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
-                            </template>                                                                                    
-                        </div>
+                        
                     </form>
                 </div>
             </div>
@@ -787,8 +738,8 @@
                             <div class="row g-3">
                                 <!-- Estudio -->
                                 <div class="col-md-5">
-                                    <label for="inputState" class="form-label fw-bold">Estudio</label>
-                                    <select id="inputState" @change="enviarDatosValoracion"
+                                    <label  class="form-label fw-bold">Estudio</label>
+                                    <select  @change="enviarDatosValoracion"
                                             class="form-select"
                                             v-model="infoValoracion.estudios_Estudio"
                                             :class="infoValoracion.estudios_Estudio != undefined && infoValoracion.estudios_Estudio ?
@@ -835,7 +786,7 @@
                                 
                                 <!-- Especificaciones -->
                                 <div class="col-md-10">
-                                    <label for="" class="form-label fw-bold">Específicar</label>
+                                    <label  class="form-label fw-bold">Específicar</label>
                                     <textarea class="form-control" @keyup.capture="enviarDatosValoracion"
                                             id=""
                                             rows="3"
@@ -913,32 +864,14 @@
                 <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">
                     <form @submit.prevent="" class="row g-3">
                         <!-- Exámenes / Perfil Bioquímico -->                        
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             <h5 class="fw-bold">PERFIL BIOQUÍMICO</h5>
-                        </div>
-
-                        <!-- Botón Guardar/Actualizar -->
-                        <div class="col-md-2 btn-abajo">
-                            <template v-if="btnActualizarValoracion === false">
-                                <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"                                            
-                                    @click="cambiarUpdateValoracion"> GUARDAR </button> 
-                            </template>
-
-                            <template v-else>
-                                <button data-bs-toggle="tab" 
-                                    type="submit"
-                                    class="btn btn-guardar-datos fw-bold"
-                                    @click="preIdStore.updatePreAntecedentes(infoValoracion, preIdStore.pacienteID._id)"> ACTUALIZAR </button>
-                            </template>                                                         
-                        </div>
-
+                        </div>                        
 
                         <!-- Fecha de realización -->
                         <!-- Revisar que funcione el class -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Fecha de realización</label>
+                            <label  class="form-label fw-bold">Fecha de realización</label>
                             <input type="date" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -950,8 +883,8 @@
 
                         <!-- Grupo sanguíneo -->
                         <div class="col-md-6">
-                            <label for="inputState" class="form-label fw-bold">Grupo sanguíneo</label>
-                            <select id="inputState" @change="enviarDatosValoracion"
+                            <label  class="form-label fw-bold">Grupo sanguíneo</label>
+                            <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.perfilBioQ_GrupoSanguineo"
                                     :class="infoValoracion.perfilBioQ_GrupoSanguineo != undefined && infoValoracion.perfilBioQ_GrupoSanguineo !='' ?
@@ -970,7 +903,7 @@
 
                         <!-- Hemoglobina -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Hemoglobina</label>
+                            <label  class="form-label fw-bold">Hemoglobina</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -981,7 +914,7 @@
 
                         <!-- Hematocrito -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Hematocrito</label>
+                            <label  class="form-label fw-bold">Hematocrito</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -992,7 +925,7 @@
 
                         <!-- Plaquetas -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Plaquetas</label>
+                            <label  class="form-label fw-bold">Plaquetas</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1003,7 +936,7 @@
 
                         <!-- Leutocitos -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Leutocitos</label>
+                            <label  class="form-label fw-bold">Leutocitos</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1014,7 +947,7 @@
 
                         <!-- TP -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">TP</label>
+                            <label  class="form-label fw-bold">TP</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1025,7 +958,7 @@
 
                         <!-- TT -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">TT</label>
+                            <label  class="form-label fw-bold">TT</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1036,7 +969,7 @@
 
                         <!-- TPT -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">TPT</label>
+                            <label  class="form-label fw-bold">TPT</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1047,7 +980,7 @@
 
                         <!-- INR -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">INR</label>
+                            <label  class="form-label fw-bold">INR</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1058,7 +991,7 @@
 
                         <!-- Glucosa -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Glucosa</label>
+                            <label  class="form-label fw-bold">Glucosa</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1069,7 +1002,7 @@
 
                         <!-- Creatinina -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Creatinina</label>
+                            <label  class="form-label fw-bold">Creatinina</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id="" v-model="infoValoracion.perfilBioQ_Creatinina"
@@ -1079,7 +1012,7 @@
 
                         <!-- Urea -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Urea</label>
+                            <label  class="form-label fw-bold">Urea</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1090,7 +1023,7 @@
 
                         <!-- Sodio -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Sodio</label>
+                            <label  class="form-label fw-bold">Sodio</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1101,7 +1034,7 @@
 
                         <!-- Potasio -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Potasio</label>
+                            <label  class="form-label fw-bold">Potasio</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1112,7 +1045,7 @@
 
                         <!-- Cloro -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Cloro</label>
+                            <label  class="form-label fw-bold">Cloro</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1123,7 +1056,7 @@
 
                         <!-- Calcio -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Calcio</label>
+                            <label  class="form-label fw-bold">Calcio</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1134,7 +1067,7 @@
 
                         <!-- Magnesio -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Magnesio</label>
+                            <label  class="form-label fw-bold">Magnesio</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1145,7 +1078,7 @@
 
                         <!-- Bilirrubina directa -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Bilirrubina directa</label>
+                            <label  class="form-label fw-bold">Bilirrubina directa</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1156,7 +1089,7 @@
 
                         <!-- Bilirrubina indirecta -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Bilirrubina indirecta</label>
+                            <label  class="form-label fw-bold">Bilirrubina indirecta</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1167,7 +1100,7 @@
 
                         <!-- Bilirrubina Total -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Bilirrubina Total</label>
+                            <label  class="form-label fw-bold">Bilirrubina Total</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1178,7 +1111,7 @@
 
                         <!-- Lipasa -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Lipasa</label>
+                            <label  class="form-label fw-bold">Lipasa</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1189,7 +1122,7 @@
                         
                         <!-- Amilasa -->
                         <div class="col-md-3">
-                            <label for="" class="form-label fw-bold">Amilasa</label>
+                            <label  class="form-label fw-bold">Amilasa</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1200,7 +1133,7 @@
 
                         <!-- Otros -->
                         <div class="col-md-9">
-                            <label for="" class="form-label fw-bold">Otros</label>
+                            <label  class="form-label fw-bold">Otros</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1218,10 +1151,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { usePreIdStore } from "@/stores/preId-store";
+import { usePostAnestStore } from "@/stores/postAnest-store";
+import { useTransAnestStore } from "@/stores/transAnest-store";
 import type { regValoracion } from "@/interfaces/regPreAnest";
 import swal from "sweetalert2";
 
 const preIdStore = usePreIdStore();
+const postStore = usePostAnestStore();
+const transStore = useTransAnestStore();
 
 export default defineComponent({
 
@@ -1230,6 +1167,9 @@ export default defineComponent({
             IMC:"",
             infoValoracion: {} as regValoracion,
             preIdStore,
+            postStore,
+            transStore,
+
             btnActualizarValoracion:false,
             
             btnAddEstudios:true,
@@ -1238,11 +1178,95 @@ export default defineComponent({
         }  
     },
 
-    mounted() {
-        preIdStore.getEstudiosList();
-    },
-
     methods: {
+        async vaciarInputsValoracion(){
+            this.infoValoracion.antPersPat_Alergias = ""
+            this.infoValoracion.antPersPat_Quirurgicos = ""
+            this.infoValoracion.antPersPat_Endocrinologicos = ""
+            this.infoValoracion.antPersPat_Urologicos = ""
+            this.infoValoracion.antPersPat_Traumaticos = ""
+            this.infoValoracion.antPersPat_Ortopedicos = ""
+            this.infoValoracion.antPersPat_Transfusiones = ""
+            this.infoValoracion.antPersPat_CompAnestPrev = ""
+            this.infoValoracion.antPersPat_EstadoPsiq = ""
+            this.infoValoracion.antPersPat_MedActual = ""
+            this.infoValoracion.antPersNoPat_HrsAyuno = ""
+            this.infoValoracion.antPersNoPat_Tabaquismo = ""
+            this.infoValoracion.antPersNoPat_Etilismo = ""
+            this.infoValoracion.antPersNoPat_Adicciones = ""
+            this.infoValoracion.antPersNoPat_Inmunizaciones = ""
+            this.infoValoracion.antPersNoPat_AntImportQx = ""
+            this.infoValoracion.sigVit_Edad = ""
+            this.infoValoracion.sigVit_Temperatura = ""
+            this.infoValoracion.sigVit_FrecuCardiaca = ""
+            this.infoValoracion.sigVit_FrecuRespiratoria = ""
+            this.infoValoracion.sigVit_Peso = null
+            this.infoValoracion.sigVit_Talla = null
+            this.infoValoracion.sigVit_IMC = null
+            this.infoValoracion.sigVit_TensionArterial = ""
+            this.infoValoracion.sigVit_SaturacionOxigeno = ""
+            this.infoValoracion.viaAerea_Mallampati = ""
+            this.infoValoracion.viaAerea_PatilAldreti = ""
+            this.infoValoracion.viaAerea_AperturaBucal = ""
+            this.infoValoracion.viaAerea_Distancia = ""
+            this.infoValoracion.viaAerea_Protusion = ""
+            this.infoValoracion.viaAerea_Ipid = ""
+            this.infoValoracion.viaAerea_Glasgow = ""
+            this.infoValoracion.viaAerea_NYHA = ""
+            this.infoValoracion.viaAerea_Goldman = ""
+            this.infoValoracion.viaAerea_RiesgoTrombosis = ""
+            this.infoValoracion.viaAerea_ClasificacionASA = ""
+            this.infoValoracion.viaAerea_TipoCirugia = ""
+            this.infoValoracion.viaAerea_RiesgoAnestesico = ""
+            this.infoValoracion.estudio_Id = ""
+            this.infoValoracion.estudios_Estudio = ""
+            this.infoValoracion.estudio_Especificaciones = ""
+            this.infoValoracion.perfilBioQ_FechaRealizacion = ""
+            this.infoValoracion.perfilBioQ_GrupoSanguineo = ""
+            this.infoValoracion.perfilBioQ_Hemoglobina = ""
+            this.infoValoracion.perfilBioQ_Hematocrito = ""
+            this.infoValoracion.perfilBioQ_Plaquetas = ""
+            this.infoValoracion.perfilBioQ_Leutocitos = ""
+            this.infoValoracion.perfilBioQ_TP = ""
+            this.infoValoracion.perfilBioQ_TT = ""
+            this.infoValoracion.perfilBioQ_TPT = ""
+            this.infoValoracion.perfilBioQ_INR = ""
+            this.infoValoracion.perfilBioQ_Glucosa = ""
+            this.infoValoracion.perfilBioQ_Creatinina = ""
+            this.infoValoracion.perfilBioQ_Urea = ""
+            this.infoValoracion.perfilBioQ_Sodio = ""
+            this.infoValoracion.perfilBioQ_Potasio = ""
+            this.infoValoracion.perfilBioQ_Cloro = ""
+            this.infoValoracion.perfilBioQ_Calcio = ""
+            this.infoValoracion.perfilBioQ_Magnesio = ""
+            this.infoValoracion.perfilBioQ_BilirrubinaDirecta = ""
+            this.infoValoracion.perfilBioQ_BilirrubinaIndirecta = ""
+            this.infoValoracion.perfilBioQ_BilirrubinaTotal = ""
+            this.infoValoracion.perfilBioQ_Lipasa = ""
+            this.infoValoracion.perfilBioQ_Amilasa = ""
+            this.infoValoracion.perfilBioQ_Otros = ""
+            this.infoValoracion.expFis_VASCabeza = ""
+            this.infoValoracion.expFis_VASCuello = ""
+            this.infoValoracion.expFis_VASRespiratorio = ""
+            this.infoValoracion.expFis_VASCardioVasc = ""
+            this.infoValoracion.expFis_VASHipertension = ""
+            this.infoValoracion.expFis_VASAbdomen = ""
+            this.infoValoracion.expFis_VASGenUr = ""
+            this.infoValoracion.expFis_VASMuscEsq = ""
+            this.infoValoracion.expFis_VASNeuro = ""
+            this.infoValoracion.expFis_VASPielFaneras = ""
+
+            preIdStore.estudios = null
+
+            this.enviarDatosValoracion()
+        },
+
+        async regresarBotones(){
+            this.btnAddEstudios=true
+            this.btnUpdateEstudios=false
+            this.btnActualizaEstudio=false
+        },
+
         calcularIMC() {
 
             if(this.infoValoracion.sigVit_Peso && this.infoValoracion.sigVit_Talla){
@@ -1258,10 +1282,32 @@ export default defineComponent({
             }
         },
 
-        cambiarUpdateValoracion() {
-            this.btnActualizarValoracion=true
+        async guardarDatosValoracion(){
+            if(preIdStore.nuevoRegistroPaciente == false){
+                if(preIdStore.actualizarRegValoracion == false ){
+                    // Guardar datos
+                    preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
+                    preIdStore.actualizarRegValoracion = true
+                    this.btnActualizarValoracion = true
+                }else if(preIdStore.actualizarRegValoracion == true){
+                    // Actualizar datos
+                    preIdStore.updatePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
+                }
 
-            preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
+            }else if(preIdStore.nuevoRegistroPaciente == true){
+                if(preIdStore.actualizarRegValoracion == false ){
+                    // Guardar nuevos datos
+                    preIdStore.saveNuevoPreAntecedentes(this.infoValoracion, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                    preIdStore.actualizarRegValoracion = true
+                    this.btnActualizarValoracion = true
+                    postStore.cirugiaID = preIdStore.cirugiaID
+                    transStore.cirugiaID = preIdStore.cirugiaID
+                }else if(preIdStore.actualizarRegValoracion == true){
+                    // Actualizar nuevos datos
+                    preIdStore.updateNuevoPreAntecedentes(this.infoValoracion, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
+                }
+
+            }
         },
 
         async listarEstudios() {
@@ -1269,7 +1315,7 @@ export default defineComponent({
         },
 
         async guardarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
-            if(this.btnActualizarValoracion){
+            if(this.btnActualizarValoracion){            
                 await preIdStore.updatePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
             }
             else{

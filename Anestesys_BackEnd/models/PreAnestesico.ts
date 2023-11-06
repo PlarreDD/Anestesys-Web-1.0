@@ -47,7 +47,7 @@ const PreIdPacienteCxSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'PreIdPacientes',
         required: true,
-    },
+    },    
 
     /* Información de la cirugía del paciente */
     numEpisodio: { type: String, },
@@ -81,6 +81,12 @@ const PreValoracionSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'PreIdPacientes',
         required: true,
+    },
+
+    cxid:{
+        type: Schema.Types.ObjectId,
+        ref: 'PreIdPacientesCx',
+        required: false
     },
 
     /* Antecedentes */
@@ -189,6 +195,12 @@ const PrePlanSchema = new Schema({
         ref: 'PreIdPacientes',
         required: true,
     },
+
+    cxid:{
+        type: Schema.Types.ObjectId,
+        ref: 'PreIdPacientesCx',
+        required: false
+    },
     
     /* Posicion y Cuidados */
     pos_HorasAyuno: { type: String, },
@@ -271,6 +283,12 @@ const PreNotaSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'PreIdPacientes',
         required: true,
+    },
+
+    cxid:{
+        type: Schema.Types.ObjectId,
+        ref: 'PreIdPacientesCx',
+        required: false
     },
 
     /* Información de la nota pre anestésica */

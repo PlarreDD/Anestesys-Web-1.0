@@ -41,7 +41,7 @@
       </li>
     </ul>
 
-    <div class="tab-content col-md-12" id="">
+    <div class="tab-content col-md-12" id="" @mouseover="vaciarInputsRecuperacion">
       <!-- Nota de Evaluación de UCPA -->
       <div class="tab-pane fade show active" id="notaEvaluacion">
         <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">
@@ -64,37 +64,6 @@
               ></textarea>
             </div>
 
-            <div class="col-md-10"></div>
-
-            <!-- Botón Guardar/Actualizar -->
-
-            <div class="col-md-2 alinear-btn">
-              <template v-if="btnActualizarRecuperacion === false">
-                <button
-                  data-bs-toggle="tab"
-                  type="submit"
-                  class="btn btn-guardar-info fw-bold"
-                  @click="cambiarUpdateRecup"
-                >
-                  GUARDAR
-                </button>
-              </template>
-              <template v-else>
-                <button
-                  data-bs-toggle="tab"
-                  type="submit"
-                  class="btn btn-guardar-info fw-bold"
-                  @click="
-                    postAnestStore.updateRecupera(
-                      infoRec,
-                      preIdStore.pacienteID._id
-                    )
-                  "
-                >
-                  ACTUALIZAR
-                </button>
-              </template>
-            </div>
           </form>
         </div>
       </div>
@@ -534,7 +503,7 @@
                 <td class="col-2 color-texto">Aldrete:</td>
                 <th>
                   <select
-                    id="inputState"
+                    
                     v-model="infoRec.aldreteRec_AldreteIn"
                     @click.capture="obtenerAldrete"
                     class="form-select"
@@ -561,7 +530,7 @@
 
                 <th>
                   <select
-                    id="inputState"
+                    
                     v-model="infoRec.aldreteRec_Aldrete15"
                     @click.capture="obtenerAldrete"
                     class="form-select"
@@ -588,7 +557,7 @@
 
                 <th>
                   <select
-                    id="inputState"
+                    
                     v-model="infoRec.aldreteRec_Aldrete30"
                     @click.capture="obtenerAldrete"
                     class="form-select"
@@ -615,7 +584,7 @@
 
                 <th>
                   <select
-                    id="inputState"
+                    
                     v-model="infoRec.aldreteRec_Aldrete45"
                     @click.capture="obtenerAldrete"
                     class="form-select"
@@ -642,7 +611,7 @@
 
                 <th>
                   <select
-                    id="inputState"
+                    
                     v-model="infoRec.aldreteRec_Aldrete60"
                     @click.capture="obtenerAldrete"
                     class="form-select"
@@ -669,7 +638,7 @@
 
                 <th>
                   <select
-                    id="inputState"
+                    
                     v-model="infoRec.aldreteRec_Aldrete90"
                     @click.capture="obtenerAldrete"
                     class="form-select"
@@ -696,7 +665,7 @@
 
                 <th>
                   <select
-                    id="inputState"
+                    
                     v-model="infoRec.aldreteRec_Aldrete120"
                     @click.capture="obtenerAldrete"
                     class="form-select"
@@ -725,7 +694,7 @@
               <!-- Bromage -->
               <tr class="espacio">
                 <td class="col-2 color-texto">
-                  <label for="" class="form-label color-td">
+                  <label  class="form-label color-td">
                     <span
                       data-bs-toggle="modal"
                       data-bs-target="#bromage-modal"
@@ -737,7 +706,7 @@
                 </td>
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_BromageIn"
                     class="form-select"
                     :class="
@@ -757,7 +726,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Bromage15"
                     class="form-select"
                     :class="
@@ -777,7 +746,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Bromage30"
                     class="form-select"
                     :class="
@@ -797,7 +766,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Bromage45"
                     class="form-select"
                     :class="
@@ -817,7 +786,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Bromage60"
                     class="form-select"
                     :class="
@@ -837,7 +806,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Bromage90"
                     class="form-select"
                     :class="
@@ -857,7 +826,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Bromage120"
                     class="form-select"
                     :class="
@@ -881,7 +850,7 @@
                 <td class="col-2 color-texto">Nauseas/Vomito:</td>
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_NauseasIn"
                     class="form-select"
                     :class="
@@ -899,7 +868,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Nauseas15"
                     class="form-select"
                     :class="
@@ -917,7 +886,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Nauseas30"
                     class="form-select"
                     :class="
@@ -935,7 +904,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Nauseas45"
                     class="form-select"
                     :class="
@@ -953,7 +922,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Nauseas60"
                     class="form-select"
                     :class="
@@ -971,7 +940,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Nauseas90"
                     class="form-select"
                     :class="
@@ -989,7 +958,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_Nauseas120"
                     class="form-select"
                     :class="
@@ -1009,7 +978,7 @@
               <!-- Escala de EVA Dolor -->
               <tr class="espacio">
                 <td class="col-2 color-texto">
-                  <label for="" class="form-label color-td">
+                  <label  class="form-label color-td">
                     <span
                       data-bs-toggle="modal"
                       data-bs-target="#escala-EVA-modal"
@@ -1021,7 +990,7 @@
                 </td>
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_escEVADolIn"
                     class="form-select"
                     :class="
@@ -1047,7 +1016,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_escEVADol15"
                     class="form-select"
                     :class="
@@ -1073,7 +1042,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_escEVADol30"
                     class="form-select"
                     :class="
@@ -1099,7 +1068,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_escEVADol45"
                     class="form-select"
                     :class="
@@ -1125,7 +1094,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_escEVADol60"
                     class="form-select"
                     :class="
@@ -1151,7 +1120,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_escEVADol90"
                     class="form-select"
                     :class="
@@ -1177,7 +1146,7 @@
 
                 <th>
                   <select
-                    id="inputState" @change="enviarDatosRecuperacion"
+                     @change="enviarDatosRecuperacion"
                     v-model="infoRec.aldreteRec_escEVADol120"
                     class="form-select"
                     :class="
@@ -1202,37 +1171,6 @@
                 </th>
               </tr>
             </table>
-
-            <div class="col-md-10"></div>
-
-            <!-- Botón Guardar/Actualizar -->
-            <div class="col-md-2 alinear-btn">
-              <template v-if="btnActualizarRecuperacion === false">
-                <button
-                  data-bs-toggle="tab"
-                  type="submit"
-                  class="btn btn-guardar-info fw-bold"
-                  @click="cambiarUpdateRecup"
-                >
-                  GUARDAR
-                </button>
-              </template>
-              <template v-else>
-                <button
-                  data-bs-toggle="tab"
-                  type="submit"
-                  class="btn btn-guardar-info fw-bold"
-                  @click="
-                    postAnestStore.updateRecupera(
-                      infoRec,
-                      preIdStore.pacienteID._id
-                    )
-                  "
-                >
-                  ACTUALIZAR
-                </button>
-              </template>
-            </div>
           </form>
         </div>
       </div>
@@ -1245,11 +1183,11 @@
             <h5 class="fw-bold">ALTA DE RECUPERACIÓN</h5>
             <!-- Criterio de Aldrete -->
             <div class="col-md-3">
-              <label for="" class="form-label fw-bold">Criterio de Aldrete</label>
+              <label  class="form-label fw-bold">Criterio de Aldrete</label>
             </div>
 
             <div class="col-md-1 text-center">
-              <label for="" class="form-label fw-bold">0 min</label>
+              <label  class="form-label fw-bold">0 min</label>
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_0min"
@@ -1259,7 +1197,7 @@
             </div>
 
             <div class="col-md-1 text-center">
-              <label for="" class="form-label fw-bold">15 min</label>
+              <label  class="form-label fw-bold">15 min</label>
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_15min"
@@ -1268,7 +1206,7 @@
             </div>
 
             <div class="col-md-1 text-center">
-              <label for="" class="form-label fw-bold">30 min</label>
+              <label  class="form-label fw-bold">30 min</label>
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_30min"
@@ -1277,7 +1215,7 @@
             </div>
 
             <div class="col-md-1 text-center">
-              <label for="" class="form-label fw-bold">45 min</label>
+              <label  class="form-label fw-bold">45 min</label>
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_45min"
@@ -1286,7 +1224,7 @@
             </div>
 
             <div class="col-md-1 text-center">
-              <label for="" class="form-label fw-bold">60 min</label>
+              <label  class="form-label fw-bold">60 min</label>
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_60min"
@@ -1295,7 +1233,7 @@
             </div>
 
             <div class="col-md-1 text-center">
-              <label for="" class="form-label fw-bold">90 min</label>
+              <label  class="form-label fw-bold">90 min</label>
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_90min"
@@ -1304,7 +1242,7 @@
             </div>
 
             <div class="col-md-1 text-center">
-              <label for="" class="form-label fw-bold">120 min</label>
+              <label  class="form-label fw-bold">120 min</label>
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_120min"
@@ -1319,7 +1257,7 @@
                       
                         <!-- Calificación de Aldrete -->
                         <div class="col-md-12">
-                            <label for="" class="form-label fw-bold">Calificación de Aldrete</label>
+                            <label  class="form-label fw-bold">Calificación de Aldrete</label>
                             <input
                                 type="text" @keyup.capture="enviarDatosRecuperacion"
                                 class="form-control"                                
@@ -1331,7 +1269,7 @@
                         
                         <!-- Nombre del Médico Anestesiólogo -->
                         <div class="col-md-12">
-                            <label for="" class="form-label fw-bold"
+                            <label  class="form-label fw-bold"
                                 >Nombre del Médico Anestesiólogo</label
                             >
                             <input
@@ -1345,7 +1283,7 @@
 
                         <!-- Fecha de Alta -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Fecha de alta de recuperación</label>
+                            <label  class="form-label fw-bold">Fecha de alta de recuperación</label>
                             <input
                                 type="date"
                                 class="form-control"
@@ -1358,7 +1296,7 @@
 
                         <!-- Hora de la Alta de Recuperación -->
                         <div class="col-md-6">
-                            <label for="" class="form-label fw-bold">Hora de alta de recuperación</label>
+                            <label  class="form-label fw-bold">Hora de alta de recuperación</label>
                             <input
                                 type="time"
                                 class="form-control"
@@ -1377,7 +1315,7 @@
                     <div class="row g-3">
                         <!-- Observaciones -->
                         <div class="col-md-12">
-                            <label for="" class="form-label fw-bold">Observaciones</label>
+                            <label  class="form-label fw-bold">Observaciones</label>
                             <textarea
                                 class="form-control"
                                 @keyup.capture="enviarDatosRecuperacion"
@@ -1386,27 +1324,6 @@
                                 :class="infoRec.altaRec_Obs != undefined && infoRec.altaRec_Obs != '' ?
                                         'form-control border border-success formSombra' : 'form-control'"
                             ></textarea>
-                        </div> 
-                        
-                        <div class="col-md-8"></div>
-                        <!-- Botón Guardar/Actualizar -->
-                        <div class="col-md-2 alinear-btn">
-                            <template v-if="btnActualizarRecuperacion === false">
-                                <button
-                                    data-bs-toggle="tab"
-                                    type="submit"
-                                    class="btn btn-guardar-info fw-bold"
-                                    @click="cambiarUpdateRecup">GUARDAR
-                                </button>
-                            </template>
-                            <template v-else>
-                                <button
-                                    data-bs-toggle="tab"
-                                    type="submit"
-                                    class="btn btn-guardar-info fw-bold"
-                                    @click="postAnestStore.updateRecupera(infoRec,preIdStore.pacienteID._id)">ACTUALIZAR
-                                </button>
-                            </template>
                         </div>
                     </div>
                 </div>
@@ -1484,11 +1401,110 @@ export default defineComponent({
   },
 
   methods: {
-    cambiarUpdateRecup() {
-      this.btnActualizarRecuperacion = true;
+    async vaciarInputsRecuperacion(){
+      this.infoRec.notaEval_Obs=postAnestStore.NotaUCPA
 
-      // Método Guardar
-      postAnestStore.saveRecupera(this.infoRec, preIdStore.pacienteID._id);
+      this.infoRec.aldreteRec_FrecCardIn=postAnestStore.FCIngreso
+      this.infoRec.aldreteRec_FrecCard15=postAnestStore.FC15Min
+      this.infoRec.aldreteRec_FrecCard30=postAnestStore.FC30Min
+      this.infoRec.aldreteRec_FrecCard45=postAnestStore.FC45Min
+      this.infoRec.aldreteRec_FrecCard60=postAnestStore.FC60Min
+      this.infoRec.aldreteRec_FrecCard90=postAnestStore.FC90Min
+      this.infoRec.aldreteRec_FrecCard120=postAnestStore.FC120Min
+
+      this.infoRec.aldreteRec_FrecRespIn=postAnestStore.FRIngreso
+      this.infoRec.aldreteRec_FrecResp15=postAnestStore.FR15Min
+      this.infoRec.aldreteRec_FrecResp30=postAnestStore.FR30Min
+      this.infoRec.aldreteRec_FrecResp45=postAnestStore.FR45Min
+      this.infoRec.aldreteRec_FrecResp60=postAnestStore.FR60Min
+      this.infoRec.aldreteRec_FrecResp90=postAnestStore.FR90Min
+      this.infoRec.aldreteRec_FrecResp120=postAnestStore.FR120Min
+
+      this.infoRec.aldreteRec_TensArteIn=postAnestStore.TensionIngreso
+      this.infoRec.aldreteRec_TensArte15=postAnestStore.Tension15Min
+      this.infoRec.aldreteRec_TensArte30=postAnestStore.Tension30Min
+      this.infoRec.aldreteRec_TensArte45=postAnestStore.Tension45Min
+      this.infoRec.aldreteRec_TensArte60=postAnestStore.Tension60Min
+      this.infoRec.aldreteRec_TensArte90=postAnestStore.Tension90Min
+      this.infoRec.aldreteRec_TensArte120=postAnestStore.Tension120Min
+
+      this.infoRec.aldreteRec_SatO2In=postAnestStore.SaturacionIngreso
+      this.infoRec.aldreteRec_SatO215=postAnestStore.Saturacion15Min
+      this.infoRec.aldreteRec_SatO230=postAnestStore.Saturacion30Min
+      this.infoRec.aldreteRec_SatO245=postAnestStore.Saturacion45Min
+      this.infoRec.aldreteRec_SatO260=postAnestStore.Saturacion60Min
+      this.infoRec.aldreteRec_SatO290=postAnestStore.Saturacion90Min
+      this.infoRec.aldreteRec_SatO2120=postAnestStore.Saturacion120Min
+
+      this.infoRec.aldreteRec_AldreteIn=postAnestStore.AldreteIngreso
+      this.infoRec.aldreteRec_Aldrete15=postAnestStore.Aldrete15Min
+      this.infoRec.aldreteRec_Aldrete30=postAnestStore.Aldrete30Min
+      this.infoRec.aldreteRec_Aldrete45=postAnestStore.Aldrete45Min
+      this.infoRec.aldreteRec_Aldrete60=postAnestStore.Aldrete60Min
+      this.infoRec.aldreteRec_Aldrete90=postAnestStore.Aldrete90Min
+      this.infoRec.aldreteRec_Aldrete120=postAnestStore.Aldrete120Min
+
+      this.infoRec.aldreteRec_BromageIn=postAnestStore.BromageIngreso
+      this.infoRec.aldreteRec_Bromage15=postAnestStore.Bromage15Min
+      this.infoRec.aldreteRec_Bromage30=postAnestStore.Bromage30Min
+      this.infoRec.aldreteRec_Bromage45=postAnestStore.Bromage45Min
+      this.infoRec.aldreteRec_Bromage60=postAnestStore.Bromage60Min
+      this.infoRec.aldreteRec_Bromage90=postAnestStore.Bromage90Min
+      this.infoRec.aldreteRec_Bromage120=postAnestStore.Bromage120Min
+
+      this.infoRec.aldreteRec_NauseasIn=postAnestStore.NauseaIngreso
+      this.infoRec.aldreteRec_Nauseas15=postAnestStore.Nausea15Min
+      this.infoRec.aldreteRec_Nauseas30=postAnestStore.Nausea30Min
+      this.infoRec.aldreteRec_Nauseas45=postAnestStore.Nausea45Min
+      this.infoRec.aldreteRec_Nauseas60=postAnestStore.Nausea60Min
+      this.infoRec.aldreteRec_Nauseas90=postAnestStore.Nausea90Min
+      this.infoRec.aldreteRec_Nauseas120=postAnestStore.Nausea120Min
+
+      this.infoRec.aldreteRec_escEVADolIn=postAnestStore.EscalaEVAIngreso
+      this.infoRec.aldreteRec_escEVADol15=postAnestStore.EscalaEVA15Min
+      this.infoRec.aldreteRec_escEVADol30=postAnestStore.EscabaEVA30Min
+      this.infoRec.aldreteRec_escEVADol45=postAnestStore.EscalaEVA45Min
+      this.infoRec.aldreteRec_escEVADol60=postAnestStore.EscalaEVA60Min
+      this.infoRec.aldreteRec_escEVADol90=postAnestStore.EscalaEVA90Min
+      this.infoRec.aldreteRec_escEVADol120=postAnestStore.EscalaEVA120Min
+
+      this.infoRec.altaRec_0min=postAnestStore.AldreteFinal0Min
+      this.infoRec.altaRec_15min=postAnestStore.AldreteFinal15Min
+      this.infoRec.altaRec_30min=postAnestStore.AldreteFinal30Min
+      this.infoRec.altaRec_45min=postAnestStore.AldreteFinal45Min
+      this.infoRec.altaRec_60min=postAnestStore.AldreteFinal60Min
+      this.infoRec.altaRec_90min=postAnestStore.AldreteFinal90Min
+      this.infoRec.altaRec_120min=postAnestStore.AldreteFinal120Min
+
+      this.infoRec.altaRec_CalifAldrete=postAnestStore.CalificacionAldrete
+      this.infoRec.altaRec_Obs=postAnestStore.ObservacionesAlta
+      preIdStore.NombreAnestesiologo=postAnestStore.NombreAnestesiologo
+      this.infoRec.altaRec_FechaAltaRec=postAnestStore.FechaAlta
+      this.infoRec.altaRec_HrAltaRec=postAnestStore.HoraAlta
+    },
+
+    async guardarDatosRecuperacion(){
+        if(preIdStore.nuevoRegistroPaciente == false){
+            if(preIdStore.actualizarRegRecuperacion == false ){
+                // Guardar datos                    
+                postAnestStore.saveRecupera(this.infoRec, preIdStore.pacienteID._id);
+                preIdStore.actualizarRegRecuperacion = true
+            }else if(preIdStore.actualizarRegRecuperacion == true){
+                // Actualizar datos
+                postAnestStore.updateRecupera(this.infoRec, preIdStore.pacienteID._id)
+            }
+
+        }else if(preIdStore.nuevoRegistroPaciente == true){
+            if(preIdStore.actualizarRegRecuperacion == false ){
+                // Guardar nuevos datos                                        
+                postAnestStore.saveNuevoRecupera(this.infoRec, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                preIdStore.actualizarRegRecuperacion = true
+            }else if(preIdStore.actualizarRegRecuperacion == true){
+                // Actualizar nuevos datos
+                postAnestStore.updateNuevoRecupera(this.infoRec, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
+            }
+
+        }
     },
 
     obtenerAldrete(){

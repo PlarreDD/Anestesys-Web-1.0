@@ -10,7 +10,7 @@
             <form class="row g-3" method="post" autocomplete="off" @submit.prevent="">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
-                    <label for="" class="form-label fw-bold margenLabelR">Nombre(s)</label>
+                    <label  class="form-label fw-bold margenLabelR">Nombre(s)</label>
                     <input type="text"
                            :class="userNombre == true ?
                                   'form-control border border-danger margenInputR' : 'form-control margenInputR'"
@@ -28,7 +28,7 @@
                 <div class="col-md-2"></div>
 
                 <div class="col-md-8">
-                    <label for="" class="form-label fw-bold margenLabelR"> Apellidos </label>
+                    <label  class="form-label fw-bold margenLabelR"> Apellidos </label>
                     <input type="text"
                            :class="userApellido == true ?
                                   'form-control border border-danger margenInputR' : 'form-control margenInputR'"
@@ -46,7 +46,7 @@
                 <div class="col-md-2"></div>
 
                 <div class="col-md-8">
-                    <label for="" class="form-label fw-bold margenLabelR"> Correo electrónico </label>
+                    <label  class="form-label fw-bold margenLabelR"> Correo electrónico </label>
                     <input type="email"
                            :class="userCorreo == true ?
                                   'form-control border border-danger margenInputR' : 'form-control margenInputR'"
@@ -64,7 +64,7 @@
                 <div class="col-md-2"></div>
 
                 <div class="col-md-8">
-                    <label for="" class="form-label fw-bold margenLabelR"> Fecha de nacimiento </label>
+                    <label  class="form-label fw-bold margenLabelR"> Fecha de nacimiento </label>
                     <input type="date"
                            :class="userFecha == true ?
                                   'form-control border border-danger' : 'form-control'"
@@ -162,7 +162,6 @@ export default defineComponent({
                     this.usr.fechaNac = ""
                 }                
             } catch (error) {
-                // console.log("Error registro: " + error.error.response.data);
             }
         },
 

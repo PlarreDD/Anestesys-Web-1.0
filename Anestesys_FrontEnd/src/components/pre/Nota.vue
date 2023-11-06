@@ -5,7 +5,7 @@
                     <h5 class="col-12 fw-bold"> NOTA PREANESTÉSICA </h5>                                                                                                                    
             </div>
             <div class="col-md-1 justificar-icono-nota">
-                <label for=""
+                <label 
                         class="form-label fw-bold alinear-icono-nota">
                             <span style="text-align: right;">
                                 <font-awesome-icon icon="fa-solid fa-microphone" size="2xl"/>
@@ -21,25 +21,7 @@
                           :class="textoNota.nota != undefined && textoNota.nota != '' ?
                                  'form-control border border-success formSombra' : 'form-control'">
                 </textarea>
-            </div>
-
-            <!-- Botón Guardar/Actualizar --> 
-            <div class="col-md-12 alinear-btn">
-                <template v-if="btnActualizarNota === false">
-                    <button data-bs-toggle="tab" 
-                            type="submit"
-                            class="btn btn-guardar-info fw-bold"
-                            @click="cambiarUpdateNota"
-                            > GUARDAR </button>
-                </template>
-                <template v-else>
-                    <button data-bs-toggle="tab" 
-                            type="submit"
-                            class="btn btn-guardar-info fw-bold"
-                            @click="preIdStore.updatePreNota(textoNota.nota, preIdStore.pacienteID._id)"
-                            > ACTUALIZAR </button> 
-                </template>                                                         
-            </div>
+            </div>            
         </form>
     </div>    
 </template>
@@ -63,15 +45,39 @@ export default defineComponent({
     },
 
     methods: {
-        cambiarUpdateNota() {
-            this.btnActualizarNota=true
+        async vaciarInputsNota(){
+            this.textoNota.nota = ""
 
-            preIdStore.savePreNota(this.textoNota.nota, preIdStore.pacienteID._id)
+            this.enviarDatosNota()
+        },
+
+        async guardarDatosNota(){
+            if(preIdStore.nuevoRegistroPaciente == false){
+                if(preIdStore.actualizarRegNota == false ){
+                    // Guardar datos
+                    preIdStore.savePreNota(this.textoNota.nota, preIdStore.pacienteID._id)
+                    preIdStore.actualizarRegNota = true
+                }else if(preIdStore.actualizarRegNota == true){
+                    // Actualizar datos
+                    preIdStore.updatePreNota(this.textoNota.nota, preIdStore.pacienteID._id)
+                }
+
+            }else if(preIdStore.nuevoRegistroPaciente == true){
+                if(preIdStore.actualizarRegNota == false ){
+                    // Guardar nuevos datos
+                    preIdStore.saveNuevoPreNota(this.textoNota.nota, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                    preIdStore.actualizarRegNota = true
+                }else if(preIdStore.actualizarRegNota == true){
+                    // Actualizar nuevos datos
+                    preIdStore.updateNuevoPreNota(this.textoNota.nota, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
+                }
+
+            }
         },
 
         enviarDatosNota() {
             this.$emit('recibe-datos-nota', preIdStore.NotaPre=this.textoNota.nota)
-        }
+        }        
     }
 })
 </script>
