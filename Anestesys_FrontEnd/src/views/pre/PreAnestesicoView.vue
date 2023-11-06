@@ -370,6 +370,7 @@ export default defineComponent({
   },  
 
   methods: {
+/*======================= Obtener paciente para nuevo registro =======================*/
     // Obtener expedientes en Multiselect
     async listarExpedientes(){
       await idStore.getExpedientesList()
@@ -383,8 +384,7 @@ export default defineComponent({
     async obtenerPaciente(){
       await this.listarExpedientes();
 
-      if(idStore.numExpediente == null || idStore.numExpediente == ''){ 
-
+      if(idStore.numExpediente == null || idStore.numExpediente == ''){
         this.numeroExpediente = ''
         this.nombrePaciente = ''
         this.fechaNacimiento = null
@@ -775,13 +775,13 @@ export default defineComponent({
           this.deshabilitado=false
           document.getElementById("menu-trans").className='visible'
           document.getElementById("menu-post").className='visible'
-        }
-        
+        }        
       }
     },    
-
-    async guardarDatos(){
-      
+/*====================================================================================*/
+    
+/*==================== Funciones para guardar al cambiar de módulo ===================*/
+    async guardarDatos(){      
       const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
       await componenteId.guardarDatosId();
 
@@ -886,6 +886,7 @@ export default defineComponent({
       const componenteNota = await this.$refs.refNota as InstanceType<typeof Nota>;
       await componenteNota.guardarDatosNota();      
     },
+/*====================================================================================*/
 
     async actualizaDatos(numeroExpediente, nombrePaciente, nombreCirujano, cirugia, numEpisodio) {
       this.numExpediente = numeroExpediente,

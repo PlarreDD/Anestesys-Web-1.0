@@ -196,7 +196,6 @@ export default ({
     },
 
     async guardarDatos(){
-      
       const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
       await componenteNotaPA.guardarDatosNotaPA();
 

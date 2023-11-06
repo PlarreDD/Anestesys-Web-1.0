@@ -482,7 +482,7 @@ export default defineComponent({
     },
 
     async agregarMVS(){
-      if(medStore.monitor.length != 0){
+      if(medStore.monitor.length != 0 && medStore.monitor != "1.1.1.1"){
         swal.fire({
             title: "Elimine el monitor antes de agregar uno nuevo",
             icon: "warning",

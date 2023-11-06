@@ -6497,15 +6497,11 @@ export default defineComponent({
           this.guardaDatosMSV=this.guardaDatosMSV +1;
           
           //Guardar datos del MSV en la BD
-          // if(this.guardaDatosMSV == 5){
-            // console.log("Entro");
           if(preIdStore.nuevoRegistroPaciente == false){
             this.transAnestStore.saveDatosMSV(this.grid, preIdStore.pacienteID._id);
-          }else if(preIdStore.nuevoRegistroPaciente == true){         
+          }else if(preIdStore.nuevoRegistroPaciente == true){
             this.transAnestStore.saveNuevoDatosMSV(this.grid, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-          }          
-            // this.guardaDatosMSV = 0;
-          // }
+          }
         }, 1000 * 60);
       },
 
