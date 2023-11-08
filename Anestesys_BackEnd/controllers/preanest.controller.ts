@@ -1,7 +1,7 @@
 import { Response } from "express";
 import { PreIdPacientes, PreIdPacientesCx, PreValoracion, ValEstudios, PrePlan, PreNota } from "../models/PreAnestesico";
-import { PostRecupera, PostNotaPA } from "../models/PostAnestesico";
-import { MenuTrans } from "../models/TransAnestesico";
+// import { PostRecupera, PostNotaPA } from "../models/PostAnestesico";
+// import { MenuTrans } from "../models/TransAnestesico";
 
 /********************************************************************/
 /***************************  ID PACIENTE ***************************/
@@ -19,8 +19,11 @@ export const getExpedientes = async (req: any, res: Response) =>{
 /* Función para listar las cirugías */
 export const getCirugias = async (req: any, res: Response) =>{
     try {
-        const expedientes = await PreIdPacientes.find({id: req.id}) 
-        return res.json({expedientes});
+        const {id} = req.params;
+
+        const pacientes = await PreIdPacientes.find({numExpediente: id})
+        const pacientesCx = await PreIdPacientesCx.find({pid: pacientes[0].id});
+        return res.json({pacientes, pacientesCx});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
     }
@@ -32,19 +35,20 @@ export const getPaciente = async (req: any, res: Response) => {
         const {id} = req.params;
 
         const pacientes = await PreIdPacientes.find({numExpediente: id});
-        const pacientesCx = await PreIdPacientesCx.find({pid: pacientes[0].id});
-        const pacientesVal = await PreValoracion.find({pid: pacientes[0].id});
-        const pacientesEstu = await ValEstudios.find({pid: pacientes[0].id});
-        const pacientesPlan = await PrePlan.find({pid: pacientes[0].id});
-        const pacientesNotaPre = await PreNota.find({pid: pacientes[0].id});
+        // const pacientesCx = await PreIdPacientesCx.find({pid: pacientes[0].id});
+        // const pacientesVal = await PreValoracion.find({pid: pacientes[0].id});
+        // const pacientesEstu = await ValEstudios.find({pid: pacientes[0].id});
+        // const pacientesPlan = await PrePlan.find({pid: pacientes[0].id});
+        // const pacientesNotaPre = await PreNota.find({pid: pacientes[0].id});
 
-        const pacienteTrans = await MenuTrans.find({pid: pacientes[0].id})
+        // const pacienteTrans = await MenuTrans.find({pid: pacientes[0].id})
         
-        const pacientesNotaPost = await PostNotaPA.find({pid: pacientes[0].id});
-        const pacientesRecu = await PostRecupera.find({pid: pacientes[0].id});
+        // const pacientesNotaPost = await PostNotaPA.find({pid: pacientes[0].id});
+        // const pacientesRecu = await PostRecupera.find({pid: pacientes[0].id});
 
-        return res.json({pacientes, pacientesCx, pacientesVal, pacientesEstu, pacientesPlan, pacientesNotaPre, 
-                        pacienteTrans, pacientesNotaPost, pacientesRecu});
+        // return res.json({pacientes, pacientesCx, pacientesVal, pacientesEstu, pacientesPlan, pacientesNotaPre, 
+        //                 pacienteTrans, pacientesNotaPost, pacientesRecu});
+        return res.json({pacientes});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
     }

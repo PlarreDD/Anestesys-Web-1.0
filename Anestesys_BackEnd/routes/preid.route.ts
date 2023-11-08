@@ -6,7 +6,8 @@ import { getPaciente,
          getExpedientes,
          createNuevoRegistroPaciente,
          updateNuevoRegistroPaciente,
-         updateAnteriorPaciente} from "../controllers/preanest.controller";
+         updateAnteriorPaciente,
+         getCirugias} from "../controllers/preanest.controller";
 
 const router = Router();
 
@@ -16,6 +17,7 @@ const router = Router();
 // PATCH/PUT    /preId/:id      Actualizar paciente
 
 /*------------------- PreId --------------------*/
+router.get('/cx/:id', requireToken, getCirugias)
 router.get('/exp', requireToken, getExpedientes)
 router.get('/:id', requireToken, getPaciente);
 router.post('/', requireToken, createPaciente);

@@ -32,7 +32,8 @@
       
       <div class="col-md-2">
         <div class="alinearBotonDerecha">
-          <button class="btn btn-icono fw-bold" :disabled="historialPaciente == false ? true : false" data-bs-toggle="modal" data-bs-target="#modal-historial">
+          <button class="btn btn-icono fw-bold" :disabled="historialPaciente == false ? true : false" 
+                  data-bs-toggle="modal" data-bs-target="#modal-historial" @click="">
             <img class="btn-historial"
                  src="images/imgIcon/historial-pac.svg"/> Historial Paciente </button>
         </div>
@@ -40,20 +41,64 @@
 
       <!--Abrir el modal de Historial-->
       <div class="modal" ref="historialModal" id="modal-historial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content color-dropdown">
-                  <div class="input-group mb-3">
-                    <div class="modal-body">
-                      <div class="col-md-12">
-                        <div class="row g-3">                                                      
-                            
-                        </div>
-                      </div>
-                    </div>
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content color-dropdown">
+            <div class="input-group mb-3">
+              <div class="modal-body">
+                <div class="col-md-12">
+                  <div class="row g-3">     
+                    <h5 class="text-white text-center fw-bold">{{ idStore.NombrePaciente + " " + idStore.numeroExpediente }}</h5>
+
+                    <table class="table table-responsive text-white">
+                      <thead>
+                        <tr>
+                          <th>Anestesiólogo</th>
+                          <th>Cirujano</th>
+                          <th>Cirugía</th>
+                          <th>Fecha Cx</th>
+                          <td></td>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr v-for="(cirugia) in listaCirugias">
+
+                          <td class="text-white">
+                            {{ cirugia.anestesiologo }}
+                          </td>
+
+                          <td class="text-white">
+                            {{ cirugia.cirujano }}
+                          </td>
+
+                          <td class="text-white">
+                            {{ cirugia.cirugia }}
+                          </td>
+
+                          <td class="text-white">
+                            {{ cirugia.fechaCx }}
+                          </td>
+
+                          <!-- Seleccionar -->
+                          <td>
+                            <button class="btn fw-bold btn-historial">
+                              <span>
+                                  <font-awesome-icon icon="fa-solid fa-arrow-right" size="lg"/>
+                              </span>
+                            </button>
+                          </td>
+
+                        </tr>
+                      </tbody>
+                    </table>
+
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="input-group mb-3">
@@ -325,6 +370,8 @@ export default defineComponent({
 
       expSeleccionado: [],
       listaExpedientes: [],
+      listaCirugias: [],
+      cx: [],
 
       idPaciente: '',
       numeroExpediente: '',
@@ -374,6 +421,12 @@ export default defineComponent({
       let expediente= idStore.expedientes;
       this.listaExpedientes = expediente.map(document => document.numExpediente+" " +document.nomPaciente);
       this.listaExpedientes.sort();      
+    },
+
+    async listarCirugias(){
+      await idStore.getCirugias(idStore.numeroExpediente)
+
+      this.listaCirugias = idStore.cirugias.pacientesCx
     },
 
     // Obtener datos de paciente seleccionado
@@ -503,11 +556,15 @@ export default defineComponent({
         const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
         await componenteId.asignarValoresPaciente();
 
+        await componenteId.enviarDatos();
+
         this.nuevoRegistro = true;
         this.historialPaciente = true;
 
         this.bloquearInputs=true
         this.bloquearInputsPrincipales=true
+
+        this.listarCirugias()
       }      
     },
 
@@ -532,6 +589,7 @@ export default defineComponent({
       // idStore.numExpediente = ""
       idStore.expedientes = ""
       idStore.pacientes = ""
+      idStore.cirugias = ""
     },
 
     async vaciarStoreTrans(){
@@ -1054,6 +1112,19 @@ export default defineComponent({
     --bs-btn-active-bg: #ced4da;
     --bs-btn-active-color: #002d60;
     --bs-btn-active-border-color: #ced4da;
+}
+.btn-historial {
+    --bs-btn-bg: #002d60;
+    --bs-btn-color: #ffffff;
+    --bs-btn-border-color: #002d60;
+
+    --bs-btn-hover-bg: #ffffff;
+    --bs-btn-hover-color: #002d60;
+    --bs-btn-hover-border-color: #ffffff;
+
+    --bs-btn-active-bg: #002d60;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-border-color: #002d60;
 }
 .btn-paciente{
   width: 25px;
