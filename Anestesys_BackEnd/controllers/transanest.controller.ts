@@ -548,8 +548,8 @@ export const saveNuevoTiemposQX = async (req: any, res: Response) => {
 
 /* Guardado Datos MSV */
 export const saveDatosMSV = async (req: any, res: Response) => {
-    // const { datosMSV } = req.body;
-    
+    console.log("datosMSV\n" + JSON.stringify(req.body));
+
     try {
         const { pid } = req.params;
         const { datosMSV } = req.body;
@@ -558,11 +558,45 @@ export const saveDatosMSV = async (req: any, res: Response) => {
 
         const menuTrans = await MenuTrans.findOneAndUpdate(
             { pid: pid },
-            { $push:[
-                { 
-                    datosMSV
-                }]
+            { $push:{ datosMSV: {
+                        FC: datosMSV[0],
+                        Pulso: datosMSV[1],
+                        PAS: datosMSV[2],
+                        PAD: datosMSV[3],
+                        PAM: datosMSV[4],
+                        SpO2: datosMSV[5],
+                        EtCO2: datosMSV[6],
+                        Temp1: datosMSV[7], 
+                        Temp2: datosMSV[8],
+                        PVC: datosMSV[9],
+                        PAS_IN: datosMSV[10],
+                        PAD_IN: datosMSV[11],
+                        PAM_IN: datosMSV[12],
+                        FiCO2: datosMSV[13],
+                        FR: datosMSV[14], 
+                        HoraGeneracion: datosMSV[15]
+                        }
+                    }
             });
+
+        // const menuTrans = await MenuTrans.insertMany([
+        //     {FC: "datosMSV[0]",
+        //      Pulso: "datosMSV[1]",
+        //      PAS: "datosMSV[2]",
+        //      PAD: "datosMSV[3]",
+        //      PAM: "datosMSV[4]",
+        //      SpO2: "datosMSV[5]",
+        //      EtCO2: "datosMSV[6]",
+        //      Temp1: "datosMSV[7]", 
+        //      Temp2: "datosMSV[8]",
+        //      PVC: "datosMSV[9]",
+        //      PAS_IN: "datosMSV[10]",
+        //      PAD_IN: "datosMSV[11]",
+        //      PAM_IN: "datosMSV[12]",
+        //      FiCO2: "datosMSV[13]",
+        //      FR: "datosMSV[14]", 
+        //      HoraGeneracion: "datosMSV[15]"}
+        // ])
 
         return res.json({datosMSV, menuTrans});
     } catch (error) {
@@ -575,7 +609,7 @@ export const saveNuevoDatosMSV = async (req: any, _res: Response) => {
     console.log(req.body);
     // try {
     //     const { pid, cxid } = req.params;
-    //     const { datosMSV } = req.body;                
+    //     const { datosMSV } = req.body;
     //     const menuTrans = await MenuTrans.findOneAndUpdate(
     //         { pid: pid, cxid: cxid },
     //         { $push:{
