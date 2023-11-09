@@ -1517,7 +1517,8 @@ export default defineComponent({
 
       chartElements: [],
 
-      guardaDatosMSV: 0
+      guardaDatosMSV: 0,
+      gridBD: [], // Contiene todos los datos del grid
     }
   },
 
@@ -5079,10 +5080,10 @@ export default defineComponent({
             this.menuTrans.vt = "";
 
             if(preIdStore.nuevoRegistroPaciente == false){
-          await transAnestStore.listDatosV(preIdStore.pacienteID._id);
-        }else if(preIdStore.nuevoRegistroPaciente == true){          
-          await transAnestStore.listNuevoDatosV(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-        }     
+              await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){          
+              await transAnestStore.listNuevoDatosV(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }     
         }
       },
 
@@ -6492,16 +6493,23 @@ export default defineComponent({
       async capturaGrid(){
         this.saveGrid = await setInterval(() => {
           this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
+          this.gridBD.push(this.hl7mess[this.hl7mess.length - 1]);
           this.hl7mess = [];
 
-          this.guardaDatosMSV=this.guardaDatosMSV +1;
+          this.guardaDatosMSV = this.guardaDatosMSV +1;
           
           //Guardar datos del MSV en la BD
-          if(preIdStore.nuevoRegistroPaciente == false){
-            this.transAnestStore.saveDatosMSV(this.grid, preIdStore.pacienteID._id);
-          }else if(preIdStore.nuevoRegistroPaciente == true){
-            this.transAnestStore.saveNuevoDatosMSV(this.grid, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+          if(this.guardaDatosMSV == 5){
+          //   if(preIdStore.nuevoRegistroPaciente == false){
+              this.transAnestStore.saveDatosMSV(this.gridBD, preIdStore.pacienteID._id);
+          //   }else if(preIdStore.nuevoRegistroPaciente == true){
+          //     this.transAnestStore.saveNuevoDatosMSV(this.gridBD, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+          //   }
+          
+            this.guardaDatosMSV = 0;
+            this.gridBD = [];
           }
+
         }, 1000 * 60);
       },
 

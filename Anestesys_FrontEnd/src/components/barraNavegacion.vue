@@ -482,6 +482,8 @@ export default defineComponent({
     },
 
     async agregarMVS(){
+      // medStore.monitor != "1.1.1.1" Comprobación para permitir agregar un monitor cuando solo esta el 1.1.1.1
+      // que hace que exista la animación de monitor desconectado
       if(medStore.monitor.length != 0 && medStore.monitor != "1.1.1.1"){
         swal.fire({
             title: "Elimine el monitor antes de agregar uno nuevo",
