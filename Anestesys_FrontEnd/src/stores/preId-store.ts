@@ -17,6 +17,7 @@ export const usePreIdStore = defineStore('preid', {
         pacientes: ref(null),
 
         cirugias: ref(null),
+        cirugia: ref(null),
 
         actualizarRegId: false,
         actualizarRegValoracion: false,
@@ -1547,8 +1548,7 @@ export const usePreIdStore = defineStore('preid', {
               },
             })
             .then((res: any) => {
-                this.pacientes = res.data;
-                // console.log("Paciente: "+JSON.stringify(this.pacientes));                
+                this.pacientes = res.data;                                
             })
             .catch((e: any) => {
             });
@@ -1564,6 +1564,23 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res:any) =>{
                 this.cirugias = res.data
+            })
+            .catch((e: any) => {                
+            });
+        },
+
+        async getDatosPDF(id) {
+            await apiAxios({
+                url: `http://localhost:5000/preId/cirugia/cx/${String(id)}`,
+                method: "GET",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+            })
+            .then((res:any) =>{
+                this.cirugia = res.data
+                console.log("id store: "+id);
+                console.log("Cirugia store: "+JSON.stringify(this.cirugia));
             })
             .catch((e: any) => {                
             });

@@ -52,6 +52,7 @@
                     <table class="table table-responsive text-white">
                       <thead>
                         <tr>
+                          <th>ID</th>
                           <th>Anestesiólogo</th>
                           <th>Cirujano</th>
                           <th>Cirugía</th>
@@ -62,6 +63,10 @@
 
                       <tbody>
                         <tr v-for="(cirugia) in listaCirugias">
+
+                          <td class="text-white">
+                            {{ cirugia._id }}
+                          </td>
 
                           <td class="text-white">
                             {{ cirugia.anestesiologo }}
@@ -81,9 +86,9 @@
 
                           <!-- Seleccionar -->
                           <td>
-                            <button class="btn fw-bold btn-historial">
+                            <button class="btn fw-bold btn-historial" @click="obtenerCirugia(cirugia._id)">
                               <span>
-                                  <font-awesome-icon icon="fa-solid fa-arrow-right" size="lg"/>
+                                  <font-awesome-icon icon="fa-solid fa-file-pdf" size="lg"/>
                               </span>
                             </button>
                           </td>
@@ -427,6 +432,13 @@ export default defineComponent({
       await idStore.getCirugias(idStore.numeroExpediente)
 
       this.listaCirugias = idStore.cirugias.pacientesCx
+      this.cx = idStore.cirugias
+    },
+
+    async obtenerCirugia(id){
+      await idStore.getDatosPDF(id)
+
+      console.log("id: "+id);      
     },
 
     // Obtener datos de paciente seleccionado

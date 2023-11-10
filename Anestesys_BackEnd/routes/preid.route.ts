@@ -7,7 +7,8 @@ import { getPaciente,
          createNuevoRegistroPaciente,
          updateNuevoRegistroPaciente,
          updateAnteriorPaciente,
-         getCirugias} from "../controllers/preanest.controller";
+         getCirugias,
+         getPDFData} from "../controllers/preanest.controller";
 
 const router = Router();
 
@@ -18,6 +19,7 @@ const router = Router();
 
 /*------------------- PreId --------------------*/
 router.get('/cx/:id', requireToken, getCirugias)
+router.get('/cirugia/cx/:id', requireToken, getPDFData)
 router.get('/exp', requireToken, getExpedientes)
 router.get('/:id', requireToken, getPaciente);
 router.post('/', requireToken, createPaciente);
