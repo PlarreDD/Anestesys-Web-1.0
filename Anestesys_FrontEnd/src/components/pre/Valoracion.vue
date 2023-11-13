@@ -1286,7 +1286,7 @@ export default defineComponent({
             if(preIdStore.nuevoRegistroPaciente == false){
                 if(preIdStore.actualizarRegValoracion == false ){
                     // Guardar datos
-                    preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
+                    preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
                     preIdStore.actualizarRegValoracion = true
                     this.btnActualizarValoracion = true
                 }else if(preIdStore.actualizarRegValoracion == true){
@@ -1320,7 +1320,7 @@ export default defineComponent({
             }
             else{
                 this.btnActualizarValoracion=true
-                await preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
+                await preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
             }            
 
             this.btnAddEstudios=false

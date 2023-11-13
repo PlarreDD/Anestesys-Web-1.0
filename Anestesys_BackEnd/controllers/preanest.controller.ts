@@ -253,7 +253,7 @@ export const updateNuevoRegistroPaciente = async (req: any, res: Response) => {
 /* Función de registro de valoración pre anetésica */
 export const savePreAntecedentes = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { pid, cxid,
                 // Patológicos
                 antPersPat_Alergias, antPersPat_Quirurgicos,
                 antPersPat_Endocrinologicos, antPersPat_Urologicos,
@@ -290,7 +290,7 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
             } = req.body;
 
         const preval = new PreValoracion({
-            pid: pid,
+            pid: pid, cxid: cxid,
             /* Antecedentes */
             // Personales Patológicos
             antPersPat_Alergias: antPersPat_Alergias,

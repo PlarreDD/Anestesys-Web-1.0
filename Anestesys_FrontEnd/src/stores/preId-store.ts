@@ -467,7 +467,7 @@ export const usePreIdStore = defineStore('preid', {
         },
         
         /*************************** Valoración **************************/
-        async savePreAntecedentes(infoValoracion: any, pid: string){
+        async savePreAntecedentes(infoValoracion: any, pid: string, cxid: string){
             await apiAxios({                
                     url: "http://localhost:5000/valora",
                     method: "POST",
@@ -476,7 +476,7 @@ export const usePreIdStore = defineStore('preid', {
                     },
                     data: {
                         // Antecedentes
-                        pid: pid,
+                        pid: pid, cxid: cxid,
                         // Personales Patológicos
                         antPersPat_Alergias: infoValoracion.antPersPat_Alergias,
                         antPersPat_Quirurgicos: infoValoracion.antPersPat_Quirurgicos,
