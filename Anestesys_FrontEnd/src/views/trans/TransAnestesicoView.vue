@@ -6500,11 +6500,11 @@ export default defineComponent({
           
           //Guardar datos del MSV en la BD
           if(this.guardaDatosMSV == 5){
-          //   if(preIdStore.nuevoRegistroPaciente == false){
+            if(preIdStore.nuevoRegistroPaciente == false){
               this.transAnestStore.saveDatosMSV(this.gridBD, preIdStore.pacienteID._id);
-          //   }else if(preIdStore.nuevoRegistroPaciente == true){
-          //     this.transAnestStore.saveNuevoDatosMSV(this.gridBD, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-          //   }
+            }else if(preIdStore.nuevoRegistroPaciente == true){
+              this.transAnestStore.saveNuevoDatosMSV(this.gridBD, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
           
             this.guardaDatosMSV = 0;
             this.gridBD = [];

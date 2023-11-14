@@ -548,95 +548,219 @@ export const saveNuevoTiemposQX = async (req: any, res: Response) => {
 
 /* Guardado Datos MSV */
 export const saveDatosMSV = async (req: any, res: Response) => {
-    console.log("datosMSV\n" + JSON.stringify(req.body));
-
     try {
         const { pid } = req.params;
         const { datosMSV } = req.body;
-        console.log("datosMSV\n" + JSON.stringify(datosMSV[0]));
-        console.log("datosMSV\n" + JSON.stringify(datosMSV[1]));
-
+        
         const menuTrans = await MenuTrans.findOneAndUpdate(
             { pid: pid },
-            { $push:{ datosMSV: {
-                        FC: datosMSV[0],
-                        Pulso: datosMSV[1],
-                        PAS: datosMSV[2],
-                        PAD: datosMSV[3],
-                        PAM: datosMSV[4],
-                        SpO2: datosMSV[5],
-                        EtCO2: datosMSV[6],
-                        Temp1: datosMSV[7], 
-                        Temp2: datosMSV[8],
-                        PVC: datosMSV[9],
-                        PAS_IN: datosMSV[10],
-                        PAD_IN: datosMSV[11],
-                        PAM_IN: datosMSV[12],
-                        FiCO2: datosMSV[13],
-                        FR: datosMSV[14], 
-                        HoraGeneracion: datosMSV[15]
-                        }
+            { $addToSet:{ datosMSV: [
+                    {
+                        FC: datosMSV[0].FC,
+                        Pulso: datosMSV[0].Pulso,
+                        PAS: datosMSV[0].PAS,
+                        PAD: datosMSV[0].PAD,
+                        PAM: datosMSV[0].PAM,
+                        SpO2: datosMSV[0].SpO2,
+                        EtCO2: datosMSV[0].EtCO2,
+                        Temp1: datosMSV[0].Temp1,
+                        Temp2: datosMSV[0].Temp2,
+                        PVC: datosMSV[0].PVC,
+                        PAS_IN: datosMSV[0].PAS_IN,
+                        PAD_IN: datosMSV[0].PAD_IN,
+                        PAM_IN: datosMSV[0].PAM_IN,
+                        FiCO2: datosMSV[0].FiCO2,
+                        FR: datosMSV[0].FR,
+                        HoraGeneracion: datosMSV[0].HoraGeneracion
+                    },
+                    {
+                        FC: datosMSV[1].FC,
+                        Pulso: datosMSV[1].Pulso,
+                        PAS: datosMSV[1].PAS,
+                        PAD: datosMSV[1].PAD,
+                        PAM: datosMSV[1].PAM,
+                        SpO2: datosMSV[1].SpO2,
+                        EtCO2: datosMSV[1].EtCO2,
+                        Temp1: datosMSV[1].Temp1,
+                        Temp2: datosMSV[1].Temp2,
+                        PVC: datosMSV[1].PVC,
+                        PAS_IN: datosMSV[1].PAS_IN,
+                        PAD_IN: datosMSV[1].PAD_IN,
+                        PAM_IN: datosMSV[1].PAM_IN,
+                        FiCO2: datosMSV[1].FiCO2,
+                        FR: datosMSV[1].FR,
+                        HoraGeneracion: datosMSV[1].HoraGeneracion
+                    },
+                    {
+                        FC: datosMSV[2].FC,
+                        Pulso: datosMSV[2].Pulso,
+                        PAS: datosMSV[2].PAS,
+                        PAD: datosMSV[2].PAD,
+                        PAM: datosMSV[2].PAM,
+                        SpO2: datosMSV[2].SpO2,
+                        EtCO2: datosMSV[2].EtCO2,
+                        Temp1: datosMSV[2].Temp1,
+                        Temp2: datosMSV[2].Temp2,
+                        PVC: datosMSV[2].PVC,
+                        PAS_IN: datosMSV[2].PAS_IN,
+                        PAD_IN: datosMSV[2].PAD_IN,
+                        PAM_IN: datosMSV[2].PAM_IN,
+                        FiCO2: datosMSV[2].FiCO2,
+                        FR: datosMSV[2].FR,
+                        HoraGeneracion: datosMSV[2].HoraGeneracion
+                    },
+                    {
+                        FC: datosMSV[3].FC,
+                        Pulso: datosMSV[3].Pulso,
+                        PAS: datosMSV[3].PAS,
+                        PAD: datosMSV[3].PAD,
+                        PAM: datosMSV[3].PAM,
+                        SpO2: datosMSV[3].SpO2,
+                        EtCO2: datosMSV[3].EtCO2,
+                        Temp1: datosMSV[3].Temp1,
+                        Temp2: datosMSV[3].Temp2,
+                        PVC: datosMSV[3].PVC,
+                        PAS_IN: datosMSV[3].PAS_IN,
+                        PAD_IN: datosMSV[3].PAD_IN,
+                        PAM_IN: datosMSV[3].PAM_IN,
+                        FiCO2: datosMSV[3].FiCO2,
+                        FR: datosMSV[3].FR,
+                        HoraGeneracion: datosMSV[3].HoraGeneracion
+                    },
+                    {
+                        FC: datosMSV[4].FC,
+                        Pulso: datosMSV[4].Pulso,
+                        PAS: datosMSV[4].PAS,
+                        PAD: datosMSV[4].PAD,
+                        PAM: datosMSV[4].PAM,
+                        SpO2: datosMSV[4].SpO2,
+                        EtCO2: datosMSV[4].EtCO2,
+                        Temp1: datosMSV[4].Temp1,
+                        Temp2: datosMSV[4].Temp2,
+                        PVC: datosMSV[4].PVC,
+                        PAS_IN: datosMSV[4].PAS_IN,
+                        PAD_IN: datosMSV[4].PAD_IN,
+                        PAM_IN: datosMSV[4].PAM_IN,
+                        FiCO2: datosMSV[4].FiCO2,
+                        FR: datosMSV[4].FR,
+                        HoraGeneracion: datosMSV[4].HoraGeneracion
                     }
+                ]
+                }
             });
-
-        // const menuTrans = await MenuTrans.insertMany([
-        //     {FC: "datosMSV[0]",
-        //      Pulso: "datosMSV[1]",
-        //      PAS: "datosMSV[2]",
-        //      PAD: "datosMSV[3]",
-        //      PAM: "datosMSV[4]",
-        //      SpO2: "datosMSV[5]",
-        //      EtCO2: "datosMSV[6]",
-        //      Temp1: "datosMSV[7]", 
-        //      Temp2: "datosMSV[8]",
-        //      PVC: "datosMSV[9]",
-        //      PAS_IN: "datosMSV[10]",
-        //      PAD_IN: "datosMSV[11]",
-        //      PAM_IN: "datosMSV[12]",
-        //      FiCO2: "datosMSV[13]",
-        //      FR: "datosMSV[14]", 
-        //      HoraGeneracion: "datosMSV[15]"}
-        // ])
-
-        return res.json({datosMSV, menuTrans});
+        return res.json({ menuTrans });
     } catch (error) {
         console.log(error);
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
 
-export const saveNuevoDatosMSV = async (req: any, _res: Response) => {
-    console.log(req.body);
-    // try {
-    //     const { pid, cxid } = req.params;
-    //     const { datosMSV } = req.body;
-    //     const menuTrans = await MenuTrans.findOneAndUpdate(
-    //         { pid: pid, cxid: cxid },
-    //         { $push:{
-    //                 datosMSV: {
-    //                     FC: datosMSV[0],
-    //                     Pulso: datosMSV[1],
-    //                     PAS: datosMSV[2],
-    //                     PAD: datosMSV[3],
-    //                     PAM: datosMSV[4],
-    //                     SpO2: datosMSV[5],
-    //                     EtCO2: datosMSV[6],
-    //                     Temp1: datosMSV[7], 
-    //                     Temp2: datosMSV[8],
-    //                     PVC: datosMSV[9],
-    //                     PAS_IN: datosMSV[10],
-    //                     PAD_IN: datosMSV[11],
-    //                     PAM_IN: datosMSV[12],
-    //                     FiCO2: datosMSV[13],
-    //                     FR: datosMSV[14], 
-    //                     HoraGeneracion: datosMSV[15]
-    //                 }
-    //             }
-    //         });
-    //     return res.json({ menuTrans });
-    // } catch (error) {
-    //     return res.status(500).json({Error: 'Error de servidor'});
-    // }
+export const saveNuevoDatosMSV = async (req: any, res: Response) => {
+    try {
+        const { pid } = req.params;
+        const { datosMSV } = req.body;
+        
+        const menuTrans = await MenuTrans.findOneAndUpdate(
+            { pid: pid },
+            { $addToSet:{ datosMSV: [
+                    {
+                        FC: datosMSV[0].FC,
+                        Pulso: datosMSV[0].Pulso,
+                        PAS: datosMSV[0].PAS,
+                        PAD: datosMSV[0].PAD,
+                        PAM: datosMSV[0].PAM,
+                        SpO2: datosMSV[0].SpO2,
+                        EtCO2: datosMSV[0].EtCO2,
+                        Temp1: datosMSV[0].Temp1,
+                        Temp2: datosMSV[0].Temp2,
+                        PVC: datosMSV[0].PVC,
+                        PAS_IN: datosMSV[0].PAS_IN,
+                        PAD_IN: datosMSV[0].PAD_IN,
+                        PAM_IN: datosMSV[0].PAM_IN,
+                        FiCO2: datosMSV[0].FiCO2,
+                        FR: datosMSV[0].FR,
+                        HoraGeneracion: datosMSV[0].HoraGeneracion
+                    },
+                    {
+                        FC: datosMSV[1].FC,
+                        Pulso: datosMSV[1].Pulso,
+                        PAS: datosMSV[1].PAS,
+                        PAD: datosMSV[1].PAD,
+                        PAM: datosMSV[1].PAM,
+                        SpO2: datosMSV[1].SpO2,
+                        EtCO2: datosMSV[1].EtCO2,
+                        Temp1: datosMSV[1].Temp1,
+                        Temp2: datosMSV[1].Temp2,
+                        PVC: datosMSV[1].PVC,
+                        PAS_IN: datosMSV[1].PAS_IN,
+                        PAD_IN: datosMSV[1].PAD_IN,
+                        PAM_IN: datosMSV[1].PAM_IN,
+                        FiCO2: datosMSV[1].FiCO2,
+                        FR: datosMSV[1].FR,
+                        HoraGeneracion: datosMSV[1].HoraGeneracion
+                    },
+                    {
+                        FC: datosMSV[2].FC,
+                        Pulso: datosMSV[2].Pulso,
+                        PAS: datosMSV[2].PAS,
+                        PAD: datosMSV[2].PAD,
+                        PAM: datosMSV[2].PAM,
+                        SpO2: datosMSV[2].SpO2,
+                        EtCO2: datosMSV[2].EtCO2,
+                        Temp1: datosMSV[2].Temp1,
+                        Temp2: datosMSV[2].Temp2,
+                        PVC: datosMSV[2].PVC,
+                        PAS_IN: datosMSV[2].PAS_IN,
+                        PAD_IN: datosMSV[2].PAD_IN,
+                        PAM_IN: datosMSV[2].PAM_IN,
+                        FiCO2: datosMSV[2].FiCO2,
+                        FR: datosMSV[2].FR,
+                        HoraGeneracion: datosMSV[2].HoraGeneracion
+                    },
+                    {
+                        FC: datosMSV[3].FC,
+                        Pulso: datosMSV[3].Pulso,
+                        PAS: datosMSV[3].PAS,
+                        PAD: datosMSV[3].PAD,
+                        PAM: datosMSV[3].PAM,
+                        SpO2: datosMSV[3].SpO2,
+                        EtCO2: datosMSV[3].EtCO2,
+                        Temp1: datosMSV[3].Temp1,
+                        Temp2: datosMSV[3].Temp2,
+                        PVC: datosMSV[3].PVC,
+                        PAS_IN: datosMSV[3].PAS_IN,
+                        PAD_IN: datosMSV[3].PAD_IN,
+                        PAM_IN: datosMSV[3].PAM_IN,
+                        FiCO2: datosMSV[3].FiCO2,
+                        FR: datosMSV[3].FR,
+                        HoraGeneracion: datosMSV[3].HoraGeneracion
+                    },
+                    {
+                        FC: datosMSV[4].FC,
+                        Pulso: datosMSV[4].Pulso,
+                        PAS: datosMSV[4].PAS,
+                        PAD: datosMSV[4].PAD,
+                        PAM: datosMSV[4].PAM,
+                        SpO2: datosMSV[4].SpO2,
+                        EtCO2: datosMSV[4].EtCO2,
+                        Temp1: datosMSV[4].Temp1,
+                        Temp2: datosMSV[4].Temp2,
+                        PVC: datosMSV[4].PVC,
+                        PAS_IN: datosMSV[4].PAS_IN,
+                        PAD_IN: datosMSV[4].PAD_IN,
+                        PAM_IN: datosMSV[4].PAM_IN,
+                        FiCO2: datosMSV[4].FiCO2,
+                        FR: datosMSV[4].FR,
+                        HoraGeneracion: datosMSV[4].HoraGeneracion
+                    }
+                ]
+                }
+            });
+        return res.json({ menuTrans });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
 };
 
 /* Guardado Medicamentos */

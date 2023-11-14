@@ -929,108 +929,219 @@ export const useTransAnestStore = defineStore('transAn', {
         },
 
         async saveDatosMSV(grid:any, pid:string){
-            // console.log("saveDatosMSV\n" + JSON.stringify(grid));
-            
-            // await apiAxios({
-            // url: `http://localhost:5000/trans/msvData/${String(pid)}`,
-            // method: "PUT",
-            // headers: {
-            //     Authorization: "Bearer " + userStore.token,
-            // },
-            // data: {
-            //     grid: grid
-            //     datosMSV: [
-            //         grid[0].datos[0].valor, grid[0].datos[1].valor, grid[0].datos[2].valor,
-            //         grid[0].datos[3].valor, grid[0].datos[4].valor, grid[0].datos[5].valor,
-            //         grid[0].datos[6].valor, grid[0].datos[7].valor, grid[0].datos[8].valor,
-            //         grid[0].datos[9].valor, grid[0].datos[10].valor,grid[0].datos[11].valor,
-            //         grid[0].datos[12].valor, grid[0].datos[13].valor, grid[0].datos[14].valor,
-            //         grid[0].horaGeneracion,
-
-            //         grid[grid.length -1].datos[0].valor, grid[grid.length -1].datos[1].valor, grid[grid.length -1].datos[2].valor,
-            //         grid[grid.length -1].datos[3].valor, grid[grid.length -1].datos[4].valor, grid[grid.length -1].datos[5].valor,
-            //         grid[grid.length -1].datos[6].valor, grid[grid.length -1].datos[7].valor, grid[grid.length -1].datos[8].valor,
-            //         grid[grid.length -1].datos[9].valor, grid[grid.length -1].datos[10].valor,grid[grid.length -1].datos[11].valor,
-            //         grid[grid.length -1].datos[12].valor, grid[grid.length -1].datos[13].valor, grid[grid.length -1].datos[14].valor,
-            //         grid[grid.length -1].horaGeneracion,
-            //     ]
-            // },
-            // })
-            // .then((res: any) => {
-            // })
-            //     .catch((e: any) => {
-            // });
-            const datosMSV = grid.map(element => {
-                return {
-                    FC: element.datos[0].valor,
-                    Pulso: element.datos[1].valor,
-                    PAS: element.datos[2].valor,
-                    PAD: element.datos[3].valor,
-                    PAM: element.datos[4].valor,
-                    SpO2: element.datos[5].valor,
-                    EtCO2: element.datos[6].valor,
-                    Temp1: element.datos[7].valor,
-                    Temp2: element.datos[8].valor,
-                    PVC: element.datos[9].valor,
-                    PAS_IN: element.datos[10].valor,
-                    PAD_IN: element.datos[11].valor,
-                    PAM_IN: element.datos[12].valor,
-                    FiCO2: element.datos[13].valor,
-                    FR: element.datos[14].valor,
-                    HoraGeneracion: element.horaGeneracion
-                };
-            });
-        
             await apiAxios({
-                url: `http://localhost:5000/trans/msvData/${String(pid)}`,
-                method: "PUT",
-                headers: {
-                    Authorization: "Bearer " + userStore.token,
-                },
-                data: {
-                    datosMSV
-                },
+            url: `http://localhost:5000/trans/msvData/${String(pid)}`,
+            method: "PUT",
+            headers: {
+                Authorization: "Bearer " + userStore.token,
+            },                        
+            data: {
+                datosMSV: [
+                    {
+                        "FC": grid[grid.length - 5].datos[0].valor,
+                        "Pulso": grid[grid.length - 5].datos[1].valor,
+                        "PAS": grid[grid.length - 5].datos[2].valor,
+                        "PAD": grid[grid.length - 5].datos[3].valor,
+                        "PAM": grid[grid.length - 5].datos[4].valor,
+                        "SpO2": grid[grid.length - 5].datos[5].valor,
+                        "EtCO2": grid[grid.length - 5].datos[6].valor,
+                        "Temp1": grid[grid.length - 5].datos[7].valor,
+                        "Temp2": grid[grid.length - 5].datos[8].valor,
+                        "PVC": grid[grid.length - 5].datos[9].valor,
+                        "PAS_IN": grid[grid.length - 5].datos[10].valor,
+                        "PAD_IN": grid[grid.length - 5].datos[11].valor,
+                        "PAM_IN": grid[grid.length - 5].datos[12].valor,
+                        "FiCO2": grid[grid.length - 5].datos[13].valor,
+                        "FR": grid[grid.length - 5].datos[14].valor,
+                        "HoraGeneracion": grid[grid.length - 5].horaGeneracion,
+                    },
+                    {
+                        "FC": grid[grid.length - 4].datos[0].valor,
+                        "Pulso": grid[grid.length - 4].datos[1].valor,
+                        "PAS": grid[grid.length - 4].datos[2].valor,
+                        "PAD": grid[grid.length - 4].datos[3].valor,
+                        "PAM": grid[grid.length - 4].datos[4].valor,
+                        "SpO2": grid[grid.length - 4].datos[5].valor,
+                        "EtCO2": grid[grid.length - 4].datos[6].valor,
+                        "Temp1": grid[grid.length - 4].datos[7].valor,
+                        "Temp2": grid[grid.length - 4].datos[8].valor,
+                        "PVC": grid[grid.length - 4].datos[9].valor,
+                        "PAS_IN": grid[grid.length - 4].datos[10].valor,
+                        "PAD_IN": grid[grid.length - 4].datos[11].valor,
+                        "PAM_IN": grid[grid.length - 4].datos[12].valor,
+                        "FiCO2": grid[grid.length - 4].datos[13].valor,
+                        "FR": grid[grid.length - 4].datos[14].valor,
+                        "HoraGeneracion": grid[grid.length - 4].horaGeneracion,
+                    },
+                    {
+                        "FC": grid[grid.length - 3].datos[0].valor,
+                        "Pulso": grid[grid.length - 3].datos[1].valor,
+                        "PAS": grid[grid.length - 3].datos[2].valor,
+                        "PAD": grid[grid.length - 3].datos[3].valor,
+                        "PAM": grid[grid.length - 3].datos[4].valor,
+                        "SpO2": grid[grid.length - 3].datos[5].valor,
+                        "EtCO2": grid[grid.length - 3].datos[6].valor,
+                        "Temp1": grid[grid.length - 3].datos[7].valor,
+                        "Temp2": grid[grid.length - 3].datos[8].valor,
+                        "PVC": grid[grid.length - 3].datos[9].valor,
+                        "PAS_IN": grid[grid.length - 3].datos[10].valor,
+                        "PAD_IN": grid[grid.length - 3].datos[11].valor,
+                        "PAM_IN": grid[grid.length - 3].datos[12].valor,
+                        "FiCO2": grid[grid.length - 3].datos[13].valor,
+                        "FR": grid[grid.length - 3].datos[14].valor,
+                        "HoraGeneracion": grid[grid.length - 3].horaGeneracion,
+                    },
+                    {
+                        "FC": grid[grid.length - 2].datos[0].valor,
+                        "Pulso": grid[grid.length - 2].datos[1].valor,
+                        "PAS": grid[grid.length - 2].datos[2].valor,
+                        "PAD": grid[grid.length - 2].datos[3].valor,
+                        "PAM": grid[grid.length - 2].datos[4].valor,
+                        "SpO2": grid[grid.length - 2].datos[5].valor,
+                        "EtCO2": grid[grid.length - 2].datos[6].valor,
+                        "Temp1": grid[grid.length - 2].datos[7].valor,
+                        "Temp2": grid[grid.length - 2].datos[8].valor,
+                        "PVC": grid[grid.length - 2].datos[9].valor,
+                        "PAS_IN": grid[grid.length - 2].datos[10].valor,
+                        "PAD_IN": grid[grid.length - 2].datos[11].valor,
+                        "PAM_IN": grid[grid.length - 2].datos[12].valor,
+                        "FiCO2": grid[grid.length - 2].datos[13].valor,
+                        "FR": grid[grid.length - 2].datos[14].valor,
+                        "HoraGeneracion": grid[grid.length - 2].horaGeneracion,
+                    },
+                    {
+                        "FC": grid[grid.length - 1].datos[0].valor,
+                        "Pulso": grid[grid.length - 1].datos[1].valor,
+                        "PAS": grid[grid.length - 1].datos[2].valor,
+                        "PAD": grid[grid.length - 1].datos[3].valor,
+                        "PAM": grid[grid.length - 1].datos[4].valor,
+                        "SpO2": grid[grid.length - 1].datos[5].valor,
+                        "EtCO2": grid[grid.length - 1].datos[6].valor,
+                        "Temp1": grid[grid.length - 1].datos[7].valor,
+                        "Temp2": grid[grid.length - 1].datos[8].valor,
+                        "PVC": grid[grid.length - 1].datos[9].valor,
+                        "PAS_IN": grid[grid.length - 1].datos[10].valor,
+                        "PAD_IN": grid[grid.length - 1].datos[11].valor,
+                        "PAM_IN": grid[grid.length - 1].datos[12].valor,
+                        "FiCO2": grid[grid.length - 1].datos[13].valor,
+                        "FR": grid[grid.length - 1].datos[14].valor,
+                        "HoraGeneracion": grid[grid.length - 1].horaGeneracion,
+                    }
+                ]
+            },
             })
-            .then((res) => {
-                console.log(datosMSV); // Puedes verificar los datos que se están enviando
+            .then((res: any) => {            
             })
-            .catch((e) => {
-                console.error(e);
+                .catch((e: any) => {
             });
         },
 
         async saveNuevoDatosMSV(grid:any, pid:string, cxid:string){
-            console.log("saveNuevoDatosMSV\n" + JSON.stringify(grid));
-            // await apiAxios({
-            //     url: `http://localhost:5000/trans/msvData/add/${String(pid)}/${String(cxid)}`,
-            //     method: "PUT",
-            //     headers: {
-            //         Authorization: "Bearer " + userStore.token,
-            //     },                        
-            //     data: {
-            //         datosMSV: [
-            //             grid[0].datos[0].valor, grid[0].datos[1].valor, grid[0].datos[2].valor,
-            //             grid[0].datos[3].valor, grid[0].datos[4].valor, grid[0].datos[5].valor,
-            //             grid[0].datos[6].valor, grid[0].datos[7].valor, grid[0].datos[8].valor,
-            //             grid[0].datos[9].valor, grid[0].datos[10].valor,grid[0].datos[11].valor,
-            //             grid[0].datos[12].valor, grid[0].datos[13].valor, grid[0].datos[14].valor,
-            //             grid[0].horaGeneracion,
-
-            //             grid[grid.length -1].datos[0].valor, grid[grid.length -1].datos[1].valor, grid[grid.length -1].datos[2].valor,
-            //             grid[grid.length -1].datos[3].valor, grid[grid.length -1].datos[4].valor, grid[grid.length -1].datos[5].valor,
-            //             grid[grid.length -1].datos[6].valor, grid[grid.length -1].datos[7].valor, grid[grid.length -1].datos[8].valor,
-            //             grid[grid.length -1].datos[9].valor, grid[grid.length -1].datos[10].valor,grid[grid.length -1].datos[11].valor,
-            //             grid[grid.length -1].datos[12].valor, grid[grid.length -1].datos[13].valor, grid[grid.length -1].datos[14].valor,
-            //             grid[grid.length -1].horaGeneracion,                
-            //         ]
-            //     },
-            // })
-            // .then((res: any) => {            
-            //     console.log(grid[0].horaGeneracion);
-            //     console.log(grid[grid.length -1].horaGeneracion);
-            // })
-            //     .catch((e: any) => {
-            // });
+            await apiAxios({
+                url: `http://localhost:5000/trans/msvData/add/${String(pid)}/${String(cxid)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },                        
+                data: {
+                    datosMSV: [
+                        {
+                            "FC": grid[grid.length - 5].datos[0].valor,
+                            "Pulso": grid[grid.length - 5].datos[1].valor,
+                            "PAS": grid[grid.length - 5].datos[2].valor,
+                            "PAD": grid[grid.length - 5].datos[3].valor,
+                            "PAM": grid[grid.length - 5].datos[4].valor,
+                            "SpO2": grid[grid.length - 5].datos[5].valor,
+                            "EtCO2": grid[grid.length - 5].datos[6].valor,
+                            "Temp1": grid[grid.length - 5].datos[7].valor,
+                            "Temp2": grid[grid.length - 5].datos[8].valor,
+                            "PVC": grid[grid.length - 5].datos[9].valor,
+                            "PAS_IN": grid[grid.length - 5].datos[10].valor,
+                            "PAD_IN": grid[grid.length - 5].datos[11].valor,
+                            "PAM_IN": grid[grid.length - 5].datos[12].valor,
+                            "FiCO2": grid[grid.length - 5].datos[13].valor,
+                            "FR": grid[grid.length - 5].datos[14].valor,
+                            "HoraGeneracion": grid[grid.length - 5].horaGeneracion,
+                        },
+                        {
+                            "FC": grid[grid.length - 4].datos[0].valor,
+                            "Pulso": grid[grid.length - 4].datos[1].valor,
+                            "PAS": grid[grid.length - 4].datos[2].valor,
+                            "PAD": grid[grid.length - 4].datos[3].valor,
+                            "PAM": grid[grid.length - 4].datos[4].valor,
+                            "SpO2": grid[grid.length - 4].datos[5].valor,
+                            "EtCO2": grid[grid.length - 4].datos[6].valor,
+                            "Temp1": grid[grid.length - 4].datos[7].valor,
+                            "Temp2": grid[grid.length - 4].datos[8].valor,
+                            "PVC": grid[grid.length - 4].datos[9].valor,
+                            "PAS_IN": grid[grid.length - 4].datos[10].valor,
+                            "PAD_IN": grid[grid.length - 4].datos[11].valor,
+                            "PAM_IN": grid[grid.length - 4].datos[12].valor,
+                            "FiCO2": grid[grid.length - 4].datos[13].valor,
+                            "FR": grid[grid.length - 4].datos[14].valor,
+                            "HoraGeneracion": grid[grid.length - 4].horaGeneracion,
+                        },
+                        {
+                            "FC": grid[grid.length - 3].datos[0].valor,
+                            "Pulso": grid[grid.length - 3].datos[1].valor,
+                            "PAS": grid[grid.length - 3].datos[2].valor,
+                            "PAD": grid[grid.length - 3].datos[3].valor,
+                            "PAM": grid[grid.length - 3].datos[4].valor,
+                            "SpO2": grid[grid.length - 3].datos[5].valor,
+                            "EtCO2": grid[grid.length - 3].datos[6].valor,
+                            "Temp1": grid[grid.length - 3].datos[7].valor,
+                            "Temp2": grid[grid.length - 3].datos[8].valor,
+                            "PVC": grid[grid.length - 3].datos[9].valor,
+                            "PAS_IN": grid[grid.length - 3].datos[10].valor,
+                            "PAD_IN": grid[grid.length - 3].datos[11].valor,
+                            "PAM_IN": grid[grid.length - 3].datos[12].valor,
+                            "FiCO2": grid[grid.length - 3].datos[13].valor,
+                            "FR": grid[grid.length - 3].datos[14].valor,
+                            "HoraGeneracion": grid[grid.length - 3].horaGeneracion,
+                        },
+                        {
+                            "FC": grid[grid.length - 2].datos[0].valor,
+                            "Pulso": grid[grid.length - 2].datos[1].valor,
+                            "PAS": grid[grid.length - 2].datos[2].valor,
+                            "PAD": grid[grid.length - 2].datos[3].valor,
+                            "PAM": grid[grid.length - 2].datos[4].valor,
+                            "SpO2": grid[grid.length - 2].datos[5].valor,
+                            "EtCO2": grid[grid.length - 2].datos[6].valor,
+                            "Temp1": grid[grid.length - 2].datos[7].valor,
+                            "Temp2": grid[grid.length - 2].datos[8].valor,
+                            "PVC": grid[grid.length - 2].datos[9].valor,
+                            "PAS_IN": grid[grid.length - 2].datos[10].valor,
+                            "PAD_IN": grid[grid.length - 2].datos[11].valor,
+                            "PAM_IN": grid[grid.length - 2].datos[12].valor,
+                            "FiCO2": grid[grid.length - 2].datos[13].valor,
+                            "FR": grid[grid.length - 2].datos[14].valor,
+                            "HoraGeneracion": grid[grid.length - 2].horaGeneracion,
+                        },
+                        {
+                            "FC": grid[grid.length - 1].datos[0].valor,
+                            "Pulso": grid[grid.length - 1].datos[1].valor,
+                            "PAS": grid[grid.length - 1].datos[2].valor,
+                            "PAD": grid[grid.length - 1].datos[3].valor,
+                            "PAM": grid[grid.length - 1].datos[4].valor,
+                            "SpO2": grid[grid.length - 1].datos[5].valor,
+                            "EtCO2": grid[grid.length - 1].datos[6].valor,
+                            "Temp1": grid[grid.length - 1].datos[7].valor,
+                            "Temp2": grid[grid.length - 1].datos[8].valor,
+                            "PVC": grid[grid.length - 1].datos[9].valor,
+                            "PAS_IN": grid[grid.length - 1].datos[10].valor,
+                            "PAD_IN": grid[grid.length - 1].datos[11].valor,
+                            "PAM_IN": grid[grid.length - 1].datos[12].valor,
+                            "FiCO2": grid[grid.length - 1].datos[13].valor,
+                            "FR": grid[grid.length - 1].datos[14].valor,
+                            "HoraGeneracion": grid[grid.length - 1].horaGeneracion,
+                        }
+                    ]
+                },
+            })
+            .then((res: any) => {
+            })
+                .catch((e: any) => {
+            });
         },
 
         // Gestión de medicamentos
