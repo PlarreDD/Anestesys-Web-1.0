@@ -1487,7 +1487,7 @@ export default defineComponent({
         if(preIdStore.nuevoRegistroPaciente == false){
             if(preIdStore.actualizarRegRecuperacion == false ){
                 // Guardar datos                    
-                postAnestStore.saveRecupera(this.infoRec, preIdStore.pacienteID._id);
+                postAnestStore.saveRecupera(this.infoRec, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id);
                 preIdStore.actualizarRegRecuperacion = true
             }else if(preIdStore.actualizarRegRecuperacion == true){
                 // Actualizar datos

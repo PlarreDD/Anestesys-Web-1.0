@@ -9,7 +9,7 @@ import { UpdateResult } from "mongodb";
 /******************* Menu Trans Anestesico *******************/
 export const saveMenuTrans = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { pid, cxid,
                 /* Balance Total */
                 balanceTotal,
                 // Ingresos
@@ -33,7 +33,7 @@ export const saveMenuTrans = async (req: any, res: Response) => {
         let menuTrans;
 
         if( modosVentilacion == undefined ){
-            menuTrans = new MenuTrans({ pid,
+            menuTrans = new MenuTrans({ pid, cxid,
                                         /* Balance Total */
                                         balanceTotal: balanceTotal,
                                         // Ingresos
@@ -76,7 +76,7 @@ export const saveMenuTrans = async (req: any, res: Response) => {
             });
         }
         else{
-            menuTrans = new MenuTrans({ pid,
+            menuTrans = new MenuTrans({ pid, cxid,
                                         // Datos del ventilador
                                         datosVentilador: {
                                             modosVentilacion: modosVentilacion,
@@ -472,7 +472,7 @@ export const UpdateNuevoBalanceH = async (req: any, res: Response) => {
 /* Tiempos QX Guardado/Actualización */
 export const saveTiemposQX = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { pid, cxid,
                 // Tiempos Qx
                 ingresoQX, inicioAn, inicioCx, finCx, finAn, egresoQx,
               } = req.body;
@@ -492,7 +492,7 @@ export const saveTiemposQX = async (req: any, res: Response) => {
                                                });
 
         } else {
-            const menuTrans  = new MenuTrans({ pid,
+            const menuTrans  = new MenuTrans({ pid, cxid,
                                                 // Datos del ventilador
                                                 tiemposQX: {
                                                     ingresoQX: ingresoQX,
@@ -549,10 +549,10 @@ export const saveNuevoTiemposQX = async (req: any, res: Response) => {
 /* Guardado Datos MSV */
 export const saveDatosMSV = async (req: any, res: Response) => {
     try {
-        const { pid } = req.params;
+        const { pid, cxid } = req.params;
         const { datosMSV } = req.body;                
         const menuTrans = await MenuTrans.findOneAndUpdate(
-            { pid: pid },
+            { pid: pid, cxid: cxid },
             { $push:{
                     datosMSV: {
                         FC: datosMSV[0], Pulso: datosMSV[1], PAS: datosMSV[2], PAD: datosMSV[3], PAM: datosMSV[4], SpO2: datosMSV[5], EtCO2: datosMSV[6], Temp1: datosMSV[7], 
@@ -590,11 +590,11 @@ export const saveNuevoDatosMSV = async (req: any, res: Response) => {
 /* Guardado Medicamentos */
 export const saveMedicamentos = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { pid, cxid,
                 // Datos medicamentos
                 tipoMed, medicamento, dosisMed, unidadMed, viaMed, horaInicioMed, horaFinalMed, observacionesMed
               } = req.body;        
-        const menuTrans  = await new MenuTrans({ pid,
+        const menuTrans  = await new MenuTrans({ pid, cxid,
                                             // Datos del medicamento
                                             medicamentosCx: {
                                                 tipoMed: tipoMed, medicamento: medicamento, dosisMed: dosisMed, unidadMed: unidadMed, viaMed: viaMed, 
@@ -756,11 +756,11 @@ export const deleteMedicamento = async (req: any, res: Response) => {
 /* Guardado Relevo */
 export const saveRelevos = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { pid, cxid,
                 // Datos relevos
                 horaRelevo, tipoRel, matriculaRel, anestesiologoRel, observacionesRel
               } = req.body;        
-        const menuTrans  = await new MenuTrans({ pid,
+        const menuTrans  = await new MenuTrans({ pid, cxid,
                                             // Datos del relevo
                                             relevoCx: {
                                                 horaRelevo: horaRelevo, tipoRel: tipoRel, matriculaRel: matriculaRel, anestesiologoRel: anestesiologoRel, observacionesRel: observacionesRel
@@ -917,11 +917,11 @@ export const deleteRelevo = async (req: any, res: Response) => {
 /* Guardado Eventos */
 export const saveEventos = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { pid, cxid,
                 // Datos relevos
                 horaEvento, tipoEve, detalleEvento
               } = req.body;        
-        const menuTrans  = await new MenuTrans({ pid,
+        const menuTrans  = await new MenuTrans({ pid, cxid,
                                             // Datos del relevo
                                             evCriticoCx: {
                                                 horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento

@@ -968,7 +968,7 @@ export default defineComponent({
                 if(preIdStore.actualizarRegNotaPA == false ){
                     // Guardar datos
                     if(this.transAnestStore.tipoTecnica == false){
-                        postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id);
+                        postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id);
                         this.transAnestStore.tipoTecnica=true
                     }
                     preIdStore.actualizarRegNotaPA = true                    

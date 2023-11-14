@@ -5130,7 +5130,7 @@ export default defineComponent({
         this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
         
         if(preIdStore.nuevoRegistroPaciente == false){
-          await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
+          await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id);
         }else if(preIdStore.nuevoRegistroPaciente == true){        
           await transAnestStore.saveNuevoDatosV(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
         }        
@@ -5269,7 +5269,7 @@ export default defineComponent({
 
           //Metódo para guardar
           if(preIdStore.nuevoRegistroPaciente == false){
-            await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
+            await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id);
           }else if(preIdStore.nuevoRegistroPaciente == true){         
             await transAnestStore.saveNuevoDatosV(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
           }
@@ -5301,7 +5301,7 @@ export default defineComponent({
 
         if(preIdStore.nuevoRegistroPaciente == false){
           if(this.transAnestStore.tipoTecnica == false){
-            postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id)
+            postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id)
             this.transAnestStore.tipoTecnica=true
           }
         }else if(preIdStore.nuevoRegistroPaciente == true){
@@ -5383,7 +5383,7 @@ export default defineComponent({
             this.enviarDatosTrans()
 
             if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.saveTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID._id, tiemposQX);
+              await transAnestStore.saveTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
             }else if(preIdStore.nuevoRegistroPaciente == true){            
               await transAnestStore.saveNuevoTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
             }
@@ -5415,7 +5415,7 @@ export default defineComponent({
             this.enviarDatosTrans()
 
             if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.saveTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID._id, tiemposQX);
+              await transAnestStore.saveTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
             }else if(preIdStore.nuevoRegistroPaciente == true){            
               await transAnestStore.saveNuevoTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
             }
@@ -5445,7 +5445,7 @@ export default defineComponent({
 
             this.enviarDatosTrans()
             if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.saveTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID._id, tiemposQX);
+              await transAnestStore.saveTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
             }else if(preIdStore.nuevoRegistroPaciente == true){            
               await transAnestStore.saveNuevoTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
             }
@@ -5476,7 +5476,7 @@ export default defineComponent({
             this.enviarDatosTrans()
 
             if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.saveTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID._id, tiemposQX);
+              await transAnestStore.saveTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
             }else if(preIdStore.nuevoRegistroPaciente == true){            
               await transAnestStore.saveNuevoTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
             }
@@ -5507,7 +5507,7 @@ export default defineComponent({
             this.enviarDatosTrans()
 
             if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.saveTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID._id, tiemposQX);
+              await transAnestStore.saveTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
             }else if(preIdStore.nuevoRegistroPaciente == true){            
               await transAnestStore.saveNuevoTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
             }
@@ -5542,7 +5542,7 @@ export default defineComponent({
             this.enviarDatosTrans()
 
             if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX);
+              await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
             }else if(preIdStore.nuevoRegistroPaciente == true){            
               await transAnestStore.saveNuevoTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
             }
@@ -5557,7 +5557,7 @@ export default defineComponent({
         switch (tiemposQX) {
           case "QXIN":
             if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.saveTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID._id, tiemposQX);
+              await transAnestStore.saveTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
               this.enviarDatosTrans()
             }else if(preIdStore.nuevoRegistroPaciente == true){            
               await transAnestStore.saveNuevoTiemposQX(this.menuTrans.ingresoQX, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
@@ -5568,7 +5568,7 @@ export default defineComponent({
           case "ANESIN":
             if(preIdStore.nuevoRegistroPaciente == false){
               this.enviarDatosTrans()
-              await transAnestStore.saveTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID._id, tiemposQX);
+              await transAnestStore.saveTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
             }else if(preIdStore.nuevoRegistroPaciente == true){            
               this.enviarDatosTrans()
               await transAnestStore.saveNuevoTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
@@ -5578,7 +5578,7 @@ export default defineComponent({
           case "CXIN":
             if(preIdStore.nuevoRegistroPaciente == false){
               this.enviarDatosTrans()
-              await transAnestStore.saveTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID._id, tiemposQX);
+              await transAnestStore.saveTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
             }else if(preIdStore.nuevoRegistroPaciente == true){            
               this.enviarDatosTrans()
               await transAnestStore.saveNuevoTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
@@ -5588,7 +5588,7 @@ export default defineComponent({
           case "CXOUT":
             if(preIdStore.nuevoRegistroPaciente == false){
               this.enviarDatosTrans()
-              await transAnestStore.saveTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID._id, tiemposQX);
+              await transAnestStore.saveTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
             }else if(preIdStore.nuevoRegistroPaciente == true){       
               this.enviarDatosTrans()     
               await transAnestStore.saveNuevoTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
@@ -5598,7 +5598,7 @@ export default defineComponent({
           case "ANESOUT":
             if(preIdStore.nuevoRegistroPaciente == false){
               this.enviarDatosTrans()
-              await transAnestStore.saveTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID._id, tiemposQX);
+              await transAnestStore.saveTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
             }else if(preIdStore.nuevoRegistroPaciente == true){      
               this.enviarDatosTrans()      
               await transAnestStore.saveNuevoTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
@@ -5607,7 +5607,7 @@ export default defineComponent({
 
           case "QXOUT":
             if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX);
+              await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
             }else if(preIdStore.nuevoRegistroPaciente == true){            
               await transAnestStore.saveNuevoTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
             }
@@ -5786,7 +5786,7 @@ export default defineComponent({
           transAnestStore.btnActualizarBalance=true
           
           if(preIdStore.nuevoRegistroPaciente == false){
-            await this.transAnestStore.saveDatosMedicamentos(this.menuTrans, preIdStore.pacienteID._id)
+            await this.transAnestStore.saveDatosMedicamentos(this.menuTrans, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id)
           }else if(preIdStore.nuevoRegistroPaciente == true){         
             await this.transAnestStore.saveNuevoDatosMedicamentos(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
           }          
@@ -6021,7 +6021,7 @@ export default defineComponent({
             transAnestStore.btnActualizarBalance=true
             
             if(preIdStore.nuevoRegistroPaciente == false){
-              await this.transAnestStore.saveDatosRelevos(this.menuTrans, preIdStore.pacienteID._id)
+              await this.transAnestStore.saveDatosRelevos(this.menuTrans, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id)
             }else if(preIdStore.nuevoRegistroPaciente == true){        
               await this.transAnestStore.saveNuevoDatosRelevos(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
             }            
@@ -6265,7 +6265,7 @@ export default defineComponent({
             transAnestStore.btnActualizarBalance=true
             
             if(preIdStore.nuevoRegistroPaciente == false){
-              await this.transAnestStore.saveDatosEventos(this.menuTrans, preIdStore.pacienteID._id)
+              await this.transAnestStore.saveDatosEventos(this.menuTrans, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id)
             }else if(preIdStore.nuevoRegistroPaciente == true){        
               await this.transAnestStore.saveNuevoDatosEventos(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
             }  

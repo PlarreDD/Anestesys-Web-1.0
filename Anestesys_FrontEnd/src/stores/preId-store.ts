@@ -9,6 +9,7 @@ const userStore = useUserStore();
 export const usePreIdStore = defineStore('preid', {
     state: () => ({
         pacienteID: ref(null),
+        pacienteCxID: ref(null),
         estudioID: ref(null),
         valoracionID: ref(null),
         numExpediente: ref(null),
@@ -265,6 +266,7 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {                
                 this.pacienteID = res.data.paciente;
+                this.pacienteCxID = res.data.infoCx;
                 this.actualizarRegId = true
                 
                 swal.fire({
@@ -467,7 +469,7 @@ export const usePreIdStore = defineStore('preid', {
         },
         
         /*************************** Valoración **************************/
-        async savePreAntecedentes(infoValoracion: any, pid: string){
+        async savePreAntecedentes(infoValoracion: any, pid: string, cxid: string){
             await apiAxios({                
                     url: "http://localhost:5000/valora",
                     method: "POST",
@@ -476,7 +478,7 @@ export const usePreIdStore = defineStore('preid', {
                     },
                     data: {
                         // Antecedentes
-                        pid: pid,
+                        pid: pid, cxid: cxid,
                         // Personales Patológicos
                         antPersPat_Alergias: infoValoracion.antPersPat_Alergias,
                         antPersPat_Quirurgicos: infoValoracion.antPersPat_Quirurgicos,
@@ -1028,7 +1030,7 @@ export const usePreIdStore = defineStore('preid', {
             });
         },
         /***************************** Plan ******************************/
-        savePrePlan(infoPlan: any, pid: string){
+        savePrePlan(infoPlan: any, pid: string, cxid: string){
             apiAxios({
                 url: "http://localhost:5000/plan",
                 method: "POST",
@@ -1036,7 +1038,7 @@ export const usePreIdStore = defineStore('preid', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    pid: pid,
+                    pid: pid, cxid:cxid,
                     // Posición y Cuidados
                     pos_HorasAyuno: infoPlan.pos_HorasAyuno,
                     pos_AccesoVenoso: infoPlan.pos_AccesoVenoso,
@@ -1413,7 +1415,7 @@ export const usePreIdStore = defineStore('preid', {
             });
         },
         /***************************** Nota ******************************/
-        savePreNota(obsNotaPre: string, pid: string){
+        savePreNota(obsNotaPre: string, pid: string, cxid: string){
             apiAxios({
                 url: "http://localhost:5000/nota",
                 method: "POST",
@@ -1421,7 +1423,7 @@ export const usePreIdStore = defineStore('preid', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    pid: pid,
+                    pid: pid, cxid: cxid,
                     obsNotaPre: obsNotaPre,
                 },
             })

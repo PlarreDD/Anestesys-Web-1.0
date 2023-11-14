@@ -157,7 +157,7 @@ export const usePostAnestStore = defineStore('postAn', {
 
     actions: {
         /*------------------- Nota Post Anestésica -------------------*/
-        async saveNotaPA(infoNotaPost: any, pid: string){
+        async saveNotaPA(infoNotaPost: any, pid: string, cxid: string){
             await apiAxios({
                 url: "http://localhost:5000/notapa",
                 method: "POST",
@@ -165,7 +165,7 @@ export const usePostAnestStore = defineStore('postAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    pid: pid,
+                    pid: pid, cxid: cxid,
                     // Nota Post Anestésica
                     npa_TecAnestFinal: String(infoNotaPost.npa_TecAnestFinal),
                     npa_Intubacion: infoNotaPost.npa_Intubacion,
@@ -454,7 +454,7 @@ export const usePostAnestStore = defineStore('postAn', {
             });
         },
         /*----------------------- Recuperación -----------------------*/
-        async saveRecupera(infoRec: any, pid: string){
+        async saveRecupera(infoRec: any, pid: string, cxid: string){
             await apiAxios({
                 url: "http://localhost:5000/recupera",
                 method: "POST",
@@ -462,7 +462,7 @@ export const usePostAnestStore = defineStore('postAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    pid: pid,
+                    pid: pid, cxid: cxid,
                     // Nota de Evaluación UCPA
                     notaEval_Obs: infoRec.notaEval_Obs,
                     // Aldrete de Recuperación

@@ -436,9 +436,7 @@ export default defineComponent({
     },
 
     async obtenerCirugia(id){
-      await idStore.getDatosPDF(id)
-
-      console.log("id: "+id);      
+      await idStore.getDatosPDF(id)    
     },
 
     // Obtener datos de paciente seleccionado

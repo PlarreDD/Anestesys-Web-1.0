@@ -141,7 +141,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
     actions: {
         /* Datos del Ventilador */
-        async saveDatosV(regTransAnest: any, pid: string){
+        async saveDatosV(regTransAnest: any, pid: string, cxid: string){
             await apiAxios({
                 url: "http://localhost:5000/trans",
                 method: "POST",
@@ -149,7 +149,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    pid: pid,
+                    pid: pid, cxid: cxid,
                     // Datos del Ventilador
                     modosVentilacion: regTransAnest.modosVentilacion,
                     peep: regTransAnest.peep,
@@ -666,7 +666,7 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
-        async saveTiemposQX(regTransAnest: any, pid: string, tqx: string) {
+        async saveTiemposQX(regTransAnest: any, pid: string, tqx: string, cxid: string) {
             switch (tqx) {
                 case "QXIN":
                     await apiAxios({
@@ -676,7 +676,7 @@ export const useTransAnestStore = defineStore('transAn', {
                             Authorization: "Bearer " + userStore.token,
                         },
                         data: {
-                            pid: pid,
+                            pid: pid, cxid: cxid,
                             ingresoQX: regTransAnest
                         }
                     })
@@ -1083,7 +1083,7 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
-        async saveDatosMedicamentos(regTransAnest: any, pid: string){
+        async saveDatosMedicamentos(regTransAnest: any, pid: string, cxid: string){
             await apiAxios({
                 url: "http://localhost:5000/trans/medic",
                 method: "POST",
@@ -1091,7 +1091,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    pid: pid,
+                    pid: pid, cxid: cxid,
                     // Datos del Medicamento
                     tipoMed: regTransAnest.tipoMed,
                     medicamento: regTransAnest.medicamento,
@@ -1305,7 +1305,7 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
-        async saveDatosRelevos(regTransAnest: any, pid: string){
+        async saveDatosRelevos(regTransAnest: any, pid: string, cxid: string){
             await apiAxios({
                 url: "http://localhost:5000/trans/relevo",
                 method: "POST",
@@ -1313,7 +1313,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    pid: pid,
+                    pid: pid, cxid: cxid,
                     // Datos del Relevo
                     tipoRel: regTransAnest.tipoRel,
                     horaRelevo: regTransAnest.horaRelevo,
@@ -1521,7 +1521,7 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
-        async saveDatosEventos(regTransAnest: any, pid: string){
+        async saveDatosEventos(regTransAnest: any, pid: string, cxid: string){
             await apiAxios({
                 url: "http://localhost:5000/trans/evento",
                 method: "POST",
@@ -1529,7 +1529,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    pid: pid,
+                    pid: pid, cxid: cxid,
                     // Datos del evento
                     horaEvento: regTransAnest.horaEvento,
                     tipoEve: regTransAnest.tipoEve,

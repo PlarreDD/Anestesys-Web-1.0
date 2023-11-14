@@ -1149,7 +1149,7 @@ export default defineComponent({
             if(preIdStore.nuevoRegistroPaciente == false){
                 if(preIdStore.actualizarRegPlan == false ){
                     // Guardar datos
-                    preIdStore.savePrePlan(this.infoPlan, preIdStore.pacienteID._id)
+                    preIdStore.savePrePlan(this.infoPlan, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id)
                     preIdStore.actualizarRegPlan = true
                 }else if(preIdStore.actualizarRegPlan == true){
                     // Actualizar datos

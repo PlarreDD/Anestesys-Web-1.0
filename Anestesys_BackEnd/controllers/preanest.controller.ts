@@ -253,7 +253,7 @@ export const updateNuevoRegistroPaciente = async (req: any, res: Response) => {
 /* Función de registro de valoración pre anetésica */
 export const savePreAntecedentes = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { pid, cxid,
                 // Patológicos
                 antPersPat_Alergias, antPersPat_Quirurgicos,
                 antPersPat_Endocrinologicos, antPersPat_Urologicos,
@@ -290,7 +290,7 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
             } = req.body;
 
         const preval = new PreValoracion({
-            pid: pid,
+            pid: pid, cxid,
             /* Antecedentes */
             // Personales Patológicos
             antPersPat_Alergias: antPersPat_Alergias,
@@ -885,7 +885,7 @@ export const deleteEstudio = async (req: any, res: Response) => {
 /********************************************************************/
 export const savePrePlan = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { pid, cxid,
                 // Posicion y Cuidados
                 pos_HorasAyuno, pos_AccesoVenoso, pos_PosicionPaciente,
                 pos_PosicionBrazos, pos_Torniquete, pos_AplicacionTorniquete,
@@ -922,7 +922,7 @@ export const savePrePlan = async (req: any, res: Response) => {
                 local_SitioAnestesiaL, local_AnestesicoUtilizado,
                 local_Especificar, } = req.body;
         
-        const preplan = new PrePlan({ pid: pid,
+        const preplan = new PrePlan({ pid: pid, cxid: cxid,
                                       // Posicion y Cuidados
                                       pos_HorasAyuno, pos_AccesoVenoso, pos_PosicionPaciente,
                                       pos_PosicionBrazos, pos_Torniquete, pos_AplicacionTorniquete,
@@ -1226,9 +1226,9 @@ export const updateNuevoPrePlan = async (req: any, res: Response) => {
 /* Función de registro de nota pre anetésica */
 export const saveNota = async (req: any, res: Response) => {
     try {
-        const { obsNotaPre, pid } = req.body;
+        const { obsNotaPre, pid, cxid } = req.body;
         
-        const prenota = new PreNota({ pid: pid,
+        const prenota = new PreNota({ pid: pid, cxid: cxid,
                                       obsNota: obsNotaPre });
         
         await prenota.save();
