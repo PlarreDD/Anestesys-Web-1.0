@@ -436,7 +436,49 @@ export default defineComponent({
     },
 
     async obtenerCirugia(id){
-      await idStore.getDatosPDF(id)    
+      await idStore.getDatosPDF(id)
+
+      // pacientesCx
+      idStore.NumeroEpisodio = idStore.cirugia.pacientesCx[0].numEpisodio
+      idStore.Habitacion = idStore.cirugia.pacientesCx[0].habitacionPaciente
+      idStore.FechaIngreso = idStore.cirugia.pacientesCx[0].fechaInPaciente
+      idStore.Diagnostico = idStore.cirugia.pacientesCx[0].diagnostico
+      idStore.TipoCirugia = idStore.cirugia.pacientesCx[0].tipoCx
+      idStore.CIE10 = idStore.cirugia.pacientesCx[0].cie10
+      idStore.CIE9 = idStore.cirugia.pacientesCx[0].cie9
+      idStore.NombreCirugia = idStore.cirugia.pacientesCx[0].cirugia
+      idStore.FechaCirugia = idStore.cirugia.pacientesCx[0].fechaCx
+      idStore.HoraCirugia = idStore.cirugia.pacientesCx[0].hrCx
+      idStore.NombreCirujano = idStore.cirugia.pacientesCx[0].cirujano
+      idStore.NombreAnestesiologo = idStore.cirugia.pacientesCx[0].anestesiologo
+      idStore.AnestesiologoVPA = idStore.cirugia.pacientesCx[0].anestesiologoVPA
+      idStore.residenteAnestesia = idStore.cirugia.pacientesCx[0].residenteAnestesia
+      // pacientesVal
+      idStore.APPAlergias = idStore.cirugia.pacientesVal[0].antPersPat_Alergias
+      idStore.APPQuirurgicos = idStore.cirugia.pacientesVal[0].antPersPat_Quirurgicos
+      idStore.APPEndocrinologicos = idStore.cirugia.pacientesVal[0].antPersPat_Endocrinologicos
+      idStore.APPUrologicos = idStore.cirugia.pacientesVal[0].antPersPat_Urologicos
+      idStore.APPTraumaticos = idStore.cirugia.pacientesVal[0].antPersPat_Traumaticos
+      idStore.APPOrtopedicos = idStore.cirugia.pacientesVal[0].antPersPat_Ortopedicos
+      idStore.APPTransfuciones = idStore.cirugia.pacientesVal[0].antPersPat_Transfusiones
+      idStore.APPComplicaciones = idStore.cirugia.pacientesVal[0].antPersPat_CompAnestPrev
+      idStore.APPEstadoPsiquico = idStore.cirugia.pacientesVal[0].antPersPat_EstadoPsiq
+      idStore.APPMedicacion = idStore.cirugia.pacientesVal[0].antPersPat_MedActual
+      idStore.APNPHorasAyuno = idStore.cirugia.pacientesCx[0].numEpisodio
+      idStore.APNPTabaquismo = idStore.cirugia.pacientesCx[0].numEpisodio
+      idStore.APNPEtilismo = idStore.cirugia.pacientesCx[0].numEpisodio
+      idStore.APNPAdicciones = idStore.cirugia.pacientesCx[0].numEpisodio
+      idStore.APNPInmunizaciones = idStore.cirugia.pacientesCx[0].numEpisodio
+      idStore.AntecedentesImportancia = idStore.cirugia.pacientesCx[0].numEpisodio
+      idStore.SEdad = idStore.cirugia.pacientesCx[0].numEpisodio
+      idStore.Temperatura = idStore.cirugia.pacientesCx[0].numEpisodio
+      idStore.FrecuenciaCardiaca = idStore.cirugia.pacientesCx[0].numEpisodio
+      idStore.FrecuenciaRespiratoria = idStore.cirugia.pacientesCx[0].numEpisodio
+      idStore.Peso = idStore.cirugia.pacientesCx[0].numEpisodio
+      idStore.Talla = idStore.cirugia.pacientesCx[0].numEpisodio
+      idStore.IMC = idStore.cirugia.pacientesCx[0].numEpisodio
+      idStore.TensionArterial = idStore.cirugia.pacientesCx[0].numEpisodio
+      idStore.SaturacionOxigeno = idStore.cirugia.pacientesCx[0].numEpisodio
     },
 
     // Obtener datos de paciente seleccionado
