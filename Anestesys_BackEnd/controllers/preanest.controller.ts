@@ -290,7 +290,7 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
             } = req.body;
 
         const preval = new PreValoracion({
-            pid: pid, cxid,
+            pid: pid, cxid: cxid,
             /* Antecedentes */
             // Personales Patológicos
             antPersPat_Alergias: antPersPat_Alergias,
