@@ -657,11 +657,11 @@ export const saveDatosMSV = async (req: any, res: Response) => {
 
 export const saveNuevoDatosMSV = async (req: any, res: Response) => {
     try {
-        const { pid } = req.params;
+        const { pid, cxid } = req.params;
         const { datosMSV } = req.body;
         
         const menuTrans = await MenuTrans.findOneAndUpdate(
-            { pid: pid },
+            { pid: pid, cxid: cxid },
             { $addToSet:{ datosMSV: [
                     {
                         FC: datosMSV[0].FC,
