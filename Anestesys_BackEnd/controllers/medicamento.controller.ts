@@ -16,7 +16,7 @@ export const getMedicamento = async (req: any, res: Response) => {
     try {
         const {id} = req.params;
         
-        const medicamento = await Medicamento.findById(id)        
+        const medicamento = await Medicamento.findById(id)
         return res.json({medicamento});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
