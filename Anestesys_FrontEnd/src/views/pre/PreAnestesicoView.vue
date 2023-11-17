@@ -440,6 +440,9 @@ export default defineComponent({
 
       await this.asignarDatosPacientesCx()
       await this.asignarDatosPacientesVal()
+      await this.asignarDatosPacientesPlan()
+      await this.asignarDatosPacientesNota()
+      await this.asignarDatosPacientesTrans()
     },
 
     async asignarDatosPacientesCx(){
@@ -457,7 +460,7 @@ export default defineComponent({
       idStore.NombreCirujano = idStore.cirugia.pacientesCx[0].cirujano
       idStore.NombreAnestesiologo = idStore.cirugia.pacientesCx[0].anestesiologo
       idStore.AnestesiologoVPA = idStore.cirugia.pacientesCx[0].anestesiologoVPA
-      idStore.residenteAnestesia = idStore.cirugia.pacientesCx[0].residenteAnestesia
+      idStore.residenteAnestesia = idStore.cirugia.pacientesCx[0].residenteAnestesia    
     },
 
     async asignarDatosPacientesVal(){
@@ -487,57 +490,165 @@ export default defineComponent({
       idStore.IMC = idStore.cirugia.pacientesVal[0].sigVit_IMC
       idStore.TensionArterial = idStore.cirugia.pacientesVal[0].sigVit_TensionArterial
       idStore.SaturacionOxigeno = idStore.cirugia.pacientesVal[0].sigVit_SaturacionOxigeno
+      idStore.Mallampati = idStore.cirugia.pacientesVal[0].viaAerea_Mallampati
+      idStore.PatilAldreti = idStore.cirugia.pacientesVal[0].viaAerea_PatilAldreti
+      idStore.AperturaBucal = idStore.cirugia.pacientesVal[0].viaAerea_AperturaBucal
+      idStore.Distancia = idStore.cirugia.pacientesVal[0].viaAerea_Distancia
+      idStore.Protusion = idStore.cirugia.pacientesVal[0].viaAerea_Protusion
+      idStore.IPID = idStore.cirugia.pacientesVal[0].viaAerea_Ipid
+      idStore.Glasgow = idStore.cirugia.pacientesVal[0].viaAerea_Glasgow
+      idStore.NYHA = idStore.cirugia.pacientesVal[0].viaAerea_NYHA
+      idStore.Goldman = idStore.cirugia.pacientesVal[0].viaAerea_Goldman
+      idStore.RiesgosTrombosis = idStore.cirugia.pacientesVal[0].viaAerea_RiesgoTrombosis
+      idStore.ClasificacionASA = idStore.cirugia.pacientesVal[0].viaAerea_ClasificacionASA
+      idStore.VTipoCirugia = idStore.cirugia.pacientesVal[0].viaAerea_TipoCirugia
+      idStore.RiesgoAnestesico = idStore.cirugia.pacientesVal[0].viaAerea_RiesgoAnestesico
 
-      idStore.Peso = idStore.cirugia.pacientesVal[0].sigVit_Peso
-      idStore.Talla = idStore.cirugia.pacientesVal[0].sigVit_Talla
-      idStore.IMC = idStore.cirugia.pacientesVal[0].sigVit_IMC
-      idStore.TensionArterial = idStore.cirugia.pacientesVal[0].sigVit_TensionArterial
-      idStore.SaturacionOxigeno = idStore.cirugia.pacientesVal[0].sigVit_SaturacionOxigeno
-      idStore.Peso = idStore.cirugia.pacientesVal[0].sigVit_Peso
-      idStore.Talla = idStore.cirugia.pacientesVal[0].sigVit_Talla
-      idStore.IMC = idStore.cirugia.pacientesVal[0].sigVit_IMC
-      idStore.TensionArterial = idStore.cirugia.pacientesVal[0].sigVit_TensionArterial
-      idStore.SaturacionOxigeno = idStore.cirugia.pacientesVal[0].sigVit_SaturacionOxigeno
-      idStore.Peso = idStore.cirugia.pacientesVal[0].sigVit_Peso
-      idStore.Talla = idStore.cirugia.pacientesVal[0].sigVit_Talla
-      idStore.IMC = idStore.cirugia.pacientesVal[0].sigVit_IMC
-      idStore.TensionArterial = idStore.cirugia.pacientesVal[0].sigVit_TensionArterial
-      idStore.SaturacionOxigeno = idStore.cirugia.pacientesVal[0].sigVit_SaturacionOxigeno
-      idStore.Peso = idStore.cirugia.pacientesVal[0].sigVit_Peso
-      idStore.Talla = idStore.cirugia.pacientesVal[0].sigVit_Talla
-      idStore.IMC = idStore.cirugia.pacientesVal[0].sigVit_IMC
-      idStore.TensionArterial = idStore.cirugia.pacientesVal[0].sigVit_TensionArterial
-      idStore.SaturacionOxigeno = idStore.cirugia.pacientesVal[0].sigVit_SaturacionOxigeno
-      idStore.Peso = idStore.cirugia.pacientesVal[0].sigVit_Peso
-      idStore.Talla = idStore.cirugia.pacientesVal[0].sigVit_Talla
-      idStore.IMC = idStore.cirugia.pacientesVal[0].sigVit_IMC
-      idStore.TensionArterial = idStore.cirugia.pacientesVal[0].sigVit_TensionArterial
-      idStore.SaturacionOxigeno = idStore.cirugia.pacientesVal[0].sigVit_SaturacionOxigeno
-      idStore.Peso = idStore.cirugia.pacientesVal[0].sigVit_Peso
-      idStore.Talla = idStore.cirugia.pacientesVal[0].sigVit_Talla
-      idStore.IMC = idStore.cirugia.pacientesVal[0].sigVit_IMC
-      idStore.TensionArterial = idStore.cirugia.pacientesVal[0].sigVit_TensionArterial
-      idStore.SaturacionOxigeno = idStore.cirugia.pacientesVal[0].sigVit_SaturacionOxigeno
-      idStore.Peso = idStore.cirugia.pacientesVal[0].sigVit_Peso
-      idStore.Talla = idStore.cirugia.pacientesVal[0].sigVit_Talla
-      idStore.IMC = idStore.cirugia.pacientesVal[0].sigVit_IMC
-      idStore.TensionArterial = idStore.cirugia.pacientesVal[0].sigVit_TensionArterial
-      idStore.SaturacionOxigeno = idStore.cirugia.pacientesVal[0].sigVit_SaturacionOxigeno
-      idStore.Peso = idStore.cirugia.pacientesVal[0].sigVit_Peso
-      idStore.Talla = idStore.cirugia.pacientesVal[0].sigVit_Talla
-      idStore.IMC = idStore.cirugia.pacientesVal[0].sigVit_IMC
-      idStore.TensionArterial = idStore.cirugia.pacientesVal[0].sigVit_TensionArterial
-      idStore.SaturacionOxigeno = idStore.cirugia.pacientesVal[0].sigVit_SaturacionOxigeno
-      idStore.Peso = idStore.cirugia.pacientesVal[0].sigVit_Peso
-      idStore.Talla = idStore.cirugia.pacientesVal[0].sigVit_Talla
-      idStore.IMC = idStore.cirugia.pacientesVal[0].sigVit_IMC
-      idStore.TensionArterial = idStore.cirugia.pacientesVal[0].sigVit_TensionArterial
-      idStore.SaturacionOxigeno = idStore.cirugia.pacientesVal[0].sigVit_SaturacionOxigeno
-      idStore.Peso = idStore.cirugia.pacientesVal[0].sigVit_Peso
-      idStore.Talla = idStore.cirugia.pacientesVal[0].sigVit_Talla
-      idStore.IMC = idStore.cirugia.pacientesVal[0].sigVit_IMC
-      idStore.TensionArterial = idStore.cirugia.pacientesVal[0].sigVit_TensionArterial
-      idStore.SaturacionOxigeno = idStore.cirugia.pacientesVal[0].sigVit_SaturacionOxigeno
+      idStore.estudios = idStore.cirugia.pacientesEstu
+
+      idStore.FechaRealizacion = idStore.cirugia.pacientesVal[0].perfilBioQ_FechaRealizacion
+      idStore.GrupoSanguineo = idStore.cirugia.pacientesVal[0].perfilBioQ_GrupoSanguineo
+      idStore.Hemoglobina = idStore.cirugia.pacientesVal[0].perfilBioQ_Hemoglobina
+      idStore.Hematocrito = idStore.cirugia.pacientesVal[0].perfilBioQ_Hematocrito
+      idStore.Plaquetas = idStore.cirugia.pacientesVal[0].perfilBioQ_Plaquetas
+      idStore.Leutocitos = idStore.cirugia.pacientesVal[0].perfilBioQ_Leutocitos
+      idStore.TP = idStore.cirugia.pacientesVal[0].perfilBioQ_TP
+      idStore.TT = idStore.cirugia.pacientesVal[0].perfilBioQ_TT
+      idStore.TPT = idStore.cirugia.pacientesVal[0].perfilBioQ_TPT
+      idStore.INR = idStore.cirugia.pacientesVal[0].perfilBioQ_INR
+      idStore.Glucosa = idStore.cirugia.pacientesVal[0].perfilBioQ_Glucosa
+      idStore.Creatinina = idStore.cirugia.pacientesVal[0].perfilBioQ_Creatinina
+      idStore.Urea = idStore.cirugia.pacientesVal[0].perfilBioQ_Urea
+      idStore.Sodio = idStore.cirugia.pacientesVal[0].perfilBioQ_Sodio
+      idStore.Potasio = idStore.cirugia.pacientesVal[0].perfilBioQ_Potasio
+      idStore.Cloro = idStore.cirugia.pacientesVal[0].perfilBioQ_Cloro
+      idStore.Calcio = idStore.cirugia.pacientesVal[0].perfilBioQ_Calcio
+      idStore.Megnesio = idStore.cirugia.pacientesVal[0].perfilBioQ_Magnesio
+      idStore.BilirrubinaDirecta = idStore.cirugia.pacientesVal[0].perfilBioQ_BilirrubinaDirecta
+      idStore.BilirrubinaIndirecta = idStore.cirugia.pacientesVal[0].perfilBioQ_BilirrubinaIndirecta
+      idStore.BilirrubimaTotal = idStore.cirugia.pacientesVal[0].perfilBioQ_BilirrubinaTotal
+      idStore.Lipasa = idStore.cirugia.pacientesVal[0].perfilBioQ_Lipasa
+      idStore.Amilasa = idStore.cirugia.pacientesVal[0].perfilBioQ_Amilasa
+      idStore.PerfilOtros = idStore.cirugia.pacientesVal[0].perfilBioQ_Otros
+
+      idStore.Cabeza = idStore.cirugia.pacientesVal[0].expFis_VASCabeza
+      idStore.Cuello = idStore.cirugia.pacientesVal[0].expFis_VASCuello
+      idStore.Respiratorio = idStore.cirugia.pacientesVal[0].expFis_VASRespiratorio
+      idStore.Cadiovascular = idStore.cirugia.pacientesVal[0].expFis_VASCardioVasc
+      idStore.Hipertension = idStore.cirugia.pacientesVal[0].expFis_VASHipertension
+      idStore.Abdomen = idStore.cirugia.pacientesVal[0].expFis_VASAbdomen
+      idStore.Genitourinario = idStore.cirugia.pacientesVal[0].expFis_VASGenUr
+      idStore.MusculoEsqueletico = idStore.cirugia.pacientesVal[0].expFis_VASMuscEsq
+      idStore.Neurologico = idStore.cirugia.pacientesVal[0].expFis_VASNeuro
+      idStore.PielFaneras = idStore.cirugia.pacientesVal[0].expFis_VASPielFaneras
+    },
+
+    async asignarDatosPacientesPlan(){
+      // pacientesPlan
+      idStore.HorasAyuno = idStore.cirugia.pacientesPlan[0].pos_HorasAyuno
+      idStore.AccesoVenoso = idStore.cirugia.pacientesPlan[0].pos_AccesoVenoso
+      idStore.PosicionPaciente = idStore.cirugia.pacientesPlan[0].pos_PosicionPaciente
+      idStore.PosicionBrazos = idStore.cirugia.pacientesPlan[0].pos_PosicionBrazos
+      idStore.Torniquete = idStore.cirugia.pacientesPlan[0].pos_Torniquete
+      idStore.AplicacionTorniquete = idStore.cirugia.pacientesPlan[0].pos_AplicacionTorniquete
+      idStore.Sitio = idStore.cirugia.pacientesPlan[0].pos_Sitio
+      idStore.TiempoIsquemia = idStore.cirugia.pacientesPlan[0].pos_TiempoIsquemia
+      idStore.ProteccionOjos = idStore.cirugia.pacientesPlan[0].pos_ProteccionOjos
+      idStore.ProteccionProminencias = idStore.cirugia.pacientesPlan[0].pos_ProtecProminencias
+      idStore.TecnicaAnestesica = idStore.cirugia.pacientesPlan[0].pos_TecnicaAnestesica
+      idStore.Premedicacion = idStore.cirugia.pacientesPlan[0].pos_Premedicacion
+      idStore.EspecPremedicacion = idStore.cirugia.pacientesPlan[0].pos_EspPremedicacion
+      idStore.Monitoreo = idStore.cirugia.pacientesPlan[0].pos_Monitoreo
+      idStore.ViaSedacion = idStore.cirugia.pacientesPlan[0].sedacion_Via
+      idStore.OpcionSedacion = idStore.cirugia.pacientesPlan[0].sedacion_Opcion
+      idStore.ObservacionesSedacion = idStore.cirugia.pacientesPlan[0].sedacion_Observaciones
+      idStore.MedicamentosSedacion = idStore.cirugia.pacientesPlan[0].sedacion_Medicamentos
+      idStore.TipoRegional = idStore.cirugia.pacientesPlan[0].regional_Tipo
+      idStore.TipoAguja = idStore.cirugia.pacientesPlan[0].regional_TipoAguja
+      idStore.Nivel = idStore.cirugia.pacientesPlan[0].regional_Nivel
+      idStore.CalibreAguja = idStore.cirugia.pacientesPlan[0].regional_CalibreAguja
+      idStore.Cateter = idStore.cirugia.pacientesPlan[0].regional_Cateter
+      idStore.OrientacionCateter = idStore.cirugia.pacientesPlan[0].regional_OrientacionCateter
+      idStore.DificultadesOrientacion = idStore.cirugia.pacientesPlan[0].regional_ProbDificulNeuro
+      idStore.EspecificarRegional = idStore.cirugia.pacientesPlan[0].regional_EspDificultadesNeuro
+      idStore.SitioRegional = idStore.cirugia.pacientesPlan[0].regional_Sitio
+      idStore.OpcionRegional = idStore.cirugia.pacientesPlan[0].regional_Opcion
+      idStore.EspecificarSitionRegional = idStore.cirugia.pacientesPlan[0].regional_EspSitio
+      idStore.AnestesicoUtilizado = idStore.cirugia.pacientesPlan[0].regional_AnestesicoUtilizado
+      idStore.EspecificarAnestesico = idStore.cirugia.pacientesPlan[0].regional_EspAnestesico
+      idStore.DificultadesPlexo = idStore.cirugia.pacientesPlan[0].regional_ProbDificulPlexo
+      idStore.EspecificarDificPlexo = idStore.cirugia.pacientesPlan[0].regional_EspDificulPlexo
+      idStore.Ultrasonido = idStore.cirugia.pacientesPlan[0].regional_Ultrasonido
+      idStore.EspecUltrasonido = idStore.cirugia.pacientesPlan[0].regional_EspUltrasonido
+      idStore.Neuroestimulador = idStore.cirugia.pacientesPlan[0].regional_Neuroestimulador
+      idStore.ComplicacionesNeuroestimulador = idStore.cirugia.pacientesPlan[0].regional_EspNeuroestimulador
+      idStore.EspecificarNeuroestimulador = idStore.cirugia.pacientesPlan[0].regional_ProbComplicaciones
+      idStore.EspecificarComplicacNeuroes = idStore.cirugia.pacientesPlan[0].regional_EspDificEquipo
+      idStore.SitioLocal = idStore.cirugia.pacientesPlan[0].local_SitioAnestesiaL
+      idStore.AnestesicoLocal = idStore.cirugia.pacientesPlan[0].local_AnestesicoUtilizado
+      idStore.EspecificarLocal = idStore.cirugia.pacientesPlan[0].local_Especificar
+      idStore.Induccion = idStore.cirugia.pacientesPlan[0].general_Induccion
+      idStore.Tubo = idStore.cirugia.pacientesPlan[0].general_Tubo
+      idStore.NumeroTubo = idStore.cirugia.pacientesPlan[0].general_NumeroTubo
+      idStore.TipoCanula = idStore.cirugia.pacientesPlan[0].general_TipoCanula
+      idStore.Globo = idStore.cirugia.pacientesPlan[0].general_Globo
+      idStore.Presion = idStore.cirugia.pacientesPlan[0].general_Presion
+      idStore.DificultadesGeneral = idStore.cirugia.pacientesPlan[0].general_DifTecnicasIntubacion
+      idStore.EspecificarGeneral = idStore.cirugia.pacientesPlan[0].general_EspDifTecIntubacion
+      idStore.DispositivosSupra = idStore.cirugia.pacientesPlan[0].general_DispositivosSupro
+      idStore.Calibre = idStore.cirugia.pacientesPlan[0].general_Calibre
+      idStore.ComplicacionesDispositivos = idStore.cirugia.pacientesPlan[0].general_Complicaciones
+      idStore.EspecificarDispositivos = idStore.cirugia.pacientesPlan[0].general_EspComplicaciones
+      idStore.OtrosDispositivos = idStore.cirugia.pacientesPlan[0].general_OtrosDispositivos
+      idStore.EspecificarOtrosDispositivos = idStore.cirugia.pacientesPlan[0].general_EspOtrosDispositivos
+    },
+
+    async asignarDatosPacientesNota(){
+      idStore.NotaPre = idStore.cirugia.pacientesNotaPre[0].obsNota
+    },
+
+    async asignarDatosPacientesTrans(){
+      transStore.datosVentilacion = idStore.cirugia.pacienteTrans[0].datosVentilador
+      transStore.medicamentos = idStore.cirugia.pacienteTrans[0].medicamentosCx
+      transStore.relevos = idStore.cirugia.pacienteTrans[0].relevoCx
+      transStore.eventos = idStore.cirugia.pacienteTrans[0].evCriticoCx
+      transStore.datosMSV = idStore.cirugia.pacienteTrans[0].datosMSV
+      
+      transStore.solHartman = idStore.cirugia.pacienteTrans[0].solHartman
+      transStore.solFisio = idStore.cirugia.pacienteTrans[0].solFisio
+      transStore.glucosados = idStore.cirugia.pacienteTrans[0].glucosados
+      transStore.gelatinas = idStore.cirugia.pacienteTrans[0].gelatinas
+      transStore.almidones = idStore.cirugia.pacienteTrans[0].almidones
+      transStore.albuminas = idStore.cirugia.pacienteTrans[0].albuminas
+      transStore.paqGlobular = idStore.cirugia.pacienteTrans[0].paqGlobular
+      transStore.plasmas = idStore.cirugia.pacienteTrans[0].plasmas
+      transStore.plaquetas = idStore.cirugia.pacienteTrans[0].plaquetas
+      transStore.crioprecipitados = idStore.cirugia.pacienteTrans[0].crioprecipitados
+      transStore.factor_VII = idStore.cirugia.pacienteTrans[0].factor_VII
+      transStore.factor_VIII = idStore.cirugia.pacienteTrans[0].factor_VIII
+      transStore.otrosIngresos = idStore.cirugia.pacienteTrans[0].otrosIngresos
+      transStore.liqAscitis = idStore.cirugia.pacienteTrans[0].liqAscitis
+      transStore.sangradoAprox = idStore.cirugia.pacienteTrans[0].sangradoAprox
+      transStore.uresis = idStore.cirugia.pacienteTrans[0].uresis
+      transStore.expoQX = idStore.cirugia.pacienteTrans[0].expoQX
+      transStore.reqBasales = idStore.cirugia.pacienteTrans[0].reqBasales
+      transStore.ayuno = idStore.cirugia.pacienteTrans[0].ayuno
+      transStore.otrosEgresos = idStore.cirugia.pacienteTrans[0].otrosEgresos
+
+      transStore.ingresoQX = idStore.cirugia.pacienteTrans[0].tiemposQX[0].ingresoQX
+      transStore.inicioAn = idStore.cirugia.pacienteTrans[0].tiemposQX[0].inicioAn
+      transStore.inicioCx = idStore.cirugia.pacienteTrans[0].tiemposQX[0].inicioCx
+      transStore.finCx = idStore.cirugia.pacienteTrans[0].tiemposQX[0].finCx
+      transStore.finAn = idStore.cirugia.pacienteTrans[0].tiemposQX[0].finAn
+      transStore.egresoQx = idStore.cirugia.pacienteTrans[0].tiemposQX[0].egresoQx 
+    },
+
+    async asignarDatosPacientesNotaPA(){
+
+    },
+
+    async asignarDatosPacientesRecuperacion(){
+
     },
 
     // Obtener datos de paciente seleccionado
