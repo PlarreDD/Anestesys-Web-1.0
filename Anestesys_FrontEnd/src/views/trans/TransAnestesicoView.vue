@@ -1753,9 +1753,7 @@ export default defineComponent({
           item.datos
             .filter(dato => dato.segmento4 === "174147842")
             .map(dato => dato.valor ?? ' ')
-        );
-        console.log("FC Trans: "+FC);
-        
+        );        
         let Pulso = this.saltoArreglo.flatMap(item =>
           item.datos
             .filter(dato => dato.segmento4 === "131149530")
@@ -2856,10 +2854,7 @@ export default defineComponent({
 
         /*Grid Anestésico*/
         let datosGrid = this.saltoArreglo;
-        let tablaDatosGrid = [];
-
-        console.log(JSON.stringify(datosGrid));
-        
+        let tablaDatosGrid = [];        
 
         datosGrid.forEach(entry => {
           const columnData = [];

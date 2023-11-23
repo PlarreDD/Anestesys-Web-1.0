@@ -1346,7 +1346,7 @@ export default defineComponent({
         this.chartElements.push(chart);
       }
 
-      this.chartKey += 1;             
+      this.chartKey += 1;
     },
 
     // Imprimir PDF      
@@ -2079,19 +2079,6 @@ export default defineComponent({
       let datosGrid = transStore.datosMSV;
       let tablaDatosGrid = [];
 
-      console.log(JSON.stringify(datosGrid));      
-
-      // datosGrid.forEach(entry => {
-      //   const columnData = [];
-      //   // Agregar la Hora 
-      //   columnData.push({ text: entry.horaGeneracion, style: 'SF', fontSize: 6, alignment:'center', margin: [0, 0, 0, 4] });
-      //   // Agregar Signos Vítales
-      //   entry.datos.forEach(item => {
-      //     columnData.push({ text: item.valor ? item.valor : '-', style: 'SF', fontSize: 6, bold: true, alignment:'center', margin: [0, 0, 0, 4] });
-      //   });        
-      //   tablaDatosGrid.push(columnData);
-      // });
-
       datosGrid.forEach(entry => {
         const columnData = [];
         // Agregar la Hora 
@@ -2112,7 +2099,6 @@ export default defineComponent({
         columnData.push({ text: entry.PAM_IN, style: 'SF', fontSize: 6, bold: true, alignment:'center', margin: [0, 0, 0, 4] });
         columnData.push({ text: entry.FiCO2, style: 'SF', fontSize: 6, bold: true, alignment:'center', margin: [0, 0, 0, 4] });
         columnData.push({ text: entry.FR, style: 'SF', fontSize: 6, bold: true, alignment:'center', margin: [0, 0, 0, 4] });
-        // ... continuar con los demás campos
 
         tablaDatosGrid.push(columnData);
       });
