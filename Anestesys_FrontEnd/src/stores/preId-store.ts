@@ -1581,7 +1581,7 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res:any) =>{
                 this.cirugia = res.data
-                console.log("Cirugia store: "+JSON.stringify(this.cirugia));
+                // console.log("Cirugia store: "+JSON.stringify(this.cirugia));
             })
             .catch((e: any) => {                
             });
