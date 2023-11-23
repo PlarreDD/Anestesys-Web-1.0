@@ -6659,6 +6659,7 @@ export default defineComponent({
         transAnestStore.envDat = false;
         transAnestStore.datosMSV = null;
         clearInterval(this.intervalId);
+        clearInterval(this.saveGrid);
       },
       
       siAquisigo(){
@@ -6674,6 +6675,7 @@ export default defineComponent({
       // Agrega los datos del MSV al arreglo 'grid' cada minuto
       async capturaGrid(){
         this.saveGrid = await setInterval(() => {
+          console.log("saveGrid")
           this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
           this.gridBD.push(this.hl7mess[this.hl7mess.length - 1]);
           this.hl7mess = [];
