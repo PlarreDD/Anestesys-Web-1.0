@@ -2,10 +2,6 @@ import { Response } from "express";
 import { MenuTrans } from "../models/TransAnestesico";
 import { UpdateResult } from "mongodb";
 
-// interface TiempoResult {
-//     tiemposQX: any[];
-// };
-
 /******************* Menu Trans Anestesico *******************/
 export const saveMenuTrans = async (req: any, res: Response) => {
     try {
@@ -547,6 +543,7 @@ export const saveNuevoTiemposQX = async (req: any, res: Response) => {
 };
 
 /* Guardado Datos MSV */
+/* Para un nuevo paciente */
 export const saveDatosMSV = async (req: any, res: Response) => {
     try {
         const { pid } = req.params;
@@ -655,6 +652,7 @@ export const saveDatosMSV = async (req: any, res: Response) => {
     }
 };
 
+/* Para una nueva cirugía de un paciente ya existente */
 export const saveNuevoDatosMSV = async (req: any, res: Response) => {
     try {
         const { pid, cxid } = req.params;

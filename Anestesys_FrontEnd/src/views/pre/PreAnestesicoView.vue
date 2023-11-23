@@ -360,6 +360,7 @@ export default defineComponent({
     this.mostrarHeader();
     this.ocultarMenuLateral();
     document.addEventListener('scroll', this.scrollFunction);
+    transStore.getIniciaMonitoreo();
   },
   
   destroyed: function(){

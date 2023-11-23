@@ -16,6 +16,8 @@ const server = net.createServer(function(socket) {
   
   socket.on('data', function(data) {
     capturedMsg = data;
+    console.log("server: " + data + "\n");
+    
   });
   
   socket.on('error', function(error) {
@@ -39,6 +41,7 @@ export const startMSVData = async () => {
 
 export const stopMSVData = async () => {  
   if(serverAnest){
+    console.log("Detiene MSV");
     serverAnest.close(function() {
       console.log('Sign monitor stopped');
     });
@@ -46,6 +49,7 @@ export const stopMSVData = async () => {
 };
 
 export const handleMonitorData = async (_req: Request, res: Response) => {
+  console.log("handleMonitorData: " + capturedMsg + "\n");
   if (capturedMsg) {
     const hl7String = await capturedMsg.toString();
 
