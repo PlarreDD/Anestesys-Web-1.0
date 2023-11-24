@@ -20,7 +20,7 @@
           <!-- @click="obtenerPaciente" -->
       </div>
 
-      <div class="col-md-2"></div>
+      <div class="col-md-2"> <button class="btn btn-icono fw-bold" data-bs-toggle="modal" data-bs-target="#modal-grid" @click="obtenerValoresGrafica">Abrir Modal </button></div>
 
       <div class="col-md-2">
         <div class="centrarBoton">
@@ -397,6 +397,8 @@ const transStore = useTransAnestStore();
 const postAnestStore = usePostAnestStore();
 
 export default defineComponent({
+  name: 'App',
+
   data() {
     return {
       deshabilitado: true,
@@ -1245,9 +1247,7 @@ export default defineComponent({
       let gruposFC = [];
       for (let i = 0; i < FC.length; i += 26) {
         gruposFC.push(FC.slice(i, i + 26));
-      };
-      console.log("FC Pre: "+FC);
-      
+      };      
       let gruposPulso = [];
       for (let i = 0; i < Pulso.length; i += 26) {
         gruposPulso.push(Pulso.slice(i, i + 26));
@@ -1311,6 +1311,7 @@ export default defineComponent({
 
       // Asignar valores a gráfica principal
       this.chartData.datasets[0].data = FC;
+      console.log("chartData: "+this.chartData.datasets[0].data);
       this.chartData.datasets[1].data = Pulso;
       this.chartData.datasets[2].data = PAS;
       this.chartData.datasets[3].data = PAD;
@@ -1347,6 +1348,8 @@ export default defineComponent({
       }
 
       this.chartKey += 1;
+
+      console.log("Termino")
     },
 
     // Imprimir PDF      
@@ -4993,6 +4996,46 @@ export default defineComponent({
 <style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
+.grafica-div {
+  position: relative;
+}
+.div-spinner{
+  display: none;
+  position: absolute; 
+  background-color: #002d60; 
+  width: 100%; 
+  height: 100%; 
+  left: 0; 
+  right: 0;
+  bottom:0;
+  top:0;
+  z-index: 9999;
+  border-radius: 5px;
+}
+.div-spinner-on{
+  display: block;
+  position: absolute; 
+  background-color: #002d60; 
+  width: 100%; 
+  height: 100%; 
+  left: 0; 
+  right: 0;
+  bottom:0;
+  top:0;
+  z-index: 9999;
+  border-radius: 5px;
+}
+.div-none{
+  display:none;
+}
+.div-block{
+  display:block;
+}
+.txt-spinner{
+  position: relative; 
+  left: 40%; 
+  top: 45%;
+}
 .color-dropdown {
   background-color: #002d60;
 }
