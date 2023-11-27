@@ -20,9 +20,7 @@
           <!-- @click="obtenerPaciente" -->
       </div>
 
-      <div class="col-md-2">
-        <button type="button" class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#modal-grid" @click="obtenerValoresGrafica">Abrir Modal </button>
-      </div>
+      <div class="col-md-2"></div>
 
       <!--Botón Nuevo registro-->
       <div class="col-md-2">

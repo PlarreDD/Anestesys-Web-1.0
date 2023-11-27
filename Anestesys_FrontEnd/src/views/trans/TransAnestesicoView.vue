@@ -1638,24 +1638,24 @@ export default defineComponent({
           transAnestStore.finAn=this.menuTrans.finAn
           transAnestStore.egresoQx=this.menuTrans.egresoQx
           // Datos Medicamentos
-          transAnestStore.tipoMed = this.menuTrans.tipoMed
-          transAnestStore.medicamento=this.menuTrans.medicamento
-          transAnestStore.dosisMed=this.menuTrans.dosisMed
-          transAnestStore.unidadMed=this.menuTrans.unidadMed
-          transAnestStore.viaMed=this.menuTrans.viaMed
-          transAnestStore.horaInicioMed=this.menuTrans.horaInicioMed
-          transAnestStore.horaFinalMed=this.menuTrans.horaFinalMed
-          transAnestStore.observacionesMed=this.menuTrans.observacionesMed
+          // transAnestStore.tipoMed = this.menuTrans.tipoMed
+          // transAnestStore.medicamento=this.menuTrans.medicamento
+          // transAnestStore.dosisMed=this.menuTrans.dosisMed
+          // transAnestStore.unidadMed=this.menuTrans.unidadMed
+          // transAnestStore.viaMed=this.menuTrans.viaMed
+          // transAnestStore.horaInicioMed=this.menuTrans.horaInicioMed
+          // transAnestStore.horaFinalMed=this.menuTrans.horaFinalMed
+          // transAnestStore.observacionesMed=this.menuTrans.observacionesMed
           // Relevos
-          transAnestStore.horaRelevo=this.menuTrans.horaRelevo
-          transAnestStore.tipoRel=this.menuTrans.tipoRel
-          transAnestStore.matriculaRel=this.menuTrans.matriculaRel
-          transAnestStore.anestesiologoRel=this.menuTrans.anestesiologoRel
-          transAnestStore.observacionesRel=this.menuTrans.observacionesRel
+          // transAnestStore.horaRelevo=this.menuTrans.horaRelevo
+          // transAnestStore.tipoRel=this.menuTrans.tipoRel
+          // transAnestStore.matriculaRel=this.menuTrans.matriculaRel
+          // transAnestStore.anestesiologoRel=this.menuTrans.anestesiologoRel
+          // transAnestStore.observacionesRel=this.menuTrans.observacionesRel
           // Eventos Criticos
-          transAnestStore.horaEvento=this.menuTrans.horaEvento
-          transAnestStore.tipoEve=this.menuTrans.tipoEve
-          transAnestStore.detalleEvento=this.menuTrans.detalleEvento
+          // transAnestStore.horaEvento=this.menuTrans.horaEvento
+          // transAnestStore.tipoEve=this.menuTrans.tipoEve
+          // transAnestStore.detalleEvento=this.menuTrans.detalleEvento
       },
 
       async vaciarInputsTrans(){
@@ -1714,24 +1714,24 @@ export default defineComponent({
         this.menuTrans.finAn= transAnestStore.finAn
         this.menuTrans.egresoQx= transAnestStore.egresoQx
         /* Datos Medicamentos */
-        this.menuTrans.tipoMed= transAnestStore.tipoMed
-        this.menuTrans.medicamento= transAnestStore.medicamento
-        this.menuTrans.dosisMed= transAnestStore.dosisMed
-        this.menuTrans.unidadMed= transAnestStore.unidadMed
-        this.menuTrans.viaMed= transAnestStore.viaMed
-        this.menuTrans.horaInicioMed= transAnestStore.horaInicioMed
-        this.menuTrans.horaFinalMed= transAnestStore.horaFinalMed
-        this.menuTrans.observacionesMed= transAnestStore.observacionesMed
+        // this.menuTrans.tipoMed= transAnestStore.tipoMed
+        // this.menuTrans.medicamento= transAnestStore.medicamento
+        // this.menuTrans.dosisMed= transAnestStore.dosisMed
+        // this.menuTrans.unidadMed= transAnestStore.unidadMed
+        // this.menuTrans.viaMed= transAnestStore.viaMed
+        // this.menuTrans.horaInicioMed= transAnestStore.horaInicioMed
+        // this.menuTrans.horaFinalMed= transAnestStore.horaFinalMed
+        // this.menuTrans.observacionesMed= transAnestStore.observacionesMed
         /* Relevos */
-        this.menuTrans.horaRelevo= transAnestStore.horaRelevo
-        this.menuTrans.tipoRel= transAnestStore.tipoRel
-        this.menuTrans.matriculaRel= transAnestStore.matriculaRel
-        this.menuTrans.anestesiologoRel= transAnestStore.anestesiologoRel
-        this.menuTrans.observacionesRel= transAnestStore.observacionesRel
+        // this.menuTrans.horaRelevo= transAnestStore.horaRelevo
+        // this.menuTrans.tipoRel= transAnestStore.tipoRel
+        // this.menuTrans.matriculaRel= transAnestStore.matriculaRel
+        // this.menuTrans.anestesiologoRel= transAnestStore.anestesiologoRel
+        // this.menuTrans.observacionesRel= transAnestStore.observacionesRel
         /* Eventos Criticos */
-        this.menuTrans.horaEvento= transAnestStore.horaEvento
-        this.menuTrans.tipoEve= transAnestStore.tipoEve
-        this.menuTrans.detalleEvento= transAnestStore.detalleEvento
+        // this.menuTrans.horaEvento= transAnestStore.horaEvento
+        // this.menuTrans.tipoEve= transAnestStore.tipoEve
+        // this.menuTrans.detalleEvento= transAnestStore.detalleEvento
       },
 
       // Generar Grafica a Imagen
