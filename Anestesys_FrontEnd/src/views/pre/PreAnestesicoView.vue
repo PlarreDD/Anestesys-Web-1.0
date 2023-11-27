@@ -20,8 +20,11 @@
           <!-- @click="obtenerPaciente" -->
       </div>
 
-      <div class="col-md-2"> <button class="btn btn-icono fw-bold" data-bs-toggle="modal" data-bs-target="#modal-grid" @click="obtenerValoresGrafica">Abrir Modal </button></div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#modal-grid" @click="obtenerValoresGrafica">Abrir Modal </button>
+      </div>
 
+      <!--Botón Nuevo registro-->
       <div class="col-md-2">
         <div class="centrarBoton">
           <button class="btn btn-icono fw-bold" :disabled="nuevoRegistro == false ? true : false" @click="crearNuevoRegistroExpediente">
@@ -30,6 +33,7 @@
         </div>
       </div>
       
+      <!--Botón Historial-->
       <div class="col-md-2">
         <div class="alinearBotonDerecha">
           <button class="btn btn-icono fw-bold" :disabled="historialPaciente == false ? true : false" 
@@ -78,7 +82,7 @@
                           </button>
                         </div>
                         <div class="" :class="mostrarGraficas == false ? 'div-block' : 'div-none'" ref="chartRef" >                          
-                          <Line class="" id="my-chart-id" :options="chartOptions" :data="chartData" :key="chartKey"/>
+                          <Line class="" id="my-chart-pre" :options="chartOptions" :data="chartData" :key="chartKey"/>
                         </div>
                       </div>
                   </div>
@@ -1242,7 +1246,7 @@ export default defineComponent({
       
       let FR = transStore.datosMSV.flatMap(dato => dato.FR ?? ' ')
       
-      let horaGeneracion = transStore.datosMSV.map(item => item.horaGeneracion);
+      let horaGeneracion = transStore.datosMSV.map(item => item.HoraGeneracion);
 
       let gruposFC = [];
       for (let i = 0; i < FC.length; i += 26) {
@@ -1311,7 +1315,6 @@ export default defineComponent({
 
       // Asignar valores a gráfica principal
       this.chartData.datasets[0].data = FC;
-      console.log("chartData: "+this.chartData.datasets[0].data);
       this.chartData.datasets[1].data = Pulso;
       this.chartData.datasets[2].data = PAS;
       this.chartData.datasets[3].data = PAD;
@@ -1333,7 +1336,7 @@ export default defineComponent({
       let topPosition = 0;
 
       for (let i = 0; i < gruposFC.length; i++) {
-        const canvasElement = document.createElement('canvas');
+        const canvasElement = document.createElement('canvas');        
 
         // Sobreponer todas las graficas en el mismo div
         canvasElement.style.position = 'absolute'; 
@@ -1348,8 +1351,6 @@ export default defineComponent({
       }
 
       this.chartKey += 1;
-
-      console.log("Termino")
     },
 
     // Imprimir PDF      
