@@ -20,6 +20,8 @@ export const usePreIdStore = defineStore('preid', {
         cirugias: ref(null),
         cirugia: ref(null),
 
+        volverPost: false,
+
         actualizarRegId: false,
         actualizarRegValoracion: false,
         actualizarRegPlan: false,

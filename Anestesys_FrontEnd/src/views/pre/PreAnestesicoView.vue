@@ -170,7 +170,7 @@
                     data-bs-toggle="tab"
                     type="submit"
                     aria-selected="true"
-                    @click="validaSeleccionId()"> ID PACIENTE </button>
+                    @click="validaSeleccionId()" v-bind:disabled="deshabilitado"> ID PACIENTE </button>
           </li>
 
           <li class="nav-item col-md-3">
@@ -380,6 +380,7 @@ import Plan from "../../components/pre/Plan.vue";
 import Nota from '../../components/pre/Nota.vue';
 import swal from 'sweetalert2';
 import BarraNavegacion from "../../components/barraNavegacion.vue";
+import { Tab } from 'bootstrap';
 import { usePreIdStore } from '../../stores/preId-store';
 import { useTransAnestStore } from "@/stores/transAnest-store";
 import { usePostAnestStore } from "@/stores/postAnest-store";
@@ -4397,46 +4398,55 @@ export default defineComponent({
 
         const componenteValoracion = await this.$refs.refValoracion as InstanceType<typeof Valoracion>;
         await componenteValoracion.regresarBotones();
-
-        // document.getElementById("id-tab").ariaSelected=="false"
-        document.getElementById("id-tab").ariaChecked=="true"
-
+        
         // Devolver todos los botones de trans a estado inicial
         transStore.btnAddMedicamentos = true
         transStore.btnUpdateMedicamentos = false
         transStore.btnActualizaMedicamento = false
-
+        
         transStore.btnAddRelevos = true
         transStore.btnUpdateRelevos = false
         transStore.btnActualizaRelevo = false
-
+        
         transStore.btnAddEventos = true
         transStore.btnUpdateEventos = false
         transStore.btnActualizaEvento = false
-
+        
         transStore.btnAddVentilador = true
         transStore.btnUpdateVentilador = false
         transStore.btnActualizaVentilador = false
-
+        
         transStore.btnActualizarBalance = false
-
+        
         transStore.tipoTecnica = false
-
+        
         transStore.btnTQX = false
-
+        
         transStore.activoAnesIN = false
         transStore.noActivoAnesIN = true
-
+        
         transStore.activoCxIN = false
         transStore.noActivoCxIN = true
-
+        
         transStore.activoCxOUT = false
         transStore.noActivoCxOUT = true
-
+        
         transStore.activoAnesOUT = false
         transStore.noActivoAnesOUT = true
-      }
+        
+        document.getElementById("id-tab").ariaSelected=="true"
+        this.esPaciente=true
+        this.esValoracion=false;
+        this.esPlan=false;
+        this.esNota=false;
 
+        const tabIdPaciente = document.getElementById('id-tab');
+        const tabObj = new Tab(tabIdPaciente);
+        tabObj.show();
+
+        idStore.volverPost = true
+      }
+      
       // Sino se elige un expediente no manda la petición
       if(idStore.numExpediente != null && idStore.numExpediente != ''){
 

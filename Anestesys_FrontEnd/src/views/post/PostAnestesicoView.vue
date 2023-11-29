@@ -3,7 +3,7 @@
     <barra-navegacion/>
   </header>
   <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">
-    <div class="input-group mb-3">
+    <div class="input-group mb-3" @click.stop="volverPestana">
 
       <div class="col-10 divform navbar-nav">     
 
@@ -161,6 +161,7 @@ import Nota from '../../components/post/Nota.vue';
 import Recuperacion from "../../components/post/Recuperacion.vue";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
 import { usePreIdStore } from "../../stores/preId-store";
+import { Tab } from 'bootstrap';
 
 const preIdStore = usePreIdStore();
 
@@ -194,6 +195,16 @@ export default ({
     //   const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
     //   await componenteRecuperacion.vaciarInputsRecuperacion();
     // },
+    
+    async volverPestana(){
+      if(preIdStore.volverPost == true){
+        const tabPost = document.getElementById('notaP-tab');
+        const tabObj = new Tab(tabPost);
+        tabObj.show();
+        
+        preIdStore.volverPost = false;
+      }
+    },
 
     async guardarDatos(){
       
@@ -238,6 +249,7 @@ export default ({
       preIdStore.VistaRapida=true
       this.mostrarVistaRapida=true
     },
+
     async replegarMenuVistaRapida(){ 
       if(this.mostrarVistaRapida=true)     
         preIdStore.VistaRapida=false

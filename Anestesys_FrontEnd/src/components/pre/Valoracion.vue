@@ -1155,6 +1155,7 @@ import { usePostAnestStore } from "@/stores/postAnest-store";
 import { useTransAnestStore } from "@/stores/transAnest-store";
 import type { regValoracion } from "@/interfaces/regPreAnest";
 import swal from "sweetalert2";
+import { Tab } from 'bootstrap';
 
 const preIdStore = usePreIdStore();
 const postStore = usePostAnestStore();
@@ -1257,6 +1258,10 @@ export default defineComponent({
             this.infoValoracion.expFis_VASPielFaneras = ""
 
             preIdStore.estudios = null
+
+            const tabAntecedentes = document.getElementById('valoracion');
+            const tabObj = new Tab(tabAntecedentes);
+            tabObj.show();
 
             this.enviarDatosValoracion()
         },
