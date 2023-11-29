@@ -4398,6 +4398,9 @@ export default defineComponent({
         const componenteValoracion = await this.$refs.refValoracion as InstanceType<typeof Valoracion>;
         await componenteValoracion.regresarBotones();
 
+        // document.getElementById("id-tab").ariaSelected=="false"
+        document.getElementById("id-tab").ariaChecked=="true"
+
         // Devolver todos los botones de trans a estado inicial
         transStore.btnAddMedicamentos = true
         transStore.btnUpdateMedicamentos = false
@@ -4537,20 +4540,20 @@ export default defineComponent({
       transStore.ayuno=""
       transStore.otrosEgresos=""
       // Técnica Anestésica
-      transStore.local=""
-      transStore.sedación=""
-      transStore.gralBalanceada=""
-      transStore.TIVA=""
-      transStore.multimodal=""
-      transStore.bloqMixto=""
-      transStore.bloqPeriLum=""
-      transStore.bloqPeriCaudal=""
-      transStore.BloqEspinal=""
-      transStore.BloqPlexo=""
-      transStore.BloqTroncular=""
-      transStore.bloqPeriToracico=""
-      transStore.bloqPeriCervical=""
-      transStore.libreOpioides=""
+      // transStore.local=""
+      // transStore.sedación=""
+      // transStore.gralBalanceada=""
+      // transStore.TIVA=""
+      // transStore.multimodal=""
+      // transStore.bloqMixto=""
+      // transStore.bloqPeriLum=""
+      // transStore.bloqPeriCaudal=""
+      // transStore.BloqEspinal=""
+      // transStore.BloqPlexo=""
+      // transStore.BloqTroncular=""
+      // transStore.bloqPeriToracico=""
+      // transStore.bloqPeriCervical=""
+      // transStore.libreOpioides=""
       // Tiempos QX
       transStore.ingresoQX=""
       transStore.inicioAn=""

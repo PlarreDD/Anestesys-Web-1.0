@@ -1584,13 +1584,13 @@ export default defineComponent({
   methods: {
       async enviarDatosTrans() {          
           // DatosVentilador
-          transAnestStore.modosVentilacion=this.menuTrans.modosVentilacion
-          transAnestStore.PEEP=this.menuTrans.peep
-          transAnestStore.VT=this.menuTrans.vt
-          transAnestStore.FC=this.menuTrans.frecResp
-          transAnestStore.IE=this.menuTrans.IE
-          transAnestStore.PLimite=this.menuTrans.PLimite
-          transAnestStore.Hr=this.menuTrans.Hr
+          // transAnestStore.modosVentilacion=this.menuTrans.modosVentilacion
+          // transAnestStore.PEEP=this.menuTrans.peep
+          // transAnestStore.VT=this.menuTrans.vt
+          // transAnestStore.FC=this.menuTrans.frecResp
+          // transAnestStore.IE=this.menuTrans.IE
+          // transAnestStore.PLimite=this.menuTrans.PLimite
+          // transAnestStore.Hr=this.menuTrans.Hr
           // Balance Total
           // transAnestStore.balanceTotal=this.menuTrans.balanceTotal
           // Ingresos
@@ -1616,20 +1616,20 @@ export default defineComponent({
           transAnestStore.ayuno=this.menuTrans.ayuno
           transAnestStore.otrosEgresos=this.menuTrans.otrosEgresos
           // Técnica Anestésica
-          transAnestStore.local=this.menuTrans.local
-          transAnestStore.sedación=this.menuTrans.sedación
-          transAnestStore.gralBalanceada=this.menuTrans.gralBalanceada
-          transAnestStore.TIVA=this.menuTrans.TIVA
-          transAnestStore.multimodal=this.menuTrans.multimodal
-          transAnestStore.bloqMixto=this.menuTrans.bloqMixto
-          transAnestStore.bloqPeriLum=this.menuTrans.bloqPeriLum
-          transAnestStore.bloqPeriCaudal=this.menuTrans.bloqPeriCaudal
-          transAnestStore.BloqEspinal=this.menuTrans.BloqEspinal
-          transAnestStore.BloqPlexo=this.menuTrans.BloqPlexo
-          transAnestStore.BloqTroncular=this.menuTrans.BloqTroncular
-          transAnestStore.bloqPeriToracico=this.menuTrans.bloqPeriToracico
-          transAnestStore.bloqPeriCervical=this.menuTrans.bloqPeriCervical
-          transAnestStore.libreOpioides=this.menuTrans.libreOpioides
+          // transAnestStore.local=this.menuTrans.local
+          // transAnestStore.sedación=this.menuTrans.sedación
+          // transAnestStore.gralBalanceada=this.menuTrans.gralBalanceada
+          // transAnestStore.TIVA=this.menuTrans.TIVA
+          // transAnestStore.multimodal=this.menuTrans.multimodal
+          // transAnestStore.bloqMixto=this.menuTrans.bloqMixto
+          // transAnestStore.bloqPeriLum=this.menuTrans.bloqPeriLum
+          // transAnestStore.bloqPeriCaudal=this.menuTrans.bloqPeriCaudal
+          // transAnestStore.BloqEspinal=this.menuTrans.BloqEspinal
+          // transAnestStore.BloqPlexo=this.menuTrans.BloqPlexo
+          // transAnestStore.BloqTroncular=this.menuTrans.BloqTroncular
+          // transAnestStore.bloqPeriToracico=this.menuTrans.bloqPeriToracico
+          // transAnestStore.bloqPeriCervical=this.menuTrans.bloqPeriCervical
+          // transAnestStore.libreOpioides=this.menuTrans.libreOpioides
           // Tiempos QX
           transAnestStore.ingresoQX=this.menuTrans.ingresoQX
           transAnestStore.inicioAn=this.menuTrans.inicioAn
@@ -1660,13 +1660,13 @@ export default defineComponent({
 
       async vaciarInputsTrans(){
         /* DatosVentilador */
-        this.menuTrans.modosVentilacion= transAnestStore.modosVentilacion
-        this.menuTrans.peep= transAnestStore.PEEP
-        this.menuTrans.vt= transAnestStore.VT
-        this.menuTrans.frecResp= transAnestStore.FC
-        this.menuTrans.IE= transAnestStore.IE
-        this.menuTrans.PLimite= transAnestStore.PLimite
-        this.menuTrans.Hr= transAnestStore.Hr
+        // this.menuTrans.modosVentilacion= transAnestStore.modosVentilacion
+        // this.menuTrans.peep= transAnestStore.PEEP
+        // this.menuTrans.vt= transAnestStore.VT
+        // this.menuTrans.frecResp= transAnestStore.FC
+        // this.menuTrans.IE= transAnestStore.IE
+        // this.menuTrans.PLimite= transAnestStore.PLimite
+        // this.menuTrans.Hr= transAnestStore.Hr
         /* Balance Total */
         // this.menuTrans.balanceTotal= transAnestStore.balanceTotal
         // Ingresos
@@ -1692,20 +1692,20 @@ export default defineComponent({
         this.menuTrans.ayuno= transAnestStore.ayuno
         this.menuTrans.otrosEgresos= transAnestStore.otrosEgresos
         /* Técnica Anestésica */
-        this.menuTrans.local= transAnestStore.local
-        this.menuTrans.sedación= transAnestStore.sedación
-        this.menuTrans.gralBalanceada= transAnestStore.gralBalanceada
-        this.menuTrans.TIVA= transAnestStore.TIVA
-        this.menuTrans.multimodal= transAnestStore.multimodal
-        this.menuTrans.bloqMixto= transAnestStore.bloqMixto
-        this.menuTrans.bloqPeriLum= transAnestStore.bloqPeriLum
-        this.menuTrans.bloqPeriCaudal= transAnestStore.bloqPeriCaudal
-        this.menuTrans.BloqEspinal= transAnestStore.BloqEspinal
-        this.menuTrans.BloqPlexo= transAnestStore.BloqPlexo
-        this.menuTrans.BloqTroncular= transAnestStore.BloqTroncular
-        this.menuTrans.bloqPeriToracico= transAnestStore.bloqPeriToracico
-        this.menuTrans.bloqPeriCervical= transAnestStore.bloqPeriCervical
-        this.menuTrans.libreOpioides= transAnestStore.libreOpioides
+        // this.menuTrans.local= transAnestStore.local
+        // this.menuTrans.sedación= transAnestStore.sedación
+        // this.menuTrans.gralBalanceada= transAnestStore.gralBalanceada
+        // this.menuTrans.TIVA= transAnestStore.TIVA
+        // this.menuTrans.multimodal= transAnestStore.multimodal
+        // this.menuTrans.bloqMixto= transAnestStore.bloqMixto
+        // this.menuTrans.bloqPeriLum= transAnestStore.bloqPeriLum
+        // this.menuTrans.bloqPeriCaudal= transAnestStore.bloqPeriCaudal
+        // this.menuTrans.BloqEspinal= transAnestStore.BloqEspinal
+        // this.menuTrans.BloqPlexo= transAnestStore.BloqPlexo
+        // this.menuTrans.BloqTroncular= transAnestStore.BloqTroncular
+        // this.menuTrans.bloqPeriToracico= transAnestStore.bloqPeriToracico
+        // this.menuTrans.bloqPeriCervical= transAnestStore.bloqPeriCervical
+        // this.menuTrans.libreOpioides= transAnestStore.libreOpioides
         /* Tiempos QX */
         this.menuTrans.ingresoQX= transAnestStore.ingresoQX
         this.menuTrans.inicioAn= transAnestStore.inicioAn
