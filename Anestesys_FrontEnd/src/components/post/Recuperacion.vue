@@ -4,7 +4,7 @@
       <li class="nav-item col-md-4">
         <button
           class="btn btn-nav-bar fw-bold active"
-          id="recuperacion"
+          id="nota-evaluacion"
           data-bs-toggle="pill"
           data-bs-target="#notaEvaluacion"
           type="button"
@@ -17,7 +17,7 @@
       <li class="nav-item col-md-4">
         <button
           class="btn btn-nav-bar fw-bold"
-          id="recuperacion"
+          id=""
           data-bs-toggle="pill"
           data-bs-target="#aldrete"
           type="button"
@@ -30,7 +30,7 @@
       <li class="nav-item col-md-4">
         <button
           class="btn btn-nav-bar fw-bold"
-          id="recuperacion"
+          id=""
           data-bs-toggle="pill"
           data-bs-target="#alta"
           type="button"
@@ -1385,6 +1385,7 @@ import type { regRecuperacion } from "@/interfaces/regPostAnest";
 import { defineComponent } from "vue";
 import { usePostAnestStore } from "../../stores/postAnest-store";
 import { usePreIdStore } from "@/stores/preId-store";
+import { Tab } from 'bootstrap';
 
 const postAnestStore = usePostAnestStore();
 const preIdStore = usePreIdStore();
@@ -1480,7 +1481,17 @@ export default defineComponent({
       this.infoRec.altaRec_Obs=postAnestStore.ObservacionesAlta
       // preIdStore.NombreAnestesiologo=postAnestStore.NombreAnestesiologo
       this.infoRec.altaRec_FechaAltaRec=postAnestStore.FechaAlta
-      this.infoRec.altaRec_HrAltaRec=postAnestStore.HoraAlta
+      this.infoRec.altaRec_HrAltaRec=postAnestStore.HoraAlta      
+    },
+
+    async volverPestana(){
+      if(preIdStore.volverPostRecuperacion === true){
+          const tabPostRecup = document.getElementById('nota-evaluacion');
+          const tabObj = new Tab(tabPostRecup);
+          tabObj.show();
+          
+          preIdStore.volverPostRecuperacion = false;
+      } 
     },
 
     async guardarDatosRecuperacion(){

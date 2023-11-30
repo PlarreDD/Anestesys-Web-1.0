@@ -5,7 +5,7 @@
             <!-- POSICIÓN Y CUIDADOS -->
             <li class="nav-item col-md-3" >
                 <button class="btn btn-nav-bar fw-bold active"
-                        id="posicion"
+                        id="posicion-cuidados"
                         data-bs-toggle="pill"
                         data-bs-target="#posicion"
                         type="button"
@@ -15,7 +15,7 @@
             <!-- GENERAL -->
             <li class="nav-item col-md-2" >
                 <button class="btn btn-nav-bar fw-bold"
-                        id="general"
+                        id=""
                         data-bs-toggle="pill"
                         data-bs-target="#general"
                         type="button"
@@ -25,7 +25,7 @@
             <!-- REGIONAL -->
             <li class="nav-item col-md-2" >
                 <button class="btn btn-nav-bar fw-bold"
-                        id="regional"
+                        id=""
                         data-bs-toggle="pill"
                         data-bs-target="#regional"
                         type="button"
@@ -35,7 +35,7 @@
             <!-- SEDACIÓN -->
             <li class="nav-item col-md-2" >
                 <button class="btn btn-nav-bar fw-bold"
-                        id="sedacion"
+                        id=""
                         data-bs-toggle="pill"
                         data-bs-target="#sedacion"
                         type="button"
@@ -45,7 +45,7 @@
             <!-- LOCAL -->
             <li class="nav-item col-md-2" >
                 <button class="btn btn-nav-bar fw-bold"
-                        id="local"
+                        id=""
                         data-bs-toggle="pill"
                         data-bs-target="#local"
                         type="button"
@@ -1143,7 +1143,7 @@ export default defineComponent({
             this.infoPlan.general_OtrosDispositivos = "No"
             this.infoPlan.general_EspOtrosDispositivos = ""
 
-            const tabPosicion = document.getElementById('posicion');
+            const tabPosicion = document.getElementById('posicion-cuidados');
             const tabObj = new Tab(tabPosicion);
             tabObj.show();
 

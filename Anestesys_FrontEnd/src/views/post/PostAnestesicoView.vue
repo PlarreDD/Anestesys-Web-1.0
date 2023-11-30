@@ -2,8 +2,8 @@
   <header @click.stop="replegarMenuVistaRapida">
     <barra-navegacion/>
   </header>
-  <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">
-    <div class="input-group mb-3" @click.stop="volverPestana">
+  <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida" @mouseover="volverPestana">
+    <div class="input-group mb-3">
 
       <div class="col-10 divform navbar-nav">     
 
@@ -197,12 +197,22 @@ export default ({
     // },
     
     async volverPestana(){
+      
       if(preIdStore.volverPost == true){
         const tabPost = document.getElementById('notaP-tab');
         const tabObj = new Tab(tabPost);
         tabObj.show();
+
+        this.esNotaP=true;
+        this.esRecuperacion=false;
         
         preIdStore.volverPost = false;
+
+        const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
+        await componenteNotaPA.volverPestana();
+
+        const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
+        await componenteRecuperacion.volverPestana();
       }
     },
 

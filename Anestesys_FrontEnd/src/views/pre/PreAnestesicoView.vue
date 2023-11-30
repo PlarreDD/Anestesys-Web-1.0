@@ -4445,6 +4445,8 @@ export default defineComponent({
         tabObj.show();
 
         idStore.volverPost = true
+        idStore.volverPostNota = true
+        idStore.volverPostRecuperacion = true
       }
       
       // Sino se elige un expediente no manda la petición
