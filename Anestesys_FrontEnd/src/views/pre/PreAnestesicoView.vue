@@ -4801,7 +4801,7 @@ export default defineComponent({
         document.getElementById("menu-post").className='invisible'       
 
         swal.fire({
-          title: 'Escribir el número de expediente, nombre del paciente y número de episodio',
+          title: 'Escribir el número de expediente y nombre del paciente',
           icon: 'error',
           showConfirmButton: false,
           toast: true,
