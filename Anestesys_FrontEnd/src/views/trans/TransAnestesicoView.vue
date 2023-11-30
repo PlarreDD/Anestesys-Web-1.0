@@ -6434,17 +6434,14 @@ export default defineComponent({
 
       // Eventos de Monitoreo
       async iniMSV(){
-        console.log("iniMSV");
         transAnestStore.envDat = true;
         this.btnCambioMonitor = true;
         this.siAquisigo();
-        // transAnestStore.getIniciaMonitoreo();
         this.iniRecepDatos();
         this.capturaGrid();
       },
 
       async finMSV(){
-        console.log("finMSV");
         transAnestStore.envDat = false;
         this.btnCambioMonitor = false;
         transAnestStore.getDetieneMonitoreo();
@@ -6650,7 +6647,6 @@ export default defineComponent({
       // Recibe datos del MSV cada segundo
       iniRecepDatos(){
         this.intervalId = setInterval(() => {
-          console.log("iniRecepDatos");
           this.comMSV();
         }, 1000);
       },
@@ -6660,6 +6656,15 @@ export default defineComponent({
         transAnestStore.datosMSV = null;
         clearInterval(this.intervalId);
         clearInterval(this.saveGrid);
+        
+        if(preIdStore.nuevoRegistroPaciente == false){
+          this.transAnestStore.saveDatosMSV(this.gridBD, preIdStore.pacienteID._id);
+        }else if(preIdStore.nuevoRegistroPaciente == true){
+          this.transAnestStore.saveNuevoDatosMSV(this.gridBD, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        }
+      
+        this.guardaDatosMSV = 0;
+        this.gridBD = [];
       },
       
       siAquisigo(){
@@ -6675,7 +6680,6 @@ export default defineComponent({
       // Agrega los datos del MSV al arreglo 'grid' cada minuto
       async capturaGrid(){
         this.saveGrid = await setInterval(() => {
-          console.log("saveGrid")
           this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
           this.gridBD.push(this.hl7mess[this.hl7mess.length - 1]);
           this.hl7mess = [];
