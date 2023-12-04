@@ -1291,9 +1291,9 @@ export default defineComponent({
         postAnestStore.AldreteFinal120Min = paciente?.altaRec_120min ?? ''
         postAnestStore.CalificacionAldrete = paciente?.altaRec_CalifAldrete ?? ''
         postAnestStore.ObservacionesAlta = paciente?.altaRec_Obs ?? ''
-        postAnestStore.NombreAnestesiologo = paciente?.altaRec_FechaAltaRec ?? ''
-        postAnestStore.FechaAlta = paciente?.altaRec_HrAltaRec ?? ''
-        postAnestStore.HoraAlta = paciente?.altaRec_NomMedAnest ?? ''
+        postAnestStore.FechaAlta = paciente?.altaRec_FechaAltaRec ?? ''
+        postAnestStore.HoraAlta = paciente?.altaRec_HrAltaRec ?? ''
+        postAnestStore.NombreAnestesiologo = paciente?.altaRec_NomMedAnest ?? ''
       } else {
         postAnestStore.NotaUCPA = ''
         postAnestStore.FCIngreso = ''
@@ -1558,37 +1558,59 @@ export default defineComponent({
       });
       this.chartElements = [];
 
-      let FC = transStore.datosMSV.flatMap(dato => dato.FC ?? ' ') //Corregir esto
+      let FC = null
+      let Pulso = null
+      let PAS = null      
+      let PAD = null
+      let PAM = null
+      let SpO2 = null
+      let EtCO2 = null
+      let Temp1 = null
+      let Temp2 = null
+      let PVC = null
+      let PAS_IN = null
+      let PAD_IN = null
+      let PAM_IN = null
+      let FiCO2 = null
+      let FR = null
+      let horaGeneracion = null
       
-      let Pulso = transStore.datosMSV.flatMap(dato => dato.Pulso ?? ' ')
-
-      let PAS = transStore.datosMSV.flatMap(dato => dato.PAS ?? ' ')
-      
-      let PAD = transStore.datosMSV.flatMap(dato => dato.PAD ?? ' ')
-
-      let PAM = transStore.datosMSV.flatMap(dato => dato.PAM ?? ' ')
-      
-      let SpO2 = transStore.datosMSV.flatMap(dato => dato.SpO2 ?? ' ')
-      
-      let EtCO2 = transStore.datosMSV.flatMap(dato => dato.EtCO2 ?? ' ')
-      
-      let Temp1 = transStore.datosMSV.flatMap(dato => dato.Temp1 ?? ' ')
-      
-      let Temp2 = transStore.datosMSV.flatMap(dato => dato.Temp2 ?? ' ')
-      
-      let PVC = transStore.datosMSV.flatMap(dato => dato.PVC ?? ' ')
-      
-      let PAS_IN = transStore.datosMSV.flatMap(dato => dato.PAS_IN ?? ' ')
-      
-      let PAD_IN = transStore.datosMSV.flatMap(dato => dato.PAD_IN ?? ' ')
-      
-      let PAM_IN = transStore.datosMSV.flatMap(dato => dato.PAM_IN ?? ' ')
-      
-      let FiCO2 = transStore.datosMSV.flatMap(dato => dato.FiCO2 ?? ' ')
-      
-      let FR = transStore.datosMSV.flatMap(dato => dato.FR ?? ' ')
-      
-      let horaGeneracion = transStore.datosMSV.map(item => item.HoraGeneracion);
+      if (transStore.datosMSV != ''){
+        
+        FC = transStore.datosMSV.flatMap(dato => dato.FC ?? ' ') //Corregir esto      
+        Pulso = transStore.datosMSV.flatMap(dato => dato.Pulso ?? ' ')
+        PAS = transStore.datosMSV.flatMap(dato => dato.PAS ?? ' ')      
+        PAD = transStore.datosMSV.flatMap(dato => dato.PAD ?? ' ')
+        PAM = transStore.datosMSV.flatMap(dato => dato.PAM ?? ' ')      
+        SpO2 = transStore.datosMSV.flatMap(dato => dato.SpO2 ?? ' ')      
+        EtCO2 = transStore.datosMSV.flatMap(dato => dato.EtCO2 ?? ' ')      
+        Temp1 = transStore.datosMSV.flatMap(dato => dato.Temp1 ?? ' ')      
+        Temp2 = transStore.datosMSV.flatMap(dato => dato.Temp2 ?? ' ')      
+        PVC = transStore.datosMSV.flatMap(dato => dato.PVC ?? ' ')      
+        PAS_IN = transStore.datosMSV.flatMap(dato => dato.PAS_IN ?? ' ')      
+        PAD_IN = transStore.datosMSV.flatMap(dato => dato.PAD_IN ?? ' ')      
+        PAM_IN = transStore.datosMSV.flatMap(dato => dato.PAM_IN ?? ' ')      
+        FiCO2 = transStore.datosMSV.flatMap(dato => dato.FiCO2 ?? ' ')      
+        FR = transStore.datosMSV.flatMap(dato => dato.FR ?? ' ')      
+        horaGeneracion = transStore.datosMSV.map(item => item.HoraGeneracion);
+      }else{
+        FC = ' '
+        Pulso = ' '
+        PAS = ' '
+        PAD = ' '
+        PAM = ' '
+        SpO2 = ' '
+        EtCO2 = ' '
+        Temp1 = ' '
+        Temp2 = ' '
+        PVC = ' '
+        PAS_IN = ' '
+        PAD_IN = ' '
+        PAM_IN = ' '
+        FiCO2 = ' '
+        FR = ' '
+        horaGeneracion = ' '
+      }
 
       let gruposFC = [];
       for (let i = 0; i < FC.length; i += 26) {
@@ -2422,10 +2444,15 @@ export default defineComponent({
       let txtCirugiaTrans= cirugiaTrans.length > 60 ? cirugiaTrans.substring(0, 60) + '...' : cirugiaTrans;        
 
       /*Grid Anestésico*/
+      if(transStore.datosMSV == ''){
+        transStore.datosMSV = []
+      }
+
       let datosGrid = transStore.datosMSV;
       let tablaDatosGrid = [];
 
       datosGrid.forEach(entry => {
+        
         const columnData = [];
         // Agregar la Hora 
         columnData.push({ text: entry.HoraGeneracion, style: 'SF', fontSize: 6, alignment:'center', margin: [0, 0, 0, 4] });
@@ -4674,6 +4701,8 @@ export default defineComponent({
       this.mostrarGraficas=false;
 
       this.mostrarSpinner=false;
+
+      transStore.datosMSV=''
     },   
 
     // Obtener datos de paciente seleccionado
