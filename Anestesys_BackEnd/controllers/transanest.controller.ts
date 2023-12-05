@@ -5,7 +5,7 @@ import { UpdateResult } from "mongodb";
 /******************* Menu Trans Anestesico *******************/
 export const saveMenuTrans = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { pid, cxid,
                 /* Balance Total */
                 balanceTotal,
                 // Ingresos
@@ -17,10 +17,10 @@ export const saveMenuTrans = async (req: any, res: Response) => {
                 liqAscitis, sangradoAprox, uresis, expoQX,
                 reqBasales, ayuno, otrosEgresos,
                 /* Técnica Anestésica */
-                local, sedación, gralBalanceada, TIVA, multimodal,
-                bloqMixto, bloqPeriLum, bloqPeriCaudal, BloqEspinal,
-                BloqPlexo, BloqTroncular, bloqPeriToracico, bloqPeriCervical,
-                libreOpioides,
+                // local, sedación, gralBalanceada, TIVA, multimodal,
+                // bloqMixto, bloqPeriLum, bloqPeriCaudal, BloqEspinal,
+                // BloqPlexo, BloqTroncular, bloqPeriToracico, bloqPeriCervical,
+                // libreOpioides,
                 // Datos del ventilador
                 modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr,
 
@@ -29,7 +29,7 @@ export const saveMenuTrans = async (req: any, res: Response) => {
         let menuTrans;
 
         if( modosVentilacion == undefined ){
-            menuTrans = new MenuTrans({ pid,
+            menuTrans = new MenuTrans({ pid, cxid,
                                         /* Balance Total */
                                         balanceTotal: balanceTotal,
                                         // Ingresos
@@ -55,24 +55,24 @@ export const saveMenuTrans = async (req: any, res: Response) => {
                                         ayuno: ayuno,
                                         otrosEgresos: otrosEgresos,
                                         /* Técnica Anestésica */
-                                        local: local,
-                                        sedación: sedación,
-                                        gralBalanceada: gralBalanceada,
-                                        TIVA: TIVA,
-                                        multimodal: multimodal,
-                                        bloqMixto: bloqMixto,
-                                        bloqPeriLum: bloqPeriLum,
-                                        bloqPeriCaudal: bloqPeriCaudal,
-                                        BloqEspinal: BloqEspinal,
-                                        BloqPlexo: BloqPlexo,
-                                        BloqTroncular: BloqTroncular,
-                                        bloqPeriToracico: bloqPeriToracico,
-                                        bloqPeriCervical: bloqPeriCervical,
-                                        libreOpioides: libreOpioides,
+                                        // local: local,
+                                        // sedación: sedación,
+                                        // gralBalanceada: gralBalanceada,
+                                        // TIVA: TIVA,
+                                        // multimodal: multimodal,
+                                        // bloqMixto: bloqMixto,
+                                        // bloqPeriLum: bloqPeriLum,
+                                        // bloqPeriCaudal: bloqPeriCaudal,
+                                        // BloqEspinal: BloqEspinal,
+                                        // BloqPlexo: BloqPlexo,
+                                        // BloqTroncular: BloqTroncular,
+                                        // bloqPeriToracico: bloqPeriToracico,
+                                        // bloqPeriCervical: bloqPeriCervical,
+                                        // libreOpioides: libreOpioides,
             });
         }
         else{
-            menuTrans = new MenuTrans({ pid,
+            menuTrans = new MenuTrans({ pid, cxid,
                                         // Datos del ventilador
                                         datosVentilador: {
                                             modosVentilacion: modosVentilacion,
@@ -108,10 +108,10 @@ export const saveNuevoMenuTrans = async (req: any, res: Response) => {
                 liqAscitis, sangradoAprox, uresis, expoQX,
                 reqBasales, ayuno, otrosEgresos,
                 /* Técnica Anestésica */
-                local, sedación, gralBalanceada, TIVA, multimodal,
-                bloqMixto, bloqPeriLum, bloqPeriCaudal, BloqEspinal,
-                BloqPlexo, BloqTroncular, bloqPeriToracico, bloqPeriCervical,
-                libreOpioides,
+                // local, sedación, gralBalanceada, TIVA, multimodal,
+                // bloqMixto, bloqPeriLum, bloqPeriCaudal, BloqEspinal,
+                // BloqPlexo, BloqTroncular, bloqPeriToracico, bloqPeriCervical,
+                // libreOpioides,
                 // Datos del ventilador
                 modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr,
 
@@ -146,20 +146,20 @@ export const saveNuevoMenuTrans = async (req: any, res: Response) => {
                                         ayuno: ayuno,
                                         otrosEgresos: otrosEgresos,
                                         /* Técnica Anestésica */
-                                        local: local,
-                                        sedación: sedación,
-                                        gralBalanceada: gralBalanceada,
-                                        TIVA: TIVA,
-                                        multimodal: multimodal,
-                                        bloqMixto: bloqMixto,
-                                        bloqPeriLum: bloqPeriLum,
-                                        bloqPeriCaudal: bloqPeriCaudal,
-                                        BloqEspinal: BloqEspinal,
-                                        BloqPlexo: BloqPlexo,
-                                        BloqTroncular: BloqTroncular,
-                                        bloqPeriToracico: bloqPeriToracico,
-                                        bloqPeriCervical: bloqPeriCervical,
-                                        libreOpioides: libreOpioides,
+                                        // local: local,
+                                        // sedación: sedación,
+                                        // gralBalanceada: gralBalanceada,
+                                        // TIVA: TIVA,
+                                        // multimodal: multimodal,
+                                        // bloqMixto: bloqMixto,
+                                        // bloqPeriLum: bloqPeriLum,
+                                        // bloqPeriCaudal: bloqPeriCaudal,
+                                        // BloqEspinal: BloqEspinal,
+                                        // BloqPlexo: BloqPlexo,
+                                        // BloqTroncular: BloqTroncular,
+                                        // bloqPeriToracico: bloqPeriToracico,
+                                        // bloqPeriCervical: bloqPeriCervical,
+                                        // libreOpioides: libreOpioides,
             });
         }
         else{
@@ -468,7 +468,7 @@ export const UpdateNuevoBalanceH = async (req: any, res: Response) => {
 /* Tiempos QX Guardado/Actualización */
 export const saveTiemposQX = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { pid, cxid,
                 // Tiempos Qx
                 ingresoQX, inicioAn, inicioCx, finCx, finAn, egresoQx,
               } = req.body;
@@ -488,7 +488,7 @@ export const saveTiemposQX = async (req: any, res: Response) => {
                                                });
 
         } else {
-            const menuTrans  = new MenuTrans({ pid,
+            const menuTrans  = new MenuTrans({ pid, cxid,
                                                 // Datos del ventilador
                                                 tiemposQX: {
                                                     ingresoQX: ingresoQX,
@@ -546,7 +546,7 @@ export const saveNuevoTiemposQX = async (req: any, res: Response) => {
 /* Para un nuevo paciente */
 export const saveDatosMSV = async (req: any, res: Response) => {
     try {
-        const { pid } = req.params;
+        const { pid, cxid } = req.params;
         const { datosMSV } = req.body;
 
         const dataToInsert = datosMSV.map((data: { FC: any; Pulso: any;
@@ -576,9 +576,9 @@ export const saveDatosMSV = async (req: any, res: Response) => {
         }));
 
         const menuTrans = await MenuTrans.findOneAndUpdate(
-            { pid: pid },
+            { pid: pid, cxid: cxid },
             { $addToSet: { datosMSV: { $each: dataToInsert } } } );
-
+      
         return res.json({ menuTrans });
     } catch (error) {
         console.log(error);
@@ -632,11 +632,11 @@ export const saveNuevoDatosMSV = async (req: any, res: Response) => {
 /* Guardado Medicamentos */
 export const saveMedicamentos = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { pid, cxid,
                 // Datos medicamentos
                 tipoMed, medicamento, dosisMed, unidadMed, viaMed, horaInicioMed, horaFinalMed, observacionesMed
               } = req.body;        
-        const menuTrans  = await new MenuTrans({ pid,
+        const menuTrans  = await new MenuTrans({ pid, cxid,
                                             // Datos del medicamento
                                             medicamentosCx: {
                                                 tipoMed: tipoMed, medicamento: medicamento, dosisMed: dosisMed, unidadMed: unidadMed, viaMed: viaMed, 
@@ -798,11 +798,11 @@ export const deleteMedicamento = async (req: any, res: Response) => {
 /* Guardado Relevo */
 export const saveRelevos = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { pid, cxid,
                 // Datos relevos
                 horaRelevo, tipoRel, matriculaRel, anestesiologoRel, observacionesRel
               } = req.body;        
-        const menuTrans  = await new MenuTrans({ pid,
+        const menuTrans  = await new MenuTrans({ pid, cxid,
                                             // Datos del relevo
                                             relevoCx: {
                                                 horaRelevo: horaRelevo, tipoRel: tipoRel, matriculaRel: matriculaRel, anestesiologoRel: anestesiologoRel, observacionesRel: observacionesRel
@@ -959,11 +959,11 @@ export const deleteRelevo = async (req: any, res: Response) => {
 /* Guardado Eventos */
 export const saveEventos = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { pid, cxid,
                 // Datos relevos
                 horaEvento, tipoEve, detalleEvento
               } = req.body;        
-        const menuTrans  = await new MenuTrans({ pid,
+        const menuTrans  = await new MenuTrans({ pid, cxid,
                                             // Datos del relevo
                                             evCriticoCx: {
                                                 horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento

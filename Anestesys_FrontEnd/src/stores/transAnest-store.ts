@@ -97,20 +97,20 @@ export const useTransAnestStore = defineStore('transAn', {
         ayuno: ref(null),
         otrosEgresos: ref(null),
         // Técnica Anestésica
-        local: ref(null),
-        sedación: ref(null),
-        gralBalanceada: ref(null),
-        TIVA: ref(null),
-        multimodal: ref(null),
-        bloqMixto: ref(null),
-        bloqPeriLum: ref(null),
-        bloqPeriCaudal: ref(null),
-        BloqEspinal: ref(null),
-        BloqPlexo: ref(null),
-        BloqTroncular: ref(null),
-        bloqPeriToracico: ref(null),
-        bloqPeriCervical: ref(null),
-        libreOpioides: ref(null),
+        // local: ref(null),
+        // sedación: ref(null),
+        // gralBalanceada: ref(null),
+        // TIVA: ref(null),
+        // multimodal: ref(null),
+        // bloqMixto: ref(null),
+        // bloqPeriLum: ref(null),
+        // bloqPeriCaudal: ref(null),
+        // BloqEspinal: ref(null),
+        // BloqPlexo: ref(null),
+        // BloqTroncular: ref(null),
+        // bloqPeriToracico: ref(null),
+        // bloqPeriCervical: ref(null),
+        // libreOpioides: ref(null),
         // Tiempos QX
         ingresoQX: ref(null),
         inicioAn: ref(null),
@@ -141,7 +141,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
     actions: {
         /* Datos del Ventilador */
-        async saveDatosV(regTransAnest: any, pid: string){
+        async saveDatosV(regTransAnest: any, pid: string, cxid: string){
             await apiAxios({
                 url: "http://localhost:5000/trans",
                 method: "POST",
@@ -149,7 +149,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    pid: pid,
+                    pid: pid, cxid: cxid,
                     // Datos del Ventilador
                     modosVentilacion: regTransAnest.modosVentilacion,
                     peep: regTransAnest.peep,
@@ -183,20 +183,20 @@ export const useTransAnestStore = defineStore('transAn', {
                     ayuno: regTransAnest.ayuno,
                     otrosEgresos: regTransAnest.otrosEgresos,
                     /* Técnica Anestésica */
-                    local: regTransAnest.local,
-                    sedación: regTransAnest.sedación,
-                    gralBalanceada: regTransAnest.gralBalanceada,
-                    TIVA: regTransAnest.TIVA,
-                    multimodal: regTransAnest.multimodal,
-                    bloqMixto: regTransAnest.bloqMixto,
-                    bloqPeriLum: regTransAnest.bloqPeriLum,
-                    bloqPeriCaudal: regTransAnest.bloqPeriCaudal,
-                    BloqEspinal: regTransAnest.BloqEspinal,
-                    BloqPlexo: regTransAnest.BloqPlexo,
-                    BloqTroncular: regTransAnest.BloqTroncular,
-                    bloqPeriToracico: regTransAnest.bloqPeriToracico,
-                    bloqPeriCervical: regTransAnest.bloqPeriCervical,
-                    libreOpioides: regTransAnest.libreOpioides,
+                    // local: regTransAnest.local,
+                    // sedación: regTransAnest.sedación,
+                    // gralBalanceada: regTransAnest.gralBalanceada,
+                    // TIVA: regTransAnest.TIVA,
+                    // multimodal: regTransAnest.multimodal,
+                    // bloqMixto: regTransAnest.bloqMixto,
+                    // bloqPeriLum: regTransAnest.bloqPeriLum,
+                    // bloqPeriCaudal: regTransAnest.bloqPeriCaudal,
+                    // BloqEspinal: regTransAnest.BloqEspinal,
+                    // BloqPlexo: regTransAnest.BloqPlexo,
+                    // BloqTroncular: regTransAnest.BloqTroncular,
+                    // bloqPeriToracico: regTransAnest.bloqPeriToracico,
+                    // bloqPeriCervical: regTransAnest.bloqPeriCervical,
+                    // libreOpioides: regTransAnest.libreOpioides,
                 }
             })
             .then((res: any) => {
@@ -256,20 +256,20 @@ export const useTransAnestStore = defineStore('transAn', {
                     ayuno: regTransAnest.ayuno,
                     otrosEgresos: regTransAnest.otrosEgresos,
                     /* Técnica Anestésica */
-                    local: regTransAnest.local,
-                    sedación: regTransAnest.sedación,
-                    gralBalanceada: regTransAnest.gralBalanceada,
-                    TIVA: regTransAnest.TIVA,
-                    multimodal: regTransAnest.multimodal,
-                    bloqMixto: regTransAnest.bloqMixto,
-                    bloqPeriLum: regTransAnest.bloqPeriLum,
-                    bloqPeriCaudal: regTransAnest.bloqPeriCaudal,
-                    BloqEspinal: regTransAnest.BloqEspinal,
-                    BloqPlexo: regTransAnest.BloqPlexo,
-                    BloqTroncular: regTransAnest.BloqTroncular,
-                    bloqPeriToracico: regTransAnest.bloqPeriToracico,
-                    bloqPeriCervical: regTransAnest.bloqPeriCervical,
-                    libreOpioides: regTransAnest.libreOpioides,
+                    // local: regTransAnest.local,
+                    // sedación: regTransAnest.sedación,
+                    // gralBalanceada: regTransAnest.gralBalanceada,
+                    // TIVA: regTransAnest.TIVA,
+                    // multimodal: regTransAnest.multimodal,
+                    // bloqMixto: regTransAnest.bloqMixto,
+                    // bloqPeriLum: regTransAnest.bloqPeriLum,
+                    // bloqPeriCaudal: regTransAnest.bloqPeriCaudal,
+                    // BloqEspinal: regTransAnest.BloqEspinal,
+                    // BloqPlexo: regTransAnest.BloqPlexo,
+                    // BloqTroncular: regTransAnest.BloqTroncular,
+                    // bloqPeriToracico: regTransAnest.bloqPeriToracico,
+                    // bloqPeriCervical: regTransAnest.bloqPeriCervical,
+                    // libreOpioides: regTransAnest.libreOpioides,
                 }
             })
             .then((res: any) => {
@@ -328,20 +328,20 @@ export const useTransAnestStore = defineStore('transAn', {
                     ayuno: regTransAnest.ayuno,
                     otrosEgresos: regTransAnest.otrosEgresos,
                     /* Técnica Anestésica */
-                    local: regTransAnest.local,
-                    sedación: regTransAnest.sedación,
-                    gralBalanceada: regTransAnest.gralBalanceada,
-                    TIVA: regTransAnest.TIVA,
-                    multimodal: regTransAnest.multimodal,
-                    bloqMixto: regTransAnest.bloqMixto,
-                    bloqPeriLum: regTransAnest.bloqPeriLum,
-                    bloqPeriCaudal: regTransAnest.bloqPeriCaudal,
-                    BloqEspinal: regTransAnest.BloqEspinal,
-                    BloqPlexo: regTransAnest.BloqPlexo,
-                    BloqTroncular: regTransAnest.BloqTroncular,
-                    bloqPeriToracico: regTransAnest.bloqPeriToracico,
-                    bloqPeriCervical: regTransAnest.bloqPeriCervical,
-                    libreOpioides: regTransAnest.libreOpioides,
+                    // local: regTransAnest.local,
+                    // sedación: regTransAnest.sedación,
+                    // gralBalanceada: regTransAnest.gralBalanceada,
+                    // TIVA: regTransAnest.TIVA,
+                    // multimodal: regTransAnest.multimodal,
+                    // bloqMixto: regTransAnest.bloqMixto,
+                    // bloqPeriLum: regTransAnest.bloqPeriLum,
+                    // bloqPeriCaudal: regTransAnest.bloqPeriCaudal,
+                    // BloqEspinal: regTransAnest.BloqEspinal,
+                    // BloqPlexo: regTransAnest.BloqPlexo,
+                    // BloqTroncular: regTransAnest.BloqTroncular,
+                    // bloqPeriToracico: regTransAnest.bloqPeriToracico,
+                    // bloqPeriCervical: regTransAnest.bloqPeriCervical,
+                    // libreOpioides: regTransAnest.libreOpioides,
                 }
             })
             .then((res: any) => {
@@ -402,20 +402,20 @@ export const useTransAnestStore = defineStore('transAn', {
                     ayuno: regTransAnest.ayuno,
                     otrosEgresos: regTransAnest.otrosEgresos,
                     /* Técnica Anestésica */
-                    local: regTransAnest.local,
-                    sedación: regTransAnest.sedación,
-                    gralBalanceada: regTransAnest.gralBalanceada,
-                    TIVA: regTransAnest.TIVA,
-                    multimodal: regTransAnest.multimodal,
-                    bloqMixto: regTransAnest.bloqMixto,
-                    bloqPeriLum: regTransAnest.bloqPeriLum,
-                    bloqPeriCaudal: regTransAnest.bloqPeriCaudal,
-                    BloqEspinal: regTransAnest.BloqEspinal,
-                    BloqPlexo: regTransAnest.BloqPlexo,
-                    BloqTroncular: regTransAnest.BloqTroncular,
-                    bloqPeriToracico: regTransAnest.bloqPeriToracico,
-                    bloqPeriCervical: regTransAnest.bloqPeriCervical,
-                    libreOpioides: regTransAnest.libreOpioides,
+                    // local: regTransAnest.local,
+                    // sedación: regTransAnest.sedación,
+                    // gralBalanceada: regTransAnest.gralBalanceada,
+                    // TIVA: regTransAnest.TIVA,
+                    // multimodal: regTransAnest.multimodal,
+                    // bloqMixto: regTransAnest.bloqMixto,
+                    // bloqPeriLum: regTransAnest.bloqPeriLum,
+                    // bloqPeriCaudal: regTransAnest.bloqPeriCaudal,
+                    // BloqEspinal: regTransAnest.BloqEspinal,
+                    // BloqPlexo: regTransAnest.BloqPlexo,
+                    // BloqTroncular: regTransAnest.BloqTroncular,
+                    // bloqPeriToracico: regTransAnest.bloqPeriToracico,
+                    // bloqPeriCervical: regTransAnest.bloqPeriCervical,
+                    // libreOpioides: regTransAnest.libreOpioides,
                 }
             })
             .then((res: any) => {
@@ -666,7 +666,7 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
-        async saveTiemposQX(regTransAnest: any, pid: string, tqx: string) {
+        async saveTiemposQX(regTransAnest: any, pid: string, tqx: string, cxid: string) {
             switch (tqx) {
                 case "QXIN":
                     await apiAxios({
@@ -676,7 +676,7 @@ export const useTransAnestStore = defineStore('transAn', {
                             Authorization: "Bearer " + userStore.token,
                         },
                         data: {
-                            pid: pid,
+                            pid: pid, cxid: cxid,
                             ingresoQX: regTransAnest
                         }
                     })
@@ -1118,7 +1118,7 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
-        async saveDatosMedicamentos(regTransAnest: any, pid: string){
+        async saveDatosMedicamentos(regTransAnest: any, pid: string, cxid: string){
             await apiAxios({
                 url: "http://localhost:5000/trans/medic",
                 method: "POST",
@@ -1126,7 +1126,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    pid: pid,
+                    pid: pid, cxid: cxid,
                     // Datos del Medicamento
                     tipoMed: regTransAnest.tipoMed,
                     medicamento: regTransAnest.medicamento,
@@ -1340,7 +1340,7 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
-        async saveDatosRelevos(regTransAnest: any, pid: string){
+        async saveDatosRelevos(regTransAnest: any, pid: string, cxid: string){
             await apiAxios({
                 url: "http://localhost:5000/trans/relevo",
                 method: "POST",
@@ -1348,7 +1348,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    pid: pid,
+                    pid: pid, cxid: cxid,
                     // Datos del Relevo
                     tipoRel: regTransAnest.tipoRel,
                     horaRelevo: regTransAnest.horaRelevo,
@@ -1556,7 +1556,7 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
-        async saveDatosEventos(regTransAnest: any, pid: string){
+        async saveDatosEventos(regTransAnest: any, pid: string, cxid: string){
             await apiAxios({
                 url: "http://localhost:5000/trans/evento",
                 method: "POST",
@@ -1564,7 +1564,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    pid: pid,
+                    pid: pid, cxid: cxid,
                     // Datos del evento
                     horaEvento: regTransAnest.horaEvento,
                     tipoEve: regTransAnest.tipoEve,

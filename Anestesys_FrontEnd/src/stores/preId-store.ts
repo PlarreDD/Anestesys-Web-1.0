@@ -9,12 +9,20 @@ const userStore = useUserStore();
 export const usePreIdStore = defineStore('preid', {
     state: () => ({
         pacienteID: ref(null),
+        pacienteCxID: ref(null),
         estudioID: ref(null),
         valoracionID: ref(null),
         numExpediente: ref(null),
         expedientes: ref(null),
         estudios: ref(null),
         pacientes: ref(null),
+
+        cirugias: ref(null),
+        cirugia: ref(null),
+
+        volverPost: false,
+        volverPostNota: false,
+        volverPostRecuperacion: false,
 
         actualizarRegId: false,
         actualizarRegValoracion: false,
@@ -262,6 +270,7 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {                
                 this.pacienteID = res.data.paciente;
+                this.pacienteCxID = res.data.infoCx;
                 this.actualizarRegId = true
                 
                 swal.fire({
@@ -464,7 +473,7 @@ export const usePreIdStore = defineStore('preid', {
         },
         
         /*************************** Valoración **************************/
-        async savePreAntecedentes(infoValoracion: any, pid: string){
+        async savePreAntecedentes(infoValoracion: any, pid: string, cxid: string){
             await apiAxios({                
                     url: "http://localhost:5000/valora",
                     method: "POST",
@@ -473,7 +482,7 @@ export const usePreIdStore = defineStore('preid', {
                     },
                     data: {
                         // Antecedentes
-                        pid: pid,
+                        pid: pid, cxid: cxid,
                         // Personales Patológicos
                         antPersPat_Alergias: infoValoracion.antPersPat_Alergias,
                         antPersPat_Quirurgicos: infoValoracion.antPersPat_Quirurgicos,
@@ -1025,7 +1034,7 @@ export const usePreIdStore = defineStore('preid', {
             });
         },
         /***************************** Plan ******************************/
-        savePrePlan(infoPlan: any, pid: string){
+        savePrePlan(infoPlan: any, pid: string, cxid: string){
             apiAxios({
                 url: "http://localhost:5000/plan",
                 method: "POST",
@@ -1033,7 +1042,7 @@ export const usePreIdStore = defineStore('preid', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    pid: pid,
+                    pid: pid, cxid:cxid,
                     // Posición y Cuidados
                     pos_HorasAyuno: infoPlan.pos_HorasAyuno,
                     pos_AccesoVenoso: infoPlan.pos_AccesoVenoso,
@@ -1410,7 +1419,7 @@ export const usePreIdStore = defineStore('preid', {
             });
         },
         /***************************** Nota ******************************/
-        savePreNota(obsNotaPre: string, pid: string){
+        savePreNota(obsNotaPre: string, pid: string, cxid: string){
             apiAxios({
                 url: "http://localhost:5000/nota",
                 method: "POST",
@@ -1418,7 +1427,7 @@ export const usePreIdStore = defineStore('preid', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    pid: pid,
+                    pid: pid, cxid: cxid,
                     obsNotaPre: obsNotaPre,
                 },
             })
@@ -1545,11 +1554,40 @@ export const usePreIdStore = defineStore('preid', {
               },
             })
             .then((res: any) => {
-                this.pacientes = res.data;
-                // console.log("Paciente: "+JSON.stringify(this.pacientes));                
+                this.pacientes = res.data;                                
             })
             .catch((e: any) => {
             });
         },
+
+        async getCirugias(numExpediente) {
+            await apiAxios({
+                url: `http://localhost:5000/preId/cx/${String(numExpediente)}`,
+                method: "GET",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+            })
+            .then((res:any) =>{
+                this.cirugias = res.data
+            })
+            .catch((e: any) => {                
+            });
+        },
+
+        async getDatosPDF(id) {
+            await apiAxios({
+                url: `http://localhost:5000/preId/cirugia/cx/${String(id)}`,
+                method: "GET",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+            })
+            .then((res:any) =>{
+                this.cirugia = res.data
+            })
+            .catch((e: any) => {                
+            });
+        }
     }
 });

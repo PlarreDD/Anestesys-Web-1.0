@@ -2,7 +2,7 @@
   <header @click.stop="replegarMenuVistaRapida">
     <barra-navegacion/>
   </header>
-  <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">
+  <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida" @mouseover="volverPestana">
     <div class="input-group mb-3">
 
       <div class="col-10 divform navbar-nav">     
@@ -161,6 +161,7 @@ import Nota from '../../components/post/Nota.vue';
 import Recuperacion from "../../components/post/Recuperacion.vue";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
 import { usePreIdStore } from "../../stores/preId-store";
+import { Tab } from 'bootstrap';
 
 const preIdStore = usePreIdStore();
 
@@ -194,6 +195,26 @@ export default ({
     //   const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
     //   await componenteRecuperacion.vaciarInputsRecuperacion();
     // },
+    
+    async volverPestana(){
+      
+      if(preIdStore.volverPost == true){
+        const tabPost = document.getElementById('notaP-tab');
+        const tabObj = new Tab(tabPost);
+        tabObj.show();
+
+        this.esNotaP=true;
+        this.esRecuperacion=false;
+        
+        preIdStore.volverPost = false;
+
+        const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
+        await componenteNotaPA.volverPestana();
+
+        const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
+        await componenteRecuperacion.volverPestana();
+      }
+    },
 
     async guardarDatos(){
       const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
@@ -237,6 +258,7 @@ export default ({
       preIdStore.VistaRapida=true
       this.mostrarVistaRapida=true
     },
+
     async replegarMenuVistaRapida(){ 
       if(this.mostrarVistaRapida=true)     
         preIdStore.VistaRapida=false
