@@ -695,333 +695,676 @@ export default defineComponent({
 
     async asignarDatosPacientesCx(){
       // pacientesCx
-      idStore.NumeroEpisodio = idStore.cirugia.pacientesCx[0]?.numEpisodio == undefined ? '' : idStore.cirugia.pacientesCx[0].numEpisodio
-      idStore.Habitacion = idStore.cirugia.pacientesCx[0]?.habitacionPaciente == undefined ? '' : idStore.cirugia.pacientesCx[0].habitacionPaciente
-      idStore.FechaIngreso = idStore.cirugia.pacientesCx[0]?.fechaInPaciente == null ? '' : idStore.cirugia.pacientesCx[0].fechaInPaciente
-      idStore.Diagnostico = idStore.cirugia.pacientesCx[0]?.diagnostico == undefined ? '' : idStore.cirugia.pacientesCx[0].diagnostico
-      idStore.TipoCirugia = idStore.cirugia.pacientesCx[0]?.tipoCx == undefined ? '' : idStore.cirugia.pacientesCx[0].tipoCx
-      idStore.CIE10 = idStore.cirugia.pacientesCx[0]?.cie10 == undefined ? '' : idStore.cirugia.pacientesCx[0].cie10
-      idStore.CIE9 = idStore.cirugia.pacientesCx[0]?.cie9 == undefined ? '' : idStore.cirugia.pacientesCx[0].cie9
-      idStore.NombreCirugia = idStore.cirugia.pacientesCx[0]?.cirugia == undefined ? '' : idStore.cirugia.pacientesCx[0].cirugia
-      idStore.FechaCirugia = idStore.cirugia.pacientesCx[0]?.fechaCx == undefined ? '' : idStore.cirugia.pacientesCx[0].fechaCx
-      idStore.HoraCirugia = idStore.cirugia.pacientesCx[0]?.hrCx == undefined ? '' : idStore.cirugia.pacientesCx[0].hrCx
-      idStore.NombreCirujano = idStore.cirugia.pacientesCx[0]?.cirujano == undefined ? '' : idStore.cirugia.pacientesCx[0].cirujano
-      idStore.NombreAnestesiologo = idStore.cirugia.pacientesCx[0]?.anestesiologo == undefined ? '' : idStore.cirugia.pacientesCx[0].anestesiologo
-      idStore.AnestesiologoVPA = idStore.cirugia.pacientesCx[0]?.anestesiologoVPA == undefined ? '' : idStore.cirugia.pacientesCx[0].anestesiologoVPA
-      idStore.residenteAnestesia = idStore.cirugia.pacientesCx[0]?.residenteAnestesia == undefined ? '' : idStore.cirugia.pacientesCx[0].residenteAnestesia
+      if (idStore.cirugia && idStore.cirugia.pacientesCx) {
+        const paciente = idStore.cirugia.pacientesCx[0];
+
+        idStore.NumeroEpisodio = paciente?.numEpisodio ?? ''
+        idStore.Habitacion = paciente?.habitacionPaciente ?? ''
+        idStore.FechaIngreso = paciente?.fechaInPaciente ?? ''
+        idStore.Diagnostico = paciente?.diagnostico ?? ''
+        idStore.TipoCirugia = paciente?.tipoCx ?? ''
+        idStore.CIE10 = paciente?.cie10 ?? ''
+        idStore.CIE9 = paciente?.cie9 ?? ''
+        idStore.NombreCirugia = paciente?.cirugia ?? ''
+        idStore.FechaCirugia = paciente?.fechaCx ?? ''
+        idStore.HoraCirugia = paciente?.hrCx ?? ''
+        idStore.NombreCirujano = paciente?.cirujano ?? ''
+        idStore.NombreAnestesiologo = paciente?.anestesiologo ?? ''
+        idStore.AnestesiologoVPA = paciente?.anestesiologoVPA ?? ''
+        idStore.residenteAnestesia = paciente?.residenteAnestesia ?? ''
+      } else {
+        // Manejo para el caso en que cirugia o pacientesCx sean nulos
+        idStore.NumeroEpisodio = ''
+        idStore.Habitacion = ''
+        idStore.FechaIngreso = ''
+        idStore.Diagnostico = ''
+        idStore.TipoCirugia = ''
+        idStore.CIE10 = ''
+        idStore.CIE9 = ''
+        idStore.NombreCirugia = ''
+        idStore.FechaCirugia = ''
+        idStore.HoraCirugia = ''
+        idStore.NombreCirujano = ''
+        idStore.NombreAnestesiologo = ''
+        idStore.AnestesiologoVPA = ''
+        idStore.residenteAnestesia = ''
+      }
     },
 
     async asignarDatosPacientesVal(){
       // pacientesVal
-      idStore.APPAlergias = idStore.cirugia.pacientesVal[0]?.antPersPat_Alergias == undefined ? '' :  idStore.cirugia.pacientesVal[0].antPersPat_Alergias 
-      idStore.APPQuirurgicos = idStore.cirugia.pacientesVal[0]?.antPersPat_Quirurgicos == undefined ? '' :  idStore.cirugia.pacientesVal[0].antPersPat_Quirurgicos 
-      idStore.APPEndocrinologicos = idStore.cirugia.pacientesVal[0]?.antPersPat_Endocrinologicos == undefined ? '' :  idStore.cirugia.pacientesVal[0].antPersPat_Endocrinologicos 
-      idStore.APPUrologicos = idStore.cirugia.pacientesVal[0]?.antPersPat_Urologicos == undefined ? '' :  idStore.cirugia.pacientesVal[0].antPersPat_Urologicos 
-      idStore.APPTraumaticos = idStore.cirugia.pacientesVal[0]?.antPersPat_Traumaticos == undefined ? '' :  idStore.cirugia.pacientesVal[0].antPersPat_Traumaticos 
-      idStore.APPOrtopedicos = idStore.cirugia.pacientesVal[0]?.antPersPat_Ortopedicos == undefined ? '' :  idStore.cirugia.pacientesVal[0].antPersPat_Ortopedicos 
-      idStore.APPTransfuciones = idStore.cirugia.pacientesVal[0]?.antPersPat_Transfusiones == undefined ? '' :  idStore.cirugia.pacientesVal[0].antPersPat_Transfusiones 
-      idStore.APPComplicaciones = idStore.cirugia.pacientesVal[0]?.antPersPat_CompAnestPrev == undefined ? '' :  idStore.cirugia.pacientesVal[0].antPersPat_CompAnestPrev 
-      idStore.APPEstadoPsiquico = idStore.cirugia.pacientesVal[0]?.antPersPat_EstadoPsiq == undefined ? '' :  idStore.cirugia.pacientesVal[0].antPersPat_EstadoPsiq 
-      idStore.APPMedicacion = idStore.cirugia.pacientesVal[0]?.antPersPat_MedActual == undefined ? '' :  idStore.cirugia.pacientesVal[0].antPersPat_MedActual 
-      idStore.APNPHorasAyuno = idStore.cirugia.pacientesVal[0]?.antPersNoPat_HrsAyuno == undefined ? '' :  idStore.cirugia.pacientesVal[0].antPersNoPat_HrsAyuno 
-      idStore.APNPTabaquismo = idStore.cirugia.pacientesVal[0]?.antPersNoPat_Tabaquismo == undefined ? '' :  idStore.cirugia.pacientesVal[0].antPersNoPat_Tabaquismo 
-      idStore.APNPEtilismo = idStore.cirugia.pacientesVal[0]?.antPersNoPat_Etilismo == undefined ? '' :  idStore.cirugia.pacientesVal[0].antPersNoPat_Etilismo 
-      idStore.APNPAdicciones = idStore.cirugia.pacientesVal[0]?.antPersNoPat_Adicciones == undefined ? '' :  idStore.cirugia.pacientesVal[0].antPersNoPat_Adicciones 
-      idStore.APNPInmunizaciones = idStore.cirugia.pacientesVal[0]?.antPersNoPat_Inmunizaciones == undefined ? '' :  idStore.cirugia.pacientesVal[0].antPersNoPat_Inmunizaciones 
-      idStore.AntecedentesImportancia = idStore.cirugia.pacientesVal[0]?.antPersNoPat_AntImportQx == undefined ? '' :  idStore.cirugia.pacientesVal[0].antPersNoPat_AntImportQx 
-      idStore.SEdad = idStore.cirugia.pacientesVal[0]?.sigVit_Edad == undefined ? '' :  idStore.cirugia.pacientesVal[0].sigVit_Edad 
-      idStore.Temperatura = idStore.cirugia.pacientesVal[0]?.sigVit_Temperatura == undefined ? '' :  idStore.cirugia.pacientesVal[0].sigVit_Temperatura 
-      idStore.FrecuenciaCardiaca = idStore.cirugia.pacientesVal[0]?.sigVit_FrecuCardiaca == undefined ? '' :  idStore.cirugia.pacientesVal[0].sigVit_FrecuCardiaca 
-      idStore.FrecuenciaRespiratoria = idStore.cirugia.pacientesVal[0]?.sigVit_FrecuRespiratoria == undefined ? '' :  idStore.cirugia.pacientesVal[0].sigVit_FrecuRespiratoria 
-      idStore.Peso = idStore.cirugia.pacientesVal[0]?.sigVit_Peso == undefined ? '' :  idStore.cirugia.pacientesVal[0].sigVit_Peso 
-      idStore.Talla = idStore.cirugia.pacientesVal[0]?.sigVit_Talla == undefined ? '' :  idStore.cirugia.pacientesVal[0].sigVit_Talla 
-      idStore.IMC = idStore.cirugia.pacientesVal[0]?.sigVit_IMC == undefined ? '' :  idStore.cirugia.pacientesVal[0].sigVit_IMC 
-      idStore.TensionArterial = idStore.cirugia.pacientesVal[0]?.sigVit_TensionArterial == undefined ? '' :  idStore.cirugia.pacientesVal[0].sigVit_TensionArterial 
-      idStore.SaturacionOxigeno = idStore.cirugia.pacientesVal[0]?.sigVit_SaturacionOxigeno == undefined ? '' :  idStore.cirugia.pacientesVal[0].sigVit_SaturacionOxigeno 
-      idStore.Mallampati = idStore.cirugia.pacientesVal[0]?.viaAerea_Mallampati == undefined ? '' :  idStore.cirugia.pacientesVal[0].viaAerea_Mallampati 
-      idStore.PatilAldreti = idStore.cirugia.pacientesVal[0]?.viaAerea_PatilAldreti == undefined ? '' :  idStore.cirugia.pacientesVal[0].viaAerea_PatilAldreti 
-      idStore.AperturaBucal = idStore.cirugia.pacientesVal[0]?.viaAerea_AperturaBucal == undefined ? '' :  idStore.cirugia.pacientesVal[0].viaAerea_AperturaBucal 
-      idStore.Distancia = idStore.cirugia.pacientesVal[0]?.viaAerea_Distancia == undefined ? '' :  idStore.cirugia.pacientesVal[0].viaAerea_Distancia 
-      idStore.Protusion = idStore.cirugia.pacientesVal[0]?.viaAerea_Protusion == undefined ? '' :  idStore.cirugia.pacientesVal[0].viaAerea_Protusion 
-      idStore.IPID = idStore.cirugia.pacientesVal[0]?.viaAerea_Ipid == undefined ? '' :  idStore.cirugia.pacientesVal[0].viaAerea_Ipid 
-      idStore.Glasgow = idStore.cirugia.pacientesVal[0]?.viaAerea_Glasgow == undefined ? '' :  idStore.cirugia.pacientesVal[0].viaAerea_Glasgow 
-      idStore.NYHA = idStore.cirugia.pacientesVal[0]?.viaAerea_NYHA == undefined ? '' :  idStore.cirugia.pacientesVal[0].viaAerea_NYHA 
-      idStore.Goldman = idStore.cirugia.pacientesVal[0]?.viaAerea_Goldman == undefined ? '' :  idStore.cirugia.pacientesVal[0].viaAerea_Goldman 
-      idStore.RiesgosTrombosis = idStore.cirugia.pacientesVal[0]?.viaAerea_RiesgoTrombosis == undefined ? '' :  idStore.cirugia.pacientesVal[0].viaAerea_RiesgoTrombosis 
-      idStore.ClasificacionASA = idStore.cirugia.pacientesVal[0]?.viaAerea_ClasificacionASA == undefined ? '' :  idStore.cirugia.pacientesVal[0].viaAerea_ClasificacionASA 
-      idStore.VTipoCirugia = idStore.cirugia.pacientesVal[0]?.viaAerea_TipoCirugia == undefined ? '' :  idStore.cirugia.pacientesVal[0].viaAerea_TipoCirugia 
-      idStore.RiesgoAnestesico = idStore.cirugia.pacientesVal[0]?.viaAerea_RiesgoAnestesico == undefined ? '' :  idStore.cirugia.pacientesVal[0].viaAerea_RiesgoAnestesico 
-      
-      idStore.estudios = idStore.cirugia.pacientesEstu == undefined ? '' : idStore.cirugia.pacientesEstu
-      
-      idStore.FechaRealizacion = idStore.cirugia.pacientesVal[0]?.perfilBioQ_FechaRealizacion == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_FechaRealizacion
-      idStore.GrupoSanguineo = idStore.cirugia.pacientesVal[0]?.perfilBioQ_GrupoSanguineo == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_GrupoSanguineo
-      idStore.Hemoglobina = idStore.cirugia.pacientesVal[0]?.perfilBioQ_Hemoglobina == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_Hemoglobina
-      idStore.Hematocrito = idStore.cirugia.pacientesVal[0]?.perfilBioQ_Hematocrito == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_Hematocrito
-      idStore.Plaquetas = idStore.cirugia.pacientesVal[0]?.perfilBioQ_Plaquetas == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_Plaquetas
-      idStore.Leutocitos = idStore.cirugia.pacientesVal[0]?.perfilBioQ_Leutocitos == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_Leutocitos
-      idStore.TP = idStore.cirugia.pacientesVal[0]?.perfilBioQ_TP == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_TP
-      idStore.TT = idStore.cirugia.pacientesVal[0]?.perfilBioQ_TT == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_TT
-      idStore.TPT = idStore.cirugia.pacientesVal[0]?.perfilBioQ_TPT == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_TPT
-      idStore.INR = idStore.cirugia.pacientesVal[0]?.perfilBioQ_INR == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_INR
-      idStore.Glucosa = idStore.cirugia.pacientesVal[0]?.perfilBioQ_Glucosa == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_Glucosa
-      idStore.Creatinina = idStore.cirugia.pacientesVal[0]?.perfilBioQ_Creatinina == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_Creatinina
-      idStore.Urea = idStore.cirugia.pacientesVal[0]?.perfilBioQ_Urea == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_Urea
-      idStore.Sodio = idStore.cirugia.pacientesVal[0]?.perfilBioQ_Sodio == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_Sodio
-      idStore.Potasio = idStore.cirugia.pacientesVal[0]?.perfilBioQ_Potasio == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_Potasio
-      idStore.Cloro = idStore.cirugia.pacientesVal[0]?.perfilBioQ_Cloro == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_Cloro
-      idStore.Calcio = idStore.cirugia.pacientesVal[0]?.perfilBioQ_Calcio == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_Calcio
-      idStore.Megnesio = idStore.cirugia.pacientesVal[0]?.perfilBioQ_Magnesio == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_Magnesio
-      idStore.BilirrubinaDirecta = idStore.cirugia.pacientesVal[0]?.perfilBioQ_BilirrubinaDirecta == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_BilirrubinaDirecta
-      idStore.BilirrubinaIndirecta = idStore.cirugia.pacientesVal[0]?.perfilBioQ_BilirrubinaIndirecta == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_BilirrubinaIndirecta
-      idStore.BilirrubimaTotal = idStore.cirugia.pacientesVal[0]?.perfilBioQ_BilirrubinaTotal == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_BilirrubinaTotal
-      idStore.Lipasa = idStore.cirugia.pacientesVal[0]?.perfilBioQ_Lipasa == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_Lipasa
-      idStore.Amilasa = idStore.cirugia.pacientesVal[0]?.perfilBioQ_Amilasa == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_Amilasa
-      idStore.PerfilOtros = idStore.cirugia.pacientesVal[0]?.perfilBioQ_Otros == undefined ? '' : idStore.cirugia.pacientesVal[0].perfilBioQ_Otros
-      idStore.Cabeza = idStore.cirugia.pacientesVal[0]?.expFis_VASCabeza == undefined ? '' : idStore.cirugia.pacientesVal[0].expFis_VASCabeza
-      idStore.Cuello = idStore.cirugia.pacientesVal[0]?.expFis_VASCuello == undefined ? '' : idStore.cirugia.pacientesVal[0].expFis_VASCuello
-      idStore.Respiratorio = idStore.cirugia.pacientesVal[0]?.expFis_VASRespiratorio == undefined ? '' : idStore.cirugia.pacientesVal[0].expFis_VASRespiratorio
-      idStore.Cadiovascular = idStore.cirugia.pacientesVal[0]?.expFis_VASCardioVasc == undefined ? '' : idStore.cirugia.pacientesVal[0].expFis_VASCardioVasc
-      idStore.Hipertension = idStore.cirugia.pacientesVal[0]?.expFis_VASHipertension == undefined ? '' : idStore.cirugia.pacientesVal[0].expFis_VASHipertension
-      idStore.Abdomen = idStore.cirugia.pacientesVal[0]?.expFis_VASAbdomen == undefined ? '' : idStore.cirugia.pacientesVal[0].expFis_VASAbdomen
-      idStore.Genitourinario = idStore.cirugia.pacientesVal[0]?.expFis_VASGenUr == undefined ? '' : idStore.cirugia.pacientesVal[0].expFis_VASGenUr
-      idStore.MusculoEsqueletico = idStore.cirugia.pacientesVal[0]?.expFis_VASMuscEsq == undefined ? '' : idStore.cirugia.pacientesVal[0].expFis_VASMuscEsq
-      idStore.Neurologico = idStore.cirugia.pacientesVal[0]?.expFis_VASNeuro == undefined ? '' : idStore.cirugia.pacientesVal[0].expFis_VASNeuro
-      idStore.PielFaneras = idStore.cirugia.pacientesVal[0]?.expFis_VASPielFaneras == undefined ? '' : idStore.cirugia.pacientesVal[0].expFis_VASPielFaneras
+      if (idStore.cirugia && idStore.cirugia.pacientesVal) {
+        const paciente = idStore.cirugia.pacientesVal[0];
+
+        idStore.APPAlergias = paciente?.antPersPat_Alergias ?? '' 
+        idStore.APPQuirurgicos = paciente?.antPersPat_Quirurgicos ?? '' 
+        idStore.APPEndocrinologicos = paciente?.antPersPat_Endocrinologicos ?? '' 
+        idStore.APPUrologicos = paciente?.antPersPat_Urologicos ?? '' 
+        idStore.APPTraumaticos = paciente?.antPersPat_Traumaticos ?? '' 
+        idStore.APPOrtopedicos = paciente?.antPersPat_Ortopedicos ?? '' 
+        idStore.APPTransfuciones = paciente?.antPersPat_Transfusiones ?? '' 
+        idStore.APPComplicaciones = paciente?.antPersPat_CompAnestPrev ?? '' 
+        idStore.APPEstadoPsiquico = paciente?.antPersPat_EstadoPsiq ?? '' 
+        idStore.APPMedicacion = paciente?.antPersPat_MedActual ?? '' 
+        idStore.APNPHorasAyuno = paciente?.antPersNoPat_HrsAyuno ?? '' 
+        idStore.APNPTabaquismo = paciente?.antPersNoPat_Tabaquismo ?? '' 
+        idStore.APNPEtilismo = paciente?.antPersNoPat_Etilismo ?? '' 
+        idStore.APNPAdicciones = paciente?.antPersNoPat_Adicciones ?? '' 
+        idStore.APNPInmunizaciones = paciente?.antPersNoPat_Inmunizaciones ?? '' 
+        idStore.AntecedentesImportancia = paciente?.antPersNoPat_AntImportQx ?? '' 
+        idStore.SEdad = paciente?.sigVit_Edad ?? '' 
+        idStore.Temperatura = paciente?.sigVit_Temperatura ?? '' 
+        idStore.FrecuenciaCardiaca = paciente?.sigVit_FrecuCardiaca ?? '' 
+        idStore.FrecuenciaRespiratoria = paciente?.sigVit_FrecuRespiratoria ?? '' 
+        idStore.Peso = paciente?.sigVit_Peso ?? '' 
+        idStore.Talla = paciente?.sigVit_Talla ?? '' 
+        idStore.IMC = paciente?.sigVit_IMC ?? '' 
+        idStore.TensionArterial = paciente?.sigVit_TensionArterial ?? '' 
+        idStore.SaturacionOxigeno = paciente?.sigVit_SaturacionOxigeno ?? '' 
+        idStore.Mallampati = paciente?.viaAerea_Mallampati ?? '' 
+        idStore.PatilAldreti = paciente?.viaAerea_PatilAldreti ?? '' 
+        idStore.AperturaBucal = paciente?.viaAerea_AperturaBucal ?? '' 
+        idStore.Distancia = paciente?.viaAerea_Distancia ?? '' 
+        idStore.Protusion = paciente?.viaAerea_Protusion ?? '' 
+        idStore.IPID = paciente?.viaAerea_Ipid ?? '' 
+        idStore.Glasgow = paciente?.viaAerea_Glasgow ?? '' 
+        idStore.NYHA = paciente?.viaAerea_NYHA ?? '' 
+        idStore.Goldman = paciente?.viaAerea_Goldman ?? '' 
+        idStore.RiesgosTrombosis = paciente?.viaAerea_RiesgoTrombosis ?? '' 
+        idStore.ClasificacionASA = paciente?.viaAerea_ClasificacionASA ?? '' 
+        idStore.VTipoCirugia = paciente?.viaAerea_TipoCirugia ?? '' 
+        idStore.RiesgoAnestesico = paciente?.viaAerea_RiesgoAnestesico ?? '' 
+        
+        idStore.estudios = paciente?.pacientesEstu ?? null
+        
+        idStore.FechaRealizacion = paciente?.perfilBioQ_FechaRealizacion ?? ''
+        idStore.GrupoSanguineo = paciente?.perfilBioQ_GrupoSanguineo ?? ''
+        idStore.Hemoglobina = paciente?.perfilBioQ_Hemoglobina ?? ''
+        idStore.Hematocrito = paciente?.perfilBioQ_Hematocrito ?? ''
+        idStore.Plaquetas = paciente?.perfilBioQ_Plaquetas ?? ''
+        idStore.Leutocitos = paciente?.perfilBioQ_Leutocitos ?? ''
+        idStore.TP = paciente?.perfilBioQ_TP ?? ''
+        idStore.TT = paciente?.perfilBioQ_TT ?? ''
+        idStore.TPT = paciente?.perfilBioQ_TPT ?? ''
+        idStore.INR = paciente?.perfilBioQ_INR ?? ''
+        idStore.Glucosa = paciente?.perfilBioQ_Glucosa ?? ''
+        idStore.Creatinina = paciente?.perfilBioQ_Creatinina ?? ''
+        idStore.Urea = paciente?.perfilBioQ_Urea ?? ''
+        idStore.Sodio = paciente?.perfilBioQ_Sodio ?? ''
+        idStore.Potasio = paciente?.perfilBioQ_Potasio ?? ''
+        idStore.Cloro = paciente?.perfilBioQ_Cloro ?? ''
+        idStore.Calcio = paciente?.perfilBioQ_Calcio ?? ''
+        idStore.Megnesio = paciente?.perfilBioQ_Magnesio ?? ''
+        idStore.BilirrubinaDirecta = paciente?.perfilBioQ_BilirrubinaDirecta ?? ''
+        idStore.BilirrubinaIndirecta = paciente?.perfilBioQ_BilirrubinaIndirecta ?? ''
+        idStore.BilirrubimaTotal = paciente?.perfilBioQ_BilirrubinaTotal ?? ''
+        idStore.Lipasa = paciente?.perfilBioQ_Lipasa ?? ''
+        idStore.Amilasa = paciente?.perfilBioQ_Amilasa ?? ''
+        idStore.PerfilOtros = paciente?.perfilBioQ_Otros ?? ''
+        idStore.Cabeza = paciente?.expFis_VASCabeza ?? ''
+        idStore.Cuello = paciente?.expFis_VASCuello ?? ''
+        idStore.Respiratorio = paciente?.expFis_VASRespiratorio ?? ''
+        idStore.Cadiovascular = paciente?.expFis_VASCardioVasc ?? ''
+        idStore.Hipertension = paciente?.expFis_VASHipertension ?? ''
+        idStore.Abdomen = paciente?.expFis_VASAbdomen ?? ''
+        idStore.Genitourinario = paciente?.expFis_VASGenUr ?? ''
+        idStore.MusculoEsqueletico = paciente?.expFis_VASMuscEsq ?? ''
+        idStore.Neurologico = paciente?.expFis_VASNeuro ?? ''
+        idStore.PielFaneras = paciente?.expFis_VASPielFaneras ?? ''
+      } else {
+        // Manejo para el caso en que cirugia o pacientesCx sean nulos
+        idStore.APPAlergias = '' 
+        idStore.APPQuirurgicos = '' 
+        idStore.APPEndocrinologicos = '' 
+        idStore.APPUrologicos = '' 
+        idStore.APPTraumaticos = '' 
+        idStore.APPOrtopedicos = '' 
+        idStore.APPTransfuciones = '' 
+        idStore.APPComplicaciones = '' 
+        idStore.APPEstadoPsiquico = '' 
+        idStore.APPMedicacion = '' 
+        idStore.APNPHorasAyuno = '' 
+        idStore.APNPTabaquismo = '' 
+        idStore.APNPEtilismo = '' 
+        idStore.APNPAdicciones = '' 
+        idStore.APNPInmunizaciones = '' 
+        idStore.AntecedentesImportancia = '' 
+        idStore.SEdad = '' 
+        idStore.Temperatura = '' 
+        idStore.FrecuenciaCardiaca = '' 
+        idStore.FrecuenciaRespiratoria = '' 
+        idStore.Peso = '' 
+        idStore.Talla = '' 
+        idStore.IMC = '' 
+        idStore.TensionArterial = '' 
+        idStore.SaturacionOxigeno = '' 
+        idStore.Mallampati = '' 
+        idStore.PatilAldreti = '' 
+        idStore.AperturaBucal = '' 
+        idStore.Distancia = '' 
+        idStore.Protusion = '' 
+        idStore.IPID = '' 
+        idStore.Glasgow = '' 
+        idStore.NYHA = '' 
+        idStore.Goldman = '' 
+        idStore.RiesgosTrombosis = '' 
+        idStore.ClasificacionASA = '' 
+        idStore.VTipoCirugia = '' 
+        idStore.RiesgoAnestesico = '' 
+        
+        idStore.estudios = null
+        
+        idStore.FechaRealizacion = ''
+        idStore.GrupoSanguineo = ''
+        idStore.Hemoglobina = ''
+        idStore.Hematocrito = ''
+        idStore.Plaquetas = ''
+        idStore.Leutocitos = ''
+        idStore.TP = ''
+        idStore.TT = ''
+        idStore.TPT = ''
+        idStore.INR = ''
+        idStore.Glucosa = ''
+        idStore.Creatinina = ''
+        idStore.Urea = ''
+        idStore.Sodio = ''
+        idStore.Potasio = ''
+        idStore.Cloro = ''
+        idStore.Calcio = ''
+        idStore.Megnesio = ''
+        idStore.BilirrubinaDirecta = ''
+        idStore.BilirrubinaIndirecta = ''
+        idStore.BilirrubimaTotal = ''
+        idStore.Lipasa = ''
+        idStore.Amilasa = ''
+        idStore.PerfilOtros = ''
+        idStore.Cabeza = ''
+        idStore.Cuello = ''
+        idStore.Respiratorio = ''
+        idStore.Cadiovascular = ''
+        idStore.Hipertension = ''
+        idStore.Abdomen = ''
+        idStore.Genitourinario = ''
+        idStore.MusculoEsqueletico = ''
+        idStore.Neurologico = ''
+        idStore.PielFaneras = ''
+      }      
     },
 
     async asignarDatosPacientesPlan(){
       // pacientesPlan
-      idStore.HorasAyuno = idStore.cirugia.pacientesPlan[0]?.pos_HorasAyuno == undefined ? '' : idStore.cirugia.pacientesPlan[0].pos_HorasAyuno
-      idStore.AccesoVenoso = idStore.cirugia.pacientesPlan[0]?.pos_AccesoVenoso == undefined ? '' : idStore.cirugia.pacientesPlan[0].pos_AccesoVenoso
-      idStore.PosicionPaciente = idStore.cirugia.pacientesPlan[0]?.pos_PosicionPaciente == undefined ? '' : idStore.cirugia.pacientesPlan[0].pos_PosicionPaciente
-      idStore.PosicionBrazos = idStore.cirugia.pacientesPlan[0]?.pos_PosicionBrazos == undefined ? '' : idStore.cirugia.pacientesPlan[0].pos_PosicionBrazos
-      idStore.Torniquete = idStore.cirugia.pacientesPlan[0]?.pos_Torniquete == undefined ? '' : idStore.cirugia.pacientesPlan[0].pos_Torniquete
-      idStore.AplicacionTorniquete = idStore.cirugia.pacientesPlan[0]?.pos_AplicacionTorniquete == undefined ? '' : idStore.cirugia.pacientesPlan[0].pos_AplicacionTorniquete
-      idStore.Sitio = idStore.cirugia.pacientesPlan[0]?.pos_Sitio == undefined ? '' : idStore.cirugia.pacientesPlan[0].pos_Sitio
-      idStore.TiempoIsquemia = idStore.cirugia.pacientesPlan[0]?.pos_TiempoIsquemia == undefined ? '' : idStore.cirugia.pacientesPlan[0].pos_TiempoIsquemia
-      idStore.ProteccionOjos = idStore.cirugia.pacientesPlan[0]?.pos_ProteccionOjos == undefined ? '' : idStore.cirugia.pacientesPlan[0].pos_ProteccionOjos
-      idStore.ProteccionProminencias = idStore.cirugia.pacientesPlan[0]?.pos_ProtecProminencias == undefined ? '' : idStore.cirugia.pacientesPlan[0].pos_ProtecProminencias
-      idStore.TecnicaAnestesica = idStore.cirugia.pacientesPlan[0]?.pos_TecnicaAnestesica == undefined ? '' : idStore.cirugia.pacientesPlan[0].pos_TecnicaAnestesica
-      idStore.Premedicacion = idStore.cirugia.pacientesPlan[0]?.pos_Premedicacion == undefined ? '' : idStore.cirugia.pacientesPlan[0].pos_Premedicacion
-      idStore.EspecPremedicacion = idStore.cirugia.pacientesPlan[0]?.pos_EspPremedicacion == undefined ? '' : idStore.cirugia.pacientesPlan[0].pos_EspPremedicacion
-      idStore.Monitoreo = idStore.cirugia.pacientesPlan[0]?.pos_Monitoreo == undefined ? '' : idStore.cirugia.pacientesPlan[0].pos_Monitoreo
-      idStore.ViaSedacion = idStore.cirugia.pacientesPlan[0]?.sedacion_Via == undefined ? '' : idStore.cirugia.pacientesPlan[0].sedacion_Via
-      idStore.OpcionSedacion = idStore.cirugia.pacientesPlan[0]?.sedacion_Opcion == undefined ? '' : idStore.cirugia.pacientesPlan[0].sedacion_Opcion
-      idStore.ObservacionesSedacion = idStore.cirugia.pacientesPlan[0]?.sedacion_Observaciones == undefined ? '' : idStore.cirugia.pacientesPlan[0].sedacion_Observaciones
-      idStore.MedicamentosSedacion = idStore.cirugia.pacientesPlan[0]?.sedacion_Medicamentos == undefined ? '' : idStore.cirugia.pacientesPlan[0].sedacion_Medicamentos
-      idStore.TipoRegional = idStore.cirugia.pacientesPlan[0]?.regional_Tipo == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_Tipo
-      idStore.TipoAguja = idStore.cirugia.pacientesPlan[0]?.regional_TipoAguja == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_TipoAguja
-      idStore.Nivel = idStore.cirugia.pacientesPlan[0]?.regional_Nivel == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_Nivel
-      idStore.CalibreAguja = idStore.cirugia.pacientesPlan[0]?.regional_CalibreAguja == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_CalibreAguja
-      idStore.Cateter = idStore.cirugia.pacientesPlan[0]?.regional_Cateter == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_Cateter
-      idStore.OrientacionCateter = idStore.cirugia.pacientesPlan[0]?.regional_OrientacionCateter == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_OrientacionCateter
-      idStore.DificultadesOrientacion = idStore.cirugia.pacientesPlan[0]?.regional_ProbDificulNeuro == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_ProbDificulNeuro
-      idStore.EspecificarRegional = idStore.cirugia.pacientesPlan[0]?.regional_EspDificultadesNeuro == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_EspDificultadesNeuro
-      idStore.SitioRegional = idStore.cirugia.pacientesPlan[0]?.regional_Sitio == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_Sitio
-      idStore.OpcionRegional = idStore.cirugia.pacientesPlan[0]?.regional_Opcion == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_Opcion
-      idStore.EspecificarSitionRegional = idStore.cirugia.pacientesPlan[0]?.regional_EspSitio == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_EspSitio
-      idStore.AnestesicoUtilizado = idStore.cirugia.pacientesPlan[0]?.regional_AnestesicoUtilizado == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_AnestesicoUtilizado
-      idStore.EspecificarAnestesico = idStore.cirugia.pacientesPlan[0]?.regional_EspAnestesico == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_EspAnestesico
-      idStore.DificultadesPlexo = idStore.cirugia.pacientesPlan[0]?.regional_ProbDificulPlexo == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_ProbDificulPlexo
-      idStore.EspecificarDificPlexo = idStore.cirugia.pacientesPlan[0]?.regional_EspDificulPlexo == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_EspDificulPlexo
-      idStore.Ultrasonido = idStore.cirugia.pacientesPlan[0]?.regional_Ultrasonido == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_Ultrasonido
-      idStore.EspecUltrasonido = idStore.cirugia.pacientesPlan[0]?.regional_EspUltrasonido == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_EspUltrasonido
-      idStore.Neuroestimulador = idStore.cirugia.pacientesPlan[0]?.regional_Neuroestimulador == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_Neuroestimulador
-      idStore.ComplicacionesNeuroestimulador = idStore.cirugia.pacientesPlan[0]?.regional_EspNeuroestimulador == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_EspNeuroestimulador
-      idStore.EspecificarNeuroestimulador = idStore.cirugia.pacientesPlan[0]?.regional_ProbComplicaciones == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_ProbComplicaciones
-      idStore.EspecificarComplicacNeuroes = idStore.cirugia.pacientesPlan[0]?.regional_EspDificEquipo == undefined ? '' : idStore.cirugia.pacientesPlan[0].regional_EspDificEquipo
-      idStore.SitioLocal = idStore.cirugia.pacientesPlan[0]?.local_SitioAnestesiaL == undefined ? '' : idStore.cirugia.pacientesPlan[0].local_SitioAnestesiaL
-      idStore.AnestesicoLocal = idStore.cirugia.pacientesPlan[0]?.local_AnestesicoUtilizado == undefined ? '' : idStore.cirugia.pacientesPlan[0].local_AnestesicoUtilizado
-      idStore.EspecificarLocal = idStore.cirugia.pacientesPlan[0]?.local_Especificar == undefined ? '' : idStore.cirugia.pacientesPlan[0].local_Especificar
-      idStore.Induccion = idStore.cirugia.pacientesPlan[0]?.general_Induccion == undefined ? '' : idStore.cirugia.pacientesPlan[0].general_Induccion
-      idStore.Tubo = idStore.cirugia.pacientesPlan[0]?.general_Tubo == undefined ? '' : idStore.cirugia.pacientesPlan[0].general_Tubo
-      idStore.NumeroTubo = idStore.cirugia.pacientesPlan[0]?.general_NumeroTubo == undefined ? '' : idStore.cirugia.pacientesPlan[0].general_NumeroTubo
-      idStore.TipoCanula = idStore.cirugia.pacientesPlan[0]?.general_TipoCanula == undefined ? '' : idStore.cirugia.pacientesPlan[0].general_TipoCanula
-      idStore.Globo = idStore.cirugia.pacientesPlan[0]?.general_Globo == undefined ? '' : idStore.cirugia.pacientesPlan[0].general_Globo
-      idStore.Presion = idStore.cirugia.pacientesPlan[0]?.general_Presion == undefined ? '' : idStore.cirugia.pacientesPlan[0].general_Presion
-      idStore.DificultadesGeneral = idStore.cirugia.pacientesPlan[0]?.general_DifTecnicasIntubacion == undefined ? '' : idStore.cirugia.pacientesPlan[0].general_DifTecnicasIntubacion
-      idStore.EspecificarGeneral = idStore.cirugia.pacientesPlan[0]?.general_EspDifTecIntubacion == undefined ? '' : idStore.cirugia.pacientesPlan[0].general_EspDifTecIntubacion
-      idStore.DispositivosSupra = idStore.cirugia.pacientesPlan[0]?.general_DispositivosSupro == undefined ? '' : idStore.cirugia.pacientesPlan[0].general_DispositivosSupro
-      idStore.Calibre = idStore.cirugia.pacientesPlan[0]?.general_Calibre == undefined ? '' : idStore.cirugia.pacientesPlan[0].general_Calibre
-      idStore.ComplicacionesDispositivos = idStore.cirugia.pacientesPlan[0]?.general_Complicaciones == undefined ? '' : idStore.cirugia.pacientesPlan[0].general_Complicaciones
-      idStore.EspecificarDispositivos = idStore.cirugia.pacientesPlan[0]?.general_EspComplicaciones == undefined ? '' : idStore.cirugia.pacientesPlan[0].general_EspComplicaciones
-      idStore.OtrosDispositivos = idStore.cirugia.pacientesPlan[0]?.general_OtrosDispositivos == undefined ? '' : idStore.cirugia.pacientesPlan[0].general_OtrosDispositivos
-      idStore.EspecificarOtrosDispositivos = idStore.cirugia.pacientesPlan[0]?.general_EspOtrosDispositivos == undefined ? '' : idStore.cirugia.pacientesPlan[0].general_EspOtrosDispositivos
+      if (idStore.cirugia && idStore.cirugia.pacientesPlan) {
+        const paciente = idStore.cirugia.pacientesPlan[0];
+
+        idStore.HorasAyuno = paciente?.pos_HorasAyuno ?? ''
+        idStore.AccesoVenoso = paciente?.pos_AccesoVenoso ?? ''
+        idStore.PosicionPaciente = paciente?.pos_PosicionPaciente ?? ''
+        idStore.PosicionBrazos = paciente?.pos_PosicionBrazos ?? ''
+        idStore.Torniquete = paciente?.pos_Torniquete ?? ''
+        idStore.AplicacionTorniquete = paciente?.pos_AplicacionTorniquete ?? ''
+        idStore.Sitio = paciente?.pos_Sitio ?? ''
+        idStore.TiempoIsquemia = paciente?.pos_TiempoIsquemia ?? ''
+        idStore.ProteccionOjos = paciente?.pos_ProteccionOjos ?? ''
+        idStore.ProteccionProminencias = paciente?.pos_ProtecProminencias ?? ''
+        idStore.TecnicaAnestesica = paciente?.pos_TecnicaAnestesica ?? ''
+        idStore.Premedicacion = paciente?.pos_Premedicacion ?? ''
+        idStore.EspecPremedicacion = paciente?.pos_EspPremedicacion ?? ''
+        idStore.Monitoreo = paciente?.pos_Monitoreo ?? ''
+        idStore.ViaSedacion = paciente?.sedacion_Via ?? ''
+        idStore.OpcionSedacion = paciente?.sedacion_Opcion ?? ''
+        idStore.ObservacionesSedacion = paciente?.sedacion_Observaciones ?? ''
+        idStore.MedicamentosSedacion = paciente?.sedacion_Medicamentos ?? ''
+        idStore.TipoRegional = paciente?.regional_Tipo ?? ''
+        idStore.TipoAguja = paciente?.regional_TipoAguja ?? ''
+        idStore.Nivel = paciente?.regional_Nivel ?? ''
+        idStore.CalibreAguja = paciente?.regional_CalibreAguja ?? ''
+        idStore.Cateter = paciente?.regional_Cateter ?? ''
+        idStore.OrientacionCateter = paciente?.regional_OrientacionCateter ?? ''
+        idStore.DificultadesOrientacion = paciente?.regional_ProbDificulNeuro ?? ''
+        idStore.EspecificarRegional = paciente?.regional_EspDificultadesNeuro ?? ''
+        idStore.SitioRegional = paciente?.regional_Sitio ?? ''
+        idStore.OpcionRegional = paciente?.regional_Opcion ?? ''
+        idStore.EspecificarSitionRegional = paciente?.regional_EspSitio ?? ''
+        idStore.AnestesicoUtilizado = paciente?.regional_AnestesicoUtilizado ?? ''
+        idStore.EspecificarAnestesico = paciente?.regional_EspAnestesico ?? ''
+        idStore.DificultadesPlexo = paciente?.regional_ProbDificulPlexo ?? ''
+        idStore.EspecificarDificPlexo = paciente?.regional_EspDificulPlexo ?? ''
+        idStore.Ultrasonido = paciente?.regional_Ultrasonido ?? ''
+        idStore.EspecUltrasonido = paciente?.regional_EspUltrasonido ?? ''
+        idStore.Neuroestimulador = paciente?.regional_Neuroestimulador ?? ''
+        idStore.ComplicacionesNeuroestimulador = paciente?.regional_EspNeuroestimulador ?? ''
+        idStore.EspecificarNeuroestimulador = paciente?.regional_ProbComplicaciones ?? ''
+        idStore.EspecificarComplicacNeuroes = paciente?.regional_EspDificEquipo ?? ''
+        idStore.SitioLocal = paciente?.local_SitioAnestesiaL ?? ''
+        idStore.AnestesicoLocal = paciente?.local_AnestesicoUtilizado ?? ''
+        idStore.EspecificarLocal = paciente?.local_Especificar ?? ''
+        idStore.Induccion = paciente?.general_Induccion ?? ''
+        idStore.Tubo = paciente?.general_Tubo ?? ''
+        idStore.NumeroTubo = paciente?.general_NumeroTubo ?? ''
+        idStore.TipoCanula = paciente?.general_TipoCanula ?? ''
+        idStore.Globo = paciente?.general_Globo ?? ''
+        idStore.Presion = paciente?.general_Presion ?? ''
+        idStore.DificultadesGeneral = paciente?.general_DifTecnicasIntubacion ?? ''
+        idStore.EspecificarGeneral = paciente?.general_EspDifTecIntubacion ?? ''
+        idStore.DispositivosSupra = paciente?.general_DispositivosSupro ?? ''
+        idStore.Calibre = paciente?.general_Calibre ?? ''
+        idStore.ComplicacionesDispositivos = paciente?.general_Complicaciones ?? ''
+        idStore.EspecificarDispositivos = paciente?.general_EspComplicaciones ?? ''
+        idStore.OtrosDispositivos = paciente?.general_OtrosDispositivos ?? ''
+        idStore.EspecificarOtrosDispositivos = paciente?.general_EspOtrosDispositivos ?? ''
+      } else {
+        idStore.HorasAyuno = ''
+        idStore.AccesoVenoso = ''
+        idStore.PosicionPaciente = ''
+        idStore.PosicionBrazos = ''
+        idStore.Torniquete = ''
+        idStore.AplicacionTorniquete = ''
+        idStore.Sitio = ''
+        idStore.TiempoIsquemia = ''
+        idStore.ProteccionOjos = ''
+        idStore.ProteccionProminencias = ''
+        idStore.TecnicaAnestesica = ''
+        idStore.Premedicacion = ''
+        idStore.EspecPremedicacion = ''
+        idStore.Monitoreo = ''
+        idStore.ViaSedacion = ''
+        idStore.OpcionSedacion = ''
+        idStore.ObservacionesSedacion = ''
+        idStore.MedicamentosSedacion = ''
+        idStore.TipoRegional = ''
+        idStore.TipoAguja = ''
+        idStore.Nivel = ''
+        idStore.CalibreAguja = ''
+        idStore.Cateter = ''
+        idStore.OrientacionCateter = ''
+        idStore.DificultadesOrientacion = ''
+        idStore.EspecificarRegional = ''
+        idStore.SitioRegional = ''
+        idStore.OpcionRegional = ''
+        idStore.EspecificarSitionRegional = ''
+        idStore.AnestesicoUtilizado = ''
+        idStore.EspecificarAnestesico = ''
+        idStore.DificultadesPlexo = ''
+        idStore.EspecificarDificPlexo = ''
+        idStore.Ultrasonido = ''
+        idStore.EspecUltrasonido = ''
+        idStore.Neuroestimulador = ''
+        idStore.ComplicacionesNeuroestimulador = ''
+        idStore.EspecificarNeuroestimulador = ''
+        idStore.EspecificarComplicacNeuroes = ''
+        idStore.SitioLocal = ''
+        idStore.AnestesicoLocal = ''
+        idStore.EspecificarLocal = ''
+        idStore.Induccion = ''
+        idStore.Tubo = ''
+        idStore.NumeroTubo = ''
+        idStore.TipoCanula = ''
+        idStore.Globo = ''
+        idStore.Presion = ''
+        idStore.DificultadesGeneral = ''
+        idStore.EspecificarGeneral = ''
+        idStore.DispositivosSupra = ''
+        idStore.Calibre = ''
+        idStore.ComplicacionesDispositivos = ''
+        idStore.EspecificarDispositivos = ''
+        idStore.OtrosDispositivos = ''
+        idStore.EspecificarOtrosDispositivos = ''
+      }         
     },
 
     async asignarDatosPacientesNota(){
-      idStore.NotaPre = idStore.cirugia.pacientesNotaPre[0]?.obsNota == undefined ? '' : idStore.cirugia.pacientesNotaPre[0].obsNota
+      if (idStore.cirugia && idStore.cirugia.pacientesNotaPre) {
+        const paciente = idStore.cirugia.pacientesNotaPre[0];
+
+        idStore.NotaPre = paciente?.obsNota ?? ''
+      } else {
+        idStore.NotaPre = ''
+      }
     },
 
     async asignarDatosPacientesTrans(){
-      transStore.datosVentilacion = idStore.cirugia.pacienteTrans[0]?.datosVentilador == undefined ? null : idStore.cirugia.pacienteTrans[0].datosVentilador
-      transStore.medicamentos = idStore.cirugia.pacienteTrans[0]?.medicamentosCx == undefined ? null : idStore.cirugia.pacienteTrans[0].medicamentosCx    
-      transStore.relevos = idStore.cirugia.pacienteTrans[0]?.relevoCx == undefined ? null : idStore.cirugia.pacienteTrans[0].relevoCx
-      transStore.eventos = idStore.cirugia.pacienteTrans[0]?.evCriticoCx == undefined ? null : idStore.cirugia.pacienteTrans[0].evCriticoCx
-      transStore.datosMSV = idStore.cirugia.pacienteTrans[0]?.datosMSV == undefined ? '' : idStore.cirugia.pacienteTrans[0].datosMSV
-      
-      transStore.solHartman = idStore.cirugia.pacienteTrans[0]?.solHartman == undefined ? '' : idStore.cirugia.pacienteTrans[0].solHartman
-      transStore.solFisio = idStore.cirugia.pacienteTrans[0]?.solFisio == undefined ? '' : idStore.cirugia.pacienteTrans[0].solFisio
-      transStore.glucosados = idStore.cirugia.pacienteTrans[0]?.glucosados == undefined ? '' : idStore.cirugia.pacienteTrans[0].glucosados
-      transStore.gelatinas = idStore.cirugia.pacienteTrans[0]?.gelatinas == undefined ? '' : idStore.cirugia.pacienteTrans[0].gelatinas
-      transStore.almidones = idStore.cirugia.pacienteTrans[0]?.almidones == undefined ? '' : idStore.cirugia.pacienteTrans[0].almidones
-      transStore.albuminas = idStore.cirugia.pacienteTrans[0]?.albuminas == undefined ? '' : idStore.cirugia.pacienteTrans[0].albuminas
-      transStore.paqGlobular = idStore.cirugia.pacienteTrans[0]?.paqGlobular == undefined ? '' : idStore.cirugia.pacienteTrans[0].paqGlobular
-      transStore.plasmas = idStore.cirugia.pacienteTrans[0]?.plasmas == undefined ? '' : idStore.cirugia.pacienteTrans[0].plasmas
-      transStore.plaquetas = idStore.cirugia.pacienteTrans[0]?.plaquetas == undefined ? '' : idStore.cirugia.pacienteTrans[0].plaquetas
-      transStore.crioprecipitados = idStore.cirugia.pacienteTrans[0]?.crioprecipitados == undefined ? '' : idStore.cirugia.pacienteTrans[0].crioprecipitados
-      transStore.factor_VII = idStore.cirugia.pacienteTrans[0]?.factor_VII == undefined ? '' : idStore.cirugia.pacienteTrans[0].factor_VII
-      transStore.factor_VIII = idStore.cirugia.pacienteTrans[0]?.factor_VIII == undefined ? '' : idStore.cirugia.pacienteTrans[0].factor_VIII
-      transStore.otrosIngresos = idStore.cirugia.pacienteTrans[0]?.otrosIngresos == undefined ? '' : idStore.cirugia.pacienteTrans[0].otrosIngresos
-      transStore.liqAscitis = idStore.cirugia.pacienteTrans[0]?.liqAscitis == undefined ? '' : idStore.cirugia.pacienteTrans[0].liqAscitis
-      transStore.sangradoAprox = idStore.cirugia.pacienteTrans[0]?.sangradoAprox == undefined ? '' : idStore.cirugia.pacienteTrans[0].sangradoAprox
-      transStore.uresis = idStore.cirugia.pacienteTrans[0]?.uresis == undefined ? '' : idStore.cirugia.pacienteTrans[0].uresis
-      transStore.expoQX = idStore.cirugia.pacienteTrans[0]?.expoQX == undefined ? '' : idStore.cirugia.pacienteTrans[0].expoQX
-      transStore.reqBasales = idStore.cirugia.pacienteTrans[0]?.reqBasales == undefined ? '' : idStore.cirugia.pacienteTrans[0].reqBasales
-      transStore.ayuno = idStore.cirugia.pacienteTrans[0]?.ayuno == undefined ? '' : idStore.cirugia.pacienteTrans[0].ayuno
-      transStore.otrosEgresos = idStore.cirugia.pacienteTrans[0]?.otrosEgresos == undefined ? '' : idStore.cirugia.pacienteTrans[0].otrosEgresos
-                            
-      transStore.ingresoQX = idStore.cirugia.pacienteTrans[0]?.tiemposQX[0]?.ingresoQX == undefined ? '' : idStore.cirugia.pacienteTrans[0].tiemposQX[0].ingresoQX
-      transStore.inicioAn = idStore.cirugia.pacienteTrans[0]?.tiemposQX[0]?.inicioAn == undefined ? '' : idStore.cirugia.pacienteTrans[0].tiemposQX[0].inicioAn
-      transStore.inicioCx = idStore.cirugia.pacienteTrans[0]?.tiemposQX[0]?.inicioCx == undefined ? '' : idStore.cirugia.pacienteTrans[0].tiemposQX[0].inicioCx
-      transStore.finCx = idStore.cirugia.pacienteTrans[0]?.tiemposQX[0]?.finCx == undefined ? '' : idStore.cirugia.pacienteTrans[0].tiemposQX[0].finCx
-      transStore.finAn = idStore.cirugia.pacienteTrans[0]?.tiemposQX[0]?.finAn == undefined ? '' : idStore.cirugia.pacienteTrans[0].tiemposQX[0].finAn
-      transStore.egresoQx = idStore.cirugia.pacienteTrans[0]?.tiemposQX[0]?.egresoQx == undefined ? '' : idStore.cirugia.pacienteTrans[0].tiemposQX[0].egresoQx 
+      if (idStore.cirugia && idStore.cirugia.pacienteTrans) {
+        const paciente = idStore.cirugia.pacienteTrans[0];
+
+        transStore.datosVentilacion = paciente?.datosVentilador ?? null
+        transStore.medicamentos = paciente?.medicamentosCx ?? null  
+        transStore.relevos = paciente?.relevoCx ?? null
+        transStore.eventos = paciente?.evCriticoCx ?? null
+        transStore.datosMSV = paciente?.datosMSV ?? ''
+        transStore.solHartman = paciente?.solHartman ?? ''
+        transStore.solFisio = paciente?.solFisio ?? ''
+        transStore.glucosados = paciente?.glucosados ?? ''
+        transStore.gelatinas = paciente?.gelatinas ?? ''
+        transStore.almidones = paciente?.almidones ?? ''
+        transStore.albuminas = paciente?.albuminas ?? ''
+        transStore.paqGlobular = paciente?.paqGlobular ?? ''
+        transStore.plasmas = paciente?.plasmas ?? ''
+        transStore.plaquetas = paciente?.plaquetas ?? ''
+        transStore.crioprecipitados = paciente?.crioprecipitados ?? ''
+        transStore.factor_VII = paciente?.factor_VII ?? ''
+        transStore.factor_VIII = paciente?.factor_VIII ?? ''
+        transStore.otrosIngresos = paciente?.otrosIngresos ?? ''
+        transStore.liqAscitis = paciente?.liqAscitis ?? ''
+        transStore.sangradoAprox = paciente?.sangradoAprox ?? ''
+        transStore.uresis = paciente?.uresis ?? ''
+        transStore.expoQX = paciente?.expoQX ?? ''
+        transStore.reqBasales = paciente?.reqBasales ?? ''
+        transStore.ayuno = paciente?.ayuno ?? ''        
+        transStore.otrosEgresos = paciente?.otrosEgresos ?? ''                            
+        
+        transStore.ingresoQX = idStore.cirugia.pacienteTrans[0]?.tiemposQX[0]?.ingresoQX == undefined ? '' : idStore.cirugia.pacienteTrans[0].tiemposQX[0].ingresoQX
+        transStore.inicioAn = idStore.cirugia.pacienteTrans[0]?.tiemposQX[0]?.inicioAn == undefined ? '' : idStore.cirugia.pacienteTrans[0].tiemposQX[0].inicioAn
+        transStore.inicioCx = idStore.cirugia.pacienteTrans[0]?.tiemposQX[0]?.inicioCx == undefined ? '' : idStore.cirugia.pacienteTrans[0].tiemposQX[0].inicioCx
+        transStore.finCx = idStore.cirugia.pacienteTrans[0]?.tiemposQX[0]?.finCx == undefined ? '' : idStore.cirugia.pacienteTrans[0].tiemposQX[0].finCx
+        transStore.finAn = idStore.cirugia.pacienteTrans[0]?.tiemposQX[0]?.finAn == undefined ? '' : idStore.cirugia.pacienteTrans[0].tiemposQX[0].finAn
+        transStore.egresoQx = idStore.cirugia.pacienteTrans[0]?.tiemposQX[0]?.egresoQx == undefined ? '' : idStore.cirugia.pacienteTrans[0].tiemposQX[0].egresoQx 
+      } else {
+        idStore.NotaPre = ''
+        transStore.datosVentilacion = null
+        transStore.medicamentos = null  
+        transStore.relevos = null
+        transStore.eventos = null
+        transStore.datosMSV = ''
+        transStore.solHartman = ''
+        transStore.solFisio = ''
+        transStore.glucosados = ''
+        transStore.gelatinas = ''
+        transStore.almidones = ''
+        transStore.albuminas = ''
+        transStore.paqGlobular = ''
+        transStore.plasmas = ''
+        transStore.plaquetas = ''
+        transStore.crioprecipitados = ''
+        transStore.factor_VII = ''
+        transStore.factor_VIII = ''
+        transStore.otrosIngresos = ''
+        transStore.liqAscitis = ''
+        transStore.sangradoAprox = ''
+        transStore.uresis = ''
+        transStore.expoQX = ''
+        transStore.reqBasales = ''
+        transStore.ayuno = ''        
+        transStore.otrosEgresos = ''                            
+        
+        transStore.ingresoQX = ''
+        transStore.inicioAn = ''
+        transStore.inicioCx = ''
+        transStore.finCx = ''
+        transStore.finAn = ''
+        transStore.egresoQx = '' 
+      }      
     },
 
     async asignarDatosPacientesNotaPA(){
-      postAnestStore.TecnicaAnestesica = idStore.cirugia.pacientesNotaPost[0]?.npa_TecAnestFinal == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].npa_TecAnestFinal
-      postAnestStore.Intubacion = idStore.cirugia.pacientesNotaPost[0]?.npa_Intubacion == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].npa_Intubacion
-      postAnestStore.NotaPost = idStore.cirugia.pacientesNotaPost[0]?.npa_NotaPostAnest == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].npa_NotaPostAnest
-      postAnestStore.EgresoTA = idStore.cirugia.pacientesNotaPost[0]?.signVitEgQx_TA == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].signVitEgQx_TA
-      postAnestStore.EgresoFC = idStore.cirugia.pacientesNotaPost[0]?.signVitEgQx_FC == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].signVitEgQx_FC
-      postAnestStore.EgresoFR = idStore.cirugia.pacientesNotaPost[0]?.signVitEgQx_FR == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].signVitEgQx_FR
-      postAnestStore.EgresoTemp = idStore.cirugia.pacientesNotaPost[0]?.signVitEgQx_Temperatura == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].signVitEgQx_Temperatura
-      postAnestStore.EgresoPulso = idStore.cirugia.pacientesNotaPost[0]?.signVitEgQx_Pulso == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].signVitEgQx_Pulso
-      postAnestStore.EgresoSpO2 = idStore.cirugia.pacientesNotaPost[0]?.signVitEgQx_SpO2 == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].signVitEgQx_SpO2
-      postAnestStore.DestinoEgreso = idStore.cirugia.pacientesNotaPost[0]?.signVitEgQx_EgresoPac == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].signVitEgQx_EgresoPac
-      postAnestStore.NumeroProductos = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac_NumProd == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac_NumProd
-      postAnestStore.GeneroUno = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac1_Genero == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac1_Genero
-      postAnestStore.HoraNacimientoUno = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac1_HrNacimiento == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac1_HrNacimiento
-      postAnestStore.AlumbramientoUno = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac1_Alumbramiento == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac1_Alumbramiento
-      postAnestStore.Apgar1Uno = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac1_Apgar1 == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac1_Apgar1
-      postAnestStore.Apgar5Uno = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac1_Apgar5 == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac1_Apgar5
-      postAnestStore.CapurroUno = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac1_Capurro == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac1_Capurro
-      postAnestStore.PesoUno = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac1_Peso == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac1_Peso
-      postAnestStore.TallaUno = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac1_Talla == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac1_Talla
-      postAnestStore.GeneroDos = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac2_Genero == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac2_Genero
-      postAnestStore.HoraNacimientoDos = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac2_HrNacimiento == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac2_HrNacimiento
-      postAnestStore.AlumbramientoDos = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac2_Alumbramiento == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac2_Alumbramiento
-      postAnestStore.Apgar1Dos = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac2_Apgar1 == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac2_Apgar1
-      postAnestStore.Apgar5Dos = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac2_Apgar5 == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac2_Apgar5
-      postAnestStore.CapurroDos = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac2_Capurro == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac2_Capurro
-      postAnestStore.PesoDos = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac2_Peso == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac2_Peso
-      postAnestStore.TallaDos = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac2_Talla == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac2_Talla
-      postAnestStore.GeneroTres = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac3_Genero == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac3_Genero
-      postAnestStore.HoraNacimientoTres = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac3_HrNacimiento == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac3_HrNacimiento
-      postAnestStore.AlumbramientoTres = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac3_Alumbramiento == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac3_Alumbramiento
-      postAnestStore.Apgar1Tres = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac3_Apgar1 == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac3_Apgar1
-      postAnestStore.Apgar5Tres = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac3_Apgar5 == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac3_Apgar5
-      postAnestStore.CapurroTres = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac3_Capurro == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac3_Capurro
-      postAnestStore.PesoTres = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac3_Peso == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac3_Peso
-      postAnestStore.TallaTres = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac3_Talla == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac3_Talla
-      postAnestStore.GeneroCuatro = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac4_Genero == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac4_Genero
-      postAnestStore.HoraNacimientoCuatro = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac4_HrNacimiento == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac4_HrNacimiento
-      postAnestStore.AlumbramientoCuatro = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac4_Alumbramiento == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac4_Alumbramiento
-      postAnestStore.Apgar1Cuatro = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac4_Apgar1 == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac4_Apgar1
-      postAnestStore.Apgar5Cuatro = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac4_Apgar5 == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac4_Apgar5
-      postAnestStore.CapurroCuatro = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac4_Capurro == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac4_Capurro
-      postAnestStore.PesoCuatro = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac4_Peso == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac4_Peso
-      postAnestStore.TallaCuatro = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac4_Talla == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac4_Talla
-      postAnestStore.GeneroCinco = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac5_Genero == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac5_Genero
-      postAnestStore.HoraNacimientoCinco = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac5_HrNacimiento == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac5_HrNacimiento
-      postAnestStore.AlumbramientoCinco = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac5_Alumbramiento == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac5_Alumbramiento
-      postAnestStore.Apgar1Cinco = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac5_Apgar1 == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac5_Apgar1
-      postAnestStore.Apgar5Cinco = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac5_Apgar5 == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac5_Apgar5
-      postAnestStore.CapurroCinco = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac5_Capurro == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac5_Capurro
-      postAnestStore.PesoCinco = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac5_Peso == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac5_Peso
-      postAnestStore.TallaCinco = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac5_Talla == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac5_Talla
-      postAnestStore.GeneroSeis = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac6_Genero == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac6_Genero
-      postAnestStore.HoraNacimientoSeis = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac6_HrNacimiento == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac6_HrNacimiento
-      postAnestStore.AlumbramientoSeis = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac6_Alumbramiento == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac6_Alumbramiento
-      postAnestStore.Apgar1Seis = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac6_Apgar1 == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac6_Apgar1
-      postAnestStore.Apgar5Seis = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac6_Apgar5 == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac6_Apgar5
-      postAnestStore.CapurroSeis = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac6_Capurro == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac6_Capurro
-      postAnestStore.PesoSeis = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac6_Peso == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac6_Peso
-      postAnestStore.TallaSeis = idStore.cirugia.pacientesNotaPost[0]?.casoObsRecNac6_Talla == undefined ? '' : idStore.cirugia.pacientesNotaPost[0].casoObsRecNac6_Talla
+      if (idStore.cirugia && idStore.cirugia.pacientesNotaPost) {
+        const paciente = idStore.cirugia.pacientesNotaPost[0];
+
+        postAnestStore.TecnicaAnestesica = paciente?.npa_TecAnestFinal ?? ''
+        postAnestStore.Intubacion = paciente?.npa_Intubacion ?? ''
+        postAnestStore.NotaPost = paciente?.npa_NotaPostAnest ?? ''
+        postAnestStore.EgresoTA = paciente?.signVitEgQx_TA ?? ''
+        postAnestStore.EgresoFC = paciente?.signVitEgQx_FC ?? ''
+        postAnestStore.EgresoFR = paciente?.signVitEgQx_FR ?? ''
+        postAnestStore.EgresoTemp = paciente?.signVitEgQx_Temperatura ?? ''
+        postAnestStore.EgresoPulso = paciente?.signVitEgQx_Pulso ?? ''
+        postAnestStore.EgresoSpO2 = paciente?.signVitEgQx_SpO2 ?? ''
+        postAnestStore.DestinoEgreso = paciente?.signVitEgQx_EgresoPac ?? ''
+        postAnestStore.NumeroProductos = paciente?.casoObsRecNac_NumProd ?? ''
+        postAnestStore.GeneroUno = paciente?.casoObsRecNac1_Genero ?? ''
+        postAnestStore.HoraNacimientoUno = paciente?.casoObsRecNac1_HrNacimiento ?? ''
+        postAnestStore.AlumbramientoUno = paciente?.casoObsRecNac1_Alumbramiento ?? ''
+        postAnestStore.Apgar1Uno = paciente?.casoObsRecNac1_Apgar1 ?? ''
+        postAnestStore.Apgar5Uno = paciente?.casoObsRecNac1_Apgar5 ?? ''
+        postAnestStore.CapurroUno = paciente?.casoObsRecNac1_Capurro ?? ''
+        postAnestStore.PesoUno = paciente?.casoObsRecNac1_Peso ?? ''
+        postAnestStore.TallaUno = paciente?.casoObsRecNac1_Talla ?? ''
+        postAnestStore.GeneroDos = paciente?.casoObsRecNac2_Genero ?? ''
+        postAnestStore.HoraNacimientoDos = paciente?.casoObsRecNac2_HrNacimiento ?? ''
+        postAnestStore.AlumbramientoDos = paciente?.casoObsRecNac2_Alumbramiento ?? ''
+        postAnestStore.Apgar1Dos = paciente?.casoObsRecNac2_Apgar1 ?? ''
+        postAnestStore.Apgar5Dos = paciente?.casoObsRecNac2_Apgar5 ?? ''
+        postAnestStore.CapurroDos = paciente?.casoObsRecNac2_Capurro ?? ''
+        postAnestStore.PesoDos = paciente?.casoObsRecNac2_Peso ?? ''
+        postAnestStore.TallaDos = paciente?.casoObsRecNac2_Talla ?? ''
+        postAnestStore.GeneroTres = paciente?.casoObsRecNac3_Genero ?? ''
+        postAnestStore.HoraNacimientoTres = paciente?.casoObsRecNac3_HrNacimiento ?? ''
+        postAnestStore.AlumbramientoTres = paciente?.casoObsRecNac3_Alumbramiento ?? ''
+        postAnestStore.Apgar1Tres = paciente?.casoObsRecNac3_Apgar1 ?? ''
+        postAnestStore.Apgar5Tres = paciente?.casoObsRecNac3_Apgar5 ?? ''
+        postAnestStore.CapurroTres = paciente?.casoObsRecNac3_Capurro ?? ''
+        postAnestStore.PesoTres = paciente?.casoObsRecNac3_Peso ?? ''
+        postAnestStore.TallaTres = paciente?.casoObsRecNac3_Talla ?? ''
+        postAnestStore.GeneroCuatro = paciente?.casoObsRecNac4_Genero ?? ''
+        postAnestStore.HoraNacimientoCuatro = paciente?.casoObsRecNac4_HrNacimiento ?? ''
+        postAnestStore.AlumbramientoCuatro = paciente?.casoObsRecNac4_Alumbramiento ?? ''
+        postAnestStore.Apgar1Cuatro = paciente?.casoObsRecNac4_Apgar1 ?? ''
+        postAnestStore.Apgar5Cuatro = paciente?.casoObsRecNac4_Apgar5 ?? ''
+        postAnestStore.CapurroCuatro = paciente?.casoObsRecNac4_Capurro ?? ''
+        postAnestStore.PesoCuatro = paciente?.casoObsRecNac4_Peso ?? ''
+        postAnestStore.TallaCuatro = paciente?.casoObsRecNac4_Talla ?? ''
+        postAnestStore.GeneroCinco = paciente?.casoObsRecNac5_Genero ?? ''
+        postAnestStore.HoraNacimientoCinco = paciente?.casoObsRecNac5_HrNacimiento ?? ''
+        postAnestStore.AlumbramientoCinco = paciente?.casoObsRecNac5_Alumbramiento ?? ''
+        postAnestStore.Apgar1Cinco = paciente?.casoObsRecNac5_Apgar1 ?? ''
+        postAnestStore.Apgar5Cinco = paciente?.casoObsRecNac5_Apgar5 ?? ''
+        postAnestStore.CapurroCinco = paciente?.casoObsRecNac5_Capurro ?? ''
+        postAnestStore.PesoCinco = paciente?.casoObsRecNac5_Peso ?? ''
+        postAnestStore.TallaCinco = paciente?.casoObsRecNac5_Talla ?? ''
+        postAnestStore.GeneroSeis = paciente?.casoObsRecNac6_Genero ?? ''
+        postAnestStore.HoraNacimientoSeis = paciente?.casoObsRecNac6_HrNacimiento ?? ''
+        postAnestStore.AlumbramientoSeis = paciente?.casoObsRecNac6_Alumbramiento ?? ''
+        postAnestStore.Apgar1Seis = paciente?.casoObsRecNac6_Apgar1 ?? ''
+        postAnestStore.Apgar5Seis = paciente?.casoObsRecNac6_Apgar5 ?? ''
+        postAnestStore.CapurroSeis = paciente?.casoObsRecNac6_Capurro ?? ''
+        postAnestStore.PesoSeis = paciente?.casoObsRecNac6_Peso ?? ''
+        postAnestStore.TallaSeis = paciente?.casoObsRecNac6_Talla ?? ''
+      } else {
+        postAnestStore.TecnicaAnestesica = ''
+        postAnestStore.Intubacion = ''
+        postAnestStore.NotaPost = ''
+        postAnestStore.EgresoTA = ''
+        postAnestStore.EgresoFC = ''
+        postAnestStore.EgresoFR = ''
+        postAnestStore.EgresoTemp = ''
+        postAnestStore.EgresoPulso = ''
+        postAnestStore.EgresoSpO2 = ''
+        postAnestStore.DestinoEgreso = ''
+        postAnestStore.NumeroProductos = ''
+        postAnestStore.GeneroUno = ''
+        postAnestStore.HoraNacimientoUno = ''
+        postAnestStore.AlumbramientoUno = ''
+        postAnestStore.Apgar1Uno = ''
+        postAnestStore.Apgar5Uno = ''
+        postAnestStore.CapurroUno = ''
+        postAnestStore.PesoUno = ''
+        postAnestStore.TallaUno = ''
+        postAnestStore.GeneroDos = ''
+        postAnestStore.HoraNacimientoDos = ''
+        postAnestStore.AlumbramientoDos = ''
+        postAnestStore.Apgar1Dos = ''
+        postAnestStore.Apgar5Dos = ''
+        postAnestStore.CapurroDos = ''
+        postAnestStore.PesoDos = ''
+        postAnestStore.TallaDos = ''
+        postAnestStore.GeneroTres = ''
+        postAnestStore.HoraNacimientoTres = ''
+        postAnestStore.AlumbramientoTres = ''
+        postAnestStore.Apgar1Tres = ''
+        postAnestStore.Apgar5Tres = ''
+        postAnestStore.CapurroTres = ''
+        postAnestStore.PesoTres = ''
+        postAnestStore.TallaTres = ''
+        postAnestStore.GeneroCuatro = ''
+        postAnestStore.HoraNacimientoCuatro = ''
+        postAnestStore.AlumbramientoCuatro = ''
+        postAnestStore.Apgar1Cuatro = ''
+        postAnestStore.Apgar5Cuatro = ''
+        postAnestStore.CapurroCuatro = ''
+        postAnestStore.PesoCuatro = ''
+        postAnestStore.TallaCuatro = ''
+        postAnestStore.GeneroCinco = ''
+        postAnestStore.HoraNacimientoCinco = ''
+        postAnestStore.AlumbramientoCinco = ''
+        postAnestStore.Apgar1Cinco = ''
+        postAnestStore.Apgar5Cinco = ''
+        postAnestStore.CapurroCinco = ''
+        postAnestStore.PesoCinco = ''
+        postAnestStore.TallaCinco = ''
+        postAnestStore.GeneroSeis = ''
+        postAnestStore.HoraNacimientoSeis = ''
+        postAnestStore.AlumbramientoSeis = ''
+        postAnestStore.Apgar1Seis = ''
+        postAnestStore.Apgar5Seis = ''
+        postAnestStore.CapurroSeis = ''
+        postAnestStore.PesoSeis = ''
+        postAnestStore.TallaSeis = ''
+      }      
     },
     
     async asignarDatosPacientesRecuperacion(){
-      postAnestStore.NotaUCPA = idStore.cirugia.pacientesRecu[0]?.notaEval_Obs == undefined ? '' : idStore.cirugia.pacientesRecu[0].notaEval_Obs
-      postAnestStore.FCIngreso = idStore.cirugia.pacientesRecu[0]?.aldreteRec_FrecCardIn == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_FrecCardIn
-      postAnestStore.FC15Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_FrecCard15 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_FrecCard15
-      postAnestStore.FC30Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_FrecCard30 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_FrecCard30
-      postAnestStore.FC45Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_FrecCard45 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_FrecCard45
-      postAnestStore.FC60Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_FrecCard60 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_FrecCard60
-      postAnestStore.FC90Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_FrecCard90 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_FrecCard90
-      postAnestStore.FC120Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_FrecCard120 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_FrecCard120
-      postAnestStore.FRIngreso = idStore.cirugia.pacientesRecu[0]?.aldreteRec_FrecRespIn == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_FrecRespIn
-      postAnestStore.FR15Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_FrecResp15 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_FrecResp15
-      postAnestStore.FR30Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_FrecResp30 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_FrecResp30
-      postAnestStore.FR45Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_FrecResp45 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_FrecResp45
-      postAnestStore.FR60Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_FrecResp60 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_FrecResp60
-      postAnestStore.FR90Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_FrecResp90 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_FrecResp90
-      postAnestStore.FR120Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_FrecResp120 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_FrecResp120
-      postAnestStore.TensionIngreso = idStore.cirugia.pacientesRecu[0]?.aldreteRec_TensArteIn == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_TensArteIn
-      postAnestStore.Tension15Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_TensArte15 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_TensArte15
-      postAnestStore.Tension30Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_TensArte30 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_TensArte30
-      postAnestStore.Tension45Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_TensArte45 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_TensArte45
-      postAnestStore.Tension60Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_TensArte60 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_TensArte60
-      postAnestStore.Tension90Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_TensArte90 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_TensArte90
-      postAnestStore.Tension120Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_TensArte120 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_TensArte120
-      postAnestStore.SaturacionIngreso = idStore.cirugia.pacientesRecu[0]?.aldreteRec_SatO2In == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_SatO2In
-      postAnestStore.Saturacion15Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_SatO215 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_SatO215
-      postAnestStore.Saturacion30Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_SatO230 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_SatO230
-      postAnestStore.Saturacion45Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_SatO245 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_SatO245
-      postAnestStore.Saturacion60Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_SatO260 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_SatO260
-      postAnestStore.Saturacion90Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_SatO290 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_SatO290
-      postAnestStore.Saturacion120Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_SatO2120 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_SatO2120
-      postAnestStore.AldreteIngreso = idStore.cirugia.pacientesRecu[0]?.aldreteRec_AldreteIn == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_AldreteIn
-      postAnestStore.Aldrete15Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_Aldrete15 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_Aldrete15
-      postAnestStore.Aldrete30Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_Aldrete30 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_Aldrete30
-      postAnestStore.Aldrete45Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_Aldrete45 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_Aldrete45
-      postAnestStore.Aldrete60Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_Aldrete60 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_Aldrete60
-      postAnestStore.Aldrete90Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_Aldrete90 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_Aldrete90
-      postAnestStore.Aldrete120Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_Aldrete120 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_Aldrete120
-      postAnestStore.BromageIngreso = idStore.cirugia.pacientesRecu[0]?.aldreteRec_BromageIn == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_BromageIn
-      postAnestStore.Bromage15Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_Bromage15 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_Bromage15
-      postAnestStore.Bromage30Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_Bromage30 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_Bromage30
-      postAnestStore.Bromage45Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_Bromage45 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_Bromage45
-      postAnestStore.Bromage60Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_Bromage60 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_Bromage60
-      postAnestStore.Bromage90Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_Bromage90 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_Bromage90
-      postAnestStore.Bromage120Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_Bromage120 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_Bromage120
-      postAnestStore.NauseaIngreso = idStore.cirugia.pacientesRecu[0]?.aldreteRec_NauseasIn == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_NauseasIn
-      postAnestStore.Nausea15Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_Nauseas15 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_Nauseas15
-      postAnestStore.Nausea30Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_Nauseas30 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_Nauseas30
-      postAnestStore.Nausea45Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_Nauseas45 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_Nauseas45
-      postAnestStore.Nausea60Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_Nauseas60 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_Nauseas60
-      postAnestStore.Nausea90Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_Nauseas90 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_Nauseas90
-      postAnestStore.Nausea120Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_Nauseas120 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_Nauseas120
-      postAnestStore.EscalaEVAIngreso = idStore.cirugia.pacientesRecu[0]?.aldreteRec_escEVADolIn == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_escEVADolIn
-      postAnestStore.EscalaEVA15Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_escEVADol15 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_escEVADol15
-      postAnestStore.EscabaEVA30Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_escEVADol30 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_escEVADol30
-      postAnestStore.EscalaEVA45Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_escEVADol45 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_escEVADol45
-      postAnestStore.EscalaEVA60Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_escEVADol60 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_escEVADol60
-      postAnestStore.EscalaEVA90Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_escEVADol90 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_escEVADol90
-      postAnestStore.EscalaEVA120Min = idStore.cirugia.pacientesRecu[0]?.aldreteRec_escEVADol120 == undefined ? '' : idStore.cirugia.pacientesRecu[0].aldreteRec_escEVADol120
-      postAnestStore.AldreteFinal0Min = idStore.cirugia.pacientesRecu[0]?.altaRec_0min == undefined ? '' : idStore.cirugia.pacientesRecu[0].altaRec_0min
-      postAnestStore.AldreteFinal15Min = idStore.cirugia.pacientesRecu[0]?.altaRec_15min == undefined ? '' : idStore.cirugia.pacientesRecu[0].altaRec_15min
-      postAnestStore.AldreteFinal30Min = idStore.cirugia.pacientesRecu[0]?.altaRec_30min == undefined ? '' : idStore.cirugia.pacientesRecu[0].altaRec_30min
-      postAnestStore.AldreteFinal45Min = idStore.cirugia.pacientesRecu[0]?.altaRec_45min == undefined ? '' : idStore.cirugia.pacientesRecu[0].altaRec_45min
-      postAnestStore.AldreteFinal60Min = idStore.cirugia.pacientesRecu[0]?.altaRec_60min == undefined ? '' : idStore.cirugia.pacientesRecu[0].altaRec_60min
-      postAnestStore.AldreteFinal90Min = idStore.cirugia.pacientesRecu[0]?.altaRec_90min == undefined ? '' : idStore.cirugia.pacientesRecu[0].altaRec_90min
-      postAnestStore.AldreteFinal120Min = idStore.cirugia.pacientesRecu[0]?.altaRec_120min == undefined ? '' : idStore.cirugia.pacientesRecu[0].altaRec_120min
-      postAnestStore.CalificacionAldrete = idStore.cirugia.pacientesRecu[0]?.altaRec_CalifAldrete == undefined ? '' : idStore.cirugia.pacientesRecu[0].altaRec_CalifAldrete
-      postAnestStore.ObservacionesAlta = idStore.cirugia.pacientesRecu[0]?.altaRec_Obs == undefined ? '' : idStore.cirugia.pacientesRecu[0].altaRec_Obs
-      postAnestStore.NombreAnestesiologo = idStore.cirugia.pacientesRecu[0]?.altaRec_FechaAltaRec == undefined ? '' : idStore.cirugia.pacientesRecu[0].altaRec_FechaAltaRec
-      postAnestStore.FechaAlta = idStore.cirugia.pacientesRecu[0]?.altaRec_HrAltaRec == undefined ? '' : idStore.cirugia.pacientesRecu[0].altaRec_HrAltaRec
-      postAnestStore.HoraAlta = idStore.cirugia.pacientesRecu[0]?.altaRec_NomMedAnest == undefined ? '' : idStore.cirugia.pacientesRecu[0].altaRec_NomMedAnest
+      if (idStore.cirugia && idStore.cirugia.pacientesRecu) {
+        const paciente = idStore.cirugia.pacientesRecu[0];
+
+        postAnestStore.NotaUCPA = paciente?.notaEval_Obs ?? ''
+        postAnestStore.FCIngreso = paciente?.aldreteRec_FrecCardIn ?? ''
+        postAnestStore.FC15Min = paciente?.aldreteRec_FrecCard15 ?? ''
+        postAnestStore.FC30Min = paciente?.aldreteRec_FrecCard30 ?? ''
+        postAnestStore.FC45Min = paciente?.aldreteRec_FrecCard45 ?? ''
+        postAnestStore.FC60Min = paciente?.aldreteRec_FrecCard60 ?? ''
+        postAnestStore.FC90Min = paciente?.aldreteRec_FrecCard90 ?? ''
+        postAnestStore.FC120Min = paciente?.aldreteRec_FrecCard120 ?? ''
+        postAnestStore.FRIngreso = paciente?.aldreteRec_FrecRespIn ?? ''
+        postAnestStore.FR15Min = paciente?.aldreteRec_FrecResp15 ?? ''
+        postAnestStore.FR30Min = paciente?.aldreteRec_FrecResp30 ?? ''
+        postAnestStore.FR45Min = paciente?.aldreteRec_FrecResp45 ?? ''
+        postAnestStore.FR60Min = paciente?.aldreteRec_FrecResp60 ?? ''
+        postAnestStore.FR90Min = paciente?.aldreteRec_FrecResp90 ?? ''
+        postAnestStore.FR120Min = paciente?.aldreteRec_FrecResp120 ?? ''
+        postAnestStore.TensionIngreso = paciente?.aldreteRec_TensArteIn ?? ''
+        postAnestStore.Tension15Min = paciente?.aldreteRec_TensArte15 ?? ''
+        postAnestStore.Tension30Min = paciente?.aldreteRec_TensArte30 ?? ''
+        postAnestStore.Tension45Min = paciente?.aldreteRec_TensArte45 ?? ''
+        postAnestStore.Tension60Min = paciente?.aldreteRec_TensArte60 ?? ''
+        postAnestStore.Tension90Min = paciente?.aldreteRec_TensArte90 ?? ''
+        postAnestStore.Tension120Min = paciente?.aldreteRec_TensArte120 ?? ''
+        postAnestStore.SaturacionIngreso = paciente?.aldreteRec_SatO2In ?? ''
+        postAnestStore.Saturacion15Min = paciente?.aldreteRec_SatO215 ?? ''
+        postAnestStore.Saturacion30Min = paciente?.aldreteRec_SatO230 ?? ''
+        postAnestStore.Saturacion45Min = paciente?.aldreteRec_SatO245 ?? ''
+        postAnestStore.Saturacion60Min = paciente?.aldreteRec_SatO260 ?? ''
+        postAnestStore.Saturacion90Min = paciente?.aldreteRec_SatO290 ?? ''
+        postAnestStore.Saturacion120Min = paciente?.aldreteRec_SatO2120 ?? ''
+        postAnestStore.AldreteIngreso = paciente?.aldreteRec_AldreteIn ?? ''
+        postAnestStore.Aldrete15Min = paciente?.aldreteRec_Aldrete15 ?? ''
+        postAnestStore.Aldrete30Min = paciente?.aldreteRec_Aldrete30 ?? ''
+        postAnestStore.Aldrete45Min = paciente?.aldreteRec_Aldrete45 ?? ''
+        postAnestStore.Aldrete60Min = paciente?.aldreteRec_Aldrete60 ?? ''
+        postAnestStore.Aldrete90Min = paciente?.aldreteRec_Aldrete90 ?? ''
+        postAnestStore.Aldrete120Min = paciente?.aldreteRec_Aldrete120 ?? ''
+        postAnestStore.BromageIngreso = paciente?.aldreteRec_BromageIn ?? ''
+        postAnestStore.Bromage15Min = paciente?.aldreteRec_Bromage15 ?? ''
+        postAnestStore.Bromage30Min = paciente?.aldreteRec_Bromage30 ?? ''
+        postAnestStore.Bromage45Min = paciente?.aldreteRec_Bromage45 ?? ''
+        postAnestStore.Bromage60Min = paciente?.aldreteRec_Bromage60 ?? ''
+        postAnestStore.Bromage90Min = paciente?.aldreteRec_Bromage90 ?? ''
+        postAnestStore.Bromage120Min = paciente?.aldreteRec_Bromage120 ?? ''
+        postAnestStore.NauseaIngreso = paciente?.aldreteRec_NauseasIn ?? ''
+        postAnestStore.Nausea15Min = paciente?.aldreteRec_Nauseas15 ?? ''
+        postAnestStore.Nausea30Min = paciente?.aldreteRec_Nauseas30 ?? ''
+        postAnestStore.Nausea45Min = paciente?.aldreteRec_Nauseas45 ?? ''
+        postAnestStore.Nausea60Min = paciente?.aldreteRec_Nauseas60 ?? ''
+        postAnestStore.Nausea90Min = paciente?.aldreteRec_Nauseas90 ?? ''
+        postAnestStore.Nausea120Min = paciente?.aldreteRec_Nauseas120 ?? ''
+        postAnestStore.EscalaEVAIngreso = paciente?.aldreteRec_escEVADolIn ?? ''
+        postAnestStore.EscalaEVA15Min = paciente?.aldreteRec_escEVADol15 ?? ''
+        postAnestStore.EscabaEVA30Min = paciente?.aldreteRec_escEVADol30 ?? ''
+        postAnestStore.EscalaEVA45Min = paciente?.aldreteRec_escEVADol45 ?? ''
+        postAnestStore.EscalaEVA60Min = paciente?.aldreteRec_escEVADol60 ?? ''
+        postAnestStore.EscalaEVA90Min = paciente?.aldreteRec_escEVADol90 ?? ''
+        postAnestStore.EscalaEVA120Min = paciente?.aldreteRec_escEVADol120 ?? ''
+        postAnestStore.AldreteFinal0Min = paciente?.altaRec_0min ?? ''
+        postAnestStore.AldreteFinal15Min = paciente?.altaRec_15min ?? ''
+        postAnestStore.AldreteFinal30Min = paciente?.altaRec_30min ?? ''
+        postAnestStore.AldreteFinal45Min = paciente?.altaRec_45min ?? ''
+        postAnestStore.AldreteFinal60Min = paciente?.altaRec_60min ?? ''
+        postAnestStore.AldreteFinal90Min = paciente?.altaRec_90min ?? ''
+        postAnestStore.AldreteFinal120Min = paciente?.altaRec_120min ?? ''
+        postAnestStore.CalificacionAldrete = paciente?.altaRec_CalifAldrete ?? ''
+        postAnestStore.ObservacionesAlta = paciente?.altaRec_Obs ?? ''
+        postAnestStore.FechaAlta = paciente?.altaRec_FechaAltaRec ?? ''
+        postAnestStore.HoraAlta = paciente?.altaRec_HrAltaRec ?? ''
+        postAnestStore.NombreAnestesiologo = paciente?.altaRec_NomMedAnest ?? ''
+      } else {
+        postAnestStore.NotaUCPA = ''
+        postAnestStore.FCIngreso = ''
+        postAnestStore.FC15Min = ''
+        postAnestStore.FC30Min = ''
+        postAnestStore.FC45Min = ''
+        postAnestStore.FC60Min = ''
+        postAnestStore.FC90Min = ''
+        postAnestStore.FC120Min = ''
+        postAnestStore.FRIngreso = ''
+        postAnestStore.FR15Min = ''
+        postAnestStore.FR30Min = ''
+        postAnestStore.FR45Min = ''
+        postAnestStore.FR60Min = ''
+        postAnestStore.FR90Min = ''
+        postAnestStore.FR120Min = ''
+        postAnestStore.TensionIngreso = ''
+        postAnestStore.Tension15Min = ''
+        postAnestStore.Tension30Min = ''
+        postAnestStore.Tension45Min = ''
+        postAnestStore.Tension60Min = ''
+        postAnestStore.Tension90Min = ''
+        postAnestStore.Tension120Min = ''
+        postAnestStore.SaturacionIngreso = ''
+        postAnestStore.Saturacion15Min = ''
+        postAnestStore.Saturacion30Min = ''
+        postAnestStore.Saturacion45Min = ''
+        postAnestStore.Saturacion60Min = ''
+        postAnestStore.Saturacion90Min = ''
+        postAnestStore.Saturacion120Min = ''
+        postAnestStore.AldreteIngreso = ''
+        postAnestStore.Aldrete15Min = ''
+        postAnestStore.Aldrete30Min = ''
+        postAnestStore.Aldrete45Min = ''
+        postAnestStore.Aldrete60Min = ''
+        postAnestStore.Aldrete90Min = ''
+        postAnestStore.Aldrete120Min = ''
+        postAnestStore.BromageIngreso = ''
+        postAnestStore.Bromage15Min = ''
+        postAnestStore.Bromage30Min = ''
+        postAnestStore.Bromage45Min = ''
+        postAnestStore.Bromage60Min = ''
+        postAnestStore.Bromage90Min = ''
+        postAnestStore.Bromage120Min = ''
+        postAnestStore.NauseaIngreso = ''
+        postAnestStore.Nausea15Min = ''
+        postAnestStore.Nausea30Min = ''
+        postAnestStore.Nausea45Min = ''
+        postAnestStore.Nausea60Min = ''
+        postAnestStore.Nausea90Min = ''
+        postAnestStore.Nausea120Min = ''
+        postAnestStore.EscalaEVAIngreso = ''
+        postAnestStore.EscalaEVA15Min = ''
+        postAnestStore.EscabaEVA30Min = ''
+        postAnestStore.EscalaEVA45Min = ''
+        postAnestStore.EscalaEVA60Min = ''
+        postAnestStore.EscalaEVA90Min = ''
+        postAnestStore.EscalaEVA120Min = ''
+        postAnestStore.AldreteFinal0Min = ''
+        postAnestStore.AldreteFinal15Min = ''
+        postAnestStore.AldreteFinal30Min = ''
+        postAnestStore.AldreteFinal45Min = ''
+        postAnestStore.AldreteFinal60Min = ''
+        postAnestStore.AldreteFinal90Min = ''
+        postAnestStore.AldreteFinal120Min = ''
+        postAnestStore.CalificacionAldrete = ''
+        postAnestStore.ObservacionesAlta = ''
+        postAnestStore.NombreAnestesiologo = ''
+        postAnestStore.FechaAlta = ''
+        postAnestStore.HoraAlta = ''
+      }      
     },
 
     async cerrarModalGrid() {
@@ -1215,37 +1558,59 @@ export default defineComponent({
       });
       this.chartElements = [];
 
-      let FC = transStore.datosMSV.flatMap(dato => dato.FC ?? ' ')
+      let FC = null
+      let Pulso = null
+      let PAS = null      
+      let PAD = null
+      let PAM = null
+      let SpO2 = null
+      let EtCO2 = null
+      let Temp1 = null
+      let Temp2 = null
+      let PVC = null
+      let PAS_IN = null
+      let PAD_IN = null
+      let PAM_IN = null
+      let FiCO2 = null
+      let FR = null
+      let horaGeneracion = null
       
-      let Pulso = transStore.datosMSV.flatMap(dato => dato.Pulso ?? ' ')
-
-      let PAS = transStore.datosMSV.flatMap(dato => dato.PAS ?? ' ')
-      
-      let PAD = transStore.datosMSV.flatMap(dato => dato.PAD ?? ' ')
-
-      let PAM = transStore.datosMSV.flatMap(dato => dato.PAM ?? ' ')
-      
-      let SpO2 = transStore.datosMSV.flatMap(dato => dato.SpO2 ?? ' ')
-      
-      let EtCO2 = transStore.datosMSV.flatMap(dato => dato.EtCO2 ?? ' ')
-      
-      let Temp1 = transStore.datosMSV.flatMap(dato => dato.Temp1 ?? ' ')
-      
-      let Temp2 = transStore.datosMSV.flatMap(dato => dato.Temp2 ?? ' ')
-      
-      let PVC = transStore.datosMSV.flatMap(dato => dato.PVC ?? ' ')
-      
-      let PAS_IN = transStore.datosMSV.flatMap(dato => dato.PAS_IN ?? ' ')
-      
-      let PAD_IN = transStore.datosMSV.flatMap(dato => dato.PAD_IN ?? ' ')
-      
-      let PAM_IN = transStore.datosMSV.flatMap(dato => dato.PAM_IN ?? ' ')
-      
-      let FiCO2 = transStore.datosMSV.flatMap(dato => dato.FiCO2 ?? ' ')
-      
-      let FR = transStore.datosMSV.flatMap(dato => dato.FR ?? ' ')
-      
-      let horaGeneracion = transStore.datosMSV.map(item => item.HoraGeneracion);
+      if (transStore.datosMSV != ''){
+        
+        FC = transStore.datosMSV.flatMap(dato => dato.FC ?? ' ') //Corregir esto      
+        Pulso = transStore.datosMSV.flatMap(dato => dato.Pulso ?? ' ')
+        PAS = transStore.datosMSV.flatMap(dato => dato.PAS ?? ' ')      
+        PAD = transStore.datosMSV.flatMap(dato => dato.PAD ?? ' ')
+        PAM = transStore.datosMSV.flatMap(dato => dato.PAM ?? ' ')      
+        SpO2 = transStore.datosMSV.flatMap(dato => dato.SpO2 ?? ' ')      
+        EtCO2 = transStore.datosMSV.flatMap(dato => dato.EtCO2 ?? ' ')      
+        Temp1 = transStore.datosMSV.flatMap(dato => dato.Temp1 ?? ' ')      
+        Temp2 = transStore.datosMSV.flatMap(dato => dato.Temp2 ?? ' ')      
+        PVC = transStore.datosMSV.flatMap(dato => dato.PVC ?? ' ')      
+        PAS_IN = transStore.datosMSV.flatMap(dato => dato.PAS_IN ?? ' ')      
+        PAD_IN = transStore.datosMSV.flatMap(dato => dato.PAD_IN ?? ' ')      
+        PAM_IN = transStore.datosMSV.flatMap(dato => dato.PAM_IN ?? ' ')      
+        FiCO2 = transStore.datosMSV.flatMap(dato => dato.FiCO2 ?? ' ')      
+        FR = transStore.datosMSV.flatMap(dato => dato.FR ?? ' ')      
+        horaGeneracion = transStore.datosMSV.map(item => item.HoraGeneracion);
+      }else{
+        FC = ' '
+        Pulso = ' '
+        PAS = ' '
+        PAD = ' '
+        PAM = ' '
+        SpO2 = ' '
+        EtCO2 = ' '
+        Temp1 = ' '
+        Temp2 = ' '
+        PVC = ' '
+        PAS_IN = ' '
+        PAD_IN = ' '
+        PAM_IN = ' '
+        FiCO2 = ' '
+        FR = ' '
+        horaGeneracion = ' '
+      }
 
       let gruposFC = [];
       for (let i = 0; i < FC.length; i += 26) {
@@ -2079,10 +2444,15 @@ export default defineComponent({
       let txtCirugiaTrans= cirugiaTrans.length > 60 ? cirugiaTrans.substring(0, 60) + '...' : cirugiaTrans;        
 
       /*Grid Anestésico*/
+      if(transStore.datosMSV == ''){
+        transStore.datosMSV = []
+      }
+
       let datosGrid = transStore.datosMSV;
       let tablaDatosGrid = [];
 
       datosGrid.forEach(entry => {
+        
         const columnData = [];
         // Agregar la Hora 
         columnData.push({ text: entry.HoraGeneracion, style: 'SF', fontSize: 6, alignment:'center', margin: [0, 0, 0, 4] });
@@ -4331,6 +4701,8 @@ export default defineComponent({
       this.mostrarGraficas=false;
 
       this.mostrarSpinner=false;
+
+      transStore.datosMSV=''
     },   
 
     // Obtener datos de paciente seleccionado
