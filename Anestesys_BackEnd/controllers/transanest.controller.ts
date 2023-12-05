@@ -546,7 +546,7 @@ export const saveNuevoTiemposQX = async (req: any, res: Response) => {
 /* Para un nuevo paciente */
 export const saveDatosMSV = async (req: any, res: Response) => {
     try {
-        const { pid, cxid } = req.params;
+        const { pid} = req.params;
         const { datosMSV } = req.body;
 
         const dataToInsert = datosMSV.map((data: { FC: any; Pulso: any;
@@ -576,7 +576,7 @@ export const saveDatosMSV = async (req: any, res: Response) => {
         }));
 
         const menuTrans = await MenuTrans.findOneAndUpdate(
-            { pid: pid, cxid: cxid },
+            { pid: pid},
             { $addToSet: { datosMSV: { $each: dataToInsert } } } );
       
         return res.json({ menuTrans });
