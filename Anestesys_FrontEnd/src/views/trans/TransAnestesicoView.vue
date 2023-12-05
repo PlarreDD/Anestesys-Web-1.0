@@ -1517,7 +1517,8 @@ export default defineComponent({
 
       chartElements: [],
 
-      guardaDatosMSV: 0
+      guardaDatosMSV: 0,
+      gridBD: [], // Contiene todos los datos del grid
     }
   },
 
@@ -1529,7 +1530,7 @@ export default defineComponent({
   },
 
   mounted: function() { // Llama el método despues de cargar la página    
-    transAnestStore.getDetieneMonitoreo();
+    // transAnestStore.getDetieneMonitoreo();
     this.pingMSV(medStore.monitor[0].dirIPMVS);
     
     this.menuTrans.balanceTotal = null;
@@ -1734,16 +1735,15 @@ export default defineComponent({
         // this.menuTrans.detalleEvento= transAnestStore.detalleEvento
       },
 
-      // Generar Grafica a Imagen
-      async convertirGrafica() {
-        let grafica = (this.$refs.chartRef as HTMLElement);
-        let canvas = await html2canvas(grafica);
-        return canvas.toDataURL('image/png'); // Devuelve la imagen como base64
-      },
+    // Generar Grafica a Imagen
+    async convertirGrafica() {
+      let grafica = (this.$refs.chartRef as HTMLElement);
+      let canvas = await html2canvas(grafica);
+      return canvas.toDataURL('image/png'); // Devuelve la imagen como base64
+    },
 
       // Asignar valores del MSV a las graficas
       async obtenerValoresGrafica() {
-
         this.chartElements.forEach(chart => {
           chart.destroy();
         });
@@ -2494,9 +2494,7 @@ export default defineComponent({
         let txtNotaPre = notaPre.length > 6500 ? notaPre.substring(0, 6500) + '...' : notaPre;
 
         /***********************POST***********************/
-
         /*NOTA POST*/
-
         /*Caso Obstetrico Recién Nacido*/
         // Número de Productos        
         let numProductos = postAnestStore.NumeroProductos === undefined || postAnestStore.NumeroProductos === null ? ' ' : postAnestStore.NumeroProductos;
@@ -2518,7 +2516,6 @@ export default defineComponent({
         let tallaNacido = postAnestStore.TallaUno === undefined || postAnestStore.TallaUno === null ? ' ' : postAnestStore.TallaUno;
 
         /*Nota Post-Anestésica*/
-
         // Técnica de Anestesia Final
         let tecnicaAnestFinal = postAnestStore.TecnicaAnestesica === undefined || postAnestStore.TecnicaAnestesica === null ? ' ' : String(postAnestStore.TecnicaAnestesica);
         // Intubación
@@ -2672,7 +2669,6 @@ export default defineComponent({
         let horaAlta = postAnestStore.HoraAlta === undefined || postAnestStore.HoraAlta === null ? ' ' : postAnestStore.HoraAlta;
 
         /***********************TRANS***********************/
-
         /*Datos del Medicamento*/
         let listaMedicamentosTipo = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
             item.medicamentosCx.map(medicamento => medicamento.tipoMed)).flat();
@@ -5231,10 +5227,10 @@ export default defineComponent({
             this.menuTrans.vt = "";
 
             if(preIdStore.nuevoRegistroPaciente == false){
-          await transAnestStore.listDatosV(preIdStore.pacienteID._id);
-        }else if(preIdStore.nuevoRegistroPaciente == true){          
-          await transAnestStore.listNuevoDatosV(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-        }     
+              await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){          
+              await transAnestStore.listNuevoDatosV(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }     
         }
       },
 
@@ -5754,18 +5750,17 @@ export default defineComponent({
       },
 
       async guardarMedicamentos() {
-
         if(this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.medicamento == "" || this.menuTrans.medicamento == undefined) {
-              swal.fire({
-              title: "Indique el tipo de administración y medicamento",
-              icon: "warning",
-              showConfirmButton: false,
-              showCloseButton: true,
-              toast: true,
-              timer: 2500,
-              timerProgressBar: true,
-              position: "top-end",
-              });
+          swal.fire({
+          title: "Indique el tipo de administración y medicamento",
+          icon: "warning",
+          showConfirmButton: false,
+          showCloseButton: true,
+          toast: true,
+          timer: 2500,
+          timerProgressBar: true,
+          position: "top-end",
+          });
         }else {        
           transAnestStore.btnAddMedicamentos=false
           transAnestStore.btnUpdateMedicamentos=true
@@ -5814,131 +5809,25 @@ export default defineComponent({
 
       async actualizarMedicamentos(m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
                                     m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string) {
-          if (this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.medicamento == "" || this.menuTrans.medicamento == undefined) {
-                swal.fire({
-                title: "Indique el tipo de administración y medicamento",
-                icon: "warning",
-                showConfirmButton: false,
-                showCloseButton: true,
-                toast: true,
-                timer: 2500,
-                timerProgressBar: true,
-                position: "top-end",
-                });
-          } else {
+        if (this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.medicamento == "" || this.menuTrans.medicamento == undefined) {
+              swal.fire({
+              title: "Indique el tipo de administración y medicamento",
+              icon: "warning",
+              showConfirmButton: false,
+              showCloseButton: true,
+              toast: true,
+              timer: 2500,
+              timerProgressBar: true,
+              position: "top-end",
+              });
+        } else {
 
-            if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.updateMedicamentos(m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed, preIdStore.pacienteID._id);
-            }else if(preIdStore.nuevoRegistroPaciente == true){        
-              await transAnestStore.updateNuevoMedicamentos(m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed, preIdStore.pacienteID.pid,  preIdStore.cirugiaID);
-            }            
-            
-            this.menuTrans.tipoMed = "";
-            this.menuTrans.medicamento = "";
-            this.menuTrans.dosisMed = "";
-            this.menuTrans.unidadMed = "";
-            this.menuTrans.viaMed = "";
-            this.menuTrans.horaInicioMed = "";
-            this.menuTrans.horaFinalMed = "";
-            this.menuTrans.observacionesMed = "";    
-            
-            this.cerrarModalMed();
-
-            if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
-            }else if(preIdStore.nuevoRegistroPaciente == true){        
-              await transAnestStore.getNuevoMedicamentosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-            }
-            await this.listarMedicamentosTrans()
-          }
-      },
-
-      async cambiarBtnActualizarMedic(id) {
-            transAnestStore.btnAddMedicamentos=false
-            transAnestStore.btnUpdateMedicamentos=false
-            transAnestStore.btnActualizaMedicamento=true
-
-            await transAnestStore.getMedicamento(id);
-
-            this.menuTrans.idMed = transAnestStore.medicamentos.medicamentosCx[0]._id;
-            this.menuTrans.tipoMed = transAnestStore.medicamentos.medicamentosCx[0].tipoMed;
-            this.menuTrans.medicamento = transAnestStore.medicamentos.medicamentosCx[0].medicamento;
-            this.menuTrans.dosisMed = transAnestStore.medicamentos.medicamentosCx[0].dosisMed;
-            this.menuTrans.unidadMed = transAnestStore.medicamentos.medicamentosCx[0].unidadMed;
-            this.menuTrans.viaMed = transAnestStore.medicamentos.medicamentosCx[0].viaMed;
-            this.menuTrans.horaInicioMed = transAnestStore.medicamentos.medicamentosCx[0].horaInicioMed;
-            this.menuTrans.horaFinalMed = transAnestStore.medicamentos.medicamentosCx[0].horaFinalMed;
-            this.menuTrans.observacionesMed = transAnestStore.medicamentos.medicamentosCx[0].observacionesMed;
-
-            if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
-            }else if(preIdStore.nuevoRegistroPaciente == true){        
-              await transAnestStore.getNuevoMedicamentosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-            }
-            await this.listarMedicamentosTrans()
-      },
-
-      async actualizarMedicamento() {
-            if (this.menuTrans.tipoMed == "" || this.menuTrans.medicamento == "") {
-                swal.fire({
-                title: "Indique el tipo de administración y medicamento",
-                icon: "warning",
-                showConfirmButton: false,
-                showCloseButton: true,
-                toast: true,
-                timer: 2500,
-                timerProgressBar: true,
-                position: "top-end",
-                });
-            } else {
-                await transAnestStore.updateMedicamento(this.menuTrans.idMed, this.menuTrans.tipoMed, this.menuTrans.medicamento, this.menuTrans.dosisMed,
-                this.menuTrans.unidadMed, this.menuTrans.viaMed, this.menuTrans.horaInicioMed, this.menuTrans.horaFinalMed, this.menuTrans.observacionesMed);
-
-                transAnestStore.btnAddMedicamentos=false
-                transAnestStore.btnUpdateMedicamentos=true
-                transAnestStore.btnActualizaMedicamento=false
-
-                this.menuTrans.idMed = "";
-                this.menuTrans.tipoMed = "";
-                this.menuTrans.medicamento = "";
-                this.menuTrans.dosisMed = "";
-                this.menuTrans.unidadMed = "";
-                this.menuTrans.viaMed = "";
-                this.menuTrans.horaInicioMed = "";
-                this.menuTrans.horaFinalMed = "";
-                this.menuTrans.observacionesMed = "";
-
-                this.cerrarModalMed();
-
-                if(preIdStore.nuevoRegistroPaciente == false){
-                  await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
-                }else if(preIdStore.nuevoRegistroPaciente == true){        
-                  await transAnestStore.getNuevoMedicamentosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-                }
-                await this.listarMedicamentosTrans()
-            }
-      },
-
-      async validaEliminarMedicamento(idMedicamento: string) {
-            swal
-                .fire({
-                html: "¿Esta seguro de eliminar los datos del medicamento?",
-                icon: "warning",
-                showConfirmButton: true,
-                showCancelButton: true,
-                toast: true,
-                })
-                .then((result) => {
-                if (result.isConfirmed) {
-                    this.eliminarMedicamento(idMedicamento);
-                }
-                });
-      },
-
-      async eliminarMedicamento(idMedicamento: string) {
-          await transAnestStore.deleteMedicamento(idMedicamento);          
-
-          this.menuTrans.idMed = "";
+          if(preIdStore.nuevoRegistroPaciente == false){
+            await transAnestStore.updateMedicamentos(m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed, preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){        
+            await transAnestStore.updateNuevoMedicamentos(m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed, preIdStore.pacienteID.pid,  preIdStore.cirugiaID);
+          }            
+          
           this.menuTrans.tipoMed = "";
           this.menuTrans.medicamento = "";
           this.menuTrans.dosisMed = "";
@@ -5946,12 +5835,8 @@ export default defineComponent({
           this.menuTrans.viaMed = "";
           this.menuTrans.horaInicioMed = "";
           this.menuTrans.horaFinalMed = "";
-          this.menuTrans.observacionesMed = "";
-
-          transAnestStore.btnAddMedicamentos=false
-          transAnestStore.btnUpdateMedicamentos=true
-          transAnestStore.btnActualizaMedicamento=false
-
+          this.menuTrans.observacionesMed = "";    
+          
           this.cerrarModalMed();
 
           if(preIdStore.nuevoRegistroPaciente == false){
@@ -5960,6 +5845,116 @@ export default defineComponent({
             await transAnestStore.getNuevoMedicamentosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
           }
           await this.listarMedicamentosTrans()
+        }
+      },
+
+      async cambiarBtnActualizarMedic(id) {
+        transAnestStore.btnAddMedicamentos=false
+        transAnestStore.btnUpdateMedicamentos=false
+        transAnestStore.btnActualizaMedicamento=true
+
+        await transAnestStore.getMedicamento(id);
+
+        this.menuTrans.idMed = transAnestStore.medicamentos.medicamentosCx[0]._id;
+        this.menuTrans.tipoMed = transAnestStore.medicamentos.medicamentosCx[0].tipoMed;
+        this.menuTrans.medicamento = transAnestStore.medicamentos.medicamentosCx[0].medicamento;
+        this.menuTrans.dosisMed = transAnestStore.medicamentos.medicamentosCx[0].dosisMed;
+        this.menuTrans.unidadMed = transAnestStore.medicamentos.medicamentosCx[0].unidadMed;
+        this.menuTrans.viaMed = transAnestStore.medicamentos.medicamentosCx[0].viaMed;
+        this.menuTrans.horaInicioMed = transAnestStore.medicamentos.medicamentosCx[0].horaInicioMed;
+        this.menuTrans.horaFinalMed = transAnestStore.medicamentos.medicamentosCx[0].horaFinalMed;
+        this.menuTrans.observacionesMed = transAnestStore.medicamentos.medicamentosCx[0].observacionesMed;
+
+        if(preIdStore.nuevoRegistroPaciente == false){
+          await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+        }else if(preIdStore.nuevoRegistroPaciente == true){        
+          await transAnestStore.getNuevoMedicamentosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        }
+        await this.listarMedicamentosTrans()
+      },
+
+      async actualizarMedicamento() {
+        if (this.menuTrans.tipoMed == "" || this.menuTrans.medicamento == "") {
+            swal.fire({
+            title: "Indique el tipo de administración y medicamento",
+            icon: "warning",
+            showConfirmButton: false,
+            showCloseButton: true,
+            toast: true,
+            timer: 2500,
+            timerProgressBar: true,
+            position: "top-end",
+            });
+        } else {
+            await transAnestStore.updateMedicamento(this.menuTrans.idMed, this.menuTrans.tipoMed, this.menuTrans.medicamento, this.menuTrans.dosisMed,
+            this.menuTrans.unidadMed, this.menuTrans.viaMed, this.menuTrans.horaInicioMed, this.menuTrans.horaFinalMed, this.menuTrans.observacionesMed);
+
+            transAnestStore.btnAddMedicamentos=false
+            transAnestStore.btnUpdateMedicamentos=true
+            transAnestStore.btnActualizaMedicamento=false
+
+            this.menuTrans.idMed = "";
+            this.menuTrans.tipoMed = "";
+            this.menuTrans.medicamento = "";
+            this.menuTrans.dosisMed = "";
+            this.menuTrans.unidadMed = "";
+            this.menuTrans.viaMed = "";
+            this.menuTrans.horaInicioMed = "";
+            this.menuTrans.horaFinalMed = "";
+            this.menuTrans.observacionesMed = "";
+
+            this.cerrarModalMed();
+
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.getNuevoMedicamentosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
+            await this.listarMedicamentosTrans()
+        }
+      },
+
+      async validaEliminarMedicamento(idMedicamento: string) {
+        swal
+            .fire({
+            html: "¿Esta seguro de eliminar los datos del medicamento?",
+            icon: "warning",
+            showConfirmButton: true,
+            showCancelButton: true,
+            toast: true,
+            })
+            .then((result) => {
+            if (result.isConfirmed) {
+                this.eliminarMedicamento(idMedicamento);
+            }
+            });
+      },
+
+      async eliminarMedicamento(idMedicamento: string) {
+        await transAnestStore.deleteMedicamento(idMedicamento);          
+
+        this.menuTrans.idMed = "";
+        this.menuTrans.tipoMed = "";
+        this.menuTrans.medicamento = "";
+        this.menuTrans.dosisMed = "";
+        this.menuTrans.unidadMed = "";
+        this.menuTrans.viaMed = "";
+        this.menuTrans.horaInicioMed = "";
+        this.menuTrans.horaFinalMed = "";
+        this.menuTrans.observacionesMed = "";
+
+        transAnestStore.btnAddMedicamentos=false
+        transAnestStore.btnUpdateMedicamentos=true
+        transAnestStore.btnActualizaMedicamento=false
+
+        this.cerrarModalMed();
+
+        if(preIdStore.nuevoRegistroPaciente == false){
+          await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
+        }else if(preIdStore.nuevoRegistroPaciente == true){        
+          await transAnestStore.getNuevoMedicamentosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        }
+        await this.listarMedicamentosTrans()
       },
 
       //Métodos gestión de relevo
@@ -6051,24 +6046,95 @@ export default defineComponent({
 
       async actualizarRelevos(r_horaRelevo: string, r_tipoRel: string, r_matriculaRel: string, 
                             r_anestesiologoRel: string, r_observacionesRel: string) {
-          if (this.menuTrans.horaRelevo == "" || this.menuTrans.horaRelevo == undefined) {
-                swal.fire({
-                title: "Ingrese la hora del relevo",
-                icon: "warning",
-                showConfirmButton: false,
-                showCloseButton: true,
-                toast: true,
-                timer: 2500,
-                timerProgressBar: true,
-                position: "top-end",
-                });
-          } else {
-            if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.updateRelevos(r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel, preIdStore.pacienteID._id);
-            }else if(preIdStore.nuevoRegistroPaciente == true){        
-              await transAnestStore.updateNuevoRelevos(r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel, preIdStore.pacienteID.pid, preIdStore.cirugiaID);
-            }            
-            
+        if (this.menuTrans.horaRelevo == "" || this.menuTrans.horaRelevo == undefined) {
+              swal.fire({
+              title: "Ingrese la hora del relevo",
+              icon: "warning",
+              showConfirmButton: false,
+              showCloseButton: true,
+              toast: true,
+              timer: 2500,
+              timerProgressBar: true,
+              position: "top-end",
+              });
+        } else {
+          if(preIdStore.nuevoRegistroPaciente == false){
+            await transAnestStore.updateRelevos(r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel, preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){        
+            await transAnestStore.updateNuevoRelevos(r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel, preIdStore.pacienteID.pid, preIdStore.cirugiaID);
+          }            
+          
+          this.menuTrans.horaRelevo = "";
+          this.menuTrans.tipoRel= "RELEVO";
+          this.menuTrans.matriculaRel = "";
+          this.menuTrans.anestesiologoRel = "";
+          this.menuTrans.observacionesRel = ""; 
+
+          this.cerrarModalRel();
+
+          if(preIdStore.nuevoRegistroPaciente == false){
+            await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){        
+            await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+          }
+
+          if(preIdStore.nuevoRegistroPaciente == false){
+            await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){        
+            await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+          }
+
+        }
+      },
+
+      async cambiarBtnActualizarRelevo(id) {
+        transAnestStore.btnAddRelevos=false
+        transAnestStore.btnUpdateRelevos=false
+        transAnestStore.btnActualizaRelevo=true
+
+        await transAnestStore.getRelevo(id);
+
+        this.menuTrans.idRelevo = transAnestStore.relevos.relevoCx[0]._id;
+        this.menuTrans.horaRelevo = transAnestStore.relevos.relevoCx[0].horaRelevo;
+        this.menuTrans.tipoRel = transAnestStore.relevos.relevoCx[0].tipoRel;
+        this.menuTrans.matriculaRel = transAnestStore.relevos.relevoCx[0].matriculaRel;
+        this.menuTrans.anestesiologoRel = transAnestStore.relevos.relevoCx[0].anestesiologoRel;
+        this.menuTrans.observacionesRel = transAnestStore.relevos.relevoCx[0].observacionesRel;
+
+        if(preIdStore.nuevoRegistroPaciente == false){
+          await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+        }else if(preIdStore.nuevoRegistroPaciente == true){        
+          await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        }
+
+        if(preIdStore.nuevoRegistroPaciente == false){
+          await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+        }else if(preIdStore.nuevoRegistroPaciente == true){        
+          await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        }
+      },
+
+      async actualizarRelevo() {
+        if (this.menuTrans.horaRelevo == "") {
+            swal.fire({
+            title: "Ingrese la hora del relevo",
+            icon: "warning",
+            showConfirmButton: false,
+            showCloseButton: true,
+            toast: true,
+            timer: 2500,
+            timerProgressBar: true,
+            position: "top-end",
+            });
+        } else {
+            await transAnestStore.updateRelevo(this.menuTrans.idRelevo, this.menuTrans.horaRelevo, this.menuTrans.tipoRel, this.menuTrans.matriculaRel,
+                                                this.menuTrans.anestesiologoRel, this.menuTrans.observacionesRel);
+
+            transAnestStore.btnAddRelevos=false
+            transAnestStore.btnUpdateRelevos=true
+            transAnestStore.btnActualizaRelevo=false
+
+            this.menuTrans.idRelevo = "";
             this.menuTrans.horaRelevo = "";
             this.menuTrans.tipoRel= "RELEVO";
             this.menuTrans.matriculaRel = "";
@@ -6088,124 +6154,52 @@ export default defineComponent({
             }else if(preIdStore.nuevoRegistroPaciente == true){        
               await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
             }
-
-          }
-      },
-
-      async cambiarBtnActualizarRelevo(id) {
-            transAnestStore.btnAddRelevos=false
-            transAnestStore.btnUpdateRelevos=false
-            transAnestStore.btnActualizaRelevo=true
-
-            await transAnestStore.getRelevo(id);
-
-            this.menuTrans.idRelevo = transAnestStore.relevos.relevoCx[0]._id;
-            this.menuTrans.horaRelevo = transAnestStore.relevos.relevoCx[0].horaRelevo;
-            this.menuTrans.tipoRel = transAnestStore.relevos.relevoCx[0].tipoRel;
-            this.menuTrans.matriculaRel = transAnestStore.relevos.relevoCx[0].matriculaRel;
-            this.menuTrans.anestesiologoRel = transAnestStore.relevos.relevoCx[0].anestesiologoRel;
-            this.menuTrans.observacionesRel = transAnestStore.relevos.relevoCx[0].observacionesRel;
-
-            if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
-            }else if(preIdStore.nuevoRegistroPaciente == true){        
-              await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-            }
-
-            if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.getEventosList(preIdStore.pacienteID._id);
-            }else if(preIdStore.nuevoRegistroPaciente == true){        
-              await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-            }
-      },
-
-      async actualizarRelevo() {
-            if (this.menuTrans.horaRelevo == "") {
-                swal.fire({
-                title: "Ingrese la hora del relevo",
-                icon: "warning",
-                showConfirmButton: false,
-                showCloseButton: true,
-                toast: true,
-                timer: 2500,
-                timerProgressBar: true,
-                position: "top-end",
-                });
-            } else {
-                await transAnestStore.updateRelevo(this.menuTrans.idRelevo, this.menuTrans.horaRelevo, this.menuTrans.tipoRel, this.menuTrans.matriculaRel,
-                                                    this.menuTrans.anestesiologoRel, this.menuTrans.observacionesRel);
-
-                transAnestStore.btnAddRelevos=false
-                transAnestStore.btnUpdateRelevos=true
-                transAnestStore.btnActualizaRelevo=false
-
-                this.menuTrans.idRelevo = "";
-                this.menuTrans.horaRelevo = "";
-                this.menuTrans.tipoRel= "RELEVO";
-                this.menuTrans.matriculaRel = "";
-                this.menuTrans.anestesiologoRel = "";
-                this.menuTrans.observacionesRel = ""; 
-
-                this.cerrarModalRel();
-
-                if(preIdStore.nuevoRegistroPaciente == false){
-                  await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
-                }else if(preIdStore.nuevoRegistroPaciente == true){        
-                  await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-                }
-
-                if(preIdStore.nuevoRegistroPaciente == false){
-                  await transAnestStore.getEventosList(preIdStore.pacienteID._id);
-                }else if(preIdStore.nuevoRegistroPaciente == true){        
-                  await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-                }
-            }
+        }
       },
 
       async validaEliminarRelevos(idRelevo: string) {
-            swal
-                .fire({
-                html: "¿Esta seguro de eliminar los datos del relevo?",
-                icon: "warning",
-                showConfirmButton: true,
-                showCancelButton: true,
-                toast: true,
-                })
-                .then((result) => {
-                if (result.isConfirmed) {
-                    this.eliminarRelevo(idRelevo);
-                }
-                });
+        swal
+            .fire({
+            html: "¿Esta seguro de eliminar los datos del relevo?",
+            icon: "warning",
+            showConfirmButton: true,
+            showCancelButton: true,
+            toast: true,
+            })
+            .then((result) => {
+            if (result.isConfirmed) {
+                this.eliminarRelevo(idRelevo);
+            }
+            });
       },
 
       async eliminarRelevo(idRelevo: string) {
+        await transAnestStore.deleteRelevo(idRelevo);
 
-          await transAnestStore.deleteRelevo(idRelevo);
+        this.menuTrans.idRelevo = "";
+        this.menuTrans.horaRelevo = "";
+        this.menuTrans.tipoRel= "RELEVO";
+        this.menuTrans.matriculaRel = "";
+        this.menuTrans.anestesiologoRel = "";
+        this.menuTrans.observacionesRel = "";
 
-          this.menuTrans.idRelevo = "";
-          this.menuTrans.horaRelevo = "";
-          this.menuTrans.tipoRel= "RELEVO";
-          this.menuTrans.matriculaRel = "";
-          this.menuTrans.anestesiologoRel = "";
-          this.menuTrans.observacionesRel = "";
+        transAnestStore.btnAddRelevos=false
+        transAnestStore.btnUpdateRelevos=true
+        transAnestStore.btnActualizaRelevo=false
 
-          transAnestStore.btnAddRelevos=false
-          transAnestStore.btnUpdateRelevos=true
-          transAnestStore.btnActualizaRelevo=false
+        this.cerrarModalRel();
 
-          this.cerrarModalRel();
+        if(preIdStore.nuevoRegistroPaciente == false){
+          await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+        }else if(preIdStore.nuevoRegistroPaciente == true){        
+          await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        }
 
-          if(preIdStore.nuevoRegistroPaciente == false){
-            await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
-          }else if(preIdStore.nuevoRegistroPaciente == true){        
-            await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-          }
-
-          if(preIdStore.nuevoRegistroPaciente == false){
-            await transAnestStore.getEventosList(preIdStore.pacienteID._id);
-          }else if(preIdStore.nuevoRegistroPaciente == true){        
-            await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-          }
+        if(preIdStore.nuevoRegistroPaciente == false){
+          await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+        }else if(preIdStore.nuevoRegistroPaciente == true){        
+          await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        }
       },
 
       //Métodos gestión de evento crítico
@@ -6291,138 +6285,28 @@ export default defineComponent({
       },
 
       async actualizarEventos(r_horaEvento: string, e_tipoEve: string, e_detalleEvento: string) {
-          if (this.menuTrans.horaEvento == "" || this.menuTrans.horaEvento == undefined) {
-                swal.fire({
-                title: "Ingrese la hora del evento crítico",
-                icon: "warning",
-                showConfirmButton: false,
-                showCloseButton: true,
-                toast: true,
-                timer: 2500,
-                timerProgressBar: true,
-                position: "top-end",
-                });
-          } else {
-            if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.updateEventos(r_horaEvento, e_tipoEve, e_detalleEvento, preIdStore.pacienteID._id);
-            }else if(preIdStore.nuevoRegistroPaciente == true){        
-              await transAnestStore.updateNuevoEventos(r_horaEvento, e_tipoEve, e_detalleEvento, preIdStore.pacienteID.pid, preIdStore.cirugiaID);
-            }              
-            
-            this.menuTrans.horaEvento = "";
-            this.menuTrans.tipoEve= "EVENTO";
-            this.menuTrans.detalleEvento = "";
-            
-            this.cerrarModalEve();
-
-            if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
-            }else if(preIdStore.nuevoRegistroPaciente == true){        
-              await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-            }
-
-            if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.getEventosList(preIdStore.pacienteID._id);
-            }else if(preIdStore.nuevoRegistroPaciente == true){        
-              await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-            }
-          }
-      },
-
-      async cambiarBtnActualizarEvento(id) {
-            transAnestStore.btnAddEventos=false
-            transAnestStore.btnUpdateEventos=false
-            transAnestStore.btnActualizaEvento=true
-
-            await transAnestStore.getEvento(id);
-
-            this.menuTrans.idEvento = transAnestStore.eventos.evCriticoCx[0]._id;
-            this.menuTrans.horaEvento = transAnestStore.eventos.evCriticoCx[0].horaEvento;
-            this.menuTrans.tipoEve = transAnestStore.eventos.evCriticoCx[0].tipoEve;
-            this.menuTrans.detalleEvento = transAnestStore.eventos.evCriticoCx[0].detalleEvento;
-
-            if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
-            }else if(preIdStore.nuevoRegistroPaciente == true){        
-              await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-            }
-
-            if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.getEventosList(preIdStore.pacienteID._id);
-            }else if(preIdStore.nuevoRegistroPaciente == true){        
-              await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-            }
-      },
-
-      async actualizarEvento() {
-            if (this.menuTrans.horaEvento == "") {
-                swal.fire({
-                title: "Ingrese la hora del evento crítico",
-                icon: "warning",
-                showConfirmButton: false,
-                showCloseButton: true,
-                toast: true,
-                timer: 2500,
-                timerProgressBar: true,
-                position: "top-end",
-                });
-            } else {
-                await transAnestStore.updateEvento(this.menuTrans.idEvento, this.menuTrans.horaEvento, this.menuTrans.tipoEve, this.menuTrans.detalleEvento);
-
-                transAnestStore.btnAddEventos=false
-                transAnestStore.btnUpdateEventos=true
-                transAnestStore.btnActualizaEvento=false
-
-                this.menuTrans.idEvento = "";
-                this.menuTrans.horaEvento = "";
-                this.menuTrans.tipoEve= "EVENTO";
-                this.menuTrans.detalleEvento = ""; 
-
-                this.cerrarModalEve();
-
-                if(preIdStore.nuevoRegistroPaciente == false){
-                  await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
-                }else if(preIdStore.nuevoRegistroPaciente == true){        
-                  await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-                }
-
-                if(preIdStore.nuevoRegistroPaciente == false){
-                  await transAnestStore.getEventosList(preIdStore.pacienteID._id);
-                }else if(preIdStore.nuevoRegistroPaciente == true){        
-                  await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-                }
-            }
-      },
-
-      async validaEliminarEventos(idEvento: string) {
-            swal
-                .fire({
-                  html: "¿Esta seguro de eliminar los datos del evento crítico?",
-                  icon: "warning",
-                  showConfirmButton: true,
-                  showCancelButton: true,
-                  toast: true,
-                  })
-                  .then((result) => {
-                  if (result.isConfirmed) {
-                      this.eliminarEvento(idEvento);
-                  }
-                });
-      },
-
-      async eliminarEvento(idEvento: string) {
-
-          await transAnestStore.deleteEvento(idEvento);
-
-          this.menuTrans.idEvento = "";
+        if (this.menuTrans.horaEvento == "" || this.menuTrans.horaEvento == undefined) {
+              swal.fire({
+              title: "Ingrese la hora del evento crítico",
+              icon: "warning",
+              showConfirmButton: false,
+              showCloseButton: true,
+              toast: true,
+              timer: 2500,
+              timerProgressBar: true,
+              position: "top-end",
+              });
+        } else {
+          if(preIdStore.nuevoRegistroPaciente == false){
+            await transAnestStore.updateEventos(r_horaEvento, e_tipoEve, e_detalleEvento, preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){        
+            await transAnestStore.updateNuevoEventos(r_horaEvento, e_tipoEve, e_detalleEvento, preIdStore.pacienteID.pid, preIdStore.cirugiaID);
+          }              
+          
           this.menuTrans.horaEvento = "";
           this.menuTrans.tipoEve= "EVENTO";
           this.menuTrans.detalleEvento = "";
-
-          transAnestStore.btnAddEventos=false
-          transAnestStore.btnUpdateEventos=true
-          transAnestStore.btnActualizaEvento=false
-
+          
           this.cerrarModalEve();
 
           if(preIdStore.nuevoRegistroPaciente == false){
@@ -6436,6 +6320,115 @@ export default defineComponent({
           }else if(preIdStore.nuevoRegistroPaciente == true){        
             await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
           }
+        }
+      },
+
+      async cambiarBtnActualizarEvento(id) {
+        transAnestStore.btnAddEventos=false
+        transAnestStore.btnUpdateEventos=false
+        transAnestStore.btnActualizaEvento=true
+
+        await transAnestStore.getEvento(id);
+
+        this.menuTrans.idEvento = transAnestStore.eventos.evCriticoCx[0]._id;
+        this.menuTrans.horaEvento = transAnestStore.eventos.evCriticoCx[0].horaEvento;
+        this.menuTrans.tipoEve = transAnestStore.eventos.evCriticoCx[0].tipoEve;
+        this.menuTrans.detalleEvento = transAnestStore.eventos.evCriticoCx[0].detalleEvento;
+
+        if(preIdStore.nuevoRegistroPaciente == false){
+          await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+        }else if(preIdStore.nuevoRegistroPaciente == true){        
+          await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        }
+
+        if(preIdStore.nuevoRegistroPaciente == false){
+          await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+        }else if(preIdStore.nuevoRegistroPaciente == true){        
+          await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        }
+      },
+
+      async actualizarEvento() {
+        if (this.menuTrans.horaEvento == "") {
+            swal.fire({
+            title: "Ingrese la hora del evento crítico",
+            icon: "warning",
+            showConfirmButton: false,
+            showCloseButton: true,
+            toast: true,
+            timer: 2500,
+            timerProgressBar: true,
+            position: "top-end",
+            });
+        } else {
+            await transAnestStore.updateEvento(this.menuTrans.idEvento, this.menuTrans.horaEvento, this.menuTrans.tipoEve, this.menuTrans.detalleEvento);
+
+            transAnestStore.btnAddEventos=false
+            transAnestStore.btnUpdateEventos=true
+            transAnestStore.btnActualizaEvento=false
+
+            this.menuTrans.idEvento = "";
+            this.menuTrans.horaEvento = "";
+            this.menuTrans.tipoEve= "EVENTO";
+            this.menuTrans.detalleEvento = ""; 
+
+            this.cerrarModalEve();
+
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
+
+            if(preIdStore.nuevoRegistroPaciente == false){
+              await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){        
+              await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
+        }
+      },
+
+      async validaEliminarEventos(idEvento: string) {
+        swal
+            .fire({
+              html: "¿Esta seguro de eliminar los datos del evento crítico?",
+              icon: "warning",
+              showConfirmButton: true,
+              showCancelButton: true,
+              toast: true,
+              })
+              .then((result) => {
+              if (result.isConfirmed) {
+                  this.eliminarEvento(idEvento);
+              }
+            });
+      },
+
+      async eliminarEvento(idEvento: string) {
+        await transAnestStore.deleteEvento(idEvento);
+
+        this.menuTrans.idEvento = "";
+        this.menuTrans.horaEvento = "";
+        this.menuTrans.tipoEve= "EVENTO";
+        this.menuTrans.detalleEvento = "";
+
+        transAnestStore.btnAddEventos=false
+        transAnestStore.btnUpdateEventos=true
+        transAnestStore.btnActualizaEvento=false
+
+        this.cerrarModalEve();
+
+        if(preIdStore.nuevoRegistroPaciente == false){
+          await transAnestStore.getRelevosList(preIdStore.pacienteID._id);
+        }else if(preIdStore.nuevoRegistroPaciente == true){        
+          await transAnestStore.getNuevoRelevosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        }
+
+        if(preIdStore.nuevoRegistroPaciente == false){
+          await transAnestStore.getEventosList(preIdStore.pacienteID._id);
+        }else if(preIdStore.nuevoRegistroPaciente == true){        
+          await transAnestStore.getNuevoEventosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        }
       },
 
       // Eventos de Monitoreo
@@ -6443,7 +6436,6 @@ export default defineComponent({
         transAnestStore.envDat = true;
         this.btnCambioMonitor = true;
         this.siAquisigo();
-        transAnestStore.getIniciaMonitoreo();
         this.iniRecepDatos();
         this.capturaGrid();
       },
@@ -6488,7 +6480,6 @@ export default defineComponent({
 
           //Ordena los valores obtenidos de los segmentos 4 y 5
           for (let index = 0; index < valorSegmentos.length; index++) {
-            
             // Obtiene los valores de los datos del MSV para guardarlos en el grid
             switch (valorSegmentos[index].segmento4) {
               case '174147842': // FC
@@ -6663,6 +6654,16 @@ export default defineComponent({
         transAnestStore.envDat = false;
         transAnestStore.datosMSV = null;
         clearInterval(this.intervalId);
+        clearInterval(this.saveGrid);
+        
+        if(preIdStore.nuevoRegistroPaciente == false){
+          this.transAnestStore.saveDatosMSV(this.gridBD, preIdStore.pacienteID._id);
+        }else if(preIdStore.nuevoRegistroPaciente == true){
+          this.transAnestStore.saveNuevoDatosMSV(this.gridBD, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        }
+      
+        this.guardaDatosMSV = 0;
+        this.gridBD = [];
       },
       
       siAquisigo(){
@@ -6679,20 +6680,23 @@ export default defineComponent({
       async capturaGrid(){
         this.saveGrid = await setInterval(() => {
           this.grid.push(this.hl7mess[this.hl7mess.length - 1]);
+          this.gridBD.push(this.hl7mess[this.hl7mess.length - 1]);
           this.hl7mess = [];
 
-          this.guardaDatosMSV=this.guardaDatosMSV +1;
+          this.guardaDatosMSV = this.guardaDatosMSV +1;
           
           //Guardar datos del MSV en la BD
-          // if(this.guardaDatosMSV == 5){
-            // console.log("Entro");
-          if(preIdStore.nuevoRegistroPaciente == false){
-            this.transAnestStore.saveDatosMSV(this.grid, preIdStore.pacienteID._id);
-          }else if(preIdStore.nuevoRegistroPaciente == true){         
-            this.transAnestStore.saveNuevoDatosMSV(this.grid, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-          }          
-            // this.guardaDatosMSV = 0;
-          // }
+          if(this.guardaDatosMSV == 5){
+            if(preIdStore.nuevoRegistroPaciente == false){
+              this.transAnestStore.saveDatosMSV(this.gridBD, preIdStore.pacienteID._id);
+            }else if(preIdStore.nuevoRegistroPaciente == true){
+              this.transAnestStore.saveNuevoDatosMSV(this.gridBD, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+            }
+          
+            this.guardaDatosMSV = 0;
+            this.gridBD = [];
+          }
+
         }, 1000 * 60);
       },
 

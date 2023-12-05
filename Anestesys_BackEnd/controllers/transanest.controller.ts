@@ -2,10 +2,6 @@ import { Response } from "express";
 import { MenuTrans } from "../models/TransAnestesico";
 import { UpdateResult } from "mongodb";
 
-// interface TiempoResult {
-//     tiemposQX: any[];
-// };
-
 /******************* Menu Trans Anestesico *******************/
 export const saveMenuTrans = async (req: any, res: Response) => {
     try {
@@ -547,42 +543,88 @@ export const saveNuevoTiemposQX = async (req: any, res: Response) => {
 };
 
 /* Guardado Datos MSV */
+/* Para un nuevo paciente */
 export const saveDatosMSV = async (req: any, res: Response) => {
     try {
         const { pid, cxid } = req.params;
-        const { datosMSV } = req.body;                
+        const { datosMSV } = req.body;
+
+        const dataToInsert = datosMSV.map((data: { FC: any; Pulso: any;
+                                                   PAS: any; PAD: any;
+                                                   PAM: any; SpO2: any;
+                                                   EtCO2: any; Temp1: any;
+                                                   Temp2: any; PVC: any;
+                                                   PAS_IN: any; PAD_IN: any;
+                                                   PAM_IN: any; FiCO2: any;
+                                                   FR: any; HoraGeneracion: any; }) => ({
+            FC: data.FC,
+            Pulso: data.Pulso,
+            PAS: data.PAS,
+            PAD: data.PAD,
+            PAM: data.PAM,
+            SpO2: data.SpO2,
+            EtCO2: data.EtCO2,
+            Temp1: data.Temp1,
+            Temp2: data.Temp2,
+            PVC: data.PVC,
+            PAS_IN: data.PAS_IN,
+            PAD_IN: data.PAD_IN,
+            PAM_IN: data.PAM_IN,
+            FiCO2: data.FiCO2,
+            FR: data.FR,
+            HoraGeneracion: data.HoraGeneracion,
+        }));
+
         const menuTrans = await MenuTrans.findOneAndUpdate(
             { pid: pid, cxid: cxid },
-            { $push:{
-                    datosMSV: {
-                        FC: datosMSV[0], Pulso: datosMSV[1], PAS: datosMSV[2], PAD: datosMSV[3], PAM: datosMSV[4], SpO2: datosMSV[5], EtCO2: datosMSV[6], Temp1: datosMSV[7], 
-                        Temp2: datosMSV[8], PVC: datosMSV[9], PAS_IN: datosMSV[10], PAD_IN: datosMSV[11], PAM_IN: datosMSV[12], FiCO2: datosMSV[13], FR: datosMSV[14], 
-                        HoraGeneracion: datosMSV[15]
-                    }
-                }
-            });
+            { $addToSet: { datosMSV: { $each: dataToInsert } } } );
+      
         return res.json({ menuTrans });
     } catch (error) {
-        return res.status(500).json({Error: 'Error de servidor'});
+        console.log(error);
+        return res.status(500).json({ Error: 'Error de servidor' });
     }
 };
 
+/* Para una nueva cirugía de un paciente ya existente */
 export const saveNuevoDatosMSV = async (req: any, res: Response) => {
     try {
         const { pid, cxid } = req.params;
-        const { datosMSV } = req.body;                
+        const { datosMSV } = req.body;
+        
+        const dataToInsert = datosMSV.map((data: { FC: any; Pulso: any;
+                                                   PAS: any; PAD: any;
+                                                   PAM: any; SpO2: any;
+                                                   EtCO2: any; Temp1: any;
+                                                   Temp2: any; PVC: any;
+                                                   PAS_IN: any; PAD_IN: any;
+                                                   PAM_IN: any; FiCO2: any;
+                                                   FR: any; HoraGeneracion: any; }) => ({
+                FC: data.FC,
+                Pulso: data.Pulso,
+                PAS: data.PAS,
+                PAD: data.PAD,
+                PAM: data.PAM,
+                SpO2: data.SpO2,
+                EtCO2: data.EtCO2,
+                Temp1: data.Temp1,
+                Temp2: data.Temp2,
+                PVC: data.PVC,
+                PAS_IN: data.PAS_IN,
+                PAD_IN: data.PAD_IN,
+                PAM_IN: data.PAM_IN,
+                FiCO2: data.FiCO2,
+                FR: data.FR,
+                HoraGeneracion: data.HoraGeneracion,
+            }));
+
         const menuTrans = await MenuTrans.findOneAndUpdate(
             { pid: pid, cxid: cxid },
-            { $push:{
-                    datosMSV: {
-                        FC: datosMSV[0], Pulso: datosMSV[1], PAS: datosMSV[2], PAD: datosMSV[3], PAM: datosMSV[4], SpO2: datosMSV[5], EtCO2: datosMSV[6], Temp1: datosMSV[7], 
-                        Temp2: datosMSV[8], PVC: datosMSV[9], PAS_IN: datosMSV[10], PAD_IN: datosMSV[11], PAM_IN: datosMSV[12], FiCO2: datosMSV[13], FR: datosMSV[14], 
-                        HoraGeneracion: datosMSV[15]
-                    }
-                }
-            });
+            { $addToSet:{ datosMSV: { $each: dataToInsert } } });
+            
         return res.json({ menuTrans });
     } catch (error) {
+        console.log(error);
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };

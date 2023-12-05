@@ -107,24 +107,26 @@ const menuTransSchema = new Schema({
         detalleEvento: { type: String },
     }],
 
-    datosMSV: [{
-        FC: {type:String},
-        Pulso: {type:String},
-        PAS: {type:String},
-        PAD: {type:String},
-        PAM: {type:String},
-        SpO2: {type:String},
-        EtCO2: {type:String},
-        Temp1: {type:String},
-        Temp2: {type:String},
-        PVC: {type:String},
-        PAS_IN: {type:String},
-        PAD_IN: {type:String},
-        PAM_IN: {type:String},
-        FiCO2: {type:String},
-        FR: {type:String},
-        HoraGeneracion: {type:String}
-    }]
+    datosMSV: [
+        {
+            FC: {type:String},
+            Pulso: {type:String},
+            PAS: {type:String},
+            PAD: {type:String},
+            PAM: {type:String},
+            SpO2: {type:String},
+            EtCO2: {type:String},
+            Temp1: {type:String},
+            Temp2: {type:String},
+            PVC: {type:String},
+            PAS_IN: {type:String},
+            PAD_IN: {type:String},
+            PAM_IN: {type:String},
+            FiCO2: {type:String},
+            FR: {type:String},
+            HoraGeneracion: {type:String}
+        }
+    ]
 });
 
 export const MenuTrans = model('MenuTrans', menuTransSchema);

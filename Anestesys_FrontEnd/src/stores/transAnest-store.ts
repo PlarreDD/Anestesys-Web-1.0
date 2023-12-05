@@ -1005,51 +1005,86 @@ export const useTransAnestStore = defineStore('transAn', {
         },
 
         async saveDatosMSV(grid:any, pid:string){
-            await apiAxios({
-            url: `http://localhost:5000/trans/msvData/${String(pid)}`,
-            method: "PUT",
-            headers: {
-                Authorization: "Bearer " + userStore.token,
-            },                        
-            data: {
-                datosMSV: [
-                    grid[grid.length -1].datos[0].valor, grid[grid.length -1].datos[1].valor, grid[grid.length -1].datos[2].valor,
-                    grid[grid.length -1].datos[3].valor, grid[grid.length -1].datos[4].valor, grid[grid.length -1].datos[5].valor,
-                    grid[grid.length -1].datos[6].valor, grid[grid.length -1].datos[7].valor, grid[grid.length -1].datos[8].valor,
-                    grid[grid.length -1].datos[9].valor, grid[grid.length -1].datos[10].valor,grid[grid.length -1].datos[11].valor,
-                    grid[grid.length -1].datos[12].valor, grid[grid.length -1].datos[13].valor, grid[grid.length -1].datos[14].valor,
-                    grid[grid.length -1].horaGeneracion,                
-                ]
-            },
-            })
-            .then((res: any) => {            
-            })
-                .catch((e: any) => {
-            });
+            const objectsToUpload = Math.min(5, grid.length);
+            const dataToUpload = [];
+            
+            for (let i = 0; i < objectsToUpload; i++) {
+                dataToUpload.push({
+                    FC: grid[grid.length - 1 - i].datos[0].valor,
+                    Pulso: grid[grid.length - 1 - i].datos[1].valor,
+                    PAS: grid[grid.length - 1 - i].datos[2].valor,
+                    PAD: grid[grid.length - 1 - i].datos[3].valor,
+                    PAM: grid[grid.length - 1 - i].datos[4].valor,
+                    SpO2: grid[grid.length - 1 - i].datos[5].valor,
+                    EtCO2: grid[grid.length - 1 - i].datos[6].valor,
+                    Temp1: grid[grid.length - 1 - i].datos[7].valor,
+                    Temp2: grid[grid.length - 1 - i].datos[8].valor,
+                    PVC: grid[grid.length - 1 - i].datos[9].valor,
+                    PAS_IN: grid[grid.length - 1 - i].datos[10].valor,
+                    PAD_IN: grid[grid.length - 1 - i].datos[11].valor,
+                    PAM_IN: grid[grid.length - 1 - i].datos[12].valor,
+                    FiCO2: grid[grid.length - 1 - i].datos[13].valor,
+                    FR: grid[grid.length - 1 - i].datos[14].valor,
+                    HoraGeneracion: grid[grid.length - 1 - i].horaGeneracion,
+                });
+            }
+            
+            try {
+                await apiAxios({
+                    url: `http://localhost:5000/trans/msvData/${String(pid)}`,
+                    method: "PUT",
+                    headers: {
+                        Authorization: "Bearer " + userStore.token,
+                    },
+                    data: {
+                        datosMSV: dataToUpload,
+                    },
+                });
+            } catch (error) {
+                console.error("Error al subir datosMSV:", error);
+            }
         },
 
         async saveNuevoDatosMSV(grid:any, pid:string, cxid:string){
-            await apiAxios({
-            url: `http://localhost:5000/trans/msvData/add/${String(pid)}/${String(cxid)}`,
-            method: "PUT",
-            headers: {
-                Authorization: "Bearer " + userStore.token,
-            },                        
-            data: {
-                datosMSV: [
-                    grid[grid.length -1].datos[0].valor, grid[grid.length -1].datos[1].valor, grid[grid.length -1].datos[2].valor,
-                    grid[grid.length -1].datos[3].valor, grid[grid.length -1].datos[4].valor, grid[grid.length -1].datos[5].valor,
-                    grid[grid.length -1].datos[6].valor, grid[grid.length -1].datos[7].valor, grid[grid.length -1].datos[8].valor,
-                    grid[grid.length -1].datos[9].valor, grid[grid.length -1].datos[10].valor,grid[grid.length -1].datos[11].valor,
-                    grid[grid.length -1].datos[12].valor, grid[grid.length -1].datos[13].valor, grid[grid.length -1].datos[14].valor,
-                    grid[grid.length -1].horaGeneracion,                
-                ]
-            },
-            })
-            .then((res: any) => {            
-            })
-                .catch((e: any) => {
-            });
+            const objectsToUpload = Math.min(5, grid.length);
+            const dataToUpload = [];
+
+            for (let i = 0; i < objectsToUpload; i++) {
+                dataToUpload.push({
+                    FC: grid[grid.length - 1 - i].datos[0].valor,
+                    Pulso: grid[grid.length - 1 - i].datos[1].valor,
+                    PAS: grid[grid.length - 1 - i].datos[2].valor,
+                    PAD: grid[grid.length - 1 - i].datos[3].valor,
+                    PAM: grid[grid.length - 1 - i].datos[4].valor,
+                    SpO2: grid[grid.length - 1 - i].datos[5].valor,
+                    EtCO2: grid[grid.length - 1 - i].datos[6].valor,
+                    Temp1: grid[grid.length - 1 - i].datos[7].valor,
+                    Temp2: grid[grid.length - 1 - i].datos[8].valor,
+                    PVC: grid[grid.length - 1 - i].datos[9].valor,
+                    PAS_IN: grid[grid.length - 1 - i].datos[10].valor,
+                    PAD_IN: grid[grid.length - 1 - i].datos[11].valor,
+                    PAM_IN: grid[grid.length - 1 - i].datos[12].valor,
+                    FiCO2: grid[grid.length - 1 - i].datos[13].valor,
+                    FR: grid[grid.length - 1 - i].datos[14].valor,
+                    HoraGeneracion: grid[grid.length - 1 - i].horaGeneracion,
+                });
+            }
+
+            try {
+                await apiAxios({
+                    url: `http://localhost:5000/trans/msvData/add/${String(pid)}/${String(cxid)}`,
+                    method: "PUT",
+                    headers: {
+                        Authorization: "Bearer " + userStore.token,
+                    },                        
+                    data: {
+                        datosMSV: dataToUpload,
+                    },
+                })
+            } catch (error) {
+                console.error("Error al subir datosMSV:", error);
+            }
+
         },
 
         // Gestión de medicamentos
