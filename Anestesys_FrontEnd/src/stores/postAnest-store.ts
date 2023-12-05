@@ -152,7 +152,7 @@ export const usePostAnestStore = defineStore('postAn', {
         ObservacionesAlta:ref(null),
         NombreAnestesiologo:ref(null),
         FechaAlta:ref(null),
-        HoraAlta:ref(null)
+        HoraAlta:ref(null),
     }),
 
     actions: {

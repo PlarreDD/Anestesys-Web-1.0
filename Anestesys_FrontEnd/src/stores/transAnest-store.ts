@@ -1007,28 +1007,28 @@ export const useTransAnestStore = defineStore('transAn', {
         async saveDatosMSV(grid:any, pid:string){
             const objectsToUpload = Math.min(5, grid.length);
             const dataToUpload = [];
-            
-            for (let i = 0; i < objectsToUpload; i++) {
+
+            for (let i = objectsToUpload; i > 0; i--) {
                 dataToUpload.push({
-                    FC: grid[grid.length - 1 - i].datos[0].valor,
-                    Pulso: grid[grid.length - 1 - i].datos[1].valor,
-                    PAS: grid[grid.length - 1 - i].datos[2].valor,
-                    PAD: grid[grid.length - 1 - i].datos[3].valor,
-                    PAM: grid[grid.length - 1 - i].datos[4].valor,
-                    SpO2: grid[grid.length - 1 - i].datos[5].valor,
-                    EtCO2: grid[grid.length - 1 - i].datos[6].valor,
-                    Temp1: grid[grid.length - 1 - i].datos[7].valor,
-                    Temp2: grid[grid.length - 1 - i].datos[8].valor,
-                    PVC: grid[grid.length - 1 - i].datos[9].valor,
-                    PAS_IN: grid[grid.length - 1 - i].datos[10].valor,
-                    PAD_IN: grid[grid.length - 1 - i].datos[11].valor,
-                    PAM_IN: grid[grid.length - 1 - i].datos[12].valor,
-                    FiCO2: grid[grid.length - 1 - i].datos[13].valor,
-                    FR: grid[grid.length - 1 - i].datos[14].valor,
-                    HoraGeneracion: grid[grid.length - 1 - i].horaGeneracion,
+                    FC: grid[grid.length - i].datos[0].valor,
+                    Pulso: grid[grid.length - i].datos[1].valor,
+                    PAS: grid[grid.length - i].datos[2].valor,
+                    PAD: grid[grid.length - i].datos[3].valor,
+                    PAM: grid[grid.length - i].datos[4].valor,
+                    SpO2: grid[grid.length - i].datos[5].valor,
+                    EtCO2: grid[grid.length - i].datos[6].valor,
+                    Temp1: grid[grid.length - i].datos[7].valor,
+                    Temp2: grid[grid.length - i].datos[8].valor,
+                    PVC: grid[grid.length - i].datos[9].valor,
+                    PAS_IN: grid[grid.length - i].datos[10].valor,
+                    PAD_IN: grid[grid.length - i].datos[11].valor,
+                    PAM_IN: grid[grid.length - i].datos[12].valor,
+                    FiCO2: grid[grid.length - i].datos[13].valor,
+                    FR: grid[grid.length - i].datos[14].valor,
+                    HoraGeneracion: grid[grid.length - i].horaGeneracion,
                 });
             }
-            
+
             try {
                 await apiAxios({
                     url: `http://localhost:5000/trans/msvData/${String(pid)}`,
@@ -1051,22 +1051,22 @@ export const useTransAnestStore = defineStore('transAn', {
 
             for (let i = 0; i < objectsToUpload; i++) {
                 dataToUpload.push({
-                    FC: grid[grid.length - 1 - i].datos[0].valor,
-                    Pulso: grid[grid.length - 1 - i].datos[1].valor,
-                    PAS: grid[grid.length - 1 - i].datos[2].valor,
-                    PAD: grid[grid.length - 1 - i].datos[3].valor,
-                    PAM: grid[grid.length - 1 - i].datos[4].valor,
-                    SpO2: grid[grid.length - 1 - i].datos[5].valor,
-                    EtCO2: grid[grid.length - 1 - i].datos[6].valor,
-                    Temp1: grid[grid.length - 1 - i].datos[7].valor,
-                    Temp2: grid[grid.length - 1 - i].datos[8].valor,
-                    PVC: grid[grid.length - 1 - i].datos[9].valor,
-                    PAS_IN: grid[grid.length - 1 - i].datos[10].valor,
-                    PAD_IN: grid[grid.length - 1 - i].datos[11].valor,
-                    PAM_IN: grid[grid.length - 1 - i].datos[12].valor,
-                    FiCO2: grid[grid.length - 1 - i].datos[13].valor,
-                    FR: grid[grid.length - 1 - i].datos[14].valor,
-                    HoraGeneracion: grid[grid.length - 1 - i].horaGeneracion,
+                    FC: grid[grid.length - i].datos[0].valor,
+                    Pulso: grid[grid.length - i].datos[1].valor,
+                    PAS: grid[grid.length - i].datos[2].valor,
+                    PAD: grid[grid.length - i].datos[3].valor,
+                    PAM: grid[grid.length - i].datos[4].valor,
+                    SpO2: grid[grid.length - i].datos[5].valor,
+                    EtCO2: grid[grid.length - i].datos[6].valor,
+                    Temp1: grid[grid.length - i].datos[7].valor,
+                    Temp2: grid[grid.length - i].datos[8].valor,
+                    PVC: grid[grid.length - i].datos[9].valor,
+                    PAS_IN: grid[grid.length - i].datos[10].valor,
+                    PAD_IN: grid[grid.length - i].datos[11].valor,
+                    PAM_IN: grid[grid.length - i].datos[12].valor,
+                    FiCO2: grid[grid.length - i].datos[13].valor,
+                    FR: grid[grid.length - i].datos[14].valor,
+                    HoraGeneracion: grid[grid.length - i].horaGeneracion,
                 });
             }
 

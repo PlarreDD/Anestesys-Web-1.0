@@ -161,8 +161,10 @@ import Nota from '../../components/post/Nota.vue';
 import Recuperacion from "../../components/post/Recuperacion.vue";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
 import { usePreIdStore } from "../../stores/preId-store";
+import { usePostAnestStore } from '@/stores/postAnest-store';
 
 const preIdStore = usePreIdStore();
+const postAnestStore = usePostAnestStore();
 
 export default ({
   data(){
@@ -171,6 +173,7 @@ export default ({
       esRecuperacion: false,
 
       preIdStore,
+      postAnestStore,
 
       mostrarVistaRapida:false
     }
@@ -183,18 +186,11 @@ export default ({
   },
 
   mounted: function() { // Llama el método despues de cargar la página
-    this.validaSeleccionNota()
+    this.validaSeleccionNota();
+    
   },
 
   methods:{
-    // async vaciarInputsPost(){
-    //   const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
-    //   await componenteNotaPA.vaciarInputsNotaPA();
-
-    //   const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
-    //   await componenteRecuperacion.vaciarInputsRecuperacion();
-    // },
-
     async guardarDatos(){
       const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
       await componenteNotaPA.guardarDatosNotaPA();
@@ -237,6 +233,7 @@ export default ({
       preIdStore.VistaRapida=true
       this.mostrarVistaRapida=true
     },
+
     async replegarMenuVistaRapida(){ 
       if(this.mostrarVistaRapida=true)     
         preIdStore.VistaRapida=false
@@ -247,6 +244,16 @@ export default ({
       document.body.scrollTop = 0; // Para safari
       document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
     },
+
+    async svEgreso(){
+      console.log("Si esto jala ya esta lo que me falta y que CSM el dani" +
+        postAnestStore.EgresoTA,
+        postAnestStore.EgresoFC,
+        postAnestStore.EgresoFR,
+        postAnestStore.EgresoTemp,
+        postAnestStore.EgresoPulso,
+        postAnestStore.EgresoSpO2)
+    }
   }
 })
 </script>
