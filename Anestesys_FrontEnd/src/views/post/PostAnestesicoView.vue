@@ -187,7 +187,6 @@ export default ({
 
   mounted: function() { // Llama el método despues de cargar la página
     this.validaSeleccionNota();
-    
   },
 
   methods:{
@@ -201,7 +200,7 @@ export default ({
 
     async validaSeleccionNota(){
       if(document.getElementById("notaP-tab").ariaSelected=="false"){
-        this.esNotaP=false   
+        this.esNotaP=false
       }
       else
         this.esNotaP=true;
@@ -229,13 +228,13 @@ export default ({
       await componenteRecuperacion.guardarDatosRecuperacion();
     },
 
-    async desplegarMenuVistaRapida(){     
+    async desplegarMenuVistaRapida(){
       preIdStore.VistaRapida=true
       this.mostrarVistaRapida=true
     },
 
     async replegarMenuVistaRapida(){ 
-      if(this.mostrarVistaRapida=true)     
+      if(this.mostrarVistaRapida=true)
         preIdStore.VistaRapida=false
         this.mostrarVistaRapida=false
     },
@@ -244,16 +243,6 @@ export default ({
       document.body.scrollTop = 0; // Para safari
       document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
     },
-
-    async svEgreso(){
-      console.log("Si esto jala ya esta lo que me falta y que CSM el dani" +
-        postAnestStore.EgresoTA,
-        postAnestStore.EgresoFC,
-        postAnestStore.EgresoFR,
-        postAnestStore.EgresoTemp,
-        postAnestStore.EgresoPulso,
-        postAnestStore.EgresoSpO2)
-    }
   }
 })
 </script>
