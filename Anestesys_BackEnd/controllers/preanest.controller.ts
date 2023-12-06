@@ -1,7 +1,7 @@
 import { Response } from "express";
 import { PreIdPacientes, PreIdPacientesCx, PreValoracion, ValEstudios, PrePlan, PreNota } from "../models/PreAnestesico";
-import { PostRecupera, PostNotaPA } from "../models/PostAnestesico";
 import { MenuTrans } from "../models/TransAnestesico";
+import { PostRecupera, PostNotaPA } from "../models/PostAnestesico";
 
 /********************************************************************/
 /***************************  ID PACIENTE ***************************/
@@ -19,8 +19,33 @@ export const getExpedientes = async (req: any, res: Response) =>{
 /* Función para listar las cirugías */
 export const getCirugias = async (req: any, res: Response) =>{
     try {
-        const expedientes = await PreIdPacientes.find({id: req.id}) 
-        return res.json({expedientes});
+        const {id} = req.params;
+
+        const pacientes = await PreIdPacientes.find({numExpediente: id})
+        const pacientesCx = await PreIdPacientesCx.find({pid: pacientes[0].id});
+
+        return res.json({pacientes, pacientesCx});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const getPDFData = async (req: any, res: Response) =>{
+    try {
+        const {id} = req.params;
+
+        const pacientesCx = await PreIdPacientesCx.find({ "_id": id });
+        const pacientesVal = await PreValoracion.find({cxid: pacientesCx[0].id});
+        const pacientesEstu = await ValEstudios.find({vid: pacientesVal[0].id});
+        const pacientesPlan = await PrePlan.find({cxid: pacientesCx[0].id});
+        const pacientesNotaPre = await PreNota.find({cxid: pacientesCx[0].id});
+
+        const pacienteTrans = await MenuTrans.find({cxid: pacientesCx[0].id})
+        
+        const pacientesNotaPost = await PostNotaPA.find({cxid: pacientesCx[0].id});
+        const pacientesRecu = await PostRecupera.find({cxid: pacientesCx[0].id});
+
+        return res.json({pacientesCx, pacientesVal, pacientesEstu, pacientesPlan, pacientesNotaPre, pacienteTrans, pacientesNotaPost, pacientesRecu});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
     }
@@ -31,20 +56,8 @@ export const getPaciente = async (req: any, res: Response) => {
     try {
         const {id} = req.params;
 
-        const pacientes = await PreIdPacientes.find({numExpediente: id});
-        const pacientesCx = await PreIdPacientesCx.find({pid: pacientes[0].id});
-        const pacientesVal = await PreValoracion.find({pid: pacientes[0].id});
-        const pacientesEstu = await ValEstudios.find({pid: pacientes[0].id});
-        const pacientesPlan = await PrePlan.find({pid: pacientes[0].id});
-        const pacientesNotaPre = await PreNota.find({pid: pacientes[0].id});
-
-        const pacienteTrans = await MenuTrans.find({pid: pacientes[0].id})
-        
-        const pacientesNotaPost = await PostNotaPA.find({pid: pacientes[0].id});
-        const pacientesRecu = await PostRecupera.find({pid: pacientes[0].id});
-
-        return res.json({pacientes, pacientesCx, pacientesVal, pacientesEstu, pacientesPlan, pacientesNotaPre, 
-                        pacienteTrans, pacientesNotaPost, pacientesRecu});
+        const pacientes = await PreIdPacientes.find({numExpediente: id});        
+        return res.json({pacientes});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
     }
@@ -240,7 +253,7 @@ export const updateNuevoRegistroPaciente = async (req: any, res: Response) => {
 /* Función de registro de valoración pre anetésica */
 export const savePreAntecedentes = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { pid, cxid,
                 // Patológicos
                 antPersPat_Alergias, antPersPat_Quirurgicos,
                 antPersPat_Endocrinologicos, antPersPat_Urologicos,
@@ -277,7 +290,7 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
             } = req.body;
 
         const preval = new PreValoracion({
-            pid: pid,
+            pid: pid, cxid: cxid,
             /* Antecedentes */
             // Personales Patológicos
             antPersPat_Alergias: antPersPat_Alergias,
@@ -872,7 +885,7 @@ export const deleteEstudio = async (req: any, res: Response) => {
 /********************************************************************/
 export const savePrePlan = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { pid, cxid,
                 // Posicion y Cuidados
                 pos_HorasAyuno, pos_AccesoVenoso, pos_PosicionPaciente,
                 pos_PosicionBrazos, pos_Torniquete, pos_AplicacionTorniquete,
@@ -909,7 +922,7 @@ export const savePrePlan = async (req: any, res: Response) => {
                 local_SitioAnestesiaL, local_AnestesicoUtilizado,
                 local_Especificar, } = req.body;
         
-        const preplan = new PrePlan({ pid: pid,
+        const preplan = new PrePlan({ pid: pid, cxid: cxid,
                                       // Posicion y Cuidados
                                       pos_HorasAyuno, pos_AccesoVenoso, pos_PosicionPaciente,
                                       pos_PosicionBrazos, pos_Torniquete, pos_AplicacionTorniquete,
@@ -1213,9 +1226,9 @@ export const updateNuevoPrePlan = async (req: any, res: Response) => {
 /* Función de registro de nota pre anetésica */
 export const saveNota = async (req: any, res: Response) => {
     try {
-        const { obsNotaPre, pid } = req.body;
+        const { obsNotaPre, pid, cxid } = req.body;
         
-        const prenota = new PreNota({ pid: pid,
+        const prenota = new PreNota({ pid: pid, cxid: cxid,
                                       obsNota: obsNotaPre });
         
         await prenota.save();

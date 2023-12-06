@@ -55,7 +55,7 @@ export default defineComponent({
             if(preIdStore.nuevoRegistroPaciente == false){
                 if(preIdStore.actualizarRegNota == false ){
                     // Guardar datos
-                    preIdStore.savePreNota(this.textoNota.nota, preIdStore.pacienteID._id)
+                    preIdStore.savePreNota(this.textoNota.nota, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id)
                     preIdStore.actualizarRegNota = true
                 }else if(preIdStore.actualizarRegNota == true){
                     // Actualizar datos

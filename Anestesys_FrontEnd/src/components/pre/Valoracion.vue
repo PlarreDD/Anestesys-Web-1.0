@@ -1155,6 +1155,7 @@ import { usePostAnestStore } from "@/stores/postAnest-store";
 import { useTransAnestStore } from "@/stores/transAnest-store";
 import type { regValoracion } from "@/interfaces/regPreAnest";
 import swal from "sweetalert2";
+import { Tab } from 'bootstrap';
 
 const preIdStore = usePreIdStore();
 const postStore = usePostAnestStore();
@@ -1258,6 +1259,10 @@ export default defineComponent({
 
             preIdStore.estudios = null
 
+            const tabAntecedentes = document.getElementById('valoracion');
+            const tabObj = new Tab(tabAntecedentes);
+            tabObj.show();
+
             this.enviarDatosValoracion()
         },
 
@@ -1286,9 +1291,10 @@ export default defineComponent({
             if(preIdStore.nuevoRegistroPaciente == false){
                 if(preIdStore.actualizarRegValoracion == false ){
                     // Guardar datos
-                    preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
+                    preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id)
                     preIdStore.actualizarRegValoracion = true
                     this.btnActualizarValoracion = true
+                    
                 }else if(preIdStore.actualizarRegValoracion == true){
                     // Actualizar datos
                     preIdStore.updatePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
@@ -1302,6 +1308,7 @@ export default defineComponent({
                     this.btnActualizarValoracion = true
                     postStore.cirugiaID = preIdStore.cirugiaID
                     transStore.cirugiaID = preIdStore.cirugiaID
+                    
                 }else if(preIdStore.actualizarRegValoracion == true){
                     // Actualizar nuevos datos
                     preIdStore.updateNuevoPreAntecedentes(this.infoValoracion, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
@@ -1320,7 +1327,7 @@ export default defineComponent({
             }
             else{
                 this.btnActualizarValoracion=true
-                await preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
+                await preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id)
             }            
 
             this.btnAddEstudios=false
