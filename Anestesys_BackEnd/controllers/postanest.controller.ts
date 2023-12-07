@@ -7,7 +7,7 @@ import { PostRecupera,
 /********************************************************************/
 export const saveNotaPA = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { pid, cxid,
                 // Nota Post Anestésica
                 npa_TecAnestFinal, npa_Intubacion, npa_NotaPostAnest,
 
@@ -34,7 +34,7 @@ export const saveNotaPA = async (req: any, res: Response) => {
                 casoObsRecNac6_Apgar5, casoObsRecNac6_Capurro, casoObsRecNac6_Peso,
                 casoObsRecNac6_Talla} = req.body;
         
-        const notaPA = new PostNotaPA({ pid: pid,
+        const notaPA = new PostNotaPA({ pid: pid, cxid: cxid,
                                         // Nota Post Anestésica
                                         npa_TecAnestFinal: npa_TecAnestFinal,
                                         npa_Intubacion: npa_Intubacion,
@@ -347,7 +347,7 @@ export const listNuevoNotaPA = async (req: any, res: Response) => {
 /********************************************************************/
 export const saveRecuperacion = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { pid, cxid,
                 // Nota de Evaluación UCPA
                 notaEval_Obs,
                 // Aldrete de Recuperación
@@ -390,7 +390,7 @@ export const saveRecuperacion = async (req: any, res: Response) => {
                 altaRec_NomMedAnest,
                 } = req.body;
         
-        const recuperacion = new PostRecupera({ pid: pid,
+        const recuperacion = new PostRecupera({ pid: pid, cxid: cxid,
                                                 // Nota de Evaluación UCPA
                                                 notaEval_Obs: notaEval_Obs,
 

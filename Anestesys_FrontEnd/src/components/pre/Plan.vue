@@ -5,7 +5,7 @@
             <!-- POSICIÓN Y CUIDADOS -->
             <li class="nav-item col-md-3" >
                 <button class="btn btn-nav-bar fw-bold active"
-                        id="plan"
+                        id="posicion-cuidados"
                         data-bs-toggle="pill"
                         data-bs-target="#posicion"
                         type="button"
@@ -15,7 +15,7 @@
             <!-- GENERAL -->
             <li class="nav-item col-md-2" >
                 <button class="btn btn-nav-bar fw-bold"
-                        id="plan"
+                        id=""
                         data-bs-toggle="pill"
                         data-bs-target="#general"
                         type="button"
@@ -25,7 +25,7 @@
             <!-- REGIONAL -->
             <li class="nav-item col-md-2" >
                 <button class="btn btn-nav-bar fw-bold"
-                        id="plan"
+                        id=""
                         data-bs-toggle="pill"
                         data-bs-target="#regional"
                         type="button"
@@ -35,7 +35,7 @@
             <!-- SEDACIÓN -->
             <li class="nav-item col-md-2" >
                 <button class="btn btn-nav-bar fw-bold"
-                        id="plan"
+                        id=""
                         data-bs-toggle="pill"
                         data-bs-target="#sedacion"
                         type="button"
@@ -45,7 +45,7 @@
             <!-- LOCAL -->
             <li class="nav-item col-md-2" >
                 <button class="btn btn-nav-bar fw-bold"
-                        id="plan"
+                        id=""
                         data-bs-toggle="pill"
                         data-bs-target="#local"
                         type="button"
@@ -1046,7 +1046,8 @@
 <script lang="ts">
 import type { regPlan } from "@/interfaces/regPreAnest";
 import { usePreIdStore } from "@/stores/preId-store";
-import { defineComponent } from "vue"
+import { defineComponent } from "vue";
+import { Tab } from 'bootstrap';
 
 const preIdStore = usePreIdStore();
 
@@ -1142,6 +1143,10 @@ export default defineComponent({
             this.infoPlan.general_OtrosDispositivos = "No"
             this.infoPlan.general_EspOtrosDispositivos = ""
 
+            const tabPosicion = document.getElementById('posicion-cuidados');
+            const tabObj = new Tab(tabPosicion);
+            tabObj.show();
+
             this.enviarDatosPlan()
         },
 
@@ -1149,7 +1154,7 @@ export default defineComponent({
             if(preIdStore.nuevoRegistroPaciente == false){
                 if(preIdStore.actualizarRegPlan == false ){
                     // Guardar datos
-                    preIdStore.savePrePlan(this.infoPlan, preIdStore.pacienteID._id)
+                    preIdStore.savePrePlan(this.infoPlan, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id)
                     preIdStore.actualizarRegPlan = true
                 }else if(preIdStore.actualizarRegPlan == true){
                     // Actualizar datos

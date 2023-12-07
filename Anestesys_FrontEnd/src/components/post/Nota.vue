@@ -863,6 +863,7 @@ import { usePostAnestStore } from "../../stores/postAnest-store";
 import { usePreIdStore } from "@/stores/preId-store";
 import { useTransAnestStore } from "@/stores/transAnest-store";
 import Multiselect from '@vueform/multiselect';
+import { Tab } from 'bootstrap';
 
 const postAnestStore = usePostAnestStore();
 const preIdStore = usePreIdStore();
@@ -901,6 +902,7 @@ export default defineComponent({
 
     methods: {
         async vaciarInputsNotaPA(){
+            
             this.infoNotaPost.npa_NotaPostAnest = postAnestStore.NotaPost
             this.infoNotaPost.npa_Intubacion = postAnestStore.Intubacion
 
@@ -960,7 +962,17 @@ export default defineComponent({
             this.infoNotaPost.casoObsRecNac6_Apgar5 = postAnestStore.Apgar5Seis
             this.infoNotaPost.casoObsRecNac6_Capurro = postAnestStore.CapurroSeis
             this.infoNotaPost.casoObsRecNac6_Peso = postAnestStore.PesoSeis
-            this.infoNotaPost.casoObsRecNac6_Talla = postAnestStore.TallaSeis
+            this.infoNotaPost.casoObsRecNac6_Talla = postAnestStore.TallaSeis            
+        },
+
+        async volverPestana(){
+            if(preIdStore.volverPostNota === true){
+                const tabPostNota = document.getElementById('nota-post-anes');
+                const tabObj = new Tab(tabPostNota);
+                tabObj.show();
+                
+                preIdStore.volverPostNota = false;
+            }            
         },
 
         async guardarDatosNotaPA(){
@@ -968,7 +980,7 @@ export default defineComponent({
                 if(preIdStore.actualizarRegNotaPA == false ){
                     // Guardar datos
                     if(this.transAnestStore.tipoTecnica == false){
-                        postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id);
+                        postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id);
                         this.transAnestStore.tipoTecnica=true
                     }
                     preIdStore.actualizarRegNotaPA = true                    
