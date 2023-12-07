@@ -141,7 +141,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
     actions: {
         /* Datos del Ventilador */
-        async saveDatosV(regTransAnest: any, pid: string, cxid: string){
+        async saveDatosV(regTransAnest: any, pid: string){
             await apiAxios({
                 url: "http://localhost:5000/trans",
                 method: "POST",
@@ -149,7 +149,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    pid: pid, cxid: cxid,
+                    pid: pid,
                     // Datos del Ventilador
                     modosVentilacion: regTransAnest.modosVentilacion,
                     peep: regTransAnest.peep,
