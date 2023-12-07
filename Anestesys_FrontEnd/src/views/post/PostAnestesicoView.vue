@@ -187,7 +187,6 @@ export default ({
 
   mounted: function() { // Llama el método despues de cargar la página
     this.validaSeleccionNota();
-    
   },
 
   methods:{
@@ -244,16 +243,6 @@ export default ({
       document.body.scrollTop = 0; // Para safari
       document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
     },
-
-    async svEgreso(){
-      console.log("Si esto jala ya esta lo que me falta y que CSM el dani" +
-        postAnestStore.EgresoTA,
-        postAnestStore.EgresoFC,
-        postAnestStore.EgresoFR,
-        postAnestStore.EgresoTemp,
-        postAnestStore.EgresoPulso,
-        postAnestStore.EgresoSpO2)
-    }
   }
 })
 </script>
