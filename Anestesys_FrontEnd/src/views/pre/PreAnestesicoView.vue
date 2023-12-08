@@ -629,7 +629,7 @@ export default defineComponent({
               },
             },
           },
-      },
+      }as unknown,
       chartKey: 0,
 
       tamanoModalGrid: false,
@@ -5251,14 +5251,20 @@ export default defineComponent({
       const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
       await componenteId.guardarDatosId();
 
-      const componenteValoracion = await this.$refs.refValoracion as InstanceType<typeof Valoracion>;
-      await componenteValoracion.guardarDatosValoracion();
+      if(idStore.pacienteID != null){
+        const componenteValoracion = await this.$refs.refValoracion as InstanceType<typeof Valoracion>;
+        await componenteValoracion.guardarDatosValoracion();
+      }
 
-      const componentePlan = await this.$refs.refPlan as InstanceType<typeof Plan>;
-      await componentePlan.guardarDatosPlan();
+      if(idStore.pacienteID != null){
+        const componentePlan = await this.$refs.refPlan as InstanceType<typeof Plan>;
+        await componentePlan.guardarDatosPlan();
+      }
 
-      const componenteNota = await this.$refs.refNota as InstanceType<typeof Nota>;
-      await componenteNota.guardarDatosNota();      
+      if(idStore.pacienteID != null){
+        const componenteNota = await this.$refs.refNota as InstanceType<typeof Nota>;
+        await componenteNota.guardarDatosNota();
+      }
     },
 
     async validaSeleccionValoracion(){

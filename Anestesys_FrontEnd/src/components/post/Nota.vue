@@ -887,15 +887,6 @@ export default defineComponent({
         }
     },
 
-    watch: {
-        miVariableBooleana(nuevoValor, valorAnterior) {
-            if (nuevoValor === true) {
-                // Ejecutar la función cuando miVariableBooleana cambie a true
-                this.vaciarInputsNotaPA();
-            }
-        }
-    },
-
     mounted: function() {
         this.infoNotaPost.npa_Intubacion = "No";
     },
