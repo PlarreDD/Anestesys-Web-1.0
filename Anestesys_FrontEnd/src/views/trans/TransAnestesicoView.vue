@@ -1529,8 +1529,7 @@ export default defineComponent({
     Line
   },
 
-  mounted: function() { // Llama el método despues de cargar la página    
-    // transAnestStore.getDetieneMonitoreo();
+  mounted: function() { // Llama el método despues de cargar la página
     this.pingMSV(medStore.monitor[0].dirIPMVS);
     
     this.menuTrans.balanceTotal = null;
@@ -5274,7 +5273,6 @@ export default defineComponent({
       }     
     },
 
-
     //Gestión datos balance
     async cambiarUpdateBalance() {
       transAnestStore.btnActualizarBalance=true
@@ -6727,6 +6725,7 @@ export default defineComponent({
           if(preIdStore.nuevoRegistroPaciente == false){
             this.transAnestStore.saveDatosMSV(this.gridBD, preIdStore.pacienteID._id);
           }else if(preIdStore.nuevoRegistroPaciente == true){
+            console.log("Nuevo");
             this.transAnestStore.saveNuevoDatosMSV(this.gridBD, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
           }
         

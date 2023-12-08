@@ -584,6 +584,7 @@ export default defineComponent({
               },
           ]
       },
+
       chartOptions: {
           responsive: true,
           plugins: {
@@ -630,6 +631,7 @@ export default defineComponent({
             },
           },
       },
+
       chartKey: 0,
 
       tamanoModalGrid: false,
@@ -651,7 +653,8 @@ export default defineComponent({
   },
   
   mounted: function() { // Llama el método despues de cargar la página
-    this.validaSeleccionId()
+    transStore.getDetieneMonitoreo();
+    this.validaSeleccionId();
     this.ocultarFondo();
     this.mostrarHeader();
     this.ocultarMenuLateral();
