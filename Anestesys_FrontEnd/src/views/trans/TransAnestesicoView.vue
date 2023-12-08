@@ -1507,7 +1507,7 @@ export default defineComponent({
               },
             },
           },
-      },
+      }as unknown,
       chartKey: 0,
 
       tamanoModalGrid: false,
