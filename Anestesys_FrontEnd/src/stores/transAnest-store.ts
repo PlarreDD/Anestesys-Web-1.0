@@ -1049,7 +1049,7 @@ export const useTransAnestStore = defineStore('transAn', {
             const objectsToUpload = Math.min(5, grid.length);
             const dataToUpload = [];
 
-            for (let i = 0; i < objectsToUpload; i++) {
+            for (let i = objectsToUpload; i > 0; i--) {
                 dataToUpload.push({
                     FC: grid[grid.length - i].datos[0].valor,
                     Pulso: grid[grid.length - i].datos[1].valor,
@@ -1069,6 +1069,8 @@ export const useTransAnestStore = defineStore('transAn', {
                     HoraGeneracion: grid[grid.length - i].horaGeneracion,
                 });
             }
+
+            console.log(dataToUpload);
 
             try {
                 await apiAxios({
