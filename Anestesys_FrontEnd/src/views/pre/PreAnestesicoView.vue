@@ -684,7 +684,9 @@ export default defineComponent({
     },
 
     async obtenerCirugia(id){
-      await idStore.getDatosPDF(id)
+      if(idStore.cirugia != null){
+        await idStore.getDatosPDF(id)
+      }
 
       await this.asignarDatosPacientesCx()
       await this.asignarDatosPacientesVal()
@@ -693,8 +695,8 @@ export default defineComponent({
       await this.asignarDatosPacientesTrans()
       await this.asignarDatosPacientesNotaPA()
       await this.asignarDatosPacientesRecuperacion()
-
-      await this.crearPdf()
+      
+      await this.crearPdf()      
     },
 
     async asignarDatosPacientesCx(){
@@ -4822,6 +4824,10 @@ export default defineComponent({
         idStore.volverPost = true
         idStore.volverPostNota = true
         idStore.volverPostRecuperacion = true
+
+        idStore.vaciadroTrans = true
+        idStore.vaciadoPostNota = true
+        idStore.vaciadoPostRecup = true
       }
       
       // Sino se elige un expediente no manda la petición
@@ -4927,20 +4933,7 @@ export default defineComponent({
       transStore.ayuno=""
       transStore.otrosEgresos=""
       // Técnica Anestésica
-      // transStore.local=""
-      // transStore.sedación=""
-      // transStore.gralBalanceada=""
-      // transStore.TIVA=""
-      // transStore.multimodal=""
-      // transStore.bloqMixto=""
-      // transStore.bloqPeriLum=""
-      // transStore.bloqPeriCaudal=""
-      // transStore.BloqEspinal=""
-      // transStore.BloqPlexo=""
-      // transStore.BloqTroncular=""
-      // transStore.bloqPeriToracico=""
-      // transStore.bloqPeriCervical=""
-      // transStore.libreOpioides=""
+
       // Tiempos QX
       transStore.ingresoQX=""
       transStore.inicioAn=""

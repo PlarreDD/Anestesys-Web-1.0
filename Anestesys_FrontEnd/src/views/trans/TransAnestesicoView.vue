@@ -1582,17 +1582,10 @@ export default defineComponent({
   },
 
   methods: {
-      async enviarDatosTrans() {          
+      async enviarDatosTrans() {
+        if(preIdStore.vaciadroTrans == true){
           // DatosVentilador
-          // transAnestStore.modosVentilacion=this.menuTrans.modosVentilacion
-          // transAnestStore.PEEP=this.menuTrans.peep
-          // transAnestStore.VT=this.menuTrans.vt
-          // transAnestStore.FC=this.menuTrans.frecResp
-          // transAnestStore.IE=this.menuTrans.IE
-          // transAnestStore.PLimite=this.menuTrans.PLimite
-          // transAnestStore.Hr=this.menuTrans.Hr
-          // Balance Total
-          // transAnestStore.balanceTotal=this.menuTrans.balanceTotal
+
           // Ingresos
           transAnestStore.solHartman=this.menuTrans.solHartman
           transAnestStore.solFisio=this.menuTrans.solFisio
@@ -1616,20 +1609,7 @@ export default defineComponent({
           transAnestStore.ayuno=this.menuTrans.ayuno
           transAnestStore.otrosEgresos=this.menuTrans.otrosEgresos
           // Técnica Anestésica
-          // transAnestStore.local=this.menuTrans.local
-          // transAnestStore.sedación=this.menuTrans.sedación
-          // transAnestStore.gralBalanceada=this.menuTrans.gralBalanceada
-          // transAnestStore.TIVA=this.menuTrans.TIVA
-          // transAnestStore.multimodal=this.menuTrans.multimodal
-          // transAnestStore.bloqMixto=this.menuTrans.bloqMixto
-          // transAnestStore.bloqPeriLum=this.menuTrans.bloqPeriLum
-          // transAnestStore.bloqPeriCaudal=this.menuTrans.bloqPeriCaudal
-          // transAnestStore.BloqEspinal=this.menuTrans.BloqEspinal
-          // transAnestStore.BloqPlexo=this.menuTrans.BloqPlexo
-          // transAnestStore.BloqTroncular=this.menuTrans.BloqTroncular
-          // transAnestStore.bloqPeriToracico=this.menuTrans.bloqPeriToracico
-          // transAnestStore.bloqPeriCervical=this.menuTrans.bloqPeriCervical
-          // transAnestStore.libreOpioides=this.menuTrans.libreOpioides
+
           // Tiempos QX
           transAnestStore.ingresoQX=this.menuTrans.ingresoQX
           transAnestStore.inicioAn=this.menuTrans.inicioAn
@@ -1638,37 +1618,14 @@ export default defineComponent({
           transAnestStore.finAn=this.menuTrans.finAn
           transAnestStore.egresoQx=this.menuTrans.egresoQx
           // Datos Medicamentos
-          // transAnestStore.tipoMed = this.menuTrans.tipoMed
-          // transAnestStore.medicamento=this.menuTrans.medicamento
-          // transAnestStore.dosisMed=this.menuTrans.dosisMed
-          // transAnestStore.unidadMed=this.menuTrans.unidadMed
-          // transAnestStore.viaMed=this.menuTrans.viaMed
-          // transAnestStore.horaInicioMed=this.menuTrans.horaInicioMed
-          // transAnestStore.horaFinalMed=this.menuTrans.horaFinalMed
-          // transAnestStore.observacionesMed=this.menuTrans.observacionesMed
-          // Relevos
-          // transAnestStore.horaRelevo=this.menuTrans.horaRelevo
-          // transAnestStore.tipoRel=this.menuTrans.tipoRel
-          // transAnestStore.matriculaRel=this.menuTrans.matriculaRel
-          // transAnestStore.anestesiologoRel=this.menuTrans.anestesiologoRel
-          // transAnestStore.observacionesRel=this.menuTrans.observacionesRel
-          // Eventos Criticos
-          // transAnestStore.horaEvento=this.menuTrans.horaEvento
-          // transAnestStore.tipoEve=this.menuTrans.tipoEve
-          // transAnestStore.detalleEvento=this.menuTrans.detalleEvento
+          
+          preIdStore.vaciadroTrans=false
+        }
       },
 
       async vaciarInputsTrans(){
         /* DatosVentilador */
-        // this.menuTrans.modosVentilacion= transAnestStore.modosVentilacion
-        // this.menuTrans.peep= transAnestStore.PEEP
-        // this.menuTrans.vt= transAnestStore.VT
-        // this.menuTrans.frecResp= transAnestStore.FC
-        // this.menuTrans.IE= transAnestStore.IE
-        // this.menuTrans.PLimite= transAnestStore.PLimite
-        // this.menuTrans.Hr= transAnestStore.Hr
-        /* Balance Total */
-        // this.menuTrans.balanceTotal= transAnestStore.balanceTotal
+
         // Ingresos
         this.menuTrans.solHartman= transAnestStore.solHartman
         this.menuTrans.solFisio= transAnestStore.solFisio
@@ -1692,20 +1649,7 @@ export default defineComponent({
         this.menuTrans.ayuno= transAnestStore.ayuno
         this.menuTrans.otrosEgresos= transAnestStore.otrosEgresos
         /* Técnica Anestésica */
-        // this.menuTrans.local= transAnestStore.local
-        // this.menuTrans.sedación= transAnestStore.sedación
-        // this.menuTrans.gralBalanceada= transAnestStore.gralBalanceada
-        // this.menuTrans.TIVA= transAnestStore.TIVA
-        // this.menuTrans.multimodal= transAnestStore.multimodal
-        // this.menuTrans.bloqMixto= transAnestStore.bloqMixto
-        // this.menuTrans.bloqPeriLum= transAnestStore.bloqPeriLum
-        // this.menuTrans.bloqPeriCaudal= transAnestStore.bloqPeriCaudal
-        // this.menuTrans.BloqEspinal= transAnestStore.BloqEspinal
-        // this.menuTrans.BloqPlexo= transAnestStore.BloqPlexo
-        // this.menuTrans.BloqTroncular= transAnestStore.BloqTroncular
-        // this.menuTrans.bloqPeriToracico= transAnestStore.bloqPeriToracico
-        // this.menuTrans.bloqPeriCervical= transAnestStore.bloqPeriCervical
-        // this.menuTrans.libreOpioides= transAnestStore.libreOpioides
+
         /* Tiempos QX */
         this.menuTrans.ingresoQX= transAnestStore.ingresoQX
         this.menuTrans.inicioAn= transAnestStore.inicioAn
@@ -1714,24 +1658,11 @@ export default defineComponent({
         this.menuTrans.finAn= transAnestStore.finAn
         this.menuTrans.egresoQx= transAnestStore.egresoQx
         /* Datos Medicamentos */
-        // this.menuTrans.tipoMed= transAnestStore.tipoMed
-        // this.menuTrans.medicamento= transAnestStore.medicamento
-        // this.menuTrans.dosisMed= transAnestStore.dosisMed
-        // this.menuTrans.unidadMed= transAnestStore.unidadMed
-        // this.menuTrans.viaMed= transAnestStore.viaMed
-        // this.menuTrans.horaInicioMed= transAnestStore.horaInicioMed
-        // this.menuTrans.horaFinalMed= transAnestStore.horaFinalMed
-        // this.menuTrans.observacionesMed= transAnestStore.observacionesMed
+
         /* Relevos */
-        // this.menuTrans.horaRelevo= transAnestStore.horaRelevo
-        // this.menuTrans.tipoRel= transAnestStore.tipoRel
-        // this.menuTrans.matriculaRel= transAnestStore.matriculaRel
-        // this.menuTrans.anestesiologoRel= transAnestStore.anestesiologoRel
-        // this.menuTrans.observacionesRel= transAnestStore.observacionesRel
+
         /* Eventos Criticos */
-        // this.menuTrans.horaEvento= transAnestStore.horaEvento
-        // this.menuTrans.tipoEve= transAnestStore.tipoEve
-        // this.menuTrans.detalleEvento= transAnestStore.detalleEvento
+
       },
 
     // Generar Grafica a Imagen
