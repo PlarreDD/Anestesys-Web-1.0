@@ -1582,87 +1582,87 @@ export default defineComponent({
   },
 
   methods: {
-      async enviarDatosTrans() {
-        if(preIdStore.vaciadroTrans == true){
-          // DatosVentilador
+      async enviarDatosTrans() {        
+        // DatosVentilador
 
-          // Ingresos
-          transAnestStore.solHartman=this.menuTrans.solHartman
-          transAnestStore.solFisio=this.menuTrans.solFisio
-          transAnestStore.glucosados=this.menuTrans.glucosados
-          transAnestStore.gelatinas=this.menuTrans.gelatinas
-          transAnestStore.almidones=this.menuTrans.almidones
-          transAnestStore.albuminas=this.menuTrans.albuminas
-          transAnestStore.paqGlobular=this.menuTrans.paqGlobular
-          transAnestStore.plasmas=this.menuTrans.plasmas
-          transAnestStore.plaquetas=this.menuTrans.plaquetas
-          transAnestStore.crioprecipitados=this.menuTrans.crioprecipitados
-          transAnestStore.factor_VII=this.menuTrans.factor_VII
-          transAnestStore.factor_VIII=this.menuTrans.factor_VIII
-          transAnestStore.otrosIngresos=this.menuTrans.otrosIngresos
-          // Egresos
-          transAnestStore.liqAscitis=this.menuTrans.liqAscitis
-          transAnestStore.sangradoAprox=this.menuTrans.sangradoAprox
-          transAnestStore.uresis=this.menuTrans.uresis
-          transAnestStore.expoQX=this.menuTrans.expoQX
-          transAnestStore.reqBasales=this.menuTrans.reqBasales
-          transAnestStore.ayuno=this.menuTrans.ayuno
-          transAnestStore.otrosEgresos=this.menuTrans.otrosEgresos
-          // Técnica Anestésica
+        // Ingresos
+        transAnestStore.solHartman=this.menuTrans.solHartman
+        transAnestStore.solFisio=this.menuTrans.solFisio
+        transAnestStore.glucosados=this.menuTrans.glucosados
+        transAnestStore.gelatinas=this.menuTrans.gelatinas
+        transAnestStore.almidones=this.menuTrans.almidones
+        transAnestStore.albuminas=this.menuTrans.albuminas
+        transAnestStore.paqGlobular=this.menuTrans.paqGlobular
+        transAnestStore.plasmas=this.menuTrans.plasmas
+        transAnestStore.plaquetas=this.menuTrans.plaquetas
+        transAnestStore.crioprecipitados=this.menuTrans.crioprecipitados
+        transAnestStore.factor_VII=this.menuTrans.factor_VII
+        transAnestStore.factor_VIII=this.menuTrans.factor_VIII
+        transAnestStore.otrosIngresos=this.menuTrans.otrosIngresos
+        // Egresos
+        transAnestStore.liqAscitis=this.menuTrans.liqAscitis
+        transAnestStore.sangradoAprox=this.menuTrans.sangradoAprox
+        transAnestStore.uresis=this.menuTrans.uresis
+        transAnestStore.expoQX=this.menuTrans.expoQX
+        transAnestStore.reqBasales=this.menuTrans.reqBasales
+        transAnestStore.ayuno=this.menuTrans.ayuno
+        transAnestStore.otrosEgresos=this.menuTrans.otrosEgresos
+        // Técnica Anestésica
 
-          // Tiempos QX
-          transAnestStore.ingresoQX=this.menuTrans.ingresoQX
-          transAnestStore.inicioAn=this.menuTrans.inicioAn
-          transAnestStore.inicioCx=this.menuTrans.inicioCx
-          transAnestStore.finCx=this.menuTrans.finCx
-          transAnestStore.finAn=this.menuTrans.finAn
-          transAnestStore.egresoQx=this.menuTrans.egresoQx
-          // Datos Medicamentos
-          
-          preIdStore.vaciadroTrans=false
-        }
+        // Tiempos QX
+        transAnestStore.ingresoQX=this.menuTrans.ingresoQX
+        transAnestStore.inicioAn=this.menuTrans.inicioAn
+        transAnestStore.inicioCx=this.menuTrans.inicioCx
+        transAnestStore.finCx=this.menuTrans.finCx
+        transAnestStore.finAn=this.menuTrans.finAn
+        transAnestStore.egresoQx=this.menuTrans.egresoQx
+        // Datos Medicamentos
+        
+        preIdStore.vaciadroTrans=false        
       },
 
       async vaciarInputsTrans(){
-        /* DatosVentilador */
+        if(preIdStore.vaciadroTrans == true){
+          /* DatosVentilador */
 
-        // Ingresos
-        this.menuTrans.solHartman= transAnestStore.solHartman
-        this.menuTrans.solFisio= transAnestStore.solFisio
-        this.menuTrans.glucosados= transAnestStore.glucosados
-        this.menuTrans.gelatinas= transAnestStore.gelatinas
-        this.menuTrans.almidones= transAnestStore.almidones
-        this.menuTrans.albuminas= transAnestStore.albuminas
-        this.menuTrans.paqGlobular= transAnestStore.paqGlobular
-        this.menuTrans.plasmas= transAnestStore.plasmas
-        this.menuTrans.plaquetas= transAnestStore.plaquetas
-        this.menuTrans.crioprecipitados= transAnestStore.crioprecipitados
-        this.menuTrans.factor_VII= transAnestStore.factor_VII
-        this.menuTrans.factor_VIII= transAnestStore.factor_VIII
-        this.menuTrans.otrosIngresos= transAnestStore.otrosIngresos
-        // Egresos
-        this.menuTrans.liqAscitis= transAnestStore.liqAscitis
-        this.menuTrans.sangradoAprox= transAnestStore.sangradoAprox
-        this.menuTrans.uresis= transAnestStore.uresis
-        this.menuTrans.expoQX= transAnestStore.expoQX
-        this.menuTrans.reqBasales= transAnestStore.reqBasales
-        this.menuTrans.ayuno= transAnestStore.ayuno
-        this.menuTrans.otrosEgresos= transAnestStore.otrosEgresos
-        /* Técnica Anestésica */
+          // Ingresos
+          this.menuTrans.solHartman= transAnestStore.solHartman
+          this.menuTrans.solFisio= transAnestStore.solFisio
+          this.menuTrans.glucosados= transAnestStore.glucosados
+          this.menuTrans.gelatinas= transAnestStore.gelatinas
+          this.menuTrans.almidones= transAnestStore.almidones
+          this.menuTrans.albuminas= transAnestStore.albuminas
+          this.menuTrans.paqGlobular= transAnestStore.paqGlobular
+          this.menuTrans.plasmas= transAnestStore.plasmas
+          this.menuTrans.plaquetas= transAnestStore.plaquetas
+          this.menuTrans.crioprecipitados= transAnestStore.crioprecipitados
+          this.menuTrans.factor_VII= transAnestStore.factor_VII
+          this.menuTrans.factor_VIII= transAnestStore.factor_VIII
+          this.menuTrans.otrosIngresos= transAnestStore.otrosIngresos
+          // Egresos
+          this.menuTrans.liqAscitis= transAnestStore.liqAscitis
+          this.menuTrans.sangradoAprox= transAnestStore.sangradoAprox
+          this.menuTrans.uresis= transAnestStore.uresis
+          this.menuTrans.expoQX= transAnestStore.expoQX
+          this.menuTrans.reqBasales= transAnestStore.reqBasales
+          this.menuTrans.ayuno= transAnestStore.ayuno
+          this.menuTrans.otrosEgresos= transAnestStore.otrosEgresos
+          /* Técnica Anestésica */
 
-        /* Tiempos QX */
-        this.menuTrans.ingresoQX= transAnestStore.ingresoQX
-        this.menuTrans.inicioAn= transAnestStore.inicioAn
-        this.menuTrans.inicioCx= transAnestStore.inicioCx
-        this.menuTrans.finCx= transAnestStore.finCx
-        this.menuTrans.finAn= transAnestStore.finAn
-        this.menuTrans.egresoQx= transAnestStore.egresoQx
-        /* Datos Medicamentos */
+          /* Tiempos QX */
+          this.menuTrans.ingresoQX= transAnestStore.ingresoQX
+          this.menuTrans.inicioAn= transAnestStore.inicioAn
+          this.menuTrans.inicioCx= transAnestStore.inicioCx
+          this.menuTrans.finCx= transAnestStore.finCx
+          this.menuTrans.finAn= transAnestStore.finAn
+          this.menuTrans.egresoQx= transAnestStore.egresoQx
+          /* Datos Medicamentos */
 
-        /* Relevos */
+          /* Relevos */
 
-        /* Eventos Criticos */
-
+          /* Eventos Criticos */
+          this.grid = []
+        }
       },
 
     // Generar Grafica a Imagen
