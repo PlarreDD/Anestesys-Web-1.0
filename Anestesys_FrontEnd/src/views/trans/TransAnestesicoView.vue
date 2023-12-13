@@ -795,23 +795,23 @@
                     <!-- Botón Guardar/Agregar -->
                     <div class="col-md-3 btn-abajo">                                    
                       <template v-if="transAnestStore.btnAddVentilador === true">
-                        <button class="btn btn-guardar fw-bold"
+                        <button class="btn btn-guardar-balance fw-bold"
                                 @click="guardarDatosV">
-                          <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                          GUARDAR
                         </button>
                       </template>
 
                       <template v-if="transAnestStore.btnUpdateVentilador === true">
-                        <button class="btn btn-guardar fw-bold"
+                        <button class="btn btn-guardar-balance fw-bold"
                                 @click="actualizarDatosVentilador">
-                          <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                          GUARDAR
                         </button>
                       </template>  
 
                       <template v-if="transAnestStore.btnActualizaVentilador === true">
-                        <button class="btn btn-guardar fw-bold"
+                        <button class="btn btn-guardar-balance fw-bold"
                                 @click="actualizarVentilador">
-                          <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                          ACTUALIZAR
                         </button>
                       </template>  
                     </div>
