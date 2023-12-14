@@ -96,7 +96,7 @@
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
           <div class="modal-content color-dropdown">
             <div class="input-group mb-3">
-              <div class="modal-body">
+              <div class="modal-body deslizar">
                 <div class="col-md-12">
                   <div class="row g-3">     
                     <h5 class="text-white text-center fw-bold">{{ idStore.NombrePaciente + " " + idStore.numeroExpediente }}</h5>
@@ -113,7 +113,7 @@
                         </tr>
                       </thead>
 
-                      <tbody>
+                      <tbody class="">
                         <tr v-for="(cirugia) in listaCirugias">
 
                           <td class="text-white">
@@ -5385,6 +5385,12 @@ export default defineComponent({
 <style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
+.deslizar {
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 400px;
+  margin-top: 15px;
+}
 .grafica-div {
   position: relative;
 }
