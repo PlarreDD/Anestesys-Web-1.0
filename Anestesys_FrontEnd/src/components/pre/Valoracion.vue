@@ -761,25 +761,25 @@
                                 </div>       
                                 
                                 <!-- Botón Guardar/Agregar -->
-                                <div class="col-md-1 btn-abajo">
+                                <div class="col-md-2 btn-abajo">
                                     <template v-if="btnAddEstudios === true">
                                         <button class="btn btn-guardar fw-bold"
                                             @click="guardarEstudios(infoValoracion.estudios_Estudio, infoValoracion.estudio_Especificaciones)">
-                                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                                            GUARDAR
                                         </button>
                                     </template>
 
                                     <template v-if="btnUpdateEstudios === true">
                                         <button class="btn btn-guardar fw-bold"
                                             @click="actualizarEstudios(infoValoracion.estudios_Estudio, infoValoracion.estudio_Especificaciones)">
-                                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                                            GUARDAR
                                         </button>
                                     </template>  
 
                                     <template v-if="btnActualizaEstudio === true">
-                                        <button class="btn btn-guardar fw-bold"
+                                        <button class="col-md-1 btn btn-guardar fw-bold"
                                             @click="actualizarEstudio()">
-                                            <font-awesome-icon icon="fa-solid fa-square-plus" size="2xl"/>
+                                            ACTUALIZAR
                                         </button>
                                     </template>  
                                 </div>
@@ -1575,14 +1575,14 @@ h5{
     width: 100%;        
 }
 .btn-guardar{
-    --bs-btn-bg: none;
-    --bs-btn-color: #A0A6B2;    
+    --bs-btn-bg: #fff;
+    --bs-btn-color: #002D60;    
     --bs-btn-border-color: #E88300;
-    --bs-btn-hover-bg: #edeff3;
-    --bs-btn-hover-color: #E88300;
+    --bs-btn-hover-bg: #E88300;
+    --bs-btn-hover-color: #fff;
     --bs-btn-hover-border-color: #E88300;          
-    --bs-btn-active-bg: none;
-    --bs-btn-active-color: #E88300;
+    --bs-btn-active-bg: #E88300;
+    --bs-btn-active-color: #fff;
     --bs-btn-active-border-color: #E88300;
     width: 100%;    
     border: none;        

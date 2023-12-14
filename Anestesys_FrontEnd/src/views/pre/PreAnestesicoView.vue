@@ -389,7 +389,7 @@ import { Line } from 'vue-chartjs';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
-import pdfFonts from "pdfmake/build/vfs_fonts";
+import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
 window.pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
