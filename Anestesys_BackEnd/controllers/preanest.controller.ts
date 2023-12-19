@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { PreIdPacientes, PreIdPacientesCx, PreValoracion, ValEstudios, PrePlan, PreNota } from "../models/PreAnestesico";
+import { PreIdPacientes, PreIdPacientesCx, PreValoracion, ValEstudios, PrePlan, PreNota, PreCatalogoCIE9, PreCatalogoCIE10 } from "../models/PreAnestesico";
 import { MenuTrans } from "../models/TransAnestesico";
 import { PostRecupera, PostNotaPA } from "../models/PostAnestesico";
 
@@ -11,6 +11,26 @@ export const getExpedientes = async (req: any, res: Response) =>{
     try {
         const expedientes = await PreIdPacientes.find({id: req.id}) 
         return res.json({expedientes});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Función para listar los datos de CIE-10 */
+export const getCIE10 = async (req: any, res: Response) =>{
+    try {
+        const cie10 = await PreCatalogoCIE10.find({id: req.id}) 
+        return res.json({cie10});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Función para listar los datos de CIE-9 */
+export const getCIE9 = async (req: any, res: Response) =>{
+    try {
+        const cie9 = await PreCatalogoCIE9.find({id: req.id}) 
+        return res.json({cie9});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
     }

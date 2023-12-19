@@ -104,7 +104,6 @@
                     <table class="table table-responsive text-white">
                       <thead>
                         <tr>
-                          <th>ID</th>
                           <th>Anestesiólogo</th>
                           <th>Cirujano</th>
                           <th>Cirugía</th>
@@ -115,10 +114,6 @@
 
                       <tbody class="">
                         <tr v-for="(cirugia) in listaCirugias">
-
-                          <td class="text-white">
-                            {{ cirugia._id }}
-                          </td>
 
                           <td class="text-white">
                             {{ cirugia.anestesiologo }}

@@ -295,9 +295,19 @@ const PreNotaSchema = new Schema({
     obsNota: { type: String, },
 });
 
+const PreCatalogoCIE9Schema = new Schema({
+    nombre: { type: String}
+});
+
+const PreCatalogoCIE10Schema = new Schema({
+    nombre: { type: String}
+});
+
 export const PreIdPacientes = model('PreIdPacientes', PreIdPacienteSchema);
 export const PreIdPacientesCx = model('PreIdPacientesCx', PreIdPacienteCxSchema);
 export const PreValoracion = model('PreVal', PreValoracionSchema);
 export const ValEstudios = model('PreEst', ValEstudiosSchema);
 export const PrePlan = model('PrePlan', PrePlanSchema);
 export const PreNota = model('PreNota', PreNotaSchema);
+export const PreCatalogoCIE9 = model('Cie9', PreCatalogoCIE9Schema)
+export const PreCatalogoCIE10 = model('Cie10', PreCatalogoCIE10Schema)
