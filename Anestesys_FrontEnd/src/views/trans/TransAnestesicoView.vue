@@ -15,7 +15,7 @@
               <template v-if="transAnestStore.envDat === true && medStore.status === 'Activo'">
                 <button class="borde-btn-msv"
                         @click="finMSV">
-                  <img src="images/imgIcon/MonitorActivoDatos.png" class="btn-msv"/>
+                  <img src="../../../public/images/imgIcon/MonitorActivoDatos.png" class="btn-msv"/>
                 </button>
                 <span class="fw-bold msv-color-txt">&nbsp;&nbsp;Estado: Recibiendo Datos</span>
               </template>
@@ -25,7 +25,7 @@
                         style="border: none;"
                         @click="iniMSV"
                         :disabled="btnMSV">
-                  <img src="images/imgIcon/MonitorActivo.png" class="btn-msv" />
+                  <img src="../../../public/images/imgIcon/MonitorActivo.png" class="btn-msv" />
                 </button>
                 <span class="fw-bold msv-color-txt" >&nbsp;&nbsp;Estado: Sin Datos</span>
               </template>
@@ -33,7 +33,7 @@
               <template v-if="medStore.status === 'Inactivo'">
                 <button class="borde-btn-msv"
                         style="border: none;">
-                  <img src="images/imgIcon/MonitorInactivo.png" class="btn-msv"/>
+                  <img src="../../../public/images/imgIcon/MonitorInactivo.png" class="btn-msv"/>
                 </button>
                 <span class="fw-bold msv-color-txt">&nbsp;&nbsp;Estado: Desconectado</span>
               </template>
@@ -1148,17 +1148,17 @@
 
         <div class="" :class="vistaPreviaOff == false ? 'col-md-2 menu-pre-post' : 'col-md-2 menu-pre-post-off'">
           <RouterLink to="pre">
-            <img src="images/pre.svg" class="ajusteImg"/>
+            <img src="../../../public/images/pre.svg" class="ajusteImg"/>
           </RouterLink>
         </div>
 
         <div class="" :class="vistaPreviaOff == false ? 'col-md-2 menu-trans' : 'col-md-2 menu-trans-off'">
-          <img src="images/trans.svg" class="ajusteImg"/>
+          <img src="../../../public/images/trans.svg" class="ajusteImg"/>
         </div>
 
         <div class="" :class="vistaPreviaOff == false ? 'col-md-2 menu-pre-post' : 'col-md-2 menu-pre-post-off'">
           <RouterLink to="post">
-            <img src="images/post.svg" class="ajusteImg"/>
+            <img src="../../../public/images/post.svg" class="ajusteImg"/>
           </RouterLink>
         </div>
       </div>
@@ -1170,7 +1170,7 @@
           </label>
         <div class="row columna-size-1 mb-4 mt-2">
           <div class="col borde-row">           
-            <img class="img-vista-rapida-arriba" src="images/imgIcon/paciente_cuadro.png">                              
+            <img class="img-vista-rapida-arriba" src="../../../public/images/imgIcon/paciente_cuadro.png">                              
             <label class="form-label text-white" :class="preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? 'invisible':''"> 
               {{ preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? '-': preIdStore.NombrePaciente }}
             </label>
@@ -1189,7 +1189,7 @@
           </div>
           
           <div class="col">
-            <img class="img-vista-rapida-arriba" src="images/imgIcon/anestesiologo_cuadro.png">
+            <img class="img-vista-rapida-arriba" src="../../../public/images/imgIcon/anestesiologo_cuadro.png">
             <label class="form-label text-white" :class="preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? 'invisible':''">
               {{ preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? '-': preIdStore.NombreAnestesiologo }}            
             </label>
@@ -1198,14 +1198,14 @@
 
         <div class="row columna-size-2">
           <div class="col borde-row"> 
-            <img class="img-vista-rapida-arriba" src="images/imgIcon/cirujano_cuadro.png">
+            <img class="img-vista-rapida-arriba" src="../../../public/images/imgIcon/cirujano_cuadro.png">
             <label class="form-label text-white" :class="preIdStore.NombreCirujano == '' || preIdStore.NombreCirujano == undefined ? 'invisible':''">            
               {{ preIdStore.NombreCirujano == '' || preIdStore.NombreCirujano == undefined ? '-': preIdStore.NombreCirujano }}
             </label>
           </div>
 
           <div class="col"> 
-            <img class="img-vista-rapida-arriba" src="images/imgIcon/cirugia_cuadro.png">
+            <img class="img-vista-rapida-arriba" src="../../../public/images/imgIcon/cirugia_cuadro.png">
             <label class="form-label text-white" :class="preIdStore.NombreCirugia == '' || preIdStore.NombreCirugia == undefined ? 'invisible':''">            
               {{ preIdStore.NombreCirugia == '' || preIdStore.NombreCirugia == undefined ? '-': preIdStore.NombreCirugia }}
             </label>
@@ -1219,7 +1219,7 @@
     <div class="text-center posicion-estatica fw-bold container" :class="preIdStore.VistaRapida == false ? 'c-fixed' : 'c-fixed invisible'" @click.stop="desplegarMenuVistaRapida()">
       <div class="row">
         <div class="col bordeColumna">           
-          <img class="img-vista-rapida" src="images/imgIcon/paciente.png">          
+          <img class="img-vista-rapida" src="../../../public/images/imgIcon/paciente.png">          
           <label class="form-label text-white" :class="preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? 'invisible':''"> 
             {{ preIdStore.NombrePaciente == '' || preIdStore.NombrePaciente == undefined ? '-': 
                preIdStore.NombrePaciente.length > 30 ? preIdStore.NombrePaciente.substring(0,30) + '...' : preIdStore.NombrePaciente }}
@@ -1227,7 +1227,7 @@
         </div>
         
         <div class="col">
-          <img class="img-vista-rapida" src="images/imgIcon/anestesiologo.png">
+          <img class="img-vista-rapida" src="../../../public/images/imgIcon/anestesiologo.png">
           <label class="form-label text-white" :class="preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? 'invisible':''">
             {{ preIdStore.NombreAnestesiologo == '' || preIdStore.NombreAnestesiologo == undefined ? '-': 
                preIdStore.NombreAnestesiologo.length > 30 ? preIdStore.NombreAnestesiologo.substring(0,30) + '...' : preIdStore.NombreAnestesiologo }}            
@@ -1235,7 +1235,7 @@
         </div>
         
         <div class="col bordeColumna"> 
-          <img class="img-vista-rapida" src="images/imgIcon/cirugia.png">
+          <img class="img-vista-rapida" src="../../../public/images/imgIcon/cirugia.png">
           <label class="form-label text-white" :class="preIdStore.NombreCirugia == '' || preIdStore.NombreCirugia == undefined ? 'invisible':''">            
             {{ preIdStore.NombreCirugia == '' || preIdStore.NombreCirugia == undefined ? '-' : 
                preIdStore.NombreCirugia.length > 30 ? preIdStore.NombreCirugia.substring(0, 30) + '...': preIdStore.NombreCirugia }}

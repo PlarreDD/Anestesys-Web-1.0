@@ -1347,7 +1347,7 @@
             <div class="modal-body">
               <div class="col-md-12">
                 <div class="row g-3">
-                  <img src="images/bromage-info.svg" alt="" />
+                  <img src="../../../public/images/bromage-info.svg" alt="" />
                 </div>
               </div>
             </div>
@@ -1369,7 +1369,7 @@
             <div class="modal-body">
               <div class="col-md-12">
                 <div class="row g-3">
-                  <img src="images/escala-EVA-info.svg" alt="" />
+                  <img src="../../../public/images/escala-EVA-info.svg" alt="" />
                 </div>
               </div>
             </div>

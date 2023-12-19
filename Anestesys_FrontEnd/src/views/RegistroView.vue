@@ -2,7 +2,7 @@
     <div class="col-5 divBorderR posicionEstaticaR">  
         <div class="margenR">
             <div class="div-img">
-                <img src="images/logoB.png" class="imgLogo"/>
+                <img src="../../public/images/logoB.png" class="imgLogo"/>
             </div>
 
             <h2 class="fw-bold h2Estilo m-4">Nuevo Usuario</h2>

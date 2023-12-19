@@ -6,7 +6,7 @@
 
         <div class="col-md-2 alinearElementoI">
           <RouterLink class="" to="pre">
-            <img src="images/logoA.png" class="imgLogoBarra" />
+            <img src="../../public/images/logoA.png" class="imgLogoBarra" />
           </RouterLink>
         </div>
 
@@ -14,7 +14,7 @@
 
         <!-- Nombre DR -->
         <div class="col-md-2 text-white alinearElementoD">
-          <img src="images/perfil.jpg" class="imgPerfil" />
+          <img src="../../public/images/perfil.jpg" class="imgPerfil" />
           {{ userStore.Nombre == undefined || userStore.Apellido == undefined ? '-':
           "Dr. " + userStore.Nombre.split(' ')[0] + " " + userStore.Apellido.split(' ')[0] }}
         </div>
@@ -51,7 +51,7 @@
                   data-bs-toggle="modal"
                   data-bs-target="#medicamentosModal"
                 >
-                  <img src="images/imgIcon/medicamento.svg" />
+                  <img src="../../public/images/imgIcon/medicamento.svg" />
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Medicamentos
                 </button>
               </li>
@@ -63,7 +63,7 @@
                   class="btn btn-configuracion fw-bold"
                   data-bs-toggle="modal"
                   data-bs-target="#mvsModal">
-                  <img src="images/imgIcon/monitor.svg" />
+                  <img src="../../public/images/imgIcon/monitor.svg" />
                   &nbsp;&nbsp;&nbsp;Configuración de monitor
                 </button>
               </li>
@@ -76,7 +76,7 @@
                   data-bs-toggle="modal"
                   data-bs-target="#tendenciasModal"
                 >
-                  <img src="images/imgIcon/tendencia.svg" />
+                  <img src="../../public/images/imgIcon/tendencia.svg" />
                   &nbsp;&nbsp;&nbsp;Tendencias
                 </button>
               </li>
@@ -84,7 +84,7 @@
               <!-- Link Teclado Virtual -->
               <li>
                 <button type="button" class="btn btn-configuracion fw-bold">
-                  <img src="images/imgIcon/teclado.svg" />
+                  <img src="../../public/images/imgIcon/teclado.svg" />
                   &nbsp;&nbsp;&nbsp;Teclado virtual
                 </button>
               </li>
@@ -94,7 +94,7 @@
                 <button
                   class="btn btn-configuracion fw-bold"
                   @click="userStore.logout()">
-                  <img src="images/imgIcon/salir.svg" />
+                  <img src="../../public/images/imgIcon/salir.svg" />
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Salir
                 </button>
               </li>

@@ -27,7 +27,7 @@
         <div class="centrarBoton">
           <button class="btn btn-icono fw-bold" :disabled="nuevoRegistro == false ? true : false" @click="crearNuevoRegistroExpediente">
             <img class="btn-registro"
-                 src="images/imgIcon/nuevo.svg"/> Nuevo Registro </button>
+                 src="../../../public/images/imgIcon/nuevo.svg"/> Nuevo Registro </button>
         </div>
       </div>
       
@@ -37,7 +37,7 @@
           <button class="btn btn-icono fw-bold" :disabled="historialPaciente == false ? true : false" 
                   data-bs-toggle="modal" data-bs-target="#modal-historial" @click="">
             <img class="btn-historial"
-                 src="images/imgIcon/historial-pac.svg"/> Historial Paciente </button>
+                 src="../../../public/images/imgIcon/historial-pac.svg"/> Historial Paciente </button>
         </div>
       </div>
 
@@ -254,14 +254,14 @@
       <!--Menú lateral-->
       <div class="col-2 menuLateralPrincipal">        
         <div class="col-md-2 menu-pre">
-          <img src="images/pre.svg" class="img-menu-lateral"/>
+          <img src="../../../public/images/pre.svg" class="img-menu-lateral"/>
         </div>
         
         <div :class="numExpediente != '' && nomPaciente != '' ?
                     'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
           <RouterLink to="trans"
                       class="" id="menu-trans">
-            <img src="images/trans.svg" class="img-menu-lateral" @click="guardarDatos()"/>
+            <img src="../../../public/images/trans.svg" class="img-menu-lateral" @click="guardarDatos()"/>
           </RouterLink>
         </div>
         
@@ -269,7 +269,7 @@
                     'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
           <RouterLink to="post"
                       class="" id="menu-post">
-            <img src="images/post.svg" class="img-menu-lateral" @click="guardarDatos()"/>
+            <img src="../../../public/images/post.svg" class="img-menu-lateral" @click="guardarDatos()"/>
           </RouterLink>
         </div>
 
@@ -291,7 +291,7 @@
           </label>
         <div class="row columna-size-1 mb-4 mt-2">
           <div class="col borde-row">           
-            <img class="img-vista-rapida-arriba" src="images/imgIcon/paciente_cuadro.png">                              
+            <img class="img-vista-rapida-arriba" src="../../../public/images/imgIcon/paciente_cuadro.png">                              
             <label class="form-label text-white" :class="idStore.NombrePaciente == '' || idStore.NombrePaciente == undefined ? 'invisible':''"> 
               {{ idStore.NombrePaciente == '' || idStore.NombrePaciente == undefined ? '-': idStore.NombrePaciente }}
             </label>
@@ -310,7 +310,7 @@
           </div>
           
           <div class="col">
-            <img class="img-vista-rapida-arriba" src="images/imgIcon/anestesiologo_cuadro.png">
+            <img class="img-vista-rapida-arriba" src="../../../public/images/imgIcon/anestesiologo_cuadro.png">
             <label class="form-label text-white" :class="idStore.NombreAnestesiologo == '' || idStore.NombreAnestesiologo == undefined ? 'invisible':''">
               {{ idStore.NombreAnestesiologo == '' || idStore.NombreAnestesiologo == undefined ? '-': idStore.NombreAnestesiologo }}            
             </label>
@@ -319,14 +319,14 @@
 
         <div class="row columna-size-2">
           <div class="col borde-row"> 
-            <img class="img-vista-rapida-arriba" src="images/imgIcon/cirujano_cuadro.png">
+            <img class="img-vista-rapida-arriba" src="../../../public/images/imgIcon/cirujano_cuadro.png">
             <label class="form-label text-white" :class="idStore.NombreCirujano == '' || idStore.NombreCirujano == undefined ? 'invisible':''">            
               {{ idStore.NombreCirujano == '' || idStore.NombreCirujano == undefined ? '-': idStore.NombreCirujano }}
             </label>
           </div>
 
           <div class="col"> 
-            <img class="img-vista-rapida-arriba" src="images/imgIcon/cirugia_cuadro.png">
+            <img class="img-vista-rapida-arriba" src="../../../public/images/imgIcon/cirugia_cuadro.png">
             <label class="form-label text-white" :class="idStore.NombreCirugia == '' || idStore.NombreCirugia == undefined ? 'invisible':''">            
               {{ idStore.NombreCirugia == '' || idStore.NombreCirugia == undefined ? '-': idStore.NombreCirugia }}
             </label>
@@ -340,7 +340,7 @@
     <div class="text-center posicion-estatica fw-bold container" :class="idStore.VistaRapida == false ? 'c-fixed' : 'c-fixed invisible'" @click.stop="desplegarMenuVistaRapida()">
       <div class="row">
         <div class="col bordeColumna">           
-          <img class="img-vista-rapida" src="images/imgIcon/paciente.png">          
+          <img class="img-vista-rapida" src="../../../public/images/imgIcon/paciente.png">          
           <label class="form-label text-white" :class="idStore.NombrePaciente == '' || idStore.NombrePaciente == undefined ? 'invisible':''"> 
             {{ idStore.NombrePaciente == '' || idStore.NombrePaciente == undefined ? '-': 
                idStore.NombrePaciente.length > 30 ? idStore.NombrePaciente.substring(0,30) + '...' : idStore.NombrePaciente }}
@@ -348,7 +348,7 @@
         </div>
         
         <div class="col">
-          <img class="img-vista-rapida" src="images/imgIcon/anestesiologo.png">
+          <img class="img-vista-rapida" src="../../../public/images/imgIcon/anestesiologo.png">
           <label class="form-label text-white" :class="idStore.NombreAnestesiologo == '' || idStore.NombreAnestesiologo == undefined ? 'invisible':''">
             {{ idStore.NombreAnestesiologo == '' || idStore.NombreAnestesiologo == undefined ? '-': 
                idStore.NombreAnestesiologo.length > 30 ? idStore.NombreAnestesiologo.substring(0,30) + '...' : idStore.NombreAnestesiologo }}            
@@ -356,7 +356,7 @@
         </div>
         
         <div class="col bordeColumna"> 
-          <img class="img-vista-rapida" src="images/imgIcon/cirugia.png">
+          <img class="img-vista-rapida" src="../../../public/images/imgIcon/cirugia.png">
           <label class="form-label text-white" :class="idStore.NombreCirugia == '' || idStore.NombreCirugia == undefined ? 'invisible':''">            
             {{ idStore.NombreCirugia == '' || idStore.NombreCirugia == undefined ? '-' : 
                idStore.NombreCirugia.length > 30 ? idStore.NombreCirugia.substring(0, 30) + '...': idStore.NombreCirugia }}
