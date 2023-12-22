@@ -114,7 +114,6 @@
 
                       <tbody class="">
                         <tr v-for="(cirugia) in listaCirugias">
-
                           <td class="text-white">
                             {{ cirugia.anestesiologo }}
                           </td>

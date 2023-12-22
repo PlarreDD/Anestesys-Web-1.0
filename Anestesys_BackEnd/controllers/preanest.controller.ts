@@ -19,7 +19,12 @@ export const getExpedientes = async (req: any, res: Response) =>{
 /* Función para listar los datos de CIE-10 */
 export const getCIE10 = async (req: any, res: Response) =>{
     try {
-        const cie10 = await PreCatalogoCIE10.find({id: req.id}) 
+        const {nombre} = req.params
+
+        // Crea una expresión regular con RegExp para buscar el nombre que comienza con la palabra proporcionada
+        const regex = new RegExp('^' + nombre, 'i');
+
+        const cie10 = await PreCatalogoCIE10.find({nombre: regex}) 
         return res.json({cie10});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
@@ -29,7 +34,11 @@ export const getCIE10 = async (req: any, res: Response) =>{
 /* Función para listar los datos de CIE-9 */
 export const getCIE9 = async (req: any, res: Response) =>{
     try {
-        const cie9 = await PreCatalogoCIE9.find({id: req.id}) 
+        const {nombre} = req.params
+
+        const regex = new RegExp('^' + nombre, 'i');
+
+        const cie9 = await PreCatalogoCIE9.find({nombre: regex}) 
         return res.json({cie9});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});

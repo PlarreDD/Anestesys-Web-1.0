@@ -29,7 +29,7 @@ router.put('/:id',  requireToken, updatePaciente);
 router.post('/add', requireToken, createNuevoRegistroPaciente);
 router.put('/add/:id',  requireToken, updateNuevoRegistroPaciente);
 router.put('/ante/:id',  requireToken, updateAnteriorPaciente);
-router.get('/cie10/uno', requireToken, getCIE10)
-router.get('/cie9/uno', requireToken, getCIE9)
+router.get('/cie10/uno/:nombre', requireToken, getCIE10)
+router.get('/cie9/uno/:nombre', requireToken, getCIE9)
 
 export default router;

@@ -40,6 +40,9 @@ export const usePreIdStore = defineStore('preid', {
 
         cie10: ref(null),
         cie9: ref(null),
+
+        datoCIE10: ref(null),
+        datoCIE9: ref(null),
         
         // ID
         numeroExpediente: ref(null),
@@ -479,16 +482,16 @@ export const usePreIdStore = defineStore('preid', {
             });
         },
 
-        async getCIE10List() {
+        async getCIE10List() {            
             await apiAxios({
-              url: "http://localhost:5000/preId/cie10/uno",
+              url: `http://localhost:5000/preId/cie10/uno/${this.datoCIE10}`,
               method: "GET",
               headers: {
                 Authorization: "Bearer " + userStore.token,
               },
             })
             .then((res: any) => {
-                this.cie10 = res.data.cie10;
+                this.cie10 = res.data.cie10;            
             })
             .catch((e: any) => {
             });
@@ -496,14 +499,14 @@ export const usePreIdStore = defineStore('preid', {
 
         async getCIE9List() {
             await apiAxios({                
-              url: "http://localhost:5000/preId/cie9/uno",
+              url: `http://localhost:5000/preId/cie9/uno/${this.datoCIE9}`,
               method: "GET",
               headers: {
                 Authorization: "Bearer " + userStore.token,
               },
             })
             .then((res: any) => {
-                this.cie9 = res.data.cie9;            
+                this.cie9 = res.data.cie9;
             })
             .catch((e: any) => {
             });
