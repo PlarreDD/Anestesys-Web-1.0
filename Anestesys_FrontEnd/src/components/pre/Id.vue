@@ -223,7 +223,7 @@
                         <!-- CIE-10 -->
                         <div class="col-md-8">
                             <label class="form-label fw-bold mt-2"> CIE-10 </label>
-                            <el-input v-model="infoPreIdPaciente.cie10" @input="obtenerValoresCIE10"
+                            <el-input v-model="infoPreIdPaciente.cie10" @keyup.capture="obtenerValoresCIE10"
                                        :class="infoPreIdPaciente.cie10 != undefined && infoPreIdPaciente.cie10 != '' ?
                                               'form-control-input border border-success formSombra' : 'form-control-input'" :disabled="propBloquearInputs == true" />
                             <el-card v-show="mostrarDatosFiltradosCIE10" class="filtered-container" v-if="opcionCIE10.length">
@@ -250,7 +250,7 @@
                             <!-- CIE-9 -->
                             <div class="col-md-6">
                                 <label class="form-label fw-bold"> CIE-9 </label>                               
-                                <el-input v-model="infoPreIdPaciente.cie9" @input="obtenerValoresCIE9"                                           
+                                <el-input v-model="infoPreIdPaciente.cie9" @keyup.capture="obtenerValoresCIE9"                                           
                                            :class="infoPreIdPaciente.cie9 != undefined && infoPreIdPaciente.cie9 != '' ?
                                                   'form-control-input border border-success formSombra' : 'form-control-input'" :disabled="propBloquearInputs == true" />
                                 <el-card v-show="mostrarDatosFiltradosCIE9" class="filtered-container" v-if="opcionCIE9.length">

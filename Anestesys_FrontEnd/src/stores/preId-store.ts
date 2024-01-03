@@ -1579,7 +1579,6 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {
                 this.expedientes = res.data.expedientes;
-                console.log("Expedientes: "+this.expedientes);                
             })
             .catch((e: any) => {              
             });

@@ -5,19 +5,13 @@
   <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">
     <div class="input-group mb-3">
       <div class="col-md-6">
-        <!--Buscador-->
-        <Multiselect mode="tags"          
-          placeholder="Buscar número de expediente..."
-          v-model="idStore.numExpediente"                
-          :options="listaExpedientes"
-          :searchable="true"
-          :createTag="true"
-          :max="1"
-          :multiple="false"
-          @keyup.capture="obtenerPaciente"
-          @change="obtenerPaciente"
-          />
-          <!-- @click="obtenerPaciente" -->
+        <!--Buscador-->          
+          <el-input v-model="idStore.numExpediente" @keyup.capture="obtenerPaciente" class="form-control-input" placeholder="Buscar Expediente..." />
+          <el-card v-show="mostrarDatosFiltradosExp" class="filtered-container" v-if="opcionExp.length">
+              <div v-for="(item, index) in opcionExp" :key="index" @click="selecDatoExp(item)">                                        
+                  <p>{{ item }}</p> <!-- Mostrar los datos filtrados -->
+              </div>
+          </el-card>
       </div>
 
       <div class="col-md-2"></div>
@@ -380,6 +374,7 @@ import { useTransAnestStore } from "@/stores/transAnest-store";
 import { usePostAnestStore } from "@/stores/postAnest-store";
 import Multiselect from '@vueform/multiselect';
 import { Line } from 'vue-chartjs';
+import { ElInput, ElCard } from 'element-plus';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
@@ -398,6 +393,9 @@ export default defineComponent({
 
   data() {
     return {
+      opcionExp: [],
+      mostrarDatosFiltradosExp: false,
+
       deshabilitado: true,
 
       numExpediente:'',
@@ -432,7 +430,6 @@ export default defineComponent({
       mostrarVistaRapida: false,
 
       expSeleccionado: [],
-      listaExpedientes: [],
       listaCirugias: [],
       cx: [],
 
@@ -642,7 +639,8 @@ export default defineComponent({
     Plan,
     Valoracion,
     BarraNavegacion,
-    Multiselect, Line
+    Multiselect, Line,
+    ElInput, ElCard
   },
   
   mounted: function() { // Llama el método despues de cargar la página
@@ -662,12 +660,18 @@ export default defineComponent({
   methods: {
 /*======================= Obtener paciente para nuevo registro =======================*/
     // Obtener expedientes en Multiselect
-    async listarExpedientes(){
-      await idStore.getExpedientesList()
+    async listarExpedientes(){    
+      this.mostrarDatosFiltradosExp=true
 
-      let expediente= idStore.expedientes;
-      this.listaExpedientes = expediente.map(document => document.numExpediente+" " +document.nomPaciente);
-      this.listaExpedientes.sort();      
+      await idStore.getExpedientesList()      
+
+      if(this.idStore.numExpediente == ''){
+          this.mostrarDatosFiltradosExp=false
+      }
+      
+      if(this.idStore.numExpediente != '' && this.idStore.numExpediente != null){
+        this.opcionExp = idStore.expedientes.map(document => document.numExpediente+" " +document.nomPaciente);
+      }
     },
 
     async listarCirugias(){
@@ -4707,9 +4711,11 @@ export default defineComponent({
 
     // Obtener datos de paciente seleccionado
     async obtenerPaciente(){
-      await this.listarExpedientes();
+      await this.listarExpedientes();     
 
       if(idStore.numExpediente == null || idStore.numExpediente == ''){
+        
+        this.mostrarDatosFiltradosExp=false
         this.numeroExpediente = ''
         this.nombrePaciente = ''
         this.fechaNacimiento = null
@@ -5371,7 +5377,15 @@ export default defineComponent({
       if(this.mostrarVistaRapida=true)     
         idStore.VistaRapida=false
         this.mostrarVistaRapida=false
-    }
+    },
+
+    selecDatoExp(item) {
+        // Al hacer clic en un elemento, se almacena en selectedItem y se mostrará en el input
+        this.idStore.numExpediente = item;
+        this.mostrarDatosFiltradosExp= false
+
+        this.obtenerPaciente()
+    },
   }  
 })
 </script>
@@ -5379,6 +5393,18 @@ export default defineComponent({
 <style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
+.filtered-container {
+  max-height: 200px; /* Altura máxima del contenedor */
+  overflow-y: auto; /* Añadir scroll vertical si el contenido excede la altura */
+  border: 1px solid #ccc; /* Opcional: agregar borde para mejor visualización */
+  padding: 5px; /* Opcional: agregar espacio interno */
+  position: relative;
+  cursor: pointer
+}
+/* Estilos para los elementos dentro del contenedor */
+.filtered-container > div {
+  padding: 8px;
+}
 .deslizar {
   overflow: scroll;
   overflow-x: hidden;
