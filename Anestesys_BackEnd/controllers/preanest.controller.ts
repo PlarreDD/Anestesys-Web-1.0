@@ -9,7 +9,11 @@ import { PostRecupera, PostNotaPA } from "../models/PostAnestesico";
 /* Función para listar los expedientes */
 export const getExpedientes = async (req: any, res: Response) =>{
     try {
-        const expedientes = await PreIdPacientes.find({id: req.id}) 
+        const {numExpediente} = req.params
+
+        const regex = new RegExp('^' + numExpediente, 'i');
+
+        const expedientes = await PreIdPacientes.find({numExpediente: regex}) 
         return res.json({expedientes});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});

@@ -1571,7 +1571,7 @@ export const usePreIdStore = defineStore('preid', {
         /********************** Consulta Expedientes ***********************/
         async getExpedientesList() {
             await apiAxios({
-                url: "http://localhost:5000/preId/exp",
+                url: `http://localhost:5000/preId/exp/${this.numExpediente}`,
                 method: "GET",
                 headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -1579,6 +1579,7 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {
                 this.expedientes = res.data.expedientes;
+                console.log("Expedientes: "+this.expedientes);                
             })
             .catch((e: any) => {              
             });

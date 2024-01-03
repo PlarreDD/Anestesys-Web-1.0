@@ -22,7 +22,7 @@ const router = Router();
 /*------------------- PreId --------------------*/
 router.get('/cx/:id', requireToken, getCirugias)
 router.get('/cirugia/cx/:id', requireToken, getPDFData)
-router.get('/exp', requireToken, getExpedientes)
+router.get('/exp/:numExpediente', requireToken, getExpedientes)
 router.get('/:id', requireToken, getPaciente);
 router.post('/', requireToken, createPaciente);
 router.put('/:id',  requireToken, updatePaciente);
