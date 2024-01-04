@@ -1,5 +1,5 @@
 import "dotenv/config";
-import "./database/connectdb.ts";
+import "./database/connectdb";
 import cookieParser from "cookie-parser";
 import express from 'express';
 import cors from 'cors';
