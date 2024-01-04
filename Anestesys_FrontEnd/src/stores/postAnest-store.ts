@@ -159,7 +159,7 @@ export const usePostAnestStore = defineStore('postAn', {
         /*------------------- Nota Post Anestésica -------------------*/
         async saveNotaPA(infoNotaPost: any, pid: string, cxid: string){
             await apiAxios({
-                url: "http://localhost:5000/notapa",
+                url: "/notapa",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -225,7 +225,7 @@ export const usePostAnestStore = defineStore('postAn', {
 
         async saveNuevoNotaPA(infoNotaPost: any, pid: string, cxid: string){
             await apiAxios({
-                url: "http://localhost:5000/notapa/add",
+                url: "/notapa/add",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -292,7 +292,7 @@ export const usePostAnestStore = defineStore('postAn', {
             infoNotaPost.npa_TecAnestFinal = String(tecnicaAnest);
             
             await apiAxios({
-                url: `http://localhost:5000/notapa/${String(pid)}`,
+                url: `/notapa/${String(pid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -359,7 +359,7 @@ export const usePostAnestStore = defineStore('postAn', {
             infoNotaPost.npa_TecAnestFinal = String(tecnicaAnest);
             
             await apiAxios({
-                url: `http://localhost:5000/notapa/add/${String(pid)}/${String(cxid)}`,
+                url: `/notapa/add/${String(pid)}/${String(cxid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -426,7 +426,7 @@ export const usePostAnestStore = defineStore('postAn', {
 
         async listNotaPA(pid: string){
             await apiAxios({
-                url: `http://localhost:5000/notapa/${String(pid)}`,
+                url: `/notapa/${String(pid)}`,
                 method: "GET",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -441,7 +441,7 @@ export const usePostAnestStore = defineStore('postAn', {
 
         async listNuevoNotaPA(pid: string, cxid: string){
             await apiAxios({
-                url: `http://localhost:5000/notapa/add/${String(pid)}/${String(cxid)}`,
+                url: `/notapa/add/${String(pid)}/${String(cxid)}`,
                 method: "GET",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -456,7 +456,7 @@ export const usePostAnestStore = defineStore('postAn', {
         /*----------------------- Recuperación -----------------------*/
         async saveRecupera(infoRec: any, pid: string, cxid: string){
             await apiAxios({
-                url: "http://localhost:5000/recupera",
+                url: "/recupera",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -563,7 +563,7 @@ export const usePostAnestStore = defineStore('postAn', {
 
         async saveNuevoRecupera(infoRec: any, pid: string, cxid: string){
             await apiAxios({
-                url: "http://localhost:5000/recupera/add",
+                url: "/recupera/add",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -669,7 +669,7 @@ export const usePostAnestStore = defineStore('postAn', {
 
         async updateRecupera(infoRec: any, pid: string){
             await apiAxios({
-                url: `http://localhost:5000/recupera/${String(pid)}`,
+                url: `/recupera/${String(pid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -775,7 +775,7 @@ export const usePostAnestStore = defineStore('postAn', {
 
         async updateNuevoRecupera(infoRec: any, pid: string, cxid: string){
             await apiAxios({
-                url: `http://localhost:5000/recupera/add/${String(pid)}/${String(cxid)}`,
+                url: `/recupera/add/${String(pid)}/${String(cxid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,

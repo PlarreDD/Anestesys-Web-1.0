@@ -16,7 +16,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
   actions: {
     async getMedicamentosList() {
       await apiAxios({
-        url: "http://localhost:5000/medicamentos",
+        url: "/medicamentos",
         method: "GET",
         headers: {
           Authorization: "Bearer " + userStore.token,
@@ -31,7 +31,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
 
     async getMedicamento(idMedicamento) {
       await apiAxios({
-        url: `http://localhost:5000/medicamentos/${String(idMedicamento)}`,
+        url: `/medicamentos/${String(idMedicamento)}`,
         method: "GET",
         headers: {
           Authorization: "Bearer " + userStore.token,
@@ -46,7 +46,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
 
     async createMedicamento(infoMedicamento: any) {
       await apiAxios({
-        url: "http://localhost:5000/medicamentos",
+        url: "/medicamentos",
         method: "POST",
         headers: {
           Authorization: "Bearer " + userStore.token,
@@ -92,7 +92,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
         infoMedicamento;
 
       await apiAxios({
-        url: `http://localhost:5000/medicamentos/${String(idMedicamento)}`,
+        url: `/medicamentos/${String(idMedicamento)}`,
         method: "PUT",
         headers: {
           Authorization: "Bearer " + userStore.token,
@@ -121,7 +121,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
 
     async deleteMedicamento(infoMedicamento: any) {
       await apiAxios({
-        url: `http://localhost:5000/medicamentos/${String(infoMedicamento)}`,
+        url: `/medicamentos/${String(infoMedicamento)}`,
         method: "DELETE",
         headers: {
           Authorization: "Bearer " + userStore.token,
@@ -147,7 +147,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
     /** MVS **/
     async pingMonitor(nomMonitor: string, dirIPMonitor: string){
       await apiAxios({
-        url: "http://localhost:5000/mvs",
+        url: "/mvs",
         method: "POST",
         headers: {
           Authorization: "Bearer " + userStore.token,
@@ -191,7 +191,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
     async listMonitor(){
       
       await apiAxios({
-        url: "http://localhost:5000/mvs",
+        url: "/mvs",
         method: "GET",
         headers: {
           Authorization: "Bearer " + userStore.token,
@@ -210,7 +210,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
 
     async deleteMonitor(infoMonitor: any){
       await apiAxios({
-        url: `http://localhost:5000/mvs/${String(infoMonitor)}`,
+        url: `/mvs/${String(infoMonitor)}`,
         method: "DELETE",
         headers: {
           Authorization: "Bearer " + userStore.token,
@@ -235,7 +235,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
 
     async statusMSV(dirIP: string){
       await apiAxios({
-        url: "http://localhost:5000/mvs/stat",
+        url: "/mvs/stat",
         method: "POST",
         headers: {
           Authorization: "Bearer " + userStore.token,

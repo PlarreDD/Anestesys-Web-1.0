@@ -143,7 +143,7 @@ export const useTransAnestStore = defineStore('transAn', {
         /* Datos del Ventilador */
         async saveDatosV(regTransAnest: any, pid: string){
             await apiAxios({
-                url: "http://localhost:5000/trans",
+                url: "/trans",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -216,7 +216,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async saveNuevoDatosV(regTransAnest: any, pid: string, cxid: string){
             await apiAxios({
-                url: "http://localhost:5000/trans/add",
+                url: "/trans/add",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -289,7 +289,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async updateDatosV(regTransAnest: any, pid: string){
             await apiAxios({
-                url: `http://localhost:5000/trans/${String(pid)}`,
+                url: `/trans/${String(pid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -361,7 +361,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async updateNuevoDatosV(regTransAnest: any, pid: string, cxid: string){
             await apiAxios({
-                url: `http://localhost:5000/trans/add/${String(pid)}/${String(cxid)}`,
+                url: `/trans/add/${String(pid)}/${String(cxid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -435,7 +435,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async listDatosV(pid: string) {
             await apiAxios({
-                url: `http://localhost:5000/trans/${String(pid)}`,
+                url: `/trans/${String(pid)}`,
                 method: "GET",
                 headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -450,7 +450,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async listNuevoDatosV(pid: string, cxid: string) {
             await apiAxios({
-                url: `http://localhost:5000/trans/add/${String(pid)}/${String(cxid)}`,
+                url: `/trans/add/${String(pid)}/${String(cxid)}`,
                 method: "GET",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -465,7 +465,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async getModoVent(dVId: string) {
             await apiAxios({
-                url: `http://localhost:5000/trans/uno/${String(dVId)}`,
+                url: `/trans/uno/${String(dVId)}`,
                 method: "GET",
                 headers: {
                   Authorization: "Bearer " + userStore.token,
@@ -482,7 +482,7 @@ export const useTransAnestStore = defineStore('transAn', {
                                 vt: string, frecResp: string, IE: string, PLimite: string, Hr:string){
             
             await apiAxios({
-                url: `http://localhost:5000/trans/uno/${String(idVentilador)}`,
+                url: `/trans/uno/${String(idVentilador)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -515,7 +515,7 @@ export const useTransAnestStore = defineStore('transAn', {
         
         async deleteModoVent(dVId: string) {
             await apiAxios({
-                url: `http://localhost:5000/trans/${String(dVId)}`,
+                url: `/trans/${String(dVId)}`,
                 method: "DELETE",
                 headers: {
                   Authorization: "Bearer " + userStore.token,
@@ -538,7 +538,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async updateBalanceH (regTransAnest: any, pid: string){
             await apiAxios({
-                url: `http://localhost:5000/trans/bh/${String(pid)}`,
+                url: `/trans/bh/${String(pid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -602,7 +602,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async updateNuevoBalanceH (regTransAnest: any, pid: string, cxid: string){
             await apiAxios({
-                url: `http://localhost:5000/trans/bh/add/${String(pid)}/${String(cxid)}`,
+                url: `/trans/bh/add/${String(pid)}/${String(cxid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -670,7 +670,7 @@ export const useTransAnestStore = defineStore('transAn', {
             switch (tqx) {
                 case "QXIN":
                     await apiAxios({
-                        url: "http://localhost:5000/trans/tqx",
+                        url: "/trans/tqx",
                         method: "POST",
                         headers: {
                             Authorization: "Bearer " + userStore.token,
@@ -697,7 +697,7 @@ export const useTransAnestStore = defineStore('transAn', {
       
                 case "ANESIN":
                     await apiAxios({
-                        url: 'http://localhost:5000/trans/tqx',
+                        url: '/trans/tqx',
                         method: "POST",
                         headers: {
                             Authorization: "Bearer " + userStore.token,
@@ -724,7 +724,7 @@ export const useTransAnestStore = defineStore('transAn', {
       
                 case "CXIN":
                     await apiAxios({
-                        url: 'http://localhost:5000/trans/tqx',
+                        url: '/trans/tqx',
                         method: "POST",
                         headers: {
                             Authorization: "Bearer " + userStore.token,
@@ -751,7 +751,7 @@ export const useTransAnestStore = defineStore('transAn', {
       
                 case "CXOUT":
                     await apiAxios({
-                        url: 'http://localhost:5000/trans/tqx',
+                        url: '/trans/tqx',
                         method: "POST",
                         headers: {
                             Authorization: "Bearer " + userStore.token,
@@ -778,7 +778,7 @@ export const useTransAnestStore = defineStore('transAn', {
       
                 case "ANESOUT":
                     await apiAxios({
-                        url: 'http://localhost:5000/trans/tqx',
+                        url: '/trans/tqx',
                         method: "POST",
                         headers: {
                             Authorization: "Bearer " + userStore.token,
@@ -805,7 +805,7 @@ export const useTransAnestStore = defineStore('transAn', {
       
                 case "QXOUT":
                     await apiAxios({
-                        url: 'http://localhost:5000/trans/tqx',
+                        url: '/trans/tqx',
                         method: "POST",
                         headers: {
                             Authorization: "Bearer " + userStore.token,
@@ -839,7 +839,7 @@ export const useTransAnestStore = defineStore('transAn', {
             switch (tqx) {
                 case "QXIN":
                     await apiAxios({
-                        url: "http://localhost:5000/trans/tqx/add",
+                        url: "/trans/tqx/add",
                         method: "POST",
                         headers: {
                             Authorization: "Bearer " + userStore.token,
@@ -866,7 +866,7 @@ export const useTransAnestStore = defineStore('transAn', {
       
                 case "ANESIN":
                     await apiAxios({
-                        url: 'http://localhost:5000/trans/tqx/add',
+                        url: '/trans/tqx/add',
                         method: "POST",
                         headers: {
                             Authorization: "Bearer " + userStore.token,
@@ -893,7 +893,7 @@ export const useTransAnestStore = defineStore('transAn', {
       
                 case "CXIN":
                     await apiAxios({
-                        url: 'http://localhost:5000/trans/tqx/add',
+                        url: '/trans/tqx/add',
                         method: "POST",
                         headers: {
                             Authorization: "Bearer " + userStore.token,
@@ -920,7 +920,7 @@ export const useTransAnestStore = defineStore('transAn', {
       
                 case "CXOUT":
                     await apiAxios({
-                        url: 'http://localhost:5000/trans/tqx/add',
+                        url: '/trans/tqx/add',
                         method: "POST",
                         headers: {
                             Authorization: "Bearer " + userStore.token,
@@ -947,7 +947,7 @@ export const useTransAnestStore = defineStore('transAn', {
       
                 case "ANESOUT":
                     await apiAxios({
-                        url: 'http://localhost:5000/trans/tqx/add',
+                        url: '/trans/tqx/add',
                         method: "POST",
                         headers: {
                             Authorization: "Bearer " + userStore.token,
@@ -974,7 +974,7 @@ export const useTransAnestStore = defineStore('transAn', {
       
                 case "QXOUT":
                     await apiAxios({
-                        url: 'http://localhost:5000/trans/tqx/add',
+                        url: '/trans/tqx/add',
                         method: "POST",
                         headers: {
                             Authorization: "Bearer " + userStore.token,
@@ -1031,7 +1031,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
             try {
                 await apiAxios({
-                    url: `http://localhost:5000/trans/msvData/${String(pid)}`,
+                    url: `/trans/msvData/${String(pid)}`,
                     method: "PUT",
                     headers: {
                         Authorization: "Bearer " + userStore.token,
@@ -1074,7 +1074,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
             try {
                 await apiAxios({
-                    url: `http://localhost:5000/trans/msvData/add/${String(pid)}/${String(cxid)}`,
+                    url: `/trans/msvData/add/${String(pid)}/${String(cxid)}`,
                     method: "PUT",
                     headers: {
                         Authorization: "Bearer " + userStore.token,
@@ -1092,7 +1092,7 @@ export const useTransAnestStore = defineStore('transAn', {
         // Gestión de medicamentos
         async getMedicamentosList(pid: string) {
             await apiAxios({
-                url: `http://localhost:5000/trans/medic/${String(pid)}`,
+                url: `/trans/medic/${String(pid)}`,
                 method: "GET",
                 headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -1107,7 +1107,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async getNuevoMedicamentosList(pid: string, cxid: string) {
             await apiAxios({
-                url: `http://localhost:5000/trans/medic/add/${String(pid)}/${String(cxid)}`,
+                url: `/trans/medic/add/${String(pid)}/${String(cxid)}`,
                 method: "GET",
                 headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -1122,7 +1122,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async saveDatosMedicamentos(regTransAnest: any, pid: string, cxid: string){
             await apiAxios({
-                url: "http://localhost:5000/trans/medic",
+                url: "/trans/medic",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1157,7 +1157,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async saveNuevoDatosMedicamentos(regTransAnest: any, pid: string, cxid: string){
             await apiAxios({
-                url: "http://localhost:5000/trans/medic/add",
+                url: "/trans/medic/add",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1193,7 +1193,7 @@ export const useTransAnestStore = defineStore('transAn', {
         async updateMedicamentos(m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
                             m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string, pid:string){
             await apiAxios({
-                url: `http://localhost:5000/trans/medic/${String(pid)}`,
+                url: `/trans/medic/${String(pid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1220,7 +1220,7 @@ export const useTransAnestStore = defineStore('transAn', {
         async updateNuevoMedicamentos(m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
                             m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string, pid:string, cxid:string){
             await apiAxios({
-                url: `http://localhost:5000/trans/medic/add/${String(pid)}/${String(cxid)}`,
+                url: `/trans/medic/add/${String(pid)}/${String(cxid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1246,7 +1246,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async getMedicamento(medicamentoID) {
             await apiAxios({
-              url: `http://localhost:5000/trans/medic/uno/${String(medicamentoID)}`,
+              url: `/trans/medic/uno/${String(medicamentoID)}`,
               method: "GET",
               headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -1263,7 +1263,7 @@ export const useTransAnestStore = defineStore('transAn', {
                             m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string){
             
             await apiAxios({
-                url: `http://localhost:5000/trans/medic/uno/${String(medicamentoID)}`,
+                url: `/trans/medic/uno/${String(medicamentoID)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1290,7 +1290,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async deleteMedicamento(medicamentoID : string) {
             await apiAxios({
-              url: `http://localhost:5000/trans/medic/${String(medicamentoID)}`,
+              url: `/trans/medic/${String(medicamentoID)}`,
               method: "DELETE",
               headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -1314,7 +1314,7 @@ export const useTransAnestStore = defineStore('transAn', {
         // Gestión de relevos
         async getRelevosList(pid: string) {
             await apiAxios({
-                url: `http://localhost:5000/trans/relevo/${String(pid)}`,
+                url: `/trans/relevo/${String(pid)}`,
                 method: "GET",
                 headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -1329,7 +1329,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async getNuevoRelevosList(pid: string, cxid: string) {
             await apiAxios({
-                url: `http://localhost:5000/trans/relevo/add/${String(pid)}/${String(cxid)}`,
+                url: `/trans/relevo/add/${String(pid)}/${String(cxid)}`,
                 method: "GET",
                 headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -1344,7 +1344,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async saveDatosRelevos(regTransAnest: any, pid: string, cxid: string){
             await apiAxios({
-                url: "http://localhost:5000/trans/relevo",
+                url: "/trans/relevo",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1376,7 +1376,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async saveNuevoDatosRelevos(regTransAnest: any, pid: string, cxid: string){
             await apiAxios({
-                url: "http://localhost:5000/trans/relevo/add",
+                url: "/trans/relevo/add",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1409,7 +1409,7 @@ export const useTransAnestStore = defineStore('transAn', {
         async updateRelevos(r_horaRelevo: string, r_tipoRel: string, r_matriculaRel: string, 
                             r_anestesiologoRel: string, r_observacionesRel: string, pid:string){
             await apiAxios({
-                url: `http://localhost:5000/trans/relevo/${String(pid)}`,
+                url: `/trans/relevo/${String(pid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1436,7 +1436,7 @@ export const useTransAnestStore = defineStore('transAn', {
         async updateNuevoRelevos(r_horaRelevo: string, r_tipoRel: string, r_matriculaRel: string, 
                             r_anestesiologoRel: string, r_observacionesRel: string, pid:string, cxid: string){
             await apiAxios({
-                url: `http://localhost:5000/trans/relevo/add/${String(pid)}/${String(cxid)}`,
+                url: `/trans/relevo/add/${String(pid)}/${String(cxid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1462,7 +1462,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async getRelevo(relevoID) {
             await apiAxios({
-              url: `http://localhost:5000/trans/relevo/uno/${String(relevoID)}`,
+              url: `/trans/relevo/uno/${String(relevoID)}`,
               method: "GET",
               headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -1479,7 +1479,7 @@ export const useTransAnestStore = defineStore('transAn', {
                                     r_anestesiologoRel: string, r_observacionesRel: string){
             
             await apiAxios({
-                url: `http://localhost:5000/trans/relevo/uno/${String(relevoID)}`,
+                url: `/trans/relevo/uno/${String(relevoID)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1506,7 +1506,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async deleteRelevo(relevoID : string) {
             await apiAxios({
-              url: `http://localhost:5000/trans/relevo/${String(relevoID)}`,
+              url: `/trans/relevo/${String(relevoID)}`,
               method: "DELETE",
               headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -1530,7 +1530,7 @@ export const useTransAnestStore = defineStore('transAn', {
         // Gestión de eventos
         async getEventosList(pid: string) {
             await apiAxios({
-                url: `http://localhost:5000/trans/evento/${String(pid)}`,
+                url: `/trans/evento/${String(pid)}`,
                 method: "GET",
                 headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -1545,7 +1545,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async getNuevoEventosList(pid: string, cxid: string) {
             await apiAxios({
-                url: `http://localhost:5000/trans/evento/add/${String(pid)}/${String(cxid)}`,
+                url: `/trans/evento/add/${String(pid)}/${String(cxid)}`,
                 method: "GET",
                 headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -1560,7 +1560,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async saveDatosEventos(regTransAnest: any, pid: string, cxid: string){
             await apiAxios({
-                url: "http://localhost:5000/trans/evento",
+                url: "/trans/evento",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1590,7 +1590,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async saveNuevoDatosEventos(regTransAnest: any, pid: string, cxid: string){
             await apiAxios({
-                url: "http://localhost:5000/trans/evento/add",
+                url: "/trans/evento/add",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1620,7 +1620,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async updateEventos(e_horaEvento: string, e_tipoEve: string, e_detalleEvento: string, pid:string){
             await apiAxios({
-                url: `http://localhost:5000/trans/evento/${String(pid)}`,
+                url: `/trans/evento/${String(pid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1646,7 +1646,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async updateNuevoEventos(e_horaEvento: string, e_tipoEve: string, e_detalleEvento: string, pid:string, cxid: string){
             await apiAxios({
-                url: `http://localhost:5000/trans/evento/add/${String(pid)}/${String(cxid)}`,
+                url: `/trans/evento/add/${String(pid)}/${String(cxid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1672,7 +1672,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async getEvento(eventoID) {
             await apiAxios({
-              url: `http://localhost:5000/trans/evento/uno/${String(eventoID)}`,
+              url: `/trans/evento/uno/${String(eventoID)}`,
               method: "GET",
               headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -1688,7 +1688,7 @@ export const useTransAnestStore = defineStore('transAn', {
         async updateEvento(eventoID : string, e_horaEvento: string, e_tipoEve: string, e_detalleEvento: string){
             
             await apiAxios({
-                url: `http://localhost:5000/trans/evento/uno/${String(eventoID)}`,
+                url: `/trans/evento/uno/${String(eventoID)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1714,7 +1714,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async deleteEvento(eventoID : string) {
             await apiAxios({
-              url: `http://localhost:5000/trans/evento/${String(eventoID)}`,
+              url: `/trans/evento/${String(eventoID)}`,
               method: "DELETE",
               headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -1737,7 +1737,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async getIniciaMonitoreo() {
             await apiAxios({
-              url: 'http://localhost:5000/mvs/monitor',
+              url: '/mvs/monitor',
               method: 'GET',
               headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -1753,7 +1753,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async getDetieneMonitoreo() {
             await apiAxios({
-              url: 'http://localhost:5000/mvs/stop',
+              url: '/mvs/stop',
               method: 'GET',
               headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -1769,7 +1769,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
         async getDatosMonitor() {
             await apiAxios({
-              url: 'http://localhost:5000/mvs/com',
+              url: '/mvs/com',
               method: 'GET',
               headers: {
                 Authorization: "Bearer " + userStore.token,
