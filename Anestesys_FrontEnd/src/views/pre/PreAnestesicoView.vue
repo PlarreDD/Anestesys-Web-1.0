@@ -6,7 +6,10 @@
     <div class="input-group mb-3">
       <div class="col-md-6">
         <!--Buscador-->          
-          <el-input v-model="idStore.numExpediente" @keyup.capture="obtenerPaciente" class="form-control-input" placeholder="Buscar Expediente..." />
+        <el-input v-model="idStore.numExpediente" @keyup.capture="obtenerPaciente" class="form-control-input" placeholder="Buscar número de expediente..." />
+          <span class="password-icon show-password" id="mostrar">
+            <font-awesome-icon icon="fa-solid fa-circle-xmark" @click="vaciarInputs"/>
+          </span>
           <el-card v-show="mostrarDatosFiltradosExp" class="filtered-container" v-if="opcionExp.length">
               <div v-for="(item, index) in opcionExp" :key="index" @click="selecDatoExp(item)">                                        
                   <p>{{ item }}</p> <!-- Mostrar los datos filtrados -->
@@ -4707,7 +4710,13 @@ export default defineComponent({
       this.mostrarSpinner=false;
 
       transStore.datosMSV=''
-    },   
+    },
+
+    async vaciarInputs(){
+      this.idStore.numExpediente = ''
+
+      await this.obtenerPaciente()
+    },
 
     // Obtener datos de paciente seleccionado
     async obtenerPaciente(){
@@ -5379,12 +5388,12 @@ export default defineComponent({
         this.mostrarVistaRapida=false
     },
 
-    selecDatoExp(item) {
+    async selecDatoExp(item) {
         // Al hacer clic en un elemento, se almacena en selectedItem y se mostrará en el input
         this.idStore.numExpediente = item;
         this.mostrarDatosFiltradosExp= false
 
-        this.obtenerPaciente()
+        await this.obtenerPaciente()
     },
   }  
 })
