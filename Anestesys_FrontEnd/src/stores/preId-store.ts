@@ -37,6 +37,12 @@ export const usePreIdStore = defineStore('preid', {
         vaciadroTrans: ref(false),
         vaciadoPostNota: ref(false),
         vaciadoPostRecup: ref(false),
+
+        cie10: ref(null),
+        cie9: ref(null),
+
+        datoCIE10: ref(null),
+        datoCIE9: ref(null),
         
         // ID
         numeroExpediente: ref(null),
@@ -471,6 +477,36 @@ export const usePreIdStore = defineStore('preid', {
                     timer: 2000,
                     timerProgressBar: true
                 })
+            })
+            .catch((e: any) => {
+            });
+        },
+
+        async getCIE10List() {            
+            await apiAxios({
+              url: `http://localhost:5000/preId/cie10/uno/${this.datoCIE10}`,
+              method: "GET",
+              headers: {
+                Authorization: "Bearer " + userStore.token,
+              },
+            })
+            .then((res: any) => {
+                this.cie10 = res.data.cie10;            
+            })
+            .catch((e: any) => {
+            });
+        },
+
+        async getCIE9List() {
+            await apiAxios({                
+              url: `http://localhost:5000/preId/cie9/uno/${this.datoCIE9}`,
+              method: "GET",
+              headers: {
+                Authorization: "Bearer " + userStore.token,
+              },
+            })
+            .then((res: any) => {
+                this.cie9 = res.data.cie9;
             })
             .catch((e: any) => {
             });
@@ -1535,7 +1571,7 @@ export const usePreIdStore = defineStore('preid', {
         /********************** Consulta Expedientes ***********************/
         async getExpedientesList() {
             await apiAxios({
-                url: "http://localhost:5000/preId/exp",
+                url: `http://localhost:5000/preId/exp/${this.numExpediente}`,
                 method: "GET",
                 headers: {
                 Authorization: "Bearer " + userStore.token,

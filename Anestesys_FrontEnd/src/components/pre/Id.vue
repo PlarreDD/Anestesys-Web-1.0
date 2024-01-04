@@ -158,7 +158,7 @@
                             <!-- Habitación -->
                             <div class="col-md-2">
                                 <label class="form-label fw-bold"> Habitación </label>
-                                <input type="number" @keyup.capture="enviarDatos"
+                                <input type="text" @keyup.capture="enviarDatos"
                                        class="form-control"
                                        v-model="infoPreIdPaciente.habitacion"
                                        :class="infoPreIdPaciente.habitacion != undefined && infoPreIdPaciente.habitacion != '' ?
@@ -223,15 +223,14 @@
                         <!-- CIE-10 -->
                         <div class="col-md-8">
                             <label class="form-label fw-bold mt-2"> CIE-10 </label>
-                            <el-select v-model="infoPreIdPaciente.cie10" @change="enviarDatos"
-                                       filterable
+                            <el-input v-model="infoPreIdPaciente.cie10" @keyup.capture="obtenerValoresCIE10"
                                        :class="infoPreIdPaciente.cie10 != undefined && infoPreIdPaciente.cie10 != '' ?
-                                              'form-control-select border border-success formSombra' : 'form-control-select'" :disabled="propBloquearInputs == true">
-                                <el-option 
-                                    v-for="estadoNacimiento in opcionCIE10"
-                                    :value="estadoNacimiento.lblCie10">
-                                </el-option>
-                            </el-select>
+                                              'form-control-input border border-success formSombra' : 'form-control-input'" :disabled="propBloquearInputs == true" />
+                            <el-card v-show="mostrarDatosFiltradosCIE10" class="filtered-container" v-if="opcionCIE10.length">
+                                <div v-for="(item, index) in opcionCIE10" :key="index" @click="selecDatoCIE10(item)">                                        
+                                    <p>{{ item }}</p> <!-- Mostrar los datos filtrados -->
+                                </div>
+                            </el-card>
                         </div>
 
                         <div class="row g-3 mt-2">
@@ -250,16 +249,15 @@
 
                             <!-- CIE-9 -->
                             <div class="col-md-6">
-                                <label class="form-label fw-bold"> CIE-9 </label>
-                                <el-select v-model="infoPreIdPaciente.cie9" @change="enviarDatos"
-                                           filterable
+                                <label class="form-label fw-bold"> CIE-9 </label>                               
+                                <el-input v-model="infoPreIdPaciente.cie9" @keyup.capture="obtenerValoresCIE9"                                           
                                            :class="infoPreIdPaciente.cie9 != undefined && infoPreIdPaciente.cie9 != '' ?
-                                                  'form-control-select border border-success formSombra' : 'form-control-select'" :disabled="propBloquearInputs == true">
-                                    <el-option
-                                        v-for="estadoNacimiento in opcionCIE9"
-                                        :value="estadoNacimiento.lblCie9">
-                                    </el-option>
-                                </el-select>
+                                                  'form-control-input border border-success formSombra' : 'form-control-input'" :disabled="propBloquearInputs == true" />
+                                <el-card v-show="mostrarDatosFiltradosCIE9" class="filtered-container" v-if="opcionCIE9.length">
+                                    <div v-for="(item, index) in opcionCIE9" :key="index" @click="selecDatoCIE9(item)">                                        
+                                        <p>{{ item }}</p> <!-- Mostrar los datos filtrados -->
+                                    </div>
+                                </el-card>
                             </div>
                         </div>
 
@@ -440,13 +438,14 @@
 <script lang="ts">
 import type { regIdPaciente } from "@/interfaces/regPreAnest"
 import { defineComponent } from "vue"
-import { ElSelect, ElOption } from 'element-plus';
+import { ElSelect, ElOption, ElInput, ElCard } from 'element-plus';
 import { usePreIdStore } from "../../stores/preId-store";
+import Multiselect from '@vueform/multiselect';
 
 const preIdStore = usePreIdStore();
 
 export default defineComponent({
-    components: { ElSelect, ElOption },
+    components: { ElSelect, ElOption, ElInput, ElCard, Multiselect },
 
     props: {
         propNumExp: {type: Boolean},
@@ -489,17 +488,14 @@ export default defineComponent({
             valorEstRes: String,
             lblEstRes: String,
 
-            opcionCIE10: [
-                { valorCie10: '', lblCie10: '' },
-                { valorCie10: 'opcion1', lblCie10: 'Opción 1' },
-                { valorCie10: 'opcion2', lblCie10: 'Opción 2' }
-            ],
-            
-            opcionCIE9: [
-                { valorCie9: '', lblCie9: '' },
-                { valorCie9: 'opcion1', lblCie9: 'Opción 1' },
-                { valorCie9: 'opcion2', lblCie9: 'Opción 2' }
-            ],
+            opcionCIE10: [],            
+            opcionCIE9: [],
+
+            datoSeleccionadoCIE9: '',
+            datoSeleccionadoCIE10: '',
+
+            mostrarDatosFiltradosCIE9: false,
+            mostrarDatosFiltradosCIE10: false,
             
             opcionNacionalidad: [
                 { valorNac: '', lblNac: '' },
@@ -634,6 +630,39 @@ export default defineComponent({
             this.calcularEdad()
         },
 
+        async obtenerValoresCIE10(){
+            this.mostrarDatosFiltradosCIE10=true
+            preIdStore.datoCIE10 = await this.infoPreIdPaciente.cie10 
+            await preIdStore.getCIE10List()
+            this.opcionCIE10 = await preIdStore.cie10.map(item=>item.nombre);
+            if(this.infoPreIdPaciente.cie10 == ''){
+                this.mostrarDatosFiltradosCIE10=false
+            }
+        },
+
+        async obtenerValoresCIE9(){
+            this.mostrarDatosFiltradosCIE9=true
+            preIdStore.datoCIE9 = await this.infoPreIdPaciente.cie9
+            await preIdStore.getCIE9List()
+            this.opcionCIE9 = await preIdStore.cie9.map(item=>item.nombre);
+            if(this.infoPreIdPaciente.cie9 == ''){
+                this.mostrarDatosFiltradosCIE9=false
+            }
+        },
+
+        selecDatoCIE10(item) {
+            // Al hacer clic en un elemento, se almacena en selectedItem y se mostrará en el input
+            this.infoPreIdPaciente.cie10 = item;
+            this.mostrarDatosFiltradosCIE10= false
+        },
+
+        selecDatoCIE9(item) {
+            // Al hacer clic en un elemento, se almacena en selectedItem y se mostrará en el input
+            this.infoPreIdPaciente.cie9 = item;
+            this.mostrarDatosFiltradosCIE9= false
+        },
+
+
         obtenerDatos() {
             this.$emit("validar", this.infoPreIdPaciente.numExped,
                                   this.infoPreIdPaciente.nomPaciente);
@@ -722,7 +751,23 @@ export default defineComponent({
 })
 </script>
 
+<style src="@vueform/multiselect/themes/default.css"></style>
+
 <style scoped>
+.filtered-container {
+  max-height: 200px; /* Altura máxima del contenedor */
+  overflow-y: auto; /* Añadir scroll vertical si el contenido excede la altura */
+  border: 1px solid #ccc; /* Opcional: agregar borde para mejor visualización */
+  padding: 5px; /* Opcional: agregar espacio interno */
+  position: relative;
+  cursor: pointer
+}
+
+/* Estilos para los elementos dentro del contenedor */
+.filtered-container > div {
+  padding: 8px;
+}
+
 .borderPrincipal {
   border-radius: 5px;
   padding: 1rem;
