@@ -158,7 +158,7 @@
                             <!-- Habitación -->
                             <div class="col-md-2">
                                 <label class="form-label fw-bold"> Habitación </label>
-                                <input type="number" @keyup.capture="enviarDatos"
+                                <input type="text" @keyup.capture="enviarDatos"
                                        class="form-control"
                                        v-model="infoPreIdPaciente.habitacion"
                                        :class="infoPreIdPaciente.habitacion != undefined && infoPreIdPaciente.habitacion != '' ?
