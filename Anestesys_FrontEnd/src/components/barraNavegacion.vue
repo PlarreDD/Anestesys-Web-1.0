@@ -13,7 +13,7 @@
         <div class="col-md-5"></div>
 
         <!-- Nombre DR -->
-        <div class="col-md-2 text-white alinearElementoD">
+        <div class="col-md-2 text-white alinearElementoD" data-bs-toggle="modal" data-bs-target="#perfilModal">
           <img src="../../public/images/perfil.jpg" class="imgPerfil" />
           {{ userStore.Nombre == undefined || userStore.Apellido == undefined ? '-':
           "Dr. " + userStore.Nombre.split(' ')[0] + " " + userStore.Apellido.split(' ')[0] }}
@@ -33,6 +33,7 @@
           </button>
         </div>
 
+        <!-- Menú lateral -->
         <div
           class="offcanvas nav-config"
           tabindex="-1"
@@ -103,6 +104,26 @@
         </div>
       </div>
     </nav>
+
+    <div class="modal"
+         id="perfilModal"
+         tabindex="-1"
+         aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
+        <div class="modal-content colorModalMedicamentos">
+          <div class="input-group mb-3">
+            <div class="modal-body">
+              <div class="col-md-12">
+                <div class="row g-3">
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Modal medicamentos -->
     <div class="modal"
