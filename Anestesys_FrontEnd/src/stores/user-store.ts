@@ -66,7 +66,7 @@ export const useUserStore = defineStore('user', {
             }, Number(this.expiresIn) * 1000 - 5000)
         },
 
-        registerUsr(email: string, nomUsr: string, apUsr: string, fechaNac: string){
+        registerUsr(email: string, nomUsr: string, apUsr: string, fechaNac: string, cedula: string){
             const NombreDr = ref('');
             const ApPatDr = ref('');
             const FechaNac = ref('');
@@ -94,7 +94,7 @@ export const useUserStore = defineStore('user', {
                 password: String(genPswd.value),
                 repassword: String(genPswd.value),
                 nomMed: nomUsr,
-                apMed: apUsr,})
+                apMed: apUsr, fechaNac: fechaNac, cedula: ""})
                     .then((res:any) => {
                         /* Mensaje de registro exitoso */
                         swal.fire({

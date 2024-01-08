@@ -6,14 +6,14 @@ import { Request,
          Response } from "express";    // Obtiene los Response y Request que se envían
 
 export const register = async (req:Request, res:Response) => {
-    const {email, password, nomMed, apMed} = req.body;
+    const {email, password, nomMed, apMed, fechaNac, cedula, especialidad, foto, horaSesion} = req.body;
 
     try{
         let user = await User.findOne({email});
 
         if(user) throw {code: 11000};
 
-        user = new User({email, password, nomMed, apMed});
+        user = new User({email, password, nomMed, apMed, fechaNac, cedula, especialidad, foto, horaSesion});
         await user.save();
 
         //Generar el JWT

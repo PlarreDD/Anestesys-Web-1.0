@@ -25,6 +25,16 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+
+    fechaNac: {type: String},
+
+    cedula: {type: String},
+
+    especialidad: {type: String},
+
+    foto: {type: String},
+
+    horaSesion: {type: String},
 });
 
 userSchema.pre("save", async function(next){

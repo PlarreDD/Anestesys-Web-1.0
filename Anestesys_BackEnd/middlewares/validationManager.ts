@@ -50,17 +50,7 @@ export const bodyRegisterValidator = [
     
     body("password", "Minimo 6 caracteres")
         .trim()
-        .isLength({min: 6}),
-    
-    body("password", "Formato de password incorrecto")
-        .custom(
-            (value, {req}) => {
-                if(value !== req.body.repassword){
-                    throw new Error("Las contraseñas no coinciden");
-                }
-                return value;
-            }
-        ),
+        .isLength({min: 6}),        
 
     validationResultExpress,
 ];

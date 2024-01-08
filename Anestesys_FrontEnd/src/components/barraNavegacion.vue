@@ -13,7 +13,7 @@
         <div class="col-md-5"></div>
 
         <!-- Nombre DR -->
-        <div class="col-md-2 text-white alinearElementoD" data-bs-toggle="modal" data-bs-target="#perfilModal">
+        <div class="col-md-2 text-white alinearElementoD puntero" data-bs-toggle="modal" data-bs-target="#perfilModal">
           <img src="../../public/images/perfil.jpg" class="imgPerfil" />
           {{ userStore.Nombre == undefined || userStore.Apellido == undefined ? '-':
           "Dr. " + userStore.Nombre.split(' ')[0] + " " + userStore.Apellido.split(' ')[0] }}
@@ -105,6 +105,7 @@
       </div>
     </nav>
 
+    <!-- Modal perfil -->
     <div class="modal"
          id="perfilModal"
          tabindex="-1"
@@ -116,7 +117,29 @@
             <div class="modal-body">
               <div class="col-md-12">
                 <div class="row g-3">
-                  
+                  <div class="col-md-11">
+                    <h5 class="text-white fw-bold">PERFIL</h5>
+                    <h6 class="text-white fw-bold">Gestión de perfil</h6>
+                  </div>
+
+                  <div class="col-md-1 div-img">
+                    <button type="button" class="btn fw-bold" data-bs-dismiss="modal" aria-label="Close">
+                      <i class="text-white">
+                        <font-awesome-icon icon="fa-solid fa-xmark" size="2xl"/>
+                      </i>
+                    </button>
+                  </div>
+
+                  <form class="row g-3" @submit.prevent="">
+                    <label  class="form-label fw-bold text-white">Nombre</label>    
+                    <div class="col-md-4">
+                      <input type="text"
+                             class="form-control"
+                             v-model="userStore.Nombre.split(' ')[0]"
+                             placeholder="Nombre del médico"/>
+                    </div>
+                  </form>
+
                 </div>
               </div>
             </div>
@@ -673,5 +696,8 @@ export default defineComponent({
 }
 .modal-med-largo {
   height: 515px;
+}
+.puntero {
+  cursor: pointer;
 }
 </style>
