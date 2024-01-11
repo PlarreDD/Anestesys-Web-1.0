@@ -133,7 +133,7 @@
                   <form class="row g-3 mt-1" @submit.prevent="">
                     
                     <div class="col-md-4">
-                      <img :src="userStore.Foto" alt="" style=" width: 140px; height: auto; border-radius: 70px; position: fixed;" >                      
+                      <img :src="'data:image/png;base64,{{user.foto}}'" alt="" style=" width: 140px; height: auto; border-radius: 70px; position: fixed;" >                      
                     </div>
                     <div class="col-md-5">
                       <label class="form-label fw-bold text-white">Nombre(s): </label>    
@@ -160,7 +160,7 @@
                     </div>
 
                     <div class="col-md-4">
-                      <input type="file" :class="perfilData == false ? 'form-control invisible' : 'form-control'" style="position: relative;">
+                      <input type="file" accept="image/*" :class="perfilData == false ? 'form-control invisible' : 'form-control'" style="position: relative;" @change="handleFileChange">
                       <!-- <button class="btn btn-secondary" @click="">Subir</button> -->
                     </div>
                     <div class="col-md-5">
@@ -476,7 +476,8 @@ export default defineComponent({
       user: { } as regUsr,
       editar: false,
 
-      perfilData: false
+      perfilData: false,
+      imagenSeleccionada : ''
     };
   },
 
@@ -489,6 +490,9 @@ export default defineComponent({
     this.user.email = this.userStore.Correo
     this.user.especialidad = this.userStore.Especialidad
     this.user.cedula = this.userStore.Cedula
+    this.user.foto = this.userStore.Foto
+    console.log(this.user.foto);
+    
   },
 
   methods: {
@@ -668,10 +672,20 @@ export default defineComponent({
     },
 
     async actualizarDatosMedico(){
-      this.userStore.updateMed(userStore.IdMed, this.user.cedula, this.user.especialidad)
+      const formData = new FormData();
+      formData.append('cedula', this.user.cedula);
+      formData.append('especialidad', this.user.especialidad);
+      formData.append('foto', this.imagenSeleccionada);
+
+      this.userStore.updateMed(userStore.IdMed, formData)
 
       this.perfilData = false
-    }
+    },
+
+    handleFileChange(event) {
+      const file = event.target.files[0];
+      this.imagenSeleccionada = file;
+    },
   },
 });
 </script>

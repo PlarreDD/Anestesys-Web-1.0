@@ -4,6 +4,10 @@ import { generateToken,
 import bcryptjs from "bcryptjs";
 import { Request,
          Response } from "express";    // Obtiene los Response y Request que se envían
+import multer from 'multer';
+
+const storage = multer.memoryStorage(); // Almacenamiento en memoria
+const upload = multer({ storage: storage });
 
 export const register = async (req:Request, res:Response) => {
     const {email, password, nomMed, apMed, fechaNac, cedula, especialidad, foto} = req.body;
@@ -102,12 +106,28 @@ export const logout = (_req:Request, res:Response) => {
 export const updateMedico = async (req: any, res: Response) => {
     try {
         const { id } = req.params;
-        const user = req.body;
+        const { cedula, especialidad } = req.body;
 
-        const medico = await User.findByIdAndUpdate( id, { cedula: user.cedula,
-                                                            especialidad: user.especialidad,
-                                                            foto: user.foto } );        
+        // Manejar la carga de la imagen con Multer
+        upload.single('foto')(req, res, async (err: any) => {
+        if (err) {
+            return res.status(400).json({ error: 'Error al cargar la imagen' });
+        }
+
+        const medico = await User.findByIdAndUpdate(
+            id,
+            { cedula, especialidad, foto: req.file.buffer.toString('base64') },
+            { new: true }
+        );
+
         return res.json({ medico });
+        });
+        // const user = req.body;
+
+        // const medico = await User.findByIdAndUpdate( id, { cedula: user.cedula,
+        //                                                     especialidad: user.especialidad,
+        //                                                     foto: user.foto } );        
+        // return res.json({ medico });
     } catch (error) {
         if (error.kind === "ObjectId") 
             return res.status(403).json({ error: "Formato de ID incorrecto" });

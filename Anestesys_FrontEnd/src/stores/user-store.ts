@@ -166,18 +166,14 @@ export const useUserStore = defineStore('user', {
                         }});
         },
 
-        updateMed( _id:string, cedula: string, especialidad: string){
+        updateMed( _id:string, formData:FormData){
             apiAxios({
                 url: `http://localhost:5000/updateMed/${String(this.IdMed)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + this.token,
                 },
-                data: {
-                    _id: _id,
-                    cedula: cedula,
-                    especialidad: especialidad,
-                }
+                data: formData
             })
             .then((res: any) => {
                 swal.fire({
