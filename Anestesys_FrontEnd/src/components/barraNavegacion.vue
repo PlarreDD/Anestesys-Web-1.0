@@ -14,7 +14,7 @@
 
         <!-- Nombre DR -->
         <div class="col-md-2 text-white alinearElementoD puntero" data-bs-toggle="modal" data-bs-target="#perfilModal">
-          <img src="../../public/images/perfil.jpg" class="imgPerfil" />
+          <img :src="userStore.Foto" class="imgPerfil" />
           {{ userStore.Nombre == undefined || userStore.Apellido == undefined ? '-':
           "Dr. " + userStore.Nombre.split(' ')[0] + " " + userStore.Apellido.split(' ')[0] }}
         </div>
@@ -130,14 +130,71 @@
                     </button>
                   </div>
 
-                  <form class="row g-3" @submit.prevent="">
-                    <label  class="form-label fw-bold text-white">Nombre</label>    
+                  <form class="row g-3 mt-1" @submit.prevent="">
+                    
                     <div class="col-md-4">
-                      <input type="text"
-                             class="form-control"
-                             v-model="userStore.Nombre.split(' ')[0]"
-                             placeholder="Nombre del médico"/>
+                      <img :src="userStore.Foto" alt="" style=" width: 140px; height: auto; border-radius: 70px; position: fixed;" >                      
                     </div>
+                    <div class="col-md-5">
+                      <label class="form-label fw-bold text-white">Nombre(s): </label>    
+                      <input type="text" :class="perfilData == false ? 'form-control input-perfil' : 'form-control input-read-perfil'" 
+                          v-model="user.nomUsr" placeholder="Nombre(s)" readonly/>
+                    </div>                    
+                    <div class="col-md-3">
+                      <label class="form-label fw-bold text-white">Fecha de Nacimiento: </label>
+                      <input type="text" :class="perfilData == false ? 'form-control input-perfil' : 'form-control form-control input-read-perfil'" 
+                          v-model="user.fechaNac" placeholder="Fecha de nacimiento" readonly/>                      
+                    </div>
+
+                    <div class="col-md-4">                      
+                    </div>
+                    <div class="col-md-5">
+                      <label class="form-label fw-bold text-white">Apellidos: </label>                         
+                      <input type="text" :class="perfilData == false ? 'form-control input-perfil' : 'form-control form-control input-read-perfil'" 
+                          v-model="user.apUsr" placeholder="Apellidos" readonly/> 
+                    </div>
+                    <div class="col-md-3">
+                      <label class="form-label fw-bold text-white">Cédula:</label>
+                      <input type="text" :class="perfilData == false ? 'form-control input-perfil' : 'form-control'" 
+                          v-model="user.cedula" placeholder="Cédula" :readonly="perfilData == false"/> 
+                    </div>
+
+                    <div class="col-md-4">
+                      <input type="file" :class="perfilData == false ? 'form-control invisible' : 'form-control'" style="position: relative;">
+                      <!-- <button class="btn btn-secondary" @click="">Subir</button> -->
+                    </div>
+                    <div class="col-md-5">
+                      <label class="form-label fw-bold text-white">Correo Electrónico:</label>
+                      <input type="text" :class="perfilData == false ? 'form-control input-perfil' : 'form-control form-control input-read-perfil'" 
+                          v-model="user.email" placeholder="Correo electrónico" readonly/> 
+                    </div>
+                    <div class="col-md-3">
+                      <label class="form-label fw-bold text-white">Especialidad:</label>                         
+                      <input type="text" :class="perfilData == false ? 'form-control input-perfil' : 'form-control'" 
+                          v-model="user.especialidad" placeholder="Especialidad" :readonly="perfilData == false"/>
+                    </div>
+
+                    <div class="col-md-4"></div>.
+                    <div class="col-md-5">
+                      <button type="button" :class="perfilData == false ? 'invisible' : 'btn btn-modal-medicamentos fw-bold'" @click="ocultarInputsPerfil">
+                        Cancelar
+                      </button>
+                    </div>
+                    <div class="col-md-2">
+
+                      <template v-if="perfilData === false">
+                        <button type="button" class="btn btn-modal-medicamentos fw-bold" @click="mostrarInputsPerfil">
+                          <font-awesome-icon icon="fa-solid fa-pen-to-square" size="md" class=""/> Modificar
+                        </button>
+                      </template>
+
+                      <template v-else>
+                        <button type="button" class="btn btn-modal-medicamentos fw-bold" @click="actualizarDatosMedico">
+                          Actualizar
+                        </button>
+                      </template>                      
+                    </div>
+
                   </form>
 
                 </div>
@@ -404,6 +461,7 @@ import swal from "sweetalert2";
 import { useMedicamentoStore } from "../stores/medicamento-store";
 import type { regMedicamento,
               ConfigMonitor } from "@/interfaces/regMedicamento";
+import type { regUsr } from '@/interfaces/regUsr';
 
 const userStore = useUserStore();
 const medStore = useMedicamentoStore();
@@ -415,13 +473,22 @@ export default defineComponent({
       medStore,
       infoMedicamento: {} as regMedicamento,
       configMonitor: {} as ConfigMonitor,
+      user: { } as regUsr,
       editar: false,
+
+      perfilData: false
     };
   },
 
   mounted() {
     medStore.getMedicamentosList();
     this.listadoMonitor();
+    this.user.nomUsr = this.userStore.Nombre
+    this.user.apUsr = this.userStore.Apellido
+    this.user.fechaNac = this.userStore.FechaNac
+    this.user.email = this.userStore.Correo
+    this.user.especialidad = this.userStore.Especialidad
+    this.user.cedula = this.userStore.Cedula
   },
 
   methods: {
@@ -591,6 +658,20 @@ export default defineComponent({
     async listadoMonitor() {
       await medStore.listMonitor();
     },
+
+    async mostrarInputsPerfil(){
+      this.perfilData = true
+    },
+
+    async ocultarInputsPerfil(){
+      this.perfilData = false
+    },
+
+    async actualizarDatosMedico(){
+      this.userStore.updateMed(userStore.IdMed, this.user.cedula, this.user.especialidad)
+
+      this.perfilData = false
+    }
   },
 });
 </script>
@@ -699,5 +780,15 @@ export default defineComponent({
 }
 .puntero {
   cursor: pointer;
+}
+.input-perfil{
+  background-color: #002d60 !important;
+  color: #fff !important;
+  border: 1px solid #002d60 !important;
+  padding: 0% !important;
+}
+.input-read-perfil{
+  background-color: #002d60 !important;
+  color: #fff !important;
 }
 </style>

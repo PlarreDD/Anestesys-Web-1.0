@@ -8,8 +8,14 @@ export const useUserStore = defineStore('user', {
     state: () => ({
         token: ref(null),
         expiresIn: ref(null),
+        IdMed: ref(null),
         Nombre: ref(null),
         Apellido: ref(null),
+        FechaNac: ref(null),
+        Cedula: ref(null),
+        Especialidad: ref(null),
+        Correo: ref(null),
+        Foto: ref(null)
     }),
 
     actions: {
@@ -22,6 +28,12 @@ export const useUserStore = defineStore('user', {
                 this.expiresIn = res.data.xprIn;
                 this.Nombre = res.data.Nombre;
                 this.Apellido = res.data.Apellido;
+                this.FechaNac = res.data.FechaNac
+                this.Cedula = res.data.Cedula
+                this.Especialidad = res.data.Especialidad
+                this.Correo = res.data.Correo
+                this.Foto = res.data.Foto
+                this.IdMed = res.data.Id
                 
                 /* Mensaje de Bienvenida */
                 swal.fire({
@@ -66,7 +78,7 @@ export const useUserStore = defineStore('user', {
             }, Number(this.expiresIn) * 1000 - 5000)
         },
 
-        registerUsr(email: string, nomUsr: string, apUsr: string, fechaNac: string, cedula: string){
+        registerUsr(email: string, nomUsr: string, apUsr: string, fechaNac: string){
             const NombreDr = ref('');
             const ApPatDr = ref('');
             const FechaNac = ref('');
@@ -92,9 +104,13 @@ export const useUserStore = defineStore('user', {
             apiAxios.post("http://localhost:5000/register", {
                 email: email,
                 password: String(genPswd.value),
-                repassword: String(genPswd.value),
                 nomMed: nomUsr,
-                apMed: apUsr, fechaNac: fechaNac, cedula: ""})
+                apMed: apUsr,
+                fechaNac: fechaNac,
+                cedula: "",
+                especialidad: "",
+                foto: "../../public/images/perfil.jpg",
+                horaSesion: Date()})
                     .then((res:any) => {
                         /* Mensaje de registro exitoso */
                         swal.fire({
@@ -148,6 +164,34 @@ export const useUserStore = defineStore('user', {
                         }
                         else{
                         }});
+        },
+
+        updateMed( _id:string, cedula: string, especialidad: string){
+            apiAxios({
+                url: `http://localhost:5000/updateMed/${String(this.IdMed)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + this.token,
+                },
+                data: {
+                    _id: _id,
+                    cedula: cedula,
+                    especialidad: especialidad,
+                }
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos del perfil actualizados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+            });
         },
 
         logout(){

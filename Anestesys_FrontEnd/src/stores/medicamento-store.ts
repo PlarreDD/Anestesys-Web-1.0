@@ -60,7 +60,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
           this.medicamentos = res.data.medicamentos;
 
           swal.fire({
-            title: "Medicamento registrado correctamente",
+            title: "Datos del medicamento registrados correctamente",
             icon: "success",
             showConfirmButton: false,
             toast: true,

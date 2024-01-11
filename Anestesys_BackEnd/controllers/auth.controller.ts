@@ -6,14 +6,14 @@ import { Request,
          Response } from "express";    // Obtiene los Response y Request que se envían
 
 export const register = async (req:Request, res:Response) => {
-    const {email, password, nomMed, apMed, fechaNac, cedula, especialidad, foto, horaSesion} = req.body;
+    const {email, password, nomMed, apMed, fechaNac, cedula, especialidad, foto} = req.body;
 
     try{
         let user = await User.findOne({email});
 
         if(user) throw {code: 11000};
 
-        user = new User({email, password, nomMed, apMed, fechaNac, cedula, especialidad, foto, horaSesion});
+        user = new User({email, password, nomMed, apMed, fechaNac, cedula, especialidad, foto});
         await user.save();
 
         //Generar el JWT
@@ -33,8 +33,15 @@ export const register = async (req:Request, res:Response) => {
 export const login = async (req:Request, res:Response) => {
     try{        
         const {email, password} = req.body;
-        var Nombre = "";
-        var Apellido = "";
+        let Nombre = "";
+        let Apellido = "";
+        let FechaNac = "";
+        let Cedula = null;
+        let Especialidad = null;
+        let HoraSesion = null;
+        let Correo = null;
+        let Foto = null;
+        let Id = null;
 
         let user = await User.findOne({email});
 
@@ -43,6 +50,12 @@ export const login = async (req:Request, res:Response) => {
         {
             Nombre = user.nomMed;
             Apellido = user.apMed;
+            FechaNac = user.fechaNac
+            Cedula = user.cedula
+            Especialidad = user.especialidad
+            Correo = user.email
+            Foto = user.foto
+            Id = user._id
         }
 
         const respuestaPasword = await bcryptjs.compare(password, user.password);
@@ -56,7 +69,7 @@ export const login = async (req:Request, res:Response) => {
         const tkn = token?.token;
         const xprIn = token?.expiresIn;
 
-        return res.json( {tkn, xprIn, Nombre, Apellido} );
+        return res.json( {tkn, xprIn, Nombre, Apellido, FechaNac, Cedula, Especialidad, HoraSesion, Correo, Foto, Id} );
     }catch(error){
         if (error.code == 12000)
             return res.status(403).json({error: "Usuario Inválido"});
@@ -83,4 +96,22 @@ export const refreshToken = (req:any, res:Response) => {
 export const logout = (_req:Request, res:Response) => {
     res.clearCookie('refreshToken');
     res.json({ok: true});
+};
+
+/* Funcion de actualización de la ficha ID de un paciente */
+export const updateMedico = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+        const user = req.body;
+
+        const medico = await User.findByIdAndUpdate( id, { cedula: user.cedula,
+                                                            especialidad: user.especialidad,
+                                                            foto: user.foto } );        
+        return res.json({ medico });
+    } catch (error) {
+        if (error.kind === "ObjectId") 
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+                
+        return res.status(500).json({ error: "Error de servidor" });
+    }
 };

@@ -343,7 +343,7 @@ export const usePreIdStore = defineStore('preid', {
                 this.pacienteID = res.data.paciente;                
                 
                 swal.fire({
-                    title: 'Datos actualizados correctamente',
+                    title: 'Datos del módulo pre actualizados correctamente',
                     icon: 'success',
                     showConfirmButton: false,
                     toast: true,
@@ -419,7 +419,7 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {
                 swal.fire({
-                    title: 'Datos actualizados correctamente',
+                    title: 'Datos del módulo pre actualizados correctamente',
                     icon: 'success',
                     showConfirmButton: false,
                     toast: true,
@@ -469,7 +469,7 @@ export const usePreIdStore = defineStore('preid', {
             .then((res: any) => {                
                 this.pacienteID = res.data.infoCx;
                 swal.fire({
-                    title: 'Datos actualizados correctamente',
+                    title: 'Datos del módulo pre actualizados correctamente',
                     icon: 'success',
                     showConfirmButton: false,
                     toast: true,
@@ -970,7 +970,7 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {
                 swal.fire({
-                    title: 'Datos agregados correctamente',
+                    title: 'Datos del estudio agregados correctamente',
                     icon: 'success',
                     showConfirmButton: false,
                     toast: true,
@@ -996,7 +996,7 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {
                 swal.fire({
-                    title: 'Datos agregados correctamente',
+                    title: 'Datos del estudio agregados correctamente',
                     icon: 'success',
                     showConfirmButton: false,
                     toast: true,

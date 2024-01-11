@@ -7,5 +7,4 @@ export interface regUsr{
     cedula: string,
     especialidad: string,
     foto: string,
-    horaSesion: string
 }
