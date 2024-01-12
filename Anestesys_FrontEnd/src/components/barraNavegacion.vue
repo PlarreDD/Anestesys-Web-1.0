@@ -14,7 +14,7 @@
 
         <!-- Nombre DR -->
         <div class="col-md-2 text-white alinearElementoD puntero" data-bs-toggle="modal" data-bs-target="#perfilModal">
-          <img :src="userStore.Foto" class="imgPerfil" />
+          <img :src="'data:image/png;base64,'+userStore.Foto" class="imgPerfil" />
           {{ userStore.Nombre == undefined || userStore.Apellido == undefined ? '-':
           "Dr. " + userStore.Nombre.split(' ')[0] + " " + userStore.Apellido.split(' ')[0] }}
         </div>
@@ -133,7 +133,7 @@
                   <form class="row g-3 mt-1" @submit.prevent="">
                     
                     <div class="col-md-4">
-                      <img :src="'data:image/png;base64,{{user.foto}}'" alt="" style=" width: 140px; height: auto; border-radius: 70px; position: fixed;" >                      
+                      <img :src="'data:image/png;base64,'+userStore.Foto" alt="" style=" width: 140px; height: auto; border-radius: 70px; position: fixed;" >                      
                     </div>
                     <div class="col-md-5">
                       <label class="form-label fw-bold text-white">Nombre(s): </label>    
@@ -489,10 +489,7 @@ export default defineComponent({
     this.user.fechaNac = this.userStore.FechaNac
     this.user.email = this.userStore.Correo
     this.user.especialidad = this.userStore.Especialidad
-    this.user.cedula = this.userStore.Cedula
-    this.user.foto = this.userStore.Foto
-    console.log(this.user.foto);
-    
+    this.user.cedula = this.userStore.Cedula  
   },
 
   methods: {
@@ -677,12 +674,13 @@ export default defineComponent({
       formData.append('especialidad', this.user.especialidad);
       formData.append('foto', this.imagenSeleccionada);
 
-      this.userStore.updateMed(userStore.IdMed, formData)
+      await this.userStore.updateMed(userStore.IdMed, formData)   
 
+      this.user.foto = userStore.Foto
       this.perfilData = false
     },
 
-    handleFileChange(event) {
+    async handleFileChange(event) {
       const file = event.target.files[0];
       this.imagenSeleccionada = file;
     },

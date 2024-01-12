@@ -106,21 +106,17 @@ export const logout = (_req:Request, res:Response) => {
 export const updateMedico = async (req: any, res: Response) => {
     try {
         const { id } = req.params;
-        const { cedula, especialidad } = req.body;
-
+        
         // Manejar la carga de la imagen con Multer
         upload.single('foto')(req, res, async (err: any) => {
-        if (err) {
-            return res.status(400).json({ error: 'Error al cargar la imagen' });
-        }
+            if (err) {
+                return res.status(400).json({ error: 'Error al cargar la imagen' });
+            }
+            
+        const { cedula, especialidad } = req.body;
 
-        const medico = await User.findByIdAndUpdate(
-            id,
-            { cedula, especialidad, foto: req.file.buffer.toString('base64') },
-            { new: true }
-        );
-
-        return res.json({ medico });
+        const medico = await User.findByIdAndUpdate(id,{ cedula, especialidad, foto: req.file.buffer.toString('base64') },{ new: true });
+        return res.json({ medico });            
         });
         // const user = req.body;
 
