@@ -113,17 +113,18 @@ export const updateMedico = async (req: any, res: Response) => {
                 return res.status(400).json({ error: 'Error al cargar la imagen' });
             }
             
-        const { cedula, especialidad } = req.body;
+            const { cedula, especialidad } = req.body;
 
-        const medico = await User.findByIdAndUpdate(id,{ cedula, especialidad, foto: req.file.buffer.toString('base64') },{ new: true });
-        return res.json({ medico });            
+            if(req.file){
+                const medico = await User.findByIdAndUpdate(id,{ cedula, especialidad, foto: req.file.buffer.toString('base64') },{ new: true });
+                return res.json({ medico });            
+            }else{
+                const medico = await User.findByIdAndUpdate(id,{ cedula, especialidad },{ new: true });        
+                return res.json({ medico });
+            }
+
         });
-        // const user = req.body;
 
-        // const medico = await User.findByIdAndUpdate( id, { cedula: user.cedula,
-        //                                                     especialidad: user.especialidad,
-        //                                                     foto: user.foto } );        
-        // return res.json({ medico });
     } catch (error) {
         if (error.kind === "ObjectId") 
             return res.status(403).json({ error: "Formato de ID incorrecto" });
