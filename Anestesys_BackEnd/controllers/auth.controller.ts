@@ -123,7 +123,7 @@ export const updateMedico = async (req: any, res: Response) => {
             if(req.file){
                 // Redimensionar la imagen si es necesario
                 const resizedBuffer = await sharp(req.file.buffer)
-                .resize({ width: 500 }) // ajusta el ancho según tus necesidades
+                .resize({ width: 500, height :500 }) // ajusta el ancho según tus necesidades
                 .toBuffer();
 
                 const medico = await User.findByIdAndUpdate(id,{ cedula, especialidad, foto: resizedBuffer.toString('base64') },{ new: true });
