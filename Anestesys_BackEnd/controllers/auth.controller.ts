@@ -5,9 +5,14 @@ import bcryptjs from "bcryptjs";
 import { Request,
          Response } from "express";    // Obtiene los Response y Request que se envían
 import multer from 'multer';
+import sharp from 'sharp'; // Para redimensionar la imagen
 
 const storage = multer.memoryStorage(); // Almacenamiento en memoria
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage,
+                        limits: {
+                            fileSize: 1024 * 1024 * 50, // Límite de 50 MB
+                        }, 
+                    });
 
 export const register = async (req:Request, res:Response) => {
     const {email, password, nomMed, apMed, fechaNac, cedula, especialidad, foto} = req.body;
@@ -116,7 +121,12 @@ export const updateMedico = async (req: any, res: Response) => {
             const { cedula, especialidad } = req.body;
 
             if(req.file){
-                const medico = await User.findByIdAndUpdate(id,{ cedula, especialidad, foto: req.file.buffer.toString('base64') },{ new: true });
+                // Redimensionar la imagen si es necesario
+                const resizedBuffer = await sharp(req.file.buffer)
+                .resize({ width: 500 }) // ajusta el ancho según tus necesidades
+                .toBuffer();
+
+                const medico = await User.findByIdAndUpdate(id,{ cedula, especialidad, foto: resizedBuffer.toString('base64') },{ new: true });
                 return res.json({ medico });            
             }else{
                 const medico = await User.findByIdAndUpdate(id,{ cedula, especialidad },{ new: true });        
