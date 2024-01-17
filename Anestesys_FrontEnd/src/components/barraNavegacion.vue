@@ -15,8 +15,7 @@
         <!-- Nombre DR -->
         <div class="col-md-2 text-white alinearElementoD puntero" data-bs-toggle="modal" data-bs-target="#perfilModal">
           <img :src="'data:image/png;base64,'+userStore.Foto" class="imgPerfil" />
-          {{ userStore.Nombre == undefined || userStore.Apellido == undefined ? '-':
-          "Dr. " + userStore.Nombre.split(' ')[0] + " " + userStore.Apellido.split(' ')[0] }}
+          &nbsp;&nbsp;{{ userStore.Nombre == undefined || userStore.Apellido == undefined ? '-': "Dr. " + userStore.Nombre.split(' ')[0] + " " + userStore.Apellido.split(' ')[0] }}
         </div>
 
         <!-- Menú de configuración -->
@@ -133,13 +132,14 @@
                   <form class="row g-3 mt-1" @submit.prevent="">
                     
                     <div class="col-md-4">
-                      <img :src="'data:image/png;base64,'+userStore.Foto" alt="" style=" width: 140px; height: auto; border-radius: 70px; position: fixed;" >                      
+                      <img class="img-perfil-modal" :src="'data:image/png;base64,'+userStore.Foto" alt="">                      
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                       <label class="form-label fw-bold text-white">Nombre(s): </label>    
                       <input type="text" :class="perfilData == false ? 'form-control input-perfil' : 'form-control input-read-perfil'" 
                           v-model="user.nomUsr" placeholder="Nombre(s)" readonly/>
-                    </div>                    
+                    </div>              
+                    <div class="col-md-1"></div>      
                     <div class="col-md-3">
                       <label class="form-label fw-bold text-white">Fecha de Nacimiento: </label>
                       <input type="text" :class="perfilData == false ? 'form-control input-perfil' : 'form-control form-control input-read-perfil'" 
@@ -148,26 +148,28 @@
 
                     <div class="col-md-4">                      
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                       <label class="form-label fw-bold text-white">Apellidos: </label>                         
                       <input type="text" :class="perfilData == false ? 'form-control input-perfil' : 'form-control form-control input-read-perfil'" 
                           v-model="user.apUsr" placeholder="Apellidos" readonly/> 
                     </div>
+                    <div class="col-md-1"></div>  
                     <div class="col-md-3">
                       <label class="form-label fw-bold text-white">Cédula:</label>
                       <input type="text" :class="perfilData == false ? 'form-control input-perfil' : 'form-control'" 
                           v-model="user.cedula" placeholder="Cédula" :readonly="perfilData == false"/> 
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <input type="file" accept="image/*" :class="perfilData == false ? 'form-control invisible' : 'form-control'" style="position: relative;" @change="handleFileChange">
-                      <!-- <button class="btn btn-secondary" @click="">Subir</button> -->
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-1"></div> 
+                    <div class="col-md-4">
                       <label class="form-label fw-bold text-white">Correo Electrónico:</label>
                       <input type="text" :class="perfilData == false ? 'form-control input-perfil' : 'form-control form-control input-read-perfil'" 
                           v-model="user.email" placeholder="Correo electrónico" readonly/> 
                     </div>
+                    <div class="col-md-1"></div>
                     <div class="col-md-3">
                       <label class="form-label fw-bold text-white">Especialidad:</label>                         
                       <input type="text" :class="perfilData == false ? 'form-control input-perfil' : 'form-control'" 
@@ -723,9 +725,12 @@ export default defineComponent({
   height: auto;
 }
 .imgPerfil {
-  width: 75px;
+  width: 45px;
   height: auto;
   border-radius: 50px;
+}
+.img-perfil-modal{
+  width: 140px; height: auto; border-radius: 70px; position: fixed;
 }
 .navbar-color {
   background-color: #002d60;
