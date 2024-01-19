@@ -7,4 +7,7 @@ export interface regUsr{
     cedula: string,
     especialidad: string,
     foto: string,
+    tutorialPre: number,
+    tutorialTrans: number,
+    tutorialPost: number
 }

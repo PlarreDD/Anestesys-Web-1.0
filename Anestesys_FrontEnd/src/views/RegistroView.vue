@@ -156,7 +156,7 @@ export default defineComponent({
                     this.userCorreo = false
                     this.userFecha = false
                     
-                    userStore.registerUsr(this.usr.email, this.usr.nomUsr, this.usr.apUsr, this.usr.fechaNac, this.usr.cedula);
+                    userStore.registerUsr(this.usr.email, this.usr.nomUsr, this.usr.apUsr, this.usr.fechaNac);
 
                     this.usr.nomUsr = ""
                     this.usr.apUsr = ""

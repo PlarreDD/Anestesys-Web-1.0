@@ -32,7 +32,13 @@ const userSchema = new Schema({
 
     especialidad: {type: String},
 
-    foto: {type: String}
+    foto: {type: String},
+
+    tutorialPre: {type: Number},
+
+    tutorialTrans: {type: Number},
+
+    tutorialPost: {type: Number}
 });
 
 userSchema.pre("save", async function(next){

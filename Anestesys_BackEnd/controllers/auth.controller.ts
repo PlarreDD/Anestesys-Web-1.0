@@ -8,21 +8,17 @@ import multer from 'multer';
 import sharp from 'sharp'; // Para redimensionar la imagen
 
 const storage = multer.memoryStorage(); // Almacenamiento en memoria
-const upload = multer({ storage: storage,
-                        limits: {
-                            fileSize: 1024 * 1024 * 50, // Límite de 50 MB
-                        }, 
-                    });
+const upload = multer({ storage: storage});
 
 export const register = async (req:Request, res:Response) => {
-    const {email, password, nomMed, apMed, fechaNac, cedula, especialidad, foto} = req.body;
+    const {email, password, nomMed, apMed, fechaNac, cedula, especialidad, foto, tutorialPre, tutorialTrans, tutorialPost} = req.body;
 
     try{
         let user = await User.findOne({email});
 
         if(user) throw {code: 11000};
 
-        user = new User({email, password, nomMed, apMed, fechaNac, cedula, especialidad, foto});
+        user = new User({email, password, nomMed, apMed, fechaNac, cedula, especialidad, foto, tutorialPre, tutorialTrans, tutorialPost});
         await user.save();
 
         //Generar el JWT
@@ -51,6 +47,9 @@ export const login = async (req:Request, res:Response) => {
         let Correo = null;
         let Foto = null;
         let Id = null;
+        let TutorialPre = null;
+        let TutorialTrans = null;
+        let TutorialPost = null;
 
         let user = await User.findOne({email});
 
@@ -65,6 +64,9 @@ export const login = async (req:Request, res:Response) => {
             Correo = user.email
             Foto = user.foto
             Id = user._id
+            TutorialPre = user.tutorialPre
+            TutorialTrans = user.tutorialTrans
+            TutorialPost = user.tutorialPost
         }
 
         const respuestaPasword = await bcryptjs.compare(password, user.password);
@@ -77,8 +79,8 @@ export const login = async (req:Request, res:Response) => {
         generateRefreshToken(user.id, res);
         const tkn = token?.token;
         const xprIn = token?.expiresIn;
-
-        return res.json( {tkn, xprIn, Nombre, Apellido, FechaNac, Cedula, Especialidad, HoraSesion, Correo, Foto, Id} );
+   
+        return res.json( {tkn, xprIn, Nombre, Apellido, FechaNac, Cedula, Especialidad, HoraSesion, Correo, Foto, Id, TutorialPre, TutorialTrans, TutorialPost} );
     }catch(error){
         if (error.code == 12000)
             return res.status(403).json({error: "Usuario Inválido"});
@@ -135,6 +137,22 @@ export const updateMedico = async (req: any, res: Response) => {
 
         });
 
+    } catch (error) {
+        if (error.kind === "ObjectId") 
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+                
+        return res.status(500).json({ error: "Error de servidor" });
+    }
+};
+
+/* Funcion de actualización del valor para mostrar información del tutorial */
+export const updateValorTutorialPre = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;                        
+        const { tutorialPre } = req.body;
+        
+        const medico = await User.findByIdAndUpdate(id,{ tutorialPre },{ new: true });        
+        return res.json({ medico });                    
     } catch (error) {
         if (error.kind === "ObjectId") 
             return res.status(403).json({ error: "Formato de ID incorrecto" });

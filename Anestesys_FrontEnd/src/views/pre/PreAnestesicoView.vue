@@ -17,7 +17,16 @@
           </el-card>
       </div>
 
-      <div class="col-md-2"></div>
+      <div class="col-md-2">
+        <button
+          type="button"
+          id="tutorial-pre"
+          class="btn btn-secondary fw-bold"
+          data-bs-toggle="modal"
+          data-bs-target="#tutorialPreModal">
+          Modal Tutorial
+        </button>
+      </div>
 
       <!--Botón Nuevo registro-->
       <div class="col-md-2">
@@ -356,6 +365,63 @@
       </div>
     </div>
 
+    <!-- Modal tutorial Pre -->
+    <div class="modal"
+        id="tutorialPreModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable" >
+        <div class="modal-content color-modal modal-med-largo">
+          <div class="input-group mb-3">
+            <div class="modal-body">
+              <div class="col-md-12">
+                <div class="row g-3">
+                  <div class="col-md-11"></div>
+
+                  <div class="col-md-1 div-img">
+                    <button type="button" class="btn fw-bold" data-bs-dismiss="modal" aria-label="Close" @click="cambiarValorTutorial">
+                      <i class="text-white">
+                        <font-awesome-icon icon="fa-solid fa-xmark" size="2xl"/>
+                      </i>
+                    </button>
+                  </div>
+
+                </div>
+                  
+                    <div id="carouselExampleIndicators" class="carousel slide">
+                      <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                      </div>
+                      <div class="carousel-inner">
+                        <div class="carousel-item active" style="text-align: -webkit-center;">
+                          <img src="images/tutorial/pre-info.svg" class="d-block" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                          <img src="..." class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                          <img src="..." class="d-block w-100" alt="...">
+                        </div>
+                      </div>
+                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
+                    </div>                                  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -375,6 +441,7 @@ import { Tab } from 'bootstrap';
 import { usePreIdStore } from '../../stores/preId-store';
 import { useTransAnestStore } from "@/stores/transAnest-store";
 import { usePostAnestStore } from "@/stores/postAnest-store";
+import { useUserStore } from "@/stores/user-store";
 import Multiselect from '@vueform/multiselect';
 import { Line } from 'vue-chartjs';
 import { ElInput, ElCard } from 'element-plus';
@@ -390,6 +457,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 const idStore = usePreIdStore();
 const transStore = useTransAnestStore();
 const postAnestStore = usePostAnestStore();
+const userStore = useUserStore()
 
 export default defineComponent({
   name: 'App',
@@ -429,6 +497,7 @@ export default defineComponent({
       idStore,
       transStore,
       postAnestStore,
+      userStore,
       
       mostrarVistaRapida: false,
 
@@ -646,7 +715,22 @@ export default defineComponent({
     ElInput, ElCard
   },
   
-  mounted: function() { // Llama el método despues de cargar la página
+  mounted: function() { // Llama el método despues de cargar la página 
+    //Mostrar modal de tutorial al logear por primera vez
+    if(userStore.TutorialPre === 0){
+      let abrir = document.getElementById('tutorial-pre');
+
+      // Crea un nuevo evento de clic
+      let event = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      });
+
+      // Despacha el evento de clic en el botón
+      abrir.dispatchEvent(event);
+    }
+
     transStore.getDetieneMonitoreo();
     this.validaSeleccionId();
     this.ocultarFondo();
@@ -5395,6 +5479,19 @@ export default defineComponent({
 
         await this.obtenerPaciente()
     },
+
+    async cambiarValorTutorial(){
+      swal
+        .fire({
+          html: "Podrá volver a consultar el tutorial cuando desee desde el menú lateral en la sección de 'Ayuda'",
+          icon: "info",
+          showConfirmButton: true,
+          showCancelButton: false,
+          toast: true,
+        })
+        
+        await this.userStore.updateTutorialPre(userStore.IdMed)                        
+    }
   }  
 })
 </script>
@@ -5402,6 +5499,9 @@ export default defineComponent({
 <style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
+.color-modal {
+  background-color: #002d60;
+}
 .filtered-container {
   max-height: 200px; /* Altura máxima del contenedor */
   overflow-y: auto; /* Añadir scroll vertical si el contenido excede la altura */
@@ -5648,5 +5748,8 @@ export default defineComponent({
     --bs-btn-active-bg: #002d60;
     --bs-btn-active-color: #ffffff;
     --bs-btn-active-border-color: #002d60;     
+}
+.modal-med-largo {
+  height: auto;
 }
 </style>

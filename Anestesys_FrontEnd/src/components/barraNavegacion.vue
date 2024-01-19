@@ -89,6 +89,14 @@
                 </button>
               </li>
 
+              <!-- Link Ayuda -->
+              <li class="nav-item">
+                <button class="btn btn-configuracion fw-bold" data-bs-toggle="modal" data-bs-target="#tutorial-modal">
+                  <img src="../../public/images/imgIcon/ayuda.svg" />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ayuda
+                </button>
+              </li>
+
               <!-- Link Salir -->
               <li class="nav-item">
                 <button
@@ -111,7 +119,7 @@
          aria-labelledby="exampleModalLabel"
          aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
-        <div class="modal-content colorModalMedicamentos">
+        <div class="modal-content colorModal">
           <div class="input-group mb-3">
             <div class="modal-body">
               <div class="col-md-12">
@@ -214,7 +222,7 @@
          aria-labelledby="exampleModalLabel"
          aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
-        <div class="modal-content colorModalMedicamentos modal-med-largo">
+        <div class="modal-content colorModal modal-med-largo">
           <div class="input-group mb-3">
             <div class="modal-body">
               <div class="col-md-12">
@@ -339,7 +347,7 @@
          aria-labelledby="exampleModalLabel"
          aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
-        <div class="modal-content colorModalMedicamentos modal-med-largo">
+        <div class="modal-content colorModal modal-med-largo">
           <div class="input-group mb-3">
             <div class="modal-body">
               <div class="col-md-12">
@@ -445,6 +453,42 @@
                       </table>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal tutorial -->
+    <div class="modal"
+        id="tutorial-modal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable" >
+        <div class="modal-content color-modal">
+          <div class="input-group mb-3">
+            <div class="modal-body">
+              <div class="col-md-12">
+                <div class="row g-3">
+                  <div class="col-md-11">
+                    <h5 class="text-white fw-bold">TUTORIAL</h5>                    
+                  </div>
+
+                  <div class="col-md-1 div-img">
+                    <button type="button" class="btn fw-bold" data-bs-dismiss="modal" aria-label="Close">
+                      <i class="text-white">
+                        <font-awesome-icon icon="fa-solid fa-xmark" size="2xl"/>
+                      </i>
+                    </button>
+                  </div>
+
+                  <form class="row g-3 mt-1" @submit.prevent="">
+                    
+                  </form>
+
                 </div>
               </div>
             </div>
@@ -783,7 +827,7 @@ export default defineComponent({
   width: 130px;
 }
 /* Modal medicamentos */
-.colorModalMedicamentos {
+.colorModal {
   background-color: #002d60;
 }
 .deslizar {
@@ -807,5 +851,8 @@ export default defineComponent({
 .input-read-perfil{
   background-color: #002d60 !important;
   color: #fff !important;
+}
+.color-modal {
+  background-color: #002d60;
 }
 </style>
