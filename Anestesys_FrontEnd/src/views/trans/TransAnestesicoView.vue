@@ -6673,7 +6673,7 @@ export default defineComponent({
   },
   
   computed: {
-    tablaMedicamentos() {      
+    tablaMedicamentos() : String[] {      
       if (this.medicSeleccionados.length === 0) {
         return this.listaMedTrans;
       } else {
@@ -6681,7 +6681,7 @@ export default defineComponent({
       }
     },
 
-    saltoArreglo(){
+    saltoArreglo() : any[]{
       const step = this.stepSize;
       const filas = this.grid.filter((itemMSV, index) => index % step === 0);    
 
