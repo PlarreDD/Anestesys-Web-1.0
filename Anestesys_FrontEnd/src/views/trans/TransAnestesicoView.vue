@@ -981,6 +981,129 @@
             <option>15</option>
           </select>
         </div>
+
+        <div class="col-md-2">
+          <button type="button" id="tutorial-trans" class="btn btn-secondary invisible" data-bs-toggle="modal" data-bs-target="#tutorialTransModal">
+            Modal Tutorial
+          </button>
+        </div>
+
+        <!-- Modal tutorial Trans -->
+        <div class="modal" id="tutorialTransModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+          <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content color-modal modal-tut-largo">
+              <div class="input-group">
+                <div class="modal-body">
+                  
+                  <div class="col-md-12" style="text-align: end;">
+                    <button type="button" class="btn fw-bold" data-bs-dismiss="modal" aria-label="Close" @click="cambiarValorTutorial">
+                      <i class="text-white">
+                        <font-awesome-icon icon="fa-solid fa-xmark" size="xl"/>
+                      </i>
+                    </button>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-3">                   
+                      <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                          <h1 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" disabled>
+                              <b>PRE-ANÉSTESICO</b>
+                            </button>
+                          </h1>
+                          <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">                              
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                              <b>TRANS-ANÉSTESICO</b>
+                            </button>
+                          </h2>
+                          <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                              <label type="button"
+                                :class="tutoUno == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"  
+                                data-bs-target="#carousel-trans" data-bs-slide-to="0" aria-label="Slide 1" @click="validarCambioCarrusel">
+                                Acciones quirúrgicas
+                              </label><br><br>
+                              <label type="button" 
+                                :class="tutoDos == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
+                                data-bs-target="#carousel-trans" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel">
+                                Tiempos quirúrgicos
+                              </label><br><br>
+                              <label type="button"
+                                :class="tutoTres == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
+                                data-bs-target="#carousel-trans" data-bs-slide-to="2" aria-label="Slide 3" @click="validarCambioCarrusel">
+                                Barra de información
+                              </label><br><br>
+                              <label type="button"
+                                :class="tutoCuatro == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
+                                data-bs-target="#carousel-trans" data-bs-slide-to="3" aria-label="Slide 4" @click="validarCambioCarrusel">
+                                Signos vitales
+                              </label><br><br>
+                              <label type="button"
+                                :class="tutoCinco == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
+                                data-bs-target="#carousel-trans" data-bs-slide-to="4" aria-label="Slide 5" @click="validarCambioCarrusel">
+                                Grid anestésico
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" disabled>
+                              <b>POST-ANÉSTESICO</b>
+                            </button>
+                          </h2>
+                          <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Carrusel para tutorial -->
+                    <div class="col-md-9">                
+                      <div id="carousel-trans" class="carousel slide">
+                        <div class="carousel-indicators">
+                          <button type="button" id="tutoUno" data-bs-target="#carousel-trans" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" @click="validarCambioCarrusel"></button>
+                          <button type="button" id="tutoDos" data-bs-target="#carousel-trans" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel"></button>
+                          <button type="button" id="tutoTres" data-bs-target="#carousel-trans" data-bs-slide-to="2" aria-label="Slide 3" @click="validarCambioCarrusel"></button>
+                          <button type="button" id="tutoCuatro" data-bs-target="#carousel-trans" data-bs-slide-to="3" aria-label="Slide 4" @click="validarCambioCarrusel"></button>
+                          <button type="button" id="tutoCinco" data-bs-target="#carousel-trans" data-bs-slide-to="4" aria-label="Slide 5" @click="validarCambioCarrusel"></button>
+                        </div>
+                        <div class="carousel-inner">
+                          <div class="carousel-item active div-carrusel">
+                            <img src="images/tutorial/trans-acciones.png" class="d-block img-carrusel">
+                          </div>
+                          <div class="carousel-item div-carrusel">
+                            <img src="images/tutorial/trans-tiempos.png" class="d-block img-carrusel">
+                          </div>
+                          <div class="carousel-item div-carrusel">
+                            <img src="images/tutorial/trans-barra.png" class="d-block img-carrusel">
+                          </div>
+                          <div class="carousel-item div-carrusel">
+                            <img src="images/tutorial/trans-signos.png" class="d-block img-carrusel">
+                          </div>
+                          <div class="carousel-item div-carrusel">
+                            <img src="images/tutorial/trans-grafica.png" class="d-block img-carrusel">
+                          </div>
+                        </div>
+                      </div>       
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1256,6 +1379,7 @@ import { usePreIdStore } from "@/stores/preId-store";
 import swal from "sweetalert2";
 import Multiselect from '@vueform/multiselect';
 import type { regNotaPost } from "@/interfaces/regPostAnest";
+import { useUserStore } from "@/stores/user-store";
 import { usePostAnestStore } from "@/stores/postAnest-store";
 import { useMedicamentoStore } from "../../stores/medicamento-store";
 import { ElSelect, ElOption } from 'element-plus';
@@ -1269,6 +1393,7 @@ window.pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 
+const userStore = useUserStore()
 const preIdStore = usePreIdStore();
 const transAnestStore = useTransAnestStore();
 const postAnestStore = usePostAnestStore();
@@ -1296,11 +1421,18 @@ export default defineComponent({
 
   data() {
     return {
+      tutoUno: true,
+      tutoDos: false,
+      tutoTres: false,
+      tutoCuatro: false,
+      tutoCinco:false,
+
       //Datos interfaces
       menuTrans: {} as regMenuTrans,
       infoNotaPost: {} as regNotaPost,
       
       //Store
+      userStore,
       preIdStore,
       transAnestStore,
       postAnestStore,
@@ -1530,6 +1662,21 @@ export default defineComponent({
   },
 
   mounted: function() { // Llama el método despues de cargar la página
+    //Mostrar modal de tutorial al logear por primera vez
+    if(userStore.TutorialTrans === 0){
+      let abrir = document.getElementById('tutorial-trans');
+
+      // Crea un nuevo evento de clic
+      let event = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      });
+
+      // Despacha el evento de clic en el botón
+      abrir.dispatchEvent(event);
+    }
+
     this.pingMSV(medStore.monitor[0].dirIPMVS);
     
     this.menuTrans.balanceTotal = null;
@@ -1582,88 +1729,88 @@ export default defineComponent({
   },
 
   methods: {
-      async enviarDatosTrans() {        
-        // DatosVentilador
+    async enviarDatosTrans() {        
+      // DatosVentilador
+
+      // Ingresos
+      transAnestStore.solHartman=this.menuTrans.solHartman
+      transAnestStore.solFisio=this.menuTrans.solFisio
+      transAnestStore.glucosados=this.menuTrans.glucosados
+      transAnestStore.gelatinas=this.menuTrans.gelatinas
+      transAnestStore.almidones=this.menuTrans.almidones
+      transAnestStore.albuminas=this.menuTrans.albuminas
+      transAnestStore.paqGlobular=this.menuTrans.paqGlobular
+      transAnestStore.plasmas=this.menuTrans.plasmas
+      transAnestStore.plaquetas=this.menuTrans.plaquetas
+      transAnestStore.crioprecipitados=this.menuTrans.crioprecipitados
+      transAnestStore.factor_VII=this.menuTrans.factor_VII
+      transAnestStore.factor_VIII=this.menuTrans.factor_VIII
+      transAnestStore.otrosIngresos=this.menuTrans.otrosIngresos
+      // Egresos
+      transAnestStore.liqAscitis=this.menuTrans.liqAscitis
+      transAnestStore.sangradoAprox=this.menuTrans.sangradoAprox
+      transAnestStore.uresis=this.menuTrans.uresis
+      transAnestStore.expoQX=this.menuTrans.expoQX
+      transAnestStore.reqBasales=this.menuTrans.reqBasales
+      transAnestStore.ayuno=this.menuTrans.ayuno
+      transAnestStore.otrosEgresos=this.menuTrans.otrosEgresos
+      // Técnica Anestésica
+
+      // Tiempos QX
+      transAnestStore.ingresoQX=this.menuTrans.ingresoQX
+      transAnestStore.inicioAn=this.menuTrans.inicioAn
+      transAnestStore.inicioCx=this.menuTrans.inicioCx
+      transAnestStore.finCx=this.menuTrans.finCx
+      transAnestStore.finAn=this.menuTrans.finAn
+      transAnestStore.egresoQx=this.menuTrans.egresoQx
+      // Datos Medicamentos
+      
+      preIdStore.vaciadroTrans=false        
+    },
+
+    async vaciarInputsTrans(){
+      if(preIdStore.vaciadroTrans == true){
+        /* DatosVentilador */
 
         // Ingresos
-        transAnestStore.solHartman=this.menuTrans.solHartman
-        transAnestStore.solFisio=this.menuTrans.solFisio
-        transAnestStore.glucosados=this.menuTrans.glucosados
-        transAnestStore.gelatinas=this.menuTrans.gelatinas
-        transAnestStore.almidones=this.menuTrans.almidones
-        transAnestStore.albuminas=this.menuTrans.albuminas
-        transAnestStore.paqGlobular=this.menuTrans.paqGlobular
-        transAnestStore.plasmas=this.menuTrans.plasmas
-        transAnestStore.plaquetas=this.menuTrans.plaquetas
-        transAnestStore.crioprecipitados=this.menuTrans.crioprecipitados
-        transAnestStore.factor_VII=this.menuTrans.factor_VII
-        transAnestStore.factor_VIII=this.menuTrans.factor_VIII
-        transAnestStore.otrosIngresos=this.menuTrans.otrosIngresos
+        this.menuTrans.solHartman= transAnestStore.solHartman
+        this.menuTrans.solFisio= transAnestStore.solFisio
+        this.menuTrans.glucosados= transAnestStore.glucosados
+        this.menuTrans.gelatinas= transAnestStore.gelatinas
+        this.menuTrans.almidones= transAnestStore.almidones
+        this.menuTrans.albuminas= transAnestStore.albuminas
+        this.menuTrans.paqGlobular= transAnestStore.paqGlobular
+        this.menuTrans.plasmas= transAnestStore.plasmas
+        this.menuTrans.plaquetas= transAnestStore.plaquetas
+        this.menuTrans.crioprecipitados= transAnestStore.crioprecipitados
+        this.menuTrans.factor_VII= transAnestStore.factor_VII
+        this.menuTrans.factor_VIII= transAnestStore.factor_VIII
+        this.menuTrans.otrosIngresos= transAnestStore.otrosIngresos
         // Egresos
-        transAnestStore.liqAscitis=this.menuTrans.liqAscitis
-        transAnestStore.sangradoAprox=this.menuTrans.sangradoAprox
-        transAnestStore.uresis=this.menuTrans.uresis
-        transAnestStore.expoQX=this.menuTrans.expoQX
-        transAnestStore.reqBasales=this.menuTrans.reqBasales
-        transAnestStore.ayuno=this.menuTrans.ayuno
-        transAnestStore.otrosEgresos=this.menuTrans.otrosEgresos
-        // Técnica Anestésica
+        this.menuTrans.liqAscitis= transAnestStore.liqAscitis
+        this.menuTrans.sangradoAprox= transAnestStore.sangradoAprox
+        this.menuTrans.uresis= transAnestStore.uresis
+        this.menuTrans.expoQX= transAnestStore.expoQX
+        this.menuTrans.reqBasales= transAnestStore.reqBasales
+        this.menuTrans.ayuno= transAnestStore.ayuno
+        this.menuTrans.otrosEgresos= transAnestStore.otrosEgresos
+        /* Técnica Anestésica */
 
-        // Tiempos QX
-        transAnestStore.ingresoQX=this.menuTrans.ingresoQX
-        transAnestStore.inicioAn=this.menuTrans.inicioAn
-        transAnestStore.inicioCx=this.menuTrans.inicioCx
-        transAnestStore.finCx=this.menuTrans.finCx
-        transAnestStore.finAn=this.menuTrans.finAn
-        transAnestStore.egresoQx=this.menuTrans.egresoQx
-        // Datos Medicamentos
-        
-        preIdStore.vaciadroTrans=false        
-      },
+        /* Tiempos QX */
+        this.menuTrans.ingresoQX= transAnestStore.ingresoQX
+        this.menuTrans.inicioAn= transAnestStore.inicioAn
+        this.menuTrans.inicioCx= transAnestStore.inicioCx
+        this.menuTrans.finCx= transAnestStore.finCx
+        this.menuTrans.finAn= transAnestStore.finAn
+        this.menuTrans.egresoQx= transAnestStore.egresoQx
+        /* Datos Medicamentos */
 
-      async vaciarInputsTrans(){
-        if(preIdStore.vaciadroTrans == true){
-          /* DatosVentilador */
+        /* Relevos */
 
-          // Ingresos
-          this.menuTrans.solHartman= transAnestStore.solHartman
-          this.menuTrans.solFisio= transAnestStore.solFisio
-          this.menuTrans.glucosados= transAnestStore.glucosados
-          this.menuTrans.gelatinas= transAnestStore.gelatinas
-          this.menuTrans.almidones= transAnestStore.almidones
-          this.menuTrans.albuminas= transAnestStore.albuminas
-          this.menuTrans.paqGlobular= transAnestStore.paqGlobular
-          this.menuTrans.plasmas= transAnestStore.plasmas
-          this.menuTrans.plaquetas= transAnestStore.plaquetas
-          this.menuTrans.crioprecipitados= transAnestStore.crioprecipitados
-          this.menuTrans.factor_VII= transAnestStore.factor_VII
-          this.menuTrans.factor_VIII= transAnestStore.factor_VIII
-          this.menuTrans.otrosIngresos= transAnestStore.otrosIngresos
-          // Egresos
-          this.menuTrans.liqAscitis= transAnestStore.liqAscitis
-          this.menuTrans.sangradoAprox= transAnestStore.sangradoAprox
-          this.menuTrans.uresis= transAnestStore.uresis
-          this.menuTrans.expoQX= transAnestStore.expoQX
-          this.menuTrans.reqBasales= transAnestStore.reqBasales
-          this.menuTrans.ayuno= transAnestStore.ayuno
-          this.menuTrans.otrosEgresos= transAnestStore.otrosEgresos
-          /* Técnica Anestésica */
-
-          /* Tiempos QX */
-          this.menuTrans.ingresoQX= transAnestStore.ingresoQX
-          this.menuTrans.inicioAn= transAnestStore.inicioAn
-          this.menuTrans.inicioCx= transAnestStore.inicioCx
-          this.menuTrans.finCx= transAnestStore.finCx
-          this.menuTrans.finAn= transAnestStore.finAn
-          this.menuTrans.egresoQx= transAnestStore.egresoQx
-          /* Datos Medicamentos */
-
-          /* Relevos */
-
-          /* Eventos Criticos */
-          this.grid = []
-        }
-      },
+        /* Eventos Criticos */
+        this.grid = []
+      }
+    },
 
     // Generar Grafica a Imagen
     async convertirGrafica() {
@@ -6670,6 +6817,57 @@ export default defineComponent({
     pingMSV(dirip: string){
       medStore.statusMSV(dirip);
     },
+
+    async cambiarValorTutorial(){
+      swal
+        .fire({
+          html: "Podrá volver a consultar el tutorial desde el menú lateral en la sección de <b>Ayuda</b>",
+          icon: "info",
+          showConfirmButton: true,
+          showCancelButton: false,
+          toast: true,
+        })
+        
+        await this.userStore.updateTutorialTrans(userStore.IdMed)                        
+    },
+
+    async validarCambioCarrusel(){
+      if(document.getElementById("tutoUno").ariaCurrent=="true"){
+        this.tutoUno=true
+        this.tutoDos=false
+        this.tutoTres=false
+        this.tutoCuatro=false
+        this.tutoCinco=false
+      }
+      else if(document.getElementById("tutoDos").ariaCurrent=="true"){
+        this.tutoUno=false
+        this.tutoDos=true
+        this.tutoTres=false
+        this.tutoCuatro=false
+        this.tutoCinco=false
+      }
+      else if(document.getElementById("tutoTres").ariaCurrent=="true"){
+        this.tutoUno=false
+        this.tutoDos=false
+        this.tutoTres=true
+        this.tutoCuatro=false
+        this.tutoCinco=false
+      }
+      else if(document.getElementById("tutoCuatro").ariaCurrent=="true"){
+        this.tutoUno=false
+        this.tutoDos=false
+        this.tutoTres=false
+        this.tutoCuatro=true
+        this.tutoCinco=false
+      }
+      else if(document.getElementById("tutoCinco").ariaCurrent=="true"){
+        this.tutoUno=false
+        this.tutoDos=false
+        this.tutoTres=false
+        this.tutoCuatro=false
+        this.tutoCinco=true
+      }
+    }
   },
   
   computed: {
@@ -7244,5 +7442,33 @@ hr {
 }
 .cursor-default{
   cursor:default;
+}
+/* Modal tutorial */
+.modal-tut-largo {
+  height: 510px;
+}
+.div-carrusel{
+  text-align: -webkit-center;
+}
+.img-carrusel{
+  width: inherit;
+}
+.carousel-indicators [data-bs-target] {
+  background-color: #E88000 !important;
+}
+.carousel-indicators{
+  margin-bottom: 0;
+}
+.accordion{
+  --bs-accordion-bg: #EEF1F4 !important;
+}
+.accordion-button{
+  color: #1F315A !important
+}
+.color-desactivo-acordeon{
+  color: #00123B
+}
+.color-activo-acordeon{
+  color: #E88000
 }
 </style>

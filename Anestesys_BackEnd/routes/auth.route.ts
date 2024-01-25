@@ -4,7 +4,9 @@ import { login,
          register,
          refreshToken, 
          updateMedico,
-         updateValorTutorialPre} from '../controllers/auth.controller';
+         updateValorTutorialPre,
+         updateValorTutorialTrans,
+         updateValorTutorialPost} from '../controllers/auth.controller';
 import { requireRefreshToken } from '../middlewares/requireRefreshToken';
 import { bodyLoginValidator,
          bodyRegisterValidator } from '../middlewares/validationManager';
@@ -15,6 +17,8 @@ router.post("/login", bodyLoginValidator, login);
 router.post("/register", bodyRegisterValidator, register);
 router.put('/updateMed/:id' ,requireRefreshToken, updateMedico)
 router.put('/pre/:id', requireRefreshToken, updateValorTutorialPre)
+router.put('/trans/:id', requireRefreshToken, updateValorTutorialTrans)
+router.put('/post/:id', requireRefreshToken, updateValorTutorialPost)
 router.post('/logout', logout);
 
 router.get('/refresh', requireRefreshToken, refreshToken);

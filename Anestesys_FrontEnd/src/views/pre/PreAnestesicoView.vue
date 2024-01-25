@@ -17,13 +17,9 @@
           </el-card>
       </div>
 
+      <!-- Botón tutorial -->
       <div class="col-md-2">
-        <button
-          type="button"
-          id="tutorial-pre"
-          class="btn btn-secondary fw-bold"
-          data-bs-toggle="modal"
-          data-bs-target="#tutorialPreModal">
+        <button type="button" id="tutorial-pre" class="btn btn-secondary fw-bold invisible" data-bs-toggle="modal" data-bs-target="#tutorialPreModal">
           Modal Tutorial
         </button>
       </div>
@@ -366,56 +362,107 @@
     </div>
 
     <!-- Modal tutorial Pre -->
-    <div class="modal"
-        id="tutorialPreModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable" >
+    <div class="modal" id="tutorialPreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content color-modal modal-med-largo">
-          <div class="input-group mb-3">
+          <div class="input-group">
             <div class="modal-body">
-              <div class="col-md-12">
-                <div class="row g-3">
-                  <div class="col-md-11"></div>
-
-                  <div class="col-md-1 div-img">
-                    <button type="button" class="btn fw-bold" data-bs-dismiss="modal" aria-label="Close" @click="cambiarValorTutorial">
-                      <i class="text-white">
-                        <font-awesome-icon icon="fa-solid fa-xmark" size="2xl"/>
-                      </i>
-                    </button>
-                  </div>
-
-                </div>
-                  
-                    <div id="carouselExampleIndicators" class="carousel slide">
-                      <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                      </div>
-                      <div class="carousel-inner">
-                        <div class="carousel-item active" style="text-align: -webkit-center;">
-                          <img src="images/tutorial/pre-info.svg" class="d-block" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                          <img src="..." class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                          <img src="..." class="d-block w-100" alt="...">
-                        </div>
-                      </div>
-                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                      </button>
-                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                      </button>
-                    </div>                                  
+              
+              <div class="col-md-12" style="text-align: end;">
+                <button type="button" class="btn fw-bold" data-bs-dismiss="modal" aria-label="Close" @click="cambiarValorTutorial">
+                  <i class="text-white">
+                    <font-awesome-icon icon="fa-solid fa-xmark" size="xl"/>
+                  </i>
+                </button>
               </div>
+
+              <div class="row">
+                <div class="col-md-3">                   
+                  <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                      <h1 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          <b>PRE-ANÉSTESICO</b>
+                        </button>
+                      </h1>
+                      <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          <label type="button"
+                            :class="tutoUno == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"  
+                            data-bs-target="#carousel-pre" data-bs-slide-to="0" aria-label="Slide 1" @click="validarCambioCarrusel">
+                            Inf. del paciente
+                          </label><br><br>
+                          <label type="button" 
+                            :class="tutoDos == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
+                            data-bs-target="#carousel-pre" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel">
+                            Barra de búsqueda
+                          </label><br><br>
+                          <label type="button"
+                            :class="tutoTres == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
+                            data-bs-target="#carousel-pre" data-bs-slide-to="2" aria-label="Slide 3" @click="validarCambioCarrusel">
+                            Modulos
+                          </label><br><br>
+                          <label type="button"
+                            :class="tutoCuatro == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
+                            data-bs-target="#carousel-pre" data-bs-slide-to="3" aria-label="Slide 4" @click="validarCambioCarrusel">
+                            Barra de estado
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" disabled>
+                          <b>TRANS-ANÉSTESICO</b>
+                        </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" disabled>
+                          <b>POST-ANÉSTESICO</b>
+                        </button>
+                      </h2>
+                      <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Carrusel para tutorial -->
+                <div class="col-md-9">                
+                  <div id="carousel-pre" class="carousel slide">
+                    <div class="carousel-indicators">
+                      <button type="button" id="tutoUno" data-bs-target="#carousel-pre" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" @click="validarCambioCarrusel"></button>
+                      <button type="button" id="tutoDos" data-bs-target="#carousel-pre" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel"></button>
+                      <button type="button" id="tutoTres" data-bs-target="#carousel-pre" data-bs-slide-to="2" aria-label="Slide 3" @click="validarCambioCarrusel"></button>
+                      <button type="button" id="tutoCuatro" data-bs-target="#carousel-pre" data-bs-slide-to="3" aria-label="Slide 4" @click="validarCambioCarrusel"></button>
+                    </div>
+                    <div class="carousel-inner">
+                      <div class="carousel-item active div-carrusel">
+                        <img src="images/tutorial/pre-info.png" class="d-block img-carrusel">
+                      </div>
+                      <div class="carousel-item div-carrusel">
+                        <img src="images/tutorial/pre-barra-busqueda.png" class="d-block img-carrusel">
+                      </div>
+                      <div class="carousel-item div-carrusel">
+                        <img src="images/tutorial/pre-modulos.png" class="d-block img-carrusel">
+                      </div>
+                      <div class="carousel-item div-carrusel">
+                        <img src="images/tutorial/pre-barra-estado.png" class="d-block img-carrusel">
+                      </div>
+                    </div>
+                  </div>       
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -464,6 +511,11 @@ export default defineComponent({
 
   data() {
     return {
+      tutoUno: true,
+      tutoDos: false,
+      tutoTres: false,
+      tutoCuatro: false,
+
       opcionExp: [],
       mostrarDatosFiltradosExp: false,
 
@@ -5483,7 +5535,7 @@ export default defineComponent({
     async cambiarValorTutorial(){
       swal
         .fire({
-          html: "Podrá volver a consultar el tutorial cuando desee desde el menú lateral en la sección de 'Ayuda'",
+          html: "Podrá volver a consultar el tutorial desde el menú lateral en la sección de <b>Ayuda</b>",
           icon: "info",
           showConfirmButton: true,
           showCancelButton: false,
@@ -5491,6 +5543,33 @@ export default defineComponent({
         })
         
         await this.userStore.updateTutorialPre(userStore.IdMed)                        
+    },
+
+    async validarCambioCarrusel(){
+      if(document.getElementById("tutoUno").ariaCurrent=="true"){
+        this.tutoUno=true
+        this.tutoDos=false
+        this.tutoTres=false
+        this.tutoCuatro=false
+      }
+      else if(document.getElementById("tutoDos").ariaCurrent=="true"){
+        this.tutoUno=false
+        this.tutoDos=true
+        this.tutoTres=false
+        this.tutoCuatro=false
+      }
+      else if(document.getElementById("tutoTres").ariaCurrent=="true"){
+        this.tutoUno=false
+        this.tutoDos=false
+        this.tutoTres=true
+        this.tutoCuatro=false
+      }
+      else if(document.getElementById("tutoCuatro").ariaCurrent=="true"){
+        this.tutoUno=false
+        this.tutoDos=false
+        this.tutoTres=false
+        this.tutoCuatro=true
+      }
     }
   }  
 })
@@ -5749,7 +5828,32 @@ export default defineComponent({
     --bs-btn-active-color: #ffffff;
     --bs-btn-active-border-color: #002d60;     
 }
+/* Modal tutorial */
 .modal-med-largo {
-  height: auto;
+  height: 510px;
+}
+.div-carrusel{
+  text-align: -webkit-center;
+}
+.img-carrusel{
+  width: inherit;
+}
+.carousel-indicators{
+  margin-bottom: 0;
+}
+.carousel-indicators [data-bs-target] {
+  background-color: #E88000 !important;  
+}
+.accordion{
+  --bs-accordion-bg: #EEF1F4 !important;
+}
+.accordion-button{
+  color: #1F315A !important
+}
+.color-desactivo-acordeon{
+  color: #00123B
+}
+.color-activo-acordeon{
+  color: #E88000
 }
 </style>

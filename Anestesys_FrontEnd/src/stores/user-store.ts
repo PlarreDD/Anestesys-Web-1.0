@@ -209,16 +209,41 @@ export const useUserStore = defineStore('user', {
                     tutorialPre: 1
                 }
             })
-            .then((res: any) => {             
-                // swal.fire({
-                //     title: 'Datos del perfil actualizados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
+            .then((res: any) => {
+            })
+            .catch((e: any) => {
+            });
+        },
+
+        updateTutorialTrans( _id:string){
+            apiAxios({
+                url: `http://localhost:5000/trans/${String(this.IdMed)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + this.token,
+                },
+                data: {
+                    tutorialTrans: 1
+                }
+            })
+            .then((res: any) => {
+            })
+            .catch((e: any) => {
+            });
+        },
+
+        updateTutorialPost( _id:string){
+            apiAxios({
+                url: `http://localhost:5000/post/${String(this.IdMed)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + this.token,
+                },
+                data: {
+                    tutorialPost: 1
+                }
+            })
+            .then((res: any) => {
             })
             .catch((e: any) => {
             });

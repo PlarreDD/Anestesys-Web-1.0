@@ -145,13 +145,45 @@ export const updateMedico = async (req: any, res: Response) => {
     }
 };
 
-/* Funcion de actualización del valor para mostrar información del tutorial */
+/* Funcion de actualización del valor para mostrar información del tutorial del modulo pre */
 export const updateValorTutorialPre = async (req: any, res: Response) => {
     try {
         const { id } = req.params;                        
         const { tutorialPre } = req.body;
         
         const medico = await User.findByIdAndUpdate(id,{ tutorialPre },{ new: true });        
+        return res.json({ medico });                    
+    } catch (error) {
+        if (error.kind === "ObjectId") 
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+                
+        return res.status(500).json({ error: "Error de servidor" });
+    }
+};
+
+/* Funcion de actualización del valor para mostrar información del tutorial del modulo trans */
+export const updateValorTutorialTrans = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;                        
+        const { tutorialTrans } = req.body;
+        
+        const medico = await User.findByIdAndUpdate(id,{ tutorialTrans },{ new: true });        
+        return res.json({ medico });                    
+    } catch (error) {
+        if (error.kind === "ObjectId") 
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+                
+        return res.status(500).json({ error: "Error de servidor" });
+    }
+};
+
+/* Funcion de actualización del valor para mostrar información del tutorial del modulo post */
+export const updateValorTutorialPost = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;                        
+        const { tutorialPost } = req.body;
+        
+        const medico = await User.findByIdAndUpdate(id,{ tutorialPost },{ new: true });        
         return res.json({ medico });                    
     } catch (error) {
         if (error.kind === "ObjectId") 
