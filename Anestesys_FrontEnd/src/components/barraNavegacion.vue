@@ -462,35 +462,188 @@
     </div>
 
     <!-- Modal tutorial -->
-    <div class="modal"
-        id="tutorial-modal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable" >
-        <div class="modal-content color-modal">
-          <div class="input-group mb-3">
+    <div class="modal" id="tutorial-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content color-modal modal-med-largo">
+          <div class="input-group">
             <div class="modal-body">
-              <div class="col-md-12">
-                <div class="row g-3">
-                  <div class="col-md-11">
-                    <h5 class="text-white fw-bold">TUTORIAL</h5>                    
+              
+              <div class="col-md-12" style="text-align: end;">
+                <button type="button" class="btn fw-bold" data-bs-dismiss="modal" aria-label="Close">
+                  <i class="text-white">
+                    <font-awesome-icon icon="fa-solid fa-xmark" size="xl"/>
+                  </i>
+                </button>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3">                   
+                  <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                      <h1 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" @click="cambiarTutorialPre">
+                          <b>PRE-ANÉSTESICO</b>
+                        </button>
+                      </h1>
+                      <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          <label type="button"
+                            :class="tutoUnoPre == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"  
+                            data-bs-target="#carousel-pre" data-bs-slide-to="0" aria-label="Slide 1" @click="validarCambioCarruselPre">
+                            Inf. del paciente
+                          </label><br><br>
+                          <label type="button" 
+                            :class="tutoDosPre == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
+                            data-bs-target="#carousel-pre" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarruselPre">
+                            Barra de búsqueda
+                          </label><br><br>
+                          <label type="button"
+                            :class="tutoTresPre == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
+                            data-bs-target="#carousel-pre" data-bs-slide-to="2" aria-label="Slide 3" @click="validarCambioCarruselPre">
+                            Modulos
+                          </label><br><br>
+                          <label type="button"
+                            :class="tutoCuatroPre == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
+                            data-bs-target="#carousel-pre" data-bs-slide-to="3" aria-label="Slide 4" @click="validarCambioCarruselPre">
+                            Barra de estado
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" :disabled="userStore.TutorialTrans == 0 ? true : false" @click="cambiarTutorialTrans">
+                          <b>TRANS-ANÉSTESICO</b>
+                        </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          <label type="button"
+                            :class="tutoUnoTrans == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"  
+                            data-bs-target="#carousel-trans" data-bs-slide-to="0" aria-label="Slide 1" @click="validarCambioCarruselTrans">
+                            Acciones quirúrgicas
+                          </label><br><br>
+                          <label type="button" 
+                            :class="tutoDosTrans == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
+                            data-bs-target="#carousel-trans" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarruselTrans">
+                            Tiempos quirúrgicos
+                          </label><br><br>
+                          <label type="button"
+                            :class="tutoTresTrans == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
+                            data-bs-target="#carousel-trans" data-bs-slide-to="2" aria-label="Slide 3" @click="validarCambioCarruselTrans">
+                            Barra de información
+                          </label><br><br>
+                          <label type="button"
+                            :class="tutoCuatroTrans == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
+                            data-bs-target="#carousel-trans" data-bs-slide-to="3" aria-label="Slide 4" @click="validarCambioCarruselTrans">
+                            Signos vitales
+                          </label><br><br>
+                          <label type="button"
+                            :class="tutoCincoTrans == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
+                            data-bs-target="#carousel-trans" data-bs-slide-to="4" aria-label="Slide 5" @click="validarCambioCarruselTrans">
+                            Grid anestésico
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" :disabled="userStore.TutorialPost == 0 ? true : false" @click="cambiarTutorialPost">
+                          <b>POST-ANÉSTESICO</b>
+                        </button>
+                      </h2>
+                      <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          <label type="button"
+                            :class="tutoUnoPost == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"  
+                            data-bs-target="#carousel-post" data-bs-slide-to="0" aria-label="Slide 1" @click="validarCambioCarruselPost">
+                            Inf. adicional
+                          </label><br><br>
+                          <label type="button" 
+                            :class="tutoDosPost == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
+                            data-bs-target="#carousel-post" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarruselPost">
+                            Caso obstétrico
+                          </label>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                </div>
+                <!-- Carrusel para tutorial -->
+                <div class="col-md-9">
+                  <template v-if="tutoPre === true">
+                    <div id="carousel-pre" class="carousel slide">
+                      <div class="carousel-indicators">
+                        <button type="button" id="tutoUnoPre" data-bs-target="#carousel-pre" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" @click="validarCambioCarruselPre"></button>
+                        <button type="button" id="tutoDosPre" data-bs-target="#carousel-pre" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarruselPre"></button>
+                        <button type="button" id="tutoTresPre" data-bs-target="#carousel-pre" data-bs-slide-to="2" aria-label="Slide 3" @click="validarCambioCarruselPre"></button>
+                        <button type="button" id="tutoCuatroPre" data-bs-target="#carousel-pre" data-bs-slide-to="3" aria-label="Slide 4" @click="validarCambioCarruselPre"></button>
+                      </div>
+                      <div class="carousel-inner">
+                        <div class="carousel-item active div-carrusel">
+                          <img src="images/tutorial/pre-info.png" class="d-block img-carrusel">
+                        </div>
+                        <div class="carousel-item div-carrusel">
+                          <img src="images/tutorial/pre-barra-busqueda.png" class="d-block img-carrusel">
+                        </div>
+                        <div class="carousel-item div-carrusel">
+                          <img src="images/tutorial/pre-modulos.png" class="d-block img-carrusel">
+                        </div>
+                        <div class="carousel-item div-carrusel">
+                          <img src="images/tutorial/pre-barra-estado.png" class="d-block img-carrusel">
+                        </div>
+                      </div>
+                    </div>       
+                  </template>
 
-                  <div class="col-md-1 div-img">
-                    <button type="button" class="btn fw-bold" data-bs-dismiss="modal" aria-label="Close">
-                      <i class="text-white">
-                        <font-awesome-icon icon="fa-solid fa-xmark" size="2xl"/>
-                      </i>
-                    </button>
-                  </div>
+                  <template v-if="tutoTrans === true">
+                    <div id="carousel-trans" class="carousel slide">
+                      <div class="carousel-indicators">
+                        <button type="button" id="tutoUnoTrans" data-bs-target="#carousel-trans" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" @click="validarCambioCarruselTrans"></button>
+                        <button type="button" id="tutoDosTrans" data-bs-target="#carousel-trans" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarruselTrans"></button>
+                        <button type="button" id="tutoTresTrans" data-bs-target="#carousel-trans" data-bs-slide-to="2" aria-label="Slide 3" @click="validarCambioCarruselTrans"></button>
+                        <button type="button" id="tutoCuatroTrans" data-bs-target="#carousel-trans" data-bs-slide-to="3" aria-label="Slide 4" @click="validarCambioCarruselTrans"></button>
+                        <button type="button" id="tutoCincoTrans" data-bs-target="#carousel-trans" data-bs-slide-to="4" aria-label="Slide 5" @click="validarCambioCarruselTrans"></button>
+                      </div>
+                      <div class="carousel-inner">
+                        <div class="carousel-item active div-carrusel">
+                          <img src="images/tutorial/trans-acciones.png" class="d-block img-carrusel">
+                        </div>
+                        <div class="carousel-item div-carrusel">
+                          <img src="images/tutorial/trans-tiempos.png" class="d-block img-carrusel">
+                        </div>
+                        <div class="carousel-item div-carrusel">
+                          <img src="images/tutorial/trans-barra.png" class="d-block img-carrusel">
+                        </div>
+                        <div class="carousel-item div-carrusel">
+                          <img src="images/tutorial/trans-signos.png" class="d-block img-carrusel">
+                        </div>
+                        <div class="carousel-item div-carrusel">
+                          <img src="images/tutorial/trans-grafica.png" class="d-block img-carrusel">
+                        </div>
+                      </div>
+                    </div>
+                  </template>
 
-                  <form class="row g-3 mt-1" @submit.prevent="">
-                    
-                  </form>
-
+                  <template v-if="tutoPost === true">
+                    <div id="carousel-post" class="carousel slide">
+                      <div class="carousel-indicators">
+                        <button type="button" id="tutoUnoPost" data-bs-target="#carousel-post" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" @click="validarCambioCarruselPost"></button>
+                        <button type="button" id="tutoDosPost" data-bs-target="#carousel-post" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarruselPost"></button>
+                      </div>
+                      <div class="carousel-inner">
+                        <div class="carousel-item active div-carrusel">
+                          <img src="images/tutorial/post-modulos.png" class="d-block img-carrusel">
+                        </div>
+                        <div class="carousel-item div-carrusel">
+                          <img src="images/tutorial/post-caso.png" class="d-block img-carrusel">
+                        </div>
+                      </div>
+                    </div>  
+                  </template>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -515,6 +668,24 @@ const medStore = useMedicamentoStore();
 export default defineComponent({
   data() {
     return {
+      tutoPre: true,
+      tutoTrans: false,
+      tutoPost: false,
+
+      tutoUnoPre: true,
+      tutoDosPre: false,
+      tutoTresPre: false,
+      tutoCuatroPre: false,
+
+      tutoUnoTrans: true,
+      tutoDosTrans: false,
+      tutoTresTrans: false,
+      tutoCuatroTrans: false,
+      tutoCincoTrans: false,
+
+      tutoUnoPost: true,
+      tutoDosPost: false,
+
       userStore,
       medStore,
       infoMedicamento: {} as regMedicamento,
@@ -730,7 +901,114 @@ export default defineComponent({
       const file = event.target.files[0];
       this.imagenSeleccionada = file;
     },
-  },
+
+    async validarCambioCarruselPre(){
+      if(document.getElementById("tutoUnoPre").ariaCurrent=="true"){
+        this.tutoUnoPre=true
+        this.tutoDosPre=false
+        this.tutoTresPre=false
+        this.tutoCuatroPre=false
+      }
+      else if(document.getElementById("tutoDosPre").ariaCurrent=="true"){
+        this.tutoUnoPre=false
+        this.tutoDosPre=true
+        this.tutoTresPre=false
+        this.tutoCuatroPre=false
+      }
+      else if(document.getElementById("tutoTresPre").ariaCurrent=="true"){
+        this.tutoUnoPre=false
+        this.tutoDosPre=false
+        this.tutoTresPre=true
+        this.tutoCuatroPre=false
+      }
+      else if(document.getElementById("tutoCuatroPre").ariaCurrent=="true"){
+        this.tutoUnoPre=false
+        this.tutoDosPre=false
+        this.tutoTresPre=false
+        this.tutoCuatroPre=true
+      }
+    },
+
+    async validarCambioCarruselTrans(){
+      if(document.getElementById("tutoUnoTrans").ariaCurrent=="true"){
+        this.tutoUnoTrans=true
+        this.tutoDosTrans=false
+        this.tutoTresTrans=false
+        this.tutoCuatroTrans=false
+        this.tutoCincoTrans=false
+      }
+      else if(document.getElementById("tutoDosTrans").ariaCurrent=="true"){
+        this.tutoUnoTrans=false
+        this.tutoDosTrans=true
+        this.tutoTresTrans=false
+        this.tutoCuatroTrans=false
+        this.tutoCincoTrans=false
+      }
+      else if(document.getElementById("tutoTresTrans").ariaCurrent=="true"){
+        this.tutoUnoTrans=false
+        this.tutoDosTrans=false
+        this.tutoTresTrans=true
+        this.tutoCuatroTrans=false
+        this.tutoCincoTrans=false
+      }
+      else if(document.getElementById("tutoCuatroTrans").ariaCurrent=="true"){
+        this.tutoUnoTrans=false
+        this.tutoDosTrans=false
+        this.tutoTresTrans=false
+        this.tutoCuatroTrans=true
+        this.tutoCincoTrans=false
+      }
+      else if(document.getElementById("tutoCincoTrans").ariaCurrent=="true"){
+        this.tutoUnoTrans=false
+        this.tutoDosTrans=false
+        this.tutoTresTrans=false
+        this.tutoCuatroTrans=false
+        this.tutoCincoTrans=true
+      }
+    },
+
+    async validarCambioCarruselPost(){
+      if(document.getElementById("tutoUnoPost").ariaCurrent=="true"){
+        this.tutoUnoPost=true
+        this.tutoDosPost=false
+      }
+      else if(document.getElementById("tutoDosPost").ariaCurrent=="true"){
+        this.tutoUnoPost=false
+        this.tutoDosPost=true
+      }
+    },
+
+    async cambiarTutorialPre(){
+      this.tutoPre=true;
+      this.tutoTrans=false;
+      this.tutoPost=false;
+
+      this.tutoUnoPre= true
+      this.tutoDosPre= false
+      this.tutoTresPre= false
+      this.tutoCuatroPre= false
+    },
+    async cambiarTutorialTrans(){
+      this.tutoPre=false;
+      this.tutoTrans=true;
+      this.tutoPost=false;
+
+      this.tutoUnoTrans=true
+      this.tutoDosTrans=false
+      this.tutoTresTrans=false
+      this.tutoCuatroTrans=false
+      this.tutoCincoTrans=false
+    },
+    async cambiarTutorialPost(){
+      this.tutoPre=false;
+      this.tutoTrans=false;
+      this.tutoPost=true;
+
+      this.tutoUnoPost=true
+      this.tutoDosPost=false
+    }
+
+  }
 });
 </script>
 
@@ -854,5 +1132,33 @@ export default defineComponent({
 }
 .color-modal {
   background-color: #002d60;
+}
+/* Modal tutorial */
+.modal-med-largo {
+  height: 510px;
+}
+.div-carrusel{
+  text-align: -webkit-center;
+}
+.img-carrusel{
+  width: inherit;
+}
+.carousel-indicators{
+  margin-bottom: 0;
+}
+.carousel-indicators [data-bs-target] {
+  background-color: #E88000 !important;  
+}
+.accordion{
+  --bs-accordion-bg: #EEF1F4 !important;
+}
+.accordion-button{
+  color: #1F315A !important
+}
+.color-desactivo-acordeon{
+  color: #00123B
+}
+.color-activo-acordeon{
+  color: #E88000
 }
 </style>

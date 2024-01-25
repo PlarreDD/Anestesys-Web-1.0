@@ -1027,27 +1027,27 @@
                             <div class="accordion-body">
                               <label type="button"
                                 :class="tutoUno == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"  
-                                data-bs-target="#carousel-trans" data-bs-slide-to="0" aria-label="Slide 1" @click="validarCambioCarrusel">
+                                data-bs-target="#carousel-trans1" data-bs-slide-to="0" aria-label="Slide 1" @click="validarCambioCarrusel">
                                 Acciones quirúrgicas
                               </label><br><br>
                               <label type="button" 
                                 :class="tutoDos == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
-                                data-bs-target="#carousel-trans" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel">
+                                data-bs-target="#carousel-trans1" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel">
                                 Tiempos quirúrgicos
                               </label><br><br>
                               <label type="button"
                                 :class="tutoTres == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
-                                data-bs-target="#carousel-trans" data-bs-slide-to="2" aria-label="Slide 3" @click="validarCambioCarrusel">
+                                data-bs-target="#carousel-trans1" data-bs-slide-to="2" aria-label="Slide 3" @click="validarCambioCarrusel">
                                 Barra de información
                               </label><br><br>
                               <label type="button"
                                 :class="tutoCuatro == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
-                                data-bs-target="#carousel-trans" data-bs-slide-to="3" aria-label="Slide 4" @click="validarCambioCarrusel">
+                                data-bs-target="#carousel-trans1" data-bs-slide-to="3" aria-label="Slide 4" @click="validarCambioCarrusel">
                                 Signos vitales
                               </label><br><br>
                               <label type="button"
                                 :class="tutoCinco == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
-                                data-bs-target="#carousel-trans" data-bs-slide-to="4" aria-label="Slide 5" @click="validarCambioCarrusel">
+                                data-bs-target="#carousel-trans1" data-bs-slide-to="4" aria-label="Slide 5" @click="validarCambioCarrusel">
                                 Grid anestésico
                               </label>
                             </div>
@@ -1070,13 +1070,13 @@
 
                     <!-- Carrusel para tutorial -->
                     <div class="col-md-9">                
-                      <div id="carousel-trans" class="carousel slide">
+                      <div id="carousel-trans1" class="carousel slide">
                         <div class="carousel-indicators">
-                          <button type="button" id="tutoUno" data-bs-target="#carousel-trans" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" @click="validarCambioCarrusel"></button>
-                          <button type="button" id="tutoDos" data-bs-target="#carousel-trans" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel"></button>
-                          <button type="button" id="tutoTres" data-bs-target="#carousel-trans" data-bs-slide-to="2" aria-label="Slide 3" @click="validarCambioCarrusel"></button>
-                          <button type="button" id="tutoCuatro" data-bs-target="#carousel-trans" data-bs-slide-to="3" aria-label="Slide 4" @click="validarCambioCarrusel"></button>
-                          <button type="button" id="tutoCinco" data-bs-target="#carousel-trans" data-bs-slide-to="4" aria-label="Slide 5" @click="validarCambioCarrusel"></button>
+                          <button type="button" id="tutoUno" data-bs-target="#carousel-trans1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" @click="validarCambioCarrusel"></button>
+                          <button type="button" id="tutoDos" data-bs-target="#carousel-trans1" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel"></button>
+                          <button type="button" id="tutoTres" data-bs-target="#carousel-trans1" data-bs-slide-to="2" aria-label="Slide 3" @click="validarCambioCarrusel"></button>
+                          <button type="button" id="tutoCuatro" data-bs-target="#carousel-trans1" data-bs-slide-to="3" aria-label="Slide 4" @click="validarCambioCarrusel"></button>
+                          <button type="button" id="tutoCinco" data-bs-target="#carousel-trans1" data-bs-slide-to="4" aria-label="Slide 5" @click="validarCambioCarrusel"></button>
                         </div>
                         <div class="carousel-inner">
                           <div class="carousel-item active div-carrusel">
@@ -6828,6 +6828,7 @@ export default defineComponent({
           toast: true,
         })
         
+        this.userStore.TutorialTrans = 1
         await this.userStore.updateTutorialTrans(userStore.IdMed)                        
     },
 

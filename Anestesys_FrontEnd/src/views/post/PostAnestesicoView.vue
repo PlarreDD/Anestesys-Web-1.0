@@ -90,12 +90,12 @@
                         <div class="accordion-body">
                           <label type="button"
                             :class="tutoUno == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"  
-                            data-bs-target="#carousel-post" data-bs-slide-to="0" aria-label="Slide 1" @click="validarCambioCarrusel">
+                            data-bs-target="#carousel-post1" data-bs-slide-to="0" aria-label="Slide 1" @click="validarCambioCarrusel">
                             Inf. adicional
                           </label><br><br>
                           <label type="button" 
                             :class="tutoDos == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
-                            data-bs-target="#carousel-post" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel">
+                            data-bs-target="#carousel-post1" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel">
                             Caso obstétrico
                           </label>
                         </div>
@@ -105,10 +105,10 @@
                 </div>
                 <!-- Carrusel para tutorial -->
                 <div class="col-md-9">                
-                  <div id="carousel-post" class="carousel slide">
+                  <div id="carousel-post1" class="carousel slide">
                     <div class="carousel-indicators">
-                      <button type="button" id="tutoUno" data-bs-target="#carousel-post" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" @click="validarCambioCarrusel"></button>
-                      <button type="button" id="tutoDos" data-bs-target="#carousel-post" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel"></button>
+                      <button type="button" id="tutoUno" data-bs-target="#carousel-post1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" @click="validarCambioCarrusel"></button>
+                      <button type="button" id="tutoDos" data-bs-target="#carousel-post1" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel"></button>
                     </div>
                     <div class="carousel-inner">
                       <div class="carousel-item active div-carrusel">
@@ -393,6 +393,7 @@ export default ({
           toast: true,
         })
         
+        userStore.TutorialPost = 1
         await this.userStore.updateTutorialPost(userStore.IdMed)                        
     },
 

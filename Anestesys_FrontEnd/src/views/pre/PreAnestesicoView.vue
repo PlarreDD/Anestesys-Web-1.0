@@ -389,22 +389,22 @@
                         <div class="accordion-body">
                           <label type="button"
                             :class="tutoUno == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"  
-                            data-bs-target="#carousel-pre" data-bs-slide-to="0" aria-label="Slide 1" @click="validarCambioCarrusel">
+                            data-bs-target="#carousel-pre1" data-bs-slide-to="0" aria-label="Slide 1" @click="validarCambioCarrusel">
                             Inf. del paciente
                           </label><br><br>
                           <label type="button" 
                             :class="tutoDos == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
-                            data-bs-target="#carousel-pre" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel">
+                            data-bs-target="#carousel-pre1" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel">
                             Barra de búsqueda
                           </label><br><br>
                           <label type="button"
                             :class="tutoTres == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
-                            data-bs-target="#carousel-pre" data-bs-slide-to="2" aria-label="Slide 3" @click="validarCambioCarrusel">
+                            data-bs-target="#carousel-pre1" data-bs-slide-to="2" aria-label="Slide 3" @click="validarCambioCarrusel">
                             Modulos
                           </label><br><br>
                           <label type="button"
                             :class="tutoCuatro == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
-                            data-bs-target="#carousel-pre" data-bs-slide-to="3" aria-label="Slide 4" @click="validarCambioCarrusel">
+                            data-bs-target="#carousel-pre1" data-bs-slide-to="3" aria-label="Slide 4" @click="validarCambioCarrusel">
                             Barra de estado
                           </label>
                         </div>
@@ -438,12 +438,12 @@
                 </div>
                 <!-- Carrusel para tutorial -->
                 <div class="col-md-9">                
-                  <div id="carousel-pre" class="carousel slide">
+                  <div id="carousel-pre1" class="carousel slide">
                     <div class="carousel-indicators">
-                      <button type="button" id="tutoUno" data-bs-target="#carousel-pre" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" @click="validarCambioCarrusel"></button>
-                      <button type="button" id="tutoDos" data-bs-target="#carousel-pre" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel"></button>
-                      <button type="button" id="tutoTres" data-bs-target="#carousel-pre" data-bs-slide-to="2" aria-label="Slide 3" @click="validarCambioCarrusel"></button>
-                      <button type="button" id="tutoCuatro" data-bs-target="#carousel-pre" data-bs-slide-to="3" aria-label="Slide 4" @click="validarCambioCarrusel"></button>
+                      <button type="button" id="tutoUno" data-bs-target="#carousel-pre1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" @click="validarCambioCarrusel"></button>
+                      <button type="button" id="tutoDos" data-bs-target="#carousel-pre1" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel"></button>
+                      <button type="button" id="tutoTres" data-bs-target="#carousel-pre1" data-bs-slide-to="2" aria-label="Slide 3" @click="validarCambioCarrusel"></button>
+                      <button type="button" id="tutoCuatro" data-bs-target="#carousel-pre1" data-bs-slide-to="3" aria-label="Slide 4" @click="validarCambioCarrusel"></button>
                     </div>
                     <div class="carousel-inner">
                       <div class="carousel-item active div-carrusel">
@@ -5542,6 +5542,7 @@ export default defineComponent({
           toast: true,
         })
         
+        userStore.TutorialPre = 1
         await this.userStore.updateTutorialPre(userStore.IdMed)                        
     },
 
