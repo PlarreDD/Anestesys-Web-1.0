@@ -6,6 +6,7 @@ import { Request,
          Response } from "express";    // Obtiene los Response y Request que se envían
 import multer from 'multer';
 import sharp from 'sharp'; // Para redimensionar la imagen
+import nodemailer from 'nodemailer';
 
 const storage = multer.memoryStorage(); // Almacenamiento en memoria
 const upload = multer({ storage: storage});
@@ -21,6 +22,8 @@ export const register = async (req:Request, res:Response) => {
         user = new User({email, password, nomMed, apMed, fechaNac, cedula, especialidad, foto, tutorialPre, tutorialTrans, tutorialPost});
         await user.save();
 
+        await enviarEmail(email, password);
+
         //Generar el JWT
         const token = generateToken(user.id);
 
@@ -33,6 +36,29 @@ export const register = async (req:Request, res:Response) => {
         
         return res.status(500).json({error: "Error con el servidor"});
     }
+};
+
+const enviarEmail = async (email: string, password: string) => {
+
+    // Configurar el transporte de nodemailer (puedes utilizar tu propio proveedor de correo electrónico)
+    const transporter = nodemailer.createTransport({
+        service: 'outlook',
+        auth: {
+            user: 'juan.hernandez@biossmann.com', // Reemplazar con tu dirección de correo electrónico
+            pass: 'hefuju*2022' // Reemplazar con tu contraseña
+        }
+    });
+    
+    // Configurar el contenido del correo electrónico
+    const mailOptions = {
+        from: 'juan.hernandez@biossmann.com', // Reemplazar con tu dirección de correo electrónico
+        to: email,
+        subject: 'Confirmación de contraseña Anestesys',
+        text: 'Gracias por registrarte en nuestra aplicación. \n\n Tu contraseña es: '+password
+    };   
+
+    // Enviar el correo electrónico
+    await transporter.sendMail(mailOptions);
 };
 
 export const login = async (req:Request, res:Response) => {
