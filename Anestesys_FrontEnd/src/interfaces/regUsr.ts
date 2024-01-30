@@ -9,5 +9,6 @@ export interface regUsr{
     foto: string,
     tutorialPre: number,
     tutorialTrans: number,
-    tutorialPost: number
+    tutorialPost: number,
+    passwordTemp: string
 }

@@ -38,7 +38,9 @@ const userSchema = new Schema({
 
     tutorialTrans: {type: Number},
 
-    tutorialPost: {type: Number}
+    tutorialPost: {type: Number},
+
+    passwordTemp: {type: String}
 });
 
 userSchema.pre("save", async function(next){
