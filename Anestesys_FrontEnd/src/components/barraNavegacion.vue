@@ -477,6 +477,7 @@
               </div>
 
               <div class="row">
+                <!-- Acordeón -->
                 <div class="col-md-3">                   
                   <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
@@ -580,16 +581,16 @@
                         <button type="button" id="tutoCuatroPre" data-bs-target="#carousel-pre" data-bs-slide-to="3" aria-label="Slide 4" @click="validarCambioCarruselPre"></button>
                       </div>
                       <div class="carousel-inner">
-                        <div class="carousel-item active div-carrusel">
+                        <div :class="tutoUnoPre == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
                           <img src="images/tutorial/pre-info.png" class="d-block img-carrusel">
                         </div>
-                        <div class="carousel-item div-carrusel">
+                        <div :class="tutoDosPre == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
                           <img src="images/tutorial/pre-barra-busqueda.png" class="d-block img-carrusel">
                         </div>
-                        <div class="carousel-item div-carrusel">
+                        <div :class="tutoTresPre == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
                           <img src="images/tutorial/pre-modulos.png" class="d-block img-carrusel">
                         </div>
-                        <div class="carousel-item div-carrusel">
+                        <div :class="tutoCuatroPre == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
                           <img src="images/tutorial/pre-barra-estado.png" class="d-block img-carrusel">
                         </div>
                       </div>
@@ -606,19 +607,19 @@
                         <button type="button" id="tutoCincoTrans" data-bs-target="#carousel-trans" data-bs-slide-to="4" aria-label="Slide 5" @click="validarCambioCarruselTrans"></button>
                       </div>
                       <div class="carousel-inner">
-                        <div class="carousel-item active div-carrusel">
+                        <div :class="tutoUnoTrans == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
                           <img src="images/tutorial/trans-acciones.png" class="d-block img-carrusel">
                         </div>
-                        <div class="carousel-item div-carrusel">
+                        <div :class="tutoDosTrans == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
                           <img src="images/tutorial/trans-tiempos.png" class="d-block img-carrusel">
                         </div>
-                        <div class="carousel-item div-carrusel">
+                        <div :class="tutoTresTrans == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
                           <img src="images/tutorial/trans-barra.png" class="d-block img-carrusel">
                         </div>
-                        <div class="carousel-item div-carrusel">
+                        <div :class="tutoCuatroTrans == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
                           <img src="images/tutorial/trans-signos.png" class="d-block img-carrusel">
                         </div>
-                        <div class="carousel-item div-carrusel">
+                        <div :class="tutoCincoTrans == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
                           <img src="images/tutorial/trans-grafica.png" class="d-block img-carrusel">
                         </div>
                       </div>
@@ -632,10 +633,10 @@
                         <button type="button" id="tutoDosPost" data-bs-target="#carousel-post" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarruselPost"></button>
                       </div>
                       <div class="carousel-inner">
-                        <div class="carousel-item active div-carrusel">
+                        <div :class="tutoUnoPost == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
                           <img src="images/tutorial/post-modulos.png" class="d-block img-carrusel">
                         </div>
-                        <div class="carousel-item div-carrusel">
+                        <div :class="tutoDosTrans == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
                           <img src="images/tutorial/post-caso.png" class="d-block img-carrusel">
                         </div>
                       </div>
@@ -987,6 +988,9 @@ export default defineComponent({
       this.tutoDosPre= false
       this.tutoTresPre= false
       this.tutoCuatroPre= false
+
+      document.getElementById("tutoUnoPre").ariaCurrent=="true"
+      document.getElementById("tutoUnoPre").className=="active"      
     },
     async cambiarTutorialTrans(){
       this.tutoPre=false;
@@ -998,6 +1002,7 @@ export default defineComponent({
       this.tutoTresTrans=false
       this.tutoCuatroTrans=false
       this.tutoCincoTrans=false
+
     },
     async cambiarTutorialPost(){
       this.tutoPre=false;
