@@ -184,7 +184,11 @@
                           v-model="user.especialidad" placeholder="Especialidad" :readonly="perfilData == false"/>
                     </div>
 
-                    <div class="col-md-4"></div>.
+                    <div class="col-md-4">
+                      <button type="button" :class="perfilData == true ? 'invisible' : 'btn btn-modal-pass fw-bold'">
+                        Modificar Contraseña <font-awesome-icon icon="fa-solid fa-angle-right" size="md" />
+                      </button>
+                    </div>
                     <div class="col-md-5">
                       <button type="button" :class="perfilData == false ? 'invisible' : 'btn btn-modal-medicamentos fw-bold'" @click="ocultarInputsPerfil">
                         Cancelar
@@ -1108,6 +1112,17 @@ export default defineComponent({
   --bs-btn-active-color: #ffffff;
   --bs-btn-active-border-color: #E88300;
   width: 130px;
+}
+.btn-modal-pass {
+  --bs-btn-bg: #ffffff;
+  --bs-btn-color: #002d60;
+  --bs-btn-border-color: #ffffff;
+  --bs-btn-hover-bg: #E88300;
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-hover-border-color: #E88300;
+  --bs-btn-active-bg: #E88300;
+  --bs-btn-active-color: #ffffff;
+  --bs-btn-active-border-color: #E88300;
 }
 /* Modal medicamentos */
 .colorModal {
