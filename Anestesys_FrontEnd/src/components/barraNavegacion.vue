@@ -522,7 +522,7 @@
                           <label type="button"
                             :class="tutoUnoTrans == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"  
                             data-bs-target="#carousel-trans" data-bs-slide-to="0" aria-label="Slide 1" @click="validarCambioCarruselTrans">
-                            Acciones quirúrgicas
+                            Monitoreo
                           </label><br><br>
                           <label type="button" 
                             :class="tutoDosTrans == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
@@ -532,7 +532,7 @@
                           <label type="button"
                             :class="tutoTresTrans == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
                             data-bs-target="#carousel-trans" data-bs-slide-to="2" aria-label="Slide 3" @click="validarCambioCarruselTrans">
-                            Barra de información
+                            Menús y acciones
                           </label><br><br>
                           <label type="button"
                             :class="tutoCuatroTrans == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
@@ -608,13 +608,13 @@
                       </div>
                       <div class="carousel-inner">
                         <div :class="tutoUnoTrans == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
-                          <img src="images/tutorial/trans-acciones.png" class="d-block img-carrusel">
+                          <img src="images/tutorial/trans-monitoreo.png" class="d-block img-carrusel">
                         </div>
                         <div :class="tutoDosTrans == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
                           <img src="images/tutorial/trans-tiempos.png" class="d-block img-carrusel">
                         </div>
                         <div :class="tutoTresTrans == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
-                          <img src="images/tutorial/trans-barra.png" class="d-block img-carrusel">
+                          <img src="images/tutorial/trans-acciones.png" class="d-block img-carrusel">
                         </div>
                         <div :class="tutoCuatroTrans == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
                           <img src="images/tutorial/trans-signos.png" class="d-block img-carrusel">
