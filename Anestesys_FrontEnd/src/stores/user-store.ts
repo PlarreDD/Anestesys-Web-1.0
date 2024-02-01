@@ -18,7 +18,8 @@ export const useUserStore = defineStore('user', {
         Foto: ref(null),
         TutorialPre: ref(null),
         TutorialTrans: ref(null),
-        TutorialPost: ref(null)
+        TutorialPost: ref(null),
+        Password: ref(null)
     }),
 
     actions: {
@@ -40,6 +41,7 @@ export const useUserStore = defineStore('user', {
                 this.TutorialPre = res.data.TutorialPre
                 this.TutorialTrans = res.data.TutorialTrans
                 this.TutorialPost = res.data.TutorialPost
+                this.Password = res.data.Password
                 
                 /* Mensaje de Bienvenida */
                 swal.fire({

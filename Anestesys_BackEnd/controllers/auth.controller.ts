@@ -84,6 +84,7 @@ export const login = async (req:Request, res:Response) => {
         let TutorialPre = null;
         let TutorialTrans = null;
         let TutorialPost = null;
+        let Password = null;
 
         let user = await User.findOne({email});
 
@@ -101,6 +102,7 @@ export const login = async (req:Request, res:Response) => {
             TutorialPre = user.tutorialPre
             TutorialTrans = user.tutorialTrans
             TutorialPost = user.tutorialPost
+            Password = user.password
         }
 
         const respuestaPasword = await bcryptjs.compare(password, user.password);
@@ -114,7 +116,7 @@ export const login = async (req:Request, res:Response) => {
         const tkn = token?.token;
         const xprIn = token?.expiresIn;
    
-        return res.json( {tkn, xprIn, Nombre, Apellido, FechaNac, Cedula, Especialidad, HoraSesion, Correo, Foto, Id, TutorialPre, TutorialTrans, TutorialPost} );
+        return res.json( {tkn, xprIn, Nombre, Apellido, FechaNac, Cedula, Especialidad, HoraSesion, Correo, Foto, Id, TutorialPre, TutorialTrans, TutorialPost, Password} );
     }catch(error){
         if (error.code == 12000)
             return res.status(403).json({error: "Usuario Inválido"});

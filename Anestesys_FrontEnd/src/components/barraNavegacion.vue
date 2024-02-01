@@ -113,11 +113,7 @@
     </nav>
 
     <!-- Modal perfil -->
-    <div class="modal"
-         id="perfilModal"
-         tabindex="-1"
-         aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+    <div class="modal" id="perfilModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
         <div class="modal-content colorModal">
           <div class="input-group mb-3">
@@ -185,7 +181,7 @@
                     </div>
 
                     <div class="col-md-4">
-                      <button type="button" :class="perfilData == true ? 'invisible' : 'btn btn-modal-pass fw-bold'">
+                      <button type="button" :class="perfilData == true ? 'invisible' : 'btn btn-modal-pass fw-bold'" data-bs-toggle="modal" data-bs-target="#contrasenaModal">
                         Modificar Contraseña <font-awesome-icon icon="fa-solid fa-angle-right" size="md" />
                       </button>
                     </div>
@@ -208,6 +204,72 @@
                         </button>
                       </template>                      
                     </div>
+
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal contraseña -->
+    <div class="modal" id="contrasenaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
+        <div class="modal-content colorModal">
+          <div class="input-group mb-3">
+            <div class="modal-body">
+              <div class="col-md-12">
+                <div class="row g-3">
+                  <div class="col-md-11">
+                    <h5 class="text-white fw-bold">CONTRASEÑA</h5>
+                    <h6 class="text-white fw-bold">Modificar contraseña</h6>
+                  </div>
+
+                  <div class="col-md-1 div-img">
+                    <button type="button" class="btn fw-bold" aria-label="Close" data-bs-toggle="modal" data-bs-target="#perfilModal">
+                      <i class="text-white">
+                        <font-awesome-icon icon="fa-solid fa-arrow-left" size="2xl"/>
+                      </i>
+                    </button>
+                  </div>
+
+                  <form class="row g-3 mt-1" @submit.prevent="">
+                    
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                      <label class="form-label fw-bold text-white">Contraseña actual: </label>    
+                      <input type="text" class="form-control" v-model="contrasenaAnterior" placeholder="Escribir contraseña actual" @keyup.capture="validarContrasena()"/>
+                      <span :class="passCorrecta == false ? 'password-icon' : 'password-check'">                        
+                        <font-awesome-icon icon="fa-solid fa-circle-check" />                                                  
+                      </span>
+                    </div>                  
+                    <div class="col-md-4"></div>        
+                    
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                      <label class="form-label fw-bold text-white">Contraseña nueva: </label>    
+                      <input type="text" id="contrasena" :class="passCorrecta == false ? 'form-control input-read-perfil' : 'form-control'" 
+                        placeholder="Escribir contraseña nueva" :readonly="passCorrecta == false"/>
+                      <span class="password-icon show-password" id="mostrar" @click="mostrarPass()">
+                        <template v-if="contrasena === true">
+                          <font-awesome-icon icon="fa-solid fa-eye" />
+                        </template>
+                        <template v-else>
+                          <font-awesome-icon icon="fa-solid fa-eye-slash" />
+                        </template>                              
+                      </span>
+                    </div>                  
+                    <div class="col-md-4"></div>
+
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                      <label class="form-label fw-bold text-white">Repetir contraseña nueva: </label>    
+                      <input type="text" :class="passCorrecta == false ? 'form-control input-read-perfil' : 'form-control'" placeholder="Repetir contraseña nueva" :readonly="passCorrecta == false"/>
+                    </div>                  
+                    <div class="col-md-4"></div> 
 
                   </form>
 
@@ -666,6 +728,7 @@ import { useMedicamentoStore } from "../stores/medicamento-store";
 import type { regMedicamento,
               ConfigMonitor } from "@/interfaces/regMedicamento";
 import type { regUsr } from '@/interfaces/regUsr';
+import bcryptjs from "bcryptjs"
 
 const userStore = useUserStore();
 const medStore = useMedicamentoStore();
@@ -699,11 +762,17 @@ export default defineComponent({
       editar: false,
 
       perfilData: false,
-      imagenSeleccionada : ''
+      imagenSeleccionada: '',
+
+      contrasenaAnterior: '',
+      contrasena: false,
+      passCorrecta: false,
     };
   },
 
   mounted() {
+    this.mostrarPass();
+
     medStore.getMedicamentosList();
     this.listadoMonitor();
     this.user.nomUsr = this.userStore.Nombre
@@ -1015,8 +1084,33 @@ export default defineComponent({
 
       this.tutoUnoPost=true
       this.tutoDosPost=false
-    }
+    },
 
+    async validarContrasena(){
+      const respuestaPasword = await bcryptjs.compare(this.contrasenaAnterior, userStore.Password);
+
+      if(respuestaPasword){
+        console.log("true");
+        this.passCorrecta=true        
+      }else{
+        console.log("false");
+        this.passCorrecta=false    
+      }
+    },
+
+    async mostrarPass(){
+      if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
+        (document.getElementById("contrasena") as HTMLInputElement).type = "password";
+        this.contrasena=false
+      } else {
+        (document.getElementById("contrasena") as HTMLInputElement).type = "text";
+        this.contrasena=true
+      }
+    },
+
+    async vaciarInputsContrasena(){
+
+    }
   }
 });
 </script>
@@ -1180,5 +1274,19 @@ export default defineComponent({
 }
 .color-activo-acordeon{
   color: #E88000
+}
+.password-icon {
+  float: right;
+  position: relative;
+  margin: -30px 10px 0 0;
+  cursor: pointer;
+  color: gray;
+}
+.password-check{
+  float: right;
+  position: relative;
+  margin: -30px 10px 0 0;
+  cursor: pointer;
+  color: green;
 }
 </style>
