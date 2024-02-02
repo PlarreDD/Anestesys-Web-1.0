@@ -229,7 +229,7 @@
                   </div>
 
                   <div class="col-md-1 div-img">
-                    <button type="button" class="btn fw-bold" aria-label="Close" data-bs-toggle="modal" data-bs-target="#perfilModal">
+                    <button id="volver-perfil" type="button" class="btn fw-bold" aria-label="Close" data-bs-toggle="modal" data-bs-target="#perfilModal" @click="vaciarInputsContrasena()">
                       <i class="text-white">
                         <font-awesome-icon icon="fa-solid fa-arrow-left" size="2xl"/>
                       </i>
@@ -240,8 +240,11 @@
                     
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
-                      <label class="form-label fw-bold text-white">Contraseña actual: </label>    
-                      <input type="text" class="form-control" v-model="contrasenaAnterior" placeholder="Escribir contraseña actual" @keyup.capture="validarContrasena()"/>
+                      <label class="form-label fw-bold text-white">Contraseña actual: </label>
+
+                      <input type="text" class="form-control" v-model="contrasenaAnterior" placeholder="Escribir contraseña actual" 
+                      @keyup.capture="validarContrasena()" @change="validarContrasena()"/>
+
                       <span :class="passCorrecta == false ? 'password-icon' : 'password-check'">                        
                         <font-awesome-icon icon="fa-solid fa-circle-check" />                                                  
                       </span>
@@ -250,26 +253,49 @@
                     
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
-                      <label class="form-label fw-bold text-white">Contraseña nueva: </label>    
+                      <label class="form-label fw-bold text-white">Contraseña nueva: </label>
+
                       <input type="text" id="contrasena" :class="passCorrecta == false ? 'form-control input-read-perfil' : 'form-control'" 
-                        placeholder="Escribir contraseña nueva" :readonly="passCorrecta == false"/>
+                        placeholder="Escribir contraseña nueva" :readonly="passCorrecta == false" v-model="user.pswd"/>
+
                       <span class="password-icon show-password" id="mostrar" @click="mostrarPass()">
-                        <template v-if="contrasena === true">
+                        <template v-if="contrasena === false">
                           <font-awesome-icon icon="fa-solid fa-eye" />
                         </template>
                         <template v-else>
                           <font-awesome-icon icon="fa-solid fa-eye-slash" />
                         </template>                              
                       </span>
+
                     </div>                  
                     <div class="col-md-4"></div>
 
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
-                      <label class="form-label fw-bold text-white">Repetir contraseña nueva: </label>    
-                      <input type="text" :class="passCorrecta == false ? 'form-control input-read-perfil' : 'form-control'" placeholder="Repetir contraseña nueva" :readonly="passCorrecta == false"/>
+                      <label class="form-label fw-bold text-white">Repetir contraseña nueva: </label>
+
+                      <input type="text" id="contrasenaRep" :class="passCorrecta == false ? 'form-control input-read-perfil' : 'form-control'" 
+                        placeholder="Repetir contraseña nueva" :readonly="passCorrecta == false" v-model="contrasenaRepetida"/>
+
+                      <span class="password-icon show-password" id="mostrar" @click="mostrarPassRep()">
+                        <template v-if="contrasenaRep === false">
+                          <font-awesome-icon icon="fa-solid fa-eye" />
+                        </template>
+                        <template v-else>
+                          <font-awesome-icon icon="fa-solid fa-eye-slash" />
+                        </template>                              
+                      </span>
+
                     </div>                  
-                    <div class="col-md-4"></div> 
+                    <div class="col-md-4"></div>
+
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                      <button type="button" class="btn btn-modal-pass fw-bold" :disabled="passCorrecta == false" @click="validarContrasenas">
+                        Actualizar 
+                      </button>
+                    </div>
+                    <div class="col-md-4"></div>
 
                   </form>
 
@@ -765,13 +791,16 @@ export default defineComponent({
       imagenSeleccionada: '',
 
       contrasenaAnterior: '',
+      contrasenaRepetida: '',
       contrasena: false,
+      contrasenaRep: false,
       passCorrecta: false,
     };
   },
 
   mounted() {
     this.mostrarPass();
+    this.mostrarPassRep()
 
     medStore.getMedicamentosList();
     this.listadoMonitor();
@@ -1090,10 +1119,8 @@ export default defineComponent({
       const respuestaPasword = await bcryptjs.compare(this.contrasenaAnterior, userStore.Password);
 
       if(respuestaPasword){
-        console.log("true");
         this.passCorrecta=true        
       }else{
-        console.log("false");
         this.passCorrecta=false    
       }
     },
@@ -1108,8 +1135,76 @@ export default defineComponent({
       }
     },
 
-    async vaciarInputsContrasena(){
+    async mostrarPassRep(){
+      if ( (document.getElementById("contrasenaRep") as HTMLInputElement).type == "text" ) {
+        (document.getElementById("contrasenaRep") as HTMLInputElement).type = "password";
+        this.contrasenaRep=false
+      } else {
+        (document.getElementById("contrasenaRep") as HTMLInputElement).type = "text";
+        this.contrasenaRep=true
+      }
+    },
 
+    async vaciarInputsContrasena(){
+      this.contrasenaAnterior="";
+      this.user.pswd="";
+      this.contrasenaRepetida="";
+
+      this.passCorrecta = false
+    },
+
+    async validarContrasenas(){
+      if(this.user.pswd != "" && this.user.pswd != null && this.user.pswd != undefined && this.contrasenaRepetida != "" && this.contrasenaRepetida != null && this.contrasenaRepetida != undefined){
+        if(this.user.pswd.length >= 6){
+          if(this.user.pswd == this.contrasenaRepetida){
+            userStore.PasswordNuevo = this.user.pswd
+
+            userStore.updateContrasena(userStore.IdMed, this.user.pswd);
+            const hashedPassword = await bcryptjs.hash(this.user.pswd, 10);
+
+            userStore.Password= hashedPassword
+            //this.contrasenaAnterior="";
+            //this.user.pswd="";
+            //this.contrasenaRepetida="";
+
+            this.passCorrecta = false
+
+            let closeButton = document.getElementById('volver-perfil');
+
+            // Crea un nuevo evento de clic
+            let event = new MouseEvent('click', {
+              bubbles: true,
+              cancelable: true,
+              view: window
+            });
+
+            // Despacha el evento de clic en el botón
+            closeButton.dispatchEvent(event);
+
+          }else{
+            swal.fire({
+              title: "Las contraseñas no coinciden, verifique",
+              icon: "error",
+              showConfirmButton: true,
+              toast: true,
+            })
+          }
+        }else{
+          swal.fire({
+            title: "La contraseña debe tener por lo menos 6 caracteres",
+            icon: "warning",
+            showConfirmButton: true,
+            toast: true,
+          })
+        }
+      }else{
+        swal.fire({
+          html: "Llene ambos campos",
+          icon: "warning",
+          showConfirmButton: true,
+          toast: true,
+        })
+      }
     }
   }
 });

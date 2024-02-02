@@ -19,7 +19,8 @@ export const useUserStore = defineStore('user', {
         TutorialPre: ref(null),
         TutorialTrans: ref(null),
         TutorialPost: ref(null),
-        Password: ref(null)
+        Password: ref(null),
+        PasswordNuevo: ref(null)
     }),
 
     actions: {
@@ -247,6 +248,35 @@ export const useUserStore = defineStore('user', {
                 }
             })
             .then((res: any) => {
+            })
+            .catch((e: any) => {
+            });
+        },
+
+        updateContrasena( _id:string, pswd){
+            apiAxios({
+                url: `http://localhost:5000/password/${String(this.IdMed)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + this.token,
+                },
+                data: {
+                    password: pswd,
+                    email: this.Correo,
+                    passwordTemp: this.PasswordNuevo
+                }
+            })
+            .then((res: any) => {
+                
+                swal.fire({
+                    title: "Contraseña actualizada correctamente",
+                    icon: "success",
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 3000,
+                    timerProgressBar: true
+                })
             })
             .catch((e: any) => {
             });

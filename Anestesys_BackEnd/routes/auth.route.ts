@@ -6,7 +6,8 @@ import { login,
          updateMedico,
          updateValorTutorialPre,
          updateValorTutorialTrans,
-         updateValorTutorialPost} from '../controllers/auth.controller';
+         updateValorTutorialPost,
+         updateContrasena} from '../controllers/auth.controller';
 import { requireRefreshToken } from '../middlewares/requireRefreshToken';
 import { bodyLoginValidator,
          bodyRegisterValidator } from '../middlewares/validationManager';
@@ -19,6 +20,7 @@ router.put('/updateMed/:id' ,requireRefreshToken, updateMedico)
 router.put('/pre/:id', requireRefreshToken, updateValorTutorialPre)
 router.put('/trans/:id', requireRefreshToken, updateValorTutorialTrans)
 router.put('/post/:id', requireRefreshToken, updateValorTutorialPost)
+router.put('/password/:id', requireRefreshToken, updateContrasena)
 router.post('/logout', logout);
 
 router.get('/refresh', requireRefreshToken, refreshToken);
