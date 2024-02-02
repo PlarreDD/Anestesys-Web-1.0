@@ -728,7 +728,7 @@ import { useMedicamentoStore } from "../stores/medicamento-store";
 import type { regMedicamento,
               ConfigMonitor } from "@/interfaces/regMedicamento";
 import type { regUsr } from '@/interfaces/regUsr';
-import bcryptjs from "bcryptjs"
+import bcryptjs from "bcryptjs";
 
 const userStore = useUserStore();
 const medStore = useMedicamentoStore();
