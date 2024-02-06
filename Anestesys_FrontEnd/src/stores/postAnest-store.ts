@@ -210,7 +210,7 @@ export const usePostAnestStore = defineStore('postAn', {
             })
             .then((res: any) => {
                 swal.fire({
-                    title: 'Datos guardados correctamente',
+                    title: 'Datos del módulo post guardados correctamente',
                     icon: 'success',
                     showConfirmButton: false,
                     toast: true,
@@ -275,7 +275,7 @@ export const usePostAnestStore = defineStore('postAn', {
             })
             .then((res: any) => {
                 swal.fire({
-                    title: 'Datos actualizados correctamente',
+                    title: 'Datos del módulo post actualizados correctamente',
                     icon: 'success',
                     showConfirmButton: false,
                     toast: true,
@@ -342,7 +342,7 @@ export const usePostAnestStore = defineStore('postAn', {
             })
             .then((res: any) => {
                 swal.fire({
-                    title: 'Datos actualizados correctamente',
+                    title: 'Datos del módulo post actualizados correctamente',
                     icon: 'success',
                     showConfirmButton: false,
                     toast: true,
@@ -411,7 +411,7 @@ export const usePostAnestStore = defineStore('postAn', {
             })
             .then((res: any) => {
                 swal.fire({
-                    title: 'Datos guardados correctamente',
+                    title: 'Datos del módulo post guardados correctamente',
                     icon: 'success',
                     showConfirmButton: false,
                     toast: true,

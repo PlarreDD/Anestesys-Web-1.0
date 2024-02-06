@@ -74,6 +74,8 @@
                                 'visible validaCampo' : 'invisible'" id="userFechaN">
                         Escriba su fecha de nacimiento
                     </div>
+
+                    <!-- <input type="hidden" v-model="usr.cedula"> -->
                 </div>
 
                 <div class="col-md-2"></div>
@@ -160,6 +162,7 @@ export default defineComponent({
                     this.usr.apUsr = ""
                     this.usr.email = ""
                     this.usr.fechaNac = ""
+                    this.usr.cedula = ""
                 }                
             } catch (error) {
             }

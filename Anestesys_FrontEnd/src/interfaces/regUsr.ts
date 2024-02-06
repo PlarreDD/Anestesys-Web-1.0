@@ -2,7 +2,13 @@ export interface regUsr{
     nomUsr: string,
     apUsr: string,
     email: string,
-    fechaNac: string; 
+    fechaNac: string,
     pswd: string,
-    rpswd: string, // Eliminar en un futuro
+    cedula: string,
+    especialidad: string,
+    foto: string,
+    tutorialPre: number,
+    tutorialTrans: number,
+    tutorialPost: number,
+    passwordTemp: string
 }
