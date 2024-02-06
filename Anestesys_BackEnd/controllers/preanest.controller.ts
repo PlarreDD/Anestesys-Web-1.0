@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { PreIdPacientes, PreIdPacientesCx, PreValoracion, ValEstudios, PrePlan, PreNota } from "../models/PreAnestesico";
+import { PreIdPacientes, PreIdPacientesCx, PreValoracion, ValEstudios, PrePlan, PreNota, PreCatalogoCIE9, PreCatalogoCIE10 } from "../models/PreAnestesico";
 import { MenuTrans } from "../models/TransAnestesico";
 import { PostRecupera, PostNotaPA } from "../models/PostAnestesico";
 
@@ -9,8 +9,41 @@ import { PostRecupera, PostNotaPA } from "../models/PostAnestesico";
 /* Función para listar los expedientes */
 export const getExpedientes = async (req: any, res: Response) =>{
     try {
-        const expedientes = await PreIdPacientes.find({id: req.id}) 
+        const {numExpediente} = req.params
+
+        const regex = new RegExp('^' + numExpediente, 'i');
+
+        const expedientes = await PreIdPacientes.find({numExpediente: regex}) 
         return res.json({expedientes});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Función para listar los datos de CIE-10 */
+export const getCIE10 = async (req: any, res: Response) =>{
+    try {
+        const {nombre} = req.params
+
+        // Crea una expresión regular con RegExp para buscar el nombre que comienza con la palabra proporcionada
+        const regex = new RegExp('^' + nombre, 'i');
+
+        const cie10 = await PreCatalogoCIE10.find({nombre: regex}) 
+        return res.json({cie10});
+    } catch (error) {
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Función para listar los datos de CIE-9 */
+export const getCIE9 = async (req: any, res: Response) =>{
+    try {
+        const {nombre} = req.params
+
+        const regex = new RegExp('^' + nombre, 'i');
+
+        const cie9 = await PreCatalogoCIE9.find({nombre: regex}) 
+        return res.json({cie9});
     } catch (error) {
         return res.status(500).json({Error: 'Error de servidor'});
     }

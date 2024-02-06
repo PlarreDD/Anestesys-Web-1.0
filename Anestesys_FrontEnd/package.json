@@ -17,6 +17,7 @@
     "@types/pdfmake": "^0.2.2",
     "@vueform/multiselect": "^2.6.2",
     "axios": "^1.2.2",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^5.2.3",
     "chart.js": "^4.3.3",
     "chartjs-plugin-zoom": "^2.0.1",
@@ -35,6 +36,7 @@
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/ping": "^0.4.1",
     "@vitejs/plugin-vue": "^3.2.0",
     "@vue/tsconfig": "^0.1.3",

@@ -5,22 +5,24 @@
   <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">
     <div class="input-group mb-3">
       <div class="col-md-6">
-        <!--Buscador-->
-        <Multiselect mode="tags"          
-          placeholder="Buscar número de expediente..."
-          v-model="idStore.numExpediente"                
-          :options="listaExpedientes"
-          :searchable="true"
-          :createTag="true"
-          :max="1"
-          :multiple="false"
-          @keyup.capture="obtenerPaciente"
-          @change="obtenerPaciente"
-          />
-          <!-- @click="obtenerPaciente" -->
+        <!--Buscador-->          
+        <el-input v-model="idStore.numExpediente" @keyup.capture="obtenerPaciente" class="form-control-input" placeholder="Buscar número de expediente..." />
+          <span class="password-icon show-password" id="mostrar">
+            <font-awesome-icon icon="fa-solid fa-circle-xmark" @click="vaciarInputs"/>
+          </span>
+          <el-card v-show="mostrarDatosFiltradosExp" class="filtered-container" v-if="opcionExp.length">
+              <div v-for="(item, index) in opcionExp" :key="index" @click="selecDatoExp(item)">                                        
+                  <p>{{ item }}</p> <!-- Mostrar los datos filtrados -->
+              </div>
+          </el-card>
       </div>
 
-      <div class="col-md-2"></div>
+      <!-- Botón tutorial -->
+      <div class="col-md-2">
+        <button type="button" id="tutorial-pre" class="btn btn-secondary fw-bold invisible" data-bs-toggle="modal" data-bs-target="#tutorialPreModal">
+          Modal Tutorial
+        </button>
+      </div>
 
       <!--Botón Nuevo registro-->
       <div class="col-md-2">
@@ -104,7 +106,6 @@
                     <table class="table table-responsive text-white">
                       <thead>
                         <tr>
-                          <th>ID</th>
                           <th>Anestesiólogo</th>
                           <th>Cirujano</th>
                           <th>Cirugía</th>
@@ -115,11 +116,6 @@
 
                       <tbody class="">
                         <tr v-for="(cirugia) in listaCirugias">
-
-                          <td class="text-white">
-                            {{ cirugia._id }}
-                          </td>
-
                           <td class="text-white">
                             {{ cirugia.anestesiologo }}
                           </td>
@@ -365,6 +361,114 @@
       </div>
     </div>
 
+    <!-- Modal tutorial Pre -->
+    <div class="modal" id="tutorialPreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content color-modal modal-med-largo">
+          <div class="input-group">
+            <div class="modal-body">
+              
+              <div class="col-md-12" style="text-align: end;">
+                <button type="button" class="btn fw-bold" data-bs-dismiss="modal" aria-label="Close" @click="cambiarValorTutorial">
+                  <i class="text-white">
+                    <font-awesome-icon icon="fa-solid fa-xmark" size="xl"/>
+                  </i>
+                </button>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3">                   
+                  <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                      <h1 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          <b>PRE-ANÉSTESICO</b>
+                        </button>
+                      </h1>
+                      <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          <label type="button"
+                            :class="tutoUno == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"  
+                            data-bs-target="#carousel-pre1" data-bs-slide-to="0" aria-label="Slide 1" @click="validarCambioCarrusel">
+                            Inf. del paciente
+                          </label><br><br>
+                          <label type="button" 
+                            :class="tutoDos == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
+                            data-bs-target="#carousel-pre1" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel">
+                            Barra de búsqueda
+                          </label><br><br>
+                          <label type="button"
+                            :class="tutoTres == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
+                            data-bs-target="#carousel-pre1" data-bs-slide-to="2" aria-label="Slide 3" @click="validarCambioCarrusel">
+                            Modulos
+                          </label><br><br>
+                          <label type="button"
+                            :class="tutoCuatro == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
+                            data-bs-target="#carousel-pre1" data-bs-slide-to="3" aria-label="Slide 4" @click="validarCambioCarrusel">
+                            Barra de estado
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" disabled>
+                          <b>TRANS-ANÉSTESICO</b>
+                        </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" disabled>
+                          <b>POST-ANÉSTESICO</b>
+                        </button>
+                      </h2>
+                      <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Carrusel para tutorial -->
+                <div class="col-md-9">                
+                  <div id="carousel-pre1" class="carousel slide">
+                    <div class="carousel-indicators">
+                      <button type="button" id="tutoUno" data-bs-target="#carousel-pre1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" @click="validarCambioCarrusel"></button>
+                      <button type="button" id="tutoDos" data-bs-target="#carousel-pre1" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel"></button>
+                      <button type="button" id="tutoTres" data-bs-target="#carousel-pre1" data-bs-slide-to="2" aria-label="Slide 3" @click="validarCambioCarrusel"></button>
+                      <button type="button" id="tutoCuatro" data-bs-target="#carousel-pre1" data-bs-slide-to="3" aria-label="Slide 4" @click="validarCambioCarrusel"></button>
+                    </div>
+                    <div class="carousel-inner">
+                      <div class="carousel-item active div-carrusel">
+                        <img src="images/tutorial/pre-info.png" class="d-block img-carrusel">
+                      </div>
+                      <div class="carousel-item div-carrusel">
+                        <img src="images/tutorial/pre-barra-busqueda.png" class="d-block img-carrusel">
+                      </div>
+                      <div class="carousel-item div-carrusel">
+                        <img src="images/tutorial/pre-modulos.png" class="d-block img-carrusel">
+                      </div>
+                      <div class="carousel-item div-carrusel">
+                        <img src="images/tutorial/pre-barra-estado.png" class="d-block img-carrusel">
+                      </div>
+                    </div>
+                  </div>       
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -384,8 +488,10 @@ import { Tab } from 'bootstrap';
 import { usePreIdStore } from '../../stores/preId-store';
 import { useTransAnestStore } from "@/stores/transAnest-store";
 import { usePostAnestStore } from "@/stores/postAnest-store";
+import { useUserStore } from "@/stores/user-store";
 import Multiselect from '@vueform/multiselect';
 import { Line } from 'vue-chartjs';
+import { ElInput, ElCard } from 'element-plus';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
@@ -398,12 +504,21 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 const idStore = usePreIdStore();
 const transStore = useTransAnestStore();
 const postAnestStore = usePostAnestStore();
+const userStore = useUserStore()
 
 export default defineComponent({
   name: 'App',
 
   data() {
     return {
+      tutoUno: true,
+      tutoDos: false,
+      tutoTres: false,
+      tutoCuatro: false,
+
+      opcionExp: [],
+      mostrarDatosFiltradosExp: false,
+
       deshabilitado: true,
 
       numExpediente:'',
@@ -434,11 +549,11 @@ export default defineComponent({
       idStore,
       transStore,
       postAnestStore,
+      userStore,
       
       mostrarVistaRapida: false,
 
       expSeleccionado: [],
-      listaExpedientes: [],
       listaCirugias: [],
       cx: [],
 
@@ -648,10 +763,26 @@ export default defineComponent({
     Plan,
     Valoracion,
     BarraNavegacion,
-    Multiselect, Line
+    Multiselect, Line,
+    ElInput, ElCard
   },
   
-  mounted: function() { // Llama el método despues de cargar la página
+  mounted: function() { // Llama el método despues de cargar la página 
+    //Mostrar modal de tutorial al logear por primera vez
+    if(userStore.TutorialPre === 0){
+      let abrir = document.getElementById('tutorial-pre');
+
+      // Crea un nuevo evento de clic
+      let event = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      });
+
+      // Despacha el evento de clic en el botón
+      abrir.dispatchEvent(event);
+    }
+
     transStore.getDetieneMonitoreo();
     this.validaSeleccionId();
     this.ocultarFondo();
@@ -668,12 +799,18 @@ export default defineComponent({
   methods: {
 /*======================= Obtener paciente para nuevo registro =======================*/
     // Obtener expedientes en Multiselect
-    async listarExpedientes(){
-      await idStore.getExpedientesList()
+    async listarExpedientes(){    
+      this.mostrarDatosFiltradosExp=true
 
-      let expediente= idStore.expedientes;
-      this.listaExpedientes = expediente.map(document => document.numExpediente+" " +document.nomPaciente);
-      this.listaExpedientes.sort();      
+      await idStore.getExpedientesList()      
+
+      if(this.idStore.numExpediente == ''){
+          this.mostrarDatosFiltradosExp=false
+      }
+      
+      if(this.idStore.numExpediente != '' && this.idStore.numExpediente != null){
+        this.opcionExp = idStore.expedientes.map(document => document.numExpediente+" " +document.nomPaciente);
+      }
     },
 
     async listarCirugias(){
@@ -4709,13 +4846,21 @@ export default defineComponent({
       this.mostrarSpinner=false;
 
       transStore.datosMSV=''
-    },   
+    },
+
+    async vaciarInputs(){
+      this.idStore.numExpediente = ''
+
+      await this.obtenerPaciente()
+    },
 
     // Obtener datos de paciente seleccionado
     async obtenerPaciente(){
-      await this.listarExpedientes();
+      await this.listarExpedientes();     
 
       if(idStore.numExpediente == null || idStore.numExpediente == ''){
+        
+        this.mostrarDatosFiltradosExp=false
         this.numeroExpediente = ''
         this.nombrePaciente = ''
         this.fechaNacimiento = null
@@ -5377,6 +5522,55 @@ export default defineComponent({
       if(this.mostrarVistaRapida=true)     
         idStore.VistaRapida=false
         this.mostrarVistaRapida=false
+    },
+
+    async selecDatoExp(item) {
+        // Al hacer clic en un elemento, se almacena en selectedItem y se mostrará en el input
+        this.idStore.numExpediente = item;
+        this.mostrarDatosFiltradosExp= false
+
+        await this.obtenerPaciente()
+    },
+
+    async cambiarValorTutorial(){
+      swal
+        .fire({
+          html: "Podrá volver a consultar el tutorial desde el menú lateral en la sección de <b>Ayuda</b>",
+          icon: "info",
+          showConfirmButton: true,
+          showCancelButton: false,
+          toast: true,
+        })
+        
+        userStore.TutorialPre = 1
+        await this.userStore.updateTutorialPre(userStore.IdMed)                        
+    },
+
+    async validarCambioCarrusel(){
+      if(document.getElementById("tutoUno").ariaCurrent=="true"){
+        this.tutoUno=true
+        this.tutoDos=false
+        this.tutoTres=false
+        this.tutoCuatro=false
+      }
+      else if(document.getElementById("tutoDos").ariaCurrent=="true"){
+        this.tutoUno=false
+        this.tutoDos=true
+        this.tutoTres=false
+        this.tutoCuatro=false
+      }
+      else if(document.getElementById("tutoTres").ariaCurrent=="true"){
+        this.tutoUno=false
+        this.tutoDos=false
+        this.tutoTres=true
+        this.tutoCuatro=false
+      }
+      else if(document.getElementById("tutoCuatro").ariaCurrent=="true"){
+        this.tutoUno=false
+        this.tutoDos=false
+        this.tutoTres=false
+        this.tutoCuatro=true
+      }
     }
   }  
 })
@@ -5385,6 +5579,21 @@ export default defineComponent({
 <style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
+.color-modal {
+  background-color: #002d60;
+}
+.filtered-container {
+  max-height: 200px; /* Altura máxima del contenedor */
+  overflow-y: auto; /* Añadir scroll vertical si el contenido excede la altura */
+  border: 1px solid #ccc; /* Opcional: agregar borde para mejor visualización */
+  padding: 5px; /* Opcional: agregar espacio interno */
+  position: relative;
+  cursor: pointer
+}
+/* Estilos para los elementos dentro del contenedor */
+.filtered-container > div {
+  padding: 8px;
+}
 .deslizar {
   overflow: scroll;
   overflow-x: hidden;
@@ -5619,5 +5828,33 @@ export default defineComponent({
     --bs-btn-active-bg: #002d60;
     --bs-btn-active-color: #ffffff;
     --bs-btn-active-border-color: #002d60;     
+}
+/* Modal tutorial */
+.modal-med-largo {
+  height: 510px;
+}
+.div-carrusel{
+  text-align: -webkit-center;
+}
+.img-carrusel{
+  width: inherit;
+}
+.carousel-indicators{
+  margin-bottom: 0;
+}
+.carousel-indicators [data-bs-target] {
+  background-color: #E88000 !important;  
+}
+.accordion{
+  --bs-accordion-bg: #EEF1F4 !important;
+}
+.accordion-button{
+  color: #1F315A !important
+}
+.color-desactivo-acordeon{
+  color: #00123B
+}
+.color-activo-acordeon{
+  color: #E88000
 }
 </style>

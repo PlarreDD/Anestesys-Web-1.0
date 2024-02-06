@@ -326,7 +326,7 @@ label{
 .password-icon {
   float: right;
   position: relative;
-  margin: -25px 10px 0 0;
+  margin: -30px 10px 0 0;
   cursor: pointer;
   color: gray;
 }

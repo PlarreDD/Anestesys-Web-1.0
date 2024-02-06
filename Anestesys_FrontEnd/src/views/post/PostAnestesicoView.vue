@@ -31,6 +31,103 @@
         </ul>
       </div>
 
+      <!-- Botón Tutorial -->
+      <div class="col-md-2">
+        <button type="button" id="tutorial-post" class="btn btn-secondary fw-bold invisible" data-bs-toggle="modal" data-bs-target="#tutorialPostModal">
+          Modal Tutorial
+        </button>
+      </div>
+
+      <!-- Modal tutorial Post -->
+    <div class="modal" id="tutorialPostModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content color-modal modal-med-largo">
+          <div class="input-group">
+            <div class="modal-body">
+              
+              <div class="col-md-12" style="text-align: end;">
+                <button type="button" class="btn fw-bold" data-bs-dismiss="modal" aria-label="Close" @click="cambiarValorTutorial">
+                  <i class="text-white">
+                    <font-awesome-icon icon="fa-solid fa-xmark" size="xl"/>
+                  </i>
+                </button>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3">                   
+                  <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                      <h1 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" disabled>
+                          <b>PRE-ANÉSTESICO</b>
+                        </button>
+                      </h1>
+                      <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" disabled>
+                          <b>TRANS-ANÉSTESICO</b>
+                        </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                          <b>POST-ANÉSTESICO</b>
+                        </button>
+                      </h2>
+                      <div id="collapseThree" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          <label type="button"
+                            :class="tutoUno == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"  
+                            data-bs-target="#carousel-post1" data-bs-slide-to="0" aria-label="Slide 1" @click="validarCambioCarrusel">
+                            Inf. adicional
+                          </label><br><br>
+                          <label type="button" 
+                            :class="tutoDos == true ? 'color-activo-acordeon active' : 'color-desactivo-acordeon'"
+                            data-bs-target="#carousel-post1" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel">
+                            Caso obstétrico
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Carrusel para tutorial -->
+                <div class="col-md-9">                
+                  <div id="carousel-post1" class="carousel slide">
+                    <div class="carousel-indicators">
+                      <button type="button" id="tutoUno" data-bs-target="#carousel-post1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" @click="validarCambioCarrusel"></button>
+                      <button type="button" id="tutoDos" data-bs-target="#carousel-post1" data-bs-slide-to="1" aria-label="Slide 2" @click="validarCambioCarrusel"></button>
+                    </div>
+                    <div class="carousel-inner">
+                      <div class="carousel-item active div-carrusel">
+                        <img src="images/tutorial/post-modulos.png" class="d-block img-carrusel">
+                      </div>
+                      <div class="carousel-item div-carrusel">
+                        <img src="images/tutorial/post-caso.png" class="d-block img-carrusel">
+                      </div>
+                    </div>
+                  </div>       
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     </div>
 
     <!-- Cargar componentes -->
@@ -160,19 +257,26 @@
 import Nota from '../../components/post/Nota.vue';
 import Recuperacion from "../../components/post/Recuperacion.vue";
 import BarraNavegacion from "../../components/barraNavegacion.vue";
+import { useUserStore } from "@/stores/user-store";
 import { usePreIdStore } from "../../stores/preId-store";
 import { usePostAnestStore } from '@/stores/postAnest-store';
+import swal from 'sweetalert2';
 import { Tab } from 'bootstrap';
 
+const userStore = useUserStore()
 const preIdStore = usePreIdStore();
 const postAnestStore = usePostAnestStore();
 
 export default ({
   data(){
     return{
+      tutoUno: true,
+      tutoDos: false,
+
       esNotaP: false,
       esRecuperacion: false,
 
+      userStore,
       preIdStore,
       postAnestStore,
 
@@ -187,6 +291,20 @@ export default ({
   },
 
   mounted: function() { // Llama el método despues de cargar la página
+    if(userStore.TutorialPost === 0){
+      let abrir = document.getElementById('tutorial-post');
+
+      // Crea un nuevo evento de clic
+      let event = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      });
+
+      // Despacha el evento de clic en el botón
+      abrir.dispatchEvent(event);
+    }
+
     this.validaSeleccionNota();
   },
 
@@ -264,6 +382,31 @@ export default ({
       document.body.scrollTop = 0; // Para safari
       document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
     },
+
+    async cambiarValorTutorial(){
+      swal
+        .fire({
+          html: "Podrá volver a consultar el tutorial desde el menú lateral en la sección de <b>Ayuda</b>",
+          icon: "info",
+          showConfirmButton: true,
+          showCancelButton: false,
+          toast: true,
+        })
+        
+        userStore.TutorialPost = 1
+        await this.userStore.updateTutorialPost(userStore.IdMed)                        
+    },
+
+    async validarCambioCarrusel(){
+      if(document.getElementById("tutoUno").ariaCurrent=="true"){
+        this.tutoUno=true
+        this.tutoDos=false
+      }
+      else if(document.getElementById("tutoDos").ariaCurrent=="true"){
+        this.tutoUno=false
+        this.tutoDos=true
+      }
+    }
   }
 })
 </script>
@@ -403,5 +546,33 @@ export default ({
     --bs-btn-active-bg: #002d60;
     --bs-btn-active-color: #ffffff;
     --bs-btn-active-border-color: #002d60;     
+}
+/* Modal tutorial */
+.modal-med-largo {
+  height: 510px;
+}
+.div-carrusel{
+  text-align: -webkit-center;
+}
+.img-carrusel{
+  width: inherit;
+}
+.carousel-indicators [data-bs-target] {
+  background-color: #E88000 !important;
+}
+.carousel-indicators{
+  margin-bottom: 0;
+}
+.accordion{
+  --bs-accordion-bg: #EEF1F4 !important;
+}
+.accordion-button{
+  color: #1F315A !important
+}
+.color-desactivo-acordeon{
+  color: #00123B
+}
+.color-activo-acordeon{
+  color: #E88000
 }
 </style>
