@@ -242,14 +242,25 @@
                     <div class="col-md-4">
                       <label class="form-label fw-bold text-white">Contraseña actual: </label>
 
-                      <input type="text" class="form-control" v-model="contrasenaAnterior" placeholder="Escribir contraseña actual" 
+                      <input type="text" id="contrasenaAnt" class="form-control" v-model="contrasenaAnterior" placeholder="Escribir contraseña actual" 
                       @keyup.capture="validarContrasena()" @change="validarContrasena()"/>
 
-                      <span :class="passCorrecta == false ? 'password-icon' : 'password-check'">                        
-                        <font-awesome-icon icon="fa-solid fa-circle-check" />                                                  
+                      <span class="password-icon show-password" id="mostrar" @click="mostrarPassAnt()">
+                        <template v-if="contrasenaAnt === false">
+                          <font-awesome-icon icon="fa-solid fa-eye" />
+                        </template>
+                        <template v-else>
+                          <font-awesome-icon icon="fa-solid fa-eye-slash" />
+                        </template>                              
                       </span>
                     </div>                  
-                    <div class="col-md-4"></div>        
+                    <div class="col-md-1">
+                      <label class="form-label fw-bold text-white invisible">Contraseña actual: </label>
+                      <span :class="passCorrecta == false ? 'password-des' : 'password-check'">                        
+                        <font-awesome-icon icon="fa-solid fa-circle-check" />                                                  
+                      </span>
+                    </div>
+                    <div class="col-md-3"></div>
                     
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
@@ -792,6 +803,7 @@ export default defineComponent({
 
       contrasenaAnterior: '',
       contrasenaRepetida: '',
+      contrasenaAnt: false,
       contrasena: false,
       contrasenaRep: false,
       passCorrecta: false,
@@ -799,8 +811,9 @@ export default defineComponent({
   },
 
   mounted() {
+    this.mostrarPassAnt();
     this.mostrarPass();
-    this.mostrarPassRep()
+    this.mostrarPassRep();
 
     medStore.getMedicamentosList();
     this.listadoMonitor();
@@ -1125,6 +1138,16 @@ export default defineComponent({
       }
     },
 
+    async mostrarPassAnt(){
+      if ( (document.getElementById("contrasenaAnt") as HTMLInputElement).type == "text" ) {
+        (document.getElementById("contrasenaAnt") as HTMLInputElement).type = "password";
+        this.contrasenaAnt=false
+      } else {
+        (document.getElementById("contrasenaAnt") as HTMLInputElement).type = "text";
+        this.contrasenaAnt=true
+      }
+    },
+
     async mostrarPass(){
       if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
         (document.getElementById("contrasena") as HTMLInputElement).type = "password";
@@ -1377,11 +1400,14 @@ export default defineComponent({
   cursor: pointer;
   color: gray;
 }
+.password-des {
+  float: left;
+  margin: -15px 10px 0 0;
+  color: gray;
+}
 .password-check{
-  float: right;
-  position: relative;
-  margin: -30px 10px 0 0;
-  cursor: pointer;
+  float: left;
+  margin: -15px 10px 0 0;
   color: green;
 }
 </style>
