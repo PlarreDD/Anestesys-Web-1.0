@@ -1080,19 +1080,19 @@
                         </div>
                         <div class="carousel-inner">
                           <div class="carousel-item active div-carrusel">
-                            <img src="images/tutorial/trans-acciones.png" class="d-block img-carrusel">
+                            <img src="../../../public/images/tutorial/trans-monitoreo.png" class="d-block img-carrusel">
                           </div>
                           <div class="carousel-item div-carrusel">
-                            <img src="images/tutorial/trans-tiempos.png" class="d-block img-carrusel">
+                            <img src="../../../public/images/tutorial/trans-tiempos.png" class="d-block img-carrusel">
                           </div>
                           <div class="carousel-item div-carrusel">
-                            <img src="images/tutorial/trans-barra.png" class="d-block img-carrusel">
+                            <img src="../../../public/images/tutorial/trans-acciones.png" class="d-block img-carrusel">
                           </div>
                           <div class="carousel-item div-carrusel">
-                            <img src="images/tutorial/trans-signos.png" class="d-block img-carrusel">
+                            <img src="../../../public/images/tutorial/trans-signos.png" class="d-block img-carrusel">
                           </div>
                           <div class="carousel-item div-carrusel">
-                            <img src="images/tutorial/trans-grafica.png" class="d-block img-carrusel">
+                            <img src="../../../public/images/tutorial/trans-grafica.png" class="d-block img-carrusel">
                           </div>
                         </div>
                       </div>       

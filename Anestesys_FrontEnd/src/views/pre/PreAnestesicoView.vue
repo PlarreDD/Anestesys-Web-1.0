@@ -447,16 +447,16 @@
                     </div>
                     <div class="carousel-inner">
                       <div class="carousel-item active div-carrusel">
-                        <img src="images/tutorial/pre-info.png" class="d-block img-carrusel">
+                        <img src="../../../public/images/tutorial/pre-info.png" class="d-block img-carrusel">
                       </div>
                       <div class="carousel-item div-carrusel">
-                        <img src="images/tutorial/pre-barra-busqueda.png" class="d-block img-carrusel">
+                        <img src="../../../public/images/tutorial/pre-barra-busqueda.png" class="d-block img-carrusel">
                       </div>
                       <div class="carousel-item div-carrusel">
-                        <img src="images/tutorial/pre-modulos.png" class="d-block img-carrusel">
+                        <img src="../../../public/images/tutorial/pre-modulos.png" class="d-block img-carrusel">
                       </div>
                       <div class="carousel-item div-carrusel">
-                        <img src="images/tutorial/pre-barra-estado.png" class="d-block img-carrusel">
+                        <img src="../../../public/images/tutorial/pre-barra-estado.png" class="d-block img-carrusel">
                       </div>
                     </div>
                   </div>       

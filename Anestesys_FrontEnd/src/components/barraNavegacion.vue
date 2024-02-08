@@ -685,16 +685,16 @@
                       </div>
                       <div class="carousel-inner">
                         <div :class="tutoUnoPre == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
-                          <img src="images/tutorial/pre-info.png" class="d-block img-carrusel">
+                          <img src="../../public/images/tutorial/pre-info.png" class="d-block img-carrusel">
                         </div>
-                        <div :class="tutoDosPre == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
-                          <img src="images/tutorial/pre-barra-busqueda.png" class="d-block img-carrusel">
+                        <div :class="tutoDosPre == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'"> 
+                          <img src="../../public/images/tutorial/pre-barra-busqueda.png" class="d-block img-carrusel">
                         </div>
                         <div :class="tutoTresPre == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
-                          <img src="images/tutorial/pre-modulos.png" class="d-block img-carrusel">
+                          <img src="../../public/images/tutorial/pre-modulos.png" class="d-block img-carrusel">
                         </div>
                         <div :class="tutoCuatroPre == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
-                          <img src="images/tutorial/pre-barra-estado.png" class="d-block img-carrusel">
+                          <img src="../../public/images/tutorial/pre-barra-estado.png" class="d-block img-carrusel">
                         </div>
                       </div>
                     </div>       
@@ -711,19 +711,19 @@
                       </div>
                       <div class="carousel-inner">
                         <div :class="tutoUnoTrans == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
-                          <img src="images/tutorial/trans-monitoreo.png" class="d-block img-carrusel">
+                          <img src="../../public/images/tutorial/trans-monitoreo.png" class="d-block img-carrusel">
                         </div>
                         <div :class="tutoDosTrans == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
-                          <img src="images/tutorial/trans-tiempos.png" class="d-block img-carrusel">
+                          <img src="../../public/images/tutorial/trans-tiempos.png" class="d-block img-carrusel">
                         </div>
                         <div :class="tutoTresTrans == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
-                          <img src="images/tutorial/trans-acciones.png" class="d-block img-carrusel">
+                          <img src="../../public/images/tutorial/trans-acciones.png" class="d-block img-carrusel">
                         </div>
                         <div :class="tutoCuatroTrans == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
-                          <img src="images/tutorial/trans-signos.png" class="d-block img-carrusel">
+                          <img src="../../public/images/tutorial/trans-signos.png" class="d-block img-carrusel">
                         </div>
                         <div :class="tutoCincoTrans == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
-                          <img src="images/tutorial/trans-grafica.png" class="d-block img-carrusel">
+                          <img src="../../public/images/tutorial/trans-grafica.png" class="d-block img-carrusel">
                         </div>
                       </div>
                     </div>
@@ -737,10 +737,10 @@
                       </div>
                       <div class="carousel-inner">
                         <div :class="tutoUnoPost == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
-                          <img src="images/tutorial/post-modulos.png" class="d-block img-carrusel">
+                          <img src="../../public/images/tutorial/post-modulos.png" class="d-block img-carrusel">
                         </div>
                         <div :class="tutoDosTrans == true ? 'carousel-item active div-carrusel' : 'carousel-item div-carrusel'">
-                          <img src="images/tutorial/post-caso.png" class="d-block img-carrusel">
+                          <img src="../../public/images/tutorial/post-caso.png" class="d-block img-carrusel">
                         </div>
                       </div>
                     </div>  
