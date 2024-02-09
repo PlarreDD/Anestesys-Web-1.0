@@ -1389,7 +1389,7 @@ import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
-window.pdfMake.vfs = pdfFonts.pdfMake.vfs;
+window.pdfMake.fonts = pdfFonts.pdfMake;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 

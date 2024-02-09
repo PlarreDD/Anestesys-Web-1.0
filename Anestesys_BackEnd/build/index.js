@@ -20,7 +20,7 @@ const notapa_route_1 = __importDefault(require("./routes/notapa.route"));
 const datosv_route_1 = __importDefault(require("./routes/datosv.route"));
 const mvs_route_1 = __importDefault(require("./routes/mvs.route"));
 const app = (0, express_1.default)();
-const whiteList = [process.env.ORIGIN1];
+const whiteList = [process.env.ORIGIN1, process.env.ORIGIN2];
 app.use((0, cors_1.default)({
     origin: function (origin, callback) {
         if (!origin || whiteList.includes(origin)) {

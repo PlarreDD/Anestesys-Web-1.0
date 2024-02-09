@@ -27,7 +27,7 @@
     "html2canvas": "^1.4.1",
     "html2pdf.js": "^0.10.1",
     "mitt": "^3.0.0",
-    "pdfmake": "^0.2.8",
+    "pdfmake": "^0.2.9",
     "ping": "^0.4.4",
     "pinia": "^2.0.32",
     "sweetalert2": "^11.6.13",
