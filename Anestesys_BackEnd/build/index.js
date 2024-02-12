@@ -49,4 +49,4 @@ app.use('/recupera', recuperacion_route_1.default);
 app.use('/medicamentos', medicamento_route_1.default);
 app.use('/mvs', mvs_route_1.default);
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log("http://localhost:" + PORT));
+app.listen(PORT, () => console.log("Conectado en el puerto:" + PORT));
