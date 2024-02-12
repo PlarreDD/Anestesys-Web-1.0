@@ -33,9 +33,29 @@ npm run dev
 ```
 
 ### Checkeo, compilación y build de la aplicación
+```sh
+Servidor
+En Axios colocar en la baseURL la dirección IP de la PC servidor junto con el puerto donde se esta ejecutando el backend.
+![Direccion IP Servidor](/Ip_Servidor.png)
+![Puerto Servidor](/Puerto_Servidor.png)
+
+En el documento dotenv se coloca la dirección ORIGIN la dirección que marca en la que levantó el servidor.
+![Dirección del Front End](/IP_PagWeb.png)
+
+Los archivos deben quedar de la siguiente forma
+![Ejemplo archivos dotenv y Axios](/Ejemplo.png)
+
+```
 
 ```sh
-npm run build
+Front End
+ - npm run build
+ - npm install -g serve
+ - serve -s dist si no deja ejecutar el comando, ejecutar primero 'Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass'
+
+Back End
+ - Ejecutar 'tsc' si no deja ejecutar el comando, ejecutar primero 'Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass'
+ - node build/index.js
 ```
 ## Infraestructura de la aplicación
 ![Captura de pantalla 2023-05-03 092427](https://user-images.githubusercontent.com/39073053/235962866-eff38bb6-d79a-40a5-8120-289089b469cc.png)
