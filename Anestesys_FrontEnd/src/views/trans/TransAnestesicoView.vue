@@ -1080,19 +1080,19 @@
                         </div>
                         <div class="carousel-inner">
                           <div class="carousel-item active div-carrusel">
-                            <img src="images/tutorial/trans-acciones.png" class="d-block img-carrusel">
+                            <img src="../../../public/images/tutorial/trans-monitoreo.png" class="d-block img-carrusel">
                           </div>
                           <div class="carousel-item div-carrusel">
-                            <img src="images/tutorial/trans-tiempos.png" class="d-block img-carrusel">
+                            <img src="../../../public/images/tutorial/trans-tiempos.png" class="d-block img-carrusel">
                           </div>
                           <div class="carousel-item div-carrusel">
-                            <img src="images/tutorial/trans-barra.png" class="d-block img-carrusel">
+                            <img src="../../../public/images/tutorial/trans-acciones.png" class="d-block img-carrusel">
                           </div>
                           <div class="carousel-item div-carrusel">
-                            <img src="images/tutorial/trans-signos.png" class="d-block img-carrusel">
+                            <img src="../../../public/images/tutorial/trans-signos.png" class="d-block img-carrusel">
                           </div>
                           <div class="carousel-item div-carrusel">
-                            <img src="images/tutorial/trans-grafica.png" class="d-block img-carrusel">
+                            <img src="../../../public/images/tutorial/trans-grafica.png" class="d-block img-carrusel">
                           </div>
                         </div>
                       </div>       
@@ -1389,7 +1389,7 @@ import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
-window.pdfMake.vfs = pdfFonts.pdfMake.vfs;
+window.pdfMake.fonts = pdfFonts.pdfMake;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 
@@ -6872,7 +6872,7 @@ export default defineComponent({
   },
   
   computed: {
-    tablaMedicamentos() {      
+    tablaMedicamentos() : String[] {      
       if (this.medicSeleccionados.length === 0) {
         return this.listaMedTrans;
       } else {
@@ -6880,7 +6880,7 @@ export default defineComponent({
       }
     },
 
-    saltoArreglo(){
+    saltoArreglo() : any[]{
       const step = this.stepSize;
       const filas = this.grid.filter((itemMSV, index) => index % step === 0);    
 

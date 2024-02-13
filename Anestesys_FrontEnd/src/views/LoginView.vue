@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fondo-vista">
     <div class="">
       <div class="modal"
            id="emergenciaModal"
@@ -113,7 +113,7 @@
           <div class="col-md-12">
             <RouterLink class="nav-link colorLinkL"
                         to="registro"
-                        @click="cargarFondoRegistro()"> Crear una cuenta </RouterLink>
+                        @click=""> Crear una cuenta </RouterLink>
           </div>
         </form>
       </div>
@@ -137,12 +137,12 @@ const userStore = useUserStore();
 
 export default defineComponent({
   mounted: function() { // Llama el método despues de cargar la página
-    this.cargarFondo();
+    // this.cargarFondo();
   },
   
-  created(){
-    this.cargarFondo()
-  },
+  // created(){
+    // this.cargarFondo()
+  // },
 
   data() {
     return{
@@ -189,13 +189,13 @@ export default defineComponent({
       this.$router.push('pre')
     },
 
-    async cargarFondo(){
-      document.body.style.backgroundImage = "url('../../public/images/login.webp')";
-    },
+    // async cargarFondo(){
+    //   document.body.style.backgroundImage = "url('../../public/images/login.webp')";
+    // },
 
-    async cargarFondoRegistro(){
-      document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
-    },
+    // async cargarFondoRegistro(){
+    //   document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
+    // },
 
     async mostrarPass(){
       if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
@@ -211,6 +211,21 @@ export default defineComponent({
 </script>
 
 <style>
+.fondo-vista {
+  /* Otras propiedades de estilo */
+  background-image: url('../../public/images/login.webp'); /* Ruta de la imagen en tus assets */
+  height: 100vh;
+  /* width: 1920; */
+  /* margin: 0; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  margin-top: -1rem;
+  margin-left: -19rem;
+  margin-right: -18rem;
+}
+
 .modal-dialog,
 .modal-content {
     height: 50%;

@@ -447,16 +447,16 @@
                     </div>
                     <div class="carousel-inner">
                       <div class="carousel-item active div-carrusel">
-                        <img src="images/tutorial/pre-info.png" class="d-block img-carrusel">
+                        <img src="../../../public/images/tutorial/pre-info.png" class="d-block img-carrusel">
                       </div>
                       <div class="carousel-item div-carrusel">
-                        <img src="images/tutorial/pre-barra-busqueda.png" class="d-block img-carrusel">
+                        <img src="../../../public/images/tutorial/pre-barra-busqueda.png" class="d-block img-carrusel">
                       </div>
                       <div class="carousel-item div-carrusel">
-                        <img src="images/tutorial/pre-modulos.png" class="d-block img-carrusel">
+                        <img src="../../../public/images/tutorial/pre-modulos.png" class="d-block img-carrusel">
                       </div>
                       <div class="carousel-item div-carrusel">
-                        <img src="images/tutorial/pre-barra-estado.png" class="d-block img-carrusel">
+                        <img src="../../../public/images/tutorial/pre-barra-estado.png" class="d-block img-carrusel">
                       </div>
                     </div>
                   </div>       
@@ -497,7 +497,7 @@ import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
-window.pdfMake.vfs = pdfFonts.pdfMake.vfs;
+window.pdfMake.fonts = pdfFonts.pdfMake;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 

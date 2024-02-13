@@ -236,7 +236,7 @@ export const usePreIdStore = defineStore('preid', {
         /************************** Id Paciente **************************/
         savePreId(infoPreIdPaciente: any){
             apiAxios({
-                url: "http://localhost:5000/preId",
+                url: "/preId",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -299,7 +299,7 @@ export const usePreIdStore = defineStore('preid', {
 
         updatePreId( infoPreIdPaciente: any ){
             apiAxios({
-                url: `http://localhost:5000/preId/${String(this.pacienteID._id)}`,
+                url: `/preId/${String(this.pacienteID._id)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -358,7 +358,7 @@ export const usePreIdStore = defineStore('preid', {
 
         createAddPreId(infoPreIdPaciente: any){
             apiAxios({
-                url: "http://localhost:5000/preId/add",
+                url: "/preId/add",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -406,7 +406,7 @@ export const usePreIdStore = defineStore('preid', {
 
         updatePreIdAnterior( infoPreIdPaciente: any ){
             apiAxios({
-                url: `http://localhost:5000/preId/ante/${String(this.pacienteId)}`,
+                url: `/preId/ante/${String(this.pacienteId)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -435,7 +435,7 @@ export const usePreIdStore = defineStore('preid', {
         //Modificar para actualizar
         updateAddPreId( infoPreIdPaciente: any ){
             apiAxios({
-                url: `http://localhost:5000/preId/add/${String(this.pacienteID._id)}`,
+                url: `/preId/add/${String(this.pacienteID._id)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -515,7 +515,7 @@ export const usePreIdStore = defineStore('preid', {
         /*************************** Valoración **************************/
         async savePreAntecedentes(infoValoracion: any, pid: string, cxid: string){
             await apiAxios({                
-                    url: "http://localhost:5000/valora",
+                    url: "/valora",
                     method: "POST",
                     headers: {
                         Authorization: "Bearer " + userStore.token,
@@ -622,7 +622,7 @@ export const usePreIdStore = defineStore('preid', {
 
         async saveNuevoPreAntecedentes(infoValoracion: any, pid: string, cxid: string){
             await apiAxios({
-                url: "http://localhost:5000/valora/add",
+                url: "/valora/add",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -731,7 +731,7 @@ export const usePreIdStore = defineStore('preid', {
 
         async updatePreAntecedentes(infoValoracion: any, pid: string){
             await apiAxios({
-                url: `http://localhost:5000/valora/${String(pid)}`,
+                url: `/valora/${String(pid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -836,7 +836,7 @@ export const usePreIdStore = defineStore('preid', {
 
         async updateNuevoPreAntecedentes(infoValoracion: any, pid: string, cxid: string){
             await apiAxios({
-                url: `http://localhost:5000/valora/add/${String(pid)}/${String(cxid)}`,                
+                url: `/valora/add/${String(pid)}/${String(cxid)}`,                
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -943,7 +943,7 @@ export const usePreIdStore = defineStore('preid', {
         // ******* ESTUDIOS ********
         async getEstudiosList() {
             await apiAxios({
-                url: `http://localhost:5000/estudios/${String(this.valoracionID)}`,
+                url: `/estudios/${String(this.valoracionID)}`,
                 method: "GET",
                 headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -958,7 +958,7 @@ export const usePreIdStore = defineStore('preid', {
 
         async saveEstudios(estudios_Estudio: string, estudio_Especificaciones: string){
             await apiAxios({
-                url: "http://localhost:5000/estudios",
+                url: "/estudios",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -985,7 +985,7 @@ export const usePreIdStore = defineStore('preid', {
 
         async updateEstudios(estudios_Estudio: string, estudio_Especificaciones: string){
             await apiAxios({
-                url: `http://localhost:5000/estudios/${String(this.valoracionID)}`,
+                url: `/estudios/${String(this.valoracionID)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1011,7 +1011,7 @@ export const usePreIdStore = defineStore('preid', {
 
         async getEstudio(estudioID) {
             await apiAxios({
-              url: `http://localhost:5000/estudios/uno/${String(estudioID)}`,
+              url: `/estudios/uno/${String(estudioID)}`,
               method: "GET",
               headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -1027,7 +1027,7 @@ export const usePreIdStore = defineStore('preid', {
         async updateEstudio(estudioId : string, estudios_Estudio: string, estudio_Especificaciones: string){
             
             await apiAxios({
-                url: `http://localhost:5000/estudios/uno/${String(estudioId)}`,
+                url: `/estudios/uno/${String(estudioId)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1053,7 +1053,7 @@ export const usePreIdStore = defineStore('preid', {
 
         async deleteEstudio(estudioId : string) {
             await apiAxios({
-              url: `http://localhost:5000/estudios/${String(estudioId)}`,
+              url: `/estudios/${String(estudioId)}`,
               method: "DELETE",
               headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -1076,7 +1076,7 @@ export const usePreIdStore = defineStore('preid', {
         /***************************** Plan ******************************/
         savePrePlan(infoPlan: any, pid: string, cxid: string){
             apiAxios({
-                url: "http://localhost:5000/plan",
+                url: "/plan",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1172,7 +1172,7 @@ export const usePreIdStore = defineStore('preid', {
 
         saveNuevoPrePlan(infoPlan: any, pid: string, cxid:string){
             apiAxios({
-                url: "http://localhost:5000/plan/add",
+                url: "/plan/add",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1269,7 +1269,7 @@ export const usePreIdStore = defineStore('preid', {
 
         updatePrePlan(infoPlan: any, pid: string){
             apiAxios({
-                url: `http://localhost:5000/plan/${String(pid)}`,
+                url: `/plan/${String(pid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1364,7 +1364,7 @@ export const usePreIdStore = defineStore('preid', {
 
         updateNuevoPrePlan(infoPlan: any, pid: string, cxid: string){
             apiAxios({
-                url: `http://localhost:5000/plan/add/${String(pid)}/${String(cxid)}`,
+                url: `/plan/add/${String(pid)}/${String(cxid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1461,7 +1461,7 @@ export const usePreIdStore = defineStore('preid', {
         /***************************** Nota ******************************/
         savePreNota(obsNotaPre: string, pid: string, cxid: string){
             apiAxios({
-                url: "http://localhost:5000/nota",
+                url: "/nota",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1488,7 +1488,7 @@ export const usePreIdStore = defineStore('preid', {
 
         saveNuevoPreNota(obsNotaPre: string, pid: string, cxid: string){
             apiAxios({
-                url: "http://localhost:5000/nota/add",
+                url: "/nota/add",
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1516,7 +1516,7 @@ export const usePreIdStore = defineStore('preid', {
 
         updatePreNota(obsNotaPre: string, pid: string){
             apiAxios({
-                url: `http://localhost:5000/nota/${String(pid)}`,
+                url: `/nota/${String(pid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1542,7 +1542,7 @@ export const usePreIdStore = defineStore('preid', {
 
         updateNuevoPreNota(obsNotaPre: string, pid: string, cxid: string){
             apiAxios({
-                url: `http://localhost:5000/nota/add/${String(pid)}/${String(cxid)}`,
+                url: `/nota/add/${String(pid)}/${String(cxid)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1571,7 +1571,7 @@ export const usePreIdStore = defineStore('preid', {
         /********************** Consulta Expedientes ***********************/
         async getExpedientesList() {
             await apiAxios({
-                url: `http://localhost:5000/preId/exp/${this.numExpediente}`,
+                url: `/preId/exp/${this.numExpediente}`,
                 method: "GET",
                 headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -1587,7 +1587,7 @@ export const usePreIdStore = defineStore('preid', {
         /************************** Consulta *************************/
         async getPaciente(numExpediente) {            
             await apiAxios({
-              url: `http://localhost:5000/preId/${String(numExpediente)}`,
+              url: `/preId/${String(numExpediente)}`,
               method: "GET",
               headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -1602,7 +1602,7 @@ export const usePreIdStore = defineStore('preid', {
 
         async getCirugias(numExpediente) {
             await apiAxios({
-                url: `http://localhost:5000/preId/cx/${String(numExpediente)}`,
+                url: `/preId/cx/${String(numExpediente)}`,
                 method: "GET",
                 headers: {
                     Authorization: "Bearer " + userStore.token,
@@ -1617,7 +1617,7 @@ export const usePreIdStore = defineStore('preid', {
 
         async getDatosPDF(id) {
             await apiAxios({
-                url: `http://localhost:5000/preId/cirugia/cx/${String(id)}`,
+                url: `/preId/cirugia/cx/${String(id)}`,
                 method: "GET",
                 headers: {
                     Authorization: "Bearer " + userStore.token,

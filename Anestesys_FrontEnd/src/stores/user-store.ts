@@ -25,7 +25,7 @@ export const useUserStore = defineStore('user', {
 
     actions: {
         loginAccess(email: string, pswd:string){
-            apiAxios.post("http://localhost:5000/login", {
+            apiAxios.post("/login", {
                 email: email,
                 password: pswd,
             }).then((res:any) => {
@@ -72,7 +72,7 @@ export const useUserStore = defineStore('user', {
         },
 
         refreshToken(){
-            apiAxios.get("http://localhost:5000/refresh")
+            apiAxios.get("/refresh")
             .then((res:any) => {
                 this.token = res.data.tkn;
                 this.expiresIn = res.data.xprIn;
@@ -110,7 +110,7 @@ export const useUserStore = defineStore('user', {
             let timerInterval;
             
             /* Comunicación a con la base de datos */
-            apiAxios.post("http://localhost:5000/register", {
+            apiAxios.post("/register", {
                 email: email,
                 password: String(genPswd.value),
                 nomMed: nomUsr,
@@ -283,7 +283,7 @@ export const useUserStore = defineStore('user', {
         },
 
         logout(){
-            apiAxios.post("http://localhost:5000/logout")
+            apiAxios.post("/logout")
                     .then(() => {
                         /* Mensaje de cierre de sesión */
                         // Falta uso de botones de cancelar y finaluizar

@@ -112,10 +112,10 @@
                     </div>
                     <div class="carousel-inner">
                       <div class="carousel-item active div-carrusel">
-                        <img src="images/tutorial/post-modulos.png" class="d-block img-carrusel">
+                        <img src="../../../public/images/tutorial/post-modulos.png" class="d-block img-carrusel">
                       </div>
                       <div class="carousel-item div-carrusel">
-                        <img src="images/tutorial/post-caso.png" class="d-block img-carrusel">
+                        <img src="../../../public/images/tutorial/post-caso.png" class="d-block img-carrusel">
                       </div>
                     </div>
                   </div>       

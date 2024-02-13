@@ -1,96 +1,98 @@
 <template>
-    <div class="col-5 divBorderR posicionEstaticaR">  
-        <div class="margenR">
-            <div class="div-img">
-                <img src="../../public/images/logoB.png" class="imgLogo"/>
+    <div class="fondo-vista-reg">
+        <div class="col-5 divBorderR posicionEstaticaR">  
+            <div class="margenR">
+                <div class="div-img">
+                    <img src="../../public/images/logoB.png" class="imgLogo"/>
+                </div>
+
+                <h2 class="fw-bold h2Estilo m-4">Nuevo Usuario</h2>
+            
+                <form class="row g-3" method="post" autocomplete="off" @submit.prevent="">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <label  class="form-label fw-bold margenLabelR">Nombre(s)</label>
+                        <input type="text"
+                            :class="userNombre == true ?
+                                    'form-control border border-danger margenInputR' : 'form-control margenInputR'"
+                            v-model="usr.nomUsr"
+                            id="nombre"
+                            placeholder="Nombre completo">
+                        
+                        <div :class="userNombre == true ?
+                                    'visible validaCampo' : 'invisible'"
+                            id="userNombre"> Escriba sus nombres
+                        </div>
+                    </div>
+
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+
+                    <div class="col-md-8">
+                        <label  class="form-label fw-bold margenLabelR"> Apellidos </label>
+                        <input type="text"
+                            :class="userApellido == true ?
+                                    'form-control border border-danger margenInputR' : 'form-control margenInputR'"
+                            v-model="usr.apUsr"
+                            id="apellidos"
+                            placeholder="Apellidos (paterno y materno)">
+                        
+                        <div :class="userApellido == true ?
+                                    'visible validaCampo' : 'invisible'"
+                            id="userApellidos"> Escriba sus apellidos
+                        </div> 
+                    </div>
+
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+
+                    <div class="col-md-8">
+                        <label  class="form-label fw-bold margenLabelR"> Correo electrónico </label>
+                        <input type="email"
+                            :class="userCorreo == true ?
+                                    'form-control border border-danger margenInputR' : 'form-control margenInputR'"
+                            v-model="usr.email"
+                            id="correo"
+                            placeholder="correo@mail.com">
+                        
+                        <div :class="userCorreo == true ?
+                                    'visible validaCampo' : 'invisible'"
+                            id="userEmail"> Escriba su correo electrónico
+                        </div> 
+                    </div>
+
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+
+                    <div class="col-md-8">
+                        <label  class="form-label fw-bold margenLabelR"> Fecha de nacimiento </label>
+                        <input type="date"
+                            :class="userFecha == true ?
+                                    'form-control border border-danger' : 'form-control'"
+                            v-model="usr.fechaNac"
+                            id="fechaN">
+                        <div :class="userFecha == true ?
+                                    'visible validaCampo' : 'invisible'" id="userFechaN">
+                            Escriba su fecha de nacimiento
+                        </div>
+
+                        <!-- <input type="hidden" v-model="usr.cedula"> -->
+                    </div>
+
+                    <div class="col-md-2"></div>
+
+                    <div class="col-md-12 div-img">
+                        <button @click="validaCamposRegistro()"
+                                class="btn btn-reg fw-bold"> Crear Cuenta </button>
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <RouterLink class="nav-link colorLinkA"
+                                    @click=""
+                                    to="/"> Iniciar Sesión </RouterLink>
+                    </div>
+                </form> 
             </div>
-
-            <h2 class="fw-bold h2Estilo m-4">Nuevo Usuario</h2>
-        
-            <form class="row g-3" method="post" autocomplete="off" @submit.prevent="">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                    <label  class="form-label fw-bold margenLabelR">Nombre(s)</label>
-                    <input type="text"
-                           :class="userNombre == true ?
-                                  'form-control border border-danger margenInputR' : 'form-control margenInputR'"
-                           v-model="usr.nomUsr"
-                           id="nombre"
-                           placeholder="Nombre completo">
-                    
-                    <div :class="userNombre == true ?
-                                'visible validaCampo' : 'invisible'"
-                         id="userNombre"> Escriba sus nombres
-                    </div>
-                </div>
-
-                <div class="col-md-2"></div>
-                <div class="col-md-2"></div>
-
-                <div class="col-md-8">
-                    <label  class="form-label fw-bold margenLabelR"> Apellidos </label>
-                    <input type="text"
-                           :class="userApellido == true ?
-                                  'form-control border border-danger margenInputR' : 'form-control margenInputR'"
-                           v-model="usr.apUsr"
-                           id="apellidos"
-                           placeholder="Apellidos (paterno y materno)">
-                    
-                    <div :class="userApellido == true ?
-                                'visible validaCampo' : 'invisible'"
-                         id="userApellidos"> Escriba sus apellidos
-                    </div> 
-                </div>
-
-                <div class="col-md-2"></div>
-                <div class="col-md-2"></div>
-
-                <div class="col-md-8">
-                    <label  class="form-label fw-bold margenLabelR"> Correo electrónico </label>
-                    <input type="email"
-                           :class="userCorreo == true ?
-                                  'form-control border border-danger margenInputR' : 'form-control margenInputR'"
-                           v-model="usr.email"
-                           id="correo"
-                           placeholder="correo@mail.com">
-                    
-                    <div :class="userCorreo == true ?
-                                'visible validaCampo' : 'invisible'"
-                         id="userEmail"> Escriba su correo electrónico
-                    </div> 
-                </div>
-
-                <div class="col-md-2"></div>
-                <div class="col-md-2"></div>
-
-                <div class="col-md-8">
-                    <label  class="form-label fw-bold margenLabelR"> Fecha de nacimiento </label>
-                    <input type="date"
-                           :class="userFecha == true ?
-                                  'form-control border border-danger' : 'form-control'"
-                           v-model="usr.fechaNac"
-                           id="fechaN">
-                    <div :class="userFecha == true ?
-                                'visible validaCampo' : 'invisible'" id="userFechaN">
-                        Escriba su fecha de nacimiento
-                    </div>
-
-                    <!-- <input type="hidden" v-model="usr.cedula"> -->
-                </div>
-
-                <div class="col-md-2"></div>
-
-                <div class="col-md-12 div-img">
-                    <button @click="validaCamposRegistro()"
-                            class="btn btn-reg fw-bold"> Crear Cuenta </button>
-                </div>
-                
-                <div class="col-md-12">
-                    <RouterLink class="nav-link colorLinkA"
-                                @click="cargarFondoLogin()"
-                                to="/"> Iniciar Sesión </RouterLink>
-                </div>
-            </form> 
         </div>
     </div>
 </template>
@@ -115,13 +117,13 @@ export default defineComponent({
         };
     },
     
-    mounted: function() { // Llama el método despues de cargar la página
-      this.cargarFondo();
-    },
+    // mounted: function() { // Llama el método despues de cargar la página
+    //   this.cargarFondo();
+    // },
 
-    created(){
-        this.cargarFondo()
-    },
+    // created(){
+    //     this.cargarFondo()
+    // },
 
     methods: {
         async validaCamposRegistro() {
@@ -168,18 +170,32 @@ export default defineComponent({
             }
         },
 
-        async cargarFondo(){
-            document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
-        },
+        // async cargarFondo(){
+        //     document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
+        // },
 
-        async cargarFondoLogin(){
-            document.body.style.backgroundImage = "url('../../public/images/login.webp')";
-        },
+        // async cargarFondoLogin(){
+        //     document.body.style.backgroundImage = "url('../../public/images/login.webp')";
+        // },
     }
 });
 </script>
 
 <style>
+.fondo-vista-reg {
+  /* Otras propiedades de estilo */
+  background-image: url('../../public/images/registro.webp'); /* Ruta de la imagen en tus assets */
+  height: 100vh;
+  /* width: 1920; */
+  /* margin: 0; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  margin-top: -1rem;
+  margin-left: -19rem;
+  margin-right: -18rem;
+}
 .divBorderR {
   border-top-right-radius: 55px;
   border-bottom-right-radius: 55px;
@@ -236,5 +252,9 @@ export default defineComponent({
 }
 label{
   color: #002D60;  
+}
+.imgLogo{
+  width: 400px;
+  height: auto; 
 }
 </style>
