@@ -3,7 +3,7 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-informacion_variable = "Que chingue a su madre el Dani"
+informacion_variable = "Prueba"
 
 @app.route('/obtener_informacion', methods=['GET'])
 def obtener_informacion():
