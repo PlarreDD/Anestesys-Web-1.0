@@ -19,6 +19,7 @@ const recuperacion_route_1 = __importDefault(require("./routes/recuperacion.rout
 const notapa_route_1 = __importDefault(require("./routes/notapa.route"));
 const datosv_route_1 = __importDefault(require("./routes/datosv.route"));
 const mvs_route_1 = __importDefault(require("./routes/mvs.route"));
+const net = require('net');
 const app = (0, express_1.default)();
 const whiteList = [process.env.ORIGIN1, process.env.ORIGIN2];
 app.use((0, cors_1.default)({
@@ -28,7 +29,7 @@ app.use((0, cors_1.default)({
         }
         return callback(Error("Error de CORS origin " + origin + " No autorizado"));
     },
-    credentials: true,
+    credentials: true
 }));
 app.use(express_1.default.json()); // Transforma la req.body en formato json
 app.use((0, cookie_parser_1.default)());
@@ -48,5 +49,14 @@ app.use('/recupera', recuperacion_route_1.default);
 /*----------------- Menú ------------------*/
 app.use('/medicamentos', medicamento_route_1.default);
 app.use('/mvs', mvs_route_1.default);
+// Ruta para obtener la dirección IP del cliente
+app.get('/api/getClienteIp', (req, res) => {
+    const clientIp = req.socket.remoteAddress;
+    if (clientIp) {
+        const clienteIp = net.isIPv4(clientIp) ? clientIp : clientIp.replace(/^.*:/, '');
+        res.json({ clienteIp });
+        console.log("IP que manda solicitud:" + clienteIp);
+    }
+});
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log("Conectado en el puerto:" + PORT));

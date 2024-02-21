@@ -4,7 +4,7 @@
   </header>
   <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">
     <div class="input-group mb-3">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <!--Buscador-->          
         <el-input v-model="idStore.numExpediente" @keyup.capture="obtenerPaciente" class="form-control-input" placeholder="Buscar número de expediente..." />
           <span class="password-icon show-password" id="mostrar">
@@ -15,6 +15,12 @@
                   <p>{{ item }}</p> <!-- Mostrar los datos filtrados -->
               </div>
           </el-card>
+      </div>
+
+      <div class="col-md-2">
+        <button type="button" id="tutorial-pre" class="btn btn-secondary fw-bold" @click="obtenerInformacion">
+          Prueba {{ clienteIp }}
+        </button>
       </div>
 
       <!-- Botón tutorial -->
@@ -495,6 +501,7 @@ import { ElInput, ElCard } from 'element-plus';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
+import axios from 'axios';
 import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
 window.pdfMake.fonts = pdfFonts.pdfMake;
@@ -511,6 +518,9 @@ export default defineComponent({
 
   data() {
     return {
+      informacion: '',
+      clienteIp: '',
+
       tutoUno: true,
       tutoDos: false,
       tutoTres: false,
@@ -790,6 +800,16 @@ export default defineComponent({
     this.ocultarMenuLateral();
     document.addEventListener('scroll', this.scrollFunction);
     transStore.getIniciaMonitoreo();
+
+    // this.getClientIP();
+    fetch('http://172.16.20.8:5000/api/getClienteIp') // Reemplaza '/api/getClientIp' con la ruta correcta en tu servidor
+      .then(response => response.json())
+      .then(data => {
+        this.clienteIp = data.clienteIp;
+      })
+      .catch(error => {
+        console.error('Error al obtener la dirección IP:', error);
+      });
   },
   
   destroyed: function(){
@@ -798,6 +818,18 @@ export default defineComponent({
 
   methods: {
 /*======================= Obtener paciente para nuevo registro =======================*/
+    async obtenerInformacion(){
+      try {
+        const response = await fetch(`http://${this.clienteIp}:5000/obtener_informacion`);
+        const data = await response.json();
+        this.informacion = data.informacion;
+
+        console.log("info: "+this.informacion);        
+      } catch (error) {
+        console.error('Error al obtener información:', error);
+      }
+    },
+
     // Obtener expedientes en Multiselect
     async listarExpedientes(){    
       this.mostrarDatosFiltradosExp=true

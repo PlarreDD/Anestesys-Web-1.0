@@ -15,6 +15,7 @@ import notapaRouter from './routes/notapa.route';
 import transRouter from "./routes/datosv.route";
 import mvsRouter from "./routes/mvs.route";
 
+const net = require('net');
 const app = express();
 const whiteList = [process.env.ORIGIN1, process.env.ORIGIN2];
 
@@ -28,7 +29,7 @@ app.use(
           Error("Error de CORS origin " + origin + " No autorizado")
       );
     },
-    credentials: true,
+    credentials: true
   })
 );
 
@@ -51,6 +52,17 @@ app.use('/recupera', recuperaRouter);
 /*----------------- Menú ------------------*/
 app.use('/medicamentos', medicamentoRouter);
 app.use('/mvs', mvsRouter);
+
+// Ruta para obtener la dirección IP del cliente
+app.get('/api/getClienteIp', (req, res) => {
+  const clientIp = req.socket.remoteAddress;
+
+  if (clientIp) {
+    const clienteIp = net.isIPv4(clientIp) ? clientIp : clientIp.replace(/^.*:/, '');
+    res.json({ clienteIp });
+    console.log("IP que manda solicitud:" + clienteIp);    
+  }
+});
 
 const PORT = process.env.PORT || 5000;
 
