@@ -547,15 +547,6 @@ export const usePostAnestStore = defineStore('postAn', {
                 }
             })
             .then((res: any) => {
-                // swal.fire({
-                //     title: 'Datos guardados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
             });
@@ -653,15 +644,6 @@ export const usePostAnestStore = defineStore('postAn', {
                 }
             })
             .then((res: any) => {
-                // swal.fire({
-                //     title: 'Datos guardados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
             });
@@ -759,15 +741,6 @@ export const usePostAnestStore = defineStore('postAn', {
                 }
             })
             .then((res: any) => {
-                // swal.fire({
-                //     title: 'Datos guardados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
             });
@@ -867,15 +840,6 @@ export const usePostAnestStore = defineStore('postAn', {
                 }
             })
             .then((res: any) => {
-                // swal.fire({
-                //     title: 'Datos guardados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
             });

@@ -136,13 +136,6 @@ import { defineComponent } from "vue";
 const userStore = useUserStore();
 
 export default defineComponent({
-  mounted: function() { // Llama el método despues de cargar la página
-    // this.cargarFondo();
-  },
-  
-  // created(){
-    // this.cargarFondo()
-  // },
 
   data() {
     return{
@@ -189,14 +182,6 @@ export default defineComponent({
       this.$router.push('pre')
     },
 
-    // async cargarFondo(){
-    //   document.body.style.backgroundImage = "url('../../public/images/login.webp')";
-    // },
-
-    // async cargarFondoRegistro(){
-    //   document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
-    // },
-
     async mostrarPass(){
       if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
         (document.getElementById("contrasena") as HTMLInputElement).type = "password";
@@ -212,15 +197,8 @@ export default defineComponent({
 
 <style>
 .fondo-vista {
-  /* Otras propiedades de estilo */
   background-image: url('../../public/images/login.webp'); /* Ruta de la imagen en tus assets */
   height: 100vh;
-  /* width: 1920; */
-  /* margin: 0; */
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: center; */
-  /* align-items: center; */
   margin-top: -1rem;
   margin-left: -19rem;
   margin-right: -18rem;
