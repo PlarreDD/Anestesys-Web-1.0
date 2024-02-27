@@ -43,10 +43,9 @@ namespace WindowsFormsApp1
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(776, 393);
             this.label1.TabIndex = 3;
             this.label1.Text = "label1";
             // 
@@ -62,7 +61,6 @@ namespace WindowsFormsApp1
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

@@ -142,10 +142,17 @@ namespace WindowsFormsApp1
                 {
                     string cadena_MVS = reader.ReadLine();
 
+                    bool valor = cadena_MVS.StartsWith("\v");
+
+                    if (valor)
+                        responseString = "";
+
                     responseString += cadena_MVS;
+
+                    btnQueryUrl.BackColor = Color.Black;
                 }
 
-                
+                btnQueryUrl.BackColor = Color.Orange;
             }
         }
     }
