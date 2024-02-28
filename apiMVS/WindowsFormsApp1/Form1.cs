@@ -42,6 +42,13 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            IPStatus Nose;
+            
+            do
+            {
+                Nose = pingMSV();
+            } while (Nose != System.Net.NetworkInformation.IPStatus.Success);
+
             p1 = new Thread(new ThreadStart(Hilo1));
             p2 = new Thread(new ThreadStart(Hilo2));
 
@@ -68,10 +75,13 @@ namespace WindowsFormsApp1
 
         private async void startServer()
         {
+            if (ipLocal == null)
+                ipLocal = Dns.GetHostEntry(Dns.GetHostName());
+
             if (httpListener == null)
             {
                 httpListener = new HttpListener();
-                httpListener.Prefixes.Add("http://localhost:8080/apiMVS/");
+                httpListener.Prefixes.Add($"http://{ipLocal.AddressList[1]}:5000/apiMVS/");
                 httpListener.Start();
                 await ListenForRequests();
             }
@@ -95,7 +105,9 @@ namespace WindowsFormsApp1
 
         private void ProcessRequest(HttpListenerContext context)
         {
-            string url = context.Request.Url.ToString();
+            context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            context.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+            context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Accept");
 
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
             context.Response.ContentLength64 = buffer.Length;
@@ -110,16 +122,15 @@ namespace WindowsFormsApp1
 
         private void btnQueryUrl_Click(object sender, EventArgs e)
         {
-            //responseString = txtUrlToQuery.Text;
             label1.Text = responseString;
         }
 
-        public void pingMSV()
+        public IPStatus pingMSV()
         {
             pMSV = new Ping();
             rMSV = pMSV.Send(ipMonitor, 1000);
 
-            Console.WriteLine(rMSV.Status);
+            return rMSV.Status;
         }
 
         public void obtenerDatosMSV()
@@ -145,7 +156,9 @@ namespace WindowsFormsApp1
                     bool valor = cadena_MVS.StartsWith("\v");
 
                     if (valor)
+                    {
                         responseString = "";
+                    }
 
                     responseString += cadena_MVS;
 
