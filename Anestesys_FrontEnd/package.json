@@ -27,6 +27,7 @@
     "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",
     "html2pdf.js": "^0.10.1",
+    "loglevel": "^1.9.1",
     "mitt": "^3.0.0",
     "pdfmake": "^0.2.9",
     "ping": "^0.4.4",

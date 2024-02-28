@@ -5018,8 +5018,7 @@ export default defineComponent({
         idStore.numeroExpediente = idStore.pacientes.pacientes[0].numExpediente
         this.numeroExpediente = idStore.numeroExpediente
         
-        idStore.pacienteId = idStore.pacientes.pacientes[0]._id        
-        // this.idPaciente = idStore.pacientes.pacientes[0]._id                
+        idStore.pacienteId = idStore.pacientes.pacientes[0]._id                     
         this.nombrePaciente = idStore.pacientes.pacientes[0].nomPaciente
         this.fechaNacimiento = idStore.pacientes.pacientes[0].fechaNPaciente
         this.edad = idStore.pacientes.pacientes[0].edadPaciente
@@ -5059,10 +5058,6 @@ export default defineComponent({
     },
 
     async vaciarStoresPre(){
-      // idStore.pacienteID = ""
-      // idStore.estudioID = ""
-      // idStore.valoracionID = ""
-      // idStore.numExpediente = ""
       idStore.expedientes = ""
       idStore.pacientes = ""
       idStore.cirugias = ""

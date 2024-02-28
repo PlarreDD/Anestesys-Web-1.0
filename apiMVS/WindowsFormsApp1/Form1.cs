@@ -9,18 +9,31 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
         Thread p1;
-        //Thread p2;
+        Thread p2;
+
+        public static IPHostEntry ipLocal;
+        public static TcpListener listener;
+        public static TcpClient client;
+
+        public static int port = 6664;
+        public static string ipMonitor = "172.16.20.102";
+
+        public static Ping pMSV;
+        public static PingReply rMSV;
 
         private HttpListener httpListener;
 
-        string responseString;
+        string responseString = "";
 
         public Form1()
         {
@@ -30,67 +43,26 @@ namespace WindowsFormsApp1
         private void Form1_Load(object sender, EventArgs e)
         {
             p1 = new Thread(new ThreadStart(Hilo1));
-            //p2 = new Thread(new ThreadStart(Hilo2));
+            p2 = new Thread(new ThreadStart(Hilo2));
 
             p1.Start();
-            //p2.Start();
+            p2.Start();
         }
 
         public void Hilo1()
         {
             startServer();
-            //    while (true)
-            //    {
-            //        Thread.Sleep(10);
-
-            //        if (r >= 0 && r <= 255 && b1 == false)
-            //        {
-            //            r++;
-            //            if (r == 255)
-            //                b1 = true;
-            //        }
-
-            //        if (r >= 0 && r <= 255 && b1 == true)
-            //        {
-            //            r--;
-            //            if (r == 0)
-            //                b1 = false;
-            //        }
-
-            //        pictureBox1.BackColor = Color.FromArgb(r, 80, 100);
-            //    }
         }
 
-    //public void Hilo2()
-    //{
-    //    while (true)
-    //    {
-    //        Thread.Sleep(10);
-
-    //        if (g >= 0 && g <= 255 && b2 == false)
-    //        {
-    //            g++;
-
-    //            if (g == 255)
-    //                b2 = true;
-    //        }
-
-    //        if (g >= 0 && g <= 255 && b2 == true)
-    //        {
-    //            g--;
-
-    //            if (g == 0)
-    //                b2 = false;
-    //        }
-
-    //        pictureBox2.BackColor = Color.FromArgb(100, g, 80);
-    //    }
-    //}
-
-    private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        public void Hilo2()
         {
-            //p1.Abort();
-            //p2.Abort();
+            obtenerDatosMSV();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            p1.Abort();
+            p2.Abort();
             httpListener?.Stop();
         }
 
@@ -138,8 +110,50 @@ namespace WindowsFormsApp1
 
         private void btnQueryUrl_Click(object sender, EventArgs e)
         {
+            //responseString = txtUrlToQuery.Text;
             label1.Text = responseString;
-            responseString = "Hi";
+        }
+
+        public void pingMSV()
+        {
+            pMSV = new Ping();
+            rMSV = pMSV.Send(ipMonitor, 1000);
+
+            Console.WriteLine(rMSV.Status);
+        }
+
+        public void obtenerDatosMSV()
+        {
+            if (ipLocal == null)
+            {
+                ipLocal = Dns.GetHostEntry(Dns.GetHostName());
+                listener = new TcpListener(IPAddress.Any, port);
+            }
+
+            listener.Start();
+
+            while (true)
+            {
+                client = listener.AcceptTcpClient();
+
+                StreamReader reader = new StreamReader(client.GetStream(), true);
+
+                while (!reader.EndOfStream)
+                {
+                    string cadena_MVS = reader.ReadLine();
+
+                    bool valor = cadena_MVS.StartsWith("\v");
+
+                    if (valor)
+                        responseString = "";
+
+                    responseString += cadena_MVS;
+
+                    btnQueryUrl.BackColor = Color.Black;
+                }
+
+                btnQueryUrl.BackColor = Color.Orange;
+            }
         }
     }
 }

@@ -1186,9 +1186,6 @@ export default defineComponent({
             const hashedPassword = await bcryptjs.hash(this.user.pswd, 10);
 
             userStore.Password= hashedPassword
-            //this.contrasenaAnterior="";
-            //this.user.pswd="";
-            //this.contrasenaRepetida="";
 
             this.passCorrecta = false
 
