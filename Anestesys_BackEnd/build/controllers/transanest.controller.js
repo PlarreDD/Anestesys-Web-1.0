@@ -21,11 +21,6 @@ const saveMenuTrans = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         solHartman, solFisio, glucosados, gelatinas, almidones, albuminas, paqGlobular, plasmas, plaquetas, crioprecipitados, factor_VII, factor_VIII, otrosIngresos, 
         // Egresos
         liqAscitis, sangradoAprox, uresis, expoQX, reqBasales, ayuno, otrosEgresos, 
-        /* Técnica Anestésica */
-        // local, sedación, gralBalanceada, TIVA, multimodal,
-        // bloqMixto, bloqPeriLum, bloqPeriCaudal, BloqEspinal,
-        // BloqPlexo, BloqTroncular, bloqPeriToracico, bloqPeriCervical,
-        // libreOpioides,
         // Datos del ventilador
         modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr, } = req.body;
         let menuTrans;
@@ -55,21 +50,6 @@ const saveMenuTrans = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 reqBasales: reqBasales,
                 ayuno: ayuno,
                 otrosEgresos: otrosEgresos,
-                /* Técnica Anestésica */
-                // local: local,
-                // sedación: sedación,
-                // gralBalanceada: gralBalanceada,
-                // TIVA: TIVA,
-                // multimodal: multimodal,
-                // bloqMixto: bloqMixto,
-                // bloqPeriLum: bloqPeriLum,
-                // bloqPeriCaudal: bloqPeriCaudal,
-                // BloqEspinal: BloqEspinal,
-                // BloqPlexo: BloqPlexo,
-                // BloqTroncular: BloqTroncular,
-                // bloqPeriToracico: bloqPeriToracico,
-                // bloqPeriCervical: bloqPeriCervical,
-                // libreOpioides: libreOpioides,
             });
         }
         else {
@@ -103,11 +83,6 @@ const saveNuevoMenuTrans = (req, res) => __awaiter(void 0, void 0, void 0, funct
         solHartman, solFisio, glucosados, gelatinas, almidones, albuminas, paqGlobular, plasmas, plaquetas, crioprecipitados, factor_VII, factor_VIII, otrosIngresos, 
         // Egresos
         liqAscitis, sangradoAprox, uresis, expoQX, reqBasales, ayuno, otrosEgresos, 
-        /* Técnica Anestésica */
-        // local, sedación, gralBalanceada, TIVA, multimodal,
-        // bloqMixto, bloqPeriLum, bloqPeriCaudal, BloqEspinal,
-        // BloqPlexo, BloqTroncular, bloqPeriToracico, bloqPeriCervical,
-        // libreOpioides,
         // Datos del ventilador
         modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr, } = req.body;
         let menuTrans;
@@ -137,21 +112,6 @@ const saveNuevoMenuTrans = (req, res) => __awaiter(void 0, void 0, void 0, funct
                 reqBasales: reqBasales,
                 ayuno: ayuno,
                 otrosEgresos: otrosEgresos,
-                /* Técnica Anestésica */
-                // local: local,
-                // sedación: sedación,
-                // gralBalanceada: gralBalanceada,
-                // TIVA: TIVA,
-                // multimodal: multimodal,
-                // bloqMixto: bloqMixto,
-                // bloqPeriLum: bloqPeriLum,
-                // bloqPeriCaudal: bloqPeriCaudal,
-                // BloqEspinal: BloqEspinal,
-                // BloqPlexo: BloqPlexo,
-                // BloqTroncular: BloqTroncular,
-                // bloqPeriToracico: bloqPeriToracico,
-                // bloqPeriCervical: bloqPeriCervical,
-                // libreOpioides: libreOpioides,
             });
         }
         else {

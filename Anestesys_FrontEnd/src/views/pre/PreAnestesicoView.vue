@@ -801,8 +801,7 @@ export default defineComponent({
     document.addEventListener('scroll', this.scrollFunction);
     transStore.getIniciaMonitoreo();
 
-    // this.getClientIP();
-    fetch('http://172.16.20.8:5000/api/getClienteIp') // Reemplaza '/api/getClientIp' con la ruta correcta en tu servidor
+    fetch('http://172.16.20.22:5000/api/getClienteIp') // Reemplaza '/api/getClientIp' con la ruta correcta en tu servidor
       .then(response => response.json())
       .then(data => {
         this.clienteIp = data.clienteIp;
@@ -820,7 +819,7 @@ export default defineComponent({
 /*======================= Obtener paciente para nuevo registro =======================*/
     async obtenerInformacion(){
       try {
-        const response = await fetch(`http://${this.clienteIp}:5000/obtener_informacion`);
+        const response = await fetch(`http://${this.clienteIp}:5000/apiMVS`);
         const data = await response.json();
         this.informacion = data.informacion;
 

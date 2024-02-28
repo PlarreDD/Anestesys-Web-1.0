@@ -143,9 +143,10 @@ export default defineComponent({
         userStore,
         userCorreo:false,
         userContrasena:false,
-        contrasena:false
+        contrasena:false        
     };
   },
+
   
   methods: {
     async validaCamposLogin() {

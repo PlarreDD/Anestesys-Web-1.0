@@ -20,7 +20,7 @@ export const useUserStore = defineStore('user', {
         TutorialTrans: ref(null),
         TutorialPost: ref(null),
         Password: ref(null),
-        PasswordNuevo: ref(null)
+        PasswordNuevo: ref(null),
     }),
 
     actions: {
