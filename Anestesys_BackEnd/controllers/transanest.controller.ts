@@ -16,11 +16,6 @@ export const saveMenuTrans = async (req: any, res: Response) => {
                 // Egresos
                 liqAscitis, sangradoAprox, uresis, expoQX,
                 reqBasales, ayuno, otrosEgresos,
-                /* Técnica Anestésica */
-                // local, sedación, gralBalanceada, TIVA, multimodal,
-                // bloqMixto, bloqPeriLum, bloqPeriCaudal, BloqEspinal,
-                // BloqPlexo, BloqTroncular, bloqPeriToracico, bloqPeriCervical,
-                // libreOpioides,
                 // Datos del ventilador
                 modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr,
 
@@ -54,21 +49,6 @@ export const saveMenuTrans = async (req: any, res: Response) => {
                                         reqBasales: reqBasales,
                                         ayuno: ayuno,
                                         otrosEgresos: otrosEgresos,
-                                        /* Técnica Anestésica */
-                                        // local: local,
-                                        // sedación: sedación,
-                                        // gralBalanceada: gralBalanceada,
-                                        // TIVA: TIVA,
-                                        // multimodal: multimodal,
-                                        // bloqMixto: bloqMixto,
-                                        // bloqPeriLum: bloqPeriLum,
-                                        // bloqPeriCaudal: bloqPeriCaudal,
-                                        // BloqEspinal: BloqEspinal,
-                                        // BloqPlexo: BloqPlexo,
-                                        // BloqTroncular: BloqTroncular,
-                                        // bloqPeriToracico: bloqPeriToracico,
-                                        // bloqPeriCervical: bloqPeriCervical,
-                                        // libreOpioides: libreOpioides,
             });
         }
         else{
@@ -107,11 +87,6 @@ export const saveNuevoMenuTrans = async (req: any, res: Response) => {
                 // Egresos
                 liqAscitis, sangradoAprox, uresis, expoQX,
                 reqBasales, ayuno, otrosEgresos,
-                /* Técnica Anestésica */
-                // local, sedación, gralBalanceada, TIVA, multimodal,
-                // bloqMixto, bloqPeriLum, bloqPeriCaudal, BloqEspinal,
-                // BloqPlexo, BloqTroncular, bloqPeriToracico, bloqPeriCervical,
-                // libreOpioides,
                 // Datos del ventilador
                 modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr,
 
@@ -145,21 +120,6 @@ export const saveNuevoMenuTrans = async (req: any, res: Response) => {
                                         reqBasales: reqBasales,
                                         ayuno: ayuno,
                                         otrosEgresos: otrosEgresos,
-                                        /* Técnica Anestésica */
-                                        // local: local,
-                                        // sedación: sedación,
-                                        // gralBalanceada: gralBalanceada,
-                                        // TIVA: TIVA,
-                                        // multimodal: multimodal,
-                                        // bloqMixto: bloqMixto,
-                                        // bloqPeriLum: bloqPeriLum,
-                                        // bloqPeriCaudal: bloqPeriCaudal,
-                                        // BloqEspinal: BloqEspinal,
-                                        // BloqPlexo: BloqPlexo,
-                                        // BloqTroncular: BloqTroncular,
-                                        // bloqPeriToracico: bloqPeriToracico,
-                                        // bloqPeriCervical: bloqPeriCervical,
-                                        // libreOpioides: libreOpioides,
             });
         }
         else{

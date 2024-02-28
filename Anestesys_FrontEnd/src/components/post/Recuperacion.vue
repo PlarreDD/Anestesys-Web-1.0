@@ -1480,7 +1480,6 @@ export default defineComponent({
 
         this.infoRec.altaRec_CalifAldrete=postAnestStore.CalificacionAldrete
         this.infoRec.altaRec_Obs=postAnestStore.ObservacionesAlta
-        // preIdStore.NombreAnestesiologo=postAnestStore.NombreAnestesiologo
         this.infoRec.altaRec_FechaAltaRec=postAnestStore.FechaAlta
         this.infoRec.altaRec_HrAltaRec=postAnestStore.HoraAlta
 

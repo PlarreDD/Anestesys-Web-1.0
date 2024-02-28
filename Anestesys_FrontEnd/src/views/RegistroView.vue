@@ -115,15 +115,7 @@ export default defineComponent({
             userFecha:false,
             userStore,
         };
-    },
-    
-    // mounted: function() { // Llama el método despues de cargar la página
-    //   this.cargarFondo();
-    // },
-
-    // created(){
-    //     this.cargarFondo()
-    // },
+    },    
 
     methods: {
         async validaCamposRegistro() {
@@ -169,29 +161,14 @@ export default defineComponent({
             } catch (error) {
             }
         },
-
-        // async cargarFondo(){
-        //     document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
-        // },
-
-        // async cargarFondoLogin(){
-        //     document.body.style.backgroundImage = "url('../../public/images/login.webp')";
-        // },
     }
 });
 </script>
 
 <style>
 .fondo-vista-reg {
-  /* Otras propiedades de estilo */
   background-image: url('../../public/images/registro.webp'); /* Ruta de la imagen en tus assets */
   height: 100vh;
-  /* width: 1920; */
-  /* margin: 0; */
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: center; */
-  /* align-items: center; */
   margin-top: -1rem;
   margin-left: -19rem;
   margin-right: -18rem;

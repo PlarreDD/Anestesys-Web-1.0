@@ -96,21 +96,6 @@ export const useTransAnestStore = defineStore('transAn', {
         reqBasales: ref(null),
         ayuno: ref(null),
         otrosEgresos: ref(null),
-        // Técnica Anestésica
-        // local: ref(null),
-        // sedación: ref(null),
-        // gralBalanceada: ref(null),
-        // TIVA: ref(null),
-        // multimodal: ref(null),
-        // bloqMixto: ref(null),
-        // bloqPeriLum: ref(null),
-        // bloqPeriCaudal: ref(null),
-        // BloqEspinal: ref(null),
-        // BloqPlexo: ref(null),
-        // BloqTroncular: ref(null),
-        // bloqPeriToracico: ref(null),
-        // bloqPeriCervical: ref(null),
-        // libreOpioides: ref(null),
         // Tiempos QX
         ingresoQX: ref(null),
         inicioAn: ref(null),
@@ -182,21 +167,6 @@ export const useTransAnestStore = defineStore('transAn', {
                     reqBasales: regTransAnest.reqBasales,
                     ayuno: regTransAnest.ayuno,
                     otrosEgresos: regTransAnest.otrosEgresos,
-                    /* Técnica Anestésica */
-                    // local: regTransAnest.local,
-                    // sedación: regTransAnest.sedación,
-                    // gralBalanceada: regTransAnest.gralBalanceada,
-                    // TIVA: regTransAnest.TIVA,
-                    // multimodal: regTransAnest.multimodal,
-                    // bloqMixto: regTransAnest.bloqMixto,
-                    // bloqPeriLum: regTransAnest.bloqPeriLum,
-                    // bloqPeriCaudal: regTransAnest.bloqPeriCaudal,
-                    // BloqEspinal: regTransAnest.BloqEspinal,
-                    // BloqPlexo: regTransAnest.BloqPlexo,
-                    // BloqTroncular: regTransAnest.BloqTroncular,
-                    // bloqPeriToracico: regTransAnest.bloqPeriToracico,
-                    // bloqPeriCervical: regTransAnest.bloqPeriCervical,
-                    // libreOpioides: regTransAnest.libreOpioides,
                 }
             })
             .then((res: any) => {
@@ -255,21 +225,6 @@ export const useTransAnestStore = defineStore('transAn', {
                     reqBasales: regTransAnest.reqBasales,
                     ayuno: regTransAnest.ayuno,
                     otrosEgresos: regTransAnest.otrosEgresos,
-                    /* Técnica Anestésica */
-                    // local: regTransAnest.local,
-                    // sedación: regTransAnest.sedación,
-                    // gralBalanceada: regTransAnest.gralBalanceada,
-                    // TIVA: regTransAnest.TIVA,
-                    // multimodal: regTransAnest.multimodal,
-                    // bloqMixto: regTransAnest.bloqMixto,
-                    // bloqPeriLum: regTransAnest.bloqPeriLum,
-                    // bloqPeriCaudal: regTransAnest.bloqPeriCaudal,
-                    // BloqEspinal: regTransAnest.BloqEspinal,
-                    // BloqPlexo: regTransAnest.BloqPlexo,
-                    // BloqTroncular: regTransAnest.BloqTroncular,
-                    // bloqPeriToracico: regTransAnest.bloqPeriToracico,
-                    // bloqPeriCervical: regTransAnest.bloqPeriCervical,
-                    // libreOpioides: regTransAnest.libreOpioides,
                 }
             })
             .then((res: any) => {
@@ -327,21 +282,6 @@ export const useTransAnestStore = defineStore('transAn', {
                     reqBasales: regTransAnest.reqBasales,
                     ayuno: regTransAnest.ayuno,
                     otrosEgresos: regTransAnest.otrosEgresos,
-                    /* Técnica Anestésica */
-                    // local: regTransAnest.local,
-                    // sedación: regTransAnest.sedación,
-                    // gralBalanceada: regTransAnest.gralBalanceada,
-                    // TIVA: regTransAnest.TIVA,
-                    // multimodal: regTransAnest.multimodal,
-                    // bloqMixto: regTransAnest.bloqMixto,
-                    // bloqPeriLum: regTransAnest.bloqPeriLum,
-                    // bloqPeriCaudal: regTransAnest.bloqPeriCaudal,
-                    // BloqEspinal: regTransAnest.BloqEspinal,
-                    // BloqPlexo: regTransAnest.BloqPlexo,
-                    // BloqTroncular: regTransAnest.BloqTroncular,
-                    // bloqPeriToracico: regTransAnest.bloqPeriToracico,
-                    // bloqPeriCervical: regTransAnest.bloqPeriCervical,
-                    // libreOpioides: regTransAnest.libreOpioides,
                 }
             })
             .then((res: any) => {
@@ -401,21 +341,6 @@ export const useTransAnestStore = defineStore('transAn', {
                     reqBasales: regTransAnest.reqBasales,
                     ayuno: regTransAnest.ayuno,
                     otrosEgresos: regTransAnest.otrosEgresos,
-                    /* Técnica Anestésica */
-                    // local: regTransAnest.local,
-                    // sedación: regTransAnest.sedación,
-                    // gralBalanceada: regTransAnest.gralBalanceada,
-                    // TIVA: regTransAnest.TIVA,
-                    // multimodal: regTransAnest.multimodal,
-                    // bloqMixto: regTransAnest.bloqMixto,
-                    // bloqPeriLum: regTransAnest.bloqPeriLum,
-                    // bloqPeriCaudal: regTransAnest.bloqPeriCaudal,
-                    // BloqEspinal: regTransAnest.BloqEspinal,
-                    // BloqPlexo: regTransAnest.BloqPlexo,
-                    // BloqTroncular: regTransAnest.BloqTroncular,
-                    // bloqPeriToracico: regTransAnest.bloqPeriToracico,
-                    // bloqPeriCervical: regTransAnest.bloqPeriCervical,
-                    // libreOpioides: regTransAnest.libreOpioides,
                 }
             })
             .then((res: any) => {
