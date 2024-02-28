@@ -35,6 +35,7 @@ namespace WindowsFormsApp1
             // 
             // btnQueryUrl
             // 
+            this.btnQueryUrl.ForeColor = System.Drawing.Color.IndianRed;
             this.btnQueryUrl.Location = new System.Drawing.Point(713, 415);
             this.btnQueryUrl.Name = "btnQueryUrl";
             this.btnQueryUrl.Size = new System.Drawing.Size(75, 23);
