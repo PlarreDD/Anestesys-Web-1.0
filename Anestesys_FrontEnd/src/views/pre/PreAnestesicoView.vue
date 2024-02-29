@@ -820,10 +820,10 @@ export default defineComponent({
     async obtenerInformacion(){
       try {
         const response = await fetch(`http://${this.clienteIp}:5000/apiMVS`);
-        const data = await response.json();
-        this.informacion = data.informacion;
+        const data = await response.text();
+        this.informacion = data;
 
-        console.log("info: "+this.informacion);        
+        console.log("info: "+this.informacion);
       } catch (error) {
         console.error('Error al obtener información:', error);
       }

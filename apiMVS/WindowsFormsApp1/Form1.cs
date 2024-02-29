@@ -26,7 +26,7 @@ namespace WindowsFormsApp1
         public static TcpClient client;
 
         public static int port = 6664;
-        public static string ipMonitor = "172.16.20.102";
+        public static string ipMonitor = "172.16.20.101";
 
         public static Ping pMSV;
         public static PingReply rMSV;
