@@ -18,7 +18,13 @@ library.add(faCircleQuestion, faCircleInfo, faCircleCheck, faAngleUp, faEllipsis
 log.setLevel(process.env.NODE_ENV === 'production' ? log.levels.ERROR : log.levels.DEBUG);
 
 // Agrega log a la instancia de Vue para accederlo globalmente
-(window as any).log = log;
+declare global {
+    interface Window {
+      log: any;
+    }
+  }
+
+window.log = log;
 
 createApp(App)
     .component('font-awesome-icon', FontAwesomeIcon)

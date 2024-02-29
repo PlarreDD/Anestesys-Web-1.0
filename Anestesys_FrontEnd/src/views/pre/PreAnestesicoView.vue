@@ -501,7 +501,6 @@ import { ElInput, ElCard } from 'element-plus';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
-import axios from 'axios';
 import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
 window.pdfMake.fonts = pdfFonts.pdfMake;
@@ -823,9 +822,10 @@ export default defineComponent({
         const data = await response.json();
         this.informacion = data.informacion;
 
-        console.log("info: "+this.informacion);        
+        console.log("info: "+this.informacion);
       } catch (error) {
-        console.error('Error al obtener información:', error);
+        // console.error('Error al obtener información:', error);
+        window.log.info('Ocurrió un error', error);
       }
     },
 
