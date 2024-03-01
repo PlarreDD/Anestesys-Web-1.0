@@ -502,9 +502,9 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import axios from 'axios';
-import pdfFonts from "pdfmake/build/vfs_fonts.js";
+// import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
-window.pdfMake.fonts = pdfFonts.pdfMake;
+// window.pdfMake.fonts = pdfFonts.pdfMake;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 
@@ -801,7 +801,9 @@ export default defineComponent({
     document.addEventListener('scroll', this.scrollFunction);
     transStore.getIniciaMonitoreo();
 
-    fetch('http://172.16.20.22:5000/api/getClienteIp') // Reemplaza '/api/getClientIp' con la ruta correcta en tu servidor
+    //console.log("Esta: " + import.meta.env.VITE_ORIGIN2);
+
+    fetch(`${import.meta.env.VITE_ORIGIN1}/api/getClienteIp`) // Reemplaza '/api/getClientIp' con la ruta correcta en tu servidor
       .then(response => response.json())
       .then(data => {
         this.clienteIp = data.clienteIp;

@@ -2,7 +2,7 @@ import axios from "axios";
 
 const apiAxios = axios.create(
     {
-        baseURL: "http://172.16.20.58:5000",
+        baseURL: import.meta.env.VITE_ORIGIN1,
         withCredentials: true
     });
 
