@@ -800,7 +800,9 @@ export default defineComponent({
     document.addEventListener('scroll', this.scrollFunction);
     transStore.getIniciaMonitoreo();
 
-    fetch('http://172.16.20.22:5000/api/getClienteIp') // Reemplaza '/api/getClientIp' con la ruta correcta en tu servidor
+    //console.log("Esta: " + import.meta.env.VITE_ORIGIN2);
+
+    fetch(`${import.meta.env.VITE_ORIGIN1}/api/getClienteIp`) // Reemplaza '/api/getClientIp' con la ruta correcta en tu servidor
       .then(response => response.json())
       .then(data => {
         this.clienteIp = data.clienteIp;
