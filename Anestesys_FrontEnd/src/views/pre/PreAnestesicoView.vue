@@ -502,7 +502,7 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import axios from 'axios';
-// import pdfFonts from "pdfmake/build/vfs_fonts.js";
+import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
 // window.pdfMake.fonts = pdfFonts.pdfMake;
 
@@ -827,7 +827,8 @@ export default defineComponent({
 
         console.log("info: "+this.informacion);
       } catch (error) {
-        console.error('Error al obtener información:', error);
+        // console.error('Error al obtener información:', error);
+        window.log.info('Ocurrió un error', error);
       }
     },
 
