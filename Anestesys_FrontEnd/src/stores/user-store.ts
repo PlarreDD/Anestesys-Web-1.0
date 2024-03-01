@@ -58,7 +58,7 @@ export const useUserStore = defineStore('user', {
 
                 /* Redirección a la pantalla de Preanestésico */
                 router.push("/pre");
-            }).catch((res:any) => {
+            }).catch((e:any) => {
                 /* Fallo de inicio de sesión */
                 swal.fire({
                     html: '<b>Usuario o contraseña inválidos</b>',
@@ -68,6 +68,7 @@ export const useUserStore = defineStore('user', {
                     timer: 4000,
                     timerProgressBar: true,
                 });
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -78,6 +79,7 @@ export const useUserStore = defineStore('user', {
                 this.expiresIn = res.data.xprIn;
                 this.setTime();
             }).catch((e:any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -170,6 +172,7 @@ export const useUserStore = defineStore('user', {
                                 timerProgressBar: true,
                                 // position: 'top-end'
                             });
+                            window.log.error('Ocurrió un error:', e)
                         }
                         else if(e.request){
                         }
@@ -199,6 +202,7 @@ export const useUserStore = defineStore('user', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -216,6 +220,7 @@ export const useUserStore = defineStore('user', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -233,6 +238,7 @@ export const useUserStore = defineStore('user', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -250,6 +256,7 @@ export const useUserStore = defineStore('user', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -279,6 +286,7 @@ export const useUserStore = defineStore('user', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 

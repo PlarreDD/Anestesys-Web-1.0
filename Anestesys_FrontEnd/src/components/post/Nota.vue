@@ -893,176 +893,192 @@ export default defineComponent({
 
     methods: {
         async vaciarInputsNotaPA(){
-            if(preIdStore.vaciadoPostNota == true){
-                this.infoNotaPost.npa_NotaPostAnest = postAnestStore.NotaPost
-                this.infoNotaPost.npa_Intubacion = postAnestStore.Intubacion
-
-                this.infoNotaPost.signVitEgQx_TA = postAnestStore.EgresoTA
-                this.infoNotaPost.signVitEgQx_FC = postAnestStore.EgresoFC
-                this.infoNotaPost.signVitEgQx_FR = postAnestStore.EgresoFR
-                this.infoNotaPost.signVitEgQx_Temperatura = postAnestStore.EgresoTemp
-                this.infoNotaPost.signVitEgQx_Pulso = postAnestStore.EgresoPulso
-                this.infoNotaPost.signVitEgQx_SpO2 = postAnestStore.EgresoSpO2
-                this.infoNotaPost.signVitEgQx_EgresoPac = postAnestStore.DestinoEgreso
-
-                this.infoNotaPost.casoObsRecNac_NumProd = postAnestStore.NumeroProductos
-                this.infoNotaPost.casoObsRecNac1_Genero = postAnestStore.GeneroUno
-                this.infoNotaPost.casoObsRecNac1_HrNacimiento = postAnestStore.HoraNacimientoUno
-                this.infoNotaPost.casoObsRecNac1_Alumbramiento = postAnestStore.AlumbramientoUno
-                this.infoNotaPost.casoObsRecNac1_Apgar1 = postAnestStore.Apgar1Uno
-                this.infoNotaPost.casoObsRecNac1_Apgar5 = postAnestStore.Apgar5Uno
-                this.infoNotaPost.casoObsRecNac1_Capurro = postAnestStore.CapurroUno
-                this.infoNotaPost.casoObsRecNac1_Peso =  postAnestStore.PesoUno
-                this.infoNotaPost.casoObsRecNac1_Talla = postAnestStore.TallaUno
-                this.infoNotaPost.casoObsRecNac2_Genero = postAnestStore.GeneroDos
-                this.infoNotaPost.casoObsRecNac2_HrNacimiento = postAnestStore.HoraNacimientoDos
-                this.infoNotaPost.casoObsRecNac2_Alumbramiento = postAnestStore.AlumbramientoDos
-                this.infoNotaPost.casoObsRecNac2_Apgar1 = postAnestStore.Apgar1Dos
-                this.infoNotaPost.casoObsRecNac2_Apgar5 = postAnestStore.Apgar5Dos
-                this.infoNotaPost.casoObsRecNac2_Capurro = postAnestStore.CapurroDos
-                this.infoNotaPost.casoObsRecNac2_Peso = postAnestStore.PesoDos
-                this.infoNotaPost.casoObsRecNac2_Talla = postAnestStore.TallaDos
-                this.infoNotaPost.casoObsRecNac3_Genero = postAnestStore.GeneroTres
-                this.infoNotaPost.casoObsRecNac3_HrNacimiento = postAnestStore.HoraNacimientoTres
-                this.infoNotaPost.casoObsRecNac3_Alumbramiento = postAnestStore.AlumbramientoTres
-                this.infoNotaPost.casoObsRecNac3_Apgar1 = postAnestStore.Apgar1Tres
-                this.infoNotaPost.casoObsRecNac3_Apgar5 = postAnestStore.Apgar5Tres
-                this.infoNotaPost.casoObsRecNac3_Capurro = postAnestStore.CapurroTres
-                this.infoNotaPost.casoObsRecNac3_Peso = postAnestStore.PesoTres
-                this.infoNotaPost.casoObsRecNac3_Talla = postAnestStore.TallaTres
-                this.infoNotaPost.casoObsRecNac4_Genero = postAnestStore.GeneroCuatro
-                this.infoNotaPost.casoObsRecNac4_HrNacimiento = postAnestStore.HoraNacimientoCuatro
-                this.infoNotaPost.casoObsRecNac4_Alumbramiento = postAnestStore.AlumbramientoCuatro
-                this.infoNotaPost.casoObsRecNac4_Apgar1 = postAnestStore.Apgar1Cuatro
-                this.infoNotaPost.casoObsRecNac4_Apgar5 = postAnestStore.Apgar5Cuatro
-                this.infoNotaPost.casoObsRecNac4_Capurro = postAnestStore.CapurroCuatro
-                this.infoNotaPost.casoObsRecNac4_Peso = postAnestStore.PesoCuatro
-                this.infoNotaPost.casoObsRecNac4_Talla = postAnestStore.TallaCuatro
-                this.infoNotaPost.casoObsRecNac5_Genero = postAnestStore.GeneroCinco
-                this.infoNotaPost.casoObsRecNac5_HrNacimiento = postAnestStore.HoraNacimientoCinco
-                this.infoNotaPost.casoObsRecNac5_Alumbramiento = postAnestStore.AlumbramientoCinco
-                this.infoNotaPost.casoObsRecNac5_Apgar1 = postAnestStore.Apgar1Cinco
-                this.infoNotaPost.casoObsRecNac5_Apgar5 = postAnestStore.Apgar5Cinco
-                this.infoNotaPost.casoObsRecNac5_Capurro = postAnestStore.CapurroCinco
-                this.infoNotaPost.casoObsRecNac5_Peso = postAnestStore.PesoCinco
-                this.infoNotaPost.casoObsRecNac5_Talla = postAnestStore.TallaCinco
-                this.infoNotaPost.casoObsRecNac6_Genero = postAnestStore.GeneroSeis
-                this.infoNotaPost.casoObsRecNac6_HrNacimiento = postAnestStore.HoraNacimientoSeis
-                this.infoNotaPost.casoObsRecNac6_Alumbramiento = postAnestStore.AlumbramientoSeis
-                this.infoNotaPost.casoObsRecNac6_Apgar1 = postAnestStore.Apgar1Seis
-                this.infoNotaPost.casoObsRecNac6_Apgar5 = postAnestStore.Apgar5Seis
-                this.infoNotaPost.casoObsRecNac6_Capurro = postAnestStore.CapurroSeis
-                this.infoNotaPost.casoObsRecNac6_Peso = postAnestStore.PesoSeis
-                this.infoNotaPost.casoObsRecNac6_Talla = postAnestStore.TallaSeis
-
-                preIdStore.vaciadoPostNota = false
+            try {
+                if(preIdStore.vaciadoPostNota == true){
+                    this.infoNotaPost.npa_NotaPostAnest = postAnestStore.NotaPost
+                    this.infoNotaPost.npa_Intubacion = postAnestStore.Intubacion
+    
+                    this.infoNotaPost.signVitEgQx_TA = postAnestStore.EgresoTA
+                    this.infoNotaPost.signVitEgQx_FC = postAnestStore.EgresoFC
+                    this.infoNotaPost.signVitEgQx_FR = postAnestStore.EgresoFR
+                    this.infoNotaPost.signVitEgQx_Temperatura = postAnestStore.EgresoTemp
+                    this.infoNotaPost.signVitEgQx_Pulso = postAnestStore.EgresoPulso
+                    this.infoNotaPost.signVitEgQx_SpO2 = postAnestStore.EgresoSpO2
+                    this.infoNotaPost.signVitEgQx_EgresoPac = postAnestStore.DestinoEgreso
+    
+                    this.infoNotaPost.casoObsRecNac_NumProd = postAnestStore.NumeroProductos
+                    this.infoNotaPost.casoObsRecNac1_Genero = postAnestStore.GeneroUno
+                    this.infoNotaPost.casoObsRecNac1_HrNacimiento = postAnestStore.HoraNacimientoUno
+                    this.infoNotaPost.casoObsRecNac1_Alumbramiento = postAnestStore.AlumbramientoUno
+                    this.infoNotaPost.casoObsRecNac1_Apgar1 = postAnestStore.Apgar1Uno
+                    this.infoNotaPost.casoObsRecNac1_Apgar5 = postAnestStore.Apgar5Uno
+                    this.infoNotaPost.casoObsRecNac1_Capurro = postAnestStore.CapurroUno
+                    this.infoNotaPost.casoObsRecNac1_Peso =  postAnestStore.PesoUno
+                    this.infoNotaPost.casoObsRecNac1_Talla = postAnestStore.TallaUno
+                    this.infoNotaPost.casoObsRecNac2_Genero = postAnestStore.GeneroDos
+                    this.infoNotaPost.casoObsRecNac2_HrNacimiento = postAnestStore.HoraNacimientoDos
+                    this.infoNotaPost.casoObsRecNac2_Alumbramiento = postAnestStore.AlumbramientoDos
+                    this.infoNotaPost.casoObsRecNac2_Apgar1 = postAnestStore.Apgar1Dos
+                    this.infoNotaPost.casoObsRecNac2_Apgar5 = postAnestStore.Apgar5Dos
+                    this.infoNotaPost.casoObsRecNac2_Capurro = postAnestStore.CapurroDos
+                    this.infoNotaPost.casoObsRecNac2_Peso = postAnestStore.PesoDos
+                    this.infoNotaPost.casoObsRecNac2_Talla = postAnestStore.TallaDos
+                    this.infoNotaPost.casoObsRecNac3_Genero = postAnestStore.GeneroTres
+                    this.infoNotaPost.casoObsRecNac3_HrNacimiento = postAnestStore.HoraNacimientoTres
+                    this.infoNotaPost.casoObsRecNac3_Alumbramiento = postAnestStore.AlumbramientoTres
+                    this.infoNotaPost.casoObsRecNac3_Apgar1 = postAnestStore.Apgar1Tres
+                    this.infoNotaPost.casoObsRecNac3_Apgar5 = postAnestStore.Apgar5Tres
+                    this.infoNotaPost.casoObsRecNac3_Capurro = postAnestStore.CapurroTres
+                    this.infoNotaPost.casoObsRecNac3_Peso = postAnestStore.PesoTres
+                    this.infoNotaPost.casoObsRecNac3_Talla = postAnestStore.TallaTres
+                    this.infoNotaPost.casoObsRecNac4_Genero = postAnestStore.GeneroCuatro
+                    this.infoNotaPost.casoObsRecNac4_HrNacimiento = postAnestStore.HoraNacimientoCuatro
+                    this.infoNotaPost.casoObsRecNac4_Alumbramiento = postAnestStore.AlumbramientoCuatro
+                    this.infoNotaPost.casoObsRecNac4_Apgar1 = postAnestStore.Apgar1Cuatro
+                    this.infoNotaPost.casoObsRecNac4_Apgar5 = postAnestStore.Apgar5Cuatro
+                    this.infoNotaPost.casoObsRecNac4_Capurro = postAnestStore.CapurroCuatro
+                    this.infoNotaPost.casoObsRecNac4_Peso = postAnestStore.PesoCuatro
+                    this.infoNotaPost.casoObsRecNac4_Talla = postAnestStore.TallaCuatro
+                    this.infoNotaPost.casoObsRecNac5_Genero = postAnestStore.GeneroCinco
+                    this.infoNotaPost.casoObsRecNac5_HrNacimiento = postAnestStore.HoraNacimientoCinco
+                    this.infoNotaPost.casoObsRecNac5_Alumbramiento = postAnestStore.AlumbramientoCinco
+                    this.infoNotaPost.casoObsRecNac5_Apgar1 = postAnestStore.Apgar1Cinco
+                    this.infoNotaPost.casoObsRecNac5_Apgar5 = postAnestStore.Apgar5Cinco
+                    this.infoNotaPost.casoObsRecNac5_Capurro = postAnestStore.CapurroCinco
+                    this.infoNotaPost.casoObsRecNac5_Peso = postAnestStore.PesoCinco
+                    this.infoNotaPost.casoObsRecNac5_Talla = postAnestStore.TallaCinco
+                    this.infoNotaPost.casoObsRecNac6_Genero = postAnestStore.GeneroSeis
+                    this.infoNotaPost.casoObsRecNac6_HrNacimiento = postAnestStore.HoraNacimientoSeis
+                    this.infoNotaPost.casoObsRecNac6_Alumbramiento = postAnestStore.AlumbramientoSeis
+                    this.infoNotaPost.casoObsRecNac6_Apgar1 = postAnestStore.Apgar1Seis
+                    this.infoNotaPost.casoObsRecNac6_Apgar5 = postAnestStore.Apgar5Seis
+                    this.infoNotaPost.casoObsRecNac6_Capurro = postAnestStore.CapurroSeis
+                    this.infoNotaPost.casoObsRecNac6_Peso = postAnestStore.PesoSeis
+                    this.infoNotaPost.casoObsRecNac6_Talla = postAnestStore.TallaSeis
+    
+                    preIdStore.vaciadoPostNota = false
+                }        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
             }
         },
 
         async volverPestana(){
-            if(preIdStore.volverPostNota === true){
-                const tabPostNota = document.getElementById('nota-post-anes');
-                const tabObj = new Tab(tabPostNota);
-                tabObj.show();
-                
-                preIdStore.volverPostNota = false;
-            }            
-        },
-
-        async guardarDatosNotaPA(){
-            if(preIdStore.nuevoRegistroPaciente == false){
-                if(preIdStore.actualizarRegNotaPA == false ){
-                    // Guardar datos
-                    if(this.transAnestStore.tipoTecnica == false){
-                        postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id);
-                        this.transAnestStore.tipoTecnica=true
-                    }
-                    preIdStore.actualizarRegNotaPA = true                    
-                    this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
-                }else if(preIdStore.actualizarRegNotaPA == true){
-                    // Actualizar datos
-                    postAnestStore.updateNotaPA(this.infoNotaPost, preIdStore.pacienteID._id, postAnestStore.TecnicaAnestesica)
-                }
-
-            }else if(preIdStore.nuevoRegistroPaciente == true){
-                if(preIdStore.actualizarRegNotaPA == false ){
-                    // Guardar nuevos datos
-                    if(this.transAnestStore.tipoTecnica == false){
-                        postAnestStore.saveNuevoNotaPA(this.infoNotaPost, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-                        this.transAnestStore.tipoTecnica=true
-                    }
-                    preIdStore.actualizarRegNotaPA = true                    
-                    this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
-                }else if(preIdStore.actualizarRegNotaPA == true){
-                    // Actualizar nuevos datos
-                    postAnestStore.updateNuevoNotaPA(this.infoNotaPost, preIdStore.pacienteID.pid, preIdStore.cirugiaID, postAnestStore.TecnicaAnestesica)
-                }
-
+            try {
+                if(preIdStore.volverPostNota === true){
+                    const tabPostNota = document.getElementById('nota-post-anes');
+                    const tabObj = new Tab(tabPostNota);
+                    tabObj.show();
+                    
+                    preIdStore.volverPostNota = false;
+                }                    
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
             }
         },
 
-        enviarDatosNotaPost() {
-            this.$emit('recibe-datos-nota-post', postAnestStore.NotaPost=this.infoNotaPost.npa_NotaPostAnest,
-                                                postAnestStore.Intubacion=this.infoNotaPost.npa_Intubacion,
+        async guardarDatosNotaPA(){
+            try {
+                if(preIdStore.nuevoRegistroPaciente == false){
+                    if(preIdStore.actualizarRegNotaPA == false ){
+                        // Guardar datos
+                        if(this.transAnestStore.tipoTecnica == false){
+                            postAnestStore.saveNotaPA(this.infoNotaPost, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id);
+                            this.transAnestStore.tipoTecnica=true
+                        }
+                        preIdStore.actualizarRegNotaPA = true                    
+                        this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
+                    }else if(preIdStore.actualizarRegNotaPA == true){
+                        // Actualizar datos
+                        postAnestStore.updateNotaPA(this.infoNotaPost, preIdStore.pacienteID._id, postAnestStore.TecnicaAnestesica)
+                    }
+    
+                }else if(preIdStore.nuevoRegistroPaciente == true){
+                    if(preIdStore.actualizarRegNotaPA == false ){
+                        // Guardar nuevos datos
+                        if(this.transAnestStore.tipoTecnica == false){
+                            postAnestStore.saveNuevoNotaPA(this.infoNotaPost, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                            this.transAnestStore.tipoTecnica=true
+                        }
+                        preIdStore.actualizarRegNotaPA = true                    
+                        this.infoNotaPost.npa_TecAnestFinal = String(postAnestStore.TecnicaAnestesica)
+                    }else if(preIdStore.actualizarRegNotaPA == true){
+                        // Actualizar nuevos datos
+                        postAnestStore.updateNuevoNotaPA(this.infoNotaPost, preIdStore.pacienteID.pid, preIdStore.cirugiaID, postAnestStore.TecnicaAnestesica)
+                    }
+    
+                }        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }
+        },
 
-                                                postAnestStore.EgresoTA=this.infoNotaPost.signVitEgQx_TA,
-                                                postAnestStore.EgresoFC=this.infoNotaPost.signVitEgQx_FC,
-                                                postAnestStore.EgresoFR=this.infoNotaPost.signVitEgQx_FR,
-                                                postAnestStore.EgresoTemp=this.infoNotaPost.signVitEgQx_Temperatura,
-                                                postAnestStore.EgresoPulso=this.infoNotaPost.signVitEgQx_Pulso,
-                                                postAnestStore.EgresoSpO2=this.infoNotaPost.signVitEgQx_SpO2,
-                                                postAnestStore.DestinoEgreso=this.infoNotaPost.signVitEgQx_EgresoPac,
-
-                                                postAnestStore.NumeroProductos=this.infoNotaPost.casoObsRecNac_NumProd,
-                                                postAnestStore.GeneroUno=this.infoNotaPost.casoObsRecNac1_Genero,
-                                                postAnestStore.HoraNacimientoUno=this.infoNotaPost.casoObsRecNac1_HrNacimiento,
-                                                postAnestStore.AlumbramientoUno=this.infoNotaPost.casoObsRecNac1_Alumbramiento,
-                                                postAnestStore.Apgar1Uno=this.infoNotaPost.casoObsRecNac1_Apgar1,
-                                                postAnestStore.Apgar5Uno=this.infoNotaPost.casoObsRecNac1_Apgar5,
-                                                postAnestStore.CapurroUno=this.infoNotaPost.casoObsRecNac1_Capurro,
-                                                postAnestStore.PesoUno=this.infoNotaPost.casoObsRecNac1_Peso,
-                                                postAnestStore.TallaUno=this.infoNotaPost.casoObsRecNac1_Talla,
-                                                postAnestStore.GeneroDos=this.infoNotaPost.casoObsRecNac2_Genero,
-                                                postAnestStore.HoraNacimientoDos=this.infoNotaPost.casoObsRecNac2_HrNacimiento,
-                                                postAnestStore.AlumbramientoDos=this.infoNotaPost.casoObsRecNac2_Alumbramiento,
-                                                postAnestStore.Apgar1Dos=this.infoNotaPost.casoObsRecNac2_Apgar1,
-                                                postAnestStore.Apgar5Dos=this.infoNotaPost.casoObsRecNac2_Apgar5,
-                                                postAnestStore.CapurroDos=this.infoNotaPost.casoObsRecNac2_Capurro,
-                                                postAnestStore.PesoDos=this.infoNotaPost.casoObsRecNac2_Peso,
-                                                postAnestStore.TallaDos=this.infoNotaPost.casoObsRecNac2_Talla,
-                                                postAnestStore.GeneroTres=this.infoNotaPost.casoObsRecNac3_Genero,
-                                                postAnestStore.HoraNacimientoTres=this.infoNotaPost.casoObsRecNac3_HrNacimiento,
-                                                postAnestStore.AlumbramientoTres=this.infoNotaPost.casoObsRecNac3_Alumbramiento,
-                                                postAnestStore.Apgar1Tres=this.infoNotaPost.casoObsRecNac3_Apgar1,
-                                                postAnestStore.Apgar5Tres=this.infoNotaPost.casoObsRecNac3_Apgar5,
-                                                postAnestStore.CapurroTres=this.infoNotaPost.casoObsRecNac3_Capurro,
-                                                postAnestStore.PesoTres=this.infoNotaPost.casoObsRecNac3_Peso,
-                                                postAnestStore.TallaTres=this.infoNotaPost.casoObsRecNac3_Talla,
-                                                postAnestStore.GeneroCuatro=this.infoNotaPost.casoObsRecNac4_Genero,
-                                                postAnestStore.HoraNacimientoCuatro=this.infoNotaPost.casoObsRecNac4_HrNacimiento,
-                                                postAnestStore.AlumbramientoCuatro=this.infoNotaPost.casoObsRecNac4_Alumbramiento,
-                                                postAnestStore.Apgar1Cuatro=this.infoNotaPost.casoObsRecNac4_Apgar1,
-                                                postAnestStore.Apgar5Cuatro=this.infoNotaPost.casoObsRecNac4_Apgar5,
-                                                postAnestStore.CapurroCuatro=this.infoNotaPost.casoObsRecNac4_Capurro,
-                                                postAnestStore.PesoCuatro=this.infoNotaPost.casoObsRecNac4_Peso,
-                                                postAnestStore.TallaCuatro=this.infoNotaPost.casoObsRecNac4_Talla,
-                                                postAnestStore.GeneroCinco=this.infoNotaPost.casoObsRecNac5_Genero,
-                                                postAnestStore.HoraNacimientoCinco=this.infoNotaPost.casoObsRecNac5_HrNacimiento,
-                                                postAnestStore.AlumbramientoCinco=this.infoNotaPost.casoObsRecNac5_Alumbramiento,
-                                                postAnestStore.Apgar1Cinco=this.infoNotaPost.casoObsRecNac5_Apgar1,
-                                                postAnestStore.Apgar5Cinco=this.infoNotaPost.casoObsRecNac5_Apgar5,
-                                                postAnestStore.CapurroCinco=this.infoNotaPost.casoObsRecNac5_Capurro,
-                                                postAnestStore.PesoCinco=this.infoNotaPost.casoObsRecNac5_Peso,
-                                                postAnestStore.TallaCinco=this.infoNotaPost.casoObsRecNac5_Talla,
-                                                postAnestStore.GeneroSeis=this.infoNotaPost.casoObsRecNac6_Genero,
-                                                postAnestStore.HoraNacimientoSeis=this.infoNotaPost.casoObsRecNac6_HrNacimiento,
-                                                postAnestStore.AlumbramientoSeis=this.infoNotaPost.casoObsRecNac6_Alumbramiento,
-                                                postAnestStore.Apgar1Seis=this.infoNotaPost.casoObsRecNac6_Apgar1,
-                                                postAnestStore.Apgar5Seis=this.infoNotaPost.casoObsRecNac6_Apgar5,
-                                                postAnestStore.CapurroSeis=this.infoNotaPost.casoObsRecNac6_Capurro,
-                                                postAnestStore.PesoSeis=this.infoNotaPost.casoObsRecNac6_Peso,
-                                                postAnestStore.TallaSeis=this.infoNotaPost.casoObsRecNac6_Talla,                                                
-                                                )
+        async enviarDatosNotaPost() {
+            try {
+                this.$emit('recibe-datos-nota-post', postAnestStore.NotaPost=this.infoNotaPost.npa_NotaPostAnest,
+                                                    postAnestStore.Intubacion=this.infoNotaPost.npa_Intubacion,
+    
+                                                    postAnestStore.EgresoTA=this.infoNotaPost.signVitEgQx_TA,
+                                                    postAnestStore.EgresoFC=this.infoNotaPost.signVitEgQx_FC,
+                                                    postAnestStore.EgresoFR=this.infoNotaPost.signVitEgQx_FR,
+                                                    postAnestStore.EgresoTemp=this.infoNotaPost.signVitEgQx_Temperatura,
+                                                    postAnestStore.EgresoPulso=this.infoNotaPost.signVitEgQx_Pulso,
+                                                    postAnestStore.EgresoSpO2=this.infoNotaPost.signVitEgQx_SpO2,
+                                                    postAnestStore.DestinoEgreso=this.infoNotaPost.signVitEgQx_EgresoPac,
+    
+                                                    postAnestStore.NumeroProductos=this.infoNotaPost.casoObsRecNac_NumProd,
+                                                    postAnestStore.GeneroUno=this.infoNotaPost.casoObsRecNac1_Genero,
+                                                    postAnestStore.HoraNacimientoUno=this.infoNotaPost.casoObsRecNac1_HrNacimiento,
+                                                    postAnestStore.AlumbramientoUno=this.infoNotaPost.casoObsRecNac1_Alumbramiento,
+                                                    postAnestStore.Apgar1Uno=this.infoNotaPost.casoObsRecNac1_Apgar1,
+                                                    postAnestStore.Apgar5Uno=this.infoNotaPost.casoObsRecNac1_Apgar5,
+                                                    postAnestStore.CapurroUno=this.infoNotaPost.casoObsRecNac1_Capurro,
+                                                    postAnestStore.PesoUno=this.infoNotaPost.casoObsRecNac1_Peso,
+                                                    postAnestStore.TallaUno=this.infoNotaPost.casoObsRecNac1_Talla,
+                                                    postAnestStore.GeneroDos=this.infoNotaPost.casoObsRecNac2_Genero,
+                                                    postAnestStore.HoraNacimientoDos=this.infoNotaPost.casoObsRecNac2_HrNacimiento,
+                                                    postAnestStore.AlumbramientoDos=this.infoNotaPost.casoObsRecNac2_Alumbramiento,
+                                                    postAnestStore.Apgar1Dos=this.infoNotaPost.casoObsRecNac2_Apgar1,
+                                                    postAnestStore.Apgar5Dos=this.infoNotaPost.casoObsRecNac2_Apgar5,
+                                                    postAnestStore.CapurroDos=this.infoNotaPost.casoObsRecNac2_Capurro,
+                                                    postAnestStore.PesoDos=this.infoNotaPost.casoObsRecNac2_Peso,
+                                                    postAnestStore.TallaDos=this.infoNotaPost.casoObsRecNac2_Talla,
+                                                    postAnestStore.GeneroTres=this.infoNotaPost.casoObsRecNac3_Genero,
+                                                    postAnestStore.HoraNacimientoTres=this.infoNotaPost.casoObsRecNac3_HrNacimiento,
+                                                    postAnestStore.AlumbramientoTres=this.infoNotaPost.casoObsRecNac3_Alumbramiento,
+                                                    postAnestStore.Apgar1Tres=this.infoNotaPost.casoObsRecNac3_Apgar1,
+                                                    postAnestStore.Apgar5Tres=this.infoNotaPost.casoObsRecNac3_Apgar5,
+                                                    postAnestStore.CapurroTres=this.infoNotaPost.casoObsRecNac3_Capurro,
+                                                    postAnestStore.PesoTres=this.infoNotaPost.casoObsRecNac3_Peso,
+                                                    postAnestStore.TallaTres=this.infoNotaPost.casoObsRecNac3_Talla,
+                                                    postAnestStore.GeneroCuatro=this.infoNotaPost.casoObsRecNac4_Genero,
+                                                    postAnestStore.HoraNacimientoCuatro=this.infoNotaPost.casoObsRecNac4_HrNacimiento,
+                                                    postAnestStore.AlumbramientoCuatro=this.infoNotaPost.casoObsRecNac4_Alumbramiento,
+                                                    postAnestStore.Apgar1Cuatro=this.infoNotaPost.casoObsRecNac4_Apgar1,
+                                                    postAnestStore.Apgar5Cuatro=this.infoNotaPost.casoObsRecNac4_Apgar5,
+                                                    postAnestStore.CapurroCuatro=this.infoNotaPost.casoObsRecNac4_Capurro,
+                                                    postAnestStore.PesoCuatro=this.infoNotaPost.casoObsRecNac4_Peso,
+                                                    postAnestStore.TallaCuatro=this.infoNotaPost.casoObsRecNac4_Talla,
+                                                    postAnestStore.GeneroCinco=this.infoNotaPost.casoObsRecNac5_Genero,
+                                                    postAnestStore.HoraNacimientoCinco=this.infoNotaPost.casoObsRecNac5_HrNacimiento,
+                                                    postAnestStore.AlumbramientoCinco=this.infoNotaPost.casoObsRecNac5_Alumbramiento,
+                                                    postAnestStore.Apgar1Cinco=this.infoNotaPost.casoObsRecNac5_Apgar1,
+                                                    postAnestStore.Apgar5Cinco=this.infoNotaPost.casoObsRecNac5_Apgar5,
+                                                    postAnestStore.CapurroCinco=this.infoNotaPost.casoObsRecNac5_Capurro,
+                                                    postAnestStore.PesoCinco=this.infoNotaPost.casoObsRecNac5_Peso,
+                                                    postAnestStore.TallaCinco=this.infoNotaPost.casoObsRecNac5_Talla,
+                                                    postAnestStore.GeneroSeis=this.infoNotaPost.casoObsRecNac6_Genero,
+                                                    postAnestStore.HoraNacimientoSeis=this.infoNotaPost.casoObsRecNac6_HrNacimiento,
+                                                    postAnestStore.AlumbramientoSeis=this.infoNotaPost.casoObsRecNac6_Alumbramiento,
+                                                    postAnestStore.Apgar1Seis=this.infoNotaPost.casoObsRecNac6_Apgar1,
+                                                    postAnestStore.Apgar5Seis=this.infoNotaPost.casoObsRecNac6_Apgar5,
+                                                    postAnestStore.CapurroSeis=this.infoNotaPost.casoObsRecNac6_Capurro,
+                                                    postAnestStore.PesoSeis=this.infoNotaPost.casoObsRecNac6_Peso,
+                                                    postAnestStore.TallaSeis=this.infoNotaPost.casoObsRecNac6_Talla,                                                
+                                                    )        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }
         }
     }
  })

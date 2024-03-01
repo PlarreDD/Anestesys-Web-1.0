@@ -220,6 +220,7 @@ export const usePostAnestStore = defineStore('postAn', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -285,6 +286,7 @@ export const usePostAnestStore = defineStore('postAn', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -352,6 +354,7 @@ export const usePostAnestStore = defineStore('postAn', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -421,6 +424,7 @@ export const usePostAnestStore = defineStore('postAn', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -436,6 +440,7 @@ export const usePostAnestStore = defineStore('postAn', {
                 this.NotaPA = res.data.notaPA;
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -451,6 +456,7 @@ export const usePostAnestStore = defineStore('postAn', {
                 this.NotaPA = res.data.notaPA;
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
         /*----------------------- Recuperación -----------------------*/
@@ -549,6 +555,7 @@ export const usePostAnestStore = defineStore('postAn', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -646,6 +653,7 @@ export const usePostAnestStore = defineStore('postAn', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -743,6 +751,7 @@ export const usePostAnestStore = defineStore('postAn', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -842,6 +851,7 @@ export const usePostAnestStore = defineStore('postAn', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
     }

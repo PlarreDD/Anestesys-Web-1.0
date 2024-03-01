@@ -1086,197 +1086,213 @@ export default defineComponent({
 
     methods:{
         async vaciarInputsPlan(){
-            this.infoPlan.pos_HorasAyuno = ""
-            this.infoPlan.pos_AccesoVenoso = ""
-            this.infoPlan.pos_PosicionPaciente = ""
-            this.infoPlan.pos_PosicionBrazos = ""
-            this.infoPlan.pos_Torniquete = "No"
-            this.infoPlan.pos_AplicacionTorniquete = ""
-            this.infoPlan.pos_Sitio = ""
-            this.infoPlan.pos_TiempoIsquemia = ""
-            this.infoPlan.pos_ProteccionOjos = "No"
-            this.infoPlan.pos_ProtecProminencias = "No"
-            this.infoPlan.pos_TecnicaAnestesica = ""
-            this.infoPlan.pos_Premedicacion = "No"
-            this.infoPlan.pos_EspPremedicacion = ""
-            this.infoPlan.pos_Monitoreo = ""
-            this.infoPlan.sedacion_Via = ""
-            this.infoPlan.sedacion_Opcion = ""
-            this.infoPlan.sedacion_Observaciones = ""
-            this.infoPlan.sedacion_Medicamentos = ""
-            this.infoPlan.regional_Tipo = ""
-            this.infoPlan.regional_TipoAguja = ""
-            this.infoPlan.regional_Nivel = ""
-            this.infoPlan.regional_CalibreAguja = ""
-            this.infoPlan.regional_Cateter = ""
-            this.infoPlan.regional_OrientacionCateter = ""
-            this.infoPlan.regional_ProbDificulNeuro = "No"
-            this.infoPlan.regional_EspDificultadesNeuro = ""
-            this.infoPlan.regional_Sitio = ""
-            this.infoPlan.regional_Opcion = ""
-            this.infoPlan.regional_EspSitio = ""
-            this.infoPlan.regional_AnestesicoUtilizado = ""
-            this.infoPlan.regional_EspAnestesico = ""
-            this.infoPlan.regional_ProbDificulPlexo = "No"
-            this.infoPlan.regional_EspDificulPlexo = ""
-            this.infoPlan.regional_Ultrasonido = "No"
-            this.infoPlan.regional_EspUltrasonido = ""
-            this.infoPlan.regional_Neuroestimulador = "No"
-            this.infoPlan.regional_EspNeuroestimulador = ""
-            this.infoPlan.regional_ProbComplicaciones = "No"
-            this.infoPlan.regional_EspDificEquipo = ""
-            this.infoPlan.local_SitioAnestesiaL = ""
-            this.infoPlan.local_AnestesicoUtilizado = ""
-            this.infoPlan.local_Especificar = ""
-            this.infoPlan.general_Induccion = ""
-            this.infoPlan.general_Tubo = ""
-            this.infoPlan.general_NumeroTubo = ""
-            this.infoPlan.general_TipoCanula = ""
-            this.infoPlan.general_Globo = "No"
-            this.infoPlan.general_Presion = ""
-            this.infoPlan.general_DifTecnicasIntubacion = "No"
-            this.infoPlan.general_EspDifTecIntubacion = ""
-            this.infoPlan.general_DispositivosSupro = "No"
-            this.infoPlan.general_Calibre = ""
-            this.infoPlan.general_Complicaciones = "No"
-            this.infoPlan.general_EspComplicaciones = ""
-            this.infoPlan.general_OtrosDispositivos = "No"
-            this.infoPlan.general_EspOtrosDispositivos = ""
-
-            const tabPosicion = document.getElementById('posicion-cuidados');
-            const tabObj = new Tab(tabPosicion);
-            tabObj.show();
-
-            this.enviarDatosPlan()
+            try {
+                this.infoPlan.pos_HorasAyuno = ""
+                this.infoPlan.pos_AccesoVenoso = ""
+                this.infoPlan.pos_PosicionPaciente = ""
+                this.infoPlan.pos_PosicionBrazos = ""
+                this.infoPlan.pos_Torniquete = "No"
+                this.infoPlan.pos_AplicacionTorniquete = ""
+                this.infoPlan.pos_Sitio = ""
+                this.infoPlan.pos_TiempoIsquemia = ""
+                this.infoPlan.pos_ProteccionOjos = "No"
+                this.infoPlan.pos_ProtecProminencias = "No"
+                this.infoPlan.pos_TecnicaAnestesica = ""
+                this.infoPlan.pos_Premedicacion = "No"
+                this.infoPlan.pos_EspPremedicacion = ""
+                this.infoPlan.pos_Monitoreo = ""
+                this.infoPlan.sedacion_Via = ""
+                this.infoPlan.sedacion_Opcion = ""
+                this.infoPlan.sedacion_Observaciones = ""
+                this.infoPlan.sedacion_Medicamentos = ""
+                this.infoPlan.regional_Tipo = ""
+                this.infoPlan.regional_TipoAguja = ""
+                this.infoPlan.regional_Nivel = ""
+                this.infoPlan.regional_CalibreAguja = ""
+                this.infoPlan.regional_Cateter = ""
+                this.infoPlan.regional_OrientacionCateter = ""
+                this.infoPlan.regional_ProbDificulNeuro = "No"
+                this.infoPlan.regional_EspDificultadesNeuro = ""
+                this.infoPlan.regional_Sitio = ""
+                this.infoPlan.regional_Opcion = ""
+                this.infoPlan.regional_EspSitio = ""
+                this.infoPlan.regional_AnestesicoUtilizado = ""
+                this.infoPlan.regional_EspAnestesico = ""
+                this.infoPlan.regional_ProbDificulPlexo = "No"
+                this.infoPlan.regional_EspDificulPlexo = ""
+                this.infoPlan.regional_Ultrasonido = "No"
+                this.infoPlan.regional_EspUltrasonido = ""
+                this.infoPlan.regional_Neuroestimulador = "No"
+                this.infoPlan.regional_EspNeuroestimulador = ""
+                this.infoPlan.regional_ProbComplicaciones = "No"
+                this.infoPlan.regional_EspDificEquipo = ""
+                this.infoPlan.local_SitioAnestesiaL = ""
+                this.infoPlan.local_AnestesicoUtilizado = ""
+                this.infoPlan.local_Especificar = ""
+                this.infoPlan.general_Induccion = ""
+                this.infoPlan.general_Tubo = ""
+                this.infoPlan.general_NumeroTubo = ""
+                this.infoPlan.general_TipoCanula = ""
+                this.infoPlan.general_Globo = "No"
+                this.infoPlan.general_Presion = ""
+                this.infoPlan.general_DifTecnicasIntubacion = "No"
+                this.infoPlan.general_EspDifTecIntubacion = ""
+                this.infoPlan.general_DispositivosSupro = "No"
+                this.infoPlan.general_Calibre = ""
+                this.infoPlan.general_Complicaciones = "No"
+                this.infoPlan.general_EspComplicaciones = ""
+                this.infoPlan.general_OtrosDispositivos = "No"
+                this.infoPlan.general_EspOtrosDispositivos = ""
+    
+                const tabPosicion = document.getElementById('posicion-cuidados');
+                const tabObj = new Tab(tabPosicion);
+                tabObj.show();
+    
+                this.enviarDatosPlan()
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }
         },
 
         async guardarDatosPlan(){
-            if(preIdStore.nuevoRegistroPaciente == false){
-                if(preIdStore.actualizarRegPlan == false ){
-                    // Guardar datos
-                    preIdStore.savePrePlan(this.infoPlan, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id)
-                    preIdStore.actualizarRegPlan = true
-                }else if(preIdStore.actualizarRegPlan == true){
-                    // Actualizar datos
-                    preIdStore.updatePrePlan(this.infoPlan, preIdStore.pacienteID._id)
-                }
-
-            }else if(preIdStore.nuevoRegistroPaciente == true){
-                if(preIdStore.actualizarRegPlan == false ){
-                    // Guardar nuevos datos
-                    preIdStore.saveNuevoPrePlan(this.infoPlan, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-                    preIdStore.actualizarRegPlan = true
-                }else if(preIdStore.actualizarRegPlan == true){
-                    // Actualizar nuevos datos
-                    preIdStore.updateNuevoPrePlan(this.infoPlan, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
-                }
-
+            try {
+                if(preIdStore.nuevoRegistroPaciente == false){
+                    if(preIdStore.actualizarRegPlan == false ){
+                        // Guardar datos
+                        preIdStore.savePrePlan(this.infoPlan, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id)
+                        preIdStore.actualizarRegPlan = true
+                    }else if(preIdStore.actualizarRegPlan == true){
+                        // Actualizar datos
+                        preIdStore.updatePrePlan(this.infoPlan, preIdStore.pacienteID._id)
+                    }
+    
+                }else if(preIdStore.nuevoRegistroPaciente == true){
+                    if(preIdStore.actualizarRegPlan == false ){
+                        // Guardar nuevos datos
+                        preIdStore.saveNuevoPrePlan(this.infoPlan, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                        preIdStore.actualizarRegPlan = true
+                    }else if(preIdStore.actualizarRegPlan == true){
+                        // Actualizar nuevos datos
+                        preIdStore.updateNuevoPrePlan(this.infoPlan, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
+                    }
+    
+                }        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
             }
         },
 
         cambioSelectRegional(){
-            if((document.getElementById("sitioCabeza") as HTMLOptionElement).selected){
-                this.sitioCabeza=true
-                this.sitioCervical=false
-                this.sitioToracico=false
-                this.sitioLumbar=false
-                this.infoPlan.regional_Opcion = ""
-            }
-            else if((document.getElementById("sitioCervical") as HTMLOptionElement).selected){
-                this.sitioCabeza=false
-                this.sitioCervical=true
-                this.sitioToracico=false
-                this.sitioLumbar=false
-                this.infoPlan.regional_Opcion = ""
-            }
-            else if((document.getElementById("sitioToracico") as HTMLOptionElement).selected){
-                this.sitioCabeza=false
-                this.sitioCervical=false
-                this.sitioToracico=true
-                this.sitioLumbar=false
-                this.infoPlan.regional_Opcion = ""
-            }
-            else if((document.getElementById("sitioLumbar") as HTMLOptionElement).selected){
-                this.sitioCabeza=false
-                this.sitioCervical=false
-                this.sitioToracico=false
-                this.sitioLumbar=true
-                this.infoPlan.regional_Opcion = ""
-            }
-            else if((document.getElementById("sitioOtros") as HTMLOptionElement).selected){
-                this.sitioCabeza=false
-                this.sitioCervical=false
-                this.sitioToracico=false
-                this.sitioLumbar=false
-                this.infoPlan.regional_Opcion = ""
+            try {
+                if((document.getElementById("sitioCabeza") as HTMLOptionElement).selected){
+                    this.sitioCabeza=true
+                    this.sitioCervical=false
+                    this.sitioToracico=false
+                    this.sitioLumbar=false
+                    this.infoPlan.regional_Opcion = ""
+                }
+                else if((document.getElementById("sitioCervical") as HTMLOptionElement).selected){
+                    this.sitioCabeza=false
+                    this.sitioCervical=true
+                    this.sitioToracico=false
+                    this.sitioLumbar=false
+                    this.infoPlan.regional_Opcion = ""
+                }
+                else if((document.getElementById("sitioToracico") as HTMLOptionElement).selected){
+                    this.sitioCabeza=false
+                    this.sitioCervical=false
+                    this.sitioToracico=true
+                    this.sitioLumbar=false
+                    this.infoPlan.regional_Opcion = ""
+                }
+                else if((document.getElementById("sitioLumbar") as HTMLOptionElement).selected){
+                    this.sitioCabeza=false
+                    this.sitioCervical=false
+                    this.sitioToracico=false
+                    this.sitioLumbar=true
+                    this.infoPlan.regional_Opcion = ""
+                }
+                else if((document.getElementById("sitioOtros") as HTMLOptionElement).selected){
+                    this.sitioCabeza=false
+                    this.sitioCervical=false
+                    this.sitioToracico=false
+                    this.sitioLumbar=false
+                    this.infoPlan.regional_Opcion = ""
+                }        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
             }
         },
 
         enviarDatosPlan() {
-            this.$emit('recibe-datos-plan', preIdStore.HorasAyuno = this.infoPlan.pos_HorasAyuno,
-                                            preIdStore.AccesoVenoso = this.infoPlan.pos_AccesoVenoso,
-                                            preIdStore.PosicionPaciente = this.infoPlan.pos_PosicionPaciente,
-                                            preIdStore.PosicionBrazos = this.infoPlan.pos_PosicionBrazos,
-                                            preIdStore.Torniquete = this.infoPlan.pos_Torniquete,
-                                            preIdStore.AplicacionTorniquete = this.infoPlan.pos_AplicacionTorniquete,
-                                            preIdStore.Sitio = this.infoPlan.pos_Sitio,
-                                            preIdStore.TiempoIsquemia = this.infoPlan.pos_TiempoIsquemia,
-                                            preIdStore.ProteccionOjos = this.infoPlan.pos_ProteccionOjos,
-                                            preIdStore.ProteccionProminencias = this.infoPlan.pos_ProtecProminencias,
-                                            preIdStore.TecnicaAnestesica = this.infoPlan.pos_TecnicaAnestesica,
-                                            preIdStore.Premedicacion = this.infoPlan.pos_Premedicacion,
-                                            preIdStore.EspecPremedicacion = this.infoPlan.pos_EspPremedicacion,
-                                            preIdStore.Monitoreo = this.infoPlan.pos_Monitoreo,
-
-                                            preIdStore.ViaSedacion = this.infoPlan.sedacion_Via,
-                                            preIdStore.OpcionSedacion = this.infoPlan.sedacion_Opcion,
-                                            preIdStore.ObservacionesSedacion = this.infoPlan.sedacion_Observaciones,
-                                            preIdStore.MedicamentosSedacion = this.infoPlan.sedacion_Medicamentos,
-
-                                            preIdStore.TipoRegional = this.infoPlan.regional_Tipo,
-                                            preIdStore.TipoAguja = this.infoPlan.regional_TipoAguja,
-                                            preIdStore.Nivel = this.infoPlan.regional_Nivel,
-                                            preIdStore.CalibreAguja = this.infoPlan.regional_CalibreAguja,
-                                            preIdStore.Cateter = this.infoPlan.regional_Cateter,
-                                            preIdStore.OrientacionCateter = this.infoPlan.regional_OrientacionCateter,
-                                            preIdStore.DificultadesOrientacion = this.infoPlan.regional_ProbDificulNeuro,
-                                            preIdStore.EspecificarRegional = this.infoPlan.regional_EspDificultadesNeuro,
-
-                                            preIdStore.SitioRegional = this.infoPlan.regional_Sitio,
-                                            preIdStore.OpcionRegional = this.infoPlan.regional_Opcion,
-                                            preIdStore.EspecificarSitionRegional = this.infoPlan.regional_EspSitio,
-                                            preIdStore.AnestesicoUtilizado = this.infoPlan.regional_AnestesicoUtilizado,
-                                            preIdStore.EspecificarAnestesico = this.infoPlan.regional_EspAnestesico,
-                                            preIdStore.DificultadesPlexo = this.infoPlan.regional_ProbDificulPlexo,
-                                            preIdStore.EspecificarDificPlexo = this.infoPlan.regional_EspDificulPlexo,
-
-                                            preIdStore.Ultrasonido = this.infoPlan.regional_Ultrasonido,
-                                            preIdStore.EspecUltrasonido = this.infoPlan.regional_EspUltrasonido,
-                                            preIdStore.Neuroestimulador = this.infoPlan.regional_Neuroestimulador,
-                                            preIdStore.ComplicacionesNeuroestimulador = this.infoPlan.regional_ProbComplicaciones,
-                                            preIdStore.EspecificarNeuroestimulador = this.infoPlan.regional_EspNeuroestimulador,
-                                            preIdStore.EspecificarComplicacNeuroes = this.infoPlan.regional_EspDificEquipo,
-
-                                            preIdStore.SitioLocal = this.infoPlan.local_SitioAnestesiaL,
-                                            preIdStore.AnestesicoLocal = this.infoPlan.local_AnestesicoUtilizado,
-                                            preIdStore.EspecificarLocal = this.infoPlan.local_Especificar,
-
-                                            preIdStore.Induccion = this.infoPlan.general_Induccion,
-                                            preIdStore.Tubo = this.infoPlan.general_Tubo,
-                                            preIdStore.NumeroTubo = this.infoPlan.general_NumeroTubo,
-                                            preIdStore.TipoCanula = this.infoPlan.general_TipoCanula,
-                                            preIdStore.Globo = this.infoPlan.general_Globo,
-                                            preIdStore.Presion = this.infoPlan.general_Presion,
-                                            preIdStore.DificultadesGeneral = this.infoPlan.general_DifTecnicasIntubacion,
-                                            preIdStore.EspecificarGeneral = this.infoPlan.general_EspDifTecIntubacion,
-
-                                            preIdStore.DispositivosSupra = this.infoPlan.general_DispositivosSupro,
-                                            preIdStore.Calibre = this.infoPlan.general_Calibre,
-                                            preIdStore.ComplicacionesDispositivos = this.infoPlan.general_Complicaciones,
-                                            preIdStore.EspecificarDispositivos = this.infoPlan.general_EspComplicaciones,
-
-                                            preIdStore.OtrosDispositivos = this.infoPlan.general_OtrosDispositivos,
-                                            preIdStore.EspecificarOtrosDispositivos = this.infoPlan.general_EspOtrosDispositivos)
+            try {
+                this.$emit('recibe-datos-plan', preIdStore.HorasAyuno = this.infoPlan.pos_HorasAyuno,
+                                                preIdStore.AccesoVenoso = this.infoPlan.pos_AccesoVenoso,
+                                                preIdStore.PosicionPaciente = this.infoPlan.pos_PosicionPaciente,
+                                                preIdStore.PosicionBrazos = this.infoPlan.pos_PosicionBrazos,
+                                                preIdStore.Torniquete = this.infoPlan.pos_Torniquete,
+                                                preIdStore.AplicacionTorniquete = this.infoPlan.pos_AplicacionTorniquete,
+                                                preIdStore.Sitio = this.infoPlan.pos_Sitio,
+                                                preIdStore.TiempoIsquemia = this.infoPlan.pos_TiempoIsquemia,
+                                                preIdStore.ProteccionOjos = this.infoPlan.pos_ProteccionOjos,
+                                                preIdStore.ProteccionProminencias = this.infoPlan.pos_ProtecProminencias,
+                                                preIdStore.TecnicaAnestesica = this.infoPlan.pos_TecnicaAnestesica,
+                                                preIdStore.Premedicacion = this.infoPlan.pos_Premedicacion,
+                                                preIdStore.EspecPremedicacion = this.infoPlan.pos_EspPremedicacion,
+                                                preIdStore.Monitoreo = this.infoPlan.pos_Monitoreo,
+    
+                                                preIdStore.ViaSedacion = this.infoPlan.sedacion_Via,
+                                                preIdStore.OpcionSedacion = this.infoPlan.sedacion_Opcion,
+                                                preIdStore.ObservacionesSedacion = this.infoPlan.sedacion_Observaciones,
+                                                preIdStore.MedicamentosSedacion = this.infoPlan.sedacion_Medicamentos,
+    
+                                                preIdStore.TipoRegional = this.infoPlan.regional_Tipo,
+                                                preIdStore.TipoAguja = this.infoPlan.regional_TipoAguja,
+                                                preIdStore.Nivel = this.infoPlan.regional_Nivel,
+                                                preIdStore.CalibreAguja = this.infoPlan.regional_CalibreAguja,
+                                                preIdStore.Cateter = this.infoPlan.regional_Cateter,
+                                                preIdStore.OrientacionCateter = this.infoPlan.regional_OrientacionCateter,
+                                                preIdStore.DificultadesOrientacion = this.infoPlan.regional_ProbDificulNeuro,
+                                                preIdStore.EspecificarRegional = this.infoPlan.regional_EspDificultadesNeuro,
+    
+                                                preIdStore.SitioRegional = this.infoPlan.regional_Sitio,
+                                                preIdStore.OpcionRegional = this.infoPlan.regional_Opcion,
+                                                preIdStore.EspecificarSitionRegional = this.infoPlan.regional_EspSitio,
+                                                preIdStore.AnestesicoUtilizado = this.infoPlan.regional_AnestesicoUtilizado,
+                                                preIdStore.EspecificarAnestesico = this.infoPlan.regional_EspAnestesico,
+                                                preIdStore.DificultadesPlexo = this.infoPlan.regional_ProbDificulPlexo,
+                                                preIdStore.EspecificarDificPlexo = this.infoPlan.regional_EspDificulPlexo,
+    
+                                                preIdStore.Ultrasonido = this.infoPlan.regional_Ultrasonido,
+                                                preIdStore.EspecUltrasonido = this.infoPlan.regional_EspUltrasonido,
+                                                preIdStore.Neuroestimulador = this.infoPlan.regional_Neuroestimulador,
+                                                preIdStore.ComplicacionesNeuroestimulador = this.infoPlan.regional_ProbComplicaciones,
+                                                preIdStore.EspecificarNeuroestimulador = this.infoPlan.regional_EspNeuroestimulador,
+                                                preIdStore.EspecificarComplicacNeuroes = this.infoPlan.regional_EspDificEquipo,
+    
+                                                preIdStore.SitioLocal = this.infoPlan.local_SitioAnestesiaL,
+                                                preIdStore.AnestesicoLocal = this.infoPlan.local_AnestesicoUtilizado,
+                                                preIdStore.EspecificarLocal = this.infoPlan.local_Especificar,
+    
+                                                preIdStore.Induccion = this.infoPlan.general_Induccion,
+                                                preIdStore.Tubo = this.infoPlan.general_Tubo,
+                                                preIdStore.NumeroTubo = this.infoPlan.general_NumeroTubo,
+                                                preIdStore.TipoCanula = this.infoPlan.general_TipoCanula,
+                                                preIdStore.Globo = this.infoPlan.general_Globo,
+                                                preIdStore.Presion = this.infoPlan.general_Presion,
+                                                preIdStore.DificultadesGeneral = this.infoPlan.general_DifTecnicasIntubacion,
+                                                preIdStore.EspecificarGeneral = this.infoPlan.general_EspDifTecIntubacion,
+    
+                                                preIdStore.DispositivosSupra = this.infoPlan.general_DispositivosSupro,
+                                                preIdStore.Calibre = this.infoPlan.general_Calibre,
+                                                preIdStore.ComplicacionesDispositivos = this.infoPlan.general_Complicaciones,
+                                                preIdStore.EspecificarDispositivos = this.infoPlan.general_EspComplicaciones,
+    
+                                                preIdStore.OtrosDispositivos = this.infoPlan.general_OtrosDispositivos,
+                                                preIdStore.EspecificarOtrosDispositivos = this.infoPlan.general_EspOtrosDispositivos)        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }
         }
     },
 })

@@ -582,170 +582,221 @@ export default defineComponent({
     },
     
     methods: {
-        async vaciarInputsId(){            
-            this.infoPreIdPaciente.numEpisodio = ""
-            this.infoPreIdPaciente.habitacion = ""
-            this.infoPreIdPaciente.fechaIn = ""
-            this.infoPreIdPaciente.diagnostico = ""
-            this.infoPreIdPaciente.tipoCx = ""
-            this.infoPreIdPaciente.cie10 = ""
-            this.infoPreIdPaciente.cie9 = ""
-            this.infoPreIdPaciente.cirugia = ""
-            this.infoPreIdPaciente.fechaCx = ""
-            this.infoPreIdPaciente.hrCx = ""
-            this.infoPreIdPaciente.cirujano = ""
-            this.infoPreIdPaciente.anestesiologo = ""
-            this.infoPreIdPaciente.anestesiologoVPA = ""
-            this.infoPreIdPaciente.residenteAnestesia = ""
-
-            this.enviarDatos()
+        async vaciarInputsId(){       
+            try {
+                this.infoPreIdPaciente.numEpisodio = ""
+                this.infoPreIdPaciente.habitacion = ""
+                this.infoPreIdPaciente.fechaIn = ""
+                this.infoPreIdPaciente.diagnostico = ""
+                this.infoPreIdPaciente.tipoCx = ""
+                this.infoPreIdPaciente.cie10 = ""
+                this.infoPreIdPaciente.cie9 = ""
+                this.infoPreIdPaciente.cirugia = ""
+                this.infoPreIdPaciente.fechaCx = ""
+                this.infoPreIdPaciente.hrCx = ""
+                this.infoPreIdPaciente.cirujano = ""
+                this.infoPreIdPaciente.anestesiologo = ""
+                this.infoPreIdPaciente.anestesiologoVPA = ""
+                this.infoPreIdPaciente.residenteAnestesia = ""
+    
+                this.enviarDatos()        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }      
         },
 
         async guardarDatosId(){
-            if(preIdStore.nuevoRegistroPaciente == false){
-                if(preIdStore.actualizarRegId == true){
-                    // Actualizar datos
-                    preIdStore.updatePreId(this.infoPreIdPaciente)                    
-                }
-
-            }else if(preIdStore.nuevoRegistroPaciente == true){
-                if(preIdStore.actualizarRegId == true){
-                    // Actualizar nuevos datos
-                    preIdStore.updateAddPreId(this.infoPreIdPaciente)
-                    preIdStore.updatePreIdAnterior(this.infoPreIdPaciente)
-                }
-            }
+            try {
+                if(preIdStore.nuevoRegistroPaciente == false){
+                    if(preIdStore.actualizarRegId == true){
+                        // Actualizar datos
+                        preIdStore.updatePreId(this.infoPreIdPaciente)                    
+                    }
+    
+                }else if(preIdStore.nuevoRegistroPaciente == true){
+                    if(preIdStore.actualizarRegId == true){
+                        // Actualizar nuevos datos
+                        preIdStore.updateAddPreId(this.infoPreIdPaciente)
+                        preIdStore.updatePreIdAnterior(this.infoPreIdPaciente)
+                    }
+                }        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }     
         },
 
         async asignarValoresPaciente(){
-            this.infoPreIdPaciente.numExped = await this.propNumeroExp;
-            this.infoPreIdPaciente.nomPaciente = await this.propNombrePac;
-            this.infoPreIdPaciente.fechaNac = await this.propFechaNacimiento;
-            this.infoPreIdPaciente.edadPaciente = await this.propEdad;
-            this.infoPreIdPaciente.genero = await this.propGenero;
-            // this.infoPreIdPaciente.nacionalidad = await this.propNacionalidad;
-            // this.infoPreIdPaciente.CURP = await this.propCURP;
-            // this.infoPreIdPaciente.estNacimiento = await this.propEstadoNacimiento;
-
-            this.calcularEdad()
+            try {
+                this.infoPreIdPaciente.numExped = await this.propNumeroExp;
+                this.infoPreIdPaciente.nomPaciente = await this.propNombrePac;
+                this.infoPreIdPaciente.fechaNac = await this.propFechaNacimiento;
+                this.infoPreIdPaciente.edadPaciente = await this.propEdad;
+                this.infoPreIdPaciente.genero = await this.propGenero;
+                // this.infoPreIdPaciente.nacionalidad = await this.propNacionalidad;
+                // this.infoPreIdPaciente.CURP = await this.propCURP;
+                // this.infoPreIdPaciente.estNacimiento = await this.propEstadoNacimiento;
+    
+                this.calcularEdad()        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }     
         },
 
         async obtenerValoresCIE10(){
-            this.mostrarDatosFiltradosCIE10=true
-            preIdStore.datoCIE10 = await this.infoPreIdPaciente.cie10 
-            await preIdStore.getCIE10List()
-            this.opcionCIE10 = await preIdStore.cie10.map(item=>item.nombre);
-            if(this.infoPreIdPaciente.cie10 == ''){
-                this.mostrarDatosFiltradosCIE10=false
-            }
+            try {
+                this.mostrarDatosFiltradosCIE10=true
+                preIdStore.datoCIE10 = await this.infoPreIdPaciente.cie10 
+                await preIdStore.getCIE10List()
+                this.opcionCIE10 = await preIdStore.cie10.map(item=>item.nombre);
+                if(this.infoPreIdPaciente.cie10 == ''){
+                    this.mostrarDatosFiltradosCIE10=false
+                }        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }     
         },
 
         async obtenerValoresCIE9(){
-            this.mostrarDatosFiltradosCIE9=true
-            preIdStore.datoCIE9 = await this.infoPreIdPaciente.cie9
-            await preIdStore.getCIE9List()
-            this.opcionCIE9 = await preIdStore.cie9.map(item=>item.nombre);
-            if(this.infoPreIdPaciente.cie9 == ''){
-                this.mostrarDatosFiltradosCIE9=false
-            }
+            try {
+                this.mostrarDatosFiltradosCIE9=true
+                preIdStore.datoCIE9 = await this.infoPreIdPaciente.cie9
+                await preIdStore.getCIE9List()
+                this.opcionCIE9 = await preIdStore.cie9.map(item=>item.nombre);
+                if(this.infoPreIdPaciente.cie9 == ''){
+                    this.mostrarDatosFiltradosCIE9=false
+                }        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }     
         },
 
         selecDatoCIE10(item) {
-            // Al hacer clic en un elemento, se almacena en selectedItem y se mostrará en el input
-            this.infoPreIdPaciente.cie10 = item;
-            this.mostrarDatosFiltradosCIE10= false
+            try {
+                // Al hacer clic en un elemento, se almacena en selectedItem y se mostrará en el input
+                this.infoPreIdPaciente.cie10 = item;
+                this.mostrarDatosFiltradosCIE10= false        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }     
         },
 
         selecDatoCIE9(item) {
-            // Al hacer clic en un elemento, se almacena en selectedItem y se mostrará en el input
-            this.infoPreIdPaciente.cie9 = item;
-            this.mostrarDatosFiltradosCIE9= false
+            try {
+                // Al hacer clic en un elemento, se almacena en selectedItem y se mostrará en el input
+                this.infoPreIdPaciente.cie9 = item;
+                this.mostrarDatosFiltradosCIE9= false        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }     
         },
 
-
         obtenerDatos() {
-            this.$emit("validar", this.infoPreIdPaciente.numExped,
-                                  this.infoPreIdPaciente.nomPaciente);
+            try {
+                this.$emit("validar", this.infoPreIdPaciente.numExped,
+                                      this.infoPreIdPaciente.nomPaciente);        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }     
         },
 
         enviarDatos() {
-            this.$emit('recibe-datos', this.infoPreIdPaciente.numExped,
-                                       this.infoPreIdPaciente.nomPaciente,
-                                       this.infoPreIdPaciente.cirujano,
-                                       this.infoPreIdPaciente.cirugia,
-
-                                       preIdStore.numeroExpediente=this.infoPreIdPaciente.numExped,
-                                       preIdStore.NombrePaciente=this.infoPreIdPaciente.nomPaciente,
-                                       preIdStore.fechaNacimientoPaciente= this.infoPreIdPaciente.fechaNac,
-                                       preIdStore.edadPaciente=this.infoPreIdPaciente.edadPaciente,
-                                       preIdStore.generoPaciente=this.infoPreIdPaciente.genero,
-
-                                       preIdStore.Nacionalidad=this.infoPreIdPaciente.nacionalidad,
-                                       preIdStore.CURP=this.infoPreIdPaciente.CURP,
-                                       preIdStore.FolioID=this.infoPreIdPaciente.folioID,
-                                       preIdStore.EstadoNacimiento=this.infoPreIdPaciente.estNacimiento,
-                                       preIdStore.EstadoResidencia=this.infoPreIdPaciente.estResidencia,
-                                       preIdStore.Alcaldia=this.infoPreIdPaciente.alcaldia,
-                                       preIdStore.Colonia=this.infoPreIdPaciente.colonia,
-                                       preIdStore.CP=this.infoPreIdPaciente.codigoPostal,
-
-                                       preIdStore.NumeroEpisodio=this.infoPreIdPaciente.numEpisodio,
-                                       preIdStore.Habitacion=this.infoPreIdPaciente.habitacion,
-                                       preIdStore.FechaIngreso=this.infoPreIdPaciente.fechaIn,
-                                       preIdStore.Diagnostico=this.infoPreIdPaciente.diagnostico,
-                                       preIdStore.TipoCirugia=this.infoPreIdPaciente.tipoCx,
-
-                                       preIdStore.CIE10=this.infoPreIdPaciente.cie10,
-                                       preIdStore.CIE9=this.infoPreIdPaciente.cie9,
-                                       preIdStore.NombreCirugia=this.infoPreIdPaciente.cirugia,
-                                       preIdStore.FechaCirugia=this.infoPreIdPaciente.fechaCx,
-                                       preIdStore.HoraCirugia=this.infoPreIdPaciente.hrCx,
-
-                                       preIdStore.NombreCirujano=this.infoPreIdPaciente.cirujano,
-                                       preIdStore.NombreAnestesiologo=this.infoPreIdPaciente.anestesiologo,
-                                       preIdStore.AnestesiologoVPA=this.infoPreIdPaciente.anestesiologoVPA,
-                                       preIdStore.residenteAnestesia=this.infoPreIdPaciente.residenteAnestesia
-                                       );
+            try {
+                this.$emit('recibe-datos', this.infoPreIdPaciente.numExped,
+                                           this.infoPreIdPaciente.nomPaciente,
+                                           this.infoPreIdPaciente.cirujano,
+                                           this.infoPreIdPaciente.cirugia,
+    
+                                           preIdStore.numeroExpediente=this.infoPreIdPaciente.numExped,
+                                           preIdStore.NombrePaciente=this.infoPreIdPaciente.nomPaciente,
+                                           preIdStore.fechaNacimientoPaciente= this.infoPreIdPaciente.fechaNac,
+                                           preIdStore.edadPaciente=this.infoPreIdPaciente.edadPaciente,
+                                           preIdStore.generoPaciente=this.infoPreIdPaciente.genero,
+    
+                                           preIdStore.Nacionalidad=this.infoPreIdPaciente.nacionalidad,
+                                           preIdStore.CURP=this.infoPreIdPaciente.CURP,
+                                           preIdStore.FolioID=this.infoPreIdPaciente.folioID,
+                                           preIdStore.EstadoNacimiento=this.infoPreIdPaciente.estNacimiento,
+                                           preIdStore.EstadoResidencia=this.infoPreIdPaciente.estResidencia,
+                                           preIdStore.Alcaldia=this.infoPreIdPaciente.alcaldia,
+                                           preIdStore.Colonia=this.infoPreIdPaciente.colonia,
+                                           preIdStore.CP=this.infoPreIdPaciente.codigoPostal,
+    
+                                           preIdStore.NumeroEpisodio=this.infoPreIdPaciente.numEpisodio,
+                                           preIdStore.Habitacion=this.infoPreIdPaciente.habitacion,
+                                           preIdStore.FechaIngreso=this.infoPreIdPaciente.fechaIn,
+                                           preIdStore.Diagnostico=this.infoPreIdPaciente.diagnostico,
+                                           preIdStore.TipoCirugia=this.infoPreIdPaciente.tipoCx,
+    
+                                           preIdStore.CIE10=this.infoPreIdPaciente.cie10,
+                                           preIdStore.CIE9=this.infoPreIdPaciente.cie9,
+                                           preIdStore.NombreCirugia=this.infoPreIdPaciente.cirugia,
+                                           preIdStore.FechaCirugia=this.infoPreIdPaciente.fechaCx,
+                                           preIdStore.HoraCirugia=this.infoPreIdPaciente.hrCx,
+    
+                                           preIdStore.NombreCirujano=this.infoPreIdPaciente.cirujano,
+                                           preIdStore.NombreAnestesiologo=this.infoPreIdPaciente.anestesiologo,
+                                           preIdStore.AnestesiologoVPA=this.infoPreIdPaciente.anestesiologoVPA,
+                                           preIdStore.residenteAnestesia=this.infoPreIdPaciente.residenteAnestesia
+                                           );        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }     
         },
 
         calcularEdad() {
-            if(this.infoPreIdPaciente.fechaNac != null){
-                let fechaNacimiento = new Date(this.infoPreIdPaciente.fechaNac);
-                let fechaActual = new Date();
-
-                let diferencia = fechaActual.getTime() - fechaNacimiento.getTime();
-                let edad = Math.floor(diferencia / (1000 * 60 * 60 * 24 * 365.25));
-                this.infoPreIdPaciente.edadPaciente = edad;
-
-                this.enviarDatos();
-            }            
+            try {
+                if(this.infoPreIdPaciente.fechaNac != null){
+                    let fechaNacimiento = new Date(this.infoPreIdPaciente.fechaNac);
+                    let fechaActual = new Date();
+    
+                    let diferencia = fechaActual.getTime() - fechaNacimiento.getTime();
+                    let edad = Math.floor(diferencia / (1000 * 60 * 60 * 24 * 365.25));
+                    this.infoPreIdPaciente.edadPaciente = edad;
+    
+                    this.enviarDatos();
+                }                    
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }     
         },
 
         calcularFechaIngreso(){
-            let fecha = new Date();
-            let año = fecha.getFullYear();
-            let mes = String(fecha.getMonth() + 1).padStart(2, '0');
-            let dia = String(fecha.getDate()).padStart(2, '0');
-            this.infoPreIdPaciente.fechaIn = `${año}-${mes}-${dia}`;
-
-            this.enviarDatos();
+            try {
+                let fecha = new Date();
+                let año = fecha.getFullYear();
+                let mes = String(fecha.getMonth() + 1).padStart(2, '0');
+                let dia = String(fecha.getDate()).padStart(2, '0');
+                this.infoPreIdPaciente.fechaIn = `${año}-${mes}-${dia}`;
+    
+                this.enviarDatos();        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }     
         },
 
         calcularFechaCirugia(){
-            let fecha = new Date();
-            let año = fecha.getFullYear();
-            let mes = String(fecha.getMonth() + 1).padStart(2, '0');
-            let dia = String(fecha.getDate()).padStart(2, '0');
-            this.infoPreIdPaciente.fechaCx = `${año}-${mes}-${dia}`;
-
-            this.enviarDatos();
+            try {
+                let fecha = new Date();
+                let año = fecha.getFullYear();
+                let mes = String(fecha.getMonth() + 1).padStart(2, '0');
+                let dia = String(fecha.getDate()).padStart(2, '0');
+                this.infoPreIdPaciente.fechaCx = `${año}-${mes}-${dia}`;
+    
+                this.enviarDatos();        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }     
         },
 
         calcularHoraCirugia(){
-            let hoy = new Date();
-            this.infoPreIdPaciente.hrCx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
-
-            this.enviarDatos();
+            try {
+                let hoy = new Date();
+                this.infoPreIdPaciente.hrCx = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+    
+                this.enviarDatos();        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }     
         },        
     },
 })

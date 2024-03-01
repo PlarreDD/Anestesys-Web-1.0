@@ -149,46 +149,58 @@ export default defineComponent({
   
   methods: {
     async validaCamposLogin() {
-      if(this.usr.email == undefined || this.usr.email == "" ||
-         this.usr.pswd == undefined || this.usr.pswd =="") {
-        if(this.usr.email == undefined || this.usr.email == ""){
-          this.userCorreo = true;
+      try {
+        if(this.usr.email == undefined || this.usr.email == "" ||
+           this.usr.pswd == undefined || this.usr.pswd =="") {
+          if(this.usr.email == undefined || this.usr.email == ""){
+            this.userCorreo = true;
+          }
+          else{
+            this.userCorreo = false;
+          }
+  
+          if(this.usr.pswd == undefined || this.usr.pswd == ""){
+            this.userContrasena = true;
+          }
+          else{
+            this.userContrasena = false;
+          }
         }
         else{
           this.userCorreo = false;
-        }
-
-        if(this.usr.pswd == undefined || this.usr.pswd == ""){
-          this.userContrasena = true;
-        }
-        else{
           this.userContrasena = false;
-        }
-      }
-      else{
-        this.userCorreo = false;
-        this.userContrasena = false;
-        
-        userStore.loginAccess(this.usr.email, this.usr.pswd);
-
-        this.usr.email = ""
-        this.usr.pswd = ""
+          
+          userStore.loginAccess(this.usr.email, this.usr.pswd);
+  
+          this.usr.email = ""
+          this.usr.pswd = ""
+        }        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
       }
     },
 
     async iniciarEmergencia(){
-      userStore.token = "tokenEmergencia"
-      userStore.expiresIn = 900
-      this.$router.push('pre')
+      try {
+        userStore.token = "tokenEmergencia"
+        userStore.expiresIn = 900
+        this.$router.push('pre')        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
     },
 
     async mostrarPass(){
-      if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
-        (document.getElementById("contrasena") as HTMLInputElement).type = "password";
-        this.contrasena=false
-      } else {
-        (document.getElementById("contrasena") as HTMLInputElement).type = "text";
-        this.contrasena=true
+      try {
+        if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
+          (document.getElementById("contrasena") as HTMLInputElement).type = "password";
+          this.contrasena=false
+        } else {
+          (document.getElementById("contrasena") as HTMLInputElement).type = "text";
+          this.contrasena=true
+        }        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
       }
     },
   }

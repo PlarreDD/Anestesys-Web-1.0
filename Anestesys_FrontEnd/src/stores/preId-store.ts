@@ -294,6 +294,7 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -353,6 +354,7 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -401,6 +403,7 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -429,6 +432,7 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -479,6 +483,7 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -494,6 +499,7 @@ export const usePreIdStore = defineStore('preid', {
                 this.cie10 = res.data.cie10;            
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -509,6 +515,7 @@ export const usePreIdStore = defineStore('preid', {
                 this.cie9 = res.data.cie9;
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
         
@@ -608,6 +615,7 @@ export const usePreIdStore = defineStore('preid', {
                 
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -708,6 +716,7 @@ export const usePreIdStore = defineStore('preid', {
                 
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -804,6 +813,7 @@ export const usePreIdStore = defineStore('preid', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -901,6 +911,7 @@ export const usePreIdStore = defineStore('preid', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -917,6 +928,7 @@ export const usePreIdStore = defineStore('preid', {
                 this.estudios = res.data.estudio;
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -944,6 +956,7 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -970,6 +983,7 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -985,6 +999,7 @@ export const usePreIdStore = defineStore('preid', {
                 this.estudios = res.data.estudio;
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
       
@@ -1012,6 +1027,7 @@ export const usePreIdStore = defineStore('preid', {
                 })                
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1035,6 +1051,7 @@ export const usePreIdStore = defineStore('preid', {
                 });
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
         /***************************** Plan ******************************/
@@ -1122,6 +1139,7 @@ export const usePreIdStore = defineStore('preid', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1210,6 +1228,7 @@ export const usePreIdStore = defineStore('preid', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1296,6 +1315,7 @@ export const usePreIdStore = defineStore('preid', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1384,6 +1404,7 @@ export const usePreIdStore = defineStore('preid', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
         /***************************** Nota ******************************/
@@ -1402,6 +1423,7 @@ export const usePreIdStore = defineStore('preid', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1421,6 +1443,7 @@ export const usePreIdStore = defineStore('preid', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1438,6 +1461,7 @@ export const usePreIdStore = defineStore('preid', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1457,6 +1481,7 @@ export const usePreIdStore = defineStore('preid', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1472,7 +1497,8 @@ export const usePreIdStore = defineStore('preid', {
             .then((res: any) => {
                 this.expedientes = res.data.expedientes;
             })
-            .catch((e: any) => {              
+            .catch((e: any) => {     
+                window.log.error('Ocurrió un error:', e)         
             });
         },
 
@@ -1489,6 +1515,7 @@ export const usePreIdStore = defineStore('preid', {
                 this.pacientes = res.data;                                
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1503,7 +1530,8 @@ export const usePreIdStore = defineStore('preid', {
             .then((res:any) =>{
                 this.cirugias = res.data
             })
-            .catch((e: any) => {                
+            .catch((e: any) => {         
+                window.log.error('Ocurrió un error:', e)       
             });
         },
 
@@ -1519,6 +1547,7 @@ export const usePreIdStore = defineStore('preid', {
                 this.cirugia = res.data
             })
             .catch((e: any) => {                
+                window.log.error('Ocurrió un error:', e)
             });
         }
     }

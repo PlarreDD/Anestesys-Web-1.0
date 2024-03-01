@@ -1181,319 +1181,365 @@ export default defineComponent({
 
     methods: {
         async vaciarInputsValoracion(){
-            this.infoValoracion.antPersPat_Alergias = ""
-            this.infoValoracion.antPersPat_Quirurgicos = ""
-            this.infoValoracion.antPersPat_Endocrinologicos = ""
-            this.infoValoracion.antPersPat_Urologicos = ""
-            this.infoValoracion.antPersPat_Traumaticos = ""
-            this.infoValoracion.antPersPat_Ortopedicos = ""
-            this.infoValoracion.antPersPat_Transfusiones = ""
-            this.infoValoracion.antPersPat_CompAnestPrev = ""
-            this.infoValoracion.antPersPat_EstadoPsiq = ""
-            this.infoValoracion.antPersPat_MedActual = ""
-            this.infoValoracion.antPersNoPat_HrsAyuno = ""
-            this.infoValoracion.antPersNoPat_Tabaquismo = ""
-            this.infoValoracion.antPersNoPat_Etilismo = ""
-            this.infoValoracion.antPersNoPat_Adicciones = ""
-            this.infoValoracion.antPersNoPat_Inmunizaciones = ""
-            this.infoValoracion.antPersNoPat_AntImportQx = ""
-            this.infoValoracion.sigVit_Edad = ""
-            this.infoValoracion.sigVit_Temperatura = ""
-            this.infoValoracion.sigVit_FrecuCardiaca = ""
-            this.infoValoracion.sigVit_FrecuRespiratoria = ""
-            this.infoValoracion.sigVit_Peso = null
-            this.infoValoracion.sigVit_Talla = null
-            this.infoValoracion.sigVit_IMC = null
-            this.infoValoracion.sigVit_TensionArterial = ""
-            this.infoValoracion.sigVit_SaturacionOxigeno = ""
-            this.infoValoracion.viaAerea_Mallampati = ""
-            this.infoValoracion.viaAerea_PatilAldreti = ""
-            this.infoValoracion.viaAerea_AperturaBucal = ""
-            this.infoValoracion.viaAerea_Distancia = ""
-            this.infoValoracion.viaAerea_Protusion = ""
-            this.infoValoracion.viaAerea_Ipid = ""
-            this.infoValoracion.viaAerea_Glasgow = ""
-            this.infoValoracion.viaAerea_NYHA = ""
-            this.infoValoracion.viaAerea_Goldman = ""
-            this.infoValoracion.viaAerea_RiesgoTrombosis = ""
-            this.infoValoracion.viaAerea_ClasificacionASA = ""
-            this.infoValoracion.viaAerea_TipoCirugia = ""
-            this.infoValoracion.viaAerea_RiesgoAnestesico = ""
-            this.infoValoracion.estudio_Id = ""
-            this.infoValoracion.estudios_Estudio = ""
-            this.infoValoracion.estudio_Especificaciones = ""
-            this.infoValoracion.perfilBioQ_FechaRealizacion = ""
-            this.infoValoracion.perfilBioQ_GrupoSanguineo = ""
-            this.infoValoracion.perfilBioQ_Hemoglobina = ""
-            this.infoValoracion.perfilBioQ_Hematocrito = ""
-            this.infoValoracion.perfilBioQ_Plaquetas = ""
-            this.infoValoracion.perfilBioQ_Leutocitos = ""
-            this.infoValoracion.perfilBioQ_TP = ""
-            this.infoValoracion.perfilBioQ_TT = ""
-            this.infoValoracion.perfilBioQ_TPT = ""
-            this.infoValoracion.perfilBioQ_INR = ""
-            this.infoValoracion.perfilBioQ_Glucosa = ""
-            this.infoValoracion.perfilBioQ_Creatinina = ""
-            this.infoValoracion.perfilBioQ_Urea = ""
-            this.infoValoracion.perfilBioQ_Sodio = ""
-            this.infoValoracion.perfilBioQ_Potasio = ""
-            this.infoValoracion.perfilBioQ_Cloro = ""
-            this.infoValoracion.perfilBioQ_Calcio = ""
-            this.infoValoracion.perfilBioQ_Magnesio = ""
-            this.infoValoracion.perfilBioQ_BilirrubinaDirecta = ""
-            this.infoValoracion.perfilBioQ_BilirrubinaIndirecta = ""
-            this.infoValoracion.perfilBioQ_BilirrubinaTotal = ""
-            this.infoValoracion.perfilBioQ_Lipasa = ""
-            this.infoValoracion.perfilBioQ_Amilasa = ""
-            this.infoValoracion.perfilBioQ_Otros = ""
-            this.infoValoracion.expFis_VASCabeza = ""
-            this.infoValoracion.expFis_VASCuello = ""
-            this.infoValoracion.expFis_VASRespiratorio = ""
-            this.infoValoracion.expFis_VASCardioVasc = ""
-            this.infoValoracion.expFis_VASHipertension = ""
-            this.infoValoracion.expFis_VASAbdomen = ""
-            this.infoValoracion.expFis_VASGenUr = ""
-            this.infoValoracion.expFis_VASMuscEsq = ""
-            this.infoValoracion.expFis_VASNeuro = ""
-            this.infoValoracion.expFis_VASPielFaneras = ""
-
-            preIdStore.estudios = null
-
-            const tabAntecedentes = document.getElementById('valoracion');
-            const tabObj = new Tab(tabAntecedentes);
-            tabObj.show();
-
-            this.enviarDatosValoracion()
+            try {
+                this.infoValoracion.antPersPat_Alergias = ""
+                this.infoValoracion.antPersPat_Quirurgicos = ""
+                this.infoValoracion.antPersPat_Endocrinologicos = ""
+                this.infoValoracion.antPersPat_Urologicos = ""
+                this.infoValoracion.antPersPat_Traumaticos = ""
+                this.infoValoracion.antPersPat_Ortopedicos = ""
+                this.infoValoracion.antPersPat_Transfusiones = ""
+                this.infoValoracion.antPersPat_CompAnestPrev = ""
+                this.infoValoracion.antPersPat_EstadoPsiq = ""
+                this.infoValoracion.antPersPat_MedActual = ""
+                this.infoValoracion.antPersNoPat_HrsAyuno = ""
+                this.infoValoracion.antPersNoPat_Tabaquismo = ""
+                this.infoValoracion.antPersNoPat_Etilismo = ""
+                this.infoValoracion.antPersNoPat_Adicciones = ""
+                this.infoValoracion.antPersNoPat_Inmunizaciones = ""
+                this.infoValoracion.antPersNoPat_AntImportQx = ""
+                this.infoValoracion.sigVit_Edad = ""
+                this.infoValoracion.sigVit_Temperatura = ""
+                this.infoValoracion.sigVit_FrecuCardiaca = ""
+                this.infoValoracion.sigVit_FrecuRespiratoria = ""
+                this.infoValoracion.sigVit_Peso = null
+                this.infoValoracion.sigVit_Talla = null
+                this.infoValoracion.sigVit_IMC = null
+                this.infoValoracion.sigVit_TensionArterial = ""
+                this.infoValoracion.sigVit_SaturacionOxigeno = ""
+                this.infoValoracion.viaAerea_Mallampati = ""
+                this.infoValoracion.viaAerea_PatilAldreti = ""
+                this.infoValoracion.viaAerea_AperturaBucal = ""
+                this.infoValoracion.viaAerea_Distancia = ""
+                this.infoValoracion.viaAerea_Protusion = ""
+                this.infoValoracion.viaAerea_Ipid = ""
+                this.infoValoracion.viaAerea_Glasgow = ""
+                this.infoValoracion.viaAerea_NYHA = ""
+                this.infoValoracion.viaAerea_Goldman = ""
+                this.infoValoracion.viaAerea_RiesgoTrombosis = ""
+                this.infoValoracion.viaAerea_ClasificacionASA = ""
+                this.infoValoracion.viaAerea_TipoCirugia = ""
+                this.infoValoracion.viaAerea_RiesgoAnestesico = ""
+                this.infoValoracion.estudio_Id = ""
+                this.infoValoracion.estudios_Estudio = ""
+                this.infoValoracion.estudio_Especificaciones = ""
+                this.infoValoracion.perfilBioQ_FechaRealizacion = ""
+                this.infoValoracion.perfilBioQ_GrupoSanguineo = ""
+                this.infoValoracion.perfilBioQ_Hemoglobina = ""
+                this.infoValoracion.perfilBioQ_Hematocrito = ""
+                this.infoValoracion.perfilBioQ_Plaquetas = ""
+                this.infoValoracion.perfilBioQ_Leutocitos = ""
+                this.infoValoracion.perfilBioQ_TP = ""
+                this.infoValoracion.perfilBioQ_TT = ""
+                this.infoValoracion.perfilBioQ_TPT = ""
+                this.infoValoracion.perfilBioQ_INR = ""
+                this.infoValoracion.perfilBioQ_Glucosa = ""
+                this.infoValoracion.perfilBioQ_Creatinina = ""
+                this.infoValoracion.perfilBioQ_Urea = ""
+                this.infoValoracion.perfilBioQ_Sodio = ""
+                this.infoValoracion.perfilBioQ_Potasio = ""
+                this.infoValoracion.perfilBioQ_Cloro = ""
+                this.infoValoracion.perfilBioQ_Calcio = ""
+                this.infoValoracion.perfilBioQ_Magnesio = ""
+                this.infoValoracion.perfilBioQ_BilirrubinaDirecta = ""
+                this.infoValoracion.perfilBioQ_BilirrubinaIndirecta = ""
+                this.infoValoracion.perfilBioQ_BilirrubinaTotal = ""
+                this.infoValoracion.perfilBioQ_Lipasa = ""
+                this.infoValoracion.perfilBioQ_Amilasa = ""
+                this.infoValoracion.perfilBioQ_Otros = ""
+                this.infoValoracion.expFis_VASCabeza = ""
+                this.infoValoracion.expFis_VASCuello = ""
+                this.infoValoracion.expFis_VASRespiratorio = ""
+                this.infoValoracion.expFis_VASCardioVasc = ""
+                this.infoValoracion.expFis_VASHipertension = ""
+                this.infoValoracion.expFis_VASAbdomen = ""
+                this.infoValoracion.expFis_VASGenUr = ""
+                this.infoValoracion.expFis_VASMuscEsq = ""
+                this.infoValoracion.expFis_VASNeuro = ""
+                this.infoValoracion.expFis_VASPielFaneras = ""
+    
+                preIdStore.estudios = null
+    
+                const tabAntecedentes = document.getElementById('valoracion');
+                const tabObj = new Tab(tabAntecedentes);
+                tabObj.show();
+    
+                this.enviarDatosValoracion()
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }
         },
 
         async regresarBotones(){
-            this.btnAddEstudios=true
-            this.btnUpdateEstudios=false
-            this.btnActualizaEstudio=false
+            try {
+                this.btnAddEstudios=true
+                this.btnUpdateEstudios=false
+                this.btnActualizaEstudio=false        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }
         },
 
         calcularIMC() {
-
-            if(this.infoValoracion.sigVit_Peso && this.infoValoracion.sigVit_Talla){
-                this.infoValoracion.sigVit_IMC = (this.infoValoracion.sigVit_Peso / (this.infoValoracion.sigVit_Talla * this.infoValoracion.sigVit_Talla))
-                this.infoValoracion.sigVit_IMC = Number(this.infoValoracion.sigVit_IMC.toFixed(2));
-
-                this.enviarDatosValoracion();
-            }
-            else{
-                this.infoValoracion.sigVit_IMC = 0;
-                
-                this.enviarDatosValoracion();
+            try {
+                if(this.infoValoracion.sigVit_Peso && this.infoValoracion.sigVit_Talla){
+                    this.infoValoracion.sigVit_IMC = (this.infoValoracion.sigVit_Peso / (this.infoValoracion.sigVit_Talla * this.infoValoracion.sigVit_Talla))
+                    this.infoValoracion.sigVit_IMC = Number(this.infoValoracion.sigVit_IMC.toFixed(2));
+    
+                    this.enviarDatosValoracion();
+                }
+                else{
+                    this.infoValoracion.sigVit_IMC = 0;
+                    
+                    this.enviarDatosValoracion();
+                }        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
             }
         },
 
         async guardarDatosValoracion(){
-            if(preIdStore.nuevoRegistroPaciente == false){
-                if(preIdStore.actualizarRegValoracion == false ){
-                    // Guardar datos
-                    preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id)
-                    preIdStore.actualizarRegValoracion = true
-                    this.btnActualizarValoracion = true
-                    
-                }else if(preIdStore.actualizarRegValoracion == true){
-                    // Actualizar datos
-                    preIdStore.updatePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
-                }
-
-            }else if(preIdStore.nuevoRegistroPaciente == true){
-                if(preIdStore.actualizarRegValoracion == false ){
-                    // Guardar nuevos datos
-                    preIdStore.saveNuevoPreAntecedentes(this.infoValoracion, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-                    preIdStore.actualizarRegValoracion = true
-                    this.btnActualizarValoracion = true
-                    postStore.cirugiaID = preIdStore.cirugiaID
-                    transStore.cirugiaID = preIdStore.cirugiaID
-                    
-                }else if(preIdStore.actualizarRegValoracion == true){
-                    // Actualizar nuevos datos
-                    preIdStore.updateNuevoPreAntecedentes(this.infoValoracion, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
-                }
-
+            try {
+                if(preIdStore.nuevoRegistroPaciente == false){
+                    if(preIdStore.actualizarRegValoracion == false ){
+                        // Guardar datos
+                        preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id)
+                        preIdStore.actualizarRegValoracion = true
+                        this.btnActualizarValoracion = true
+                        
+                    }else if(preIdStore.actualizarRegValoracion == true){
+                        // Actualizar datos
+                        preIdStore.updatePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
+                    }
+    
+                }else if(preIdStore.nuevoRegistroPaciente == true){
+                    if(preIdStore.actualizarRegValoracion == false ){
+                        // Guardar nuevos datos
+                        preIdStore.saveNuevoPreAntecedentes(this.infoValoracion, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                        preIdStore.actualizarRegValoracion = true
+                        this.btnActualizarValoracion = true
+                        postStore.cirugiaID = preIdStore.cirugiaID
+                        transStore.cirugiaID = preIdStore.cirugiaID
+                        
+                    }else if(preIdStore.actualizarRegValoracion == true){
+                        // Actualizar nuevos datos
+                        preIdStore.updateNuevoPreAntecedentes(this.infoValoracion, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
+                    }
+    
+                }        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
             }
         },
 
         async listarEstudios() {
-            await preIdStore.getEstudiosList();
+            try {
+                await preIdStore.getEstudiosList();        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }
         },
 
         async guardarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
-            if(this.btnActualizarValoracion){            
-                await preIdStore.updatePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
-            }
-            else{
-                this.btnActualizarValoracion=true
-                await preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id)
-            }            
-
-            this.btnAddEstudios=false
-            this.btnUpdateEstudios=true
-            this.btnActualizaEstudio=false
-            
-            await preIdStore.saveEstudios(estudios_Estudio, estudio_Especificaciones);
-            this.infoValoracion.estudios_Estudio = "";
-            this.infoValoracion.estudio_Especificaciones = "";
-
-            await this.listarEstudios();
-        },
-
-        async actualizarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
-            await preIdStore.updateEstudios(estudios_Estudio, estudio_Especificaciones);
-            this.infoValoracion.estudios_Estudio = "";
-            this.infoValoracion.estudio_Especificaciones = "";
-
-            await this.listarEstudios();
-        },
-
-        async cambiarBtnActualizar(id) {
-            this.btnAddEstudios=false
-            this.btnUpdateEstudios=false
-            this.btnActualizaEstudio=true
-
-            await preIdStore.getEstudio(id);
-
-            this.infoValoracion.estudio_Id = preIdStore.estudios.val_Estudios[0]._id;
-            this.infoValoracion.estudios_Estudio = preIdStore.estudios.val_Estudios[0].estudio;
-            this.infoValoracion.estudio_Especificaciones = preIdStore.estudios.val_Estudios[0].especifEstudio;
-
-            await this.listarEstudios();
-        },
-
-        async actualizarEstudio() {
-            if (this.infoValoracion.estudios_Estudio == "") {
-                swal.fire({
-                title: "Seleccione el estudio",
-                icon: "warning",
-                showConfirmButton: false,
-                showCloseButton: true,
-                toast: true,
-                timer: 2500,
-                timerProgressBar: true,
-                position: "top-end",
-                });
-            } else {
-                await preIdStore.updateEstudio(this.infoValoracion.estudio_Id, this.infoValoracion.estudios_Estudio, this.infoValoracion.estudio_Especificaciones);
-
+            try {
+                if(this.btnActualizarValoracion){            
+                    await preIdStore.updatePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id)
+                }
+                else{
+                    this.btnActualizarValoracion=true
+                    await preIdStore.savePreAntecedentes(this.infoValoracion, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id)
+                }            
+    
                 this.btnAddEstudios=false
                 this.btnUpdateEstudios=true
                 this.btnActualizaEstudio=false
-
-                this.infoValoracion.estudio_Id = "";
+                
+                await preIdStore.saveEstudios(estudios_Estudio, estudio_Especificaciones);
                 this.infoValoracion.estudios_Estudio = "";
                 this.infoValoracion.estudio_Especificaciones = "";
+    
+                await this.listarEstudios();        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }
+        },
 
-                await this.listarEstudios();
+        async actualizarEstudios(estudios_Estudio: string, estudio_Especificaciones: string) {
+            try {
+                await preIdStore.updateEstudios(estudios_Estudio, estudio_Especificaciones);
+                this.infoValoracion.estudios_Estudio = "";
+                this.infoValoracion.estudio_Especificaciones = "";
+    
+                await this.listarEstudios();        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }
+        },
+
+        async cambiarBtnActualizar(id) {
+            try {
+                this.btnAddEstudios=false
+                this.btnUpdateEstudios=false
+                this.btnActualizaEstudio=true
+    
+                await preIdStore.getEstudio(id);
+    
+                this.infoValoracion.estudio_Id = preIdStore.estudios.val_Estudios[0]._id;
+                this.infoValoracion.estudios_Estudio = preIdStore.estudios.val_Estudios[0].estudio;
+                this.infoValoracion.estudio_Especificaciones = preIdStore.estudios.val_Estudios[0].especifEstudio;
+    
+                await this.listarEstudios();        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }
+        },
+
+        async actualizarEstudio() {
+            try {
+                if (this.infoValoracion.estudios_Estudio == "") {
+                    swal.fire({
+                    title: "Seleccione el estudio",
+                    icon: "warning",
+                    showConfirmButton: false,
+                    showCloseButton: true,
+                    toast: true,
+                    timer: 2500,
+                    timerProgressBar: true,
+                    position: "top-end",
+                    });
+                } else {
+                    await preIdStore.updateEstudio(this.infoValoracion.estudio_Id, this.infoValoracion.estudios_Estudio, this.infoValoracion.estudio_Especificaciones);
+    
+                    this.btnAddEstudios=false
+                    this.btnUpdateEstudios=true
+                    this.btnActualizaEstudio=false
+    
+                    this.infoValoracion.estudio_Id = "";
+                    this.infoValoracion.estudios_Estudio = "";
+                    this.infoValoracion.estudio_Especificaciones = "";
+    
+                    await this.listarEstudios();
+                }        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
             }
         },
 
         async validaEliminarEstudio(idEstudio: string) {
-            swal
-                .fire({
-                html: "¿Esta seguro de eliminar el estudio?",
-                icon: "warning",
-                showConfirmButton: true,
-                showCancelButton: true,
-                toast: true,
-                })
-                .then((result) => {
-                if (result.isConfirmed) {
-                    this.eliminarEstudio(idEstudio);
-                }
-                });
+            try {
+                swal
+                    .fire({
+                    html: "¿Esta seguro de eliminar el estudio?",
+                    icon: "warning",
+                    showConfirmButton: true,
+                    showCancelButton: true,
+                    toast: true,
+                    })
+                    .then((result) => {
+                    if (result.isConfirmed) {
+                        this.eliminarEstudio(idEstudio);
+                    }
+                    });        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }
         },
 
         async eliminarEstudio(idEstudio: string) {
-            await preIdStore.deleteEstudio(idEstudio);
-            await this.listarEstudios();
+            try {
+                await preIdStore.deleteEstudio(idEstudio);
+                await this.listarEstudios();        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }
         },
 
         enviarDatosValoracion() {
-            this.$emit('recibe-datos-valoracion', preIdStore.APPAlergias = this.infoValoracion.antPersPat_Alergias,
-                                                    preIdStore.APPQuirurgicos= this.infoValoracion.antPersPat_Quirurgicos,
-                                                    preIdStore.APPEndocrinologicos= this.infoValoracion.antPersPat_Endocrinologicos,
-                                                    preIdStore.APPUrologicos= this.infoValoracion.antPersPat_Urologicos,
-                                                    preIdStore.APPTraumaticos= this.infoValoracion.antPersPat_Traumaticos,
-                                                    preIdStore.APPOrtopedicos= this.infoValoracion.antPersPat_Ortopedicos,
-                                                    preIdStore.APPTransfuciones= this.infoValoracion.antPersPat_Transfusiones,
-                                                    preIdStore.APPComplicaciones= this.infoValoracion.antPersPat_CompAnestPrev,
-                                                    preIdStore.APPEstadoPsiquico= this.infoValoracion.antPersPat_EstadoPsiq,
-                                                    preIdStore.APPMedicacion= this.infoValoracion.antPersPat_MedActual,
-                                                    
-                                                    preIdStore.APNPHorasAyuno= this.infoValoracion.antPersNoPat_HrsAyuno,
-                                                    preIdStore.APNPTabaquismo= this.infoValoracion.antPersNoPat_Tabaquismo,
-                                                    preIdStore.APNPEtilismo= this.infoValoracion.antPersNoPat_Etilismo,
-                                                    preIdStore.APNPAdicciones= this.infoValoracion.antPersNoPat_Adicciones,
-                                                    preIdStore.APNPInmunizaciones= this.infoValoracion.antPersNoPat_Inmunizaciones,
-                                                    
-                                                    preIdStore.AntecedentesImportancia= this.infoValoracion.antPersNoPat_AntImportQx,
-                                                    
-                                                    preIdStore.SEdad= this.infoValoracion.sigVit_Edad,
-                                                    preIdStore.Temperatura= this.infoValoracion.sigVit_Temperatura,
-                                                    preIdStore.FrecuenciaCardiaca= this.infoValoracion.sigVit_FrecuCardiaca,
-                                                    preIdStore.FrecuenciaRespiratoria= this.infoValoracion.sigVit_FrecuRespiratoria,
-                                                    preIdStore.Peso= this.infoValoracion.sigVit_Peso,
-                                                    preIdStore.Talla= this.infoValoracion.sigVit_Talla,
-                                                    preIdStore.IMC= this.infoValoracion.sigVit_IMC,
-                                                    preIdStore.TensionArterial= this.infoValoracion.sigVit_TensionArterial,
-                                                    preIdStore.SaturacionOxigeno= this.infoValoracion.sigVit_SaturacionOxigeno,
-                                                    preIdStore.Mallampati= this.infoValoracion.viaAerea_Mallampati,
-                                                    preIdStore.PatilAldreti= this.infoValoracion.viaAerea_PatilAldreti,
-                                                    preIdStore.AperturaBucal= this.infoValoracion.viaAerea_AperturaBucal,
-                                                    preIdStore.Distancia= this.infoValoracion.viaAerea_Distancia,
-                                                    preIdStore.Protusion= this.infoValoracion.viaAerea_Protusion,
-                                                    preIdStore.IPID= this.infoValoracion.viaAerea_Ipid,
-                                                    preIdStore.Glasgow= this.infoValoracion.viaAerea_Glasgow,
-                                                    preIdStore.NYHA= this.infoValoracion.viaAerea_NYHA,
-                                                    preIdStore.Goldman= this.infoValoracion.viaAerea_Goldman,
-                                                    preIdStore.RiesgosTrombosis= this.infoValoracion.viaAerea_RiesgoTrombosis,
-                                                    preIdStore.ClasificacionASA= this.infoValoracion.viaAerea_ClasificacionASA,
-                                                    preIdStore.VTipoCirugia= this.infoValoracion.viaAerea_TipoCirugia,
-                                                    preIdStore.RiesgoAnestesico= this.infoValoracion.viaAerea_RiesgoAnestesico,
-
-                                                    preIdStore.Estudio= this.infoValoracion.estudios_Estudio,
-                                                    preIdStore.EspecificarEstudio= this.infoValoracion.estudio_Especificaciones,
-
-                                                    preIdStore.FechaRealizacion= this.infoValoracion.perfilBioQ_FechaRealizacion,
-                                                    preIdStore.GrupoSanguineo= this.infoValoracion.perfilBioQ_GrupoSanguineo,
-                                                    preIdStore.Hemoglobina= this.infoValoracion.perfilBioQ_Hemoglobina,
-                                                    preIdStore.Hematocrito= this.infoValoracion.perfilBioQ_Hematocrito,
-                                                    preIdStore.Plaquetas= this.infoValoracion.perfilBioQ_Plaquetas,
-                                                    preIdStore.Leutocitos= this.infoValoracion.perfilBioQ_Leutocitos,
-                                                    preIdStore.TP= this.infoValoracion.perfilBioQ_TP,
-                                                    preIdStore.TT= this.infoValoracion.perfilBioQ_TT,
-                                                    preIdStore.TPT= this.infoValoracion.perfilBioQ_TPT,
-                                                    preIdStore.INR= this.infoValoracion.perfilBioQ_INR,
-                                                    preIdStore.Glucosa= this.infoValoracion.perfilBioQ_Glucosa,
-                                                    preIdStore.Creatinina= this.infoValoracion.perfilBioQ_Creatinina,
-                                                    preIdStore.Urea= this.infoValoracion.perfilBioQ_Urea,
-                                                    preIdStore.Sodio= this.infoValoracion.perfilBioQ_Sodio,
-                                                    preIdStore.Potasio= this.infoValoracion.perfilBioQ_Potasio,
-                                                    preIdStore.Cloro= this.infoValoracion.perfilBioQ_Cloro,
-                                                    preIdStore.Calcio= this.infoValoracion.perfilBioQ_Calcio,
-                                                    preIdStore.Megnesio= this.infoValoracion.perfilBioQ_Magnesio,
-                                                    preIdStore.BilirrubinaDirecta= this.infoValoracion.perfilBioQ_BilirrubinaDirecta,
-                                                    preIdStore.BilirrubinaIndirecta= this.infoValoracion.perfilBioQ_BilirrubinaIndirecta,
-                                                    preIdStore.BilirrubimaTotal= this.infoValoracion.perfilBioQ_BilirrubinaTotal,
-                                                    preIdStore.Lipasa= this.infoValoracion.perfilBioQ_Lipasa,
-                                                    preIdStore.Amilasa= this.infoValoracion.perfilBioQ_Amilasa,
-                                                    preIdStore.PerfilOtros= this.infoValoracion.perfilBioQ_Otros,
-
-                                                    preIdStore.Cabeza= this.infoValoracion.expFis_VASCabeza,
-                                                    preIdStore.Cuello= this.infoValoracion.expFis_VASCuello,
-                                                    preIdStore.Respiratorio= this.infoValoracion.expFis_VASRespiratorio,
-                                                    preIdStore.Cadiovascular= this.infoValoracion.expFis_VASCardioVasc,
-                                                    preIdStore.Hipertension= this.infoValoracion.expFis_VASHipertension,
-                                                    preIdStore.Abdomen= this.infoValoracion.expFis_VASAbdomen,
-                                                    preIdStore.Genitourinario= this.infoValoracion.expFis_VASGenUr,
-                                                    preIdStore.MusculoEsqueletico= this.infoValoracion.expFis_VASMuscEsq,
-                                                    preIdStore.Neurologico= this.infoValoracion.expFis_VASNeuro,
-                                                    preIdStore.PielFaneras= this.infoValoracion.expFis_VASPielFaneras,
-                                                    )
-
+            try {
+                this.$emit('recibe-datos-valoracion', preIdStore.APPAlergias = this.infoValoracion.antPersPat_Alergias,
+                                                        preIdStore.APPQuirurgicos= this.infoValoracion.antPersPat_Quirurgicos,
+                                                        preIdStore.APPEndocrinologicos= this.infoValoracion.antPersPat_Endocrinologicos,
+                                                        preIdStore.APPUrologicos= this.infoValoracion.antPersPat_Urologicos,
+                                                        preIdStore.APPTraumaticos= this.infoValoracion.antPersPat_Traumaticos,
+                                                        preIdStore.APPOrtopedicos= this.infoValoracion.antPersPat_Ortopedicos,
+                                                        preIdStore.APPTransfuciones= this.infoValoracion.antPersPat_Transfusiones,
+                                                        preIdStore.APPComplicaciones= this.infoValoracion.antPersPat_CompAnestPrev,
+                                                        preIdStore.APPEstadoPsiquico= this.infoValoracion.antPersPat_EstadoPsiq,
+                                                        preIdStore.APPMedicacion= this.infoValoracion.antPersPat_MedActual,
+                                                        
+                                                        preIdStore.APNPHorasAyuno= this.infoValoracion.antPersNoPat_HrsAyuno,
+                                                        preIdStore.APNPTabaquismo= this.infoValoracion.antPersNoPat_Tabaquismo,
+                                                        preIdStore.APNPEtilismo= this.infoValoracion.antPersNoPat_Etilismo,
+                                                        preIdStore.APNPAdicciones= this.infoValoracion.antPersNoPat_Adicciones,
+                                                        preIdStore.APNPInmunizaciones= this.infoValoracion.antPersNoPat_Inmunizaciones,
+                                                        
+                                                        preIdStore.AntecedentesImportancia= this.infoValoracion.antPersNoPat_AntImportQx,
+                                                        
+                                                        preIdStore.SEdad= this.infoValoracion.sigVit_Edad,
+                                                        preIdStore.Temperatura= this.infoValoracion.sigVit_Temperatura,
+                                                        preIdStore.FrecuenciaCardiaca= this.infoValoracion.sigVit_FrecuCardiaca,
+                                                        preIdStore.FrecuenciaRespiratoria= this.infoValoracion.sigVit_FrecuRespiratoria,
+                                                        preIdStore.Peso= this.infoValoracion.sigVit_Peso,
+                                                        preIdStore.Talla= this.infoValoracion.sigVit_Talla,
+                                                        preIdStore.IMC= this.infoValoracion.sigVit_IMC,
+                                                        preIdStore.TensionArterial= this.infoValoracion.sigVit_TensionArterial,
+                                                        preIdStore.SaturacionOxigeno= this.infoValoracion.sigVit_SaturacionOxigeno,
+                                                        preIdStore.Mallampati= this.infoValoracion.viaAerea_Mallampati,
+                                                        preIdStore.PatilAldreti= this.infoValoracion.viaAerea_PatilAldreti,
+                                                        preIdStore.AperturaBucal= this.infoValoracion.viaAerea_AperturaBucal,
+                                                        preIdStore.Distancia= this.infoValoracion.viaAerea_Distancia,
+                                                        preIdStore.Protusion= this.infoValoracion.viaAerea_Protusion,
+                                                        preIdStore.IPID= this.infoValoracion.viaAerea_Ipid,
+                                                        preIdStore.Glasgow= this.infoValoracion.viaAerea_Glasgow,
+                                                        preIdStore.NYHA= this.infoValoracion.viaAerea_NYHA,
+                                                        preIdStore.Goldman= this.infoValoracion.viaAerea_Goldman,
+                                                        preIdStore.RiesgosTrombosis= this.infoValoracion.viaAerea_RiesgoTrombosis,
+                                                        preIdStore.ClasificacionASA= this.infoValoracion.viaAerea_ClasificacionASA,
+                                                        preIdStore.VTipoCirugia= this.infoValoracion.viaAerea_TipoCirugia,
+                                                        preIdStore.RiesgoAnestesico= this.infoValoracion.viaAerea_RiesgoAnestesico,
+    
+                                                        preIdStore.Estudio= this.infoValoracion.estudios_Estudio,
+                                                        preIdStore.EspecificarEstudio= this.infoValoracion.estudio_Especificaciones,
+    
+                                                        preIdStore.FechaRealizacion= this.infoValoracion.perfilBioQ_FechaRealizacion,
+                                                        preIdStore.GrupoSanguineo= this.infoValoracion.perfilBioQ_GrupoSanguineo,
+                                                        preIdStore.Hemoglobina= this.infoValoracion.perfilBioQ_Hemoglobina,
+                                                        preIdStore.Hematocrito= this.infoValoracion.perfilBioQ_Hematocrito,
+                                                        preIdStore.Plaquetas= this.infoValoracion.perfilBioQ_Plaquetas,
+                                                        preIdStore.Leutocitos= this.infoValoracion.perfilBioQ_Leutocitos,
+                                                        preIdStore.TP= this.infoValoracion.perfilBioQ_TP,
+                                                        preIdStore.TT= this.infoValoracion.perfilBioQ_TT,
+                                                        preIdStore.TPT= this.infoValoracion.perfilBioQ_TPT,
+                                                        preIdStore.INR= this.infoValoracion.perfilBioQ_INR,
+                                                        preIdStore.Glucosa= this.infoValoracion.perfilBioQ_Glucosa,
+                                                        preIdStore.Creatinina= this.infoValoracion.perfilBioQ_Creatinina,
+                                                        preIdStore.Urea= this.infoValoracion.perfilBioQ_Urea,
+                                                        preIdStore.Sodio= this.infoValoracion.perfilBioQ_Sodio,
+                                                        preIdStore.Potasio= this.infoValoracion.perfilBioQ_Potasio,
+                                                        preIdStore.Cloro= this.infoValoracion.perfilBioQ_Cloro,
+                                                        preIdStore.Calcio= this.infoValoracion.perfilBioQ_Calcio,
+                                                        preIdStore.Megnesio= this.infoValoracion.perfilBioQ_Magnesio,
+                                                        preIdStore.BilirrubinaDirecta= this.infoValoracion.perfilBioQ_BilirrubinaDirecta,
+                                                        preIdStore.BilirrubinaIndirecta= this.infoValoracion.perfilBioQ_BilirrubinaIndirecta,
+                                                        preIdStore.BilirrubimaTotal= this.infoValoracion.perfilBioQ_BilirrubinaTotal,
+                                                        preIdStore.Lipasa= this.infoValoracion.perfilBioQ_Lipasa,
+                                                        preIdStore.Amilasa= this.infoValoracion.perfilBioQ_Amilasa,
+                                                        preIdStore.PerfilOtros= this.infoValoracion.perfilBioQ_Otros,
+    
+                                                        preIdStore.Cabeza= this.infoValoracion.expFis_VASCabeza,
+                                                        preIdStore.Cuello= this.infoValoracion.expFis_VASCuello,
+                                                        preIdStore.Respiratorio= this.infoValoracion.expFis_VASRespiratorio,
+                                                        preIdStore.Cadiovascular= this.infoValoracion.expFis_VASCardioVasc,
+                                                        preIdStore.Hipertension= this.infoValoracion.expFis_VASHipertension,
+                                                        preIdStore.Abdomen= this.infoValoracion.expFis_VASAbdomen,
+                                                        preIdStore.Genitourinario= this.infoValoracion.expFis_VASGenUr,
+                                                        preIdStore.MusculoEsqueletico= this.infoValoracion.expFis_VASMuscEsq,
+                                                        preIdStore.Neurologico= this.infoValoracion.expFis_VASNeuro,
+                                                        preIdStore.PielFaneras= this.infoValoracion.expFis_VASPielFaneras,
+                                                        )        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }
         }
     }
 })

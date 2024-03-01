@@ -159,6 +159,7 @@ export default defineComponent({
                     this.usr.cedula = ""
                 }                
             } catch (error) {
+                window.log.error('Ocurrió un error:', error)
             }
         },
     }

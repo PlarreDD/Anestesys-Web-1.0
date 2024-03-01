@@ -46,37 +46,49 @@ export default defineComponent({
 
     methods: {
         async vaciarInputsNota(){
-            this.textoNota.nota = ""
-
-            this.enviarDatosNota()
+            try {
+                this.textoNota.nota = ""
+    
+                this.enviarDatosNota()        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }
         },
 
         async guardarDatosNota(){
-            if(preIdStore.nuevoRegistroPaciente == false){
-                if(preIdStore.actualizarRegNota == false ){
-                    // Guardar datos
-                    preIdStore.savePreNota(this.textoNota.nota, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id)
-                    preIdStore.actualizarRegNota = true
-                }else if(preIdStore.actualizarRegNota == true){
-                    // Actualizar datos
-                    preIdStore.updatePreNota(this.textoNota.nota, preIdStore.pacienteID._id)
-                }
-
-            }else if(preIdStore.nuevoRegistroPaciente == true){
-                if(preIdStore.actualizarRegNota == false ){
-                    // Guardar nuevos datos
-                    preIdStore.saveNuevoPreNota(this.textoNota.nota, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-                    preIdStore.actualizarRegNota = true
-                }else if(preIdStore.actualizarRegNota == true){
-                    // Actualizar nuevos datos
-                    preIdStore.updateNuevoPreNota(this.textoNota.nota, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
-                }
-
+            try {
+                if(preIdStore.nuevoRegistroPaciente == false){
+                    if(preIdStore.actualizarRegNota == false ){
+                        // Guardar datos
+                        preIdStore.savePreNota(this.textoNota.nota, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id)
+                        preIdStore.actualizarRegNota = true
+                    }else if(preIdStore.actualizarRegNota == true){
+                        // Actualizar datos
+                        preIdStore.updatePreNota(this.textoNota.nota, preIdStore.pacienteID._id)
+                    }
+    
+                }else if(preIdStore.nuevoRegistroPaciente == true){
+                    if(preIdStore.actualizarRegNota == false ){
+                        // Guardar nuevos datos
+                        preIdStore.saveNuevoPreNota(this.textoNota.nota, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                        preIdStore.actualizarRegNota = true
+                    }else if(preIdStore.actualizarRegNota == true){
+                        // Actualizar nuevos datos
+                        preIdStore.updateNuevoPreNota(this.textoNota.nota, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
+                    }
+    
+                }        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
             }
         },
 
         enviarDatosNota() {
-            this.$emit('recibe-datos-nota', preIdStore.NotaPre=this.textoNota.nota)
+            try {
+                this.$emit('recibe-datos-nota', preIdStore.NotaPre=this.textoNota.nota)        
+            } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+            }
         }        
     }
 })
