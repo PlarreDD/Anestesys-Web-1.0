@@ -44,10 +44,10 @@ namespace WindowsFormsApp1
         {
             IPStatus Nose;
             
-            do
-            {
-                Nose = pingMSV();
-            } while (Nose != System.Net.NetworkInformation.IPStatus.Success);
+           // do
+            //{
+              //  Nose = pingMSV();
+           // } while (Nose != System.Net.NetworkInformation.IPStatus.Success);
 
             p1 = new Thread(new ThreadStart(Hilo1));
             p2 = new Thread(new ThreadStart(Hilo2));

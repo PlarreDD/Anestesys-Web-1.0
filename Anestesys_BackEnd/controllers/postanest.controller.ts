@@ -1,6 +1,7 @@
 import { Response } from "express";
 import { PostRecupera,
          PostNotaPA } from "../models/PostAnestesico";
+import logger from '../logger';
 
 /********************************************************************/
 /************************ NOTA POST-ANESTÉSICA **********************/
@@ -81,6 +82,10 @@ export const saveNotaPA = async (req: any, res: Response) => {
 
         return res.json({ notaPA });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -161,6 +166,10 @@ export const saveNuevoNotaPA = async (req: any, res: Response) => {
 
         return res.json({ notaPA });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -239,6 +248,10 @@ export const updateNotaPA = async (req: any, res: Response) => {
 
         return res.json({ notaPA })
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -317,6 +330,10 @@ export const updateNuevoNotaPA = async (req: any, res: Response) => {
 
         return res.json({ notaPA })
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -328,6 +345,10 @@ export const listNotaPA = async (req: any, res: Response) => {
 
         return res.json({ notaPA });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -339,6 +360,10 @@ export const listNuevoNotaPA = async (req: any, res: Response) => {
 
         return res.json({ notaPA });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -479,6 +504,10 @@ export const saveRecuperacion = async (req: any, res: Response) => {
 
         return res.json({ recuperacion });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -617,6 +646,10 @@ export const saveNuevoRecuperacion = async (req: any, res: Response) => {
 
         return res.json({ recuperacion });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -766,6 +799,10 @@ export const updateRecuperacion = async (req: any, res: Response) => {
 
         return res.json({ recuperacion })
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -915,6 +952,10 @@ export const updateNuevoRecuperacion = async (req: any, res: Response) => {
 
         return res.json({ recuperacion })
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };

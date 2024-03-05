@@ -1,6 +1,7 @@
 import { Response } from "express";
 import { MenuTrans } from "../models/TransAnestesico";
 import { UpdateResult } from "mongodb";
+import logger from '../logger';
 
 /******************* Menu Trans Anestesico *******************/
 export const saveMenuTrans = async (req: any, res: Response) => {
@@ -70,6 +71,10 @@ export const saveMenuTrans = async (req: any, res: Response) => {
 
         return res.json({ menuTrans });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -141,6 +146,10 @@ export const saveNuevoMenuTrans = async (req: any, res: Response) => {
 
         return res.json({ menuTrans });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -168,6 +177,10 @@ export const updateMenuTrans = async (req: any, res: Response) => {
 
         return res.json({ menuTrans });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -195,6 +208,10 @@ export const updateNuevoMenuTrans = async (req: any, res: Response) => {
 
         return res.json({ menuTrans });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -207,6 +224,10 @@ export const getModosVent = async (req: any, res: Response) => {
 
         return res.json({ listaModosVent });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -219,6 +240,10 @@ export const getNuevoModosVent = async (req: any, res: Response) => {
 
         return res.json({ listaModosVent });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -233,6 +258,10 @@ export const getModoVentilacion =async (req: any, res: Response) => {
 
         return res.json({ modoVent });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }    
 };
@@ -261,10 +290,18 @@ export const updateVentilacion = async (req: any, res: Response) => {
             return res.status(404).json({ Error: "No existe el modo de ventilación." });        
         
         return res.json({ ventilador });
-    } catch (error) {
+    } catch (error) {        
         if (error.kind === "ObjectId") {
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }        
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
@@ -281,9 +318,17 @@ export const deleteModoVentilacion = async (req: any, res: Response) => {
         return res.json({ modoVent });
     } catch (error) {
         if (error.kind === "ObjectId") {
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }
         
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
@@ -353,6 +398,10 @@ export const UpdateBalanceH = async (req: any, res: Response) => {
 
         return res.json({ menuTrans });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -421,6 +470,10 @@ export const UpdateNuevoBalanceH = async (req: any, res: Response) => {
 
         return res.json({ menuTrans });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -460,6 +513,10 @@ export const saveTiemposQX = async (req: any, res: Response) => {
 
         return res.json({ tiempo });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -498,6 +555,10 @@ export const saveNuevoTiemposQX = async (req: any, res: Response) => {
 
         return res.json({ tiempo });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -541,7 +602,10 @@ export const saveDatosMSV = async (req: any, res: Response) => {
       
         return res.json({ menuTrans });
     } catch (error) {
-        console.log(error);
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 };
@@ -584,7 +648,10 @@ export const saveNuevoDatosMSV = async (req: any, res: Response) => {
             
         return res.json({ menuTrans });
     } catch (error) {
-        console.log(error);
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -606,6 +673,10 @@ export const saveMedicamentos = async (req: any, res: Response) => {
         await menuTrans.save();        
         return res.json({ menuTrans });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -626,6 +697,10 @@ export const saveNuevoMedicamentos = async (req: any, res: Response) => {
         await menuTrans.save();        
         return res.json({ menuTrans });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -645,6 +720,10 @@ export const updateMedicamentos = async (req: any, res: Response) => {
             });                
         return res.json({ menuTrans });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -664,6 +743,10 @@ export const updateNuevoMedicamentos = async (req: any, res: Response) => {
             });                
         return res.json({ menuTrans });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -677,6 +760,10 @@ export const getMedicamentos = async (req: any, res: Response) => {
            
         return res.json({medicamento});
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -689,6 +776,10 @@ export const getNuevoMedicamentos = async (req: any, res: Response) => {
            
         return res.json({medicamento});
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -703,6 +794,10 @@ export const getMedicamento = async (req: any, res: Response) => {
         
         return res.json({medicamento});
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -728,10 +823,18 @@ export const updateMedicamento = async (req: any, res: Response) => {
             return res.status(404).json({ Error: "No existe el medicamento." });        
         
         return res.json({ medicamento });
-    } catch (error) {
+    } catch (error) {        
         if (error.kind === "ObjectId") {
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
-        }        
+        }    
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });    
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
@@ -746,11 +849,19 @@ export const deleteMedicamento = async (req: any, res: Response) => {
         );              
        
         return res.json({ medicamento });
-    } catch (error) {
+    } catch (error) {        
         if (error.kind === "ObjectId") {
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }
         
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
@@ -771,6 +882,10 @@ export const saveRelevos = async (req: any, res: Response) => {
         await menuTrans.save();        
         return res.json({ menuTrans });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -790,6 +905,10 @@ export const saveNuevoRelevos = async (req: any, res: Response) => {
         await menuTrans.save();        
         return res.json({ menuTrans });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -808,6 +927,10 @@ export const updateRelevos = async (req: any, res: Response) => {
             });        
         return res.json({ menuTrans });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -826,6 +949,10 @@ export const updateNuevoRelevos = async (req: any, res: Response) => {
             });        
         return res.json({ menuTrans });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -839,6 +966,10 @@ export const getRelevos = async (req: any, res: Response) => {
            
         return res.json({relevo});
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -851,6 +982,10 @@ export const getNuevoRelevos = async (req: any, res: Response) => {
            
         return res.json({relevo});
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -865,6 +1000,10 @@ export const getRelevo = async (req: any, res: Response) => {
         
         return res.json({relevo});
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -889,10 +1028,18 @@ export const updateRelevo = async (req: any, res: Response) => {
             return res.status(404).json({ Error: "No existe el relevo." });        
         
         return res.json({ relevo });
-    } catch (error) {
+    } catch (error) {        
         if (error.kind === "ObjectId") {
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }        
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
@@ -909,9 +1056,17 @@ export const deleteRelevo = async (req: any, res: Response) => {
         return res.json({ relevo });
     } catch (error) {
         if (error.kind === "ObjectId") {
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }
         
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
@@ -932,6 +1087,10 @@ export const saveEventos = async (req: any, res: Response) => {
         await menuTrans.save();        
         return res.json({ menuTrans });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -951,6 +1110,10 @@ export const saveNuevoEventos = async (req: any, res: Response) => {
         await menuTrans.save();        
         return res.json({ menuTrans });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -969,6 +1132,10 @@ export const updateEventos = async (req: any, res: Response) => {
             });        
         return res.json({ menuTrans });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -987,6 +1154,10 @@ export const updateNuevoEventos = async (req: any, res: Response) => {
             });        
         return res.json({ menuTrans });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -1000,6 +1171,10 @@ export const getEventos = async (req: any, res: Response) => {
            
         return res.json({evento});
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -1012,6 +1187,10 @@ export const getNuevoEventos = async (req: any, res: Response) => {
            
         return res.json({evento});
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -1026,6 +1205,10 @@ export const getEvento = async (req: any, res: Response) => {
         
         return res.json({evento});
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -1049,10 +1232,19 @@ export const updateEvento = async (req: any, res: Response) => {
             return res.status(404).json({ Error: "No existe el relevo." });        
         
         return res.json({ evento });
-    } catch (error) {
+    } catch (error) {        
         if (error.kind === "ObjectId") {
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
-        }        
+        }       
+        
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
@@ -1069,9 +1261,17 @@ export const deleteEvento = async (req: any, res: Response) => {
         return res.json({ evento });
     } catch (error) {
         if (error.kind === "ObjectId") {
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }
         
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
