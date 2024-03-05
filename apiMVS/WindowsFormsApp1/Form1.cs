@@ -26,10 +26,11 @@ namespace WindowsFormsApp1
         public static TcpClient client;
 
         public static int port = 6664;
-        public static string ipMonitor = "172.16.20.101";
+        public static string ipMonitor;
 
         public static Ping pMSV;
         public static PingReply rMSV;
+        private IPStatus Nose;
 
         private HttpListener httpListener;
 
@@ -56,21 +57,27 @@ namespace WindowsFormsApp1
             p2.Start();
         }
 
-        public void Hilo1()
+        public void HiloServidor()
         {
+            do
+            {
+                Nose = pingMSV(ipMonitor);
+            } while (Nose != System.Net.NetworkInformation.IPStatus.Success);
+
             startServer();
         }
 
-        public void Hilo2()
+        public void HiloMSV()
         {
             obtenerDatosMSV();
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
+            httpListener?.Stop();
+            listener.Stop();
             p1.Abort();
             p2.Abort();
-            httpListener?.Stop();
         }
 
         private async void startServer()
@@ -81,7 +88,7 @@ namespace WindowsFormsApp1
             if (httpListener == null)
             {
                 httpListener = new HttpListener();
-                httpListener.Prefixes.Add($"http://{ipLocal.AddressList[1]}:5000/apiMVS/");
+                httpListener.Prefixes.Add($"http://{ipLocal.AddressList[ipLocal.AddressList.Length - 1]}:5000/apiMVS/");
                 httpListener.Start();
                 await ListenForRequests();
             }
@@ -122,15 +129,26 @@ namespace WindowsFormsApp1
 
         private void btnQueryUrl_Click(object sender, EventArgs e)
         {
-            label1.Text = responseString;
+            hl7Test.Text = responseString;
         }
 
-        public IPStatus pingMSV()
+        public IPStatus pingMSV(string ip)
         {
-            pMSV = new Ping();
-            rMSV = pMSV.Send(ipMonitor, 1000);
+            IPStatus otroNoSe;
 
-            return rMSV.Status;
+            pMSV = new Ping();
+            
+            try
+            {
+                rMSV = pMSV.Send(ip, 1000);
+                otroNoSe = rMSV.Status;
+            }
+            catch
+            {
+                otroNoSe = IPStatus.DestinationUnreachable;
+            }
+
+            return otroNoSe;
         }
 
         public void obtenerDatosMSV()
@@ -140,33 +158,46 @@ namespace WindowsFormsApp1
                 ipLocal = Dns.GetHostEntry(Dns.GetHostName());
                 listener = new TcpListener(IPAddress.Any, port);
             }
-
+            
             listener.Start();
 
             while (true)
             {
-                client = listener.AcceptTcpClient();
-
-                StreamReader reader = new StreamReader(client.GetStream(), true);
-
-                while (!reader.EndOfStream)
+                try
                 {
-                    string cadena_MVS = reader.ReadLine();
+                    client = listener.AcceptTcpClient();
 
-                    bool valor = cadena_MVS.StartsWith("\v");
+                    StreamReader reader = new StreamReader(client.GetStream(), true);
 
-                    if (valor)
+                    while (!reader.EndOfStream)
                     {
-                        responseString = "";
+                        string cadena_MVS = reader.ReadLine();
+
+                        bool valor = cadena_MVS.StartsWith("\v");
+
+                        if (valor)
+                        {
+                            responseString = "";
+                        }
+
+                        responseString += cadena_MVS;
+
+                        btnQueryUrl.BackColor = Color.Black;
                     }
 
-                    responseString += cadena_MVS;
-
-                    btnQueryUrl.BackColor = Color.Black;
+                    btnQueryUrl.BackColor = Color.Orange;
                 }
+                catch
+                {
 
-                btnQueryUrl.BackColor = Color.Orange;
+                }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ipMonitor = ipMSV.Text;
+            Nose = pingMSV(ipMonitor);
         }
     }
 }
