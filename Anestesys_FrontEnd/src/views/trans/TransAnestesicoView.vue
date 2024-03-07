@@ -5,6 +5,12 @@
 
   <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">
 
+    <div class="col-md-2">
+      <button type="button" id="tutorial-pre" class="btn btn-secondary fw-bold" @click="obtenerInformacion">
+        Prueba {{ clienteIp }}
+      </button>
+    </div>
+
     <!-- Barra superior -->
     <div class="input-group mb-3" @mouseover="vaciarInputsTrans">
       <div class="row g-3 col-md-12">
@@ -30,13 +36,13 @@
                 <span class="fw-bold msv-color-txt" >&nbsp;&nbsp;Estado: Sin Datos</span>
               </template>
 
-              <template v-if="medStore.status === 'Inactivo'">
+              <!-- <template v-if="medStore.status === 'Inactivo'">
                 <button class="borde-btn-msv"
                         style="border: none;">
                   <img src="../../../public/images/imgIcon/MonitorInactivo.png" class="btn-msv"/>
                 </button>
                 <span class="fw-bold msv-color-txt">&nbsp;&nbsp;Estado: Desconectado</span>
-              </template>
+              </template> -->
             </div>
 
             <!-- Botón medicamento -->
@@ -1421,6 +1427,9 @@ export default defineComponent({
 
   data() {
     return {
+      informacion: '',
+      clienteIp: '',
+
       tutoUno: true,
       tutoDos: false,
       tutoTres: false,
@@ -1677,7 +1686,8 @@ export default defineComponent({
       abrir.dispatchEvent(event);
     }
 
-    this.pingMSV(medStore.monitor[0].dirIPMVS);
+    // this.pingMSV(medStore.monitor[0].dirIPMVS);
+    medStore.status = 'Activo';
     
     this.menuTrans.balanceTotal = null;
     this.menuTrans.solHartman = null;
@@ -1726,9 +1736,37 @@ export default defineComponent({
       // Sincronizar la posición de desplazamiento en el elemento 'grid-lateral'
       gridLateral.scrollTop = grid.scrollTop;
     });
+
+    fetch(`${import.meta.env.VITE_ORIGIN1}/api/getClienteIp`) // Reemplaza '/api/getClientIp' con la ruta correcta en tu servidor
+      .then(response => response.json())
+      .then(data => {
+        this.clienteIp = data.clienteIp;
+      })
+      .catch(error => {
+        console.error('Error al obtener la dirección IP:', error);
+      });
   },
 
   methods: {
+    //PRUEBA DE FUNCIONAMIENTO DE OBTENCION DE HL7
+    async obtenerInformacion(){
+      this.intervalId = setInterval(() => {
+        this.pruebaCom()
+      }, 1000);
+    },
+    
+    async pruebaCom() {
+      try {
+        const response = await fetch(`http://${this.clienteIp}:5000/apiMVS`);
+        const data = await response.text();
+        this.informacion = data;
+
+        console.log("info: "+this.informacion);
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
+    },
+
     async enviarDatosTrans() {        
       try {
         // Ingresos
@@ -6732,25 +6770,28 @@ export default defineComponent({
 
     // Eventos de Monitoreo
     async iniMSV(){
-      try {
-        transAnestStore.envDat = true;
-        this.btnCambioMonitor = true;
-        this.iniRecepDatos();
-        this.capturaGrid();
-      } catch (error) {
-        window.log.error('Ocurrió un error:', error);
-      }
+      // try {
+      //   transAnestStore.envDat = true;
+      //   this.btnCambioMonitor = true;
+      //   this.iniRecepDatos();
+      //   this.capturaGrid();
+      // } catch (error) {
+      //   window.log.error('Ocurrió un error:', error);
+      // }
+      console.log("iniMSV");
+      
     },
 
     async finMSV(){
-      try {
-        transAnestStore.envDat = false;
-        this.btnCambioMonitor = false;
-        transAnestStore.getDetieneMonitoreo();
-        this.termRecepDatos();
-      } catch (error) {
-        window.log.error('Ocurrió un error:', error);
-      }
+      // try {
+      //   transAnestStore.envDat = false;
+      //   this.btnCambioMonitor = false;
+      //   transAnestStore.getDetieneMonitoreo();
+      //   this.termRecepDatos();
+      // } catch (error) {
+      //   window.log.error('Ocurrió un error:', error);
+      // }
+      console.log("finMSV");
     },
 
     comMSV(){
@@ -7026,7 +7067,7 @@ export default defineComponent({
 
     pingMSV(dirip: string){
       try {
-        medStore.statusMSV(dirip);
+        // medStore.statusMSV(dirip);
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
