@@ -501,9 +501,9 @@ import { ElInput, ElCard } from 'element-plus';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
-import pdfFonts from "pdfmake/build/vfs_fonts.js";
+// import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
-window.pdfMake.fonts = pdfFonts.pdfMake;
+// window.pdfMake.fonts = pdfFonts.pdfMake;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 
@@ -798,7 +798,7 @@ export default defineComponent({
     this.mostrarHeader();
     this.ocultarMenuLateral();
     document.addEventListener('scroll', this.scrollFunction);
-    transStore.getIniciaMonitoreo();
+    // transStore.getIniciaMonitoreo();
 
     //console.log("Esta: " + import.meta.env.VITE_ORIGIN2);
 
