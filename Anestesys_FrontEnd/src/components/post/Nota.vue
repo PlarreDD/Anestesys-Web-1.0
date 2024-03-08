@@ -959,7 +959,7 @@ export default defineComponent({
                     preIdStore.vaciadoPostNota = false
                 }        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         },
 
@@ -973,7 +973,7 @@ export default defineComponent({
                     preIdStore.volverPostNota = false;
                 }                    
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         },
 
@@ -1009,7 +1009,7 @@ export default defineComponent({
     
                 }        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         },
 
@@ -1077,7 +1077,7 @@ export default defineComponent({
                                                     postAnestStore.TallaSeis=this.infoNotaPost.casoObsRecNac6_Talla,                                                
                                                     )        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         }
     }

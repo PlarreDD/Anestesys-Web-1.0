@@ -1150,7 +1150,7 @@ export default defineComponent({
     
                 this.enviarDatosPlan()
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         },
 
@@ -1178,7 +1178,7 @@ export default defineComponent({
     
                 }        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         },
 
@@ -1220,7 +1220,7 @@ export default defineComponent({
                     this.infoPlan.regional_Opcion = ""
                 }        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         },
 
@@ -1291,7 +1291,7 @@ export default defineComponent({
                                                 preIdStore.OtrosDispositivos = this.infoPlan.general_OtrosDispositivos,
                                                 preIdStore.EspecificarOtrosDispositivos = this.infoPlan.general_EspOtrosDispositivos)        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         }
     },

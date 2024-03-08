@@ -87,7 +87,7 @@ export default defineComponent({
             try {
                 this.$emit('recibe-datos-nota', preIdStore.NotaPre=this.textoNota.nota)        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         }        
     }

@@ -178,9 +178,9 @@ export const updatePaciente = async (req: any, res: Response) => {
         const updVar = req.body;
 
         const paciente = await PreIdPacientes.findByIdAndUpdate( id, { nomPaciente: updVar.nomPaciente,
-                                                                    fechaNPaciente: updVar.fechaNac,
+                                                                    fechaNPaciente: updVar.fechaNPaciente,
                                                                     edadPaciente: updVar.edadPaciente,
-                                                                    generoPaciente: updVar.genero,
+                                                                    generoPaciente: updVar.generoPaciente,
                                                                     nacionalidad: updVar.nacionalidad,
                                                                     CURP: updVar.CURP,
                                                                     folioID: updVar.folioID,
@@ -192,7 +192,7 @@ export const updatePaciente = async (req: any, res: Response) => {
         
         const infoCx = await PreIdPacientesCx.findOneAndUpdate({ pid: paciente?._id }, { numEpisodio: updVar.numEpisodio,
                                                                                       habitacionPaciente: updVar.habitacionPaciente,
-                                                                                      fechaInPaciente: updVar.fechaIn,
+                                                                                      fechaInPaciente: updVar.fechaInPaciente,
                                                                                       /* Datos de cirugía */
                                                                                       diagnostico: updVar.diagnostico,
                                                                                       tipoCx: updVar.tipoCx,
@@ -281,9 +281,9 @@ export const updateAnteriorPaciente = async (req: any, res: Response) => {
         const { id } = req.params;
         const updVar = req.body;
 
-        const paciente = await PreIdPacientes.findByIdAndUpdate( id, {fechaNPaciente: updVar.fechaNac,
+        const paciente = await PreIdPacientes.findByIdAndUpdate( id, {fechaNPaciente: updVar.fechaNPaciente,
                                                                     edadPaciente: updVar.edadPaciente,
-                                                                    generoPaciente: updVar.genero} );            
+                                                                    generoPaciente: updVar.generoPaciente} );            
         
         return res.json({ paciente });
     } catch (error) {
@@ -311,7 +311,7 @@ export const updateNuevoRegistroPaciente = async (req: any, res: Response) => {
         
         const infoCx = await PreIdPacientesCx.findByIdAndUpdate(id , { numEpisodio: updVar.numEpisodio,
                                                                                       habitacionPaciente: updVar.habitacionPaciente,
-                                                                                      fechaInPaciente: updVar.fechaIn,
+                                                                                      fechaInPaciente: updVar.fechaInPaciente,
                                                                                       /* Datos de cirugía */
                                                                                       diagnostico: updVar.diagnostico,
                                                                                       tipoCx: updVar.tipoCx,

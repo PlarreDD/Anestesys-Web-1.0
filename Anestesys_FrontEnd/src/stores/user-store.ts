@@ -182,7 +182,7 @@ export const useUserStore = defineStore('user', {
 
         updateMed( _id:string, formData:FormData){
             apiAxios({
-                url: `http://localhost:5000/updateMed/${String(this.IdMed)}`,
+                url: `/updateMed/${String(this.IdMed)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + this.token,
@@ -208,7 +208,7 @@ export const useUserStore = defineStore('user', {
 
         updateTutorialPre( _id:string){
             apiAxios({
-                url: `http://localhost:5000/pre/${String(this.IdMed)}`,
+                url: `/pre/${String(this.IdMed)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + this.token,
@@ -226,7 +226,7 @@ export const useUserStore = defineStore('user', {
 
         updateTutorialTrans( _id:string){
             apiAxios({
-                url: `http://localhost:5000/trans/${String(this.IdMed)}`,
+                url: `/trans/${String(this.IdMed)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + this.token,
@@ -244,7 +244,7 @@ export const useUserStore = defineStore('user', {
 
         updateTutorialPost( _id:string){
             apiAxios({
-                url: `http://localhost:5000/post/${String(this.IdMed)}`,
+                url: `/post/${String(this.IdMed)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + this.token,
@@ -262,7 +262,7 @@ export const useUserStore = defineStore('user', {
 
         updateContrasena( _id:string, pswd){
             apiAxios({
-                url: `http://localhost:5000/password/${String(this.IdMed)}`,
+                url: `/password/${String(this.IdMed)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + this.token,
