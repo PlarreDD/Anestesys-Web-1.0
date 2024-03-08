@@ -18,9 +18,9 @@
       </div>
 
       <div class="col-md-2">
-        <button type="button" id="tutorial-pre" class="btn btn-secondary fw-bold" @click="obtenerInformacion">
+        <!-- <button type="button" id="tutorial-pre" class="btn btn-secondary fw-bold" @click="">
           Prueba {{ clienteIp }}
-        </button>
+        </button> -->
       </div>
 
       <!-- Botón tutorial -->
@@ -778,6 +778,8 @@ export default defineComponent({
   
   mounted: function() { // Llama el método despues de cargar la página 
     //Mostrar modal de tutorial al logear por primera vez
+    console.log("tutoPre "+userStore.TutorialPre);
+    
     if(userStore.TutorialPre === 0){
       let abrir = document.getElementById('tutorial-pre');
 
@@ -816,17 +818,17 @@ export default defineComponent({
 
   methods: {
 /*======================= Obtener paciente para nuevo registro =======================*/
-    async obtenerInformacion(){
-      try {
-        const response = await fetch(`http://${this.clienteIp}:5000/apiMVS`);
-        const data = await response.text();
-        this.informacion = data;
+    // async obtenerInformacion(){
+    //   try {
+    //     const response = await fetch(`http://${this.clienteIp}:5000/apiMVS`);
+    //     const data = await response.text();
+    //     this.informacion = data;
 
-        console.log("info: "+this.informacion);
-      } catch (error) {
-        window.log.error('Ocurrió un error:', error);
-      }
-    },
+    //     console.log("info: "+this.informacion);
+    //   } catch (error) {
+    //     window.log.error('Ocurrió un error:', error);
+    //   }
+    // },
 
     // Obtener expedientes en Multiselect
     async listarExpedientes(){    
