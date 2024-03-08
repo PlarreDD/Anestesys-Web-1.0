@@ -60,7 +60,7 @@ app.get('/api/getClienteIp', (req, res) => {
   if (clientIp) {
     const clienteIp = net.isIPv4(clientIp) ? clientIp : clientIp.replace(/^.*:/, '');
     res.json({ clienteIp });
-    console.log("IP que manda solicitud:" + clienteIp);    
+    // console.log("IP que manda solicitud:" + clienteIp);    
   }
 });
 
