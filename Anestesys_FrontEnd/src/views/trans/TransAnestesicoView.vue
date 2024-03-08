@@ -18,7 +18,8 @@
           <div class="row g-3 mb-3">
             <!-- Botón monitoreo -->
             <div class="col-md-4">
-              <template v-if="transAnestStore.envDat === true && medStore.status === 'Activo'">
+              <!-- Monitor Verde -->
+              <template v-if="apiMSV === true">
                 <button class="borde-btn-msv"
                         @click="finMSV">
                   <img src="../../../public/images/imgIcon/MonitorActivoDatos.png" class="btn-msv"/>
@@ -26,18 +27,27 @@
                 <span class="fw-bold msv-color-txt">&nbsp;&nbsp;Estado: Recibiendo Datos</span>
               </template>
 
-              <template v-if="transAnestStore.envDat === false && medStore.status === 'Activo'">
+              <!-- Monitor Gris -->
+              <!-- <template v-if="transAnestStore.envDat === false && medStore.status === 'Activo'">
                 <button class="borde-btn-msv"
                         style="border: none;"
                         @click="iniMSV"
-                        :disabled="btnMSV">
+                        
+                        >
                   <img src="../../../public/images/imgIcon/MonitorActivo.png" class="btn-msv" />
                 </button>
                 <span class="fw-bold msv-color-txt" >&nbsp;&nbsp;Estado: Sin Datos</span>
-              </template>
+              </template> -->
 
+<<<<<<< HEAD
               <!-- <template v-if="medStore.status === 'Inactivo'">
+=======
+              <!-- Monitor Rojo -->
+              <template v-if="apiMSV === false">
+>>>>>>> e60888814a334d1aa6f7f092cd0f9e7a37f86eca
                 <button class="borde-btn-msv"
+                        @click="iniMSV"
+                        :disabled="btnMSV"
                         style="border: none;">
                   <img src="../../../public/images/imgIcon/MonitorInactivo.png" class="btn-msv"/>
                 </button>
@@ -1393,9 +1403,9 @@ import { Line } from 'vue-chartjs';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
-import pdfFonts from "pdfmake/build/vfs_fonts.js";
+// import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
-window.pdfMake.fonts = pdfFonts.pdfMake;
+// window.pdfMake.fonts = pdfFonts.pdfMake;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 
@@ -1435,6 +1445,8 @@ export default defineComponent({
       tutoTres: false,
       tutoCuatro: false,
       tutoCinco:false,
+
+      apiMSV: false,
 
       //Datos interfaces
       menuTrans: {} as regMenuTrans,
@@ -1686,8 +1698,12 @@ export default defineComponent({
       abrir.dispatchEvent(event);
     }
 
+<<<<<<< HEAD
     // this.pingMSV(medStore.monitor[0].dirIPMVS);
     medStore.status = 'Activo';
+=======
+    //this.pingMSV(medStore.monitor[0].dirIPMVS);
+>>>>>>> e60888814a334d1aa6f7f092cd0f9e7a37f86eca
     
     this.menuTrans.balanceTotal = null;
     this.menuTrans.solHartman = null;
@@ -1724,9 +1740,9 @@ export default defineComponent({
     this.menuTrans.tipoRel= "RELEVO";
     this.menuTrans.tipoEve= "EVENTO";
     
-    this.tempMSV = setInterval(() => {
-      this.pingMSV(medStore.monitor[0].dirIPMVS);
-    }, 10000);
+    // this.tempMSV = setInterval(() => {
+    //   this.pingMSV(medStore.monitor[0].dirIPMVS);
+    // }, 10000);
 
     const gridLateral = document.getElementById('grid-lateral');
     const grid = document.getElementById('grid');
@@ -6778,8 +6794,12 @@ export default defineComponent({
       // } catch (error) {
       //   window.log.error('Ocurrió un error:', error);
       // }
+<<<<<<< HEAD
       console.log("iniMSV");
       
+=======
+      this.apiMSV = true;
+>>>>>>> e60888814a334d1aa6f7f092cd0f9e7a37f86eca
     },
 
     async finMSV(){
@@ -6791,7 +6811,11 @@ export default defineComponent({
       // } catch (error) {
       //   window.log.error('Ocurrió un error:', error);
       // }
+<<<<<<< HEAD
       console.log("finMSV");
+=======
+      this.apiMSV = false;
+>>>>>>> e60888814a334d1aa6f7f092cd0f9e7a37f86eca
     },
 
     comMSV(){

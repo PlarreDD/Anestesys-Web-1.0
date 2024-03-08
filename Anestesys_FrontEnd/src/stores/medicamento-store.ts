@@ -163,8 +163,8 @@ export const useMedicamentoStore = defineStore("medicamento", {
         },
       })
       .then((res: any) => {
-        this.status = res.data.statusMSV;
-
+        // this.status = res.data.statusMSV;
+        this.status = 'Activo';
         swal.fire({
           title: "Monitor registrado",
           icon: "success",

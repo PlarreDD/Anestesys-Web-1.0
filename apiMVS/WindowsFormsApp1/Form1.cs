@@ -43,15 +43,8 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            IPStatus Nose;
-            
-           // do
-            //{
-              //  Nose = pingMSV();
-           // } while (Nose != System.Net.NetworkInformation.IPStatus.Success);
-
-            p1 = new Thread(new ThreadStart(Hilo1));
-            p2 = new Thread(new ThreadStart(Hilo2));
+            p1 = new Thread(new ThreadStart(HiloServidor));
+            p2 = new Thread(new ThreadStart(HiloMSV));
 
             p1.Start();
             p2.Start();
@@ -148,6 +141,11 @@ namespace WindowsFormsApp1
                 otroNoSe = IPStatus.DestinationUnreachable;
             }
 
+            if (otroNoSe == IPStatus.Success)
+                ping.BackColor = Color.Green;
+            else
+                ping.BackColor = Color.Red;
+
             return otroNoSe;
         }
 
@@ -181,6 +179,7 @@ namespace WindowsFormsApp1
                         }
 
                         responseString += cadena_MVS;
+                        pingMSV(ipMonitor);
 
                         btnQueryUrl.BackColor = Color.Black;
                     }
