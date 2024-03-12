@@ -5,12 +5,6 @@
 
   <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">
 
-    <div class="col-md-2">
-      <button type="button" id="tutorial-pre" class="btn btn-secondary fw-bold" @click="obtenerInformacion">
-        Prueba {{ clienteIp }}
-      </button>
-    </div>
-
     <!-- Barra superior -->
     <div class="input-group mb-3" @mouseover="vaciarInputsTrans">
       <div class="row g-3 col-md-12">
@@ -39,12 +33,8 @@
                 <span class="fw-bold msv-color-txt" >&nbsp;&nbsp;Estado: Sin Datos</span>
               </template> -->
 
-<<<<<<< HEAD
-              <!-- <template v-if="medStore.status === 'Inactivo'">
-=======
               <!-- Monitor Rojo -->
               <template v-if="apiMSV === false">
->>>>>>> e60888814a334d1aa6f7f092cd0f9e7a37f86eca
                 <button class="borde-btn-msv"
                         @click="iniMSV"
                         :disabled="btnMSV"
@@ -52,7 +42,7 @@
                   <img src="../../../public/images/imgIcon/MonitorInactivo.png" class="btn-msv"/>
                 </button>
                 <span class="fw-bold msv-color-txt">&nbsp;&nbsp;Estado: Desconectado</span>
-              </template> -->
+              </template>
             </div>
 
             <!-- Botón medicamento -->
@@ -1403,9 +1393,9 @@ import { Line } from 'vue-chartjs';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
-// import pdfFonts from "pdfmake/build/vfs_fonts.js";
+import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
-// window.pdfMake.fonts = pdfFonts.pdfMake;
+window.pdfMake.fonts = pdfFonts.pdfMake;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 
@@ -1698,12 +1688,7 @@ export default defineComponent({
       abrir.dispatchEvent(event);
     }
 
-<<<<<<< HEAD
-    // this.pingMSV(medStore.monitor[0].dirIPMVS);
-    medStore.status = 'Activo';
-=======
     //this.pingMSV(medStore.monitor[0].dirIPMVS);
->>>>>>> e60888814a334d1aa6f7f092cd0f9e7a37f86eca
     
     this.menuTrans.balanceTotal = null;
     this.menuTrans.solHartman = null;
@@ -1740,6 +1725,7 @@ export default defineComponent({
     this.menuTrans.tipoRel= "RELEVO";
     this.menuTrans.tipoEve= "EVENTO";
     
+    /*Retirado*/
     // this.tempMSV = setInterval(() => {
     //   this.pingMSV(medStore.monitor[0].dirIPMVS);
     // }, 10000);
@@ -1764,25 +1750,6 @@ export default defineComponent({
   },
 
   methods: {
-    //PRUEBA DE FUNCIONAMIENTO DE OBTENCION DE HL7
-    async obtenerInformacion(){
-      this.intervalId = setInterval(() => {
-        this.pruebaCom()
-      }, 1000);
-    },
-    
-    async pruebaCom() {
-      try {
-        const response = await fetch(`http://${this.clienteIp}:5000/apiMVS`);
-        const data = await response.text();
-        this.informacion = data;
-
-        console.log("info: "+this.informacion);
-      } catch (error) {
-        window.log.error('Ocurrió un error:', error);
-      }
-    },
-
     async enviarDatosTrans() {        
       try {
         // Ingresos
@@ -6784,6 +6751,18 @@ export default defineComponent({
       }
     },
 
+    //PRUEBA DE FUNCIONAMIENTO DE OBTENCION DE HL7
+    async pruebaCom() {
+      try {
+        const response = await fetch(`http://${this.clienteIp}:5000/apiMVS`);
+        const data = await response.text();
+        this.informacion = data;
+        this.vaciarMensajeHL7();
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
+    },
+
     // Eventos de Monitoreo
     async iniMSV(){
       // try {
@@ -6794,12 +6773,11 @@ export default defineComponent({
       // } catch (error) {
       //   window.log.error('Ocurrió un error:', error);
       // }
-<<<<<<< HEAD
-      console.log("iniMSV");
-      
-=======
       this.apiMSV = true;
->>>>>>> e60888814a334d1aa6f7f092cd0f9e7a37f86eca
+      
+      this.intervalId = setInterval(() => {
+        this.pruebaCom()
+      }, 1000);
     },
 
     async finMSV(){
@@ -6811,11 +6789,8 @@ export default defineComponent({
       // } catch (error) {
       //   window.log.error('Ocurrió un error:', error);
       // }
-<<<<<<< HEAD
-      console.log("finMSV");
-=======
       this.apiMSV = false;
->>>>>>> e60888814a334d1aa6f7f092cd0f9e7a37f86eca
+      clearInterval(this.intervalId);
     },
 
     comMSV(){
@@ -6832,12 +6807,17 @@ export default defineComponent({
         let valoresOrdenados = Array.from({ length: 15 }, () => ({ segmento4: "", valor: "" }));
   
         //Obtiene el arreglo con el mensaje HL7
-        let hl7Message = transAnestStore.datosMSV
+        //let hl7Message = transAnestStore.datosMSV
+        let hl7Message = this.informacion
         
         //Separa las líneas del mensaje HL7
         if(hl7Message != null){          
           let lineas = hl7Message.split('\r');
-          
+          //console.log(lineas);
+          lineas.array.forEach(element => {
+            console.log(element);
+          });
+
           //Obtiene las líneas OBX
           let lineasOBX = lineas.filter(function(linea) {
             return /^OBX/.test(linea);
