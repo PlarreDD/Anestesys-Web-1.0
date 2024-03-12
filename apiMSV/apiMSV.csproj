@@ -86,5 +86,8 @@
   <ItemGroup>
     <None Include="src\noPing.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\Fondo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

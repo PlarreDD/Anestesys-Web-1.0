@@ -206,12 +206,14 @@ namespace apiMSV
             txtHL7.Text = responseString;
         }
 
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
             httpListener?.Stop();
             listener.Stop();
             p1.Abort();
             p2.Abort();
+
+            this.Close();
         }
     }
 }
