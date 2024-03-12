@@ -1393,9 +1393,9 @@ import { Line } from 'vue-chartjs';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
-// import pdfFonts from "pdfmake/build/vfs_fonts.js";
+import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
-// window.pdfMake.fonts = pdfFonts.pdfMake;
+window.pdfMake.fonts = pdfFonts.pdfMake;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 
@@ -1427,6 +1427,9 @@ export default defineComponent({
 
   data() {
     return {
+      informacion: '',
+      clienteIp: '',
+
       tutoUno: true,
       tutoDos: false,
       tutoTres: false,
@@ -1722,6 +1725,7 @@ export default defineComponent({
     this.menuTrans.tipoRel= "RELEVO";
     this.menuTrans.tipoEve= "EVENTO";
     
+    /*Retirado*/
     // this.tempMSV = setInterval(() => {
     //   this.pingMSV(medStore.monitor[0].dirIPMVS);
     // }, 10000);
@@ -1734,6 +1738,15 @@ export default defineComponent({
       // Sincronizar la posición de desplazamiento en el elemento 'grid-lateral'
       gridLateral.scrollTop = grid.scrollTop;
     });
+
+    fetch(`${import.meta.env.VITE_ORIGIN1}/api/getClienteIp`) // Reemplaza '/api/getClientIp' con la ruta correcta en tu servidor
+      .then(response => response.json())
+      .then(data => {
+        this.clienteIp = data.clienteIp;
+      })
+      .catch(error => {
+        console.error('Error al obtener la dirección IP:', error);
+      });
   },
 
   methods: {
@@ -6738,6 +6751,18 @@ export default defineComponent({
       }
     },
 
+    //PRUEBA DE FUNCIONAMIENTO DE OBTENCION DE HL7
+    async pruebaCom() {
+      try {
+        const response = await fetch(`http://${this.clienteIp}:5000/apiMVS`);
+        const data = await response.text();
+        this.informacion = data;
+        this.vaciarMensajeHL7();
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
+    },
+
     // Eventos de Monitoreo
     async iniMSV(){
       // try {
@@ -6749,6 +6774,10 @@ export default defineComponent({
       //   window.log.error('Ocurrió un error:', error);
       // }
       this.apiMSV = true;
+      
+      this.intervalId = setInterval(() => {
+        this.pruebaCom()
+      }, 1000);
     },
 
     async finMSV(){
@@ -6761,6 +6790,7 @@ export default defineComponent({
       //   window.log.error('Ocurrió un error:', error);
       // }
       this.apiMSV = false;
+      clearInterval(this.intervalId);
     },
 
     comMSV(){
@@ -6777,12 +6807,14 @@ export default defineComponent({
         let valoresOrdenados = Array.from({ length: 15 }, () => ({ segmento4: "", valor: "" }));
   
         //Obtiene el arreglo con el mensaje HL7
-        let hl7Message = transAnestStore.datosMSV
+        //let hl7Message = transAnestStore.datosMSV
+        let hl7Message = this.informacion
+        console.log(hl7Message);
         
         //Separa las líneas del mensaje HL7
         if(hl7Message != null){          
-          let lineas = hl7Message.split('\r');
-          
+          let lineas = hl7Message.split(',');
+
           //Obtiene las líneas OBX
           let lineasOBX = lineas.filter(function(linea) {
             return /^OBX/.test(linea);
@@ -7036,7 +7068,7 @@ export default defineComponent({
 
     pingMSV(dirip: string){
       try {
-        medStore.statusMSV(dirip);
+        // medStore.statusMSV(dirip);
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }

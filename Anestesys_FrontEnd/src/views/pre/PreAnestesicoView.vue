@@ -17,12 +17,6 @@
           </el-card>
       </div>
 
-      <div class="col-md-2">
-        <!-- <button type="button" id="tutorial-pre" class="btn btn-secondary fw-bold" @click="">
-          Prueba {{ clienteIp }}
-        </button> -->
-      </div>
-
       <!-- Botón tutorial -->
       <div class="col-md-2">
         <button type="button" id="tutorial-pre" class="btn btn-secondary fw-bold invisible" data-bs-toggle="modal" data-bs-target="#tutorialPreModal">
@@ -501,9 +495,9 @@ import { ElInput, ElCard } from 'element-plus';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
-// import pdfFonts from "pdfmake/build/vfs_fonts.js";
+import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
-// window.pdfMake.fonts = pdfFonts.pdfMake;
+window.pdfMake.fonts = pdfFonts.pdfMake;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 
@@ -517,9 +511,6 @@ export default defineComponent({
 
   data() {
     return {
-      informacion: '',
-      clienteIp: '',
-
       tutoUno: true,
       tutoDos: false,
       tutoTres: false,
@@ -800,16 +791,7 @@ export default defineComponent({
     this.mostrarHeader();
     this.ocultarMenuLateral();
     document.addEventListener('scroll', this.scrollFunction);
-    // transStore.getIniciaMonitoreo();
-
-    fetch(`${import.meta.env.VITE_ORIGIN1}/api/getClienteIp`) // Reemplaza '/api/getClientIp' con la ruta correcta en tu servidor
-      .then(response => response.json())
-      .then(data => {
-        this.clienteIp = data.clienteIp;
-      })
-      .catch(error => {
-        console.error('Error al obtener la dirección IP:', error);
-      });
+    //transStore.getIniciaMonitoreo();
   },
   
   destroyed: function(){
@@ -818,18 +800,6 @@ export default defineComponent({
 
   methods: {
 /*======================= Obtener paciente para nuevo registro =======================*/
-    // async obtenerInformacion(){
-    //   try {
-    //     const response = await fetch(`http://${this.clienteIp}:5000/apiMVS`);
-    //     const data = await response.text();
-    //     this.informacion = data;
-
-    //     console.log("info: "+this.informacion);
-    //   } catch (error) {
-    //     window.log.error('Ocurrió un error:', error);
-    //   }
-    // },
-
     // Obtener expedientes en Multiselect
     async listarExpedientes(){    
       try {
