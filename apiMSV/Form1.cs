@@ -185,7 +185,7 @@ namespace apiMSV
                             responseString = "";
                         }
 
-                        responseString = cadena_MVS + ",";
+                        responseString += cadena_MVS + ",";
                         
                         conexionMSV(ipMonitor);
 
