@@ -176,9 +176,9 @@ const updatePaciente = (req, res) => __awaiter(void 0, void 0, void 0, function*
         const { id } = req.params;
         const updVar = req.body;
         const paciente = yield PreAnestesico_1.PreIdPacientes.findByIdAndUpdate(id, { nomPaciente: updVar.nomPaciente,
-            fechaNPaciente: updVar.fechaNac,
+            fechaNPaciente: updVar.fechaNPaciente,
             edadPaciente: updVar.edadPaciente,
-            generoPaciente: updVar.genero,
+            generoPaciente: updVar.generoPaciente,
             nacionalidad: updVar.nacionalidad,
             CURP: updVar.CURP,
             folioID: updVar.folioID,
@@ -189,7 +189,7 @@ const updatePaciente = (req, res) => __awaiter(void 0, void 0, void 0, function*
             codigoPostal: updVar.codigoPostal });
         const infoCx = yield PreAnestesico_1.PreIdPacientesCx.findOneAndUpdate({ pid: paciente === null || paciente === void 0 ? void 0 : paciente._id }, { numEpisodio: updVar.numEpisodio,
             habitacionPaciente: updVar.habitacionPaciente,
-            fechaInPaciente: updVar.fechaIn,
+            fechaInPaciente: updVar.fechaInPaciente,
             /* Datos de cirugía */
             diagnostico: updVar.diagnostico,
             tipoCx: updVar.tipoCx,
@@ -270,9 +270,9 @@ const updateAnteriorPaciente = (req, res) => __awaiter(void 0, void 0, void 0, f
     try {
         const { id } = req.params;
         const updVar = req.body;
-        const paciente = yield PreAnestesico_1.PreIdPacientes.findByIdAndUpdate(id, { fechaNPaciente: updVar.fechaNac,
+        const paciente = yield PreAnestesico_1.PreIdPacientes.findByIdAndUpdate(id, { fechaNPaciente: updVar.fechaNPaciente,
             edadPaciente: updVar.edadPaciente,
-            generoPaciente: updVar.genero });
+            generoPaciente: updVar.generoPaciente });
         return res.json({ paciente });
     }
     catch (error) {
@@ -298,7 +298,7 @@ const updateNuevoRegistroPaciente = (req, res) => __awaiter(void 0, void 0, void
         const updVar = req.body;
         const infoCx = yield PreAnestesico_1.PreIdPacientesCx.findByIdAndUpdate(id, { numEpisodio: updVar.numEpisodio,
             habitacionPaciente: updVar.habitacionPaciente,
-            fechaInPaciente: updVar.fechaIn,
+            fechaInPaciente: updVar.fechaInPaciente,
             /* Datos de cirugía */
             diagnostico: updVar.diagnostico,
             tipoCx: updVar.tipoCx,

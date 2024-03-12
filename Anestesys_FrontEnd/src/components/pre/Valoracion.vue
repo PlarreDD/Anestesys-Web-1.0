@@ -1266,7 +1266,7 @@ export default defineComponent({
     
                 this.enviarDatosValoracion()
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         },
 
@@ -1276,7 +1276,7 @@ export default defineComponent({
                 this.btnUpdateEstudios=false
                 this.btnActualizaEstudio=false        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         },
 
@@ -1294,7 +1294,7 @@ export default defineComponent({
                     this.enviarDatosValoracion();
                 }        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         },
 
@@ -1328,7 +1328,7 @@ export default defineComponent({
     
                 }        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         },
 
@@ -1336,7 +1336,7 @@ export default defineComponent({
             try {
                 await preIdStore.getEstudiosList();        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         },
 
@@ -1360,7 +1360,7 @@ export default defineComponent({
     
                 await this.listarEstudios();        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         },
 
@@ -1372,7 +1372,7 @@ export default defineComponent({
     
                 await this.listarEstudios();        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         },
 
@@ -1390,7 +1390,7 @@ export default defineComponent({
     
                 await this.listarEstudios();        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         },
 
@@ -1421,7 +1421,7 @@ export default defineComponent({
                     await this.listarEstudios();
                 }        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         },
 
@@ -1441,7 +1441,7 @@ export default defineComponent({
                     }
                     });        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         },
 
@@ -1450,7 +1450,7 @@ export default defineComponent({
                 await preIdStore.deleteEstudio(idEstudio);
                 await this.listarEstudios();        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         },
 
@@ -1538,7 +1538,7 @@ export default defineComponent({
                                                         preIdStore.PielFaneras= this.infoValoracion.expFis_VASPielFaneras,
                                                         )        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }
         }
     }

@@ -838,7 +838,7 @@ export default defineComponent({
           position: "top-start",
         });        
       } catch (error) {
-      window.log.error('Ocurrió un error:', error);
+        window.log.error('Ocurrió un error:', error);
       }     
     },
 
@@ -846,7 +846,7 @@ export default defineComponent({
       try {
         await medStore.getMedicamentosList();        
       } catch (error) {
-      window.log.error('Ocurrió un error:', error);
+        window.log.error('Ocurrió un error:', error);
       }     
     },
 
@@ -1159,21 +1159,17 @@ export default defineComponent({
     },
 
     async cambiarTutorialPre(){
-      try {
-        this.tutoPre=true;
-        this.tutoTrans=false;
-        this.tutoPost=false;
-  
-        this.tutoUnoPre= true
-        this.tutoDosPre= false
-        this.tutoTresPre= false
-        this.tutoCuatroPre= false
-  
-        document.getElementById("tutoUnoPre").ariaCurrent=="true"
-        document.getElementById("tutoUnoPre").className=="active"      
-      } catch (error) {
-        window.log.error('Ocurrió un error:', error);
-      }
+      this.tutoPre=true;
+      this.tutoTrans=false;
+      this.tutoPost=false;
+
+      this.tutoUnoPre= true
+      this.tutoDosPre= false
+      this.tutoTresPre= false
+      this.tutoCuatroPre= false
+
+      document.getElementById("tutoUnoPre").ariaCurrent=="true"
+      document.getElementById("tutoUnoPre").className=="active"      
     },
     async cambiarTutorialTrans(){
       this.tutoPre=false;
@@ -1185,7 +1181,6 @@ export default defineComponent({
       this.tutoTresTrans=false
       this.tutoCuatroTrans=false
       this.tutoCincoTrans=false
-
     },
     async cambiarTutorialPost(){
       this.tutoPre=false;

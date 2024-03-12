@@ -601,7 +601,7 @@ export default defineComponent({
     
                 this.enviarDatos()        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }      
         },
 
@@ -621,7 +621,7 @@ export default defineComponent({
                     }
                 }        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }     
         },
 
@@ -638,7 +638,7 @@ export default defineComponent({
     
                 this.calcularEdad()        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }     
         },
 
@@ -652,7 +652,7 @@ export default defineComponent({
                     this.mostrarDatosFiltradosCIE10=false
                 }        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }     
         },
 
@@ -666,7 +666,7 @@ export default defineComponent({
                     this.mostrarDatosFiltradosCIE9=false
                 }        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }     
         },
 
@@ -676,7 +676,7 @@ export default defineComponent({
                 this.infoPreIdPaciente.cie10 = item;
                 this.mostrarDatosFiltradosCIE10= false        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }     
         },
 
@@ -686,7 +686,7 @@ export default defineComponent({
                 this.infoPreIdPaciente.cie9 = item;
                 this.mostrarDatosFiltradosCIE9= false        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }     
         },
 
@@ -695,7 +695,7 @@ export default defineComponent({
                 this.$emit("validar", this.infoPreIdPaciente.numExped,
                                       this.infoPreIdPaciente.nomPaciente);        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }     
         },
 
@@ -739,7 +739,7 @@ export default defineComponent({
                                            preIdStore.residenteAnestesia=this.infoPreIdPaciente.residenteAnestesia
                                            );        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }     
         },
 
@@ -756,7 +756,7 @@ export default defineComponent({
                     this.enviarDatos();
                 }                    
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }     
         },
 
@@ -770,7 +770,7 @@ export default defineComponent({
     
                 this.enviarDatos();        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }     
         },
 
@@ -784,7 +784,7 @@ export default defineComponent({
     
                 this.enviarDatos();        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }     
         },
 
@@ -795,7 +795,7 @@ export default defineComponent({
     
                 this.enviarDatos();        
             } catch (error) {
-            window.log.error('Ocurrió un error:', error);
+                window.log.error('Ocurrió un error:', error);
             }     
         },        
     },

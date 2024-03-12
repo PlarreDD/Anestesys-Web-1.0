@@ -489,7 +489,7 @@ export const usePreIdStore = defineStore('preid', {
 
         async getCIE10List() {            
             await apiAxios({
-              url: `http://localhost:5000/preId/cie10/uno/${this.datoCIE10}`,
+              url: `/preId/cie10/uno/${this.datoCIE10}`,
               method: "GET",
               headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -505,7 +505,7 @@ export const usePreIdStore = defineStore('preid', {
 
         async getCIE9List() {
             await apiAxios({                
-              url: `http://localhost:5000/preId/cie9/uno/${this.datoCIE9}`,
+              url: `/preId/cie9/uno/${this.datoCIE9}`,
               method: "GET",
               headers: {
                 Authorization: "Bearer " + userStore.token,

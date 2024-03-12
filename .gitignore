@@ -29,3 +29,54 @@ coverage
 
 .env
 node_modules
+
+# Carpeta de salida de compilación
+bin/
+obj/
+
+# Archivos de configuración
+*.suo
+*.user
+*.sln.docstates
+*.bak
+
+# Visual Studio Code
+.vscode/
+
+# ReSharper
+_ReSharper*/
+
+# Rider
+.idea/
+
+# Carpeta de paquetes NuGet
+packages/
+
+# Carpeta de caché de Visual Studio
+.vs/
+
+# Archivos de respaldo de Visual Studio
+*.*proj.user
+*.publishsettings
+*.pfx
+
+# Archivos de análisis de código
+*.sln.ide
+
+# Archivos de caché de herramientas
+*.ide/
+
+# Archivos de caché de Visual Studio para Mac
+*.vsix.state
+project.lock.json
+
+# Carpeta de caché de Rider
+.idea/
+
+# Archivos de caché de Rider
+*.sln.iml
+*.ipr
+*.iws
+
+# Carpeta de archivos de caché de Unity
+Library/
