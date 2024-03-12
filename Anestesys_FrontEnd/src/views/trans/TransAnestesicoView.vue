@@ -6809,14 +6809,11 @@ export default defineComponent({
         //Obtiene el arreglo con el mensaje HL7
         //let hl7Message = transAnestStore.datosMSV
         let hl7Message = this.informacion
+        console.log(hl7Message);
         
         //Separa las líneas del mensaje HL7
         if(hl7Message != null){          
-          let lineas = hl7Message.split('\r');
-          //console.log(lineas);
-          lineas.array.forEach(element => {
-            console.log(element);
-          });
+          let lineas = hl7Message.split(',');
 
           //Obtiene las líneas OBX
           let lineasOBX = lineas.filter(function(linea) {
