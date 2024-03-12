@@ -7,7 +7,7 @@
             <div class="col-md-1 justificar-icono-nota">
                 <label 
                         class="form-label fw-bold alinear-icono-nota">
-                            <span style="text-align: right;">
+                            <span style="text-align: right;" @click="empezarReconocimiento">
                                 <font-awesome-icon icon="fa-solid fa-microphone" size="2xl"/>
                             </span>
                 </label>     
@@ -29,6 +29,7 @@
 <script lang="ts">
 import type { notaPre } from "@/interfaces/regPreAnest";
 import { usePreIdStore } from "@/stores/preId-store";
+import { log } from "loglevel";
 import { defineComponent } from "vue";
 
 const preIdStore = usePreIdStore();
@@ -89,7 +90,22 @@ export default defineComponent({
             } catch (error) {
                 window.log.error('Ocurrió un error:', error);
             }
-        }        
+        },
+
+        async empezarReconocimiento() {
+            console.log("Entro reconocimiento");                        
+            const recognition = new (window as any).webkitSpeechRecognition();
+
+            recognition.lang = 'es-ES'; // Establece el idioma del reconocimiento de voz
+            recognition.interimResults = false; // Si quieres resultados intermedios
+
+            recognition.onresult = (event: any) => {
+                const resultado = event.results[0][0].transcript;
+                this.textoNota.nota = resultado;
+            };
+
+            recognition.start();
+        }
     }
 })
 </script>
