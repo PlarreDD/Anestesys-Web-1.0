@@ -1,17 +1,19 @@
 <template>
     <div class="col-12 borderPrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">  
-        <form @submit.prevent="" class="row g-3">                
+        <div class="row g-3">                
             <div class="col-md-11">
                     <h5 class="col-12 fw-bold"> NOTA PREANESTÉSICA </h5>                                                                                                                    
             </div>
             <div class="col-md-1 justificar-icono-nota">
-                <label 
-                        class="form-label fw-bold alinear-icono-nota">
-                            <span style="text-align: right;" @click="empezarReconocimiento">
-                                <font-awesome-icon icon="fa-solid fa-microphone" size="2xl"/>
-                            </span>
+                <label class="form-label fw-bold alinear-icono-nota">
+                    <!-- <button > -->
+                        <span style="text-align: right; cursor: pointer;" @click="empezarReconocimiento">
+                            <font-awesome-icon icon="fa-solid fa-microphone" size="2xl"/>
+                        </span>
+                    <!-- </button> -->
                 </label>     
             </div>
+            
             <div class="col-md-12">
                 <textarea class="form-control"
                           id=""
@@ -22,14 +24,13 @@
                                  'form-control border border-success formSombra' : 'form-control'">
                 </textarea>
             </div>            
-        </form>
+        </div>
     </div>    
 </template>
 
 <script lang="ts">
 import type { notaPre } from "@/interfaces/regPreAnest";
 import { usePreIdStore } from "@/stores/preId-store";
-import { log } from "loglevel";
 import { defineComponent } from "vue";
 
 const preIdStore = usePreIdStore();
@@ -101,10 +102,13 @@ export default defineComponent({
 
             recognition.onresult = (event: any) => {
                 const resultado = event.results[0][0].transcript;
+                console.log("Res"+resultado);
+                
                 this.textoNota.nota = resultado;
             };
 
             recognition.start();
+            console.log("Termino reconocimiento");            
         }
     }
 })
