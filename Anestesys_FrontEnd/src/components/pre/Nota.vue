@@ -8,7 +8,7 @@
                 <label class="form-label fw-bold alinear-icono-nota">
                     <!-- <button > -->
                         <span style="text-align: right; cursor: pointer;" @click="empezarReconocimiento">
-                            <font-awesome-icon icon="fa-solid fa-microphone" size="2xl"/>
+                            <font-awesome-icon class="" icon="fa-solid fa-microphone" id="microfono" size="2xl"/>
                         </span>
                     <!-- </button> -->
                 </label>     
@@ -98,13 +98,15 @@ export default defineComponent({
             const recognition = new (window as any).webkitSpeechRecognition();
 
             recognition.lang = 'es-ES'; // Establece el idioma del reconocimiento de voz
-            recognition.interimResults = false; // Si quieres resultados intermedios
+            recognition.interimResults = true; // Si quieres resultados intermedios
 
             recognition.onresult = (event: any) => {
+                document.getElementById("microfono").className = "microfono" //Test
+                
                 const resultado = event.results[0][0].transcript;
                 console.log("Res"+resultado);
                 
-                this.textoNota.nota = resultado;
+                this.textoNota.nota += ' ' + resultado;
             };
 
             recognition.start();
@@ -156,5 +158,9 @@ h5{
 }
 .justificar-icono-nota{
     text-align: center;
+}
+
+.microfono{
+    color: #E88300;
 }
 </style>
