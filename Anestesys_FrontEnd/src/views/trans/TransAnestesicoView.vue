@@ -18,20 +18,8 @@
                         @click="finMSV">
                   <img src="../../../public/images/imgIcon/MonitorActivoDatos.png" class="btn-msv"/>
                 </button>
-                <span class="fw-bold msv-color-txt">&nbsp;&nbsp;Estado: Recibiendo Datos</span>
+                <span class="fw-bold msv-color-txt">&nbsp;&nbsp;Estado: Conectado</span>
               </template>
-
-              <!-- Monitor Gris -->
-              <!-- <template v-if="transAnestStore.envDat === false && medStore.status === 'Activo'">
-                <button class="borde-btn-msv"
-                        style="border: none;"
-                        @click="iniMSV"
-                        
-                        >
-                  <img src="../../../public/images/imgIcon/MonitorActivo.png" class="btn-msv" />
-                </button>
-                <span class="fw-bold msv-color-txt" >&nbsp;&nbsp;Estado: Sin Datos</span>
-              </template> -->
 
               <!-- Monitor Rojo -->
               <template v-if="apiMSV === false">
@@ -6752,32 +6740,26 @@ export default defineComponent({
     },
 
     //PRUEBA DE FUNCIONAMIENTO DE OBTENCION DE HL7
-    async pruebaCom() {
-      try {
-        const response = await fetch(`http://${this.clienteIp}:5000/apiMVS`);
-        const data = await response.text();
-        this.informacion = data;
-        this.vaciarMensajeHL7();
-      } catch (error) {
-        window.log.error('Ocurrió un error:', error);
-      }
-    },
+    // async pruebaCom() {
+    //   try {
+    //     const response = await fetch(`http://${this.clienteIp}:5000/apiMVS`);
+    //     const data = await response.text();
+    //     this.informacion = data;
+    //     this.vaciarMensajeHL7();
+    //   } catch (error) {
+    //     window.log.error('Ocurrió un error:', error);
+    //   }
+    // },
 
     // Eventos de Monitoreo
     async iniMSV(){
-      // try {
-      //   transAnestStore.envDat = true;
-      //   this.btnCambioMonitor = true;
-      //   this.iniRecepDatos();
-      //   this.capturaGrid();
-      // } catch (error) {
-      //   window.log.error('Ocurrió un error:', error);
-      // }
       this.apiMSV = true;
       
       this.intervalId = setInterval(() => {
-        this.pruebaCom()
+        this.comMSV()
       }, 1000);
+
+      this.capturaGrid();
     },
 
     async finMSV(){
@@ -6791,11 +6773,23 @@ export default defineComponent({
       // }
       this.apiMSV = false;
       clearInterval(this.intervalId);
+      clearInterval(this.saveGrid);
+
+      if(preIdStore.nuevoRegistroPaciente == false){
+        this.transAnestStore.saveDatosMSV(this.gridBD, preIdStore.pacienteID._id);
+      }else if(preIdStore.nuevoRegistroPaciente == true){
+        this.transAnestStore.saveNuevoDatosMSV(this.gridBD, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+      }
+      
+      this.guardaDatosMSV = 0;
+      this.gridBD = [];
     },
 
-    comMSV(){
+    async comMSV(){
       try {
-        transAnestStore.getDatosMonitor();
+        const response = await fetch(`http://${this.clienteIp}:5000/apiMVS`);
+        const data = await response.text();
+        this.informacion = data;
         this.vaciarMensajeHL7();
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
@@ -6807,9 +6801,7 @@ export default defineComponent({
         let valoresOrdenados = Array.from({ length: 15 }, () => ({ segmento4: "", valor: "" }));
   
         //Obtiene el arreglo con el mensaje HL7
-        //let hl7Message = transAnestStore.datosMSV
         let hl7Message = this.informacion
-        console.log(hl7Message);
         
         //Separa las líneas del mensaje HL7
         if(hl7Message != null){          
@@ -6819,7 +6811,7 @@ export default defineComponent({
           let lineasOBX = lineas.filter(function(linea) {
             return /^OBX/.test(linea);
           });
-          
+
           //Obtiene los valores requeridos de las líneas OBX, en este caso los segmentos 4 y 5
           let valorSegmentos = lineasOBX.map(function(fila) {
             let segmentos = fila.split('|');
@@ -7000,22 +6992,23 @@ export default defineComponent({
     },
 
     // Recibe datos del MSV cada segundo
-    iniRecepDatos(){
-      try {
-        this.intervalId = setInterval(() => {
-          this.comMSV();
-        }, 1000);
-      } catch (error) {
-        window.log.error('Ocurrió un error:', error);
-      }
-    },
+    // iniRecepDatos(){
+      // console.log("iniRecepDatos");
+      // try {
+      //   this.intervalId = setInterval(() => {
+      //     this.comMSV();
+      //   }, 1000);
+      // } catch (error) {
+      //   window.log.error('Ocurrió un error:', error);
+      // }
+    // },
 
     termRecepDatos(){
       try {
-        transAnestStore.envDat = false;
-        transAnestStore.datosMSV = null;
-        clearInterval(this.intervalId);
-        clearInterval(this.saveGrid);
+        // transAnestStore.envDat = false;
+        // transAnestStore.datosMSV = null;
+        // clearInterval(this.intervalId);
+        // clearInterval(this.saveGrid);
         
         if(preIdStore.nuevoRegistroPaciente == false){
           this.transAnestStore.saveDatosMSV(this.gridBD, preIdStore.pacienteID._id);
@@ -7066,13 +7059,13 @@ export default defineComponent({
       }
     },
 
-    pingMSV(dirip: string){
-      try {
-        // medStore.statusMSV(dirip);
-      } catch (error) {
-        window.log.error('Ocurrió un error:', error);
-      }
-    },
+    // pingMSV(dirip: string){
+    //   try {
+    //     // medStore.statusMSV(dirip);
+    //   } catch (error) {
+    //     window.log.error('Ocurrió un error:', error);
+    //   }
+    // },
 
     async cambiarValorTutorial(){
       try {
