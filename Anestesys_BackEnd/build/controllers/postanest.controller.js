@@ -8,9 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateNuevoRecuperacion = exports.updateRecuperacion = exports.saveNuevoRecuperacion = exports.saveRecuperacion = exports.listNuevoNotaPA = exports.listNotaPA = exports.updateNuevoNotaPA = exports.updateNotaPA = exports.saveNuevoNotaPA = exports.saveNotaPA = void 0;
 const PostAnestesico_1 = require("../models/PostAnestesico");
+const logger_1 = __importDefault(require("../logger"));
 /********************************************************************/
 /************************ NOTA POST-ANESTÉSICA **********************/
 /********************************************************************/
@@ -67,6 +71,10 @@ const saveNotaPA = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         return res.json({ notaPA });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -124,6 +132,10 @@ const saveNuevoNotaPA = (req, res) => __awaiter(void 0, void 0, void 0, function
         return res.json({ notaPA });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -179,6 +191,10 @@ const updateNotaPA = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         return res.json({ notaPA });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -234,6 +250,10 @@ const updateNuevoNotaPA = (req, res) => __awaiter(void 0, void 0, void 0, functi
         return res.json({ notaPA });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -245,6 +265,10 @@ const listNotaPA = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         return res.json({ notaPA });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -256,6 +280,10 @@ const listNuevoNotaPA = (req, res) => __awaiter(void 0, void 0, void 0, function
         return res.json({ notaPA });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -373,6 +401,10 @@ const saveRecuperacion = (req, res) => __awaiter(void 0, void 0, void 0, functio
         return res.json({ recuperacion });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -487,6 +519,10 @@ const saveNuevoRecuperacion = (req, res) => __awaiter(void 0, void 0, void 0, fu
         return res.json({ recuperacion });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -599,6 +635,10 @@ const updateRecuperacion = (req, res) => __awaiter(void 0, void 0, void 0, funct
         return res.json({ recuperacion });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -711,6 +751,10 @@ const updateNuevoRecuperacion = (req, res) => __awaiter(void 0, void 0, void 0, 
         return res.json({ recuperacion });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });

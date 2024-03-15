@@ -42,21 +42,6 @@ const menuTransSchema = new mongoose_1.Schema({
     reqBasales: { type: String },
     ayuno: { type: String },
     otrosEgresos: { type: String },
-    /* Técnica Anestésica */
-    // local: { type: String },
-    // sedación: { type: String },
-    // gralBalanceada: { type: String },
-    // TIVA: { type: String },
-    // multimodal: { type: String },
-    // bloqMixto: { type: String },
-    // bloqPeriLum: { type: String },
-    // bloqPeriCaudal: { type: String },
-    // BloqEspinal: { type: String },
-    // BloqPlexo: { type: String },
-    // BloqTroncular: { type: String },
-    // bloqPeriToracico: { type: String },
-    // bloqPeriCervical: { type: String },
-    // libreOpioides: { type: String },
     /* Datos del Ventilador */
     datosVentilador: [{
             modosVentilacion: { type: String },

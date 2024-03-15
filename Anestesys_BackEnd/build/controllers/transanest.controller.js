@@ -8,9 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteEvento = exports.updateEvento = exports.getEvento = exports.getNuevoEventos = exports.getEventos = exports.updateNuevoEventos = exports.updateEventos = exports.saveNuevoEventos = exports.saveEventos = exports.deleteRelevo = exports.updateRelevo = exports.getRelevo = exports.getNuevoRelevos = exports.getRelevos = exports.updateNuevoRelevos = exports.updateRelevos = exports.saveNuevoRelevos = exports.saveRelevos = exports.deleteMedicamento = exports.updateMedicamento = exports.getMedicamento = exports.getNuevoMedicamentos = exports.getMedicamentos = exports.updateNuevoMedicamentos = exports.updateMedicamentos = exports.saveNuevoMedicamentos = exports.saveMedicamentos = exports.saveNuevoDatosMSV = exports.saveDatosMSV = exports.saveNuevoTiemposQX = exports.saveTiemposQX = exports.UpdateNuevoBalanceH = exports.UpdateBalanceH = exports.deleteModoVentilacion = exports.updateVentilacion = exports.getModoVentilacion = exports.getNuevoModosVent = exports.getModosVent = exports.updateNuevoMenuTrans = exports.updateMenuTrans = exports.saveNuevoMenuTrans = exports.saveMenuTrans = void 0;
 const TransAnestesico_1 = require("../models/TransAnestesico");
+const logger_1 = __importDefault(require("../logger"));
 /******************* Menu Trans Anestesico *******************/
 const saveMenuTrans = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -21,11 +25,6 @@ const saveMenuTrans = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         solHartman, solFisio, glucosados, gelatinas, almidones, albuminas, paqGlobular, plasmas, plaquetas, crioprecipitados, factor_VII, factor_VIII, otrosIngresos, 
         // Egresos
         liqAscitis, sangradoAprox, uresis, expoQX, reqBasales, ayuno, otrosEgresos, 
-        /* Técnica Anestésica */
-        // local, sedación, gralBalanceada, TIVA, multimodal,
-        // bloqMixto, bloqPeriLum, bloqPeriCaudal, BloqEspinal,
-        // BloqPlexo, BloqTroncular, bloqPeriToracico, bloqPeriCervical,
-        // libreOpioides,
         // Datos del ventilador
         modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr, } = req.body;
         let menuTrans;
@@ -55,21 +54,6 @@ const saveMenuTrans = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 reqBasales: reqBasales,
                 ayuno: ayuno,
                 otrosEgresos: otrosEgresos,
-                /* Técnica Anestésica */
-                // local: local,
-                // sedación: sedación,
-                // gralBalanceada: gralBalanceada,
-                // TIVA: TIVA,
-                // multimodal: multimodal,
-                // bloqMixto: bloqMixto,
-                // bloqPeriLum: bloqPeriLum,
-                // bloqPeriCaudal: bloqPeriCaudal,
-                // BloqEspinal: BloqEspinal,
-                // BloqPlexo: BloqPlexo,
-                // BloqTroncular: BloqTroncular,
-                // bloqPeriToracico: bloqPeriToracico,
-                // bloqPeriCervical: bloqPeriCervical,
-                // libreOpioides: libreOpioides,
             });
         }
         else {
@@ -90,6 +74,10 @@ const saveMenuTrans = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         return res.json({ menuTrans });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -103,11 +91,6 @@ const saveNuevoMenuTrans = (req, res) => __awaiter(void 0, void 0, void 0, funct
         solHartman, solFisio, glucosados, gelatinas, almidones, albuminas, paqGlobular, plasmas, plaquetas, crioprecipitados, factor_VII, factor_VIII, otrosIngresos, 
         // Egresos
         liqAscitis, sangradoAprox, uresis, expoQX, reqBasales, ayuno, otrosEgresos, 
-        /* Técnica Anestésica */
-        // local, sedación, gralBalanceada, TIVA, multimodal,
-        // bloqMixto, bloqPeriLum, bloqPeriCaudal, BloqEspinal,
-        // BloqPlexo, BloqTroncular, bloqPeriToracico, bloqPeriCervical,
-        // libreOpioides,
         // Datos del ventilador
         modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr, } = req.body;
         let menuTrans;
@@ -137,21 +120,6 @@ const saveNuevoMenuTrans = (req, res) => __awaiter(void 0, void 0, void 0, funct
                 reqBasales: reqBasales,
                 ayuno: ayuno,
                 otrosEgresos: otrosEgresos,
-                /* Técnica Anestésica */
-                // local: local,
-                // sedación: sedación,
-                // gralBalanceada: gralBalanceada,
-                // TIVA: TIVA,
-                // multimodal: multimodal,
-                // bloqMixto: bloqMixto,
-                // bloqPeriLum: bloqPeriLum,
-                // bloqPeriCaudal: bloqPeriCaudal,
-                // BloqEspinal: BloqEspinal,
-                // BloqPlexo: BloqPlexo,
-                // BloqTroncular: BloqTroncular,
-                // bloqPeriToracico: bloqPeriToracico,
-                // bloqPeriCervical: bloqPeriCervical,
-                // libreOpioides: libreOpioides,
             });
         }
         else {
@@ -172,6 +140,10 @@ const saveNuevoMenuTrans = (req, res) => __awaiter(void 0, void 0, void 0, funct
         return res.json({ menuTrans });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -196,6 +168,10 @@ const updateMenuTrans = (req, res) => __awaiter(void 0, void 0, void 0, function
         return res.json({ menuTrans });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -220,6 +196,10 @@ const updateNuevoMenuTrans = (req, res) => __awaiter(void 0, void 0, void 0, fun
         return res.json({ menuTrans });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -231,6 +211,10 @@ const getModosVent = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         return res.json({ listaModosVent });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -242,6 +226,10 @@ const getNuevoModosVent = (req, res) => __awaiter(void 0, void 0, void 0, functi
         return res.json({ listaModosVent });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -254,6 +242,10 @@ const getModoVentilacion = (req, res) => __awaiter(void 0, void 0, void 0, funct
         return res.json({ modoVent });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -280,8 +272,16 @@ const updateVentilacion = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
     catch (error) {
         if (error.kind === "ObjectId") {
+            logger_1.default.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 });
@@ -295,8 +295,16 @@ const deleteModoVentilacion = (req, res) => __awaiter(void 0, void 0, void 0, fu
     }
     catch (error) {
         if (error.kind === "ObjectId") {
+            logger_1.default.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 });
@@ -355,6 +363,10 @@ const UpdateBalanceH = (req, res) => __awaiter(void 0, void 0, void 0, function*
         return res.json({ menuTrans });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -412,6 +424,10 @@ const UpdateNuevoBalanceH = (req, res) => __awaiter(void 0, void 0, void 0, func
         return res.json({ menuTrans });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -446,6 +462,10 @@ const saveTiemposQX = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         return res.json({ tiempo });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -479,6 +499,10 @@ const saveNuevoTiemposQX = (req, res) => __awaiter(void 0, void 0, void 0, funct
         return res.json({ tiempo });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -511,7 +535,10 @@ const saveDatosMSV = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         return res.json({ menuTrans });
     }
     catch (error) {
-        console.log(error);
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -543,7 +570,10 @@ const saveNuevoDatosMSV = (req, res) => __awaiter(void 0, void 0, void 0, functi
         return res.json({ menuTrans });
     }
     catch (error) {
-        console.log(error);
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -565,6 +595,10 @@ const saveMedicamentos = (req, res) => __awaiter(void 0, void 0, void 0, functio
         return res.json({ menuTrans });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -585,6 +619,10 @@ const saveNuevoMedicamentos = (req, res) => __awaiter(void 0, void 0, void 0, fu
         return res.json({ menuTrans });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -603,6 +641,10 @@ const updateMedicamentos = (req, res) => __awaiter(void 0, void 0, void 0, funct
         return res.json({ menuTrans });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -621,6 +663,10 @@ const updateNuevoMedicamentos = (req, res) => __awaiter(void 0, void 0, void 0, 
         return res.json({ menuTrans });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -633,6 +679,10 @@ const getMedicamentos = (req, res) => __awaiter(void 0, void 0, void 0, function
         return res.json({ medicamento });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -644,6 +694,10 @@ const getNuevoMedicamentos = (req, res) => __awaiter(void 0, void 0, void 0, fun
         return res.json({ medicamento });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -656,6 +710,10 @@ const getMedicamento = (req, res) => __awaiter(void 0, void 0, void 0, function*
         return res.json({ medicamento });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -679,8 +737,16 @@ const updateMedicamento = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
     catch (error) {
         if (error.kind === "ObjectId") {
+            logger_1.default.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 });
@@ -694,8 +760,16 @@ const deleteMedicamento = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
     catch (error) {
         if (error.kind === "ObjectId") {
+            logger_1.default.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 });
@@ -716,6 +790,10 @@ const saveRelevos = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         return res.json({ menuTrans });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -735,6 +813,10 @@ const saveNuevoRelevos = (req, res) => __awaiter(void 0, void 0, void 0, functio
         return res.json({ menuTrans });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -752,6 +834,10 @@ const updateRelevos = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         return res.json({ menuTrans });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -769,6 +855,10 @@ const updateNuevoRelevos = (req, res) => __awaiter(void 0, void 0, void 0, funct
         return res.json({ menuTrans });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -781,6 +871,10 @@ const getRelevos = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         return res.json({ relevo });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -792,6 +886,10 @@ const getNuevoRelevos = (req, res) => __awaiter(void 0, void 0, void 0, function
         return res.json({ relevo });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -804,6 +902,10 @@ const getRelevo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return res.json({ relevo });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -826,8 +928,16 @@ const updateRelevo = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
     catch (error) {
         if (error.kind === "ObjectId") {
+            logger_1.default.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 });
@@ -841,8 +951,16 @@ const deleteRelevo = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
     catch (error) {
         if (error.kind === "ObjectId") {
+            logger_1.default.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 });
@@ -863,6 +981,10 @@ const saveEventos = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         return res.json({ menuTrans });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -882,6 +1004,10 @@ const saveNuevoEventos = (req, res) => __awaiter(void 0, void 0, void 0, functio
         return res.json({ menuTrans });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -899,6 +1025,10 @@ const updateEventos = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         return res.json({ menuTrans });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -916,6 +1046,10 @@ const updateNuevoEventos = (req, res) => __awaiter(void 0, void 0, void 0, funct
         return res.json({ menuTrans });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -928,6 +1062,10 @@ const getEventos = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         return res.json({ evento });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -939,6 +1077,10 @@ const getNuevoEventos = (req, res) => __awaiter(void 0, void 0, void 0, function
         return res.json({ evento });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -951,6 +1093,10 @@ const getEvento = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return res.json({ evento });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -972,8 +1118,16 @@ const updateEvento = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
     catch (error) {
         if (error.kind === "ObjectId") {
+            logger_1.default.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 });
@@ -987,8 +1141,16 @@ const deleteEvento = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
     catch (error) {
         if (error.kind === "ObjectId") {
+            logger_1.default.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 });

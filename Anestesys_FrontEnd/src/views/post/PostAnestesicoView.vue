@@ -310,101 +310,136 @@ export default ({
 
   methods:{
     async volverPestana(){
-      
-      if(preIdStore.volverPost == true){
-        const tabPost = document.getElementById('notaP-tab');
-        const tabObj = new Tab(tabPost);
-        tabObj.show();
-
-        this.esNotaP=true;
-        this.esRecuperacion=false;
-        
-        preIdStore.volverPost = false;
-
-        const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
-        await componenteNotaPA.volverPestana();
-
-        const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
-        await componenteRecuperacion.volverPestana();
+      try {
+        if(preIdStore.volverPost == true){
+          const tabPost = document.getElementById('notaP-tab');
+          const tabObj = new Tab(tabPost);
+          tabObj.show();
+  
+          this.esNotaP=true;
+          this.esRecuperacion=false;
+          
+          preIdStore.volverPost = false;
+  
+          const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
+          await componenteNotaPA.volverPestana();
+  
+          const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
+          await componenteRecuperacion.volverPestana();
+        }        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
       }
     },
     
     async guardarDatos(){
-      const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
-      await componenteNotaPA.guardarDatosNotaPA();
-
-      const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
-      await componenteRecuperacion.guardarDatosRecuperacion();
+      try {
+        const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
+        await componenteNotaPA.guardarDatosNotaPA();
+  
+        const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
+        await componenteRecuperacion.guardarDatosRecuperacion();        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
     },
 
     async validaSeleccionNota(){
-      if(document.getElementById("notaP-tab").ariaSelected=="false"){
-        this.esNotaP=false   
+      try {
+        if(document.getElementById("notaP-tab").ariaSelected=="false"){
+          this.esNotaP=false   
+        }
+        else
+          this.esNotaP=true;
+          this.esRecuperacion=false;
+  
+        const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
+        await componenteNotaPA.guardarDatosNotaPA();
+  
+        const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
+        await componenteRecuperacion.guardarDatosRecuperacion();        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
       }
-      else
-        this.esNotaP=true;
-        this.esRecuperacion=false;
-
-      const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
-      await componenteNotaPA.guardarDatosNotaPA();
-
-      const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
-      await componenteRecuperacion.guardarDatosRecuperacion();
     },
 
     async validaSeleccionRecuperacion(){
-      if(document.getElementById("recuperacion-tab").ariaSelected=="false"){
-        this.esRecuperacion=false  
+      try {
+        if(document.getElementById("recuperacion-tab").ariaSelected=="false"){
+          this.esRecuperacion=false  
+        }
+        else
+          this.esNotaP=false;
+          this.esRecuperacion=true;
+  
+        const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
+        await componenteNotaPA.guardarDatosNotaPA();
+  
+        const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
+        await componenteRecuperacion.guardarDatosRecuperacion();        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
       }
-      else
-        this.esNotaP=false;
-        this.esRecuperacion=true;
-
-      const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
-      await componenteNotaPA.guardarDatosNotaPA();
-
-      const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
-      await componenteRecuperacion.guardarDatosRecuperacion();
     },
 
     async desplegarMenuVistaRapida(){     
-      preIdStore.VistaRapida=true
-      this.mostrarVistaRapida=true
+      try {
+        preIdStore.VistaRapida=true
+        this.mostrarVistaRapida=true        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
     },
 
     async replegarMenuVistaRapida(){ 
-      if(this.mostrarVistaRapida=true)     
-        preIdStore.VistaRapida=false
-        this.mostrarVistaRapida=false
+      try {
+        if(this.mostrarVistaRapida=true)     
+          preIdStore.VistaRapida=false
+          this.mostrarVistaRapida=false        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
     },
 
     async topFunction() {
-      document.body.scrollTop = 0; // Para safari
-      document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
+      try {
+        document.body.scrollTop = 0; // Para safari
+        document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
     },
 
     async cambiarValorTutorial(){
-      swal
-        .fire({
-          html: "Podrá volver a consultar el tutorial desde el menú lateral en la sección de <b>Ayuda</b>",
-          icon: "info",
-          showConfirmButton: true,
-          showCancelButton: false,
-          toast: true,
-        })
-        
-        userStore.TutorialPost = 1
-        await this.userStore.updateTutorialPost(userStore.IdMed)                        
+      try {
+        swal
+          .fire({
+            html: "Podrá volver a consultar el tutorial desde el menú lateral en la sección de <b>Ayuda</b>",
+            icon: "info",
+            showConfirmButton: true,
+            showCancelButton: false,
+            toast: true,
+          })
+          
+          userStore.TutorialPost = 1
+          await this.userStore.updateTutorialPost(userStore.IdMed)                                
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
     },
 
     async validarCambioCarrusel(){
-      if(document.getElementById("tutoUno").ariaCurrent=="true"){
-        this.tutoUno=true
-        this.tutoDos=false
-      }
-      else if(document.getElementById("tutoDos").ariaCurrent=="true"){
-        this.tutoUno=false
-        this.tutoDos=true
+      try {
+        if(document.getElementById("tutoUno").ariaCurrent=="true"){
+          this.tutoUno=true
+          this.tutoDos=false
+        }
+        else if(document.getElementById("tutoDos").ariaCurrent=="true"){
+          this.tutoUno=false
+          this.tutoDos=true
+        }        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
       }
     }
   }

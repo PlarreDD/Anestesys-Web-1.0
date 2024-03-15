@@ -136,13 +136,6 @@ import { defineComponent } from "vue";
 const userStore = useUserStore();
 
 export default defineComponent({
-  mounted: function() { // Llama el método despues de cargar la página
-    // this.cargarFondo();
-  },
-  
-  // created(){
-    // this.cargarFondo()
-  // },
 
   data() {
     return{
@@ -156,54 +149,58 @@ export default defineComponent({
   
   methods: {
     async validaCamposLogin() {
-      if(this.usr.email == undefined || this.usr.email == "" ||
-         this.usr.pswd == undefined || this.usr.pswd =="") {
-        if(this.usr.email == undefined || this.usr.email == ""){
-          this.userCorreo = true;
+      try {
+        if(this.usr.email == undefined || this.usr.email == "" ||
+           this.usr.pswd == undefined || this.usr.pswd =="") {
+          if(this.usr.email == undefined || this.usr.email == ""){
+            this.userCorreo = true;
+          }
+          else{
+            this.userCorreo = false;
+          }
+  
+          if(this.usr.pswd == undefined || this.usr.pswd == ""){
+            this.userContrasena = true;
+          }
+          else{
+            this.userContrasena = false;
+          }
         }
         else{
           this.userCorreo = false;
-        }
-
-        if(this.usr.pswd == undefined || this.usr.pswd == ""){
-          this.userContrasena = true;
-        }
-        else{
           this.userContrasena = false;
-        }
-      }
-      else{
-        this.userCorreo = false;
-        this.userContrasena = false;
-        
-        userStore.loginAccess(this.usr.email, this.usr.pswd);
-
-        this.usr.email = ""
-        this.usr.pswd = ""
+          
+          userStore.loginAccess(this.usr.email, this.usr.pswd);
+  
+          this.usr.email = ""
+          this.usr.pswd = ""
+        }        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
       }
     },
 
     async iniciarEmergencia(){
-      userStore.token = "tokenEmergencia"
-      userStore.expiresIn = 900
-      this.$router.push('pre')
+      try {
+        userStore.token = "tokenEmergencia"
+        userStore.expiresIn = 900
+        this.$router.push('pre')        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
     },
 
-    // async cargarFondo(){
-    //   document.body.style.backgroundImage = "url('../../public/images/login.webp')";
-    // },
-
-    // async cargarFondoRegistro(){
-    //   document.body.style.backgroundImage = "url('../../public/images/registro.webp')";
-    // },
-
     async mostrarPass(){
-      if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
-        (document.getElementById("contrasena") as HTMLInputElement).type = "password";
-        this.contrasena=false
-      } else {
-        (document.getElementById("contrasena") as HTMLInputElement).type = "text";
-        this.contrasena=true
+      try {
+        if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
+          (document.getElementById("contrasena") as HTMLInputElement).type = "password";
+          this.contrasena=false
+        } else {
+          (document.getElementById("contrasena") as HTMLInputElement).type = "text";
+          this.contrasena=true
+        }        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
       }
     },
   }
@@ -212,15 +209,8 @@ export default defineComponent({
 
 <style>
 .fondo-vista {
-  /* Otras propiedades de estilo */
   background-image: url('../../public/images/login.webp'); /* Ruta de la imagen en tus assets */
   height: 100vh;
-  /* width: 1920; */
-  /* margin: 0; */
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: center; */
-  /* align-items: center; */
   margin-top: -1rem;
   margin-left: -19rem;
   margin-right: -18rem;

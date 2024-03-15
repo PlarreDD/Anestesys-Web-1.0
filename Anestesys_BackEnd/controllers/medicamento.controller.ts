@@ -1,5 +1,6 @@
 import { Response } from "express";
 import { Medicamento } from "../models/Medicamento";
+import logger from '../logger';
 
 /* Función para obtener todos los medicamentos */
 export const getMedicamentos = async (req: any, res: Response) => {
@@ -7,6 +8,10 @@ export const getMedicamentos = async (req: any, res: Response) => {
         const medicamentos = await Medicamento.find({id: req.id}) 
         return res.json({medicamentos});
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -19,6 +24,10 @@ export const getMedicamento = async (req: any, res: Response) => {
         const medicamento = await Medicamento.findById(id)
         return res.json({medicamento});
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -33,6 +42,10 @@ export const createMedicamento = async (req: any, res: Response) => {
 
         return res.json({ medicamento });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 };
@@ -51,9 +64,17 @@ export const updateMedicamento = async (req: any, res: Response) => {
         return res.json({ medicamento });
     } catch (error) {
         if (error.kind === "ObjectId") {
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }
         
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
@@ -68,9 +89,17 @@ export const deleteMedicamento = async (req: any, res: Response) => {
         return res.json({ medicamento });
     } catch (error) {
         if (error.kind === "ObjectId") {
+            logger.log({
+                level: 'error',
+                message: 'Error de servidor', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }
         
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 };

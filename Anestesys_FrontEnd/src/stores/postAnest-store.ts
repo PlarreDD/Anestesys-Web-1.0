@@ -220,6 +220,7 @@ export const usePostAnestStore = defineStore('postAn', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -285,6 +286,7 @@ export const usePostAnestStore = defineStore('postAn', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -352,6 +354,7 @@ export const usePostAnestStore = defineStore('postAn', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -421,6 +424,7 @@ export const usePostAnestStore = defineStore('postAn', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -436,6 +440,7 @@ export const usePostAnestStore = defineStore('postAn', {
                 this.NotaPA = res.data.notaPA;
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -451,6 +456,7 @@ export const usePostAnestStore = defineStore('postAn', {
                 this.NotaPA = res.data.notaPA;
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
         /*----------------------- Recuperación -----------------------*/
@@ -547,17 +553,9 @@ export const usePostAnestStore = defineStore('postAn', {
                 }
             })
             .then((res: any) => {
-                // swal.fire({
-                //     title: 'Datos guardados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -653,17 +651,9 @@ export const usePostAnestStore = defineStore('postAn', {
                 }
             })
             .then((res: any) => {
-                // swal.fire({
-                //     title: 'Datos guardados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -759,17 +749,9 @@ export const usePostAnestStore = defineStore('postAn', {
                 }
             })
             .then((res: any) => {
-                // swal.fire({
-                //     title: 'Datos guardados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -867,17 +849,9 @@ export const usePostAnestStore = defineStore('postAn', {
                 }
             })
             .then((res: any) => {
-                // swal.fire({
-                //     title: 'Datos guardados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
     }

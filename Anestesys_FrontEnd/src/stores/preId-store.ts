@@ -294,6 +294,7 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -353,6 +354,7 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -401,6 +403,7 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -429,6 +432,7 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -479,12 +483,13 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
         async getCIE10List() {            
             await apiAxios({
-              url: `http://localhost:5000/preId/cie10/uno/${this.datoCIE10}`,
+              url: `/preId/cie10/uno/${this.datoCIE10}`,
               method: "GET",
               headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -494,12 +499,13 @@ export const usePreIdStore = defineStore('preid', {
                 this.cie10 = res.data.cie10;            
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
         async getCIE9List() {
             await apiAxios({                
-              url: `http://localhost:5000/preId/cie9/uno/${this.datoCIE9}`,
+              url: `/preId/cie9/uno/${this.datoCIE9}`,
               method: "GET",
               headers: {
                 Authorization: "Bearer " + userStore.token,
@@ -509,6 +515,7 @@ export const usePreIdStore = defineStore('preid', {
                 this.cie9 = res.data.cie9;
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
         
@@ -606,17 +613,9 @@ export const usePreIdStore = defineStore('preid', {
             .then((res: any) => {
                 this.valoracionID = res.data.preval._id;
                 
-                // swal.fire({
-                //     title: 'Datos guardados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -715,17 +714,9 @@ export const usePreIdStore = defineStore('preid', {
                 this.valoracionID = res.data.preval._id;
                 this.cirugiaID = res.data.preval.cxid;
                 
-                // swal.fire({
-                //     title: 'Datos guardados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -820,17 +811,9 @@ export const usePreIdStore = defineStore('preid', {
                 }
             })
             .then((res: any) => {
-                // swal.fire({
-                //     title: 'Datos actualizados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -926,17 +909,9 @@ export const usePreIdStore = defineStore('preid', {
                 }
             })
             .then((res: any) => {
-                // swal.fire({
-                //     title: 'Datos actualizados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -953,6 +928,7 @@ export const usePreIdStore = defineStore('preid', {
                 this.estudios = res.data.estudio;
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -980,6 +956,7 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1006,6 +983,7 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1021,6 +999,7 @@ export const usePreIdStore = defineStore('preid', {
                 this.estudios = res.data.estudio;
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
       
@@ -1048,6 +1027,7 @@ export const usePreIdStore = defineStore('preid', {
                 })                
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1071,6 +1051,7 @@ export const usePreIdStore = defineStore('preid', {
                 });
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
         /***************************** Plan ******************************/
@@ -1156,17 +1137,9 @@ export const usePreIdStore = defineStore('preid', {
                 },
             })
             .then((res: any) => {
-                // swal.fire({
-                //     title: 'Datos guardados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1253,17 +1226,9 @@ export const usePreIdStore = defineStore('preid', {
                 },
             })
             .then((res: any) => {
-                // swal.fire({
-                //     title: 'Datos guardados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1348,17 +1313,9 @@ export const usePreIdStore = defineStore('preid', {
                 }
             })
             .then((res: any) => {
-                // swal.fire({
-                //     title: 'Datos actualizados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1445,17 +1402,9 @@ export const usePreIdStore = defineStore('preid', {
                 }
             })
             .then((res: any) => {
-                // swal.fire({
-                //     title: 'Datos actualizados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
         /***************************** Nota ******************************/
@@ -1472,17 +1421,9 @@ export const usePreIdStore = defineStore('preid', {
                 },
             })
             .then((res: any) => {
-                // swal.fire({
-                //     title: 'Datos guardados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1500,17 +1441,9 @@ export const usePreIdStore = defineStore('preid', {
                 },
             })
             .then((res: any) => {
-                // swal.fire({
-                //     title: 'Datos guardados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1526,17 +1459,9 @@ export const usePreIdStore = defineStore('preid', {
                 }
             })
             .then((res: any) => {
-                // swal.fire({
-                //     title: 'Datos actualizados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1554,17 +1479,9 @@ export const usePreIdStore = defineStore('preid', {
                 }
             })
             .then((res: any) => {
-                // swal.fire({
-                //     title: 'Datos actualizados correctamente',
-                //     icon: 'success',
-                //     showConfirmButton: false,
-                //     toast: true,
-                //     position: 'top-end',
-                //     timer: 2000,
-                //     timerProgressBar: true
-                // })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1580,7 +1497,8 @@ export const usePreIdStore = defineStore('preid', {
             .then((res: any) => {
                 this.expedientes = res.data.expedientes;
             })
-            .catch((e: any) => {              
+            .catch((e: any) => {     
+                window.log.error('Ocurrió un error:', e)         
             });
         },
 
@@ -1597,6 +1515,7 @@ export const usePreIdStore = defineStore('preid', {
                 this.pacientes = res.data;                                
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -1611,7 +1530,8 @@ export const usePreIdStore = defineStore('preid', {
             .then((res:any) =>{
                 this.cirugias = res.data
             })
-            .catch((e: any) => {                
+            .catch((e: any) => {         
+                window.log.error('Ocurrió un error:', e)       
             });
         },
 
@@ -1627,6 +1547,7 @@ export const usePreIdStore = defineStore('preid', {
                 this.cirugia = res.data
             })
             .catch((e: any) => {                
+                window.log.error('Ocurrió un error:', e)
             });
         }
     }

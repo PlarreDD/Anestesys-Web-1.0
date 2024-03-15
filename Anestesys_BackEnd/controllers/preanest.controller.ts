@@ -2,6 +2,7 @@ import { Response } from "express";
 import { PreIdPacientes, PreIdPacientesCx, PreValoracion, ValEstudios, PrePlan, PreNota, PreCatalogoCIE9, PreCatalogoCIE10 } from "../models/PreAnestesico";
 import { MenuTrans } from "../models/TransAnestesico";
 import { PostRecupera, PostNotaPA } from "../models/PostAnestesico";
+import logger from '../logger';
 
 /********************************************************************/
 /***************************  ID PACIENTE ***************************/
@@ -16,6 +17,10 @@ export const getExpedientes = async (req: any, res: Response) =>{
         const expedientes = await PreIdPacientes.find({numExpediente: regex}) 
         return res.json({expedientes});
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -31,6 +36,10 @@ export const getCIE10 = async (req: any, res: Response) =>{
         const cie10 = await PreCatalogoCIE10.find({nombre: regex}) 
         return res.json({cie10});
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -45,6 +54,10 @@ export const getCIE9 = async (req: any, res: Response) =>{
         const cie9 = await PreCatalogoCIE9.find({nombre: regex}) 
         return res.json({cie9});
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -59,6 +72,10 @@ export const getCirugias = async (req: any, res: Response) =>{
 
         return res.json({pacientes, pacientesCx});
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -80,6 +97,10 @@ export const getPDFData = async (req: any, res: Response) =>{
 
         return res.json({pacientesCx, pacientesVal, pacientesEstu, pacientesPlan, pacientesNotaPre, pacienteTrans, pacientesNotaPost, pacientesRecu});
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -92,6 +113,10 @@ export const getPaciente = async (req: any, res: Response) => {
         const pacientes = await PreIdPacientes.find({numExpediente: id});        
         return res.json({pacientes});
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -138,6 +163,10 @@ export const createPaciente = async (req: any, res: Response) => {
 
         return res.json({ paciente, infoCx });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 };
@@ -149,9 +178,9 @@ export const updatePaciente = async (req: any, res: Response) => {
         const updVar = req.body;
 
         const paciente = await PreIdPacientes.findByIdAndUpdate( id, { nomPaciente: updVar.nomPaciente,
-                                                                    fechaNPaciente: updVar.fechaNac,
+                                                                    fechaNPaciente: updVar.fechaNPaciente,
                                                                     edadPaciente: updVar.edadPaciente,
-                                                                    generoPaciente: updVar.genero,
+                                                                    generoPaciente: updVar.generoPaciente,
                                                                     nacionalidad: updVar.nacionalidad,
                                                                     CURP: updVar.CURP,
                                                                     folioID: updVar.folioID,
@@ -163,7 +192,7 @@ export const updatePaciente = async (req: any, res: Response) => {
         
         const infoCx = await PreIdPacientesCx.findOneAndUpdate({ pid: paciente?._id }, { numEpisodio: updVar.numEpisodio,
                                                                                       habitacionPaciente: updVar.habitacionPaciente,
-                                                                                      fechaInPaciente: updVar.fechaIn,
+                                                                                      fechaInPaciente: updVar.fechaInPaciente,
                                                                                       /* Datos de cirugía */
                                                                                       diagnostico: updVar.diagnostico,
                                                                                       tipoCx: updVar.tipoCx,
@@ -181,10 +210,19 @@ export const updatePaciente = async (req: any, res: Response) => {
                                                                                       residenteAnestesia: updVar.residenteAnestesia });
         
         return res.json({ paciente, infoCx });
-    } catch (error) {
-        if (error.kind === "ObjectId") 
+    } catch (error) {        
+        if (error.kind === "ObjectId"){
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
                 
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
@@ -221,9 +259,18 @@ export const createNuevoRegistroPaciente = async (req: any, res: Response) => {
 
         return res.json({ infoCx });
     } catch (error) {
-        if (error.kind === "ObjectId") 
+        if (error.kind === "ObjectId"){
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
-                
+        }
+               
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
@@ -234,15 +281,24 @@ export const updateAnteriorPaciente = async (req: any, res: Response) => {
         const { id } = req.params;
         const updVar = req.body;
 
-        const paciente = await PreIdPacientes.findByIdAndUpdate( id, {fechaNPaciente: updVar.fechaNac,
+        const paciente = await PreIdPacientes.findByIdAndUpdate( id, {fechaNPaciente: updVar.fechaNPaciente,
                                                                     edadPaciente: updVar.edadPaciente,
-                                                                    generoPaciente: updVar.genero} );            
+                                                                    generoPaciente: updVar.generoPaciente} );            
         
         return res.json({ paciente });
     } catch (error) {
-        if (error.kind === "ObjectId") 
+        if (error.kind === "ObjectId"){
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
                 
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
@@ -255,7 +311,7 @@ export const updateNuevoRegistroPaciente = async (req: any, res: Response) => {
         
         const infoCx = await PreIdPacientesCx.findByIdAndUpdate(id , { numEpisodio: updVar.numEpisodio,
                                                                                       habitacionPaciente: updVar.habitacionPaciente,
-                                                                                      fechaInPaciente: updVar.fechaIn,
+                                                                                      fechaInPaciente: updVar.fechaInPaciente,
                                                                                       /* Datos de cirugía */
                                                                                       diagnostico: updVar.diagnostico,
                                                                                       tipoCx: updVar.tipoCx,
@@ -273,10 +329,19 @@ export const updateNuevoRegistroPaciente = async (req: any, res: Response) => {
                                                                                       residenteAnestesia: updVar.residenteAnestesia });
                                                                                           
         return res.json({infoCx });
-    } catch (error) {
-        if (error.kind === "ObjectId") 
+    } catch (error) {        
+        if (error.kind === "ObjectId"){
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
                 
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
@@ -410,6 +475,10 @@ export const savePreAntecedentes = async (req: any, res: Response) => {
 
         return res.json({ preval });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -538,6 +607,10 @@ export const updatePreAntecedentes = async (req: any, res: Response) => {
 
         return res.json({ preval })
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -670,6 +743,10 @@ export const saveNuevoPreAntecedentes = async (req: any, res: Response) => {
 
         return res.json({ preval });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -798,6 +875,10 @@ export const updateNuevoPreAntecedentes = async (req: any, res: Response) =>{
 
         return res.json({ preval })
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });  
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -817,6 +898,10 @@ export const saveEstudios = async (req: any, res: Response) => {
                 
         return res.json({ valest });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -838,6 +923,10 @@ export const updateEstudios = async (req: any, res: Response) => {
         
         return res.json({ valest });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -850,6 +939,10 @@ export const getEstudios = async (req: any, res: Response) => {
         const estudio = await ValEstudios.find({vid:vid})
         return res.json({estudio});
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -864,6 +957,10 @@ export const getEstudio = async (req: any, res: Response) => {
         
         return res.json({estudio});
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -887,10 +984,18 @@ export const updateEstudio = async (req: any, res: Response) => {
             return res.status(404).json({ Error: "No existe el estudio." });        
         
         return res.json({ estudio });
-    } catch (error) {
+    } catch (error) {        
         if (error.kind === "ObjectId") {
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }        
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
@@ -906,10 +1011,19 @@ export const deleteEstudio = async (req: any, res: Response) => {
        
         return res.json({ estudio });
     } catch (error) {
+        logger.error('Ocurrió un error:', error);
         if (error.kind === "ObjectId") {
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }
         
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 };
@@ -996,6 +1110,10 @@ export const savePrePlan = async (req: any, res: Response) => {
         
         return res.json({ preplan });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -1080,6 +1198,10 @@ export const saveNuevoPrePlan = async (req: any, res: Response) => {
         
         return res.json({ preplan });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -1165,6 +1287,10 @@ export const updatePrePlan = async (req: any, res: Response) => {
 
         return res.json({ preplan });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -1250,6 +1376,10 @@ export const updateNuevoPrePlan = async (req: any, res: Response) => {
 
         return res.json({ preplan });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -1268,6 +1398,10 @@ export const saveNota = async (req: any, res: Response) => {
 
         return res.json({ prenota });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -1283,6 +1417,10 @@ export const saveNuevoNota = async (req: any, res: Response) => {
 
         return res.json({ prenota });
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -1297,6 +1435,10 @@ export const updateNota = async (req: any, res: Response) => {
 
         return res.json({ prenota })
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
@@ -1310,6 +1452,10 @@ export const updateNuevoNota = async (req: any, res: Response) => {
 
         return res.json({ prenota })
     } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };

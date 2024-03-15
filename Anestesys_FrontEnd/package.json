@@ -7,7 +7,8 @@
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit"
+    "type-check": "vue-tsc --noEmit",
+    "publish": "Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; npm run build; node build/index.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
@@ -27,6 +28,7 @@
     "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",
     "html2pdf.js": "^0.10.1",
+    "loglevel": "^1.9.1",
     "mitt": "^3.0.0",
     "pdfmake": "^0.2.9",
     "ping": "^0.4.4",

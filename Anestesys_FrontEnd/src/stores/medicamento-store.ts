@@ -26,6 +26,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
           this.medicamentos = res.data.medicamentos;
         })
         .catch((e: any) => {
+          window.log.error('Ocurrió un error:', e)
         });
     },
 
@@ -41,6 +42,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
           this.medicamentos = res.data.medicamento;
         })
         .catch((e: any) => {        
+          window.log.error('Ocurrió un error:', e)
         });
     },
 
@@ -81,6 +83,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
               timerProgressBar: true,
               position: "top-end",
             });
+            window.log.error('Ocurrió un error:', e)
           } else if (e.request) {            
           } else {          
           }
@@ -116,6 +119,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
           });
         })
         .catch((e: any) => {        
+          window.log.error('Ocurrió un error:', e)
         });
     },
 
@@ -140,7 +144,8 @@ export const useMedicamentoStore = defineStore("medicamento", {
             timerProgressBar: true,
           });
         })
-        .catch((e: any) => {        
+        .catch((e: any) => {    
+          window.log.error('Ocurrió un error:', e)    
         });
     },
 
@@ -158,8 +163,8 @@ export const useMedicamentoStore = defineStore("medicamento", {
         },
       })
       .then((res: any) => {
-        this.status = res.data.statusMSV;
-
+        // this.status = res.data.statusMSV;
+        this.status = 'Activo';
         swal.fire({
           title: "Monitor registrado",
           icon: "success",
@@ -182,6 +187,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
               timerProgressBar: true,
               position: "top-end",
             });
+            window.log.error('Ocurrió un error:', e)
           } else if (e.request) {            
           } else {            
           }
@@ -205,6 +211,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
         }
       })
       .catch((e: any) => {       
+        window.log.error('Ocurrió un error:', e)
       });
     },
 
@@ -230,6 +237,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
           });
         })
         .catch((e: any) => {
+          window.log.error('Ocurrió un error:', e)
         });
     },
 
@@ -248,6 +256,7 @@ export const useMedicamentoStore = defineStore("medicamento", {
         this.status = res.data.statusMSV;
       })
       .catch((e: any) => {
+        window.log.error('Ocurrió un error:', e)
       });
     },
   },

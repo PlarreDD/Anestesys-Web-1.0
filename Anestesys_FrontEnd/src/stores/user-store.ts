@@ -20,7 +20,7 @@ export const useUserStore = defineStore('user', {
         TutorialTrans: ref(null),
         TutorialPost: ref(null),
         Password: ref(null),
-        PasswordNuevo: ref(null)
+        PasswordNuevo: ref(null),
     }),
 
     actions: {
@@ -58,7 +58,7 @@ export const useUserStore = defineStore('user', {
 
                 /* Redirección a la pantalla de Preanestésico */
                 router.push("/pre");
-            }).catch((res:any) => {
+            }).catch((e:any) => {
                 /* Fallo de inicio de sesión */
                 swal.fire({
                     html: '<b>Usuario o contraseña inválidos</b>',
@@ -68,6 +68,7 @@ export const useUserStore = defineStore('user', {
                     timer: 4000,
                     timerProgressBar: true,
                 });
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -78,6 +79,7 @@ export const useUserStore = defineStore('user', {
                 this.expiresIn = res.data.xprIn;
                 this.setTime();
             }).catch((e:any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
@@ -170,6 +172,7 @@ export const useUserStore = defineStore('user', {
                                 timerProgressBar: true,
                                 // position: 'top-end'
                             });
+                            window.log.error('Ocurrió un error:', e)
                         }
                         else if(e.request){
                         }
@@ -179,7 +182,7 @@ export const useUserStore = defineStore('user', {
 
         updateMed( _id:string, formData:FormData){
             apiAxios({
-                url: `http://localhost:5000/updateMed/${String(this.IdMed)}`,
+                url: `/updateMed/${String(this.IdMed)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + this.token,
@@ -199,12 +202,13 @@ export const useUserStore = defineStore('user', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
         updateTutorialPre( _id:string){
             apiAxios({
-                url: `http://localhost:5000/pre/${String(this.IdMed)}`,
+                url: `/pre/${String(this.IdMed)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + this.token,
@@ -216,12 +220,13 @@ export const useUserStore = defineStore('user', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
         updateTutorialTrans( _id:string){
             apiAxios({
-                url: `http://localhost:5000/trans/${String(this.IdMed)}`,
+                url: `/trans/${String(this.IdMed)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + this.token,
@@ -233,12 +238,13 @@ export const useUserStore = defineStore('user', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
         updateTutorialPost( _id:string){
             apiAxios({
-                url: `http://localhost:5000/post/${String(this.IdMed)}`,
+                url: `/post/${String(this.IdMed)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + this.token,
@@ -250,12 +256,13 @@ export const useUserStore = defineStore('user', {
             .then((res: any) => {
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 
         updateContrasena( _id:string, pswd){
             apiAxios({
-                url: `http://localhost:5000/password/${String(this.IdMed)}`,
+                url: `/password/${String(this.IdMed)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + this.token,
@@ -279,6 +286,7 @@ export const useUserStore = defineStore('user', {
                 })
             })
             .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
             });
         },
 

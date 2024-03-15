@@ -36,8 +36,8 @@ npm run dev
 ```sh
 Servidor
 En Axios colocar en la baseURL la dirección IP de la PC servidor junto con el puerto donde se esta ejecutando el backend.
-![Direccion IP Servidor](/Ip_Servidor.png)
-![Puerto Servidor](/Puerto_Servidor.png)
+![Ip_Servidor](/Ip_Servidor.png)
+![Puerto_Servidor](/Puerto_Servidor.png)
 
 En el documento dotenv se coloca la dirección ORIGIN la dirección que marca en la que levantó el servidor.
 ![Dirección del Front End](/IP_PagWeb.png)

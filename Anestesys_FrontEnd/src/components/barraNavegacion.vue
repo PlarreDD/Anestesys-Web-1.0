@@ -827,127 +827,37 @@ export default defineComponent({
 
   methods: {
     async mostrarMensaje() {
-      swal.fire({
-        title:
-          "Usuario registrado correctamente, consulte su correo electrónico",
-        icon: "info",
-        showConfirmButton: true,
-        showCloseButton: true,
-        toast: true,
-        position: "top-start",
-      });
+      try {
+        swal.fire({
+          title:
+            "Usuario registrado correctamente, consulte su correo electrónico",
+          icon: "info",
+          showConfirmButton: true,
+          showCloseButton: true,
+          toast: true,
+          position: "top-start",
+        });        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }     
     },
 
     async listarMedicamentos() {
-      await medStore.getMedicamentosList();
+      try {
+        await medStore.getMedicamentosList();        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }     
     },
 
     async agregaMedicamento() {
-      if (
-        this.infoMedicamento.nombreMedicamento == undefined ||
-        this.infoMedicamento.nombreMedicamento == ""
-      ) {
-        swal.fire({
-          title: "Ingrese el nombre del medicamento",
-          icon: "warning",
-          showConfirmButton: false,
-          showCloseButton: true,
-          toast: true,
-          timer: 2500,
-          timerProgressBar: true,
-          position: "top-end",
-        });
-      } else {
-        await medStore.createMedicamento(this.infoMedicamento);
-
-        this.infoMedicamento.nombreMedicamento = "";
-        this.infoMedicamento.codigoMedicamento = "";
-
-        await this.listarMedicamentos();
-      }
-    },
-
-    async cambiarBtnActualizar(idMedicamento) {
-      this.editar = true;
-
-      await medStore.getMedicamento(idMedicamento);
-
-      this.infoMedicamento.idMedicamento = medStore.medicamentos._id;
-      this.infoMedicamento.nombreMedicamento =
-        medStore.medicamentos.nombreMedicamento;
-      this.infoMedicamento.codigoMedicamento =
-        medStore.medicamentos.codigoMedicamento;
-
-      await this.listarMedicamentos();
-    },
-
-    async actualizarMedicamento(infoMedicamento) {
-      if (this.infoMedicamento.nombreMedicamento == "") {
-        swal.fire({
-          title: "Ingrese el nombre del medicamento",
-          icon: "warning",
-          showConfirmButton: false,
-          showCloseButton: true,
-          toast: true,
-          timer: 2500,
-          timerProgressBar: true,
-          position: "top-end",
-        });
-      } else {
-        await medStore.updateMedicamento(infoMedicamento);
-        this.editar = false;
-
-        this.infoMedicamento.nombreMedicamento = "";
-        this.infoMedicamento.codigoMedicamento = "";
-        this.infoMedicamento.idMedicamento = "";
-
-        await this.listarMedicamentos();
-      }
-    },
-
-    async validaEliminarMedicamento(idMedicamento) {
-      swal
-        .fire({
-          html: "¿Esta seguro de eliminar el medicamento?",
-          icon: "warning",
-          showConfirmButton: true,
-          showCancelButton: true,
-          toast: true,
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            this.eliminarMedicamento(idMedicamento);
-          }
-        });
-    },
-
-    async eliminarMedicamento(idMedicamento) {
-      await medStore.deleteMedicamento(idMedicamento);
-      await this.listarMedicamentos();
-    },
-
-    async agregarMVS(){
-      // medStore.monitor != "1.1.1.1" Comprobación para permitir agregar un monitor cuando solo esta el 1.1.1.1
-      // que hace que exista la animación de monitor desconectado
-      if(medStore.monitor.length != 0 && medStore.monitor != "1.1.1.1"){
-        swal.fire({
-            title: "Elimine el monitor antes de agregar uno nuevo",
-            icon: "warning",
-            showConfirmButton: false,
-            showCloseButton: true,
-            toast: true,
-            timer: 2500,
-            timerProgressBar: true,
-            position: "top-end",
-          });
-      }
-      else{
+      try {
         if (
-          this.configMonitor.nomMonitor == undefined ||
-          this.configMonitor.nomMonitor == ""
+          this.infoMedicamento.nombreMedicamento == undefined ||
+          this.infoMedicamento.nombreMedicamento == ""
         ) {
           swal.fire({
-            title: "Ingrese el modelo del monitor",
+            title: "Ingrese el nombre del medicamento",
             icon: "warning",
             showConfirmButton: false,
             showCloseButton: true,
@@ -957,40 +867,174 @@ export default defineComponent({
             position: "top-end",
           });
         } else {
-          await medStore.pingMonitor(String(this.configMonitor.nomMonitor),
-                                     String(this.configMonitor.dirIPMonitor));
+          await medStore.createMedicamento(this.infoMedicamento);
   
-          this.configMonitor.nomMonitor = "";
-          this.configMonitor.dirIPMonitor = "";  
+          this.infoMedicamento.nombreMedicamento = "";
+          this.infoMedicamento.codigoMedicamento = "";
+  
+          await this.listarMedicamentos();
         }
-      }
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }   
+    },
 
-      await medStore.listMonitor();
+    async cambiarBtnActualizar(idMedicamento) {
+      try {
+        this.editar = true;
+  
+        await medStore.getMedicamento(idMedicamento);
+  
+        this.infoMedicamento.idMedicamento = medStore.medicamentos._id;
+        this.infoMedicamento.nombreMedicamento =
+          medStore.medicamentos.nombreMedicamento;
+        this.infoMedicamento.codigoMedicamento =
+          medStore.medicamentos.codigoMedicamento;
+  
+        await this.listarMedicamentos();
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
+    },
+
+    async actualizarMedicamento(infoMedicamento) {
+      try {
+        if (this.infoMedicamento.nombreMedicamento == "") {
+          swal.fire({
+            title: "Ingrese el nombre del medicamento",
+            icon: "warning",
+            showConfirmButton: false,
+            showCloseButton: true,
+            toast: true,
+            timer: 2500,
+            timerProgressBar: true,
+            position: "top-end",
+          });
+        } else {
+          await medStore.updateMedicamento(infoMedicamento);
+          this.editar = false;
+  
+          this.infoMedicamento.nombreMedicamento = "";
+          this.infoMedicamento.codigoMedicamento = "";
+          this.infoMedicamento.idMedicamento = "";
+  
+          await this.listarMedicamentos();
+        }
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
+    },
+
+    async validaEliminarMedicamento(idMedicamento) {
+      try {
+        swal
+          .fire({
+            html: "¿Esta seguro de eliminar el medicamento?",
+            icon: "warning",
+            showConfirmButton: true,
+            showCancelButton: true,
+            toast: true,
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              this.eliminarMedicamento(idMedicamento);
+            }
+          });
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
+    },
+
+    async eliminarMedicamento(idMedicamento) {
+      try {
+        await medStore.deleteMedicamento(idMedicamento);
+        await this.listarMedicamentos();
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
+    },
+
+    async agregarMVS(){
+      try {
+        // medStore.monitor != "1.1.1.1" Comprobación para permitir agregar un monitor cuando solo esta el 1.1.1.1
+        // que hace que exista la animación de monitor desconectado
+        if(medStore.monitor.length != 0 && medStore.monitor != "1.1.1.1"){
+          swal.fire({
+              title: "Elimine el monitor antes de agregar uno nuevo",
+              icon: "warning",
+              showConfirmButton: false,
+              showCloseButton: true,
+              toast: true,
+              timer: 2500,
+              timerProgressBar: true,
+              position: "top-end",
+            });
+        }
+        else{
+          if (
+            this.configMonitor.nomMonitor == undefined ||
+            this.configMonitor.nomMonitor == ""
+          ) {
+            swal.fire({
+              title: "Ingrese el modelo del monitor",
+              icon: "warning",
+              showConfirmButton: false,
+              showCloseButton: true,
+              toast: true,
+              timer: 2500,
+              timerProgressBar: true,
+              position: "top-end",
+            });
+          } else {
+            await medStore.pingMonitor(String(this.configMonitor.nomMonitor),
+                                       String(this.configMonitor.dirIPMonitor));
+    
+            this.configMonitor.nomMonitor = "";
+            this.configMonitor.dirIPMonitor = "";  
+          }
+        }
+  
+        await medStore.listMonitor();
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
     },
 
     async validaEliminarMonitor(idMonitor) {
-      swal
-        .fire({
-          html: "¿Esta seguro de eliminar el monitor?",
-          icon: "warning",
-          showConfirmButton: true,
-          showCancelButton: true,
-          toast: true,
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            this.eliminarMonitor(idMonitor);
-          }
-        });
+      try {
+        swal
+          .fire({
+            html: "¿Esta seguro de eliminar el monitor?",
+            icon: "warning",
+            showConfirmButton: true,
+            showCancelButton: true,
+            toast: true,
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              this.eliminarMonitor(idMonitor);
+            }
+          });
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
     },
 
     async eliminarMonitor(idMonitor) {
-      await medStore.deleteMonitor(idMonitor);
-      await medStore.listMonitor();
+      try {
+        await medStore.deleteMonitor(idMonitor);
+        await medStore.listMonitor();
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
     },
 
     async listadoMonitor() {
-      await medStore.listMonitor();
+      try {
+        await medStore.listMonitor();
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
     },
 
     async mostrarInputsPerfil(){
@@ -1002,95 +1046,115 @@ export default defineComponent({
     },
 
     async actualizarDatosMedico(){
-      const formData = new FormData();
-      formData.append('cedula', this.user.cedula);
-      formData.append('especialidad', this.user.especialidad);
-      formData.append('foto', this.imagenSeleccionada);
-
-      await this.userStore.updateMed(userStore.IdMed, formData)   
-
-      this.user.foto = userStore.Foto
-      this.perfilData = false
+      try {
+        const formData = new FormData();
+        formData.append('cedula', this.user.cedula);
+        formData.append('especialidad', this.user.especialidad);
+        formData.append('foto', this.imagenSeleccionada);
+  
+        await this.userStore.updateMed(userStore.IdMed, formData)   
+  
+        this.user.foto = userStore.Foto
+        this.perfilData = false
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
     },
 
     async handleFileChange(event) {
-      const file = event.target.files[0];
-      this.imagenSeleccionada = file;
+      try {
+        const file = event.target.files[0];
+        this.imagenSeleccionada = file;
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
     },
 
     async validarCambioCarruselPre(){
-      if(document.getElementById("tutoUnoPre").ariaCurrent=="true"){
-        this.tutoUnoPre=true
-        this.tutoDosPre=false
-        this.tutoTresPre=false
-        this.tutoCuatroPre=false
-      }
-      else if(document.getElementById("tutoDosPre").ariaCurrent=="true"){
-        this.tutoUnoPre=false
-        this.tutoDosPre=true
-        this.tutoTresPre=false
-        this.tutoCuatroPre=false
-      }
-      else if(document.getElementById("tutoTresPre").ariaCurrent=="true"){
-        this.tutoUnoPre=false
-        this.tutoDosPre=false
-        this.tutoTresPre=true
-        this.tutoCuatroPre=false
-      }
-      else if(document.getElementById("tutoCuatroPre").ariaCurrent=="true"){
-        this.tutoUnoPre=false
-        this.tutoDosPre=false
-        this.tutoTresPre=false
-        this.tutoCuatroPre=true
+      try {
+        if(document.getElementById("tutoUnoPre").ariaCurrent=="true"){
+          this.tutoUnoPre=true
+          this.tutoDosPre=false
+          this.tutoTresPre=false
+          this.tutoCuatroPre=false
+        }
+        else if(document.getElementById("tutoDosPre").ariaCurrent=="true"){
+          this.tutoUnoPre=false
+          this.tutoDosPre=true
+          this.tutoTresPre=false
+          this.tutoCuatroPre=false
+        }
+        else if(document.getElementById("tutoTresPre").ariaCurrent=="true"){
+          this.tutoUnoPre=false
+          this.tutoDosPre=false
+          this.tutoTresPre=true
+          this.tutoCuatroPre=false
+        }
+        else if(document.getElementById("tutoCuatroPre").ariaCurrent=="true"){
+          this.tutoUnoPre=false
+          this.tutoDosPre=false
+          this.tutoTresPre=false
+          this.tutoCuatroPre=true
+        }
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
       }
     },
 
     async validarCambioCarruselTrans(){
-      if(document.getElementById("tutoUnoTrans").ariaCurrent=="true"){
-        this.tutoUnoTrans=true
-        this.tutoDosTrans=false
-        this.tutoTresTrans=false
-        this.tutoCuatroTrans=false
-        this.tutoCincoTrans=false
-      }
-      else if(document.getElementById("tutoDosTrans").ariaCurrent=="true"){
-        this.tutoUnoTrans=false
-        this.tutoDosTrans=true
-        this.tutoTresTrans=false
-        this.tutoCuatroTrans=false
-        this.tutoCincoTrans=false
-      }
-      else if(document.getElementById("tutoTresTrans").ariaCurrent=="true"){
-        this.tutoUnoTrans=false
-        this.tutoDosTrans=false
-        this.tutoTresTrans=true
-        this.tutoCuatroTrans=false
-        this.tutoCincoTrans=false
-      }
-      else if(document.getElementById("tutoCuatroTrans").ariaCurrent=="true"){
-        this.tutoUnoTrans=false
-        this.tutoDosTrans=false
-        this.tutoTresTrans=false
-        this.tutoCuatroTrans=true
-        this.tutoCincoTrans=false
-      }
-      else if(document.getElementById("tutoCincoTrans").ariaCurrent=="true"){
-        this.tutoUnoTrans=false
-        this.tutoDosTrans=false
-        this.tutoTresTrans=false
-        this.tutoCuatroTrans=false
-        this.tutoCincoTrans=true
+      try {
+        if(document.getElementById("tutoUnoTrans").ariaCurrent=="true"){
+          this.tutoUnoTrans=true
+          this.tutoDosTrans=false
+          this.tutoTresTrans=false
+          this.tutoCuatroTrans=false
+          this.tutoCincoTrans=false
+        }
+        else if(document.getElementById("tutoDosTrans").ariaCurrent=="true"){
+          this.tutoUnoTrans=false
+          this.tutoDosTrans=true
+          this.tutoTresTrans=false
+          this.tutoCuatroTrans=false
+          this.tutoCincoTrans=false
+        }
+        else if(document.getElementById("tutoTresTrans").ariaCurrent=="true"){
+          this.tutoUnoTrans=false
+          this.tutoDosTrans=false
+          this.tutoTresTrans=true
+          this.tutoCuatroTrans=false
+          this.tutoCincoTrans=false
+        }
+        else if(document.getElementById("tutoCuatroTrans").ariaCurrent=="true"){
+          this.tutoUnoTrans=false
+          this.tutoDosTrans=false
+          this.tutoTresTrans=false
+          this.tutoCuatroTrans=true
+          this.tutoCincoTrans=false
+        }
+        else if(document.getElementById("tutoCincoTrans").ariaCurrent=="true"){
+          this.tutoUnoTrans=false
+          this.tutoDosTrans=false
+          this.tutoTresTrans=false
+          this.tutoCuatroTrans=false
+          this.tutoCincoTrans=true
+        }
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
       }
     },
 
     async validarCambioCarruselPost(){
-      if(document.getElementById("tutoUnoPost").ariaCurrent=="true"){
-        this.tutoUnoPost=true
-        this.tutoDosPost=false
-      }
-      else if(document.getElementById("tutoDosPost").ariaCurrent=="true"){
-        this.tutoUnoPost=false
-        this.tutoDosPost=true
+      try {
+        if(document.getElementById("tutoUnoPost").ariaCurrent=="true"){
+          this.tutoUnoPost=true
+          this.tutoDosPost=false
+        }
+        else if(document.getElementById("tutoDosPost").ariaCurrent=="true"){
+          this.tutoUnoPost=false
+          this.tutoDosPost=true
+        }
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
       }
     },
 
@@ -1117,7 +1181,6 @@ export default defineComponent({
       this.tutoTresTrans=false
       this.tutoCuatroTrans=false
       this.tutoCincoTrans=false
-
     },
     async cambiarTutorialPost(){
       this.tutoPre=false;
@@ -1129,104 +1192,125 @@ export default defineComponent({
     },
 
     async validarContrasena(){
-      const respuestaPasword = await bcryptjs.compare(this.contrasenaAnterior, userStore.Password);
-
-      if(respuestaPasword){
-        this.passCorrecta=true        
-      }else{
-        this.passCorrecta=false    
+      try {
+        const respuestaPasword = await bcryptjs.compare(this.contrasenaAnterior, userStore.Password);
+  
+        if(respuestaPasword){
+          this.passCorrecta=true        
+        }else{
+          this.passCorrecta=false    
+        }
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
       }
     },
 
     async mostrarPassAnt(){
-      if ( (document.getElementById("contrasenaAnt") as HTMLInputElement).type == "text" ) {
-        (document.getElementById("contrasenaAnt") as HTMLInputElement).type = "password";
-        this.contrasenaAnt=false
-      } else {
-        (document.getElementById("contrasenaAnt") as HTMLInputElement).type = "text";
-        this.contrasenaAnt=true
+      try {
+        if ( (document.getElementById("contrasenaAnt") as HTMLInputElement).type == "text" ) {
+          (document.getElementById("contrasenaAnt") as HTMLInputElement).type = "password";
+          this.contrasenaAnt=false
+        } else {
+          (document.getElementById("contrasenaAnt") as HTMLInputElement).type = "text";
+          this.contrasenaAnt=true
+        }
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
       }
     },
 
     async mostrarPass(){
-      if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
-        (document.getElementById("contrasena") as HTMLInputElement).type = "password";
-        this.contrasena=false
-      } else {
-        (document.getElementById("contrasena") as HTMLInputElement).type = "text";
-        this.contrasena=true
+      try {
+        if ( (document.getElementById("contrasena") as HTMLInputElement).type == "text" ) {
+          (document.getElementById("contrasena") as HTMLInputElement).type = "password";
+          this.contrasena=false
+        } else {
+          (document.getElementById("contrasena") as HTMLInputElement).type = "text";
+          this.contrasena=true
+        }
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
       }
     },
 
     async mostrarPassRep(){
-      if ( (document.getElementById("contrasenaRep") as HTMLInputElement).type == "text" ) {
-        (document.getElementById("contrasenaRep") as HTMLInputElement).type = "password";
-        this.contrasenaRep=false
-      } else {
-        (document.getElementById("contrasenaRep") as HTMLInputElement).type = "text";
-        this.contrasenaRep=true
+      try {
+        if ( (document.getElementById("contrasenaRep") as HTMLInputElement).type == "text" ) {
+          (document.getElementById("contrasenaRep") as HTMLInputElement).type = "password";
+          this.contrasenaRep=false
+        } else {
+          (document.getElementById("contrasenaRep") as HTMLInputElement).type = "text";
+          this.contrasenaRep=true
+        }
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
       }
     },
 
     async vaciarInputsContrasena(){
-      this.contrasenaAnterior="";
-      this.user.pswd="";
-      this.contrasenaRepetida="";
-
-      this.passCorrecta = false
+      try {
+        this.contrasenaAnterior="";
+        this.user.pswd="";
+        this.contrasenaRepetida="";
+  
+        this.passCorrecta = false
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
     },
 
     async validarContrasenas(){
-      if(this.user.pswd != "" && this.user.pswd != null && this.user.pswd != undefined && this.contrasenaRepetida != "" && this.contrasenaRepetida != null && this.contrasenaRepetida != undefined){
-        if(this.user.pswd.length >= 6){
-          if(this.user.pswd == this.contrasenaRepetida){
-            userStore.PasswordNuevo = this.user.pswd
-
-            userStore.updateContrasena(userStore.IdMed, this.user.pswd);
-            const hashedPassword = await bcryptjs.hash(this.user.pswd, 10);
-
-            userStore.Password= hashedPassword
-            //this.contrasenaAnterior="";
-            //this.user.pswd="";
-            //this.contrasenaRepetida="";
-
-            this.passCorrecta = false
-
-            let closeButton = document.getElementById('volver-perfil');
-
-            // Crea un nuevo evento de clic
-            let event = new MouseEvent('click', {
-              bubbles: true,
-              cancelable: true,
-              view: window
-            });
-
-            // Despacha el evento de clic en el botón
-            closeButton.dispatchEvent(event);
-
+      try {
+        if(this.user.pswd != "" && this.user.pswd != null && this.user.pswd != undefined && this.contrasenaRepetida != "" && this.contrasenaRepetida != null && this.contrasenaRepetida != undefined){
+          if(this.user.pswd.length >= 6){
+            if(this.user.pswd == this.contrasenaRepetida){
+              userStore.PasswordNuevo = this.user.pswd
+  
+              userStore.updateContrasena(userStore.IdMed, this.user.pswd);
+              const hashedPassword = await bcryptjs.hash(this.user.pswd, 10);
+  
+              userStore.Password= hashedPassword
+  
+              this.passCorrecta = false
+  
+              let closeButton = document.getElementById('volver-perfil');
+  
+              // Crea un nuevo evento de clic
+              let event = new MouseEvent('click', {
+                bubbles: true,
+                cancelable: true,
+                view: window
+              });
+  
+              // Despacha el evento de clic en el botón
+              closeButton.dispatchEvent(event);
+  
+            }else{
+              swal.fire({
+                title: "Las contraseñas no coinciden, verifique",
+                icon: "error",
+                showConfirmButton: true,
+                toast: true,
+              })
+            }
           }else{
             swal.fire({
-              title: "Las contraseñas no coinciden, verifique",
-              icon: "error",
+              title: "La contraseña debe tener por lo menos 6 caracteres",
+              icon: "warning",
               showConfirmButton: true,
               toast: true,
             })
           }
         }else{
           swal.fire({
-            title: "La contraseña debe tener por lo menos 6 caracteres",
+            html: "Llene ambos campos",
             icon: "warning",
             showConfirmButton: true,
             toast: true,
           })
         }
-      }else{
-        swal.fire({
-          html: "Llene ambos campos",
-          icon: "warning",
-          showConfirmButton: true,
-          toast: true,
-        })
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
       }
     }
   }

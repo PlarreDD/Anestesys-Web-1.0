@@ -8,9 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteMedicamento = exports.updateMedicamento = exports.createMedicamento = exports.getMedicamento = exports.getMedicamentos = void 0;
 const Medicamento_1 = require("../models/Medicamento");
+const logger_1 = __importDefault(require("../logger"));
 /* Función para obtener todos los medicamentos */
 const getMedicamentos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -18,6 +22,10 @@ const getMedicamentos = (req, res) => __awaiter(void 0, void 0, void 0, function
         return res.json({ medicamentos });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -30,6 +38,10 @@ const getMedicamento = (req, res) => __awaiter(void 0, void 0, void 0, function*
         return res.json({ medicamento });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -43,6 +55,10 @@ const createMedicamento = (req, res) => __awaiter(void 0, void 0, void 0, functi
         return res.json({ medicamento });
     }
     catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
@@ -59,8 +75,16 @@ const updateMedicamento = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
     catch (error) {
         if (error.kind === "ObjectId") {
+            logger_1.default.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 });
@@ -74,8 +98,16 @@ const deleteMedicamento = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
     catch (error) {
         if (error.kind === "ObjectId") {
+            logger_1.default.log({
+                level: 'error',
+                message: 'Error de servidor', error
+            });
             return res.status(403).json({ error: "Formato de ID incorrecto" });
         }
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
         return res.status(500).json({ error: "Error de servidor" });
     }
 });
