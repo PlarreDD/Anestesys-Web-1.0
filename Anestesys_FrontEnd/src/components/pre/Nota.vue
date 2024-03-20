@@ -7,8 +7,8 @@
             <div class="col-md-1 justificar-icono-nota">
                 <label class="form-label fw-bold alinear-icono-nota">
                     <!-- <button > -->
-                        <span style="text-align: right; cursor: pointer;" @click="empezarReconocimiento">
-                            <font-awesome-icon class="" icon="fa-solid fa-microphone" id="microfono" size="2xl"/>
+                        <span id="microfono" class="microfono-off" @click="empezarReconocimiento">
+                            <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
                         </span>
                     <!-- </button> -->
                 </label>     
@@ -31,6 +31,7 @@
 <script lang="ts">
 import type { notaPre } from "@/interfaces/regPreAnest";
 import { usePreIdStore } from "@/stores/preId-store";
+import log from "loglevel";
 import { defineComponent } from "vue";
 
 const preIdStore = usePreIdStore();
@@ -91,26 +92,37 @@ export default defineComponent({
             } catch (error) {
                 window.log.error('Ocurrió un error:', error);
             }
-        },
+        },        
 
         async empezarReconocimiento() {
-            console.log("Entro reconocimiento");                        
-            const recognition = new (window as any).webkitSpeechRecognition();
+            const recognition = new (window as any).webkitSpeechRecognition(); // Crear instancia del reconocimiento de voz
+            recognition.lang = 'es-ES'; // Establecer idioma a español, puede cambiar
+            recognition.start(); // Iniciar reconocimiento de voz
 
-            recognition.lang = 'es-ES'; // Establece el idioma del reconocimiento de voz
-            recognition.interimResults = true; // Si quieres resultados intermedios
+            document.getElementById("microfono").className = "microfono-on"
 
-            recognition.onresult = (event: any) => {
-                document.getElementById("microfono").className = "microfono" //Test
-                
-                const resultado = event.results[0][0].transcript;
-                console.log("Res"+resultado);
-                
-                this.textoNota.nota += ' ' + resultado;
+            if(this.textoNota.nota === undefined || this.textoNota.nota === ''){             
+                this.textoNota.nota = '';
+            }
+
+            // Manejar evento de resultado del reconocimiento
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript; // Obtener texto reconocido
+                this.textoNota.nota += ' ' + transcript;
+                console.log('Texto reconocido:', transcript);
             };
 
-            recognition.start();
-            console.log("Termino reconocimiento");            
+            // Manejar evento de error del reconocimiento
+            recognition.onerror = (event) => {
+                document.getElementById("microfono").className = "microfono-off";
+                console.error('Error en reconocimiento de voz:', event.error);
+            };
+
+            // Manejar evento de fin del reconocimiento
+            recognition.onend = () => {
+                document.getElementById("microfono").className = "microfono-off";
+                console.log('Fin del reconocimiento de voz');
+            };
         }
     }
 })
@@ -160,7 +172,14 @@ h5{
     text-align: center;
 }
 
-.microfono{
+.microfono-off{
+    text-align: right;
+    cursor: pointer;
+}
+
+.microfono-on{
+    text-align: right;
+    cursor: pointer;
     color: #E88300;
 }
 </style>

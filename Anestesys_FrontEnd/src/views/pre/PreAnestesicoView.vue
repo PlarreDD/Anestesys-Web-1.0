@@ -768,8 +768,6 @@ export default defineComponent({
   },
   
   mounted: function() { // Llama el método despues de cargar la página 
-    //Mostrar modal de tutorial al logear por primera vez
-    console.log("tutoPre "+userStore.TutorialPre);
     
     if(userStore.TutorialPre === 0){
       let abrir = document.getElementById('tutorial-pre');
