@@ -7,7 +7,7 @@
             <div class="col-md-1 justificar-icono-nota">
                 <label class="form-label fw-bold alinear-icono-nota">
                     <!-- <button > -->
-                        <span id="microfono" class="microfono-off" @click="empezarReconocimiento">
+                        <span id="microfono" :class="microfono == false ? 'microfono-off' : 'microfono-on'" @click="empezarReconocimiento">
                             <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
                         </span>
                     <!-- </button> -->
@@ -43,7 +43,8 @@ export default defineComponent({
             textoNota: {} as notaPre,
             preIdStore,
 
-            btnActualizarNota:false
+            btnActualizarNota:false,
+            microfono: false
         }
     },
 
@@ -99,7 +100,8 @@ export default defineComponent({
             recognition.lang = 'es-ES'; // Establecer idioma a español, puede cambiar
             recognition.start(); // Iniciar reconocimiento de voz
 
-            document.getElementById("microfono").className = "microfono-on"
+            // document.getElementById("microfono").className = "microfono-on"
+            this.microfono=true
 
             if(this.textoNota.nota === undefined || this.textoNota.nota === ''){             
                 this.textoNota.nota = '';
@@ -107,20 +109,22 @@ export default defineComponent({
 
             // Manejar evento de resultado del reconocimiento
             recognition.onresult = (event) => {
-                const transcript = event.results[0][0].transcript; // Obtener texto reconocido
-                this.textoNota.nota += ' ' + transcript;
-                console.log('Texto reconocido:', transcript);
+                const escuchado = event.results[0][0].transcript; // Obtener texto reconocido
+                this.textoNota.nota += ' ' + escuchado;
+                console.log('Texto reconocido:', escuchado);
             };
 
             // Manejar evento de error del reconocimiento
             recognition.onerror = (event) => {
-                document.getElementById("microfono").className = "microfono-off";
+                // document.getElementById("microfono").className = "microfono-off";
+                this.microfono=false
                 console.error('Error en reconocimiento de voz:', event.error);
             };
 
             // Manejar evento de fin del reconocimiento
             recognition.onend = () => {
-                document.getElementById("microfono").className = "microfono-off";
+                // document.getElementById("microfono").className = "microfono-off";
+                this.microfono=false
                 console.log('Fin del reconocimiento de voz');
             };
         }

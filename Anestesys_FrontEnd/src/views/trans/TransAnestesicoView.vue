@@ -876,7 +876,7 @@
           <div class="row g-3">
                 
             <div class="col-md-2">
-              <button class="btn btn-menu fw-bold"
+              <button id="inicio-cx" class="btn btn-menu fw-bold"
                       type="button"
                       @dblclick="actualizarTQX('QXIN')"
                       :disabled="menuTrans.ingresoQX != undefined && menuTrans.ingresoQX != ''  ? true : false">
@@ -988,10 +988,14 @@
           </select>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-1">
           <button type="button" id="tutorial-trans" class="btn btn-secondary invisible" data-bs-toggle="modal" data-bs-target="#tutorialTransModal">
             Modal Tutorial
           </button>
+        </div>
+
+        <div class="col-md-1">
+          <button type="button" class="btn btn-secondary" @click="startRecognition">Test</button>
         </div>
 
         <!-- Modal tutorial Trans -->
@@ -1422,6 +1426,9 @@ let FR: any;
 
 let taSeparada: Object;
 
+const recognition = new (window as any).webkitSpeechRecognition();
+recognition.lang = 'es-ES';
+
 export default defineComponent({
   name: 'App',
 
@@ -1750,6 +1757,80 @@ export default defineComponent({
   },
 
   methods: {
+    startRecognition() {
+      const recognition = new (window as any).webkitSpeechRecognition(); // Crear instancia del reconocimiento de voz
+      recognition.lang = 'es-ES'; // Establecer idioma a español (puedes cambiarlo según tus necesidades)
+      recognition.start(); // Iniciar reconocimiento de voz
+
+      // Manejar evento de resultado del reconocimiento
+      recognition.onresult = (event) => {
+          const transcript = event.results[0][0].transcript.toLowerCase(); // Obtener texto reconocido
+          console.log('Texto reconocido:', transcript);
+
+          // Verificar si la palabra específica ha sido detectada
+          if (transcript.includes('quirófano')) {                
+            // Realizar la acción deseada cuando se detecta la palabra clave                
+            let closeButton = document.getElementById('inicio-cx');
+
+            // Crea un nuevo evento de clic
+            let event = new MouseEvent('dblclick', {
+                bubbles: true,
+                cancelable: true,
+                view: window
+            });                    
+            // Despacha el evento de clic en el botón
+            closeButton.dispatchEvent(event);
+
+            console.log('Palabra clave detectada. Acción realizada...');
+          }
+
+          else if (transcript.includes('anestesia')) {                             
+            let closeButton = document.getElementById('anes-in');
+
+            // if(transAnestStore.btnTQX === true){
+              // Crea un nuevo evento de clic
+              let event = new MouseEvent('dblclick', {
+                  bubbles: true,
+                  cancelable: true,
+                  view: window
+              });                    
+              // Despacha el evento de clic en el botón
+              closeButton.dispatchEvent(event);
+  
+              console.log('Palabra clave detectada. Acción realizada...');
+            // }
+          }
+
+          else if (transcript.includes('cirugía')) {                             
+            let closeButton = document.getElementById('cx-in');
+
+            // if(transAnestStore.btnTQX === true){
+              // Crea un nuevo evento de clic
+              let event = new MouseEvent('dblclick', {
+                  bubbles: true,
+                  cancelable: true,
+                  view: window
+              });                    
+              // Despacha el evento de clic en el botón
+              closeButton.dispatchEvent(event);
+  
+              console.log('Palabra clave detectada. Acción realizada...');
+            // }
+          }
+      };
+
+      // Manejar evento de error del reconocimiento
+      recognition.onerror = (event) => {
+          console.error('Error en reconocimiento de voz:', event.error);
+      };
+
+      // Manejar evento de fin del reconocimiento
+      recognition.onend = () => {
+          console.log('Fin del reconocimiento de voz');
+      };
+    },
+
+
     async enviarDatosTrans() {        
       try {
         // Ingresos
