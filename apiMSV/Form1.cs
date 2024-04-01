@@ -236,12 +236,22 @@ namespace apiMSV
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            httpListener?.Stop();
-            listener.Stop();
-            p1.Abort();
-            p2.Abort();
+            try
+            {
+                httpListener?.Stop();
+                listener.Stop();
+                p1.Abort();
+                p2.Abort();
 
-            this.Close();
+                this.Close();
+            }
+            catch
+            {
+                p1.Abort();
+                p2.Abort();
+
+                this.Close();
+            }
         }
     }
 }

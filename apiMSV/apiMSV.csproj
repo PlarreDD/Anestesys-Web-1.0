@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="apiMVS.ico" />
+    <None Include="src\iconMSV.ico" />
     <None Include="src\apiMVS.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
