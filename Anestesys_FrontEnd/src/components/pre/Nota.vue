@@ -6,11 +6,17 @@
             </div>
             <div class="col-md-1 justificar-icono-nota">
                 <label class="form-label fw-bold alinear-icono-nota">
-                    <!-- <button > -->
+                    <template v-if="microfonoEscucha === false">
                         <span id="microfono" :class="microfono == false ? 'microfono-off' : 'microfono-on'" @click="empezarReconocimiento">
                             <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
                         </span>
-                    <!-- </button> -->
+                    </template>
+
+                    <template v-else>
+                        <span class="microfono-on" @click="detenerReconocimiento">
+                            <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
+                        </span>
+                    </template>                                
                 </label>     
             </div>
             
@@ -31,7 +37,6 @@
 <script lang="ts">
 import type { notaPre } from "@/interfaces/regPreAnest";
 import { usePreIdStore } from "@/stores/preId-store";
-import log from "loglevel";
 import { defineComponent } from "vue";
 
 const preIdStore = usePreIdStore();
@@ -44,7 +49,10 @@ export default defineComponent({
             preIdStore,
 
             btnActualizarNota:false,
-            microfono: false
+            microfono: false,
+            intervalId: null,
+            microfonoEscucha: false,
+            recognition: null,
         }
     },
 
@@ -96,38 +104,70 @@ export default defineComponent({
         },        
 
         async empezarReconocimiento() {
-            const recognition = new (window as any).webkitSpeechRecognition(); // Crear instancia del reconocimiento de voz
-            recognition.lang = 'es-ES'; // Establecer idioma a español, puede cambiar
-            recognition.start(); // Iniciar reconocimiento de voz
-
-            // document.getElementById("microfono").className = "microfono-on"
+            this.recognition = new (window as any).webkitSpeechRecognition(); // Crear instancia del reconocimiento de voz
+            this.recognition.lang = 'es-ES'; // Establecer idioma a español, puede cambiar
+            this.recognition.continuous = true; // Permitir reconocimiento continuo
+            this.recognition.start(); // Iniciar reconocimiento de voz
+            
             this.microfono=true
+            this.microfonoEscucha=true
+
+            const tiempoEspera = 500;
 
             if(this.textoNota.nota === undefined || this.textoNota.nota === ''){             
                 this.textoNota.nota = '';
             }
-
+            
             // Manejar evento de resultado del reconocimiento
-            recognition.onresult = (event) => {
-                const escuchado = event.results[0][0].transcript; // Obtener texto reconocido
+            this.recognition.onresult = (event) => {
+                let escuchado = event.results[0][0].transcript; // Obtener texto reconocido
                 this.textoNota.nota += ' ' + escuchado;
                 console.log('Texto reconocido:', escuchado);
-            };
+
+                // Reiniciar el temporizador si se detecta otra transcripción mientras el temporizador está en marcha
+                if (this.intervalId !== null) {
+                    clearTimeout(this.intervalId);
+                }
+
+                this.intervalId = setTimeout(() => {
+                    this.recognition.stop(); // Detener reconocimiento después del tiempo especificado sin transcripciones adicionales
+                    this.microfono = false; // Cerrar micrófono después del tiempo especificado sin transcripciones adicionales
+                }, tiempoEspera);
+            };            
 
             // Manejar evento de error del reconocimiento
-            recognition.onerror = (event) => {
-                // document.getElementById("microfono").className = "microfono-off";
+            this.recognition.onerror = (event) => {
                 this.microfono=false
                 console.error('Error en reconocimiento de voz:', event.error);
-            };
+            };            
 
             // Manejar evento de fin del reconocimiento
-            recognition.onend = () => {
-                // document.getElementById("microfono").className = "microfono-off";
-                this.microfono=false
-                console.log('Fin del reconocimiento de voz');
+            this.recognition.onend = () => {
+                if (this.intervalId !== null) {
+                    clearTimeout(this.intervalId);
+                }
+                this.microfono = false;
+
+                // Iniciar reconocimiento de voz nuevamente después de un pequeño retraso
+                setTimeout(() => {
+                    this.recognition.start();
+                    this.microfono = true;
+                }, 50); // Ajustar el valor del retraso según sea necesario
             };
-        }
+        },
+
+        detenerReconocimiento() {      
+            this.recognition.onend = () => {
+                clearTimeout(this.intervalId);
+            };
+
+            if (this.recognition) {
+                this.recognition.stop();
+                clearTimeout(this.intervalId);
+                this.microfono = false;
+                this.microfonoEscucha=false
+            }
+        }        
     }
 })
 </script>

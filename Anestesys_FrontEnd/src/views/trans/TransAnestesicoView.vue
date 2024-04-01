@@ -878,7 +878,7 @@
             <div class="col-md-2">
               <button id="inicio-cx" class="btn btn-menu fw-bold"
                       type="button"
-                      @dblclick="actualizarTQX('QXIN')"
+                      @click="actualizarTQX('QXIN')"
                       :disabled="menuTrans.ingresoQX != undefined && menuTrans.ingresoQX != ''  ? true : false">
                   <label class="cursor-puntero">QX IN <label class="fw-normal">{{menuTrans.ingresoQX}}</label></label>                  
               </button>
@@ -889,8 +889,8 @@
                       class="btn btn-menu fw-bold"
                       :class="{ 'show': transAnestStore.activoAnesIN, ' ': transAnestStore.noActivoAnesIN }"
                       :disabled="transAnestStore.btnTQX == true ? true : false"
-                      @dblclick="actualizarTQX('ANESIN')"
-                      @click.right="mostrarDropDown('ANESIN')"> 
+                      @click="actualizarTQX('ANESIN')"
+                      @dblclick="mostrarDropDown('ANESIN')"> 
                       <label class="cursor-puntero">ANES IN <label class="fw-normal">{{menuTrans.inicioAn}}</label></label> 
               </button>
 
@@ -899,7 +899,7 @@
                 <i class="text-white float-end cursor-puntero"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('ANESIN')"/></i>
                 <input class="form-control"
                         id="appt-time"
-                        type="time"
+                        type="time" :disabled="transAnestStore.ingresoQuirofano == false ? true : false"
                         v-model="menuTrans.inicioAn"
                         step="300" @change="actualizaHora('ANESIN')">
               </form>
@@ -910,8 +910,8 @@
               <button type="button" id="cx-in"
                       class="btn btn-menu fw-bold" :class="{ 'show': transAnestStore.activoCxIN, ' ': transAnestStore.noActivoCxIN }"
                       :disabled="transAnestStore.btnTQX == true ? true : false"
-                      @dblclick="actualizarTQX('CXIN')"
-                      @click.right="mostrarDropDown('CXIN')"> 
+                      @click="actualizarTQX('CXIN')"
+                      @dblclick="mostrarDropDown('CXIN')"> 
                 <label class="cursor-puntero">CX IN <label class="fw-normal">{{menuTrans.inicioCx}}</label></label>
               </button>
 
@@ -919,7 +919,7 @@
                 <label class="text-white fw-bold">Modificar</label>                
                 <i class="text-white float-end cursor-puntero"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('CXIN')"/></i>
                 <input class="form-control"
-                        type="time"
+                        type="time" :disabled="transAnestStore.ingresoQuirofano == false ? true : false"
                         v-model="menuTrans.inicioCx" 
                         step="300" @change="actualizaHora('CXIN')">
               </form>
@@ -929,8 +929,8 @@
               <button type="button" id="cx-out"
                       class="btn btn-menu fw-bold" :class="{ 'show': transAnestStore.activoCxOUT, ' ': transAnestStore.noActivoCxOUT }"
                       :disabled="transAnestStore.btnTQX == true ? true : false"
-                      @dblclick="actualizarTQX('CXOUT')"
-                      @click.right="mostrarDropDown('CXOUT')"> 
+                      @click="actualizarTQX('CXOUT')"
+                      @dblclick="mostrarDropDown('CXOUT')"> 
                 <label class="cursor-puntero">CX OUT <label class="fw-normal">{{menuTrans.finCx}}</label></label>
               </button>
 
@@ -939,7 +939,7 @@
                 <i class="text-white float-end cursor-puntero"><font-awesome-icon icon="fa-solid fa-xmark" size="lg" @click="ocultarDropDown('CXOUT')"/></i>
                 <input class="form-control"
                         id="appt-time"
-                        type="time"
+                        type="time" :disabled="transAnestStore.ingresoQuirofano == false ? true : false"
                         v-model="menuTrans.finCx"
                         step="300" @change="actualizaHora('CXOUT')">
               </form>
@@ -949,8 +949,8 @@
               <button type="button" id="anes-out"
                       class="btn btn-menu fw-bold" :class="{ 'show': transAnestStore.activoAnesOUT, ' ': transAnestStore.noActivoAnesOUT }"
                       :disabled="transAnestStore.btnTQX == true ? true : false"
-                      @dblclick="actualizarTQX('ANESOUT')"
-                      @click.right="mostrarDropDown('ANESOUT')"> 
+                      @click="actualizarTQX('ANESOUT')"
+                      @dblclick="mostrarDropDown('ANESOUT')"> 
                 <label class="cursor-puntero">ANES OUT <label class="fw-normal">{{menuTrans.finAn}}</label></label>
               </button>
               
@@ -959,16 +959,16 @@
                 <i class="text-white float-end cursor-puntero"><font-awesome-icon icon="fa-solid fa-xmark" size="lg " @click="ocultarDropDown('ANESOUT')"/></i>
                 <input class="form-control"
                         id="appt-time"
-                        type="time"
+                        type="time" :disabled="transAnestStore.ingresoQuirofano == false ? true : false"
                         v-model="menuTrans.finAn"
                         step="300" @change="actualizaHora('ANESOUT')">
               </form>   
             </div>
 
             <div class="col-md-2">    
-              <button type="button"
+              <button type="button" id="qx-out"
                       class="btn btn-menu fw-bold" 
-                      @dblclick="actualizarTQX('QXOUT')"
+                      @click="actualizarTQX('QXOUT')"
                       :disabled="menuTrans.egresoQx != undefined && menuTrans.egresoQx != '' ? true : false"> 
                       <label class="cursor-puntero">QX OUT <label class="fw-normal">{{menuTrans.egresoQx}}</label></label>
               </button>        
@@ -994,8 +994,20 @@
           </button>
         </div>
 
-        <div class="col-md-1">
-          <button type="button" class="btn btn-secondary" @click="startRecognition">Test</button>
+        <div class="col-md-1 justificar-icono-nota">
+          <label class="form-label fw-bold alinear-icono-nota">
+            <template v-if="transAnestStore.microfonoEscucha === false">
+              <span id="microfono" :class="transAnestStore.microfono == false ? 'microfono-off' : 'microfono-on'" @click="empezarReconocimiento">
+                <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
+              </span>
+            </template>
+
+            <template v-else>
+              <span class="microfono-on" @click="detenerReconocimiento">
+                <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
+              </span>
+            </template>            
+          </label>     
         </div>
 
         <!-- Modal tutorial Trans -->
@@ -1197,16 +1209,16 @@
         <!-- Botón deslizar -->
         <div class="btn-ocultar">
           <template v-if="vistaPreviaOff === false">
-              <span class="ocultar-izquierdo" @click="mostrarVistaPrevia">
-                <font-awesome-icon :icon="['fas', 'angle-left']" size="xl" />
-              </span>
-            </template>
+            <span class="ocultar-izquierdo" @click="mostrarVistaPrevia">
+              <font-awesome-icon :icon="['fas', 'angle-left']" size="xl" />
+            </span>
+          </template>
 
-            <template v-else>
-              <span class="ocultar-derecho" @click="ocultarVistaPrevia">
-                <font-awesome-icon :icon="['fas', 'angle-right']" size="xl" />
-              </span>
-            </template>  
+          <template v-else>
+            <span class="ocultar-derecho" @click="ocultarVistaPrevia">
+              <font-awesome-icon :icon="['fas', 'angle-right']" size="xl" />
+            </span>
+          </template>  
         </div>
 
       </div>
@@ -1281,7 +1293,7 @@
 
         <div class="" :class="vistaPreviaOff == false ? 'col-md-2 menu-pre-post' : 'col-md-2 menu-pre-post-off'">
           <RouterLink to="pre">
-            <img src="../../../public/images/pre.svg" class="ajusteImg"/>
+            <img src="../../../public/images/pre.svg" class="ajusteImg" @click="detenerReconocimiento" />
           </RouterLink>
         </div>
 
@@ -1291,7 +1303,7 @@
 
         <div class="" :class="vistaPreviaOff == false ? 'col-md-2 menu-pre-post' : 'col-md-2 menu-pre-post-off'">
           <RouterLink to="post">
-            <img src="../../../public/images/post.svg" class="ajusteImg"/>
+            <img src="../../../public/images/post.svg" class="ajusteImg" @click="detenerReconocimiento" />
           </RouterLink>
         </div>
       </div>
@@ -1426,14 +1438,19 @@ let FR: any;
 
 let taSeparada: Object;
 
-const recognition = new (window as any).webkitSpeechRecognition();
-recognition.lang = 'es-ES';
-
 export default defineComponent({
   name: 'App',
 
   data() {
     return {
+      // ingresoQuirofano: false,
+      ocultarHorario: false,
+
+      // intervalo: null,
+      // recognition: null,
+      // microfono: false,
+      // microfonoEscucha: false,
+
       informacion: '',
       clienteIp: '',
 
@@ -1757,79 +1774,213 @@ export default defineComponent({
   },
 
   methods: {
-    startRecognition() {
-      const recognition = new (window as any).webkitSpeechRecognition(); // Crear instancia del reconocimiento de voz
-      recognition.lang = 'es-ES'; // Establecer idioma a español (puedes cambiarlo según tus necesidades)
-      recognition.start(); // Iniciar reconocimiento de voz
+    empezarReconocimiento() {
+      transAnestStore.recognition = new (window as any).webkitSpeechRecognition(); // Crear instancia del reconocimiento de voz
+      transAnestStore.recognition.lang = 'es-ES'; // Establecer idioma a español (puedes cambiarlo según tus necesidades)
+      transAnestStore.recognition.continuous = true; // Permitir reconocimiento continuo
+      transAnestStore.recognition.start(); // Iniciar reconocimiento de voz
+
+      transAnestStore.microfono=true
+      transAnestStore.microfonoEscucha=true
+
+      const tiempoEspera = 1500;
 
       // Manejar evento de resultado del reconocimiento
-      recognition.onresult = (event) => {
+      transAnestStore.recognition.onresult = (event) => {
           const transcript = event.results[0][0].transcript.toLowerCase(); // Obtener texto reconocido
           console.log('Texto reconocido:', transcript);
 
           // Verificar si la palabra específica ha sido detectada
-          if (transcript.includes('quirófano')) {                
+
+          // QX IN
+          if (transcript === 'quirófano.') {                
             // Realizar la acción deseada cuando se detecta la palabra clave                
             let closeButton = document.getElementById('inicio-cx');
 
             // Crea un nuevo evento de clic
-            let event = new MouseEvent('dblclick', {
+            let event = new MouseEvent('click', {
                 bubbles: true,
                 cancelable: true,
                 view: window
             });                    
             // Despacha el evento de clic en el botón
             closeButton.dispatchEvent(event);
-
-            console.log('Palabra clave detectada. Acción realizada...');
           }
 
-          else if (transcript.includes('anestesia')) {                             
+          // ANES IN
+          else if (transcript === 'anestesia.') {                             
             let closeButton = document.getElementById('anes-in');
 
-            // if(transAnestStore.btnTQX === true){
+            if(transAnestStore.ingresoQuirofano === true){
               // Crea un nuevo evento de clic
-              let event = new MouseEvent('dblclick', {
+              let event = new MouseEvent('click', {
                   bubbles: true,
                   cancelable: true,
                   view: window
               });                    
               // Despacha el evento de clic en el botón
               closeButton.dispatchEvent(event);
-  
-              console.log('Palabra clave detectada. Acción realizada...');
-            // }
+            }else{
+              swal.fire({
+                title: 'Registre la hora de ingreso al quirófano',
+                icon: 'error',
+                showConfirmButton: false,
+                toast: true,
+                position: 'top',
+                timer: 3000,
+                timerProgressBar: true
+              })
+            }
           }
 
-          else if (transcript.includes('cirugía')) {                             
+          // CX IN
+          else if (transcript === 'cirugía.') {                             
             let closeButton = document.getElementById('cx-in');
 
-            // if(transAnestStore.btnTQX === true){
+            if(transAnestStore.ingresoQuirofano === true){
               // Crea un nuevo evento de clic
-              let event = new MouseEvent('dblclick', {
+              let event = new MouseEvent('click', {
                   bubbles: true,
                   cancelable: true,
                   view: window
               });                    
               // Despacha el evento de clic en el botón
               closeButton.dispatchEvent(event);
-  
-              console.log('Palabra clave detectada. Acción realizada...');
-            // }
+            }else{
+              swal.fire({
+                title: 'Registre la hora de ingreso al quirófano',
+                icon: 'error',
+                showConfirmButton: false,
+                toast: true,
+                position: 'top',
+                timer: 3000,
+                timerProgressBar: true
+              })
+            }
           }
+
+          // CX OUT
+          else if (transcript === 'termina cirugía.') {                             
+            let closeButton = document.getElementById('cx-out');
+
+            if(transAnestStore.ingresoQuirofano === true){
+              // Crea un nuevo evento de clic
+              let event = new MouseEvent('click', {
+                  bubbles: true,
+                  cancelable: true,
+                  view: window
+              });                    
+              // Despacha el evento de clic en el botón
+              closeButton.dispatchEvent(event);
+            }else{
+              swal.fire({
+                title: 'Registre la hora de ingreso al quirófano',
+                icon: 'error',
+                showConfirmButton: false,
+                toast: true,
+                position: 'top',
+                timer: 3000,
+                timerProgressBar: true
+              })
+            }
+          }
+
+          // CX OUT
+          else if (transcript === 'termina anestesia.') {                             
+            let closeButton = document.getElementById('anes-out');
+
+            if(transAnestStore.ingresoQuirofano === true){
+              // Crea un nuevo evento de clic
+              let event = new MouseEvent('click', {
+                  bubbles: true,
+                  cancelable: true,
+                  view: window
+              });                    
+              // Despacha el evento de clic en el botón
+              closeButton.dispatchEvent(event);
+            }else{
+              swal.fire({
+                title: 'Registre la hora de ingreso al quirófano',
+                icon: 'error',
+                showConfirmButton: false,
+                toast: true,
+                position: 'top',
+                timer: 3000,
+                timerProgressBar: true
+              })
+            }
+          }
+
+          // QX OUT
+          else if (transcript === 'termina quirófano.') {
+            let closeButton = document.getElementById('qx-out');
+
+            if(transAnestStore.ingresoQuirofano === true){
+              // Crea un nuevo evento de clic
+              let event = new MouseEvent('click', {
+                  bubbles: true,
+                  cancelable: true,
+                  view: window
+              });                    
+              // Despacha el evento de clic en el botón
+              closeButton.dispatchEvent(event);
+            }else{
+              swal.fire({
+                title: 'Registre la hora de ingreso al quirófano',
+                icon: 'error',
+                showConfirmButton: false,
+                toast: true,
+                position: 'top',
+                timer: 3000,
+                timerProgressBar: true
+              })
+            }
+          }
+          
+          if (transAnestStore.intervalo !== null) {
+              clearTimeout(transAnestStore.intervalo);
+              console.log('Temporizador reiniciado.');
+          }
+
+          transAnestStore.intervalo = setTimeout(() => {
+            transAnestStore.recognition.stop();
+            transAnestStore.microfono = false;
+          }, tiempoEspera);
       };
 
       // Manejar evento de error del reconocimiento
-      recognition.onerror = (event) => {
+      transAnestStore.recognition.onerror = (event) => {
           console.error('Error en reconocimiento de voz:', event.error);
       };
 
       // Manejar evento de fin del reconocimiento
-      recognition.onend = () => {
-          console.log('Fin del reconocimiento de voz');
+      transAnestStore.recognition.onend = () => {
+        if (transAnestStore.intervalo !== null) {
+            clearTimeout(transAnestStore.intervalo);
+        }
+        transAnestStore.microfono = false;
+
+        // Iniciar reconocimiento de voz nuevamente
+        setTimeout(() => {
+          transAnestStore.recognition.start();
+          transAnestStore.microfono = true;
+        }, 100);
       };
     },
 
+    detenerReconocimiento() {      
+      transAnestStore.recognition.onend = () => {
+        clearTimeout(transAnestStore.intervalo);
+      };
+
+      if (transAnestStore.recognition) {
+        transAnestStore.recognition.stop();
+        clearTimeout(transAnestStore.intervalo);
+        transAnestStore.microfono = false;
+        transAnestStore.microfonoEscucha=false
+        console.log('Reconocimiento de voz detenido F.');
+      }
+    },
 
     async enviarDatosTrans() {        
       try {
@@ -1912,8 +2063,10 @@ export default defineComponent({
   
           /* Relevos */
   
-          /* Eventos Criticos */
+          /* Eventos Criticos */          
           this.grid = []
+
+          transAnestStore.ingresoQuirofano = false
         }
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
@@ -5633,6 +5786,8 @@ export default defineComponent({
           break;
   
           case "QXIN":
+            transAnestStore.ingresoQuirofano =true
+
             transAnestStore.btnActualizarBalance=true
   
             transAnestStore.btnAddVentilador=false
@@ -5666,161 +5821,221 @@ export default defineComponent({
           break;
   
           case "ANESIN":
-            transAnestStore.btnActualizarBalance=true
-  
-            transAnestStore.btnAddVentilador=false
-            transAnestStore.btnUpdateVentilador=true
-            transAnestStore.btnActualizaVentilador=false
-  
-            transAnestStore.btnAddMedicamentos=false
-            transAnestStore.btnUpdateMedicamentos=true
-            transAnestStore.btnActualizaMedicamento=false
-  
-            transAnestStore.btnAddRelevos=false
-            transAnestStore.btnUpdateRelevos=true
-            transAnestStore.btnActualizaRelevo=false
-  
-            transAnestStore.btnAddEventos=false
-            transAnestStore.btnUpdateEventos=true
-            transAnestStore.btnActualizaEvento=false            
-  
-            let hoy_4 = new Date();
-            this.menuTrans.inicioAn = ((hoy_4.getHours() <10) ? '0':'') + hoy_4.getHours() + ':' + ((hoy_4.getMinutes() <10) ? '0':'')+hoy_4.getMinutes();
-  
-            this.enviarDatosTrans()
-  
-            if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.saveTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
-            }else if(preIdStore.nuevoRegistroPaciente == true){            
-              await transAnestStore.saveNuevoTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
-            }
+            if(transAnestStore.ingresoQuirofano ==true){
+              transAnestStore.btnActualizarBalance=true
+    
+              transAnestStore.btnAddVentilador=false
+              transAnestStore.btnUpdateVentilador=true
+              transAnestStore.btnActualizaVentilador=false
+    
+              transAnestStore.btnAddMedicamentos=false
+              transAnestStore.btnUpdateMedicamentos=true
+              transAnestStore.btnActualizaMedicamento=false
+    
+              transAnestStore.btnAddRelevos=false
+              transAnestStore.btnUpdateRelevos=true
+              transAnestStore.btnActualizaRelevo=false
+    
+              transAnestStore.btnAddEventos=false
+              transAnestStore.btnUpdateEventos=true
+              transAnestStore.btnActualizaEvento=false            
+    
+              let hoy_4 = new Date();
+              this.menuTrans.inicioAn = ((hoy_4.getHours() <10) ? '0':'') + hoy_4.getHours() + ':' + ((hoy_4.getMinutes() <10) ? '0':'')+hoy_4.getMinutes();
+    
+              this.enviarDatosTrans()
+    
+              if(preIdStore.nuevoRegistroPaciente == false){
+                await transAnestStore.saveTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
+              }else if(preIdStore.nuevoRegistroPaciente == true){            
+                await transAnestStore.saveNuevoTiemposQX(this.menuTrans.inicioAn, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
+              }                      
+            }else{
+              swal.fire({
+                title: 'Registre la hora de ingreso al quirófano',
+                icon: 'error',
+                showConfirmButton: false,
+                toast: true,
+                position: 'top',
+                timer: 3000,
+                timerProgressBar: true
+              })
+            }            
           break;
   
           case "CXIN":
-            transAnestStore.btnActualizarBalance=true
-  
-            transAnestStore.btnAddVentilador=false
-            transAnestStore.btnUpdateVentilador=true
-            transAnestStore.btnActualizaVentilador=false
-  
-            transAnestStore.btnAddMedicamentos=false
-            transAnestStore.btnUpdateMedicamentos=true
-            transAnestStore.btnActualizaMedicamento=false
-  
-            transAnestStore.btnAddRelevos=false
-            transAnestStore.btnUpdateRelevos=true
-            transAnestStore.btnActualizaRelevo=false
-  
-            transAnestStore.btnAddEventos=false
-            transAnestStore.btnUpdateEventos=true
-            transAnestStore.btnActualizaEvento=false
-          
-            let hoy_5 = new Date();
-            this.menuTrans.inicioCx = ((hoy_5.getHours() <10) ? '0':'') + hoy_5.getHours() + ':' + ((hoy_5.getMinutes() <10) ? '0':'')+hoy_5.getMinutes();
-  
-            this.enviarDatosTrans()
-            if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.saveTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
-            }else if(preIdStore.nuevoRegistroPaciente == true){            
-              await transAnestStore.saveNuevoTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
+            if(transAnestStore.ingresoQuirofano == true){
+              transAnestStore.btnActualizarBalance=true
+    
+              transAnestStore.btnAddVentilador=false
+              transAnestStore.btnUpdateVentilador=true
+              transAnestStore.btnActualizaVentilador=false
+    
+              transAnestStore.btnAddMedicamentos=false
+              transAnestStore.btnUpdateMedicamentos=true
+              transAnestStore.btnActualizaMedicamento=false
+    
+              transAnestStore.btnAddRelevos=false
+              transAnestStore.btnUpdateRelevos=true
+              transAnestStore.btnActualizaRelevo=false
+    
+              transAnestStore.btnAddEventos=false
+              transAnestStore.btnUpdateEventos=true
+              transAnestStore.btnActualizaEvento=false
+            
+              let hoy_5 = new Date();
+              this.menuTrans.inicioCx = ((hoy_5.getHours() <10) ? '0':'') + hoy_5.getHours() + ':' + ((hoy_5.getMinutes() <10) ? '0':'')+hoy_5.getMinutes();
+    
+              this.enviarDatosTrans()
+              if(preIdStore.nuevoRegistroPaciente == false){
+                await transAnestStore.saveTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
+              }else if(preIdStore.nuevoRegistroPaciente == true){            
+                await transAnestStore.saveNuevoTiemposQX(this.menuTrans.inicioCx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
+              }
+            }else{
+              swal.fire({
+                title: 'Registre la hora de ingreso al quirófano',
+                icon: 'error',
+                showConfirmButton: false,
+                toast: true,
+                position: 'top',
+                timer: 3000,
+                timerProgressBar: true
+              })
             }
           break;
   
           case "CXOUT":
-            transAnestStore.btnActualizarBalance=true
+            if(transAnestStore.ingresoQuirofano == true){
+              transAnestStore.btnActualizarBalance=true
   
-            transAnestStore.btnAddVentilador=false
-            transAnestStore.btnUpdateVentilador=true
-            transAnestStore.btnActualizaVentilador=false
-  
-            transAnestStore.btnAddMedicamentos=false
-            transAnestStore.btnUpdateMedicamentos=true
-            transAnestStore.btnActualizaMedicamento=false
-  
-            transAnestStore.btnAddRelevos=false
-            transAnestStore.btnUpdateRelevos=true
-            transAnestStore.btnActualizaRelevo=false
-  
-            transAnestStore.btnAddEventos=false
-            transAnestStore.btnUpdateEventos=true
-            transAnestStore.btnActualizaEvento=false
-  
-            let hoy_6 = new Date();
-            this.menuTrans.finCx = ((hoy_6.getHours() <10) ? '0':'') + hoy_6.getHours() + ':' + ((hoy_6.getMinutes() <10) ? '0':'')+hoy_6.getMinutes();
-  
-            this.enviarDatosTrans()
-  
-            if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.saveTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
-            }else if(preIdStore.nuevoRegistroPaciente == true){            
-              await transAnestStore.saveNuevoTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
-            }
+              transAnestStore.btnAddVentilador=false
+              transAnestStore.btnUpdateVentilador=true
+              transAnestStore.btnActualizaVentilador=false
+    
+              transAnestStore.btnAddMedicamentos=false
+              transAnestStore.btnUpdateMedicamentos=true
+              transAnestStore.btnActualizaMedicamento=false
+    
+              transAnestStore.btnAddRelevos=false
+              transAnestStore.btnUpdateRelevos=true
+              transAnestStore.btnActualizaRelevo=false
+    
+              transAnestStore.btnAddEventos=false
+              transAnestStore.btnUpdateEventos=true
+              transAnestStore.btnActualizaEvento=false
+    
+              let hoy_6 = new Date();
+              this.menuTrans.finCx = ((hoy_6.getHours() <10) ? '0':'') + hoy_6.getHours() + ':' + ((hoy_6.getMinutes() <10) ? '0':'')+hoy_6.getMinutes();
+    
+              this.enviarDatosTrans()
+    
+              if(preIdStore.nuevoRegistroPaciente == false){
+                await transAnestStore.saveTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
+              }else if(preIdStore.nuevoRegistroPaciente == true){            
+                await transAnestStore.saveNuevoTiemposQX(this.menuTrans.finCx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
+              }
+            }else{
+              swal.fire({
+                title: 'Registre la hora de ingreso al quirófano',
+                icon: 'error',
+                showConfirmButton: false,
+                toast: true,
+                position: 'top',
+                timer: 3000,
+                timerProgressBar: true
+              })
+            }            
           break;
   
           case "ANESOUT":
-            transAnestStore.btnActualizarBalance=true
+            if(transAnestStore.ingresoQuirofano == true){
+              transAnestStore.btnActualizarBalance=true
   
-            transAnestStore.btnAddVentilador=false
-            transAnestStore.btnUpdateVentilador=true
-            transAnestStore.btnActualizaVentilador=false
-  
-            transAnestStore.btnAddMedicamentos=false
-            transAnestStore.btnUpdateMedicamentos=true
-            transAnestStore.btnActualizaMedicamento=false
-  
-            transAnestStore.btnAddRelevos=false
-            transAnestStore.btnUpdateRelevos=true
-            transAnestStore.btnActualizaRelevo=false
-  
-            transAnestStore.btnAddEventos=false
-            transAnestStore.btnUpdateEventos=true
-            transAnestStore.btnActualizaEvento=false
-  
-            let hoy_7 = new Date();
-            this.menuTrans.finAn = ((hoy_7.getHours() <10) ? '0':'') + hoy_7.getHours() + ':' + ((hoy_7.getMinutes() <10) ? '0':'')+hoy_7.getMinutes();
-  
-            this.enviarDatosTrans()
-  
-            if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.saveTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
-            }else if(preIdStore.nuevoRegistroPaciente == true){            
-              await transAnestStore.saveNuevoTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
-            }
+              transAnestStore.btnAddVentilador=false
+              transAnestStore.btnUpdateVentilador=true
+              transAnestStore.btnActualizaVentilador=false
+    
+              transAnestStore.btnAddMedicamentos=false
+              transAnestStore.btnUpdateMedicamentos=true
+              transAnestStore.btnActualizaMedicamento=false
+    
+              transAnestStore.btnAddRelevos=false
+              transAnestStore.btnUpdateRelevos=true
+              transAnestStore.btnActualizaRelevo=false
+    
+              transAnestStore.btnAddEventos=false
+              transAnestStore.btnUpdateEventos=true
+              transAnestStore.btnActualizaEvento=false
+    
+              let hoy_7 = new Date();
+              this.menuTrans.finAn = ((hoy_7.getHours() <10) ? '0':'') + hoy_7.getHours() + ':' + ((hoy_7.getMinutes() <10) ? '0':'')+hoy_7.getMinutes();
+    
+              this.enviarDatosTrans()
+    
+              if(preIdStore.nuevoRegistroPaciente == false){
+                await transAnestStore.saveTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
+              }else if(preIdStore.nuevoRegistroPaciente == true){            
+                await transAnestStore.saveNuevoTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
+              }
+            }else{
+              swal.fire({
+                title: 'Registre la hora de ingreso al quirófano',
+                icon: 'error',
+                showConfirmButton: false,
+                toast: true,
+                position: 'top',
+                timer: 3000,
+                timerProgressBar: true
+              })
+            }            
           break;
   
           case "QXOUT":
-            transAnestStore.btnActualizarBalance=true
+            if(transAnestStore.ingresoQuirofano == true){
+              transAnestStore.btnActualizarBalance=true
   
-            transAnestStore.btnAddVentilador=false
-            transAnestStore.btnUpdateVentilador=true
-            transAnestStore.btnActualizaVentilador=false
-  
-            transAnestStore.btnAddMedicamentos=false
-            transAnestStore.btnUpdateMedicamentos=true
-            transAnestStore.btnActualizaMedicamento=false
-  
-            transAnestStore.btnAddRelevos=false
-            transAnestStore.btnUpdateRelevos=true
-            transAnestStore.btnActualizaRelevo=false
-  
-            transAnestStore.btnAddEventos=false
-            transAnestStore.btnUpdateEventos=true
-            transAnestStore.btnActualizaEvento=false
-  
-            this.btnMSV=true
-            transAnestStore.btnTQX
-            this.finMSV()
-  
-            let hoy_8 = new Date();
-            this.menuTrans.egresoQx = ((hoy_8.getHours() <10) ? '0':'') + hoy_8.getHours() + ':' + ((hoy_8.getMinutes() <10) ? '0':'')+hoy_8.getMinutes();
-  
-            this.enviarDatosTrans()
-  
-            if(preIdStore.nuevoRegistroPaciente == false){
-              await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
-            }else if(preIdStore.nuevoRegistroPaciente == true){            
-              await transAnestStore.saveNuevoTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
-            }
+              transAnestStore.btnAddVentilador=false
+              transAnestStore.btnUpdateVentilador=true
+              transAnestStore.btnActualizaVentilador=false
+    
+              transAnestStore.btnAddMedicamentos=false
+              transAnestStore.btnUpdateMedicamentos=true
+              transAnestStore.btnActualizaMedicamento=false
+    
+              transAnestStore.btnAddRelevos=false
+              transAnestStore.btnUpdateRelevos=true
+              transAnestStore.btnActualizaRelevo=false
+    
+              transAnestStore.btnAddEventos=false
+              transAnestStore.btnUpdateEventos=true
+              transAnestStore.btnActualizaEvento=false
+    
+              this.btnMSV=true
+              transAnestStore.btnTQX
+              this.finMSV()
+    
+              let hoy_8 = new Date();
+              this.menuTrans.egresoQx = ((hoy_8.getHours() <10) ? '0':'') + hoy_8.getHours() + ':' + ((hoy_8.getMinutes() <10) ? '0':'')+hoy_8.getMinutes();
+    
+              this.enviarDatosTrans()
+    
+              if(preIdStore.nuevoRegistroPaciente == false){
+                await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
+              }else if(preIdStore.nuevoRegistroPaciente == true){            
+                await transAnestStore.saveNuevoTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
+              }
+            }else{
+              swal.fire({
+                title: 'Registre la hora de ingreso al quirófano',
+                icon: 'error',
+                showConfirmButton: false,
+                toast: true,
+                position: 'top',
+                timer: 3000,
+                timerProgressBar: true
+              })
+            }            
           break;
         
           default:
@@ -7248,6 +7463,21 @@ export default defineComponent({
 <style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
+.alinear-icono-nota{
+    margin-top: 6px;
+}
+
+.microfono-off{
+    text-align: right;
+    cursor: pointer;
+}
+
+.microfono-on{
+    text-align: right;
+    cursor: pointer;
+    color: #E88300;
+}
+
 .grafica-div {
   position: relative;
 }
