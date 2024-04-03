@@ -24,6 +24,7 @@ export const useTransAnestStore = defineStore('transAn', {
         microfono: ref(false),
         microfonoEscucha: ref(false),
         ingresoQuirofano: ref(false),
+        salidaQuirofano: ref(false),
         
         // Botones técnica
         tipoTecnica: false,

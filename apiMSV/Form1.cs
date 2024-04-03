@@ -178,7 +178,7 @@ namespace apiMSV
                     {
                         string cadena_MVS = reader.ReadLine();
                         
-                        bool valor = cadena_MVS.StartsWith("\v");
+                        bool valor = cadena_MVS.StartsWith("\n");
 
                         if (valor)
                         {
