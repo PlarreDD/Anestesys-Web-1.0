@@ -7053,6 +7053,7 @@ export default defineComponent({
             this.gridBD = [];
           }
   
+          Temp1 = null
         }, 1000 * 60);
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
