@@ -7052,8 +7052,19 @@ export default defineComponent({
             this.guardaDatosMSV = 0;
             this.gridBD = [];
           }
-  
+
+          FC = null
+          Pulso = null          
+          SpO2 = null
+          EtCO2 = null
           Temp1 = null
+          Temp2 = null
+          PVC = null
+          PAS_In = null
+          PAD_In = null
+          PAM_In= null
+          FiCO2 = null
+          FR = null
         }, 1000 * 60);
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
