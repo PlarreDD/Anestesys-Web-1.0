@@ -1381,9 +1381,9 @@ import { Line } from 'vue-chartjs';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
-import pdfFonts from "pdfmake/build/vfs_fonts.js";
+// import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
-window.pdfMake.fonts = pdfFonts.pdfMake;
+// window.pdfMake.fonts = pdfFonts.pdfMake;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 
@@ -5294,8 +5294,8 @@ export default defineComponent({
         let hoy = new Date();
         this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
   
-        if(preIdStore.nuevoRegistroPaciente == false){
-          await transAnestStore.updateDatosV(this.menuTrans, preIdStore.pacienteID._id);
+        if(preIdStore.nuevoRegistroPaciente == false){      
+          await transAnestStore.updateDatosV(this.menuTrans, preIdStore.pacienteID._id);          
         }else if(preIdStore.nuevoRegistroPaciente == true){         
           await transAnestStore.updateNuevoDatosV(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
         }
