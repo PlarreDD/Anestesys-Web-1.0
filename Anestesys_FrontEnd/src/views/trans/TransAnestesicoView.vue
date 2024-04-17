@@ -501,7 +501,7 @@
                                     type="submit"
                                     class="btn btn-guardar-balance fw-bold"
                                     @click="updateNotaPA()"
-                                    > ACTUALIZAR </button> 
+                                    > GUARDAR </button> 
                           </template>   
                         </div>
                   </div>
@@ -531,7 +531,7 @@
                         <input class="form-control"
                               v-model="menuTrans.solHartman"
                               type="text"
-                              @keyup.capture="calcularBalance">
+                              @keyup="calcularBalance">
                       </div>
                       <!-- Solución fisiológica -->
                       <div class="col-md-4">
@@ -709,7 +709,7 @@
                           <button data-bs-toggle="tab" 
                                   type="submit"
                                   class="btn btn-guardar-balance fw-bold"
-                                  @click="actualizarDatosBalance()"> ACTUALIZAR </button> 
+                                  @click="actualizarDatosBalance()"> GUARDAR </button> 
                         </template>   
                       </div>
                     </div>
@@ -1691,7 +1691,7 @@ export default defineComponent({
     this.menuTrans.albuminas = null;
     this.menuTrans.plasmas = null;
     this.menuTrans.crioprecipitados = null;
-    this.menuTrans.factor_VII = null;
+    this.menuTrans.factor_VIII = null;
     this.menuTrans.liqAscitis = null;
     this.menuTrans.sangradoAprox = null;
     this.menuTrans.uresis = null;
@@ -5448,15 +5448,17 @@ export default defineComponent({
 
     async calcularBalance(){
       try {
-        this.enviarDatosTrans()
+        await this.enviarDatosTrans()
+
+        this.menuTrans.balanceTotal = ( Number(this.menuTrans.factor_VIII) + Number(this.menuTrans.solHartman) + Number(this.menuTrans.glucosados) +
+                                        Number(this.menuTrans.almidones) + Number(this.menuTrans.paqGlobular) + Number(this.menuTrans.plaquetas) +
+                                        Number(this.menuTrans.factor_VII) + Number(this.menuTrans.otrosIngresos) + Number(this.menuTrans.solFisio) +
+                                        Number(this.menuTrans.gelatinas) + Number(this.menuTrans.albuminas) + Number(this.menuTrans.plasmas) +
+                                        Number(this.menuTrans.crioprecipitados) ) - 
+                                      ( Number(this.menuTrans.liqAscitis) + Number(this.menuTrans.sangradoAprox) + Number(this.menuTrans.uresis) + 
+                                        Number(this.menuTrans.expoQX) + Number(this.menuTrans.reqBasales) + Number(this.menuTrans.ayuno) + 
+                                        Number(this.menuTrans.otrosEgresos) );
         
-        this.menuTrans.balanceTotal = ( Number(this.menuTrans.solHartman) + Number(this.menuTrans.glucosados) + Number(this.menuTrans.almidones) +
-                                        Number(this.menuTrans.paqGlobular) + Number(this.menuTrans.plaquetas) + Number(this.menuTrans.factor_VII) +
-                                        Number(this.menuTrans.otrosIngresos) + Number(this.menuTrans.solFisio) + Number(this.menuTrans.gelatinas) +
-                                        Number(this.menuTrans.albuminas) + Number(this.menuTrans.plasmas) + Number(this.menuTrans.crioprecipitados) +
-                                        Number(this.menuTrans.factor_VIII) ) - ( Number(this.menuTrans.liqAscitis) + Number(this.menuTrans.sangradoAprox) +
-                                        Number(this.menuTrans.uresis)+ Number(this.menuTrans.expoQX) + Number(this.menuTrans.reqBasales) +
-                                        Number(this.menuTrans.ayuno) + Number(this.menuTrans.otrosEgresos) );
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
