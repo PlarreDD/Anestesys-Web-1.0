@@ -100,11 +100,16 @@
                                 <option>ml.</option>
                                 <option>MUI</option>
                                 <option>MUI/min.</option>
-                                <option>ug/Kg min.</option>
+                                <option>ng.</option>
+                                <option>ng/kg/min.</option>
+                                <option>μg.</option>
+                                <option>μg/kg.</option>
+                                <option>μg/Kg min.</option>
                                 <option>mEq.</option>
                                 <option>mcg.</option>
                                 <option>mcg/kg/hr.</option>
                                 <option>mcg/kg/min.</option>
+                                <option>mg/kg.</option>
                                 <option>mg/kg/hr.</option>
                                 <option>mg/kg/min.</option>
                             </select>
