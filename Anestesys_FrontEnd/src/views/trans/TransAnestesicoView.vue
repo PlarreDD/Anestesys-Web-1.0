@@ -5244,45 +5244,58 @@ export default defineComponent({
     // Gestión datos ventilador 
     async guardarDatosV() {
       try {
-        transAnestStore.btnAddVentilador=false
-        transAnestStore.btnUpdateVentilador=true
-        transAnestStore.btnActualizaVentilador=false
-  
-        transAnestStore.btnAddMedicamentos =false
-        transAnestStore.btnUpdateMedicamentos=true
-        transAnestStore.btnActualizaMedicamento=false
-  
-        transAnestStore.btnAddRelevos=false
-        transAnestStore.btnUpdateRelevos=true
-        transAnestStore.btnActualizaRelevo=false
-  
-        transAnestStore.btnAddEventos=false
-        transAnestStore.btnUpdateEventos=true
-        transAnestStore.btnActualizaEvento=false
-  
-        transAnestStore.btnActualizarBalance=true
-  
-        let hoy = new Date();
-        this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
-        
-        if(preIdStore.nuevoRegistroPaciente == false){
-          await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
-        }else if(preIdStore.nuevoRegistroPaciente == true){        
-          await transAnestStore.saveNuevoDatosV(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-        }        
-  
-        this.menuTrans.modosVentilacion = "";
-        this.menuTrans.Hr = "";
-        this.menuTrans.IE = "";
-        this.menuTrans.PLimite = "";
-        this.menuTrans.frecResp = "";
-        this.menuTrans.peep = "";
-        this.menuTrans.vt = "";
-  
-        if(preIdStore.nuevoRegistroPaciente == false){
-          await transAnestStore.listDatosV(preIdStore.pacienteID._id);
-        }else if(preIdStore.nuevoRegistroPaciente == true){        
-          await transAnestStore.listNuevoDatosV(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        if(this.menuTrans.modosVentilacion == "" || this.menuTrans.modosVentilacion == undefined) {
+          swal.fire({
+          title: "Indique el modo de ventilación",
+          icon: "warning",
+          showConfirmButton: false,
+          showCloseButton: true,
+          toast: true,
+          timer: 2500,
+          timerProgressBar: true,
+          position: "top-end",
+          });
+        }else{
+          transAnestStore.btnAddVentilador=false
+          transAnestStore.btnUpdateVentilador=true
+          transAnestStore.btnActualizaVentilador=false
+    
+          transAnestStore.btnAddMedicamentos =false
+          transAnestStore.btnUpdateMedicamentos=true
+          transAnestStore.btnActualizaMedicamento=false
+    
+          transAnestStore.btnAddRelevos=false
+          transAnestStore.btnUpdateRelevos=true
+          transAnestStore.btnActualizaRelevo=false
+    
+          transAnestStore.btnAddEventos=false
+          transAnestStore.btnUpdateEventos=true
+          transAnestStore.btnActualizaEvento=false
+    
+          transAnestStore.btnActualizarBalance=true
+    
+          let hoy = new Date();
+          this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+          
+          if(preIdStore.nuevoRegistroPaciente == false){
+            await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){        
+            await transAnestStore.saveNuevoDatosV(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+          }        
+    
+          this.menuTrans.modosVentilacion = "";
+          this.menuTrans.Hr = "";
+          this.menuTrans.IE = "";
+          this.menuTrans.PLimite = "";
+          this.menuTrans.frecResp = "";
+          this.menuTrans.peep = "";
+          this.menuTrans.vt = "";
+    
+          if(preIdStore.nuevoRegistroPaciente == false){
+            await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){        
+            await transAnestStore.listNuevoDatosV(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+          }
         }
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
@@ -5291,28 +5304,41 @@ export default defineComponent({
 
     async actualizarDatosVentilador() {
       try {
-        let hoy = new Date();
-        this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
-  
-        if(preIdStore.nuevoRegistroPaciente == false){      
-          await transAnestStore.updateDatosV(this.menuTrans, preIdStore.pacienteID._id);          
-        }else if(preIdStore.nuevoRegistroPaciente == true){         
-          await transAnestStore.updateNuevoDatosV(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
+        if(this.menuTrans.modosVentilacion == "" || this.menuTrans.modosVentilacion == undefined) {
+          swal.fire({
+          title: "Indique el modo de ventilación",
+          icon: "warning",
+          showConfirmButton: false,
+          showCloseButton: true,
+          toast: true,
+          timer: 2500,
+          timerProgressBar: true,
+          position: "top-end",
+          });
+        }else{
+          let hoy = new Date();
+          this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+    
+          if(preIdStore.nuevoRegistroPaciente == false){      
+            await transAnestStore.updateDatosV(this.menuTrans, preIdStore.pacienteID._id);          
+          }else if(preIdStore.nuevoRegistroPaciente == true){         
+            await transAnestStore.updateNuevoDatosV(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
+          }
+    
+          this.menuTrans.modosVentilacion = "";
+          this.menuTrans.Hr = "";
+          this.menuTrans.IE = "";
+          this.menuTrans.PLimite = "";
+          this.menuTrans.frecResp = "";
+          this.menuTrans.peep = "";
+          this.menuTrans.vt = "";
+    
+          if(preIdStore.nuevoRegistroPaciente == false){
+            await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){          
+            await transAnestStore.listNuevoDatosV(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+          }     
         }
-  
-        this.menuTrans.modosVentilacion = "";
-        this.menuTrans.Hr = "";
-        this.menuTrans.IE = "";
-        this.menuTrans.PLimite = "";
-        this.menuTrans.frecResp = "";
-        this.menuTrans.peep = "";
-        this.menuTrans.vt = "";
-  
-        if(preIdStore.nuevoRegistroPaciente == false){
-          await transAnestStore.listDatosV(preIdStore.pacienteID._id);
-        }else if(preIdStore.nuevoRegistroPaciente == true){          
-          await transAnestStore.listNuevoDatosV(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-        }     
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
@@ -5347,9 +5373,9 @@ export default defineComponent({
 
     async actualizarVentilador() {
       try {
-        if (this.menuTrans.modosVentilacion == "") {
+        if (this.menuTrans.modosVentilacion == "" || this.menuTrans.modosVentilacion == undefined) {
             swal.fire({
-            title: "Seleccione el modo de ventilación",
+            title: "Indique el modo de ventilación",
             icon: "warning",
             showConfirmButton: false,
             showCloseButton: true,
