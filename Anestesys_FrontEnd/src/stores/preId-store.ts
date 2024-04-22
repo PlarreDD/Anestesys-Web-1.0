@@ -1078,7 +1078,7 @@ export const usePreIdStore = defineStore('preid', {
                     pos_TecnicaAnestesica: infoPlan.pos_TecnicaAnestesica,
                     pos_Premedicacion: infoPlan.pos_Premedicacion,
                     pos_EspPremedicacion: infoPlan.pos_EspPremedicacion,
-                    pos_Monitoreo: infoPlan.pos_Monitoreo,
+                    pos_Monitoreo: String(infoPlan.pos_Monitoreo),
                     // Tipos de Anestésia
                     // Sedación
                     sedacion_Via: infoPlan.sedacion_Via,
@@ -1167,7 +1167,7 @@ export const usePreIdStore = defineStore('preid', {
                     pos_TecnicaAnestesica: infoPlan.pos_TecnicaAnestesica,
                     pos_Premedicacion: infoPlan.pos_Premedicacion,
                     pos_EspPremedicacion: infoPlan.pos_EspPremedicacion,
-                    pos_Monitoreo: infoPlan.pos_Monitoreo,
+                    pos_Monitoreo: String(infoPlan.pos_Monitoreo),
                     // Tipos de Anestésia
                     // Sedación
                     sedacion_Via: infoPlan.sedacion_Via,
@@ -1253,7 +1253,7 @@ export const usePreIdStore = defineStore('preid', {
                     pos_TecnicaAnestesica: infoPlan.pos_TecnicaAnestesica,
                     pos_Premedicacion: infoPlan.pos_Premedicacion,
                     pos_EspPremedicacion: infoPlan.pos_EspPremedicacion,
-                    pos_Monitoreo: infoPlan.pos_Monitoreo,
+                    pos_Monitoreo: String(infoPlan.pos_Monitoreo),
                     // Tipos de Anestésia
                     // Sedación
                     sedacion_Via: infoPlan.sedacion_Via,
@@ -1342,7 +1342,7 @@ export const usePreIdStore = defineStore('preid', {
                     pos_TecnicaAnestesica: infoPlan.pos_TecnicaAnestesica,
                     pos_Premedicacion: infoPlan.pos_Premedicacion,
                     pos_EspPremedicacion: infoPlan.pos_EspPremedicacion,
-                    pos_Monitoreo: infoPlan.pos_Monitoreo,
+                    pos_Monitoreo: String(infoPlan.pos_Monitoreo),
                     // Tipos de Anestésia
                     // Sedación
                     sedacion_Via: infoPlan.sedacion_Via,

@@ -194,6 +194,20 @@
                             <label class="btn btn-radio" for="ojosNo">No</label>
                         </div>
 
+                        <!-- Monitoreo -->
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold">Monitoreo</label>
+                            <Multiselect mode="tags"
+                                        v-model="infoPlan.pos_Monitoreo"
+                                        @select="enviarDatosPlan"
+                                        :class="infoPlan.pos_Monitoreo != '' && infoPlan.pos_Monitoreo != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'"
+                                        placeholder="Seleccione el tipo de monitoreo"
+                                        :options="opcionMonitoreo"
+                                        :searchable="true"
+                                        :createTag="true"/>
+                        </div>  
+
                         <!-- Protección de prominencias oseas -->
                         <div class="col-md-2">
                             <label class="form-label col-12 fw-bold">Protección de prominencias oseas</label>
@@ -226,7 +240,7 @@
                                    v-model="infoPlan.pos_TecnicaAnestesica"
                                    :class="infoPlan.pos_TecnicaAnestesica != '' && infoPlan.pos_TecnicaAnestesica != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
-                        </div>
+                        </div>                         
 
                         <!-- Premedicación -->
                         <div class="col-md-2">
@@ -260,18 +274,7 @@
                                    v-model="infoPlan.pos_EspPremedicacion"
                                    :class="infoPlan.pos_EspPremedicacion != '' && infoPlan.pos_EspPremedicacion != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
-                        </div>
-
-                        <!-- Monitoreo -->
-                        <div class="col-md-12">
-                            <label class="form-label fw-bold">Monitoreo</label>
-                            <input type="text" @keyup.capture="enviarDatosPlan"
-                                   class="form-control"
-                                   id=""
-                                   v-model="infoPlan.pos_Monitoreo"
-                                   :class="infoPlan.pos_Monitoreo != '' && infoPlan.pos_Monitoreo != undefined ?
-                                          'form-control border border-success formSombra' : 'form-control'"> 
-                        </div>                        
+                        </div>                                             
                     </form>
                 </div>
             </div>
@@ -1048,6 +1051,7 @@ import type { regPlan } from "@/interfaces/regPreAnest";
 import { usePreIdStore } from "@/stores/preId-store";
 import { defineComponent } from "vue";
 import { Tab } from 'bootstrap';
+import Multiselect from '@vueform/multiselect';
 
 const preIdStore = usePreIdStore();
 
@@ -1062,6 +1066,8 @@ export default defineComponent({
             sitioCervical:false,
             sitioToracico:false,
             sitioLumbar:false,
+
+            opcionMonitoreo: ['No invasivo','Invasivo', 'Gasto cardíaco invasivo', 'Gasto cardíaco no invasivo', 'Neurológico', 'Otro']
         }
     },
 
@@ -1082,6 +1088,10 @@ export default defineComponent({
         this.infoPlan.regional_Ultrasonido = "No";
         this.infoPlan.regional_ProbComplicaciones = "No";
         this.infoPlan.regional_Neuroestimulador = "No";
+    },
+
+    components:{
+        Multiselect
     },
 
     methods:{
@@ -1239,7 +1249,7 @@ export default defineComponent({
                                                 preIdStore.TecnicaAnestesica = this.infoPlan.pos_TecnicaAnestesica,
                                                 preIdStore.Premedicacion = this.infoPlan.pos_Premedicacion,
                                                 preIdStore.EspecPremedicacion = this.infoPlan.pos_EspPremedicacion,
-                                                preIdStore.Monitoreo = this.infoPlan.pos_Monitoreo,
+                                                preIdStore.Monitoreo = String(this.infoPlan.pos_Monitoreo),                                                
     
                                                 preIdStore.ViaSedacion = this.infoPlan.sedacion_Via,
                                                 preIdStore.OpcionSedacion = this.infoPlan.sedacion_Opcion,
