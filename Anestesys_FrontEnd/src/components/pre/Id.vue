@@ -33,7 +33,7 @@
                         <div class="col-md-4">
                             <label class="form-label fw-bold"> Número de Expediente 
                                 <span class="text-danger">* </span>
-                                <span data-title="Llene el campo para navegar por la aplicación">
+                                <span data-title="Llene el campo para navegar por la aplicación" @click="validaCampo">
                                     <font-awesome-icon icon="fa-solid fa-circle-question"/>
                                 </span>
                             </label>
@@ -55,7 +55,7 @@
                         <div class="col-md-6">
                             <label class="form-label fw-bold"> Nombre del Paciente 
                                 <span class="text-danger">* </span> 
-                                <span data-title="Llene el campo para navegar por la aplicación">
+                                <span data-title="Llene el campo para navegar por la aplicación" @click="validaCampo">
                                     <font-awesome-icon icon="fa-solid fa-circle-question"/>
                                 </span>
 
@@ -303,7 +303,8 @@
                                    @keyup.capture="enviarDatos"
                                    v-model="infoPreIdPaciente.anestesiologo"
                                    :class="infoPreIdPaciente.anestesiologo != undefined && infoPreIdPaciente.anestesiologo != '' ?
-                                          'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
+                                          'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true"
+                                    readonly>
                         </div>
 
                         <!-- Anestesiólogo VPA -->
@@ -440,9 +441,12 @@ import type { regIdPaciente } from "@/interfaces/regPreAnest"
 import { defineComponent } from "vue"
 import { ElSelect, ElOption, ElInput, ElCard } from 'element-plus';
 import { usePreIdStore } from "../../stores/preId-store";
+import { useUserStore } from "../../stores/user-store";
 import Multiselect from '@vueform/multiselect';
+import swal from 'sweetalert2';
 
 const preIdStore = usePreIdStore();
+const userStore = useUserStore();
 
 export default defineComponent({
     components: { ElSelect, ElOption, ElInput, ElCard, Multiselect },
@@ -475,7 +479,7 @@ export default defineComponent({
     data () {
         return{
             infoPreIdPaciente: {} as regIdPaciente,
-            preIdStore,            
+            preIdStore, userStore,          
 
             valorNac: String,
             lblNac: String,  
@@ -580,8 +584,26 @@ export default defineComponent({
             ],
         }
     },
+
+    mounted: function(){
+        this.infoPreIdPaciente.anestesiologo = userStore.Nombre + ' ' + userStore.Apellido
+        this.enviarDatos()
+    },
     
     methods: {
+        async validaCampo(){
+            swal.fire({
+              title: "Llene el campo para navegar por la aplicación",
+              icon: "info",
+              showConfirmButton: false,
+              showCloseButton: true,
+              toast: true,
+              timer: 3000,
+              timerProgressBar: true,
+              position: "top-end",
+            });
+        },
+
         async vaciarInputsId(){       
             try {
                 this.infoPreIdPaciente.numEpisodio = ""
@@ -595,7 +617,7 @@ export default defineComponent({
                 this.infoPreIdPaciente.fechaCx = ""
                 this.infoPreIdPaciente.hrCx = ""
                 this.infoPreIdPaciente.cirujano = ""
-                this.infoPreIdPaciente.anestesiologo = ""
+                // this.infoPreIdPaciente.anestesiologo = ""
                 this.infoPreIdPaciente.anestesiologoVPA = ""
                 this.infoPreIdPaciente.residenteAnestesia = ""
     

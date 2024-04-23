@@ -1277,7 +1277,7 @@
                                 class="form-control"                                
                                 v-model="preIdStore.NombreAnestesiologo"
                                 :class="preIdStore.NombreAnestesiologo != undefined && preIdStore.NombreAnestesiologo != '' ?
-                                        'form-control border border-success formSombra' : 'form-control'"
+                                        'form-control border border-success formSombra' : 'form-control'" readonly
                             />
                         </div>
 

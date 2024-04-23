@@ -14,11 +14,12 @@
 
             <!-- GENERAL -->
             <li class="nav-item col-md-2" >
-                <button class="btn btn-nav-bar fw-bold"
-                        id=""
+                <button class="btn btn-nav-bar fw-bold"       
+                        id=""                           
                         data-bs-toggle="pill"
                         data-bs-target="#general"
                         type="button"
+                        :disabled="infoPlan.pos_TecnicaAnestesica != 'General' ? true : false"
                         aria-selected="false">GENERAL</button>
             </li>
 
@@ -29,6 +30,7 @@
                         data-bs-toggle="pill"
                         data-bs-target="#regional"
                         type="button"
+                        :disabled="infoPlan.pos_TecnicaAnestesica != 'Regional' ? true : false"
                         aria-selected="false">REGIONAL</button>
             </li>
 
@@ -39,6 +41,7 @@
                         data-bs-toggle="pill"
                         data-bs-target="#sedacion"
                         type="button"
+                        :disabled="infoPlan.pos_TecnicaAnestesica != 'Sedación' ? true : false"
                         aria-selected="false">SEDACIÓN</button>
             </li>            
   
@@ -49,6 +52,7 @@
                         data-bs-toggle="pill"
                         data-bs-target="#local"
                         type="button"
+                        :disabled="infoPlan.pos_TecnicaAnestesica != 'Local' ? true : false"
                         aria-selected="false">LOCAL</button>
             </li>
               
@@ -234,12 +238,20 @@
                         <!-- Técnica anéstesica -->
                         <div class="col-md-10">
                             <label class="form-label fw-bold">Técnica anéstesica</label>
-                            <input type="text" @keyup.capture="enviarDatosPlan"
-                                   class="form-control"
-                                   id=""
-                                   v-model="infoPlan.pos_TecnicaAnestesica"
-                                   :class="infoPlan.pos_TecnicaAnestesica != '' && infoPlan.pos_TecnicaAnestesica != undefined ?
-                                          'form-control border border-success formSombra' : 'form-control'"> 
+                            <span data-title="Llene el campo para navegar por la aplicación" @click="seleccionarTecnica">
+                                &nbsp<font-awesome-icon icon="fa-solid fa-circle-info" class="btn-info"/>
+                            </span>
+                            <select  @select="enviarDatosPlan"
+                                    class="form-select"
+                                    v-model="infoPlan.pos_TecnicaAnestesica"
+                                    :class="infoPlan.pos_TecnicaAnestesica != '' && infoPlan.pos_TecnicaAnestesica != undefined ?
+                                           'form-control border border-success formSombra' : 'form-control'">
+                                <option selected></option>
+                                <option>General</option>
+                                <option>Regional</option>
+                                <option>Sedación</option>
+                                <option>Local</option>                                          
+                            </select>
                         </div>                         
 
                         <!-- Premedicación -->
@@ -1052,6 +1064,7 @@ import { usePreIdStore } from "@/stores/preId-store";
 import { defineComponent } from "vue";
 import { Tab } from 'bootstrap';
 import Multiselect from '@vueform/multiselect';
+import swal from 'sweetalert2';
 
 const preIdStore = usePreIdStore();
 
@@ -1303,12 +1316,29 @@ export default defineComponent({
             } catch (error) {
                 window.log.error('Ocurrió un error:', error);
             }
+        },
+
+        async seleccionarTecnica(){
+            swal.fire({
+              title: "Seleccione la técnica anéstesica",
+              icon: "info",
+              showConfirmButton: false,
+              showCloseButton: true,
+              toast: true,
+              timer: 3000,
+              timerProgressBar: true,
+              position: "top-end",
+            });
         }
     },
 })
 </script>
 
 <style scoped>
+.btn-info{
+    cursor: pointer;
+    color:#002D60;
+}
 .bordePrincipal {
   border-radius: 5px;
   padding: 1rem;

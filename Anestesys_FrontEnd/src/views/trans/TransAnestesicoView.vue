@@ -1738,7 +1738,7 @@ export default defineComponent({
         this.clienteIp = data.clienteIp;
       })
       .catch(error => {
-        console.error('Error al obtener la dirección IP:', error);
+        window.log.error('Error al obtener la dirección IP:', error);
       });
   },
 
@@ -7078,7 +7078,6 @@ export default defineComponent({
             if(preIdStore.nuevoRegistroPaciente == false){
               this.transAnestStore.saveDatosMSV(this.gridBD, preIdStore.pacienteID._id);
             }else if(preIdStore.nuevoRegistroPaciente == true){
-              console.log("Nuevo");
               this.transAnestStore.saveNuevoDatosMSV(this.gridBD, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
             }
           
