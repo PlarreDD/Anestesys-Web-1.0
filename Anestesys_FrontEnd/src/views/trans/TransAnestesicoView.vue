@@ -889,8 +889,8 @@
                       class="btn btn-menu fw-bold"
                       :class="{ 'show': transAnestStore.activoAnesIN, ' ': transAnestStore.noActivoAnesIN }"
                       :disabled="transAnestStore.btnTQX == true ? true : false"
-                      @click="actualizarTQX('ANESIN')"
-                      @dblclick="mostrarDropDown('ANESIN')"> 
+                      @dblclick="actualizarTQX('ANESIN')"
+                      @click="mostrarDropDown('ANESIN')"> 
                       <label class="cursor-puntero">ANES IN <label class="fw-normal">{{menuTrans.inicioAn}}</label></label> 
               </button>
 
@@ -901,7 +901,7 @@
                         id="appt-time"
                         type="time" :disabled="transAnestStore.ingresoQuirofano == false || transAnestStore.salidaQuirofano == true ? true : false"
                         v-model="menuTrans.inicioAn"
-                        step="300" @change="actualizaHora('ANESIN')">
+                        step="300" @change="actualizaHora('ANESIN')" @dblclick="actualizaHora('ANESIN')">
               </form>
               
             </div>
@@ -6253,11 +6253,13 @@ export default defineComponent({
       try {
         switch (tiemposQX) {
           case "ANESIN":
-            transAnestStore.activoAnesIN=true;
-            transAnestStore.noActivoAnesIN=false;
-            transAnestStore.activoCxIN=false;
-            transAnestStore.activoCxOUT=false;
-            transAnestStore.activoAnesOUT=false;
+            if(this.menuTrans.inicioAn != undefined && this.menuTrans.inicioAn != ''){
+              transAnestStore.activoAnesIN=true;
+              transAnestStore.noActivoAnesIN=false;
+              transAnestStore.activoCxIN=false;
+              transAnestStore.activoCxOUT=false;
+              transAnestStore.activoAnesOUT=false;
+            }
           break;
   
           case "CXIN":
