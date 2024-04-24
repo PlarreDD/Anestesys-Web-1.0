@@ -208,7 +208,7 @@ export const useUserStore = defineStore('user', {
 
         updateTutorialPre( _id:string){
             apiAxios({
-                url: `/pre/${String(this.IdMed)}`,
+                url: `/preTuto/${String(this.IdMed)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + this.token,
@@ -226,7 +226,7 @@ export const useUserStore = defineStore('user', {
 
         updateTutorialTrans( _id:string){
             apiAxios({
-                url: `/trans/${String(this.IdMed)}`,
+                url: `/transTuto/${String(this.IdMed)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + this.token,
@@ -244,7 +244,7 @@ export const useUserStore = defineStore('user', {
 
         updateTutorialPost( _id:string){
             apiAxios({
-                url: `/post/${String(this.IdMed)}`,
+                url: `/postTuto/${String(this.IdMed)}`,
                 method: "PUT",
                 headers: {
                     Authorization: "Bearer " + this.token,
