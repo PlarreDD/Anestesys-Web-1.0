@@ -57,6 +57,13 @@ Back End
  - Ejecutar 'tsc' si no deja ejecutar el comando, ejecutar primero 'Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass'
  - node build/index.js
 ```
+## Instalación y configuración apiMSV
+Copiar el archivo apiMSV.exe en el escritorio
+- Hacer clic derecho en el archivo del programa (.exe) y seleccionar Propiedades.
+- En la pestaña Compatibilidad activa la opción Ejecutar este programa como administrador.
+![Ejecutar_como_administrator](https://github.com/PlarreDD/Anestesys-Web-1.0/assets/104015786/17b25a2a-62aa-4df9-bc16-96d60f50c112)
+- Hacer clic en Aplicar, luego en Aceptar.
+
 ## Infraestructura de la aplicación
 ![Captura de pantalla 2023-05-03 092427](https://user-images.githubusercontent.com/39073053/235962866-eff38bb6-d79a-40a5-8120-289089b469cc.png)
 
