@@ -15,7 +15,7 @@
       </li>
 
       <li class="nav-item col-md-4">
-        <button
+        <button @click="detenerReconocimiento"
           class="btn btn-nav-bar fw-bold"
           id=""
           data-bs-toggle="pill"
@@ -28,7 +28,7 @@
       </li>
 
       <li class="nav-item col-md-4">
-        <button
+        <button @click="detenerReconocimiento"
           class="btn btn-nav-bar fw-bold"
           id=""
           data-bs-toggle="pill"
@@ -45,8 +45,26 @@
       <!-- Nota de Evaluación de UCPA -->
       <div class="tab-pane fade show active" id="notaEvaluacion">
         <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">
-          <form @submit.prevent="" class="row g-3">
-            <h5 class="fw-bold">NOTA DE EVALUACIÓN UCPA</h5>
+          <form @submit.prevent="" class="row g-1">
+            <div class="col-md-11">
+              <h5 class="fw-bold">NOTA DE EVALUACIÓN UCPA</h5>
+            </div>
+
+            <div class="col-md-1 justificar-icono-nota">
+                <label class="form-label fw-bold alinear-icono-nota">
+                    <template v-if="microfonoEscucha === false">
+                        <span id="microfono-post" :class="microfono == false ? 'microfono-off-rec' : 'microfono-on-rec'" @click="empezarReconocimiento">
+                            <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
+                        </span>
+                    </template>
+
+                    <template v-else>
+                        <span class="microfono-on-rec" @click="detenerReconocimiento">
+                            <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
+                        </span>
+                    </template>                                
+                </label>     
+            </div>
 
             <!-- Observaciones -->
             <div class="col-md-12">
@@ -1398,10 +1416,92 @@ export default defineComponent({
       preIdStore,    
       
       btnActualizarRecuperacion: false,
+
+      microfono: false,
+      intervalId: null,
+      microfonoEscucha: false,
+      recognition: null,
     };
   },
 
   methods: {
+    async empezarReconocimiento() {
+      try {                
+        this.recognition = new (window as any).webkitSpeechRecognition(); // Crear instancia del reconocimiento de voz
+        this.recognition.lang = 'es-ES'; // Establecer idioma a español, puede cambiar
+        this.recognition.continuous = true; // Permitir reconocimiento continuo
+        this.recognition.start(); // Iniciar reconocimiento de voz
+        
+        this.microfono=true
+        this.microfonoEscucha=true
+  
+        const tiempoEspera = 200;
+  
+        if(this.infoRec.notaEval_Obs === undefined || this.infoRec.notaEval_Obs === ''){             
+            this.infoRec.notaEval_Obs = '';
+        }
+        
+        // Manejar evento de resultado del reconocimiento
+        this.recognition.onresult = (event) => {
+            let escuchado = event.results[0][0].transcript; // Obtener texto reconocido
+            this.infoRec.notaEval_Obs += ' ' + escuchado;
+            console.log('Texto reconocido:', escuchado);
+  
+            // Reiniciar el temporizador si se detecta otra transcripción mientras el temporizador está en marcha
+            if (this.intervalId !== null) {
+                clearTimeout(this.intervalId);
+            }
+  
+            this.intervalId = setTimeout(() => {
+                this.recognition.stop(); // Detener reconocimiento después del tiempo especificado sin transcripciones adicionales
+                this.microfono = false; // Cerrar micrófono después del tiempo especificado sin transcripciones adicionales
+            }, tiempoEspera);
+        };            
+  
+        // Manejar evento de error del reconocimiento
+        this.recognition.onerror = (event) => {
+            this.microfono=false
+            window.log.error('Error en reconocimiento de voz:', event.error);
+        };            
+  
+        // Manejar evento de fin del reconocimiento
+        this.recognition.onend = () => {
+            if (this.intervalId !== null) {
+                clearTimeout(this.intervalId);
+            }
+            this.microfono = false;
+  
+            // Iniciar reconocimiento de voz nuevamente después de un pequeño retraso
+            setTimeout(() => {
+                this.recognition.start();
+                this.microfono = true;
+            }, 50); // Ajustar el valor del retraso según sea necesario
+        };
+      } catch (error) {
+          window.log.error('Ocurrió un error:', error)
+      }
+    },
+
+    async detenerReconocimiento() {
+      try {
+        if(this.recognition !== null){
+          this.recognition.onend = () => {
+              clearTimeout(this.intervalId);
+          };
+    
+          if (this.recognition) {
+              this.recognition.stop();
+              clearTimeout(this.intervalId);
+              this.microfono = false;
+              this.microfonoEscucha=false
+              console.log('Reconocimiento de voz detenido Recuperación.');
+          }
+        }                
+      } catch (error) {
+          window.log.error('Ocurrió un error:', error)
+      }
+    },
+
     async vaciarInputsRecuperacion(){
       try {
         if(preIdStore.vaciadoPostRecup == true){
@@ -1782,5 +1882,15 @@ span {
 
 .margen-input{
     margin-top: 25px;
+}
+.microfono-off-rec{
+    text-align: right;
+    cursor: pointer;
+}
+
+.microfono-on-rec{
+    text-align: right;
+    cursor: pointer;
+    color: #E88300;
 }
 </style>

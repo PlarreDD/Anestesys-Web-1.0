@@ -18,6 +18,13 @@ export const useTransAnestStore = defineStore('transAn', {
         eventoID: ref(null),
         datosMSV: ref(null),
         envDat: ref(false),
+
+        recognition: ref(null),
+        intervalo: ref(null),
+        microfono: ref(false),
+        microfonoEscucha: ref(false),
+        ingresoQuirofano: ref(false),
+        salidaQuirofano: ref(false),
         
         // Botones técnica
         tipoTecnica: false,

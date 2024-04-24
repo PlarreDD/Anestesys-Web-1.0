@@ -120,7 +120,7 @@
 
       <div class="div-img col-md-10">
         <button type="button"
-                class="btn btn-emergencia fw-bold"
+                class="btn btn-emergencia fw-bold invisible"
                 data-bs-toggle="modal"
                 data-bs-target="#emergenciaModal"> ¡EMERGENCIA! </button>
       </div>
