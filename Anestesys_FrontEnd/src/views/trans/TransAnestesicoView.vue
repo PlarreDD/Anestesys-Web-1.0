@@ -137,12 +137,12 @@
 
                           <div class="col-md-2">
                             <label  class="form-label text-white fw-bold"> Hora de Inicio </label>
-                            <input type="time" class="form-control" v-model="menuTrans.horaInicioMed" @dblclick="actualizarTQX('INCX')">
+                            <input type="time" class="form-control" v-model="menuTrans.horaInicioMed" @click="actualizarTQX('INCX')">
                           </div>
 
                           <div class="col-md-2" :class="menuTrans.tipoMed == 'Bolo' ? 'invisible' : 'visible'">
                             <label  class="form-label text-white fw-bold"> Hora Final </label>
-                            <input type="time" class="form-control" v-model="menuTrans.horaFinalMed" @keyup.capture="enviarDatosTrans">
+                            <input type="time" class="form-control" v-model="menuTrans.horaFinalMed" @click="calcularHoraFinalMed">
                           </div>
 
                           <div class="col-md-8">
@@ -223,7 +223,7 @@
                               <input type="hidden" v-model="menuTrans.idRelevo">
 
                               <label class="form-label text-white fw-bold"> Hora </label>
-                              <input type="time" class="form-control" v-model="menuTrans.horaRelevo" @dblclick="actualizarTQX('INREL')">
+                              <input type="time" class="form-control" v-model="menuTrans.horaRelevo" @click="actualizarTQX('INREL')">
                             </div>
 
                             <div class="col-md-7">
@@ -318,7 +318,7 @@
                               <input type="hidden" v-model="menuTrans.idEvento">
 
                               <label class="form-label text-white fw-bold"> Hora </label>
-                              <input type="time" class="form-control" v-model="menuTrans.horaEvento" @dblclick="actualizarTQX('INEVE')">
+                              <input type="time" class="form-control" v-model="menuTrans.horaEvento" @click="actualizarTQX('INEVE')">
                             </div>
 
                             <div class="col-md-10">
@@ -1743,6 +1743,17 @@ export default defineComponent({
   },
 
   methods: {
+  calcularHoraFinalMed(){
+          try {
+              let hoy = new Date();
+              this.menuTrans.horaFinalMed = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+  
+              this.enviarDatosTrans();        
+          } catch (error) {
+              window.log.error('Ocurrió un error:', error);
+          }     
+      },        
+
     async enviarDatosTrans() {        
       try {
         // Ingresos
