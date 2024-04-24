@@ -3,6 +3,7 @@
         <!-- Barra de Navegación -->
         <ul class="nav nav-pills mb-3 text-center centrar-li" id="">
             <!-- POSICIÓN Y CUIDADOS -->
+
             <li class="nav-item col-md-3" >
                 <button class="btn btn-nav-bar fw-bold active"
                         id="posicion-cuidados"
@@ -12,44 +13,57 @@
                         aria-selected="true">POSICIÓN Y CUIDADOS</button>
             </li>
 
-            <!-- GENERAL -->
+            <!-- TIPO TÉCNICA -->
             <li class="nav-item col-md-2" >
-                <button class="btn btn-nav-bar fw-bold"
-                        id=""
+
+                <!-- GENERAL -->
+                <template v-if="infoPlan.pos_TecnicaAnestesica === 'General'">
+                    <button class="btn btn-nav-bar fw-bold"
+                        :class="infoPlan.pos_TecnicaAnestesica != 'General' ? 'invisible' : ''"
+                        id=""                           
                         data-bs-toggle="pill"
                         data-bs-target="#general"
                         type="button"
+                        :disabled="infoPlan.pos_TecnicaAnestesica != 'General' ? true : false"
                         aria-selected="false">GENERAL</button>
-            </li>
+                </template>
 
-            <!-- REGIONAL -->
-            <li class="nav-item col-md-2" >
-                <button class="btn btn-nav-bar fw-bold"
+                <!-- REGIONAL -->
+                <template v-if="infoPlan.pos_TecnicaAnestesica === 'Regional'">
+                    <button class="btn btn-nav-bar fw-bold"
+                        :class="infoPlan.pos_TecnicaAnestesica != 'Regional' ? 'invisible' : ''"
                         id=""
                         data-bs-toggle="pill"
                         data-bs-target="#regional"
                         type="button"
+                        :disabled="infoPlan.pos_TecnicaAnestesica != 'Regional' ? true : false"
                         aria-selected="false">REGIONAL</button>
-            </li>
+                </template>  
 
-            <!-- SEDACIÓN -->
-            <li class="nav-item col-md-2" >
-                <button class="btn btn-nav-bar fw-bold"
+                <!-- SEDACIÓN -->
+                <template v-if="infoPlan.pos_TecnicaAnestesica === 'Sedación'">
+                    <button class="btn btn-nav-bar fw-bold"
+                        :class="infoPlan.pos_TecnicaAnestesica != 'Sedación' ? 'invisible' : ''"
                         id=""
                         data-bs-toggle="pill"
                         data-bs-target="#sedacion"
                         type="button"
+                        :disabled="infoPlan.pos_TecnicaAnestesica != 'Sedación' ? true : false"
                         aria-selected="false">SEDACIÓN</button>
-            </li>            
-  
-            <!-- LOCAL -->
-            <li class="nav-item col-md-2" >
-                <button class="btn btn-nav-bar fw-bold"
+                </template>  
+
+                <!-- LOCAL -->
+                <template v-if="infoPlan.pos_TecnicaAnestesica === 'Local'">
+                    <button class="btn btn-nav-bar fw-bold"
+                        :class="infoPlan.pos_TecnicaAnestesica != 'Local' ? 'invisible' : ''"
                         id=""
                         data-bs-toggle="pill"
                         data-bs-target="#local"
                         type="button"
+                        :disabled="infoPlan.pos_TecnicaAnestesica != 'Local' ? true : false"
                         aria-selected="false">LOCAL</button>
+                </template>  
+                
             </li>
               
         </ul>
@@ -194,6 +208,20 @@
                             <label class="btn btn-radio" for="ojosNo">No</label>
                         </div>
 
+                        <!-- Monitoreo -->
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold">Monitoreo</label>
+                            <Multiselect mode="tags"
+                                        v-model="infoPlan.pos_Monitoreo"
+                                        @select="enviarDatosPlan"
+                                        :class="infoPlan.pos_Monitoreo != '' && infoPlan.pos_Monitoreo != undefined ?
+                                          'form-control border border-success formSombra' : 'form-control'"
+                                        placeholder="Seleccione el tipo de monitoreo"
+                                        :options="opcionMonitoreo"
+                                        :searchable="true"
+                                        :createTag="true"/>
+                        </div>  
+
                         <!-- Protección de prominencias oseas -->
                         <div class="col-md-2">
                             <label class="form-label col-12 fw-bold">Protección de prominencias oseas</label>
@@ -220,13 +248,21 @@
                         <!-- Técnica anéstesica -->
                         <div class="col-md-10">
                             <label class="form-label fw-bold">Técnica anéstesica</label>
-                            <input type="text" @keyup.capture="enviarDatosPlan"
-                                   class="form-control"
-                                   id=""
-                                   v-model="infoPlan.pos_TecnicaAnestesica"
-                                   :class="infoPlan.pos_TecnicaAnestesica != '' && infoPlan.pos_TecnicaAnestesica != undefined ?
-                                          'form-control border border-success formSombra' : 'form-control'"> 
-                        </div>
+                            <span data-title="Llene el campo para navegar por la aplicación" @click="seleccionarTecnica">
+                                &nbsp<font-awesome-icon icon="fa-solid fa-circle-info" class="btn-info"/>
+                            </span>
+                            <select  @select="enviarDatosPlan"
+                                    class="form-select"
+                                    v-model="infoPlan.pos_TecnicaAnestesica"
+                                    :class="infoPlan.pos_TecnicaAnestesica != '' && infoPlan.pos_TecnicaAnestesica != undefined ?
+                                           'form-control border border-success formSombra' : 'form-control'">
+                                <option selected></option>
+                                <option>General</option>
+                                <option>Regional</option>
+                                <option>Sedación</option>
+                                <option>Local</option>                                          
+                            </select>
+                        </div>                         
 
                         <!-- Premedicación -->
                         <div class="col-md-2">
@@ -260,18 +296,7 @@
                                    v-model="infoPlan.pos_EspPremedicacion"
                                    :class="infoPlan.pos_EspPremedicacion != '' && infoPlan.pos_EspPremedicacion != undefined ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
-                        </div>
-
-                        <!-- Monitoreo -->
-                        <div class="col-md-12">
-                            <label class="form-label fw-bold">Monitoreo</label>
-                            <input type="text" @keyup.capture="enviarDatosPlan"
-                                   class="form-control"
-                                   id=""
-                                   v-model="infoPlan.pos_Monitoreo"
-                                   :class="infoPlan.pos_Monitoreo != '' && infoPlan.pos_Monitoreo != undefined ?
-                                          'form-control border border-success formSombra' : 'form-control'"> 
-                        </div>                        
+                        </div>                                             
                     </form>
                 </div>
             </div>
@@ -1048,6 +1073,8 @@ import type { regPlan } from "@/interfaces/regPreAnest";
 import { usePreIdStore } from "@/stores/preId-store";
 import { defineComponent } from "vue";
 import { Tab } from 'bootstrap';
+import Multiselect from '@vueform/multiselect';
+import swal from 'sweetalert2';
 
 const preIdStore = usePreIdStore();
 
@@ -1062,6 +1089,8 @@ export default defineComponent({
             sitioCervical:false,
             sitioToracico:false,
             sitioLumbar:false,
+
+            opcionMonitoreo: ['No invasivo','Invasivo', 'Gasto cardíaco invasivo', 'Gasto cardíaco no invasivo', 'Neurológico', 'Otro']
         }
     },
 
@@ -1082,6 +1111,10 @@ export default defineComponent({
         this.infoPlan.regional_Ultrasonido = "No";
         this.infoPlan.regional_ProbComplicaciones = "No";
         this.infoPlan.regional_Neuroestimulador = "No";
+    },
+
+    components:{
+        Multiselect
     },
 
     methods:{
@@ -1239,7 +1272,7 @@ export default defineComponent({
                                                 preIdStore.TecnicaAnestesica = this.infoPlan.pos_TecnicaAnestesica,
                                                 preIdStore.Premedicacion = this.infoPlan.pos_Premedicacion,
                                                 preIdStore.EspecPremedicacion = this.infoPlan.pos_EspPremedicacion,
-                                                preIdStore.Monitoreo = this.infoPlan.pos_Monitoreo,
+                                                preIdStore.Monitoreo = String(this.infoPlan.pos_Monitoreo),                                                
     
                                                 preIdStore.ViaSedacion = this.infoPlan.sedacion_Via,
                                                 preIdStore.OpcionSedacion = this.infoPlan.sedacion_Opcion,
@@ -1293,12 +1326,29 @@ export default defineComponent({
             } catch (error) {
                 window.log.error('Ocurrió un error:', error);
             }
+        },
+
+        async seleccionarTecnica(){
+            swal.fire({
+              title: "Seleccione la técnica anéstesica",
+              icon: "info",
+              showConfirmButton: false,
+              showCloseButton: true,
+              toast: true,
+              timer: 3000,
+              timerProgressBar: true,
+              position: "top-end",
+            });
         }
     },
 })
 </script>
 
 <style scoped>
+.btn-info{
+    cursor: pointer;
+    color:#002D60;
+}
 .bordePrincipal {
   border-radius: 5px;
   padding: 1rem;

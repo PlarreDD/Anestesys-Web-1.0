@@ -1099,9 +1099,9 @@ export default defineComponent({
 
     async obtenerCirugia(id){
       try {
-        if(idStore.cirugia != null){
+        // if(idStore.cirugia != null){
           await idStore.getDatosPDF(id)
-        }
+        // }
 
         await this.asignarDatosPacientesCx()
         await this.asignarDatosPacientesVal()

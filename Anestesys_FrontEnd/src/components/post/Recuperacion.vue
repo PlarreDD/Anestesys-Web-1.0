@@ -1295,7 +1295,7 @@
                                 class="form-control"                                
                                 v-model="preIdStore.NombreAnestesiologo"
                                 :class="preIdStore.NombreAnestesiologo != undefined && preIdStore.NombreAnestesiologo != '' ?
-                                        'form-control border border-success formSombra' : 'form-control'"
+                                        'form-control border border-success formSombra' : 'form-control'" readonly
                             />
                         </div>
 
@@ -1305,7 +1305,7 @@
                             <input
                                 type="date"
                                 class="form-control"
-                                @keyup.capture="enviarDatosRecuperacion"
+                                @click="calcularFechaAlta"
                                 v-model="infoRec.altaRec_FechaAltaRec"
                                 :class="infoRec.altaRec_FechaAltaRec != undefined && infoRec.altaRec_FechaAltaRec != '' ?
                                         'form-control border border-success formSombra' : 'form-control'"
@@ -1752,6 +1752,20 @@ export default defineComponent({
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
+    },
+
+    calcularFechaAlta(){
+        try {
+            let fecha = new Date();
+            let año = fecha.getFullYear();
+            let mes = String(fecha.getMonth() + 1).padStart(2, '0');
+            let dia = String(fecha.getDate()).padStart(2, '0');
+            this.infoRec.altaRec_FechaAltaRec = `${año}-${mes}-${dia}`;
+
+            this.enviarDatosRecuperacion();        
+        } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+        }     
     }
   },
 });

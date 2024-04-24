@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>apiMVS.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -85,6 +88,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="src\noPing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\Fondo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="apiMVS.ico" />
+    <None Include="src\iconMSV.ico" />
+    <None Include="src\apiMVS.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

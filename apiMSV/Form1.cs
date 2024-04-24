@@ -66,18 +66,25 @@ namespace apiMSV
 
         private async void startServer()
         {
-            if (ipLocal == null)
+            try
             {
-                ipLocal = Dns.GetHostEntry(Dns.GetHostName());
-                listener = new TcpListener(IPAddress.Any, port);
-            }
+                if (ipLocal == null)
+                {
+                    ipLocal = Dns.GetHostEntry(Dns.GetHostName());
+                    listener = new TcpListener(IPAddress.Any, port);
+                }
 
-            if (httpListener == null)
+                if (httpListener == null)
+                {
+                    httpListener = new HttpListener();
+                    httpListener.Prefixes.Add($"http://{ipLocal.AddressList[ipLocal.AddressList.Length - 1]}:5000/apiMVS/");
+                    httpListener.Start();
+                    await ListenForRequests();
+                }
+            }
+            catch (Exception ex)
             {
-                httpListener = new HttpListener();
-                httpListener.Prefixes.Add($"http://{ipLocal.AddressList[ipLocal.AddressList.Length - 1]}:5000/apiMVS/");
-                httpListener.Start();
-                await ListenForRequests();
+                Console.WriteLine(ex.ToString());
             }
         }
 
@@ -99,19 +106,26 @@ namespace apiMSV
 
         private void ProcessRequest(HttpListenerContext context)
         {
-            context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
-            context.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-            context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Accept");
-
-            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
-            context.Response.ContentLength64 = buffer.Length;
-
-            using (Stream outputStream = context.Response.OutputStream)
+            try
             {
-                outputStream.Write(buffer, 0, buffer.Length);
-            }
+                context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+                context.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+                context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Accept");
 
-            context.Response.Close();
+                byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
+                context.Response.ContentLength64 = buffer.Length;
+
+                using (Stream outputStream = context.Response.OutputStream)
+                {
+                    outputStream.Write(buffer, 0, buffer.Length);
+                }
+
+                context.Response.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
         public IPStatus conexionMSV(string ip)
@@ -122,32 +136,46 @@ namespace apiMSV
 
             try
             {
-                rMSV = pMSV.Send(ip, 1000);
-                otroNoSe = rMSV.Status;
+
+                try
+                {
+                    rMSV = pMSV.Send(ip, 1000);
+                    otroNoSe = rMSV.Status;
+                }
+                catch
+                {
+                    otroNoSe = IPStatus.DestinationUnreachable;
+                }
+
+                if (otroNoSe == IPStatus.Success)
+                {
+                    pingMSV.Invoke((MethodInvoker)delegate {
+                        pingMSV.Image = Properties.Resources.pingOk;
+                    });
+
+                    ipMSV.Invoke((MethodInvoker)delegate {
+                        this.ipMSV.Enabled = false; ;
+                    });
+                }
+                else
+                {
+                    pingMSV.Invoke((MethodInvoker)delegate {
+                        this.pingMSV.Image = Properties.Resources.noPing;
+                    });
+
+                    ipMSV.Invoke((MethodInvoker)delegate {
+                        this.ipMSV.Enabled = true;
+                    });
+                }
+
+                return otroNoSe;
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 otroNoSe = IPStatus.DestinationUnreachable;
+                return otroNoSe;
             }
-
-            if (otroNoSe == IPStatus.Success)
-            {
-                pingMSV.Image = Properties.Resources.pingOk;
-                
-                ipMSV.Invoke((MethodInvoker)delegate {
-                    this.ipMSV.Enabled = false; ;
-                });
-            }
-            else
-            {
-                pingMSV.Image = Properties.Resources.noPing;
-                
-                ipMSV.Invoke((MethodInvoker)delegate {
-                    this.ipMSV.Enabled = true;
-                });
-            }
-
-            return otroNoSe;
         }
 
         private void pingMSV_Click(object sender, EventArgs e)
@@ -158,17 +186,17 @@ namespace apiMSV
 
         public void obtenerDatosMSV()
         {
-            if (ipLocal == null)
+            try
             {
-                ipLocal = Dns.GetHostEntry(Dns.GetHostName());
-                listener = new TcpListener(IPAddress.Any, port);
-            }
+                if (ipLocal == null)
+                {
+                    ipLocal = Dns.GetHostEntry(Dns.GetHostName());
+                    listener = new TcpListener(IPAddress.Any, port);
+                }
 
-            listener.Start();
+                listener.Start();
 
-            while (true)
-            {
-                try
+                while (true)
                 {
                     client = listener.AcceptTcpClient();
 
@@ -177,8 +205,8 @@ namespace apiMSV
                     while (!reader.EndOfStream)
                     {
                         string cadena_MVS = reader.ReadLine();
-                        
-                        bool valor = cadena_MVS.StartsWith("\n");
+
+                        bool valor = cadena_MVS.StartsWith("\v");
 
                         if (valor)
                         {
@@ -186,7 +214,7 @@ namespace apiMSV
                         }
 
                         responseString += cadena_MVS + ",";
-                        
+
                         conexionMSV(ipMonitor);
 
                         testHL7.BackColor = Color.Black;
@@ -194,10 +222,10 @@ namespace apiMSV
 
                     testHL7.BackColor = Color.Orange;
                 }
-                catch
-                {
-
-                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
             }
         }
 
@@ -206,12 +234,24 @@ namespace apiMSV
             txtHL7.Text = responseString;
         }
 
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
-            httpListener?.Stop();
-            listener.Stop();
-            p1.Abort();
-            p2.Abort();
+            try
+            {
+                httpListener?.Stop();
+                listener.Stop();
+                p1.Abort();
+                p2.Abort();
+
+                this.Close();
+            }
+            catch
+            {
+                p1.Abort();
+                p2.Abort();
+
+                this.Close();
+            }
         }
     }
 }

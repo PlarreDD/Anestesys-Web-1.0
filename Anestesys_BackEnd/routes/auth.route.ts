@@ -17,9 +17,9 @@ const router = Router();
 router.post("/login", bodyLoginValidator, login);
 router.post("/register", bodyRegisterValidator, register);
 router.put('/updateMed/:id' ,requireRefreshToken, updateMedico)
-router.put('/pre/:id', requireRefreshToken, updateValorTutorialPre)
-router.put('/trans/:id', requireRefreshToken, updateValorTutorialTrans)
-router.put('/post/:id', requireRefreshToken, updateValorTutorialPost)
+router.put('/preTuto/:id', requireRefreshToken, updateValorTutorialPre)
+router.put('/transTuto/:id', requireRefreshToken, updateValorTutorialTrans)
+router.put('/postTuto/:id', requireRefreshToken, updateValorTutorialPost)
 router.put('/password/:id', requireRefreshToken, updateContrasena)
 router.post('/logout', logout);
 

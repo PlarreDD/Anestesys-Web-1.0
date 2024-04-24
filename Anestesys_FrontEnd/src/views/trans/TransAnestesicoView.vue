@@ -18,20 +18,8 @@
                         @click="finMSV">
                   <img src="../../../public/images/imgIcon/MonitorActivoDatos.png" class="btn-msv"/>
                 </button>
-                <span class="fw-bold msv-color-txt">&nbsp;&nbsp;Estado: Recibiendo Datos</span>
+                <span class="fw-bold msv-color-txt">&nbsp;&nbsp;Estado: Conectado</span>
               </template>
-
-              <!-- Monitor Gris -->
-              <!-- <template v-if="transAnestStore.envDat === false && medStore.status === 'Activo'">
-                <button class="borde-btn-msv"
-                        style="border: none;"
-                        @click="iniMSV"
-                        
-                        >
-                  <img src="../../../public/images/imgIcon/MonitorActivo.png" class="btn-msv" />
-                </button>
-                <span class="fw-bold msv-color-txt" >&nbsp;&nbsp;Estado: Sin Datos</span>
-              </template> -->
 
               <!-- Monitor Rojo -->
               <template v-if="apiMSV === false">
@@ -112,11 +100,16 @@
                                 <option>ml.</option>
                                 <option>MUI</option>
                                 <option>MUI/min.</option>
-                                <option>ug/Kg min.</option>
+                                <option>ng.</option>
+                                <option>ng/kg/min.</option>
+                                <option>μg.</option>
+                                <option>μg/kg.</option>
+                                <option>μg/Kg min.</option>
                                 <option>mEq.</option>
                                 <option>mcg.</option>
                                 <option>mcg/kg/hr.</option>
                                 <option>mcg/kg/min.</option>
+                                <option>mg/kg.</option>
                                 <option>mg/kg/hr.</option>
                                 <option>mg/kg/min.</option>
                             </select>
@@ -144,12 +137,12 @@
 
                           <div class="col-md-2">
                             <label  class="form-label text-white fw-bold"> Hora de Inicio </label>
-                            <input type="time" class="form-control" v-model="menuTrans.horaInicioMed" @dblclick="actualizarTQX('INCX')">
+                            <input type="time" class="form-control" v-model="menuTrans.horaInicioMed" @click="actualizarTQX('INCX')">
                           </div>
 
                           <div class="col-md-2" :class="menuTrans.tipoMed == 'Bolo' ? 'invisible' : 'visible'">
                             <label  class="form-label text-white fw-bold"> Hora Final </label>
-                            <input type="time" class="form-control" v-model="menuTrans.horaFinalMed" @keyup.capture="enviarDatosTrans">
+                            <input type="time" class="form-control" v-model="menuTrans.horaFinalMed" @click="calcularHoraFinalMed">
                           </div>
 
                           <div class="col-md-8">
@@ -230,7 +223,7 @@
                               <input type="hidden" v-model="menuTrans.idRelevo">
 
                               <label class="form-label text-white fw-bold"> Hora </label>
-                              <input type="time" class="form-control" v-model="menuTrans.horaRelevo" @dblclick="actualizarTQX('INREL')">
+                              <input type="time" class="form-control" v-model="menuTrans.horaRelevo" @click="actualizarTQX('INREL')">
                             </div>
 
                             <div class="col-md-7">
@@ -325,7 +318,7 @@
                               <input type="hidden" v-model="menuTrans.idEvento">
 
                               <label class="form-label text-white fw-bold"> Hora </label>
-                              <input type="time" class="form-control" v-model="menuTrans.horaEvento" @dblclick="actualizarTQX('INEVE')">
+                              <input type="time" class="form-control" v-model="menuTrans.horaEvento" @click="actualizarTQX('INEVE')">
                             </div>
 
                             <div class="col-md-10">
@@ -513,7 +506,7 @@
                                     type="submit"
                                     class="btn btn-guardar-balance fw-bold"
                                     @click="updateNotaPA()"
-                                    > ACTUALIZAR </button> 
+                                    > GUARDAR </button> 
                           </template>   
                         </div>
                   </div>
@@ -543,7 +536,7 @@
                         <input class="form-control"
                               v-model="menuTrans.solHartman"
                               type="text"
-                              @keyup.capture="calcularBalance">
+                              @keyup="calcularBalance">
                       </div>
                       <!-- Solución fisiológica -->
                       <div class="col-md-4">
@@ -721,7 +714,7 @@
                           <button data-bs-toggle="tab" 
                                   type="submit"
                                   class="btn btn-guardar-balance fw-bold"
-                                  @click="actualizarDatosBalance()"> ACTUALIZAR </button> 
+                                  @click="actualizarDatosBalance()"> GUARDAR </button> 
                         </template>   
                       </div>
                     </div>
@@ -1727,7 +1720,7 @@ export default defineComponent({
     this.menuTrans.albuminas = null;
     this.menuTrans.plasmas = null;
     this.menuTrans.crioprecipitados = null;
-    this.menuTrans.factor_VII = null;
+    this.menuTrans.factor_VIII = null;
     this.menuTrans.liqAscitis = null;
     this.menuTrans.sangradoAprox = null;
     this.menuTrans.uresis = null;
@@ -1769,11 +1762,22 @@ export default defineComponent({
         this.clienteIp = data.clienteIp;
       })
       .catch(error => {
-        console.error('Error al obtener la dirección IP:', error);
+        window.log.error('Error al obtener la dirección IP:', error);
       });
   },
 
   methods: {
+  calcularHoraFinalMed(){
+        try {
+            let hoy = new Date();
+            this.menuTrans.horaFinalMed = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+
+            this.enviarDatosTrans();        
+        } catch (error) {
+            window.log.error('Ocurrió un error:', error);
+        }     
+    },     
+    
     async empezarReconocimiento() {
       try {
                 
@@ -5574,45 +5578,58 @@ export default defineComponent({
     // Gestión datos ventilador 
     async guardarDatosV() {
       try {
-        transAnestStore.btnAddVentilador=false
-        transAnestStore.btnUpdateVentilador=true
-        transAnestStore.btnActualizaVentilador=false
-  
-        transAnestStore.btnAddMedicamentos =false
-        transAnestStore.btnUpdateMedicamentos=true
-        transAnestStore.btnActualizaMedicamento=false
-  
-        transAnestStore.btnAddRelevos=false
-        transAnestStore.btnUpdateRelevos=true
-        transAnestStore.btnActualizaRelevo=false
-  
-        transAnestStore.btnAddEventos=false
-        transAnestStore.btnUpdateEventos=true
-        transAnestStore.btnActualizaEvento=false
-  
-        transAnestStore.btnActualizarBalance=true
-  
-        let hoy = new Date();
-        this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
-        
-        if(preIdStore.nuevoRegistroPaciente == false){
-          await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
-        }else if(preIdStore.nuevoRegistroPaciente == true){        
-          await transAnestStore.saveNuevoDatosV(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-        }        
-  
-        this.menuTrans.modosVentilacion = "";
-        this.menuTrans.Hr = "";
-        this.menuTrans.IE = "";
-        this.menuTrans.PLimite = "";
-        this.menuTrans.frecResp = "";
-        this.menuTrans.peep = "";
-        this.menuTrans.vt = "";
-  
-        if(preIdStore.nuevoRegistroPaciente == false){
-          await transAnestStore.listDatosV(preIdStore.pacienteID._id);
-        }else if(preIdStore.nuevoRegistroPaciente == true){        
-          await transAnestStore.listNuevoDatosV(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        if(this.menuTrans.modosVentilacion == "" || this.menuTrans.modosVentilacion == undefined) {
+          swal.fire({
+          title: "Indique el modo de ventilación",
+          icon: "warning",
+          showConfirmButton: false,
+          showCloseButton: true,
+          toast: true,
+          timer: 2500,
+          timerProgressBar: true,
+          position: "top-end",
+          });
+        }else{
+          transAnestStore.btnAddVentilador=false
+          transAnestStore.btnUpdateVentilador=true
+          transAnestStore.btnActualizaVentilador=false
+    
+          transAnestStore.btnAddMedicamentos =false
+          transAnestStore.btnUpdateMedicamentos=true
+          transAnestStore.btnActualizaMedicamento=false
+    
+          transAnestStore.btnAddRelevos=false
+          transAnestStore.btnUpdateRelevos=true
+          transAnestStore.btnActualizaRelevo=false
+    
+          transAnestStore.btnAddEventos=false
+          transAnestStore.btnUpdateEventos=true
+          transAnestStore.btnActualizaEvento=false
+    
+          transAnestStore.btnActualizarBalance=true
+    
+          let hoy = new Date();
+          this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+          
+          if(preIdStore.nuevoRegistroPaciente == false){
+            await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){        
+            await transAnestStore.saveNuevoDatosV(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+          }        
+    
+          this.menuTrans.modosVentilacion = "";
+          this.menuTrans.Hr = "";
+          this.menuTrans.IE = "";
+          this.menuTrans.PLimite = "";
+          this.menuTrans.frecResp = "";
+          this.menuTrans.peep = "";
+          this.menuTrans.vt = "";
+    
+          if(preIdStore.nuevoRegistroPaciente == false){
+            await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){        
+            await transAnestStore.listNuevoDatosV(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+          }
         }
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
@@ -5621,28 +5638,41 @@ export default defineComponent({
 
     async actualizarDatosVentilador() {
       try {
-        let hoy = new Date();
-        this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
-  
-        if(preIdStore.nuevoRegistroPaciente == false){
-          await transAnestStore.updateDatosV(this.menuTrans, preIdStore.pacienteID._id);
-        }else if(preIdStore.nuevoRegistroPaciente == true){         
-          await transAnestStore.updateNuevoDatosV(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
+        if(this.menuTrans.modosVentilacion == "" || this.menuTrans.modosVentilacion == undefined) {
+          swal.fire({
+          title: "Indique el modo de ventilación",
+          icon: "warning",
+          showConfirmButton: false,
+          showCloseButton: true,
+          toast: true,
+          timer: 2500,
+          timerProgressBar: true,
+          position: "top-end",
+          });
+        }else{
+          let hoy = new Date();
+          this.menuTrans.Hr = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+    
+          if(preIdStore.nuevoRegistroPaciente == false){      
+            await transAnestStore.updateDatosV(this.menuTrans, preIdStore.pacienteID._id);          
+          }else if(preIdStore.nuevoRegistroPaciente == true){         
+            await transAnestStore.updateNuevoDatosV(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
+          }
+    
+          this.menuTrans.modosVentilacion = "";
+          this.menuTrans.Hr = "";
+          this.menuTrans.IE = "";
+          this.menuTrans.PLimite = "";
+          this.menuTrans.frecResp = "";
+          this.menuTrans.peep = "";
+          this.menuTrans.vt = "";
+    
+          if(preIdStore.nuevoRegistroPaciente == false){
+            await transAnestStore.listDatosV(preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){          
+            await transAnestStore.listNuevoDatosV(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+          }     
         }
-  
-        this.menuTrans.modosVentilacion = "";
-        this.menuTrans.Hr = "";
-        this.menuTrans.IE = "";
-        this.menuTrans.PLimite = "";
-        this.menuTrans.frecResp = "";
-        this.menuTrans.peep = "";
-        this.menuTrans.vt = "";
-  
-        if(preIdStore.nuevoRegistroPaciente == false){
-          await transAnestStore.listDatosV(preIdStore.pacienteID._id);
-        }else if(preIdStore.nuevoRegistroPaciente == true){          
-          await transAnestStore.listNuevoDatosV(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-        }     
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
@@ -5677,9 +5707,9 @@ export default defineComponent({
 
     async actualizarVentilador() {
       try {
-        if (this.menuTrans.modosVentilacion == "") {
+        if (this.menuTrans.modosVentilacion == "" || this.menuTrans.modosVentilacion == undefined) {
             swal.fire({
-            title: "Seleccione el modo de ventilación",
+            title: "Indique el modo de ventilación",
             icon: "warning",
             showConfirmButton: false,
             showCloseButton: true,
@@ -5778,15 +5808,17 @@ export default defineComponent({
 
     async calcularBalance(){
       try {
-        this.enviarDatosTrans()
+        await this.enviarDatosTrans()
+
+        this.menuTrans.balanceTotal = ( Number(this.menuTrans.factor_VIII) + Number(this.menuTrans.solHartman) + Number(this.menuTrans.glucosados) +
+                                        Number(this.menuTrans.almidones) + Number(this.menuTrans.paqGlobular) + Number(this.menuTrans.plaquetas) +
+                                        Number(this.menuTrans.factor_VII) + Number(this.menuTrans.otrosIngresos) + Number(this.menuTrans.solFisio) +
+                                        Number(this.menuTrans.gelatinas) + Number(this.menuTrans.albuminas) + Number(this.menuTrans.plasmas) +
+                                        Number(this.menuTrans.crioprecipitados) ) - 
+                                      ( Number(this.menuTrans.liqAscitis) + Number(this.menuTrans.sangradoAprox) + Number(this.menuTrans.uresis) + 
+                                        Number(this.menuTrans.expoQX) + Number(this.menuTrans.reqBasales) + Number(this.menuTrans.ayuno) + 
+                                        Number(this.menuTrans.otrosEgresos) );
         
-        this.menuTrans.balanceTotal = ( Number(this.menuTrans.solHartman) + Number(this.menuTrans.glucosados) + Number(this.menuTrans.almidones) +
-                                        Number(this.menuTrans.paqGlobular) + Number(this.menuTrans.plaquetas) + Number(this.menuTrans.factor_VII) +
-                                        Number(this.menuTrans.otrosIngresos) + Number(this.menuTrans.solFisio) + Number(this.menuTrans.gelatinas) +
-                                        Number(this.menuTrans.albuminas) + Number(this.menuTrans.plasmas) + Number(this.menuTrans.crioprecipitados) +
-                                        Number(this.menuTrans.factor_VIII) ) - ( Number(this.menuTrans.liqAscitis) + Number(this.menuTrans.sangradoAprox) +
-                                        Number(this.menuTrans.uresis)+ Number(this.menuTrans.expoQX) + Number(this.menuTrans.reqBasales) +
-                                        Number(this.menuTrans.ayuno) + Number(this.menuTrans.otrosEgresos) );
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
@@ -7182,32 +7214,26 @@ export default defineComponent({
     },
 
     //PRUEBA DE FUNCIONAMIENTO DE OBTENCION DE HL7
-    async pruebaCom() {
-      try {
-        const response = await fetch(`http://${this.clienteIp}:5000/apiMVS`);
-        const data = await response.text();
-        this.informacion = data;
-        this.vaciarMensajeHL7();
-      } catch (error) {
-        window.log.error('Ocurrió un error:', error);
-      }
-    },
+    // async pruebaCom() {
+    //   try {
+    //     const response = await fetch(`http://${this.clienteIp}:5000/apiMVS`);
+    //     const data = await response.text();
+    //     this.informacion = data;
+    //     this.vaciarMensajeHL7();
+    //   } catch (error) {
+    //     window.log.error('Ocurrió un error:', error);
+    //   }
+    // },
 
     // Eventos de Monitoreo
     async iniMSV(){
-      // try {
-      //   transAnestStore.envDat = true;
-      //   this.btnCambioMonitor = true;
-      //   this.iniRecepDatos();
-      //   this.capturaGrid();
-      // } catch (error) {
-      //   window.log.error('Ocurrió un error:', error);
-      // }
       this.apiMSV = true;
       
       this.intervalId = setInterval(() => {
-        this.pruebaCom()
+        this.comMSV()
       }, 1000);
+
+      this.capturaGrid();
     },
 
     async finMSV(){
@@ -7221,11 +7247,23 @@ export default defineComponent({
       // }
       this.apiMSV = false;
       clearInterval(this.intervalId);
+      clearInterval(this.saveGrid);
+
+      if(preIdStore.nuevoRegistroPaciente == false){
+        this.transAnestStore.saveDatosMSV(this.gridBD, preIdStore.pacienteID._id);
+      }else if(preIdStore.nuevoRegistroPaciente == true){
+        this.transAnestStore.saveNuevoDatosMSV(this.gridBD, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+      }
+      
+      this.guardaDatosMSV = 0;
+      this.gridBD = [];
     },
 
-    comMSV(){
+    async comMSV(){
       try {
-        transAnestStore.getDatosMonitor();
+        const response = await fetch(`http://${this.clienteIp}:5000/apiMVS`);
+        const data = await response.text();
+        this.informacion = data;
         this.vaciarMensajeHL7();
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
@@ -7237,9 +7275,7 @@ export default defineComponent({
         let valoresOrdenados = Array.from({ length: 15 }, () => ({ segmento4: "", valor: "" }));
   
         //Obtiene el arreglo con el mensaje HL7
-        //let hl7Message = transAnestStore.datosMSV
         let hl7Message = this.informacion
-        console.log(hl7Message);
         
         //Separa las líneas del mensaje HL7
         if(hl7Message != null){          
@@ -7249,7 +7285,7 @@ export default defineComponent({
           let lineasOBX = lineas.filter(function(linea) {
             return /^OBX/.test(linea);
           });
-          
+
           //Obtiene los valores requeridos de las líneas OBX, en este caso los segmentos 4 y 5
           let valorSegmentos = lineasOBX.map(function(fila) {
             let segmentos = fila.split('|');
@@ -7430,22 +7466,23 @@ export default defineComponent({
     },
 
     // Recibe datos del MSV cada segundo
-    iniRecepDatos(){
-      try {
-        this.intervalId = setInterval(() => {
-          this.comMSV();
-        }, 1000);
-      } catch (error) {
-        window.log.error('Ocurrió un error:', error);
-      }
-    },
+    // iniRecepDatos(){
+      // console.log("iniRecepDatos");
+      // try {
+      //   this.intervalId = setInterval(() => {
+      //     this.comMSV();
+      //   }, 1000);
+      // } catch (error) {
+      //   window.log.error('Ocurrió un error:', error);
+      // }
+    // },
 
     termRecepDatos(){
       try {
-        transAnestStore.envDat = false;
-        transAnestStore.datosMSV = null;
-        clearInterval(this.intervalId);
-        clearInterval(this.saveGrid);
+        // transAnestStore.envDat = false;
+        // transAnestStore.datosMSV = null;
+        // clearInterval(this.intervalId);
+        // clearInterval(this.saveGrid);
         
         if(preIdStore.nuevoRegistroPaciente == false){
           this.transAnestStore.saveDatosMSV(this.gridBD, preIdStore.pacienteID._id);
@@ -7482,27 +7519,38 @@ export default defineComponent({
             if(preIdStore.nuevoRegistroPaciente == false){
               this.transAnestStore.saveDatosMSV(this.gridBD, preIdStore.pacienteID._id);
             }else if(preIdStore.nuevoRegistroPaciente == true){
-              console.log("Nuevo");
               this.transAnestStore.saveNuevoDatosMSV(this.gridBD, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
             }
           
             this.guardaDatosMSV = 0;
             this.gridBD = [];
           }
-  
+
+          FC = null
+          Pulso = null          
+          SpO2 = null
+          EtCO2 = null
+          Temp1 = null
+          Temp2 = null
+          PVC = null
+          PAS_In = null
+          PAD_In = null
+          PAM_In= null
+          FiCO2 = null
+          FR = null
         }, 1000 * 60);
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
     },
 
-    pingMSV(dirip: string){
-      try {
-        // medStore.statusMSV(dirip);
-      } catch (error) {
-        window.log.error('Ocurrió un error:', error);
-      }
-    },
+    // pingMSV(dirip: string){
+    //   try {
+    //     // medStore.statusMSV(dirip);
+    //   } catch (error) {
+    //     window.log.error('Ocurrió un error:', error);
+    //   }
+    // },
 
     async cambiarValorTutorial(){
       try {
