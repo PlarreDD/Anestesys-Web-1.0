@@ -871,7 +871,7 @@
             <div class="col-md-2">
               <button id="inicio-cx" class="btn btn-menu fw-bold"
                       type="button"
-                      @click="actualizarTQX('QXIN')"
+                      @dblclick="actualizarTQX('QXIN')"
                       :disabled="menuTrans.ingresoQX != undefined && menuTrans.ingresoQX != ''  ? true : false">
                   <label class="cursor-puntero">QX IN <label class="fw-normal">{{menuTrans.ingresoQX}}</label></label>                  
               </button>
@@ -894,7 +894,7 @@
                         id="appt-time"
                         type="time" :disabled="transAnestStore.ingresoQuirofano == false || transAnestStore.salidaQuirofano == true ? true : false"
                         v-model="menuTrans.inicioAn"
-                        step="300" @change="actualizaHora('ANESIN')" @dblclick="actualizaHora('ANESIN')">
+                        step="300" @change="actualizaHora('ANESIN')">
               </form>
               
             </div>
@@ -903,8 +903,8 @@
               <button type="button" id="cx-in"
                       class="btn btn-menu fw-bold" :class="{ 'show': transAnestStore.activoCxIN, ' ': transAnestStore.noActivoCxIN }"
                       :disabled="transAnestStore.btnTQX == true ? true : false"
-                      @click="actualizarTQX('CXIN')"
-                      @dblclick="mostrarDropDown('CXIN')"> 
+                      @dblclick="actualizarTQX('CXIN')"
+                      @click="mostrarDropDown('CXIN')"> 
                 <label class="cursor-puntero">CX IN <label class="fw-normal">{{menuTrans.inicioCx}}</label></label>
               </button>
 
@@ -922,8 +922,8 @@
               <button type="button" id="cx-out"
                       class="btn btn-menu fw-bold" :class="{ 'show': transAnestStore.activoCxOUT, ' ': transAnestStore.noActivoCxOUT }"
                       :disabled="transAnestStore.btnTQX == true ? true : false"
-                      @click="actualizarTQX('CXOUT')"
-                      @dblclick="mostrarDropDown('CXOUT')"> 
+                      @dblclick="actualizarTQX('CXOUT')"
+                      @click="mostrarDropDown('CXOUT')"> 
                 <label class="cursor-puntero">CX OUT <label class="fw-normal">{{menuTrans.finCx}}</label></label>
               </button>
 
@@ -942,8 +942,8 @@
               <button type="button" id="anes-out"
                       class="btn btn-menu fw-bold" :class="{ 'show': transAnestStore.activoAnesOUT, ' ': transAnestStore.noActivoAnesOUT }"
                       :disabled="transAnestStore.btnTQX == true ? true : false"
-                      @click="actualizarTQX('ANESOUT')"
-                      @dblclick="mostrarDropDown('ANESOUT')"> 
+                      @dblclick="actualizarTQX('ANESOUT')"
+                      @click="mostrarDropDown('ANESOUT')"> 
                 <label class="cursor-puntero">ANES OUT <label class="fw-normal">{{menuTrans.finAn}}</label></label>
               </button>
               
@@ -961,7 +961,7 @@
             <div class="col-md-2">    
               <button type="button" id="qx-out"
                       class="btn btn-menu fw-bold" 
-                      @click="actualizarTQX('QXOUT')"
+                      @dblclick="actualizarTQX('QXOUT')"
                       :disabled="menuTrans.egresoQx != undefined && menuTrans.egresoQx != '' ? true : false"> 
                       <label class="cursor-puntero">QX OUT <label class="fw-normal">{{menuTrans.egresoQx}}</label></label>
               </button>        
@@ -1767,7 +1767,7 @@ export default defineComponent({
   },
 
   methods: {
-  calcularHoraFinalMed(){
+    calcularHoraFinalMed(){
         try {
             let hoy = new Date();
             this.menuTrans.horaFinalMed = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
@@ -6285,37 +6285,47 @@ export default defineComponent({
       try {
         switch (tiemposQX) {
           case "ANESIN":
-            if(this.menuTrans.inicioAn != undefined && this.menuTrans.inicioAn != ''){
-              transAnestStore.activoAnesIN=true;
-              transAnestStore.noActivoAnesIN=false;
-              transAnestStore.activoCxIN=false;
-              transAnestStore.activoCxOUT=false;
-              transAnestStore.activoAnesOUT=false;
-            }
+            if(transAnestStore.salidaQuirofano == false)
+              if(this.menuTrans.inicioAn != undefined && this.menuTrans.inicioAn != ''){
+                transAnestStore.activoAnesIN=true;
+                transAnestStore.noActivoAnesIN=false;
+                transAnestStore.activoCxIN=false;
+                transAnestStore.activoCxOUT=false;
+                transAnestStore.activoAnesOUT=false;
+              }
           break;
   
           case "CXIN":
-            transAnestStore.activoCxIN=true;
-            transAnestStore.noActivoCxIN=false;
-            transAnestStore.activoAnesIN=false;
-            transAnestStore.activoCxOUT=false;
-            transAnestStore.activoAnesOUT=false;
+            if(transAnestStore.salidaQuirofano == false)
+              if(this.menuTrans.inicioCx != undefined && this.menuTrans.inicioCx != ''){            
+                transAnestStore.activoCxIN=true;
+                transAnestStore.noActivoCxIN=false;
+                transAnestStore.activoAnesIN=false;
+                transAnestStore.activoCxOUT=false;
+                transAnestStore.activoAnesOUT=false;
+              }
           break;
   
           case "CXOUT":
-            transAnestStore.activoCxOUT=true;
-            transAnestStore.noActivoCxOUT=false;
-            transAnestStore.activoAnesIN=false;
-            transAnestStore.activoCxIN=false;
-            transAnestStore.activoAnesOUT=false;
+            if(transAnestStore.salidaQuirofano == false)
+              if(this.menuTrans.finCx != undefined && this.menuTrans.finCx != ''){            
+                transAnestStore.activoCxOUT=true;
+                transAnestStore.noActivoCxOUT=false;
+                transAnestStore.activoAnesIN=false;
+                transAnestStore.activoCxIN=false;
+                transAnestStore.activoAnesOUT=false;
+              }
           break;
   
           case "ANESOUT":
-            transAnestStore.activoAnesOUT=true;
-            transAnestStore.noActivoAnesOUT=false;
-            transAnestStore.activoAnesIN=false;
-            transAnestStore.activoCxIN=false;
-            transAnestStore.activoCxOUT=false;
+            if(transAnestStore.salidaQuirofano == false)
+              if(this.menuTrans.finAn != undefined && this.menuTrans.finAn != ''){            
+                transAnestStore.activoAnesOUT=true;
+                transAnestStore.noActivoAnesOUT=false;
+                transAnestStore.activoAnesIN=false;
+                transAnestStore.activoCxIN=false;
+                transAnestStore.activoCxOUT=false;
+              }
           break;
         
           default:
