@@ -3,6 +3,7 @@
         <!-- Barra de Navegación -->
         <ul class="nav nav-pills mb-3 text-center centrar-li" id="">
             <!-- POSICIÓN Y CUIDADOS -->
+
             <li class="nav-item col-md-3" >
                 <button class="btn btn-nav-bar fw-bold active"
                         id="posicion-cuidados"
@@ -12,48 +13,57 @@
                         aria-selected="true">POSICIÓN Y CUIDADOS</button>
             </li>
 
-            <!-- GENERAL -->
+            <!-- TIPO TÉCNICA -->
             <li class="nav-item col-md-2" >
-                <button class="btn btn-nav-bar fw-bold"       
+
+                <!-- GENERAL -->
+                <template v-if="infoPlan.pos_TecnicaAnestesica === 'General'">
+                    <button class="btn btn-nav-bar fw-bold"
+                        :class="infoPlan.pos_TecnicaAnestesica != 'General' ? 'invisible' : ''"
                         id=""                           
                         data-bs-toggle="pill"
                         data-bs-target="#general"
                         type="button"
                         :disabled="infoPlan.pos_TecnicaAnestesica != 'General' ? true : false"
                         aria-selected="false">GENERAL</button>
-            </li>
+                </template>
 
-            <!-- REGIONAL -->
-            <li class="nav-item col-md-2" >
-                <button class="btn btn-nav-bar fw-bold"
+                <!-- REGIONAL -->
+                <template v-if="infoPlan.pos_TecnicaAnestesica === 'Regional'">
+                    <button class="btn btn-nav-bar fw-bold"
+                        :class="infoPlan.pos_TecnicaAnestesica != 'Regional' ? 'invisible' : ''"
                         id=""
                         data-bs-toggle="pill"
                         data-bs-target="#regional"
                         type="button"
                         :disabled="infoPlan.pos_TecnicaAnestesica != 'Regional' ? true : false"
                         aria-selected="false">REGIONAL</button>
-            </li>
+                </template>  
 
-            <!-- SEDACIÓN -->
-            <li class="nav-item col-md-2" >
-                <button class="btn btn-nav-bar fw-bold"
+                <!-- SEDACIÓN -->
+                <template v-if="infoPlan.pos_TecnicaAnestesica === 'Sedación'">
+                    <button class="btn btn-nav-bar fw-bold"
+                        :class="infoPlan.pos_TecnicaAnestesica != 'Sedación' ? 'invisible' : ''"
                         id=""
                         data-bs-toggle="pill"
                         data-bs-target="#sedacion"
                         type="button"
                         :disabled="infoPlan.pos_TecnicaAnestesica != 'Sedación' ? true : false"
                         aria-selected="false">SEDACIÓN</button>
-            </li>            
-  
-            <!-- LOCAL -->
-            <li class="nav-item col-md-2" >
-                <button class="btn btn-nav-bar fw-bold"
+                </template>  
+
+                <!-- LOCAL -->
+                <template v-if="infoPlan.pos_TecnicaAnestesica === 'Local'">
+                    <button class="btn btn-nav-bar fw-bold"
+                        :class="infoPlan.pos_TecnicaAnestesica != 'Local' ? 'invisible' : ''"
                         id=""
                         data-bs-toggle="pill"
                         data-bs-target="#local"
                         type="button"
                         :disabled="infoPlan.pos_TecnicaAnestesica != 'Local' ? true : false"
                         aria-selected="false">LOCAL</button>
+                </template>  
+                
             </li>
               
         </ul>
