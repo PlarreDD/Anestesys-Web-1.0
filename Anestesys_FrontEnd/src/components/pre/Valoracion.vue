@@ -346,8 +346,8 @@
                        
                         <!-- IMC -->
                         <div class="col-md-2">
-                            <label  class="form-label fw-bold">IMC
-                                <span data-title="IMC=Peso(Kg)/Estatura&sup2(mts)">
+                            <label class="form-label fw-bold">IMC
+                                <span data-title="IMC=Peso(Kg)/Estatura&sup2(mts)" data-bs-toggle="modal" data-bs-target="#imc-modal">
                                     <font-awesome-icon icon="fa-solid fa-circle-info" />
                                 </span>
                             </label>
@@ -357,7 +357,7 @@
                                    v-model="infoValoracion.sigVit_IMC" readonly
                                    :class="infoValoracion.sigVit_IMC != undefined && infoValoracion.sigVit_IMC != 0 ?
                                           'form-control border border-success formSombra' : 'form-control'"> 
-                        </div>
+                        </div>                        
 
                         <!-- Tensión Arterial (mmHg) -->
                         <div class="col-md-3">
@@ -509,7 +509,11 @@
                         
                         <!-- Mallampati -->
                         <div class="col-md-3">
-                            <label  class="form-label fw-bold"> Mallampati </label>
+                            <label  class="form-label fw-bold"> Mallampati 
+                                <span class="cursor" data-bs-toggle="modal" data-bs-target="#mallampati-modal">
+                                    <font-awesome-icon icon="fa-solid fa-circle-info" />
+                                </span> 
+                            </label>
                             <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Mallampati"
@@ -525,7 +529,11 @@
 
                         <!-- Patil-Aldreti -->
                         <div class="col-md-3">
-                            <label  class="form-label fw-bold"> Patil-Aldreti </label>
+                            <label class="form-label fw-bold"> Patil-Aldreti 
+                                <span class="cursor" data-bs-toggle="modal" data-bs-target="#patil-modal">
+                                    <font-awesome-icon icon="fa-solid fa-circle-info" />
+                                </span>
+                            </label>
                             <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_PatilAldreti"
@@ -604,7 +612,11 @@
 
                         <!-- Escala Glasgow -->
                         <div class="col-md-3">
-                            <label  class="form-label fw-bold">Escala Glasgow</label>
+                            <label class="form-label fw-bold"> Escala Glasgow
+                                <span class="cursor" data-bs-toggle="modal" data-bs-target="#glasgow-modal">
+                                    <font-awesome-icon icon="fa-solid fa-circle-info" />
+                                </span>
+                            </label>
                             <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Glasgow"
@@ -631,7 +643,11 @@
 
                         <!-- Escala NYHA -->
                         <div class="col-md-3">
-                            <label  class="form-label fw-bold"> Escala NYHA </label>
+                            <label class="form-label fw-bold"> Escala NYHA
+                                <span class="cursor" data-bs-toggle="modal" data-bs-target="#nyha-modal">
+                                    <font-awesome-icon icon="fa-solid fa-circle-info" />
+                                </span> 
+                            </label>
                             <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_NYHA"
@@ -647,7 +663,11 @@
 
                         <!-- Escala de Goldman -->
                         <div class="col-md-3">
-                            <label  class="form-label fw-bold"> Escala de Goldman </label>
+                            <label class="form-label fw-bold"> Escala de Goldman 
+                                <span class="cursor" data-bs-toggle="modal" data-bs-target="#goldman-modal">
+                                    <font-awesome-icon icon="fa-solid fa-circle-info" />
+                                </span> 
+                            </label>
                             <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_Goldman"
@@ -663,7 +683,11 @@
 
                         <!-- Riesgo de Trombosis -->
                         <div class="col-md-3">
-                            <label  class="form-label fw-bold"> Riesgo de Trombosis </label>
+                            <label class="form-label fw-bold"> Riesgo de Trombosis 
+                                <span class="cursor" data-bs-toggle="modal" data-bs-target="#trombosis-modal">
+                                    <font-awesome-icon icon="fa-solid fa-circle-info" />
+                                </span>
+                            </label>
                             <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_RiesgoTrombosis"
@@ -679,7 +703,11 @@
 
                         <!-- Clasificación ASA -->
                         <div class="col-md-3">
-                            <label  class="form-label fw-bold"> Clasificación ASA </label>
+                            <label class="form-label fw-bold"> Clasificación ASA 
+                                <span class="cursor" data-bs-toggle="modal" data-bs-target="#asa-modal">
+                                    <font-awesome-icon icon="fa-solid fa-circle-info" />
+                                </span>
+                            </label>
                             <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_ClasificacionASA"
@@ -711,7 +739,11 @@
 
                         <!-- Riesgo Anéstesico Quirúrgico -->
                         <div class="col-md-4">
-                            <label  class="form-label fw-bold">Riesgo Anéstesico Quirúrgico</label>
+                            <label class="form-label fw-bold"> Riesgo Anéstesico Quirúrgico
+                                <span class="cursor" data-bs-toggle="modal" data-bs-target="#riesgo-modal">
+                                    <font-awesome-icon icon="fa-solid fa-circle-info" />
+                                </span> 
+                            </label>
                             <select  @change="enviarDatosValoracion"
                                     class="form-select"
                                     v-model="infoValoracion.viaAerea_RiesgoAnestesico"
@@ -1144,7 +1176,177 @@
                     </form>
                 </div>
             </div>
-        </div>   
+        </div>
+
+        <!-- Modal IMC -->
+        <div class="modal" id="imc-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="input-group mb-3">
+                        <div class="modal-body">
+                            <div class="col-md-12">
+                                <div class="row g-3">
+                                    <img src="../../../public/images/infografias/info-imc.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Mallampati -->
+        <div class="modal" id="mallampati-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="input-group mb-3">
+                        <div class="modal-body">
+                            <div class="col-md-12">
+                                <div class="row g-3">
+                                    <img src="../../../public/images/infografias/info-mallampati.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Patil -->
+        <div class="modal" id="patil-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="input-group mb-3">
+                        <div class="modal-body">
+                            <div class="col-md-12">
+                                <div class="row g-3">
+                                    <img src="../../../public/images/infografias/info-patil.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Glasgow -->
+        <div class="modal" id="glasgow-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="input-group mb-3">
+                        <div class="modal-body">
+                            <div class="col-md-12">
+                                <div class="row g-3">
+                                    <img src="../../../public/images/infografias/info-glasgow.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal NYHA -->
+        <div class="modal" id="nyha-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="input-group mb-3">
+                        <div class="modal-body">
+                            <div class="col-md-12">
+                                <div class="row g-3">
+                                    <img src="../../../public/images/infografias/info-nyha.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Goldman -->
+        <div class="modal" id="goldman-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="input-group mb-3">
+                        <div class="modal-body">
+                            <div class="col-md-12">
+                                <div class="row g-3">
+                                    <img src="../../../public/images/infografias/info-goldman.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Trombósis -->
+        <div class="modal" id="trombosis-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="input-group mb-3">
+                        <div class="modal-body">
+                            <div class="col-md-12">
+                                <div class="row g-3">
+                                    <img src="../../../public/images/infografias/info-trombosis.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Trombósis -->
+        <div class="modal" id="trombosis-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="input-group mb-3">
+                        <div class="modal-body">
+                            <div class="col-md-12">
+                                <div class="row g-3">
+                                    <img src="../../../public/images/infografias/info-trombosis.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal ASA -->
+        <div class="modal" id="asa-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="input-group mb-3">
+                        <div class="modal-body">
+                            <div class="col-md-12">
+                                <div class="row g-3">
+                                    <img src="../../../public/images/infografias/info-asa.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Riesgo -->
+        <div class="modal" id="riesgo-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="input-group mb-3">
+                        <div class="modal-body">
+                            <div class="col-md-12">
+                                <div class="row g-3">
+                                    <img src="../../../public/images/infografias/info-riesgo.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -1682,6 +1884,9 @@ h5{
     position: relative;
     cursor: pointer
 }
+.cursor{
+    cursor: pointer;
+}
 
 /* table{
     table-layout: fixed;
@@ -1695,6 +1900,24 @@ h5{
     overflow-y: scroll; 
     overflow-x: hidden; 
     display: block;
+}
+
+.modal-dialog,
+.modal-content {
+  height: 25%;
+}
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: var(--bs-modal-color);
+  pointer-events: auto;
+  background-color: transparent;
+  background-clip: padding-box;
+  border: none;
+  border-radius: var(--bs-modal-border-radius);
+  outline: 0;
 }
 
 </style>

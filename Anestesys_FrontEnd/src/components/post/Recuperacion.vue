@@ -1359,13 +1359,13 @@
       aria-labelledby=""
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="input-group mb-3">
             <div class="modal-body">
               <div class="col-md-12">
                 <div class="row g-3">
-                  <img src="../../../public/images/bromage-info.svg" alt="" />
+                  <img src="../../../public/images/infografias/bromage-info.png" alt="" />
                 </div>
               </div>
             </div>
@@ -1387,7 +1387,7 @@
             <div class="modal-body">
               <div class="col-md-12">
                 <div class="row g-3">
-                  <img src="../../../public/images/escala-EVA-info.svg" alt="" />
+                  <img src="../../../public/images/infografias/escala-EVA-info.svg" alt="" />
                 </div>
               </div>
             </div>
