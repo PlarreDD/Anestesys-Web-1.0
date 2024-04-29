@@ -46,7 +46,7 @@
                                    :class="{ 'form-control border border-danger': propRojoNum,
                                              'form-control border border-success formSombra': propVerdeNum }"
                                    placeholder="Campo obligatorio"
-                                   :disabled="propBtnGuardarId != true" :readonly="propBloquearInputsPrincipales == true">
+                                   :disabled="preIdStore.validaExpediente != true" :readonly="propBloquearInputsPrincipales == true">
                             <div :class="propNumExp == true ? 'visible validaCampo' : 'invisible'"
                                  id="validaNumExp"> Escriba el número de expediente </div>
                         </div>
@@ -78,14 +78,14 @@
                             <button data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar-info fw-bold"
-                                    :class="propBtnGuardarId == true ? 'visible' : 'invisible'"
+                                    :class="preIdStore.validaExpediente == true ? 'visible' : 'invisible'"
                                     @click="preIdStore.savePreId( infoPreIdPaciente )" :disabled="propBloquearInputs == true"> GUARDAR </button>                        
 
                             <button data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar-info fw-bold"
-                                    :class="propBtnNuevoGuardarId == true ? 'visible' : 'invisible'"
-                                    @click="preIdStore.createAddPreId( infoPreIdPaciente )" :disabled="propBloquearInputs == true"> GUARDAR </button>
+                                    :class="preIdStore.validaExpedienteNuevo == true ? 'visible' : 'invisible'"
+                                    @click="preIdStore.createAddPreId( infoPreIdPaciente )" :disabled="propBloquearInputs == true"> GUARDAR N</button>
                             
                         </div>
 
@@ -458,9 +458,9 @@ export default defineComponent({
         propVerdeNum:{type: Boolean},
         propRojoNom:{type: Boolean},
         propVerdeNom:{type: Boolean},
-        propBtnGuardarId:{type: Boolean},
+        // propBtnGuardarId:{type: Boolean},
         propBtnActualizarId:{type: Boolean},
-        propBtnNuevoGuardarId:{type: Boolean},
+        // propBtnNuevoGuardarId:{type: Boolean},
         propBtnNuevoActualizarId:{type: Boolean},
 
         propId:{type: String},

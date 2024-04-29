@@ -139,7 +139,11 @@ export const createPaciente = async (req: any, res: Response) => {
                 residenteAnestesia,
                 /* Datos Demográficos */
                 nacionalidad, CURP, folioID, estNacimiento,
-                estResidencia, alcaldia, colonia, codigoPostal } = req.body;
+                estResidencia, alcaldia, colonia, codigoPostal } = req.body;        
+        
+        let expediente = await PreIdPacientes.findOne({numExpediente});
+
+        if(expediente) throw {code: 11000};    
 
         const paciente = new PreIdPacientes({ numExpediente, nomPaciente, uid: req.uid,
                                            fechaNPaciente, edadPaciente, generoPaciente,

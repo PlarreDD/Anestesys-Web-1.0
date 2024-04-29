@@ -13,6 +13,8 @@ export const usePreIdStore = defineStore('preid', {
         estudioID: ref(null),
         valoracionID: ref(null),
         numExpediente: ref(null),
+        validaExpediente: true,
+        validaExpedienteNuevo: true,
         expedientes: ref(null),
         estudios: ref(null),
         pacientes: ref(null),
@@ -282,6 +284,7 @@ export const usePreIdStore = defineStore('preid', {
                 this.pacienteID = res.data.paciente;
                 this.pacienteCxID = res.data.infoCx;
                 this.actualizarRegId = true
+                this.validaExpediente = false
                 
                 swal.fire({
                     title: 'Paciente registrado correctamente',
@@ -294,7 +297,24 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
-                window.log.error('Ocurrió un error:', e)
+                if(e.response){
+                    /* Mensaje de registro fallido */
+                    swal.fire({
+                        html: 'El expediente <b>' + this.numeroExpediente + '</b> ya está registrado',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        showCloseButton: true,
+                        toast: true,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        position: "top-end",
+                    });
+                    window.log.error('Ocurrió un error:', e)
+                }
+                else if(e.request){
+                }
+                else{
+                }
             });
         },
 
@@ -391,6 +411,7 @@ export const usePreIdStore = defineStore('preid', {
             .then((res: any) => {
                 this.pacienteID = res.data.infoCx;
                 this.actualizarRegId = true;
+                this.validaExpedienteNuevo = false
 
                 swal.fire({
                     title: 'Paciente registrado correctamente',

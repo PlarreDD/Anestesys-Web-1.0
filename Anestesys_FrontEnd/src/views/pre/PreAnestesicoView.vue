@@ -214,9 +214,7 @@
               :propVerdeNum="bordeVerdeNum"
               :propRojoNom="bordeRojoNom"
               :propVerdeNom="bordeVerdeNom"
-              :propBtnGuardarId="btnGuardarId"
               :propBtnActualizarId="btnActualizarId"
-              :propBtnNuevoGuardarId="btnNuevoGuardarId"
               :propBtnNuevoActualizarId="btnNuevoActualizarId"
               
               :propId="idPaciente"
@@ -540,10 +538,10 @@ export default defineComponent({
       esPlan: false,
       esNota: false,
       
-      btnGuardarId: true,
+      // btnGuardarId: true,
       btnActualizarId: false,
       
-      btnNuevoGuardarId: false,
+      // btnNuevoGuardarId: false,
       btnNuevoActualizarId: false,
 
       idStore,
@@ -798,274 +796,274 @@ export default defineComponent({
 
   methods: {
 /*======================= Obtener paciente para nuevo registro =======================*/
-    async empezarReconocimientoTiempos() {
-      try {
-        transStore.recognition = new (window as any).webkitSpeechRecognition(); // Crear instancia del reconocimiento de voz
-        transStore.recognition.lang = 'es-ES'; // Establecer idioma a español (puedes cambiarlo según tus necesidades)
-        transStore.recognition.continuous = true; // Permitir reconocimiento continuo
-        transStore.recognition.start(); // Iniciar reconocimiento de voz
+    // async empezarReconocimientoTiempos() {
+    //   try {
+    //     transStore.recognition = new (window as any).webkitSpeechRecognition(); // Crear instancia del reconocimiento de voz
+    //     transStore.recognition.lang = 'es-ES'; // Establecer idioma a español (puedes cambiarlo según tus necesidades)
+    //     transStore.recognition.continuous = true; // Permitir reconocimiento continuo
+    //     transStore.recognition.start(); // Iniciar reconocimiento de voz
   
-        transStore.microfono=true
-        transStore.microfonoEscucha=true
+    //     transStore.microfono=true
+    //     transStore.microfonoEscucha=true
   
-        const tiempoEspera = 1500;
+    //     const tiempoEspera = 1500;
   
-        // Manejar evento de resultado del reconocimiento
-        transStore.recognition.onresult = (event) => {   
+    //     // Manejar evento de resultado del reconocimiento
+    //     transStore.recognition.onresult = (event) => {   
           
-          const transcript = event.results[0][0].transcript.toLowerCase(); // Obtener texto reconocido
-          console.log('Texto reconocido:', transcript);
+    //       const transcript = event.results[0][0].transcript.toLowerCase(); // Obtener texto reconocido
+    //       console.log('Texto reconocido:', transcript);
   
-          // QX IN
-          if (transcript === 'quirófano.') {                
-            // Realizar la acción deseada cuando se detecta la palabra clave                
-            let closeButton = document.getElementById('inicio-cx');
+    //       // QX IN
+    //       if (transcript === 'quirófano.') {                
+    //         // Realizar la acción deseada cuando se detecta la palabra clave                
+    //         let closeButton = document.getElementById('inicio-cx');
               
-            if(transStore.ingresoQuirofano === false){
-              // Crea un nuevo evento de clic
-              let event = new MouseEvent('click', {
-                  bubbles: true,
-                  cancelable: true,
-                  view: window
-              });                    
-              // Despacha el evento de clic en el botón
-              closeButton.dispatchEvent(event);
-            }else{
-              swal.fire({
-                title: 'La cirugía ya ha iniciado',
-                icon: 'error',
-                showConfirmButton: false,
-                toast: true,
-                position: 'top',
-                timer: 3000,
-                timerProgressBar: true
-              })
-            }
-          }
+    //         if(transStore.ingresoQuirofano === false){
+    //           // Crea un nuevo evento de clic
+    //           let event = new MouseEvent('click', {
+    //               bubbles: true,
+    //               cancelable: true,
+    //               view: window
+    //           });                    
+    //           // Despacha el evento de clic en el botón
+    //           closeButton.dispatchEvent(event);
+    //         }else{
+    //           swal.fire({
+    //             title: 'La cirugía ya ha iniciado',
+    //             icon: 'error',
+    //             showConfirmButton: false,
+    //             toast: true,
+    //             position: 'top',
+    //             timer: 3000,
+    //             timerProgressBar: true
+    //           })
+    //         }
+    //       }
   
-          // ANES IN
-          else if (transcript === 'anestesia.') {                             
-            let closeButton = document.getElementById('anes-in');
+    //       // ANES IN
+    //       else if (transcript === 'anestesia.') {                             
+    //         let closeButton = document.getElementById('anes-in');
   
-            if(transStore.ingresoQuirofano === true){
-              if(transStore.salidaQuirofano === false){
-                // Crea un nuevo evento de clic
-                let event = new MouseEvent('click', {
-                    bubbles: true,
-                    cancelable: true,
-                    view: window
-                });                    
-                // Despacha el evento de clic en el botón
-                closeButton.dispatchEvent(event);
-              }else{
-                swal.fire({
-                  title: 'La cirugía ya ha finalizado',
-                  icon: 'error',
-                  showConfirmButton: false,
-                  toast: true,
-                  position: 'top',
-                  timer: 3000,
-                  timerProgressBar: true
-                })
-              }
-            }else{
-              swal.fire({
-                title: 'Registre la hora de ingreso al quirófano',
-                icon: 'error',
-                showConfirmButton: false,
-                toast: true,
-                position: 'top',
-                timer: 3000,
-                timerProgressBar: true
-              })
-            }
-          }
+    //         if(transStore.ingresoQuirofano === true){
+    //           if(transStore.salidaQuirofano === false){
+    //             // Crea un nuevo evento de clic
+    //             let event = new MouseEvent('click', {
+    //                 bubbles: true,
+    //                 cancelable: true,
+    //                 view: window
+    //             });                    
+    //             // Despacha el evento de clic en el botón
+    //             closeButton.dispatchEvent(event);
+    //           }else{
+    //             swal.fire({
+    //               title: 'La cirugía ya ha finalizado',
+    //               icon: 'error',
+    //               showConfirmButton: false,
+    //               toast: true,
+    //               position: 'top',
+    //               timer: 3000,
+    //               timerProgressBar: true
+    //             })
+    //           }
+    //         }else{
+    //           swal.fire({
+    //             title: 'Registre la hora de ingreso al quirófano',
+    //             icon: 'error',
+    //             showConfirmButton: false,
+    //             toast: true,
+    //             position: 'top',
+    //             timer: 3000,
+    //             timerProgressBar: true
+    //           })
+    //         }
+    //       }
   
-          // CX IN
-          else if (transcript === 'cirugía.') {                             
-            let closeButton = document.getElementById('cx-in');
+    //       // CX IN
+    //       else if (transcript === 'cirugía.') {                             
+    //         let closeButton = document.getElementById('cx-in');
   
-            if(transStore.ingresoQuirofano === true){
-              if(transStore.salidaQuirofano === false){
-                // Crea un nuevo evento de clic
-                let event = new MouseEvent('click', {
-                    bubbles: true,
-                    cancelable: true,
-                    view: window
-                });                    
-                // Despacha el evento de clic en el botón
-                closeButton.dispatchEvent(event);
-              }else{
-                swal.fire({
-                  title: 'La cirugía ya ha finalizado',
-                  icon: 'error',
-                  showConfirmButton: false,
-                  toast: true,
-                  position: 'top',
-                  timer: 3000,
-                  timerProgressBar: true
-                })
-              }
-            }else{
-              swal.fire({
-                title: 'Registre la hora de ingreso al quirófano',
-                icon: 'error',
-                showConfirmButton: false,
-                toast: true,
-                position: 'top',
-                timer: 3000,
-                timerProgressBar: true
-              })
-            }
-          }
+    //         if(transStore.ingresoQuirofano === true){
+    //           if(transStore.salidaQuirofano === false){
+    //             // Crea un nuevo evento de clic
+    //             let event = new MouseEvent('click', {
+    //                 bubbles: true,
+    //                 cancelable: true,
+    //                 view: window
+    //             });                    
+    //             // Despacha el evento de clic en el botón
+    //             closeButton.dispatchEvent(event);
+    //           }else{
+    //             swal.fire({
+    //               title: 'La cirugía ya ha finalizado',
+    //               icon: 'error',
+    //               showConfirmButton: false,
+    //               toast: true,
+    //               position: 'top',
+    //               timer: 3000,
+    //               timerProgressBar: true
+    //             })
+    //           }
+    //         }else{
+    //           swal.fire({
+    //             title: 'Registre la hora de ingreso al quirófano',
+    //             icon: 'error',
+    //             showConfirmButton: false,
+    //             toast: true,
+    //             position: 'top',
+    //             timer: 3000,
+    //             timerProgressBar: true
+    //           })
+    //         }
+    //       }
   
-          // CX OUT
-          else if (transcript === 'termina cirugía.') {                             
-            let closeButton = document.getElementById('cx-out');
+    //       // CX OUT
+    //       else if (transcript === 'termina cirugía.') {                             
+    //         let closeButton = document.getElementById('cx-out');
   
-            if(transStore.ingresoQuirofano === true){
-              if(transStore.salidaQuirofano === false){
-                // Crea un nuevo evento de clic
-                let event = new MouseEvent('click', {
-                    bubbles: true,
-                    cancelable: true,
-                    view: window
-                });                    
-                // Despacha el evento de clic en el botón
-                closeButton.dispatchEvent(event);
-              }else{
-                swal.fire({
-                  title: 'La cirugía ya ha finalizado',
-                  icon: 'error',
-                  showConfirmButton: false,
-                  toast: true,
-                  position: 'top',
-                  timer: 3000,
-                  timerProgressBar: true
-                })
-              }
-            }else{
-              swal.fire({
-                title: 'Registre la hora de ingreso al quirófano',
-                icon: 'error',
-                showConfirmButton: false,
-                toast: true,
-                position: 'top',
-                timer: 3000,
-                timerProgressBar: true
-              })
-            }
-          }
+    //         if(transStore.ingresoQuirofano === true){
+    //           if(transStore.salidaQuirofano === false){
+    //             // Crea un nuevo evento de clic
+    //             let event = new MouseEvent('click', {
+    //                 bubbles: true,
+    //                 cancelable: true,
+    //                 view: window
+    //             });                    
+    //             // Despacha el evento de clic en el botón
+    //             closeButton.dispatchEvent(event);
+    //           }else{
+    //             swal.fire({
+    //               title: 'La cirugía ya ha finalizado',
+    //               icon: 'error',
+    //               showConfirmButton: false,
+    //               toast: true,
+    //               position: 'top',
+    //               timer: 3000,
+    //               timerProgressBar: true
+    //             })
+    //           }
+    //         }else{
+    //           swal.fire({
+    //             title: 'Registre la hora de ingreso al quirófano',
+    //             icon: 'error',
+    //             showConfirmButton: false,
+    //             toast: true,
+    //             position: 'top',
+    //             timer: 3000,
+    //             timerProgressBar: true
+    //           })
+    //         }
+    //       }
   
-          // ANES OUT
-          else if (transcript === 'termina anestesia.') {                             
-            let closeButton = document.getElementById('anes-out');
+    //       // ANES OUT
+    //       else if (transcript === 'termina anestesia.') {                             
+    //         let closeButton = document.getElementById('anes-out');
   
-            if(transStore.ingresoQuirofano === true){
-              if(transStore.salidaQuirofano === false){
-                // Crea un nuevo evento de clic
-                let event = new MouseEvent('click', {
-                    bubbles: true,
-                    cancelable: true,
-                    view: window
-                });                    
-                // Despacha el evento de clic en el botón
-                closeButton.dispatchEvent(event);
-              }else{
-                swal.fire({
-                  title: 'La cirugía ya ha finalizado',
-                  icon: 'error',
-                  showConfirmButton: false,
-                  toast: true,
-                  position: 'top',
-                  timer: 3000,
-                  timerProgressBar: true
-                })
-              }
-            }else{
-              swal.fire({
-                title: 'Registre la hora de ingreso al quirófano',
-                icon: 'error',
-                showConfirmButton: false,
-                toast: true,
-                position: 'top',
-                timer: 3000,
-                timerProgressBar: true
-              })
-            }
-          }
+    //         if(transStore.ingresoQuirofano === true){
+    //           if(transStore.salidaQuirofano === false){
+    //             // Crea un nuevo evento de clic
+    //             let event = new MouseEvent('click', {
+    //                 bubbles: true,
+    //                 cancelable: true,
+    //                 view: window
+    //             });                    
+    //             // Despacha el evento de clic en el botón
+    //             closeButton.dispatchEvent(event);
+    //           }else{
+    //             swal.fire({
+    //               title: 'La cirugía ya ha finalizado',
+    //               icon: 'error',
+    //               showConfirmButton: false,
+    //               toast: true,
+    //               position: 'top',
+    //               timer: 3000,
+    //               timerProgressBar: true
+    //             })
+    //           }
+    //         }else{
+    //           swal.fire({
+    //             title: 'Registre la hora de ingreso al quirófano',
+    //             icon: 'error',
+    //             showConfirmButton: false,
+    //             toast: true,
+    //             position: 'top',
+    //             timer: 3000,
+    //             timerProgressBar: true
+    //           })
+    //         }
+    //       }
   
-          // QX OUT
-          else if (transcript === 'termina quirófano.') {
-            let closeButton = document.getElementById('qx-out');
+    //       // QX OUT
+    //       else if (transcript === 'termina quirófano.') {
+    //         let closeButton = document.getElementById('qx-out');
   
-            if(transStore.ingresoQuirofano === true){
-              if(transStore.salidaQuirofano === false){
-                // Crea un nuevo evento de clic
-                let event = new MouseEvent('click', {
-                    bubbles: true,
-                    cancelable: true,
-                    view: window
-                });                    
-                // Despacha el evento de clic en el botón
-                closeButton.dispatchEvent(event);
-              }else{
-                swal.fire({
-                  title: 'La cirugía ya ha finalizado',
-                  icon: 'error',
-                  showConfirmButton: false,
-                  toast: true,
-                  position: 'top',
-                  timer: 3000,
-                  timerProgressBar: true
-                })
-              }
-            }else{
-              swal.fire({
-                title: 'Registre la hora de ingreso al quirófano',
-                icon: 'error',
-                showConfirmButton: false,
-                toast: true,
-                position: 'top',
-                timer: 3000,
-                timerProgressBar: true
-              })
-            }
-          }
+    //         if(transStore.ingresoQuirofano === true){
+    //           if(transStore.salidaQuirofano === false){
+    //             // Crea un nuevo evento de clic
+    //             let event = new MouseEvent('click', {
+    //                 bubbles: true,
+    //                 cancelable: true,
+    //                 view: window
+    //             });                    
+    //             // Despacha el evento de clic en el botón
+    //             closeButton.dispatchEvent(event);
+    //           }else{
+    //             swal.fire({
+    //               title: 'La cirugía ya ha finalizado',
+    //               icon: 'error',
+    //               showConfirmButton: false,
+    //               toast: true,
+    //               position: 'top',
+    //               timer: 3000,
+    //               timerProgressBar: true
+    //             })
+    //           }
+    //         }else{
+    //           swal.fire({
+    //             title: 'Registre la hora de ingreso al quirófano',
+    //             icon: 'error',
+    //             showConfirmButton: false,
+    //             toast: true,
+    //             position: 'top',
+    //             timer: 3000,
+    //             timerProgressBar: true
+    //           })
+    //         }
+    //       }
           
-          if (transStore.intervalo !== null) {
-              clearTimeout(transStore.intervalo);
-              console.log('Temporizador reiniciado.');
-          }
+    //       if (transStore.intervalo !== null) {
+    //           clearTimeout(transStore.intervalo);
+    //           console.log('Temporizador reiniciado.');
+    //       }
   
-          transStore.intervalo = setTimeout(() => {
-            transStore.recognition.stop();
-            transStore.microfono = false;
-          }, tiempoEspera);
-        };
+    //       transStore.intervalo = setTimeout(() => {
+    //         transStore.recognition.stop();
+    //         transStore.microfono = false;
+    //       }, tiempoEspera);
+    //     };
   
-        // Manejar evento de error del reconocimiento
-        transStore.recognition.onerror = (event) => {
-          window.log.error('Error en reconocimiento de voz:', event.error);
-        };
+    //     // Manejar evento de error del reconocimiento
+    //     transStore.recognition.onerror = (event) => {
+    //       window.log.error('Error en reconocimiento de voz:', event.error);
+    //     };
   
-        // Manejar evento de fin del reconocimiento
-        transStore.recognition.onend = () => {
-          if (transStore.intervalo !== null) {
-              clearTimeout(transStore.intervalo);
-          }
-          transStore.microfono = false;
+    //     // Manejar evento de fin del reconocimiento
+    //     transStore.recognition.onend = () => {
+    //       if (transStore.intervalo !== null) {
+    //           clearTimeout(transStore.intervalo);
+    //       }
+    //       transStore.microfono = false;
   
-          // Iniciar reconocimiento de voz nuevamente
-          setTimeout(() => {
-            transStore.recognition.start();
-            transStore.microfono = true;
-          }, 100);
-        };                
-      } catch (error) {
-          window.log.error('Ocurrió un error:', error)
-      }      
-    },
+    //       // Iniciar reconocimiento de voz nuevamente
+    //       setTimeout(() => {
+    //         transStore.recognition.start();
+    //         transStore.microfono = true;
+    //       }, 100);
+    //     };                
+    //   } catch (error) {
+    //       window.log.error('Ocurrió un error:', error)
+    //   }      
+    // },
     
     // Obtener expedientes en Multiselect
     async listarExpedientes(){    
@@ -5222,9 +5220,9 @@ export default defineComponent({
           this.historialPaciente = false; // Bloquear botón historial paciente
   
           // Botones de guardar a estado inicial
-          this.btnGuardarId=true        
+          idStore.validaExpediente=true        
           this.btnActualizarId=false
-          this.btnNuevoGuardarId=false
+          idStore.validaExpedienteNuevo=false
           this.btnNuevoActualizarId=false
   
           // Bloquear inputs ID a estado inicial
@@ -5619,9 +5617,9 @@ export default defineComponent({
           })
           .then((result) => {
             if (result.isConfirmed) {
-              this.btnGuardarId=false
+              idStore.validaExpediente=false
               this.btnActualizarId=false
-              this.btnNuevoGuardarId=true
+              idStore.validaExpedienteNuevo=true
               this.btnNuevoActualizarId=false
   
               this.bloquearInputs=false
@@ -5691,7 +5689,6 @@ export default defineComponent({
             this.bordeRojoNom=false
             this.bordeVerdeNom=true
             
-            this.btnGuardarId=false
             this.btnActualizarId=true
   
             this.deshabilitado=false
@@ -5707,7 +5704,6 @@ export default defineComponent({
             this.bordeRojoNom=false
             this.bordeVerdeNom=true
             
-            this.btnNuevoGuardarId=false
             this.btnNuevoActualizarId=true
   
             this.deshabilitado=false
@@ -5724,7 +5720,7 @@ export default defineComponent({
 /*==================== Funciones para guardar al cambiar de módulo ===================*/
     async guardarDatosTrans(){   
       try {
-        await this.empezarReconocimientoTiempos()
+        // await this.empezarReconocimientoTiempos()
 
         const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
         await componenteId.guardarDatosId();
@@ -5737,7 +5733,7 @@ export default defineComponent({
   
         const componenteNota = await this.$refs.refNota as InstanceType<typeof Nota>;
         await componenteNota.guardarDatosNota();        
-        await componenteNota.detenerReconocimiento()        
+        // await componenteNota.detenerReconocimiento()        
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }   
@@ -5756,7 +5752,7 @@ export default defineComponent({
   
         const componenteNota = await this.$refs.refNota as InstanceType<typeof Nota>;
         await componenteNota.guardarDatosNota();        
-        await componenteNota.detenerReconocimiento()        
+        // await componenteNota.detenerReconocimiento()        
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }   

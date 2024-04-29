@@ -1280,26 +1280,9 @@
             </div>
         </div>
 
-        <!-- Modal Trombósis -->
+        <!-- Modal Trombosis -->
         <div class="modal" id="trombosis-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="input-group mb-3">
-                        <div class="modal-body">
-                            <div class="col-md-12">
-                                <div class="row g-3">
-                                    <img src="../../../public/images/infografias/info-trombosis.png" alt="" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Trombósis -->
-        <div class="modal" id="trombosis-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <div class="input-group mb-3">
                         <div class="modal-body">
@@ -1333,7 +1316,7 @@
 
         <!-- Modal Riesgo -->
         <div class="modal" id="riesgo-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
                     <div class="input-group mb-3">
                         <div class="modal-body">
