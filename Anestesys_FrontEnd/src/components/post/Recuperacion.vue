@@ -539,7 +539,7 @@
               </tr>
 
               <!-- Aldrete -->
-              <tr class="espacio">
+              <!-- <tr class="espacio">
                 <td class="col-2 color-texto">Aldrete:</td>
                 <th>
                   <select
@@ -727,6 +727,411 @@
                     <option>8</option>
                     <option>9</option>
                     <option>10</option>
+                  </select>
+                </th>
+              </tr> -->
+
+              <!-- Actividad muscular -->
+              <tr class="espacio">
+                <td class="col-2 color-texto">
+                  <label  class="form-label color-td">
+                    <span data-bs-toggle="modal" data-bs-target="#muscular-modal">
+                      <font-awesome-icon icon="fa-solid fa-circle-info" />
+                    </span>
+                    Actividad muscular:
+                  </label>
+                </td>
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_MuscularIn" click.capture="obtenerAldrete" class="form-select"
+                    :class="infoRec.aldreteRec_MuscularIn != undefined && infoRec.aldreteRec_MuscularIn != ''? 'form-control border border-success formSombra': 'form-control'">
+                    <option selected></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Muscular15" class="form-select"
+                      :class="infoRec.aldreteRec_Muscular15 != undefined && infoRec.aldreteRec_Muscular15 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Muscular30" class="form-select"
+                    :class="infoRec.aldreteRec_Muscular30 != undefined && infoRec.aldreteRec_Muscular30 != '' ? 'form-control border border-success formSombra' : 'form-control' ">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Muscular45" class="form-select"
+                    :class="infoRec.aldreteRec_Muscular45 != undefined && infoRec.aldreteRec_Muscular45 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Muscular60" class="form-select"
+                      :class="infoRec.aldreteRec_Muscular60 != undefined && infoRec.aldreteRec_Muscular60 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Muscular90" class="form-select"
+                    :class=" infoRec.aldreteRec_Muscular90 != undefined && infoRec.aldreteRec_Muscular90 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Muscular120" class="form-select"
+                    :class=" infoRec.aldreteRec_Muscular120 != undefined && infoRec.aldreteRec_Muscular120 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+              </tr>
+
+              <!-- Respiración -->
+              <tr class="espacio">
+                <td class="col-2 color-texto">
+                  <label  class="form-label color-td">
+                    <span data-bs-toggle="modal" data-bs-target="#respiracion-modal">
+                      <font-awesome-icon icon="fa-solid fa-circle-info" />
+                    </span>
+                    Respiración:
+                  </label>
+                </td>
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_RespiracionIn" class="form-select"
+                    :class="infoRec.aldreteRec_RespiracionIn != undefined && infoRec.aldreteRec_RespiracionIn != ''? 'form-control border border-success formSombra': 'form-control'">
+                    <option selected></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Respiracion15" class="form-select"
+                      :class="infoRec.aldreteRec_Respiracion15 != undefined && infoRec.aldreteRec_Respiracion15 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Respiracion30" class="form-select"
+                    :class="infoRec.aldreteRec_Respiracion30 != undefined && infoRec.aldreteRec_Respiracion30 != '' ? 'form-control border border-success formSombra' : 'form-control' ">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Respiracion45" class="form-select"
+                    :class="infoRec.aldreteRec_Respiracion45 != undefined && infoRec.aldreteRec_Respiracion45 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Respiracion60" class="form-select"
+                      :class="infoRec.aldreteRec_Respiracion60 != undefined && infoRec.aldreteRec_Respiracion60 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Respiracion90" class="form-select"
+                    :class=" infoRec.aldreteRec_Respiracion90 != undefined && infoRec.aldreteRec_Respiracion90 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Respiracion120" class="form-select"
+                    :class=" infoRec.aldreteRec_Respiracion120 != undefined && infoRec.aldreteRec_Respiracion120 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+              </tr>
+
+              <!-- Circulación -->
+              <tr class="espacio">
+                <td class="col-2 color-texto">
+                  <label  class="form-label color-td">
+                    <span data-bs-toggle="modal" data-bs-target="#circulacion-modal">
+                      <font-awesome-icon icon="fa-solid fa-circle-info" />
+                    </span>
+                    Circulación:
+                  </label>
+                </td>
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_CirculacionIn" class="form-select"
+                    :class="infoRec.aldreteRec_CirculacionIn != undefined && infoRec.aldreteRec_CirculacionIn != ''? 'form-control border border-success formSombra': 'form-control'">
+                    <option selected></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Circulacion15" class="form-select"
+                      :class="infoRec.aldreteRec_Circulacion15 != undefined && infoRec.aldreteRec_Circulacion15 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Circulacion30" class="form-select"
+                    :class="infoRec.aldreteRec_Circulacion30 != undefined && infoRec.aldreteRec_Circulacion30 != '' ? 'form-control border border-success formSombra' : 'form-control' ">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Circulacion45" class="form-select"
+                    :class="infoRec.aldreteRec_Circulacion45 != undefined && infoRec.aldreteRec_Circulacion45 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Circulacion60" class="form-select"
+                      :class="infoRec.aldreteRec_Circulacion60 != undefined && infoRec.aldreteRec_Circulacion60 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Circulacion90" class="form-select"
+                    :class=" infoRec.aldreteRec_Circulacion90 != undefined && infoRec.aldreteRec_Circulacion90 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Circulacion120" class="form-select"
+                    :class=" infoRec.aldreteRec_Circulacion120 != undefined && infoRec.aldreteRec_Circulacion120 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+              </tr>
+
+               <!-- Estado de conciencia -->
+               <tr class="espacio">
+                <td class="col-2 color-texto">
+                  <label class="form-label color-td">
+                    <span data-bs-toggle="modal" data-bs-target="#conciencia-modal">
+                      <font-awesome-icon icon="fa-solid fa-circle-info" />
+                    </span>
+                    Estado de conciencia:
+                  </label>
+                </td>
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_ConcienciaIn" class="form-select"
+                    :class="infoRec.aldreteRec_ConcienciaIn != undefined && infoRec.aldreteRec_ConcienciaIn != ''? 'form-control border border-success formSombra': 'form-control'">
+                    <option selected></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Conciencia15" class="form-select"
+                      :class="infoRec.aldreteRec_Conciencia15 != undefined && infoRec.aldreteRec_Conciencia15 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Conciencia30" class="form-select"
+                    :class="infoRec.aldreteRec_Conciencia30 != undefined && infoRec.aldreteRec_Conciencia30 != '' ? 'form-control border border-success formSombra' : 'form-control' ">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Conciencia45" class="form-select"
+                    :class="infoRec.aldreteRec_Conciencia45 != undefined && infoRec.aldreteRec_Conciencia45 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Conciencia60" class="form-select"
+                      :class="infoRec.aldreteRec_Conciencia60 != undefined && infoRec.aldreteRec_Conciencia60 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Conciencia90" class="form-select"
+                    :class=" infoRec.aldreteRec_Conciencia90 != undefined && infoRec.aldreteRec_Conciencia90 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Conciencia120" class="form-select"
+                    :class=" infoRec.aldreteRec_Conciencia120 != undefined && infoRec.aldreteRec_Conciencia120 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+              </tr>
+
+              <!-- Coloración -->
+              <tr class="espacio">
+                <td class="col-2 color-texto">
+                  <label  class="form-label color-td">
+                    <span data-bs-toggle="modal" data-bs-target="#coloracion-modal">
+                      <font-awesome-icon icon="fa-solid fa-circle-info" />
+                    </span>
+                    Coloración:
+                  </label>
+                </td>
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_ColoracionIn" class="form-select"
+                    :class="infoRec.aldreteRec_ColoracionIn != undefined && infoRec.aldreteRec_ColoracionIn != ''? 'form-control border border-success formSombra': 'form-control'">
+                    <option selected></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Coloracion15" class="form-select"
+                      :class="infoRec.aldreteRec_Coloracion15 != undefined && infoRec.aldreteRec_Coloracion15 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Coloracion30" class="form-select"
+                    :class="infoRec.aldreteRec_Coloracion30 != undefined && infoRec.aldreteRec_Coloracion30 != '' ? 'form-control border border-success formSombra' : 'form-control' ">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Coloracion45" class="form-select"
+                    :class="infoRec.aldreteRec_Coloracion45 != undefined && infoRec.aldreteRec_Coloracion45 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Coloracion60" class="form-select"
+                      :class="infoRec.aldreteRec_Coloracion60 != undefined && infoRec.aldreteRec_Coloracion60 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Coloracion90" class="form-select"
+                    :class=" infoRec.aldreteRec_Coloracion90 != undefined && infoRec.aldreteRec_Coloracion90 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Coloracion120" class="form-select"
+                    :class=" infoRec.aldreteRec_Coloracion120 != undefined && infoRec.aldreteRec_Coloracion120 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
                   </select>
                 </th>
               </tr>
@@ -1231,7 +1636,7 @@
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_0min"
-                :class="infoRec.altaRec_0min != undefined && infoRec.altaRec_0min != '' ?
+                :class="infoRec.altaRec_0min != undefined && infoRec.altaRec_0min != 0 ?
                         'form-control border border-success formSombra' : 'form-control'" readonly
                         >
             </div>
@@ -1241,7 +1646,7 @@
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_15min"
-                :class="infoRec.altaRec_15min != undefined && infoRec.altaRec_15min != '' ?
+                :class="infoRec.altaRec_15min != undefined && infoRec.altaRec_15min != 0 ?
                         'form-control border border-success formSombra' : 'form-control'" readonly>
             </div>
 
@@ -1250,7 +1655,7 @@
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_30min"
-                :class="infoRec.altaRec_30min != undefined && infoRec.altaRec_30min != '' ?
+                :class="infoRec.altaRec_30min != undefined && infoRec.altaRec_30min != 0 ?
                         'form-control border border-success formSombra' : 'form-control'" readonly>
             </div>
 
@@ -1259,7 +1664,7 @@
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_45min"
-                :class="infoRec.altaRec_45min != undefined && infoRec.altaRec_45min != '' ?
+                :class="infoRec.altaRec_45min != undefined && infoRec.altaRec_45min != 0 ?
                         'form-control border border-success formSombra' : 'form-control'" readonly>
             </div>
 
@@ -1268,7 +1673,7 @@
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_60min"
-                :class="infoRec.altaRec_60min != undefined && infoRec.altaRec_60min != '' ?
+                :class="infoRec.altaRec_60min != undefined && infoRec.altaRec_60min != 0 ?
                         'form-control border border-success formSombra' : 'form-control'" readonly>
             </div>
 
@@ -1277,7 +1682,7 @@
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_90min"
-                :class="infoRec.altaRec_90min != undefined && infoRec.altaRec_90min != '' ?
+                :class="infoRec.altaRec_90min != undefined && infoRec.altaRec_90min != 0 ?
                         'form-control border border-success formSombra' : 'form-control'" readonly>
             </div>
 
@@ -1286,7 +1691,7 @@
               <input type="text"
                 class="form-control" @keyup.capture="enviarDatosRecuperacion"
                 v-model="infoRec.altaRec_120min"
-                :class="infoRec.altaRec_120min != undefined && infoRec.altaRec_120min != '' ?
+                :class="infoRec.altaRec_120min != undefined && infoRec.altaRec_120min != 0 ?
                         'form-control border border-success formSombra' : 'form-control'" readonly>
             </div>
             <div class="col-md-2"></div>    
@@ -1302,7 +1707,7 @@
                                 type="text" @keyup.capture="enviarDatosRecuperacion"
                                 class="form-control"                                
                                 v-model="infoRec.altaRec_CalifAldrete"
-                                :class="infoRec.altaRec_CalifAldrete != undefined && infoRec.altaRec_CalifAldrete != '' ?
+                                :class="infoRec.altaRec_CalifAldrete != undefined && infoRec.altaRec_CalifAldrete != 0 ?
                                         'form-control border border-success formSombra' : 'form-control'" readonly
                             />
                         </div>
@@ -1374,13 +1779,99 @@
       </div>
     </div>
 
+    <!-- Modal Actividad Muscular -->
     <div
-      class="modal"
-      id="bromage-modal"
-      tabindex="-1"
-      aria-labelledby=""
-      aria-hidden="true"
-    >
+      class="modal" id="muscular-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="input-group mb-3">
+            <div class="modal-body">
+              <div class="col-md-12">
+                <div class="row g-3">
+                  <img src="../../../public/images/infografias/muscular-info.png" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Respiración -->
+    <div
+      class="modal" id="respiracion-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="input-group mb-3">
+            <div class="modal-body">
+              <div class="col-md-12">
+                <div class="row g-3">
+                  <img src="../../../public/images/infografias/respiracion-info.png" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Circulación -->
+    <div
+      class="modal" id="circulacion-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="input-group mb-3">
+            <div class="modal-body">
+              <div class="col-md-12">
+                <div class="row g-3">
+                  <img src="../../../public/images/infografias/circulacion-info.png" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Estado de Conciencia -->
+    <div
+      class="modal" id="conciencia-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="input-group mb-3">
+            <div class="modal-body">
+              <div class="col-md-12">
+                <div class="row g-3">
+                  <img src="../../../public/images/infografias/conciencia-info.png" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Coloración -->
+    <div
+      class="modal" id="coloracion-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="input-group mb-3">
+            <div class="modal-body">
+              <div class="col-md-12">
+                <div class="row g-3">
+                  <img src="../../../public/images/infografias/coloracion-info.png" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Bromage -->
+    <div
+      class="modal" id="bromage-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="input-group mb-3">
@@ -1396,13 +1887,8 @@
       </div>
     </div>
 
-    <div
-      class="modal"
-      id="escala-EVA-modal"
-      tabindex="-1"
-      aria-labelledby=""
-      aria-hidden="true"
-    >
+    <!-- Model EVA -->
+    <div class="modal" id="escala-EVA-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="input-group mb-3">
@@ -1444,6 +1930,48 @@ export default defineComponent({
       microfonoEscucha: false,
       recognition: null,
     };
+  },
+
+  mounted: function() {
+    this.infoRec.aldreteRec_MuscularIn=null
+    this.infoRec.aldreteRec_Muscular15=null
+    this.infoRec.aldreteRec_Muscular30=null
+    this.infoRec.aldreteRec_Muscular45=null
+    this.infoRec.aldreteRec_Muscular60=null
+    this.infoRec.aldreteRec_Muscular90=null
+    this.infoRec.aldreteRec_Muscular120=null
+
+    this.infoRec.aldreteRec_RespiracionIn=null
+    this.infoRec.aldreteRec_Respiracion15=null
+    this.infoRec.aldreteRec_Respiracion30=null
+    this.infoRec.aldreteRec_Respiracion45=null
+    this.infoRec.aldreteRec_Respiracion60=null
+    this.infoRec.aldreteRec_Respiracion90=null
+    this.infoRec.aldreteRec_Respiracion120=null
+
+    this.infoRec.aldreteRec_CirculacionIn=null
+    this.infoRec.aldreteRec_Circulacion15=null
+    this.infoRec.aldreteRec_Circulacion30=null
+    this.infoRec.aldreteRec_Circulacion45=null
+    this.infoRec.aldreteRec_Circulacion60=null
+    this.infoRec.aldreteRec_Circulacion90=null
+    this.infoRec.aldreteRec_Circulacion120=null
+
+    this.infoRec.aldreteRec_ConcienciaIn=null
+    this.infoRec.aldreteRec_Conciencia15=null
+    this.infoRec.aldreteRec_Conciencia30=null
+    this.infoRec.aldreteRec_Conciencia45=null
+    this.infoRec.aldreteRec_Conciencia60=null
+    this.infoRec.aldreteRec_Conciencia90=null
+    this.infoRec.aldreteRec_Conciencia120=null
+
+    this.infoRec.aldreteRec_ColoracionIn=null
+    this.infoRec.aldreteRec_Coloracion15=null
+    this.infoRec.aldreteRec_Coloracion30=null
+    this.infoRec.aldreteRec_Coloracion45=null
+    this.infoRec.aldreteRec_Coloracion60=null
+    this.infoRec.aldreteRec_Coloracion90=null
+    this.infoRec.aldreteRec_Coloracion120=null
   },
 
   methods: {
@@ -1560,14 +2088,54 @@ export default defineComponent({
           this.infoRec.aldreteRec_SatO260=postAnestStore.Saturacion60Min
           this.infoRec.aldreteRec_SatO290=postAnestStore.Saturacion90Min
           this.infoRec.aldreteRec_SatO2120=postAnestStore.Saturacion120Min
+
+          this.infoRec.aldreteRec_MuscularIn=postAnestStore.MuscularIngreso
+          this.infoRec.aldreteRec_Muscular15=postAnestStore.Muscular15Min
+          this.infoRec.aldreteRec_Muscular30=postAnestStore.Muscular30Min
+          this.infoRec.aldreteRec_Muscular45=postAnestStore.Muscular45Min
+          this.infoRec.aldreteRec_Muscular60=postAnestStore.Muscular60Min
+          this.infoRec.aldreteRec_Muscular90=postAnestStore.Muscular90Min
+          this.infoRec.aldreteRec_Muscular120=postAnestStore.Muscular120Min
+
+          this.infoRec.aldreteRec_RespiracionIn=postAnestStore.RespiracionIngreso
+          this.infoRec.aldreteRec_Respiracion15=postAnestStore.Respiracion15Min
+          this.infoRec.aldreteRec_Respiracion30=postAnestStore.Respiracion30Min
+          this.infoRec.aldreteRec_Respiracion45=postAnestStore.Respiracion45Min
+          this.infoRec.aldreteRec_Respiracion60=postAnestStore.Respiracion60Min
+          this.infoRec.aldreteRec_Respiracion90=postAnestStore.Respiracion90Min
+          this.infoRec.aldreteRec_Respiracion120=postAnestStore.Respiracion120Min
+
+          this.infoRec.aldreteRec_CirculacionIn=postAnestStore.CirculacionIngreso
+          this.infoRec.aldreteRec_Circulacion15=postAnestStore.Circulacion15Min
+          this.infoRec.aldreteRec_Circulacion30=postAnestStore.Circulacion30Min
+          this.infoRec.aldreteRec_Circulacion45=postAnestStore.Circulacion45Min
+          this.infoRec.aldreteRec_Circulacion60=postAnestStore.Circulacion60Min
+          this.infoRec.aldreteRec_Circulacion90=postAnestStore.Circulacion90Min
+          this.infoRec.aldreteRec_Circulacion120=postAnestStore.Circulacion120Min
+
+          this.infoRec.aldreteRec_ConcienciaIn=postAnestStore.ConcienciaIngreso
+          this.infoRec.aldreteRec_Conciencia15=postAnestStore.Conciencia15Min
+          this.infoRec.aldreteRec_Conciencia30=postAnestStore.Conciencia30Min
+          this.infoRec.aldreteRec_Conciencia45=postAnestStore.Conciencia45Min
+          this.infoRec.aldreteRec_Conciencia60=postAnestStore.Conciencia60Min
+          this.infoRec.aldreteRec_Conciencia90=postAnestStore.Conciencia90Min
+          this.infoRec.aldreteRec_Conciencia120=postAnestStore.Conciencia120Min
+
+          this.infoRec.aldreteRec_ColoracionIn=postAnestStore.ColoracionIngreso
+          this.infoRec.aldreteRec_Coloracion15=postAnestStore.Coloracion15Min
+          this.infoRec.aldreteRec_Coloracion30=postAnestStore.Coloracion30Min
+          this.infoRec.aldreteRec_Coloracion45=postAnestStore.Coloracion45Min
+          this.infoRec.aldreteRec_Coloracion60=postAnestStore.Coloracion60Min
+          this.infoRec.aldreteRec_Coloracion90=postAnestStore.Coloracion90Min
+          this.infoRec.aldreteRec_Coloracion120=postAnestStore.Coloracion120Min
   
-          this.infoRec.aldreteRec_AldreteIn=postAnestStore.AldreteIngreso
-          this.infoRec.aldreteRec_Aldrete15=postAnestStore.Aldrete15Min
-          this.infoRec.aldreteRec_Aldrete30=postAnestStore.Aldrete30Min
-          this.infoRec.aldreteRec_Aldrete45=postAnestStore.Aldrete45Min
-          this.infoRec.aldreteRec_Aldrete60=postAnestStore.Aldrete60Min
-          this.infoRec.aldreteRec_Aldrete90=postAnestStore.Aldrete90Min
-          this.infoRec.aldreteRec_Aldrete120=postAnestStore.Aldrete120Min
+          // this.infoRec.aldreteRec_AldreteIn=postAnestStore.AldreteIngreso
+          // this.infoRec.aldreteRec_Aldrete15=postAnestStore.Aldrete15Min
+          // this.infoRec.aldreteRec_Aldrete30=postAnestStore.Aldrete30Min
+          // this.infoRec.aldreteRec_Aldrete45=postAnestStore.Aldrete45Min
+          // this.infoRec.aldreteRec_Aldrete60=postAnestStore.Aldrete60Min
+          // this.infoRec.aldreteRec_Aldrete90=postAnestStore.Aldrete90Min
+          // this.infoRec.aldreteRec_Aldrete120=postAnestStore.Aldrete120Min
   
           this.infoRec.aldreteRec_BromageIn=postAnestStore.BromageIngreso
           this.infoRec.aldreteRec_Bromage15=postAnestStore.Bromage15Min
@@ -1657,26 +2225,28 @@ export default defineComponent({
 
     async obtenerAldrete(){
       try {
-        this.infoRec.altaRec_0min = this.infoRec.aldreteRec_AldreteIn;
-        this.infoRec.altaRec_15min = this.infoRec.aldreteRec_Aldrete15;
-        this.infoRec.altaRec_30min = this.infoRec.aldreteRec_Aldrete30;
-        this.infoRec.altaRec_45min = this.infoRec.aldreteRec_Aldrete45;
-        this.infoRec.altaRec_60min = this.infoRec.aldreteRec_Aldrete60;
-        this.infoRec.altaRec_90min = this.infoRec.aldreteRec_Aldrete90;
-        this.infoRec.altaRec_120min = this.infoRec.aldreteRec_Aldrete120;
+        this.infoRec.altaRec_0min = Number(this.infoRec.aldreteRec_MuscularIn)+Number(this.infoRec.aldreteRec_RespiracionIn)+Number(this.infoRec.aldreteRec_CirculacionIn)+
+                                    Number(this.infoRec.aldreteRec_ConcienciaIn)+Number(this.infoRec.aldreteRec_ColoracionIn);
+        this.infoRec.altaRec_15min = Number(this.infoRec.aldreteRec_Muscular15)+Number(this.infoRec.aldreteRec_Respiracion15)+Number(this.infoRec.aldreteRec_Circulacion15)+
+                                    Number(this.infoRec.aldreteRec_Conciencia15)+Number(this.infoRec.aldreteRec_Coloracion15);
+        this.infoRec.altaRec_30min = Number(this.infoRec.aldreteRec_Muscular30)+Number(this.infoRec.aldreteRec_Respiracion30)+Number(this.infoRec.aldreteRec_Circulacion30)+
+                                    Number(this.infoRec.aldreteRec_Conciencia30)+Number(this.infoRec.aldreteRec_Coloracion30);
+        this.infoRec.altaRec_45min = Number(this.infoRec.aldreteRec_Muscular45)+Number(this.infoRec.aldreteRec_Respiracion45)+Number(this.infoRec.aldreteRec_Circulacion45)+
+                                    Number(this.infoRec.aldreteRec_Conciencia45)+Number(this.infoRec.aldreteRec_Coloracion45);
+        this.infoRec.altaRec_60min = Number(this.infoRec.aldreteRec_Muscular60)+Number(this.infoRec.aldreteRec_Respiracion60)+Number(this.infoRec.aldreteRec_Circulacion60)+
+                                    Number(this.infoRec.aldreteRec_Conciencia60)+Number(this.infoRec.aldreteRec_Coloracion60);
+        this.infoRec.altaRec_90min = Number(this.infoRec.aldreteRec_Muscular90)+Number(this.infoRec.aldreteRec_Respiracion90)+Number(this.infoRec.aldreteRec_Circulacion90)+
+                                    Number(this.infoRec.aldreteRec_Conciencia90)+Number(this.infoRec.aldreteRec_Coloracion90);
+        this.infoRec.altaRec_120min = Number(this.infoRec.aldreteRec_Muscular120)+Number(this.infoRec.aldreteRec_Respiracion120)+Number(this.infoRec.aldreteRec_Circulacion120)+
+                                    Number(this.infoRec.aldreteRec_Conciencia120)+Number(this.infoRec.aldreteRec_Coloracion120);
   
-        const arrayFinalAldrete= [this.infoRec.aldreteRec_AldreteIn, 
-                                this.infoRec.aldreteRec_Aldrete15, 
-                                this.infoRec.aldreteRec_Aldrete30,
-                                this.infoRec.aldreteRec_Aldrete45,
-                                this.infoRec.aldreteRec_Aldrete60,
-                                this.infoRec.aldreteRec_Aldrete90,
-                                this.infoRec.aldreteRec_Aldrete120]
+        const arrayFinalAldrete= [this.infoRec.altaRec_0min, this.infoRec.altaRec_15min, this.infoRec.altaRec_30min, this.infoRec.altaRec_45min,
+                                this.infoRec.altaRec_60min, this.infoRec.altaRec_90min, this.infoRec.altaRec_120min]
                                 
-        let valorFinalAldrete = "";
+        let valorFinalAldrete = null;
   
         for (let i = arrayFinalAldrete.length - 1; i >= 0; i--) {
-          if (arrayFinalAldrete[i] !== undefined && arrayFinalAldrete[i] !== "") {
+          if (arrayFinalAldrete[i] !== undefined && arrayFinalAldrete[i] !== 0) {
             valorFinalAldrete = arrayFinalAldrete[i];
             break;
           }
@@ -1725,14 +2295,54 @@ export default defineComponent({
                                                 postAnestStore.Saturacion60Min=this.infoRec.aldreteRec_SatO260,
                                                 postAnestStore.Saturacion90Min=this.infoRec.aldreteRec_SatO290,
                                                 postAnestStore.Saturacion120Min=this.infoRec.aldreteRec_SatO2120,
-  
-                                                postAnestStore.AldreteIngreso=this.infoRec.aldreteRec_AldreteIn,
-                                                postAnestStore.Aldrete15Min=this.infoRec.aldreteRec_Aldrete15,
-                                                postAnestStore.Aldrete30Min=this.infoRec.aldreteRec_Aldrete30,
-                                                postAnestStore.Aldrete45Min=this.infoRec.aldreteRec_Aldrete45,
-                                                postAnestStore.Aldrete60Min=this.infoRec.aldreteRec_Aldrete60,
-                                                postAnestStore.Aldrete90Min=this.infoRec.aldreteRec_Aldrete90,
-                                                postAnestStore.Aldrete120Min=this.infoRec.aldreteRec_Aldrete120,
+
+                                                postAnestStore.MuscularIngreso=this.infoRec.aldreteRec_MuscularIn,
+                                                postAnestStore.Muscular15Min=this.infoRec.aldreteRec_Muscular15,
+                                                postAnestStore.Muscular30Min=this.infoRec.aldreteRec_Muscular30,
+                                                postAnestStore.Muscular45Min=this.infoRec.aldreteRec_Muscular45,
+                                                postAnestStore.Muscular60Min=this.infoRec.aldreteRec_Muscular60,
+                                                postAnestStore.Muscular90Min=this.infoRec.aldreteRec_Muscular90,
+                                                postAnestStore.Muscular120Min=this.infoRec.aldreteRec_Muscular120,
+
+                                                postAnestStore.RespiracionIngreso=this.infoRec.aldreteRec_RespiracionIn,
+                                                postAnestStore.Respiracion15Min=this.infoRec.aldreteRec_Respiracion15,
+                                                postAnestStore.Respiracion30Min=this.infoRec.aldreteRec_Respiracion30,
+                                                postAnestStore.Respiracion45Min=this.infoRec.aldreteRec_Respiracion45,
+                                                postAnestStore.Respiracion60Min=this.infoRec.aldreteRec_Respiracion60,
+                                                postAnestStore.Respiracion90Min=this.infoRec.aldreteRec_Respiracion90,
+                                                postAnestStore.Respiracion120Min=this.infoRec.aldreteRec_Respiracion120,
+
+                                                postAnestStore.CirculacionIngreso=this.infoRec.aldreteRec_CirculacionIn,
+                                                postAnestStore.Circulacion15Min=this.infoRec.aldreteRec_Circulacion15,
+                                                postAnestStore.Circulacion30Min=this.infoRec.aldreteRec_Circulacion30,
+                                                postAnestStore.Circulacion45Min=this.infoRec.aldreteRec_Circulacion45,
+                                                postAnestStore.Circulacion60Min=this.infoRec.aldreteRec_Circulacion60,
+                                                postAnestStore.Circulacion90Min=this.infoRec.aldreteRec_Circulacion90,
+                                                postAnestStore.Circulacion120Min=this.infoRec.aldreteRec_Circulacion120,
+
+                                                postAnestStore.ConcienciaIngreso=this.infoRec.aldreteRec_ConcienciaIn,
+                                                postAnestStore.Conciencia15Min=this.infoRec.aldreteRec_Conciencia15,
+                                                postAnestStore.Conciencia30Min=this.infoRec.aldreteRec_Conciencia30,
+                                                postAnestStore.Conciencia45Min=this.infoRec.aldreteRec_Conciencia45,
+                                                postAnestStore.Conciencia60Min=this.infoRec.aldreteRec_Conciencia60,
+                                                postAnestStore.Conciencia90Min=this.infoRec.aldreteRec_Conciencia90,
+                                                postAnestStore.Conciencia120Min=this.infoRec.aldreteRec_Conciencia120,
+
+                                                postAnestStore.ColoracionIngreso=this.infoRec.aldreteRec_ColoracionIn,
+                                                postAnestStore.Coloracion15Min=this.infoRec.aldreteRec_Coloracion15,
+                                                postAnestStore.Coloracion30Min=this.infoRec.aldreteRec_Coloracion30,
+                                                postAnestStore.Coloracion45Min=this.infoRec.aldreteRec_Coloracion45,
+                                                postAnestStore.Coloracion60Min=this.infoRec.aldreteRec_Coloracion60,
+                                                postAnestStore.Coloracion90Min=this.infoRec.aldreteRec_Coloracion90,
+                                                postAnestStore.Coloracion120Min=this.infoRec.aldreteRec_Coloracion120,
+
+                                                // postAnestStore.AldreteIngreso=this.infoRec.aldreteRec_AldreteIn,
+                                                // postAnestStore.Aldrete15Min=this.infoRec.aldreteRec_Aldrete15,
+                                                // postAnestStore.Aldrete30Min=this.infoRec.aldreteRec_Aldrete30,
+                                                // postAnestStore.Aldrete45Min=this.infoRec.aldreteRec_Aldrete45,
+                                                // postAnestStore.Aldrete60Min=this.infoRec.aldreteRec_Aldrete60,
+                                                // postAnestStore.Aldrete90Min=this.infoRec.aldreteRec_Aldrete90,
+                                                // postAnestStore.Aldrete120Min=this.infoRec.aldreteRec_Aldrete120,
   
                                                 postAnestStore.BromageIngreso=this.infoRec.aldreteRec_BromageIn,
                                                 postAnestStore.Bromage15Min=this.infoRec.aldreteRec_Bromage15,

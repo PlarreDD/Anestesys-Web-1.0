@@ -108,14 +108,50 @@ export interface regRecuperacion{
     aldreteRec_SatO290: string,
     aldreteRec_SatO2120: string,
 
-    // Aldrete
-    aldreteRec_AldreteIn: string,
-    aldreteRec_Aldrete15: string,
-    aldreteRec_Aldrete30: string,
-    aldreteRec_Aldrete45: string,
-    aldreteRec_Aldrete60: string,
-    aldreteRec_Aldrete90: string,
-    aldreteRec_Aldrete120: string,
+    // Actividad muscular
+    aldreteRec_MuscularIn: string,
+    aldreteRec_Muscular15: string,
+    aldreteRec_Muscular30: string,
+    aldreteRec_Muscular45: string,
+    aldreteRec_Muscular60: string,
+    aldreteRec_Muscular90: string,
+    aldreteRec_Muscular120: string,
+
+    // Respiración
+    aldreteRec_RespiracionIn: string,
+    aldreteRec_Respiracion15: string,
+    aldreteRec_Respiracion30: string,
+    aldreteRec_Respiracion45: string,
+    aldreteRec_Respiracion60: string,
+    aldreteRec_Respiracion90: string,
+    aldreteRec_Respiracion120: string,
+
+    // Circulación
+    aldreteRec_CirculacionIn: string,
+    aldreteRec_Circulacion15: string,
+    aldreteRec_Circulacion30: string,
+    aldreteRec_Circulacion45: string,
+    aldreteRec_Circulacion60: string,
+    aldreteRec_Circulacion90: string,
+    aldreteRec_Circulacion120: string,
+
+    // Estado de conciencia
+    aldreteRec_ConcienciaIn: string,
+    aldreteRec_Conciencia15: string,
+    aldreteRec_Conciencia30: string,
+    aldreteRec_Conciencia45: string,
+    aldreteRec_Conciencia60: string,
+    aldreteRec_Conciencia90: string,
+    aldreteRec_Conciencia120: string,
+
+    // Coloración
+    aldreteRec_ColoracionIn: string,
+    aldreteRec_Coloracion15: string,
+    aldreteRec_Coloracion30: string,
+    aldreteRec_Coloracion45: string,
+    aldreteRec_Coloracion60: string,
+    aldreteRec_Coloracion90: string,
+    aldreteRec_Coloracion120: string,
 
     // Bromage
     aldreteRec_BromageIn: string,
@@ -144,15 +180,24 @@ export interface regRecuperacion{
     aldreteRec_escEVADol90: string,
     aldreteRec_escEVADol120: string,
 
+        // Aldrete
+    // aldreteRec_AldreteIn: string,
+    // aldreteRec_Aldrete15: string,
+    // aldreteRec_Aldrete30: string,
+    // aldreteRec_Aldrete45: string,
+    // aldreteRec_Aldrete60: string,
+    // aldreteRec_Aldrete90: string,
+    // aldreteRec_Aldrete120: string,
+
     // Alta Recuperación
-    altaRec_0min: string,
-    altaRec_15min: string,
-    altaRec_30min: string,
-    altaRec_45min: string,
-    altaRec_60min: string,
-    altaRec_90min: string,
-    altaRec_120min: string,
-    altaRec_CalifAldrete: string,
+    altaRec_0min: number,
+    altaRec_15min: number,
+    altaRec_30min: number,
+    altaRec_45min: number,
+    altaRec_60min: number,
+    altaRec_90min: number,
+    altaRec_120min: number,
+    altaRec_CalifAldrete: number,
     altaRec_Obs: string,
     altaRec_FechaAltaRec: string,
     altaRec_HrAltaRec: string,

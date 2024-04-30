@@ -3078,19 +3078,19 @@ export default defineComponent({
         // SpO2 120 min
         let saturacion120 = postAnestStore.Saturacion120Min === undefined || postAnestStore.Saturacion120Min === null ? ' ' : postAnestStore.Saturacion120Min;
         // Aldrete Ingreso
-        let aldreteIngreso = postAnestStore.AldreteIngreso === undefined || postAnestStore.AldreteIngreso === null ? ' ' : postAnestStore.AldreteIngreso;
-        // Aldrete 15 min
-        let aldrete15 = postAnestStore.Aldrete15Min === undefined || postAnestStore.Aldrete15Min === null ? ' ' : postAnestStore.Aldrete15Min;
-        // Aldrete 30 min
-        let aldrete30 = postAnestStore.Aldrete30Min === undefined || postAnestStore.Aldrete30Min === null ? ' ' : postAnestStore.Aldrete30Min;
-        // Aldrete 45 min
-        let aldrete45 = postAnestStore.Aldrete45Min === undefined || postAnestStore.Aldrete45Min === null ? ' ' : postAnestStore.Aldrete45Min;
-        // Aldrete 60 min
-        let aldrete60 = postAnestStore.Aldrete60Min === undefined || postAnestStore.Aldrete60Min === null ? ' ' : postAnestStore.Aldrete60Min;
-        // Aldrete 90 min
-        let aldrete90 = postAnestStore.Aldrete90Min === undefined || postAnestStore.Aldrete90Min === null ? ' ' : postAnestStore.Aldrete90Min;
-        // Aldrete 120 min
-        let aldrete120 = postAnestStore.Aldrete120Min === undefined || postAnestStore.Aldrete120Min === null ? ' ' : postAnestStore.Aldrete120Min;
+        // let aldreteIngreso = postAnestStore.AldreteIngreso === undefined || postAnestStore.AldreteIngreso === null ? ' ' : postAnestStore.AldreteIngreso;
+        // // Aldrete 15 min
+        // let aldrete15 = postAnestStore.Aldrete15Min === undefined || postAnestStore.Aldrete15Min === null ? ' ' : postAnestStore.Aldrete15Min;
+        // // Aldrete 30 min
+        // let aldrete30 = postAnestStore.Aldrete30Min === undefined || postAnestStore.Aldrete30Min === null ? ' ' : postAnestStore.Aldrete30Min;
+        // // Aldrete 45 min
+        // let aldrete45 = postAnestStore.Aldrete45Min === undefined || postAnestStore.Aldrete45Min === null ? ' ' : postAnestStore.Aldrete45Min;
+        // // Aldrete 60 min
+        // let aldrete60 = postAnestStore.Aldrete60Min === undefined || postAnestStore.Aldrete60Min === null ? ' ' : postAnestStore.Aldrete60Min;
+        // // Aldrete 90 min
+        // let aldrete90 = postAnestStore.Aldrete90Min === undefined || postAnestStore.Aldrete90Min === null ? ' ' : postAnestStore.Aldrete90Min;
+        // // Aldrete 120 min
+        // let aldrete120 = postAnestStore.Aldrete120Min === undefined || postAnestStore.Aldrete120Min === null ? ' ' : postAnestStore.Aldrete120Min;
         // Bromage Ingreso
         let bromageIngreso = postAnestStore.BromageIngreso === undefined || postAnestStore.BromageIngreso === null ? ' ' : postAnestStore.BromageIngreso;
         // Bromage 15 min
@@ -5371,7 +5371,7 @@ export default defineComponent({
                           ['Frecuencia Respiratorio', {text: FRIngreso, style: 'bold'}, {text: FR15, style: 'bold'}, {text: FR30, style: 'bold'}, {text: FR45, style: 'bold'}, {text: FR60, style: 'bold'}, {text: FR90, style: 'bold'}, {text: FR120, style: 'bold'}],
                           ['Tensión Arterial', {text: tensionIngreso, style: 'bold'}, {text: tension15, style: 'bold'}, {text: tension30, style: 'bold'}, {text: tension45, style: 'bold'}, {text: tension60, style: 'bold'}, {text: tension90, style: 'bold'}, {text: tension120, style: 'bold'}],
                           ['Saturación de O2', {text: saturacionIngreso, style: 'bold'}, {text: saturacion15, style: 'bold'}, {text: saturacion30, style: 'bold'}, {text: saturacion45, style: 'bold'}, {text: saturacion60, style: 'bold'}, {text: saturacion90, style: 'bold'}, {text: saturacion120, style: 'bold'}],
-                          ['Aldrete', {text: aldreteIngreso, style: 'bold'}, {text: aldrete15, style: 'bold'}, {text: aldrete30, style: 'bold'}, {text: aldrete45, style: 'bold'}, {text: aldrete60, style: 'bold'}, {text: aldrete90, style: 'bold'}, {text: aldrete120, style: 'bold'}],
+                          // ['Aldrete', {text: aldreteIngreso, style: 'bold'}, {text: aldrete15, style: 'bold'}, {text: aldrete30, style: 'bold'}, {text: aldrete45, style: 'bold'}, {text: aldrete60, style: 'bold'}, {text: aldrete90, style: 'bold'}, {text: aldrete120, style: 'bold'}],
                           ['Bromage', {text: bromageIngreso, style: 'bold'}, {text: bromage15, style: 'bold'}, {text: bromage30, style: 'bold'}, {text: bromage45, style: 'bold'}, {text: bromage60, style: 'bold'}, {text: bromage90, style: 'bold'}, {text: bromage120, style: 'bold'}],
                           ['Nauseas/Vómito', {text: nauseasIngreso, style: 'bold'}, {text: nauseas15, style: 'bold'}, {text: nauseas30, style: 'bold'}, {text: nauseas45, style: 'bold'}, {text: nauseas60, style: 'bold'}, {text: nauseas90, style: 'bold'}, {text: nauseas120, style: 'bold'}],
                           ['Escala de EVA Dolor', {text: EVAIngreso, style: 'bold'}, {text: EVA15, style: 'bold'}, {text: EVA30, style: 'bold'}, {text: EVA45, style: 'bold'}, {text: EVA60, style: 'bold'}, {text: EVA90, style: 'bold'}, {text: EVA120, style: 'bold'}],
