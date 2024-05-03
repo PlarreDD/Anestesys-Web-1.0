@@ -1,4 +1,4 @@
-<template>
+MENÚ DE ACCIONES<template>
   <header @click.stop="replegarMenuVistaRapida">
     <barra-navegacion/>
   </header>
@@ -23,22 +23,21 @@
 
               <!-- Monitor Rojo -->
               <template v-if="apiMSV === false">
+                <!-- :disabled="btnMSV" -->
                 <button class="borde-btn-msv"
-                        @click="iniMSV"
-                        :disabled="btnMSV"
+                        @click="iniMSV"                        
                         style="border: none;">
                   <img src="../../../public/images/imgIcon/MonitorInactivo.png" class="btn-msv"/>
                 </button>
                 <span class="fw-bold msv-color-txt">&nbsp;&nbsp;Estado: Desconectado</span>
               </template>
-            </div>
+            </div>            
 
             <!-- Botón medicamento -->
-            <div class="col-md-2">
+            <div class="col-md-2">              
               <button type="button"
                       class="btn btn-menu fw-bold"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modal-medicamento" @click="vaciarModalMed">+ MEDICAMENTO </button>
+                      @click="vaciarModalMed">+ MEDICAMENTO </button>
             </div>
             <!--Abrir el modal de Medicamentos-->
             <div class="modal" ref="medicamentoModal" id="modal-medicamento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -151,7 +150,9 @@
                               </textarea>
                           </div>
 
-                          <div class="col-md-8"></div>
+                          <div class="col-md-8">
+                            <button id="abrir-medicamento" type="button" class="invisible" data-bs-toggle="modal" data-bs-target="#modal-medicamento"></button>
+                          </div>
 
                           <div class="col-md-2">
                             <button data-bs-toggle="tab" 
@@ -196,11 +197,10 @@
             <div class="col-md-2">
               <button type="button"
                       class="btn btn-menu fw-bold"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modal-relevo" @click="vaciarModalRel"> RELEVO </button>
+                      @click="vaciarModalRel"> RELEVO </button>
             </div>
             <!--Abrir el modal de Relevo-->
-            <div class="modal" id="modal-relevo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal" ref="relevoModal" id="modal-relevo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
                 <div class="modal-content color-dropdown">
                   <div class="input-group mb-3">
@@ -246,7 +246,9 @@
                               </textarea>
                             </div>
 
-                            <div class="col-md-8"></div>
+                            <div class="col-md-8">
+                              <button id="abrir-relevo" type="button" class="invisible" data-bs-toggle="modal" data-bs-target="#modal-relevo"></button>
+                            </div>
 
                             <div class="col-md-2">
                               <button data-bs-toggle="tab" 
@@ -291,11 +293,10 @@
             <div class="col-md-2">
               <button type="button"
                       class="btn btn-menu fw-bold"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modal-evento" @click="vaciarModalEve"> EVENTO CRÍTICO </button>
+                      @click="vaciarModalEve"> EVENTO CRÍTICO </button>
             </div>
             <!--Abrir el modal de evento critico-->
-            <div class="modal" id="modal-evento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal" ref="eventoModal" id="modal-evento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
                 <div class="modal-content color-dropdown">
                   <div class="input-group mb-3">
@@ -331,7 +332,9 @@
                               </textarea>
                             </div>
 
-                            <div class="col-md-8"></div>
+                            <div class="col-md-8">
+                              <button id="abrir-evento" type="button" class="invisible" data-bs-toggle="modal" data-bs-target="#modal-evento"></button>
+                            </div>
 
                             <div class="col-md-2">
                               <button data-bs-toggle="tab" 
@@ -397,21 +400,19 @@
               <li class="col-md-3">
                 <button type="button"
                         class="btn btn-nav-bar fw-bold"
-                        data-bs-toggle="modal"
-                        data-bs-target="#modal-tecnica"> TÉCNICA ANESTÉSICA </button>                
+                        @click="validarTecnica"> TÉCNICA ANESTÉSICA </button>                
               </li>
               <!-- Balance Hídrico -->
               <li class="col-md-3">
-                <button type="button" class="btn btn-nav-bar fw-bold" 
-                        data-bs-toggle="modal"
-                        data-bs-target="#modal-balance">BALANCE HIDRICO</button> <!-- Modificar guardado -->
+                <button type="button" 
+                        class="btn btn-nav-bar fw-bold" 
+                        @click="validarBalance">BALANCE HIDRICO </button> <!-- Modificar guardado -->
               </li>
               <!-- Datos del ventilador -->
               <li class="col-md-3">
                 <button type="button"
                         class="btn btn-nav-bar fw-bold"
-                        data-bs-toggle="modal"
-                        data-bs-target="#modal-ventilador">DATOS DEL VENTILADOR</button>
+                        @click="validarVentilador">DATOS DEL VENTILADOR </button>
               </li>
             </ul>
         </div>
@@ -490,7 +491,9 @@
                                         :createTag="true"/>
                         </div>
 
-                        <div class="col-md-10"></div>
+                        <div class="col-md-10">
+                          <button id="abrir-tecnica" type="button" class="invisible" data-bs-toggle="modal" data-bs-target="#modal-tecnica"></button>
+                        </div>
 
                         <div class="col-md-2 alinear-btn">                    
                           <template v-if="transAnestStore.tipoTecnica === false">
@@ -698,7 +701,9 @@
                               @keyup.capture="calcularBalance">
                       </div>
 
-                      <div class="col-md-9"></div>
+                      <div class="col-md-9">
+                        <button id="abrir-balance" type="button" class="invisible" data-bs-toggle="modal" data-bs-target="#modal-balance"></button>
+                      </div>
                       <div class="col-md-10"></div>
 
                       <!-- Botón guardar/actualizar -->
@@ -790,7 +795,9 @@
                             v-model="menuTrans.PLimite" @keyup.capture="enviarDatosTrans"> 
                     </div>
 
-                    <div class="col-md-9"></div>
+                    <div class="col-md-9">
+                      <button id="abrir-ventilador" type="button" class="invisible" data-bs-toggle="modal" data-bs-target="#modal-ventilador"></button>
+                    </div>
                     <!-- Botón Guardar/Agregar -->
                     <div class="col-md-3 btn-abajo">                                    
                       <template v-if="transAnestStore.btnAddVentilador === true">
@@ -982,12 +989,12 @@
         </div>
 
         <div class="col-md-1">
-          <button type="button" id="tutorial-trans" class="btn btn-secondary invisible" data-bs-toggle="modal" data-bs-target="#tutorialTransModal">
+          <button type="button" id="tutorial-trans" style="padding: 0;" class="btn btn-secondary invisible" data-bs-toggle="modal" data-bs-target="#tutorialTransModal">
             Modal Tutorial
           </button>
         </div>
 
-        <div class="col-md-1 justificar-icono-nota">
+        <div class="col-md-1">
           <label class="form-label fw-bold alinear-icono-nota">
             <template v-if="transAnestStore.microfonoEscucha === false">
               <!-- <span id="microfono" :class="transAnestStore.microfono == false ? 'microfono-off' : 'microfono-on'" @click="empezarReconocimiento">
@@ -6391,21 +6398,51 @@ export default defineComponent({
     // Métodos gestión medicamentos
     async vaciarModalMed(){
       try {
-        if(this.menuTrans.tipoMed != "" && this.menuTrans.tipoMed != undefined){
+        console.log("Entro");
+        
+        if(transAnestStore.ingresoQuirofano === true){ 
+          let presionarBotonMe = document.getElementById('abrir-medicamento');
   
-          this.menuTrans.idMed = "";
-          this.menuTrans.tipoMed = "";
-          this.menuTrans.medicamento = "";
-          this.menuTrans.dosisMed = "";
-          this.menuTrans.unidadMed = "";
-          this.menuTrans.viaMed = "";
-          this.menuTrans.horaInicioMed = "";
-          this.menuTrans.horaFinalMed = "";
-          this.menuTrans.observacionesMed = "";
-          
-          transAnestStore.btnAddMedicamentos=false
-          transAnestStore.btnUpdateMedicamentos=true
-          transAnestStore.btnActualizaMedicamento=false
+          // Crea un nuevo evento de clic
+          let event = new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true,
+            view: window
+          });
+    
+          // Despacha el evento de clic en el botón
+          presionarBotonMe.dispatchEvent(event);
+
+          console.log("Paso click");
+
+          if(this.menuTrans.tipoMed != "" && this.menuTrans.tipoMed != undefined){
+    
+            this.menuTrans.idMed = "";
+            this.menuTrans.tipoMed = "";
+            this.menuTrans.medicamento = "";
+            this.menuTrans.dosisMed = "";
+            this.menuTrans.unidadMed = "";
+            this.menuTrans.viaMed = "";
+            this.menuTrans.horaInicioMed = "";
+            this.menuTrans.horaFinalMed = "";
+            this.menuTrans.observacionesMed = "";
+            
+            transAnestStore.btnAddMedicamentos=false
+            transAnestStore.btnUpdateMedicamentos=true
+            transAnestStore.btnActualizaMedicamento=false
+          }
+          console.log("Termino");
+        }else if(transAnestStore.ingresoQuirofano === false){
+          swal.fire({
+          title: "Es necesario iniciar el monitoreo primero",
+          icon: "warning",
+          showConfirmButton: false,
+          showCloseButton: true,
+          toast: true,
+          timer: 3000,
+          timerProgressBar: true,
+          position: "top-end",
+          });
         }
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
@@ -6699,19 +6736,44 @@ export default defineComponent({
     //Métodos gestión de relevo
     async vaciarModalRel(){
       try {
-        if(this.menuTrans.horaRelevo != "" && this.menuTrans.horaRelevo != undefined){
+        if(transAnestStore.ingresoQuirofano === true){ 
+          let presionarBotonRe = document.getElementById('abrir-relevo');
   
-          this.menuTrans.idRelevo = "";
-          this.menuTrans.horaRelevo = "";
-          this.menuTrans.tipoRel= "RELEVO";
-          this.menuTrans.matriculaRel = "";
-          this.menuTrans.anestesiologoRel = "";
-          this.menuTrans.observacionesRel = "";
+          // Crea un nuevo evento de clic
+          let event = new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true,
+            view: window
+          });
+    
+          // Despacha el evento de clic en el botón
+          presionarBotonRe.dispatchEvent(event);
+
+          if(this.menuTrans.horaRelevo != "" && this.menuTrans.horaRelevo != undefined){
   
-          transAnestStore.btnAddRelevos=false
-          transAnestStore.btnUpdateRelevos=true
-          transAnestStore.btnActualizaRelevo=false
-        }
+            this.menuTrans.idRelevo = "";
+            this.menuTrans.horaRelevo = "";
+            this.menuTrans.tipoRel= "RELEVO";
+            this.menuTrans.matriculaRel = "";
+            this.menuTrans.anestesiologoRel = "";
+            this.menuTrans.observacionesRel = "";
+
+            transAnestStore.btnAddRelevos=false
+            transAnestStore.btnUpdateRelevos=true
+            transAnestStore.btnActualizaRelevo=false
+          }
+        }else if(transAnestStore.ingresoQuirofano === false){
+          swal.fire({
+          title: "Es necesario iniciar el monitoreo primero",
+          icon: "warning",
+          showConfirmButton: false,
+          showCloseButton: true,
+          toast: true,
+          timer: 3000,
+          timerProgressBar: true,
+          position: "top-end",
+          });
+        }        
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
@@ -6976,16 +7038,41 @@ export default defineComponent({
     //Métodos gestión de evento crítico
     async vaciarModalEve(){
       try {
-        if(this.menuTrans.horaEvento != "" && this.menuTrans.horaEvento != undefined){
-          this.menuTrans.idEvento = "";
-          this.menuTrans.horaEvento = "";
-          this.menuTrans.tipoEve= "EVENTO";
-          this.menuTrans.detalleEvento = "";
+        if(transAnestStore.ingresoQuirofano === true){ 
+          let presionarBotonEv = document.getElementById('abrir-evento');
   
-          transAnestStore.btnAddEventos=false
-          transAnestStore.btnUpdateEventos=true
-          transAnestStore.btnActualizaEvento=false
-        }
+          // Crea un nuevo evento de clic
+          let event = new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true,
+            view: window
+          });
+    
+          // Despacha el evento de clic en el botón
+          presionarBotonEv.dispatchEvent(event);
+
+          if(this.menuTrans.horaEvento != "" && this.menuTrans.horaEvento != undefined){
+            this.menuTrans.idEvento = "";
+            this.menuTrans.horaEvento = "";
+            this.menuTrans.tipoEve= "EVENTO";
+            this.menuTrans.detalleEvento = "";
+    
+            transAnestStore.btnAddEventos=false
+            transAnestStore.btnUpdateEventos=true
+            transAnestStore.btnActualizaEvento=false
+          }
+        }else if(transAnestStore.ingresoQuirofano === false){
+          swal.fire({
+          title: "Es necesario iniciar el monitoreo primero",
+          icon: "warning",
+          showConfirmButton: false,
+          showCloseButton: true,
+          toast: true,
+          timer: 3000,
+          timerProgressBar: true,
+          position: "top-end",
+          });
+        }        
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
@@ -7247,13 +7334,32 @@ export default defineComponent({
 
     // Eventos de Monitoreo
     async iniMSV(){
-      this.apiMSV = true;
-      
-      this.intervalId = setInterval(() => {
-        this.comMSV()
-      }, 1000);
+      try {        
+        if(transAnestStore.ingresoQuirofano === true){ 
+          if(this.btnMSV === false){
+            this.apiMSV = true;
+        
+            this.intervalId = setInterval(() => {
+              this.comMSV()
+            }, 1000);
 
-      this.capturaGrid();
+            this.capturaGrid();
+          }
+        }else if(transAnestStore.ingresoQuirofano === false){
+          swal.fire({
+          title: "Agregue el ingreso al quifófano",
+          icon: "warning",
+          showConfirmButton: false,
+          showCloseButton: true,
+          toast: true,
+          timer: 3000,
+          timerProgressBar: true,
+          position: "top-end",
+          });
+        }        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }      
     },
 
     async finMSV(){
@@ -7629,6 +7735,99 @@ export default defineComponent({
           this.tutoCuatro=false
           this.tutoCinco=true
         }
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
+    },
+
+    async validarTecnica(){
+      try {
+        if(transAnestStore.ingresoQuirofano === true){ 
+          let presionarBotonTec = document.getElementById('abrir-tecnica');
+  
+          // Crea un nuevo evento de clic
+          let event = new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true,
+            view: window
+          });
+    
+          // Despacha el evento de clic en el botón
+          presionarBotonTec.dispatchEvent(event);          
+        }else if(transAnestStore.ingresoQuirofano === false){
+          swal.fire({
+          title: "Es necesario iniciar el monitoreo primero",
+          icon: "warning",
+          showConfirmButton: false,
+          showCloseButton: true,
+          toast: true,
+          timer: 3000,
+          timerProgressBar: true,
+          position: "top-end",
+          });
+        }        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
+    },
+
+    async validarVentilador(){
+      try {
+        if(transAnestStore.ingresoQuirofano === true){ 
+          let presionarBotonVen = document.getElementById('abrir-ventilador');
+  
+          // Crea un nuevo evento de clic
+          let event = new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true,
+            view: window
+          });
+    
+          // Despacha el evento de clic en el botón
+          presionarBotonVen.dispatchEvent(event);          
+        }else if(transAnestStore.ingresoQuirofano === false){
+          swal.fire({
+          title: "Es necesario iniciar el monitoreo primero",
+          icon: "warning",
+          showConfirmButton: false,
+          showCloseButton: true,
+          toast: true,
+          timer: 3000,
+          timerProgressBar: true,
+          position: "top-end",
+          });
+        }        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
+    },
+
+    async validarBalance(){
+      try {
+        if(transAnestStore.ingresoQuirofano === true){ 
+          let presionarBotonBal = document.getElementById('abrir-balance');
+  
+          // Crea un nuevo evento de clic
+          let event = new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true,
+            view: window
+          });
+    
+          // Despacha el evento de clic en el botón
+          presionarBotonBal.dispatchEvent(event);          
+        }else if(transAnestStore.ingresoQuirofano === false){
+          swal.fire({
+          title: "Es necesario iniciar el monitoreo primero",
+          icon: "warning",
+          showConfirmButton: false,
+          showCloseButton: true,
+          toast: true,
+          timer: 3000,
+          timerProgressBar: true,
+          position: "top-end",
+          });
+        }        
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
