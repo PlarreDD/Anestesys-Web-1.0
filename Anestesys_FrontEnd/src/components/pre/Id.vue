@@ -289,10 +289,16 @@
                             <label class="form-label fw-bold"> Cirujano </label>
                             <input type="text"
                                    class="form-control"
-                                   @keyup.capture="enviarDatos"
+                                   @keyup.capture="listarCirujano"
+                                   @blur="cerrarList"
                                    v-model="infoPreIdPaciente.cirujano"
                                    :class="infoPreIdPaciente.cirujano != undefined && infoPreIdPaciente.cirujano != '' ?
                                           'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
+                            <el-card v-show="mostrarCirujanos" class="filtered-container" v-if="opcCirujanos.length">
+                                <div v-for="(item, index) in opcCirujanos" :key="index" @click="selectCrj(item)">
+                                    <p>{{ item }}</p> <!-- Mostrar los datos filtrados-->
+                                </div>
+                            </el-card>
                         </div>
 
                         <!-- Anestesiólogo -->
@@ -582,6 +588,10 @@ export default defineComponent({
                 { valorEstRes: 'noAplica', lblEstRes: 'No Aplica' },
                 { valorEstRes: 'seIgnora', lblEstRes: 'Se Ignora' }
             ],
+
+            opcCirujanos: [],
+            mostrarCirujanos: false,
+            nuevoCirujano: false,
         }
     },
 
@@ -819,7 +829,54 @@ export default defineComponent({
             } catch (error) {
                 window.log.error('Ocurrió un error:', error);
             }     
-        },        
+        },
+
+/** Nuevos Cirujanos **/
+        async listarCirujano()
+        {
+            try {
+                await preIdStore.getListCirujanos(userStore.IdMed);
+                
+                if (preIdStore.cirujanos != '' && preIdStore.cirujanos != null) {
+                    const cirujanosFiltrados = preIdStore.cirujanos.lista.filter(nombre => nombre.includes(this.infoPreIdPaciente.cirujano))
+
+                    if (cirujanosFiltrados.length === 0) {
+                        this.nuevoCirujano = true;
+                        this.mostrarCirujanos = false;
+                    } else {
+                        this.opcCirujanos = cirujanosFiltrados
+                        this.mostrarCirujanos = true;
+                    }
+                }
+            } catch (error) {
+                
+            }
+
+            this.enviarDatos();
+        },
+
+        selectCrj(item)
+        {
+            try {
+                this.infoPreIdPaciente.cirujano = item;
+                this.mostrarCirujanos = false;
+            } catch (error) {
+                
+            }
+        },
+
+        cerrarList()
+        {
+            if(this.infoPreIdPaciente.cirujano == '' || this.infoPreIdPaciente.cirujano == null)
+            {
+                this.mostrarCirujanos = false;
+            }
+            else if(this.nuevoCirujano == true) {
+                console.log("Crear nueva entrada");
+            }
+        },
+/** Fin Nuevos Cirujanos **/
+
     },
 })
 </script>

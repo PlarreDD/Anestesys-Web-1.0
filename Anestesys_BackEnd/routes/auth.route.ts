@@ -7,7 +7,9 @@ import { login,
          updateValorTutorialPre,
          updateValorTutorialTrans,
          updateValorTutorialPost,
-         updateContrasena} from '../controllers/auth.controller';
+         updateContrasena,
+         updateCirujano,
+         listCirujanos } from '../controllers/auth.controller';
 import { requireRefreshToken } from '../middlewares/requireRefreshToken';
 import { bodyLoginValidator,
          bodyRegisterValidator } from '../middlewares/validationManager';
@@ -21,6 +23,10 @@ router.put('/preTuto/:id', requireRefreshToken, updateValorTutorialPre)
 router.put('/transTuto/:id', requireRefreshToken, updateValorTutorialTrans)
 router.put('/postTuto/:id', requireRefreshToken, updateValorTutorialPost)
 router.put('/password/:id', requireRefreshToken, updateContrasena)
+
+router.put('/updtCrjn/:id', requireRefreshToken, updateCirujano)
+router.get('/lstCrjn/:id', requireRefreshToken, listCirujanos)
+
 router.post('/logout', logout);
 
 router.get('/refresh', requireRefreshToken, refreshToken);

@@ -229,6 +229,9 @@ export const usePreIdStore = defineStore('preid', {
         // NOTA
         NotaPre: ref(null),
 
+        // Personal
+        cirujanos: ref(null),
+
         VistaRapida: false
     }),
 
@@ -1549,6 +1552,22 @@ export const usePreIdStore = defineStore('preid', {
             .catch((e: any) => {                
                 window.log.error('Ocurrió un error:', e)
             });
-        }
+        },
+
+        async getListCirujanos(id){
+            await apiAxios({
+                url: `/lstCrjn/${String(id)}`,
+                method: "GET",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+            })
+            .then((res:any) =>{
+                this.cirujanos = res.data
+            })
+            .catch((e: any) => {                
+                window.log.error('Ocurrió un error:', e)
+            });
+        },
     }
 });
