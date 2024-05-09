@@ -43,6 +43,10 @@ const userSchema = new Schema({
     passwordTemp: {type: String},
 
     cirujano: [String],
+    
+    anestVPA: [String],
+    
+    resdAnest: [String],
 });
 
 userSchema.pre("save", async function(next){

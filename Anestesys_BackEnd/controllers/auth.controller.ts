@@ -369,7 +369,7 @@ export const updateContrasena = async (req: any, res: Response) => {
     }
 };
 
-/* Función para crear arreglo de cirujanos para cada usuario */
+/* Función para crear arreglo de Cirujanos para cada usuario */
 export const updateCirujano = async (req: any, res: Response) => {
     try {
         const { id } = req.params;
@@ -393,10 +393,119 @@ export const listCirujanos = async (req: any, res: Response) => {
 
         const usuario = await User.findById(id);
 
-        const lista = usuario?.cirujano;//.find(nombre => nombre === nomCirujano);
+        const lista = usuario?.cirujano;
 
         return res.json({ lista });
     } catch (error) {
         // TU LE PONES LOS LOGS DE ERRORES DANI
     }
 };
+
+export const deleteCirujano = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        const { cirujano } = req.body;
+
+        const listcirujanos = await User.updateOne( { _id: id },
+                                                    { $pull: { cirujano: cirujano } });
+
+        return res.json({listcirujanos})
+    } catch (error) {
+        
+    }
+}
+
+/* Función para crear arreglo de Anestesilogos VPA para cada usuario */
+export const updateAnestVPA = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        const { anestVPA } = req.body;
+
+        const listanestVPA = await User.findByIdAndUpdate(id, { $addToSet: {
+                                                                    anestVPA: anestVPA
+                                                                } 
+                                                              });
+
+        return res.json({ listanestVPA });
+    } catch (error) {
+        // TU LE PONES LOS LOGS DE ERRORES DANI
+    }
+};
+
+export const listanestVPA = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        const usuario = await User.findById(id);
+
+        const lista = usuario?.anestVPA;
+
+        return res.json({ lista });
+    } catch (error) {
+        // TU LE PONES LOS LOGS DE ERRORES DANI
+    }
+};
+
+export const deleteanestVPA = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        const { anestVPA } = req.body;
+
+        const listanestVPA = await User.updateOne( { _id: id },
+                                                    { $pull: { anestVPA: anestVPA } });
+
+        return res.json({listanestVPA})
+    } catch (error) {
+        
+    }
+}
+
+/* Función para crear arreglo de residentes de Anestesia para cada usuario */
+export const updateResAnest = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        const { resAnest } = req.body;
+
+        const listaresAnest = await User.findByIdAndUpdate(id, { $addToSet: {
+                                                                    resdAnest: resAnest
+                                                                } 
+                                                              });
+
+        return res.json({ listaresAnest });
+    } catch (error) {
+        // TU LE PONES LOS LOGS DE ERRORES DANI
+    }
+};
+
+export const listaresAnest = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        const usuario = await User.findById(id);
+
+        const lista = usuario?.resdAnest;
+
+        return res.json({ lista });
+    } catch (error) {
+        // TU LE PONES LOS LOGS DE ERRORES DANI
+    }
+};
+
+export const deleteresAnest = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        const { resAnest } = req.body;
+
+        const listaresAnest = await User.updateOne( { _id: id },
+                                                    { $pull: { resdAnest: resAnest } });
+
+        return res.json({listaresAnest})
+    } catch (error) {
+        
+    }
+}
