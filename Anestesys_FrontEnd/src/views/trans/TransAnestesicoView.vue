@@ -1,4 +1,4 @@
-MENÚ DE ACCIONES<template>
+<template>
   <header @click.stop="replegarMenuVistaRapida">
     <barra-navegacion/>
   </header>
@@ -7940,7 +7940,7 @@ export default defineComponent({
   height: 100%;
 }
 .menuLateralPrincipal {
-    margin-top: 21px;
+    margin-top: 0px;
     display: flex;
     flex-direction: column;
     row-gap: 10px;

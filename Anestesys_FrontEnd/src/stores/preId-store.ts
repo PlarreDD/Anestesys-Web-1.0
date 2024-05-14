@@ -14,7 +14,8 @@ export const usePreIdStore = defineStore('preid', {
         valoracionID: ref(null),
         numExpediente: ref(null),
         validaExpediente: true,
-        validaExpedienteNuevo: true,
+        validaExpedienteNuevo: false,
+        desbloqueaMenuLateral: false,
         expedientes: ref(null),
         estudios: ref(null),
         pacientes: ref(null),
@@ -285,6 +286,7 @@ export const usePreIdStore = defineStore('preid', {
                 this.pacienteCxID = res.data.infoCx;
                 this.actualizarRegId = true
                 this.validaExpediente = false
+                this.desbloqueaMenuLateral = true
                 
                 swal.fire({
                     title: 'Paciente registrado correctamente',
@@ -412,6 +414,7 @@ export const usePreIdStore = defineStore('preid', {
                 this.pacienteID = res.data.infoCx;
                 this.actualizarRegId = true;
                 this.validaExpedienteNuevo = false
+                this.desbloqueaMenuLateral=true
 
                 swal.fire({
                     title: 'Paciente registrado correctamente',

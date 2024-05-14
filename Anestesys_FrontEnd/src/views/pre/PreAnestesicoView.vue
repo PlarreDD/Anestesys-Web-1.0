@@ -253,7 +253,7 @@
         
         <div :class="numExpediente != '' && nomPaciente != '' ?
                     'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
-          <RouterLink to="trans"
+          <RouterLink v-if="idStore.desbloqueaMenuLateral === true" to="trans"
                       class="" id="menu-trans">
             <img src="../../../public/images/trans.svg" class="img-menu-lateral" @click="guardarDatosTrans()"/>
           </RouterLink>
@@ -261,7 +261,7 @@
         
         <div :class="numExpediente != '' && nomPaciente != '' ?
                     'col-md-2 menu-trans-post' : 'col-md-2 menu-desactivado'">
-          <RouterLink to="post"
+          <RouterLink v-if="idStore.desbloqueaMenuLateral === true" to="post"
                       class="" id="menu-post">
             <img src="../../../public/images/post.svg" class="img-menu-lateral" @click="guardarDatosPost()"/>
           </RouterLink>
@@ -5224,6 +5224,7 @@ export default defineComponent({
           this.btnActualizarId=false
           idStore.validaExpedienteNuevo=false
           this.btnNuevoActualizarId=false
+          idStore.desbloqueaMenuLateral=false
   
           // Bloquear inputs ID a estado inicial
           this.bloquearInputs=false
