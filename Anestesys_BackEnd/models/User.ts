@@ -40,7 +40,13 @@ const userSchema = new Schema({
 
     tutorialPost: {type: Number},
 
-    passwordTemp: {type: String}
+    passwordTemp: {type: String},
+
+    cirujano: [String],
+    
+    anestVPA: [String],
+    
+    resdAnest: [String],
 });
 
 userSchema.pre("save", async function(next){

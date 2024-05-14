@@ -289,10 +289,16 @@
                             <label class="form-label fw-bold"> Cirujano </label>
                             <input type="text"
                                    class="form-control"
-                                   @keyup.capture="enviarDatos"
+                                   @keyup.capture="listarCirujano"
+                                   @blur="cerrarList"
                                    v-model="infoPreIdPaciente.cirujano"
                                    :class="infoPreIdPaciente.cirujano != undefined && infoPreIdPaciente.cirujano != '' ?
                                           'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
+                            <el-card v-show="mostrarCirujanos" class="filtered-container" v-if="opcCirujanos.length">
+                                <div v-for="(item, index) in opcCirujanos" :key="index" @click="selectCrj(item)">
+                                    <p>{{ item }}</p> <!-- Mostrar los datos filtrados-->
+                                </div>
+                            </el-card>
                         </div>
 
                         <!-- Anestesiólogo -->
@@ -310,21 +316,35 @@
                         <!-- Anestesiólogo VPA -->
                         <div class="col-md-6 mt-4">
                             <label class="form-label fw-bold"> Anestesiólogo VPA </label>
-                            <input type="text" @keyup.capture="enviarDatos"
+                            <input type="text"
+                                   @keyup.capture="listarAnestVPA"
+                                   @blur="cerrarListAnestVPA"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.anestesiologoVPA"
                                    :class="infoPreIdPaciente.anestesiologoVPA != undefined && infoPreIdPaciente.anestesiologoVPA != '' ?
                                           'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
+                            <el-card v-show="mostrarAnestVPA" class="filtered-container" v-if="opcAnestVPA.length">
+                                <div v-for="(item, index) in opcAnestVPA" :key="index" @click="selectAnestVPA(item)">
+                                    <p>{{ item }}</p> <!-- Mostrar los datos filtrados-->
+                                </div>
+                            </el-card>
                         </div>
 
                         <!-- Residente de Anestesia -->
                         <div class="col-md-6 mt-4">
                             <label class="form-label fw-bold"> Residente de Anestesia </label>
-                            <input type="text" @keyup.capture="enviarDatos"
+                            <input type="text"
+                                   @keyup.capture="listarResdAnest"
+                                   @blur="cerrarListResdAnest"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.residenteAnestesia"
                                    :class="infoPreIdPaciente.residenteAnestesia != undefined && infoPreIdPaciente.residenteAnestesia != '' ?
                                           'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
+                            <el-card v-show="mostrarResdAnest" class="filtered-container" v-if="opcResdAnest.length">
+                                <div v-for="(item, index) in opcResdAnest" :key="index" @click="selectResdAnest(item)">
+                                    <p>{{ item }}</p> <!-- Mostrar los datos filtrados-->
+                                </div>
+                            </el-card>
                         </div>
                     </form>
                 </div>
@@ -582,6 +602,18 @@ export default defineComponent({
                 { valorEstRes: 'noAplica', lblEstRes: 'No Aplica' },
                 { valorEstRes: 'seIgnora', lblEstRes: 'Se Ignora' }
             ],
+
+            opcCirujanos: [],
+            mostrarCirujanos: false,
+            nuevoCirujano: false,
+
+            opcAnestVPA: [],
+            mostrarAnestVPA: false,
+            nuevoAnestVPA: false,
+
+            opcResdAnest: [],
+            mostrarResdAnest: false,
+            nuevoResdAnest: false,
         }
     },
 
@@ -819,7 +851,142 @@ export default defineComponent({
             } catch (error) {
                 window.log.error('Ocurrió un error:', error);
             }     
-        },        
+        },
+
+/** Nuevos Cirujanos **/
+        async listarCirujano()
+        {
+            try {
+                await preIdStore.getListCirujanos(userStore.IdMed);
+                
+                if (preIdStore.cirujanos != '' && preIdStore.cirujanos != null) {
+                    const cirujanosFiltrados = preIdStore.cirujanos.lista.filter(nombre => nombre.includes(this.infoPreIdPaciente.cirujano))
+
+                    if (cirujanosFiltrados.length === 0) {
+                        this.nuevoCirujano = true;
+                        this.mostrarCirujanos = false;
+                    } else {
+                        this.opcCirujanos = cirujanosFiltrados
+                        this.mostrarCirujanos = true;
+                    }
+                }
+            } catch (error) {
+                
+            }
+
+            this.enviarDatos();
+        },
+
+        async selectCrj(item)
+        {
+            try {
+                this.infoPreIdPaciente.cirujano = item;
+                this.mostrarCirujanos = false;
+            } catch (error) {
+                
+            }
+        },
+
+        async cerrarList()
+        {
+            if(this.infoPreIdPaciente.cirujano == '' || this.infoPreIdPaciente.cirujano == null)
+            {
+                this.mostrarCirujanos = false;
+            }
+            else if(this.nuevoCirujano == true) {
+                await preIdStore.updtCrjn(userStore.IdMed, this.infoPreIdPaciente.cirujano);
+                this.nuevoCirujano = false;
+            }
+        },
+/** Fin Nuevos Cirujanos **/
+
+/** Anestesiólogo VPA **/
+        async listarAnestVPA(){
+            try {
+                await preIdStore.getListAnestVPA(userStore.IdMed);
+                
+                if (preIdStore.anestVPA != '' && preIdStore.anestVPA != null) {
+                    const anestVPAFiltrados = preIdStore.anestVPA.lista.filter(nombre => nombre.includes(this.infoPreIdPaciente.anestesiologoVPA))
+
+                    if (anestVPAFiltrados.length === 0) {
+                        this.nuevoAnestVPA = true;
+                        this.mostrarAnestVPA = false;
+                    } else {
+                        this.opcAnestVPA = anestVPAFiltrados
+                        this.mostrarAnestVPA = true;
+                    }
+                }
+            } catch (error) {
+                
+            }
+
+            this.enviarDatos();
+        },
+
+        async selectAnestVPA(item){
+            try {
+                this.infoPreIdPaciente.anestesiologoVPA = item;
+                this.mostrarAnestVPA = false;
+            } catch (error) {
+                
+            }
+        },
+
+        async cerrarListAnestVPA(){
+            if(this.infoPreIdPaciente.anestesiologoVPA == '' || this.infoPreIdPaciente.anestesiologoVPA == null)
+            {
+                this.mostrarAnestVPA = false;
+            }
+            else if(this.nuevoAnestVPA == true) {
+                await preIdStore.updtAnestVPA(userStore.IdMed, this.infoPreIdPaciente.anestesiologoVPA);
+                this.nuevoAnestVPA = false;
+            }
+        },
+/** Fin Anestesiólogo VPA **/
+
+/** Residente Anestesia **/
+        async listarResdAnest(){
+            try {
+                await preIdStore.getListResdAnest(userStore.IdMed);
+                
+                if (preIdStore.resdAnest != '' && preIdStore.resdAnest != null) {
+                    const resdAnestFiltrados = preIdStore.resdAnest.lista.filter(nombre => nombre.includes(this.infoPreIdPaciente.residenteAnestesia))
+
+                    if (resdAnestFiltrados.length === 0) {
+                        this.nuevoResdAnest = true;
+                        this.mostrarResdAnest = false;
+                    } else {
+                        this.opcResdAnest = resdAnestFiltrados
+                        this.mostrarResdAnest = true;
+                    }
+                }
+            } catch (error) {
+                
+            }
+
+            this.enviarDatos();
+        },
+
+        async selectResdAnest(item){
+            try {
+                this.infoPreIdPaciente.residenteAnestesia = item;
+                this.mostrarResdAnest = false;
+            } catch (error) {
+                
+            }
+        },
+
+        async cerrarListResdAnest(){
+            if(this.infoPreIdPaciente.residenteAnestesia == '' || this.infoPreIdPaciente.residenteAnestesia == null)
+            {
+                this.mostrarResdAnest = false;
+            }
+            else if(this.nuevoResdAnest == true) {
+                await preIdStore.updtResdAnest(userStore.IdMed, this.infoPreIdPaciente.residenteAnestesia);
+                this.nuevoResdAnest = false;
+            }
+        },
+/** Fin Residente Anestesia **/
     },
 })
 </script>

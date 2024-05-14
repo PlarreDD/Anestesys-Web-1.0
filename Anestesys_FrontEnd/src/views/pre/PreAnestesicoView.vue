@@ -5187,7 +5187,7 @@ export default defineComponent({
     // Obtener datos de paciente seleccionado
     async obtenerPaciente(){
       try {
-        await this.listarExpedientes();     
+        await this.listarExpedientes();
   
         if(idStore.numExpediente == null || idStore.numExpediente == ''){
           
@@ -5957,7 +5957,7 @@ export default defineComponent({
       try {
         // Al hacer clic en un elemento, se almacena en selectedItem y se mostrará en el input
         this.idStore.numExpediente = item;
-        this.mostrarDatosFiltradosExp= false
+        this.mostrarDatosFiltradosExp = false
 
         await this.obtenerPaciente()        
       } catch (error) {
