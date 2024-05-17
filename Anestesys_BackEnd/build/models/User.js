@@ -43,7 +43,10 @@ const userSchema = new mongoose_1.Schema({
     tutorialPre: { type: Number },
     tutorialTrans: { type: Number },
     tutorialPost: { type: Number },
-    passwordTemp: { type: String }
+    passwordTemp: { type: String },
+    cirujano: [String],
+    anestVPA: [String],
+    resdAnest: [String],
 });
 userSchema.pre("save", function (next) {
     return __awaiter(this, void 0, void 0, function* () {

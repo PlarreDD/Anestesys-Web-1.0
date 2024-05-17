@@ -141,6 +141,9 @@ const createPaciente = (req, res) => __awaiter(void 0, void 0, void 0, function*
         cirujano, anestesiologo, anestesiologoVPA, residenteAnestesia, 
         /* Datos Demográficos */
         nacionalidad, CURP, folioID, estNacimiento, estResidencia, alcaldia, colonia, codigoPostal } = req.body;
+        let expediente = yield PreAnestesico_1.PreIdPacientes.findOne({ numExpediente });
+        if (expediente)
+            throw { code: 11000 };
         const paciente = new PreAnestesico_1.PreIdPacientes({ numExpediente, nomPaciente, uid: req.uid,
             fechaNPaciente, edadPaciente, generoPaciente,
             /* Datos Demográficos */

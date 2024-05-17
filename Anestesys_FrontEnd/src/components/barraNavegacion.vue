@@ -205,6 +205,12 @@
                       </template>                      
                     </div>
 
+                    <div class="col-md-4">
+                      <button type="button" :class="perfilData == true ? 'invisible' : 'btn btn-modal-pass fw-bold'" data-bs-toggle="modal" data-bs-target="#medicosModal">
+                        Gestión de Médicos <font-awesome-icon icon="fa-solid fa-angle-right" size="md" />
+                      </button>
+                    </div>
+
                   </form>
 
                 </div>
@@ -307,6 +313,75 @@
                       </button>
                     </div>
                     <div class="col-md-4"></div>
+
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal contraseña -->
+    <div class="modal" id="medicosModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
+        <div class="modal-content colorModal">
+          <div class="input-group mb-3">
+            <div class="modal-body">
+              <div class="col-md-12">
+                <div class="row g-3">
+                  <div class="col-md-11">
+                    <h5 class="text-white fw-bold">MÉDICOS</h5>
+                    <h6 class="text-white fw-bold">Gestión de médicos</h6>
+                  </div>
+
+                  <div class="col-md-1 div-img">
+                    <button id="volver-perfil" type="button" class="btn fw-bold" aria-label="Close" data-bs-toggle="modal" data-bs-target="#perfilModal">
+                      <i class="text-white">
+                        <font-awesome-icon icon="fa-solid fa-arrow-left" size="2xl"/>
+                      </i>
+                    </button>
+                  </div>
+
+                  <form class="row g-3 mt-1" @submit.prevent="">
+                                                            
+                    <div class="col-md-12">
+                      <div class="deslizar">
+                        <table class="table table-responsive">
+                          <thead>
+                            <tr>
+                              <th class="text-white">#</th>
+                              <th class="text-white">Nombre</th>
+                              <th class="text-white"></th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <!-- Mostrar los datos que se encuentren en preIdStore en una tabla -->
+                            <tr v-for="( cirujano, index ) in preIdStore.cirujanos">
+                              <td class="text-white">
+                                {{ index + 1 }}
+                              </td>
+
+                              <td class="text-white">
+                                {{ cirujano.nombreMedicamento }}
+                              </td>                                                          
+
+                              <td>
+                                <button class="btn"
+                                        @click="validaEliminarMedicamento(cirujano._id)">
+                                  <font-awesome-icon 
+                                      icon="fa-solid fa-trash" 
+                                      size="lg" class="text-white"/>
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
 
                   </form>
 
@@ -762,6 +837,7 @@ import { useUserStore } from "@/stores/user-store";
 import { defineComponent } from "vue";
 import swal from "sweetalert2";
 import { useMedicamentoStore } from "../stores/medicamento-store";
+import { usePreIdStore } from "@/stores/preId-store";
 import type { regMedicamento,
               ConfigMonitor } from "@/interfaces/regMedicamento";
 import type { regUsr } from '@/interfaces/regUsr';
@@ -769,6 +845,7 @@ import bcryptjs from "bcryptjs";
 
 const userStore = useUserStore();
 const medStore = useMedicamentoStore();
+const preIdStore = usePreIdStore();
 
 export default defineComponent({
   data() {
@@ -793,6 +870,7 @@ export default defineComponent({
 
       userStore,
       medStore,
+      preIdStore,
       infoMedicamento: {} as regMedicamento,
       configMonitor: {} as ConfigMonitor,
       user: { } as regUsr,

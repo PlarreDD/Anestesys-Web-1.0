@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateContrasena = exports.updateValorTutorialPost = exports.updateValorTutorialTrans = exports.updateValorTutorialPre = exports.updateMedico = exports.logout = exports.refreshToken = exports.login = exports.register = void 0;
+exports.deleteresAnest = exports.listaresAnest = exports.updateResAnest = exports.deleteanestVPA = exports.listanestVPA = exports.updateAnestVPA = exports.deleteCirujano = exports.listCirujanos = exports.updateCirujano = exports.updateContrasena = exports.updateValorTutorialPost = exports.updateValorTutorialTrans = exports.updateValorTutorialPre = exports.updateMedico = exports.logout = exports.refreshToken = exports.login = exports.register = void 0;
 const User_1 = require("../models/User");
 const tokenManager_1 = require("../utils/tokenManager");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
@@ -351,3 +351,120 @@ const updateContrasena = (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.updateContrasena = updateContrasena;
+/* Función para crear arreglo de Cirujanos para cada usuario */
+const updateCirujano = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const { cirujano } = req.body;
+        const listcirujanos = yield User_1.User.findByIdAndUpdate(id, { $addToSet: {
+                cirujano: cirujano
+            }
+        });
+        return res.json({ listcirujanos });
+    }
+    catch (error) {
+        // TU LE PONES LOS LOGS DE ERRORES DANI
+    }
+});
+exports.updateCirujano = updateCirujano;
+const listCirujanos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const usuario = yield User_1.User.findById(id);
+        const lista = usuario === null || usuario === void 0 ? void 0 : usuario.cirujano;
+        return res.json({ lista });
+    }
+    catch (error) {
+        // TU LE PONES LOS LOGS DE ERRORES DANI
+    }
+});
+exports.listCirujanos = listCirujanos;
+const deleteCirujano = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const { cirujano } = req.body;
+        const listcirujanos = yield User_1.User.updateOne({ _id: id }, { $pull: { cirujano: cirujano } });
+        return res.json({ listcirujanos });
+    }
+    catch (error) {
+    }
+});
+exports.deleteCirujano = deleteCirujano;
+/* Función para crear arreglo de Anestesilogos VPA para cada usuario */
+const updateAnestVPA = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const { anestVPA } = req.body;
+        const listanestVPA = yield User_1.User.findByIdAndUpdate(id, { $addToSet: {
+                anestVPA: anestVPA
+            }
+        });
+        return res.json({ listanestVPA });
+    }
+    catch (error) {
+        // TU LE PONES LOS LOGS DE ERRORES DANI
+    }
+});
+exports.updateAnestVPA = updateAnestVPA;
+const listanestVPA = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const usuario = yield User_1.User.findById(id);
+        const lista = usuario === null || usuario === void 0 ? void 0 : usuario.anestVPA;
+        return res.json({ lista });
+    }
+    catch (error) {
+        // TU LE PONES LOS LOGS DE ERRORES DANI
+    }
+});
+exports.listanestVPA = listanestVPA;
+const deleteanestVPA = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const { anestVPA } = req.body;
+        const listanestVPA = yield User_1.User.updateOne({ _id: id }, { $pull: { anestVPA: anestVPA } });
+        return res.json({ listanestVPA });
+    }
+    catch (error) {
+    }
+});
+exports.deleteanestVPA = deleteanestVPA;
+/* Función para crear arreglo de residentes de Anestesia para cada usuario */
+const updateResAnest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const { resAnest } = req.body;
+        const listaresAnest = yield User_1.User.findByIdAndUpdate(id, { $addToSet: {
+                resdAnest: resAnest
+            }
+        });
+        return res.json({ listaresAnest });
+    }
+    catch (error) {
+        // TU LE PONES LOS LOGS DE ERRORES DANI
+    }
+});
+exports.updateResAnest = updateResAnest;
+const listaresAnest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const usuario = yield User_1.User.findById(id);
+        const lista = usuario === null || usuario === void 0 ? void 0 : usuario.resdAnest;
+        return res.json({ lista });
+    }
+    catch (error) {
+        // TU LE PONES LOS LOGS DE ERRORES DANI
+    }
+});
+exports.listaresAnest = listaresAnest;
+const deleteresAnest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const { resAnest } = req.body;
+        const listaresAnest = yield User_1.User.updateOne({ _id: id }, { $pull: { resdAnest: resAnest } });
+        return res.json({ listaresAnest });
+    }
+    catch (error) {
+    }
+});
+exports.deleteresAnest = deleteresAnest;

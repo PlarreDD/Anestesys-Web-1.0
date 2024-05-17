@@ -620,6 +620,8 @@ export default defineComponent({
     mounted: function(){
         this.infoPreIdPaciente.anestesiologo = userStore.Nombre + ' ' + userStore.Apellido
         this.enviarDatos()
+
+        preIdStore.getListCirujanos(userStore.IdMed)
     },
     
     methods: {

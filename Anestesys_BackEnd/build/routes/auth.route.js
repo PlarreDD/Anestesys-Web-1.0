@@ -12,6 +12,15 @@ router.put('/preTuto/:id', requireRefreshToken_1.requireRefreshToken, auth_contr
 router.put('/transTuto/:id', requireRefreshToken_1.requireRefreshToken, auth_controller_1.updateValorTutorialTrans);
 router.put('/postTuto/:id', requireRefreshToken_1.requireRefreshToken, auth_controller_1.updateValorTutorialPost);
 router.put('/password/:id', requireRefreshToken_1.requireRefreshToken, auth_controller_1.updateContrasena);
+router.put('/updtCrjn/:id', requireRefreshToken_1.requireRefreshToken, auth_controller_1.updateCirujano);
+router.get('/lstCrjn/:id', requireRefreshToken_1.requireRefreshToken, auth_controller_1.listCirujanos);
+router.delete('/dltCrjn/:id', requireRefreshToken_1.requireRefreshToken, auth_controller_1.deleteCirujano);
+router.put('/updtAnestVPA/:id', requireRefreshToken_1.requireRefreshToken, auth_controller_1.updateAnestVPA);
+router.get('/lstAnestVPA/:id', requireRefreshToken_1.requireRefreshToken, auth_controller_1.listanestVPA);
+router.delete('/dltAnestVPA/:id', requireRefreshToken_1.requireRefreshToken, auth_controller_1.deleteanestVPA);
+router.put('/updtResAnest/:id', requireRefreshToken_1.requireRefreshToken, auth_controller_1.updateResAnest);
+router.get('/lstResAnest/:id', requireRefreshToken_1.requireRefreshToken, auth_controller_1.listaresAnest);
+router.delete('/dltResAnest/:id', requireRefreshToken_1.requireRefreshToken, auth_controller_1.deleteresAnest);
 router.post('/logout', auth_controller_1.logout);
 router.get('/refresh', requireRefreshToken_1.requireRefreshToken, auth_controller_1.refreshToken);
 exports.default = router;

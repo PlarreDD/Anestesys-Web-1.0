@@ -6398,8 +6398,6 @@ export default defineComponent({
     // Métodos gestión medicamentos
     async vaciarModalMed(){
       try {
-        console.log("Entro");
-        
         if(transAnestStore.ingresoQuirofano === true){ 
           let presionarBotonMe = document.getElementById('abrir-medicamento');
   
@@ -6412,8 +6410,6 @@ export default defineComponent({
     
           // Despacha el evento de clic en el botón
           presionarBotonMe.dispatchEvent(event);
-
-          console.log("Paso click");
 
           if(this.menuTrans.tipoMed != "" && this.menuTrans.tipoMed != undefined){
     
@@ -6431,7 +6427,6 @@ export default defineComponent({
             transAnestStore.btnUpdateMedicamentos=true
             transAnestStore.btnActualizaMedicamento=false
           }
-          console.log("Termino");
         }else if(transAnestStore.ingresoQuirofano === false){
           swal.fire({
           title: "Es necesario iniciar el monitoreo primero",
