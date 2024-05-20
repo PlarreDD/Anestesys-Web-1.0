@@ -621,7 +621,9 @@ export default defineComponent({
         this.infoPreIdPaciente.anestesiologo = userStore.Nombre + ' ' + userStore.Apellido
         this.enviarDatos()
 
-        preIdStore.getListCirujanos(userStore.IdMed)
+        preIdStore.getListCirujanos(userStore.IdMed);
+        preIdStore.getListAnestVPA(userStore.IdMed);
+        preIdStore.getListResdAnest(userStore.IdMed);
     },
     
     methods: {

@@ -206,7 +206,8 @@
                     </div>
 
                     <div class="col-md-4">
-                      <button type="button" :class="perfilData == true ? 'invisible' : 'btn btn-modal-pass fw-bold'" data-bs-toggle="modal" data-bs-target="#medicosModal">
+                      <button type="button" :class="perfilData == true ? 'invisible' : 'btn btn-modal-pass fw-bold'" 
+                        data-bs-toggle="modal" data-bs-target="#medicosModal" @click="listarMedicos">
                         Gestión de Médicos <font-awesome-icon icon="fa-solid fa-angle-right" size="md" />
                       </button>
                     </div>
@@ -324,9 +325,9 @@
       </div>
     </div>
 
-    <!-- Modal contraseña -->
+    <!-- Modal médicos -->
     <div class="modal" id="medicosModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
-      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
+      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable" >
         <div class="modal-content colorModal">
           <div class="input-group mb-3">
             <div class="modal-body">
@@ -345,36 +346,32 @@
                     </button>
                   </div>
 
-                  <form class="row g-3 mt-1" @submit.prevent="">
-                                                            
-                    <div class="col-md-12">
-                      <div class="deslizar">
+                  <form class="row g-0 mt-0" @submit.prevent="">                                                            
+                    <div class="col-md-4">
+                      <div class="deslizar-medicos">
                         <table class="table table-responsive">
                           <thead>
                             <tr>
-                              <th class="text-white">#</th>
-                              <th class="text-white">Nombre</th>
+                              <!-- <th class="text-white">#</th> -->
+                              <th class="text-white">Cirujanos</th>
                               <th class="text-white"></th>
                             </tr>
                           </thead>
 
                           <tbody>
                             <!-- Mostrar los datos que se encuentren en preIdStore en una tabla -->
-                            <tr v-for="( cirujano, index ) in preIdStore.cirujanos">
-                              <td class="text-white">
+                            <tr v-for="( cirujano, index ) in preIdStore.cirujanos.lista">
+                              <!-- <td class="text-white">
                                 {{ index + 1 }}
-                              </td>
+                              </td> -->
 
                               <td class="text-white">
-                                {{ cirujano.nombreMedicamento }}
+                                {{ cirujano }}
                               </td>                                                          
 
                               <td>
-                                <button class="btn"
-                                        @click="validaEliminarMedicamento(cirujano._id)">
-                                  <font-awesome-icon 
-                                      icon="fa-solid fa-trash" 
-                                      size="lg" class="text-white"/>
+                                <button class="btn" @click="validaEliminarCirujanos(cirujano)">
+                                  <font-awesome-icon icon="fa-solid fa-trash" size="lg" class="text-white"/>
                                 </button>
                               </td>
                             </tr>
@@ -382,7 +379,62 @@
                         </table>
                       </div>
                     </div>
+                  
+                    <div class="col-md-4">
+                      <div class="deslizar-medicos">
+                        <table class="table table-responsive">
+                          <thead>
+                            <tr>
+                              <th class="text-white">Anestesiólogos VPA</th>
+                              <th class="text-white"></th>
+                            </tr>
+                          </thead>
 
+                          <tbody>
+                            <!-- Mostrar los datos que se encuentren en preIdStore en una tabla -->
+                            <tr v-for="( anestesiologo ) in preIdStore.anestVPA.lista">
+                              <td class="text-white">
+                                {{ anestesiologo }}
+                              </td>                                                          
+
+                              <td>
+                                <button class="btn" @click="validaEliminarAnestesiologo(anestesiologo)">
+                                  <font-awesome-icon icon="fa-solid fa-trash" size="lg" class="text-white"/>
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                      <div class="deslizar-medicos">
+                        <table class="table table-responsive">
+                          <thead>
+                            <tr>
+                              <th class="text-white">Residentes de Anestesia</th>
+                              <th class="text-white"></th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <!-- Mostrar los datos que se encuentren en preIdStore en una tabla -->
+                            <tr v-for="( residente ) in preIdStore.resdAnest.lista">
+                              <td class="text-white">
+                                {{ residente }}
+                              </td>                                                          
+
+                              <td>
+                                <button class="btn" @click="validaEliminarResidente(residente)">
+                                  <font-awesome-icon icon="fa-solid fa-trash" size="lg" class="text-white"/>
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
                   </form>
 
                 </div>
@@ -884,7 +936,7 @@ export default defineComponent({
       contrasenaAnt: false,
       contrasena: false,
       contrasenaRep: false,
-      passCorrecta: false,
+      passCorrecta: false
     };
   },
 
@@ -900,10 +952,16 @@ export default defineComponent({
     this.user.fechaNac = this.userStore.FechaNac
     this.user.email = this.userStore.Correo
     this.user.especialidad = this.userStore.Especialidad
-    this.user.cedula = this.userStore.Cedula  
+    this.user.cedula = this.userStore.Cedula
   },
 
   methods: {
+    async listarMedicos(){      
+      await preIdStore.getListCirujanos(userStore.IdMed);
+      await preIdStore.getListAnestVPA(userStore.IdMed);
+      await preIdStore.getListResdAnest(userStore.IdMed);
+    },
+
     async mostrarMensaje() {
       try {
         swal.fire({
@@ -1390,7 +1448,94 @@ export default defineComponent({
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
-    }
+    },
+
+    async validaEliminarCirujanos(nombreCirujano) {
+      try {
+        swal
+          .fire({
+            html: "¿Esta seguro de eliminar el registro?",
+            icon: "warning",
+            showConfirmButton: true,
+            showCancelButton: true,
+            toast: true,
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              this.eliminarCirujano(nombreCirujano);
+            }
+          });
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
+    },
+
+    async eliminarCirujano(nombreCirujano) {
+      try {        
+        await preIdStore.deleteCirujano(userStore.IdMed, nombreCirujano);
+        await preIdStore.getListCirujanos(userStore.IdMed);
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
+    },
+
+    async validaEliminarAnestesiologo(nombreAnestesiologo) {
+      try {
+        swal
+          .fire({
+            html: "¿Esta seguro de eliminar el registro?",
+            icon: "warning",
+            showConfirmButton: true,
+            showCancelButton: true,
+            toast: true,
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              this.eliminarAnestesiologo(nombreAnestesiologo);
+            }
+          });
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
+    },
+
+    async eliminarAnestesiologo(nombreAnestesiologo) {
+      try {        
+        await preIdStore.deleteAnestVPA(userStore.IdMed, nombreAnestesiologo);
+        await preIdStore.getListAnestVPA(userStore.IdMed);
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
+    },
+
+    async validaEliminarResidente(nombreResidente) {
+      try {
+        swal
+          .fire({
+            html: "¿Esta seguro de eliminar el registro?",
+            icon: "warning",
+            showConfirmButton: true,
+            showCancelButton: true,
+            toast: true,
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              this.eliminarResidente(nombreResidente);
+            }
+          });
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
+    },
+
+    async eliminarResidente(nombreResidente) {
+      try {        
+        await preIdStore.deleteResdAnest(userStore.IdMed, nombreResidente);
+        await preIdStore.getListResdAnest(userStore.IdMed);
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
+    },
   }
 });
 </script>
@@ -1502,10 +1647,10 @@ export default defineComponent({
 .colorModal {
   background-color: #002d60;
 }
-.deslizar {
+.deslizar-medicos {
   overflow: scroll;
   overflow-x: hidden;
-  height: 270px;
+  height: 330px;
   margin-top: 15px;
 }
 .modal-med-largo {

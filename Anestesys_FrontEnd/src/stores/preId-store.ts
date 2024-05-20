@@ -1609,7 +1609,6 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res:any) =>{
                 this.cirujanos = res.data
-                console.log("Cirujanos: "+ JSON.stringify(this.cirujanos))
             })
             .catch((e: any) => {                
                 window.log.error('Ocurrió un error:', e)
@@ -1628,7 +1627,17 @@ export const usePreIdStore = defineStore('preid', {
                 }
             })
             .then((res:any) =>{
-                
+                this.cirujanos = res.data;
+
+                swal.fire({
+                    title: "Registro eliminado correctamente",
+                    icon: "success",
+                    showConfirmButton: false,
+                    toast: true,
+                    position: "top-end",
+                    timer: 2500,
+                    timerProgressBar: true,
+                });
             })
             .catch((e: any) => {                
                 window.log.error('Ocurrió un error:', e)
@@ -1682,7 +1691,17 @@ export const usePreIdStore = defineStore('preid', {
                 }
             })
             .then((res:any) =>{
-                
+                this.anestVPA = res.data;
+
+                swal.fire({
+                    title: "Registro eliminado correctamente",
+                    icon: "success",
+                    showConfirmButton: false,
+                    toast: true,
+                    position: "top-end",
+                    timer: 2500,
+                    timerProgressBar: true,
+                });
             })
             .catch((e: any) => {                
                 window.log.error('Ocurrió un error:', e)
@@ -1735,7 +1754,17 @@ export const usePreIdStore = defineStore('preid', {
                 }
             })
             .then((res:any) =>{
-                
+                this.resdAnest = res.data;
+
+                swal.fire({
+                    title: "Registro eliminado correctamente",
+                    icon: "success",
+                    showConfirmButton: false,
+                    toast: true,
+                    position: "top-end",
+                    timer: 2500,
+                    timerProgressBar: true,
+                });
             })
             .catch((e: any) => {                
                 window.log.error('Ocurrió un error:', e)
