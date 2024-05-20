@@ -926,6 +926,13 @@ export default defineComponent({
 
     mounted: function() {
         this.infoNotaPost.npa_Intubacion = "No";
+
+        this.infoNotaPost.signVitEgQx_TA = postAnestStore.EgresoTA; 
+        this.infoNotaPost.signVitEgQx_FC = postAnestStore.EgresoFC;
+        this.infoNotaPost.signVitEgQx_FR = postAnestStore.EgresoFR;
+        this.infoNotaPost.signVitEgQx_Temperatura = postAnestStore.EgresoTemp;
+        this.infoNotaPost.signVitEgQx_Pulso = postAnestStore.EgresoPulso;
+        this.infoNotaPost.signVitEgQx_SpO2 = postAnestStore.EgresoSpO2;
     },
 
     methods: {
@@ -1132,12 +1139,13 @@ export default defineComponent({
                 this.$emit('recibe-datos-nota-post', postAnestStore.NotaPost=this.infoNotaPost.npa_NotaPostAnest,
                                                     postAnestStore.Intubacion=this.infoNotaPost.npa_Intubacion,
     
-                                                    postAnestStore.EgresoTA=this.infoNotaPost.signVitEgQx_TA,
-                                                    postAnestStore.EgresoFC=this.infoNotaPost.signVitEgQx_FC,
-                                                    postAnestStore.EgresoFR=this.infoNotaPost.signVitEgQx_FR,
-                                                    postAnestStore.EgresoTemp=this.infoNotaPost.signVitEgQx_Temperatura,
-                                                    postAnestStore.EgresoPulso=this.infoNotaPost.signVitEgQx_Pulso,
-                                                    postAnestStore.EgresoSpO2=this.infoNotaPost.signVitEgQx_SpO2,
+                                                    // postAnestStore.EgresoTA=this.infoNotaPost.signVitEgQx_TA,
+                                                    // postAnestStore.EgresoFC=this.infoNotaPost.signVitEgQx_FC,
+                                                    // postAnestStore.EgresoFR=this.infoNotaPost.signVitEgQx_FR,
+                                                    // postAnestStore.EgresoTemp=this.infoNotaPost.signVitEgQx_Temperatura,
+                                                    // postAnestStore.EgresoPulso=this.infoNotaPost.signVitEgQx_Pulso,
+                                                    // postAnestStore.EgresoSpO2=this.infoNotaPost.signVitEgQx_SpO2,
+                                                    
                                                     postAnestStore.DestinoEgreso=this.infoNotaPost.signVitEgQx_EgresoPac,
     
                                                     postAnestStore.NumeroProductos=this.infoNotaPost.casoObsRecNac_NumProd,
@@ -1193,6 +1201,17 @@ export default defineComponent({
             } catch (error) {
                 window.log.error('Ocurrió un error:', error);
             }
+        }
+    },
+
+    watch:{
+        '$route'(to, from){
+            this.infoNotaPost.signVitEgQx_TA = postAnestStore.EgresoTA; 
+            this.infoNotaPost.signVitEgQx_FC = postAnestStore.EgresoFC;
+            this.infoNotaPost.signVitEgQx_FR = postAnestStore.EgresoFR;
+            this.infoNotaPost.signVitEgQx_Temperatura = postAnestStore.EgresoTemp;
+            this.infoNotaPost.signVitEgQx_Pulso = postAnestStore.EgresoPulso;
+            this.infoNotaPost.signVitEgQx_SpO2 = postAnestStore.EgresoSpO2;
         }
     }
  })
