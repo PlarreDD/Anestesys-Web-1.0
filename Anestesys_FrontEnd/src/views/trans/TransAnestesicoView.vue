@@ -1417,9 +1417,9 @@ import { Line } from 'vue-chartjs';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
-// import pdfFonts from "pdfmake/build/vfs_fonts.js";
+import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
-// window.pdfMake.fonts = pdfFonts.pdfMake;
+window.pdfMake.fonts = pdfFonts.pdfMake;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 
@@ -6146,6 +6146,13 @@ export default defineComponent({
                 }else if(preIdStore.nuevoRegistroPaciente == true){            
                   await transAnestStore.saveNuevoTiemposQX(this.menuTrans.finAn, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
                 }
+
+                this.infoNotaPost.signVitEgQx_TA = postAnestStore.EgresoTA; 
+                this.infoNotaPost.signVitEgQx_FC = postAnestStore.EgresoFC;
+                this.infoNotaPost.signVitEgQx_FR = postAnestStore.EgresoFR;
+                this.infoNotaPost.signVitEgQx_Temperatura = postAnestStore.EgresoTemp;
+                this.infoNotaPost.signVitEgQx_Pulso = postAnestStore.EgresoPulso;
+                this.infoNotaPost.signVitEgQx_SpO2 = postAnestStore.EgresoSpO2;
               }else{
                 swal.fire({
                   title: 'La cirugía ya ha finalizado',
@@ -7378,11 +7385,13 @@ export default defineComponent({
       
       this.guardaDatosMSV = 0;
       this.gridBD = [];
+
+
     },
 
     async comMSV(){
       try {
-        console.log("Cliente IP "+this.clienteIp);
+        // console.log("Cliente IP "+this.clienteIp);
         
         const response = await fetch(`http://${this.clienteIp}:5000/apiMVS`);
         const data = await response.text();
@@ -7634,6 +7643,13 @@ export default defineComponent({
           postAnestStore.EgresoTemp = this.grid[this.grid.length - 1].datos[7].valor;
           postAnestStore.EgresoPulso = this.grid[this.grid.length - 1].datos[1].valor;
           postAnestStore.EgresoSpO2 = this.grid[this.grid.length - 1].datos[5].valor;
+
+          this.infoNotaPost.signVitEgQx_TA = postAnestStore.EgresoTA; 
+          this.infoNotaPost.signVitEgQx_FC = postAnestStore.EgresoFC;
+          this.infoNotaPost.signVitEgQx_FR = postAnestStore.EgresoFR;
+          this.infoNotaPost.signVitEgQx_Temperatura = postAnestStore.EgresoTemp;
+          this.infoNotaPost.signVitEgQx_Pulso = postAnestStore.EgresoPulso;
+          this.infoNotaPost.signVitEgQx_SpO2 = postAnestStore.EgresoSpO2;
   
           this.guardaDatosMSV = this.guardaDatosMSV +1;
           
