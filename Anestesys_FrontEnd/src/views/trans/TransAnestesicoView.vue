@@ -406,7 +406,7 @@
               <li class="col-md-3">
                 <button type="button" 
                         class="btn btn-nav-bar fw-bold" 
-                        @click="validarBalance">BALANCE HIDRICO </button> <!-- Modificar guardado -->
+                        @click="validarBalance">BALANCE HÍDRICO </button> <!-- Modificar guardado -->
               </li>
               <!-- Datos del ventilador -->
               <li class="col-md-3">
@@ -529,7 +529,13 @@
                 <div class="col-md-12">
                   <div class="row g-3">
                     <div class="estiloDropDownBalance row g-2 deslizar-balance">
-                      <h5 class="col-md-12 fw-bold text-white">BALANCE TOTAL: {{menuTrans.balanceTotal}} ml</h5>
+                      <h5 class="col-md-8 fw-bold text-white">BALANCE TOTAL: {{menuTrans.balanceTotal}} ml</h5>
+                      <div class="col-md-4">
+                        <button type="button" class="btn btn-guardar-balance fw-bold" data-bs-toggle="modal" data-bs-target="#modal-balance-parcial">
+                          Balance Hídrico Parcial
+                        </button>
+                      </div>
+
                       <h5 class="col-md-12 fw-bold text-white">Ingresos</h5>
 
                       <input type="hidden" v-model="menuTrans.balanceTotal">
@@ -723,6 +729,26 @@
                         </template>   
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Abrir el modal Balance Hídrico Parcial-->
+      <div class="modal" id="modal-balance-parcial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content color-dropdown">
+            <div class="input-group mb-3">
+              <div class="modal-body">
+                <div class="col-md-12">
+                  <div class="row g-3">
+                        <h5 class="col-md-12 fw-bold text-white">BALANCE HÍDRICO POR HORA</h5>
+                        <!-- Técnica de anestesia final -->
+                        <div class="col-md-12">                          
+                        </div>                        
                   </div>
                 </div>
               </div>
@@ -1417,9 +1443,9 @@ import { Line } from 'vue-chartjs';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
-import pdfFonts from "pdfmake/build/vfs_fonts.js";
+// import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
-window.pdfMake.fonts = pdfFonts.pdfMake;
+// window.pdfMake.fonts = pdfFonts.pdfMake;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 

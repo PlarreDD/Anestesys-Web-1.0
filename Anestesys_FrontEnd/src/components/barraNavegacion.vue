@@ -1647,6 +1647,12 @@ export default defineComponent({
 .colorModal {
   background-color: #002d60;
 }
+.deslizar {
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 270px;
+  margin-top: 15px;
+}
 .deslizar-medicos {
   overflow: scroll;
   overflow-x: hidden;
