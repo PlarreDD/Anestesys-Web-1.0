@@ -13,6 +13,9 @@ export const usePreIdStore = defineStore('preid', {
         estudioID: ref(null),
         valoracionID: ref(null),
         numExpediente: ref(null),
+        validaExpediente: true,
+        validaExpedienteNuevo: false,
+        desbloqueaMenuLateral: false,
         expedientes: ref(null),
         estudios: ref(null),
         pacientes: ref(null),
@@ -229,6 +232,11 @@ export const usePreIdStore = defineStore('preid', {
         // NOTA
         NotaPre: ref(null),
 
+        // Personal
+        cirujanos: ref(null),
+        anestVPA: ref(null),
+        resdAnest: ref(null),
+
         VistaRapida: false
     }),
 
@@ -282,6 +290,8 @@ export const usePreIdStore = defineStore('preid', {
                 this.pacienteID = res.data.paciente;
                 this.pacienteCxID = res.data.infoCx;
                 this.actualizarRegId = true
+                this.validaExpediente = false
+                this.desbloqueaMenuLateral = true
                 
                 swal.fire({
                     title: 'Paciente registrado correctamente',
@@ -294,7 +304,24 @@ export const usePreIdStore = defineStore('preid', {
                 })
             })
             .catch((e: any) => {
-                window.log.error('Ocurrió un error:', e)
+                if(e.response){
+                    /* Mensaje de registro fallido */
+                    swal.fire({
+                        html: 'El expediente <b>' + this.numeroExpediente + '</b> ya está registrado',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        showCloseButton: true,
+                        toast: true,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        position: "top-end",
+                    });
+                    window.log.error('Ocurrió un error:', e)
+                }
+                else if(e.request){
+                }
+                else{
+                }
             });
         },
 
@@ -391,6 +418,8 @@ export const usePreIdStore = defineStore('preid', {
             .then((res: any) => {
                 this.pacienteID = res.data.infoCx;
                 this.actualizarRegId = true;
+                this.validaExpedienteNuevo = false
+                this.desbloqueaMenuLateral=true
 
                 swal.fire({
                     title: 'Paciente registrado correctamente',
@@ -1549,6 +1578,197 @@ export const usePreIdStore = defineStore('preid', {
             .catch((e: any) => {                
                 window.log.error('Ocurrió un error:', e)
             });
-        }
+        },
+
+        /************************* Cirujano *************************/
+        async updtCrjn(id, cirujano: string){
+            await apiAxios({
+                url: `/updtCrjn/${String(id)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    cirujano: cirujano
+                }
+            })
+            .then((res: any) => {
+            })
+            .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
+            });
+        },
+
+        async getListCirujanos(id){
+            await apiAxios({
+                url: `/lstCrjn/${String(id)}`,
+                method: "GET",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+            })
+            .then((res:any) =>{
+                this.cirujanos = res.data
+            })
+            .catch((e: any) => {                
+                window.log.error('Ocurrió un error:', e)
+            });
+        },
+
+        async deleteCirujano(id, cirujano: string){
+            await apiAxios({
+                url: `/dltCrjn/${String(id)}`,
+                method: "DELETE",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    cirujano: cirujano
+                }
+            })
+            .then((res:any) =>{
+                this.cirujanos = res.data;
+
+                swal.fire({
+                    title: "Registro eliminado correctamente",
+                    icon: "success",
+                    showConfirmButton: false,
+                    toast: true,
+                    position: "top-end",
+                    timer: 2500,
+                    timerProgressBar: true,
+                });
+            })
+            .catch((e: any) => {                
+                window.log.error('Ocurrió un error:', e)
+            });
+        },
+
+        /********************* Anestesiólogo VPA ********************/
+        async updtAnestVPA(id, anestVPA: string){
+            await apiAxios({
+                url: `/updtAnestVPA/${String(id)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    anestVPA: anestVPA
+                }
+            })
+            .then((res: any) => {
+            })
+            .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
+            });
+        },
+
+        async getListAnestVPA(id){
+            await apiAxios({
+                url: `/lstAnestVPA/${String(id)}`,
+                method: "GET",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+            })
+            .then((res:any) =>{
+                this.anestVPA = res.data
+            })
+            .catch((e: any) => {                
+                window.log.error('Ocurrió un error:', e)
+            });
+        },
+
+        async deleteAnestVPA(id, anestVPA: string){
+            await apiAxios({
+                url: `/dltAnestVPA/${String(id)}`,
+                method: "DELETE",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    anestVPA: anestVPA
+                }
+            })
+            .then((res:any) =>{
+                this.anestVPA = res.data;
+
+                swal.fire({
+                    title: "Registro eliminado correctamente",
+                    icon: "success",
+                    showConfirmButton: false,
+                    toast: true,
+                    position: "top-end",
+                    timer: 2500,
+                    timerProgressBar: true,
+                });
+            })
+            .catch((e: any) => {                
+                window.log.error('Ocurrió un error:', e)
+            });
+        },
+        /****************** Residente de Anestesia ******************/
+        async updtResdAnest(id, resAnest: string){
+            await apiAxios({
+                url: `/updtResAnest/${String(id)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    resAnest: resAnest
+                }
+            })
+            .then((res: any) => {
+            })
+            .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
+            });
+        },
+
+        async getListResdAnest(id){
+            await apiAxios({
+                url: `/lstResAnest/${String(id)}`,
+                method: "GET",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+            })
+            .then((res:any) =>{
+                this.resdAnest = res.data
+            })
+            .catch((e: any) => {                
+                window.log.error('Ocurrió un error:', e)
+            });
+        },
+
+        async deleteResdAnest(id, resAnest: string){
+            await apiAxios({
+                url: `/dltResAnest/${String(id)}`,
+                method: "DELETE",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    resAnest: resAnest
+                }
+            })
+            .then((res:any) =>{
+                this.resdAnest = res.data;
+
+                swal.fire({
+                    title: "Registro eliminado correctamente",
+                    icon: "success",
+                    showConfirmButton: false,
+                    toast: true,
+                    position: "top-end",
+                    timer: 2500,
+                    timerProgressBar: true,
+                });
+            })
+            .catch((e: any) => {                
+                window.log.error('Ocurrió un error:', e)
+            });
+        },
     }
 });

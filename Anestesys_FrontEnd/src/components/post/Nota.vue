@@ -11,7 +11,15 @@
             </li>
 
             <li class="nav-item col-md-6" >
-                <button class="btn btn-nav-bar fw-bold" @click="detenerReconocimiento"
+                <!-- <button class="btn btn-nav-bar fw-bold" @click="detenerReconocimiento"
+                        :disabled="preIdStore.generoPaciente == 'Femenino' ? false : true"
+                        id="caso-obst"
+                        data-bs-toggle="pill"
+                        data-bs-target="#caso"
+                        type="button"
+                        aria-selected="false"
+                        >CASO OBSTÉTRICO RECIÉN NACIDO</button> -->
+                <button class="btn btn-nav-bar fw-bold"
                         :disabled="preIdStore.generoPaciente == 'Femenino' ? false : true"
                         id="caso-obst"
                         data-bs-toggle="pill"
@@ -34,13 +42,19 @@
                         <div class="col-md-1 justificar-icono-nota">
                             <label class="form-label fw-bold alinear-icono-nota">
                                 <template v-if="microfonoEscucha === false">
-                                    <span id="microfono-post" :class="microfono == false ? 'microfono-off-nota' : 'microfono-on-nota'" @click="empezarReconocimiento">
+                                    <!-- <span id="microfono-post" :class="microfono == false ? 'microfono-off-nota' : 'microfono-on-nota'" @click="empezarReconocimiento">
+                                        <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
+                                    </span> -->
+                                    <span id="microfono-post" :class="microfono == false ? 'microfono-off-nota' : 'microfono-on-nota'">
                                         <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
                                     </span>
                                 </template>
 
                                 <template v-else>
-                                    <span class="microfono-on-nota" @click="detenerReconocimiento">
+                                    <!-- <span class="microfono-on-nota" @click="detenerReconocimiento">
+                                        <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
+                                    </span> -->
+                                    <span class="microfono-on-nota">
                                         <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
                                     </span>
                                 </template>                                
@@ -912,85 +926,92 @@ export default defineComponent({
 
     mounted: function() {
         this.infoNotaPost.npa_Intubacion = "No";
+
+        this.infoNotaPost.signVitEgQx_TA = postAnestStore.EgresoTA; 
+        this.infoNotaPost.signVitEgQx_FC = postAnestStore.EgresoFC;
+        this.infoNotaPost.signVitEgQx_FR = postAnestStore.EgresoFR;
+        this.infoNotaPost.signVitEgQx_Temperatura = postAnestStore.EgresoTemp;
+        this.infoNotaPost.signVitEgQx_Pulso = postAnestStore.EgresoPulso;
+        this.infoNotaPost.signVitEgQx_SpO2 = postAnestStore.EgresoSpO2;
     },
 
     methods: {
-        async empezarReconocimiento() {
-            try {                
-                this.recognition = new (window as any).webkitSpeechRecognition(); // Crear instancia del reconocimiento de voz
-                this.recognition.lang = 'es-ES'; // Establecer idioma a español, puede cambiar
-                this.recognition.continuous = true; // Permitir reconocimiento continuo
-                this.recognition.start(); // Iniciar reconocimiento de voz
+        // async empezarReconocimiento() {
+        //     try {                
+        //         this.recognition = new (window as any).webkitSpeechRecognition(); // Crear instancia del reconocimiento de voz
+        //         this.recognition.lang = 'es-ES'; // Establecer idioma a español, puede cambiar
+        //         this.recognition.continuous = true; // Permitir reconocimiento continuo
+        //         this.recognition.start(); // Iniciar reconocimiento de voz
                 
-                this.microfono=true
-                this.microfonoEscucha=true
+        //         this.microfono=true
+        //         this.microfonoEscucha=true
     
-                const tiempoEspera = 200;
+        //         const tiempoEspera = 200;
     
-                if(this.infoNotaPost.npa_NotaPostAnest === undefined || this.infoNotaPost.npa_NotaPostAnest === ''){             
-                    this.infoNotaPost.npa_NotaPostAnest = '';
-                }
+        //         if(this.infoNotaPost.npa_NotaPostAnest === undefined || this.infoNotaPost.npa_NotaPostAnest === ''){             
+        //             this.infoNotaPost.npa_NotaPostAnest = '';
+        //         }
                 
-                // Manejar evento de resultado del reconocimiento
-                this.recognition.onresult = (event) => {
-                    let escuchado = event.results[0][0].transcript; // Obtener texto reconocido
-                    this.infoNotaPost.npa_NotaPostAnest += ' ' + escuchado;
-                    console.log('Texto reconocido:', escuchado);
+        //         // Manejar evento de resultado del reconocimiento
+        //         this.recognition.onresult = (event) => {
+        //             let escuchado = event.results[0][0].transcript; // Obtener texto reconocido
+        //             this.infoNotaPost.npa_NotaPostAnest += ' ' + escuchado;
+        //             console.log('Texto reconocido:', escuchado);
     
-                    // Reiniciar el temporizador si se detecta otra transcripción mientras el temporizador está en marcha
-                    if (this.intervalId !== null) {
-                        clearTimeout(this.intervalId);
-                    }
+        //             // Reiniciar el temporizador si se detecta otra transcripción mientras el temporizador está en marcha
+        //             if (this.intervalId !== null) {
+        //                 clearTimeout(this.intervalId);
+        //             }
     
-                    this.intervalId = setTimeout(() => {
-                        this.recognition.stop(); // Detener reconocimiento después del tiempo especificado sin transcripciones adicionales
-                        this.microfono = false; // Cerrar micrófono después del tiempo especificado sin transcripciones adicionales
-                    }, tiempoEspera);
-                };            
+        //             this.intervalId = setTimeout(() => {
+        //                 this.recognition.stop(); // Detener reconocimiento después del tiempo especificado sin transcripciones adicionales
+        //                 this.microfono = false; // Cerrar micrófono después del tiempo especificado sin transcripciones adicionales
+        //             }, tiempoEspera);
+        //         };            
     
-                // Manejar evento de error del reconocimiento
-                this.recognition.onerror = (event) => {
-                    this.microfono=false
-                    window.log.error('Error en reconocimiento de voz:', event.error);
-                };            
+        //         // Manejar evento de error del reconocimiento
+        //         this.recognition.onerror = (event) => {
+        //             this.microfono=false
+        //             window.log.error('Error en reconocimiento de voz:', event.error);
+        //         };            
     
-                // Manejar evento de fin del reconocimiento
-                this.recognition.onend = () => {
-                    if (this.intervalId !== null) {
-                        clearTimeout(this.intervalId);
-                    }
-                    this.microfono = false;
+        //         // Manejar evento de fin del reconocimiento
+        //         this.recognition.onend = () => {
+        //             if (this.intervalId !== null) {
+        //                 clearTimeout(this.intervalId);
+        //             }
+        //             this.microfono = false;
     
-                    // Iniciar reconocimiento de voz nuevamente después de un pequeño retraso
-                    setTimeout(() => {
-                        this.recognition.start();
-                        this.microfono = true;
-                    }, 50); // Ajustar el valor del retraso según sea necesario
-                };
-            } catch (error) {
-                window.log.error('Ocurrió un error:', error)
-            }
-        },
+        //             // Iniciar reconocimiento de voz nuevamente después de un pequeño retraso
+        //             setTimeout(() => {
+        //                 this.recognition.start();
+        //                 this.microfono = true;
+        //             }, 50); // Ajustar el valor del retraso según sea necesario
+        //         };
+        //     } catch (error) {
+        //         window.log.error('Ocurrió un error:', error)
+        //     }
+        // },
 
-        async detenerReconocimiento() {
-            try {
-                if(this.recognition !== null){
-                    this.recognition.onend = () => {
-                        clearTimeout(this.intervalId);
-                    };
+        // async detenerReconocimiento() {
+        //     try {
+        //         if(this.recognition !== null){
+        //             this.recognition.onend = () => {
+        //                 clearTimeout(this.intervalId);
+        //             };
         
-                    if (this.recognition) {
-                        this.recognition.stop();
-                        clearTimeout(this.intervalId);
-                        this.microfono = false;
-                        this.microfonoEscucha=false
-                        console.log('Reconocimiento de voz detenido Nota Post.');
-                    }
-                }                 
-            } catch (error) {
-                window.log.error('Ocurrió un error:', error)
-            }  
-        },
+        //             if (this.recognition) {
+        //                 this.recognition.stop();
+        //                 clearTimeout(this.intervalId);
+        //                 this.microfono = false;
+        //                 this.microfonoEscucha=false
+        //                 console.log('Reconocimiento de voz detenido Nota Post.');
+        //             }
+        //         }                 
+        //     } catch (error) {
+        //         window.log.error('Ocurrió un error:', error)
+        //     }  
+        // },
 
         async vaciarInputsNotaPA(){
             try {
@@ -1118,12 +1139,13 @@ export default defineComponent({
                 this.$emit('recibe-datos-nota-post', postAnestStore.NotaPost=this.infoNotaPost.npa_NotaPostAnest,
                                                     postAnestStore.Intubacion=this.infoNotaPost.npa_Intubacion,
     
-                                                    postAnestStore.EgresoTA=this.infoNotaPost.signVitEgQx_TA,
-                                                    postAnestStore.EgresoFC=this.infoNotaPost.signVitEgQx_FC,
-                                                    postAnestStore.EgresoFR=this.infoNotaPost.signVitEgQx_FR,
-                                                    postAnestStore.EgresoTemp=this.infoNotaPost.signVitEgQx_Temperatura,
-                                                    postAnestStore.EgresoPulso=this.infoNotaPost.signVitEgQx_Pulso,
-                                                    postAnestStore.EgresoSpO2=this.infoNotaPost.signVitEgQx_SpO2,
+                                                    // postAnestStore.EgresoTA=this.infoNotaPost.signVitEgQx_TA,
+                                                    // postAnestStore.EgresoFC=this.infoNotaPost.signVitEgQx_FC,
+                                                    // postAnestStore.EgresoFR=this.infoNotaPost.signVitEgQx_FR,
+                                                    // postAnestStore.EgresoTemp=this.infoNotaPost.signVitEgQx_Temperatura,
+                                                    // postAnestStore.EgresoPulso=this.infoNotaPost.signVitEgQx_Pulso,
+                                                    // postAnestStore.EgresoSpO2=this.infoNotaPost.signVitEgQx_SpO2,
+                                                    
                                                     postAnestStore.DestinoEgreso=this.infoNotaPost.signVitEgQx_EgresoPac,
     
                                                     postAnestStore.NumeroProductos=this.infoNotaPost.casoObsRecNac_NumProd,
@@ -1179,6 +1201,17 @@ export default defineComponent({
             } catch (error) {
                 window.log.error('Ocurrió un error:', error);
             }
+        }
+    },
+
+    watch:{
+        '$route'(to, from){
+            this.infoNotaPost.signVitEgQx_TA = postAnestStore.EgresoTA; 
+            this.infoNotaPost.signVitEgQx_FC = postAnestStore.EgresoFC;
+            this.infoNotaPost.signVitEgQx_FR = postAnestStore.EgresoFR;
+            this.infoNotaPost.signVitEgQx_Temperatura = postAnestStore.EgresoTemp;
+            this.infoNotaPost.signVitEgQx_Pulso = postAnestStore.EgresoPulso;
+            this.infoNotaPost.signVitEgQx_SpO2 = postAnestStore.EgresoSpO2;
         }
     }
  })

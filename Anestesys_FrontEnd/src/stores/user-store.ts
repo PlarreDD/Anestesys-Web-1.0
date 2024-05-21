@@ -3,6 +3,7 @@ import { apiAxios } from '@/boot/axios';
 import { ref } from "vue";
 import router from "@/router";
 import swal from 'sweetalert2';
+import { log } from "loglevel";
 
 export const useUserStore = defineStore('user', {
     state: () => ({
@@ -189,7 +190,7 @@ export const useUserStore = defineStore('user', {
                 },
                 data: formData
             })
-            .then((res: any) => {             
+            .then((res: any) => {
                 this.Foto = res.data.medico.foto
                 swal.fire({
                     title: 'Datos del perfil actualizados correctamente',

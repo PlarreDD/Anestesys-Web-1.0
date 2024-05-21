@@ -13,6 +13,7 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Xml;
 
 namespace apiMSV
 {
@@ -35,9 +36,13 @@ namespace apiMSV
 
         string responseString = "Información no disponible";
 
+        private string rutaXml = "datos.xml";
+
         public Form1()
         {
             InitializeComponent();
+
+            LeerXml();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -151,6 +156,12 @@ namespace apiMSV
                 {
                     pingMSV.Invoke((MethodInvoker)delegate {
                         pingMSV.Image = Properties.Resources.pingOk;
+                        string texto = ipMSV.Text.Trim();
+
+                        if (!string.IsNullOrEmpty(texto))
+                        {
+                            AgregarXml(texto);
+                        }
                     });
 
                     ipMSV.Invoke((MethodInvoker)delegate {
@@ -234,23 +245,115 @@ namespace apiMSV
             txtHL7.Text = responseString;
         }
 
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                notifyIcon1.Visible = true;
+                this.ShowInTaskbar = false;
+            }
+
+            if (WindowState == FormWindowState.Normal)
+            {
+                notifyIcon1.Visible = false;
+                this.ShowInTaskbar = true;
+            }
+        }
+
         private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Estas seguro que deseas cerrar?\nLa comunicación con el MSV se detendrá", "Confirmación", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    httpListener?.Stop();
+                    listener.Stop();
+                    p1.Abort();
+                    p2.Abort();
+
+                    this.Close();
+                }
+                catch
+                {
+                    p1.Abort();
+                    p2.Abort();
+
+                    this.Close();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Cancela");
+            }
+        }
+
+        private void LeerXml()
         {
             try
             {
-                httpListener?.Stop();
-                listener.Stop();
-                p1.Abort();
-                p2.Abort();
+                if (File.Exists(rutaXml))
+                {
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.Load(rutaXml);
 
-                this.Close();
+                    // Lee los elementos Texto del archivo XML y los agrega a la lista
+                    XmlNodeList nodosTexto = xmlDoc.SelectNodes("//ipMSV");
+                    
+                    foreach (XmlNode nodoTexto in nodosTexto)
+                    {
+                        ipMSV.Text = nodoTexto.InnerText;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("El archivo XML no existe.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                p1.Abort();
-                p2.Abort();
+                MessageBox.Show($"Error al leer el archivo XML: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
-                this.Close();
+        private void AgregarXml(string texto)
+        {
+            try
+            {
+                // Verifica si el archivo XML existe
+                bool archivoExistente = File.Exists(rutaXml);
+
+                // Crea un nuevo documento XML o carga el existente
+                XmlDocument xmlDoc = new XmlDocument();
+                
+                XmlDeclaration xmlDeclaracion = xmlDoc.CreateXmlDeclaration("1.0", "UTF-8", null);
+                xmlDoc.AppendChild(xmlDeclaracion);
+
+                XmlElement raiz = xmlDoc.CreateElement("Datos");
+                xmlDoc.AppendChild(raiz);
+                
+                // Crea un nuevo elemento XML para el texto
+                XmlElement elementoTexto = xmlDoc.CreateElement("ipMSV");
+                elementoTexto.InnerText = texto;
+
+                // Agrega el elemento al documento XML
+                xmlDoc.DocumentElement.AppendChild(elementoTexto);
+
+                // Guarda el documento XML en el archivo
+                xmlDoc.Save(rutaXml);
+
+                // Vuelve a leer el archivo para actualizar la vista
+                //LeerXml();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al agregar texto al archivo XML: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
