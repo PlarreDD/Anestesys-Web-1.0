@@ -11,7 +11,9 @@
             <font-awesome-icon icon="fa-solid fa-circle-xmark" @click="vaciarInputs"/>
           </span>
           <el-card v-show="mostrarDatosFiltradosExp" class="filtered-container" v-if="opcionExp.length">
-              <div v-for="(item, index) in opcionExp" :key="index" @click="selecDatoExp(item)">                                        
+              <div v-for="(item, index) in opcionExp" :key="index" @click="selecDatoExp(item)"
+                  @mouseover="hoverItem = index" @mouseleave="hoverItem = null" 
+                  :class="{ 'hovered': hoverItem === index }">                                        
                   <p>{{ item }}</p> <!-- Mostrar los datos filtrados -->
               </div>
           </el-card>
@@ -493,9 +495,9 @@ import { ElInput, ElCard } from 'element-plus';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
-import pdfFonts from "pdfmake/build/vfs_fonts.js";
+// import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
-window.pdfMake.fonts = pdfFonts.pdfMake;
+// window.pdfMake.fonts = pdfFonts.pdfMake;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 
@@ -752,6 +754,7 @@ export default defineComponent({
       mostrarSpinner: false,
 
       chartElements: [],
+      hoverItem: null
     }
   },
 
@@ -6020,6 +6023,11 @@ export default defineComponent({
 <style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
+.hovered {
+    background-color: #E88000;
+    color: white;
+    cursor: pointer;
+}
 .color-modal {
   background-color: #002d60;
 }
