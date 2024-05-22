@@ -16,9 +16,9 @@ export const saveMenuTrans = async (req: any, res: Response) => {
                 otrosIngresos,
                 // Egresos
                 liqAscitis, sangradoAprox, uresis, expoQX,
-                reqBasales, ayuno, otrosEgresos,
+                reqBasales, ayuno, otrosEgresos, balancesParciales,
                 // Datos del ventilador
-                modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr,
+                modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr
 
         } = req.body;
 
@@ -50,6 +50,9 @@ export const saveMenuTrans = async (req: any, res: Response) => {
                                         reqBasales: reqBasales,
                                         ayuno: ayuno,
                                         otrosEgresos: otrosEgresos,
+                                        // Agregar balances parciales que es un arreglo
+                                        balancesParciales: { horaBalance: balancesParciales[0],
+                                            ingresos: balancesParciales[1], egresos: balancesParciales[2] },
             });
         }
         else{

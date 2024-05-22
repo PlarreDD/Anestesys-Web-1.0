@@ -531,7 +531,7 @@
                     <div class="estiloDropDownBalance row g-2 deslizar-balance">
                       <h5 class="col-md-8 fw-bold text-white">BALANCE TOTAL: {{menuTrans.balanceTotal}} ml</h5>
                       <div class="col-md-4">
-                        <button type="button" class="btn btn-guardar-balance fw-bold" data-bs-toggle="modal" data-bs-target="#modal-balance-parcial">
+                        <button type="button" class="btn btn-guardar-balance fw-bold float-end" data-bs-toggle="modal" data-bs-target="#modal-balance-parcial">
                           Balance Hídrico Parcial
                         </button>
                       </div>
@@ -735,7 +735,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>      
 
       <!--Abrir el modal Balance Hídrico Parcial-->
       <div class="modal" id="modal-balance-parcial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -745,10 +745,45 @@
               <div class="modal-body">
                 <div class="col-md-12">
                   <div class="row g-3">
-                        <h5 class="col-md-12 fw-bold text-white">BALANCE HÍDRICO POR HORA</h5>
-                        <!-- Técnica de anestesia final -->
-                        <div class="col-md-12">                          
-                        </div>                        
+                    <h5 class="col-md-11 fw-bold text-white">BALANCE HÍDRICO POR HORA</h5>
+                    <div class="col-md-1 div-img">
+                      <button id="volver-balance" type="button" class="btn fw-bold" aria-label="Close" data-bs-toggle="modal" data-bs-target="#modal-balance">
+                        <i class="text-white">
+                          <font-awesome-icon icon="fa-solid fa-arrow-left" size="2xl"/>
+                        </i>
+                      </button>
+                    </div>
+                    
+                    <div class="col-md-12">
+                      <div class="deslizar-balance-parcial">
+                        <table class="table table-responsive">
+                          <thead>
+                            <tr>
+                              <th class="text-white">Hora</th>
+                              <td class="text-white">12:03</td>
+                            </tr>
+
+                            <tr>
+                              <th class="text-white">Ingresos</th>
+                              <td class="text-white">650 ml</td>
+                            </tr>
+
+                            <tr>
+                              <th class="text-white">Egresos</th>
+                              <td class="text-white">400 ml</td>
+                            </tr>
+
+                            <tr>
+                              <th class="text-white">Balance total</th>
+                              <td class="text-white">250 ml</td>
+                            </tr>
+                          </thead>
+
+                          <tbody>                           
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>                        
                   </div>
                 </div>
               </div>
@@ -8071,6 +8106,14 @@ export default defineComponent({
   overflow-x: hidden;
   margin-top: 0px;
   height: 205px;
+}
+.deslizar-balance-parcial {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  height: 620px;
+  margin-top: 0px;
 }
 /* Botones */
 .btn-guardar{

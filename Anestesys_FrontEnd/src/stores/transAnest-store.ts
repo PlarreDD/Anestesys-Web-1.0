@@ -174,6 +174,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     reqBasales: regTransAnest.reqBasales,
                     ayuno: regTransAnest.ayuno,
                     otrosEgresos: regTransAnest.otrosEgresos,
+                    balancesParciales: [ regTransAnest.horaBalance, regTransAnest.ingresos, regTransAnest.egresos]
                 }
             })
             .then((res: any) => {
