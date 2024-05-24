@@ -34,6 +34,10 @@ export interface regMenuTrans{
     reqBasales: string,
     ayuno: string,
     otrosEgresos: string,
+    // Balances parciales
+    horaBalance: string,
+    ingresos: number,
+    egresos: number,
     /* Técnica Anestésica */
     local: string,
     sedación: string,

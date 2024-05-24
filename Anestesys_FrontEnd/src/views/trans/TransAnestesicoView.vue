@@ -710,7 +710,15 @@
                       <div class="col-md-9">
                         <button id="abrir-balance" type="button" class="invisible" data-bs-toggle="modal" data-bs-target="#modal-balance"></button>
                       </div>
-                      <div class="col-md-10"></div>
+                      <div class="col-md-3">
+                        <input type="input" v-model="menuTrans.horaBalance">
+                      </div>
+                      <div class="col-md-3">
+                        <input type="input" v-model="menuTrans.ingresos">
+                      </div>
+                      <div class="col-md-4">
+                        <input type="input" v-model="menuTrans.egresos">
+                      </div>
 
                       <!-- Botón guardar/actualizar -->
                       <div class="col-md-2 alinear-btn">
@@ -725,7 +733,7 @@
                           <button data-bs-toggle="tab" 
                                   type="submit"
                                   class="btn btn-guardar-balance fw-bold"
-                                  @click="actualizarDatosBalance()"> GUARDAR </button> 
+                                  @click="actualizarDatosBalance()"> GUARDAR N </button> 
                         </template>   
                       </div>
                     </div>
@@ -1755,6 +1763,9 @@ export default defineComponent({
 
       guardaDatosMSV: 0,
       gridBD: [], // Contiene todos los datos del grid
+
+      balanceTemp: null,
+      primerBalance: false,
     }
   },
 
@@ -1765,7 +1776,7 @@ export default defineComponent({
     Line
   },
 
-  mounted: function() { // Llama el método despues de cargar la página
+  mounted: function() { // Llama el método despues de cargar la página    
     //Mostrar modal de tutorial al logear por primera vez
     if(userStore.TutorialTrans === 0){
       let abrir = document.getElementById('tutorial-trans');
@@ -5861,8 +5872,8 @@ export default defineComponent({
   
         //Metódo para guardar
         if(preIdStore.nuevoRegistroPaciente == false){
-          await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);
-        }else if(preIdStore.nuevoRegistroPaciente == true){         
+          await transAnestStore.saveDatosV(this.menuTrans, preIdStore.pacienteID._id);          
+        }else if(preIdStore.nuevoRegistroPaciente == true){     
           await transAnestStore.saveNuevoDatosV(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
         }
       } catch (error) {
@@ -5873,13 +5884,39 @@ export default defineComponent({
     async actualizarDatosBalance() {
       try {
         if(preIdStore.nuevoRegistroPaciente == false){
+          console.log("if act");
+          this.menuTrans.horaBalance = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
           await transAnestStore.updateBalanceH(this.menuTrans, preIdStore.pacienteID._id)
+          await transAnestStore.updateBalanceHP(this.menuTrans, preIdStore.pacienteID._id)
+
+          this.guardarBalanceParcial()
         }else if(preIdStore.nuevoRegistroPaciente == true){          
+          console.log("else act");
+          this.menuTrans.horaBalance = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
           await transAnestStore.updateNuevoBalanceH(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
+          await transAnestStore.updateNuevoBalanceHP(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
+
+          this.guardarBalanceParcial()
         }
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
+    },
+
+    async guardarBalanceParcial(){
+      console.log("guardarBalanceParcial");
+      try {
+        if(preIdStore.nuevoRegistroPaciente == false){
+          console.log("if guardarBalanceParcial");
+          transAnestStore.getBalanceHPList(preIdStore.pacienteID._id)
+        }
+        else if(preIdStore.nuevoRegistroPaciente == true){  
+          console.log("else guardarBalanceParcial");
+          transAnestStore.getNuevoBalanceHPList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+        }        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }      
     },
 
     async calcularBalance(){
@@ -5894,7 +5931,14 @@ export default defineComponent({
                                       ( Number(this.menuTrans.liqAscitis) + Number(this.menuTrans.sangradoAprox) + Number(this.menuTrans.uresis) + 
                                         Number(this.menuTrans.expoQX) + Number(this.menuTrans.reqBasales) + Number(this.menuTrans.ayuno) + 
                                         Number(this.menuTrans.otrosEgresos) );
-        
+        this.menuTrans.egresos = ( Number(this.menuTrans.liqAscitis) + Number(this.menuTrans.sangradoAprox) + Number(this.menuTrans.uresis) + 
+                                  Number(this.menuTrans.expoQX) + Number(this.menuTrans.reqBasales) + Number(this.menuTrans.ayuno) + 
+                                  Number(this.menuTrans.otrosEgresos) );
+        this.menuTrans.ingresos = ( Number(this.menuTrans.factor_VIII) + Number(this.menuTrans.solHartman) + Number(this.menuTrans.glucosados) +
+                                  Number(this.menuTrans.almidones) + Number(this.menuTrans.paqGlobular) + Number(this.menuTrans.plaquetas) +
+                                  Number(this.menuTrans.factor_VII) + Number(this.menuTrans.otrosIngresos) + Number(this.menuTrans.solFisio) +
+                                  Number(this.menuTrans.gelatinas) + Number(this.menuTrans.albuminas) + Number(this.menuTrans.plasmas) +
+                                  Number(this.menuTrans.crioprecipitados) );
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }

@@ -16,7 +16,7 @@ export const saveMenuTrans = async (req: any, res: Response) => {
                 otrosIngresos,
                 // Egresos
                 liqAscitis, sangradoAprox, uresis, expoQX,
-                reqBasales, ayuno, otrosEgresos, balancesParciales,
+                reqBasales, ayuno, otrosEgresos,
                 // Datos del ventilador
                 modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr
 
@@ -49,10 +49,7 @@ export const saveMenuTrans = async (req: any, res: Response) => {
                                         expoQX: expoQX,
                                         reqBasales: reqBasales,
                                         ayuno: ayuno,
-                                        otrosEgresos: otrosEgresos,
-                                        // Agregar balances parciales que es un arreglo
-                                        balancesParciales: { horaBalance: balancesParciales[0],
-                                            ingresos: balancesParciales[1], egresos: balancesParciales[2] },
+                                        otrosEgresos: otrosEgresos
             });
         }
         else{
@@ -127,8 +124,8 @@ export const saveNuevoMenuTrans = async (req: any, res: Response) => {
                                         expoQX: expoQX,
                                         reqBasales: reqBasales,
                                         ayuno: ayuno,
-                                        otrosEgresos: otrosEgresos,
-            });
+                                        otrosEgresos: otrosEgresos
+            });           
         }
         else{
             menuTrans = new MenuTrans({ pid, cxid,
@@ -336,6 +333,74 @@ export const deleteModoVentilacion = async (req: any, res: Response) => {
     }
 };
 
+/* Función para obtener los balances hídricos parciales */
+export const getListaBalanceHP = async (req: any, res: Response) => {
+    try {
+        const { pid } = req.params;        
+        const balance = await MenuTrans.find({pid:pid});
+
+        return res.json({ balance });
+    } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Función para obtener los nuevos balances hídricos parciales */
+export const getNuevoListaBalanceHP = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid } = req.params;        
+        const balance = await MenuTrans.find({pid:pid, cxid:cxid});
+
+        return res.json({ balance });
+    } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Función de actualización de Balance Hídrico Parcial */
+export const UpdateBalanceHP = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { horaBalance, ingresos, egresos } = req.body;
+
+        const menuTrans = await MenuTrans.findOneAndUpdate( { pid: id },
+                                                            { $push:{ balancesParciales: { horaBalance: horaBalance, ingresos: ingresos, egresos: egresos } } } );
+        return res.json({ menuTrans });
+    } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Función Nueva de actualización de Balance Hídrico Parcial */
+export const UpdateNuevoBalanceHP = async (req: any, res: Response) => {
+    try {
+        const { id, cxid } = req.params;
+        const { horaBalance, ingresos, egresos } = req.body;
+
+        const menuTrans = await MenuTrans.findOneAndUpdate( { pid: id, cxid: cxid },
+                                                            { $push:{ balancesParciales: { horaBalance: horaBalance, ingresos: ingresos, egresos: egresos } } } );
+        return res.json({ menuTrans });
+    } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 /* Función de actualización de Balance Hídrico */
 export const UpdateBalanceH = async (req: any, res: Response) => {
     try {
@@ -396,7 +461,7 @@ export const UpdateBalanceH = async (req: any, res: Response) => {
                                                               BloqTroncular: BloqTroncular,
                                                               bloqPeriToracico: bloqPeriToracico,
                                                               bloqPeriCervical: bloqPeriCervical,
-                                                              libreOpioides: libreOpioides,
+                                                              libreOpioides: libreOpioides
                                                             });
 
         return res.json({ menuTrans });
@@ -409,6 +474,7 @@ export const UpdateBalanceH = async (req: any, res: Response) => {
     }
 };
 
+/* Función Nueva de actualización de Balance Hídrico */
 export const UpdateNuevoBalanceH = async (req: any, res: Response) => {
     try {
         const { id, cxid } = req.params;
@@ -468,7 +534,7 @@ export const UpdateNuevoBalanceH = async (req: any, res: Response) => {
                                                               BloqTroncular: BloqTroncular,
                                                               bloqPeriToracico: bloqPeriToracico,
                                                               bloqPeriCervical: bloqPeriCervical,
-                                                              libreOpioides: libreOpioides,
+                                                              libreOpioides: libreOpioides
                                                             });
 
         return res.json({ menuTrans });

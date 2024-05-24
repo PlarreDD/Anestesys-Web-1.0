@@ -18,16 +18,16 @@ const menuTransSchema = new Schema({
         required: false
     },
     
-    /* Balance Total */    
-    balanceTotal:{type: String},
     // Balances parciales
     balancesParciales: [
         {
-            horaBalance: {type:String},
-            ingresos: {type:String},
-            egresos: {type:String}
+            horaBalance: {type: String},
+            ingresos: {type: String},
+            egresos: {type: String}
         }
     ],
+    /* Balance Total */    
+    balanceTotal:{type: String},
     // Ingresos
     solHartman: { type: String },
     solFisio: { type: String },
