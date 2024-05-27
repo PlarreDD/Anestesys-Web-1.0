@@ -38,6 +38,7 @@ export interface regMenuTrans{
     horaBalance: string,
     ingresos: number,
     egresos: number,
+    balanceP: number,
     /* Técnica Anestésica */
     local: string,
     sedación: string,

@@ -710,15 +710,18 @@
                       <div class="col-md-9">
                         <button id="abrir-balance" type="button" class="invisible" data-bs-toggle="modal" data-bs-target="#modal-balance"></button>
                       </div>
-                      <div class="col-md-3">
-                        <input type="input" v-model="menuTrans.horaBalance">
+                      <div class="col-md-10">
+                        <!-- <input type="input" v-model="menuTrans.horaBalance"> -->
                       </div>
-                      <div class="col-md-3">
+                      <!-- <div class="col-md-2">
                         <input type="input" v-model="menuTrans.ingresos">
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-3">
                         <input type="input" v-model="menuTrans.egresos">
                       </div>
+                      <div class="col-md-3">
+                        <input type="input" v-model="menuTrans.balanceP">
+                      </div> -->
 
                       <!-- Botón guardar/actualizar -->
                       <div class="col-md-2 alinear-btn">
@@ -764,30 +767,23 @@
                     
                     <div class="col-md-12">
                       <div class="deslizar-balance-parcial">
-                        <table class="table table-responsive">
+                        <table class="table table-responsive" v-for="( balance, index ) in transAnestStore.balanceParcial">
                           <thead>
                             <tr>
                               <th class="text-white">Hora</th>
-                              <td class="text-white">12:03</td>
-                            </tr>
-
-                            <tr>
                               <th class="text-white">Ingresos</th>
-                              <td class="text-white">650 ml</td>
-                            </tr>
-
-                            <tr>
                               <th class="text-white">Egresos</th>
-                              <td class="text-white">400 ml</td>
-                            </tr>
-
-                            <tr>
                               <th class="text-white">Balance total</th>
-                              <td class="text-white">250 ml</td>
                             </tr>
                           </thead>
 
-                          <tbody>                           
+                          <tbody v-for="(datosBalance, index) in balance.balancesParciales">
+                            <tr>
+                              <td class="text-white">{{ datosBalance.horaBalance }}</td>
+                              <td class="text-white">{{ datosBalance.ingresos }}</td>
+                              <td class="text-white">{{ datosBalance.egresos }}</td>
+                              <td class="text-white">{{ datosBalance.balanceP }}</td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -1857,7 +1853,7 @@ export default defineComponent({
     calcularHoraFinalMed(){
         try {
             let hoy = new Date();
-            this.menuTrans.horaFinalMed = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();
+            this.menuTrans.horaFinalMed = ((hoy.getHours() <10) ? '0':'') + hoy.getHours() + ':' + ((hoy.getMinutes() <10) ? '0':'')+hoy.getMinutes();            
 
             this.enviarDatosTrans();        
         } catch (error) {
@@ -5884,34 +5880,57 @@ export default defineComponent({
     async actualizarDatosBalance() {
       try {
         if(preIdStore.nuevoRegistroPaciente == false){
-          console.log("if act");
+          this.menuTrans.balanceP = this.menuTrans.ingresos - this.menuTrans.egresos;
           this.menuTrans.horaBalance = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-          await transAnestStore.updateBalanceH(this.menuTrans, preIdStore.pacienteID._id)
-          await transAnestStore.updateBalanceHP(this.menuTrans, preIdStore.pacienteID._id)
+          await transAnestStore.updateBalanceH(this.menuTrans, preIdStore.pacienteID._id)          
 
-          this.guardarBalanceParcial()
-        }else if(preIdStore.nuevoRegistroPaciente == true){          
-          console.log("else act");
+          await transAnestStore.updateBalanceHP(this.menuTrans, preIdStore.pacienteID._id)
+          transAnestStore.getBalanceHPList(preIdStore.pacienteID._id)
+
+          this.iniciarIntervaloBP();
+        }else if(preIdStore.nuevoRegistroPaciente == true){
+          this.menuTrans.balanceP = this.menuTrans.ingresos - this.menuTrans.egresos;        
           this.menuTrans.horaBalance = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
           await transAnestStore.updateNuevoBalanceH(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
-          await transAnestStore.updateNuevoBalanceHP(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
 
-          this.guardarBalanceParcial()
+          await transAnestStore.updateNuevoBalanceHP(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
+          transAnestStore.getNuevoBalanceHPList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+
+          this.iniciarIntervaloBP();
         }
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
     },
 
+    iniciarIntervaloBP() {
+      this.detenerIntervaloBP(); // Asegurarse de que no haya intervalos duplicados
+      this.balanceTemp = setInterval(async () => {
+        await this.guardarBalanceParcial();
+      }, 60000); // 60000 ms = 1 minuto
+    },
+
+    detenerIntervaloBP() {
+      if (this.balanceTemp) {
+        clearInterval(this.balanceTemp);
+        this.balanceTemp = null;
+      }
+    },
+
     async guardarBalanceParcial(){
-      console.log("guardarBalanceParcial");
       try {
         if(preIdStore.nuevoRegistroPaciente == false){
-          console.log("if guardarBalanceParcial");
+          this.menuTrans.balanceP = this.menuTrans.ingresos - this.menuTrans.egresos;
+          this.menuTrans.horaBalance = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+          await transAnestStore.updateBalanceHP(this.menuTrans, preIdStore.pacienteID._id)
           transAnestStore.getBalanceHPList(preIdStore.pacienteID._id)
         }
-        else if(preIdStore.nuevoRegistroPaciente == true){  
-          console.log("else guardarBalanceParcial");
+        else if(preIdStore.nuevoRegistroPaciente == true){
+          this.menuTrans.balanceP = this.menuTrans.ingresos - this.menuTrans.egresos;
+          this.menuTrans.horaBalance = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+          await transAnestStore.updateNuevoBalanceHP(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
           transAnestStore.getNuevoBalanceHPList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
         }        
       } catch (error) {
@@ -5938,7 +5957,7 @@ export default defineComponent({
                                   Number(this.menuTrans.almidones) + Number(this.menuTrans.paqGlobular) + Number(this.menuTrans.plaquetas) +
                                   Number(this.menuTrans.factor_VII) + Number(this.menuTrans.otrosIngresos) + Number(this.menuTrans.solFisio) +
                                   Number(this.menuTrans.gelatinas) + Number(this.menuTrans.albuminas) + Number(this.menuTrans.plasmas) +
-                                  Number(this.menuTrans.crioprecipitados) );
+                                  Number(this.menuTrans.crioprecipitados) );        
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
@@ -6307,6 +6326,7 @@ export default defineComponent({
               this.btnMSV=true
               transAnestStore.btnTQX
               this.finMSV()
+              this.detenerIntervaloBP()
     
               let hoy_8 = new Date();
               this.menuTrans.egresoQx = ((hoy_8.getHours() <10) ? '0':'') + hoy_8.getHours() + ':' + ((hoy_8.getMinutes() <10) ? '0':'')+hoy_8.getMinutes();
@@ -8152,12 +8172,10 @@ export default defineComponent({
   height: 205px;
 }
 .deslizar-balance-parcial {
-  overflow-y: hidden;
-  overflow-x: scroll;
-  white-space: nowrap;
-  scroll-behavior: smooth;
-  height: 620px;
-  margin-top: 0px;
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 320px;
+  margin-top: 15px;
 }
 /* Botones */
 .btn-guardar{

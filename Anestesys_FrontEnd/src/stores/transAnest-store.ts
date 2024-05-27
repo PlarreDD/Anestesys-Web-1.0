@@ -488,7 +488,6 @@ export const useTransAnestStore = defineStore('transAn', {
             })
             .then((res: any) => {
                 this.balanceParcial = res.data.balance;
-                console.log("balanceParcial: ", JSON.stringify(this.balanceParcial));
             })
             .catch((e: any) => {
                 window.log.error('Ocurrió un error:', e)
@@ -505,7 +504,6 @@ export const useTransAnestStore = defineStore('transAn', {
             })
             .then((res: any) => {
                 this.balanceParcial = res.data.balance;
-                console.log("balanceParcial: ", JSON.stringify(this.balanceParcial));
             })
             .catch((e: any) => {
                 window.log.error('Ocurrió un error:', e)
@@ -520,7 +518,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {                    
-                    horaBalance: regTransAnest.horaBalance, ingresos: regTransAnest.ingresos, egresos: regTransAnest.egresos,                    
+                    horaBalance: regTransAnest.horaBalance, ingresos: regTransAnest.ingresos, egresos: regTransAnest.egresos, balanceP: regTransAnest.balanceP                   
                 }
             })
             .then((res: any) => {
@@ -541,7 +539,7 @@ export const useTransAnestStore = defineStore('transAn', {
                 data: {
                     pid: pid,
                     cxid: this.cirugiaID,                    
-                    horaBalance: regTransAnest.horaBalance, ingresos: regTransAnest.ingresos, egresos: regTransAnest.egresos                    
+                    horaBalance: regTransAnest.horaBalance, ingresos: regTransAnest.ingresos, egresos: regTransAnest.egresos, balanceP: regTransAnest.balanceP        
                 }
             })
             .then((res: any) => {
@@ -1088,8 +1086,6 @@ export const useTransAnestStore = defineStore('transAn', {
                     HoraGeneracion: grid[grid.length - i].horaGeneracion,
                 });
             }
-
-            console.log(dataToUpload);
 
             try {
                 await apiAxios({

@@ -23,7 +23,8 @@ const menuTransSchema = new Schema({
         {
             horaBalance: {type: String},
             ingresos: {type: String},
-            egresos: {type: String}
+            egresos: {type: String},
+            balanceP: {type: String}
         }
     ],
     /* Balance Total */    
