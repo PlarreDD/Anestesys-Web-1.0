@@ -1504,6 +1504,7 @@ export default defineComponent({
           idStore.NotaPre = ''
           transStore.datosVentilacion = null
           transStore.medicamentos = null  
+          transStore.balanceParcial = null
           transStore.relevos = null
           transStore.eventos = null
           transStore.datosMSV = ''
@@ -5382,6 +5383,7 @@ export default defineComponent({
         transStore.datosVentilacion= null
         transStore.pacienteID= ""
         transStore.medicamentos= null
+        transStore.balanceParcial= null
         transStore.medicamentoID= ""
         transStore.relevos= null
         transStore.relevoID= ""

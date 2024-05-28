@@ -369,10 +369,10 @@ export const getNuevoListaBalanceHP = async (req: any, res: Response) => {
 export const UpdateBalanceHP = async (req: any, res: Response) => {
     try {
         const { id } = req.params;
-        const { horaBalance, ingresos, egresos, balance } = req.body;
+        const { horaBalance, ingresos, egresos, balanceP } = req.body;
 
         const menuTrans = await MenuTrans.findOneAndUpdate( { pid: id },
-                                                            { $push:{ balancesParciales: { horaBalance: horaBalance, ingresos: ingresos, egresos: egresos, balance: balance } } } );
+                                                            { $push:{ balancesParciales: { horaBalance: horaBalance, ingresos: ingresos, egresos: egresos, balanceP: balanceP } } } );
         return res.json({ menuTrans });
     } catch (error) {
         logger.log({
