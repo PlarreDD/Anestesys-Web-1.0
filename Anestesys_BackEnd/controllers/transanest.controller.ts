@@ -730,13 +730,13 @@ export const saveMedicamentos = async (req: any, res: Response) => {
     try {
         const { pid, cxid,
                 // Datos medicamentos
-                tipoMed, medicamento, dosisMed, unidadMed, viaMed, horaInicioMed, horaFinalMed, observacionesMed
+                tipoMed, medicamento, dosisMed, unidadMed, viaMed, horaInicioMed, horaFinalMed, observacionesMed, valorGrafica
               } = req.body;        
         const menuTrans  = await new MenuTrans({ pid, cxid,
                                             // Datos del medicamento
                                             medicamentosCx: {
                                                 tipoMed: tipoMed, medicamento: medicamento, dosisMed: dosisMed, unidadMed: unidadMed, viaMed: viaMed, 
-                                                horaInicioMed: horaInicioMed, horaFinalMed: horaFinalMed, observacionesMed: observacionesMed
+                                                horaInicioMed: horaInicioMed, horaFinalMed: horaFinalMed, observacionesMed: observacionesMed, valorGrafica: valorGrafica
                                             },
                                         });
         await menuTrans.save();        
@@ -754,13 +754,13 @@ export const saveNuevoMedicamentos = async (req: any, res: Response) => {
     try {
         const { pid, cxid,
                 // Datos medicamentos
-                tipoMed, medicamento, dosisMed, unidadMed, viaMed, horaInicioMed, horaFinalMed, observacionesMed
+                tipoMed, medicamento, dosisMed, unidadMed, viaMed, horaInicioMed, horaFinalMed, observacionesMed, valorGrafica
               } = req.body;        
         const menuTrans  = await new MenuTrans({ pid, cxid,
                                             // Datos del medicamento
                                             medicamentosCx: {
                                                 tipoMed: tipoMed, medicamento: medicamento, dosisMed: dosisMed, unidadMed: unidadMed, viaMed: viaMed, 
-                                                horaInicioMed: horaInicioMed, horaFinalMed: horaFinalMed, observacionesMed: observacionesMed
+                                                horaInicioMed: horaInicioMed, horaFinalMed: horaFinalMed, observacionesMed: observacionesMed, valorGrafica: valorGrafica
                                             },
                                         });
         await menuTrans.save();        
@@ -783,7 +783,8 @@ export const updateMedicamentos = async (req: any, res: Response) => {
             { $push:{
                     medicamentosCx: {
                         tipoMed: medicamentosCx[0], medicamento: medicamentosCx[1], dosisMed: medicamentosCx[2], unidadMed: medicamentosCx[3], 
-                        viaMed: medicamentosCx[4], horaInicioMed: medicamentosCx[5], horaFinalMed: medicamentosCx[6], observacionesMed: medicamentosCx[7], 
+                        viaMed: medicamentosCx[4], horaInicioMed: medicamentosCx[5], horaFinalMed: medicamentosCx[6], observacionesMed: medicamentosCx[7],
+                        valorGrafica: medicamentosCx[8]
                     }                                        
                 }
             });                
@@ -806,7 +807,8 @@ export const updateNuevoMedicamentos = async (req: any, res: Response) => {
             { $push:{
                     medicamentosCx: {
                         tipoMed: medicamentosCx[0], medicamento: medicamentosCx[1], dosisMed: medicamentosCx[2], unidadMed: medicamentosCx[3], 
-                        viaMed: medicamentosCx[4], horaInicioMed: medicamentosCx[5], horaFinalMed: medicamentosCx[6], observacionesMed: medicamentosCx[7], 
+                        viaMed: medicamentosCx[4], horaInicioMed: medicamentosCx[5], horaFinalMed: medicamentosCx[6], observacionesMed: medicamentosCx[7],
+                        valorGrafica: medicamentosCx[8]
                     }                                        
                 }
             });                

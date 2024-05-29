@@ -175,7 +175,7 @@
                                           type="submit"
                                           class="btn btn-guardar-balance fw-bold"
                                           @click="actualizarMedicamentos(menuTrans.tipoMed, menuTrans.medicamento, menuTrans.dosisMed, menuTrans.unidadMed,
-                                          menuTrans.viaMed, menuTrans.horaInicioMed, menuTrans.horaFinalMed, menuTrans.observacionesMed)"> GUARDAR </button>
+                                          menuTrans.viaMed, menuTrans.horaInicioMed, menuTrans.horaFinalMed, menuTrans.observacionesMed, menuTrans.valorGrafica)"> GUARDAR </button>
                             </template>  
 
                             <template v-if="transAnestStore.btnActualizaMedicamento === true">
@@ -1691,6 +1691,23 @@ export default defineComponent({
                   pointStyle: 'triangle',
                   radius: 4
               },
+              {
+                  label: 'Medicamento',
+                  borderColor: 'rgba(151, 199, 254)',
+                  data: [],
+                  fill: true,
+                  pointStyle: 'rect', //Estilo del punto en los datos
+                  radius: 6, //Tamaño punto           
+              },
+              {
+                  label: 'Evento',
+                  borderColor: 'rgba(31, 80, 146)',
+                  data: [],
+                  fill: false,
+                  pointStyle: 'rect', //Estilo del punto en los datos
+                  radius: 6, //Tamaño punto           
+              },
+
           ]
       },
       chartOptions: {
@@ -1752,6 +1769,8 @@ export default defineComponent({
       gridBD: [], // Contiene todos los datos del grid
 
       balanceTemp: null,
+
+      medicamentosFiltrados: [],
     }
   },
 
@@ -2345,7 +2364,31 @@ export default defineComponent({
         );
   
         let horaGeneracion = this.saltoArreglo.map(item => item.horaGeneracion);
-  
+        //horaGeneración:15:35,15:36,15:37,15:38,15:39,15:40
+
+         // Valores de medicamento a colocar en la gráfica
+        let medicamentosDataset = new Array(horaGeneracion.length).fill(null);
+
+        if(transAnestStore.medicamentos != null){
+          this.medicamentosFiltrados = transAnestStore.medicamentos.flatMap((med: any) => {
+            return med.medicamentosCx.map((medicamento: any) => {
+              return {
+                medicamento: medicamento.medicamento,
+                horaInicioMed: medicamento.horaInicioMed,
+                valorGrafica: medicamento.valorGrafica,
+              };
+            });
+          });
+
+          this.medicamentosFiltrados.forEach(med => {
+            let index = horaGeneracion.indexOf(med.horaInicioMed);
+            if (index !== -1) {
+              medicamentosDataset[index] = med.valorGrafica;
+            }
+          });
+        }
+        //this.medicamentosFiltrados: [{"medicamento":"FENTANILO","dosisMed":"45","horaInicioMed":"15:10"},{"medicamento":"LIDOCAÍNA","dosisMed":"78","horaInicioMed":"15:15"}]
+        
         let gruposFC = [];
         for (let i = 0; i < FC.length; i += 26) {
           gruposFC.push(FC.slice(i, i + 26));
@@ -2425,6 +2468,11 @@ export default defineComponent({
         for (let i = 0; i < horaGeneracion.length; i += 26) {
           gruposHora.push(horaGeneracion.slice(i, i + 26));
         };
+
+        // let gruposMedicamentos = [];
+        // for (let i = 0; i < horaGeneracion.length; i += 26) {
+        //   gruposMedicamentos.push(transAnestStore.medicamentos.slice(i, i + 26));
+        // };
   
         // Asignar valores a gráfica principal
         this.chartData.datasets[0].data = FC;
@@ -2442,6 +2490,7 @@ export default defineComponent({
         this.chartData.datasets[12].data = PAM_IN;
         this.chartData.datasets[13].data = FiCO2;
         this.chartData.datasets[14].data = FR;
+        this.chartData.datasets[15].data = medicamentosDataset; // Asignar datos de medicamentos
         // Asignar hora a valores de la gráfica principal
         this.chartData.labels = horaGeneracion;
   
@@ -6687,8 +6736,10 @@ export default defineComponent({
           transAnestStore.btnActualizarBalance=true
           
           if(preIdStore.nuevoRegistroPaciente == false){
+            this.menuTrans.valorGrafica = 0;
             await this.transAnestStore.saveDatosMedicamentos(this.menuTrans, preIdStore.pacienteID._id, preIdStore.pacienteCxID._id)
-          }else if(preIdStore.nuevoRegistroPaciente == true){         
+          }else if(preIdStore.nuevoRegistroPaciente == true){    
+            this.menuTrans.valorGrafica = 0;     
             await this.transAnestStore.saveNuevoDatosMedicamentos(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
           }          
   
@@ -6717,7 +6768,7 @@ export default defineComponent({
     },
 
     async actualizarMedicamentos(m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
-                                  m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string) {
+                                  m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string, m_valorGrafica: number) {
       try {
         if (this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.medicamento == "" || this.menuTrans.medicamento == undefined) {
               swal.fire({
@@ -6733,9 +6784,11 @@ export default defineComponent({
         } else {
   
           if(preIdStore.nuevoRegistroPaciente == false){
-            await transAnestStore.updateMedicamentos(m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed, preIdStore.pacienteID._id);
-          }else if(preIdStore.nuevoRegistroPaciente == true){        
-            await transAnestStore.updateNuevoMedicamentos(m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed, preIdStore.pacienteID.pid,  preIdStore.cirugiaID);
+            m_valorGrafica = 0;
+            await transAnestStore.updateMedicamentos(m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed, m_valorGrafica, preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){       
+            m_valorGrafica = 0; 
+            await transAnestStore.updateNuevoMedicamentos(m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed, m_valorGrafica, preIdStore.pacienteID.pid,  preIdStore.cirugiaID);
           }            
           
           this.menuTrans.tipoMed = "";

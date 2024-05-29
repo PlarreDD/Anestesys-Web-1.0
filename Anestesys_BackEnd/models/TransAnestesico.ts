@@ -83,6 +83,7 @@ const menuTransSchema = new Schema({
         horaInicioMed: {type: String},
         horaFinalMed: {type: String},
         observacionesMed: {type: String},
+        valorGrafica: {type: String},
     }],
 
     /* Relevo */

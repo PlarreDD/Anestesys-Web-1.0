@@ -71,6 +71,7 @@ export interface regMenuTrans{
     horaInicioMed: string,
     horaFinalMed: string,
     observacionesMed: string,
+    valorGrafica: number,
     /* Relevos */
     idRelevo:string,
     horaRelevo:string,

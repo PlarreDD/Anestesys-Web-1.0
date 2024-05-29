@@ -1153,7 +1153,8 @@ export const useTransAnestStore = defineStore('transAn', {
                     viaMed: regTransAnest.viaMed,
                     horaInicioMed: regTransAnest.horaInicioMed,
                     horaFinalMed: regTransAnest.horaFinalMed,
-                    observacionesMed: regTransAnest.observacionesMed
+                    observacionesMed: regTransAnest.observacionesMed,
+                    valorGrafica: regTransAnest.valorGrafica
                 }
             })
             .then((res: any) => {
@@ -1189,7 +1190,8 @@ export const useTransAnestStore = defineStore('transAn', {
                     viaMed: regTransAnest.viaMed,
                     horaInicioMed: regTransAnest.horaInicioMed,
                     horaFinalMed: regTransAnest.horaFinalMed,
-                    observacionesMed: regTransAnest.observacionesMed
+                    observacionesMed: regTransAnest.observacionesMed,
+                    valorGrafica: regTransAnest.valorGrafica
                 }
             })
             .then((res: any) => {
@@ -1209,7 +1211,7 @@ export const useTransAnestStore = defineStore('transAn', {
         },
 
         async updateMedicamentos(m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
-                            m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string, pid:string){
+                            m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string, m_valorGrafica: number, pid:string){
             await apiAxios({
                 url: `/trans/medic/${String(pid)}`,
                 method: "PUT",
@@ -1217,7 +1219,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    medicamentosCx: [ m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed]
+                    medicamentosCx: [ m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed, m_valorGrafica]
                 },
             })
             .then((res: any) => {
@@ -1237,7 +1239,7 @@ export const useTransAnestStore = defineStore('transAn', {
         },
 
         async updateNuevoMedicamentos(m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
-                            m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string, pid:string, cxid:string){
+                            m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string, m_valorGrafica: number, pid:string, cxid:string){
             await apiAxios({
                 url: `/trans/medic/add/${String(pid)}/${String(cxid)}`,
                 method: "PUT",
@@ -1245,7 +1247,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    medicamentosCx: [ m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed]
+                    medicamentosCx: [ m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed, m_valorGrafica]
                 },
             })
             .then((res: any) => {
