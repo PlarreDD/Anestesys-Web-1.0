@@ -1712,16 +1712,16 @@ export default defineComponent({
                   data: [],
                   fill: true,
                   pointStyle: 'rect', //Estilo del punto en los datos
-                  radius: 6, //Tamaño punto
+                  radius: 8, //Tamaño punto
                   showLine: false //Oculta la línea       
               },
               {
                   label: 'Evento',
                   borderColor: 'rgba(31, 80, 146)',
                   data: [],
-                  fill: false,
+                  fill: true,
                   pointStyle: 'rect', //Estilo del punto en los datos
-                  radius: 6, //Tamaño punto      
+                  radius: 8, //Tamaño punto      
                   showLine: false    
               },
 
@@ -2381,12 +2381,9 @@ export default defineComponent({
         );
   
         let horaGeneracion = this.saltoArreglo.map(item => item.horaGeneracion);
-        //horaGeneración:15:35,15:36,15:37,15:38,15:39,15:40
 
          // Valores de medicamento a colocar en la gráfica
-        // let medicamentosDataset = new Array(horaGeneracion.length).fill(null);
-        // Valores de medicamento a colocar en la gráfica
-        let medicamentosDataset = new Array(horaGeneracion.length).fill(null).map(() => ({valor: null, nombre: null}));
+        let medicamentosDataset = new Array(horaGeneracion.length).fill(null).map(() => ({valor: null, nombre: null, dosis: null, unidad: null}));
 
         if(transAnestStore.medicamentos != null){
           this.medicamentosFiltrados = transAnestStore.medicamentos.flatMap((med) => {
@@ -2395,6 +2392,8 @@ export default defineComponent({
                 medicamento: medicamento.medicamento,
                 horaInicioMed: medicamento.horaInicioMed,
                 valorGrafica: medicamento.valorGrafica,
+                dosisMed: medicamento.dosisMed,
+                unidadMed: medicamento.unidadMed
               };
             });
           });
@@ -2402,12 +2401,10 @@ export default defineComponent({
           this.medicamentosFiltrados.forEach(med => {
             let index = horaGeneracion.indexOf(med.horaInicioMed);
             if (index !== -1) {
-              // medicamentosDataset[index] = med.valorGrafica;
-              medicamentosDataset[index] = {valor: med.valorGrafica, nombre: med.medicamento};
+              medicamentosDataset[index] = {valor: med.valorGrafica, nombre: med.medicamento, dosis: med.dosisMed, unidad: med.unidadMed};
             }
           });
         }
-        //this.medicamentosFiltrados: [{"medicamento":"FENTANILO","dosisMed":"45","horaInicioMed":"15:10"},{"medicamento":"LIDOCAÍNA","dosisMed":"78","horaInicioMed":"15:15"}]
         
         let gruposFC = [];
         for (let i = 0; i < FC.length; i += 26) {
@@ -2488,11 +2485,6 @@ export default defineComponent({
         for (let i = 0; i < horaGeneracion.length; i += 26) {
           gruposHora.push(horaGeneracion.slice(i, i + 26));
         };
-
-        // let gruposMedicamentos = [];
-        // for (let i = 0; i < horaGeneracion.length; i += 26) {
-        //   gruposMedicamentos.push(transAnestStore.medicamentos.slice(i, i + 26));
-        // };
   
         // Asignar valores a gráfica principal
         this.chartData.datasets[0].data = FC;
@@ -2510,8 +2502,7 @@ export default defineComponent({
         this.chartData.datasets[12].data = PAM_IN;
         this.chartData.datasets[13].data = FiCO2;
         this.chartData.datasets[14].data = FR;
-        // this.chartData.datasets[15].data = medicamentosDataset; // Asignar datos de medicamentos
-        this.chartData.datasets[15].data = medicamentosDataset.map(item => item.valor);
+        this.chartData.datasets[15].data = medicamentosDataset.map(item => item.valor); // Asignar datos de medicamentos
         // Asignar hora a valores de la gráfica principal
         this.chartData.labels = horaGeneracion;
   
@@ -2533,12 +2524,21 @@ export default defineComponent({
           this.chartElements.push(chart);
         }
 
-        // Configurar tooltips para mostrar el nombre del medicamento
         this.chartOptions.plugins.tooltip = {
           callbacks: {
             label: function(tooltipItem) {
-              const data = medicamentosDataset[tooltipItem.dataIndex];
-              return data && data.nombre ? `${data.nombre}: ${data.valor}` : null;
+              const datasetIndex = tooltipItem.datasetIndex;
+              const dataIndex = tooltipItem.dataIndex;
+              const datasetLabel = tooltipItem.dataset.label;
+
+              // Verifica si es el dataset de medicamentos
+              if (datasetIndex === 15) {
+                const data = medicamentosDataset[dataIndex];
+                return data && data.nombre ? `${data.nombre}: ${data.dosis} ${data.unidad}` : 'No medicamento';
+              } else {
+                // Muestra el valor original para los demás datasets
+                return `${datasetLabel}: ${tooltipItem.raw}`;
+              }
             }
           }
         };
