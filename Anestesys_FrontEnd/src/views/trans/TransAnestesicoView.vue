@@ -1577,7 +1577,8 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'circle', //Estilo del punto en los datos
-                  radius: 4, //Tamaño punto                 
+                  radius: 4, //Tamaño punto              
+                  showLine: true                
               },
               {
                   label: 'Pulso',
@@ -1585,7 +1586,8 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'cross',
-                  radius: 4
+                  radius: 4,
+                  showLine: true
               },
               {
                   label: 'PAS',
@@ -1593,7 +1595,8 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'crossRot',
-                  radius: 4
+                  radius: 4,
+                  showLine: true
               },
               {
                   label: 'PAD',
@@ -1601,7 +1604,8 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'cross',
-                  radius: 4
+                  radius: 4,
+                  showLine: true
               },
               {
                   label: 'PAM',
@@ -1609,7 +1613,8 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'rectRounded',
-                  radius: 4
+                  radius: 4,
+                  showLine: true
               },
               {
                   label: 'SpO2',
@@ -1617,7 +1622,8 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'rectRot',
-                  radius: 4
+                  radius: 4,
+                  showLine: true
               },
               {
                   label: 'EtCO2',
@@ -1625,7 +1631,8 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'star',
-                  radius: 4
+                  radius: 4,
+                  showLine: true
               },
               {
                   label: 'Temp1',
@@ -1633,7 +1640,8 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'triangle',
-                  radius: 4
+                  radius: 4,
+                  showLine: true
               },
               {
                   label: 'Temp2',
@@ -1641,7 +1649,8 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'circle',
-                  radius: 4
+                  radius: 4,
+                  showLine: true
               },
               {
                   label: 'PVC',
@@ -1649,7 +1658,8 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'rectRot',
-                  radius: 4
+                  radius: 4,
+                  showLine: true
               },
               {
                   label: 'PAS_IN',
@@ -1657,7 +1667,8 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'crossRot',
-                  radius: 4
+                  radius: 4,
+                  showLine: true
               },
               {
                   label: 'PAD_IN',
@@ -1665,7 +1676,8 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'cross',
-                  radius: 4
+                  radius: 4,
+                  showLine: true
               },
               {
                   label: 'PAM_IN',
@@ -1673,7 +1685,8 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'rectRounded',
-                  radius: 4
+                  radius: 4,
+                  showLine: true
               },
               {
                   label: 'FiCO2',
@@ -1681,7 +1694,8 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'star',
-                  radius: 4
+                  radius: 4,
+                  showLine: true
               },
               {
                   label: 'FR',
@@ -1689,7 +1703,8 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'triangle',
-                  radius: 4
+                  radius: 4,
+                  showLine: true
               },
               {
                   label: 'Medicamento',
@@ -1697,7 +1712,8 @@ export default defineComponent({
                   data: [],
                   fill: true,
                   pointStyle: 'rect', //Estilo del punto en los datos
-                  radius: 6, //Tamaño punto           
+                  radius: 6, //Tamaño punto
+                  showLine: false //Oculta la línea       
               },
               {
                   label: 'Evento',
@@ -1705,7 +1721,8 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'rect', //Estilo del punto en los datos
-                  radius: 6, //Tamaño punto           
+                  radius: 6, //Tamaño punto      
+                  showLine: false    
               },
 
           ]
@@ -1755,7 +1772,7 @@ export default defineComponent({
               },
             },
           },
-      }as unknown,
+      }as any,
       chartKey: 0,
 
       tamanoModalGrid: false,
@@ -2367,10 +2384,12 @@ export default defineComponent({
         //horaGeneración:15:35,15:36,15:37,15:38,15:39,15:40
 
          // Valores de medicamento a colocar en la gráfica
-        let medicamentosDataset = new Array(horaGeneracion.length).fill(null);
+        // let medicamentosDataset = new Array(horaGeneracion.length).fill(null);
+        // Valores de medicamento a colocar en la gráfica
+        let medicamentosDataset = new Array(horaGeneracion.length).fill(null).map(() => ({valor: null, nombre: null}));
 
         if(transAnestStore.medicamentos != null){
-          this.medicamentosFiltrados = transAnestStore.medicamentos.flatMap((med: any) => {
+          this.medicamentosFiltrados = transAnestStore.medicamentos.flatMap((med) => {
             return med.medicamentosCx.map((medicamento: any) => {
               return {
                 medicamento: medicamento.medicamento,
@@ -2383,7 +2402,8 @@ export default defineComponent({
           this.medicamentosFiltrados.forEach(med => {
             let index = horaGeneracion.indexOf(med.horaInicioMed);
             if (index !== -1) {
-              medicamentosDataset[index] = med.valorGrafica;
+              // medicamentosDataset[index] = med.valorGrafica;
+              medicamentosDataset[index] = {valor: med.valorGrafica, nombre: med.medicamento};
             }
           });
         }
@@ -2490,7 +2510,8 @@ export default defineComponent({
         this.chartData.datasets[12].data = PAM_IN;
         this.chartData.datasets[13].data = FiCO2;
         this.chartData.datasets[14].data = FR;
-        this.chartData.datasets[15].data = medicamentosDataset; // Asignar datos de medicamentos
+        // this.chartData.datasets[15].data = medicamentosDataset; // Asignar datos de medicamentos
+        this.chartData.datasets[15].data = medicamentosDataset.map(item => item.valor);
         // Asignar hora a valores de la gráfica principal
         this.chartData.labels = horaGeneracion;
   
@@ -2511,6 +2532,16 @@ export default defineComponent({
                       gruposTemp2[i], gruposPVC[i], gruposPASIN[i], gruposPADIN[i], gruposPAMIN[i], gruposFiCO2[i], gruposFR[i], gruposHora[i], canvasElement);
           this.chartElements.push(chart);
         }
+
+        // Configurar tooltips para mostrar el nombre del medicamento
+        this.chartOptions.plugins.tooltip = {
+          callbacks: {
+            label: function(tooltipItem) {
+              const data = medicamentosDataset[tooltipItem.dataIndex];
+              return data && data.nombre ? `${data.nombre}: ${data.valor}` : null;
+            }
+          }
+        };
   
         this.chartKey += 1;             
       } catch (error) {
