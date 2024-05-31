@@ -1147,12 +1147,12 @@ export const saveEventos = async (req: any, res: Response) => {
     try {
         const { pid, cxid,
                 // Datos relevos
-                horaEvento, tipoEve, detalleEvento
+                horaEvento, tipoEve, detalleEvento, valorGraficaEv
               } = req.body;        
         const menuTrans  = await new MenuTrans({ pid, cxid,
                                             // Datos del relevo
                                             evCriticoCx: {
-                                                horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento
+                                                horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento, valorGraficaEv: valorGraficaEv
                                             },
                                         });
         await menuTrans.save();        
@@ -1170,12 +1170,12 @@ export const saveNuevoEventos = async (req: any, res: Response) => {
     try {
         const { pid, cxid,
                 // Datos relevos
-                horaEvento, tipoEve, detalleEvento
+                horaEvento, tipoEve, detalleEvento, valorGraficaEv
               } = req.body;        
         const menuTrans  = await new MenuTrans({ pid, cxid,
                                             // Datos del relevo
                                             evCriticoCx: {
-                                                horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento
+                                                horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento, valorGraficaEv: valorGraficaEv
                                             },
                                         });
         await menuTrans.save();        
@@ -1197,7 +1197,7 @@ export const updateEventos = async (req: any, res: Response) => {
             { pid: pid },
             { $push:{
                 evCriticoCx: {
-                        horaEvento: evCriticoCx[0], tipoEve: evCriticoCx[1], detalleEvento: evCriticoCx[2]
+                        horaEvento: evCriticoCx[0], tipoEve: evCriticoCx[1], detalleEvento: evCriticoCx[2], valorGraficaEv: evCriticoCx[3]
                     }
                 }
             });        
@@ -1219,7 +1219,7 @@ export const updateNuevoEventos = async (req: any, res: Response) => {
             { pid: pid, cxid: cxid },
             { $push:{
                 evCriticoCx: {
-                        horaEvento: evCriticoCx[0], tipoEve: evCriticoCx[1], detalleEvento: evCriticoCx[2]
+                        horaEvento: evCriticoCx[0], tipoEve: evCriticoCx[1], detalleEvento: evCriticoCx[2], valorGraficaEv: evCriticoCx[3]
                     }
                 }
             });        

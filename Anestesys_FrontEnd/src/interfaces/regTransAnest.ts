@@ -83,5 +83,6 @@ export interface regMenuTrans{
     idEvento:string,
     horaEvento:string,
     tipoEve:string,
-    detalleEvento:string
+    detalleEvento:string,
+    valorGraficaEv:number
 }

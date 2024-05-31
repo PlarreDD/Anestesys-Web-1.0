@@ -356,7 +356,7 @@
                                 <button data-bs-toggle="tab" 
                                             type="submit"
                                             class="btn btn-guardar-balance fw-bold"
-                                            @click="actualizarEventos(menuTrans.horaEvento, menuTrans.tipoEve, menuTrans.detalleEvento)"> GUARDAR</button>
+                                            @click="actualizarEventos(menuTrans.horaEvento, menuTrans.tipoEve, menuTrans.detalleEvento, menuTrans.valorGraficaEv)"> GUARDAR</button>
                               </template>  
 
                               <template v-if="transAnestStore.btnActualizaEvento === true">
@@ -1724,7 +1724,6 @@ export default defineComponent({
                   radius: 8, //Tamaño punto      
                   showLine: false    
               },
-
           ]
       },
       chartOptions: {
@@ -1788,6 +1787,7 @@ export default defineComponent({
       balanceTemp: null,
 
       medicamentosFiltrados: [],
+      eventosFiltrados: []
     }
   },
 
@@ -2382,8 +2382,8 @@ export default defineComponent({
   
         let horaGeneracion = this.saltoArreglo.map(item => item.horaGeneracion);
 
-         // Valores de medicamento a colocar en la gráfica
-        let medicamentosDataset = new Array(horaGeneracion.length).fill(null).map(() => ({valor: null, nombre: null, dosis: null, unidad: null}));
+        // Valores de medicamento a colocar en la gráfica
+        let medicamentosDataset = new Array(horaGeneracion.length).fill(null).map(() => []);        
 
         if(transAnestStore.medicamentos != null){
           this.medicamentosFiltrados = transAnestStore.medicamentos.flatMap((med) => {
@@ -2401,10 +2401,43 @@ export default defineComponent({
           this.medicamentosFiltrados.forEach(med => {
             let index = horaGeneracion.indexOf(med.horaInicioMed);
             if (index !== -1) {
-              medicamentosDataset[index] = {valor: med.valorGrafica, nombre: med.medicamento, dosis: med.dosisMed, unidad: med.unidadMed};
+              medicamentosDataset[index].push({valor: med.valorGrafica, nombre: med.medicamento, dosis: med.dosisMed, unidad: med.unidadMed});
             }
           });
         }
+
+        // Valores de evento a colocar en la gráfica
+        let eventosDataset = new Array(horaGeneracion.length).fill(null).map(() => []);
+
+        if (transAnestStore.eventos != null) {
+          transAnestStore.eventos.forEach(evento => {
+            let index = horaGeneracion.indexOf(evento.horeEvento);
+            if (index !== -1) {
+              eventosDataset[index].push({valor: evento.valorGraficaEv, detalle: evento.detalleEvento});
+            }
+          });
+        }
+
+        // if(transAnestStore.eventos != null){
+        //   this.eventosFiltrados = transAnestStore.eventos.flatMap((eve) => {
+        //     return eve.evCriticoCx.map((evento: any) => {
+        //       return {
+        //         horeEvento: evento.horaEvento,
+        //         detalleEvento: evento.detalleEvento,
+        //         valorGraficaEv: evento.valorGraficaEv,
+        //       };
+        //     });
+        //   });
+
+        //   console.log("Eventos filtrados: ", JSON.stringify(this.eventosFiltrados));          
+          
+        //   this.eventosFiltrados.forEach(eve => {
+        //     let index = horaGeneracion.indexOf(eve.horaEvento);
+        //     if (index !== -1) {
+        //       eventosDataset[index].push({valorEv: eve.valorGraficaEv, detalle: eve.detalleEvento});
+        //     }
+        //   });
+        // }
         
         let gruposFC = [];
         for (let i = 0; i < FC.length; i += 26) {
@@ -2502,7 +2535,11 @@ export default defineComponent({
         this.chartData.datasets[12].data = PAM_IN;
         this.chartData.datasets[13].data = FiCO2;
         this.chartData.datasets[14].data = FR;
-        this.chartData.datasets[15].data = medicamentosDataset.map(item => item.valor); // Asignar datos de medicamentos
+        // this.chartData.datasets[15].data = medicamentosDataset.map(item => item.valor); // Asignar datos de medicamentos
+        this.chartData.datasets[15].data = medicamentosDataset.map(item => item.length ? item[item.length - 1].valor : null);
+        console.log(this.chartData.datasets[15].data);        
+        this.chartData.datasets[16].data = eventosDataset.map(item => item.length ? item[item.length - 1].valor : null);
+        console.log(this.chartData.datasets[16].data);
         // Asignar hora a valores de la gráfica principal
         this.chartData.labels = horaGeneracion;
   
@@ -2534,7 +2571,18 @@ export default defineComponent({
               // Verifica si es el dataset de medicamentos
               if (datasetIndex === 15) {
                 const data = medicamentosDataset[dataIndex];
-                return data && data.nombre ? `${data.nombre}: ${data.dosis} ${data.unidad}` : 'No medicamento';
+                if (data && data.length) {
+                  return data.map(med => `${med.nombre}: ${med.dosis} ${med.unidad}`).join(', ');
+                } else {
+                  return 'No medicamento';
+                }
+              } else if(datasetIndex === 16) {
+                const data = eventosDataset[dataIndex];
+                if (data && data.length) {
+                  return data.map(evt => `${evt.detalle}`).join(', ');
+                } else {
+                  return 'No evento';
+                }
               } else {
                 // Muestra el valor original para los demás datasets
                 return `${datasetLabel}: ${tooltipItem.raw}`;
@@ -7390,7 +7438,7 @@ export default defineComponent({
       }
     },
 
-    async actualizarEventos(r_horaEvento: string, e_tipoEve: string, e_detalleEvento: string) {
+    async actualizarEventos(r_horaEvento: string, e_tipoEve: string, e_detalleEvento: string, e_valorGraficaEv: number) {
       try {
         if (this.menuTrans.horaEvento == "" || this.menuTrans.horaEvento == undefined) {
               swal.fire({
@@ -7405,9 +7453,11 @@ export default defineComponent({
               });
         } else {
           if(preIdStore.nuevoRegistroPaciente == false){
-            await transAnestStore.updateEventos(r_horaEvento, e_tipoEve, e_detalleEvento, preIdStore.pacienteID._id);
-          }else if(preIdStore.nuevoRegistroPaciente == true){        
-            await transAnestStore.updateNuevoEventos(r_horaEvento, e_tipoEve, e_detalleEvento, preIdStore.pacienteID.pid, preIdStore.cirugiaID);
+            e_valorGraficaEv = 10;
+            await transAnestStore.updateEventos(r_horaEvento, e_tipoEve, e_detalleEvento, e_valorGraficaEv, preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){   
+            e_valorGraficaEv = 10;     
+            await transAnestStore.updateNuevoEventos(r_horaEvento, e_tipoEve, e_detalleEvento, e_valorGraficaEv, preIdStore.pacienteID.pid, preIdStore.cirugiaID);
           }              
           
           this.menuTrans.horaEvento = "";

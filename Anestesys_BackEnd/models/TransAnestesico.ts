@@ -100,6 +100,7 @@ const menuTransSchema = new Schema({
         horaEvento: { type: String },
         tipoEve: { type: String },
         detalleEvento: { type: String },
+        valorGraficaEv: { type: String }
     }],
 
     datosMSV: [

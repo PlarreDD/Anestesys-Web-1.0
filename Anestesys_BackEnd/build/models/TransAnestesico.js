@@ -95,6 +95,7 @@ const menuTransSchema = new mongoose_1.Schema({
             horaEvento: { type: String },
             tipoEve: { type: String },
             detalleEvento: { type: String },
+            valorGraficaEv: { type: String }
         }],
     datosMSV: [
         {

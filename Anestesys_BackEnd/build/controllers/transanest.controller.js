@@ -1039,11 +1039,11 @@ const saveEventos = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     try {
         const { pid, cxid, 
         // Datos relevos
-        horaEvento, tipoEve, detalleEvento } = req.body;
+        horaEvento, tipoEve, detalleEvento, valorGraficaEv } = req.body;
         const menuTrans = yield new TransAnestesico_1.MenuTrans({ pid, cxid,
             // Datos del relevo
             evCriticoCx: {
-                horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento
+                horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento, valorGraficaEv: valorGraficaEv
             },
         });
         yield menuTrans.save();
@@ -1062,11 +1062,11 @@ const saveNuevoEventos = (req, res) => __awaiter(void 0, void 0, void 0, functio
     try {
         const { pid, cxid, 
         // Datos relevos
-        horaEvento, tipoEve, detalleEvento } = req.body;
+        horaEvento, tipoEve, detalleEvento, valorGraficaEv } = req.body;
         const menuTrans = yield new TransAnestesico_1.MenuTrans({ pid, cxid,
             // Datos del relevo
             evCriticoCx: {
-                horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento
+                horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento, valorGraficaEv: valorGraficaEv
             },
         });
         yield menuTrans.save();
@@ -1087,7 +1087,7 @@ const updateEventos = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         const { evCriticoCx } = req.body;
         const menuTrans = yield TransAnestesico_1.MenuTrans.findOneAndUpdate({ pid: pid }, { $push: {
                 evCriticoCx: {
-                    horaEvento: evCriticoCx[0], tipoEve: evCriticoCx[1], detalleEvento: evCriticoCx[2]
+                    horaEvento: evCriticoCx[0], tipoEve: evCriticoCx[1], detalleEvento: evCriticoCx[2], valorGraficaEv: evCriticoCx[3]
                 }
             }
         });
@@ -1108,7 +1108,7 @@ const updateNuevoEventos = (req, res) => __awaiter(void 0, void 0, void 0, funct
         const { evCriticoCx } = req.body;
         const menuTrans = yield TransAnestesico_1.MenuTrans.findOneAndUpdate({ pid: pid, cxid: cxid }, { $push: {
                 evCriticoCx: {
-                    horaEvento: evCriticoCx[0], tipoEve: evCriticoCx[1], detalleEvento: evCriticoCx[2]
+                    horaEvento: evCriticoCx[0], tipoEve: evCriticoCx[1], detalleEvento: evCriticoCx[2], valorGraficaEv: evCriticoCx[3]
                 }
             }
         });

@@ -1607,6 +1607,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     horaEvento: regTransAnest.horaEvento,
                     tipoEve: regTransAnest.tipoEve,
                     detalleEvento: regTransAnest.detalleEvento,
+                    valorGraficaEv: regTransAnest.valorGraficaEv
                 }
             })
             .then((res: any) => {
@@ -1638,6 +1639,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     horaEvento: regTransAnest.horaEvento,
                     tipoEve: regTransAnest.tipoEve,
                     detalleEvento: regTransAnest.detalleEvento,
+                    valorGraficaEv: regTransAnest.valorGraficaEv
                 }
             })
             .then((res: any) => {
@@ -1656,7 +1658,7 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
-        async updateEventos(e_horaEvento: string, e_tipoEve: string, e_detalleEvento: string, pid:string){
+        async updateEventos(e_horaEvento: string, e_tipoEve: string, e_detalleEvento: string, e_valorGraficaEv: number, pid:string){
             await apiAxios({
                 url: `/trans/evento/${String(pid)}`,
                 method: "PUT",
@@ -1664,7 +1666,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    evCriticoCx: [ e_horaEvento, e_tipoEve, e_detalleEvento ]
+                    evCriticoCx: [ e_horaEvento, e_tipoEve, e_detalleEvento, e_valorGraficaEv ]
                 },
             })
             .then((res: any) => {
@@ -1683,7 +1685,7 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
-        async updateNuevoEventos(e_horaEvento: string, e_tipoEve: string, e_detalleEvento: string, pid:string, cxid: string){
+        async updateNuevoEventos(e_horaEvento: string, e_tipoEve: string, e_detalleEvento: string, e_valorGraficaEv: number, pid:string, cxid: string){
             await apiAxios({
                 url: `/trans/evento/add/${String(pid)}/${String(cxid)}`,
                 method: "PUT",
@@ -1691,7 +1693,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    evCriticoCx: [ e_horaEvento, e_tipoEve, e_detalleEvento ]
+                    evCriticoCx: [ e_horaEvento, e_tipoEve, e_detalleEvento, e_valorGraficaEv ]
                 },
             })
             .then((res: any) => {
