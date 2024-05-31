@@ -1473,9 +1473,9 @@ import { Line } from 'vue-chartjs';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
-// import pdfFonts from "pdfmake/build/vfs_fonts.js";
+import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
-// window.pdfMake.fonts = pdfFonts.pdfMake;
+window.pdfMake.fonts = pdfFonts.pdfMake;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 
@@ -2383,7 +2383,9 @@ export default defineComponent({
         let horaGeneracion = this.saltoArreglo.map(item => item.horaGeneracion);
 
         // Valores de medicamento a colocar en la gráfica
-        let medicamentosDataset = new Array(horaGeneracion.length).fill(null).map(() => []);        
+        let medicamentosDataset = new Array(horaGeneracion.length).fill(null).map(() => []);
+        // Valores de evento a colocar en la gráfica
+        let eventosDataset = new Array(horaGeneracion.length).fill(null).map(() => []);    
 
         if(transAnestStore.medicamentos != null){
           this.medicamentosFiltrados = transAnestStore.medicamentos.flatMap((med) => {
@@ -2404,40 +2406,26 @@ export default defineComponent({
               medicamentosDataset[index].push({valor: med.valorGrafica, nombre: med.medicamento, dosis: med.dosisMed, unidad: med.unidadMed});
             }
           });
-        }
-
-        // Valores de evento a colocar en la gráfica
-        let eventosDataset = new Array(horaGeneracion.length).fill(null).map(() => []);
+        }                
 
         if (transAnestStore.eventos != null) {
-          transAnestStore.eventos.forEach(evento => {
-            let index = horaGeneracion.indexOf(evento.horeEvento);
+            this.eventosFiltrados = transAnestStore.eventos.flatMap((eve) => {
+            return eve.evCriticoCx.map((evento: any) => {
+              return {
+                horaEvento: evento.horaEvento,
+                detalleEvento: evento.detalleEvento,
+                valorGraficaEv: evento.valorGraficaEv,
+              };
+            });
+          });    
+
+          this.eventosFiltrados.forEach(eve => {
+            let index = horaGeneracion.indexOf(eve.horaEvento);
             if (index !== -1) {
-              eventosDataset[index].push({valor: evento.valorGraficaEv, detalle: evento.detalleEvento});
+              eventosDataset[index].push({valor: eve.valorGraficaEv, detalle: eve.detalleEvento});
             }
           });
         }
-
-        // if(transAnestStore.eventos != null){
-        //   this.eventosFiltrados = transAnestStore.eventos.flatMap((eve) => {
-        //     return eve.evCriticoCx.map((evento: any) => {
-        //       return {
-        //         horeEvento: evento.horaEvento,
-        //         detalleEvento: evento.detalleEvento,
-        //         valorGraficaEv: evento.valorGraficaEv,
-        //       };
-        //     });
-        //   });
-
-        //   console.log("Eventos filtrados: ", JSON.stringify(this.eventosFiltrados));          
-          
-        //   this.eventosFiltrados.forEach(eve => {
-        //     let index = horaGeneracion.indexOf(eve.horaEvento);
-        //     if (index !== -1) {
-        //       eventosDataset[index].push({valorEv: eve.valorGraficaEv, detalle: eve.detalleEvento});
-        //     }
-        //   });
-        // }
         
         let gruposFC = [];
         for (let i = 0; i < FC.length; i += 26) {
@@ -2535,11 +2523,9 @@ export default defineComponent({
         this.chartData.datasets[12].data = PAM_IN;
         this.chartData.datasets[13].data = FiCO2;
         this.chartData.datasets[14].data = FR;
-        // this.chartData.datasets[15].data = medicamentosDataset.map(item => item.valor); // Asignar datos de medicamentos
         this.chartData.datasets[15].data = medicamentosDataset.map(item => item.length ? item[item.length - 1].valor : null);
-        console.log(this.chartData.datasets[15].data);        
         this.chartData.datasets[16].data = eventosDataset.map(item => item.length ? item[item.length - 1].valor : null);
-        console.log(this.chartData.datasets[16].data);
+
         // Asignar hora a valores de la gráfica principal
         this.chartData.labels = horaGeneracion;
   
@@ -2579,7 +2565,7 @@ export default defineComponent({
               } else if(datasetIndex === 16) {
                 const data = eventosDataset[dataIndex];
                 if (data && data.length) {
-                  return data.map(evt => `${evt.detalle}`).join(', ');
+                  return data.map(ev => `${ev.detalle}`).join(', ');
                 } else {
                   return 'No evento';
                 }
@@ -6849,14 +6835,16 @@ export default defineComponent({
     async actualizarMedicamentos(m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
                                   m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string, m_valorGrafica: number) {
       try {
-        if (this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.medicamento == "" || this.menuTrans.medicamento == undefined) {
+        if (this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.medicamento == "" || this.menuTrans.medicamento == undefined ||
+            this.menuTrans.dosisMed == "" || this.menuTrans.dosisMed == undefined || this.menuTrans.unidadMed == "" || this.menuTrans.unidadMed == undefined ||
+            this.menuTrans.horaInicioMed == "" || this.menuTrans.horaInicioMed == undefined) {
               swal.fire({
-              title: "Indique el tipo de administración y medicamento",
+              title: "Indique el tipo de administración, medicamento, hora inicial, dosis y unidad de medicamento",
               icon: "warning",
               showConfirmButton: false,
               showCloseButton: true,
               toast: true,
-              timer: 2500,
+              timer: 4000,
               timerProgressBar: true,
               position: "top-end",
               });
@@ -6924,9 +6912,11 @@ export default defineComponent({
 
     async actualizarMedicamento() {
       try {
-        if (this.menuTrans.tipoMed == "" || this.menuTrans.medicamento == "") {
+        if (this.menuTrans.tipoMed == "" || this.menuTrans.tipoMed == undefined || this.menuTrans.medicamento == "" || this.menuTrans.medicamento == undefined ||
+            this.menuTrans.dosisMed == "" || this.menuTrans.dosisMed == undefined || this.menuTrans.unidadMed == "" || this.menuTrans.unidadMed == undefined ||
+            this.menuTrans.horaInicioMed == "" || this.menuTrans.horaInicioMed == undefined) {
             swal.fire({
-            title: "Indique el tipo de administración y medicamento",
+            title: "Indique el tipo de administración, medicamento, hora inicial, dosis y unidad de medicamento",
             icon: "warning",
             showConfirmButton: false,
             showCloseButton: true,
