@@ -57,7 +57,7 @@
               </li>
 
               <!-- Link Config Monitor -->
-              <li>
+              <!-- <li>
                 <button
                   type="button"
                   class="btn btn-configuracion fw-bold"
@@ -66,16 +66,15 @@
                   <img src="../../public/images/imgIcon/monitor.svg" />
                   &nbsp;&nbsp;&nbsp;Configuración de monitor
                 </button>
-              </li>
+              </li> -->
 
               <!-- Link Tendencias -->
               <li>
                 <button
                   type="button"
-                  class="btn btn-configuracion fw-bold"
-                  data-bs-toggle="modal"
-                  data-bs-target="#tendenciasModal"
-                >
+                  class="btn btn-configuracion fw-bold" @click="validarTendencias">
+                  <!-- data-bs-toggle="modal"
+                  data-bs-target="#tendenciasModal" -->
                   <img src="../../public/images/imgIcon/tendencia.svg" />
                   &nbsp;&nbsp;&nbsp;Tendencias
                 </button>
@@ -361,9 +360,6 @@
                           <tbody>
                             <!-- Mostrar los datos que se encuentren en preIdStore en una tabla -->
                             <tr v-for="( cirujano, index ) in preIdStore.cirujanos.lista">
-                              <!-- <td class="text-white">
-                                {{ index + 1 }}
-                              </td> -->
 
                               <td class="text-white">
                                 {{ cirujano }}
@@ -568,7 +564,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>    
 
     <!-- Modal MVS -->
     <div class="modal"
@@ -1532,6 +1528,37 @@ export default defineComponent({
       try {        
         await preIdStore.deleteResdAnest(userStore.IdMed, nombreResidente);
         await preIdStore.getListResdAnest(userStore.IdMed);
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
+    },
+
+    async validarTendencias(){
+      try {
+        if(preIdStore.modalTendencias === true){ 
+          let presionarBotonTen = document.getElementById('abrir-tendencias');
+  
+          // Crea un nuevo evento de clic
+          let event = new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true,
+            view: window
+          });
+    
+          // Despacha el evento de clic en el botón
+          presionarBotonTen.dispatchEvent(event);          
+        }else if(preIdStore.modalTendencias === false){
+          swal.fire({
+          title: "Dirijase al modulo Trans-Anéstesico para configurar las tendencias",
+          icon: "warning",
+          showConfirmButton: false,
+          showCloseButton: true,
+          toast: true,
+          timer: 3000,
+          timerProgressBar: true,
+          position: "top-end",
+          });
+        }        
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }

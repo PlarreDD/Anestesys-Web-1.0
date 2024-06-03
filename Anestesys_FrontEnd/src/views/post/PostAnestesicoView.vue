@@ -629,6 +629,7 @@ export default ({
         const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
         await componenteRecuperacion.guardarDatosRecuperacion();
         // await componenteRecuperacion.detenerReconocimiento();
+        preIdStore.modalTendencias = true
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }

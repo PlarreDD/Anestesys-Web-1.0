@@ -5739,7 +5739,8 @@ export default defineComponent({
   
         const componenteNota = await this.$refs.refNota as InstanceType<typeof Nota>;
         await componenteNota.guardarDatosNota();        
-        // await componenteNota.detenerReconocimiento()        
+        // await componenteNota.detenerReconocimiento()   
+        idStore.modalTendencias=true     
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }   

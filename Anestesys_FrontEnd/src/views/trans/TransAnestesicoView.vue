@@ -1356,7 +1356,7 @@
         <div class="" :class="vistaPreviaOff == false ? 'col-md-2 menu-pre-post' : 'col-md-2 menu-pre-post-off'">
           <RouterLink to="pre">
             <!-- <img src="../../../public/images/pre.svg" class="ajusteImg" @click="detenerReconocimiento" /> -->
-            <img src="../../../public/images/pre.svg" class="ajusteImg" />
+            <img src="../../../public/images/pre.svg" class="ajusteImg" @click="validarModalTendencias"/>
           </RouterLink>
         </div>
 
@@ -1367,7 +1367,7 @@
         <div class="" :class="vistaPreviaOff == false ? 'col-md-2 menu-pre-post' : 'col-md-2 menu-pre-post-off'">
           <RouterLink to="post">
             <!-- <img src="../../../public/images/post.svg" class="ajusteImg" @click="detenerReconocimiento" /> -->
-            <img src="../../../public/images/post.svg" class="ajusteImg" />
+            <img src="../../../public/images/post.svg" class="ajusteImg" @click="validarModalTendencias"/>
           </RouterLink>
         </div>
       </div>
@@ -1453,6 +1453,61 @@
       </div>
     </div>  
 
+    <!-- Modal tendencias -->
+    <div class="modal"
+         id="tendenciasModal"
+         tabindex="-1"
+         aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" >
+        <div class="modal-content colorModal">
+          <div class="input-group mb-3">
+            <div class="modal-body">
+              <div class="col-md-12">
+                <div class="row g-3">
+                  <div class="col-md-11">
+                    <h5 class="text-white fw-bold">TENDENCIAS</h5>
+                    <h6 class="text-white fw-bold">Configuración de Tendencias</h6>
+                  </div>
+
+                  <div class="col-md-1 div-img">
+                    <button
+                      type="button"
+                      class="btn fw-bold"
+                      data-bs-dismiss="modal"
+                      aria-label="Close">
+                      <i class="text-white">
+                        <font-awesome-icon icon="fa-solid fa-xmark" size="2xl" />
+                      </i>
+                    </button>
+                  </div>
+
+                  <form class="row g-3" @submit.prevent="">
+                    <div class="col-md-12">
+                      <div class="checkbox-container">
+                        <div v-for="(dataset, index) in chartData.datasets" :key="index" class="checkbox-item">
+                          <input
+                            type="checkbox"
+                            :id="'dataset-' + index"
+                            :checked="!dataset.hidden"
+                            @change="toggleDataset(index)"
+                          />
+                          <label class="text-white" :for="'dataset-' + index">&nbsp;{{ dataset.label }}</label>
+                        </div>
+                      </div>
+                      <canvas :id="'chart-' + chartKey"></canvas>
+                    </div>
+                    <canvas ref="chartCanvas"></canvas>
+
+                    <button id="abrir-tendencias" type="button" class="invisible" data-bs-toggle="modal" data-bs-target="#tendenciasModal"></button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -1504,6 +1559,10 @@ let taSeparada: Object;
 
 export default defineComponent({
   name: 'App',
+
+  created() {
+    this.datasetVisibility = new Array(this.chartData.datasets.length).fill(true);
+  },
 
   data() {
     return {
@@ -1578,7 +1637,8 @@ export default defineComponent({
                   fill: false,
                   pointStyle: 'circle', //Estilo del punto en los datos
                   radius: 4, //Tamaño punto              
-                  showLine: true                
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada               
               },
               {
                   label: 'Pulso',
@@ -1587,7 +1647,8 @@ export default defineComponent({
                   fill: false,
                   pointStyle: 'cross',
                   radius: 4,
-                  showLine: true
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'PAS',
@@ -1596,7 +1657,8 @@ export default defineComponent({
                   fill: false,
                   pointStyle: 'crossRot',
                   radius: 4,
-                  showLine: true
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'PAD',
@@ -1605,7 +1667,8 @@ export default defineComponent({
                   fill: false,
                   pointStyle: 'cross',
                   radius: 4,
-                  showLine: true
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'PAM',
@@ -1614,7 +1677,8 @@ export default defineComponent({
                   fill: false,
                   pointStyle: 'rectRounded',
                   radius: 4,
-                  showLine: true
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'SpO2',
@@ -1623,7 +1687,8 @@ export default defineComponent({
                   fill: false,
                   pointStyle: 'rectRot',
                   radius: 4,
-                  showLine: true
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'EtCO2',
@@ -1632,7 +1697,8 @@ export default defineComponent({
                   fill: false,
                   pointStyle: 'star',
                   radius: 4,
-                  showLine: true
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'Temp1',
@@ -1641,7 +1707,8 @@ export default defineComponent({
                   fill: false,
                   pointStyle: 'triangle',
                   radius: 4,
-                  showLine: true
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'Temp2',
@@ -1650,7 +1717,8 @@ export default defineComponent({
                   fill: false,
                   pointStyle: 'circle',
                   radius: 4,
-                  showLine: true
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'PVC',
@@ -1659,7 +1727,8 @@ export default defineComponent({
                   fill: false,
                   pointStyle: 'rectRot',
                   radius: 4,
-                  showLine: true
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'PAS_IN',
@@ -1668,7 +1737,8 @@ export default defineComponent({
                   fill: false,
                   pointStyle: 'crossRot',
                   radius: 4,
-                  showLine: true
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'PAD_IN',
@@ -1677,7 +1747,8 @@ export default defineComponent({
                   fill: false,
                   pointStyle: 'cross',
                   radius: 4,
-                  showLine: true
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'PAM_IN',
@@ -1686,7 +1757,8 @@ export default defineComponent({
                   fill: false,
                   pointStyle: 'rectRounded',
                   radius: 4,
-                  showLine: true
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'FiCO2',
@@ -1695,7 +1767,8 @@ export default defineComponent({
                   fill: false,
                   pointStyle: 'star',
                   radius: 4,
-                  showLine: true
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'FR',
@@ -1704,25 +1777,30 @@ export default defineComponent({
                   fill: false,
                   pointStyle: 'triangle',
                   radius: 4,
-                  showLine: true
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'Medicamento',
                   borderColor: 'rgba(151, 199, 254)',
+                  backgroundColor: 'rgba(151, 199, 254)',
                   data: [],
                   fill: true,
                   pointStyle: 'rect', //Estilo del punto en los datos
-                  radius: 8, //Tamaño punto
-                  showLine: false //Oculta la línea       
+                  radius: 6, //Tamaño punto
+                  showLine: false, //Oculta la línea       
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'Evento',
                   borderColor: 'rgba(31, 80, 146)',
+                  backgroundColor: 'rgba(31, 80, 146)', // Color de relleno
                   data: [],
                   fill: true,
                   pointStyle: 'rect', //Estilo del punto en los datos
-                  radius: 8, //Tamaño punto      
-                  showLine: false    
+                  radius: 6, //Tamaño punto      
+                  showLine: false,
+                  hidden: false, // Propiedad personalizada    
               },
           ]
       },
@@ -1780,6 +1858,7 @@ export default defineComponent({
       mostrarSpinner: false,
 
       chartElements: [],
+      datasetVisibility: [], // Nuevo arreglo para controlar la visibilidad
 
       guardaDatosMSV: 0,
       gridBD: [], // Contiene todos los datos del grid
@@ -1876,6 +1955,11 @@ export default defineComponent({
   },
 
   methods: {
+    toggleDataset(index) {
+      this.chartData.datasets[index].hidden = !this.datasetVisibility[index];
+      this.chartKey += 1; // Forzar el renderizado de la gráfica
+    },
+
     calcularHoraFinalMed(){
         try {
             let hoy = new Date();
@@ -7660,8 +7744,6 @@ export default defineComponent({
       
       this.guardaDatosMSV = 0;
       this.gridBD = [];
-
-
     },
 
     async comMSV(){
@@ -8117,6 +8199,10 @@ export default defineComponent({
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
+    },
+
+    async validarModalTendencias(){
+      preIdStore.modalTendencias = false  
     }
   },
   
@@ -8152,6 +8238,17 @@ export default defineComponent({
 <style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
+.checkbox-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+}
+
 .alinear-icono-nota{
     margin-top: 6px;
 }
