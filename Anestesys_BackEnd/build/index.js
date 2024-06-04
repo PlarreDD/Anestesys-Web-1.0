@@ -19,6 +19,7 @@ const recuperacion_route_1 = __importDefault(require("./routes/recuperacion.rout
 const notapa_route_1 = __importDefault(require("./routes/notapa.route"));
 const datosv_route_1 = __importDefault(require("./routes/datosv.route"));
 const mvs_route_1 = __importDefault(require("./routes/mvs.route"));
+const child_process_1 = require("child_process");
 const net = require('net');
 const app = (0, express_1.default)();
 const whiteList = [process.env.ORIGIN1, process.env.ORIGIN2];
@@ -57,6 +58,18 @@ app.get('/api/getClienteIp', (req, res) => {
         res.json({ clienteIp });
         // console.log("IP que manda solicitud:" + clienteIp);    
     }
+});
+// Nueva ruta para abrir el teclado en pantalla
+app.post('/api/openKeyboard', (_req, res) => {
+    (0, child_process_1.exec)('osk', (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error al abrir el teclado en pantalla: ${error}`);
+            return res.status(500).send('Error al abrir el teclado en pantalla');
+        }
+        console.log(`stdout: ${stdout}`);
+        console.error(`stderr: ${stderr}`);
+        res.send('Teclado en pantalla abierto');
+    });
 });
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log("Conectado en el puerto:" + PORT));
