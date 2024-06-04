@@ -896,7 +896,8 @@ const updateRelevos = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         const { relevoCx } = req.body;
         const menuTrans = yield TransAnestesico_1.MenuTrans.findOneAndUpdate({ pid: pid }, { $push: {
                 relevoCx: {
-                    horaRelevo: relevoCx[0], tipoRel: relevoCx[1], matriculaRel: relevoCx[2], anestesiologoRel: relevoCx[3], observacionesRel: relevoCx[4]
+                    horaRelevo: relevoCx[0], tipoRel: relevoCx[1], matriculaRel: relevoCx[2],
+                    anestesiologoRel: relevoCx[3], observacionesRel: relevoCx[4], valorGraficaRel: relevoCx[5]
                 }
             }
         });
@@ -917,7 +918,8 @@ const updateNuevoRelevos = (req, res) => __awaiter(void 0, void 0, void 0, funct
         const { relevoCx } = req.body;
         const menuTrans = yield TransAnestesico_1.MenuTrans.findOneAndUpdate({ pid: pid, cxid: cxid }, { $push: {
                 relevoCx: {
-                    horaRelevo: relevoCx[0], tipoRel: relevoCx[1], matriculaRel: relevoCx[2], anestesiologoRel: relevoCx[3], observacionesRel: relevoCx[4]
+                    horaRelevo: relevoCx[0], tipoRel: relevoCx[1], matriculaRel: relevoCx[2],
+                    anestesiologoRel: relevoCx[3], observacionesRel: relevoCx[4], valorGraficaRel: relevoCx[5]
                 }
             }
         });

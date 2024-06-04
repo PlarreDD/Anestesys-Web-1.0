@@ -79,6 +79,7 @@ export interface regMenuTrans{
     matriculaRel:string,
     anestesiologoRel:string,
     observacionesRel:string,
+    valorGraficaRel:number,
     /* Eventos Criticos */
     idEvento:string,
     horaEvento:string,

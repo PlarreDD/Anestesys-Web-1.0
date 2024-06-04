@@ -89,6 +89,7 @@ const menuTransSchema = new mongoose_1.Schema({
             matriculaRel: { type: String },
             anestesiologoRel: { type: String },
             observacionesRel: { type: String },
+            valorGraficaRel: { type: String }
         }],
     /* Evento Crítico */
     evCriticoCx: [{

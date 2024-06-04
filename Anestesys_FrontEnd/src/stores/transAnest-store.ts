@@ -1436,7 +1436,7 @@ export const useTransAnestStore = defineStore('transAn', {
         },
 
         async updateRelevos(r_horaRelevo: string, r_tipoRel: string, r_matriculaRel: string, 
-                            r_anestesiologoRel: string, r_observacionesRel: string, pid:string){
+                            r_anestesiologoRel: string, r_observacionesRel: string, r_valorGraficaRel: number, pid:string){
             await apiAxios({
                 url: `/trans/relevo/${String(pid)}`,
                 method: "PUT",
@@ -1444,7 +1444,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    relevoCx: [ r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel ]
+                    relevoCx: [ r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel, r_valorGraficaRel ]
                 },
             })
             .then((res: any) => {
@@ -1464,7 +1464,7 @@ export const useTransAnestStore = defineStore('transAn', {
         },
 
         async updateNuevoRelevos(r_horaRelevo: string, r_tipoRel: string, r_matriculaRel: string, 
-                            r_anestesiologoRel: string, r_observacionesRel: string, pid:string, cxid: string){
+                            r_anestesiologoRel: string, r_observacionesRel: string, r_valorGraficaRel: number, pid:string, cxid: string){
             await apiAxios({
                 url: `/trans/relevo/add/${String(pid)}/${String(cxid)}`,
                 method: "PUT",
@@ -1472,7 +1472,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    relevoCx: [ r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel ]
+                    relevoCx: [ r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel, r_valorGraficaRel ]
                 },
             })
             .then((res: any) => {

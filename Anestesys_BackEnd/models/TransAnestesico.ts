@@ -93,6 +93,7 @@ const menuTransSchema = new Schema({
         matriculaRel:{ type: String },
         anestesiologoRel:{ type: String },
         observacionesRel:{ type: String },
+        valorGraficaRel:{ type: String }
     }],
 
     /* Evento Crítico */

@@ -271,7 +271,7 @@
                                             type="submit"
                                             class="btn btn-guardar-balance fw-bold"
                                             @click="actualizarRelevos(menuTrans.horaRelevo, menuTrans.tipoRel, menuTrans.matriculaRel, 
-                                                                        menuTrans.anestesiologoRel,menuTrans.observacionesRel)"> GUARDAR </button>
+                                                                        menuTrans.anestesiologoRel, menuTrans.observacionesRel, menuTrans.valorGraficaRel)"> GUARDAR </button>
                               </template>  
 
                               <template v-if="transAnestStore.btnActualizaRelevo === true">
@@ -1495,9 +1495,7 @@
                           <label class="text-white" :for="'dataset-' + index">&nbsp;{{ dataset.label }}</label>
                         </div>
                       </div>
-                      <canvas :id="'chart-' + chartKey"></canvas>
                     </div>
-                    <canvas ref="chartCanvas"></canvas>
 
                     <button id="abrir-tendencias" type="button" class="invisible" data-bs-toggle="modal" data-bs-target="#tendenciasModal"></button>
                   </form>
@@ -1802,6 +1800,17 @@ export default defineComponent({
                   showLine: false,
                   hidden: false, // Propiedad personalizada    
               },
+              {
+                  label: 'Relevo',
+                  borderColor: 'rgba(128, 0, 128)',
+                  backgroundColor: 'rgba(128, 0, 128)', // Color de relleno
+                  data: [],
+                  fill: true,
+                  pointStyle: 'rect', //Estilo del punto en los datos
+                  radius: 6, //Tamaño punto      
+                  showLine: false,
+                  hidden: false, // Propiedad personalizada    
+              },
           ]
       },
       chartOptions: {
@@ -1866,7 +1875,8 @@ export default defineComponent({
       balanceTemp: null,
 
       medicamentosFiltrados: [],
-      eventosFiltrados: []
+      eventosFiltrados: [],
+      relevosFiltrados: [],
     }
   },
 
@@ -1955,8 +1965,12 @@ export default defineComponent({
   },
 
   methods: {
-    toggleDataset(index) {
-      this.chartData.datasets[index].hidden = !this.datasetVisibility[index];
+    toggleDataset(index) {   
+      if(this.chartData.datasets[index].hidden === true) {
+        this.chartData.datasets[index].hidden = false;
+      } else if(this.chartData.datasets[index].hidden === false) {
+        this.chartData.datasets[index].hidden = true;
+      }
       this.chartKey += 1; // Forzar el renderizado de la gráfica
     },
 
@@ -2466,10 +2480,12 @@ export default defineComponent({
   
         let horaGeneracion = this.saltoArreglo.map(item => item.horaGeneracion);
 
-        // Valores de medicamento a colocar en la gráfica
+        // Valores de medicamentos a colocar en la gráfica
         let medicamentosDataset = new Array(horaGeneracion.length).fill(null).map(() => []);
-        // Valores de evento a colocar en la gráfica
+        // Valores de eventos a colocar en la gráfica
         let eventosDataset = new Array(horaGeneracion.length).fill(null).map(() => []);    
+        // Valores de relevos a colocar en la gráfica
+        let relevosDataset = new Array(horaGeneracion.length).fill(null).map(() => []);
 
         if(transAnestStore.medicamentos != null){
           this.medicamentosFiltrados = transAnestStore.medicamentos.flatMap((med) => {
@@ -2507,6 +2523,26 @@ export default defineComponent({
             let index = horaGeneracion.indexOf(eve.horaEvento);
             if (index !== -1) {
               eventosDataset[index].push({valor: eve.valorGraficaEv, detalle: eve.detalleEvento});
+            }
+          });
+        }
+
+        if (transAnestStore.relevos != null) {
+          this.relevosFiltrados = transAnestStore.relevos.flatMap((rel) => {
+            return rel.relevoCx.map((relevo: any) => {
+              return {
+                horaRelevo: relevo.horaRelevo,
+                anestesiologoRel: relevo.anestesiologoRel,
+                observacionesRel: relevo.observacionesRel,
+                valorGraficaRel: relevo.valorGraficaRel,
+              };
+            });
+          });
+
+          this.relevosFiltrados.forEach(rel => {
+            let index = horaGeneracion.indexOf(rel.horaRelevo);
+            if (index !== -1) {
+              relevosDataset[index].push({valor: rel.valorGraficaRel, doctor: rel.anestesiologoRel, detalle: rel.observacionesRel});
             }
           });
         }
@@ -2609,6 +2645,7 @@ export default defineComponent({
         this.chartData.datasets[14].data = FR;
         this.chartData.datasets[15].data = medicamentosDataset.map(item => item.length ? item[item.length - 1].valor : null);
         this.chartData.datasets[16].data = eventosDataset.map(item => item.length ? item[item.length - 1].valor : null);
+        this.chartData.datasets[17].data = relevosDataset.map(item => item.length ? item[item.length - 1].valor : null);
 
         // Asignar hora a valores de la gráfica principal
         this.chartData.labels = horaGeneracion;
@@ -2653,7 +2690,14 @@ export default defineComponent({
                 } else {
                   return 'No evento';
                 }
-              } else {
+              } else if(datasetIndex === 17) {
+                const data = relevosDataset[dataIndex];
+                if (data && data.length) {
+                  return data.map(rel => `${rel.doctor}: ${rel.detalle}`).join(', ');
+                } else {
+                  return 'No relevo';
+                }
+              }else {
                 // Muestra el valor original para los demás datasets
                 return `${datasetLabel}: ${tooltipItem.raw}`;
               }
@@ -7217,7 +7261,7 @@ export default defineComponent({
     },
 
     async actualizarRelevos(r_horaRelevo: string, r_tipoRel: string, r_matriculaRel: string, 
-                          r_anestesiologoRel: string, r_observacionesRel: string) {
+                          r_anestesiologoRel: string, r_observacionesRel: string, r_valorGraficaRel: number) {
       try {
         if (this.menuTrans.horaRelevo == "" || this.menuTrans.horaRelevo == undefined) {
               swal.fire({
@@ -7232,9 +7276,11 @@ export default defineComponent({
               });
         } else {
           if(preIdStore.nuevoRegistroPaciente == false){
-            await transAnestStore.updateRelevos(r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel, preIdStore.pacienteID._id);
-          }else if(preIdStore.nuevoRegistroPaciente == true){        
-            await transAnestStore.updateNuevoRelevos(r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel, preIdStore.pacienteID.pid, preIdStore.cirugiaID);
+            r_valorGraficaRel = 0;
+            await transAnestStore.updateRelevos(r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel, r_valorGraficaRel, preIdStore.pacienteID._id);
+          }else if(preIdStore.nuevoRegistroPaciente == true){     
+            r_valorGraficaRel = 0;   
+            await transAnestStore.updateNuevoRelevos(r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel, r_valorGraficaRel, preIdStore.pacienteID.pid, preIdStore.cirugiaID);
           }            
           
           this.menuTrans.horaRelevo = "";
@@ -7527,10 +7573,10 @@ export default defineComponent({
               });
         } else {
           if(preIdStore.nuevoRegistroPaciente == false){
-            e_valorGraficaEv = 10;
+            e_valorGraficaEv = 5;
             await transAnestStore.updateEventos(r_horaEvento, e_tipoEve, e_detalleEvento, e_valorGraficaEv, preIdStore.pacienteID._id);
           }else if(preIdStore.nuevoRegistroPaciente == true){   
-            e_valorGraficaEv = 10;     
+            e_valorGraficaEv = 5;     
             await transAnestStore.updateNuevoEventos(r_horaEvento, e_tipoEve, e_detalleEvento, e_valorGraficaEv, preIdStore.pacienteID.pid, preIdStore.cirugiaID);
           }              
           

@@ -992,7 +992,8 @@ export const updateRelevos = async (req: any, res: Response) => {
             { pid: pid },
             { $push:{
                 relevoCx: {
-                        horaRelevo: relevoCx[0], tipoRel: relevoCx[1], matriculaRel: relevoCx[2], anestesiologoRel: relevoCx[3], observacionesRel: relevoCx[4]
+                        horaRelevo: relevoCx[0], tipoRel: relevoCx[1], matriculaRel: relevoCx[2], 
+                        anestesiologoRel: relevoCx[3], observacionesRel: relevoCx[4], valorGraficaRel: relevoCx[5]
                     }
                 }
             });        
@@ -1014,7 +1015,8 @@ export const updateNuevoRelevos = async (req: any, res: Response) => {
             { pid: pid, cxid: cxid },
             { $push:{
                 relevoCx: {
-                        horaRelevo: relevoCx[0], tipoRel: relevoCx[1], matriculaRel: relevoCx[2], anestesiologoRel: relevoCx[3], observacionesRel: relevoCx[4]
+                        horaRelevo: relevoCx[0], tipoRel: relevoCx[1], matriculaRel: relevoCx[2], 
+                        anestesiologoRel: relevoCx[3], observacionesRel: relevoCx[4], valorGraficaRel: relevoCx[5]
                     }
                 }
             });        
