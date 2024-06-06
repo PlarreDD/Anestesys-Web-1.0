@@ -2621,6 +2621,24 @@ export default defineComponent({
         for (let i = 0; i < FR.length; i += 26) {
           gruposFR.push(FR.slice(i, i + 26));
         };
+
+        let agruparValoresMedicamentos = medicamentosDataset.map(item => item.length ? item[item.length - 1].valor : null)
+        let gruposMedicamentos = [];
+        for (let i = 0; i < agruparValoresMedicamentos.length; i += 26) {
+          gruposMedicamentos.push(agruparValoresMedicamentos.slice(i, i + 26));
+        };
+
+        let agruparValoresEventos = eventosDataset.map(item => item.length ? item[item.length - 1].valor : null)
+        let gruposEventos = [];
+        for (let i = 0; i < agruparValoresEventos.length; i += 26) {
+          gruposEventos.push(agruparValoresEventos.slice(i, i + 26));
+        };        
+
+        let agruparValoresRelevos = relevosDataset.map(item => item.length ? item[item.length - 1].valor : null)
+        let gruposRelevos = [];
+        for (let i = 0; i < agruparValoresRelevos.length; i += 26) {
+          gruposRelevos.push(agruparValoresRelevos.slice(i, i + 26));
+        };
         
         let gruposHora = [];
         for (let i = 0; i < horaGeneracion.length; i += 26) {
@@ -2645,7 +2663,7 @@ export default defineComponent({
         this.chartData.datasets[14].data = FR;
         this.chartData.datasets[15].data = medicamentosDataset.map(item => item.length ? item[item.length - 1].valor : null);
         this.chartData.datasets[16].data = eventosDataset.map(item => item.length ? item[item.length - 1].valor : null);
-        this.chartData.datasets[17].data = relevosDataset.map(item => item.length ? item[item.length - 1].valor : null);
+        this.chartData.datasets[17].data = relevosDataset.map(item => item.length ? item[item.length - 1].valor : null);                
 
         // Asignar hora a valores de la gráfica principal
         this.chartData.labels = horaGeneracion;
@@ -2664,7 +2682,8 @@ export default defineComponent({
           (this.$refs.chartContainer as HTMLElement).appendChild(canvasElement);
   
           const chart = this.crearGraficasPDF(gruposFC[i], gruposPulso[i], gruposPAS[i], gruposPAD[i], gruposPAM[i], gruposSpO2[i], gruposEtCO2[i], gruposTemp1[i], 
-                      gruposTemp2[i], gruposPVC[i], gruposPASIN[i], gruposPADIN[i], gruposPAMIN[i], gruposFiCO2[i], gruposFR[i], gruposHora[i], canvasElement);
+                      gruposTemp2[i], gruposPVC[i], gruposPASIN[i], gruposPADIN[i], gruposPAMIN[i], gruposFiCO2[i], gruposFR[i], 
+                      gruposMedicamentos[i], gruposEventos[i], gruposRelevos[i], gruposHora[i], canvasElement);
           this.chartElements.push(chart);
         }
 
@@ -2712,44 +2731,52 @@ export default defineComponent({
     },
 
     // Dividir y crear graficas para cargar en documento PDF
-    crearGraficasPDF(fc, pulso, pas, pad, pam, spo2, etco2, temp1, temp2, pvc, pasin, padin, pamin, fico2, fr, horas, element) {
+    crearGraficasPDF(fc, pulso, pas, pad, pam, spo2, etco2, temp1, temp2, pvc, pasin, padin, pamin, fico2, fr, medic, even, relev, horas, element) {
       try {
         return new ChartJS(element, {
           type: 'line',
           data: {
             labels: horas,
-            datasets: [
+            datasets: [              
               {
-                label: 'FC',
-                data: fc,
-                borderColor: 'rgba(0, 165, 151)',
-                fill: false,
-                pointStyle: 'circle', //Estilo del punto en los datos
-                pointRadius: 4, //Tamaño punto
+                  label: 'FC',            
+                  borderColor: 'rgba(0, 165, 151)',
+                  data: fc,
+                  fill: false,
+                  pointStyle: 'circle', //Estilo del punto en los datos
+                  pointRadius: 8, //Tamaño punto              
+                  showLine: true,
+                  hidden: this.chartData.datasets[0].hidden, // Propiedad personalizada               
               },
               {
-                label: 'Pulso',
-                borderColor: 'rgba(117, 137, 190)',
-                data: pulso,
-                fill: false,
-                pointStyle: 'cross',
-                pointRadius: 4
+                  label: 'Pulso',
+                  borderColor: 'rgba(117, 137, 190)',
+                  data: pulso,
+                  fill: false,
+                  pointStyle: 'cross',
+                  pointRadius: 8,
+                  showLine: true,
+                  hidden: this.chartData.datasets[1].hidden, // Propiedad personalizada
               },
               {
-                label: 'PAS',
-                borderColor: 'rgba(236, 90, 85)',
-                data: pas,
-                fill: false,
-                pointStyle: 'crossRot',
-                pointRadius: 4
+                  label: 'PAS',
+                  borderColor: 'rgba(236, 90, 85)',
+                  data: pas,
+                  fill: false,
+                  pointStyle: 'crossRot',
+                  pointRadius: 8,
+                  showLine: true,
+                  hidden: this.chartData.datasets[2].hidden, // Propiedad personalizada
               },
               {
-                label: 'PAD',
-                borderColor: 'rgba(161, 197, 227)',
-                data: pad,
-                fill: false,
-                pointStyle: 'cross',
-                pointRadius: 4
+                  label: 'PAD',
+                  borderColor: 'rgba(161, 197, 227)',
+                  data: pad,
+                  fill: false,
+                  pointStyle: 'cross',
+                  pointRadius: 8,
+                  showLine: true,
+                  hidden: this.chartData.datasets[3].hidden, // Propiedad personalizada
               },
               {
                   label: 'PAM',
@@ -2757,15 +2784,19 @@ export default defineComponent({
                   data: pam,
                   fill: false,
                   pointStyle: 'rectRounded',
-                  pointRadius: 4
-              },
+                  pointRadius: 8,
+                  showLine: true,
+                  hidden: this.chartData.datasets[4].hidden, // Propiedad personalizada
+              },              
               {
                   label: 'SpO2',
                   borderColor: 'rgba(68, 163, 211)',
                   data: spo2,
                   fill: false,
                   pointStyle: 'rectRot',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
+                  hidden: this.chartData.datasets[5].hidden, // Propiedad personalizada
               },
               {
                   label: 'EtCO2',
@@ -2773,7 +2804,9 @@ export default defineComponent({
                   data: etco2,
                   fill: false,
                   pointStyle: 'star',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
+                  hidden: this.chartData.datasets[6].hidden, // Propiedad personalizada
               },
               {
                   label: 'Temp1',
@@ -2781,7 +2814,9 @@ export default defineComponent({
                   data: temp1,
                   fill: false,
                   pointStyle: 'triangle',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
+                  hidden: this.chartData.datasets[7].hidden, // Propiedad personalizada
               },
               {
                   label: 'Temp2',
@@ -2789,7 +2824,9 @@ export default defineComponent({
                   data: temp2,
                   fill: false,
                   pointStyle: 'circle',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
+                  hidden: this.chartData.datasets[8].hidden, // Propiedad personalizada
               },
               {
                   label: 'PVC',
@@ -2797,7 +2834,9 @@ export default defineComponent({
                   data: pvc,
                   fill: false,
                   pointStyle: 'rectRot',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
+                  hidden: this.chartData.datasets[9].hidden, // Propiedad personalizada
               },
               {
                   label: 'PAS_IN',
@@ -2805,7 +2844,9 @@ export default defineComponent({
                   data: pasin,
                   fill: false,
                   pointStyle: 'crossRot',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
+                  hidden: this.chartData.datasets[10].hidden, // Propiedad personalizada
               },
               {
                   label: 'PAD_IN',
@@ -2813,7 +2854,9 @@ export default defineComponent({
                   data: padin,
                   fill: false,
                   pointStyle: 'cross',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
+                  hidden: this.chartData.datasets[11].hidden, // Propiedad personalizada
               },
               {
                   label: 'PAM_IN',
@@ -2821,7 +2864,9 @@ export default defineComponent({
                   data: pamin,
                   fill: false,
                   pointStyle: 'rectRounded',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
+                  hidden: this.chartData.datasets[12].hidden, // Propiedad personalizada
               },
               {
                   label: 'FiCO2',
@@ -2829,7 +2874,9 @@ export default defineComponent({
                   data: fico2,
                   fill: false,
                   pointStyle: 'star',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
+                  hidden: this.chartData.datasets[13].hidden, // Propiedad personalizada
               },
               {
                   label: 'FR',
@@ -2837,9 +2884,44 @@ export default defineComponent({
                   data: fr,
                   fill: false,
                   pointStyle: 'triangle',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
+                  hidden: this.chartData.datasets[14].hidden, // Propiedad personalizada
               },
-            ],
+              {
+                  label: 'Medicamento',
+                  borderColor: 'rgba(151, 199, 254)',
+                  backgroundColor: 'rgba(151, 199, 254)',
+                  data: medic,
+                  fill: true,
+                  pointStyle: 'rect', //Estilo del punto en los datos
+                  pointRadius: 12, //Tamaño punto
+                  showLine: false, //Oculta la línea       
+                  hidden: this.chartData.datasets[15].hidden, // Propiedad personalizada
+              },
+              {
+                  label: 'Evento',
+                  borderColor: 'rgba(31, 80, 146)',
+                  backgroundColor: 'rgba(31, 80, 146)', // Color de relleno
+                  data: even,
+                  fill: true,
+                  pointStyle: 'rect', //Estilo del punto en los datos
+                  pointRadius: 12, //Tamaño punto      
+                  showLine: false,
+                  hidden: this.chartData.datasets[16].hidden, // Propiedad personalizada    
+              },
+              {
+                  label: 'Relevo',
+                  borderColor: 'rgba(128, 0, 128)',
+                  backgroundColor: 'rgba(128, 0, 128)', // Color de relleno
+                  data: relev,
+                  fill: true,
+                  pointStyle: 'rect', //Estilo del punto en los datos
+                  pointRadius: 12, //Tamaño punto      
+                  showLine: false,
+                  hidden: this.chartData.datasets[17].hidden, // Propiedad personalizada    
+              },
+            ],            
           },
           options: {            
             responsive: true,
@@ -2871,7 +2953,8 @@ export default defineComponent({
                 },
               },
             },
-          },
+          },          
+
         });
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
@@ -3298,6 +3381,86 @@ export default defineComponent({
         let pesoNacido = postAnestStore.PesoUno === undefined || postAnestStore.PesoUno === null ? ' ' : postAnestStore.PesoUno;
         // Talla        
         let tallaNacido = postAnestStore.TallaUno === undefined || postAnestStore.TallaUno === null ? ' ' : postAnestStore.TallaUno;
+        // Tipo Alumbramiento   
+        let alumbramientoDos = postAnestStore.AlumbramientoDos === undefined || postAnestStore.AlumbramientoDos === null ? ' ' : postAnestStore.AlumbramientoDos;
+        // Hora Nacimiento       
+        let horaNacimientoDos = postAnestStore.HoraNacimientoDos === undefined || postAnestStore.HoraNacimientoDos === null ? ' ' : postAnestStore.HoraNacimientoDos;
+        // Genero        
+        let generoDos = postAnestStore.GeneroDos === undefined || postAnestStore.GeneroDos === null ? ' ' : postAnestStore.GeneroDos;
+        // Apgar 1 min       
+        let apgar1Dos = postAnestStore.Apgar1Dos === undefined || postAnestStore.Apgar1Dos === null ? ' ' : postAnestStore.Apgar1Dos;
+        // Apgar 5 min        
+        let apgar5Dos = postAnestStore.Apgar5Dos === undefined || postAnestStore.Apgar5Dos === null ? ' ' : postAnestStore.Apgar5Dos;
+        // Capurro       
+        let capurroDos = postAnestStore.CapurroDos === undefined || postAnestStore.CapurroDos === null ? ' ' : postAnestStore.CapurroDos;
+        // Peso       
+        let pesoNacidoDos = postAnestStore.PesoDos === undefined || postAnestStore.PesoDos === null ? ' ' : postAnestStore.PesoDos;
+        // Talla        
+        let tallaNacidoDos = postAnestStore.TallaDos === undefined || postAnestStore.TallaDos === null ? ' ' : postAnestStore.TallaDos;
+        // Tipo Alumbramiento   
+        let alumbramientoTres = postAnestStore.AlumbramientoTres === undefined || postAnestStore.AlumbramientoTres === null ? ' ' : postAnestStore.AlumbramientoTres;
+        // Hora Nacimiento       
+        let horaNacimientoTres = postAnestStore.HoraNacimientoTres === undefined || postAnestStore.HoraNacimientoTres === null ? ' ' : postAnestStore.HoraNacimientoTres;
+        // Genero        
+        let generoTres = postAnestStore.GeneroTres === undefined || postAnestStore.GeneroTres === null ? ' ' : postAnestStore.GeneroTres;
+        // Apgar 1 min       
+        let apgar1Tres = postAnestStore.Apgar1Tres === undefined || postAnestStore.Apgar1Tres === null ? ' ' : postAnestStore.Apgar1Tres;
+        // Apgar 5 min        
+        let apgar5Tres = postAnestStore.Apgar5Tres === undefined || postAnestStore.Apgar5Tres === null ? ' ' : postAnestStore.Apgar5Tres;
+        // Capurro       
+        let capurroTres = postAnestStore.CapurroTres === undefined || postAnestStore.CapurroTres === null ? ' ' : postAnestStore.CapurroTres;
+        // Peso       
+        let pesoNacidoTres = postAnestStore.PesoTres === undefined || postAnestStore.PesoTres === null ? ' ' : postAnestStore.PesoTres;
+        // Talla        
+        let tallaNacidoTres = postAnestStore.TallaTres === undefined || postAnestStore.TallaTres === null ? ' ' : postAnestStore.TallaTres;
+        // Tipo Alumbramiento   
+        let alumbramientoCuatro = postAnestStore.AlumbramientoCuatro === undefined || postAnestStore.AlumbramientoCuatro === null ? ' ' : postAnestStore.AlumbramientoCuatro;
+        // Hora Nacimiento       
+        let horaNacimientoCuatro = postAnestStore.HoraNacimientoCuatro === undefined || postAnestStore.HoraNacimientoCuatro === null ? ' ' : postAnestStore.HoraNacimientoCuatro;
+        // Genero        
+        let generoCuatro = postAnestStore.GeneroCuatro === undefined || postAnestStore.GeneroCuatro === null ? ' ' : postAnestStore.GeneroCuatro;
+        // Apgar 1 min       
+        let apgar1Cuatro = postAnestStore.Apgar1Cuatro === undefined || postAnestStore.Apgar1Cuatro === null ? ' ' : postAnestStore.Apgar1Cuatro;
+        // Apgar 5 min        
+        let apgar5Cuatro = postAnestStore.Apgar5Cuatro === undefined || postAnestStore.Apgar5Cuatro === null ? ' ' : postAnestStore.Apgar5Cuatro;
+        // Capurro       
+        let capurroCuatro = postAnestStore.CapurroCuatro === undefined || postAnestStore.CapurroCuatro === null ? ' ' : postAnestStore.CapurroCuatro;
+        // Peso       
+        let pesoNacidoCuatro = postAnestStore.PesoCuatro === undefined || postAnestStore.PesoCuatro === null ? ' ' : postAnestStore.PesoCuatro;
+        // Talla        
+        let tallaNacidoCuatro = postAnestStore.TallaCuatro === undefined || postAnestStore.TallaCuatro === null ? ' ' : postAnestStore.TallaCuatro;
+        // Tipo Alumbramiento   
+        let alumbramientoCinco = postAnestStore.AlumbramientoCinco === undefined || postAnestStore.AlumbramientoCinco === null ? ' ' : postAnestStore.AlumbramientoCinco;
+        // Hora Nacimiento       
+        let horaNacimientoCinco = postAnestStore.HoraNacimientoCinco === undefined || postAnestStore.HoraNacimientoCinco === null ? ' ' : postAnestStore.HoraNacimientoCinco;
+        // Genero        
+        let generoCinco = postAnestStore.GeneroCinco === undefined || postAnestStore.GeneroCinco === null ? ' ' : postAnestStore.GeneroCinco;
+        // Apgar 1 min       
+        let apgar1Cinco = postAnestStore.Apgar1Cinco === undefined || postAnestStore.Apgar1Cinco === null ? ' ' : postAnestStore.Apgar1Cinco;
+        // Apgar 5 min        
+        let apgar5Cinco = postAnestStore.Apgar5Cinco === undefined || postAnestStore.Apgar5Cinco === null ? ' ' : postAnestStore.Apgar5Cinco;
+        // Capurro       
+        let capurroCinco = postAnestStore.CapurroCinco === undefined || postAnestStore.CapurroCinco === null ? ' ' : postAnestStore.CapurroCinco;
+        // Peso       
+        let pesoNacidoCinco = postAnestStore.PesoCinco === undefined || postAnestStore.PesoCinco === null ? ' ' : postAnestStore.PesoCinco;
+        // Talla        
+        let tallaNacidoCinco = postAnestStore.TallaCinco === undefined || postAnestStore.TallaCinco === null ? ' ' : postAnestStore.TallaCinco;
+        // Tipo Alumbramiento   
+        let alumbramientoSeis = postAnestStore.AlumbramientoSeis === undefined || postAnestStore.AlumbramientoSeis === null ? ' ' : postAnestStore.AlumbramientoSeis;
+        // Hora Nacimiento       
+        let horaNacimientoSeis = postAnestStore.HoraNacimientoSeis === undefined || postAnestStore.HoraNacimientoSeis === null ? ' ' : postAnestStore.HoraNacimientoSeis;
+        // Genero        
+        let generoSeis = postAnestStore.GeneroSeis === undefined || postAnestStore.GeneroSeis === null ? ' ' : postAnestStore.GeneroSeis;
+        // Apgar 1 min       
+        let apgar1Seis = postAnestStore.Apgar1Seis === undefined || postAnestStore.Apgar1Seis === null ? ' ' : postAnestStore.Apgar1Seis;
+        // Apgar 5 min        
+        let apgar5Seis = postAnestStore.Apgar5Seis === undefined || postAnestStore.Apgar5Seis === null ? ' ' : postAnestStore.Apgar5Seis;
+        // Capurro       
+        let capurroSeis = postAnestStore.CapurroSeis === undefined || postAnestStore.CapurroSeis === null ? ' ' : postAnestStore.CapurroSeis;
+        // Peso       
+        let pesoNacidoSeis = postAnestStore.PesoSeis === undefined || postAnestStore.PesoSeis === null ? ' ' : postAnestStore.PesoSeis;
+        // Talla        
+        let tallaNacidoSeis = postAnestStore.TallaSeis === undefined || postAnestStore.TallaSeis === null ? ' ' : postAnestStore.TallaSeis;
 
         /*Nota Post-Anestésica*/
         // Técnica de Anestesia Final
