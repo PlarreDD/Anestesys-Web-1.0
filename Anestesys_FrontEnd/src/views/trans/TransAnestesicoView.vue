@@ -5122,7 +5122,7 @@ export default defineComponent({
             {
               columns: [
                 {
-                  width: '34%',
+                  width: '100%',
                   margin: [0, 20 ,0 ,0],
                     stack: [
                       // SEDACIÓN  
@@ -5136,94 +5136,42 @@ export default defineComponent({
                         text: [
                           { text: '\nNúmero de Productos: ', font: 'SF', fontSize: 8 },
                           { text: numProductos, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Tipo Alumbramiento
+                          ],
+                          },
+                          // Tabla de caso obstetrico
                       {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Tipo Alumbramiento: ', font: 'SF', fontSize: 8 },
-                          { text: alumbramiento, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Hora Nacimiento
-                      {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Hora Nacimiento: ', font: 'SF', fontSize: 8 },
-                          { text: horaNacimiento, font: 'SF', fontSize: 8, bold:true },
-                        ],
+                        margin: [0, 5 ,0 ,0],
+                        table: {
+                          headerRows: 1,
+                          widths: [ '*', '*', '*', '*', '*', '*', '*', '*', '*'],
+                          body: [
+                            ['', 'Tipo de alumbramiento', 'Hora de nacimiento', 'Genero', 'Apgar 1min', 'Apgar 5min', 'Capurro', 'Peso(gm)', 'Talla(cm)'],
+                            ['Bebé 1', { text: alumbramiento, bold:true }, { text: horaNacimiento, bold:true }, 
+                            { text: genero, bold:true }, { text: apgar1, bold:true }, { text: apgar5, bold:true }, 
+                            { text: capurro, bold:true }, { text: pesoNacido, bold:true }, { text: tallaNacido, bold:true }],
+                            ['Bebé 2', { text: alumbramientoDos, bold:true }, { text: horaNacimientoDos, bold:true }, 
+                            { text: generoDos, bold:true }, { text: apgar1Dos, bold:true }, { text: apgar5Dos, bold:true }, 
+                            { text: capurroDos, bold:true }, { text: pesoNacidoDos, bold:true }, { text: tallaNacidoDos, bold:true }],
+                            ['Bebé 3', { text: alumbramientoTres, bold:true }, { text: horaNacimientoTres, bold:true }, 
+                            { text: generoTres, bold:true }, { text: apgar1Tres, bold:true }, { text: apgar5Tres, bold:true }, 
+                            { text: capurroTres, bold:true }, { text: pesoNacidoTres, bold:true }, { text: tallaNacidoTres, bold:true }],
+                            ['Bebé 4', { text: alumbramientoCuatro, bold:true }, { text: horaNacimientoCuatro, bold:true }, 
+                            { text: generoCuatro, bold:true }, { text: apgar1Cuatro, bold:true }, { text: apgar5Cuatro, bold:true }, 
+                            { text: capurroCuatro, bold:true }, { text: pesoNacidoCuatro, bold:true }, { text: tallaNacidoCuatro, bold:true }],
+                            ['Bebé 5', { text: alumbramientoCinco, bold:true }, { text: horaNacimientoCinco, bold:true }, 
+                            { text: generoCinco, bold:true }, { text: apgar1Cinco, bold:true }, { text: apgar5Cinco, bold:true }, 
+                            { text: capurroCinco, bold:true }, { text: pesoNacidoCinco, bold:true }, { text: tallaNacidoCinco, bold:true }],
+                            ['Bebé 6', { text: alumbramientoSeis, bold:true }, { text: horaNacimientoSeis, bold:true }, 
+                            { text: generoSeis, bold:true }, { text: apgar1Seis, bold:true }, { text: apgar5Seis, bold:true }, 
+                            { text: capurroSeis, bold:true }, { text: pesoNacidoSeis, bold:true }, { text: tallaNacidoSeis, bold:true }],
+                          ]
+                        },
+                        layout: 'noBorders', 
+                        font: 'SF', 
+                        fontSize:8,
                       },
                     ]
                 },
-                {
-                  width: '33%',
-                  margin: [0, 20, 0, 0],
-                    stack: [
-                      {
-                        text: [
-                          { text: ' ', font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Genero
-                      {
-                        text: [
-                          { text: '\nGenero: ', font: 'SF', fontSize: 8 },
-                          { text: genero, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Apgar 1 min
-                      {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Apgar 1 min: ', font: 'SF', fontSize: 8 },
-                          { text: apgar1, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                        // Apgar 5 min
-                        {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Apgar 5 min: ', font: 'SF', fontSize: 8 },
-                          { text: apgar5, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                    ]
-                },
-                {
-                  width: '34%',
-                  margin: [0, 20, 0, 0],
-                    stack: [
-                      {
-                        text: [
-                          { text: ' ', font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Capurro
-                      {
-                        text: [
-                          { text: '\nCapurro: ', font: 'SF', fontSize: 8 },
-                          { text: capurro, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Peso
-                      {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Peso (gm): ', font: 'SF', fontSize: 8 },
-                          { text: pesoNacido, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                        // Talla
-                        {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Talla (cm): ', font: 'SF', fontSize: 8 },
-                          { text: tallaNacido, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                    ]
-                }
               ]
             },
             {
