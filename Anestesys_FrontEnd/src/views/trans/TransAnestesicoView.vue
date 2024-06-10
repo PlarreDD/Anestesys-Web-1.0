@@ -3241,7 +3241,7 @@ export default defineComponent({
         let riesgo = preIdStore.RiesgoAnestesico === undefined || preIdStore.RiesgoAnestesico === null ? ' ' : preIdStore.RiesgoAnestesico;
 
         /*Estudios*/
-        let listaEstudios = preIdStore.estudios === null ? [' '] : preIdStore.estudios.map(item => item.val_Estudios.map(estudio => estudio.estudio)).flat();
+        let listaEstudios = preIdStore.estudios === null ? [' '] : preIdStore.estudios.map(item => item.val_Estudios.map(estudio => estudio.estudio+': ' + estudio.especifEstudio)).flat();        
         let estudios = listaEstudios.slice(0,5);
 
         /*PLAN*/        
@@ -3686,6 +3686,10 @@ export default defineComponent({
         let horaAlta = postAnestStore.HoraAlta === undefined || postAnestStore.HoraAlta === null ? ' ' : postAnestStore.HoraAlta;
 
         /***********************TRANS***********************/
+        /*Balance Parcial*/
+        // let balanceParcial = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial.map(item => 
+        //     item.balanceCx.map(balance => balance.horaBalance +'   '+ balance.ingresos +'   '+ balance.egresos)).flat();
+
         /*Datos del Medicamento*/
         let listaMedicamentosTipo = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
             item.medicamentosCx.map(medicamento => medicamento.tipoMed)).flat();
@@ -4848,11 +4852,11 @@ export default defineComponent({
                         ],                        
                       },
                       {
-                        ul: estudios.map(estudio => ({ text: estudio})),font: 'SF', fontSize: 8, bold:true
+                        ul: estudios.map(estudio => ({ text: estudio })),font: 'SF', fontSize: 8, bold:true
                       },
                       // ANESTESIA GENERAL
                       {
-                        margin: [0, 50, 0, 0],
+                        margin: [0, 20, 0, 0],
                         text: [
                           { text: 'ANESTESIA GENERAL', font: 'SF', fontSize: 8, bold:true },
                         ],
@@ -5766,56 +5770,98 @@ export default defineComponent({
           {
             columns:[
               {
+                relativePosition: { x: 0, y: 415 },
+                stack: [
+                  {
+                      text: [
+                        { text: 'BALANCE HÍDRICO', font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },
+                ]
+              }
+            ]
+          },
+          //Balance Hídrico Parcial
+          {
+            columns:[
+              {
                 margin: [0, 10, 0, 0],
                   relativePosition: { x: 0, y: 420 },
                   table: {
-                    widths: ['60%', '40%'],
-                    body: [
-                      [
-                        {
-                          text:[
-                            {text: 'BALANCE HÍDRICO: ', style: 'SF', fontSize: 8, bold: true}, 
-                            {text: balanceTotal, bold:true}
-                          ], colSpan: 2
-                        },
-                        {}
-                      ],
-                      [
-                        {                                
-                          text:[
-                              {text: 'Ingresos', font:'SF', fontSize:8, bold: true},
-                              {text: '\n\n', font:'SF', fontSize:8},
-                              {text: txtHartman, font:'SF', fontSize:8},{text:hartman, font:'SF', fontSize:8, bold:true},
-                              {text: txtSolFisiolo, font:'SF', fontSize:8}, {text:solFisiolo, font:'SF', fontSize:8, bold:true}, 
-                              {text: txtGlucosados, font:'SF', fontSize:8},{text:glucosados, font:'SF', fontSize:8, bold:true},
-                              {text: txtGelatinas, font:'SF', fontSize:8},{text:gelatinas, font:'SF', fontSize:8, bold:true},
-                              {text: txtAlmidones, font:'SF', fontSize:8},{text:almidones, font:'SF', fontSize:8, bold:true},
-                              {text: txtAlbuminas, font:'SF', fontSize:8},{text:albuminas, font:'SF', fontSize:8, bold:true},
-                              {text: txtPaqGlobular, font:'SF', fontSize:8},{text:paqGlobular, font:'SF', fontSize:8, bold:true},
-                              {text: txtPlasmas, font:'SF', fontSize:8},{text:plasmas, font:'SF', fontSize:8, bold:true},
-                              {text: txtPlaquetas, font:'SF', fontSize:8},{text:plaquetasIngreso, font:'SF', fontSize:8, bold:true},
-                              {text: txtCrioprecipitados, font:'SF', fontSize:8},{text:crioprecipitados, font:'SF', fontSize:8, bold:true},
-                              {text: txtFactorVII, font:'SF', fontSize:8},{text:factorVII, font:'SF', fontSize:8, bold:true},
-                              {text: txtFactorVIII, font:'SF', fontSize:8},{text:factorVIII, font:'SF', fontSize:8, bold:true},
-                              {text: txtOtrosIngresos, font:'SF', fontSize:8},{text:otrosIngreso, font:'SF', fontSize:8, bold:true},
-                          ]
-                        }, 
-                        {
-                          text:[
-                              {text: 'Egresos', font:'SF', fontSize:8, bold: true},
-                              {text: '\n\n', font:'SF', fontSize:8},
-                              {text: txtLiqAscitis, font:'SF', fontSize:8},{text:liqAscitis, font:'SF', fontSize:8, bold:true},
-                              {text: txtSangradoAprox, font:'SF', fontSize:8},{text:sangradoAprox, font:'SF', fontSize:8, bold:true},
-                              {text: txtUresis, font:'SF', fontSize:8},{text:uresis, font:'SF', fontSize:8, bold:true},
-                              {text: txtExpQuirurgica, font:'SF', fontSize:8},{text:expQuirurgica, font:'SF', fontSize:8, bold:true},
-                              {text: txtReqBasales, font:'SF', fontSize:8},{text:reqBasales, font:'SF', fontSize:8, bold:true},
-                              {text: txtAyuno, font:'SF', fontSize:8},{text:ayunoEgreso, font:'SF', fontSize:8, bold:true},
-                              {text: txtOtrosEgresos, font:'SF', fontSize:8},{text:otrosEgresos, font:'SF', fontSize:8, bold:true},
-                          ]
-                        }
-                      ]
+                    body: [                  
+                      [{ text: 'Hora', font: 'SF', fontSize: 8 }],
+                      [{ text: 'Ingresos', font: 'SF', fontSize: 8 }],
+                      [{ text: 'Egresos', font: 'SF', fontSize: 8 }],
+                      [{ text: 'Balance total', font: 'SF', fontSize: 8}],
                     ]
                   }, font: 'SF', fontSize: 8
+              }
+            ]
+          },  
+          {
+            columns:[
+              {
+                  relativePosition: { x: 53, y: 420 },
+                  // table: {
+                  //   widths: ['60%', '40%'],
+                  //   body: [
+                  //     [
+                  //       {
+                  //         text:[
+                  //           {text: 'BALANCE HÍDRICO: ', style: 'SF', fontSize: 8, bold: true}, 
+                  //           {text: balanceTotal, bold:true}
+                  //         ], colSpan: 2
+                  //       },
+                  //       {}
+                  //     ],
+                  //     [
+                  //       {                                
+                  //         text:[
+                  //             {text: 'Ingresos', font:'SF', fontSize:8, bold: true},
+                  //             {text: '\n\n', font:'SF', fontSize:8},
+                  //             {text: txtHartman, font:'SF', fontSize:8},{text:hartman, font:'SF', fontSize:8, bold:true},
+                  //             {text: txtSolFisiolo, font:'SF', fontSize:8}, {text:solFisiolo, font:'SF', fontSize:8, bold:true}, 
+                  //             {text: txtGlucosados, font:'SF', fontSize:8},{text:glucosados, font:'SF', fontSize:8, bold:true},
+                  //             {text: txtGelatinas, font:'SF', fontSize:8},{text:gelatinas, font:'SF', fontSize:8, bold:true},
+                  //             {text: txtAlmidones, font:'SF', fontSize:8},{text:almidones, font:'SF', fontSize:8, bold:true},
+                  //             {text: txtAlbuminas, font:'SF', fontSize:8},{text:albuminas, font:'SF', fontSize:8, bold:true},
+                  //             {text: txtPaqGlobular, font:'SF', fontSize:8},{text:paqGlobular, font:'SF', fontSize:8, bold:true},
+                  //             {text: txtPlasmas, font:'SF', fontSize:8},{text:plasmas, font:'SF', fontSize:8, bold:true},
+                  //             {text: txtPlaquetas, font:'SF', fontSize:8},{text:plaquetasIngreso, font:'SF', fontSize:8, bold:true},
+                  //             {text: txtCrioprecipitados, font:'SF', fontSize:8},{text:crioprecipitados, font:'SF', fontSize:8, bold:true},
+                  //             {text: txtFactorVII, font:'SF', fontSize:8},{text:factorVII, font:'SF', fontSize:8, bold:true},
+                  //             {text: txtFactorVIII, font:'SF', fontSize:8},{text:factorVIII, font:'SF', fontSize:8, bold:true},
+                  //             {text: txtOtrosIngresos, font:'SF', fontSize:8},{text:otrosIngreso, font:'SF', fontSize:8, bold:true},
+                  //         ]
+                  //       }, 
+                  //       {
+                  //         text:[
+                  //             {text: 'Egresos', font:'SF', fontSize:8, bold: true},
+                  //             {text: '\n\n', font:'SF', fontSize:8},
+                  //             {text: txtLiqAscitis, font:'SF', fontSize:8},{text:liqAscitis, font:'SF', fontSize:8, bold:true},
+                  //             {text: txtSangradoAprox, font:'SF', fontSize:8},{text:sangradoAprox, font:'SF', fontSize:8, bold:true},
+                  //             {text: txtUresis, font:'SF', fontSize:8},{text:uresis, font:'SF', fontSize:8, bold:true},
+                  //             {text: txtExpQuirurgica, font:'SF', fontSize:8},{text:expQuirurgica, font:'SF', fontSize:8, bold:true},
+                  //             {text: txtReqBasales, font:'SF', fontSize:8},{text:reqBasales, font:'SF', fontSize:8, bold:true},
+                  //             {text: txtAyuno, font:'SF', fontSize:8},{text:ayunoEgreso, font:'SF', fontSize:8, bold:true},
+                  //             {text: txtOtrosEgresos, font:'SF', fontSize:8},{text:otrosEgresos, font:'SF', fontSize:8, bold:true},
+                  //         ]
+                  //       }
+                  //     ]
+                  //   ]
+                  // }, font: 'SF', fontSize: 8
+                  table: {
+                    body: [
+                      // Hora                      
+                      transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.horaBalance),
+                      // Ingresos
+                      transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.ingresos),
+                      // Egresos
+                      transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.egresos),
+                      // Balance Total
+                      transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.balanceP)
+                    ]
+                  }, font: 'SF', fontSize: 8, bold: true
               }
             ]
           },  
