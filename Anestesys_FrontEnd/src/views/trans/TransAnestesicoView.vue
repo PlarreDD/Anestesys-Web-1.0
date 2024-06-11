@@ -5211,8 +5211,8 @@ export default defineComponent({
                           { text: '\nNúmero de Productos: ', font: 'SF', fontSize: 8 },
                           { text: numProductos, font: 'SF', fontSize: 8, bold:true },
                           ],
-                          },
-                          // Tabla de caso obstetrico
+                      },
+                      // Tabla de caso obstetrico
                       {
                         margin: [0, 5 ,0 ,0],
                         table: {

@@ -583,7 +583,9 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'circle', //Estilo del punto en los datos
-                  radius: 4, //Tamaño punto                 
+                  radius: 4, //Tamaño punto              
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada               
               },
               {
                   label: 'Pulso',
@@ -591,7 +593,9 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'cross',
-                  radius: 4
+                  radius: 4,
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'PAS',
@@ -599,7 +603,9 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'crossRot',
-                  radius: 4
+                  radius: 4,
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'PAD',
@@ -607,7 +613,9 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'cross',
-                  radius: 4
+                  radius: 4,
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'PAM',
@@ -615,7 +623,9 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'rectRounded',
-                  radius: 4
+                  radius: 4,
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'SpO2',
@@ -623,7 +633,9 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'rectRot',
-                  radius: 4
+                  radius: 4,
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'EtCO2',
@@ -631,7 +643,9 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'star',
-                  radius: 4
+                  radius: 4,
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'Temp1',
@@ -639,7 +653,9 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'triangle',
-                  radius: 4
+                  radius: 4,
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'Temp2',
@@ -647,7 +663,9 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'circle',
-                  radius: 4
+                  radius: 4,
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'PVC',
@@ -655,7 +673,9 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'rectRot',
-                  radius: 4
+                  radius: 4,
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'PAS_IN',
@@ -663,7 +683,9 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'crossRot',
-                  radius: 4
+                  radius: 4,
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'PAD_IN',
@@ -671,7 +693,9 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'cross',
-                  radius: 4
+                  radius: 4,
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'PAM_IN',
@@ -679,7 +703,9 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'rectRounded',
-                  radius: 4
+                  radius: 4,
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'FiCO2',
@@ -687,7 +713,9 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'star',
-                  radius: 4
+                  radius: 4,
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
               },
               {
                   label: 'FR',
@@ -695,7 +723,42 @@ export default defineComponent({
                   data: [],
                   fill: false,
                   pointStyle: 'triangle',
-                  radius: 4
+                  radius: 4,
+                  showLine: true,
+                  hidden: false, // Propiedad personalizada
+              },
+              {
+                  label: 'Medicamento',
+                  borderColor: 'rgba(151, 199, 254)',
+                  backgroundColor: 'rgba(151, 199, 254)',
+                  data: [],
+                  fill: true,
+                  pointStyle: 'rect', //Estilo del punto en los datos
+                  radius: 6, //Tamaño punto
+                  showLine: false, //Oculta la línea       
+                  hidden: false, // Propiedad personalizada
+              },
+              {
+                  label: 'Evento',
+                  borderColor: 'rgba(31, 80, 146)',
+                  backgroundColor: 'rgba(31, 80, 146)', // Color de relleno
+                  data: [],
+                  fill: true,
+                  pointStyle: 'rect', //Estilo del punto en los datos
+                  radius: 6, //Tamaño punto      
+                  showLine: false,
+                  hidden: false, // Propiedad personalizada    
+              },
+              {
+                  label: 'Relevo',
+                  borderColor: 'rgba(128, 0, 128)',
+                  backgroundColor: 'rgba(128, 0, 128)', // Color de relleno
+                  data: [],
+                  fill: true,
+                  pointStyle: 'rect', //Estilo del punto en los datos
+                  radius: 6, //Tamaño punto      
+                  showLine: false,
+                  hidden: false, // Propiedad personalizada    
               },
           ]
       },
@@ -745,7 +808,7 @@ export default defineComponent({
               },
             },
           },
-      }as unknown,
+      }as any,
       chartKey: 0,
 
       tamanoModalGrid: false,
@@ -754,7 +817,11 @@ export default defineComponent({
       mostrarSpinner: false,
 
       chartElements: [],
-      hoverItem: null
+      hoverItem: null,
+
+      medicamentosFiltrados: [],
+      eventosFiltrados: [],
+      relevosFiltrados: [],
     }
   },
 
@@ -1165,6 +1232,7 @@ export default defineComponent({
         // pacientesVal
         if (idStore.cirugia && idStore.cirugia.pacientesVal) {
           const paciente = idStore.cirugia.pacientesVal[0];
+          const estudios = idStore.cirugia.pacientesEstu[0];     
 
           idStore.APPAlergias = paciente?.antPersPat_Alergias ?? '' 
           idStore.APPQuirurgicos = paciente?.antPersPat_Quirurgicos ?? '' 
@@ -1205,7 +1273,7 @@ export default defineComponent({
           idStore.VTipoCirugia = paciente?.viaAerea_TipoCirugia ?? '' 
           idStore.RiesgoAnestesico = paciente?.viaAerea_RiesgoAnestesico ?? '' 
           
-          idStore.estudios = paciente?.pacientesEstu ?? null
+          idStore.estudios = estudios?.val_Estudios ?? null
           
           idStore.FechaRealizacion = paciente?.perfilBioQ_FechaRealizacion ?? ''
           idStore.GrupoSanguineo = paciente?.perfilBioQ_GrupoSanguineo ?? ''
@@ -1470,6 +1538,7 @@ export default defineComponent({
 
           transStore.datosVentilacion = paciente?.datosVentilador ?? null
           transStore.medicamentos = paciente?.medicamentosCx ?? null  
+          transStore.balanceParcial = paciente?.balancesParciales ?? null
           transStore.relevos = paciente?.relevoCx ?? null
           transStore.eventos = paciente?.evCriticoCx ?? null
           transStore.datosMSV = paciente?.datosMSV ?? ''
@@ -1705,13 +1774,41 @@ export default defineComponent({
           postAnestStore.Saturacion60Min = paciente?.aldreteRec_SatO260 ?? ''
           postAnestStore.Saturacion90Min = paciente?.aldreteRec_SatO290 ?? ''
           postAnestStore.Saturacion120Min = paciente?.aldreteRec_SatO2120 ?? ''
-          // postAnestStore.AldreteIngreso = paciente?.aldreteRec_AldreteIn ?? ''
-          // postAnestStore.Aldrete15Min = paciente?.aldreteRec_Aldrete15 ?? ''
-          // postAnestStore.Aldrete30Min = paciente?.aldreteRec_Aldrete30 ?? ''
-          // postAnestStore.Aldrete45Min = paciente?.aldreteRec_Aldrete45 ?? ''
-          // postAnestStore.Aldrete60Min = paciente?.aldreteRec_Aldrete60 ?? ''
-          // postAnestStore.Aldrete90Min = paciente?.aldreteRec_Aldrete90 ?? ''
-          // postAnestStore.Aldrete120Min = paciente?.aldreteRec_Aldrete120 ?? ''
+          postAnestStore.MuscularIngreso = paciente?.aldreteRec_MuscularIn ?? ''
+          postAnestStore.Muscular15Min = paciente?.aldreteRec_Muscular15 ?? ''
+          postAnestStore.Muscular30Min = paciente?.aldreteRec_Muscular30 ?? ''
+          postAnestStore.Muscular45Min = paciente?.aldreteRec_Muscular45 ?? ''
+          postAnestStore.Muscular60Min = paciente?.aldreteRec_Muscular60 ?? ''
+          postAnestStore.Muscular90Min = paciente?.aldreteRec_Muscular90 ?? ''
+          postAnestStore.Muscular120Min = paciente?.aldreteRec_Muscular120 ?? ''
+          postAnestStore.RespiracionIngreso = paciente?.aldreteRec_RespiracionIn ?? ''
+          postAnestStore.Respiracion15Min = paciente?.aldreteRec_Respiracion15 ?? ''
+          postAnestStore.Respiracion30Min = paciente?.aldreteRec_Respiracion30 ?? ''
+          postAnestStore.Respiracion45Min = paciente?.aldreteRec_Respiracion45 ?? ''
+          postAnestStore.Respiracion60Min = paciente?.aldreteRec_Respiracion60 ?? ''
+          postAnestStore.Respiracion90Min = paciente?.aldreteRec_Respiracion90 ?? ''
+          postAnestStore.Respiracion120Min = paciente?.aldreteRec_Respiracion120 ?? ''
+          postAnestStore.CirculacionIngreso = paciente?.aldreteRec_CirculacionIn ?? ''
+          postAnestStore.Circulacion15Min = paciente?.aldreteRec_Circulacion15 ?? ''
+          postAnestStore.Circulacion30Min = paciente?.aldreteRec_Circulacion30 ?? ''
+          postAnestStore.Circulacion45Min = paciente?.aldreteRec_Circulacion45 ?? ''
+          postAnestStore.Circulacion60Min = paciente?.aldreteRec_Circulacion60 ?? ''
+          postAnestStore.Circulacion90Min = paciente?.aldreteRec_Circulacion90 ?? ''
+          postAnestStore.Circulacion120Min = paciente?.aldreteRec_Circulacion120 ?? ''
+          postAnestStore.ConcienciaIngreso = paciente?.aldreteRec_ConcienciaIn ?? ''
+          postAnestStore.Conciencia15Min = paciente?.aldreteRec_Conciencia15 ?? ''
+          postAnestStore.Conciencia30Min = paciente?.aldreteRec_Conciencia30 ?? ''
+          postAnestStore.Conciencia45Min = paciente?.aldreteRec_Conciencia45 ?? ''
+          postAnestStore.Conciencia60Min = paciente?.aldreteRec_Conciencia60 ?? ''
+          postAnestStore.Conciencia90Min = paciente?.aldreteRec_Conciencia90 ?? ''
+          postAnestStore.Conciencia120Min = paciente?.aldreteRec_Conciencia120 ?? ''
+          postAnestStore.ColoracionIngreso = paciente?.aldreteRec_ColoracionIn ?? ''
+          postAnestStore.Coloracion15Min = paciente?.aldreteRec_Coloracion15 ?? ''
+          postAnestStore.Coloracion30Min = paciente?.aldreteRec_Coloracion30 ?? ''
+          postAnestStore.Coloracion45Min = paciente?.aldreteRec_Coloracion45 ?? ''
+          postAnestStore.Coloracion60Min = paciente?.aldreteRec_Coloracion60 ?? ''
+          postAnestStore.Coloracion90Min = paciente?.aldreteRec_Coloracion90 ?? ''
+          postAnestStore.Coloracion120Min = paciente?.aldreteRec_Coloracion120 ?? ''          
           postAnestStore.BromageIngreso = paciente?.aldreteRec_BromageIn ?? ''
           postAnestStore.Bromage15Min = paciente?.aldreteRec_Bromage15 ?? ''
           postAnestStore.Bromage30Min = paciente?.aldreteRec_Bromage30 ?? ''
@@ -1739,7 +1836,7 @@ export default defineComponent({
           postAnestStore.AldreteFinal45Min = paciente?.altaRec_45min ?? ''
           postAnestStore.AldreteFinal60Min = paciente?.altaRec_60min ?? ''
           postAnestStore.AldreteFinal90Min = paciente?.altaRec_90min ?? ''
-          postAnestStore.AldreteFinal120Min = paciente?.altaRec_120min ?? ''
+          postAnestStore.AldreteFinal120Min = paciente?.altaRec_CalifAldrete ?? ''
           postAnestStore.CalificacionAldrete = paciente?.altaRec_CalifAldrete ?? ''
           postAnestStore.ObservacionesAlta = paciente?.altaRec_Obs ?? ''
           postAnestStore.FechaAlta = paciente?.altaRec_FechaAltaRec ?? ''
@@ -1775,13 +1872,13 @@ export default defineComponent({
           postAnestStore.Saturacion60Min = ''
           postAnestStore.Saturacion90Min = ''
           postAnestStore.Saturacion120Min = ''
-          // postAnestStore.AldreteIngreso = ''
-          // postAnestStore.Aldrete15Min = ''
-          // postAnestStore.Aldrete30Min = ''
-          // postAnestStore.Aldrete45Min = ''
-          // postAnestStore.Aldrete60Min = ''
-          // postAnestStore.Aldrete90Min = ''
-          // postAnestStore.Aldrete120Min = ''
+          postAnestStore.AldreteFinal0Min = ''
+          postAnestStore.AldreteFinal15Min = ''
+          postAnestStore.AldreteFinal30Min = ''
+          postAnestStore.AldreteFinal45Min = ''
+          postAnestStore.AldreteFinal60Min = ''
+          postAnestStore.AldreteFinal90Min = ''
+          postAnestStore.AldreteFinal120Min = ''
           postAnestStore.BromageIngreso = ''
           postAnestStore.Bromage15Min = ''
           postAnestStore.Bromage30Min = ''
@@ -1840,44 +1937,48 @@ export default defineComponent({
     },
 
     // Dividir y crear graficas para cargar en documento PDF
-    crearGraficasPDF(fc, pulso, pas, pad, pam, spo2, etco2, temp1, temp2, pvc, pasin, padin, pamin, fico2, fr, horas, element) {
+    crearGraficasPDF(fc, pulso, pas, pad, pam, spo2, etco2, temp1, temp2, pvc, pasin, padin, pamin, fico2, fr, medic, even, relev, horas, element) {
       try {
         return new ChartJS(element, {
           type: 'line',
           data: {
             labels: horas,
-            datasets: [
+            datasets: [              
               {
-                label: 'FC',
-                data: fc,
-                borderColor: 'rgba(0, 165, 151)',
-                fill: false,
-                pointStyle: 'circle', //Estilo del punto en los datos
-                pointRadius: 4, //Tamaño punto
+                  label: 'FC',            
+                  borderColor: 'rgba(0, 165, 151)',
+                  data: fc,
+                  fill: false,
+                  pointStyle: 'circle', //Estilo del punto en los datos
+                  pointRadius: 8, //Tamaño punto              
+                  showLine: true,              
               },
               {
-                label: 'Pulso',
-                borderColor: 'rgba(117, 137, 190)',
-                data: pulso,
-                fill: false,
-                pointStyle: 'cross',
-                pointRadius: 4
+                  label: 'Pulso',
+                  borderColor: 'rgba(117, 137, 190)',
+                  data: pulso,
+                  fill: false,
+                  pointStyle: 'cross',
+                  pointRadius: 8,
+                  showLine: true,
               },
               {
-                label: 'PAS',
-                borderColor: 'rgba(236, 90, 85)',
-                data: pas,
-                fill: false,
-                pointStyle: 'crossRot',
-                pointRadius: 4
+                  label: 'PAS',
+                  borderColor: 'rgba(236, 90, 85)',
+                  data: pas,
+                  fill: false,
+                  pointStyle: 'crossRot',
+                  pointRadius: 8,
+                  showLine: true,
               },
               {
-                label: 'PAD',
-                borderColor: 'rgba(161, 197, 227)',
-                data: pad,
-                fill: false,
-                pointStyle: 'cross',
-                pointRadius: 4
+                  label: 'PAD',
+                  borderColor: 'rgba(161, 197, 227)',
+                  data: pad,
+                  fill: false,
+                  pointStyle: 'cross',
+                  pointRadius: 8,
+                  showLine: true,
               },
               {
                   label: 'PAM',
@@ -1885,15 +1986,17 @@ export default defineComponent({
                   data: pam,
                   fill: false,
                   pointStyle: 'rectRounded',
-                  pointRadius: 4
-              },
+                  pointRadius: 8,
+                  showLine: true,
+              },              
               {
                   label: 'SpO2',
                   borderColor: 'rgba(68, 163, 211)',
                   data: spo2,
                   fill: false,
                   pointStyle: 'rectRot',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
               },
               {
                   label: 'EtCO2',
@@ -1901,7 +2004,8 @@ export default defineComponent({
                   data: etco2,
                   fill: false,
                   pointStyle: 'star',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
               },
               {
                   label: 'Temp1',
@@ -1909,7 +2013,8 @@ export default defineComponent({
                   data: temp1,
                   fill: false,
                   pointStyle: 'triangle',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
               },
               {
                   label: 'Temp2',
@@ -1917,7 +2022,8 @@ export default defineComponent({
                   data: temp2,
                   fill: false,
                   pointStyle: 'circle',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
               },
               {
                   label: 'PVC',
@@ -1925,7 +2031,8 @@ export default defineComponent({
                   data: pvc,
                   fill: false,
                   pointStyle: 'rectRot',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
               },
               {
                   label: 'PAS_IN',
@@ -1933,7 +2040,8 @@ export default defineComponent({
                   data: pasin,
                   fill: false,
                   pointStyle: 'crossRot',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
               },
               {
                   label: 'PAD_IN',
@@ -1941,7 +2049,8 @@ export default defineComponent({
                   data: padin,
                   fill: false,
                   pointStyle: 'cross',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
               },
               {
                   label: 'PAM_IN',
@@ -1949,7 +2058,8 @@ export default defineComponent({
                   data: pamin,
                   fill: false,
                   pointStyle: 'rectRounded',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
               },
               {
                   label: 'FiCO2',
@@ -1957,7 +2067,8 @@ export default defineComponent({
                   data: fico2,
                   fill: false,
                   pointStyle: 'star',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
               },
               {
                   label: 'FR',
@@ -1965,9 +2076,40 @@ export default defineComponent({
                   data: fr,
                   fill: false,
                   pointStyle: 'triangle',
-                  pointRadius: 4
+                  pointRadius: 8,
+                  showLine: true,
               },
-            ],
+              {
+                  label: 'Medicamento',
+                  borderColor: 'rgba(151, 199, 254)',
+                  backgroundColor: 'rgba(151, 199, 254)',
+                  data: medic,
+                  fill: true,
+                  pointStyle: 'rect', //Estilo del punto en los datos
+                  pointRadius: 12, //Tamaño punto
+                  showLine: false, //Oculta la línea       
+              },
+              {
+                  label: 'Evento',
+                  borderColor: 'rgba(31, 80, 146)',
+                  backgroundColor: 'rgba(31, 80, 146)', // Color de relleno
+                  data: even,
+                  fill: true,
+                  pointStyle: 'rect', //Estilo del punto en los datos
+                  pointRadius: 12, //Tamaño punto      
+                  showLine: false,  
+              },
+              {
+                  label: 'Relevo',
+                  borderColor: 'rgba(128, 0, 128)',
+                  backgroundColor: 'rgba(128, 0, 128)', // Color de relleno
+                  data: relev,
+                  fill: true,
+                  pointStyle: 'rect', //Estilo del punto en los datos
+                  pointRadius: 12, //Tamaño punto      
+                  showLine: false,
+              },
+            ], 
           },
           options: {            
             responsive: true,
@@ -2039,7 +2181,10 @@ export default defineComponent({
         let PAM_IN = null
         let FiCO2 = null
         let FR = null
-        let horaGeneracion = null
+        // let Medicamentos = null
+        // let Eventos = null
+        // let Relevos = null
+        let horaGeneracion = null        
         
         if (transStore.datosMSV != ''){
           
@@ -2077,6 +2222,65 @@ export default defineComponent({
           FR = ' '
           horaGeneracion = ' '
         }
+
+        let medicamentosDataset = new Array(horaGeneracion.length).fill(null).map(() => []);
+        let eventosDataset = new Array(horaGeneracion.length).fill(null).map(() => []);    
+        let relevosDataset = new Array(horaGeneracion.length).fill(null).map(() => []);
+
+        if(transStore.medicamentos != null){
+          this.medicamentosFiltrados = transStore.medicamentos.flatMap((med) => {
+              return {
+                medicamento: med.medicamento,
+                horaInicioMed: med.horaInicioMed,
+                valorGrafica: med.valorGrafica,
+                dosisMed: med.dosisMed,
+                unidadMed: med.unidadMed
+              };
+          });
+
+          this.medicamentosFiltrados.forEach(med => {
+            let index = horaGeneracion.indexOf(med.horaInicioMed);
+            if (index !== -1) {
+              medicamentosDataset[index].push({valor: med.valorGrafica, nombre: med.medicamento, dosis: med.dosisMed, unidad: med.unidadMed});
+            }
+          });
+        }       
+        
+
+        if (transStore.eventos != null) {
+            this.eventosFiltrados = transStore.eventos.flatMap((eve) => {
+              return {
+                horaEvento: eve.horaEvento,
+                detalleEvento: eve.detalleEvento,
+                valorGraficaEv: eve.valorGraficaEv,
+              };
+          });    
+
+          this.eventosFiltrados.forEach(eve => {
+            let index = horaGeneracion.indexOf(eve.horaEvento);
+            if (index !== -1) {
+              eventosDataset[index].push({valor: eve.valorGraficaEv, detalle: eve.detalleEvento});
+            }
+          });
+        }
+
+        if (transStore.relevos != null) {
+          this.relevosFiltrados = transStore.relevos.flatMap((rel) => {
+              return {
+                horaRelevo: rel.horaRelevo,
+                anestesiologoRel: rel.anestesiologoRel,
+                observacionesRel: rel.observacionesRel,
+                valorGraficaRel: rel.valorGraficaRel,
+              };
+          });
+
+          this.relevosFiltrados.forEach(rel => {
+            let index = horaGeneracion.indexOf(rel.horaRelevo);
+            if (index !== -1) {
+              relevosDataset[index].push({valor: rel.valorGraficaRel, doctor: rel.anestesiologoRel, detalle: rel.observacionesRel});
+            }
+          });
+        }             
   
         let gruposFC = [];
         for (let i = 0; i < FC.length; i += 26) {
@@ -2138,6 +2342,24 @@ export default defineComponent({
         for (let i = 0; i < FR.length; i += 26) {
           gruposFR.push(FR.slice(i, i + 26));
         };
+        let agruparValoresMedicamentos = medicamentosDataset.map(item => item.length ? item[item.length - 1].valor : null)
+        let gruposMedicamentos = [];
+        for (let i = 0; i < agruparValoresMedicamentos.length; i += 26) {
+          gruposMedicamentos.push(agruparValoresMedicamentos.slice(i, i + 26));
+        };
+
+        let agruparValoresEventos = eventosDataset.map(item => item.length ? item[item.length - 1].valor : null)
+        let gruposEventos = [];
+        for (let i = 0; i < agruparValoresEventos.length; i += 26) {
+          gruposEventos.push(agruparValoresEventos.slice(i, i + 26));
+        };        
+
+        let agruparValoresRelevos = relevosDataset.map(item => item.length ? item[item.length - 1].valor : null)
+        let gruposRelevos = [];
+        for (let i = 0; i < agruparValoresRelevos.length; i += 26) {
+          gruposRelevos.push(agruparValoresRelevos.slice(i, i + 26));
+        };
+
         let gruposHora = [];
         for (let i = 0; i < horaGeneracion.length; i += 26) {
           gruposHora.push(horaGeneracion.slice(i, i + 26));
@@ -2176,10 +2398,11 @@ export default defineComponent({
           (this.$refs.chartContainer as HTMLElement).appendChild(canvasElement);
   
           const chart = this.crearGraficasPDF(gruposFC[i], gruposPulso[i], gruposPAS[i], gruposPAD[i], gruposPAM[i], gruposSpO2[i], gruposEtCO2[i], gruposTemp1[i], 
-                      gruposTemp2[i], gruposPVC[i], gruposPASIN[i], gruposPADIN[i], gruposPAMIN[i], gruposFiCO2[i], gruposFR[i], gruposHora[i], canvasElement);
+                      gruposTemp2[i], gruposPVC[i], gruposPASIN[i], gruposPADIN[i], gruposPAMIN[i], gruposFiCO2[i], gruposFR[i], 
+                      gruposMedicamentos[i], gruposEventos[i], gruposRelevos[i], gruposHora[i], canvasElement);
           this.chartElements.push(chart);
-        }
-  
+        }       
+
         this.chartKey += 1;
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
@@ -2450,9 +2673,9 @@ export default defineComponent({
         let tipoCir = idStore.VTipoCirugia === undefined || idStore.VTipoCirugia === null ? ' ' : idStore.VTipoCirugia;
         // Riesgo Anéstesico Quirúrgico 
         let riesgo = idStore.RiesgoAnestesico === undefined || idStore.RiesgoAnestesico === null ? ' ' : idStore.RiesgoAnestesico;
-  
+
         /*Estudios*/
-        let listaEstudios = idStore.estudios === null ? [' '] : idStore.estudios.map(item => item.val_Estudios.map(estudio => estudio.estudio)).flat();
+        let listaEstudios = idStore.estudios === null ? [' '] : idStore.estudios.map(estudio => estudio.estudio+': ' + estudio.especifEstudio).flat();
         let estudios = listaEstudios.slice(0,5);
   
         /*PLAN*/        
@@ -2594,6 +2817,86 @@ export default defineComponent({
         let pesoNacido = postAnestStore.PesoUno === undefined || postAnestStore.PesoUno === null ? ' ' : postAnestStore.PesoUno;
         // Talla        
         let tallaNacido = postAnestStore.TallaUno === undefined || postAnestStore.TallaUno === null ? ' ' : postAnestStore.TallaUno;
+        // Tipo Alumbramiento
+        let alumbramientoDos = postAnestStore.AlumbramientoDos === undefined || postAnestStore.AlumbramientoDos === null ? ' ' : postAnestStore.AlumbramientoDos;
+        // Hora Nacimiento       
+        let horaNacimientoDos = postAnestStore.HoraNacimientoDos === undefined || postAnestStore.HoraNacimientoDos === null ? ' ' : postAnestStore.HoraNacimientoDos;
+        // Genero        
+        let generoDos = postAnestStore.GeneroDos === undefined || postAnestStore.GeneroDos === null ? ' ' : postAnestStore.GeneroDos;
+        // Apgar 1 min       
+        let apgar1Dos = postAnestStore.Apgar1Dos === undefined || postAnestStore.Apgar1Dos === null ? ' ' : postAnestStore.Apgar1Dos;
+        // Apgar 5 min        
+        let apgar5Dos = postAnestStore.Apgar5Dos === undefined || postAnestStore.Apgar5Dos === null ? ' ' : postAnestStore.Apgar5Dos;
+        // Capurro       
+        let capurroDos = postAnestStore.CapurroDos === undefined || postAnestStore.CapurroDos === null ? ' ' : postAnestStore.CapurroDos;
+        // Peso       
+        let pesoNacidoDos = postAnestStore.PesoDos === undefined || postAnestStore.PesoDos === null ? ' ' : postAnestStore.PesoDos;
+        // Talla        
+        let tallaNacidoDos = postAnestStore.TallaDos === undefined || postAnestStore.TallaDos === null ? ' ' : postAnestStore.TallaDos;
+        // Tipo Alumbramiento   
+        let alumbramientoTres = postAnestStore.AlumbramientoTres === undefined || postAnestStore.AlumbramientoTres === null ? ' ' : postAnestStore.AlumbramientoTres;
+        // Hora Nacimiento       
+        let horaNacimientoTres = postAnestStore.HoraNacimientoTres === undefined || postAnestStore.HoraNacimientoTres === null ? ' ' : postAnestStore.HoraNacimientoTres;
+        // Genero        
+        let generoTres = postAnestStore.GeneroTres === undefined || postAnestStore.GeneroTres === null ? ' ' : postAnestStore.GeneroTres;
+        // Apgar 1 min       
+        let apgar1Tres = postAnestStore.Apgar1Tres === undefined || postAnestStore.Apgar1Tres === null ? ' ' : postAnestStore.Apgar1Tres;
+        // Apgar 5 min        
+        let apgar5Tres = postAnestStore.Apgar5Tres === undefined || postAnestStore.Apgar5Tres === null ? ' ' : postAnestStore.Apgar5Tres;
+        // Capurro       
+        let capurroTres = postAnestStore.CapurroTres === undefined || postAnestStore.CapurroTres === null ? ' ' : postAnestStore.CapurroTres;
+        // Peso       
+        let pesoNacidoTres = postAnestStore.PesoTres === undefined || postAnestStore.PesoTres === null ? ' ' : postAnestStore.PesoTres;
+        // Talla        
+        let tallaNacidoTres = postAnestStore.TallaTres === undefined || postAnestStore.TallaTres === null ? ' ' : postAnestStore.TallaTres;
+        // Tipo Alumbramiento   
+        let alumbramientoCuatro = postAnestStore.AlumbramientoCuatro === undefined || postAnestStore.AlumbramientoCuatro === null ? ' ' : postAnestStore.AlumbramientoCuatro;
+        // Hora Nacimiento       
+        let horaNacimientoCuatro = postAnestStore.HoraNacimientoCuatro === undefined || postAnestStore.HoraNacimientoCuatro === null ? ' ' : postAnestStore.HoraNacimientoCuatro;
+        // Genero        
+        let generoCuatro = postAnestStore.GeneroCuatro === undefined || postAnestStore.GeneroCuatro === null ? ' ' : postAnestStore.GeneroCuatro;
+        // Apgar 1 min       
+        let apgar1Cuatro = postAnestStore.Apgar1Cuatro === undefined || postAnestStore.Apgar1Cuatro === null ? ' ' : postAnestStore.Apgar1Cuatro;
+        // Apgar 5 min        
+        let apgar5Cuatro = postAnestStore.Apgar5Cuatro === undefined || postAnestStore.Apgar5Cuatro === null ? ' ' : postAnestStore.Apgar5Cuatro;
+        // Capurro       
+        let capurroCuatro = postAnestStore.CapurroCuatro === undefined || postAnestStore.CapurroCuatro === null ? ' ' : postAnestStore.CapurroCuatro;
+        // Peso       
+        let pesoNacidoCuatro = postAnestStore.PesoCuatro === undefined || postAnestStore.PesoCuatro === null ? ' ' : postAnestStore.PesoCuatro;
+        // Talla        
+        let tallaNacidoCuatro = postAnestStore.TallaCuatro === undefined || postAnestStore.TallaCuatro === null ? ' ' : postAnestStore.TallaCuatro;
+        // Tipo Alumbramiento   
+        let alumbramientoCinco = postAnestStore.AlumbramientoCinco === undefined || postAnestStore.AlumbramientoCinco === null ? ' ' : postAnestStore.AlumbramientoCinco;
+        // Hora Nacimiento       
+        let horaNacimientoCinco = postAnestStore.HoraNacimientoCinco === undefined || postAnestStore.HoraNacimientoCinco === null ? ' ' : postAnestStore.HoraNacimientoCinco;
+        // Genero        
+        let generoCinco = postAnestStore.GeneroCinco === undefined || postAnestStore.GeneroCinco === null ? ' ' : postAnestStore.GeneroCinco;
+        // Apgar 1 min       
+        let apgar1Cinco = postAnestStore.Apgar1Cinco === undefined || postAnestStore.Apgar1Cinco === null ? ' ' : postAnestStore.Apgar1Cinco;
+        // Apgar 5 min        
+        let apgar5Cinco = postAnestStore.Apgar5Cinco === undefined || postAnestStore.Apgar5Cinco === null ? ' ' : postAnestStore.Apgar5Cinco;
+        // Capurro       
+        let capurroCinco = postAnestStore.CapurroCinco === undefined || postAnestStore.CapurroCinco === null ? ' ' : postAnestStore.CapurroCinco;
+        // Peso       
+        let pesoNacidoCinco = postAnestStore.PesoCinco === undefined || postAnestStore.PesoCinco === null ? ' ' : postAnestStore.PesoCinco;
+        // Talla        
+        let tallaNacidoCinco = postAnestStore.TallaCinco === undefined || postAnestStore.TallaCinco === null ? ' ' : postAnestStore.TallaCinco;
+        // Tipo Alumbramiento   
+        let alumbramientoSeis = postAnestStore.AlumbramientoSeis === undefined || postAnestStore.AlumbramientoSeis === null ? ' ' : postAnestStore.AlumbramientoSeis;
+        // Hora Nacimiento       
+        let horaNacimientoSeis = postAnestStore.HoraNacimientoSeis === undefined || postAnestStore.HoraNacimientoSeis === null ? ' ' : postAnestStore.HoraNacimientoSeis;
+        // Genero        
+        let generoSeis = postAnestStore.GeneroSeis === undefined || postAnestStore.GeneroSeis === null ? ' ' : postAnestStore.GeneroSeis;
+        // Apgar 1 min       
+        let apgar1Seis = postAnestStore.Apgar1Seis === undefined || postAnestStore.Apgar1Seis === null ? ' ' : postAnestStore.Apgar1Seis;
+        // Apgar 5 min        
+        let apgar5Seis = postAnestStore.Apgar5Seis === undefined || postAnestStore.Apgar5Seis === null ? ' ' : postAnestStore.Apgar5Seis;
+        // Capurro       
+        let capurroSeis = postAnestStore.CapurroSeis === undefined || postAnestStore.CapurroSeis === null ? ' ' : postAnestStore.CapurroSeis;
+        // Peso       
+        let pesoNacidoSeis = postAnestStore.PesoSeis === undefined || postAnestStore.PesoSeis === null ? ' ' : postAnestStore.PesoSeis;
+        // Talla        
+        let tallaNacidoSeis = postAnestStore.TallaSeis === undefined || postAnestStore.TallaSeis === null ? ' ' : postAnestStore.TallaSeis;
   
         /*Nota Post-Anestésica*/
   
@@ -2681,20 +2984,90 @@ export default defineComponent({
         let saturacion90 = postAnestStore.Saturacion90Min === undefined || postAnestStore.Saturacion90Min === null ? ' ' : postAnestStore.Saturacion90Min;
         // SpO2 120 min
         let saturacion120 = postAnestStore.Saturacion120Min === undefined || postAnestStore.Saturacion120Min === null ? ' ' : postAnestStore.Saturacion120Min;
-        // Aldrete Ingreso
-        // let aldreteIngreso = postAnestStore.AldreteIngreso === undefined || postAnestStore.AldreteIngreso === null ? ' ' : postAnestStore.AldreteIngreso;
-        // // Aldrete 15 min
-        // let aldrete15 = postAnestStore.Aldrete15Min === undefined || postAnestStore.Aldrete15Min === null ? ' ' : postAnestStore.Aldrete15Min;
-        // // Aldrete 30 min
-        // let aldrete30 = postAnestStore.Aldrete30Min === undefined || postAnestStore.Aldrete30Min === null ? ' ' : postAnestStore.Aldrete30Min;
-        // // Aldrete 45 min
-        // let aldrete45 = postAnestStore.Aldrete45Min === undefined || postAnestStore.Aldrete45Min === null ? ' ' : postAnestStore.Aldrete45Min;
-        // // Aldrete 60 min
-        // let aldrete60 = postAnestStore.Aldrete60Min === undefined || postAnestStore.Aldrete60Min === null ? ' ' : postAnestStore.Aldrete60Min;
-        // // Aldrete 90 min
-        // let aldrete90 = postAnestStore.Aldrete90Min === undefined || postAnestStore.Aldrete90Min === null ? ' ' : postAnestStore.Aldrete90Min;
-        // // Aldrete 120 min
-        // let aldrete120 = postAnestStore.Aldrete120Min === undefined || postAnestStore.Aldrete120Min === null ? ' ' : postAnestStore.Aldrete120Min;
+        // Actividad Muscular Ingreso
+        let actividadIngreso = postAnestStore.MuscularIngreso === undefined || postAnestStore.MuscularIngreso === null ? ' ' : postAnestStore.MuscularIngreso;
+        // Actividad Muscular 15 min
+        let actividad15 = postAnestStore.Muscular15Min === undefined || postAnestStore.Muscular15Min === null ? ' ' : postAnestStore.Muscular15Min;
+        // Actividad Muscular 30 min
+        let actividad30 = postAnestStore.Muscular30Min === undefined || postAnestStore.Muscular30Min === null ? ' ' : postAnestStore.Muscular30Min;
+        // Actividad Muscular 45 min
+        let actividad45 = postAnestStore.Muscular45Min === undefined || postAnestStore.Muscular45Min === null ? ' ' : postAnestStore.Muscular45Min;
+        // Actividad Muscular 60 min
+        let actividad60 = postAnestStore.Muscular60Min === undefined || postAnestStore.Muscular60Min === null ? ' ' : postAnestStore.Muscular60Min;
+        // Actividad Muscular 90 min
+        let actividad90 = postAnestStore.Muscular90Min === undefined || postAnestStore.Muscular90Min === null ? ' ' : postAnestStore.Muscular90Min;
+        // Actividad Muscular 120 min
+        let actividad120 = postAnestStore.Muscular120Min === undefined || postAnestStore.Muscular120Min === null ? ' ' : postAnestStore.Muscular120Min;
+        // Respiración Ingreso
+        let respiracionIngreso = postAnestStore.RespiracionIngreso === undefined || postAnestStore.RespiracionIngreso === null ? ' ' : postAnestStore.RespiracionIngreso;
+        // Respiración 15 min
+        let respiracion15 = postAnestStore.Respiracion15Min === undefined || postAnestStore.Respiracion15Min === null ? ' ' : postAnestStore.Respiracion15Min;
+        // Respiración 30 min
+        let respiracion30 = postAnestStore.Respiracion30Min === undefined || postAnestStore.Respiracion30Min === null ? ' ' : postAnestStore.Respiracion30Min;
+        // Respiración 45 min
+        let respiracion45 = postAnestStore.Respiracion45Min === undefined || postAnestStore.Respiracion45Min === null ? ' ' : postAnestStore.Respiracion45Min;
+        // Respiración 60 min
+        let respiracion60 = postAnestStore.Respiracion60Min === undefined || postAnestStore.Respiracion60Min === null ? ' ' : postAnestStore.Respiracion60Min;
+        // Respiración 90 min
+        let respiracion90 = postAnestStore.Respiracion90Min === undefined || postAnestStore.Respiracion90Min === null ? ' ' : postAnestStore.Respiracion90Min;
+        // Respiración 120 min
+        let respiracion120 = postAnestStore.Respiracion120Min === undefined || postAnestStore.Respiracion120Min === null ? ' ' : postAnestStore.Respiracion120Min;
+        // Circulación Ingreso
+        let circulacionIngreso = postAnestStore.CirculacionIngreso === undefined || postAnestStore.CirculacionIngreso === null ? ' ' : postAnestStore.CirculacionIngreso;
+        // Circulación 15 min
+        let circulacion15 = postAnestStore.Circulacion15Min === undefined || postAnestStore.Circulacion15Min === null ? ' ' : postAnestStore.Circulacion15Min;
+        // Circulación 30 min
+        let circulacion30 = postAnestStore.Circulacion30Min === undefined || postAnestStore.Circulacion30Min === null ? ' ' : postAnestStore.Circulacion30Min;
+        // Circulación 45 min
+        let circulacion45 = postAnestStore.Circulacion45Min === undefined || postAnestStore.Circulacion45Min === null ? ' ' : postAnestStore.Circulacion45Min;
+        // Circulación 60 min
+        let circulacion60 = postAnestStore.Circulacion60Min === undefined || postAnestStore.Circulacion60Min === null ? ' ' : postAnestStore.Circulacion60Min;
+        // Circulación 90 min
+        let circulacion90 = postAnestStore.Circulacion90Min === undefined || postAnestStore.Circulacion90Min === null ? ' ' : postAnestStore.Circulacion90Min;
+        // Circulación 120 min
+        let circulacion120 = postAnestStore.Circulacion120Min === undefined || postAnestStore.Circulacion120Min === null ? ' ' : postAnestStore.Circulacion120Min;
+        // Conciencia Ingreso
+        let concienciaIngreso = postAnestStore.ConcienciaIngreso === undefined || postAnestStore.ConcienciaIngreso === null ? ' ' : postAnestStore.ConcienciaIngreso;
+        // Conciencia 15 min
+        let conciencia15 = postAnestStore.Conciencia15Min === undefined || postAnestStore.Conciencia15Min === null ? ' ' : postAnestStore.Conciencia15Min;
+        // Conciencia 30 min
+        let conciencia30 = postAnestStore.Conciencia30Min === undefined || postAnestStore.Conciencia30Min === null ? ' ' : postAnestStore.Conciencia30Min;
+        // Conciencia 45 min
+        let conciencia45 = postAnestStore.Conciencia45Min === undefined || postAnestStore.Conciencia45Min === null ? ' ' : postAnestStore.Conciencia45Min;
+        // Conciencia 60 min
+        let conciencia60 = postAnestStore.Conciencia60Min === undefined || postAnestStore.Conciencia60Min === null ? ' ' : postAnestStore.Conciencia60Min;
+        // Conciencia 90 min
+        let conciencia90 = postAnestStore.Conciencia90Min === undefined || postAnestStore.Conciencia90Min === null ? ' ' : postAnestStore.Conciencia90Min;
+        // Conciencia 120 min
+        let conciencia120 = postAnestStore.Conciencia120Min === undefined || postAnestStore.Conciencia120Min === null ? ' ' : postAnestStore.Conciencia120Min;
+        // Coloracion Ingreso
+        let coloracionIngreso = postAnestStore.ColoracionIngreso === undefined || postAnestStore.ColoracionIngreso === null ? ' ' : postAnestStore.ColoracionIngreso;
+        // Coloracion 15 min
+        let coloracion15 = postAnestStore.Coloracion15Min === undefined || postAnestStore.Coloracion15Min === null ? ' ' : postAnestStore.Coloracion15Min;
+        // Coloracion 30 min
+        let coloracion30 = postAnestStore.Coloracion30Min === undefined || postAnestStore.Coloracion30Min === null ? ' ' : postAnestStore.Coloracion30Min;
+        // Coloracion 45 min
+        let coloracion45 = postAnestStore.Coloracion45Min === undefined || postAnestStore.Coloracion45Min === null ? ' ' : postAnestStore.Coloracion45Min;
+        // Coloracion 60 min
+        let coloracion60 = postAnestStore.Coloracion60Min === undefined || postAnestStore.Coloracion60Min === null ? ' ' : postAnestStore.Coloracion60Min;
+        // Coloracion 90 min
+        let coloracion90 = postAnestStore.Coloracion90Min === undefined || postAnestStore.Coloracion90Min === null ? ' ' : postAnestStore.Coloracion90Min;
+        // Coloracion 120 min
+        let coloracion120 = postAnestStore.Coloracion120Min === undefined || postAnestStore.Coloracion120Min === null ? ' ' : postAnestStore.Coloracion120Min;
+        // Aldrete Final
+        let aldreteIngreso = postAnestStore.AldreteFinal0Min === undefined || postAnestStore.AldreteFinal0Min === null ? ' ' : postAnestStore.AldreteFinal0Min;
+        // Aldrete 15 min
+        let aldrete15 = postAnestStore.AldreteFinal15Min === undefined || postAnestStore.AldreteFinal15Min === null ? ' ' : postAnestStore.AldreteFinal15Min;
+        // Aldrete 30 min
+        let aldrete30 = postAnestStore.AldreteFinal30Min === undefined || postAnestStore.AldreteFinal30Min === null ? ' ' : postAnestStore.AldreteFinal30Min;
+        // Aldrete 45 min
+        let aldrete45 = postAnestStore.AldreteFinal45Min === undefined || postAnestStore.AldreteFinal45Min === null ? ' ' : postAnestStore.AldreteFinal45Min;
+        // Aldrete 60 min
+        let aldrete60 = postAnestStore.AldreteFinal60Min === undefined || postAnestStore.AldreteFinal60Min === null ? ' ' : postAnestStore.AldreteFinal60Min;
+        // Aldrete 90 min
+        let aldrete90 = postAnestStore.AldreteFinal90Min === undefined || postAnestStore.AldreteFinal90Min === null ? ' ' : postAnestStore.AldreteFinal90Min;
+        // Aldrete 120 min
+        let aldrete120 = postAnestStore.AldreteFinal120Min === undefined || postAnestStore.AldreteFinal120Min === null ? ' ' : postAnestStore.AldreteFinal120Min;
         // Bromage Ingreso
         let bromageIngreso = postAnestStore.BromageIngreso === undefined || postAnestStore.BromageIngreso === null ? ' ' : postAnestStore.BromageIngreso;
         // Bromage 15 min
@@ -3917,7 +4290,7 @@ export default defineComponent({
                       },
                       // ANESTESIA GENERAL
                       {
-                        margin: [0, 50, 0, 0],
+                        margin: [0, 20, 0, 0],
                         text: [
                           { text: 'ANESTESIA GENERAL', font: 'SF', fontSize: 8, bold:true },
                         ],
@@ -4273,92 +4646,40 @@ export default defineComponent({
                           { text: numProductos, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
-                      // Tipo Alumbramiento
+                      // Tabla de caso obstetrico
                       {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Tipo Alumbramiento: ', font: 'SF', fontSize: 8 },
-                          { text: alumbramiento, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Hora Nacimiento
-                      {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Hora Nacimiento: ', font: 'SF', fontSize: 8 },
-                          { text: horaNacimiento, font: 'SF', fontSize: 8, bold:true },
-                        ],
+                        margin: [0, 5 ,0 ,0],
+                        table: {
+                          headerRows: 1,
+                          widths: [ '*', '*', '*', '*', '*', '*', '*', '*', '*'],
+                          body: [
+                            ['', 'Tipo de alumbramiento', 'Hora de nacimiento', 'Genero', 'Apgar 1min', 'Apgar 5min', 'Capurro', 'Peso(gm)', 'Talla(cm)'],
+                            ['Bebé 1', { text: alumbramiento, bold:true }, { text: horaNacimiento, bold:true }, 
+                            { text: genero, bold:true }, { text: apgar1, bold:true }, { text: apgar5, bold:true }, 
+                            { text: capurro, bold:true }, { text: pesoNacido, bold:true }, { text: tallaNacido, bold:true }],
+                            ['Bebé 2', { text: alumbramientoDos, bold:true }, { text: horaNacimientoDos, bold:true }, 
+                            { text: generoDos, bold:true }, { text: apgar1Dos, bold:true }, { text: apgar5Dos, bold:true }, 
+                            { text: capurroDos, bold:true }, { text: pesoNacidoDos, bold:true }, { text: tallaNacidoDos, bold:true }],
+                            ['Bebé 3', { text: alumbramientoTres, bold:true }, { text: horaNacimientoTres, bold:true }, 
+                            { text: generoTres, bold:true }, { text: apgar1Tres, bold:true }, { text: apgar5Tres, bold:true }, 
+                            { text: capurroTres, bold:true }, { text: pesoNacidoTres, bold:true }, { text: tallaNacidoTres, bold:true }],
+                            ['Bebé 4', { text: alumbramientoCuatro, bold:true }, { text: horaNacimientoCuatro, bold:true }, 
+                            { text: generoCuatro, bold:true }, { text: apgar1Cuatro, bold:true }, { text: apgar5Cuatro, bold:true }, 
+                            { text: capurroCuatro, bold:true }, { text: pesoNacidoCuatro, bold:true }, { text: tallaNacidoCuatro, bold:true }],
+                            ['Bebé 5', { text: alumbramientoCinco, bold:true }, { text: horaNacimientoCinco, bold:true }, 
+                            { text: generoCinco, bold:true }, { text: apgar1Cinco, bold:true }, { text: apgar5Cinco, bold:true }, 
+                            { text: capurroCinco, bold:true }, { text: pesoNacidoCinco, bold:true }, { text: tallaNacidoCinco, bold:true }],
+                            ['Bebé 6', { text: alumbramientoSeis, bold:true }, { text: horaNacimientoSeis, bold:true }, 
+                            { text: generoSeis, bold:true }, { text: apgar1Seis, bold:true }, { text: apgar5Seis, bold:true }, 
+                            { text: capurroSeis, bold:true }, { text: pesoNacidoSeis, bold:true }, { text: tallaNacidoSeis, bold:true }],
+                          ]
+                        },
+                        layout: 'noBorders', 
+                        font: 'SF', 
+                        fontSize:8,
                       },
                     ]
                 },
-                {
-                  width: '33%',
-                  margin: [0, 20, 0, 0],
-                    stack: [
-                      {
-                        text: [
-                          { text: ' ', font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Genero
-                      {
-                        text: [
-                          { text: '\nGenero: ', font: 'SF', fontSize: 8 },
-                          { text: genero, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Apgar 1 min
-                      {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Apgar 1 min: ', font: 'SF', fontSize: 8 },
-                          { text: apgar1, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                        // Apgar 5 min
-                        {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Apgar 5 min: ', font: 'SF', fontSize: 8 },
-                          { text: apgar5, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                    ]
-                },
-                {
-                  width: '34%',
-                  margin: [0, 20, 0, 0],
-                    stack: [
-                      {
-                        text: [
-                          { text: ' ', font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Capurro
-                      {
-                        text: [
-                          { text: '\nCapurro: ', font: 'SF', fontSize: 8 },
-                          { text: capurro, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Peso
-                      {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Peso (gm): ', font: 'SF', fontSize: 8 },
-                          { text: pesoNacido, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                        // Talla
-                        {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Talla (cm): ', font: 'SF', fontSize: 8 },
-                          { text: tallaNacido, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                    ]
-                }
               ]
             },
             {
@@ -4884,59 +5205,53 @@ export default defineComponent({
           {
             columns:[
               {
+                relativePosition: { x: 0, y: 415 },
+                stack: [
+                  {
+                      text: [
+                        { text: 'BALANCE HÍDRICO', font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },
+                ]
+              }
+            ]
+          },  
+          //Balance Hídrico Parcial
+          {
+            columns:[
+              {
                 margin: [0, 10, 0, 0],
                   relativePosition: { x: 0, y: 420 },
                   table: {
-                    widths: ['60%', '40%'],
-                    body: [
-                      [
-                        {
-                          text:[
-                            {text: 'BALANCE HÍDRICO: ', style: 'SF', fontSize: 8, bold: true}, 
-                            {text: balanceTotal, bold:true}
-                          ], colSpan: 2
-                        },
-                        {}
-                      ],
-                      [
-                        {                                
-                          text:[
-                              {text: 'Ingresos', font:'SF', fontSize:8, bold: true},
-                              {text: '\n\n', font:'SF', fontSize:8},
-                              {text: txtHartman, font:'SF', fontSize:8},{text:hartman, font:'SF', fontSize:8, bold:true},
-                              {text: txtSolFisiolo, font:'SF', fontSize:8}, {text:solFisiolo, font:'SF', fontSize:8, bold:true}, 
-                              {text: txtGlucosados, font:'SF', fontSize:8},{text:glucosados, font:'SF', fontSize:8, bold:true},
-                              {text: txtGelatinas, font:'SF', fontSize:8},{text:gelatinas, font:'SF', fontSize:8, bold:true},
-                              {text: txtAlmidones, font:'SF', fontSize:8},{text:almidones, font:'SF', fontSize:8, bold:true},
-                              {text: txtAlbuminas, font:'SF', fontSize:8},{text:albuminas, font:'SF', fontSize:8, bold:true},
-                              {text: txtPaqGlobular, font:'SF', fontSize:8},{text:paqGlobular, font:'SF', fontSize:8, bold:true},
-                              {text: txtPlasmas, font:'SF', fontSize:8},{text:plasmas, font:'SF', fontSize:8, bold:true},
-                              {text: txtPlaquetas, font:'SF', fontSize:8},{text:plaquetasIngreso, font:'SF', fontSize:8, bold:true},
-                              {text: txtCrioprecipitados, font:'SF', fontSize:8},{text:crioprecipitados, font:'SF', fontSize:8, bold:true},
-                              {text: txtFactorVII, font:'SF', fontSize:8},{text:factorVII, font:'SF', fontSize:8, bold:true},
-                              {text: txtFactorVIII, font:'SF', fontSize:8},{text:factorVIII, font:'SF', fontSize:8, bold:true},
-                              {text: txtOtrosIngresos, font:'SF', fontSize:8},{text:otrosIngreso, font:'SF', fontSize:8, bold:true},
-                          ]
-                        }, 
-                        {
-                          text:[
-                              {text: 'Egresos', font:'SF', fontSize:8, bold: true},
-                              {text: '\n\n', font:'SF', fontSize:8},
-                              {text: txtLiqAscitis, font:'SF', fontSize:8},{text:liqAscitis, font:'SF', fontSize:8, bold:true},
-                              {text: txtSangradoAprox, font:'SF', fontSize:8},{text:sangradoAprox, font:'SF', fontSize:8, bold:true},
-                              {text: txtUresis, font:'SF', fontSize:8},{text:uresis, font:'SF', fontSize:8, bold:true},
-                              {text: txtExpQuirurgica, font:'SF', fontSize:8},{text:expQuirurgica, font:'SF', fontSize:8, bold:true},
-                              {text: txtReqBasales, font:'SF', fontSize:8},{text:reqBasales, font:'SF', fontSize:8, bold:true},
-                              {text: txtAyuno, font:'SF', fontSize:8},{text:ayunoEgreso, font:'SF', fontSize:8, bold:true},
-                              {text: txtOtrosEgresos, font:'SF', fontSize:8},{text:otrosEgresos, font:'SF', fontSize:8, bold:true},
-                          ]
-                        }
-                      ]
+                    body: [                  
+                      [{ text: 'Hora', font: 'SF', fontSize: 8 }],
+                      [{ text: 'Ingresos', font: 'SF', fontSize: 8 }],
+                      [{ text: 'Egresos', font: 'SF', fontSize: 8 }],
+                      [{ text: 'Balance total', font: 'SF', fontSize: 8}],
                     ]
                   }, font: 'SF', fontSize: 8
               }
             ]
           },  
+          {
+            columns:[
+              {
+                  relativePosition: { x: 53, y: 420 },
+                  table: {
+                    body: [
+                      // Hora                      
+                      transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.horaBalance),
+                      // Ingresos
+                      transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.ingresos),
+                      // Egresos
+                      transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.egresos),
+                      // Balance Total
+                      transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.balanceP)
+                    ]
+                  }, font: 'SF', fontSize: 8, bold: true
+              }
+            ]
+          }, 
         )        
   
         /*POST*/
@@ -4971,19 +5286,34 @@ export default defineComponent({
                     {
                       margin: [0, 10, 0, 0],
                       table: {
+                        widths: ['20%', '*', '*', '*', '*', '*', '*', '*'],
                         body: [
                           ['Criterio: ', 'Ingreso', '15 min', '30 min', '45 min', '60 min', '90 min', '120 min'],
                           ['Frecuencia Cardiáca', {text: FCIngreso, style: 'bold'}, {text: FC15, style: 'bold'}, {text: FC30, style: 'bold'}, {text: FC45, style: 'bold'}, {text: FC60, style: 'bold'}, {text: FC90, style: 'bold'}, {text: FC120, style: 'bold'}],
                           ['Frecuencia Respiratoria', {text: FRIngreso, style: 'bold'}, {text: FR15, style: 'bold'}, {text: FR30, style: 'bold'}, {text: FR45, style: 'bold'}, {text: FR60, style: 'bold'}, {text: FR90, style: 'bold'}, {text: FR120, style: 'bold'}],
                           ['Tensión Arterial', {text: tensionIngreso, style: 'bold'}, {text: tension15, style: 'bold'}, {text: tension30, style: 'bold'}, {text: tension45, style: 'bold'}, {text: tension60, style: 'bold'}, {text: tension90, style: 'bold'}, {text: tension120, style: 'bold'}],
                           ['Saturación de O2', {text: saturacionIngreso, style: 'bold'}, {text: saturacion15, style: 'bold'}, {text: saturacion30, style: 'bold'}, {text: saturacion45, style: 'bold'}, {text: saturacion60, style: 'bold'}, {text: saturacion90, style: 'bold'}, {text: saturacion120, style: 'bold'}],
-                          // ['Aldrete', {text: aldreteIngreso, style: 'bold'}, {text: aldrete15, style: 'bold'}, {text: aldrete30, style: 'bold'}, {text: aldrete45, style: 'bold'}, {text: aldrete60, style: 'bold'}, {text: aldrete90, style: 'bold'}, {text: aldrete120, style: 'bold'}],
+                          ['Actividad Muscular' , {text: actividadIngreso, style: 'bold'}, {text: actividad15, style: 'bold'}, {text: actividad30, style: 'bold'}, {text: actividad45, style: 'bold'}, {text: actividad60, style: 'bold'}, {text: actividad90, style: 'bold'}, {text: actividad120, style: 'bold'}],
+                          ['Respiración', {text: respiracionIngreso, style: 'bold'}, {text: respiracion15, style: 'bold'}, {text: respiracion30, style: 'bold'}, {text: respiracion45, style: 'bold'}, {text: respiracion60, style: 'bold'}, {text: respiracion90, style: 'bold'}, {text: respiracion120, style: 'bold'}],
+                          ['Circulación' , {text: circulacionIngreso, style: 'bold'}, {text: circulacion15, style: 'bold'}, {text: circulacion30, style: 'bold'}, {text: circulacion45, style: 'bold'}, {text: circulacion60, style: 'bold'}, {text: circulacion90, style: 'bold'}, {text: circulacion120, style: 'bold'}],                          
+                          ['Estado de Conciencia', {text: concienciaIngreso, style: 'bold'}, {text: conciencia15, style: 'bold'}, {text: conciencia30, style: 'bold'}, {text: conciencia45, style: 'bold'}, {text: conciencia60, style: 'bold'}, {text: conciencia90, style: 'bold'}, {text: conciencia120, style: 'bold'}],
+                          ['Coloración', {text: coloracionIngreso, style: 'bold'}, {text: coloracion15, style: 'bold'}, {text: coloracion30, style: 'bold'}, {text: coloracion45, style: 'bold'}, {text: coloracion60, style: 'bold'}, {text: coloracion90, style: 'bold'}, {text: coloracion120, style: 'bold'}],                          
                           ['Bromage', {text: bromageIngreso, style: 'bold'}, {text: bromage15, style: 'bold'}, {text: bromage30, style: 'bold'}, {text: bromage45, style: 'bold'}, {text: bromage60, style: 'bold'}, {text: bromage90, style: 'bold'}, {text: bromage120, style: 'bold'}],
                           ['Nauseas/Vómito', {text: nauseasIngreso, style: 'bold'}, {text: nauseas15, style: 'bold'}, {text: nauseas30, style: 'bold'}, {text: nauseas45, style: 'bold'}, {text: nauseas60, style: 'bold'}, {text: nauseas90, style: 'bold'}, {text: nauseas120, style: 'bold'}],
                           ['Escala de EVA Dolor', {text: EVAIngreso, style: 'bold'}, {text: EVA15, style: 'bold'}, {text: EVA30, style: 'bold'}, {text: EVA45, style: 'bold'}, {text: EVA60, style: 'bold'}, {text: EVA90, style: 'bold'}, {text: EVA120, style: 'bold'}],
                         ]
                       }, font: 'SF', fontSize: 8
-                    },                          
+                    },  
+                    {
+                      margin: [0, 10, 0, 0],
+                      table: {
+                        widths: ['20%', '*', '*', '*', '*', '*', '*', '*'],
+                        body: [
+                          ['Criterio de Aldrete: ', '0 min', '15 min', '30 min', '45 min', '60 min', '90 min', '120 min'],
+                          [' ', {text: aldreteIngreso, style: 'bold'}, {text: aldrete15, style: 'bold'}, {text: aldrete30, style: 'bold'}, {text: aldrete45, style: 'bold'}, {text: aldrete60, style: 'bold'}, {text: aldrete90, style: 'bold'}, {text: aldrete120, style: 'bold'}],                          
+                        ]
+                      }, font: 'SF', fontSize: 8
+                    },                                       
                   ]
               }
             ]
@@ -5124,7 +5454,7 @@ export default defineComponent({
             // Signos Vitales al Egreso
             columns: [
               {
-                width: '100%',
+                width: '60%',
                 margin: [0, 10, 0, 0],
                   stack: [
                     {
@@ -5135,6 +5465,7 @@ export default defineComponent({
                     {
                       margin: [0, 10, 0, 0],
                       table: {
+                        widths: ['*', '*', '*', '*', '*', '*'],
                         body: [
                           ['TA: ', 'FC', 'FR', 'Temp', 'Pulso', 'SpO2'],
                           [TAPost, FCPost, FRPost, TemperaturaPost, PulsoPost, SpO2Post],
@@ -5518,7 +5849,7 @@ export default defineComponent({
         postAnestStore.PesoSeis=""
         postAnestStore.TallaSeis=""
 
-        postAnestStore.TecnicaAnestesica=null
+        postAnestStore.TecnicaAnestesica=""
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
@@ -5567,6 +5898,46 @@ export default defineComponent({
         // postAnestStore.Aldrete60Min=""
         // postAnestStore.Aldrete90Min=""
         // postAnestStore.Aldrete120Min=""
+
+        postAnestStore.MuscularIngreso=""
+        postAnestStore.Muscular15Min=""
+        postAnestStore.Muscular30Min=""
+        postAnestStore.Muscular45Min=""
+        postAnestStore.Muscular60Min=""
+        postAnestStore.Muscular90Min=""
+        postAnestStore.Muscular120Min=""
+
+        postAnestStore.RespiracionIngreso=""
+        postAnestStore.Respiracion15Min=""
+        postAnestStore.Respiracion30Min=""
+        postAnestStore.Respiracion45Min=""
+        postAnestStore.Respiracion60Min=""
+        postAnestStore.Respiracion90Min=""
+        postAnestStore.Respiracion120Min=""
+
+        postAnestStore.CirculacionIngreso=""
+        postAnestStore.Circulacion15Min=""
+        postAnestStore.Circulacion30Min=""
+        postAnestStore.Circulacion45Min=""
+        postAnestStore.Circulacion60Min=""
+        postAnestStore.Circulacion90Min=""
+        postAnestStore.Circulacion120Min=""
+
+        postAnestStore.ConcienciaIngreso=""
+        postAnestStore.Conciencia15Min=""
+        postAnestStore.Conciencia30Min=""
+        postAnestStore.Conciencia45Min=""
+        postAnestStore.Conciencia60Min=""
+        postAnestStore.Conciencia90Min=""
+        postAnestStore.Conciencia120Min=""
+
+        postAnestStore.ColoracionIngreso=""
+        postAnestStore.Coloracion15Min=""
+        postAnestStore.Coloracion30Min=""
+        postAnestStore.Coloracion45Min=""
+        postAnestStore.Coloracion60Min=""
+        postAnestStore.Coloracion90Min=""
+        postAnestStore.Coloracion120Min=""        
   
         postAnestStore.BromageIngreso=""
         postAnestStore.Bromage15Min=""
