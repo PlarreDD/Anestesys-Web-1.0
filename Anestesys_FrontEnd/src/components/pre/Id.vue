@@ -884,6 +884,8 @@ export default defineComponent({
         async selectCrj(item)
         {
             try {
+                this.enviarDatos();
+
                 this.infoPreIdPaciente.cirujano = item;
                 this.mostrarCirujanos = false;
             } catch (error) {
@@ -929,6 +931,8 @@ export default defineComponent({
 
         async selectAnestVPA(item){
             try {
+                this.enviarDatos();
+
                 this.infoPreIdPaciente.anestesiologoVPA = item;
                 this.mostrarAnestVPA = false;
             } catch (error) {
@@ -973,6 +977,8 @@ export default defineComponent({
 
         async selectResdAnest(item){
             try {
+                this.enviarDatos();
+
                 this.infoPreIdPaciente.residenteAnestesia = item;
                 this.mostrarResdAnest = false;
             } catch (error) {

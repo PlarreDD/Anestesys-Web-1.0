@@ -18,7 +18,16 @@ const menuTransSchema = new Schema({
         required: false
     },
     
-    /* Balance Total */
+    // Balances parciales
+    balancesParciales: [
+        {
+            horaBalance: {type: String},
+            ingresos: {type: String},
+            egresos: {type: String},
+            balanceP: {type: String}
+        }
+    ],
+    /* Balance Total */    
     balanceTotal:{type: String},
     // Ingresos
     solHartman: { type: String },
@@ -74,6 +83,7 @@ const menuTransSchema = new Schema({
         horaInicioMed: {type: String},
         horaFinalMed: {type: String},
         observacionesMed: {type: String},
+        valorGrafica: {type: String},
     }],
 
     /* Relevo */
@@ -83,6 +93,7 @@ const menuTransSchema = new Schema({
         matriculaRel:{ type: String },
         anestesiologoRel:{ type: String },
         observacionesRel:{ type: String },
+        valorGraficaRel:{ type: String }
     }],
 
     /* Evento Crítico */
@@ -90,6 +101,7 @@ const menuTransSchema = new Schema({
         horaEvento: { type: String },
         tipoEve: { type: String },
         detalleEvento: { type: String },
+        valorGraficaEv: { type: String }
     }],
 
     datosMSV: [

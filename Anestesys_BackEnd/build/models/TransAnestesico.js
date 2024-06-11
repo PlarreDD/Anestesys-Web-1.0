@@ -18,6 +18,15 @@ const menuTransSchema = new mongoose_1.Schema({
         ref: 'PreIdPacientesCx',
         required: false
     },
+    // Balances parciales
+    balancesParciales: [
+        {
+            horaBalance: { type: String },
+            ingresos: { type: String },
+            egresos: { type: String },
+            balanceP: { type: String }
+        }
+    ],
     /* Balance Total */
     balanceTotal: { type: String },
     // Ingresos
@@ -71,6 +80,7 @@ const menuTransSchema = new mongoose_1.Schema({
             horaInicioMed: { type: String },
             horaFinalMed: { type: String },
             observacionesMed: { type: String },
+            valorGrafica: { type: String },
         }],
     /* Relevo */
     relevoCx: [{
@@ -79,12 +89,14 @@ const menuTransSchema = new mongoose_1.Schema({
             matriculaRel: { type: String },
             anestesiologoRel: { type: String },
             observacionesRel: { type: String },
+            valorGraficaRel: { type: String }
         }],
     /* Evento Crítico */
     evCriticoCx: [{
             horaEvento: { type: String },
             tipoEve: { type: String },
             detalleEvento: { type: String },
+            valorGraficaEv: { type: String }
         }],
     datosMSV: [
         {

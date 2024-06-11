@@ -18,6 +18,7 @@ export const useTransAnestStore = defineStore('transAn', {
         eventoID: ref(null),
         datosMSV: ref(null),
         envDat: ref(false),
+        balanceParcial: ref(null),
 
         recognition: ref(null),
         intervalo: ref(null),
@@ -133,7 +134,7 @@ export const useTransAnestStore = defineStore('transAn', {
 
     actions: {
         /* Datos del Ventilador */
-        async saveDatosV(regTransAnest: any, pid: string){
+        async saveDatosV(regTransAnest: any, pid: string){       
             await apiAxios({
                 url: "/trans",
                 method: "POST",
@@ -173,7 +174,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     expoQX: regTransAnest.expoQX,
                     reqBasales: regTransAnest.reqBasales,
                     ayuno: regTransAnest.ayuno,
-                    otrosEgresos: regTransAnest.otrosEgresos,
+                    otrosEgresos: regTransAnest.otrosEgresos
                 }
             })
             .then((res: any) => {
@@ -192,7 +193,7 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
-        async saveNuevoDatosV(regTransAnest: any, pid: string, cxid: string){
+        async saveNuevoDatosV(regTransAnest: any, pid: string, cxid: string){        
             await apiAxios({
                 url: "/trans/add",
                 method: "POST",
@@ -232,7 +233,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     expoQX: regTransAnest.expoQX,
                     reqBasales: regTransAnest.reqBasales,
                     ayuno: regTransAnest.ayuno,
-                    otrosEgresos: regTransAnest.otrosEgresos,
+                    otrosEgresos: regTransAnest.otrosEgresos
                 }
             })
             .then((res: any) => {
@@ -290,10 +291,10 @@ export const useTransAnestStore = defineStore('transAn', {
                     expoQX: regTransAnest.expoQX,
                     reqBasales: regTransAnest.reqBasales,
                     ayuno: regTransAnest.ayuno,
-                    otrosEgresos: regTransAnest.otrosEgresos,
+                    otrosEgresos: regTransAnest.otrosEgresos
                 }
             })
-            .then((res: any) => {
+            .then((res: any) => {                
                 swal.fire({
                     title: 'Datos guardados correctamente',
                     icon: 'success',
@@ -350,7 +351,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     expoQX: regTransAnest.expoQX,
                     reqBasales: regTransAnest.reqBasales,
                     ayuno: regTransAnest.ayuno,
-                    otrosEgresos: regTransAnest.otrosEgresos,
+                    otrosEgresos: regTransAnest.otrosEgresos
                 }
             })
             .then((res: any) => {
@@ -477,6 +478,78 @@ export const useTransAnestStore = defineStore('transAn', {
               });
         },
 
+        async getBalanceHPList(pid: string) {
+            await apiAxios({
+                url: `/trans/bhp/${String(pid)}`,
+                method: "GET",
+                headers: {
+                Authorization: "Bearer " + userStore.token,
+                },                
+            })
+            .then((res: any) => {
+                this.balanceParcial = res.data.balance;
+            })
+            .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
+            });
+        },
+
+        async getNuevoBalanceHPList(pid: string, cxid: string) {
+            await apiAxios({
+                url: `/trans/bhp/add/${String(pid)}/${String(cxid)}`,
+                method: "GET",
+                headers: {
+                Authorization: "Bearer " + userStore.token,
+                },                
+            })
+            .then((res: any) => {
+                this.balanceParcial = res.data.balance;
+            })
+            .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
+            });
+        },
+
+        async updateBalanceHP (regTransAnest: any, pid: string){
+            await apiAxios({
+                url: `/trans/bhp/${String(pid)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {                    
+                    horaBalance: regTransAnest.horaBalance, ingresos: regTransAnest.ingresos, egresos: regTransAnest.egresos, balanceP: regTransAnest.balanceP                   
+                }
+            })
+            .then((res: any) => {
+                this.balanceParcial = res.data.balancesParciales;
+            })
+            .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
+            });
+        },
+
+        async updateNuevoBalanceHP (regTransAnest: any, pid: string, cxid: string){
+            await apiAxios({
+                url: `/trans/bhp/add/${String(pid)}/${String(cxid)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    pid: pid,
+                    cxid: this.cirugiaID,                    
+                    horaBalance: regTransAnest.horaBalance, ingresos: regTransAnest.ingresos, egresos: regTransAnest.egresos, balanceP: regTransAnest.balanceP        
+                }
+            })
+            .then((res: any) => {
+                this.balanceParcial = res.data.balancesParciales;
+            })
+            .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
+            });
+        },
+
         async updateBalanceH (regTransAnest: any, pid: string){
             await apiAxios({
                 url: `/trans/bh/${String(pid)}`,
@@ -576,6 +649,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     reqBasales: regTransAnest.reqBasales,
                     ayuno: regTransAnest.ayuno,
                     otrosEgresos: regTransAnest.otrosEgresos,
+                    horaBalance: regTransAnest.horaBalance, ingresos: regTransAnest.ingresos, egresos : regTransAnest.egresos,
                     /* Técnica Anestésica */
                     local: regTransAnest.local,
                     sedación: regTransAnest.sedación,
@@ -1013,8 +1087,6 @@ export const useTransAnestStore = defineStore('transAn', {
                 });
             }
 
-            console.log(dataToUpload);
-
             try {
                 await apiAxios({
                     url: `/trans/msvData/add/${String(pid)}/${String(cxid)}`,
@@ -1081,7 +1153,8 @@ export const useTransAnestStore = defineStore('transAn', {
                     viaMed: regTransAnest.viaMed,
                     horaInicioMed: regTransAnest.horaInicioMed,
                     horaFinalMed: regTransAnest.horaFinalMed,
-                    observacionesMed: regTransAnest.observacionesMed
+                    observacionesMed: regTransAnest.observacionesMed,
+                    valorGrafica: regTransAnest.valorGrafica
                 }
             })
             .then((res: any) => {
@@ -1117,7 +1190,8 @@ export const useTransAnestStore = defineStore('transAn', {
                     viaMed: regTransAnest.viaMed,
                     horaInicioMed: regTransAnest.horaInicioMed,
                     horaFinalMed: regTransAnest.horaFinalMed,
-                    observacionesMed: regTransAnest.observacionesMed
+                    observacionesMed: regTransAnest.observacionesMed,
+                    valorGrafica: regTransAnest.valorGrafica
                 }
             })
             .then((res: any) => {
@@ -1137,7 +1211,7 @@ export const useTransAnestStore = defineStore('transAn', {
         },
 
         async updateMedicamentos(m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
-                            m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string, pid:string){
+                            m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string, m_valorGrafica: number, pid:string){
             await apiAxios({
                 url: `/trans/medic/${String(pid)}`,
                 method: "PUT",
@@ -1145,7 +1219,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    medicamentosCx: [ m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed]
+                    medicamentosCx: [ m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed, m_valorGrafica]
                 },
             })
             .then((res: any) => {
@@ -1165,7 +1239,7 @@ export const useTransAnestStore = defineStore('transAn', {
         },
 
         async updateNuevoMedicamentos(m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
-                            m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string, pid:string, cxid:string){
+                            m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string, m_valorGrafica: number, pid:string, cxid:string){
             await apiAxios({
                 url: `/trans/medic/add/${String(pid)}/${String(cxid)}`,
                 method: "PUT",
@@ -1173,7 +1247,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    medicamentosCx: [ m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed]
+                    medicamentosCx: [ m_tipoMed, m_medicamento, m_dosisMed, m_unidadMed, m_viaMed, m_horaInicioMed, m_horaFinalMed, m_observacionesMed, m_valorGrafica]
                 },
             })
             .then((res: any) => {
@@ -1362,7 +1436,7 @@ export const useTransAnestStore = defineStore('transAn', {
         },
 
         async updateRelevos(r_horaRelevo: string, r_tipoRel: string, r_matriculaRel: string, 
-                            r_anestesiologoRel: string, r_observacionesRel: string, pid:string){
+                            r_anestesiologoRel: string, r_observacionesRel: string, r_valorGraficaRel: number, pid:string){
             await apiAxios({
                 url: `/trans/relevo/${String(pid)}`,
                 method: "PUT",
@@ -1370,7 +1444,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    relevoCx: [ r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel ]
+                    relevoCx: [ r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel, r_valorGraficaRel ]
                 },
             })
             .then((res: any) => {
@@ -1390,7 +1464,7 @@ export const useTransAnestStore = defineStore('transAn', {
         },
 
         async updateNuevoRelevos(r_horaRelevo: string, r_tipoRel: string, r_matriculaRel: string, 
-                            r_anestesiologoRel: string, r_observacionesRel: string, pid:string, cxid: string){
+                            r_anestesiologoRel: string, r_observacionesRel: string, r_valorGraficaRel: number, pid:string, cxid: string){
             await apiAxios({
                 url: `/trans/relevo/add/${String(pid)}/${String(cxid)}`,
                 method: "PUT",
@@ -1398,7 +1472,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    relevoCx: [ r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel ]
+                    relevoCx: [ r_tipoRel, r_horaRelevo, r_matriculaRel, r_anestesiologoRel, r_observacionesRel, r_valorGraficaRel ]
                 },
             })
             .then((res: any) => {
@@ -1533,6 +1607,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     horaEvento: regTransAnest.horaEvento,
                     tipoEve: regTransAnest.tipoEve,
                     detalleEvento: regTransAnest.detalleEvento,
+                    valorGraficaEv: regTransAnest.valorGraficaEv
                 }
             })
             .then((res: any) => {
@@ -1564,6 +1639,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     horaEvento: regTransAnest.horaEvento,
                     tipoEve: regTransAnest.tipoEve,
                     detalleEvento: regTransAnest.detalleEvento,
+                    valorGraficaEv: regTransAnest.valorGraficaEv
                 }
             })
             .then((res: any) => {
@@ -1582,7 +1658,7 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
-        async updateEventos(e_horaEvento: string, e_tipoEve: string, e_detalleEvento: string, pid:string){
+        async updateEventos(e_horaEvento: string, e_tipoEve: string, e_detalleEvento: string, e_valorGraficaEv: number, pid:string){
             await apiAxios({
                 url: `/trans/evento/${String(pid)}`,
                 method: "PUT",
@@ -1590,7 +1666,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    evCriticoCx: [ e_horaEvento, e_tipoEve, e_detalleEvento ]
+                    evCriticoCx: [ e_horaEvento, e_tipoEve, e_detalleEvento, e_valorGraficaEv ]
                 },
             })
             .then((res: any) => {
@@ -1609,7 +1685,7 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
-        async updateNuevoEventos(e_horaEvento: string, e_tipoEve: string, e_detalleEvento: string, pid:string, cxid: string){
+        async updateNuevoEventos(e_horaEvento: string, e_tipoEve: string, e_detalleEvento: string, e_valorGraficaEv: number, pid:string, cxid: string){
             await apiAxios({
                 url: `/trans/evento/add/${String(pid)}/${String(cxid)}`,
                 method: "PUT",
@@ -1617,7 +1693,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    evCriticoCx: [ e_horaEvento, e_tipoEve, e_detalleEvento ]
+                    evCriticoCx: [ e_horaEvento, e_tipoEve, e_detalleEvento, e_valorGraficaEv ]
                 },
             })
             .then((res: any) => {

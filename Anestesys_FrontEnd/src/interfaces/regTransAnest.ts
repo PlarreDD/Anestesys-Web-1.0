@@ -34,6 +34,11 @@ export interface regMenuTrans{
     reqBasales: string,
     ayuno: string,
     otrosEgresos: string,
+    // Balances parciales
+    horaBalance: string,
+    ingresos: number,
+    egresos: number,
+    balanceP: number,
     /* Técnica Anestésica */
     local: string,
     sedación: string,
@@ -66,6 +71,7 @@ export interface regMenuTrans{
     horaInicioMed: string,
     horaFinalMed: string,
     observacionesMed: string,
+    valorGrafica: number,
     /* Relevos */
     idRelevo:string,
     horaRelevo:string,
@@ -73,9 +79,11 @@ export interface regMenuTrans{
     matriculaRel:string,
     anestesiologoRel:string,
     observacionesRel:string,
+    valorGraficaRel:number,
     /* Eventos Criticos */
     idEvento:string,
     horaEvento:string,
     tipoEve:string,
-    detalleEvento:string
+    detalleEvento:string,
+    valorGraficaEv:number
 }

@@ -57,7 +57,7 @@
               </li>
 
               <!-- Link Config Monitor -->
-              <li>
+              <!-- <li>
                 <button
                   type="button"
                   class="btn btn-configuracion fw-bold"
@@ -66,16 +66,15 @@
                   <img src="../../public/images/imgIcon/monitor.svg" />
                   &nbsp;&nbsp;&nbsp;Configuración de monitor
                 </button>
-              </li>
+              </li> -->
 
               <!-- Link Tendencias -->
               <li>
                 <button
                   type="button"
-                  class="btn btn-configuracion fw-bold"
-                  data-bs-toggle="modal"
-                  data-bs-target="#tendenciasModal"
-                >
+                  class="btn btn-configuracion fw-bold" @click="validarTendencias">
+                  <!-- data-bs-toggle="modal"
+                  data-bs-target="#tendenciasModal" -->
                   <img src="../../public/images/imgIcon/tendencia.svg" />
                   &nbsp;&nbsp;&nbsp;Tendencias
                 </button>
@@ -83,7 +82,7 @@
 
               <!-- Link Teclado Virtual -->
               <li>
-                <button type="button" class="btn btn-configuracion fw-bold">
+                <button type="button" class="btn btn-configuracion fw-bold" @click="abrirTeclado()">
                   <img src="../../public/images/imgIcon/teclado.svg" />
                   &nbsp;&nbsp;&nbsp;Teclado virtual
                 </button>
@@ -361,9 +360,6 @@
                           <tbody>
                             <!-- Mostrar los datos que se encuentren en preIdStore en una tabla -->
                             <tr v-for="( cirujano, index ) in preIdStore.cirujanos.lista">
-                              <!-- <td class="text-white">
-                                {{ index + 1 }}
-                              </td> -->
 
                               <td class="text-white">
                                 {{ cirujano }}
@@ -568,7 +564,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>    
 
     <!-- Modal MVS -->
     <div class="modal"
@@ -956,6 +952,25 @@ export default defineComponent({
   },
 
   methods: {
+    async abrirTeclado(){
+      console.log('Abriendo teclado en pantalla');      
+      fetch(`${import.meta.env.VITE_ORIGIN1}/api/openKeyboard`, {
+        method: 'POST'
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error al abrir el teclado en pantalla');
+        }
+        return response.text();
+      })
+      .then(data => {
+        console.log(data); // Aquí puedes manejar la respuesta del servidor si es necesario
+      })
+      .catch(error => {
+        console.error('Error al abrir el teclado en pantalla:', error);
+      });
+    },
+
     async listarMedicos(){      
       await preIdStore.getListCirujanos(userStore.IdMed);
       await preIdStore.getListAnestVPA(userStore.IdMed);
@@ -1536,6 +1551,37 @@ export default defineComponent({
         window.log.error('Ocurrió un error:', error);
       }
     },
+
+    async validarTendencias(){
+      try {
+        if(preIdStore.modalTendencias === true){ 
+          let presionarBotonTen = document.getElementById('abrir-tendencias');
+  
+          // Crea un nuevo evento de clic
+          let event = new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true,
+            view: window
+          });
+    
+          // Despacha el evento de clic en el botón
+          presionarBotonTen.dispatchEvent(event);          
+        }else if(preIdStore.modalTendencias === false){
+          swal.fire({
+          title: "Dirijase al modulo Trans-Anéstesico para configurar las tendencias",
+          icon: "warning",
+          showConfirmButton: false,
+          showCloseButton: true,
+          toast: true,
+          timer: 3000,
+          timerProgressBar: true,
+          position: "top-end",
+          });
+        }        
+      } catch (error) {
+        window.log.error('Ocurrió un error:', error);
+      }
+    },
   }
 });
 </script>
@@ -1646,6 +1692,12 @@ export default defineComponent({
 /* Modal medicamentos */
 .colorModal {
   background-color: #002d60;
+}
+.deslizar {
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 270px;
+  margin-top: 15px;
 }
 .deslizar-medicos {
   overflow: scroll;

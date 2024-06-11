@@ -18,7 +18,7 @@ export const saveMenuTrans = async (req: any, res: Response) => {
                 liqAscitis, sangradoAprox, uresis, expoQX,
                 reqBasales, ayuno, otrosEgresos,
                 // Datos del ventilador
-                modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr,
+                modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr
 
         } = req.body;
 
@@ -49,7 +49,7 @@ export const saveMenuTrans = async (req: any, res: Response) => {
                                         expoQX: expoQX,
                                         reqBasales: reqBasales,
                                         ayuno: ayuno,
-                                        otrosEgresos: otrosEgresos,
+                                        otrosEgresos: otrosEgresos
             });
         }
         else{
@@ -124,8 +124,8 @@ export const saveNuevoMenuTrans = async (req: any, res: Response) => {
                                         expoQX: expoQX,
                                         reqBasales: reqBasales,
                                         ayuno: ayuno,
-                                        otrosEgresos: otrosEgresos,
-            });
+                                        otrosEgresos: otrosEgresos
+            });           
         }
         else{
             menuTrans = new MenuTrans({ pid, cxid,
@@ -333,6 +333,74 @@ export const deleteModoVentilacion = async (req: any, res: Response) => {
     }
 };
 
+/* Función para obtener los balances hídricos parciales */
+export const getListaBalanceHP = async (req: any, res: Response) => {
+    try {
+        const { pid } = req.params;        
+        const balance = await MenuTrans.find({pid:pid});
+
+        return res.json({ balance });
+    } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Función para obtener los nuevos balances hídricos parciales */
+export const getNuevoListaBalanceHP = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid } = req.params;        
+        const balance = await MenuTrans.find({pid:pid, cxid:cxid});
+
+        return res.json({ balance });
+    } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Función de actualización de Balance Hídrico Parcial */
+export const UpdateBalanceHP = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { horaBalance, ingresos, egresos, balanceP } = req.body;
+
+        const menuTrans = await MenuTrans.findOneAndUpdate( { pid: id },
+                                                            { $push:{ balancesParciales: { horaBalance: horaBalance, ingresos: ingresos, egresos: egresos, balanceP: balanceP } } } );
+        return res.json({ menuTrans });
+    } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Función Nueva de actualización de Balance Hídrico Parcial */
+export const UpdateNuevoBalanceHP = async (req: any, res: Response) => {
+    try {
+        const { id, cxid } = req.params;
+        const { horaBalance, ingresos, egresos, balanceP } = req.body;
+
+        const menuTrans = await MenuTrans.findOneAndUpdate( { pid: id, cxid: cxid },
+                                                            { $push:{ balancesParciales: { horaBalance: horaBalance, ingresos: ingresos, egresos: egresos, balanceP: balanceP } } } );
+        return res.json({ menuTrans });
+    } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 /* Función de actualización de Balance Hídrico */
 export const UpdateBalanceH = async (req: any, res: Response) => {
     try {
@@ -393,7 +461,7 @@ export const UpdateBalanceH = async (req: any, res: Response) => {
                                                               BloqTroncular: BloqTroncular,
                                                               bloqPeriToracico: bloqPeriToracico,
                                                               bloqPeriCervical: bloqPeriCervical,
-                                                              libreOpioides: libreOpioides,
+                                                              libreOpioides: libreOpioides
                                                             });
 
         return res.json({ menuTrans });
@@ -406,6 +474,7 @@ export const UpdateBalanceH = async (req: any, res: Response) => {
     }
 };
 
+/* Función Nueva de actualización de Balance Hídrico */
 export const UpdateNuevoBalanceH = async (req: any, res: Response) => {
     try {
         const { id, cxid } = req.params;
@@ -465,7 +534,7 @@ export const UpdateNuevoBalanceH = async (req: any, res: Response) => {
                                                               BloqTroncular: BloqTroncular,
                                                               bloqPeriToracico: bloqPeriToracico,
                                                               bloqPeriCervical: bloqPeriCervical,
-                                                              libreOpioides: libreOpioides,
+                                                              libreOpioides: libreOpioides
                                                             });
 
         return res.json({ menuTrans });
@@ -661,13 +730,13 @@ export const saveMedicamentos = async (req: any, res: Response) => {
     try {
         const { pid, cxid,
                 // Datos medicamentos
-                tipoMed, medicamento, dosisMed, unidadMed, viaMed, horaInicioMed, horaFinalMed, observacionesMed
+                tipoMed, medicamento, dosisMed, unidadMed, viaMed, horaInicioMed, horaFinalMed, observacionesMed, valorGrafica
               } = req.body;        
         const menuTrans  = await new MenuTrans({ pid, cxid,
                                             // Datos del medicamento
                                             medicamentosCx: {
                                                 tipoMed: tipoMed, medicamento: medicamento, dosisMed: dosisMed, unidadMed: unidadMed, viaMed: viaMed, 
-                                                horaInicioMed: horaInicioMed, horaFinalMed: horaFinalMed, observacionesMed: observacionesMed
+                                                horaInicioMed: horaInicioMed, horaFinalMed: horaFinalMed, observacionesMed: observacionesMed, valorGrafica: valorGrafica
                                             },
                                         });
         await menuTrans.save();        
@@ -685,13 +754,13 @@ export const saveNuevoMedicamentos = async (req: any, res: Response) => {
     try {
         const { pid, cxid,
                 // Datos medicamentos
-                tipoMed, medicamento, dosisMed, unidadMed, viaMed, horaInicioMed, horaFinalMed, observacionesMed
+                tipoMed, medicamento, dosisMed, unidadMed, viaMed, horaInicioMed, horaFinalMed, observacionesMed, valorGrafica
               } = req.body;        
         const menuTrans  = await new MenuTrans({ pid, cxid,
                                             // Datos del medicamento
                                             medicamentosCx: {
                                                 tipoMed: tipoMed, medicamento: medicamento, dosisMed: dosisMed, unidadMed: unidadMed, viaMed: viaMed, 
-                                                horaInicioMed: horaInicioMed, horaFinalMed: horaFinalMed, observacionesMed: observacionesMed
+                                                horaInicioMed: horaInicioMed, horaFinalMed: horaFinalMed, observacionesMed: observacionesMed, valorGrafica: valorGrafica
                                             },
                                         });
         await menuTrans.save();        
@@ -714,7 +783,8 @@ export const updateMedicamentos = async (req: any, res: Response) => {
             { $push:{
                     medicamentosCx: {
                         tipoMed: medicamentosCx[0], medicamento: medicamentosCx[1], dosisMed: medicamentosCx[2], unidadMed: medicamentosCx[3], 
-                        viaMed: medicamentosCx[4], horaInicioMed: medicamentosCx[5], horaFinalMed: medicamentosCx[6], observacionesMed: medicamentosCx[7], 
+                        viaMed: medicamentosCx[4], horaInicioMed: medicamentosCx[5], horaFinalMed: medicamentosCx[6], observacionesMed: medicamentosCx[7],
+                        valorGrafica: medicamentosCx[8]
                     }                                        
                 }
             });                
@@ -737,7 +807,8 @@ export const updateNuevoMedicamentos = async (req: any, res: Response) => {
             { $push:{
                     medicamentosCx: {
                         tipoMed: medicamentosCx[0], medicamento: medicamentosCx[1], dosisMed: medicamentosCx[2], unidadMed: medicamentosCx[3], 
-                        viaMed: medicamentosCx[4], horaInicioMed: medicamentosCx[5], horaFinalMed: medicamentosCx[6], observacionesMed: medicamentosCx[7], 
+                        viaMed: medicamentosCx[4], horaInicioMed: medicamentosCx[5], horaFinalMed: medicamentosCx[6], observacionesMed: medicamentosCx[7],
+                        valorGrafica: medicamentosCx[8]
                     }                                        
                 }
             });                
@@ -921,7 +992,8 @@ export const updateRelevos = async (req: any, res: Response) => {
             { pid: pid },
             { $push:{
                 relevoCx: {
-                        horaRelevo: relevoCx[0], tipoRel: relevoCx[1], matriculaRel: relevoCx[2], anestesiologoRel: relevoCx[3], observacionesRel: relevoCx[4]
+                        horaRelevo: relevoCx[0], tipoRel: relevoCx[1], matriculaRel: relevoCx[2], 
+                        anestesiologoRel: relevoCx[3], observacionesRel: relevoCx[4], valorGraficaRel: relevoCx[5]
                     }
                 }
             });        
@@ -943,7 +1015,8 @@ export const updateNuevoRelevos = async (req: any, res: Response) => {
             { pid: pid, cxid: cxid },
             { $push:{
                 relevoCx: {
-                        horaRelevo: relevoCx[0], tipoRel: relevoCx[1], matriculaRel: relevoCx[2], anestesiologoRel: relevoCx[3], observacionesRel: relevoCx[4]
+                        horaRelevo: relevoCx[0], tipoRel: relevoCx[1], matriculaRel: relevoCx[2], 
+                        anestesiologoRel: relevoCx[3], observacionesRel: relevoCx[4], valorGraficaRel: relevoCx[5]
                     }
                 }
             });        
@@ -1076,12 +1149,12 @@ export const saveEventos = async (req: any, res: Response) => {
     try {
         const { pid, cxid,
                 // Datos relevos
-                horaEvento, tipoEve, detalleEvento
+                horaEvento, tipoEve, detalleEvento, valorGraficaEv
               } = req.body;        
         const menuTrans  = await new MenuTrans({ pid, cxid,
                                             // Datos del relevo
                                             evCriticoCx: {
-                                                horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento
+                                                horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento, valorGraficaEv: valorGraficaEv
                                             },
                                         });
         await menuTrans.save();        
@@ -1099,12 +1172,12 @@ export const saveNuevoEventos = async (req: any, res: Response) => {
     try {
         const { pid, cxid,
                 // Datos relevos
-                horaEvento, tipoEve, detalleEvento
+                horaEvento, tipoEve, detalleEvento, valorGraficaEv
               } = req.body;        
         const menuTrans  = await new MenuTrans({ pid, cxid,
                                             // Datos del relevo
                                             evCriticoCx: {
-                                                horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento
+                                                horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento, valorGraficaEv: valorGraficaEv
                                             },
                                         });
         await menuTrans.save();        
@@ -1126,7 +1199,7 @@ export const updateEventos = async (req: any, res: Response) => {
             { pid: pid },
             { $push:{
                 evCriticoCx: {
-                        horaEvento: evCriticoCx[0], tipoEve: evCriticoCx[1], detalleEvento: evCriticoCx[2]
+                        horaEvento: evCriticoCx[0], tipoEve: evCriticoCx[1], detalleEvento: evCriticoCx[2], valorGraficaEv: evCriticoCx[3]
                     }
                 }
             });        
@@ -1148,7 +1221,7 @@ export const updateNuevoEventos = async (req: any, res: Response) => {
             { pid: pid, cxid: cxid },
             { $push:{
                 evCriticoCx: {
-                        horaEvento: evCriticoCx[0], tipoEve: evCriticoCx[1], detalleEvento: evCriticoCx[2]
+                        horaEvento: evCriticoCx[0], tipoEve: evCriticoCx[1], detalleEvento: evCriticoCx[2], valorGraficaEv: evCriticoCx[3]
                     }
                 }
             });        

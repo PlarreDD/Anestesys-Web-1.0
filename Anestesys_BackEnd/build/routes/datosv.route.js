@@ -16,6 +16,10 @@ router.put('/uno/:id', requireToken_1.requireToken, transanest_controller_1.upda
 router.delete('/:dVId', requireToken_1.requireToken, transanest_controller_1.deleteModoVentilacion);
 router.put('/bh/:id', requireToken_1.requireToken, transanest_controller_1.UpdateBalanceH);
 router.put('/bh/add/:id/:cxid', requireToken_1.requireToken, transanest_controller_1.UpdateNuevoBalanceH);
+router.put('/bhp/:id', requireToken_1.requireToken, transanest_controller_1.UpdateBalanceHP);
+router.put('/bhp/add/:id/:cxid', requireToken_1.requireToken, transanest_controller_1.UpdateNuevoBalanceHP);
+router.get('/bhp/:pid', requireToken_1.requireToken, transanest_controller_1.getListaBalanceHP);
+router.get('/bhp/add/:pid/:cxid', requireToken_1.requireToken, transanest_controller_1.getNuevoListaBalanceHP);
 /*----------------------- Tiempos QX ----------------------*/
 router.post('/tqx', requireToken_1.requireToken, transanest_controller_1.saveTiemposQX);
 router.post('/tqx/add', requireToken_1.requireToken, transanest_controller_1.saveNuevoTiemposQX);

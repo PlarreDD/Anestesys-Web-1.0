@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteEvento = exports.updateEvento = exports.getEvento = exports.getNuevoEventos = exports.getEventos = exports.updateNuevoEventos = exports.updateEventos = exports.saveNuevoEventos = exports.saveEventos = exports.deleteRelevo = exports.updateRelevo = exports.getRelevo = exports.getNuevoRelevos = exports.getRelevos = exports.updateNuevoRelevos = exports.updateRelevos = exports.saveNuevoRelevos = exports.saveRelevos = exports.deleteMedicamento = exports.updateMedicamento = exports.getMedicamento = exports.getNuevoMedicamentos = exports.getMedicamentos = exports.updateNuevoMedicamentos = exports.updateMedicamentos = exports.saveNuevoMedicamentos = exports.saveMedicamentos = exports.saveNuevoDatosMSV = exports.saveDatosMSV = exports.saveNuevoTiemposQX = exports.saveTiemposQX = exports.UpdateNuevoBalanceH = exports.UpdateBalanceH = exports.deleteModoVentilacion = exports.updateVentilacion = exports.getModoVentilacion = exports.getNuevoModosVent = exports.getModosVent = exports.updateNuevoMenuTrans = exports.updateMenuTrans = exports.saveNuevoMenuTrans = exports.saveMenuTrans = void 0;
+exports.deleteEvento = exports.updateEvento = exports.getEvento = exports.getNuevoEventos = exports.getEventos = exports.updateNuevoEventos = exports.updateEventos = exports.saveNuevoEventos = exports.saveEventos = exports.deleteRelevo = exports.updateRelevo = exports.getRelevo = exports.getNuevoRelevos = exports.getRelevos = exports.updateNuevoRelevos = exports.updateRelevos = exports.saveNuevoRelevos = exports.saveRelevos = exports.deleteMedicamento = exports.updateMedicamento = exports.getMedicamento = exports.getNuevoMedicamentos = exports.getMedicamentos = exports.updateNuevoMedicamentos = exports.updateMedicamentos = exports.saveNuevoMedicamentos = exports.saveMedicamentos = exports.saveNuevoDatosMSV = exports.saveDatosMSV = exports.saveNuevoTiemposQX = exports.saveTiemposQX = exports.UpdateNuevoBalanceH = exports.UpdateBalanceH = exports.UpdateNuevoBalanceHP = exports.UpdateBalanceHP = exports.getNuevoListaBalanceHP = exports.getListaBalanceHP = exports.deleteModoVentilacion = exports.updateVentilacion = exports.getModoVentilacion = exports.getNuevoModosVent = exports.getModosVent = exports.updateNuevoMenuTrans = exports.updateMenuTrans = exports.saveNuevoMenuTrans = exports.saveMenuTrans = void 0;
 const TransAnestesico_1 = require("../models/TransAnestesico");
 const logger_1 = __importDefault(require("../logger"));
 /******************* Menu Trans Anestesico *******************/
@@ -26,7 +26,7 @@ const saveMenuTrans = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         // Egresos
         liqAscitis, sangradoAprox, uresis, expoQX, reqBasales, ayuno, otrosEgresos, 
         // Datos del ventilador
-        modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr, } = req.body;
+        modosVentilacion, peep, vt, frecResp, IE, PLimite, Hr } = req.body;
         let menuTrans;
         if (modosVentilacion == undefined) {
             menuTrans = new TransAnestesico_1.MenuTrans({ pid, cxid,
@@ -53,7 +53,7 @@ const saveMenuTrans = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 expoQX: expoQX,
                 reqBasales: reqBasales,
                 ayuno: ayuno,
-                otrosEgresos: otrosEgresos,
+                otrosEgresos: otrosEgresos
             });
         }
         else {
@@ -119,7 +119,7 @@ const saveNuevoMenuTrans = (req, res) => __awaiter(void 0, void 0, void 0, funct
                 expoQX: expoQX,
                 reqBasales: reqBasales,
                 ayuno: ayuno,
-                otrosEgresos: otrosEgresos,
+                otrosEgresos: otrosEgresos
             });
         }
         else {
@@ -309,6 +309,72 @@ const deleteModoVentilacion = (req, res) => __awaiter(void 0, void 0, void 0, fu
     }
 });
 exports.deleteModoVentilacion = deleteModoVentilacion;
+/* Función para obtener los balances hídricos parciales */
+const getListaBalanceHP = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { pid } = req.params;
+        const balance = yield TransAnestesico_1.MenuTrans.find({ pid: pid });
+        return res.json({ balance });
+    }
+    catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({ Error: 'Error de servidor' });
+    }
+});
+exports.getListaBalanceHP = getListaBalanceHP;
+/* Función para obtener los nuevos balances hídricos parciales */
+const getNuevoListaBalanceHP = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { pid, cxid } = req.params;
+        const balance = yield TransAnestesico_1.MenuTrans.find({ pid: pid, cxid: cxid });
+        return res.json({ balance });
+    }
+    catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({ Error: 'Error de servidor' });
+    }
+});
+exports.getNuevoListaBalanceHP = getNuevoListaBalanceHP;
+/* Función de actualización de Balance Hídrico Parcial */
+const UpdateBalanceHP = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const { horaBalance, ingresos, egresos, balanceP } = req.body;
+        const menuTrans = yield TransAnestesico_1.MenuTrans.findOneAndUpdate({ pid: id }, { $push: { balancesParciales: { horaBalance: horaBalance, ingresos: ingresos, egresos: egresos, balanceP: balanceP } } });
+        return res.json({ menuTrans });
+    }
+    catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({ Error: 'Error de servidor' });
+    }
+});
+exports.UpdateBalanceHP = UpdateBalanceHP;
+/* Función Nueva de actualización de Balance Hídrico Parcial */
+const UpdateNuevoBalanceHP = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id, cxid } = req.params;
+        const { horaBalance, ingresos, egresos, balanceP } = req.body;
+        const menuTrans = yield TransAnestesico_1.MenuTrans.findOneAndUpdate({ pid: id, cxid: cxid }, { $push: { balancesParciales: { horaBalance: horaBalance, ingresos: ingresos, egresos: egresos, balanceP: balanceP } } });
+        return res.json({ menuTrans });
+    }
+    catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({ Error: 'Error de servidor' });
+    }
+});
+exports.UpdateNuevoBalanceHP = UpdateNuevoBalanceHP;
 /* Función de actualización de Balance Hídrico */
 const UpdateBalanceH = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -358,7 +424,7 @@ const UpdateBalanceH = (req, res) => __awaiter(void 0, void 0, void 0, function*
             BloqTroncular: BloqTroncular,
             bloqPeriToracico: bloqPeriToracico,
             bloqPeriCervical: bloqPeriCervical,
-            libreOpioides: libreOpioides,
+            libreOpioides: libreOpioides
         });
         return res.json({ menuTrans });
     }
@@ -371,6 +437,7 @@ const UpdateBalanceH = (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
 });
 exports.UpdateBalanceH = UpdateBalanceH;
+/* Función Nueva de actualización de Balance Hídrico */
 const UpdateNuevoBalanceH = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id, cxid } = req.params;
@@ -419,7 +486,7 @@ const UpdateNuevoBalanceH = (req, res) => __awaiter(void 0, void 0, void 0, func
             BloqTroncular: BloqTroncular,
             bloqPeriToracico: bloqPeriToracico,
             bloqPeriCervical: bloqPeriCervical,
-            libreOpioides: libreOpioides,
+            libreOpioides: libreOpioides
         });
         return res.json({ menuTrans });
     }
@@ -583,12 +650,12 @@ const saveMedicamentos = (req, res) => __awaiter(void 0, void 0, void 0, functio
     try {
         const { pid, cxid, 
         // Datos medicamentos
-        tipoMed, medicamento, dosisMed, unidadMed, viaMed, horaInicioMed, horaFinalMed, observacionesMed } = req.body;
+        tipoMed, medicamento, dosisMed, unidadMed, viaMed, horaInicioMed, horaFinalMed, observacionesMed, valorGrafica } = req.body;
         const menuTrans = yield new TransAnestesico_1.MenuTrans({ pid, cxid,
             // Datos del medicamento
             medicamentosCx: {
                 tipoMed: tipoMed, medicamento: medicamento, dosisMed: dosisMed, unidadMed: unidadMed, viaMed: viaMed,
-                horaInicioMed: horaInicioMed, horaFinalMed: horaFinalMed, observacionesMed: observacionesMed
+                horaInicioMed: horaInicioMed, horaFinalMed: horaFinalMed, observacionesMed: observacionesMed, valorGrafica: valorGrafica
             },
         });
         yield menuTrans.save();
@@ -607,12 +674,12 @@ const saveNuevoMedicamentos = (req, res) => __awaiter(void 0, void 0, void 0, fu
     try {
         const { pid, cxid, 
         // Datos medicamentos
-        tipoMed, medicamento, dosisMed, unidadMed, viaMed, horaInicioMed, horaFinalMed, observacionesMed } = req.body;
+        tipoMed, medicamento, dosisMed, unidadMed, viaMed, horaInicioMed, horaFinalMed, observacionesMed, valorGrafica } = req.body;
         const menuTrans = yield new TransAnestesico_1.MenuTrans({ pid, cxid,
             // Datos del medicamento
             medicamentosCx: {
                 tipoMed: tipoMed, medicamento: medicamento, dosisMed: dosisMed, unidadMed: unidadMed, viaMed: viaMed,
-                horaInicioMed: horaInicioMed, horaFinalMed: horaFinalMed, observacionesMed: observacionesMed
+                horaInicioMed: horaInicioMed, horaFinalMed: horaFinalMed, observacionesMed: observacionesMed, valorGrafica: valorGrafica
             },
         });
         yield menuTrans.save();
@@ -635,6 +702,7 @@ const updateMedicamentos = (req, res) => __awaiter(void 0, void 0, void 0, funct
                 medicamentosCx: {
                     tipoMed: medicamentosCx[0], medicamento: medicamentosCx[1], dosisMed: medicamentosCx[2], unidadMed: medicamentosCx[3],
                     viaMed: medicamentosCx[4], horaInicioMed: medicamentosCx[5], horaFinalMed: medicamentosCx[6], observacionesMed: medicamentosCx[7],
+                    valorGrafica: medicamentosCx[8]
                 }
             }
         });
@@ -657,6 +725,7 @@ const updateNuevoMedicamentos = (req, res) => __awaiter(void 0, void 0, void 0, 
                 medicamentosCx: {
                     tipoMed: medicamentosCx[0], medicamento: medicamentosCx[1], dosisMed: medicamentosCx[2], unidadMed: medicamentosCx[3],
                     viaMed: medicamentosCx[4], horaInicioMed: medicamentosCx[5], horaFinalMed: medicamentosCx[6], observacionesMed: medicamentosCx[7],
+                    valorGrafica: medicamentosCx[8]
                 }
             }
         });
@@ -827,7 +896,8 @@ const updateRelevos = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         const { relevoCx } = req.body;
         const menuTrans = yield TransAnestesico_1.MenuTrans.findOneAndUpdate({ pid: pid }, { $push: {
                 relevoCx: {
-                    horaRelevo: relevoCx[0], tipoRel: relevoCx[1], matriculaRel: relevoCx[2], anestesiologoRel: relevoCx[3], observacionesRel: relevoCx[4]
+                    horaRelevo: relevoCx[0], tipoRel: relevoCx[1], matriculaRel: relevoCx[2],
+                    anestesiologoRel: relevoCx[3], observacionesRel: relevoCx[4], valorGraficaRel: relevoCx[5]
                 }
             }
         });
@@ -848,7 +918,8 @@ const updateNuevoRelevos = (req, res) => __awaiter(void 0, void 0, void 0, funct
         const { relevoCx } = req.body;
         const menuTrans = yield TransAnestesico_1.MenuTrans.findOneAndUpdate({ pid: pid, cxid: cxid }, { $push: {
                 relevoCx: {
-                    horaRelevo: relevoCx[0], tipoRel: relevoCx[1], matriculaRel: relevoCx[2], anestesiologoRel: relevoCx[3], observacionesRel: relevoCx[4]
+                    horaRelevo: relevoCx[0], tipoRel: relevoCx[1], matriculaRel: relevoCx[2],
+                    anestesiologoRel: relevoCx[3], observacionesRel: relevoCx[4], valorGraficaRel: relevoCx[5]
                 }
             }
         });
@@ -970,11 +1041,11 @@ const saveEventos = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     try {
         const { pid, cxid, 
         // Datos relevos
-        horaEvento, tipoEve, detalleEvento } = req.body;
+        horaEvento, tipoEve, detalleEvento, valorGraficaEv } = req.body;
         const menuTrans = yield new TransAnestesico_1.MenuTrans({ pid, cxid,
             // Datos del relevo
             evCriticoCx: {
-                horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento
+                horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento, valorGraficaEv: valorGraficaEv
             },
         });
         yield menuTrans.save();
@@ -993,11 +1064,11 @@ const saveNuevoEventos = (req, res) => __awaiter(void 0, void 0, void 0, functio
     try {
         const { pid, cxid, 
         // Datos relevos
-        horaEvento, tipoEve, detalleEvento } = req.body;
+        horaEvento, tipoEve, detalleEvento, valorGraficaEv } = req.body;
         const menuTrans = yield new TransAnestesico_1.MenuTrans({ pid, cxid,
             // Datos del relevo
             evCriticoCx: {
-                horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento
+                horaEvento: horaEvento, tipoEve: tipoEve, detalleEvento: detalleEvento, valorGraficaEv: valorGraficaEv
             },
         });
         yield menuTrans.save();
@@ -1018,7 +1089,7 @@ const updateEventos = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         const { evCriticoCx } = req.body;
         const menuTrans = yield TransAnestesico_1.MenuTrans.findOneAndUpdate({ pid: pid }, { $push: {
                 evCriticoCx: {
-                    horaEvento: evCriticoCx[0], tipoEve: evCriticoCx[1], detalleEvento: evCriticoCx[2]
+                    horaEvento: evCriticoCx[0], tipoEve: evCriticoCx[1], detalleEvento: evCriticoCx[2], valorGraficaEv: evCriticoCx[3]
                 }
             }
         });
@@ -1039,7 +1110,7 @@ const updateNuevoEventos = (req, res) => __awaiter(void 0, void 0, void 0, funct
         const { evCriticoCx } = req.body;
         const menuTrans = yield TransAnestesico_1.MenuTrans.findOneAndUpdate({ pid: pid, cxid: cxid }, { $push: {
                 evCriticoCx: {
-                    horaEvento: evCriticoCx[0], tipoEve: evCriticoCx[1], detalleEvento: evCriticoCx[2]
+                    horaEvento: evCriticoCx[0], tipoEve: evCriticoCx[1], detalleEvento: evCriticoCx[2], valorGraficaEv: evCriticoCx[3]
                 }
             }
         });
