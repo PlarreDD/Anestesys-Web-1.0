@@ -30,7 +30,7 @@
             </li>
         </ul>
 
-        <div class="tab-content col-md-12" id="" @mouseover="vaciarInputsNotaPA">
+        <div class="tab-content col-md-12" id="">
             <!-- Nota Post-Anestésica -->
             <div class="tab-pane fade show active" id="notaPost">
                 <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">

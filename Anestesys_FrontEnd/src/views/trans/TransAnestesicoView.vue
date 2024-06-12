@@ -6,7 +6,7 @@
   <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida">
 
     <!-- Barra superior -->
-    <div class="input-group mb-3" @mouseover="vaciarInputsTrans">
+    <div class="input-group mb-3" @mouseover="vaciarInputsTrans" @touchstart="vaciarInputsTrans">
       <div class="row g-3 col-md-12">
         <div class="col-md-10">
           <div class="row g-3 mb-3">
@@ -1192,7 +1192,7 @@
     </div>
 
     <!-- Contenedor Grid -->
-    <div class="input-group mb-3 bordePrincipal">
+    <div class="input-group mb-3 bordePrincipal" @mouseover="vaciarInputsTrans" @touchstart="vaciarInputsTrans">
      
       <!-- Vista previa medicamentos/eventos-relevos -->
       <div class="" :class="vistaPreviaOff == false ? 'col-md-3 menu-vista-previa mostrar' : 'menu-vista-previa ocultar'">       
