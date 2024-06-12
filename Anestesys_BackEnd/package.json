@@ -17,7 +17,6 @@
     "@types/jsonwebtoken": "^9.0.0",
     "axios": "^1.2.2",
     "bcryptjs": "^2.4.3",
-    "child_process": "^1.0.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
