@@ -33,7 +33,7 @@
     "pdfmake": "^0.2.9",
     "ping": "^0.4.4",
     "pinia": "^2.0.32",
-    "sweetalert2": "^11.6.13",
+    "sweetalert2": "^11.11.1",
     "vue": "^3.2.36",
     "vue-chartjs": "^5.2.0",
     "vue-router": "^4.1.6"

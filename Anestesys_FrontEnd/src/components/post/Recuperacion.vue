@@ -57,7 +57,7 @@
       </li>
     </ul>
 
-    <div class="tab-content col-md-12" id="" @mouseover="vaciarInputsRecuperacion">
+    <div class="tab-content col-md-12" id="">
       <!-- Nota de Evaluación de UCPA -->
       <div class="tab-pane fade show active" id="notaEvaluacion">
         <div class="col-12 bordePrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">

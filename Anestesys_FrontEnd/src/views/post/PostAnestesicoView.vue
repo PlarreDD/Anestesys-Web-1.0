@@ -2,7 +2,7 @@
   <header @click.stop="replegarMenuVistaRapida">
     <barra-navegacion/>
   </header>
-  <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida" @mouseover="volverPestana">
+  <div class="margen-div-barra" @click.stop="replegarMenuVistaRapida" @mouseover="volverPestana" @touchstart="volverPestana">
     <div class="input-group mb-3">
 
       <div class="col-10 divform navbar-nav">     
@@ -595,9 +595,11 @@ export default ({
   
           const componenteNotaPA = await this.$refs.refNotaPA as InstanceType<typeof Nota>;
           await componenteNotaPA.volverPestana();
+          await componenteNotaPA.vaciarInputsNotaPA();
   
           const componenteRecuperacion = await this.$refs.refRecuperacion as InstanceType<typeof Recuperacion>;
           await componenteRecuperacion.volverPestana();
+          await componenteRecuperacion.vaciarInputsRecuperacion();
         }        
       } catch (error) {
         window.log.error('Ocurrió un error:', error);

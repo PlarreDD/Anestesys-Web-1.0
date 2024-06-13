@@ -80,14 +80,6 @@
                 </button>
               </li>
 
-              <!-- Link Teclado Virtual -->
-              <li>
-                <button type="button" class="btn btn-configuracion fw-bold" @click="abrirTeclado()">
-                  <img src="../../public/images/imgIcon/teclado.svg" />
-                  &nbsp;&nbsp;&nbsp;Teclado virtual
-                </button>
-              </li>
-
               <!-- Link Ayuda -->
               <li class="nav-item">
                 <button class="btn btn-configuracion fw-bold" data-bs-toggle="modal" data-bs-target="#tutorial-modal">
@@ -952,25 +944,6 @@ export default defineComponent({
   },
 
   methods: {
-    async abrirTeclado(){
-      console.log('Abriendo teclado en pantalla');      
-      fetch(`${import.meta.env.VITE_ORIGIN1}/api/openKeyboard`, {
-        method: 'POST'
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Error al abrir el teclado en pantalla');
-        }
-        return response.text();
-      })
-      .then(data => {
-        console.log(data); // Aquí puedes manejar la respuesta del servidor si es necesario
-      })
-      .catch(error => {
-        console.error('Error al abrir el teclado en pantalla:', error);
-      });
-    },
-
     async listarMedicos(){      
       await preIdStore.getListCirujanos(userStore.IdMed);
       await preIdStore.getListAnestVPA(userStore.IdMed);
