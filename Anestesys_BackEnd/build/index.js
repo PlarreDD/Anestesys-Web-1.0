@@ -8,6 +8,8 @@ require("./database/connectdb");
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
+const fs_1 = __importDefault(require("fs"));
+const https_1 = __importDefault(require("https"));
 const auth_route_1 = __importDefault(require("./routes/auth.route"));
 const preid_route_1 = __importDefault(require("./routes/preid.route"));
 const medicamento_route_1 = __importDefault(require("./routes/medicamento.route"));
@@ -59,4 +61,17 @@ app.get('/api/getClienteIp', (req, res) => {
     }
 });
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log("Conectado en el puerto:" + PORT));
+// Leer los certificados
+const privateKey = fs_1.default.readFileSync('./key.pem', 'utf8');
+const certificate = fs_1.default.readFileSync('./cert.pem', 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+console.log("Leyo certificados");
+// Crear el servidor HTTPS
+const httpsServer = https_1.default.createServer(credentials, app);
+console.log("Creo servidor");
+// Escuchar en el puerto 5000 o el especificado en el .env
+httpsServer.listen(PORT, () => {
+    console.log("Conectado en el puerto:" + process.env.ORIGIN1, process.env.ORIGIN2, PORT);
+});
+// app.listen(PORT, () =>
+//     console.log("Conectado en el puerto:" + PORT));

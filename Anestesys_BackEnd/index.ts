@@ -3,6 +3,8 @@ import "./database/connectdb";
 import cookieParser from "cookie-parser";
 import express from 'express';
 import cors from 'cors';
+import fs from 'fs';
+import https from 'https';
 import authRouter from './routes/auth.route';
 import preidRouter from './routes/preid.route';
 import medicamentoRouter from './routes/medicamento.route';
@@ -19,19 +21,32 @@ const net = require('net');
 const app = express();
 const whiteList = [process.env.ORIGIN1, process.env.ORIGIN2];
 
-app.use(
-  cors({
-    origin: function(origin, callback){
-      if(!origin || whiteList.includes(origin)){
-          return callback(null, origin);
-      }
-      return callback(
-          Error("Error de CORS origin " + origin + " No autorizado")
-      );
-    },
-    credentials: true
-  })
-);
+// app.use(
+//   cors({
+//     origin: function(origin, callback){
+//       if(!origin || whiteList.includes(origin)){
+//           return callback(null, origin);
+//       }
+//       return callback(
+//           Error("Error de CORS origin " + origin + " No autorizado")
+//       );
+//     },
+//     credentials: true
+//   })
+// );
+
+const corsOptions = {
+  origin: function(origin, callback) {
+    if (!origin || whiteList.includes(origin)) {
+      callback(null, origin);
+    } else {
+      callback(new Error("Acceso no autorizado por CORS"));
+    }
+  },
+  credentials: true,  // Permite el envío de cookies
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json()); // Transforma la req.body en formato json
 app.use(cookieParser());
@@ -66,5 +81,22 @@ app.get('/api/getClienteIp', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () =>
-    console.log("Conectado en el puerto:" + PORT));
+// Leer los certificados
+const privateKey = fs.readFileSync('./key.pem', 'utf8');
+const certificate = fs.readFileSync('./cert.pem', 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+
+console.log("Leyo certificados");
+
+// Crear el servidor HTTPS
+const httpsServer = https.createServer(credentials, app);
+
+console.log("Creo servidor");
+
+// Escuchar en el puerto 5000 o el especificado en el .env
+httpsServer.listen(PORT, () => {
+  console.log("Conectado en el puerto:" + process.env.ORIGIN1, process.env.ORIGIN2, PORT);
+});
+
+// app.listen(PORT, () =>
+//     console.log("Conectado en el puerto:" + PORT));
