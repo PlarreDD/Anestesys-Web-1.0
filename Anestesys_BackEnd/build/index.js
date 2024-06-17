@@ -8,8 +8,8 @@ require("./database/connectdb");
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const fs_1 = __importDefault(require("fs"));
-const https_1 = __importDefault(require("https"));
+// import fs from 'fs';
+// import https from 'https';
 const auth_route_1 = __importDefault(require("./routes/auth.route"));
 const preid_route_1 = __importDefault(require("./routes/preid.route"));
 const medicamento_route_1 = __importDefault(require("./routes/medicamento.route"));
@@ -24,15 +24,31 @@ const mvs_route_1 = __importDefault(require("./routes/mvs.route"));
 const net = require('net');
 const app = (0, express_1.default)();
 const whiteList = [process.env.ORIGIN1, process.env.ORIGIN2];
-app.use((0, cors_1.default)({
+// app.use(
+//   cors({
+//     origin: function(origin, callback){
+//       if(!origin || whiteList.includes(origin)){
+//           return callback(null, origin);
+//       }
+//       return callback(
+//           Error("Error de CORS origin " + origin + " No autorizado")
+//       );
+//     },
+//     credentials: true
+//   })
+// );
+const corsOptions = {
     origin: function (origin, callback) {
         if (!origin || whiteList.includes(origin)) {
-            return callback(null, origin);
+            callback(null, origin);
         }
-        return callback(Error("Error de CORS origin " + origin + " No autorizado"));
+        else {
+            callback(new Error("Acceso no autorizado por CORS"));
+        }
     },
-    credentials: true
-}));
+    credentials: true, // Permite el envío de cookies
+};
+app.use((0, cors_1.default)(corsOptions));
 app.use(express_1.default.json()); // Transforma la req.body en formato json
 app.use((0, cookie_parser_1.default)());
 /*----------------- Login -----------------*/
@@ -57,21 +73,19 @@ app.get('/api/getClienteIp', (req, res) => {
     if (clientIp) {
         const clienteIp = net.isIPv4(clientIp) ? clientIp : clientIp.replace(/^.*:/, '');
         res.json({ clienteIp });
-        // console.log("IP que manda solicitud:" + clienteIp);    
     }
 });
 const PORT = process.env.PORT || 5000;
-// Leer los certificados
-const privateKey = fs_1.default.readFileSync('./key.pem', 'utf8');
-const certificate = fs_1.default.readFileSync('./cert.pem', 'utf8');
-const credentials = { key: privateKey, cert: certificate };
-console.log("Leyo certificados");
-// Crear el servidor HTTPS
-const httpsServer = https_1.default.createServer(credentials, app);
-console.log("Creo servidor");
-// Escuchar en el puerto 5000 o el especificado en el .env
-httpsServer.listen(PORT, () => {
-    console.log("Conectado en el puerto:" + process.env.ORIGIN1, process.env.ORIGIN2, PORT);
-});
-// app.listen(PORT, () =>
-//     console.log("Conectado en el puerto:" + PORT));
+// // Leer los certificados
+// const privateKey = fs.readFileSync('./key.pem', 'utf8');
+// const certificate = fs.readFileSync('./cert.pem', 'utf8');
+// const credentials = { key: privateKey, cert: certificate };
+// console.log("Leyo certificados");
+// // Crear el servidor HTTPS
+// const httpsServer = https.createServer(credentials, app);
+// console.log("Creo servidor");
+// // Escuchar en el puerto 5000 o el especificado en el .env
+// httpsServer.listen(PORT, () => {
+//   console.log("Conectado en el puerto:" + process.env.ORIGIN1, process.env.ORIGIN2, PORT);
+// });
+app.listen(PORT, () => console.log("Conectado en el puerto:" + PORT));

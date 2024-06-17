@@ -3,8 +3,8 @@ import "./database/connectdb";
 import cookieParser from "cookie-parser";
 import express from 'express';
 import cors from 'cors';
-import fs from 'fs';
-import https from 'https';
+// import fs from 'fs';
+// import https from 'https';
 import authRouter from './routes/auth.route';
 import preidRouter from './routes/preid.route';
 import medicamentoRouter from './routes/medicamento.route';
@@ -36,7 +36,7 @@ const whiteList = [process.env.ORIGIN1, process.env.ORIGIN2];
 // );
 
 const corsOptions = {
-  origin: function(origin, callback) {
+  origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean | string) => void) {
     if (!origin || whiteList.includes(origin)) {
       callback(null, origin);
     } else {
@@ -74,29 +74,28 @@ app.get('/api/getClienteIp', (req, res) => {
 
   if (clientIp) {
     const clienteIp = net.isIPv4(clientIp) ? clientIp : clientIp.replace(/^.*:/, '');
-    res.json({ clienteIp });
-    // console.log("IP que manda solicitud:" + clienteIp);    
+    res.json({ clienteIp });  
   }
 });
 
 const PORT = process.env.PORT || 5000;
 
-// Leer los certificados
-const privateKey = fs.readFileSync('./key.pem', 'utf8');
-const certificate = fs.readFileSync('./cert.pem', 'utf8');
-const credentials = { key: privateKey, cert: certificate };
+// // Leer los certificados
+// const privateKey = fs.readFileSync('./key.pem', 'utf8');
+// const certificate = fs.readFileSync('./cert.pem', 'utf8');
+// const credentials = { key: privateKey, cert: certificate };
 
-console.log("Leyo certificados");
+// console.log("Leyo certificados");
 
-// Crear el servidor HTTPS
-const httpsServer = https.createServer(credentials, app);
+// // Crear el servidor HTTPS
+// const httpsServer = https.createServer(credentials, app);
 
-console.log("Creo servidor");
+// console.log("Creó servidor");
 
-// Escuchar en el puerto 5000 o el especificado en el .env
-httpsServer.listen(PORT, () => {
-  console.log("Conectado en el puerto:" + process.env.ORIGIN1, process.env.ORIGIN2, PORT);
-});
+// // Escuchar en el puerto 5000 o el especificado en el .env
+// httpsServer.listen(PORT, () => {
+//   console.log("Conectado en el puerto:" + process.env.ORIGIN1, process.env.ORIGIN2, PORT);
+// });
 
-// app.listen(PORT, () =>
-//     console.log("Conectado en el puerto:" + PORT));
+app.listen(PORT, () =>
+    console.log("Conectado en el puerto:" + PORT));
