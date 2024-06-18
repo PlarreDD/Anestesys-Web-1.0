@@ -83,7 +83,7 @@ const PORT = process.env.PORT || 5000;
 // console.log("Leyo certificados");
 // // Crear el servidor HTTPS
 // const httpsServer = https.createServer(credentials, app);
-// console.log("Creo servidor");
+// console.log("Creó servidor");
 // // Escuchar en el puerto 5000 o el especificado en el .env
 // httpsServer.listen(PORT, () => {
 //   console.log("Conectado en el puerto:" + process.env.ORIGIN1, process.env.ORIGIN2, PORT);

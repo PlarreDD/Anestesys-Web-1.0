@@ -476,7 +476,7 @@
               <div class="modal-body">
                 <div class="col-md-12">
                   <div class="row g-3">
-                        <h5 class="col-md-12 fw-bold text-white">TÉCNICA ANÉSTESICA</h5>
+                        <h5 class="col-md-12 fw-bold text-white">TÉCNICA ANESTÉSICA</h5>
                         <!-- Técnica de anestesia final -->
                         <div class="col-md-12">
                           <label  class="form-label fw-bold text-white">Técnica de anestesia final</label>
@@ -488,7 +488,7 @@
                                         placeholder="Seleccione las técnicas de anestesia"
                                         :options="opcionTecnicas"
                                         :searchable="true"
-                                        :createTag="true"/>
+                                        :createTag="true" :limit="2"/>
                         </div>
 
                         <div class="col-md-10">
@@ -1587,7 +1587,7 @@ export default defineComponent({
       medStore,
       
       // Arreglo opciones técnicas
-      opcionTecnicas: ['Local','Sedación', 'General balanceada', 'TIVA (Anestesia total intravenosa)', 'Multimodal',
+      opcionTecnicas: ['Local','Sedación', 'General balanceada', 'Combinada (General + Regional)', 'TIVA (Anestesia total intravenosa)', 'Multimodal',
                        'Bloqueo mixto', 'Bloqueo peridural lumbar', 'Bloqueo peridural caudal', 'Bloqueo espinal',
                        'Bloqueo de plexo', 'Bloqueo troncular', 'Bloqueo peridural torácico', 'Bloqueo peridural cervical',
                        'Libre de opioides'],

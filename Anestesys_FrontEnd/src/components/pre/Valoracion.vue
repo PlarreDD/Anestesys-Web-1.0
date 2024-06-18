@@ -968,7 +968,7 @@
 
                         <!-- Leutocitos -->
                         <div class="col-md-3">
-                            <label  class="form-label fw-bold">Leutocitos</label>
+                            <label  class="form-label fw-bold">Leucocitos</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""

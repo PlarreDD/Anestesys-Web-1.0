@@ -251,17 +251,15 @@
                             <span data-title="Llene el campo para navegar por la aplicación" @click="seleccionarTecnica">
                                 &nbsp<font-awesome-icon icon="fa-solid fa-circle-info" class="btn-info"/>
                             </span>
-                            <select  @select="enviarDatosPlan"
-                                    class="form-select"
-                                    v-model="infoPlan.pos_TecnicaAnestesica"
-                                    :class="infoPlan.pos_TecnicaAnestesica != '' && infoPlan.pos_TecnicaAnestesica != undefined ?
-                                           'form-control border border-success formSombra' : 'form-control'">
-                                <option selected></option>
-                                <option>General</option>
-                                <option>Regional</option>
-                                <option>Sedación</option>
-                                <option>Local</option>                                          
-                            </select>
+                            <Multiselect mode="tags"
+                                        @select="enviarDatosPlan"
+                                        v-model="infoPlan.pos_TecnicaAnestesica"
+                                        :class="infoPlan.pos_TecnicaAnestesica != '' && infoPlan.pos_TecnicaAnestesica != undefined ?
+                                           'form-control border border-success formSombra' : 'form-control'"
+                                        placeholder="Seleccione el tipo de monitoreo"
+                                        :options="opcionTecnicas"
+                                        :searchable="true"
+                                        :createTag="true"/>                                      
                         </div>                         
 
                         <!-- Premedicación -->
@@ -1090,7 +1088,8 @@ export default defineComponent({
             sitioToracico:false,
             sitioLumbar:false,
 
-            opcionMonitoreo: ['No invasivo','Invasivo', 'Gasto cardíaco invasivo', 'Gasto cardíaco no invasivo', 'Neurológico', 'Otro']
+            opcionMonitoreo: ['No invasivo','Invasivo', 'Gasto cardíaco invasivo', 'Gasto cardíaco no invasivo', 'Neurológico', 'Otro'],
+            opcionTecnicas: ['General','Regional', 'Sedación', 'Local']
         }
     },
 

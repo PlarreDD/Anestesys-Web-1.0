@@ -50,18 +50,14 @@
                         <!-- Técnica de anestesia final -->
                         <div class="col-md-10">                            
                             <label  class="form-label fw-bold">Técnica de anestesia final</label>
-                            <Multiselect
+                            <input type="text"
                                 v-model="postAnestStore.TecnicaAnestesica"
                                 :disabled="true"
-                                mode="tags"
                                 aria-readonly="true"
-                                placeholder="Seleccione las técnicas de anestesia"
-                                :options="opcionTecnica"
-                                :searchable="true"
-                                :createTag="true"
+                                placeholder="Técnicas de anestesia usadas"
                                 :class="postAnestStore.TecnicaAnestesica != undefined && postAnestStore.TecnicaAnestesica != '' ?
                                 'form-control border border-success formSombra' : 'form-control'"
-                            />
+                            >
                         </div>
 
                         <!-- Intubación -->
