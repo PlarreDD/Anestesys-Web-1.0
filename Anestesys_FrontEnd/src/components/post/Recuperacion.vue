@@ -411,108 +411,86 @@
                 </td>
               </tr>
 
-              <!-- Saturación de O2 -->
+              <!-- Coloración -->
               <tr class="espacio">
-                <td class="col-2 color-texto">Saturación de O2:</td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    @keyup.capture="enviarDatosRecuperacion"
-                    v-model="infoRec.aldreteRec_SatO2In"
-                    :class="
-                      infoRec.aldreteRec_SatO2In != undefined &&
-                      infoRec.aldreteRec_SatO2In != ''
-                        ? 'form-control border border-success formSombra'
-                        : 'form-control'
-                    "
-                  />
+                <td class="col-2 color-texto">
+                  <label  class="form-label color-td">
+                    <span data-bs-toggle="modal" data-bs-target="#coloracion-modal">
+                      <font-awesome-icon icon="fa-solid fa-circle-info" />
+                    </span>
+                    Coloración:
+                  </label>
                 </td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    @keyup.capture="enviarDatosRecuperacion"
-                    v-model="infoRec.aldreteRec_SatO215"
-                    :class="
-                      infoRec.aldreteRec_SatO215 != undefined &&
-                      infoRec.aldreteRec_SatO215 != ''
-                        ? 'form-control border border-success formSombra'
-                        : 'form-control'
-                    "
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    @keyup.capture="enviarDatosRecuperacion"
-                    v-model="infoRec.aldreteRec_SatO230"
-                    :class="
-                      infoRec.aldreteRec_SatO230 != undefined &&
-                      infoRec.aldreteRec_SatO230 != ''
-                        ? 'form-control border border-success formSombra'
-                        : 'form-control'
-                    "
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    @keyup.capture="enviarDatosRecuperacion"
-                    v-model="infoRec.aldreteRec_SatO245"
-                    :class="
-                      infoRec.aldreteRec_SatO245 != undefined &&
-                      infoRec.aldreteRec_SatO245 != ''
-                        ? 'form-control border border-success formSombra'
-                        : 'form-control'
-                    "
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    @keyup.capture="enviarDatosRecuperacion"
-                    v-model="infoRec.aldreteRec_SatO260"
-                    :class="
-                      infoRec.aldreteRec_SatO260 != undefined &&
-                      infoRec.aldreteRec_SatO260 != ''
-                        ? 'form-control border border-success formSombra'
-                        : 'form-control'
-                    "
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    @keyup.capture="enviarDatosRecuperacion"
-                    v-model="infoRec.aldreteRec_SatO290"
-                    :class="
-                      infoRec.aldreteRec_SatO290 != undefined &&
-                      infoRec.aldreteRec_SatO290 != ''
-                        ? 'form-control border border-success formSombra'
-                        : 'form-control'
-                    "
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    @keyup.capture="enviarDatosRecuperacion"
-                    v-model="infoRec.aldreteRec_SatO2120"
-                    :class="
-                      infoRec.aldreteRec_SatO2120 != undefined &&
-                      infoRec.aldreteRec_SatO2120 != ''
-                        ? 'form-control border border-success formSombra'
-                        : 'form-control'
-                    "
-                  />
-                </td>
-              </tr>
+                <th>
+                  <select @change="enviarDatosRecuperacion" v-model="infoRec.aldreteRec_ColoracionIn" class="form-select"
+                    :class="infoRec.aldreteRec_ColoracionIn != undefined && infoRec.aldreteRec_ColoracionIn != ''? 'form-control border border-success formSombra': 'form-control'">
+                    <option selected></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="enviarDatosRecuperacion" v-model="infoRec.aldreteRec_Coloracion15" class="form-select"
+                      :class="infoRec.aldreteRec_Coloracion15 != undefined && infoRec.aldreteRec_Coloracion15 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="enviarDatosRecuperacion" v-model="infoRec.aldreteRec_Coloracion30" class="form-select"
+                    :class="infoRec.aldreteRec_Coloracion30 != undefined && infoRec.aldreteRec_Coloracion30 != '' ? 'form-control border border-success formSombra' : 'form-control' ">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="enviarDatosRecuperacion" v-model="infoRec.aldreteRec_Coloracion45" class="form-select"
+                    :class="infoRec.aldreteRec_Coloracion45 != undefined && infoRec.aldreteRec_Coloracion45 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="enviarDatosRecuperacion" v-model="infoRec.aldreteRec_Coloracion60" class="form-select"
+                      :class="infoRec.aldreteRec_Coloracion60 != undefined && infoRec.aldreteRec_Coloracion60 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="enviarDatosRecuperacion" v-model="infoRec.aldreteRec_Coloracion90" class="form-select"
+                    :class=" infoRec.aldreteRec_Coloracion90 != undefined && infoRec.aldreteRec_Coloracion90 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="enviarDatosRecuperacion" v-model="infoRec.aldreteRec_Coloracion120" class="form-select"
+                    :class=" infoRec.aldreteRec_Coloracion120 != undefined && infoRec.aldreteRec_Coloracion120 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+              </tr>              
 
               <!-- Aldrete -->
               <!-- <tr class="espacio">
@@ -1031,85 +1009,82 @@
                 </th>
               </tr>
 
-              <!-- Coloración -->
+              <!-- Saturación de O2 -->
               <tr class="espacio">
-                <td class="col-2 color-texto">
+                <td class="col-2 color-texto">                  
                   <label  class="form-label color-td">
-                    <span data-bs-toggle="modal" data-bs-target="#coloracion-modal">
+                    <span
+                      data-bs-toggle="modal"
+                      data-bs-target="#saturacion-modal"
+                    >
                       <font-awesome-icon icon="fa-solid fa-circle-info" />
                     </span>
-                    Coloración:
+                    Saturación de O2:
                   </label>
                 </td>
                 <th>
-                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_ColoracionIn" class="form-select"
-                    :class="infoRec.aldreteRec_ColoracionIn != undefined && infoRec.aldreteRec_ColoracionIn != ''? 'form-control border border-success formSombra': 'form-control'">
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_SatO2In" class="form-select"
+                    :class="infoRec.aldreteRec_SatO2In != undefined && infoRec.aldreteRec_SatO2In != ''? 'form-control border border-success formSombra': 'form-control'">
                     <option selected></option>
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>
                   </select>
                 </th>
-
                 <th>
-                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Coloracion15" class="form-select"
-                      :class="infoRec.aldreteRec_Coloracion15 != undefined && infoRec.aldreteRec_Coloracion15 != '' ? 'form-control border border-success formSombra' : 'form-control'">
-                    <option></option>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_SatO215" class="form-select"
+                    :class="infoRec.aldreteRec_SatO215 != undefined && infoRec.aldreteRec_SatO215 != ''? 'form-control border border-success formSombra': 'form-control'">
+                    <option selected></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>        
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_SatO230" class="form-select"
+                    :class="infoRec.aldreteRec_SatO230 != undefined && infoRec.aldreteRec_SatO230 != ''? 'form-control border border-success formSombra': 'form-control'">
+                    <option selected></option>
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>
                   </select>
                 </th>
-
                 <th>
-                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Coloracion30" class="form-select"
-                    :class="infoRec.aldreteRec_Coloracion30 != undefined && infoRec.aldreteRec_Coloracion30 != '' ? 'form-control border border-success formSombra' : 'form-control' ">
-                    <option></option>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_SatO245" class="form-select"
+                    :class="infoRec.aldreteRec_SatO245 != undefined && infoRec.aldreteRec_SatO245 != ''? 'form-control border border-success formSombra': 'form-control'">
+                    <option selected></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>          
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_SatO260" class="form-select"
+                    :class="infoRec.aldreteRec_SatO260 != undefined && infoRec.aldreteRec_SatO260 != ''? 'form-control border border-success formSombra': 'form-control'">
+                    <option selected></option>
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>
                   </select>
                 </th>
-
                 <th>
-                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Coloracion45" class="form-select"
-                    :class="infoRec.aldreteRec_Coloracion45 != undefined && infoRec.aldreteRec_Coloracion45 != '' ? 'form-control border border-success formSombra' : 'form-control'">
-                    <option></option>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_SatO290" class="form-select"
+                    :class="infoRec.aldreteRec_SatO290 != undefined && infoRec.aldreteRec_SatO290 != ''? 'form-control border border-success formSombra': 'form-control'">
+                    <option selected></option>
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>
                   </select>
                 </th>
-
                 <th>
-                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Coloracion60" class="form-select"
-                      :class="infoRec.aldreteRec_Coloracion60 != undefined && infoRec.aldreteRec_Coloracion60 != '' ? 'form-control border border-success formSombra' : 'form-control'">
-                    <option></option>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_SatO2120" class="form-select"
+                    :class="infoRec.aldreteRec_SatO2120 != undefined && infoRec.aldreteRec_SatO2120 != ''? 'form-control border border-success formSombra': 'form-control'">
+                    <option selected></option>
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>
                   </select>
-                </th>
-
-                <th>
-                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Coloracion90" class="form-select"
-                    :class=" infoRec.aldreteRec_Coloracion90 != undefined && infoRec.aldreteRec_Coloracion90 != '' ? 'form-control border border-success formSombra' : 'form-control'">
-                    <option></option>
-                    <option>0</option>
-                    <option>1</option>
-                    <option>2</option>
-                  </select>
-                </th>
-
-                <th>
-                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Coloracion120" class="form-select"
-                    :class=" infoRec.aldreteRec_Coloracion120 != undefined && infoRec.aldreteRec_Coloracion120 != '' ? 'form-control border border-success formSombra' : 'form-control'">
-                    <option></option>
-                    <option>0</option>
-                    <option>1</option>
-                    <option>2</option>
-                  </select>
-                </th>
+                </th>                                             
               </tr>
 
               <!-- Bromage -->
@@ -1941,13 +1916,13 @@ export default defineComponent({
     this.infoRec.aldreteRec_Conciencia90=null
     this.infoRec.aldreteRec_Conciencia120=null
 
-    this.infoRec.aldreteRec_ColoracionIn=null
-    this.infoRec.aldreteRec_Coloracion15=null
-    this.infoRec.aldreteRec_Coloracion30=null
-    this.infoRec.aldreteRec_Coloracion45=null
-    this.infoRec.aldreteRec_Coloracion60=null
-    this.infoRec.aldreteRec_Coloracion90=null
-    this.infoRec.aldreteRec_Coloracion120=null
+    this.infoRec.aldreteRec_SatO2In=null
+    this.infoRec.aldreteRec_SatO215=null
+    this.infoRec.aldreteRec_SatO230=null
+    this.infoRec.aldreteRec_SatO245=null
+    this.infoRec.aldreteRec_SatO260=null
+    this.infoRec.aldreteRec_SatO290=null
+    this.infoRec.aldreteRec_SatO2120=null
   },
 
   methods: {
@@ -2202,19 +2177,19 @@ export default defineComponent({
     async obtenerAldrete(){
       try {
         this.infoRec.altaRec_0min = Number(this.infoRec.aldreteRec_MuscularIn)+Number(this.infoRec.aldreteRec_RespiracionIn)+Number(this.infoRec.aldreteRec_CirculacionIn)+
-                                    Number(this.infoRec.aldreteRec_ConcienciaIn)+Number(this.infoRec.aldreteRec_ColoracionIn);
+                                    Number(this.infoRec.aldreteRec_ConcienciaIn)+Number(this.infoRec.aldreteRec_SatO2In);
         this.infoRec.altaRec_15min = Number(this.infoRec.aldreteRec_Muscular15)+Number(this.infoRec.aldreteRec_Respiracion15)+Number(this.infoRec.aldreteRec_Circulacion15)+
-                                    Number(this.infoRec.aldreteRec_Conciencia15)+Number(this.infoRec.aldreteRec_Coloracion15);
+                                    Number(this.infoRec.aldreteRec_Conciencia15)+Number(this.infoRec.aldreteRec_SatO215);
         this.infoRec.altaRec_30min = Number(this.infoRec.aldreteRec_Muscular30)+Number(this.infoRec.aldreteRec_Respiracion30)+Number(this.infoRec.aldreteRec_Circulacion30)+
-                                    Number(this.infoRec.aldreteRec_Conciencia30)+Number(this.infoRec.aldreteRec_Coloracion30);
+                                    Number(this.infoRec.aldreteRec_Conciencia30)+Number(this.infoRec.aldreteRec_SatO230);
         this.infoRec.altaRec_45min = Number(this.infoRec.aldreteRec_Muscular45)+Number(this.infoRec.aldreteRec_Respiracion45)+Number(this.infoRec.aldreteRec_Circulacion45)+
-                                    Number(this.infoRec.aldreteRec_Conciencia45)+Number(this.infoRec.aldreteRec_Coloracion45);
+                                    Number(this.infoRec.aldreteRec_Conciencia45)+Number(this.infoRec.aldreteRec_SatO245);
         this.infoRec.altaRec_60min = Number(this.infoRec.aldreteRec_Muscular60)+Number(this.infoRec.aldreteRec_Respiracion60)+Number(this.infoRec.aldreteRec_Circulacion60)+
-                                    Number(this.infoRec.aldreteRec_Conciencia60)+Number(this.infoRec.aldreteRec_Coloracion60);
+                                    Number(this.infoRec.aldreteRec_Conciencia60)+Number(this.infoRec.aldreteRec_SatO260);
         this.infoRec.altaRec_90min = Number(this.infoRec.aldreteRec_Muscular90)+Number(this.infoRec.aldreteRec_Respiracion90)+Number(this.infoRec.aldreteRec_Circulacion90)+
-                                    Number(this.infoRec.aldreteRec_Conciencia90)+Number(this.infoRec.aldreteRec_Coloracion90);
+                                    Number(this.infoRec.aldreteRec_Conciencia90)+Number(this.infoRec.aldreteRec_SatO290);
         this.infoRec.altaRec_120min = Number(this.infoRec.aldreteRec_Muscular120)+Number(this.infoRec.aldreteRec_Respiracion120)+Number(this.infoRec.aldreteRec_Circulacion120)+
-                                    Number(this.infoRec.aldreteRec_Conciencia120)+Number(this.infoRec.aldreteRec_Coloracion120);
+                                    Number(this.infoRec.aldreteRec_Conciencia120)+Number(this.infoRec.aldreteRec_SatO2120);
   
         const arrayFinalAldrete= [this.infoRec.altaRec_0min, this.infoRec.altaRec_15min, this.infoRec.altaRec_30min, this.infoRec.altaRec_45min,
                                 this.infoRec.altaRec_60min, this.infoRec.altaRec_90min, this.infoRec.altaRec_120min]
