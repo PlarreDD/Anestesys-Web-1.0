@@ -48,7 +48,7 @@
                       <div class="col-md-12">
                         <div class="row g-3">
                             
-                          <h5 class="text-white fw-bold col-md-11">DATOS DEL MEDICAMENTO</h5>
+                          <h5 class="text-white fw-bold col-md-5">DATOS DEL MEDICAMENTO</h5>
                           <div class="col-md-1">
                             <button type="button" id="medica"
                                     class="btn fw-bold"
@@ -57,6 +57,11 @@
                               <i class="text-white invisible">
                                 <font-awesome-icon icon="fa-solid fa-xmark" size="2xl"/>
                               </i>
+                            </button>
+                          </div>
+                          <div class="col-md-6">
+                            <button type="button" class="btn btn-guardar-balance fw-bold float-end" data-bs-toggle="modal" data-bs-target="#modal-sumatoria-medicamentos">
+                              Sumatoria de medicamentos
                             </button>
                           </div>
                           
@@ -774,6 +779,60 @@
                               <td class="text-white">{{ datosBalance.ingresos }} ml</td>
                               <td class="text-white">{{ datosBalance.egresos }} ml</td>
                               <td class="text-white">{{ datosBalance.balanceP }} ml</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>                        
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Abrir el modal Sumatoria de Medicamentos-->
+      <div class="modal" id="modal-sumatoria-medicamentos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content color-dropdown">
+            <div class="input-group mb-3">
+              <div class="modal-body">
+                <div class="col-md-12">
+                  <div class="row g-3">
+                    <h5 class="col-md-11 fw-bold text-white">SUMATORIA DE MEDICAMENTOS</h5>
+                    <div class="col-md-1 div-img">
+                      <button id="volver-balance" type="button" class="btn fw-bold" aria-label="Close" data-bs-toggle="modal" data-bs-target="#modal-medicamento">
+                        <i class="text-white">
+                          <font-awesome-icon icon="fa-solid fa-arrow-left" size="2xl"/>
+                        </i>
+                      </button>
+                    </div>
+                    
+                    <div class="col-md-12">
+                      <div class="deslizar-balance-parcial">
+                        <table class="table table-responsive">
+                          <thead>
+                            <tr>
+                              <th class="text-white">Medicamento</th>
+                              <th class="text-white">Bolo</th>
+                              <th class="text-white">Infusión</th>
+                              <th class="text-white">Total</th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <!-- <tr>
+                              <td class="text-white">{{ datosBalance.horaBalance }}</td>
+                              <td class="text-white">{{ datosBalance.ingresos }} ml</td>
+                              <td class="text-white">{{ datosBalance.egresos }} ml</td>
+                              <td class="text-white">{{ datosBalance.balanceP }} ml</td>
+                            </tr> -->
+                            <tr v-for="(item, index) in groupedMedicamentos" :key="index">
+                              <td text-white>{{ item.medicamento }}</td>
+                              <td text-white>{{ item.dosis }} {{ item.unidad }}</td>
+                              <td text-white>{{ item.unidad }}</td>
+                              <td text-white>{{ item.unidad }}</td>
                             </tr>
                           </tbody>
                         </table>
@@ -1547,10 +1606,24 @@ let FR: any;
 
 let taSeparada: Object;
 
+interface Medicamento {
+  tipoMed: string;
+  medicamento: string;
+  dosisMed: number;
+  unidadMed: string;
+}
+
+interface GrupoMedicamento {
+  medicamento: string;
+  dosis: number;
+  unidad: string;
+}
+
 export default defineComponent({
   name: 'App',
 
   created() {
+    // Visibilidad de los datasets
     this.datasetVisibility = new Array(this.chartData.datasets.length).fill(true);
   },
 
@@ -2004,7 +2077,7 @@ export default defineComponent({
               
             if(transAnestStore.ingresoQuirofano === false){
               // Crea un nuevo evento de clic
-              let event = new MouseEvent('click', {
+              let event = new MouseEvent('dblclick', {
                   bubbles: true,
                   cancelable: true,
                   view: window
@@ -2031,7 +2104,7 @@ export default defineComponent({
             if(transAnestStore.ingresoQuirofano === true){
               if(transAnestStore.salidaQuirofano === false){
                 // Crea un nuevo evento de clic
-                let event = new MouseEvent('click', {
+                let event = new MouseEvent('dblclick', {
                     bubbles: true,
                     cancelable: true,
                     view: window
@@ -2069,7 +2142,7 @@ export default defineComponent({
             if(transAnestStore.ingresoQuirofano === true){
               if(transAnestStore.salidaQuirofano === false){
                 // Crea un nuevo evento de clic
-                let event = new MouseEvent('click', {
+                let event = new MouseEvent('dblclick', {
                     bubbles: true,
                     cancelable: true,
                     view: window
@@ -2107,7 +2180,7 @@ export default defineComponent({
             if(transAnestStore.ingresoQuirofano === true){
               if(transAnestStore.salidaQuirofano === false){
                 // Crea un nuevo evento de clic
-                let event = new MouseEvent('click', {
+                let event = new MouseEvent('dblclick', {
                     bubbles: true,
                     cancelable: true,
                     view: window
@@ -2145,7 +2218,7 @@ export default defineComponent({
             if(transAnestStore.ingresoQuirofano === true){
               if(transAnestStore.salidaQuirofano === false){
                 // Crea un nuevo evento de clic
-                let event = new MouseEvent('click', {
+                let event = new MouseEvent('dblclick', {
                     bubbles: true,
                     cancelable: true,
                     view: window
@@ -2183,7 +2256,7 @@ export default defineComponent({
             if(transAnestStore.ingresoQuirofano === true){
               if(transAnestStore.salidaQuirofano === false){
                 // Crea un nuevo evento de clic
-                let event = new MouseEvent('click', {
+                let event = new MouseEvent('dblclick', {
                     bubbles: true,
                     cancelable: true,
                     view: window
@@ -8275,7 +8348,12 @@ export default defineComponent({
           this.gridBD.push(this.hl7mess[this.hl7mess.length - 1]);
           this.hl7mess = [];
                   
-          postAnestStore.EgresoTA = this.grid[this.grid.length - 1].datos[2].valor.toString() + "/" + this.grid[this.grid.length - 1].datos[3].valor.toString();
+          // PRUEBAS DE PAS Y PAD INTRUSIVAS
+          if(this.grid[this.grid.length - 1].datos[2].valor.toString() != "-" && this.grid[this.grid.length - 1].datos[3].valor.toString() != "-")
+            postAnestStore.EgresoTA = this.grid[this.grid.length - 1].datos[2].valor.toString() + "/" + this.grid[this.grid.length - 1].datos[3].valor.toString();
+          else
+            postAnestStore.EgresoTA = this.grid[this.grid.length - 1].datos[10].valor.toString() + "/" + this.grid[this.grid.length - 1].datos[11].valor.toString();
+          // HASTA AQUI SE REALIZARON LOS CAMBIOS
           postAnestStore.EgresoFC = this.grid[this.grid.length - 1].datos[0].valor;
           postAnestStore.EgresoFR = this.grid[this.grid.length - 1].datos[14].valor;
           postAnestStore.EgresoTemp = this.grid[this.grid.length - 1].datos[7].valor;
@@ -8513,6 +8591,33 @@ export default defineComponent({
       });     
       
       return filas;
+    },
+
+    groupedMedicamentos(): GrupoMedicamento[] {
+      // Verifica que `medicamentos` tenga al menos un elemento
+      if (!this.transAnestStore.medicamentos || this.transAnestStore.medicamentos.length === 0) {
+        return [];
+      }
+
+      const medicamentos = this.transAnestStore.medicamentos[0].medicamentosCx.filter((med: Medicamento) => med.tipoMed === 'Bolo');
+      const grouped: { [key: string]: { dosis: number; unidad: string } } = {};
+
+      medicamentos.forEach((med) => {
+        if (grouped[med.medicamento]) {
+          grouped[med.medicamento].dosis += Number(med.dosisMed);
+        } else {
+          grouped[med.medicamento] = {
+            dosis: Number(med.dosisMed),
+            unidad: med.unidadMed,
+          };
+        }
+      });
+
+      return Object.keys(grouped).map((key) => ({
+        medicamento: key,
+        dosis: grouped[key].dosis,
+        unidad: grouped[key].unidad,
+      }));
     },
   },
 })

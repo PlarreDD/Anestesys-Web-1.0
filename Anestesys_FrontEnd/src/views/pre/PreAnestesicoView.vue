@@ -891,7 +891,7 @@ export default defineComponent({
               
             if(transStore.ingresoQuirofano === false){
               // Crea un nuevo evento de clic
-              let event = new MouseEvent('click', {
+              let event = new MouseEvent('dblclick', {
                   bubbles: true,
                   cancelable: true,
                   view: window
@@ -918,7 +918,7 @@ export default defineComponent({
             if(transStore.ingresoQuirofano === true){
               if(transStore.salidaQuirofano === false){
                 // Crea un nuevo evento de clic
-                let event = new MouseEvent('click', {
+                let event = new MouseEvent('dblclick', {
                     bubbles: true,
                     cancelable: true,
                     view: window
@@ -956,7 +956,7 @@ export default defineComponent({
             if(transStore.ingresoQuirofano === true){
               if(transStore.salidaQuirofano === false){
                 // Crea un nuevo evento de clic
-                let event = new MouseEvent('click', {
+                let event = new MouseEvent('dblclick', {
                     bubbles: true,
                     cancelable: true,
                     view: window
@@ -994,7 +994,7 @@ export default defineComponent({
             if(transStore.ingresoQuirofano === true){
               if(transStore.salidaQuirofano === false){
                 // Crea un nuevo evento de clic
-                let event = new MouseEvent('click', {
+                let event = new MouseEvent('dblclick', {
                     bubbles: true,
                     cancelable: true,
                     view: window
@@ -1032,7 +1032,7 @@ export default defineComponent({
             if(transStore.ingresoQuirofano === true){
               if(transStore.salidaQuirofano === false){
                 // Crea un nuevo evento de clic
-                let event = new MouseEvent('click', {
+                let event = new MouseEvent('dblclick', {
                     bubbles: true,
                     cancelable: true,
                     view: window
@@ -1070,7 +1070,7 @@ export default defineComponent({
             if(transStore.ingresoQuirofano === true){
               if(transStore.salidaQuirofano === false){
                 // Crea un nuevo evento de clic
-                let event = new MouseEvent('click', {
+                let event = new MouseEvent('dblclick', {
                     bubbles: true,
                     cancelable: true,
                     view: window
