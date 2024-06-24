@@ -822,17 +822,11 @@
                           </thead>
 
                           <tbody>
-                            <!-- <tr>
-                              <td class="text-white">{{ datosBalance.horaBalance }}</td>
-                              <td class="text-white">{{ datosBalance.ingresos }} ml</td>
-                              <td class="text-white">{{ datosBalance.egresos }} ml</td>
-                              <td class="text-white">{{ datosBalance.balanceP }} ml</td>
-                            </tr> -->
-                            <tr v-for="(item, index) in groupedMedicamentos" :key="index">
-                              <td text-white>{{ item.medicamento }}</td>
-                              <td text-white>{{ item.dosis }} {{ item.unidad }}</td>
-                              <td text-white>{{ item.unidad }}</td>
-                              <td text-white>{{ item.unidad }}</td>
+                            <tr v-for="(item, index) in medicamentosAgrupados" :key="index">
+                              <td class="text-white">{{ item.medicamento }}</td>
+                              <td class="text-white">{{ item.bolo ? `${item.bolo} ${item.unidadBolo}` : '' }}</td>
+                              <td class="text-white">{{ item.infusion ? `${item.infusion} ${item.unidadInfusion}` : '' }}</td>
+                              <td class="text-white">{{ item.total ? `${item.total} ${item.unidadTotal}` : '' }}</td>
                             </tr>
                           </tbody>
                         </table>
@@ -1606,17 +1600,21 @@ let FR: any;
 
 let taSeparada: Object;
 
-interface Medicamento {
-  tipoMed: string;
-  medicamento: string;
-  dosisMed: number;
-  unidadMed: string;
-}
+// interface Medicamento {
+//   tipoMed: string;
+//   medicamento: string;
+//   dosisMed: number;
+//   unidadMed: string;
+// }
 
 interface GrupoMedicamento {
   medicamento: string;
-  dosis: number;
-  unidad: string;
+  bolo?: number;
+  unidadBolo?: string;
+  infusion?: number;
+  unidadInfusion?: string;
+  total?: number;
+  unidadTotal?: string;
 }
 
 export default defineComponent({
@@ -8564,8 +8562,9 @@ export default defineComponent({
       preIdStore.modalTendencias = false  
 
       this.detenerReconocimiento();
-    }
+    },
   },
+
   
   computed: {
     tablaMedicamentos() : String[] {      
@@ -8593,30 +8592,46 @@ export default defineComponent({
       return filas;
     },
 
-    groupedMedicamentos(): GrupoMedicamento[] {
+    medicamentosAgrupados(): GrupoMedicamento[] {
       // Verifica que `medicamentos` tenga al menos un elemento
       if (!this.transAnestStore.medicamentos || this.transAnestStore.medicamentos.length === 0) {
         return [];
       }
 
-      const medicamentos = this.transAnestStore.medicamentos[0].medicamentosCx.filter((med: Medicamento) => med.tipoMed === 'Bolo');
-      const grouped: { [key: string]: { dosis: number; unidad: string } } = {};
+      const medicamentos = this.transAnestStore.medicamentos[0].medicamentosCx;
+      const grouped: { [key: string]: { bolo?: number; unidadBolo?: string; infusion?: number; unidadInfusion?: string; total?: number; unidadTotal?: string } } = {};
 
       medicamentos.forEach((med) => {
-        if (grouped[med.medicamento]) {
-          grouped[med.medicamento].dosis += Number(med.dosisMed);
-        } else {
-          grouped[med.medicamento] = {
-            dosis: Number(med.dosisMed),
-            unidad: med.unidadMed,
-          };
+        if (!grouped[med.medicamento]) {
+          grouped[med.medicamento] = {};
         }
+        if (med.tipoMed === 'Bolo') {
+          if (grouped[med.medicamento].bolo) {
+            grouped[med.medicamento].bolo += Number(med.dosisMed);
+          } else {
+            grouped[med.medicamento].bolo = Number(med.dosisMed);
+            grouped[med.medicamento].unidadBolo = med.unidadMed;
+          }
+        } else if (med.tipoMed === 'Infusión') {
+          if (grouped[med.medicamento].infusion) {
+            grouped[med.medicamento].infusion += Number(med.dosisMed);
+          } else {
+            grouped[med.medicamento].infusion = Number(med.dosisMed);
+            grouped[med.medicamento].unidadInfusion = med.unidadMed;
+          }
+        }
+      });
+
+      Object.keys(grouped).forEach(key => {
+        const bolo = grouped[key].bolo || 0;
+        const infusion = grouped[key].infusion || 0;
+        grouped[key].total = bolo + infusion;
+        grouped[key].unidadTotal = grouped[key].unidadBolo || grouped[key].unidadInfusion;
       });
 
       return Object.keys(grouped).map((key) => ({
         medicamento: key,
-        dosis: grouped[key].dosis,
-        unidad: grouped[key].unidad,
+        ...grouped[key],
       }));
     },
   },
