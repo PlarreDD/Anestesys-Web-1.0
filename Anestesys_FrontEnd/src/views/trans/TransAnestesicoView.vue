@@ -60,7 +60,8 @@
                             </button>
                           </div>
                           <div class="col-md-6">
-                            <button type="button" class="btn btn-guardar-balance fw-bold float-end" data-bs-toggle="modal" data-bs-target="#modal-sumatoria-medicamentos">
+                            <button type="button" class="btn btn-guardar-balance fw-bold float-end" 
+                              data-bs-toggle="modal" data-bs-target="#modal-sumatoria-medicamentos">
                               Sumatoria de medicamentos
                             </button>
                           </div>
@@ -1571,9 +1572,9 @@ import { Line } from 'vue-chartjs';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
-import pdfFonts from "pdfmake/build/vfs_fonts.js";
+// import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
-window.pdfMake.fonts = pdfFonts.pdfMake;
+// window.pdfMake.fonts = pdfFonts.pdfMake;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 
@@ -1599,13 +1600,6 @@ let FiCO2: any;
 let FR: any;
 
 let taSeparada: Object;
-
-// interface Medicamento {
-//   tipoMed: string;
-//   medicamento: string;
-//   dosisMed: number;
-//   unidadMed: string;
-// }
 
 interface GrupoMedicamento {
   medicamento: string;
@@ -2028,6 +2022,10 @@ export default defineComponent({
   },
 
   methods: {
+    // mostrarFiltrados(){
+    //   console.log('Med. Filtrados: '+ JSON.stringify(this.medicamentosAgrupados))
+    // },
+
     toggleDataset(index) {   
       if(this.chartData.datasets[index].hidden === true) {
         this.chartData.datasets[index].hidden = false;
@@ -6903,6 +6901,11 @@ export default defineComponent({
                 await transAnestStore.getBalanceHPList(preIdStore.pacienteID._id)
 
                 await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
+
+                let medicamentosAgrupados = this.medicamentosAgrupados
+                if(medicamentosAgrupados.length > 0){
+                  await transAnestStore.updateSumaMedicamentos(medicamentosAgrupados, preIdStore.pacienteID._id)
+                }         
               }else if(preIdStore.nuevoRegistroPaciente == true){    
                 this.menuTrans.balanceP = this.menuTrans.ingresos - this.menuTrans.egresos;
                 this.menuTrans.horaBalance = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -6910,7 +6913,12 @@ export default defineComponent({
                 await transAnestStore.updateNuevoBalanceHP(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
                 await transAnestStore.getNuevoBalanceHPList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
 
-                await transAnestStore.saveNuevoTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
+                await transAnestStore.saveNuevoTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)  
+                
+                let medicamentosAgrupados = this.medicamentosAgrupados
+                if(medicamentosAgrupados.length > 0){
+                  await transAnestStore.updateNuevoSumaMedicamentos(medicamentosAgrupados, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                }
               }
             }else{
               swal.fire({

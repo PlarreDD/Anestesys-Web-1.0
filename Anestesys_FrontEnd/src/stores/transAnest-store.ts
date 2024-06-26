@@ -1210,6 +1210,60 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
+        async updateSumaMedicamentos(medicamentos: any, pid:string){      
+            await apiAxios({
+            url: `/trans/medicSuma/suma/${String(pid)}`,
+            method: "PUT",
+            headers: {
+                Authorization: "Bearer " + userStore.token,
+            },
+            data: {
+                medicamentosSuma: medicamentos
+            },
+        })
+        .then((res: any) => {
+            swal.fire({
+                title: 'Datos agregados correctamente',
+                icon: 'success',
+                showConfirmButton: false,
+                toast: true,
+                position: 'top-end',
+                timer: 2000,
+                timerProgressBar: true
+            })
+        })
+        .catch((e: any) => {
+            window.log.error('Ocurrió un error:', e)
+        });
+        },
+
+        async updateNuevoSumaMedicamentos(medicamentos:any, pid:string, cxid:string){
+            await apiAxios({
+                url: `/trans/medicSuma/suma/add/${String(pid)}/${String(cxid)}`,
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + userStore.token,
+                },
+                data: {
+                    medicamentosSuma: medicamentos
+                },
+            })
+            .then((res: any) => {
+                swal.fire({
+                    title: 'Datos agregados correctamente',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+            })
+            .catch((e: any) => {
+                window.log.error('Ocurrió un error:', e)
+            });
+        },
+
         async updateMedicamentos(m_tipoMed: string, m_medicamento: string, m_dosisMed: string, m_unidadMed: string,
                             m_viaMed: string, m_horaInicioMed: string, m_horaFinalMed: string, m_observacionesMed: string, m_valorGrafica: number, pid:string){
             await apiAxios({

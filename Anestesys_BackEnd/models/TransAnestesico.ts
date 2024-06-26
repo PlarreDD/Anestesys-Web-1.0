@@ -86,6 +86,17 @@ const menuTransSchema = new Schema({
         valorGrafica: {type: String},
     }],
 
+    /* Suma medicamentos */
+    medicamentosSuma: [{
+        medicamento: {type: String},
+        bolo: {type: String},
+        unidadBolo: {type: String},
+        infusion: {type: String},
+        unidadInfusion: {type: String},
+        total: {type: String},
+        unidadTotal: {type: String}
+    }],
+
     /* Relevo */
     relevoCx: [{
         horaRelevo:{ type: String },
