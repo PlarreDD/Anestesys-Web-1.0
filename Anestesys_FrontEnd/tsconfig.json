@@ -4,6 +4,7 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "baseUrl": ".",
+    "types": ["node"],
     "paths": {
       "@/*": ["./src/*"]
     },

@@ -15,44 +15,26 @@
       </li>
 
       <li class="nav-item col-md-4">
-        <!-- <button @click="detenerReconocimiento"
+        <button @click="detenerReconocimiento"
           class="btn btn-nav-bar fw-bold"
           id=""
           data-bs-toggle="pill"
           data-bs-target="#aldrete"
           type="button"
           aria-selected="false"
-        > -->
-        <button
-          class="btn btn-nav-bar fw-bold"
-          id=""
-          data-bs-toggle="pill"
-          data-bs-target="#aldrete"
-          type="button"
-          aria-selected="false"
-        >
-          ALDRETE DE RECUPERACIÓN
+        > ALDRETE DE RECUPERACIÓN
         </button>
       </li>
 
       <li class="nav-item col-md-4">
-        <!-- <button @click="detenerReconocimiento"
+        <button @click="detenerReconocimiento"
           class="btn btn-nav-bar fw-bold"
           id=""
           data-bs-toggle="pill"
           data-bs-target="#alta"
           type="button"
           aria-selected="false"
-        > -->
-        <button
-          class="btn btn-nav-bar fw-bold"
-          id=""
-          data-bs-toggle="pill"
-          data-bs-target="#alta"
-          type="button"
-          aria-selected="false"
-        >
-          ALTA DE RECUPERACIÓN
+        > ALTA DE RECUPERACIÓN
         </button>
       </li>
     </ul>
@@ -69,19 +51,13 @@
             <div class="col-md-1 justificar-icono-nota">
                 <label class="form-label fw-bold alinear-icono-nota">
                     <template v-if="microfonoEscucha === false">
-                        <!-- <span id="microfono-post" :class="microfono == false ? 'microfono-off-rec' : 'microfono-on-rec'" @click="empezarReconocimiento">
-                            <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
-                        </span> -->
-                        <span id="microfono-post" :class="microfono == false ? 'microfono-off-rec' : 'microfono-on-rec'">
+                        <span id="microfono-post" :class="microfono == false ? 'microfono-off-rec' : 'microfono-on-rec'" @click="empezarReconocimiento">
                             <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
                         </span>
                     </template>
 
                     <template v-else>
-                        <!-- <span class="microfono-on-rec" @click="detenerReconocimiento">
-                            <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
-                        </span> -->
-                        <span class="microfono-on-rec">
+                        <span class="microfono-on-rec" @click="detenerReconocimiento">
                             <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
                         </span>
                     </template>                                
@@ -435,108 +411,86 @@
                 </td>
               </tr>
 
-              <!-- Saturación de O2 -->
+              <!-- Coloración -->
               <tr class="espacio">
-                <td class="col-2 color-texto">Saturación de O2:</td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    @keyup.capture="enviarDatosRecuperacion"
-                    v-model="infoRec.aldreteRec_SatO2In"
-                    :class="
-                      infoRec.aldreteRec_SatO2In != undefined &&
-                      infoRec.aldreteRec_SatO2In != ''
-                        ? 'form-control border border-success formSombra'
-                        : 'form-control'
-                    "
-                  />
+                <td class="col-2 color-texto">
+                  <label  class="form-label color-td">
+                    <span data-bs-toggle="modal" data-bs-target="#coloracion-modal">
+                      <font-awesome-icon icon="fa-solid fa-circle-info" />
+                    </span>
+                    Coloración:
+                  </label>
                 </td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    @keyup.capture="enviarDatosRecuperacion"
-                    v-model="infoRec.aldreteRec_SatO215"
-                    :class="
-                      infoRec.aldreteRec_SatO215 != undefined &&
-                      infoRec.aldreteRec_SatO215 != ''
-                        ? 'form-control border border-success formSombra'
-                        : 'form-control'
-                    "
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    @keyup.capture="enviarDatosRecuperacion"
-                    v-model="infoRec.aldreteRec_SatO230"
-                    :class="
-                      infoRec.aldreteRec_SatO230 != undefined &&
-                      infoRec.aldreteRec_SatO230 != ''
-                        ? 'form-control border border-success formSombra'
-                        : 'form-control'
-                    "
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    @keyup.capture="enviarDatosRecuperacion"
-                    v-model="infoRec.aldreteRec_SatO245"
-                    :class="
-                      infoRec.aldreteRec_SatO245 != undefined &&
-                      infoRec.aldreteRec_SatO245 != ''
-                        ? 'form-control border border-success formSombra'
-                        : 'form-control'
-                    "
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    @keyup.capture="enviarDatosRecuperacion"
-                    v-model="infoRec.aldreteRec_SatO260"
-                    :class="
-                      infoRec.aldreteRec_SatO260 != undefined &&
-                      infoRec.aldreteRec_SatO260 != ''
-                        ? 'form-control border border-success formSombra'
-                        : 'form-control'
-                    "
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    @keyup.capture="enviarDatosRecuperacion"
-                    v-model="infoRec.aldreteRec_SatO290"
-                    :class="
-                      infoRec.aldreteRec_SatO290 != undefined &&
-                      infoRec.aldreteRec_SatO290 != ''
-                        ? 'form-control border border-success formSombra'
-                        : 'form-control'
-                    "
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    @keyup.capture="enviarDatosRecuperacion"
-                    v-model="infoRec.aldreteRec_SatO2120"
-                    :class="
-                      infoRec.aldreteRec_SatO2120 != undefined &&
-                      infoRec.aldreteRec_SatO2120 != ''
-                        ? 'form-control border border-success formSombra'
-                        : 'form-control'
-                    "
-                  />
-                </td>
-              </tr>
+                <th>
+                  <select @change="enviarDatosRecuperacion" v-model="infoRec.aldreteRec_ColoracionIn" class="form-select"
+                    :class="infoRec.aldreteRec_ColoracionIn != undefined && infoRec.aldreteRec_ColoracionIn != ''? 'form-control border border-success formSombra': 'form-control'">
+                    <option selected></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="enviarDatosRecuperacion" v-model="infoRec.aldreteRec_Coloracion15" class="form-select"
+                      :class="infoRec.aldreteRec_Coloracion15 != undefined && infoRec.aldreteRec_Coloracion15 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="enviarDatosRecuperacion" v-model="infoRec.aldreteRec_Coloracion30" class="form-select"
+                    :class="infoRec.aldreteRec_Coloracion30 != undefined && infoRec.aldreteRec_Coloracion30 != '' ? 'form-control border border-success formSombra' : 'form-control' ">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="enviarDatosRecuperacion" v-model="infoRec.aldreteRec_Coloracion45" class="form-select"
+                    :class="infoRec.aldreteRec_Coloracion45 != undefined && infoRec.aldreteRec_Coloracion45 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="enviarDatosRecuperacion" v-model="infoRec.aldreteRec_Coloracion60" class="form-select"
+                      :class="infoRec.aldreteRec_Coloracion60 != undefined && infoRec.aldreteRec_Coloracion60 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="enviarDatosRecuperacion" v-model="infoRec.aldreteRec_Coloracion90" class="form-select"
+                    :class=" infoRec.aldreteRec_Coloracion90 != undefined && infoRec.aldreteRec_Coloracion90 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+
+                <th>
+                  <select @change="enviarDatosRecuperacion" v-model="infoRec.aldreteRec_Coloracion120" class="form-select"
+                    :class=" infoRec.aldreteRec_Coloracion120 != undefined && infoRec.aldreteRec_Coloracion120 != '' ? 'form-control border border-success formSombra' : 'form-control'">
+                    <option></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>
+              </tr>              
 
               <!-- Aldrete -->
               <!-- <tr class="espacio">
@@ -1055,85 +1009,79 @@
                 </th>
               </tr>
 
-              <!-- Coloración -->
+              <!-- Saturación de O2 -->
               <tr class="espacio">
-                <td class="col-2 color-texto">
+                <td class="col-2 color-texto">                  
                   <label  class="form-label color-td">
-                    <span data-bs-toggle="modal" data-bs-target="#coloracion-modal">
+                    <span data-bs-toggle="modal" data-bs-target="#saturacion-modal">
                       <font-awesome-icon icon="fa-solid fa-circle-info" />
                     </span>
-                    Coloración:
+                    Saturación de O2:
                   </label>
                 </td>
                 <th>
-                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_ColoracionIn" class="form-select"
-                    :class="infoRec.aldreteRec_ColoracionIn != undefined && infoRec.aldreteRec_ColoracionIn != ''? 'form-control border border-success formSombra': 'form-control'">
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_SatO2In" class="form-select"
+                    :class="infoRec.aldreteRec_SatO2In != undefined && infoRec.aldreteRec_SatO2In != ''? 'form-control border border-success formSombra': 'form-control'">
                     <option selected></option>
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>
                   </select>
                 </th>
-
                 <th>
-                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Coloracion15" class="form-select"
-                      :class="infoRec.aldreteRec_Coloracion15 != undefined && infoRec.aldreteRec_Coloracion15 != '' ? 'form-control border border-success formSombra' : 'form-control'">
-                    <option></option>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_SatO215" class="form-select"
+                    :class="infoRec.aldreteRec_SatO215 != undefined && infoRec.aldreteRec_SatO215 != ''? 'form-control border border-success formSombra': 'form-control'">
+                    <option selected></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>        
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_SatO230" class="form-select"
+                    :class="infoRec.aldreteRec_SatO230 != undefined && infoRec.aldreteRec_SatO230 != ''? 'form-control border border-success formSombra': 'form-control'">
+                    <option selected></option>
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>
                   </select>
                 </th>
-
                 <th>
-                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Coloracion30" class="form-select"
-                    :class="infoRec.aldreteRec_Coloracion30 != undefined && infoRec.aldreteRec_Coloracion30 != '' ? 'form-control border border-success formSombra' : 'form-control' ">
-                    <option></option>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_SatO245" class="form-select"
+                    :class="infoRec.aldreteRec_SatO245 != undefined && infoRec.aldreteRec_SatO245 != ''? 'form-control border border-success formSombra': 'form-control'">
+                    <option selected></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                </th>          
+                <th>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_SatO260" class="form-select"
+                    :class="infoRec.aldreteRec_SatO260 != undefined && infoRec.aldreteRec_SatO260 != ''? 'form-control border border-success formSombra': 'form-control'">
+                    <option selected></option>
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>
                   </select>
                 </th>
-
                 <th>
-                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Coloracion45" class="form-select"
-                    :class="infoRec.aldreteRec_Coloracion45 != undefined && infoRec.aldreteRec_Coloracion45 != '' ? 'form-control border border-success formSombra' : 'form-control'">
-                    <option></option>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_SatO290" class="form-select"
+                    :class="infoRec.aldreteRec_SatO290 != undefined && infoRec.aldreteRec_SatO290 != ''? 'form-control border border-success formSombra': 'form-control'">
+                    <option selected></option>
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>
                   </select>
                 </th>
-
                 <th>
-                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Coloracion60" class="form-select"
-                      :class="infoRec.aldreteRec_Coloracion60 != undefined && infoRec.aldreteRec_Coloracion60 != '' ? 'form-control border border-success formSombra' : 'form-control'">
-                    <option></option>
+                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_SatO2120" class="form-select"
+                    :class="infoRec.aldreteRec_SatO2120 != undefined && infoRec.aldreteRec_SatO2120 != ''? 'form-control border border-success formSombra': 'form-control'">
+                    <option selected></option>
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>
                   </select>
-                </th>
-
-                <th>
-                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Coloracion90" class="form-select"
-                    :class=" infoRec.aldreteRec_Coloracion90 != undefined && infoRec.aldreteRec_Coloracion90 != '' ? 'form-control border border-success formSombra' : 'form-control'">
-                    <option></option>
-                    <option>0</option>
-                    <option>1</option>
-                    <option>2</option>
-                  </select>
-                </th>
-
-                <th>
-                  <select @change="obtenerAldrete" v-model="infoRec.aldreteRec_Coloracion120" class="form-select"
-                    :class=" infoRec.aldreteRec_Coloracion120 != undefined && infoRec.aldreteRec_Coloracion120 != '' ? 'form-control border border-success formSombra' : 'form-control'">
-                    <option></option>
-                    <option>0</option>
-                    <option>1</option>
-                    <option>2</option>
-                  </select>
-                </th>
+                </th>                                             
               </tr>
 
               <!-- Bromage -->
@@ -1887,6 +1835,24 @@
       </div>
     </div>
 
+    <!-- Modal Saturación -->
+    <div
+      class="modal" id="saturacion-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="input-group mb-3">
+            <div class="modal-body">
+              <div class="col-md-12">
+                <div class="row g-3">
+                  <img src="../../../public/images/infografias/saturacion-info.png" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Model EVA -->
     <div class="modal" id="escala-EVA-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
@@ -1965,92 +1931,92 @@ export default defineComponent({
     this.infoRec.aldreteRec_Conciencia90=null
     this.infoRec.aldreteRec_Conciencia120=null
 
-    this.infoRec.aldreteRec_ColoracionIn=null
-    this.infoRec.aldreteRec_Coloracion15=null
-    this.infoRec.aldreteRec_Coloracion30=null
-    this.infoRec.aldreteRec_Coloracion45=null
-    this.infoRec.aldreteRec_Coloracion60=null
-    this.infoRec.aldreteRec_Coloracion90=null
-    this.infoRec.aldreteRec_Coloracion120=null
+    this.infoRec.aldreteRec_SatO2In=null
+    this.infoRec.aldreteRec_SatO215=null
+    this.infoRec.aldreteRec_SatO230=null
+    this.infoRec.aldreteRec_SatO245=null
+    this.infoRec.aldreteRec_SatO260=null
+    this.infoRec.aldreteRec_SatO290=null
+    this.infoRec.aldreteRec_SatO2120=null
   },
 
   methods: {
-    // async empezarReconocimiento() {
-    //   try {                
-    //     this.recognition = new (window as any).webkitSpeechRecognition(); // Crear instancia del reconocimiento de voz
-    //     this.recognition.lang = 'es-ES'; // Establecer idioma a español, puede cambiar
-    //     this.recognition.continuous = true; // Permitir reconocimiento continuo
-    //     this.recognition.start(); // Iniciar reconocimiento de voz
+    async empezarReconocimiento() {
+      try {                
+        this.recognition = new (window as any).webkitSpeechRecognition(); // Crear instancia del reconocimiento de voz
+        this.recognition.lang = 'es-ES'; // Establecer idioma a español, puede cambiar
+        this.recognition.continuous = true; // Permitir reconocimiento continuo
+        this.recognition.start(); // Iniciar reconocimiento de voz
         
-    //     this.microfono=true
-    //     this.microfonoEscucha=true
+        this.microfono=true
+        this.microfonoEscucha=true
   
-    //     const tiempoEspera = 200;
+        const tiempoEspera = 200;
   
-    //     if(this.infoRec.notaEval_Obs === undefined || this.infoRec.notaEval_Obs === ''){             
-    //         this.infoRec.notaEval_Obs = '';
-    //     }
+        if(this.infoRec.notaEval_Obs === undefined || this.infoRec.notaEval_Obs === ''){             
+            this.infoRec.notaEval_Obs = '';
+        }
         
-    //     // Manejar evento de resultado del reconocimiento
-    //     this.recognition.onresult = (event) => {
-    //         let escuchado = event.results[0][0].transcript; // Obtener texto reconocido
-    //         this.infoRec.notaEval_Obs += ' ' + escuchado;
-    //         console.log('Texto reconocido:', escuchado);
+        // Manejar evento de resultado del reconocimiento
+        this.recognition.onresult = (event) => {
+            let escuchado = event.results[0][0].transcript; // Obtener texto reconocido
+            this.infoRec.notaEval_Obs += ' ' + escuchado;
+            console.log('Texto reconocido:', escuchado);
   
-    //         // Reiniciar el temporizador si se detecta otra transcripción mientras el temporizador está en marcha
-    //         if (this.intervalId !== null) {
-    //             clearTimeout(this.intervalId);
-    //         }
+            // Reiniciar el temporizador si se detecta otra transcripción mientras el temporizador está en marcha
+            if (this.intervalId !== null) {
+                clearTimeout(this.intervalId);
+            }
   
-    //         this.intervalId = setTimeout(() => {
-    //             this.recognition.stop(); // Detener reconocimiento después del tiempo especificado sin transcripciones adicionales
-    //             this.microfono = false; // Cerrar micrófono después del tiempo especificado sin transcripciones adicionales
-    //         }, tiempoEspera);
-    //     };            
+            this.intervalId = setTimeout(() => {
+                this.recognition.stop(); // Detener reconocimiento después del tiempo especificado sin transcripciones adicionales
+                this.microfono = false; // Cerrar micrófono después del tiempo especificado sin transcripciones adicionales
+            }, tiempoEspera);
+        };            
   
-    //     // Manejar evento de error del reconocimiento
-    //     this.recognition.onerror = (event) => {
-    //         this.microfono=false
-    //         window.log.error('Error en reconocimiento de voz:', event.error);
-    //     };            
+        // Manejar evento de error del reconocimiento
+        this.recognition.onerror = (event) => {
+            this.microfono=false
+            window.log.error('Error en reconocimiento de voz:', event.error);
+        };            
   
-    //     // Manejar evento de fin del reconocimiento
-    //     this.recognition.onend = () => {
-    //         if (this.intervalId !== null) {
-    //             clearTimeout(this.intervalId);
-    //         }
-    //         this.microfono = false;
+        // Manejar evento de fin del reconocimiento
+        this.recognition.onend = () => {
+            if (this.intervalId !== null) {
+                clearTimeout(this.intervalId);
+            }
+            this.microfono = false;
   
-    //         // Iniciar reconocimiento de voz nuevamente después de un pequeño retraso
-    //         setTimeout(() => {
-    //             this.recognition.start();
-    //             this.microfono = true;
-    //         }, 50); // Ajustar el valor del retraso según sea necesario
-    //     };
-    //   } catch (error) {
-    //       window.log.error('Ocurrió un error:', error)
-    //   }
-    // },
+            // Iniciar reconocimiento de voz nuevamente después de un pequeño retraso
+            setTimeout(() => {
+                this.recognition.start();
+                this.microfono = true;
+            }, 50); // Ajustar el valor del retraso según sea necesario
+        };
+      } catch (error) {
+          window.log.error('Ocurrió un error:', error)
+      }
+    },
 
-    // async detenerReconocimiento() {
-    //   try {
-    //     if(this.recognition !== null){
-    //       this.recognition.onend = () => {
-    //           clearTimeout(this.intervalId);
-    //       };
+    async detenerReconocimiento() {
+      try {
+        if(this.recognition !== null){
+          this.recognition.onend = () => {
+              clearTimeout(this.intervalId);
+          };
     
-    //       if (this.recognition) {
-    //           this.recognition.stop();
-    //           clearTimeout(this.intervalId);
-    //           this.microfono = false;
-    //           this.microfonoEscucha=false
-    //           console.log('Reconocimiento de voz detenido Recuperación.');
-    //       }
-    //     }                
-    //   } catch (error) {
-    //       window.log.error('Ocurrió un error:', error)
-    //   }
-    // },
+          if (this.recognition) {
+              this.recognition.stop();
+              clearTimeout(this.intervalId);
+              this.microfono = false;
+              this.microfonoEscucha=false
+              console.log('Reconocimiento de voz detenido Recuperación.');
+          }
+        }                
+      } catch (error) {
+          window.log.error('Ocurrió un error:', error)
+      }
+    },
 
     async vaciarInputsRecuperacion(){
       try {
@@ -2226,19 +2192,19 @@ export default defineComponent({
     async obtenerAldrete(){
       try {
         this.infoRec.altaRec_0min = Number(this.infoRec.aldreteRec_MuscularIn)+Number(this.infoRec.aldreteRec_RespiracionIn)+Number(this.infoRec.aldreteRec_CirculacionIn)+
-                                    Number(this.infoRec.aldreteRec_ConcienciaIn)+Number(this.infoRec.aldreteRec_ColoracionIn);
+                                    Number(this.infoRec.aldreteRec_ConcienciaIn)+Number(this.infoRec.aldreteRec_SatO2In);
         this.infoRec.altaRec_15min = Number(this.infoRec.aldreteRec_Muscular15)+Number(this.infoRec.aldreteRec_Respiracion15)+Number(this.infoRec.aldreteRec_Circulacion15)+
-                                    Number(this.infoRec.aldreteRec_Conciencia15)+Number(this.infoRec.aldreteRec_Coloracion15);
+                                    Number(this.infoRec.aldreteRec_Conciencia15)+Number(this.infoRec.aldreteRec_SatO215);
         this.infoRec.altaRec_30min = Number(this.infoRec.aldreteRec_Muscular30)+Number(this.infoRec.aldreteRec_Respiracion30)+Number(this.infoRec.aldreteRec_Circulacion30)+
-                                    Number(this.infoRec.aldreteRec_Conciencia30)+Number(this.infoRec.aldreteRec_Coloracion30);
+                                    Number(this.infoRec.aldreteRec_Conciencia30)+Number(this.infoRec.aldreteRec_SatO230);
         this.infoRec.altaRec_45min = Number(this.infoRec.aldreteRec_Muscular45)+Number(this.infoRec.aldreteRec_Respiracion45)+Number(this.infoRec.aldreteRec_Circulacion45)+
-                                    Number(this.infoRec.aldreteRec_Conciencia45)+Number(this.infoRec.aldreteRec_Coloracion45);
+                                    Number(this.infoRec.aldreteRec_Conciencia45)+Number(this.infoRec.aldreteRec_SatO245);
         this.infoRec.altaRec_60min = Number(this.infoRec.aldreteRec_Muscular60)+Number(this.infoRec.aldreteRec_Respiracion60)+Number(this.infoRec.aldreteRec_Circulacion60)+
-                                    Number(this.infoRec.aldreteRec_Conciencia60)+Number(this.infoRec.aldreteRec_Coloracion60);
+                                    Number(this.infoRec.aldreteRec_Conciencia60)+Number(this.infoRec.aldreteRec_SatO260);
         this.infoRec.altaRec_90min = Number(this.infoRec.aldreteRec_Muscular90)+Number(this.infoRec.aldreteRec_Respiracion90)+Number(this.infoRec.aldreteRec_Circulacion90)+
-                                    Number(this.infoRec.aldreteRec_Conciencia90)+Number(this.infoRec.aldreteRec_Coloracion90);
+                                    Number(this.infoRec.aldreteRec_Conciencia90)+Number(this.infoRec.aldreteRec_SatO290);
         this.infoRec.altaRec_120min = Number(this.infoRec.aldreteRec_Muscular120)+Number(this.infoRec.aldreteRec_Respiracion120)+Number(this.infoRec.aldreteRec_Circulacion120)+
-                                    Number(this.infoRec.aldreteRec_Conciencia120)+Number(this.infoRec.aldreteRec_Coloracion120);
+                                    Number(this.infoRec.aldreteRec_Conciencia120)+Number(this.infoRec.aldreteRec_SatO2120);
   
         const arrayFinalAldrete= [this.infoRec.altaRec_0min, this.infoRec.altaRec_15min, this.infoRec.altaRec_30min, this.infoRec.altaRec_45min,
                                 this.infoRec.altaRec_60min, this.infoRec.altaRec_90min, this.infoRec.altaRec_120min]

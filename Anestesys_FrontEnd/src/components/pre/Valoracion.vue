@@ -968,7 +968,7 @@
 
                         <!-- Leutocitos -->
                         <div class="col-md-3">
-                            <label  class="form-label fw-bold">Leutocitos</label>
+                            <label  class="form-label fw-bold">Leucocitos</label>
                             <input type="text" @keyup.capture="enviarDatosValoracion"
                                    class="form-control"
                                    id=""
@@ -1231,7 +1231,7 @@
 
         <!-- Modal Glasgow -->
         <div class="modal" id="glasgow-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-custom">
                 <div class="modal-content">
                     <div class="input-group mb-3">
                         <div class="modal-body">
@@ -1282,7 +1282,7 @@
 
         <!-- Modal Trombosis -->
         <div class="modal" id="trombosis-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
                     <div class="input-group mb-3">
                         <div class="modal-body">
@@ -1902,5 +1902,7 @@ h5{
   border-radius: var(--bs-modal-border-radius);
   outline: 0;
 }
-
+.modal-custom {
+    --bs-modal-width: 700px;
+}
 </style>

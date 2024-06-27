@@ -14,7 +14,9 @@ import { saveMenuTrans,
          UpdateBalanceHP,
          UpdateNuevoBalanceHP,
          getListaBalanceHP,
-         getNuevoListaBalanceHP} from "../controllers/transanest.controller";
+         getNuevoListaBalanceHP,
+         updateSumaMedicamentos,
+         updateNuevoSumaMedicamentos} from "../controllers/transanest.controller";
 
 const router = Router();
 
@@ -50,6 +52,8 @@ router.put('/medic/:pid', requireToken, updateMedicamentos);
 router.put('/medic/add/:pid/:cxid', requireToken, updateNuevoMedicamentos);
 router.put('/medic/uno/:id', requireToken, updateMedicamento);
 router.delete('/medic/:id', requireToken, deleteMedicamento);
+router.put('/medicSuma/suma/:pid', requireToken, updateSumaMedicamentos);
+router.put('/medicSuma/suma/add/:pid/:cxid', requireToken, updateNuevoSumaMedicamentos);
 /*---------- Datos de relevo -------------------- */
 router.get('/relevo/:pid' , requireToken, getRelevos);
 router.get('/relevo/add/:pid/:cxid' , requireToken, getNuevoRelevos);

@@ -14,57 +14,61 @@
             </li>
 
             <!-- TIPO TÉCNICA -->
-            <li class="nav-item col-md-2" >
-
+            <li class="nav-item col-md-2">
                 <!-- GENERAL -->
-                <template v-if="infoPlan.pos_TecnicaAnestesica === 'General'">
+                <template v-if="infoPlan.pos_TecnicaAnestesica && infoPlan.pos_TecnicaAnestesica.includes('General')">
                     <button class="btn btn-nav-bar fw-bold"
-                        :class="infoPlan.pos_TecnicaAnestesica != 'General' ? 'invisible' : ''"
-                        id=""                           
-                        data-bs-toggle="pill"
-                        data-bs-target="#general"
-                        type="button"
-                        :disabled="infoPlan.pos_TecnicaAnestesica != 'General' ? true : false"
-                        aria-selected="false">GENERAL</button>
-                </template>
-
-                <!-- REGIONAL -->
-                <template v-if="infoPlan.pos_TecnicaAnestesica === 'Regional'">
-                    <button class="btn btn-nav-bar fw-bold"
-                        :class="infoPlan.pos_TecnicaAnestesica != 'Regional' ? 'invisible' : ''"
-                        id=""
-                        data-bs-toggle="pill"
-                        data-bs-target="#regional"
-                        type="button"
-                        :disabled="infoPlan.pos_TecnicaAnestesica != 'Regional' ? true : false"
-                        aria-selected="false">REGIONAL</button>
-                </template>  
-
-                <!-- SEDACIÓN -->
-                <template v-if="infoPlan.pos_TecnicaAnestesica === 'Sedación'">
-                    <button class="btn btn-nav-bar fw-bold"
-                        :class="infoPlan.pos_TecnicaAnestesica != 'Sedación' ? 'invisible' : ''"
-                        id=""
-                        data-bs-toggle="pill"
-                        data-bs-target="#sedacion"
-                        type="button"
-                        :disabled="infoPlan.pos_TecnicaAnestesica != 'Sedación' ? true : false"
-                        aria-selected="false">SEDACIÓN</button>
-                </template>  
-
-                <!-- LOCAL -->
-                <template v-if="infoPlan.pos_TecnicaAnestesica === 'Local'">
-                    <button class="btn btn-nav-bar fw-bold"
-                        :class="infoPlan.pos_TecnicaAnestesica != 'Local' ? 'invisible' : ''"
-                        id=""
-                        data-bs-toggle="pill"
-                        data-bs-target="#local"
-                        type="button"
-                        :disabled="infoPlan.pos_TecnicaAnestesica != 'Local' ? true : false"
-                        aria-selected="false">LOCAL</button>
-                </template>  
-                
+                            :class="infoPlan.pos_TecnicaAnestesica && !infoPlan.pos_TecnicaAnestesica.includes('General') ? 'invisible' : ''"
+                            id=""
+                            data-bs-toggle="pill"
+                            data-bs-target="#general"
+                            type="button"
+                            :disabled="infoPlan.pos_TecnicaAnestesica && !infoPlan.pos_TecnicaAnestesica.includes('General')"
+                            aria-selected="false">GENERAL</button>
+                </template>                                   
             </li>
+
+            <li class="nav-item col-md-2">
+                <!-- REGIONAL -->
+                <template v-if="infoPlan.pos_TecnicaAnestesica && infoPlan.pos_TecnicaAnestesica.includes('Regional')">
+                    <button class="btn btn-nav-bar fw-bold"
+                            :class="infoPlan.pos_TecnicaAnestesica && !infoPlan.pos_TecnicaAnestesica.includes('Regional') ? 'invisible' : ''"
+                            id=""
+                            data-bs-toggle="pill"
+                            data-bs-target="#regional"
+                            type="button"
+                            :disabled="infoPlan.pos_TecnicaAnestesica && !infoPlan.pos_TecnicaAnestesica.includes('Regional')"
+                            aria-selected="false">REGIONAL</button>
+                </template>             
+            </li>
+
+            <li class="nav-item col-md-2" >
+                <!-- SEDACIÓN -->
+                <template v-if="infoPlan.pos_TecnicaAnestesica && infoPlan.pos_TecnicaAnestesica.includes('Sedación')">
+                    <button class="btn btn-nav-bar fw-bold"
+                            :class="infoPlan.pos_TecnicaAnestesica && !infoPlan.pos_TecnicaAnestesica.includes('Sedación') ? 'invisible' : ''"
+                            id=""
+                            data-bs-toggle="pill"
+                            data-bs-target="#sedacion"
+                            type="button"
+                            :disabled="infoPlan.pos_TecnicaAnestesica && !infoPlan.pos_TecnicaAnestesica.includes('Sedación')"
+                            aria-selected="false">SEDACIÓN</button>
+                </template>                
+            </li>
+
+            <li class="nav-item col-md-2">
+                <!-- LOCAL -->
+                <template v-if="infoPlan.pos_TecnicaAnestesica && infoPlan.pos_TecnicaAnestesica.includes('Local')">
+                    <button class="btn btn-nav-bar fw-bold"
+                            :class="infoPlan.pos_TecnicaAnestesica && !infoPlan.pos_TecnicaAnestesica.includes('Local') ? 'invisible' : ''"
+                            id=""
+                            data-bs-toggle="pill"
+                            data-bs-target="#local"
+                            type="button"
+                            :disabled="infoPlan.pos_TecnicaAnestesica && !infoPlan.pos_TecnicaAnestesica.includes('Local')"
+                            aria-selected="false">LOCAL</button>
+                </template>
+            </li>             
               
         </ul>
 
@@ -251,17 +255,15 @@
                             <span data-title="Llene el campo para navegar por la aplicación" @click="seleccionarTecnica">
                                 &nbsp<font-awesome-icon icon="fa-solid fa-circle-info" class="btn-info"/>
                             </span>
-                            <select  @select="enviarDatosPlan"
-                                    class="form-select"
-                                    v-model="infoPlan.pos_TecnicaAnestesica"
-                                    :class="infoPlan.pos_TecnicaAnestesica != '' && infoPlan.pos_TecnicaAnestesica != undefined ?
-                                           'form-control border border-success formSombra' : 'form-control'">
-                                <option selected></option>
-                                <option>General</option>
-                                <option>Regional</option>
-                                <option>Sedación</option>
-                                <option>Local</option>                                          
-                            </select>
+                            <Multiselect mode="tags"
+                                        @select="enviarDatosPlan"
+                                        v-model="infoPlan.pos_TecnicaAnestesica"
+                                        :class="infoPlan.pos_TecnicaAnestesica != '' && infoPlan.pos_TecnicaAnestesica != undefined ?
+                                           'form-control border border-success formSombra' : 'form-control'"
+                                        placeholder="Seleccione la/las técnicas anestésicas"
+                                        :options="opcionTecnicas"
+                                        :searchable="true"
+                                        :createTag="true" :max="2" />                                      
                         </div>                         
 
                         <!-- Premedicación -->
@@ -1090,7 +1092,8 @@ export default defineComponent({
             sitioToracico:false,
             sitioLumbar:false,
 
-            opcionMonitoreo: ['No invasivo','Invasivo', 'Gasto cardíaco invasivo', 'Gasto cardíaco no invasivo', 'Neurológico', 'Otro']
+            opcionMonitoreo: ['No invasivo','Invasivo', 'Gasto cardíaco invasivo', 'Gasto cardíaco no invasivo', 'Neurológico', 'Otro'],
+            opcionTecnicas: ['General','Regional', 'Sedación', 'Local']
         }
     },
 

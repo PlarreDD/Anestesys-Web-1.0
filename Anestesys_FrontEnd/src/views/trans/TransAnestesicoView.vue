@@ -48,7 +48,7 @@
                       <div class="col-md-12">
                         <div class="row g-3">
                             
-                          <h5 class="text-white fw-bold col-md-11">DATOS DEL MEDICAMENTO</h5>
+                          <h5 class="text-white fw-bold col-md-5">Datos del Medicamento</h5>
                           <div class="col-md-1">
                             <button type="button" id="medica"
                                     class="btn fw-bold"
@@ -57,6 +57,12 @@
                               <i class="text-white invisible">
                                 <font-awesome-icon icon="fa-solid fa-xmark" size="2xl"/>
                               </i>
+                            </button>
+                          </div>
+                          <div class="col-md-6">
+                            <button type="button" class="btn btn-guardar-balance-parcial fw-bold float-end" 
+                              data-bs-toggle="modal" data-bs-target="#modal-sumatoria-medicamentos">
+                              Sumatoria de medicamentos
                             </button>
                           </div>
                           
@@ -207,7 +213,7 @@
                     <div class="modal-body">
                       <div class="col-md-12">
                         <div class="row g-3">
-                            <h5 class="text-white fw-bold col-md-11">DATOS DEL RELEVO</h5>
+                            <h5 class="text-white fw-bold col-md-11">Datos del Relevo</h5>
                             <div class="col-md-1">
                               <button type="button" id="relev"
                                       class="btn fw-bold"
@@ -303,7 +309,7 @@
                     <div class="modal-body">
                       <div class="col-md-12">
                         <div class="row g-3">
-                            <h5 class="text-white fw-bold col-md-11">DATOS DEL EVENTO CRÍTICO</h5>
+                            <h5 class="text-white fw-bold col-md-11">Datos del Evento Crítico</h5>
                             <div class="col-md-1">
                               <button type="button" id="event"
                                       class="btn fw-bold"
@@ -445,7 +451,7 @@
                 <div class="col-md-12 chart-container">                                                      
                   <div class="col-md-12">                      
                       <div class="row">                        
-                        <h5 class="text-black fw-bold col-md-11">GRID ANESTÉSICO</h5>
+                        <h5 class="text-black fw-bold col-md-11">Grid Anestésico</h5>
                         <div class="col-md-1">
                           <button type="button" id="grid-anes"
                                   class="btn fw-bold"
@@ -476,7 +482,7 @@
               <div class="modal-body">
                 <div class="col-md-12">
                   <div class="row g-3">
-                        <h5 class="col-md-12 fw-bold text-white">TÉCNICA ANÉSTESICA</h5>
+                        <h5 class="col-md-12 fw-bold text-white">Técnica Anestésica</h5>
                         <!-- Técnica de anestesia final -->
                         <div class="col-md-12">
                           <label  class="form-label fw-bold text-white">Técnica de anestesia final</label>
@@ -488,7 +494,7 @@
                                         placeholder="Seleccione las técnicas de anestesia"
                                         :options="opcionTecnicas"
                                         :searchable="true"
-                                        :createTag="true"/>
+                                        :createTag="true" :limit="2"/>
                         </div>
 
                         <div class="col-md-10">
@@ -527,14 +533,13 @@
             <div class="input-group mb-3">
               <div class="modal-body">
                 <div class="col-md-12">
-                  <div class="row g-3">
-                    <div class="estiloDropDownBalance row g-2 deslizar-balance">
-                      <h5 class="col-md-8 fw-bold text-white">BALANCE TOTAL: {{menuTrans.balanceTotal}} ml</h5>
-                      <div class="col-md-4">
-                        <button type="button" class="btn btn-guardar-balance fw-bold float-end" data-bs-toggle="modal" data-bs-target="#modal-balance-parcial">
-                          Balance Hídrico Parcial
-                        </button>
-                      </div>
+                  <div class="row g-3">                    
+                    <div class="col-md-3">
+                      <button type="button" class="btn btn-guardar-balance-parcial fw-bold float" data-bs-toggle="modal" data-bs-target="#modal-balance-parcial">
+                        Balance Parcial
+                      </button>
+                    </div>
+                    <div class="estiloDropDownBalance row g-2 deslizar-balance-parcial-principal">
 
                       <h5 class="col-md-12 fw-bold text-white">Ingresos</h5>
 
@@ -731,6 +736,7 @@
                         </template>   
                       </div>
                     </div>
+                    <h5 class="col-md-8 fw-bold text-white">Balance Total: {{menuTrans.balanceTotal}} ml</h5>
                   </div>
                 </div>
               </div>
@@ -787,6 +793,54 @@
         </div>
       </div>
 
+      <!--Abrir el modal Sumatoria de Medicamentos-->
+      <div class="modal" id="modal-sumatoria-medicamentos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content color-dropdown">
+            <div class="input-group mb-3">
+              <div class="modal-body">
+                <div class="col-md-12">
+                  <div class="row g-3">
+                    <h5 class="col-md-11 fw-bold text-white">SUMATORIA DE MEDICAMENTOS</h5>
+                    <div class="col-md-1 div-img">
+                      <button id="volver-balance" type="button" class="btn fw-bold" aria-label="Close" data-bs-toggle="modal" data-bs-target="#modal-medicamento">
+                        <i class="text-white">
+                          <font-awesome-icon icon="fa-solid fa-arrow-left" size="2xl"/>
+                        </i>
+                      </button>
+                    </div>
+                    
+                    <div class="col-md-12">
+                      <div class="deslizar-balance-parcial">
+                        <table class="table table-responsive">
+                          <thead>
+                            <tr>
+                              <th class="text-white">Medicamento</th>
+                              <th class="text-white">Bolo</th>
+                              <th class="text-white">Infusión</th>
+                              <th class="text-white">Total</th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <tr v-for="(item, index) in medicamentosAgrupados" :key="index">
+                              <td class="text-white">{{ item.medicamento }}</td>
+                              <td class="text-white">{{ item.bolo ? `${item.bolo} ${item.unidadBolo}` : '' }}</td>
+                              <td class="text-white">{{ item.infusion ? `${item.infusion} ${item.unidadInfusion}` : '' }}</td>
+                              <td class="text-white">{{ item.total ? `${item.total} ${item.unidadTotal}` : '' }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>                        
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!--Abrir el modal Datos del Ventilador-->
       <div class="modal" id="modal-ventilador" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -795,7 +849,7 @@
               <div class="modal-body">
                 <div class="col-md-12">
                   <div class="row g-3">
-                    <h5 class="text-white fw-bold">VENTILADOR</h5>
+                    <h5 class="text-white fw-bold">Ventilador</h5>
                     <!-- Modos de Ventilación -->
                     <div class="col-md-9">
                       <label  class="form-label fw-bold text-white">Modos de ventilación</label>
@@ -1053,19 +1107,13 @@
         <div class="col-md-1">
           <label class="form-label fw-bold alinear-icono-nota">
             <template v-if="transAnestStore.microfonoEscucha === false">
-              <!-- <span id="microfono" :class="transAnestStore.microfono == false ? 'microfono-off' : 'microfono-on'" @click="empezarReconocimiento">
+              <span id="microfono" :class="transAnestStore.microfono == false ? 'microfono-off' : 'microfono-on'" @click="empezarReconocimiento">
                 <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
-              </span> -->
-              <span id="microfono" :class="transAnestStore.microfono == false ? 'microfono-off' : 'microfono-on'">
-                <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
-              </span>
+              </span>              
             </template>
 
             <template v-else>
-              <!-- <span class="microfono-on" @click="detenerReconocimiento">
-                <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
-              </span> -->
-              <span class="microfono-on">
+              <span class="microfono-on" @click="detenerReconocimiento">
                 <font-awesome-icon class="" icon="fa-solid fa-microphone" size="2xl"/>
               </span>
             </template>            
@@ -1355,7 +1403,6 @@
 
         <div class="" :class="vistaPreviaOff == false ? 'col-md-2 menu-pre-post' : 'col-md-2 menu-pre-post-off'">
           <RouterLink to="pre">
-            <!-- <img src="../../../public/images/pre.svg" class="ajusteImg" @click="detenerReconocimiento" /> -->
             <img src="../../../public/images/pre.svg" class="ajusteImg" @click="validarModalTendencias"/>
           </RouterLink>
         </div>
@@ -1366,7 +1413,6 @@
 
         <div class="" :class="vistaPreviaOff == false ? 'col-md-2 menu-pre-post' : 'col-md-2 menu-pre-post-off'">
           <RouterLink to="post">
-            <!-- <img src="../../../public/images/post.svg" class="ajusteImg" @click="detenerReconocimiento" /> -->
             <img src="../../../public/images/post.svg" class="ajusteImg" @click="validarModalTendencias"/>
           </RouterLink>
         </div>
@@ -1466,7 +1512,7 @@
               <div class="col-md-12">
                 <div class="row g-3">
                   <div class="col-md-11">
-                    <h5 class="text-white fw-bold">TENDENCIAS</h5>
+                    <h5 class="text-white fw-bold">Tendencias</h5>
                     <h6 class="text-white fw-bold">Configuración de Tendencias</h6>
                   </div>
 
@@ -1555,10 +1601,21 @@ let FR: any;
 
 let taSeparada: Object;
 
+interface GrupoMedicamento {
+  medicamento: string;
+  bolo?: number;
+  unidadBolo?: string;
+  infusion?: number;
+  unidadInfusion?: string;
+  total?: number;
+  unidadTotal?: string;
+}
+
 export default defineComponent({
   name: 'App',
 
   created() {
+    // Visibilidad de los datasets
     this.datasetVisibility = new Array(this.chartData.datasets.length).fill(true);
   },
 
@@ -1595,7 +1652,7 @@ export default defineComponent({
       medStore,
       
       // Arreglo opciones técnicas
-      opcionTecnicas: ['Local','Sedación', 'General balanceada', 'TIVA (Anestesia total intravenosa)', 'Multimodal',
+      opcionTecnicas: ['Local','Sedación', 'General balanceada', 'Combinada (General + Regional)', 'TIVA (Anestesia total intravenosa)', 'Multimodal',
                        'Bloqueo mixto', 'Bloqueo peridural lumbar', 'Bloqueo peridural caudal', 'Bloqueo espinal',
                        'Bloqueo de plexo', 'Bloqueo troncular', 'Bloqueo peridural torácico', 'Bloqueo peridural cervical',
                        'Libre de opioides'],
@@ -1965,6 +2022,10 @@ export default defineComponent({
   },
 
   methods: {
+    // mostrarFiltrados(){
+    //   console.log('Med. Filtrados: '+ JSON.stringify(this.medicamentosAgrupados))
+    // },
+
     toggleDataset(index) {   
       if(this.chartData.datasets[index].hidden === true) {
         this.chartData.datasets[index].hidden = false;
@@ -1985,296 +2046,296 @@ export default defineComponent({
         }     
     },     
     
-    // async empezarReconocimiento() {
-    //   try {
+    async empezarReconocimiento() {
+      try {
                 
-    //     transAnestStore.recognition = new (window as any).webkitSpeechRecognition(); // Crear instancia del reconocimiento de voz
-    //     transAnestStore.recognition.lang = 'es-ES'; // Establecer idioma a español (puedes cambiarlo según tus necesidades)
-    //     transAnestStore.recognition.continuous = true; // Permitir reconocimiento continuo
-    //     transAnestStore.recognition.start(); // Iniciar reconocimiento de voz
+        transAnestStore.recognition = new (window as any).webkitSpeechRecognition(); // Crear instancia del reconocimiento de voz
+        transAnestStore.recognition.lang = 'es-ES'; // Establecer idioma a español (puedes cambiarlo según tus necesidades)
+        transAnestStore.recognition.continuous = true; // Permitir reconocimiento continuo
+        transAnestStore.recognition.start(); // Iniciar reconocimiento de voz
   
-    //     transAnestStore.microfono=true
-    //     transAnestStore.microfonoEscucha=true
+        transAnestStore.microfono=true
+        transAnestStore.microfonoEscucha=true
   
-    //     const tiempoEspera = 1500;
+        const tiempoEspera = 1500;
   
-    //     // Manejar evento de resultado del reconocimiento
-    //     transAnestStore.recognition.onresult = (event) => {
-    //       const transcript = event.results[0][0].transcript.toLowerCase(); // Obtener texto reconocido
-    //       console.log('Texto reconocido:', transcript);
+        // Manejar evento de resultado del reconocimiento
+        transAnestStore.recognition.onresult = (event) => {
+          const transcript = event.results[0][0].transcript.toLowerCase(); // Obtener texto reconocido
+          console.log('Texto reconocido:', transcript);
   
-    //       // Verificar si la palabra específica ha sido detectada
+          // Verificar si la palabra específica ha sido detectada
   
-    //       // QX IN
-    //       if (transcript === 'quirófano.') {                
-    //         // Realizar la acción deseada cuando se detecta la palabra clave                
-    //         let closeButton = document.getElementById('inicio-cx');
+          // QX IN
+          if (transcript === 'quirófano.') {                
+            // Realizar la acción deseada cuando se detecta la palabra clave                
+            let closeButton = document.getElementById('inicio-cx');
               
-    //         if(transAnestStore.ingresoQuirofano === false){
-    //           // Crea un nuevo evento de clic
-    //           let event = new MouseEvent('click', {
-    //               bubbles: true,
-    //               cancelable: true,
-    //               view: window
-    //           });                    
-    //           // Despacha el evento de clic en el botón
-    //           closeButton.dispatchEvent(event);
-    //         }else{
-    //           swal.fire({
-    //             title: 'La cirugía ya ha iniciado',
-    //             icon: 'error',
-    //             showConfirmButton: false,
-    //             toast: true,
-    //             position: 'top',
-    //             timer: 3000,
-    //             timerProgressBar: true
-    //           })
-    //         }
-    //       }
+            if(transAnestStore.ingresoQuirofano === false){
+              // Crea un nuevo evento de clic
+              let event = new MouseEvent('dblclick', {
+                  bubbles: true,
+                  cancelable: true,
+                  view: window
+              });                    
+              // Despacha el evento de clic en el botón
+              closeButton.dispatchEvent(event);
+            }else{
+              swal.fire({
+                title: 'La cirugía ya ha iniciado',
+                icon: 'error',
+                showConfirmButton: false,
+                toast: true,
+                position: 'top',
+                timer: 3000,
+                timerProgressBar: true
+              })
+            }
+          }
   
-    //       // ANES IN
-    //       else if (transcript === 'anestesia.') {                             
-    //         let closeButton = document.getElementById('anes-in');
+          // ANES IN
+          else if (transcript === 'anestesia.') {                             
+            let closeButton = document.getElementById('anes-in');
   
-    //         if(transAnestStore.ingresoQuirofano === true){
-    //           if(transAnestStore.salidaQuirofano === false){
-    //             // Crea un nuevo evento de clic
-    //             let event = new MouseEvent('click', {
-    //                 bubbles: true,
-    //                 cancelable: true,
-    //                 view: window
-    //             });                    
-    //             // Despacha el evento de clic en el botón
-    //             closeButton.dispatchEvent(event);
-    //           }else{
-    //             swal.fire({
-    //               title: 'La cirugía ya ha finalizado',
-    //               icon: 'error',
-    //               showConfirmButton: false,
-    //               toast: true,
-    //               position: 'top',
-    //               timer: 3000,
-    //               timerProgressBar: true
-    //             })
-    //           }
-    //         }else{
-    //           swal.fire({
-    //             title: 'Registre la hora de ingreso al quirófano',
-    //             icon: 'error',
-    //             showConfirmButton: false,
-    //             toast: true,
-    //             position: 'top',
-    //             timer: 3000,
-    //             timerProgressBar: true
-    //           })
-    //         }
-    //       }
+            if(transAnestStore.ingresoQuirofano === true){
+              if(transAnestStore.salidaQuirofano === false){
+                // Crea un nuevo evento de clic
+                let event = new MouseEvent('dblclick', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                });                    
+                // Despacha el evento de clic en el botón
+                closeButton.dispatchEvent(event);
+              }else{
+                swal.fire({
+                  title: 'La cirugía ya ha finalizado',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  toast: true,
+                  position: 'top',
+                  timer: 3000,
+                  timerProgressBar: true
+                })
+              }
+            }else{
+              swal.fire({
+                title: 'Registre la hora de ingreso al quirófano',
+                icon: 'error',
+                showConfirmButton: false,
+                toast: true,
+                position: 'top',
+                timer: 3000,
+                timerProgressBar: true
+              })
+            }
+          }
   
-    //       // CX IN
-    //       else if (transcript === 'cirugía.') {                             
-    //         let closeButton = document.getElementById('cx-in');
+          // CX IN
+          else if (transcript === 'cirugía.') {                             
+            let closeButton = document.getElementById('cx-in');
   
-    //         if(transAnestStore.ingresoQuirofano === true){
-    //           if(transAnestStore.salidaQuirofano === false){
-    //             // Crea un nuevo evento de clic
-    //             let event = new MouseEvent('click', {
-    //                 bubbles: true,
-    //                 cancelable: true,
-    //                 view: window
-    //             });                    
-    //             // Despacha el evento de clic en el botón
-    //             closeButton.dispatchEvent(event);
-    //           }else{
-    //             swal.fire({
-    //               title: 'La cirugía ya ha finalizado',
-    //               icon: 'error',
-    //               showConfirmButton: false,
-    //               toast: true,
-    //               position: 'top',
-    //               timer: 3000,
-    //               timerProgressBar: true
-    //             })
-    //           }
-    //         }else{
-    //           swal.fire({
-    //             title: 'Registre la hora de ingreso al quirófano',
-    //             icon: 'error',
-    //             showConfirmButton: false,
-    //             toast: true,
-    //             position: 'top',
-    //             timer: 3000,
-    //             timerProgressBar: true
-    //           })
-    //         }
-    //       }
+            if(transAnestStore.ingresoQuirofano === true){
+              if(transAnestStore.salidaQuirofano === false){
+                // Crea un nuevo evento de clic
+                let event = new MouseEvent('dblclick', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                });                    
+                // Despacha el evento de clic en el botón
+                closeButton.dispatchEvent(event);
+              }else{
+                swal.fire({
+                  title: 'La cirugía ya ha finalizado',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  toast: true,
+                  position: 'top',
+                  timer: 3000,
+                  timerProgressBar: true
+                })
+              }
+            }else{
+              swal.fire({
+                title: 'Registre la hora de ingreso al quirófano',
+                icon: 'error',
+                showConfirmButton: false,
+                toast: true,
+                position: 'top',
+                timer: 3000,
+                timerProgressBar: true
+              })
+            }
+          }
   
-    //       // CX OUT
-    //       else if (transcript === 'termina cirugía.') {                             
-    //         let closeButton = document.getElementById('cx-out');
+          // CX OUT
+          else if (transcript === 'termina cirugía.') {                             
+            let closeButton = document.getElementById('cx-out');
   
-    //         if(transAnestStore.ingresoQuirofano === true){
-    //           if(transAnestStore.salidaQuirofano === false){
-    //             // Crea un nuevo evento de clic
-    //             let event = new MouseEvent('click', {
-    //                 bubbles: true,
-    //                 cancelable: true,
-    //                 view: window
-    //             });                    
-    //             // Despacha el evento de clic en el botón
-    //             closeButton.dispatchEvent(event);
-    //           }else{
-    //             swal.fire({
-    //               title: 'La cirugía ya ha finalizado',
-    //               icon: 'error',
-    //               showConfirmButton: false,
-    //               toast: true,
-    //               position: 'top',
-    //               timer: 3000,
-    //               timerProgressBar: true
-    //             })
-    //           }
-    //         }else{
-    //           swal.fire({
-    //             title: 'Registre la hora de ingreso al quirófano',
-    //             icon: 'error',
-    //             showConfirmButton: false,
-    //             toast: true,
-    //             position: 'top',
-    //             timer: 3000,
-    //             timerProgressBar: true
-    //           })
-    //         }
-    //       }
+            if(transAnestStore.ingresoQuirofano === true){
+              if(transAnestStore.salidaQuirofano === false){
+                // Crea un nuevo evento de clic
+                let event = new MouseEvent('dblclick', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                });                    
+                // Despacha el evento de clic en el botón
+                closeButton.dispatchEvent(event);
+              }else{
+                swal.fire({
+                  title: 'La cirugía ya ha finalizado',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  toast: true,
+                  position: 'top',
+                  timer: 3000,
+                  timerProgressBar: true
+                })
+              }
+            }else{
+              swal.fire({
+                title: 'Registre la hora de ingreso al quirófano',
+                icon: 'error',
+                showConfirmButton: false,
+                toast: true,
+                position: 'top',
+                timer: 3000,
+                timerProgressBar: true
+              })
+            }
+          }
   
-    //       // ANES OUT
-    //       else if (transcript === 'termina anestesia.') {                             
-    //         let closeButton = document.getElementById('anes-out');
+          // ANES OUT
+          else if (transcript === 'termina anestesia.') {                             
+            let closeButton = document.getElementById('anes-out');
   
-    //         if(transAnestStore.ingresoQuirofano === true){
-    //           if(transAnestStore.salidaQuirofano === false){
-    //             // Crea un nuevo evento de clic
-    //             let event = new MouseEvent('click', {
-    //                 bubbles: true,
-    //                 cancelable: true,
-    //                 view: window
-    //             });                    
-    //             // Despacha el evento de clic en el botón
-    //             closeButton.dispatchEvent(event);
-    //           }else{
-    //             swal.fire({
-    //               title: 'La cirugía ya ha finalizado',
-    //               icon: 'error',
-    //               showConfirmButton: false,
-    //               toast: true,
-    //               position: 'top',
-    //               timer: 3000,
-    //               timerProgressBar: true
-    //             })
-    //           }
-    //         }else{
-    //           swal.fire({
-    //             title: 'Registre la hora de ingreso al quirófano',
-    //             icon: 'error',
-    //             showConfirmButton: false,
-    //             toast: true,
-    //             position: 'top',
-    //             timer: 3000,
-    //             timerProgressBar: true
-    //           })
-    //         }
-    //       }
+            if(transAnestStore.ingresoQuirofano === true){
+              if(transAnestStore.salidaQuirofano === false){
+                // Crea un nuevo evento de clic
+                let event = new MouseEvent('dblclick', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                });                    
+                // Despacha el evento de clic en el botón
+                closeButton.dispatchEvent(event);
+              }else{
+                swal.fire({
+                  title: 'La cirugía ya ha finalizado',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  toast: true,
+                  position: 'top',
+                  timer: 3000,
+                  timerProgressBar: true
+                })
+              }
+            }else{
+              swal.fire({
+                title: 'Registre la hora de ingreso al quirófano',
+                icon: 'error',
+                showConfirmButton: false,
+                toast: true,
+                position: 'top',
+                timer: 3000,
+                timerProgressBar: true
+              })
+            }
+          }
   
-    //       // QX OUT
-    //       else if (transcript === 'termina quirófano.') {
-    //         let closeButton = document.getElementById('qx-out');
+          // QX OUT
+          else if (transcript === 'termina quirófano.') {
+            let closeButton = document.getElementById('qx-out');
   
-    //         if(transAnestStore.ingresoQuirofano === true){
-    //           if(transAnestStore.salidaQuirofano === false){
-    //             // Crea un nuevo evento de clic
-    //             let event = new MouseEvent('click', {
-    //                 bubbles: true,
-    //                 cancelable: true,
-    //                 view: window
-    //             });                    
-    //             // Despacha el evento de clic en el botón
-    //             closeButton.dispatchEvent(event);
-    //           }else{
-    //             swal.fire({
-    //               title: 'La cirugía ya ha finalizado',
-    //               icon: 'error',
-    //               showConfirmButton: false,
-    //               toast: true,
-    //               position: 'top',
-    //               timer: 3000,
-    //               timerProgressBar: true
-    //             })
-    //           }
-    //         }else{
-    //           swal.fire({
-    //             title: 'Registre la hora de ingreso al quirófano',
-    //             icon: 'error',
-    //             showConfirmButton: false,
-    //             toast: true,
-    //             position: 'top',
-    //             timer: 3000,
-    //             timerProgressBar: true
-    //           })
-    //         }
-    //       }
+            if(transAnestStore.ingresoQuirofano === true){
+              if(transAnestStore.salidaQuirofano === false){
+                // Crea un nuevo evento de clic
+                let event = new MouseEvent('dblclick', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                });                    
+                // Despacha el evento de clic en el botón
+                closeButton.dispatchEvent(event);
+              }else{
+                swal.fire({
+                  title: 'La cirugía ya ha finalizado',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  toast: true,
+                  position: 'top',
+                  timer: 3000,
+                  timerProgressBar: true
+                })
+              }
+            }else{
+              swal.fire({
+                title: 'Registre la hora de ingreso al quirófano',
+                icon: 'error',
+                showConfirmButton: false,
+                toast: true,
+                position: 'top',
+                timer: 3000,
+                timerProgressBar: true
+              })
+            }
+          }
           
-    //       if (transAnestStore.intervalo !== null) {
-    //           clearTimeout(transAnestStore.intervalo);
-    //           console.log('Temporizador reiniciado.');
-    //       }
+          if (transAnestStore.intervalo !== null) {
+              clearTimeout(transAnestStore.intervalo);
+              console.log('Temporizador reiniciado.');
+          }
   
-    //       transAnestStore.intervalo = setTimeout(() => {
-    //         transAnestStore.recognition.stop();
-    //         transAnestStore.microfono = false;
-    //       }, tiempoEspera);
-    //     };
+          transAnestStore.intervalo = setTimeout(() => {
+            transAnestStore.recognition.stop();
+            transAnestStore.microfono = false;
+          }, tiempoEspera);
+        };
   
-    //     // Manejar evento de error del reconocimiento
-    //     transAnestStore.recognition.onerror = (event) => {
-    //       window.log.error('Error en reconocimiento de voz:', event.error);
-    //     };
+        // Manejar evento de error del reconocimiento
+        transAnestStore.recognition.onerror = (event) => {
+          window.log.error('Error en reconocimiento de voz:', event.error);
+        };
   
-    //     // Manejar evento de fin del reconocimiento
-    //     transAnestStore.recognition.onend = () => {
-    //       if (transAnestStore.intervalo !== null) {
-    //           clearTimeout(transAnestStore.intervalo);
-    //       }
-    //       transAnestStore.microfono = false;
+        // Manejar evento de fin del reconocimiento
+        transAnestStore.recognition.onend = () => {
+          if (transAnestStore.intervalo !== null) {
+              clearTimeout(transAnestStore.intervalo);
+          }
+          transAnestStore.microfono = false;
   
-    //       // Iniciar reconocimiento de voz nuevamente
-    //       setTimeout(() => {
-    //         transAnestStore.recognition.start();
-    //         transAnestStore.microfono = true;
-    //       }, 100);
-    //     };
-    //   } catch (error) {
-    //       window.log.error('Ocurrió un error:', error)
-    //   }
-    // },
+          // Iniciar reconocimiento de voz nuevamente
+          setTimeout(() => {
+            transAnestStore.recognition.start();
+            transAnestStore.microfono = true;
+          }, 100);
+        };
+      } catch (error) {
+          window.log.error('Ocurrió un error:', error)
+      }
+    },
 
-    // async detenerReconocimiento() {
-    //   try {
-    //     if(transAnestStore.recognition !== null){
-    //       transAnestStore.recognition.onend = () => {
-    //         clearTimeout(transAnestStore.intervalo);
-    //       };
+    async detenerReconocimiento() {
+      try {
+        if(transAnestStore.recognition !== null){
+          transAnestStore.recognition.onend = () => {
+            clearTimeout(transAnestStore.intervalo);
+          };
     
-    //       if (transAnestStore.recognition) {
-    //         transAnestStore.recognition.stop();
-    //         clearTimeout(transAnestStore.intervalo);
-    //         transAnestStore.microfono = false;
-    //         transAnestStore.microfonoEscucha=false
-    //         console.log('Reconocimiento de voz detenido Trans.');
-    //       }
-    //     }                
-    //   } catch (error) {
-    //       window.log.error('Ocurrió un error:', error)
-    //   }
-    // },
+          if (transAnestStore.recognition) {
+            transAnestStore.recognition.stop();
+            clearTimeout(transAnestStore.intervalo);
+            transAnestStore.microfono = false;
+            transAnestStore.microfonoEscucha=false
+            console.log('Reconocimiento de voz detenido Trans.');
+          }
+        }                
+      } catch (error) {
+          window.log.error('Ocurrió un error:', error)
+      }
+    },
 
     async enviarDatosTrans() {        
       try {
@@ -2724,7 +2785,7 @@ export default defineComponent({
           }
         };
   
-        this.chartKey += 1;             
+        this.chartKey += 1;                  
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
@@ -6840,6 +6901,11 @@ export default defineComponent({
                 await transAnestStore.getBalanceHPList(preIdStore.pacienteID._id)
 
                 await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
+
+                let medicamentosAgrupados = this.medicamentosAgrupados
+                if(medicamentosAgrupados.length > 0){
+                  await transAnestStore.updateSumaMedicamentos(medicamentosAgrupados, preIdStore.pacienteID._id)
+                }         
               }else if(preIdStore.nuevoRegistroPaciente == true){    
                 this.menuTrans.balanceP = this.menuTrans.ingresos - this.menuTrans.egresos;
                 this.menuTrans.horaBalance = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -6847,7 +6913,12 @@ export default defineComponent({
                 await transAnestStore.updateNuevoBalanceHP(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
                 await transAnestStore.getNuevoBalanceHPList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
 
-                await transAnestStore.saveNuevoTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)
+                await transAnestStore.saveNuevoTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)  
+                
+                let medicamentosAgrupados = this.medicamentosAgrupados
+                if(medicamentosAgrupados.length > 0){
+                  await transAnestStore.updateNuevoSumaMedicamentos(medicamentosAgrupados, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                }
               }
             }else{
               swal.fire({
@@ -8283,7 +8354,12 @@ export default defineComponent({
           this.gridBD.push(this.hl7mess[this.hl7mess.length - 1]);
           this.hl7mess = [];
                   
-          postAnestStore.EgresoTA = this.grid[this.grid.length - 1].datos[2].valor.toString() + "/" + this.grid[this.grid.length - 1].datos[3].valor.toString();
+          // PRUEBAS DE PAS Y PAD INTRUSIVAS
+          if(this.grid[this.grid.length - 1].datos[2].valor.toString() != "-" && this.grid[this.grid.length - 1].datos[3].valor.toString() != "-")
+            postAnestStore.EgresoTA = this.grid[this.grid.length - 1].datos[2].valor.toString() + "/" + this.grid[this.grid.length - 1].datos[3].valor.toString();
+          else
+            postAnestStore.EgresoTA = this.grid[this.grid.length - 1].datos[10].valor.toString() + "/" + this.grid[this.grid.length - 1].datos[11].valor.toString();
+          // HASTA AQUI SE REALIZARON LOS CAMBIOS
           postAnestStore.EgresoFC = this.grid[this.grid.length - 1].datos[0].valor;
           postAnestStore.EgresoFR = this.grid[this.grid.length - 1].datos[14].valor;
           postAnestStore.EgresoTemp = this.grid[this.grid.length - 1].datos[7].valor;
@@ -8422,7 +8498,7 @@ export default defineComponent({
           timerProgressBar: true,
           position: "top-end",
           });
-        }        
+        }                
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
@@ -8492,8 +8568,11 @@ export default defineComponent({
 
     async validarModalTendencias(){
       preIdStore.modalTendencias = false  
-    }
+
+      this.detenerReconocimiento();
+    },
   },
+
   
   computed: {
     tablaMedicamentos() : String[] {      
@@ -8519,6 +8598,49 @@ export default defineComponent({
       });     
       
       return filas;
+    },
+
+    medicamentosAgrupados(): GrupoMedicamento[] {
+      // Verifica que `medicamentos` tenga al menos un elemento
+      if (!this.transAnestStore.medicamentos || this.transAnestStore.medicamentos.length === 0) {
+        return [];
+      }
+
+      const medicamentos = this.transAnestStore.medicamentos[0].medicamentosCx;
+      const grouped: { [key: string]: { bolo?: number; unidadBolo?: string; infusion?: number; unidadInfusion?: string; total?: number; unidadTotal?: string } } = {};
+
+      medicamentos.forEach((med) => {
+        if (!grouped[med.medicamento]) {
+          grouped[med.medicamento] = {};
+        }
+        if (med.tipoMed === 'Bolo') {
+          if (grouped[med.medicamento].bolo) {
+            grouped[med.medicamento].bolo += Number(med.dosisMed);
+          } else {
+            grouped[med.medicamento].bolo = Number(med.dosisMed);
+            grouped[med.medicamento].unidadBolo = med.unidadMed;
+          }
+        } else if (med.tipoMed === 'Infusión') {
+          if (grouped[med.medicamento].infusion) {
+            grouped[med.medicamento].infusion += Number(med.dosisMed);
+          } else {
+            grouped[med.medicamento].infusion = Number(med.dosisMed);
+            grouped[med.medicamento].unidadInfusion = med.unidadMed;
+          }
+        }
+      });
+
+      Object.keys(grouped).forEach(key => {
+        const bolo = grouped[key].bolo || 0;
+        const infusion = grouped[key].infusion || 0;
+        grouped[key].total = bolo + infusion;
+        grouped[key].unidadTotal = grouped[key].unidadBolo || grouped[key].unidadInfusion;
+      });
+
+      return Object.keys(grouped).map((key) => ({
+        medicamento: key,
+        ...grouped[key],
+      }));
     },
   },
 })
@@ -8695,6 +8817,12 @@ export default defineComponent({
   overflow-x: hidden;
   margin-top: 10px;
 }
+.deslizar-balance-parcial-principal {
+  overflow: scroll;
+  overflow-x: hidden;
+  margin-top: 5px;
+  height: 340px !important;
+}
 .deslizar-medicamentos {
   overflow: scroll;
   overflow-x: hidden;
@@ -8731,6 +8859,17 @@ export default defineComponent({
   --bs-btn-bg: #ffffff;
   --bs-btn-color: #002d60;
   --bs-btn-border-color: #ffffff;
+  --bs-btn-hover-bg: #E88300;
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-hover-border-color: #E88300;
+  --bs-btn-active-bg: #E88300;
+  --bs-btn-active-color: #ffffff;
+  --bs-btn-active-border-color: #E88300;
+}
+.btn-guardar-balance-parcial {
+  --bs-btn-bg: #A0A6B2;
+  --bs-btn-color: #ffffff;
+  --bs-btn-border-color: #A0A6B2;
   --bs-btn-hover-bg: #E88300;
   --bs-btn-hover-color: #ffffff;
   --bs-btn-hover-border-color: #E88300;

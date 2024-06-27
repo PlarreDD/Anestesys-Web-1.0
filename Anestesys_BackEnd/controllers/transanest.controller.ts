@@ -937,6 +937,52 @@ export const deleteMedicamento = async (req: any, res: Response) => {
     }
 };
 
+export const updateSumaMedicamentos = async (req: any, res: Response) => {
+    try {
+        const { pid } = req.params;
+        const { medicamentosSuma } = req.body;  
+
+        const menuTrans = await MenuTrans.findOneAndUpdate(
+            { pid: pid },
+            { $push:{
+                    medicamentosSuma: { $each: medicamentosSuma }                                        
+                }
+            },
+            { new: true, upsert: true }
+        );                
+        return res.json({ menuTrans });
+    } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+/* Subir medicamentos */
+export const updateNuevoSumaMedicamentos = async (req: any, res: Response) => {
+    try {
+        const { pid, cxid } = req.params;
+        const { medicamentosSuma } = req.body;                
+        const menuTrans = await MenuTrans.findOneAndUpdate(
+            { pid: pid, cxid: cxid },
+            { $push:{
+                medicamentosSuma: { $each: medicamentosSuma }                                        
+                }
+            },
+            { new: true, upsert: true }
+        );                
+        return res.json({ menuTrans });
+    } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 /* Guardado Relevo */
 export const saveRelevos = async (req: any, res: Response) => {
     try {
