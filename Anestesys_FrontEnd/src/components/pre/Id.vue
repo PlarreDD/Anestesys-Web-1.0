@@ -1,8 +1,8 @@
 <template>
     <div>
-        <!-- <ul class="nav nav-pills mb-3 text-center centrar-li" id=""> -->
+        <ul class="nav nav-pills mb-3 text-center centrar-li" id="">
             <!-- Información -->
-            <!-- <li class="nav-item col-md-3">
+            <li class="nav-item col-md-3">
                 <button class="btn btn-nav-bar fw-bold active"
                         id="plan"
                         data-bs-toggle="pill"
@@ -10,10 +10,10 @@
                         type="button"
                         aria-selected="true"
                         data-title="Información del paciente, cirugía y médicos"> INFORMACIÓN </button>
-            </li> -->
+            </li>
 
             <!-- Datos Demográficos -->
-            <!-- <li class="nav-item col-md-2" >
+            <li class="nav-item col-md-2" >
                 <button class="btn btn-nav-bar fw-bold"
                         id="plan"
                         data-bs-toggle="pill"
@@ -22,7 +22,7 @@
                         aria-selected="false"
                         data-title="Datos demográficos del paciente"> DATOS DEMOGRÁFICOS </button>
             </li>
-        </ul> -->
+        </ul>
 
         <div class="tab-content col-md-12" id="">
             <!-- Información del paciente -->
@@ -351,11 +351,11 @@
             </div>
 
             <!-- Datos Demográficos -->
-            <!-- <div class="tab-pane fade" id="demograficos">
+            <div class="tab-pane fade" id="demograficos">
                 <div class="col-12 borderPrincipal" :class="preIdStore.VistaRapida == true ? '' : 'mb-5'">
-                    <form @submit.prevent="obtenerDatos" class="row g-3 mt-1"> -->
+                    <form @submit.prevent="obtenerDatos" class="row g-3 mt-1">
                         <!-- Nacionalidad -->
-                        <!-- <div class="col-md-3">
+                        <div class="col-md-3">
                             <label class="form-label fw-bold"> Nacionalidad </label>
                             <el-select v-model="infoPreIdPaciente.nacionalidad" @change="enviarDatos"
                                        filterable
@@ -367,10 +367,10 @@
                                     :value="nacionalidad.lblNac">
                                 </el-option>
                             </el-select>
-                        </div> -->
+                        </div>
 
                         <!-- CURP -->
-                        <!-- <div class="col-md-3">
+                        <div class="col-md-3">
                             <label class="form-label fw-bold"> CURP </label>
                             <input type="text" @keyup.capture="enviarDatos"
                                    class="form-control"
@@ -378,20 +378,20 @@
                                    :class="infoPreIdPaciente.CURP != undefined && infoPreIdPaciente.CURP != '' ?
                                           'form-control border border-success formSombra' : 'form-control'" 
                                           :disabled="propBloquearInputsPrincipales == true">
-                        </div> -->
+                        </div>
 
                         <!-- Folio ID -->
-                        <!-- <div class="col-md-3">
+                        <div class="col-md-3">
                             <label class="form-label fw-bold"> FOLIO ID </label>
                             <input type="text" @keyup.capture="enviarDatos"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.folioID"
                                    :class="infoPreIdPaciente.folioID != undefined && infoPreIdPaciente.folioID != '' ?
                                           'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">                
-                        </div> -->
+                        </div>
 
                         <!-- Estado de Nacimiento -->
-                        <!-- <div class="col-md-3">
+                        <div class="col-md-3">
                             <label class="form-label fw-bold"> Estado de Nacimiento </label>
                             <el-select v-model="infoPreIdPaciente.estNacimiento" @change="enviarDatos"
                                        filterable
@@ -405,10 +405,10 @@
                             </el-select>
                         </div>
 
-                        <h5 class="fw-bold"> DATOS DEL DOMICILIO </h5> -->
+                        <h5 class="fw-bold"> DATOS DEL DOMICILIO </h5>
 
                         <!-- Estado de Residencia -->
-                        <!-- <div class="col-md-4">
+                        <div class="col-md-4">
                             <label class="form-label fw-bold">Estado de residencia</label>
                             <el-select v-model="infoPreIdPaciente.estResidencia" @change="enviarDatos"
                                        filterable 
@@ -418,27 +418,27 @@
                                            :value="estadoNacimiento.lblEstRes">
                                 </el-option>
                             </el-select>
-                        </div> -->
+                        </div>
 
                         <!-- Alcaldía/Municipio -->
-                        <!-- <div class="col-md-4">
+                        <div class="col-md-4">
                             <label class="form-label fw-bold"> Alcaldía/Municipio </label>
                             <input type="text" @keyup.capture="enviarDatos"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.alcaldia"
                                    :class="infoPreIdPaciente.alcaldia != undefined && infoPreIdPaciente.alcaldia != '' ?
                                           'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
-                        </div> -->
+                        </div>
 
                         <!-- Colonia/Localidad -->
-                        <!-- <div class="col-md-4">
+                        <div class="col-md-4">
                             <label  class="form-label fw-bold"> Colonia/Localidad </label>
                             <input type="text" @keyup.capture="enviarDatos"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.colonia"
                                    :class="infoPreIdPaciente.colonia != undefined && infoPreIdPaciente.colonia != '' ?
                                           'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
-                        </div> -->
+                        </div>
 
                         <!-- Código Postal -->
                         <!-- <div class="col-md-4">
@@ -448,10 +448,10 @@
                                    v-model="infoPreIdPaciente.codigoPostal"
                                    :class="infoPreIdPaciente.codigoPostal != undefined && infoPreIdPaciente.codigoPostal != '' ?
                                           'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
-                        </div> -->                    
-                    <!-- </form>
+                        </div>                    -->
+                    </form>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
 </template>
@@ -478,9 +478,9 @@ export default defineComponent({
         propVerdeNum:{type: Boolean},
         propRojoNom:{type: Boolean},
         propVerdeNom:{type: Boolean},
-        // propBtnGuardarId:{type: Boolean},
+        propBtnGuardarId:{type: Boolean},
         propBtnActualizarId:{type: Boolean},
-        // propBtnNuevoGuardarId:{type: Boolean},
+        propBtnNuevoGuardarId:{type: Boolean},
         propBtnNuevoActualizarId:{type: Boolean},
 
         propId:{type: String},
@@ -489,9 +489,9 @@ export default defineComponent({
         propFechaNacimiento:{type: String},
         propEdad:{type: Number},
         propGenero:{type: String},
-        // propNacionalidad:{type: String},
-        // propCURP:{type: String},
-        // propEstadoNacimiento:{type: String},
+        propNacionalidad:{type: String},
+        propCURP:{type: String},
+        propEstadoNacimiento:{type: String},
         propBloquearInputs:{type: Boolean},
         propBloquearInputsPrincipales:{type:Boolean}
     },
@@ -690,9 +690,9 @@ export default defineComponent({
                 this.infoPreIdPaciente.fechaNac = await this.propFechaNacimiento;
                 this.infoPreIdPaciente.edadPaciente = await this.propEdad;
                 this.infoPreIdPaciente.genero = await this.propGenero;
-                // this.infoPreIdPaciente.nacionalidad = await this.propNacionalidad;
-                // this.infoPreIdPaciente.CURP = await this.propCURP;
-                // this.infoPreIdPaciente.estNacimiento = await this.propEstadoNacimiento;
+                this.infoPreIdPaciente.nacionalidad = await this.propNacionalidad;
+                this.infoPreIdPaciente.CURP = await this.propCURP;
+                this.infoPreIdPaciente.estNacimiento = await this.propEstadoNacimiento;
     
                 this.calcularEdad()        
             } catch (error) {

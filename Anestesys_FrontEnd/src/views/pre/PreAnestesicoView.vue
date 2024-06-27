@@ -227,12 +227,12 @@
               :propGenero="genero"
               :propBloquearInputsPrincipales="bloquearInputsPrincipales"
               :propBloquearInputs="bloquearInputs"
-              
+              :propNacionalidad="nacionalidad"
+              :propCURP="CURP"
+              :propEstadoNacimiento="estadoNacimiento"
               ref="refId"/>
             </div>
-            <!-- :propNacionalidad="nacionalidad"
-            :propCURP="CURP"
-            :propEstadoNacimiento="estadoNacimiento" -->
+            <!--  -->
 
         <div class="tab-pane fade" id="pre-valoracion">
           <valoracion ref="refValoracion"/>
@@ -495,9 +495,9 @@ import { ElInput, ElCard } from 'element-plus';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
-// import pdfFonts from "pdfmake/build/vfs_fonts.js";
+import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
-// window.pdfMake.fonts = pdfFonts.pdfMake;
+window.pdfMake.fonts = pdfFonts.pdfMake;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 
@@ -563,9 +563,9 @@ export default defineComponent({
       fechaNacimiento: Date,
       edad: Number,
       genero: '',
-      // nacionalidad: '',
-      // CURP: '',
-      // estadoNacimiento: '',
+      nacionalidad: '',
+      CURP: '',
+      estadoNacimiento: '',
 
       nuevoRegistroExped: false,
       bloquearInputsPrincipales: false,
@@ -5532,9 +5532,9 @@ export default defineComponent({
           this.fechaNacimiento = null
           this.edad = null
           this.genero = ''
-          // this.nacionalidad = ''
-          // this.CURP = ''
-          // this.estadoNacimiento = ''
+          this.nacionalidad = ''
+          this.CURP = ''
+          this.estadoNacimiento = ''
   
           // Ejecutar método de componente Id
           const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
@@ -5658,9 +5658,9 @@ export default defineComponent({
           this.fechaNacimiento = idStore.pacientes.pacientes[0].fechaNPaciente
           this.edad = idStore.pacientes.pacientes[0].edadPaciente
           this.genero = idStore.pacientes.pacientes[0].generoPaciente
-          // this.nacionalidad = idStore.pacientes.pacientes[0].nacionalidad
-          // this.CURP = idStore.pacientes.pacientes[0].CURP
-          // this.estadoNacimiento = idStore.pacientes.pacientes[0].estNacimiento
+          this.nacionalidad = idStore.pacientes.pacientes[0].nacionalidad
+          this.CURP = idStore.pacientes.pacientes[0].CURP
+          this.estadoNacimiento = idStore.pacientes.pacientes[0].estNacimiento
   
           // Ejecutar método de componente Id
           const componenteId = await this.$refs.refId as InstanceType<typeof Id>;
