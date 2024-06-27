@@ -112,7 +112,7 @@
               <div class="col-md-12">
                 <div class="row g-3">
                   <div class="col-md-11">
-                    <h5 class="text-white fw-bold">PERFIL</h5>
+                    <h5 class="text-white fw-bold">Perfil</h5>
                     <h6 class="text-white fw-bold">Gestión de perfil</h6>
                   </div>
 
@@ -446,7 +446,7 @@
               <div class="col-md-12">
                 <div class="row g-3">
                   <div class="col-md-11">
-                    <h5 class="text-white fw-bold">MEDICAMENTOS</h5>
+                    <h5 class="text-white fw-bold">Medicamentos</h5>
                     <h6 class="text-white fw-bold">Gestión de medicamentos</h6>
                   </div>
 

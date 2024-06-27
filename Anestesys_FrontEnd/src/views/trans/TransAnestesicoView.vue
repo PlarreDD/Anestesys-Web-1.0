@@ -48,7 +48,7 @@
                       <div class="col-md-12">
                         <div class="row g-3">
                             
-                          <h5 class="text-white fw-bold col-md-5">DATOS DEL MEDICAMENTO</h5>
+                          <h5 class="text-white fw-bold col-md-5">Datos del Medicamento</h5>
                           <div class="col-md-1">
                             <button type="button" id="medica"
                                     class="btn fw-bold"
@@ -60,7 +60,7 @@
                             </button>
                           </div>
                           <div class="col-md-6">
-                            <button type="button" class="btn btn-guardar-balance fw-bold float-end" 
+                            <button type="button" class="btn btn-guardar-balance-parcial fw-bold float-end" 
                               data-bs-toggle="modal" data-bs-target="#modal-sumatoria-medicamentos">
                               Sumatoria de medicamentos
                             </button>
@@ -213,7 +213,7 @@
                     <div class="modal-body">
                       <div class="col-md-12">
                         <div class="row g-3">
-                            <h5 class="text-white fw-bold col-md-11">DATOS DEL RELEVO</h5>
+                            <h5 class="text-white fw-bold col-md-11">Datos del Relevo</h5>
                             <div class="col-md-1">
                               <button type="button" id="relev"
                                       class="btn fw-bold"
@@ -309,7 +309,7 @@
                     <div class="modal-body">
                       <div class="col-md-12">
                         <div class="row g-3">
-                            <h5 class="text-white fw-bold col-md-11">DATOS DEL EVENTO CRÍTICO</h5>
+                            <h5 class="text-white fw-bold col-md-11">Datos del Evento Crítico</h5>
                             <div class="col-md-1">
                               <button type="button" id="event"
                                       class="btn fw-bold"
@@ -451,7 +451,7 @@
                 <div class="col-md-12 chart-container">                                                      
                   <div class="col-md-12">                      
                       <div class="row">                        
-                        <h5 class="text-black fw-bold col-md-11">GRID ANESTÉSICO</h5>
+                        <h5 class="text-black fw-bold col-md-11">Grid Anestésico</h5>
                         <div class="col-md-1">
                           <button type="button" id="grid-anes"
                                   class="btn fw-bold"
@@ -482,7 +482,7 @@
               <div class="modal-body">
                 <div class="col-md-12">
                   <div class="row g-3">
-                        <h5 class="col-md-12 fw-bold text-white">TÉCNICA ANESTÉSICA</h5>
+                        <h5 class="col-md-12 fw-bold text-white">Técnica Anestésica</h5>
                         <!-- Técnica de anestesia final -->
                         <div class="col-md-12">
                           <label  class="form-label fw-bold text-white">Técnica de anestesia final</label>
@@ -533,14 +533,13 @@
             <div class="input-group mb-3">
               <div class="modal-body">
                 <div class="col-md-12">
-                  <div class="row g-3">
-                    <div class="estiloDropDownBalance row g-2 deslizar-balance">
-                      <h5 class="col-md-8 fw-bold text-white">BALANCE TOTAL: {{menuTrans.balanceTotal}} ml</h5>
-                      <div class="col-md-4">
-                        <button type="button" class="btn btn-guardar-balance fw-bold float-end" data-bs-toggle="modal" data-bs-target="#modal-balance-parcial">
-                          Balance Hídrico Parcial
-                        </button>
-                      </div>
+                  <div class="row g-3">                    
+                    <div class="col-md-3">
+                      <button type="button" class="btn btn-guardar-balance-parcial fw-bold float" data-bs-toggle="modal" data-bs-target="#modal-balance-parcial">
+                        Balance Parcial
+                      </button>
+                    </div>
+                    <div class="estiloDropDownBalance row g-2 deslizar-balance-parcial-principal">
 
                       <h5 class="col-md-12 fw-bold text-white">Ingresos</h5>
 
@@ -737,6 +736,7 @@
                         </template>   
                       </div>
                     </div>
+                    <h5 class="col-md-8 fw-bold text-white">Balance Total: {{menuTrans.balanceTotal}} ml</h5>
                   </div>
                 </div>
               </div>
@@ -849,7 +849,7 @@
               <div class="modal-body">
                 <div class="col-md-12">
                   <div class="row g-3">
-                    <h5 class="text-white fw-bold">VENTILADOR</h5>
+                    <h5 class="text-white fw-bold">Ventilador</h5>
                     <!-- Modos de Ventilación -->
                     <div class="col-md-9">
                       <label  class="form-label fw-bold text-white">Modos de ventilación</label>
@@ -1512,7 +1512,7 @@
               <div class="col-md-12">
                 <div class="row g-3">
                   <div class="col-md-11">
-                    <h5 class="text-white fw-bold">TENDENCIAS</h5>
+                    <h5 class="text-white fw-bold">Tendencias</h5>
                     <h6 class="text-white fw-bold">Configuración de Tendencias</h6>
                   </div>
 
@@ -2785,7 +2785,7 @@ export default defineComponent({
           }
         };
   
-        this.chartKey += 1;             
+        this.chartKey += 1;                  
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
@@ -8498,7 +8498,7 @@ export default defineComponent({
           timerProgressBar: true,
           position: "top-end",
           });
-        }        
+        }                
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
@@ -8817,6 +8817,12 @@ export default defineComponent({
   overflow-x: hidden;
   margin-top: 10px;
 }
+.deslizar-balance-parcial-principal {
+  overflow: scroll;
+  overflow-x: hidden;
+  margin-top: 5px;
+  height: 340px !important;
+}
 .deslizar-medicamentos {
   overflow: scroll;
   overflow-x: hidden;
@@ -8853,6 +8859,17 @@ export default defineComponent({
   --bs-btn-bg: #ffffff;
   --bs-btn-color: #002d60;
   --bs-btn-border-color: #ffffff;
+  --bs-btn-hover-bg: #E88300;
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-hover-border-color: #E88300;
+  --bs-btn-active-bg: #E88300;
+  --bs-btn-active-color: #ffffff;
+  --bs-btn-active-border-color: #E88300;
+}
+.btn-guardar-balance-parcial {
+  --bs-btn-bg: #A0A6B2;
+  --bs-btn-color: #ffffff;
+  --bs-btn-border-color: #A0A6B2;
   --bs-btn-hover-bg: #E88300;
   --bs-btn-hover-color: #ffffff;
   --bs-btn-hover-border-color: #E88300;

@@ -1013,10 +1013,7 @@
               <tr class="espacio">
                 <td class="col-2 color-texto">                  
                   <label  class="form-label color-td">
-                    <span
-                      data-bs-toggle="modal"
-                      data-bs-target="#saturacion-modal"
-                    >
+                    <span data-bs-toggle="modal" data-bs-target="#saturacion-modal">
                       <font-awesome-icon icon="fa-solid fa-circle-info" />
                     </span>
                     Saturación de O2:
@@ -1830,6 +1827,24 @@
               <div class="col-md-12">
                 <div class="row g-3">
                   <img src="../../../public/images/infografias/bromage-info.png" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Saturación -->
+    <div
+      class="modal" id="saturacion-modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="input-group mb-3">
+            <div class="modal-body">
+              <div class="col-md-12">
+                <div class="row g-3">
+                  <img src="../../../public/images/infografias/saturacion-info.png" alt="" />
                 </div>
               </div>
             </div>
