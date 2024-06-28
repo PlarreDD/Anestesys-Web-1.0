@@ -360,8 +360,7 @@
                             <el-select v-model="infoPreIdPaciente.nacionalidad" @change="enviarDatos"
                                        filterable
                                        :class="infoPreIdPaciente.nacionalidad != undefined && infoPreIdPaciente.nacionalidad != '' ?
-                                              'form-control-select border border-success formSombra' : 'form-control-select'" 
-                                              :disabled="propBloquearInputsPrincipales == true">
+                                              'form-control-select border border-success formSombra' : 'form-control-select'">
                                 <el-option
                                     v-for="nacionalidad in opcionNacionalidad"
                                     :value="nacionalidad.lblNac">
@@ -376,8 +375,7 @@
                                    class="form-control"
                                    v-model="infoPreIdPaciente.CURP"
                                    :class="infoPreIdPaciente.CURP != undefined && infoPreIdPaciente.CURP != '' ?
-                                          'form-control border border-success formSombra' : 'form-control'" 
-                                          :disabled="propBloquearInputsPrincipales == true">
+                                          'form-control border border-success formSombra' : 'form-control'">
                         </div>
 
                         <!-- Folio ID -->
@@ -396,8 +394,7 @@
                             <el-select v-model="infoPreIdPaciente.estNacimiento" @change="enviarDatos"
                                        filterable
                                        :class="infoPreIdPaciente.estNacimiento != undefined && infoPreIdPaciente.estNacimiento != '' ?
-                                              'form-control-select border border-success formSombra' : 'form-control-select'" 
-                                              :disabled="propBloquearInputsPrincipales == true">
+                                              'form-control-select border border-success formSombra' : 'form-control-select'">
                                 <el-option
                                     v-for="estadoNacimiento in opcionEstadoNacimiento"
                                     :value="estadoNacimiento.lblEst">
@@ -441,14 +438,14 @@
                         </div>
 
                         <!-- Código Postal -->
-                        <!-- <div class="col-md-4">
+                        <div class="col-md-4">
                             <label  class="form-label fw-bold margen-cp"> Código Postal </label>
                             <input type="text" @keyup.capture="enviarDatos"
                                    class="form-control"
                                    v-model="infoPreIdPaciente.codigoPostal"
                                    :class="infoPreIdPaciente.codigoPostal != undefined && infoPreIdPaciente.codigoPostal != '' ?
                                           'form-control border border-success formSombra' : 'form-control'" :disabled="propBloquearInputs == true">
-                        </div>                    -->
+                        </div>
                     </form>
                 </div>
             </div>
@@ -492,6 +489,10 @@ export default defineComponent({
         propNacionalidad:{type: String},
         propCURP:{type: String},
         propEstadoNacimiento:{type: String},
+        propEstadoResidencia:{type: String},
+        propAlcaldia:{type: String},
+        propColonia:{type: String},
+        propCodigoPostal:{type: String},
         propBloquearInputs:{type: Boolean},
         propBloquearInputsPrincipales:{type:Boolean}
     },
@@ -693,6 +694,11 @@ export default defineComponent({
                 this.infoPreIdPaciente.nacionalidad = await this.propNacionalidad;
                 this.infoPreIdPaciente.CURP = await this.propCURP;
                 this.infoPreIdPaciente.estNacimiento = await this.propEstadoNacimiento;
+                this.infoPreIdPaciente.folioID = await this.propId;
+                this.infoPreIdPaciente.estResidencia = await this.propEstadoResidencia;
+                this.infoPreIdPaciente.alcaldia = await this.propAlcaldia;
+                this.infoPreIdPaciente.colonia = await this.propColonia;
+                this.infoPreIdPaciente.codigoPostal = await this.propCodigoPostal;
     
                 this.calcularEdad()        
             } catch (error) {
