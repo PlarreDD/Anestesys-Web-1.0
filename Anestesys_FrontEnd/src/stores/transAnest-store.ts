@@ -11,6 +11,7 @@ export const useTransAnestStore = defineStore('transAn', {
         datosVentilacion: ref(null),
         pacienteID: ref(null),
         medicamentos: ref(null),
+        medicamentosAgrupados: ref(null),
         medicamentoID: ref(null),
         relevos: ref(null),
         relevoID: ref(null),
