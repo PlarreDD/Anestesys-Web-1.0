@@ -824,7 +824,7 @@
 
                           <tbody>
                             <tr v-for="(item, index) in medicamentosAgrupados" :key="index">
-                              <td class="text-white">{{ item.medicamento }}</td>
+                              <td class="text-white">{{ item.medicamentoN }}</td>
                               <td class="text-white">{{ item.bolo ? `${item.bolo} ${item.unidadBolo}` : '' }}</td>
                               <td class="text-white">{{ item.infusion ? `${item.infusion} ${item.unidadInfusion}` : '' }}</td>
                               <td class="text-white">{{ item.total ? `${item.total} ${item.unidadTotal}` : '' }}</td>
@@ -1602,7 +1602,7 @@ let FR: any;
 let taSeparada: Object;
 
 interface GrupoMedicamento {
-  medicamento: string;
+  medicamentoN: string;
   bolo?: number;
   unidadBolo?: string;
   infusion?: number;
@@ -3754,7 +3754,7 @@ export default defineComponent({
         //     item.balanceCx.map(balance => balance.horaBalance +'   '+ balance.ingresos +'   '+ balance.egresos)).flat();
 
         /*Datos de Medicamentos Agrupados*/
-        let medicamentoAg = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.medicamento).flat();
+        let medicamentoAg = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.medicamentoN).flat();
         let bolo = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.bolo).flat();
         let unidadBolo = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.unidadBolo).flat();
         let infusion = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.infusion).flat();
@@ -8659,7 +8659,7 @@ export default defineComponent({
       });
 
       return Object.keys(grouped).map((key) => ({
-        medicamento: key,
+        medicamentoN: key,
         ...grouped[key],
       }));
     },

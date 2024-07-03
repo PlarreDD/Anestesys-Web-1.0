@@ -84,7 +84,7 @@ const menuTransSchema = new mongoose_1.Schema({
         }],
     /* Suma medicamentos */
     medicamentosSuma: [{
-            medicamento: { type: String },
+            medicamentoN: { type: String },
             bolo: { type: String },
             unidadBolo: { type: String },
             infusion: { type: String },
