@@ -12,6 +12,10 @@ import { getPaciente,
          getCIE10,
          getCIE9} from "../controllers/preanest.controller";
 
+import {
+    saveCx
+} from "../controllers/cirugias.controller";
+
 const router = Router();
 
 // GET          /preId          Consultar expedientes
@@ -29,7 +33,9 @@ router.put('/:id',  requireToken, updatePaciente);
 router.post('/add', requireToken, createNuevoRegistroPaciente);
 router.put('/add/:id',  requireToken, updateNuevoRegistroPaciente);
 router.put('/ante/:id',  requireToken, updateAnteriorPaciente);
-router.get('/cie10/uno/:nombre', requireToken, getCIE10)
-router.get('/cie9/uno/:nombre', requireToken, getCIE9)
+router.get('/cie10/uno/:nombre', requireToken, getCIE10);
+router.get('/cie9/uno/:nombre', requireToken, getCIE9);
+
+router.post('/cxN', requireToken, saveCx);
 
 export default router;
