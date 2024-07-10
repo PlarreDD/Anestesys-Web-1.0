@@ -33,7 +33,14 @@ export const saveCx = async (req: any, res:Response) => {
             relevoCx,
             evCriticoCx,
             datosMSV,
-            // notaPA,
+            notaPA,
+            signVitEgQx,
+            casoObsRecNac_NumProd,
+            casoObsRecNac,
+            notaEval_Obs,
+            aldreteRec,
+            // CritAldrete,// Checar como se pone
+            altaRec,
         } = req.body;
 
         const cirugia = new Cirugias({
@@ -297,72 +304,66 @@ export const saveCx = async (req: any, res:Response) => {
                 HoraGeneracion: datosMSV[0].HoraGeneracion
             },
             notaPA:{
-                TecAnestFinal: { type: String },
-                Intubacion: { type: String },
-                NotaPostAnest: { type: String },
+                TecAnestFinal: notaPA[0].TecAnestFinal,
+                Intubacion: notaPA[0].Intubacion,
+                NotaPostAnest: notaPA[0].NotaPostAnest,
             },
-            /*= Signos Vitales al Egreso del Quirófano =*/
-            signVitEgQx:[{
-                TA: { type:String },
-                FC: { type:String },
-                FR: { type:String },
-                Temperatura: { type:String },
-                Pulso: { type:String },
-                SpO2: { type:String },
-                EgresoPac: { type:String },
-            }],    
-            /*===== Caso obstétrico reción nacido ======*/
-            casoObsRecNac_NumProd: { type:String },
-            casoObsRecNac:[{
-                Genero: { type:String },
-                HrNacimiento: { type:String },
-                Alumbramiento: { type:String },
-                Apgar1: { type:String },
-                Apgar5: { type:String },
-                Capurro: { type:String },
-                Peso: { type:String },
-                Talla: { type:String },
-            }],
-            /**************** Recuperación *****************/
-            /*========= Nota de Evaluación UCPA ========*/
-            notaEval_Obs: { type: String },
-            /*======== Aldrete de Recuperación =========*/
-            aldreteRec:[{
+            signVitEgQx:{
+                TA: signVitEgQx[0].TA,
+                FC: signVitEgQx[0].FC,
+                FR: signVitEgQx[0].FR,
+                Temperatura: signVitEgQx[0].Temperatura,
+                Pulso: signVitEgQx[0].Pulso,
+                SpO2: signVitEgQx[0].SpO2,
+                EgresoPac: signVitEgQx[0].EgresoPac,
+            },
+            casoObsRecNac_NumProd,
+            casoObsRecNac:{
+                Genero: casoObsRecNac[0].Genero,
+                HrNacimiento: casoObsRecNac[0].HrNacimiento,
+                Alumbramiento: casoObsRecNac[0].Alumbramiento,
+                Apgar1: casoObsRecNac[0].Apgar1,
+                Apgar5: casoObsRecNac[0].Apgar5,
+                Capurro: casoObsRecNac[0].Capurro,
+                Peso: casoObsRecNac[0].Peso,
+                Talla: casoObsRecNac[0].Talla,
+            },
+            notaEval_Obs,
+            aldreteRec:{
                 // IN, 15, 30, 45, 60, 90, 120
                 // Frecuencia Cardiaca
-                FrecCard: { type: String },
+                FrecCard: aldreteRec[0].FrecCard,
                 // Frecuencia Respiratoria
-                FrecResp: { type: String },
+                FrecResp: aldreteRec[0].FrecResp,
                 // Tension Arterial
-                TensArte: { type: String },
+                TensArte: aldreteRec[0].TensArte,
                 // Saturación de O2
-                SatO2: { type: String },
+                SatO2: aldreteRec[0].SatO2,
                 // Actividad Muscular
-                Muscular: { type: String },
+                Muscular: aldreteRec[0].Muscular,
                 // Respiración
-                Respiracion: { type: String },
+                Respiracion: aldreteRec[0].Respiracion,
                 // Circulación
-                CirculacionIn: { type: String },
+                CirculacionIn: aldreteRec[0].CirculacionIn,
                 // Estado de Conciencia
-                Conciencia: { type: String },
+                Conciencia: aldreteRec[0].Conciencia,
                 // Coloración
-                Coloracion: { type: String },
+                Coloracion: aldreteRec[0].Coloracion,
                 // Bromage
-                Bromage: { type: String },
+                Bromage: aldreteRec[0].Bromage,
                 // Nauseas/Vomito
-                Nauseas: { type: String },
+                Nauseas: aldreteRec[0].Nauseas,
                 // Escala de EVA de Dolor
-                escEVADol: { type: String },
-            }],    
-            /*============ Alta Recuperación ===========*/
+                escEVADol: aldreteRec[0].escEVADol,
+            },
             // 0, 15, 30, 45, 60, 90, 120
-            CritAldrete: [String],
-            altaRec:[{
-                CalifAldrete: { type: String },
-                Obs: { type: String },
-                FechaAltaRec: { type: String },
-                HrAltaRec: { type: String },
-            }],
+            CritAldrete: [String],// Revisarlo
+            altaRec:{
+                CalifAldrete: altaRec[0].CalifAldrete,
+                Obs: altaRec[0].Obs,
+                FechaAltaRec: altaRec[0].FechaAltaRec,
+                HrAltaRec: altaRec[0].HrAltaRec,
+            },
         });
 
         console.log(cirugia);
@@ -377,6 +378,32 @@ export const saveCx = async (req: any, res:Response) => {
         });
         
         return res.status(500).json({ Error: 'Error al guardar la ficha de cirugía' });
+    }
+};
+
+/* Los metodos ya deben ser update */
+export const saveEstudios = async (req: any, res: Response) => {
+    try {
+        const { pid,
+                val_Estudios } = req.body;
+        
+        const valest = await Cirugias.findOneAndUpdate(
+            { pid: pid },
+            {$push: {
+                val_Estudios: {
+                    estudio: val_Estudios[0],
+                    especifEstudio: val_Estudios[1]
+                }
+            }}
+        );
+
+        return res.json({ valest });
+    } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({Error: 'Error de servidor'});
     }
 };
 
@@ -422,22 +449,137 @@ export const saveMSVdat = async (req: any, res: Response) => {
     }
 };
 
-export const saveEstudios = async (req: any, res: Response) => {
+export const saveMedicamentos = async (req: any, res: Response) => {
+    try {
+        const {
+            pid,
+            tipoMed, medicamento, dosisMed,
+            unidadMed, viaMed, horaInicioMed,
+            horaFinalMed, observacionesMed, valorGrafica
+        } = req.body
+
+        console.log(pid,
+            tipoMed, medicamento, dosisMed,
+            unidadMed, viaMed, horaInicioMed,
+            horaFinalMed, observacionesMed, valorGrafica);
+
+        const cirugia  = await Cirugias.findOneAndUpdate(
+            { pid: pid },
+            // Datos del medicamento
+            {$push: {
+                medicamentosCx: {
+                    tipoMed: tipoMed,
+                    medicamento: medicamento,
+                    dosisMed: dosisMed,
+                    unidadMed: unidadMed,
+                    viaMed: viaMed,
+                    horaInicioMed: horaInicioMed,
+                    horaFinalMed: horaFinalMed,
+                    observacionesMed: observacionesMed,
+                    valorGrafica: valorGrafica
+                },                
+            }}
+        );
+
+        return res.json({ cirugia });
+    } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error al guardar el medicamento', error
+        });
+        
+        return res.status(500).json({ Error: 'Error al guardar el medicamento' });
+    }
+};
+
+export const saveRelevos = async (req: any, res: Response) => {
     try {
         const { pid,
-                val_Estudios } = req.body;
-        
-        const valest = await Cirugias.findOneAndUpdate(
-            { pid: pid },
-            {$push: {
-                val_Estudios: {
-                    estudio: val_Estudios[0],
-                    especifEstudio: val_Estudios[1]
-                }
-            }}
-        )
+                // Datos relevos
+                horaRelevo, tipoRel, matriculaRel,
+                anestesiologoRel, observacionesRel
+              } = req.body;
 
-        return res.json({ valest });
+        const cirugia = await Cirugias.findOneAndUpdate(
+            { pid: pid },
+            { $push: {
+                // Datos del relevo
+                relevoCx: {
+                    horaRelevo: horaRelevo,
+                    tipoRel: tipoRel,
+                    matriculaRel: matriculaRel,
+                    anestesiologoRel: anestesiologoRel,
+                    observacionesRel: observacionesRel
+                },
+            }});
+
+        return res.json({ cirugia });
+    } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const saveEventos = async (req: any, res: Response) => {
+    try {
+        const { pid,
+                // Datos relevos
+                horaEvento, tipoEve,
+                detalleEvento, valorGraficaEv
+              } = req.body;
+
+        const cirugia = await Cirugias.findOneAndUpdate(
+            { pid: pid },
+            { $push: {
+                // Datos del relevo
+                evCriticoCx: {
+                    horaEvento: horaEvento,
+                    tipoEve: tipoEve,
+                    detalleEvento: detalleEvento,
+                    valorGraficaEv: valorGraficaEv
+                },
+            }});
+
+        return res.json({ cirugia });
+    } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const saveCasoObsRN = async (req: any, res: Response) => {
+    try {
+        const {
+            pid,
+            Genero, HrNacimiento,
+            Alumbramiento, Apgar1,
+            Apgar5, Capurro,
+            Peso, Talla
+        } = req.body;
+
+        const cirugia = await Cirugias.findOneAndUpdate(
+            { pid: pid },
+            { $push: {
+                // Datos del recien nacido
+                casoObsRecNac:{
+                    Genero: Genero,
+                    HrNacimiento: HrNacimiento,
+                    Alumbramiento: Alumbramiento,
+                    Apgar1: Apgar1,
+                    Apgar5: Apgar5,
+                    Capurro: Capurro,
+                    Peso: Peso,
+                    Talla: Talla,
+                }
+            }});
+
+        return res.json({ cirugia });
     } catch (error) {
         logger.log({
             level: 'error',
