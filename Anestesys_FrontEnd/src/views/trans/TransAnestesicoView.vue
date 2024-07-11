@@ -8375,12 +8375,11 @@ export default defineComponent({
           this.gridBD.push(this.hl7mess[this.hl7mess.length - 1]);
           this.hl7mess = [];
                   
-          // PRUEBAS DE PAS Y PAD INTRUSIVAS
           if(this.grid[this.grid.length - 1].datos[2].valor.toString() != "-" && this.grid[this.grid.length - 1].datos[3].valor.toString() != "-")
             postAnestStore.EgresoTA = this.grid[this.grid.length - 1].datos[2].valor.toString() + "/" + this.grid[this.grid.length - 1].datos[3].valor.toString();
           else
             postAnestStore.EgresoTA = this.grid[this.grid.length - 1].datos[10].valor.toString() + "/" + this.grid[this.grid.length - 1].datos[11].valor.toString();
-          // HASTA AQUI SE REALIZARON LOS CAMBIOS
+
           postAnestStore.EgresoFC = this.grid[this.grid.length - 1].datos[0].valor;
           postAnestStore.EgresoFR = this.grid[this.grid.length - 1].datos[14].valor;
           postAnestStore.EgresoTemp = this.grid[this.grid.length - 1].datos[7].valor;

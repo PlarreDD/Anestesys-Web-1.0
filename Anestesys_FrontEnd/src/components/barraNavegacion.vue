@@ -351,7 +351,7 @@
 
                           <tbody>
                             <!-- Mostrar los datos que se encuentren en preIdStore en una tabla -->
-                            <tr v-for="( cirujano, index ) in preIdStore.cirujanos.lista">
+                            <tr v-for="( cirujano, index ) in preIdStore.cirujanos">
 
                               <td class="text-white">
                                 {{ cirujano }}
@@ -380,7 +380,7 @@
 
                           <tbody>
                             <!-- Mostrar los datos que se encuentren en preIdStore en una tabla -->
-                            <tr v-for="( anestesiologo ) in preIdStore.anestVPA.lista">
+                            <tr v-for="( anestesiologo ) in preIdStore.anestVPA">
                               <td class="text-white">
                                 {{ anestesiologo }}
                               </td>                                                          
@@ -408,7 +408,7 @@
 
                           <tbody>
                             <!-- Mostrar los datos que se encuentren en preIdStore en una tabla -->
-                            <tr v-for="( residente ) in preIdStore.resdAnest.lista">
+                            <tr v-for="( residente ) in preIdStore.resdAnest">
                               <td class="text-white">
                                 {{ residente }}
                               </td>                                                          
