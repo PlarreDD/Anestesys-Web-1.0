@@ -382,15 +382,15 @@ export const saveCx = async (req: any, res:Response) => {
 };
 
 /* Los metodos ya deben ser update */
-export const saveEstudios = async (req: any, res: Response) => {
+export const savePreEstudios = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { id,
                 val_Estudios } = req.body;
-        
+
         const valest = await Cirugias.findOneAndUpdate(
-            { pid: pid },
+            { _id: id },
             {$push: {
-                val_Estudios: {
+                Estudios: {
                     estudio: val_Estudios[0],
                     especifEstudio: val_Estudios[1]
                 }
@@ -410,9 +410,11 @@ export const saveEstudios = async (req: any, res: Response) => {
 export const saveMSVdat = async (req: any, res: Response) => {
     try {
         const {
-            pid,
+            id,
             datosMSV
         } = req.body;
+
+        console.log(id, datosMSV);
 
         const dataToInsert = datosMSV.map(
             (data: { 
@@ -436,35 +438,30 @@ export const saveMSVdat = async (req: any, res: Response) => {
                 }));
 
         const cirugia = await Cirugias.findOneAndUpdate(
-            { pid: pid },
+            { _id: id },
             { $addToSet:{ datosMSV: { $each: dataToInsert } } });
 
         return res.json({ cirugia });
     } catch (error) {
         logger.log({
             level: 'error',
-            message: 'Error de servidor', error
+            message: 'Error al guardar datos del MSV', error
         });
-        return res.status(500).json({Error: 'Error de servidor'});
+        return res.status(500).json({Error: 'Error al guardar datos del MSV'});
     }
 };
 
 export const saveMedicamentos = async (req: any, res: Response) => {
     try {
         const {
-            pid,
+            id,
             tipoMed, medicamento, dosisMed,
             unidadMed, viaMed, horaInicioMed,
             horaFinalMed, observacionesMed, valorGrafica
         } = req.body
 
-        console.log(pid,
-            tipoMed, medicamento, dosisMed,
-            unidadMed, viaMed, horaInicioMed,
-            horaFinalMed, observacionesMed, valorGrafica);
-
         const cirugia  = await Cirugias.findOneAndUpdate(
-            { pid: pid },
+            { _id: id },
             // Datos del medicamento
             {$push: {
                 medicamentosCx: {
@@ -494,14 +491,14 @@ export const saveMedicamentos = async (req: any, res: Response) => {
 
 export const saveRelevos = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { id,
                 // Datos relevos
                 horaRelevo, tipoRel, matriculaRel,
                 anestesiologoRel, observacionesRel
               } = req.body;
 
         const cirugia = await Cirugias.findOneAndUpdate(
-            { pid: pid },
+            { _id: id },
             { $push: {
                 // Datos del relevo
                 relevoCx: {
@@ -525,14 +522,14 @@ export const saveRelevos = async (req: any, res: Response) => {
 
 export const saveEventos = async (req: any, res: Response) => {
     try {
-        const { pid,
+        const { id,
                 // Datos relevos
                 horaEvento, tipoEve,
                 detalleEvento, valorGraficaEv
               } = req.body;
 
         const cirugia = await Cirugias.findOneAndUpdate(
-            { pid: pid },
+            { _id: id },
             { $push: {
                 // Datos del relevo
                 evCriticoCx: {
@@ -556,7 +553,7 @@ export const saveEventos = async (req: any, res: Response) => {
 export const saveCasoObsRN = async (req: any, res: Response) => {
     try {
         const {
-            pid,
+            id,
             Genero, HrNacimiento,
             Alumbramiento, Apgar1,
             Apgar5, Capurro,
@@ -564,7 +561,7 @@ export const saveCasoObsRN = async (req: any, res: Response) => {
         } = req.body;
 
         const cirugia = await Cirugias.findOneAndUpdate(
-            { pid: pid },
+            { _id: id },
             { $push: {
                 // Datos del recien nacido
                 casoObsRecNac:{

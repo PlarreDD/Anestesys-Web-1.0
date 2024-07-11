@@ -13,7 +13,13 @@ import { getPaciente,
          getCIE9} from "../controllers/preanest.controller";
 
 import {
-    saveCx
+    saveCx,
+    savePreEstudios,
+    saveMSVdat,
+    saveMedicamentos,
+    saveRelevos,
+    saveEventos,
+    saveCasoObsRN
 } from "../controllers/cirugias.controller";
 
 const router = Router();
@@ -37,5 +43,11 @@ router.get('/cie10/uno/:nombre', requireToken, getCIE10);
 router.get('/cie9/uno/:nombre', requireToken, getCIE9);
 
 router.post('/cxN', requireToken, saveCx);
+router.post('/svE', requireToken, savePreEstudios);
+router.post('/svMSVd', requireToken, saveMSVdat);
+router.post('/svMed', requireToken, saveMedicamentos);
+router.post('/svRel', requireToken, saveRelevos);
+router.post('/svEv', requireToken, saveEventos);
+router.post('/svCORN', requireToken, saveCasoObsRN);
 
 export default router;
