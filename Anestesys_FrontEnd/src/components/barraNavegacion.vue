@@ -617,11 +617,11 @@
 
                     <div class="col-md-1">
                       <template v-if="editar === false">
-                        <button
+                        <!-- <button
                           type="button"
                           class="btn btn-modal-medicamentos fw-bold"
                           @click="agregarMVS"> Agregar
-                        </button>
+                        </button> -->
                       </template>
                     </div>
                   </form>
@@ -934,7 +934,7 @@ export default defineComponent({
     this.mostrarPassRep();
 
     medStore.getMedicamentosList();
-    this.listadoMonitor();
+    // this.listadoMonitor();
     this.user.nomUsr = this.userStore.Nombre
     this.user.apUsr = this.userStore.Apellido
     this.user.fechaNac = this.userStore.FechaNac
@@ -1078,51 +1078,51 @@ export default defineComponent({
       }
     },
 
-    async agregarMVS(){
-      try {
-        // medStore.monitor != "1.1.1.1" Comprobación para permitir agregar un monitor cuando solo esta el 1.1.1.1
-        // que hace que exista la animación de monitor desconectado
-        if(medStore.monitor.length != 0 && medStore.monitor != "1.1.1.1"){
-          swal.fire({
-              title: "Elimine el monitor antes de agregar uno nuevo",
-              icon: "warning",
-              showConfirmButton: false,
-              showCloseButton: true,
-              toast: true,
-              timer: 2500,
-              timerProgressBar: true,
-              position: "top-end",
-            });
-        }
-        else{
-          if (
-            this.configMonitor.nomMonitor == undefined ||
-            this.configMonitor.nomMonitor == ""
-          ) {
-            swal.fire({
-              title: "Ingrese el modelo del monitor",
-              icon: "warning",
-              showConfirmButton: false,
-              showCloseButton: true,
-              toast: true,
-              timer: 2500,
-              timerProgressBar: true,
-              position: "top-end",
-            });
-          } else {
-            await medStore.pingMonitor(String(this.configMonitor.nomMonitor),
-                                       String(this.configMonitor.dirIPMonitor));
+    // async agregarMVS(){
+    //   try {
+    //     // medStore.monitor != "1.1.1.1" Comprobación para permitir agregar un monitor cuando solo esta el 1.1.1.1
+    //     // que hace que exista la animación de monitor desconectado
+    //     if(medStore.monitor.length != 0 && medStore.monitor != "1.1.1.1"){
+    //       swal.fire({
+    //           title: "Elimine el monitor antes de agregar uno nuevo",
+    //           icon: "warning",
+    //           showConfirmButton: false,
+    //           showCloseButton: true,
+    //           toast: true,
+    //           timer: 2500,
+    //           timerProgressBar: true,
+    //           position: "top-end",
+    //         });
+    //     }
+    //     else{
+    //       if (
+    //         this.configMonitor.nomMonitor == undefined ||
+    //         this.configMonitor.nomMonitor == ""
+    //       ) {
+    //         swal.fire({
+    //           title: "Ingrese el modelo del monitor",
+    //           icon: "warning",
+    //           showConfirmButton: false,
+    //           showCloseButton: true,
+    //           toast: true,
+    //           timer: 2500,
+    //           timerProgressBar: true,
+    //           position: "top-end",
+    //         });
+    //       } else {
+    //         await medStore.pingMonitor(String(this.configMonitor.nomMonitor),
+    //                                    String(this.configMonitor.dirIPMonitor));
     
-            this.configMonitor.nomMonitor = "";
-            this.configMonitor.dirIPMonitor = "";  
-          }
-        }
+    //         this.configMonitor.nomMonitor = "";
+    //         this.configMonitor.dirIPMonitor = "";  
+    //       }
+    //     }
   
-        await medStore.listMonitor();
-      } catch (error) {
-        window.log.error('Ocurrió un error:', error);
-      }
-    },
+    //     await medStore.listMonitor();
+    //   } catch (error) {
+    //     window.log.error('Ocurrió un error:', error);
+    //   }
+    // },
 
     async validaEliminarMonitor(idMonitor) {
       try {
@@ -1136,7 +1136,7 @@ export default defineComponent({
           })
           .then((result) => {
             if (result.isConfirmed) {
-              this.eliminarMonitor(idMonitor);
+              // this.eliminarMonitor(idMonitor);
             }
           });
       } catch (error) {
@@ -1144,22 +1144,22 @@ export default defineComponent({
       }
     },
 
-    async eliminarMonitor(idMonitor) {
-      try {
-        await medStore.deleteMonitor(idMonitor);
-        await medStore.listMonitor();
-      } catch (error) {
-        window.log.error('Ocurrió un error:', error);
-      }
-    },
+    // async eliminarMonitor(idMonitor) {
+    //   try {
+    //     await medStore.deleteMonitor(idMonitor);
+    //     await medStore.listMonitor();
+    //   } catch (error) {
+    //     window.log.error('Ocurrió un error:', error);
+    //   }
+    // },
 
-    async listadoMonitor() {
-      try {
-        await medStore.listMonitor();
-      } catch (error) {
-        window.log.error('Ocurrió un error:', error);
-      }
-    },
+    // async listadoMonitor() {
+    //   try {
+    //     await medStore.listMonitor();
+    //   } catch (error) {
+    //     window.log.error('Ocurrió un error:', error);
+    //   }
+    // },
 
     async mostrarInputsPerfil(){
       this.perfilData = true

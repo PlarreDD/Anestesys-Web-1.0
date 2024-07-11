@@ -14,16 +14,16 @@ const MedicamentoSchema = new Schema({
 });
 
 /* Monitor */
-const MVSSchema = new Schema({
-    nombreMVS: { type: String },
-    dirIPMVS: {
-        type: String,
-        required: true,
-        trim: true,
-        unique: true,
-    },
-    IP_HOST: { type: String },
-})
+// const MVSSchema = new Schema({
+//     nombreMVS: { type: String },
+//     dirIPMVS: {
+//         type: String,
+//         required: true,
+//         trim: true,
+//         unique: true,
+//     },
+//     IP_HOST: { type: String },
+// })
 
 export const Medicamento = model ('Medicamento', MedicamentoSchema);
-export const MVS = model ('MVS', MVSSchema);
+// export const MVS = model ('MVS', MVSSchema);
