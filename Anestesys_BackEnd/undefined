@@ -1,0 +1,35 @@
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-11T21:40:49.023Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-11T21:43:12.516Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-11T21:43:58.292Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-11T21:46:18.287Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-11T22:09:22.021Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-11T22:10:17.610Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-11T22:12:05.615Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-11T22:12:07.177Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-11T22:12:07.565Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-11T22:12:08.180Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-11T22:13:27.817Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-12T15:05:25.153Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-12T15:05:37.069Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-12T15:14:35.777Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-12T15:15:18.562Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-12T15:17:27.469Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-12T16:39:16.828Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-12T18:41:43.587Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-12T18:41:47.627Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-12T18:43:40.366Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-12T18:44:10.470Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-12T19:24:51.724Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-12T19:27:02.245Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-12T19:37:29.349Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-15T17:18:47.817Z"}
+error: Error al guardar la ficha de cirugía {"error":{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"0000000000000000000000000\" (type string) at path \"pid\" for model \"Cirugias\"","name":"CastError","path":"pid","reason":{},"stringValue":"\"0000000000000000000000000\"","value":"0000000000000000000000000","valueType":"string"},"timestamp":"2024-07-15T18:13:20.778Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-15T18:13:59.942Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-15T19:06:49.689Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-15T19:07:49.270Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-15T19:08:00.842Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-15T22:15:37.113Z"}
+error: Error al guardar la ficha de cirugía {"error":{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"\" (type string) at path \"_id\" for model \"Cirugias\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"\"","value":"","valueType":"string"},"timestamp":"2024-07-15T22:16:16.083Z"}
+error: Error al guardar la ficha de cirugía {"error":{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"0\" (type string) at path \"_id\" for model \"Cirugias\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"0\"","value":"0","valueType":"string"},"timestamp":"2024-07-15T22:17:17.235Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-15T22:21:50.690Z"}
+error: Error al guardar la ficha de cirugía {"error":{},"timestamp":"2024-07-15T22:32:24.755Z"}
