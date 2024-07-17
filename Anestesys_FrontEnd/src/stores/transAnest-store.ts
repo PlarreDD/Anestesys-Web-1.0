@@ -1115,6 +1115,7 @@ export const useTransAnestStore = defineStore('transAn', {
             })
             .then((res: any) => {
                 this.medicamentos = res.data.medicamento;                             
+                this.medicamentosAgrupados = res.data.medicamento;
             })
             .catch((e: any) => {
                 window.log.error('Ocurrió un error:', e)
@@ -1131,6 +1132,7 @@ export const useTransAnestStore = defineStore('transAn', {
             })
             .then((res: any) => {
                 this.medicamentos = res.data.medicamento;                             
+                this.medicamentosAgrupados = res.data.medicamento;
             })
             .catch((e: any) => {
                 window.log.error('Ocurrió un error:', e)
@@ -1211,7 +1213,7 @@ export const useTransAnestStore = defineStore('transAn', {
             });
         },
 
-        async updateSumaMedicamentos(medicamentos: any, pid:string){      
+        async updateSumaMedicamentos(regTransAnest: any, pid:string){      
             await apiAxios({
             url: `/trans/medicSuma/suma/${String(pid)}`,
             method: "PUT",
@@ -1219,7 +1221,7 @@ export const useTransAnestStore = defineStore('transAn', {
                 Authorization: "Bearer " + userStore.token,
             },
             data: {
-                medicamentosSuma: medicamentos
+                medicamentosSuma: regTransAnest
             },
         })
         .then((res: any) => {
@@ -1238,7 +1240,7 @@ export const useTransAnestStore = defineStore('transAn', {
         });
         },
 
-        async updateNuevoSumaMedicamentos(medicamentos:any, pid:string, cxid:string){
+        async updateNuevoSumaMedicamentos(regTransAnest:any, pid:string, cxid:string){
             await apiAxios({
                 url: `/trans/medicSuma/suma/add/${String(pid)}/${String(cxid)}`,
                 method: "PUT",
@@ -1246,7 +1248,7 @@ export const useTransAnestStore = defineStore('transAn', {
                     Authorization: "Bearer " + userStore.token,
                 },
                 data: {
-                    medicamentosSuma: medicamentos
+                    medicamentosSuma: regTransAnest
                 },
             })
             .then((res: any) => {

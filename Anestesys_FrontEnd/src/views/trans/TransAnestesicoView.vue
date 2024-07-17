@@ -3750,8 +3750,8 @@ export default defineComponent({
 
         /***********************TRANS***********************/
         /*Balance Parcial*/
-        // let balanceParcial = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial.map(item => 
-        //     item.balanceCx.map(balance => balance.horaBalance +'   '+ balance.ingresos +'   '+ balance.egresos)).flat();
+        let balanceParcial = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial.map(item => 
+            item.balanceCx.map(balance => balance.horaBalance +'   '+ balance.ingresos +'   '+ balance.egresos)).flat();
 
         /*Datos de Medicamentos Agrupados*/
         let medicamentoAg = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.medicamentoN).flat();
@@ -3822,6 +3822,8 @@ export default defineComponent({
             { text: i < horaFinal.length ? horaFinal[i] : '', style: 'SF', fontSize: 8, bold: true },
           ]);
         };
+
+        // console.log("medicamentos: "+ JSON.stringify(tablaMedicamentos));
 
         /*Datos del Relevo*/        
         let listaRelevosHr = transAnestStore.relevos === null ? [' '] : transAnestStore.relevos.map(item=>
@@ -8622,11 +8624,17 @@ export default defineComponent({
 
     medicamentosAgrupados(): GrupoMedicamento[] {
       // Verifica que `medicamentos` tenga al menos un elemento
-      if (!this.transAnestStore.medicamentos || this.transAnestStore.medicamentos.length === 0) {
+      if (!this.transAnestStore.medicamentosAgrupados || this.transAnestStore.medicamentosAgrupados.length === 0) {
         return [];
       }
 
-      const medicamentos = this.transAnestStore.medicamentos[0].medicamentosCx;
+      const medicamentos = this.transAnestStore.medicamentosAgrupados[0].medicamentosCx;
+
+      // Verifica que `medicamentosCx` esté definido y sea un array
+      if (!Array.isArray(medicamentos)) {
+        return [];
+      }
+
       const grouped: { [key: string]: { bolo?: number; unidadBolo?: string; infusion?: number; unidadInfusion?: string; total?: number; unidadTotal?: string } } = {};
 
       medicamentos.forEach((med) => {

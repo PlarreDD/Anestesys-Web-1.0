@@ -850,7 +850,7 @@ const updateSumaMedicamentos = (req, res) => __awaiter(void 0, void 0, void 0, f
         const menuTrans = yield TransAnestesico_1.MenuTrans.findOneAndUpdate({ pid: pid }, { $push: {
                 medicamentosSuma: { $each: medicamentosSuma }
             }
-        });
+        }, { new: true, upsert: true });
         return res.json({ menuTrans });
     }
     catch (error) {
@@ -870,7 +870,7 @@ const updateNuevoSumaMedicamentos = (req, res) => __awaiter(void 0, void 0, void
         const menuTrans = yield TransAnestesico_1.MenuTrans.findOneAndUpdate({ pid: pid, cxid: cxid }, { $push: {
                 medicamentosSuma: { $each: medicamentosSuma }
             }
-        });
+        }, { new: true, upsert: true });
         return res.json({ menuTrans });
     }
     catch (error) {
