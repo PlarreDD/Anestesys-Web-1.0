@@ -21,11 +21,12 @@ router.put('/add/:id', requireToken_1.requireToken, preanest_controller_1.update
 router.put('/ante/:id', requireToken_1.requireToken, preanest_controller_1.updateAnteriorPaciente);
 router.get('/cie10/uno/:nombre', requireToken_1.requireToken, preanest_controller_1.getCIE10);
 router.get('/cie9/uno/:nombre', requireToken_1.requireToken, preanest_controller_1.getCIE9);
-router.post('/cxN', requireToken_1.requireToken, cirugias_controller_1.saveCx);
+router.post('/cxN/', requireToken_1.requireToken, cirugias_controller_1.saveCx);
 router.post('/svE', requireToken_1.requireToken, cirugias_controller_1.savePreEstudios);
 router.post('/svMSVd', requireToken_1.requireToken, cirugias_controller_1.saveMSVdat);
 router.post('/svMed', requireToken_1.requireToken, cirugias_controller_1.saveMedicamentos);
 router.post('/svRel', requireToken_1.requireToken, cirugias_controller_1.saveRelevos);
 router.post('/svEv', requireToken_1.requireToken, cirugias_controller_1.saveEventos);
 router.post('/svCORN', requireToken_1.requireToken, cirugias_controller_1.saveCasoObsRN);
+router.get('/CN/:id', requireToken_1.requireToken, cirugias_controller_1.getCxN);
 exports.default = router;

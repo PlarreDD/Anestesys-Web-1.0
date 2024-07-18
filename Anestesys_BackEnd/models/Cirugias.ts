@@ -1,5 +1,42 @@
 import { Schema, model } from "mongoose";
 
+/* Fichas Id */
+const FichaIdsSchema = new Schema({
+    /* Información obligatoria a llenar en el cuestionario */
+    numExpediente: {
+        type: String,
+        required: true,
+        trim: true,
+        unique: true,
+    },
+    
+    nomPaciente: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    
+    uid: {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+        required: true,
+    },
+
+    fechaNPaciente: { type: String, },
+    edadPaciente: { type: String, },    
+    generoPaciente: { type: String, },
+
+    /* Datos Demográficos */
+    nacionalidad: { type: String, },
+    CURP: { type: String, },
+    folioID: { type: String, },
+    estNacimiento: { type: String, },
+    estResidencia: { type: String, },
+    alcaldia: { type: String, },
+    colonia: { type: String, },
+    codigoPostal: { type: String, }
+});
+
 /* Información Cirugía del Paciente*/
 const CirugiasSchema = new Schema({
     /* Id del paciente para enlazar la tabla */
@@ -389,4 +426,5 @@ const CirugiasSchema = new Schema({
     }],
 });
 
+export const FichaIds = model('FichaIds', FichaIdsSchema);
 export const Cirugias = model('Cirugias', CirugiasSchema);
