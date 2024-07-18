@@ -1,6 +1,6 @@
 import { Response } from "express";
 import logger from "../logger";
-import { Cirugias } from "../models/Cirugias"
+import { FichaIds, Cirugias } from "../models/Cirugias"
 import { UpdateResult } from "mongodb"
 
 export const saveCx = async (req: any, res:Response) => {
@@ -635,4 +635,22 @@ export const getCxN = async (req: any, res: Response) => {
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
+
+export const getCirugias = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        const ficha = await FichaIds.find({numExpediente: id})
+        const cirugias = await Cirugias.find({pid: ficha[0].id});
+
+        return res.json({ficha, cirugias });
+    } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+}
 

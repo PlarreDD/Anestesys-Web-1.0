@@ -7,10 +7,10 @@ import { getPaciente,
          createNuevoRegistroPaciente,
          updateNuevoRegistroPaciente,
          updateAnteriorPaciente,
-         getCirugias,
          getPDFData,
          getCIE10,
          getCIE9} from "../controllers/preanest.controller";
+        //  getCirugias,
 
 import {
     saveCx,
@@ -22,6 +22,7 @@ import {
     saveCasoObsRN,
     updateSumaMedicamentos,
     getCxN,
+    getCirugias,
     deletePreEstudios,
     deleteMedicamento,
     deleteRelevos,
@@ -37,7 +38,7 @@ const router = Router();
 // PATCH/PUT    /preId/:id      Actualizar paciente
 
 /*------------------- PreId --------------------*/
-router.get('/cx/:id', requireToken, getCirugias)
+// router.get('/cx/:id', requireToken, getCirugias)
 router.get('/cirugia/cx/:id', requireToken, getPDFData)
 router.get('/exp/:numExpediente', requireToken, getExpedientes)
 router.get('/:id', requireToken, getPaciente);
@@ -65,5 +66,6 @@ router.delete('/dltMed', requireToken, deleteMedicamento);
 router.delete('/dltRel', requireToken, deleteRelevos);
 router.delete('/dltEv', requireToken, deleteEventos);
 router.delete('/dltCORN', requireToken, deleteCasoObsRN);
+router.get('/cx/:id', requireToken, getCirugias);
 
 export default router;
