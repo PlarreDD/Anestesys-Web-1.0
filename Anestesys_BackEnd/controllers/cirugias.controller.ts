@@ -36,7 +36,6 @@ export const saveCx = async (req: any, res:Response) => {
             altaRec,
         } = req.body;
 
-        
         if (id) {
             var cirugia: UpdateResult | null = await Cirugias.findOne({ _id: id });
             const cx: any = cirugia;
@@ -147,10 +146,46 @@ export const savePreEstudios = async (req: any, res: Response) => {
     } catch (error) {
         logger.log({
             level: 'error',
-            message: 'Error de servidor', error
+            message: 'Error al guardar los Estudios', error
         });
         
-        return res.status(500).json({Error: 'Error de servidor'});
+        return res.status(500).json({Error: 'Error al guardar los Estudios'});
+    }
+};
+
+export const deletePreEstudios = async (req: any, res: Response) => {
+    try {
+        const {
+            cxID,
+            estID
+        } = req.body;
+
+        const cirugia = await Cirugias.findOneAndUpdate(
+            {"_id": cxID},
+            { $pull: {
+                    Estudios: {_id: estID}
+                }
+            }
+        );
+
+        return res.json({ cirugia })
+    } catch (error) {
+        logger.error('Ocurrió un error:', error);
+
+        if (error.kind === "ObjectId") {
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
+        
+        logger.log({
+            level: 'error',
+            message: 'Error al borrar los Estudios', error
+        });
+
+        return res.status(500).json({ error: "Error al borrar los Estudios" });
     }
 };
 
@@ -166,7 +201,7 @@ export const saveMedicamentos = async (req: any, res: Response) => {
         const cirugia  = await Cirugias.findOneAndUpdate(
             { _id: id },
             // Datos del medicamento
-            {$push: {
+            { $push: {
                 medicamentosCx: {
                     tipoMed: tipoMed,
                     medicamento: medicamento,
@@ -189,6 +224,42 @@ export const saveMedicamentos = async (req: any, res: Response) => {
         });
         
         return res.status(500).json({ Error: 'Error al guardar el medicamento' });
+    }
+};
+
+export const deleteMedicamento = async (req: any, res: Response) => {
+    try {
+        const {
+            cxID,
+            medID
+        } = req.body;
+
+        const cirugia = await Cirugias.findOneAndUpdate(
+            {"_id": cxID},
+            { $pull: {
+                    medicamentosCx: {_id: medID}
+                }
+            }
+        );
+
+        return res.json({ cirugia })
+    } catch (error) {
+        logger.error('Ocurrió un error:', error);
+
+        if (error.kind === "ObjectId") {
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
+        
+        logger.log({
+            level: 'error',
+            message: 'Error al borrar los Medicamentos', error
+        });
+
+        return res.status(500).json({ error: "Error al borrar los Medicamentos" });
     }
 };
 
@@ -224,6 +295,42 @@ export const saveRelevos = async (req: any, res: Response) => {
     }
 };
 
+export const deleteRelevos = async (req: any, res: Response) => {
+    try {
+        const {
+            cxID,
+            relID
+        } = req.body;
+
+        const cirugia = await Cirugias.findOneAndUpdate(
+            {"_id": cxID},
+            { $pull: {
+                relevoCx: {_id: relID}
+                }
+            }
+        );
+
+        return res.json({ cirugia })
+    } catch (error) {
+        logger.error('Ocurrió un error:', error);
+
+        if (error.kind === "ObjectId") {
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
+        
+        logger.log({
+            level: 'error',
+            message: 'Error al borrar los Relevos', error
+        });
+
+        return res.status(500).json({ error: "Error al borrar los Relevos" });
+    }
+};
+
 export const saveEventos = async (req: any, res: Response) => {
     try {
         const {
@@ -252,6 +359,42 @@ export const saveEventos = async (req: any, res: Response) => {
             message: 'Error de servidor', error
         });
         return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const deleteEventos = async (req: any, res: Response) => {
+    try {
+        const {
+            cxID,
+            evID
+        } = req.body;
+
+        const cirugia = await Cirugias.findOneAndUpdate(
+            {"_id": cxID},
+            { $pull: {
+                    evCriticoCx: {_id: evID}
+                }
+            }
+        );
+
+        return res.json({ cirugia })
+    } catch (error) {
+        logger.error('Ocurrió un error:', error);
+
+        if (error.kind === "ObjectId") {
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
+        
+        logger.log({
+            level: 'error',
+            message: 'Error al borrar los Relevos', error
+        });
+
+        return res.status(500).json({ error: "Error al borrar los Relevos" });
     }
 };
 
@@ -288,6 +431,42 @@ export const saveCasoObsRN = async (req: any, res: Response) => {
             message: 'Error de servidor', error
         });
         return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
+export const deleteCasoObsRN = async (req: any, res: Response) => {
+    try {
+        const {
+            cxID,
+            cornID
+        } = req.body;
+
+        const cirugia = await Cirugias.findOneAndUpdate(
+            {"_id": cxID},
+            { $pull: {
+                casoObsRecNac: {_id: cornID}
+                }
+            }
+        );
+
+        return res.json({ cirugia })
+    } catch (error) {
+        logger.error('Ocurrió un error:', error);
+
+        if (error.kind === "ObjectId") {
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
+        
+        logger.log({
+            level: 'error',
+            message: 'Error al borrar el Caso obstetrico', error
+        });
+
+        return res.status(500).json({ error: "Error al borrar el Caso obstetrico" });
     }
 };
 
@@ -374,6 +553,27 @@ export const updateResAnest = async (req: any, res: Response) => {
     }
 };
 
+export const updateSumaMedicamentos = async (req: any, res: Response) => {
+    try {
+        const {
+            id,
+            medicamentosSuma } = req.body;  
+
+        const cirugia = await Cirugias.findOneAndUpdate(
+            { _id: id },
+            { $addToSet:{ medicamentosSuma: medicamentosSuma } },
+        );
+
+        return res.json({ cirugia });
+    } catch (error) {
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({Error: 'Error de servidor'});
+    }
+};
+
 /* Falta probar que funcione correctamente */
 export const saveMSVdat = async (req: any, res: Response) => {
     try {
@@ -381,8 +581,6 @@ export const saveMSVdat = async (req: any, res: Response) => {
             id,
             datosMSV
         } = req.body;
-
-        console.log(id, datosMSV);
 
         const dataToInsert = datosMSV.map(
             (data: { 
@@ -404,6 +602,8 @@ export const saveMSVdat = async (req: any, res: Response) => {
                 PAM_IN: data.PAM_IN, FiCO2: data.FiCO2,
                 FR: data.FR, HoraGeneracion: data.HoraGeneracion,
                 }));
+
+        console.log(id, dataToInsert);
 
         const cirugia = await Cirugias.findOneAndUpdate(
             { _id: id },
@@ -435,3 +635,4 @@ export const getCxN = async (req: any, res: Response) => {
         return res.status(500).json({Error: 'Error de servidor'});
     }
 };
+

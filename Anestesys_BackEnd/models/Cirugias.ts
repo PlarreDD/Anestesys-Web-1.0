@@ -281,6 +281,15 @@ const CirugiasSchema = new Schema({
         observacionesMed: {type: String},
         valorGrafica: {type: String},
     }],
+    medicamentosSuma: [{
+        medicamentoN: {type: String},
+        bolo: {type: String},
+        unidadBolo: {type: String},
+        infusion: {type: String},
+        unidadInfusion: {type: String},
+        total: {type: String},
+        unidadTotal: {type: String}
+    }],
     /******************** Relevo *******************/
     relevoCx: [{
         horaRelevo:{ type: String },

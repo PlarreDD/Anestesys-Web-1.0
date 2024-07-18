@@ -20,7 +20,13 @@ import {
     saveRelevos,
     saveEventos,
     saveCasoObsRN,
+    updateSumaMedicamentos,
     getCxN,
+    deletePreEstudios,
+    deleteMedicamento,
+    deleteRelevos,
+    deleteEventos,
+    deleteCasoObsRN
 } from "../controllers/cirugias.controller";
 
 const router = Router();
@@ -50,7 +56,14 @@ router.post('/svMed', requireToken, saveMedicamentos);
 router.post('/svRel', requireToken, saveRelevos);
 router.post('/svEv', requireToken, saveEventos);
 router.post('/svCORN', requireToken, saveCasoObsRN);
+router.post('/svSumMed', requireToken, updateSumaMedicamentos);
 
 router.get('/CN/:id', requireToken, getCxN);
+
+router.delete('/dltE', requireToken, deletePreEstudios);
+router.delete('/dltMed', requireToken, deleteMedicamento);
+router.delete('/dltRel', requireToken, deleteRelevos);
+router.delete('/dltEv', requireToken, deleteEventos);
+router.delete('/dltCORN', requireToken, deleteCasoObsRN);
 
 export default router;
