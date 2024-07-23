@@ -4,6 +4,8 @@ import { MenuTrans } from "../models/TransAnestesico";
 import { PostRecupera, PostNotaPA } from "../models/PostAnestesico";
 import logger from '../logger';
 
+import { FichaIds } from "../models/Cirugias"
+
 /********************************************************************/
 /***************************  ID PACIENTE ***************************/
 /********************************************************************/
@@ -124,48 +126,32 @@ export const getPaciente = async (req: any, res: Response) => {
 /* Funcion para registrar la ficha ID de un paciente */
 export const createPaciente = async (req: any, res: Response) => {
     try {
-        const { /* Información principal del paciente */
-                numExpediente, nomPaciente,
-                /* Información adicional del paciente */
-                numEpisodio, fechaNPaciente, edadPaciente,
-                habitacionPaciente, generoPaciente,
-                fechaInPaciente, diagnostico, tipoCx,
-                /* Datos CIE */
-                cie10, cie9, 
-                /* Informacion Médicos */
-                cirugia, fechaCx, hrCx,
-                /* Informacion Médicos */
-                cirujano, anestesiologo, anestesiologoVPA,
-                residenteAnestesia,
-                /* Datos Demográficos */
-                nacionalidad, CURP, folioID, estNacimiento,
-                estResidencia, alcaldia, colonia, codigoPostal } = req.body;        
+        const { 
+            /* Información principal del paciente */
+            numExpediente, nomPaciente,
+            /* Información adicional del paciente */
+            fechaNPaciente, edadPaciente,
+            generoPaciente,
+            /* Datos Demográficos */
+            nacionalidad, CURP, folioID, estNacimiento,
+            estResidencia, alcaldia, colonia, codigoPostal
+        } = req.body;        
         
-        let expediente = await PreIdPacientes.findOne({numExpediente});
+        let expediente = await FichaIds.findOne({numExpediente});
 
         if(expediente) throw {code: 11000};    
 
-        const paciente = new PreIdPacientes({ numExpediente, nomPaciente, uid: req.uid,
-                                           fechaNPaciente, edadPaciente, generoPaciente,
-                                           /* Datos Demográficos */
-                                           nacionalidad, CURP, folioID, estNacimiento,
-                                           estResidencia, alcaldia, colonia, codigoPostal });
-
-        const infoCx = new PreIdPacientesCx({ /* Información adicional  del paciente */
-                                           numEpisodio, pid: paciente._id,  habitacionPaciente,
-                                           fechaInPaciente, diagnostico, tipoCx,
-                                           /* Datos CIE */
-                                           cie10, cie9, 
-                                           /* Informacion Médicos */
-                                           cirugia, fechaCx, hrCx,
-                                           /* Informacion Médicos */
-                                           cirujano, anestesiologo, anestesiologoVPA,
-                                           residenteAnestesia });
+        const paciente = new FichaIds({
+            numExpediente, nomPaciente, uid: req.uid,
+            fechaNPaciente, edadPaciente, generoPaciente,
+            /* Datos Demográficos */
+            nacionalidad, CURP, folioID, estNacimiento,
+            estResidencia, alcaldia, colonia, codigoPostal });
 
         await paciente.save();
-        await infoCx.save();
 
-        return res.json({ paciente, infoCx });
+        console.log("Este es el ID del paciente: " + paciente._id);
+        return res.json({ paciente });
     } catch (error) {
         logger.log({
             level: 'error',

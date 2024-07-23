@@ -242,7 +242,54 @@ export const usePreIdStore = defineStore('preid', {
         VistaRapida: false
     }),
 
-    actions: {        
+    actions: {
+        saveCx(infoCX: any){
+            console.log("infoCX" + JSON.stringify(infoCX));
+            console.log("Desglosadso:" + infoCX.numEpisodio);
+            
+            apiAxios({
+                url: "/cxN",
+                method: "POST" ,
+                headers: {
+                    Authorization: "Bearer " + userStore.token, 
+                },
+                data: {
+                    pid: infoCX.pid,
+                    numEpisodio: infoCX.numEpisodio,
+                    habitacionPacnt: infoCX.habitacionPacnt,
+                    fechaInPacnt: infoCX.fechaInPacnt,
+                    diagnostico: infoCX.diagnostico,
+                    tipoCx: infoCX.tipoCx,
+                    cie10: infoCX.cie10,
+                    cie9: infoCX.cie9,
+
+                    infoProced: [{}],
+                    cuerpoMed: [{}],
+                    antPersPat: [{}],
+                    antPersNoPat: [{}],
+                    sigVit: [{}],
+                    expFis: [{}],
+                    viaAerea: [{}],
+                    perfilBioQ: [{}],
+                    pos_Cuidados: [{}],
+                    sedacion: [{}],
+                    regional: [{}],
+                    anestLocal: [{}],
+                    anestGral: [{}],
+                    obsNotaPre: infoCX.obsNotaPre,
+                    balancesParciales: [{}],
+                    balIng: [{}],
+                    balEgresos: [{}],
+                    datosVentilador: [{}],
+                    tiemposQX: [{}],
+                    notaPA: [{}],
+                    signVitEgQx: [{}],
+                    casoObsRecNac_NumProd: infoCX.casoObsRecNac_NumProd,
+                    notaEval_Obs: infoCX.notaEval_Obs,
+                    altaRec: [{}]
+                }
+            })
+        },
         /************************** Id Paciente **************************/
         savePreId(infoPreIdPaciente: any){
             apiAxios({
@@ -290,10 +337,11 @@ export const usePreIdStore = defineStore('preid', {
             })
             .then((res: any) => {                
                 this.pacienteID = res.data.paciente;
-                this.pacienteCxID = res.data.infoCx;
                 this.actualizarRegId = true
                 this.validaExpediente = false
                 this.desbloqueaMenuLateral = true
+                
+                console.log("IDs" + JSON.stringify(this.pacienteID._id));
                 
                 swal.fire({
                     title: 'Paciente registrado correctamente',

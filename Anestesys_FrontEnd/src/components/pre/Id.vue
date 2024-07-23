@@ -79,7 +79,8 @@
                                     type="submit"
                                     class="btn btn-guardar-info fw-bold"
                                     :class="preIdStore.validaExpediente == true ? 'visible' : 'invisible'"
-                                    @click="preIdStore.savePreId( infoPreIdPaciente )" :disabled="propBloquearInputs == true"> GUARDAR </button>                        
+                                    
+                                    @click="seLoQueTengoQueHacerPeroPrimeroDeboLavarmeLasManos()" :disabled="propBloquearInputs == true"> GUARDAR </button>
 
                             <button data-bs-toggle="tab" 
                                     type="submit"
@@ -1003,6 +1004,11 @@ export default defineComponent({
             }
         },
 /** Fin Residente Anestesia **/
+
+        async seLoQueTengoQueHacerPeroPrimeroDeboLavarmeLasManos(){
+            preIdStore.savePreId( this.infoPreIdPaciente );
+            preIdStore.saveCx( this.infoPreIdPaciente );
+        },
     },
 })
 </script>

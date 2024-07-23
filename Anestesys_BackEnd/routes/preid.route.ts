@@ -49,7 +49,7 @@ router.put('/add/:id',  requireToken, updateNuevoRegistroPaciente);
 router.put('/ante/:id',  requireToken, updateAnteriorPaciente);
 router.get('/cie10/uno/:nombre', requireToken, getCIE10);
 router.get('/cie9/uno/:nombre', requireToken, getCIE9);
-
+///////////////////////// NUEVOS MÉTODOS /////////////////////////
 router.post('/cxN/', requireToken, saveCx);
 router.post('/svE', requireToken, savePreEstudios);
 router.post('/svMSVd', requireToken, saveMSVdat);
@@ -60,12 +60,12 @@ router.post('/svCORN', requireToken, saveCasoObsRN);
 router.post('/svSumMed', requireToken, updateSumaMedicamentos);
 
 router.get('/CN/:id', requireToken, getCxN);
+router.get('/cx/:id', requireToken, getCirugias);
 
 router.delete('/dltE', requireToken, deletePreEstudios);
 router.delete('/dltMed', requireToken, deleteMedicamento);
 router.delete('/dltRel', requireToken, deleteRelevos);
 router.delete('/dltEv', requireToken, deleteEventos);
 router.delete('/dltCORN', requireToken, deleteCasoObsRN);
-router.get('/cx/:id', requireToken, getCirugias);
 
 export default router;
