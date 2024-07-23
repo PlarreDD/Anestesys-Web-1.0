@@ -3,6 +3,42 @@ import logger from "../logger";
 import { FichaIds, Cirugias } from "../models/Cirugias"
 import { UpdateResult } from "mongodb"
 
+export const updateFichaId = async (req: any, res: Response) => {
+    try {
+        const { id } = req.params;
+        const update = req.body;
+
+        const cirugia = await FichaIds.findByIdAndUpdate( id, { 
+                                                                fechaNPaciente: update.fechaNPaciente,
+                                                                edadPaciente: update.edadPaciente,
+                                                                generoPaciente: update.generoPaciente,
+                                                                nacionalidad: update.nacionalidad,
+                                                                CURP: update.CURP,
+                                                                folioID: update.folioID,
+                                                                estNacimiento: update.estNacimiento,
+                                                                alcaldia: update.alcaldia,
+                                                                colonia: update.colonia,
+                                                                codigoPostal: update.codigoPostal,
+                                                            } );            
+        
+        return res.json({ cirugia });
+    } catch (error) {
+        if (error.kind === "ObjectId"){
+            logger.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
+                
+        logger.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({ error: "Error de servidor" });
+    }
+};
+
 export const saveCx = async (req: any, res:Response) => {
     try {
         const { pid, id,

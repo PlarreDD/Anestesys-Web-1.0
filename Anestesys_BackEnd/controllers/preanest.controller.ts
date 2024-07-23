@@ -266,32 +266,32 @@ export const createNuevoRegistroPaciente = async (req: any, res: Response) => {
 };
 
 /* Funcion de actualización de la ficha ID de un paciente */
-export const updateAnteriorPaciente = async (req: any, res: Response) => {
-    try {
-        const { id } = req.params;
-        const updVar = req.body;
+// export const updateAnteriorPaciente = async (req: any, res: Response) => {
+//     try {
+//         const { id } = req.params;
+//         const updVar = req.body;
 
-        const paciente = await PreIdPacientes.findByIdAndUpdate( id, {fechaNPaciente: updVar.fechaNPaciente,
-                                                                    edadPaciente: updVar.edadPaciente,
-                                                                    generoPaciente: updVar.generoPaciente} );            
+//         const paciente = await PreIdPacientes.findByIdAndUpdate( id, {fechaNPaciente: updVar.fechaNPaciente,
+//                                                                     edadPaciente: updVar.edadPaciente,
+//                                                                     generoPaciente: updVar.generoPaciente} );            
         
-        return res.json({ paciente });
-    } catch (error) {
-        if (error.kind === "ObjectId"){
-            logger.log({
-                level: 'error',
-                message: 'Formato de ID incorrecto', error
-            });
-            return res.status(403).json({ error: "Formato de ID incorrecto" });
-        }
+//         return res.json({ paciente });
+//     } catch (error) {
+//         if (error.kind === "ObjectId"){
+//             logger.log({
+//                 level: 'error',
+//                 message: 'Formato de ID incorrecto', error
+//             });
+//             return res.status(403).json({ error: "Formato de ID incorrecto" });
+//         }
                 
-        logger.log({
-            level: 'error',
-            message: 'Error de servidor', error
-        });
-        return res.status(500).json({ error: "Error de servidor" });
-    }
-};
+//         logger.log({
+//             level: 'error',
+//             message: 'Error de servidor', error
+//         });
+//         return res.status(500).json({ error: "Error de servidor" });
+//     }
+// };
 
 /* Funcion de actualización del nuevo registro de la ficha ID de un paciente */
 export const updateNuevoRegistroPaciente = async (req: any, res: Response) => {
