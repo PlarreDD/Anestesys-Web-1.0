@@ -9,8 +9,8 @@ import { getPaciente,
         //  updateAnteriorPaciente,
          getPDFData,
          getCIE10,
+          getCirugia,
          getCIE9} from "../controllers/preanest.controller";
-        //  getCirugias,
 
 import {
     updateFichaId,
@@ -39,7 +39,7 @@ const router = Router();
 // PATCH/PUT    /preId/:id      Actualizar paciente
 
 /*------------------- PreId --------------------*/
-// router.get('/cx/:id', requireToken, getCirugias)
+router.get('/cx/:id', requireToken, getCirugia)
 router.get('/cirugia/cx/:id', requireToken, getPDFData)
 router.get('/exp/:numExpediente', requireToken, getExpedientes)
 router.get('/:id', requireToken, getPaciente);

@@ -65,7 +65,7 @@ export const getCIE9 = async (req: any, res: Response) =>{
 };
 
 /* Función para listar las cirugías */
-export const getCirugias = async (req: any, res: Response) =>{
+export const getCirugia = async (req: any, res: Response) =>{
     try {
         const {id} = req.params;
 

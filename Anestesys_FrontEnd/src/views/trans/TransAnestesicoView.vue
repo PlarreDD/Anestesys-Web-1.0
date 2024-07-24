@@ -823,7 +823,7 @@
                           </thead>
 
                           <tbody>
-                            <tr v-for="(item, index) in medicamentosAgrupados" :key="index">
+                            <tr v-for="(item, index) in medicamentosAgrupado" :key="index">
                               <td class="text-white">{{ item.medicamentoN }}</td>
                               <td class="text-white">{{ item.bolo ? `${item.bolo} ${item.unidadBolo}` : '' }}</td>
                               <td class="text-white">{{ item.infusion ? `${item.infusion} ${item.unidadInfusion}` : '' }}</td>
@@ -1572,9 +1572,9 @@ import { Line } from 'vue-chartjs';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
-// import pdfFonts from "pdfmake/build/vfs_fonts.js";
+import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
-// window.pdfMake.fonts = pdfFonts.pdfMake;
+window.pdfMake.fonts = pdfFonts.pdfMake;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 
@@ -1934,6 +1934,8 @@ export default defineComponent({
       medicamentosFiltrados: [],
       eventosFiltrados: [],
       relevosFiltrados: [],
+
+      medicamentosAgrupado: [],
     }
   },
 
@@ -2022,9 +2024,6 @@ export default defineComponent({
   },
 
   methods: {
-    // mostrarFiltrados(){
-    //   console.log('Med. Filtrados: '+ JSON.stringify(this.medicamentosAgrupados))
-    // },
 
     toggleDataset(index) {   
       if(this.chartData.datasets[index].hidden === true) {
@@ -3750,10 +3749,11 @@ export default defineComponent({
 
         /***********************TRANS***********************/
         /*Balance Parcial*/
-        let balanceParcial = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial.map(item => 
-            item.balanceCx.map(balance => balance.horaBalance +'   '+ balance.ingresos +'   '+ balance.egresos)).flat();
+        // let balanceParcial = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial.map(item => 
+        //     item.balanceCx.map(balance => balance.horaBalance +'   '+ balance.ingresos +'   '+ balance.egresos)).flat();
 
         /*Datos de Medicamentos Agrupados*/
+
         let medicamentoAg = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.medicamentoN).flat();
         let bolo = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.bolo).flat();
         let unidadBolo = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.unidadBolo).flat();
@@ -3822,8 +3822,6 @@ export default defineComponent({
             { text: i < horaFinal.length ? horaFinal[i] : '', style: 'SF', fontSize: 8, bold: true },
           ]);
         };
-
-        // console.log("medicamentos: "+ JSON.stringify(tablaMedicamentos));
 
         /*Datos del Relevo*/        
         let listaRelevosHr = transAnestStore.relevos === null ? [' '] : transAnestStore.relevos.map(item=>
@@ -5731,38 +5729,38 @@ export default defineComponent({
             ]
           },
           //Balance Hídrico Parcial
-          {
-            columns:[
-              {
-                margin: [0, 5, 0, 0],
-                  width: '8%',
-                  table: {
-                    widths: ['*'],
-                    body: [                  
-                      [{ text: 'Hora', font: 'SF', fontSize: 8 }],
-                      [{ text: 'Ingresos', font: 'SF', fontSize: 8 }],
-                      [{ text: 'Egresos', font: 'SF', fontSize: 8 }],
-                      [{ text: 'Balance total', font: 'SF', fontSize: 8}],
-                    ]
-                  }, font: 'SF', fontSize: 8
-              },
-              {
-                margin: [0, 5, 0, 0],
-                table: {
-                  body: [
-                    // Hora                      
-                    transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.horaBalance),
-                    // Ingresos
-                    transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.ingresos),
-                    // Egresos
-                    transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.egresos),
-                    // Balance Total
-                    transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.balanceP)
-                  ]
-                }, font: 'SF', fontSize: 8, bold: true
-              }
-            ]
-          },  
+          // {
+          //   columns:[
+          //     {
+          //       margin: [0, 5, 0, 0],
+          //         width: '8%',
+          //         table: {
+          //           widths: ['*'],
+          //           body: [                  
+          //             [{ text: 'Hora', font: 'SF', fontSize: 8 }],
+          //             [{ text: 'Ingresos', font: 'SF', fontSize: 8 }],
+          //             [{ text: 'Egresos', font: 'SF', fontSize: 8 }],
+          //             [{ text: 'Balance total', font: 'SF', fontSize: 8}],
+          //           ]
+          //         }, font: 'SF', fontSize: 8
+          //     },
+          //     {
+          //       margin: [0, 5, 0, 0],
+          //       table: {
+          //         body: [
+          //           // Hora                      
+          //           transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.horaBalance),
+          //           // Ingresos
+          //           transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.ingresos),
+          //           // Egresos
+          //           transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.egresos),
+          //           // Balance Total
+          //           transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.balanceP)
+          //         ]
+          //       }, font: 'SF', fontSize: 8, bold: true
+          //     }
+          //   ]
+          // },  
           {            
             columns:[
               {
@@ -6925,7 +6923,9 @@ export default defineComponent({
 
                 await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
 
-                transAnestStore.medicamentosAgrupados = this.medicamentosAgrupados
+                // if(this.medicamentosAgrupados != null){
+                //   transAnestStore.medicamentosAgrupados = this.medicamentosAgrupados
+                // }
                 if(transAnestStore.medicamentosAgrupados.length > 0){
                   await transAnestStore.updateSumaMedicamentos(transAnestStore.medicamentosAgrupados, preIdStore.pacienteID._id)
                 }         
@@ -6938,7 +6938,9 @@ export default defineComponent({
 
                 await transAnestStore.saveNuevoTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)  
                 
-                transAnestStore.medicamentosAgrupados = this.medicamentosAgrupados
+                // if(this.medicamentosAgrupados != null){
+                //   transAnestStore.medicamentosAgrupados = this.medicamentosAgrupados                
+                // }
                 if(transAnestStore.medicamentosAgrupados.length > 0){
                   await transAnestStore.updateNuevoSumaMedicamentos(transAnestStore.medicamentosAgrupados, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
                 }
@@ -7288,7 +7290,7 @@ export default defineComponent({
             await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
           }else if(preIdStore.nuevoRegistroPaciente == true){        
             await transAnestStore.getNuevoMedicamentosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-          }
+          }                   
           
           await this.listarMedicamentosTrans();
         }            
@@ -7340,6 +7342,8 @@ export default defineComponent({
             await transAnestStore.getNuevoMedicamentosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
           }
           await this.listarMedicamentosTrans()
+
+          this.medicamentosAgrupado = this.medicamentosAgrupados
         }
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
@@ -8131,8 +8135,6 @@ export default defineComponent({
 
     async comMSV(){
       try {
-        // console.log("Cliente IP "+this.clienteIp);
-        
         const response = await fetch(`http://${this.clienteIp}:5000/apiMVS`);
         const data = await response.text();
         this.informacion = data;
@@ -8335,19 +8337,7 @@ export default defineComponent({
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
-    },
-
-    // Recibe datos del MSV cada segundo
-    // iniRecepDatos(){
-      // console.log("iniRecepDatos");
-      // try {
-      //   this.intervalId = setInterval(() => {
-      //     this.comMSV();
-      //   }, 1000);
-      // } catch (error) {
-      //   window.log.error('Ocurrió un error:', error);
-      // }
-    // },
+    },    
 
     termRecepDatos(){
       try {
