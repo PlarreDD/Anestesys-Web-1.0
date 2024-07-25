@@ -3749,11 +3749,16 @@ export default defineComponent({
 
         /***********************TRANS***********************/
         /*Balance Parcial*/
-        // let balanceParcial = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial.map(item => 
-        //     item.balanceCx.map(balance => balance.horaBalance +'   '+ balance.ingresos +'   '+ balance.egresos)).flat();
+        // Hora
+        let horaBalance = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.horaBalance)
+        // Ingresos
+        let ingresos = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.ingresos)
+        // Egresos
+        let egresos = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.egresos)
+        // Balance Total
+        let balanceP = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.balanceP)
 
         /*Datos de Medicamentos Agrupados*/
-
         let medicamentoAg = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.medicamentoN).flat();
         let bolo = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.bolo).flat();
         let unidadBolo = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.unidadBolo).flat();
@@ -3761,6 +3766,8 @@ export default defineComponent({
         let unidadInfusion = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.unidadInfusion).flat();
         let total = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.total).flat();
         let unidadTotal = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.unidadTotal).flat();
+
+        console.log("agrupados: "+ JSON.stringify(this.medicamentosAgrupado));
 
         let tablaMedicamentosAgrupados = [];
         for (let i = 0; i < Math.max(medicamentoAg.length, bolo.length, unidadBolo.length, infusion.length, unidadInfusion.length, total.length, unidadTotal.length); i++) {
@@ -3804,8 +3811,12 @@ export default defineComponent({
             item.medicamentosCx.map(medicamento => (medicamento.horaInicioMed ?? ' '))).flat();
         let horaInicio = listaMedicamentosHoraIn.slice(0,30);
         let listaMedicamentosHoraFi = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
-            item.medicamentosCx.map(medicamento => (medicamento.horaFinalMed ?? ' '))).flat();
-        let horaFinal = listaMedicamentosHoraFi.slice(0,30);
+            item.medicamentosCx.map(medicamento => (medicamento.horaFinalMed ?? '-'))).flat();
+        let horaFinal = listaMedicamentosHoraFi.slice(0,30); 
+        
+        // let listaMedicamentosHoraFi = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
+        //     medicamento.horaFinalMed === "" ? '-' : medicamento.horaFinalMed).flat();
+        // let horaFinal = listaMedicamentosHoraFi.slice(0,30);  
 
         let tablaMedicamentos = [];
         for (let i = 0; i < Math.max(tipoMed.length, medicamento.length, dosisMed.length, unidadMed.length, viaMed.length, horaInicio.length,horaFinal.length); i++) {
@@ -5729,38 +5740,38 @@ export default defineComponent({
             ]
           },
           //Balance Hídrico Parcial
-          // {
-          //   columns:[
-          //     {
-          //       margin: [0, 5, 0, 0],
-          //         width: '8%',
-          //         table: {
-          //           widths: ['*'],
-          //           body: [                  
-          //             [{ text: 'Hora', font: 'SF', fontSize: 8 }],
-          //             [{ text: 'Ingresos', font: 'SF', fontSize: 8 }],
-          //             [{ text: 'Egresos', font: 'SF', fontSize: 8 }],
-          //             [{ text: 'Balance total', font: 'SF', fontSize: 8}],
-          //           ]
-          //         }, font: 'SF', fontSize: 8
-          //     },
-          //     {
-          //       margin: [0, 5, 0, 0],
-          //       table: {
-          //         body: [
-          //           // Hora                      
-          //           transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.horaBalance),
-          //           // Ingresos
-          //           transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.ingresos),
-          //           // Egresos
-          //           transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.egresos),
-          //           // Balance Total
-          //           transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.balanceP)
-          //         ]
-          //       }, font: 'SF', fontSize: 8, bold: true
-          //     }
-          //   ]
-          // },  
+          {
+            columns:[
+              {
+                margin: [0, 5, 0, 0],
+                  width: '8%',
+                  table: {
+                    widths: ['*'],
+                    body: [                  
+                      [{ text: 'Hora', font: 'SF', fontSize: 8 }],
+                      [{ text: 'Ingresos', font: 'SF', fontSize: 8 }],
+                      [{ text: 'Egresos', font: 'SF', fontSize: 8 }],
+                      [{ text: 'Balance total', font: 'SF', fontSize: 8}],
+                    ]
+                  }, font: 'SF', fontSize: 8
+              },
+              {
+                margin: [0, 5, 0, 0],
+                table: {
+                  body: [
+                    // Hora                      
+                    horaBalance,
+                    // Ingresos
+                    ingresos,
+                    // Egresos
+                    egresos,
+                    // Balance Total
+                    balanceP
+                  ]
+                }, font: 'SF', fontSize: 8, bold: true
+              }
+            ]
+          },  
           {            
             columns:[
               {
@@ -6922,10 +6933,9 @@ export default defineComponent({
                 await transAnestStore.getBalanceHPList(preIdStore.pacienteID._id)
 
                 await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
-
-                // if(this.medicamentosAgrupados != null){
-                //   transAnestStore.medicamentosAgrupados = this.medicamentosAgrupados
-                // }
+                
+                transAnestStore.medicamentosAgrupados = this.medicamentosAgrupados
+                
                 if(transAnestStore.medicamentosAgrupados.length > 0){
                   await transAnestStore.updateSumaMedicamentos(transAnestStore.medicamentosAgrupados, preIdStore.pacienteID._id)
                 }         
@@ -6938,9 +6948,8 @@ export default defineComponent({
 
                 await transAnestStore.saveNuevoTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)  
                 
-                // if(this.medicamentosAgrupados != null){
-                //   transAnestStore.medicamentosAgrupados = this.medicamentosAgrupados                
-                // }
+                transAnestStore.medicamentosAgrupados = this.medicamentosAgrupados
+
                 if(transAnestStore.medicamentosAgrupados.length > 0){
                   await transAnestStore.updateNuevoSumaMedicamentos(transAnestStore.medicamentosAgrupados, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
                 }

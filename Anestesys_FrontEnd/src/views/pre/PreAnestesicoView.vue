@@ -3134,6 +3134,15 @@ export default defineComponent({
         let horaAlta = postAnestStore.HoraAlta === undefined || postAnestStore.HoraAlta === null ? ' ' : postAnestStore.HoraAlta;
   
         /***********************TRANS***********************/
+        // Hora                      
+        let horaBalance = transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.horaBalance)
+        // Ingresos
+        let ingresos = transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.ingresos)
+        // Egresos
+        let egresos = transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.egresos)
+        // Balance Total
+        let balanceP = transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.balanceP)
+
         /*Datos de Sumatoria de Medicamentos*/
         let medicamentoAg = transStore.medicamentosAgrupados === null ? [' '] : transStore.medicamentosAgrupados.map(medicamento => medicamento.medicamentoN).flat();
         let bolo = transStore.medicamentosAgrupados === null ? [' '] : transStore.medicamentosAgrupados.map(medicamento => medicamento.bolo).flat();
@@ -5108,38 +5117,38 @@ export default defineComponent({
             ]
           },  
           //Balance Hídrico Parcial
-          // {
-          //   columns:[
-          //     // {
-          //     //   margin: [0, 5, 0, 0],
-          //     //     width: '8%',
-          //     //     table: {
-          //     //       widths: ['*'],
-          //     //       body: [                  
-          //     //         [{ text: 'Hora', font: 'SF', fontSize: 8 }],
-          //     //         [{ text: 'Ingresos', font: 'SF', fontSize: 8 }],
-          //     //         [{ text: 'Egresos', font: 'SF', fontSize: 8 }],
-          //     //         [{ text: 'Balance total', font: 'SF', fontSize: 8}],
-          //     //       ]
-          //     //     }, font: 'SF', fontSize: 8
-          //     // },
-          //     // {
-          //     //   margin: [0, 5, 0, 0],
-          //     //   table: {
-          //     //     body: [
-          //     //       // Hora                      
-          //     //       // transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.horaBalance),
-          //     //       // Ingresos
-          //     //       // transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.ingresos),
-          //     //       // Egresos
-          //     //       // transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.egresos),
-          //     //       // Balance Total
-          //     //       // transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.balanceP)
-          //     //     ]
-          //     //   }, font: 'SF', fontSize: 8, bold: true
-          //     // }
-          //   ]
-          // },  
+          {
+            columns:[
+              {
+                margin: [0, 5, 0, 0],
+                  width: '8%',
+                  table: {
+                    widths: ['*'],
+                    body: [                  
+                      [{ text: 'Hora', font: 'SF', fontSize: 8 }],
+                      [{ text: 'Ingresos', font: 'SF', fontSize: 8 }],
+                      [{ text: 'Egresos', font: 'SF', fontSize: 8 }],
+                      [{ text: 'Balance total', font: 'SF', fontSize: 8}],
+                    ]
+                  }, font: 'SF', fontSize: 8
+              },
+              {
+                margin: [0, 5, 0, 0],
+                table: {
+                  body: [
+                    // Hora                      
+                    horaBalance,
+                    // Ingresos
+                    ingresos,
+                    // Egresos
+                    egresos,
+                    // Balance Total
+                    balanceP
+                  ]
+                }, font: 'SF', fontSize: 8, bold: true
+              }
+            ]
+          },  
           {            
             columns:[
               {
