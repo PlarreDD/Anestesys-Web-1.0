@@ -12,9 +12,43 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCxN = exports.saveMSVdat = exports.updateResAnest = exports.saveAldreteRec = exports.saveCasoObsRN = exports.saveEventos = exports.saveRelevos = exports.saveMedicamentos = exports.savePreEstudios = exports.saveCx = void 0;
+exports.getCirugias = exports.getCxN = exports.saveMSVdat = exports.updateSumaMedicamentos = exports.updateResAnest = exports.saveAldreteRec = exports.deleteCasoObsRN = exports.saveCasoObsRN = exports.deleteEventos = exports.saveEventos = exports.deleteRelevos = exports.saveRelevos = exports.deleteMedicamento = exports.saveMedicamentos = exports.deletePreEstudios = exports.savePreEstudios = exports.saveCx = exports.updateFichaId = void 0;
 const logger_1 = __importDefault(require("../logger"));
 const Cirugias_1 = require("../models/Cirugias");
+const updateFichaId = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const update = req.body;
+        const cirugia = yield Cirugias_1.FichaIds.findByIdAndUpdate(id, {
+            fechaNPaciente: update.fechaNPaciente,
+            edadPaciente: update.edadPaciente,
+            generoPaciente: update.generoPaciente,
+            nacionalidad: update.nacionalidad,
+            CURP: update.CURP,
+            folioID: update.folioID,
+            estNacimiento: update.estNacimiento,
+            alcaldia: update.alcaldia,
+            colonia: update.colonia,
+            codigoPostal: update.codigoPostal,
+        });
+        return res.json({ cirugia });
+    }
+    catch (error) {
+        if (error.kind === "ObjectId") {
+            logger_1.default.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({ error: "Error de servidor" });
+    }
+});
+exports.updateFichaId = updateFichaId;
 const saveCx = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { pid, id, numEpisodio, habitacionPacnt, fechaInPacnt, diagnostico, tipoCx, cie10, cie9, infoProced, cuerpoMed, antPersPat, antPersNoPat, sigVit, expFis, viaAerea, perfilBioQ, pos_Cuidados, sedacion, regional, anestLocal, anestGral, obsNotaPre, balancesParciales, balanceTotal, balIng, balEgresos, datosVentilador, tiemposQX, notaPA, signVitEgQx, casoObsRecNac_NumProd, notaEval_Obs, altaRec, } = req.body;
@@ -113,12 +147,38 @@ const savePreEstudios = (req, res) => __awaiter(void 0, void 0, void 0, function
     catch (error) {
         logger_1.default.log({
             level: 'error',
-            message: 'Error de servidor', error
+            message: 'Error al guardar los Estudios', error
         });
-        return res.status(500).json({ Error: 'Error de servidor' });
+        return res.status(500).json({ Error: 'Error al guardar los Estudios' });
     }
 });
 exports.savePreEstudios = savePreEstudios;
+const deletePreEstudios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { cxID, estID } = req.body;
+        const cirugia = yield Cirugias_1.Cirugias.findOneAndUpdate({ "_id": cxID }, { $pull: {
+                Estudios: { _id: estID }
+            }
+        });
+        return res.json({ cirugia });
+    }
+    catch (error) {
+        logger_1.default.error('Ocurrió un error:', error);
+        if (error.kind === "ObjectId") {
+            logger_1.default.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error al borrar los Estudios', error
+        });
+        return res.status(500).json({ error: "Error al borrar los Estudios" });
+    }
+});
+exports.deletePreEstudios = deletePreEstudios;
 const saveMedicamentos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id, tipoMed, medicamento, dosisMed, unidadMed, viaMed, horaInicioMed, horaFinalMed, observacionesMed, valorGrafica } = req.body;
@@ -148,6 +208,32 @@ const saveMedicamentos = (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.saveMedicamentos = saveMedicamentos;
+const deleteMedicamento = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { cxID, medID } = req.body;
+        const cirugia = yield Cirugias_1.Cirugias.findOneAndUpdate({ "_id": cxID }, { $pull: {
+                medicamentosCx: { _id: medID }
+            }
+        });
+        return res.json({ cirugia });
+    }
+    catch (error) {
+        logger_1.default.error('Ocurrió un error:', error);
+        if (error.kind === "ObjectId") {
+            logger_1.default.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error al borrar los Medicamentos', error
+        });
+        return res.status(500).json({ error: "Error al borrar los Medicamentos" });
+    }
+});
+exports.deleteMedicamento = deleteMedicamento;
 const saveRelevos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id, 
@@ -174,6 +260,32 @@ const saveRelevos = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.saveRelevos = saveRelevos;
+const deleteRelevos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { cxID, relID } = req.body;
+        const cirugia = yield Cirugias_1.Cirugias.findOneAndUpdate({ "_id": cxID }, { $pull: {
+                relevoCx: { _id: relID }
+            }
+        });
+        return res.json({ cirugia });
+    }
+    catch (error) {
+        logger_1.default.error('Ocurrió un error:', error);
+        if (error.kind === "ObjectId") {
+            logger_1.default.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error al borrar los Relevos', error
+        });
+        return res.status(500).json({ error: "Error al borrar los Relevos" });
+    }
+});
+exports.deleteRelevos = deleteRelevos;
 const saveEventos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id, 
@@ -199,6 +311,32 @@ const saveEventos = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.saveEventos = saveEventos;
+const deleteEventos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { cxID, evID } = req.body;
+        const cirugia = yield Cirugias_1.Cirugias.findOneAndUpdate({ "_id": cxID }, { $pull: {
+                evCriticoCx: { _id: evID }
+            }
+        });
+        return res.json({ cirugia });
+    }
+    catch (error) {
+        logger_1.default.error('Ocurrió un error:', error);
+        if (error.kind === "ObjectId") {
+            logger_1.default.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error al borrar los Relevos', error
+        });
+        return res.status(500).json({ error: "Error al borrar los Relevos" });
+    }
+});
+exports.deleteEventos = deleteEventos;
 const saveCasoObsRN = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id, Genero, HrNacimiento, Alumbramiento, Apgar1, Apgar5, Capurro, Peso, Talla } = req.body;
@@ -226,6 +364,32 @@ const saveCasoObsRN = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.saveCasoObsRN = saveCasoObsRN;
+const deleteCasoObsRN = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { cxID, cornID } = req.body;
+        const cirugia = yield Cirugias_1.Cirugias.findOneAndUpdate({ "_id": cxID }, { $pull: {
+                casoObsRecNac: { _id: cornID }
+            }
+        });
+        return res.json({ cirugia });
+    }
+    catch (error) {
+        logger_1.default.error('Ocurrió un error:', error);
+        if (error.kind === "ObjectId") {
+            logger_1.default.log({
+                level: 'error',
+                message: 'Formato de ID incorrecto', error
+            });
+            return res.status(403).json({ error: "Formato de ID incorrecto" });
+        }
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error al borrar el Caso obstetrico', error
+        });
+        return res.status(500).json({ error: "Error al borrar el Caso obstetrico" });
+    }
+});
+exports.deleteCasoObsRN = deleteCasoObsRN;
 const saveAldreteRec = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id, FrecCard, FrecResp, TensArte, SatO2, Muscular, Respiracion, CirculacionIn, Conciencia, Coloracion, Bromage, Nauseas, escEVADol } = req.body;
@@ -284,11 +448,25 @@ const updateResAnest = (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
 });
 exports.updateResAnest = updateResAnest;
+const updateSumaMedicamentos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id, medicamentosSuma } = req.body;
+        const cirugia = yield Cirugias_1.Cirugias.findOneAndUpdate({ _id: id }, { $addToSet: { medicamentosSuma: medicamentosSuma } });
+        return res.json({ cirugia });
+    }
+    catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({ Error: 'Error de servidor' });
+    }
+});
+exports.updateSumaMedicamentos = updateSumaMedicamentos;
 /* Falta probar que funcione correctamente */
 const saveMSVdat = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id, datosMSV } = req.body;
-        console.log(id, datosMSV);
         const dataToInsert = datosMSV.map((data) => ({
             FC: data.FC, Pulso: data.Pulso,
             PAS: data.PAS, PAD: data.PAD,
@@ -299,6 +477,7 @@ const saveMSVdat = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             PAM_IN: data.PAM_IN, FiCO2: data.FiCO2,
             FR: data.FR, HoraGeneracion: data.HoraGeneracion,
         }));
+        console.log(id, dataToInsert);
         const cirugia = yield Cirugias_1.Cirugias.findOneAndUpdate({ _id: id }, { $addToSet: { datosMSV: { $each: dataToInsert } } });
         return res.json({ cirugia });
     }
@@ -326,3 +505,19 @@ const getCxN = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getCxN = getCxN;
+const getCirugias = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const ficha = yield Cirugias_1.FichaIds.find({ numExpediente: id });
+        const cirugias = yield Cirugias_1.Cirugias.find({ pid: ficha[0].id });
+        return res.json({ ficha, cirugias });
+    }
+    catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({ Error: 'Error de servidor' });
+    }
+});
+exports.getCirugias = getCirugias;

@@ -12,11 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateNuevoNota = exports.updateNota = exports.saveNuevoNota = exports.saveNota = exports.updateNuevoPrePlan = exports.updatePrePlan = exports.saveNuevoPrePlan = exports.savePrePlan = exports.deleteEstudio = exports.updateEstudio = exports.getEstudio = exports.getEstudios = exports.updateEstudios = exports.saveEstudios = exports.updateNuevoPreAntecedentes = exports.saveNuevoPreAntecedentes = exports.updatePreAntecedentes = exports.savePreAntecedentes = exports.updateNuevoRegistroPaciente = exports.updateAnteriorPaciente = exports.createNuevoRegistroPaciente = exports.updatePaciente = exports.createPaciente = exports.getPaciente = exports.getPDFData = exports.getCirugias = exports.getCIE9 = exports.getCIE10 = exports.getExpedientes = void 0;
+exports.updateNuevoNota = exports.updateNota = exports.saveNuevoNota = exports.saveNota = exports.updateNuevoPrePlan = exports.updatePrePlan = exports.saveNuevoPrePlan = exports.savePrePlan = exports.deleteEstudio = exports.updateEstudio = exports.getEstudio = exports.getEstudios = exports.updateEstudios = exports.saveEstudios = exports.updateNuevoPreAntecedentes = exports.saveNuevoPreAntecedentes = exports.updatePreAntecedentes = exports.savePreAntecedentes = exports.updateNuevoRegistroPaciente = exports.createNuevoRegistroPaciente = exports.updatePaciente = exports.createPaciente = exports.getPaciente = exports.getPDFData = exports.getCirugia = exports.getCIE9 = exports.getCIE10 = exports.getExpedientes = void 0;
 const PreAnestesico_1 = require("../models/PreAnestesico");
 const TransAnestesico_1 = require("../models/TransAnestesico");
 const PostAnestesico_1 = require("../models/PostAnestesico");
 const logger_1 = __importDefault(require("../logger"));
+const Cirugias_1 = require("../models/Cirugias");
 /********************************************************************/
 /***************************  ID PACIENTE ***************************/
 /********************************************************************/
@@ -73,7 +74,7 @@ const getCIE9 = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.getCIE9 = getCIE9;
 /* Función para listar las cirugías */
-const getCirugias = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getCirugia = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
         const pacientes = yield PreAnestesico_1.PreIdPacientes.find({ numExpediente: id });
@@ -88,7 +89,7 @@ const getCirugias = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         return res.status(500).json({ Error: 'Error de servidor' });
     }
 });
-exports.getCirugias = getCirugias;
+exports.getCirugia = getCirugia;
 const getPDFData = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
@@ -130,39 +131,26 @@ exports.getPaciente = getPaciente;
 /* Funcion para registrar la ficha ID de un paciente */
 const createPaciente = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { /* Información principal del paciente */ numExpediente, nomPaciente, 
+        const { 
+        /* Información principal del paciente */
+        numExpediente, nomPaciente, 
         /* Información adicional del paciente */
-        numEpisodio, fechaNPaciente, edadPaciente, habitacionPaciente, generoPaciente, fechaInPaciente, diagnostico, tipoCx, 
-        /* Datos CIE */
-        cie10, cie9, 
-        /* Informacion Médicos */
-        cirugia, fechaCx, hrCx, 
-        /* Informacion Médicos */
-        cirujano, anestesiologo, anestesiologoVPA, residenteAnestesia, 
+        fechaNPaciente, edadPaciente, generoPaciente, 
         /* Datos Demográficos */
         nacionalidad, CURP, folioID, estNacimiento, estResidencia, alcaldia, colonia, codigoPostal } = req.body;
-        let expediente = yield PreAnestesico_1.PreIdPacientes.findOne({ numExpediente });
+        let expediente = yield Cirugias_1.FichaIds.findOne({ numExpediente });
         if (expediente)
             throw { code: 11000 };
-        const paciente = new PreAnestesico_1.PreIdPacientes({ numExpediente, nomPaciente, uid: req.uid,
+        const paciente = new Cirugias_1.FichaIds({
+            numExpediente, nomPaciente, uid: req.uid,
             fechaNPaciente, edadPaciente, generoPaciente,
             /* Datos Demográficos */
             nacionalidad, CURP, folioID, estNacimiento,
-            estResidencia, alcaldia, colonia, codigoPostal });
-        const infoCx = new PreAnestesico_1.PreIdPacientesCx({
-            numEpisodio, pid: paciente._id, habitacionPaciente,
-            fechaInPaciente, diagnostico, tipoCx,
-            /* Datos CIE */
-            cie10, cie9,
-            /* Informacion Médicos */
-            cirugia, fechaCx, hrCx,
-            /* Informacion Médicos */
-            cirujano, anestesiologo, anestesiologoVPA,
-            residenteAnestesia
+            estResidencia, alcaldia, colonia, codigoPostal
         });
         yield paciente.save();
-        yield infoCx.save();
-        return res.json({ paciente, infoCx });
+        console.log("Este es el ID del paciente: " + paciente._id);
+        return res.json({ paciente });
     }
     catch (error) {
         logger_1.default.log({
@@ -269,31 +257,29 @@ const createNuevoRegistroPaciente = (req, res) => __awaiter(void 0, void 0, void
 });
 exports.createNuevoRegistroPaciente = createNuevoRegistroPaciente;
 /* Funcion de actualización de la ficha ID de un paciente */
-const updateAnteriorPaciente = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const { id } = req.params;
-        const updVar = req.body;
-        const paciente = yield PreAnestesico_1.PreIdPacientes.findByIdAndUpdate(id, { fechaNPaciente: updVar.fechaNPaciente,
-            edadPaciente: updVar.edadPaciente,
-            generoPaciente: updVar.generoPaciente });
-        return res.json({ paciente });
-    }
-    catch (error) {
-        if (error.kind === "ObjectId") {
-            logger_1.default.log({
-                level: 'error',
-                message: 'Formato de ID incorrecto', error
-            });
-            return res.status(403).json({ error: "Formato de ID incorrecto" });
-        }
-        logger_1.default.log({
-            level: 'error',
-            message: 'Error de servidor', error
-        });
-        return res.status(500).json({ error: "Error de servidor" });
-    }
-});
-exports.updateAnteriorPaciente = updateAnteriorPaciente;
+// export const updateAnteriorPaciente = async (req: any, res: Response) => {
+//     try {
+//         const { id } = req.params;
+//         const updVar = req.body;
+//         const paciente = await PreIdPacientes.findByIdAndUpdate( id, {fechaNPaciente: updVar.fechaNPaciente,
+//                                                                     edadPaciente: updVar.edadPaciente,
+//                                                                     generoPaciente: updVar.generoPaciente} );            
+//         return res.json({ paciente });
+//     } catch (error) {
+//         if (error.kind === "ObjectId"){
+//             logger.log({
+//                 level: 'error',
+//                 message: 'Formato de ID incorrecto', error
+//             });
+//             return res.status(403).json({ error: "Formato de ID incorrecto" });
+//         }
+//         logger.log({
+//             level: 'error',
+//             message: 'Error de servidor', error
+//         });
+//         return res.status(500).json({ error: "Error de servidor" });
+//     }
+// };
 /* Funcion de actualización del nuevo registro de la ficha ID de un paciente */
 const updateNuevoRegistroPaciente = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

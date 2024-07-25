@@ -823,7 +823,7 @@
                           </thead>
 
                           <tbody>
-                            <tr v-for="(item, index) in medicamentosAgrupados" :key="index">
+                            <tr v-for="(item, index) in medicamentosAgrupado" :key="index">
                               <td class="text-white">{{ item.medicamentoN }}</td>
                               <td class="text-white">{{ item.bolo ? `${item.bolo} ${item.unidadBolo}` : '' }}</td>
                               <td class="text-white">{{ item.infusion ? `${item.infusion} ${item.unidadInfusion}` : '' }}</td>
@@ -1572,9 +1572,9 @@ import { Line } from 'vue-chartjs';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
-// import pdfFonts from "pdfmake/build/vfs_fonts.js";
+import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
-// window.pdfMake.fonts = pdfFonts.pdfMake;
+window.pdfMake.fonts = pdfFonts.pdfMake;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 
@@ -1934,6 +1934,8 @@ export default defineComponent({
       medicamentosFiltrados: [],
       eventosFiltrados: [],
       relevosFiltrados: [],
+
+      medicamentosAgrupado: [],
     }
   },
 
@@ -2022,9 +2024,6 @@ export default defineComponent({
   },
 
   methods: {
-    // mostrarFiltrados(){
-    //   console.log('Med. Filtrados: '+ JSON.stringify(this.medicamentosAgrupados))
-    // },
 
     toggleDataset(index) {   
       if(this.chartData.datasets[index].hidden === true) {
@@ -3750,17 +3749,25 @@ export default defineComponent({
 
         /***********************TRANS***********************/
         /*Balance Parcial*/
-        let balanceParcial = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial.map(item => 
-            item.balanceCx.map(balance => balance.horaBalance +'   '+ balance.ingresos +'   '+ balance.egresos)).flat();
+        // Hora
+        let horaBalance = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.horaBalance)
+        // Ingresos
+        let ingresos = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.ingresos)
+        // Egresos
+        let egresos = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.egresos)
+        // Balance Total
+        let balanceP = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.balanceP)
 
         /*Datos de Medicamentos Agrupados*/
-        let medicamentoAg = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.medicamentoN).flat();
-        let bolo = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.bolo).flat();
-        let unidadBolo = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.unidadBolo).flat();
-        let infusion = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.infusion).flat();
-        let unidadInfusion = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.unidadInfusion).flat();
-        let total = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.total).flat();
-        let unidadTotal = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.unidadTotal).flat();
+        let medicamentoAg = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.medicamentoN).flat();
+        let bolo = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.bolo).flat();
+        let unidadBolo = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.unidadBolo).flat();
+        let infusion = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.infusion).flat();
+        let unidadInfusion = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.unidadInfusion).flat();
+        let total = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.total).flat();
+        let unidadTotal = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.unidadTotal).flat();
+
+        console.log("agrupados: "+ JSON.stringify(this.medicamentosAgrupado));
 
         let tablaMedicamentosAgrupados = [];
         for (let i = 0; i < Math.max(medicamentoAg.length, bolo.length, unidadBolo.length, infusion.length, unidadInfusion.length, total.length, unidadTotal.length); i++) {
@@ -3804,8 +3811,12 @@ export default defineComponent({
             item.medicamentosCx.map(medicamento => (medicamento.horaInicioMed ?? ' '))).flat();
         let horaInicio = listaMedicamentosHoraIn.slice(0,30);
         let listaMedicamentosHoraFi = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
-            item.medicamentosCx.map(medicamento => (medicamento.horaFinalMed ?? ' '))).flat();
-        let horaFinal = listaMedicamentosHoraFi.slice(0,30);
+            item.medicamentosCx.map(medicamento => (medicamento.horaFinalMed ?? '-'))).flat();
+        let horaFinal = listaMedicamentosHoraFi.slice(0,30); 
+        
+        // let listaMedicamentosHoraFi = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
+        //     medicamento.horaFinalMed === "" ? '-' : medicamento.horaFinalMed).flat();
+        // let horaFinal = listaMedicamentosHoraFi.slice(0,30);  
 
         let tablaMedicamentos = [];
         for (let i = 0; i < Math.max(tipoMed.length, medicamento.length, dosisMed.length, unidadMed.length, viaMed.length, horaInicio.length,horaFinal.length); i++) {
@@ -3822,8 +3833,6 @@ export default defineComponent({
             { text: i < horaFinal.length ? horaFinal[i] : '', style: 'SF', fontSize: 8, bold: true },
           ]);
         };
-
-        // console.log("medicamentos: "+ JSON.stringify(tablaMedicamentos));
 
         /*Datos del Relevo*/        
         let listaRelevosHr = transAnestStore.relevos === null ? [' '] : transAnestStore.relevos.map(item=>
@@ -5751,13 +5760,13 @@ export default defineComponent({
                 table: {
                   body: [
                     // Hora                      
-                    transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.horaBalance),
+                    horaBalance,
                     // Ingresos
-                    transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.ingresos),
+                    ingresos,
                     // Egresos
-                    transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.egresos),
+                    egresos,
                     // Balance Total
-                    transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.balanceP)
+                    balanceP
                   ]
                 }, font: 'SF', fontSize: 8, bold: true
               }
@@ -6924,8 +6933,9 @@ export default defineComponent({
                 await transAnestStore.getBalanceHPList(preIdStore.pacienteID._id)
 
                 await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
-
+                
                 transAnestStore.medicamentosAgrupados = this.medicamentosAgrupados
+                
                 if(transAnestStore.medicamentosAgrupados.length > 0){
                   await transAnestStore.updateSumaMedicamentos(transAnestStore.medicamentosAgrupados, preIdStore.pacienteID._id)
                 }         
@@ -6939,6 +6949,7 @@ export default defineComponent({
                 await transAnestStore.saveNuevoTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)  
                 
                 transAnestStore.medicamentosAgrupados = this.medicamentosAgrupados
+
                 if(transAnestStore.medicamentosAgrupados.length > 0){
                   await transAnestStore.updateNuevoSumaMedicamentos(transAnestStore.medicamentosAgrupados, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
                 }
@@ -7288,7 +7299,7 @@ export default defineComponent({
             await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
           }else if(preIdStore.nuevoRegistroPaciente == true){        
             await transAnestStore.getNuevoMedicamentosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-          }
+          }                   
           
           await this.listarMedicamentosTrans();
         }            
@@ -7340,6 +7351,8 @@ export default defineComponent({
             await transAnestStore.getNuevoMedicamentosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
           }
           await this.listarMedicamentosTrans()
+
+          this.medicamentosAgrupado = this.medicamentosAgrupados
         }
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
@@ -8131,8 +8144,6 @@ export default defineComponent({
 
     async comMSV(){
       try {
-        // console.log("Cliente IP "+this.clienteIp);
-        
         const response = await fetch(`http://${this.clienteIp}:5000/apiMVS`);
         const data = await response.text();
         this.informacion = data;
@@ -8335,19 +8346,7 @@ export default defineComponent({
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
-    },
-
-    // Recibe datos del MSV cada segundo
-    // iniRecepDatos(){
-      // console.log("iniRecepDatos");
-      // try {
-      //   this.intervalId = setInterval(() => {
-      //     this.comMSV();
-      //   }, 1000);
-      // } catch (error) {
-      //   window.log.error('Ocurrió un error:', error);
-      // }
-    // },
+    },    
 
     termRecepDatos(){
       try {

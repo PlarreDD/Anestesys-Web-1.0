@@ -1,7 +1,39 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Cirugias = void 0;
+exports.Cirugias = exports.FichaIds = void 0;
 const mongoose_1 = require("mongoose");
+/* Fichas Id */
+const FichaIdsSchema = new mongoose_1.Schema({
+    /* Información obligatoria a llenar en el cuestionario */
+    numExpediente: {
+        type: String,
+        required: true,
+        trim: true,
+        unique: true,
+    },
+    nomPaciente: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    uid: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'user',
+        required: true,
+    },
+    fechaNPaciente: { type: String, },
+    edadPaciente: { type: String, },
+    generoPaciente: { type: String, },
+    /* Datos Demográficos */
+    nacionalidad: { type: String, },
+    CURP: { type: String, },
+    folioID: { type: String, },
+    estNacimiento: { type: String, },
+    estResidencia: { type: String, },
+    alcaldia: { type: String, },
+    colonia: { type: String, },
+    codigoPostal: { type: String, }
+});
 /* Información Cirugía del Paciente*/
 const CirugiasSchema = new mongoose_1.Schema({
     /* Id del paciente para enlazar la tabla */
@@ -283,6 +315,15 @@ const CirugiasSchema = new mongoose_1.Schema({
             observacionesMed: { type: String },
             valorGrafica: { type: String },
         }],
+    medicamentosSuma: [{
+            medicamentoN: { type: String },
+            bolo: { type: String },
+            unidadBolo: { type: String },
+            infusion: { type: String },
+            unidadInfusion: { type: String },
+            total: { type: String },
+            unidadTotal: { type: String }
+        }],
     /******************** Relevo *******************/
     relevoCx: [{
             horaRelevo: { type: String },
@@ -390,4 +431,5 @@ const CirugiasSchema = new mongoose_1.Schema({
             HrAltaRec: { type: String },
         }],
 });
+exports.FichaIds = (0, mongoose_1.model)('FichaIds', FichaIdsSchema);
 exports.Cirugias = (0, mongoose_1.model)('Cirugias', CirugiasSchema);

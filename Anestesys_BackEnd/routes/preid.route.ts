@@ -6,13 +6,14 @@ import { getPaciente,
          getExpedientes,
          createNuevoRegistroPaciente,
          updateNuevoRegistroPaciente,
-         updateAnteriorPaciente,
+        //  updateAnteriorPaciente,
          getPDFData,
          getCIE10,
+          getCirugia,
          getCIE9} from "../controllers/preanest.controller";
-        //  getCirugias,
 
 import {
+    updateFichaId,
     saveCx,
     savePreEstudios,
     saveMSVdat,
@@ -38,7 +39,7 @@ const router = Router();
 // PATCH/PUT    /preId/:id      Actualizar paciente
 
 /*------------------- PreId --------------------*/
-// router.get('/cx/:id', requireToken, getCirugias)
+router.get('/cx/:id', requireToken, getCirugia)
 router.get('/cirugia/cx/:id', requireToken, getPDFData)
 router.get('/exp/:numExpediente', requireToken, getExpedientes)
 router.get('/:id', requireToken, getPaciente);
@@ -46,11 +47,12 @@ router.post('/', requireToken, createPaciente);
 router.put('/:id',  requireToken, updatePaciente);
 router.post('/add', requireToken, createNuevoRegistroPaciente);
 router.put('/add/:id',  requireToken, updateNuevoRegistroPaciente);
-router.put('/ante/:id',  requireToken, updateAnteriorPaciente);
+// router.put('/ante/:id',  requireToken, updateAnteriorPaciente);
 router.get('/cie10/uno/:nombre', requireToken, getCIE10);
 router.get('/cie9/uno/:nombre', requireToken, getCIE9);
 ///////////////////////// NUEVOS MÉTODOS /////////////////////////
 router.post('/cxN/', requireToken, saveCx);
+router.put('/cxN/:id', requireToken, updateFichaId);
 router.post('/svE', requireToken, savePreEstudios);
 router.post('/svMSVd', requireToken, saveMSVdat);
 router.post('/svMed', requireToken, saveMedicamentos);

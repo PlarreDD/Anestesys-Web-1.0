@@ -495,9 +495,9 @@ import { ElInput, ElCard } from 'element-plus';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import html2canvas from 'html2canvas';
 import zoomPlugin from 'chartjs-plugin-zoom';
-// import pdfFonts from "pdfmake/build/vfs_fonts.js";
+import pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from "pdfmake/build/pdfmake";
-// window.pdfMake.fonts = pdfFonts.pdfMake;
+window.pdfMake.fonts = pdfFonts.pdfMake;
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, zoomPlugin);
 
@@ -1545,7 +1545,7 @@ export default defineComponent({
 
           transStore.datosVentilacion = paciente?.datosVentilador ?? null
           transStore.medicamentos = paciente?.medicamentosCx ?? null  
-          // transStore.medicamentosAgrupados = paciente?.medicamentosSuma ?? null
+          transStore.medicamentosAgrupados = paciente?.medicamentosSuma ?? null
           transStore.balanceParcial = paciente?.balancesParciales ?? null
           transStore.relevos = paciente?.relevoCx ?? null
           transStore.eventos = paciente?.evCriticoCx ?? null
@@ -1581,7 +1581,7 @@ export default defineComponent({
           idStore.NotaPre = ''
           transStore.datosVentilacion = null
           transStore.medicamentos = null  
-          // transStore.medicamentosAgrupados = null
+          transStore.medicamentosAgrupados = null
           transStore.balanceParcial = null
           transStore.relevos = null
           transStore.eventos = null
@@ -3134,57 +3134,45 @@ export default defineComponent({
         let horaAlta = postAnestStore.HoraAlta === undefined || postAnestStore.HoraAlta === null ? ' ' : postAnestStore.HoraAlta;
   
         /***********************TRANS***********************/
+        // Hora                      
+        let horaBalance = transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.horaBalance)                
+        // Ingresos
+        let ingresos = transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.ingresos)
+        // Egresos
+        let egresos = transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.egresos)
+        // Balance Total
+        let balanceP = transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.balanceP)
+
         /*Datos de Sumatoria de Medicamentos*/
-        // let medicamentoAg = transStore.medicamentosAgrupados === null ? [' '] : transStore.medicamentosAgrupados.map(medicamento => (medicamento.medicamento ?? ' ')).flat();
-        // let bolo = transStore.medicamentosAgrupados === null ? [' '] : transStore.medicamentosAgrupados.map(medicamento => (medicamento.bolo ?? ' ')).flat();
-        // let unidadBolo = transStore.medicamentosAgrupados === null ? [' '] : transStore.medicamentosAgrupados.map(medicamento => (medicamento.unidadBolo ?? ' ')).flat();
-        // let infusion = transStore.medicamentosAgrupados === null ? [' '] : transStore.medicamentosAgrupados.map(medicamento => (medicamento.infusion ?? ' ')).flat();
-        // let unidadInfusion = transStore.medicamentosAgrupados === null ? [' '] : transStore.medicamentosAgrupados.map(medicamento => (medicamento.unidadInfusion ?? ' ')).flat();
-        // let total = transStore.medicamentosAgrupados === null ? [' '] : transStore.medicamentosAgrupados.map(medicamento => (medicamento.total ?? ' ')).flat();
-        // let unidadTotal = transStore.medicamentosAgrupados === null ? [' '] : transStore.medicamentosAgrupados.map(medicamento => (medicamento.unidadTotal ?? ' ')).flat();
-
-        // let medicamentoAg = transStore.medicamentosAgrupados?.map(medicamento => medicamento.medicamento ?? ' ') || [' '];
-        // let bolo = transStore.medicamentosAgrupados?.map(medicamento => medicamento.bolo ?? ' ') || [' '];
-        // let unidadBolo = transStore.medicamentosAgrupados?.map(medicamento => medicamento.unidadBolo ?? ' ') || [' '];
-        // let infusion = transStore.medicamentosAgrupados?.map(medicamento => medicamento.infusion ?? ' ') || [' '];
-        // let unidadInfusion = transStore.medicamentosAgrupados?.map(medicamento => medicamento.unidadInfusion ?? ' ') || [' '];
-        // let total = transStore.medicamentosAgrupados?.map(medicamento => medicamento.total ?? ' ') || [' '];
-        // let unidadTotal = transStore.medicamentosAgrupados?.map(medicamento => medicamento.unidadTotal ?? ' ') || [' '];
-
-        // console.log("unidadBolo",unidadBolo);
+        let medicamentoAg = transStore.medicamentosAgrupados === null ? [' '] : transStore.medicamentosAgrupados.map(medicamento => medicamento.medicamentoN).flat();
+        let bolo = transStore.medicamentosAgrupados === null ? [' '] : transStore.medicamentosAgrupados.map(medicamento => medicamento.bolo).flat();
+        let unidadBolo = transStore.medicamentosAgrupados === null ? [' '] : transStore.medicamentosAgrupados.map(medicamento => medicamento.unidadBolo).flat();
+        let infusion = transStore.medicamentosAgrupados === null ? [' '] : transStore.medicamentosAgrupados.map(medicamento => medicamento.infusion).flat();
+        let unidadInfusion = transStore.medicamentosAgrupados === null ? [' '] : transStore.medicamentosAgrupados.map(medicamento => medicamento.unidadInfusion).flat();
+        let total = transStore.medicamentosAgrupados === null ? [' '] : transStore.medicamentosAgrupados.map(medicamento => medicamento.total).flat();
+        let unidadTotal = transStore.medicamentosAgrupados === null ? [' '] : transStore.medicamentosAgrupados.map(medicamento => medicamento.unidadTotal).flat();       
         
-        // let tablaMedicamentosAgrupados = [];
-        // for (let i = 0; i < Math.max(medicamentoAg.length, bolo.length, unidadBolo.length, infusion.length, unidadInfusion.length, total.length, unidadTotal.length); i++) {
-        //   tablaMedicamentosAgrupados.push([
-        //     { text: medicamentoAg[i] || '', style: 'SF', fontSize: 8, bold: true },
-        //     {
-        //       text: [
-        //         { text: bolo[i] || ' ', style: 'SF', fontSize: 8, bold: true },
-        //         { text: ' ', style: 'SF', fontSize: 8 },
-        //         { text: unidadBolo[i] || ' ', style: 'SF', fontSize: 8, bold: true }
-        //       ]
-        //     },
-        //     {
-        //       text: [
-        //         { text: infusion[i] || ' ', style: 'SF', fontSize: 8, bold: true },
-        //         { text: ' ', style: 'SF', fontSize: 8 },
-        //         { text: unidadInfusion[i] || ' ', style: 'SF', fontSize: 8, bold: true }
-        //       ]
-        //     },
-        //     {
-        //       text: [
-        //         { text: total[i] || ' ', style: 'SF', fontSize: 8, bold: true },
-        //         { text: ' ', style: 'SF', fontSize: 8 },
-        //         { text: unidadTotal[i] || ' ', style: 'SF', fontSize: 8, bold: true }
-        //       ]
-        //     }
-        //   ]);
-        // };
-
-        // console.log("agrupados: "+ JSON.stringify(tablaMedicamentosAgrupados));     
-        
-        console.log("store medicamentos: "+JSON.stringify(transStore.medicamentos));
-        // console.log("store medicamentosAgrupados: "+JSON.stringify(transStore.medicamentosAgrupados));
+        let tablaMedicamentosAgrupados = [];
+        for (let i = 0; i < Math.max(medicamentoAg.length, bolo.length, unidadBolo.length, infusion.length, unidadInfusion.length, total.length, unidadTotal.length); i++) {
+          tablaMedicamentosAgrupados.push([
+            { text: i < medicamentoAg.length ? medicamentoAg[i] : '', style: 'SF', fontSize: 8, bold: true },            
+            {text:[
+              { text: i < bolo.length ? bolo[i] : '', style: 'SF', fontSize: 8, bold: true },
+              { text: ' ', style: 'SF', fontSize: 8},
+              { text: i < unidadBolo.length ? unidadBolo[i] : '', style: 'SF', fontSize: 8, bold: true },
+            ]},
+            {text:[
+              { text: i < infusion.length ? infusion[i] : '', style: 'SF', fontSize: 8, bold: true },
+              { text: ' ', style: 'SF', fontSize: 8},
+              { text: i < unidadInfusion.length ? unidadInfusion[i] : '', style: 'SF', fontSize: 8, bold: true },
+            ]},
+            {text:[
+              { text: i < total.length ? total[i] : '', style: 'SF', fontSize: 8, bold: true },
+              { text: ' ', style: 'SF', fontSize: 8},
+              { text: i < unidadTotal.length ? unidadTotal[i] : '', style: 'SF', fontSize: 8, bold: true },
+            ]},
+          ]);
+        };
   
         /*Datos del Medicamento*/                
         let listaMedicamentosTipo = transStore.medicamentos === null ? [' '] : transStore.medicamentos.map(medicamento => medicamento.tipoMed || '').flat();
@@ -3200,9 +3188,7 @@ export default defineComponent({
         let listaMedicamentosHoraIn = transStore.medicamentos === null ? [' '] : transStore.medicamentos.map(medicamento => medicamento.horaInicioMed || '').flat();
         let horaInicio = listaMedicamentosHoraIn.slice(0, 30);
         let listaMedicamentosHoraFi = transStore.medicamentos === null ? [' '] : transStore.medicamentos.map(medicamento => medicamento.horaFinalMed === "" ? '-' : medicamento.horaFinalMed).flat();
-        let horaFinal = listaMedicamentosHoraFi.slice(0,30);
-
-        console.log("horaFinal "+JSON.stringify(horaFinal));      
+        let horaFinal = listaMedicamentosHoraFi.slice(0,30);  
   
         let tablaMedicamentos = [];
         for (let i = 0; i < Math.max(tipoMed.length, medicamento.length, dosisMed.length, unidadMed.length, viaMed.length, horaInicio.length,horaFinal.length); i++) {
@@ -3219,8 +3205,6 @@ export default defineComponent({
             { text: i < horaFinal.length ? horaFinal[i] : '', style: 'SF', fontSize: 8, bold: true },        
           ]);
         };
-
-        console.log("medicamentos: "+ JSON.stringify(tablaMedicamentos));
   
         /*Datos del Relevo*/        
         let listaRelevosHr = transStore.relevos === null ? [' '] : transStore.relevos.map(relevo => relevo.horaRelevo).flat();
@@ -5153,13 +5137,13 @@ export default defineComponent({
                 table: {
                   body: [
                     // Hora                      
-                    transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.horaBalance),
+                    horaBalance,
                     // Ingresos
-                    transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.ingresos),
+                    ingresos,
                     // Egresos
-                    transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.egresos),
+                    egresos,
                     // Balance Total
-                    transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.balanceP)
+                    balanceP
                   ]
                 }, font: 'SF', fontSize: 8, bold: true
               }
@@ -5267,30 +5251,30 @@ export default defineComponent({
             ]
           },
           // Crear la tabla de transAnestStore.medicamentosAgrupados
-          // {
-          //   columns:[
-          //     {
-          //       margin: [0, 5, 0, 0],
-          //       stack: [
-          //         {                    
-          //           table: {
-          //             widths: ['*', '*', '*', '*'],
-          //             body: [
-          //               [
-          //                 {text: 'Medicamento', style: 'SF', fontSize: 8}, 
-          //                 {text: 'Bolo', style: 'SF', fontSize:8},
-          //                 {text: 'Infusión', style: 'SF', fontSize:8},
-          //                 {text: 'Total', style: 'SF', fontSize:8},
-          //               ],
-          //               ...tablaMedicamentosAgrupados
-          //             ]
-          //           }, font: 'SF', fontSize: 8,
-          //           dontBreakRows: true                               
-          //         },
-          //       ]
-          //     }
-          //   ]
-          // }, 
+          {
+            columns:[
+              {
+                margin: [0, 5, 0, 0],
+                stack: [
+                  {                    
+                    table: {
+                      widths: ['*', '*', '*', '*'],
+                      body: [
+                        [
+                          {text: 'Medicamento', style: 'SF', fontSize: 8}, 
+                          {text: 'Bolo', style: 'SF', fontSize:8},
+                          {text: 'Infusión', style: 'SF', fontSize:8},
+                          {text: 'Total', style: 'SF', fontSize:8},
+                        ],
+                        ...tablaMedicamentosAgrupados
+                      ]
+                    }, font: 'SF', fontSize: 8,
+                    dontBreakRows: true                               
+                  },
+                ]
+              }
+            ]
+          }, 
         )        
   
         /*POST*/
@@ -5818,7 +5802,7 @@ export default defineComponent({
         transStore.datosVentilacion= null
         transStore.pacienteID= ""
         transStore.medicamentos= null
-        // transStore.medicamentosAgrupados= null
+        transStore.medicamentosAgrupados= null
         transStore.balanceParcial= null
         transStore.medicamentoID= ""
         transStore.relevos= null
