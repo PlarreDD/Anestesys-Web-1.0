@@ -243,56 +243,331 @@ export const usePreIdStore = defineStore('preid', {
     }),
 
     actions: {
-        saveCx(infoCX: any){
-            console.log("infoCX" + JSON.stringify(infoCX));
-            console.log("Desglosadso:" + infoCX.numEpisodio);
-            
+        async saveCx(
+            cxid: any,
+            infoPreIdPaciente: any,
+            infoValoracion: any,
+            infoPlan: any,
+            textoNota: any,
+            menuTrans: any,
+            infoNotaPost: any,
+            infoRec: any,
+        ){
             apiAxios({
-                url: "/cxN",
+                url: "/preId/cxN",
                 method: "POST" ,
                 headers: {
                     Authorization: "Bearer " + userStore.token, 
                 },
                 data: {
-                    pid: infoCX.pid,
-                    numEpisodio: infoCX.numEpisodio,
-                    habitacionPacnt: infoCX.habitacionPacnt,
-                    fechaInPacnt: infoCX.fechaInPacnt,
-                    diagnostico: infoCX.diagnostico,
-                    tipoCx: infoCX.tipoCx,
-                    cie10: infoCX.cie10,
-                    cie9: infoCX.cie9,
-
-                    infoProced: [{}],
-                    cuerpoMed: [{}],
-                    antPersPat: [{}],
-                    antPersNoPat: [{}],
-                    sigVit: [{}],
-                    expFis: [{}],
-                    viaAerea: [{}],
-                    perfilBioQ: [{}],
-                    pos_Cuidados: [{}],
-                    sedacion: [{}],
-                    regional: [{}],
-                    anestLocal: [{}],
-                    anestGral: [{}],
-                    obsNotaPre: infoCX.obsNotaPre,
-                    balancesParciales: [{}],
-                    balIng: [{}],
-                    balEgresos: [{}],
-                    datosVentilador: [{}],
-                    tiemposQX: [{}],
-                    notaPA: [{}],
-                    signVitEgQx: [{}],
-                    casoObsRecNac_NumProd: infoCX.casoObsRecNac_NumProd,
-                    notaEval_Obs: infoCX.notaEval_Obs,
-                    altaRec: [{}]
+                    /* Id del paciente para enlazar la tabla */
+                    pid: this.pacienteID._id,
+                    /* Id de la cirugía */
+                    cxid: cxid,
+                    /////////////////////////////////////////////////////////////
+                    /*--------------------- PREANESTÉSICO ---------------------*/
+                    /////////////////////////////////////////////////////////////
+                    /***************** ID Paciente *****************/
+                    numEpisodio: infoPreIdPaciente.numEpisodio,
+                    habitacionPacnt: infoPreIdPaciente.habitacion,
+                    fechaInPacnt: infoPreIdPaciente.fechaIn,
+                    // Datos de cirugía
+                    diagnostico: infoPreIdPaciente.diagnostico,
+                    tipoCx: infoPreIdPaciente.tipoCx,
+                    // Datos CIE
+                    cie10: infoPreIdPaciente.cie10,
+                    cie9: infoPreIdPaciente.cie9,
+                    // Informacion procedimiento
+                    infoProced:[{
+                        cirugia: infoPreIdPaciente.cirugia,
+                        fechaCx: infoPreIdPaciente.fechaCx,
+                        hrCx: infoPreIdPaciente.hrCx,
+                    }],
+                    // Informacion del personal
+                    cuerpoMed:[{
+                        cirujano: infoPreIdPaciente.cirujano,
+                        anestesiologo: infoPreIdPaciente.anestesiologo,
+                        anestVPA: infoPreIdPaciente.anestesiologoVPA,
+                        residAnest: infoPreIdPaciente.residenteAnestesia,
+                    }],
+                    /****************** VALORACIÓN *****************/
+                    /*========== Antecedentes ==========*/
+                    // Personales Patológicos
+                    antPersPat:[{ 
+                        Alergias: infoValoracion.antPersPat_Alergias,
+                        Quirurgicos: infoValoracion.antPersPat_Quirurgicos,
+                        Endocrinologicos: infoValoracion.antPersPat_Endocrinologicos,
+                        Urologicos: infoValoracion.antPersPat_Urologicos,
+                        Traumaticos: infoValoracion.antPersPat_Traumaticos,
+                        Ortopedicos: infoValoracion.antPersPat_Ortopedicos,
+                        Transfusiones: infoValoracion.antPersPat_Transfusiones,
+                        CompAnestPrev: infoValoracion.antPersPat_CompAnestPrev,
+                        EstadoPsiq: infoValoracion.antPersPat_EstadoPsiq,
+                        MedActual: infoValoracion.antPersPat_MedActual,
+                    }],
+                    // Personales No Patológicos
+                    antPersNoPat:[{
+                        HrsAyuno: infoValoracion.antPersNoPat_HrsAyuno,
+                        Tabaquismo: infoValoracion.antPersNoPat_Tabaquismo,
+                        Etilismo: infoValoracion.antPersNoPat_Etilismo,
+                        Adicciones: infoValoracion.antPersNoPat_Adicciones,
+                        Inmunizaciones: infoValoracion.antPersNoPat_Inmunizaciones,
+                        AntImportQx: infoValoracion.antPersNoPat_AntImportQx,
+                    }],
+                    /*======= Exploración Física =======*/
+                    // Signos Vitales
+                    sigVit:[{
+                        Temperatura: infoValoracion.sigVit_Temperatura,
+                        FrecCardiaca: infoValoracion.sigVit_FrecuCardiaca,
+                        FrecRespiratoria: infoValoracion.sigVit_FrecuRespiratoria,
+                        Peso: infoValoracion.sigVit_Peso,
+                        Talla: infoValoracion.sigVit_Talla,
+                        IMC: infoValoracion.sigVit_IMC,
+                        TensnArt: infoValoracion.sigVit_TensionArterial,
+                        SatOx: infoValoracion.sigVit_SaturacionOxigeno,
+                    }],
+                    // Valoración de Aparatos y Sistemas
+                    expFis:[{
+                        Cabeza: infoValoracion.expFis_VASCabeza,
+                        Cuello: infoValoracion.expFis_VASCuello,
+                        Respiratorio: infoValoracion.expFis_VASRespiratorio,
+                        CardioVasc: infoValoracion.expFis_VASCardioVasc,
+                        Hipertension: infoValoracion.expFis_VASHipertension,
+                        Abdomen: infoValoracion.expFis_VASAbdomen,
+                        GenUr: infoValoracion.expFis_VASGenUr,
+                        MuscEsq: infoValoracion.expFis_VASMuscEsq,
+                        Neuro: infoValoracion.expFis_VASNeuro,
+                        PielFaneras: infoValoracion.expFis_VASPielFaneras,
+                    }],
+                    /*=========== Vía Aérea ============*/
+                    viaAerea:[{
+                        Mallampati: infoValoracion.viaAerea_Mallampati,
+                        PatilAldreti: infoValoracion.viaAerea_PatilAldreti,
+                        AperturaBucal: infoValoracion.viaAerea_AperturaBucal,
+                        Distancia: infoValoracion.viaAerea_Distancia,
+                        Protusion: infoValoracion.viaAerea_Protusion,
+                        Ipid: infoValoracion.viaAerea_Ipid,
+                        Glasgow: infoValoracion.viaAerea_Glasgow,
+                        NYHA: infoValoracion.viaAerea_NYHA,
+                        Goldman: infoValoracion.viaAerea_Goldman,
+                        RiesgoTrombosis: infoValoracion.viaAerea_RiesgoTrombosis,
+                        ClasificacionASA: infoValoracion.viaAerea_ClasificacionASA,
+                        TipoCirugia: infoValoracion.viaAerea_TipoCirugia,
+                        RiesgoAnestesico: infoValoracion.viaAerea_RiesgoAnestesico,
+                    }],
+                    /*========== Laboratorio ===========*/
+                    perfilBioQ:[{
+                        FechaRealizacion: infoValoracion.perfilBioQ_FechaRealizacion,
+                        GrupoSanguineo: infoValoracion.perfilBioQ_GrupoSanguineo,
+                        Hemoglobina: infoValoracion.perfilBioQ_Hemoglobina,
+                        Hematocrito: infoValoracion.perfilBioQ_Hematocrito,
+                        Plaquetas: infoValoracion.perfilBioQ_Plaquetas,
+                        Leutocitos: infoValoracion.perfilBioQ_Leutocitos,
+                        TP: infoValoracion.perfilBioQ_TP,
+                        TT: infoValoracion.perfilBioQ_TT,
+                        TPT: infoValoracion.perfilBioQ_TPT,
+                        INR: infoValoracion.perfilBioQ_INR,
+                        Glucosa: infoValoracion.perfilBioQ_Glucosa,
+                        Creatinina: infoValoracion.perfilBioQ_Creatinina,
+                        Urea: infoValoracion.perfilBioQ_Urea,
+                        Sodio: infoValoracion.perfilBioQ_Sodio,
+                        Potasio: infoValoracion.perfilBioQ_Potasio,
+                        Cloro: infoValoracion.perfilBioQ_Cloro,
+                        Calcio: infoValoracion.perfilBioQ_Calcio,
+                        Magnesio: infoValoracion.perfilBioQ_Magnesio,
+                        BilirrubinaDirecta: infoValoracion.perfilBioQ_BilirrubinaDirecta,
+                        BilirrubinaIndirecta: infoValoracion.perfilBioQ_BilirrubinaIndirecta,
+                        BilirrubinaTotal: infoValoracion.perfilBioQ_BilirrubinaTotal,
+                        Lipasa: infoValoracion.perfilBioQ_Lipasa,
+                        Amilasa: infoValoracion.perfilBioQ_Amilasa,
+                        Otros: infoValoracion.perfilBioQ_Otros,
+                    }],
+                    /********************* PLAN ********************/
+                    /*====== Posicion y Cuidados =======*/
+                    pos_Cuidados:[{
+                        AccesoVenoso: infoPlan.pos_AccesoVenoso,
+                        PosicionPaciente: infoPlan.pos_PosicionPaciente,
+                        PosicionBrazos: infoPlan.pos_PosicionBrazos,
+                        Torniquete: infoPlan.pos_Torniquete,
+                        AplicacionTorniquete: infoPlan.pos_AplicacionTorniquete,
+                        Sitio: infoPlan.pos_Sitio,
+                        TiempoIsquemia: infoPlan.pos_TiempoIsquemia,
+                        ProteccionOjos: infoPlan.pos_ProteccionOjos,
+                        ProtecProminencias: infoPlan.pos_ProtecProminencias,
+                        TecnicaAnestesica: infoPlan.pos_TecnicaAnestesica,
+                        Premedicacion: infoPlan.pos_Premedicacion,
+                        EspPremedicacion: infoPlan.pos_EspPremedicacion,
+                        Monitoreo: infoPlan.pos_Monitoreo,
+                    }],
+                    /*======= Tipos de Anestésia =======*/
+                    ////// Sedación //////
+                    sedacion:[{
+                        Via: infoPlan.sedacion_Via,
+                        Opcion: infoPlan.sedacion_Opcion,
+                        Observaciones: infoPlan.sedacion_Observaciones,
+                        Medicamentos: infoPlan.sedacion_Medicamentos,
+                    }],
+                    ////// Regional //////
+                    regional:[{
+                        // Bloqueo Neuro-Axial
+                        Tipo: infoPlan.regional_Tipo,
+                        TipoAguja: infoPlan.regional_TipoAguja,
+                        Nivel: infoPlan.regional_Nivel,
+                        CalibreAguja: infoPlan.regional_CalibreAguja,
+                        Cateter: infoPlan.regional_Cateter,
+                        OrientacionCateter: infoPlan.regional_OrientacionCateter,
+                        ProbDificulNeuro: infoPlan.regional_ProbDificulNeuro,
+                        EspDificultadesNeuro: infoPlan.regional_EspDificultadesNeuro,
+                        // Bloqueo Plexo
+                        Sitio: infoPlan.regional_Sitio,
+                        Opcion: infoPlan.regional_Opcion,
+                        EspSitio: infoPlan.regional_EspSitio,
+                        AnestesicoUtilizado: infoPlan.regional_AnestesicoUtilizado,
+                        EspAnestesico: infoPlan.regional_EspAnestesico,
+                        ProbDificulPlexo: infoPlan.regional_ProbDificulPlexo,
+                        EspDificulPlexo: infoPlan.regional_EspDificulPlexo,
+                        // Equipo de Apoyo
+                        Ultrasonido: infoPlan.regional_Ultrasonido,
+                        EspUltrasonido: infoPlan.regional_EspUltrasonido,
+                        Neuroestimulador: infoPlan.regional_Neuroestimulador,
+                        EspNeuroestimulador: infoPlan.regional_EspNeuroestimulador,
+                        ProbComplicaciones: infoPlan.regional_ProbComplicaciones,
+                        EspDificEquipo: infoPlan.regional_EspDificEquipo,
+                    }],
+                    //////// Local ///////
+                    anestLocal:[{
+                        SitioAnestesiaL: infoPlan.local_SitioAnestesiaL,
+                        AnestesicoUtilizado: infoPlan.local_AnestesicoUtilizado,
+                        Especificar: infoPlan.local_Especificar,
+                    }],
+                    ////// General ///////
+                    anestGral:[{
+                        // Intubación
+                        intb_Induccion: infoPlan.general_Induccion,
+                        intb_Tubo: infoPlan.general_Tubo,
+                        intb_NumeroTubo: infoPlan.general_NumeroTubo,
+                        intb_TipoCanula: infoPlan.general_TipoCanula,
+                        intb_Globo: infoPlan.general_Globo,
+                        intb_Presion: infoPlan.general_Presion,
+                        intb_DifTecnicasIntubacion: infoPlan.general_DifTecnicasIntubacion,
+                        intb_EspDifTecIntubacion: infoPlan.general_EspDifTecIntubacion,
+                        // Dispositivos Supraglóticos
+                        supragl_DispositivosSupro: infoPlan.general_DispositivosSupro,
+                        supragl_Calibre: infoPlan.general_Calibre,
+                        supragl_Complicaciones: infoPlan.general_Complicaciones,
+                        supragl_EspComplicaciones: infoPlan.general_EspComplicaciones,
+                        // Otros Disposotivos
+                        otrosDisp: infoPlan.general_OtrosDispositivos,
+                        espOtrosDisp: infoPlan.general_EspOtrosDispositivos,
+                    }],
+                    /******************** Nota *********************/
+                    /*= Información de la nota pre anestésica =*/
+                    obsNotaPre: textoNota.nota,
+                    /////////////////////////////////////////////////////////////
+                    /*-------------------- TRANSANESTÉSICO --------------------*/
+                    /////////////////////////////////////////////////////////////
+                    // Balances parciales
+                    balancesParciales: [{
+                        horaBalance: menuTrans.horaBalance,
+                        ingresos: menuTrans.ingresos,
+                        egresos: menuTrans.egresos,
+                        balanceP: menuTrans.balanceP,
+                    }],
+                    /**************** Balance Total ****************/
+                    balanceTotal: menuTrans.balanceTotal,
+                    // Ingresos
+                    balIng:[{
+                        solHartman: menuTrans.solHartman,
+                        solFisio: menuTrans.solFisio,
+                        glucosados: menuTrans.glucosados,
+                        gelatinas: menuTrans.gelatinas,
+                        almidones: menuTrans.almidones,
+                        albuminas: menuTrans.albuminas,
+                        paqGlobular: menuTrans.paqGlobular,
+                        plasmas: menuTrans.plasmas,
+                        plaquetas: menuTrans.plaquetas,
+                        crioprecipitados: menuTrans.crioprecipitados,
+                        factor_VII: menuTrans.factor_VII,
+                        factor_VIII: menuTrans.factor_VIII,
+                        otrosIngresos: menuTrans.otrosIngresos,
+                    }],
+                    // Egresos
+                    balEgresos:[{
+                        liqAscitis: menuTrans.liqAscitis,
+                        sangradoAprox: menuTrans.sangradoAprox,
+                        uresis: menuTrans.uresis,
+                        expoQX: menuTrans.expoQX,
+                        reqBasales: menuTrans.reqBasales,
+                        ayuno: menuTrans.ayuno,
+                        otrosEgresos: menuTrans.otrosEgresos,
+                    }],
+                    /************* Datos del Ventilador ************/
+                    datosVentilador: [{
+                        modosVentilacion: menuTrans.modosVentilacion,
+                        peep: menuTrans.peep,
+                        vt: menuTrans.vt,
+                        frecResp: menuTrans.frecResp,
+                        IE: menuTrans.IE,
+                        PLimite: menuTrans.PLimite,
+                        Hr: menuTrans.Hr,
+                    }],
+                    /****************** Tiempos Qx *****************/
+                    tiemposQX: [{ 
+                        ingresoQX: menuTrans.ingresoQX,
+                        inicioAn: menuTrans.inicioAn,
+                        inicioCx: menuTrans.inicioCx,
+                        finCx: menuTrans.finCx,
+                        finAn: menuTrans.finAn,
+                        egresoQx: menuTrans.egresoQx,
+                    }],
+                    /////////////////////////////////////////////////////////////
+                    /*-------------------- POSTANESTÉSICO ---------------------*/
+                    /////////////////////////////////////////////////////////////
+                    /************ Nota Post Anestésica *************/
+                    notaPA:[{
+                        TecAnestFinal: infoNotaPost.npa_TecAnestFinal,
+                        Intubacion: infoNotaPost.npa_Intubacion,
+                        NotaPostAnest: infoNotaPost.npa_NotaPostAnest,
+                    }],
+                    /*= Signos Vitales al Egreso del Quirófano =*/
+                    signVitEgQx:[{
+                        TA: infoNotaPost.signVitEgQx_TA,
+                        FC: infoNotaPost.signVitEgQx_FC,
+                        FR: infoNotaPost.signVitEgQx_FR,
+                        Temperatura: infoNotaPost.signVitEgQx_Temperatura,
+                        Pulso: infoNotaPost.signVitEgQx_Pulso,
+                        SpO2: infoNotaPost.signVitEgQx_SpO2,
+                        EgresoPac: infoNotaPost.signVitEgQx_EgresoPac,
+                    }],
+                    /*===== Caso obstétrico reción nacido ======*/
+                    casoObsRecNac_NumProd: infoNotaPost.casoObsRecNac_NumProd,
+                    /**************** Recuperación *****************/
+                    /*========= Nota de Evaluación UCPA ========*/
+                    notaEval_Obs: infoRec.notaEval_Obs,
+                    /*============ Alta Recuperación ===========*/
+                    altaRec:[{
+                        CalifAldrete: infoRec.altaRec_CalifAldrete,
+                        Obs: infoRec.altaRec_Obs,
+                        FechaAltaRec: infoRec.altaRec_FechaAltaRec,
+                        HrAltaRec: infoRec.altaRec_HrAltaRec,
+                    }],
                 }
-            })
+            }).then((res: any) => {
+                this.pacienteCxID = res.data.cirugia._id;
+                // console.log(this.pacienteCxID);
+            }).catch((e: any) => {
+                if(e.response){
+                    window.log.error('Ocurrió un error:', e)
+                }
+                else if(e.request){
+                }
+                else{
+                }
+            });
         },
-        /************************** Id Paciente **************************/
-        savePreId(infoPreIdPaciente: any){
-            apiAxios({
+        /*************************** Ficha Id  ***************************/
+        async savePreId(infoPreIdPaciente: any){
+            await apiAxios({
                 url: "/preId",
                 method: "POST",
                 headers: {

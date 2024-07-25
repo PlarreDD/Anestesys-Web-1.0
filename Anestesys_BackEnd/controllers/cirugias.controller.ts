@@ -5,7 +5,8 @@ import { UpdateResult } from "mongodb"
 
 export const saveCx = async (req: any, res:Response) => {
     try {
-        const { pid, id,
+        const { 
+            pid, cxid,
             numEpisodio, habitacionPacnt, fechaInPacnt,
             diagnostico, tipoCx,
             cie10, cie9,
@@ -36,17 +37,21 @@ export const saveCx = async (req: any, res:Response) => {
             altaRec,
         } = req.body;
 
-        if (id) {
-            var cirugia: UpdateResult | null = await Cirugias.findOne({ _id: id });
+        if (cxid) {
+            var cirugia: UpdateResult | null = await Cirugias.findOne({ _id: cxid });
             const cx: any = cirugia;
 
             cirugia = await Cirugias.updateOne(
                 { "cirugia._id": cx?._id },
                 { $set:
                     {
-                        numEpisodio, habitacionPacnt, fechaInPacnt,
-                        diagnostico, tipoCx,
-                        cie10, cie9,
+                        numEpisodio: numEpisodio,
+                        habitacionPacnt: habitacionPacnt,
+                        fechaInPacnt: fechaInPacnt,
+                        diagnostico: diagnostico,
+                        tipoCx: tipoCx,
+                        cie10: cie10,
+                        cie9: cie9,
                         infoProced: infoProced[0],
                         cuerpoMed: cuerpoMed[0],
                         antPersPat: antPersPat[0],
@@ -81,9 +86,13 @@ export const saveCx = async (req: any, res:Response) => {
         else{
             const cirugia = new Cirugias({
                 pid: pid,
-                numEpisodio, habitacionPacnt, fechaInPacnt,
-                diagnostico, tipoCx,
-                cie10, cie9,
+                numEpisodio: numEpisodio,
+                habitacionPacnt: habitacionPacnt,
+                fechaInPacnt: fechaInPacnt,
+                diagnostico: diagnostico,
+                tipoCx: tipoCx,
+                cie10: cie10,
+                cie9: cie9,
                 infoProced: infoProced[0],
                 cuerpoMed: cuerpoMed[0],
                 antPersPat: antPersPat[0],

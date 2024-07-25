@@ -146,11 +146,10 @@ export const createPaciente = async (req: any, res: Response) => {
             fechaNPaciente, edadPaciente, generoPaciente,
             /* Datos Demográficos */
             nacionalidad, CURP, folioID, estNacimiento,
-            estResidencia, alcaldia, colonia, codigoPostal });
+            estResidencia, alcaldia, colonia, codigoPostal
+        });
 
         await paciente.save();
-
-        console.log("Este es el ID del paciente: " + paciente._id);
         return res.json({ paciente });
     } catch (error) {
         logger.log({

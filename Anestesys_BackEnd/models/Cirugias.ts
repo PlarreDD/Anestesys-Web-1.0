@@ -219,7 +219,7 @@ const CirugiasSchema = new Schema({
         EspNeuroestimulador: { type: String },
         ProbComplicaciones: { type: String },
         EspDificEquipo: { type: String },
-    }],    
+    }],
     //////// Local ///////
     anestLocal:[{
         SitioAnestesiaL: { type: String },

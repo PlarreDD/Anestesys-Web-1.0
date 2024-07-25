@@ -197,6 +197,7 @@ export interface regRecuperacion{
     altaRec_60min: number,
     altaRec_90min: number,
     altaRec_120min: number,
+    
     altaRec_CalifAldrete: number,
     altaRec_Obs: string,
     altaRec_FechaAltaRec: string,

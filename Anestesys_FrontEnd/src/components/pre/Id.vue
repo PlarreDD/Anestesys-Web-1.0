@@ -80,7 +80,7 @@
                                     class="btn btn-guardar-info fw-bold"
                                     :class="preIdStore.validaExpediente == true ? 'visible' : 'invisible'"
                                     
-                                    @click="seLoQueTengoQueHacerPeroPrimeroDeboLavarmeLasManos()" :disabled="propBloquearInputs == true"> GUARDAR </button>
+                                    @click="GuardarFichaPaciente()" :disabled="propBloquearInputs == true"> GUARDAR </button>
 
                             <button data-bs-toggle="tab" 
                                     type="submit"
@@ -455,7 +455,9 @@
 </template>
 
 <script lang="ts">
-import type { regIdPaciente } from "@/interfaces/regPreAnest"
+import type { regIdPaciente, regValoracion, regPlan, notaPre } from "@/interfaces/regPreAnest"
+import type { regMenuTrans } from "@/interfaces/regTransAnest"
+import type { regNotaPost, regRecuperacion } from "@/interfaces/regPostAnest"
 import { defineComponent } from "vue"
 import { ElSelect, ElOption, ElInput, ElCard } from 'element-plus';
 import { usePreIdStore } from "../../stores/preId-store";
@@ -501,7 +503,14 @@ export default defineComponent({
     data () {
         return{
             infoPreIdPaciente: {} as regIdPaciente,
-            preIdStore, userStore,          
+            infoValoracion: {} as regValoracion,
+            infoPlan: {} as regPlan,
+            textoNota: {} as notaPre,
+            menuTrans: {} as regMenuTrans,
+            infoNotaPost: {} as regNotaPost,
+            infoRec: {} as regRecuperacion,
+
+            preIdStore, userStore,
 
             valorNac: String,
             lblNac: String,  
@@ -670,19 +679,40 @@ export default defineComponent({
                 if(preIdStore.nuevoRegistroPaciente == false){
                     if(preIdStore.actualizarRegId == true){
                         // Actualizar datos
-                        preIdStore.updatePreId(this.infoPreIdPaciente)                    
+                        // preIdStore.updatePreId(this.infoPreIdPaciente)
+                        preIdStore.saveCx(
+                            preIdStore.pacienteCxID,
+                            this.infoPreIdPaciente,
+                            this.infoValoracion,
+                            this.infoPlan,
+                            this.textoNota,
+                            this.menuTrans,
+                            this.infoNotaPost,
+                            this.infoRec
+                        );
                     }
     
                 }else if(preIdStore.nuevoRegistroPaciente == true){
                     if(preIdStore.actualizarRegId == true){
+                        console.log("Esta Guarda pero en nuevo");
                         // Actualizar nuevos datos
-                        preIdStore.updateAddPreId(this.infoPreIdPaciente)
-                        preIdStore.updatePreIdAnterior(this.infoPreIdPaciente)
+                        // preIdStore.updateAddPreId(this.infoPreIdPaciente)
+                        // preIdStore.updatePreIdAnterior(this.infoPreIdPaciente)
+                        preIdStore.saveCx(
+                            preIdStore.pacienteCxID,
+                            this.infoPreIdPaciente,
+                            this.infoValoracion,
+                            this.infoPlan,
+                            this.textoNota,
+                            this.menuTrans,
+                            this.infoNotaPost,
+                            this.infoRec
+                        );
                     }
-                }        
+                }
             } catch (error) {
                 window.log.error('Ocurrió un error:', error);
-            }     
+            }
         },
 
         async asignarValoresPaciente(){
@@ -1005,9 +1035,18 @@ export default defineComponent({
         },
 /** Fin Residente Anestesia **/
 
-        async seLoQueTengoQueHacerPeroPrimeroDeboLavarmeLasManos(){
-            preIdStore.savePreId( this.infoPreIdPaciente );
-            preIdStore.saveCx( this.infoPreIdPaciente );
+        async GuardarFichaPaciente(){
+            await preIdStore.savePreId( this.infoPreIdPaciente );
+            await preIdStore.saveCx(
+                null,
+                this.infoPreIdPaciente,
+                this.infoValoracion,
+                this.infoPlan,
+                this.textoNota,
+                this.menuTrans,
+                this.infoNotaPost,
+                this.infoRec
+            );
         },
     },
 })
