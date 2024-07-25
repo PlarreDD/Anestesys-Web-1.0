@@ -3759,13 +3759,13 @@ export default defineComponent({
         let balanceP = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.balanceP)
 
         /*Datos de Medicamentos Agrupados*/
-        let medicamentoAg = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.medicamentoN).flat();
-        let bolo = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.bolo).flat();
-        let unidadBolo = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.unidadBolo).flat();
-        let infusion = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.infusion).flat();
-        let unidadInfusion = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.unidadInfusion).flat();
-        let total = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.total).flat();
-        let unidadTotal = this.medicamentosAgrupados === null ? [' '] : this.medicamentosAgrupados.map(medicamento => medicamento.unidadTotal).flat();
+        let medicamentoAg = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.medicamentoN).flat();
+        let bolo = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.bolo).flat();
+        let unidadBolo = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.unidadBolo).flat();
+        let infusion = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.infusion).flat();
+        let unidadInfusion = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.unidadInfusion).flat();
+        let total = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.total).flat();
+        let unidadTotal = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.unidadTotal).flat();
 
         console.log("agrupados: "+ JSON.stringify(this.medicamentosAgrupado));
 
