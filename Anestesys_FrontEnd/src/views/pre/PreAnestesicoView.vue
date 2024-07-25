@@ -1546,7 +1546,7 @@ export default defineComponent({
           transStore.datosVentilacion = paciente?.datosVentilador ?? null
           transStore.medicamentos = paciente?.medicamentosCx ?? null  
           transStore.medicamentosAgrupados = paciente?.medicamentosSuma ?? null
-          // transStore.balanceParcial = paciente?.balancesParciales ?? null
+          transStore.balanceParcial = paciente?.balancesParciales ?? null
           transStore.relevos = paciente?.relevoCx ?? null
           transStore.eventos = paciente?.evCriticoCx ?? null
           transStore.datosMSV = paciente?.datosMSV ?? ''
@@ -1582,7 +1582,7 @@ export default defineComponent({
           transStore.datosVentilacion = null
           transStore.medicamentos = null  
           transStore.medicamentosAgrupados = null
-          // transStore.balanceParcial = null
+          transStore.balanceParcial = null
           transStore.relevos = null
           transStore.eventos = null
           transStore.datosMSV = ''
@@ -3135,7 +3135,7 @@ export default defineComponent({
   
         /***********************TRANS***********************/
         // Hora                      
-        let horaBalance = transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.horaBalance)
+        let horaBalance = transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.horaBalance)                
         // Ingresos
         let ingresos = transStore.balanceParcial === null ? [' '] : transStore.balanceParcial.map(balance => balance.ingresos)
         // Egresos
@@ -5803,7 +5803,7 @@ export default defineComponent({
         transStore.pacienteID= ""
         transStore.medicamentos= null
         transStore.medicamentosAgrupados= null
-        // transStore.balanceParcial= null
+        transStore.balanceParcial= null
         transStore.medicamentoID= ""
         transStore.relevos= null
         transStore.relevoID= ""
