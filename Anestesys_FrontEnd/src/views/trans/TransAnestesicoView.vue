@@ -8857,7 +8857,7 @@ export default defineComponent({
   overflow: scroll;
   overflow-x: hidden;
   margin-top: 5px;
-  height: 340px !important;
+  height: 330px !important;
 }
 .deslizar-medicamentos {
   overflow: scroll;
