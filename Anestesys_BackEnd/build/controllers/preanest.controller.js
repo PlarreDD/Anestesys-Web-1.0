@@ -149,7 +149,6 @@ const createPaciente = (req, res) => __awaiter(void 0, void 0, void 0, function*
             estResidencia, alcaldia, colonia, codigoPostal
         });
         yield paciente.save();
-        console.log("Este es el ID del paciente: " + paciente._id);
         return res.json({ paciente });
     }
     catch (error) {
