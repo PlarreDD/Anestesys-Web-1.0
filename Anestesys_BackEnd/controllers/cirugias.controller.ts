@@ -1,25 +1,28 @@
 import { Response } from "express";
 import logger from "../logger";
 import { FichaIds, Cirugias } from "../models/Cirugias"
-import { UpdateResult } from "mongodb"
+// import { UpdateResult } from "mongodb"
 
 export const updateFichaId = async (req: any, res: Response) => {
     try {
         const { id } = req.params;
         const update = req.body;
 
-        const cirugia = await FichaIds.findByIdAndUpdate( id, { 
-                                                                fechaNPaciente: update.fechaNPaciente,
-                                                                edadPaciente: update.edadPaciente,
-                                                                generoPaciente: update.generoPaciente,
-                                                                nacionalidad: update.nacionalidad,
-                                                                CURP: update.CURP,
-                                                                folioID: update.folioID,
-                                                                estNacimiento: update.estNacimiento,
-                                                                alcaldia: update.alcaldia,
-                                                                colonia: update.colonia,
-                                                                codigoPostal: update.codigoPostal,
-                                                            } );            
+        const cirugia = await FichaIds.findByIdAndUpdate(
+            id,
+            {
+                fechaNPaciente: update.fechaNPaciente,
+                edadPaciente: update.edadPaciente,
+                generoPaciente: update.generoPaciente,
+                nacionalidad: update.nacionalidad,
+                CURP: update.CURP,
+                folioID: update.folioID,
+                estNacimiento: update.estNacimiento,
+                alcaldia: update.alcaldia,
+                colonia: update.colonia,
+                codigoPostal: update.codigoPostal,
+            }
+        );            
         
         return res.json({ cirugia });
     } catch (error) {
@@ -74,50 +77,59 @@ export const saveCx = async (req: any, res:Response) => {
         } = req.body;
 
         if (cxid) {
-            var cirugia: UpdateResult | null = await Cirugias.findOne({ _id: cxid });
-            const cx: any = cirugia;
+            // var cirugia: UpdateResult | null = await Cirugias.findOne({ _id: cxid });
+            // const cx: any = cirugia;
 
-            cirugia = await Cirugias.updateOne(
-                { "cirugia._id": cx?._id },
-                { $set:
-                    {
-                        numEpisodio: numEpisodio,
-                        habitacionPacnt: habitacionPacnt,
-                        fechaInPacnt: fechaInPacnt,
-                        diagnostico: diagnostico,
-                        tipoCx: tipoCx,
-                        cie10: cie10,
-                        cie9: cie9,
-                        infoProced: infoProced[0],
-                        cuerpoMed: cuerpoMed[0],
-                        antPersPat: antPersPat[0],
-                        antPersNoPat: antPersNoPat[0],
-                        sigVit: sigVit[0],
-                        expFis: expFis[0],
-                        viaAerea: viaAerea[0],
-                        perfilBioQ: perfilBioQ[0],
-                        pos_Cuidados: pos_Cuidados[0],
-                        sedacion: sedacion[0],
-                        regional: regional[0],
-                        anestLocal: anestLocal[0],
-                        anestGral: anestGral[0],
-                        obsNotaPre,
-                        balancesParciales: balancesParciales[0],
-                        balanceTotal,
-                        balIng: balIng[0],
-                        balEgresos: balEgresos[0],
-                        datosVentilador: datosVentilador[0],
-                        tiemposQX: tiemposQX[0],
-                        notaPA: notaPA[0],
-                        signVitEgQx: signVitEgQx[0],
-                        casoObsRecNac_NumProd,
-                        notaEval_Obs,
-                        altaRec: altaRec[0],
-                    }
+            console.log("cxid: " + cxid);
+            // console.log("CX: " + cx);
+            console.log("numEpisodio: " + numEpisodio,
+                        "habitacionPacnt: " + habitacionPacnt,
+                        "fechaInPacnt: " + fechaInPacnt,
+                        "diagnostico: " + diagnostico,
+                        "tipoCx: " + tipoCx,
+                        "cie10: " + cie10,
+                        "cie9: " + cie9);
+
+            const cirugia = await Cirugias.findOneAndUpdate(
+                { "_id": cxid },
+                {
+                    numEpisodio: numEpisodio,
+                    habitacionPacnt: habitacionPacnt,
+                    fechaInPacnt: fechaInPacnt,
+                    diagnostico: diagnostico,
+                    tipoCx: tipoCx,
+                    cie10: cie10,
+                    cie9: cie9,
+                    obsNotaPre: obsNotaPre,
+                    balanceTotal: balanceTotal,
+                    casoObsRecNac_NumProd: casoObsRecNac_NumProd,
+                    notaEval_Obs: notaEval_Obs,
+
+                    infoProced: infoProced[0],
+                    cuerpoMed: cuerpoMed[0],
+                    antPersPat: antPersPat[0],
+                    antPersNoPat: antPersNoPat[0],
+                    sigVit: sigVit[0],
+                    expFis: expFis[0],
+                    viaAerea: viaAerea[0],
+                    perfilBioQ: perfilBioQ[0],
+                    pos_Cuidados: pos_Cuidados[0],
+                    sedacion: sedacion[0],
+                    regional: regional[0],
+                    anestLocal: anestLocal[0],
+                    anestGral: anestGral[0],
+                    balancesParciales: balancesParciales[0],
+                    balIng: balIng[0],
+                    balEgresos: balEgresos[0],
+                    datosVentilador: datosVentilador[0],
+                    tiemposQX: tiemposQX[0],
+                    notaPA: notaPA[0],
+                    signVitEgQx: signVitEgQx[0],
+                    altaRec: altaRec[0],
                 }
             );
 
-            console.log(cirugia);
+            return res.json({cirugia})
         }
         else{
             const cirugia = new Cirugias({
@@ -129,6 +141,7 @@ export const saveCx = async (req: any, res:Response) => {
                 tipoCx: tipoCx,
                 cie10: cie10,
                 cie9: cie9,
+
                 infoProced: infoProced[0],
                 cuerpoMed: cuerpoMed[0],
                 antPersPat: antPersPat[0],
@@ -142,24 +155,29 @@ export const saveCx = async (req: any, res:Response) => {
                 regional: regional[0],
                 anestLocal: anestLocal[0],
                 anestGral: anestGral[0],
-                obsNotaPre,
+                
+                obsNotaPre: obsNotaPre,
+                
                 balancesParciales: balancesParciales[0],
-                balanceTotal,
+                
+                balanceTotal: balanceTotal,
+                
                 balIng: balIng[0],
                 balEgresos: balEgresos[0],
                 datosVentilador: datosVentilador[0],
                 tiemposQX: tiemposQX[0],
                 notaPA: notaPA[0],
                 signVitEgQx: signVitEgQx[0],
-                casoObsRecNac_NumProd,
-                notaEval_Obs,
+                
+                casoObsRecNac_NumProd: casoObsRecNac_NumProd,
+                notaEval_Obs: notaEval_Obs,
+                
                 altaRec: altaRec[0],
             });
 
             await cirugia.save();
             return res.json({ cirugia })
         }
-
     } catch (error) {
         logger.log({
             level: 'error',
