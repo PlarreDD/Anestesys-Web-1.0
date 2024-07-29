@@ -51,14 +51,18 @@ const updateFichaId = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 exports.updateFichaId = updateFichaId;
 const saveCx = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { pid, id, numEpisodio, habitacionPacnt, fechaInPacnt, diagnostico, tipoCx, cie10, cie9, infoProced, cuerpoMed, antPersPat, antPersNoPat, sigVit, expFis, viaAerea, perfilBioQ, pos_Cuidados, sedacion, regional, anestLocal, anestGral, obsNotaPre, balancesParciales, balanceTotal, balIng, balEgresos, datosVentilador, tiemposQX, notaPA, signVitEgQx, casoObsRecNac_NumProd, notaEval_Obs, altaRec, } = req.body;
-        if (id) {
-            var cirugia = yield Cirugias_1.Cirugias.findOne({ _id: id });
+        const { pid, cxid, numEpisodio, habitacionPacnt, fechaInPacnt, diagnostico, tipoCx, cie10, cie9, infoProced, cuerpoMed, antPersPat, antPersNoPat, sigVit, expFis, viaAerea, perfilBioQ, pos_Cuidados, sedacion, regional, anestLocal, anestGral, obsNotaPre, balancesParciales, balanceTotal, balIng, balEgresos, datosVentilador, tiemposQX, notaPA, signVitEgQx, casoObsRecNac_NumProd, notaEval_Obs, altaRec, } = req.body;
+        if (cxid) {
+            var cirugia = yield Cirugias_1.Cirugias.findOne({ _id: cxid });
             const cx = cirugia;
             cirugia = yield Cirugias_1.Cirugias.updateOne({ "cirugia._id": cx === null || cx === void 0 ? void 0 : cx._id }, { $set: {
-                    numEpisodio, habitacionPacnt, fechaInPacnt,
-                    diagnostico, tipoCx,
-                    cie10, cie9,
+                    numEpisodio: numEpisodio,
+                    habitacionPacnt: habitacionPacnt,
+                    fechaInPacnt: fechaInPacnt,
+                    diagnostico: diagnostico,
+                    tipoCx: tipoCx,
+                    cie10: cie10,
+                    cie9: cie9,
                     infoProced: infoProced[0],
                     cuerpoMed: cuerpoMed[0],
                     antPersPat: antPersPat[0],
@@ -91,9 +95,13 @@ const saveCx = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         else {
             const cirugia = new Cirugias_1.Cirugias({
                 pid: pid,
-                numEpisodio, habitacionPacnt, fechaInPacnt,
-                diagnostico, tipoCx,
-                cie10, cie9,
+                numEpisodio: numEpisodio,
+                habitacionPacnt: habitacionPacnt,
+                fechaInPacnt: fechaInPacnt,
+                diagnostico: diagnostico,
+                tipoCx: tipoCx,
+                cie10: cie10,
+                cie9: cie9,
                 infoProced: infoProced[0],
                 cuerpoMed: cuerpoMed[0],
                 antPersPat: antPersPat[0],

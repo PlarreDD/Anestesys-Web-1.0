@@ -3748,7 +3748,10 @@ export default defineComponent({
         let horaAlta = postAnestStore.HoraAlta === undefined || postAnestStore.HoraAlta === null ? ' ' : postAnestStore.HoraAlta;
 
         /***********************TRANS***********************/
-        /*Balance Parcial*/
+        /*Balance Parcial*/        
+        if(transAnestStore.balanceParcial !== null){
+          let horaBalance = transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.horaBalance)
+        }
         // Hora
         let horaBalance = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.horaBalance)
         // Ingresos
@@ -3758,6 +3761,29 @@ export default defineComponent({
         // Balance Total
         let balanceP = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.balanceP)
 
+        let balanceParcial = [];
+
+        if(transAnestStore.balanceParcial !== null){
+          balanceParcial.push(         
+            //Balance Hídrico Parcial                      
+            {
+              margin: [0, 5, 0, 0],
+              table: {
+                body: [
+                  // Hora                      
+                  horaBalance,
+                  // Ingresos
+                  ingresos,
+                  // Egresos
+                  egresos,
+                  // Balance Total
+                  balanceP
+                ]
+              }, font: 'SF', fontSize: 8, bold: true
+            }
+          )        
+        }
+
         /*Datos de Medicamentos Agrupados*/
         let medicamentoAg = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.medicamentoN).flat();
         let bolo = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.bolo).flat();
@@ -3766,8 +3792,6 @@ export default defineComponent({
         let unidadInfusion = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.unidadInfusion).flat();
         let total = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.total).flat();
         let unidadTotal = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.unidadTotal).flat();
-
-        console.log("agrupados: "+ JSON.stringify(this.medicamentosAgrupado));
 
         let tablaMedicamentosAgrupados = [];
         for (let i = 0; i < Math.max(medicamentoAg.length, bolo.length, unidadBolo.length, infusion.length, unidadInfusion.length, total.length, unidadTotal.length); i++) {
@@ -3813,10 +3837,6 @@ export default defineComponent({
         let listaMedicamentosHoraFi = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
             item.medicamentosCx.map(medicamento => (medicamento.horaFinalMed ?? '-'))).flat();
         let horaFinal = listaMedicamentosHoraFi.slice(0,30); 
-        
-        // let listaMedicamentosHoraFi = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
-        //     medicamento.horaFinalMed === "" ? '-' : medicamento.horaFinalMed).flat();
-        // let horaFinal = listaMedicamentosHoraFi.slice(0,30);  
 
         let tablaMedicamentos = [];
         for (let i = 0; i < Math.max(tipoMed.length, medicamento.length, dosisMed.length, unidadMed.length, viaMed.length, horaInicio.length,horaFinal.length); i++) {
@@ -5739,7 +5759,6 @@ export default defineComponent({
               }
             ]
           },
-          //Balance Hídrico Parcial
           {
             columns:[
               {
@@ -5755,23 +5774,9 @@ export default defineComponent({
                     ]
                   }, font: 'SF', fontSize: 8
               },
-              {
-                margin: [0, 5, 0, 0],
-                table: {
-                  body: [
-                    // Hora                      
-                    horaBalance,
-                    // Ingresos
-                    ingresos,
-                    // Egresos
-                    egresos,
-                    // Balance Total
-                    balanceP
-                  ]
-                }, font: 'SF', fontSize: 8, bold: true
-              }
+              ...balanceParcial,  
             ]
-          },  
+          },          
           {            
             columns:[
               {
@@ -6929,8 +6934,10 @@ export default defineComponent({
                 this.menuTrans.balanceP = this.menuTrans.ingresos - this.menuTrans.egresos;
                 this.menuTrans.horaBalance = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-                await transAnestStore.updateBalanceHP(this.menuTrans, preIdStore.pacienteID._id)
-                await transAnestStore.getBalanceHPList(preIdStore.pacienteID._id)
+                if(transAnestStore.balanceParcial != null){
+                  await transAnestStore.updateBalanceHP(this.menuTrans, preIdStore.pacienteID._id)
+                  await transAnestStore.getBalanceHPList(preIdStore.pacienteID._id)
+                }
 
                 await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
                 
@@ -6943,8 +6950,10 @@ export default defineComponent({
                 this.menuTrans.balanceP = this.menuTrans.ingresos - this.menuTrans.egresos;
                 this.menuTrans.horaBalance = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-                await transAnestStore.updateNuevoBalanceHP(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
-                await transAnestStore.getNuevoBalanceHPList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                if(transAnestStore.balanceParcial != null){
+                  await transAnestStore.updateNuevoBalanceHP(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
+                  await transAnestStore.getNuevoBalanceHPList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                }
 
                 await transAnestStore.saveNuevoTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)  
                 
@@ -8848,7 +8857,7 @@ export default defineComponent({
   overflow: scroll;
   overflow-x: hidden;
   margin-top: 5px;
-  height: 340px !important;
+  height: 330px !important;
 }
 .deslizar-medicamentos {
   overflow: scroll;
