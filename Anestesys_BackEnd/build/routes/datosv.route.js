@@ -36,6 +36,8 @@ router.put('/medic/:pid', requireToken_1.requireToken, transanest_controller_1.u
 router.put('/medic/add/:pid/:cxid', requireToken_1.requireToken, transanest_controller_1.updateNuevoMedicamentos);
 router.put('/medic/uno/:id', requireToken_1.requireToken, transanest_controller_1.updateMedicamento);
 router.delete('/medic/:id', requireToken_1.requireToken, transanest_controller_1.deleteMedicamento);
+router.put('/medicSuma/suma/:pid', requireToken_1.requireToken, transanest_controller_1.updateSumaMedicamentos);
+router.put('/medicSuma/suma/add/:pid/:cxid', requireToken_1.requireToken, transanest_controller_1.updateNuevoSumaMedicamentos);
 /*---------- Datos de relevo -------------------- */
 router.get('/relevo/:pid', requireToken_1.requireToken, transanest_controller_1.getRelevos);
 router.get('/relevo/add/:pid/:cxid', requireToken_1.requireToken, transanest_controller_1.getNuevoRelevos);

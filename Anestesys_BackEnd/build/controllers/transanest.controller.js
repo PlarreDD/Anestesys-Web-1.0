@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteEvento = exports.updateEvento = exports.getEvento = exports.getNuevoEventos = exports.getEventos = exports.updateNuevoEventos = exports.updateEventos = exports.saveNuevoEventos = exports.saveEventos = exports.deleteRelevo = exports.updateRelevo = exports.getRelevo = exports.getNuevoRelevos = exports.getRelevos = exports.updateNuevoRelevos = exports.updateRelevos = exports.saveNuevoRelevos = exports.saveRelevos = exports.deleteMedicamento = exports.updateMedicamento = exports.getMedicamento = exports.getNuevoMedicamentos = exports.getMedicamentos = exports.updateNuevoMedicamentos = exports.updateMedicamentos = exports.saveNuevoMedicamentos = exports.saveMedicamentos = exports.saveNuevoDatosMSV = exports.saveDatosMSV = exports.saveNuevoTiemposQX = exports.saveTiemposQX = exports.UpdateNuevoBalanceH = exports.UpdateBalanceH = exports.UpdateNuevoBalanceHP = exports.UpdateBalanceHP = exports.getNuevoListaBalanceHP = exports.getListaBalanceHP = exports.deleteModoVentilacion = exports.updateVentilacion = exports.getModoVentilacion = exports.getNuevoModosVent = exports.getModosVent = exports.updateNuevoMenuTrans = exports.updateMenuTrans = exports.saveNuevoMenuTrans = exports.saveMenuTrans = void 0;
+exports.deleteEvento = exports.updateEvento = exports.getEvento = exports.getNuevoEventos = exports.getEventos = exports.updateNuevoEventos = exports.updateEventos = exports.saveNuevoEventos = exports.saveEventos = exports.deleteRelevo = exports.updateRelevo = exports.getRelevo = exports.getNuevoRelevos = exports.getRelevos = exports.updateNuevoRelevos = exports.updateRelevos = exports.saveNuevoRelevos = exports.saveRelevos = exports.updateNuevoSumaMedicamentos = exports.updateSumaMedicamentos = exports.deleteMedicamento = exports.updateMedicamento = exports.getMedicamento = exports.getNuevoMedicamentos = exports.getMedicamentos = exports.updateNuevoMedicamentos = exports.updateMedicamentos = exports.saveNuevoMedicamentos = exports.saveMedicamentos = exports.saveNuevoDatosMSV = exports.saveDatosMSV = exports.saveNuevoTiemposQX = exports.saveTiemposQX = exports.UpdateNuevoBalanceH = exports.UpdateBalanceH = exports.UpdateNuevoBalanceHP = exports.UpdateBalanceHP = exports.getNuevoListaBalanceHP = exports.getListaBalanceHP = exports.deleteModoVentilacion = exports.updateVentilacion = exports.getModoVentilacion = exports.getNuevoModosVent = exports.getModosVent = exports.updateNuevoMenuTrans = exports.updateMenuTrans = exports.saveNuevoMenuTrans = exports.saveMenuTrans = void 0;
 const TransAnestesico_1 = require("../models/TransAnestesico");
 const logger_1 = __importDefault(require("../logger"));
 /******************* Menu Trans Anestesico *******************/
@@ -843,6 +843,45 @@ const deleteMedicamento = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 exports.deleteMedicamento = deleteMedicamento;
+const updateSumaMedicamentos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { pid } = req.params;
+        const { medicamentosSuma } = req.body;
+        const menuTrans = yield TransAnestesico_1.MenuTrans.findOneAndUpdate({ pid: pid }, { $push: {
+                medicamentosSuma: { $each: medicamentosSuma }
+            }
+        }, { new: true, upsert: true });
+        return res.json({ menuTrans });
+    }
+    catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({ Error: 'Error de servidor' });
+    }
+});
+exports.updateSumaMedicamentos = updateSumaMedicamentos;
+/* Subir medicamentos */
+const updateNuevoSumaMedicamentos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { pid, cxid } = req.params;
+        const { medicamentosSuma } = req.body;
+        const menuTrans = yield TransAnestesico_1.MenuTrans.findOneAndUpdate({ pid: pid, cxid: cxid }, { $push: {
+                medicamentosSuma: { $each: medicamentosSuma }
+            }
+        }, { new: true, upsert: true });
+        return res.json({ menuTrans });
+    }
+    catch (error) {
+        logger_1.default.log({
+            level: 'error',
+            message: 'Error de servidor', error
+        });
+        return res.status(500).json({ Error: 'Error de servidor' });
+    }
+});
+exports.updateNuevoSumaMedicamentos = updateNuevoSumaMedicamentos;
 /* Guardado Relevo */
 const saveRelevos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

@@ -1272,7 +1272,7 @@ export default defineComponent({
                                                 preIdStore.TiempoIsquemia = this.infoPlan.pos_TiempoIsquemia,
                                                 preIdStore.ProteccionOjos = this.infoPlan.pos_ProteccionOjos,
                                                 preIdStore.ProteccionProminencias = this.infoPlan.pos_ProtecProminencias,
-                                                preIdStore.TecnicaAnestesica = this.infoPlan.pos_TecnicaAnestesica,
+                                                preIdStore.TecnicaAnestesica = String(this.infoPlan.pos_TecnicaAnestesica),
                                                 preIdStore.Premedicacion = this.infoPlan.pos_Premedicacion,
                                                 preIdStore.EspecPremedicacion = this.infoPlan.pos_EspPremedicacion,
                                                 preIdStore.Monitoreo = String(this.infoPlan.pos_Monitoreo),                                                

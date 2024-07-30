@@ -823,8 +823,8 @@
                           </thead>
 
                           <tbody>
-                            <tr v-for="(item, index) in medicamentosAgrupados" :key="index">
-                              <td class="text-white">{{ item.medicamento }}</td>
+                            <tr v-for="(item, index) in medicamentosAgrupado" :key="index">
+                              <td class="text-white">{{ item.medicamentoN }}</td>
                               <td class="text-white">{{ item.bolo ? `${item.bolo} ${item.unidadBolo}` : '' }}</td>
                               <td class="text-white">{{ item.infusion ? `${item.infusion} ${item.unidadInfusion}` : '' }}</td>
                               <td class="text-white">{{ item.total ? `${item.total} ${item.unidadTotal}` : '' }}</td>
@@ -1602,7 +1602,7 @@ let FR: any;
 let taSeparada: Object;
 
 interface GrupoMedicamento {
-  medicamento: string;
+  medicamentoN: string;
   bolo?: number;
   unidadBolo?: string;
   infusion?: number;
@@ -1934,6 +1934,8 @@ export default defineComponent({
       medicamentosFiltrados: [],
       eventosFiltrados: [],
       relevosFiltrados: [],
+
+      medicamentosAgrupado: [],
     }
   },
 
@@ -2022,9 +2024,6 @@ export default defineComponent({
   },
 
   methods: {
-    // mostrarFiltrados(){
-    //   console.log('Med. Filtrados: '+ JSON.stringify(this.medicamentosAgrupados))
-    // },
 
     toggleDataset(index) {   
       if(this.chartData.datasets[index].hidden === true) {
@@ -3096,6 +3095,8 @@ export default defineComponent({
         let alcaldia = preIdStore.Alcaldia === undefined ? ' ' : preIdStore.Alcaldia;
         // Colonia
         let colonia = preIdStore.Colonia === undefined ? ' ' : preIdStore.Colonia;
+        // Código Postal
+        let codigoPostal = preIdStore.CP === undefined ? ' ' : preIdStore.CP;
         // Diagnóstico
         let diagnostico = preIdStore.Diagnostico === undefined || preIdStore.Diagnostico === null ? ' ' : preIdStore.Diagnostico;
         let txtDiagnostico = diagnostico.length > 50 ? diagnostico.substring(0, 50) + '...' : diagnostico;
@@ -3747,9 +3748,72 @@ export default defineComponent({
         let horaAlta = postAnestStore.HoraAlta === undefined || postAnestStore.HoraAlta === null ? ' ' : postAnestStore.HoraAlta;
 
         /***********************TRANS***********************/
-        /*Balance Parcial*/
-        // let balanceParcial = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial.map(item => 
-        //     item.balanceCx.map(balance => balance.horaBalance +'   '+ balance.ingresos +'   '+ balance.egresos)).flat();
+        /*Balance Parcial*/        
+        if(transAnestStore.balanceParcial !== null){
+          let horaBalance = transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.horaBalance)
+        }
+        // Hora
+        let horaBalance = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.horaBalance)
+        // Ingresos
+        let ingresos = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.ingresos)
+        // Egresos
+        let egresos = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.egresos)
+        // Balance Total
+        let balanceP = transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.balanceP)
+
+        let balanceParcial = [];
+
+        if(transAnestStore.balanceParcial !== null){
+          balanceParcial.push(         
+            //Balance Hídrico Parcial                      
+            {
+              margin: [0, 5, 0, 0],
+              table: {
+                body: [
+                  // Hora                      
+                  horaBalance,
+                  // Ingresos
+                  ingresos,
+                  // Egresos
+                  egresos,
+                  // Balance Total
+                  balanceP
+                ]
+              }, font: 'SF', fontSize: 8, bold: true
+            }
+          )        
+        }
+
+        /*Datos de Medicamentos Agrupados*/
+        let medicamentoAg = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.medicamentoN).flat();
+        let bolo = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.bolo).flat();
+        let unidadBolo = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.unidadBolo).flat();
+        let infusion = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.infusion).flat();
+        let unidadInfusion = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.unidadInfusion).flat();
+        let total = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.total).flat();
+        let unidadTotal = this.medicamentosAgrupado === null ? [' '] : this.medicamentosAgrupado.map(medicamento => medicamento.unidadTotal).flat();
+
+        let tablaMedicamentosAgrupados = [];
+        for (let i = 0; i < Math.max(medicamentoAg.length, bolo.length, unidadBolo.length, infusion.length, unidadInfusion.length, total.length, unidadTotal.length); i++) {
+          tablaMedicamentosAgrupados.push([
+            { text: i < medicamentoAg.length ? medicamentoAg[i] : '', style: 'SF', fontSize: 8, bold: true },            
+            {text:[
+              { text: i < bolo.length ? bolo[i] : '', style: 'SF', fontSize: 8, bold: true },
+              { text: ' ', style: 'SF', fontSize: 8},
+              { text: i < unidadBolo.length ? unidadBolo[i] : '', style: 'SF', fontSize: 8, bold: true },
+            ]},
+            {text:[
+              { text: i < infusion.length ? infusion[i] : '', style: 'SF', fontSize: 8, bold: true },
+              { text: ' ', style: 'SF', fontSize: 8},
+              { text: i < unidadInfusion.length ? unidadInfusion[i] : '', style: 'SF', fontSize: 8, bold: true },
+            ]},
+            {text:[
+              { text: i < total.length ? total[i] : '', style: 'SF', fontSize: 8, bold: true },
+              { text: ' ', style: 'SF', fontSize: 8},
+              { text: i < unidadTotal.length ? unidadTotal[i] : '', style: 'SF', fontSize: 8, bold: true },
+            ]},
+          ]);
+        };
 
         /*Datos del Medicamento*/
         let listaMedicamentosTipo = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
@@ -3771,8 +3835,8 @@ export default defineComponent({
             item.medicamentosCx.map(medicamento => (medicamento.horaInicioMed ?? ' '))).flat();
         let horaInicio = listaMedicamentosHoraIn.slice(0,30);
         let listaMedicamentosHoraFi = transAnestStore.medicamentos === null ? [' '] : transAnestStore.medicamentos.map(item => 
-            item.medicamentosCx.map(medicamento => (medicamento.horaFinalMed ?? ' '))).flat();
-        let horaFinal = listaMedicamentosHoraFi.slice(0,30);
+            item.medicamentosCx.map(medicamento => (medicamento.horaFinalMed ?? '-'))).flat();
+        let horaFinal = listaMedicamentosHoraFi.slice(0,30); 
 
         let tablaMedicamentos = [];
         for (let i = 0; i < Math.max(tipoMed.length, medicamento.length, dosisMed.length, unidadMed.length, viaMed.length, horaInicio.length,horaFinal.length); i++) {
@@ -4096,6 +4160,14 @@ export default defineComponent({
                           { text: colonia, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
+                      // Código Postal  
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Código Postal: ', font: 'SF', fontSize: 8 },
+                          { text: codigoPostal, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
                       {
                         text:{text: '\nINFORMACIÓN CIRUGÍA', font:'SF', fontSize: 8, bold:true,}
                       },
@@ -4215,34 +4287,7 @@ export default defineComponent({
                           { text: temperatura, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
-                      {
-                        text: [
-                          { text: '\nEXPLORACIÓN FÍSICA: ', font: 'SF', fontSize: 8, bold:true }
-                        ],
-                      },
-                      // Peso  
-                      {
-                        text: [
-                          { text: '\nPeso: ', font: 'SF', fontSize: 8 },
-                          { text: peso, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Talla  
-                      {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'Talla: ', font: 'SF', fontSize: 8 },
-                          { text: talla, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // IMC  
-                      {
-                        margin: [0, 2.5, 0, 0],
-                        text: [
-                          { text: 'IMC: ', font: 'SF', fontSize: 8 },
-                          { text: IMC, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
+                      
                     ],
                 },
                 {                  
@@ -4285,83 +4330,7 @@ export default defineComponent({
               columns: [
                 {                                        
                   width:'50%',
-                  margin: [0, 10, 0, 0],
-                    stack: [
-                      // Cabeza  
-                      {
-                        text: [
-                          { text: 'Cabeza: ', font: 'SF', fontSize: 8 },
-                          { text: txtCabeza, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Cuello  
-                      {
-                        text: [
-                          { text: ' \nCuello: ', font: 'SF', fontSize: 8 },
-                          { text: txtCuello, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Respiratorio  
-                      {
-                        text: [
-                          { text: ' \nRespiratorio: ', font: 'SF', fontSize: 8 },
-                          { text: txtRespiratorio, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Cardiovascular  
-                      {
-                        text: [
-                          { text: ' \nCardiovascular: ', font: 'SF', fontSize: 8 },
-                          { text: txtCardiovascular, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Hipertensión Arterial  
-                      {
-                        text: [
-                          { text: ' \nHipertensión Arterial: ', font: 'SF', fontSize: 8 },
-                          { text: txtHipArterial, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Abdomen  
-                      {
-                        text: [
-                          { text: ' \nAbdomen: ', font: 'SF', fontSize: 8 },
-                          { text: txtAbdomen, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Genitourinario  
-                      {
-                        text: [
-                          { text: ' \nGenitourinario: ', font: 'SF', fontSize: 8 },
-                          { text: txtGenitourinario, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Músculo Esquelético  
-                      {
-                        text: [
-                          { text: ' \nMúsculo Esquelético : ', font: 'SF', fontSize: 8 },
-                          { text: txtMusEsq, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Neurológico  
-                      {
-                        text: [
-                          { text: ' \nNeurológico: ', font: 'SF', fontSize: 8 },
-                          { text: txtNeurologico, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Piel y Fanareas  
-                      {
-                        text: [
-                          { text: ' \nPiel y Fanareas: ', font: 'SF', fontSize: 8 },
-                          { text: txtPiel, font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                    ]                    
-                },
-                {                                        
-                  width:'50%',
-                  margin: [0, 10, 0, 0],
+                  margin: [0, 20, 0, 0],
                     stack: [
                       //  
                       {
@@ -4474,6 +4443,111 @@ export default defineComponent({
                           { text: txtMedicaActual, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
+                      
+                    ]                    
+                },
+                {                                        
+                  width:'50%',
+                  margin: [0, 10, 0, 0],
+                    stack: [
+                      {
+                        text: [
+                          { text: '\nEXPLORACIÓN FÍSICA: ', font: 'SF', fontSize: 8, bold:true }
+                        ],
+                      },
+                      // Peso  
+                      {
+                        text: [
+                          { text: '\nPeso: ', font: 'SF', fontSize: 8 },
+                          { text: peso, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Talla  
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'Talla: ', font: 'SF', fontSize: 8 },
+                          { text: talla, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // IMC  
+                      {
+                        margin: [0, 2.5, 0, 0],
+                        text: [
+                          { text: 'IMC: ', font: 'SF', fontSize: 8 },
+                          { text: IMC, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Cabeza  
+                      {
+                        text: [
+                          { text: 'Cabeza: ', font: 'SF', fontSize: 8 },
+                          { text: txtCabeza, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Cuello  
+                      {
+                        text: [
+                          { text: ' \nCuello: ', font: 'SF', fontSize: 8 },
+                          { text: txtCuello, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Respiratorio  
+                      {
+                        text: [
+                          { text: ' \nRespiratorio: ', font: 'SF', fontSize: 8 },
+                          { text: txtRespiratorio, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Cardiovascular  
+                      {
+                        text: [
+                          { text: ' \nCardiovascular: ', font: 'SF', fontSize: 8 },
+                          { text: txtCardiovascular, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Hipertensión Arterial  
+                      {
+                        text: [
+                          { text: ' \nHipertensión Arterial: ', font: 'SF', fontSize: 8 },
+                          { text: txtHipArterial, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Abdomen  
+                      {
+                        text: [
+                          { text: ' \nAbdomen: ', font: 'SF', fontSize: 8 },
+                          { text: txtAbdomen, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Genitourinario  
+                      {
+                        text: [
+                          { text: ' \nGenitourinario: ', font: 'SF', fontSize: 8 },
+                          { text: txtGenitourinario, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Músculo Esquelético  
+                      {
+                        text: [
+                          { text: ' \nMúsculo Esquelético : ', font: 'SF', fontSize: 8 },
+                          { text: txtMusEsq, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Neurológico  
+                      {
+                        text: [
+                          { text: ' \nNeurológico: ', font: 'SF', fontSize: 8 },
+                          { text: txtNeurologico, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Piel y Fanareas  
+                      {
+                        text: [
+                          { text: ' \nPiel y Fanareas: ', font: 'SF', fontSize: 8 },
+                          { text: txtPiel, font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
                     ]
                 }
               ]
@@ -4535,7 +4609,7 @@ export default defineComponent({
                       {
                         margin: [0, 2.5, 0, 0],
                         text: [
-                          { text: 'Leutocitos: ', font: 'SF', fontSize: 8 },
+                          { text: 'Leucocitos: ', font: 'SF', fontSize: 8 },
                           { text: leutocitos, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
@@ -4798,12 +4872,18 @@ export default defineComponent({
                           { text: 'Riesgo Anéstesico Quirúrgico: ', font: 'SF', fontSize: 8 },
                           { text: riesgo, font: 'SF', fontSize: 8, bold:true },
                         ],
-                      },
-
+                      },                      
+                    ]
+                },
+                {
+                  width: '40%',
+                  margin: [0, 20, 0, 0],
+                  pageBreak: 'before',
+                    stack: [
                       // POSICIÓN Y CUIDADOS
                       {
                         text: [
-                          { text: '\n\nPOSICIÓN Y CUIDADOS', font: 'SF', fontSize: 8, bold:true },
+                          { text: 'POSICIÓN Y CUIDADOS', font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
                       // Horas de Ayuno
@@ -4893,15 +4973,10 @@ export default defineComponent({
                           { text: txtMonitoreo, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },                      
-                    ]
-                },
-                {
-                  width: '40%',
-                  margin: [0, 20, 0, 0],
-                  pageBreak: 'before',
-                    stack: [
+
                       // ESTUDIOS  
                       {
+                        margin: [0, 20, 0, 0],
                         text: [
                           { text: 'ESTUDIOS', font: 'SF', fontSize: 8, bold:true},
                         ],
@@ -4914,10 +4989,19 @@ export default defineComponent({
                       },
                       {
                         ul: estudios.map(estudio => ({ text: estudio })),font: 'SF', fontSize: 8, bold:true
-                      },
+                      },                      
+                    ]
+                }
+              ]
+            },
+            {
+              columns:[
+                {
+                  width: '33%',
+                  margin: [0, 25, 0, 0],
+                    stack: [
                       // ANESTESIA GENERAL
                       {
-                        margin: [0, 20, 0, 0],
                         text: [
                           { text: 'ANESTESIA GENERAL', font: 'SF', fontSize: 8, bold:true },
                         ],
@@ -5004,13 +5088,9 @@ export default defineComponent({
                           { text: '\nUso de Otros Dispositivos: ', font: 'SF', fontSize: 8 },
                           { text: txtOtrosDispositivos, font: 'SF', fontSize: 8, bold:true },
                         ],
-                      },
+                      },                      
                     ]
-                }
-              ]
-            },
-            {
-              columns:[
+                },
                 {
                   width: '33%',
                   margin: [0, 25, 0, 0],
@@ -5067,19 +5147,14 @@ export default defineComponent({
                       },
                       // Probables Dificultades Técnicas
                       {
-                        margin: [0, 2.5, 0, 0],
+                        margin: [0, 4, 0, 0],
                         text: [
                           { text: 'Probables Dificultades Técnicas: ', font: 'SF', fontSize: 8 },
                           { text: txtComplicacionesBNA, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
-                    ]
-                },
-                {
-                  width: '33%',
-                  margin: [0, 25, 0, 0],
-                    stack: [
                       {
+                        margin: [0, 2.5, 0, 0],
                         text: [
                           { text: 'Bloqueo Plexo', font: 'SF', fontSize: 8},
                         ],
@@ -5131,13 +5206,8 @@ export default defineComponent({
                           { text: txtDificultadesPlexo, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
-                    ]
-                },
-                {
-                  width: '34%',
-                  margin: [0, 25, 0, 0],
-                    stack: [
                       {
+                        margin:[0, 4, 0, 0],
                         text: [
                           { text: 'Equipo de Apoyo', font: 'SF', fontSize: 8},
                         ],
@@ -5166,16 +5236,10 @@ export default defineComponent({
                         ],
                       },
                     ]
-                }
-              ]
-            },
-            //Tercera Hoja
-            {
-              columns:[
+                },
                 {
-                  width: '50%',
-                  margin: [0, 20 ,0 ,0],
-                  pageBreak: 'before',
+                  width: '34%',
+                  margin: [0, 25, 0, 0],
                     stack: [
                       // SEDACIÓN  
                       {
@@ -5214,15 +5278,9 @@ export default defineComponent({
                           { text: txtObserSedacion, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
-                    ]
-                },
-                {
-                  width: '50%',
-                  margin: [0,20,0,0],
-                  pageBreak: 'before',
-                    stack: [
-                      // ANESTESIA LOCAL  
+                       // ANESTESIA LOCAL  
                       {
+                        margin: [0, 20, 0, 0],
                         text: [
                           { text: 'ANESTESIA LOCAL', font: 'SF', fontSize: 8, bold:true },
                         ],
@@ -5254,63 +5312,10 @@ export default defineComponent({
                 }
               ]
             },
-            {
-              columns: [
-                {
-                  width: '100%',
-                  margin: [0, 20 ,0 ,0],
-                    stack: [
-                      // SEDACIÓN  
-                      {
-                        text: [
-                          { text: 'CASO OBSTETRICO', font: 'SF', fontSize: 8, bold:true },
-                        ],
-                      },
-                      // Número de Productos
-                      {
-                        text: [
-                          { text: '\nNúmero de Productos: ', font: 'SF', fontSize: 8 },
-                          { text: numProductos, font: 'SF', fontSize: 8, bold:true },
-                          ],
-                      },
-                      // Tabla de caso obstetrico
-                      {
-                        margin: [0, 5 ,0 ,0],
-                        table: {
-                          headerRows: 1,
-                          widths: [ '*', '*', '*', '*', '*', '*', '*', '*', '*'],
-                          body: [
-                            ['', 'Tipo de alumbramiento', 'Hora de nacimiento', 'Genero', 'Apgar 1min', 'Apgar 5min', 'Capurro', 'Peso(gm)', 'Talla(cm)'],
-                            ['Bebé 1', { text: alumbramiento, bold:true }, { text: horaNacimiento, bold:true }, 
-                            { text: genero, bold:true }, { text: apgar1, bold:true }, { text: apgar5, bold:true }, 
-                            { text: capurro, bold:true }, { text: pesoNacido, bold:true }, { text: tallaNacido, bold:true }],
-                            ['Bebé 2', { text: alumbramientoDos, bold:true }, { text: horaNacimientoDos, bold:true }, 
-                            { text: generoDos, bold:true }, { text: apgar1Dos, bold:true }, { text: apgar5Dos, bold:true }, 
-                            { text: capurroDos, bold:true }, { text: pesoNacidoDos, bold:true }, { text: tallaNacidoDos, bold:true }],
-                            ['Bebé 3', { text: alumbramientoTres, bold:true }, { text: horaNacimientoTres, bold:true }, 
-                            { text: generoTres, bold:true }, { text: apgar1Tres, bold:true }, { text: apgar5Tres, bold:true }, 
-                            { text: capurroTres, bold:true }, { text: pesoNacidoTres, bold:true }, { text: tallaNacidoTres, bold:true }],
-                            ['Bebé 4', { text: alumbramientoCuatro, bold:true }, { text: horaNacimientoCuatro, bold:true }, 
-                            { text: generoCuatro, bold:true }, { text: apgar1Cuatro, bold:true }, { text: apgar5Cuatro, bold:true }, 
-                            { text: capurroCuatro, bold:true }, { text: pesoNacidoCuatro, bold:true }, { text: tallaNacidoCuatro, bold:true }],
-                            ['Bebé 5', { text: alumbramientoCinco, bold:true }, { text: horaNacimientoCinco, bold:true }, 
-                            { text: generoCinco, bold:true }, { text: apgar1Cinco, bold:true }, { text: apgar5Cinco, bold:true }, 
-                            { text: capurroCinco, bold:true }, { text: pesoNacidoCinco, bold:true }, { text: tallaNacidoCinco, bold:true }],
-                            ['Bebé 6', { text: alumbramientoSeis, bold:true }, { text: horaNacimientoSeis, bold:true }, 
-                            { text: generoSeis, bold:true }, { text: apgar1Seis, bold:true }, { text: apgar5Seis, bold:true }, 
-                            { text: capurroSeis, bold:true }, { text: pesoNacidoSeis, bold:true }, { text: tallaNacidoSeis, bold:true }],
-                          ]
-                        },
-                        layout: 'noBorders', 
-                        font: 'SF', 
-                        fontSize:8,
-                      },
-                    ]
-                },
-              ]
-            },
+            //Tercera Hoja
             {
               margin: [0, 20 ,0 ,0],
+              pageBreak: 'before',
                 stack: [
                   {
                     text: [
@@ -5744,11 +5749,42 @@ export default defineComponent({
             columns:[
               {
                 margin: [0, 10, 0, 0],
+                stack: [
+                  {
+                      text: [
+                        { text: 'BALANCE HÍDRICO', font: 'SF', fontSize: 8, bold:true },
+                      ],
+                    },
+                ]
+              }
+            ]
+          },
+          {
+            columns:[
+              {
+                margin: [0, 5, 0, 0],
+                  width: '8%',
+                  table: {
+                    widths: ['*'],
+                    body: [                  
+                      [{ text: 'Hora', font: 'SF', fontSize: 8 }],
+                      [{ text: 'Ingresos', font: 'SF', fontSize: 8 }],
+                      [{ text: 'Egresos', font: 'SF', fontSize: 8 }],
+                      [{ text: 'Balance total', font: 'SF', fontSize: 8}],
+                    ]
+                  }, font: 'SF', fontSize: 8
+              },
+              ...balanceParcial,  
+            ]
+          },          
+          {            
+            columns:[
+              {
+                margin: [0, 10, 0, 0],
                 height:'75%',
                 stack:[
                   // Medicamentos
                   {
-                    relativePosition: { x: 0, y: 0 },
                     table: {
                       widths: ['60%', '40%'],
                       body: [
@@ -5827,105 +5863,46 @@ export default defineComponent({
                 ]
               }
             ]
-          },
+          },      
           {
             columns:[
               {
-                relativePosition: { x: 0, y: 415 },
+                margin: [0, 10, 0, 0],
                 stack: [
                   {
                       text: [
-                        { text: 'BALANCE HÍDRICO', font: 'SF', fontSize: 8, bold:true },
+                        { text: 'SUMATORIA DE MEDICAMENTOS', font: 'SF', fontSize: 8, bold:true },
                       ],
                     },
                 ]
               }
             ]
+          },  
+          // Crear la tabla de transAnestStore.medicamentosAgrupados
+          {
+            columns:[
+              {
+                margin: [0, 5, 0, 0],
+                stack: [
+                  {                    
+                    table: {
+                      widths: ['*', '*', '*', '*'],
+                      body: [
+                        [
+                          {text: 'Medicamento', style: 'SF', fontSize: 8}, 
+                          {text: 'Bolo', style: 'SF', fontSize:8},
+                          {text: 'Infusión', style: 'SF', fontSize:8},
+                          {text: 'Total', style: 'SF', fontSize:8},
+                        ],
+                        ...tablaMedicamentosAgrupados
+                      ]
+                    }, font: 'SF', fontSize: 8,
+                    dontBreakRows: true                               
+                  },
+                ]
+              }
+            ]
           },
-          //Balance Hídrico Parcial
-          {
-            columns:[
-              {
-                margin: [0, 10, 0, 0],
-                  relativePosition: { x: 0, y: 420 },
-                  table: {
-                    body: [                  
-                      [{ text: 'Hora', font: 'SF', fontSize: 8 }],
-                      [{ text: 'Ingresos', font: 'SF', fontSize: 8 }],
-                      [{ text: 'Egresos', font: 'SF', fontSize: 8 }],
-                      [{ text: 'Balance total', font: 'SF', fontSize: 8}],
-                    ]
-                  }, font: 'SF', fontSize: 8
-              }
-            ]
-          },  
-          {
-            columns:[
-              {
-                  relativePosition: { x: 53, y: 420 },
-                  // table: {
-                  //   widths: ['60%', '40%'],
-                  //   body: [
-                  //     [
-                  //       {
-                  //         text:[
-                  //           {text: 'BALANCE HÍDRICO: ', style: 'SF', fontSize: 8, bold: true}, 
-                  //           {text: balanceTotal, bold:true}
-                  //         ], colSpan: 2
-                  //       },
-                  //       {}
-                  //     ],
-                  //     [
-                  //       {                                
-                  //         text:[
-                  //             {text: 'Ingresos', font:'SF', fontSize:8, bold: true},
-                  //             {text: '\n\n', font:'SF', fontSize:8},
-                  //             {text: txtHartman, font:'SF', fontSize:8},{text:hartman, font:'SF', fontSize:8, bold:true},
-                  //             {text: txtSolFisiolo, font:'SF', fontSize:8}, {text:solFisiolo, font:'SF', fontSize:8, bold:true}, 
-                  //             {text: txtGlucosados, font:'SF', fontSize:8},{text:glucosados, font:'SF', fontSize:8, bold:true},
-                  //             {text: txtGelatinas, font:'SF', fontSize:8},{text:gelatinas, font:'SF', fontSize:8, bold:true},
-                  //             {text: txtAlmidones, font:'SF', fontSize:8},{text:almidones, font:'SF', fontSize:8, bold:true},
-                  //             {text: txtAlbuminas, font:'SF', fontSize:8},{text:albuminas, font:'SF', fontSize:8, bold:true},
-                  //             {text: txtPaqGlobular, font:'SF', fontSize:8},{text:paqGlobular, font:'SF', fontSize:8, bold:true},
-                  //             {text: txtPlasmas, font:'SF', fontSize:8},{text:plasmas, font:'SF', fontSize:8, bold:true},
-                  //             {text: txtPlaquetas, font:'SF', fontSize:8},{text:plaquetasIngreso, font:'SF', fontSize:8, bold:true},
-                  //             {text: txtCrioprecipitados, font:'SF', fontSize:8},{text:crioprecipitados, font:'SF', fontSize:8, bold:true},
-                  //             {text: txtFactorVII, font:'SF', fontSize:8},{text:factorVII, font:'SF', fontSize:8, bold:true},
-                  //             {text: txtFactorVIII, font:'SF', fontSize:8},{text:factorVIII, font:'SF', fontSize:8, bold:true},
-                  //             {text: txtOtrosIngresos, font:'SF', fontSize:8},{text:otrosIngreso, font:'SF', fontSize:8, bold:true},
-                  //         ]
-                  //       }, 
-                  //       {
-                  //         text:[
-                  //             {text: 'Egresos', font:'SF', fontSize:8, bold: true},
-                  //             {text: '\n\n', font:'SF', fontSize:8},
-                  //             {text: txtLiqAscitis, font:'SF', fontSize:8},{text:liqAscitis, font:'SF', fontSize:8, bold:true},
-                  //             {text: txtSangradoAprox, font:'SF', fontSize:8},{text:sangradoAprox, font:'SF', fontSize:8, bold:true},
-                  //             {text: txtUresis, font:'SF', fontSize:8},{text:uresis, font:'SF', fontSize:8, bold:true},
-                  //             {text: txtExpQuirurgica, font:'SF', fontSize:8},{text:expQuirurgica, font:'SF', fontSize:8, bold:true},
-                  //             {text: txtReqBasales, font:'SF', fontSize:8},{text:reqBasales, font:'SF', fontSize:8, bold:true},
-                  //             {text: txtAyuno, font:'SF', fontSize:8},{text:ayunoEgreso, font:'SF', fontSize:8, bold:true},
-                  //             {text: txtOtrosEgresos, font:'SF', fontSize:8},{text:otrosEgresos, font:'SF', fontSize:8, bold:true},
-                  //         ]
-                  //       }
-                  //     ]
-                  //   ]
-                  // }, font: 'SF', fontSize: 8
-                  table: {
-                    body: [
-                      // Hora                      
-                      transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.horaBalance),
-                      // Ingresos
-                      transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.ingresos),
-                      // Egresos
-                      transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.egresos),
-                      // Balance Total
-                      transAnestStore.balanceParcial === null ? [' '] : transAnestStore.balanceParcial[0].balancesParciales.map(balance => balance.balanceP)
-                    ]
-                  }, font: 'SF', fontSize: 8, bold: true
-              }
-            ]
-          },  
         )
 
         /*POST*/
@@ -5966,12 +5943,12 @@ export default defineComponent({
                           ['Frecuencia Cardiáca', {text: FCIngreso, style: 'bold'}, {text: FC15, style: 'bold'}, {text: FC30, style: 'bold'}, {text: FC45, style: 'bold'}, {text: FC60, style: 'bold'}, {text: FC90, style: 'bold'}, {text: FC120, style: 'bold'}],
                           ['Frecuencia Respiratoria', {text: FRIngreso, style: 'bold'}, {text: FR15, style: 'bold'}, {text: FR30, style: 'bold'}, {text: FR45, style: 'bold'}, {text: FR60, style: 'bold'}, {text: FR90, style: 'bold'}, {text: FR120, style: 'bold'}],
                           ['Tensión Arterial', {text: tensionIngreso, style: 'bold'}, {text: tension15, style: 'bold'}, {text: tension30, style: 'bold'}, {text: tension45, style: 'bold'}, {text: tension60, style: 'bold'}, {text: tension90, style: 'bold'}, {text: tension120, style: 'bold'}],
-                          ['Saturación de O2', {text: saturacionIngreso, style: 'bold'}, {text: saturacion15, style: 'bold'}, {text: saturacion30, style: 'bold'}, {text: saturacion45, style: 'bold'}, {text: saturacion60, style: 'bold'}, {text: saturacion90, style: 'bold'}, {text: saturacion120, style: 'bold'}],
+                          ['Coloración', {text: coloracionIngreso, style: 'bold'}, {text: coloracion15, style: 'bold'}, {text: coloracion30, style: 'bold'}, {text: coloracion45, style: 'bold'}, {text: coloracion60, style: 'bold'}, {text: coloracion90, style: 'bold'}, {text: coloracion120, style: 'bold'}],                          
                           ['Actividad Muscular' , {text: actividadIngreso, style: 'bold'}, {text: actividad15, style: 'bold'}, {text: actividad30, style: 'bold'}, {text: actividad45, style: 'bold'}, {text: actividad60, style: 'bold'}, {text: actividad90, style: 'bold'}, {text: actividad120, style: 'bold'}],
                           ['Respiración', {text: respiracionIngreso, style: 'bold'}, {text: respiracion15, style: 'bold'}, {text: respiracion30, style: 'bold'}, {text: respiracion45, style: 'bold'}, {text: respiracion60, style: 'bold'}, {text: respiracion90, style: 'bold'}, {text: respiracion120, style: 'bold'}],
                           ['Circulación' , {text: circulacionIngreso, style: 'bold'}, {text: circulacion15, style: 'bold'}, {text: circulacion30, style: 'bold'}, {text: circulacion45, style: 'bold'}, {text: circulacion60, style: 'bold'}, {text: circulacion90, style: 'bold'}, {text: circulacion120, style: 'bold'}],                          
                           ['Estado de Conciencia', {text: concienciaIngreso, style: 'bold'}, {text: conciencia15, style: 'bold'}, {text: conciencia30, style: 'bold'}, {text: conciencia45, style: 'bold'}, {text: conciencia60, style: 'bold'}, {text: conciencia90, style: 'bold'}, {text: conciencia120, style: 'bold'}],
-                          ['Coloración', {text: coloracionIngreso, style: 'bold'}, {text: coloracion15, style: 'bold'}, {text: coloracion30, style: 'bold'}, {text: coloracion45, style: 'bold'}, {text: coloracion60, style: 'bold'}, {text: coloracion90, style: 'bold'}, {text: coloracion120, style: 'bold'}],                          
+                          ['Saturación de O2', {text: saturacionIngreso, style: 'bold'}, {text: saturacion15, style: 'bold'}, {text: saturacion30, style: 'bold'}, {text: saturacion45, style: 'bold'}, {text: saturacion60, style: 'bold'}, {text: saturacion90, style: 'bold'}, {text: saturacion120, style: 'bold'}],
                           ['Bromage', {text: bromageIngreso, style: 'bold'}, {text: bromage15, style: 'bold'}, {text: bromage30, style: 'bold'}, {text: bromage45, style: 'bold'}, {text: bromage60, style: 'bold'}, {text: bromage90, style: 'bold'}, {text: bromage120, style: 'bold'}],
                           ['Nauseas/Vómito', {text: nauseasIngreso, style: 'bold'}, {text: nauseas15, style: 'bold'}, {text: nauseas30, style: 'bold'}, {text: nauseas45, style: 'bold'}, {text: nauseas60, style: 'bold'}, {text: nauseas90, style: 'bold'}, {text: nauseas120, style: 'bold'}],
                           ['Escala de EVA Dolor', {text: EVAIngreso, style: 'bold'}, {text: EVA15, style: 'bold'}, {text: EVA30, style: 'bold'}, {text: EVA45, style: 'bold'}, {text: EVA60, style: 'bold'}, {text: EVA90, style: 'bold'}, {text: EVA120, style: 'bold'}],
@@ -6157,8 +6134,68 @@ export default defineComponent({
                   ]
               },                
             ],
-          },
+          },          
         )
+
+        if(preIdStore.generoPaciente === 'Femenino'){
+          crearPDF.push(
+            {
+              columns: [
+                {
+                  width: '100%',
+                  margin: [0, 10 ,0 ,0],
+                    stack: [
+                      // SEDACIÓN  
+                      {
+                        text: [
+                          { text: 'CASO OBSTETRICO', font: 'SF', fontSize: 8, bold:true },
+                        ],
+                      },
+                      // Número de Productos
+                      {
+                        text: [
+                          { text: '\nNúmero de Productos: ', font: 'SF', fontSize: 8 },
+                          { text: numProductos, font: 'SF', fontSize: 8, bold:true },
+                          ],
+                      },
+                      // Tabla de caso obstetrico
+                      {
+                        margin: [0, 5 ,0 ,0],
+                        table: {
+                          headerRows: 1,
+                          widths: [ '*', '*', '*', '*', '*', '*', '*', '*', '*'],
+                          body: [
+                            ['', 'Tipo de alumbramiento', 'Hora de nacimiento', 'Genero', 'Apgar 1min', 'Apgar 5min', 'Capurro', 'Peso(gm)', 'Talla(cm)'],
+                            ['Bebé 1', { text: alumbramiento, bold:true }, { text: horaNacimiento, bold:true }, 
+                            { text: genero, bold:true }, { text: apgar1, bold:true }, { text: apgar5, bold:true }, 
+                            { text: capurro, bold:true }, { text: pesoNacido, bold:true }, { text: tallaNacido, bold:true }],
+                            ['Bebé 2', { text: alumbramientoDos, bold:true }, { text: horaNacimientoDos, bold:true }, 
+                            { text: generoDos, bold:true }, { text: apgar1Dos, bold:true }, { text: apgar5Dos, bold:true }, 
+                            { text: capurroDos, bold:true }, { text: pesoNacidoDos, bold:true }, { text: tallaNacidoDos, bold:true }],
+                            ['Bebé 3', { text: alumbramientoTres, bold:true }, { text: horaNacimientoTres, bold:true }, 
+                            { text: generoTres, bold:true }, { text: apgar1Tres, bold:true }, { text: apgar5Tres, bold:true }, 
+                            { text: capurroTres, bold:true }, { text: pesoNacidoTres, bold:true }, { text: tallaNacidoTres, bold:true }],
+                            ['Bebé 4', { text: alumbramientoCuatro, bold:true }, { text: horaNacimientoCuatro, bold:true }, 
+                            { text: generoCuatro, bold:true }, { text: apgar1Cuatro, bold:true }, { text: apgar5Cuatro, bold:true }, 
+                            { text: capurroCuatro, bold:true }, { text: pesoNacidoCuatro, bold:true }, { text: tallaNacidoCuatro, bold:true }],
+                            ['Bebé 5', { text: alumbramientoCinco, bold:true }, { text: horaNacimientoCinco, bold:true }, 
+                            { text: generoCinco, bold:true }, { text: apgar1Cinco, bold:true }, { text: apgar5Cinco, bold:true }, 
+                            { text: capurroCinco, bold:true }, { text: pesoNacidoCinco, bold:true }, { text: tallaNacidoCinco, bold:true }],
+                            ['Bebé 6', { text: alumbramientoSeis, bold:true }, { text: horaNacimientoSeis, bold:true }, 
+                            { text: generoSeis, bold:true }, { text: apgar1Seis, bold:true }, { text: apgar5Seis, bold:true }, 
+                            { text: capurroSeis, bold:true }, { text: pesoNacidoSeis, bold:true }, { text: tallaNacidoSeis, bold:true }],
+                          ]
+                        },
+                        layout: 'noBorders', 
+                        font: 'SF', 
+                        fontSize:8,
+                      },
+                    ]
+                },
+              ]
+            },
+          )
+        }
 
         // Agregar las imágenes al PDF
         crearPDF.forEach(imageObj => {          
@@ -6897,27 +6934,33 @@ export default defineComponent({
                 this.menuTrans.balanceP = this.menuTrans.ingresos - this.menuTrans.egresos;
                 this.menuTrans.horaBalance = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-                await transAnestStore.updateBalanceHP(this.menuTrans, preIdStore.pacienteID._id)
-                await transAnestStore.getBalanceHPList(preIdStore.pacienteID._id)
+                if(transAnestStore.balanceParcial != null){
+                  await transAnestStore.updateBalanceHP(this.menuTrans, preIdStore.pacienteID._id)
+                  await transAnestStore.getBalanceHPList(preIdStore.pacienteID._id)
+                }
 
                 await transAnestStore.saveTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID._id, tiemposQX, preIdStore.pacienteCxID._id);
-
-                let medicamentosAgrupados = this.medicamentosAgrupados
-                if(medicamentosAgrupados.length > 0){
-                  await transAnestStore.updateSumaMedicamentos(medicamentosAgrupados, preIdStore.pacienteID._id)
+                
+                transAnestStore.medicamentosAgrupados = this.medicamentosAgrupados
+                
+                if(transAnestStore.medicamentosAgrupados.length > 0){
+                  await transAnestStore.updateSumaMedicamentos(transAnestStore.medicamentosAgrupados, preIdStore.pacienteID._id)
                 }         
               }else if(preIdStore.nuevoRegistroPaciente == true){    
                 this.menuTrans.balanceP = this.menuTrans.ingresos - this.menuTrans.egresos;
                 this.menuTrans.horaBalance = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-                await transAnestStore.updateNuevoBalanceHP(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
-                await transAnestStore.getNuevoBalanceHPList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                if(transAnestStore.balanceParcial != null){
+                  await transAnestStore.updateNuevoBalanceHP(this.menuTrans, preIdStore.pacienteID.pid, preIdStore.cirugiaID)
+                  await transAnestStore.getNuevoBalanceHPList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                }
 
                 await transAnestStore.saveNuevoTiemposQX(this.menuTrans.egresoQx, preIdStore.pacienteID.pid, preIdStore.pacienteID._id, tiemposQX)  
                 
-                let medicamentosAgrupados = this.medicamentosAgrupados
-                if(medicamentosAgrupados.length > 0){
-                  await transAnestStore.updateNuevoSumaMedicamentos(medicamentosAgrupados, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
+                transAnestStore.medicamentosAgrupados = this.medicamentosAgrupados
+
+                if(transAnestStore.medicamentosAgrupados.length > 0){
+                  await transAnestStore.updateNuevoSumaMedicamentos(transAnestStore.medicamentosAgrupados, preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
                 }
               }
             }else{
@@ -7265,7 +7308,7 @@ export default defineComponent({
             await transAnestStore.getMedicamentosList(preIdStore.pacienteID._id);
           }else if(preIdStore.nuevoRegistroPaciente == true){        
             await transAnestStore.getNuevoMedicamentosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
-          }
+          }                   
           
           await this.listarMedicamentosTrans();
         }            
@@ -7317,6 +7360,8 @@ export default defineComponent({
             await transAnestStore.getNuevoMedicamentosList(preIdStore.pacienteID.pid, preIdStore.pacienteID._id)
           }
           await this.listarMedicamentosTrans()
+
+          this.medicamentosAgrupado = this.medicamentosAgrupados
         }
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
@@ -8108,8 +8153,6 @@ export default defineComponent({
 
     async comMSV(){
       try {
-        // console.log("Cliente IP "+this.clienteIp);
-        
         const response = await fetch(`http://${this.clienteIp}:5000/apiMVS`);
         const data = await response.text();
         this.informacion = data;
@@ -8312,19 +8355,7 @@ export default defineComponent({
       } catch (error) {
         window.log.error('Ocurrió un error:', error);
       }
-    },
-
-    // Recibe datos del MSV cada segundo
-    // iniRecepDatos(){
-      // console.log("iniRecepDatos");
-      // try {
-      //   this.intervalId = setInterval(() => {
-      //     this.comMSV();
-      //   }, 1000);
-      // } catch (error) {
-      //   window.log.error('Ocurrió un error:', error);
-      // }
-    // },
+    },    
 
     termRecepDatos(){
       try {
@@ -8354,12 +8385,11 @@ export default defineComponent({
           this.gridBD.push(this.hl7mess[this.hl7mess.length - 1]);
           this.hl7mess = [];
                   
-          // PRUEBAS DE PAS Y PAD INTRUSIVAS
           if(this.grid[this.grid.length - 1].datos[2].valor.toString() != "-" && this.grid[this.grid.length - 1].datos[3].valor.toString() != "-")
             postAnestStore.EgresoTA = this.grid[this.grid.length - 1].datos[2].valor.toString() + "/" + this.grid[this.grid.length - 1].datos[3].valor.toString();
           else
             postAnestStore.EgresoTA = this.grid[this.grid.length - 1].datos[10].valor.toString() + "/" + this.grid[this.grid.length - 1].datos[11].valor.toString();
-          // HASTA AQUI SE REALIZARON LOS CAMBIOS
+
           postAnestStore.EgresoFC = this.grid[this.grid.length - 1].datos[0].valor;
           postAnestStore.EgresoFR = this.grid[this.grid.length - 1].datos[14].valor;
           postAnestStore.EgresoTemp = this.grid[this.grid.length - 1].datos[7].valor;
@@ -8602,11 +8632,17 @@ export default defineComponent({
 
     medicamentosAgrupados(): GrupoMedicamento[] {
       // Verifica que `medicamentos` tenga al menos un elemento
-      if (!this.transAnestStore.medicamentos || this.transAnestStore.medicamentos.length === 0) {
+      if (!this.transAnestStore.medicamentosAgrupados || this.transAnestStore.medicamentosAgrupados.length === 0) {
         return [];
       }
 
-      const medicamentos = this.transAnestStore.medicamentos[0].medicamentosCx;
+      const medicamentos = this.transAnestStore.medicamentosAgrupados[0].medicamentosCx;
+
+      // Verifica que `medicamentosCx` esté definido y sea un array
+      if (!Array.isArray(medicamentos)) {
+        return [];
+      }
+
       const grouped: { [key: string]: { bolo?: number; unidadBolo?: string; infusion?: number; unidadInfusion?: string; total?: number; unidadTotal?: string } } = {};
 
       medicamentos.forEach((med) => {
@@ -8638,7 +8674,7 @@ export default defineComponent({
       });
 
       return Object.keys(grouped).map((key) => ({
-        medicamento: key,
+        medicamentoN: key,
         ...grouped[key],
       }));
     },
@@ -8821,7 +8857,7 @@ export default defineComponent({
   overflow: scroll;
   overflow-x: hidden;
   margin-top: 5px;
-  height: 340px !important;
+  height: 330px !important;
 }
 .deslizar-medicamentos {
   overflow: scroll;
