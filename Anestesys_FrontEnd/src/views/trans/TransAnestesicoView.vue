@@ -4541,10 +4541,10 @@ export default defineComponent({
                           { text: txtNeurologico, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
-                      // Piel y Fanareas  
+                      // Piel y Faneras  
                       {
                         text: [
-                          { text: ' \nPiel y Fanareas: ', font: 'SF', fontSize: 8 },
+                          { text: ' \nPiel y Faneras: ', font: 'SF', fontSize: 8 },
                           { text: txtPiel, font: 'SF', fontSize: 8, bold:true },
                         ],
                       },
