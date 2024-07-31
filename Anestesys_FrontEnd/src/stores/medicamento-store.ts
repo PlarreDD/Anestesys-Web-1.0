@@ -150,114 +150,114 @@ export const useMedicamentoStore = defineStore("medicamento", {
     },
 
     /** MVS **/
-    async pingMonitor(nomMonitor: string, dirIPMonitor: string){
-      await apiAxios({
-        url: "/mvs",
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + userStore.token,
-        },
-        data: {
-          nombreMVS: nomMonitor,
-          dirIPMVS: dirIPMonitor,
-        },
-      })
-      .then((res: any) => {
-        // this.status = res.data.statusMSV;
-        this.status = 'Activo';
-        swal.fire({
-          title: "Monitor registrado",
-          icon: "success",
-          showConfirmButton: false,
-          toast: true,
-          position: "top-end",
-          timer: 2500,
-          timerProgressBar: true,
-        });
-      })
-      .catch((e: any) => {
-          if (e.response) {
-            /* Mensaje de registro fallido */
-            swal.fire({
-              title: "No se puede alcanzar este monitor",
-              icon: "error",
-              showConfirmButton: false,
-              toast: true,
-              timer: 2500,
-              timerProgressBar: true,
-              position: "top-end",
-            });
-            window.log.error('Ocurrió un error:', e)
-          } else if (e.request) {            
-          } else {            
-          }
-      });
-    },
+    // async pingMonitor(nomMonitor: string, dirIPMonitor: string){
+    //   await apiAxios({
+    //     url: "/mvs",
+    //     method: "POST",
+    //     headers: {
+    //       Authorization: "Bearer " + userStore.token,
+    //     },
+    //     data: {
+    //       nombreMVS: nomMonitor,
+    //       dirIPMVS: dirIPMonitor,
+    //     },
+    //   })
+    //   .then((res: any) => {
+    //     // this.status = res.data.statusMSV;
+    //     this.status = 'Activo';
+    //     swal.fire({
+    //       title: "Monitor registrado",
+    //       icon: "success",
+    //       showConfirmButton: false,
+    //       toast: true,
+    //       position: "top-end",
+    //       timer: 2500,
+    //       timerProgressBar: true,
+    //     });
+    //   })
+    //   .catch((e: any) => {
+    //       if (e.response) {
+    //         /* Mensaje de registro fallido */
+    //         swal.fire({
+    //           title: "No se puede alcanzar este monitor",
+    //           icon: "error",
+    //           showConfirmButton: false,
+    //           toast: true,
+    //           timer: 2500,
+    //           timerProgressBar: true,
+    //           position: "top-end",
+    //         });
+    //         window.log.error('Ocurrió un error:', e)
+    //       } else if (e.request) {            
+    //       } else {            
+    //       }
+    //   });
+    // },
 
-    async listMonitor(){
+    // async listMonitor(){
       
-      await apiAxios({
-        url: "/mvs",
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + userStore.token,
-        },
-      })
-      .then((res: any) => {
-        if (res.data.monitor.length == 0) {
-          this.monitor = "1.1.1.1";          
-        } else {
-          this.monitor = res.data.monitor;            
-        }
-      })
-      .catch((e: any) => {       
-        window.log.error('Ocurrió un error:', e)
-      });
-    },
+    //   await apiAxios({
+    //     url: "/mvs",
+    //     method: "GET",
+    //     headers: {
+    //       Authorization: "Bearer " + userStore.token,
+    //     },
+    //   })
+    //   .then((res: any) => {
+    //     if (res.data.monitor.length == 0) {
+    //       this.monitor = "1.1.1.1";          
+    //     } else {
+    //       this.monitor = res.data.monitor;            
+    //     }
+    //   })
+    //   .catch((e: any) => {       
+    //     window.log.error('Ocurrió un error:', e)
+    //   });
+    // },
 
-    async deleteMonitor(infoMonitor: any){
-      await apiAxios({
-        url: `/mvs/${String(infoMonitor)}`,
-        method: "DELETE",
-        headers: {
-          Authorization: "Bearer " + userStore.token,
-        },
-      })
-        .then((res: any) => {
-          this.monitor = res.data.monitor;
+    // async deleteMonitor(infoMonitor: any){
+    //   await apiAxios({
+    //     url: `/mvs/${String(infoMonitor)}`,
+    //     method: "DELETE",
+    //     headers: {
+    //       Authorization: "Bearer " + userStore.token,
+    //     },
+    //   })
+    //     .then((res: any) => {
+    //       this.monitor = res.data.monitor;
 
-          swal.fire({
-            title: "Monitor eliminado correctamente",
-            icon: "success",
-            showConfirmButton: false,
-            toast: true,
-            position: "top-end",
-            timer: 2500,
-            timerProgressBar: true,
-          });
-        })
-        .catch((e: any) => {
-          window.log.error('Ocurrió un error:', e)
-        });
-    },
+    //       swal.fire({
+    //         title: "Monitor eliminado correctamente",
+    //         icon: "success",
+    //         showConfirmButton: false,
+    //         toast: true,
+    //         position: "top-end",
+    //         timer: 2500,
+    //         timerProgressBar: true,
+    //       });
+    //     })
+    //     .catch((e: any) => {
+    //       window.log.error('Ocurrió un error:', e)
+    //     });
+    // },
 
-    async statusMSV(dirIP: string){
-      await apiAxios({
-        url: "/mvs/stat",
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + userStore.token,
-        },
-        data: {
-          dirIPMVS: dirIP
-        },
-      })
-      .then((res: any) => {
-        this.status = res.data.statusMSV;
-      })
-      .catch((e: any) => {
-        window.log.error('Ocurrió un error:', e)
-      });
-    },
+    // async statusMSV(dirIP: string){
+    //   await apiAxios({
+    //     url: "/mvs/stat",
+    //     method: "POST",
+    //     headers: {
+    //       Authorization: "Bearer " + userStore.token,
+    //     },
+    //     data: {
+    //       dirIPMVS: dirIP
+    //     },
+    //   })
+    //   .then((res: any) => {
+    //     this.status = res.data.statusMSV;
+    //   })
+    //   .catch((e: any) => {
+    //     window.log.error('Ocurrió un error:', e)
+    //   });
+    // },
   },
 });

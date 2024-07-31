@@ -1,14 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const requireToken_1 = require("../middlewares/requireToken");
-const scanMVS_controller_1 = require("../controllers/scanMVS.controller");
+// import { requireToken } from "../middlewares/requireToken";
+// import { registerMSV,
+//          listMSV,
+//          deleteMSV,
+//          startMSVData,
+//          stopMSVData,
+//          handleMonitorData,
+//          statusMSV} from '../controllers/scanMVS.controller';    
 const router = (0, express_1.Router)();
-router.post('/', requireToken_1.requireToken, scanMVS_controller_1.registerMSV);
-router.get('/', requireToken_1.requireToken, scanMVS_controller_1.listMSV);
-router.delete('/:id', requireToken_1.requireToken, scanMVS_controller_1.deleteMSV);
-router.get('/monitor', requireToken_1.requireToken, scanMVS_controller_1.startMSVData);
-router.get('/stop', requireToken_1.requireToken, scanMVS_controller_1.stopMSVData);
-router.get('/com', requireToken_1.requireToken, scanMVS_controller_1.handleMonitorData);
-router.post('/stat', requireToken_1.requireToken, scanMVS_controller_1.statusMSV);
+// router.post('/', requireToken, registerMSV);
+// router.get('/', requireToken, listMSV);
+// router.delete('/:id', requireToken, deleteMSV);
+// router.get('/monitor', requireToken, startMSVData);
+// router.get('/stop', requireToken, stopMSVData);
+// router.get('/com', requireToken, handleMonitorData);
+// router.post('/stat', requireToken, statusMSV);
 exports.default = router;
