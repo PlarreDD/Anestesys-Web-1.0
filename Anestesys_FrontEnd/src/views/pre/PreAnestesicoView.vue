@@ -6499,12 +6499,13 @@ export default defineComponent({
   overflow-y: auto; /* Añadir scroll vertical si el contenido excede la altura */
   border: 1px solid #ccc; /* Opcional: agregar borde para mejor visualización */
   padding: 5px; /* Opcional: agregar espacio interno */
-  position: relative;
+  position: absolute; /* Posición absoluta para que el contenedor no afecte al resto de la página */
+  z-index: 1000; /* Z-index alto para que el contenedor esté por encima de otros elementos */
   cursor: pointer
 }
 /* Estilos para los elementos dentro del contenedor */
 .filtered-container > div {
-  padding: 8px;
+  padding: 5px;
 }
 .password-icon {
   float: right;

@@ -79,13 +79,13 @@
                                     type="submit"
                                     class="btn btn-guardar-info fw-bold"
                                     :class="preIdStore.validaExpediente == true ? 'visible' : 'invisible'"
-                                    @click="preIdStore.savePreId( infoPreIdPaciente )" :disabled="propBloquearInputs == true"> GUARDAR </button>                        
+                                    @click="preIdStore.savePreId( infoPreIdPaciente )" :disabled="preIdStore.validaExpediente == false"> GUARDAR </button>                        
 
                             <button data-bs-toggle="tab" 
                                     type="submit"
                                     class="btn btn-guardar-info fw-bold"
                                     :class="preIdStore.validaExpedienteNuevo == true ? 'visible' : 'invisible'"
-                                    @click="preIdStore.createAddPreId( infoPreIdPaciente )" :disabled="propBloquearInputs == true"> GUARDAR </button>
+                                    @click="preIdStore.createAddPreId( infoPreIdPaciente )" :disabled="preIdStore.validaExpedienteNuevo == false"> GUARDAR </button>
                             
                         </div>
 
